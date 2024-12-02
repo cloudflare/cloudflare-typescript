@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as URLScannerAPI from './url-scanner';
 import { type Response as FetchResponse } from '../../_shims/index';
 
 export class Scans extends APIResource {
@@ -25,12 +24,16 @@ export class Scans extends APIResource {
   }
 
   /**
-   * Search scans by date and webpages' requests, including full URL (after
-   * redirects), hostname, and path. <br/> A successful scan will appear in search
-   * results a few minutes after finishing but may take much longer if the system in
-   * under load. By default, only successfully completed scans will appear in search
-   * results, unless searching by `scanId`. Please take into account that older scans
-   * may be removed from the search index at an unspecified time.
+   * Use a subset of ElasticSearch Query syntax to filter scans. Some example
+   * queries:<br/> <br/>- 'page.domain:microsoft AND verdicts.malicious:true AND NOT
+   * page.domain:microsoft.com': malicious scans whose hostname starts with
+   * "microsoft".<br/>- 'apikey:me AND date:[2024-01 TO 2024-10]': my scans from 2024
+   * January to 2024 October.<br/>- 'page.domain:(blogspot OR www.blogspot)':
+   * Searches for scans whose main domain starts with "blogspot" or with
+   * "www.blogspot"<br/>- 'date:>now-7d AND path:okta-sign-in.min.js: scans from the
+   * last 7 days with any request path that ends with "okta-sign-in.min.js"<br/>-
+   * 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource
+   * with the given hash was downloaded.
    */
   list(
     accountId: string,
@@ -46,38 +49,39 @@ export class Scans extends APIResource {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/urlscanner/scan`, { query, ...options }) as Core.APIPromise<{
-        result: ScanListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.get(`/accounts/${accountId}/urlscanner/v2/search`, { query, ...options });
+  }
+
+  /**
+   * Submit URLs to scan. Check limits at
+   * https://developers.cloudflare.com/security-center/investigate/scan-limits/ and
+   * take into account scans submitted in bulk have lower priority and may take
+   * longer to finish.
+   */
+  bulkCreate(
+    accountId: string,
+    body: ScanBulkCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanBulkCreateResponse> {
+    return this._client.post(`/accounts/${accountId}/urlscanner/v2/bulk`, { body, ...options });
+  }
+
+  /**
+   * Returns a plain text response, with the scan's DOM content as rendered by
+   * Chrome.
+   */
+  dom(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<string> {
+    return this._client.get(`/accounts/${accountId}/urlscanner/v2/dom/${scanId}`, {
+      ...options,
+      headers: { Accept: 'text/plain', ...options?.headers },
+    });
   }
 
   /**
    * Get URL scan by uuid
    */
-  get(
-    accountId: string,
-    scanId: string,
-    query?: ScanGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanGetResponse>;
-  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse>;
-  get(
-    accountId: string,
-    scanId: string,
-    query: ScanGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(accountId, scanId, {}, query);
-    }
-    return (
-      this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: ScanGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse> {
+    return this._client.get(`/accounts/${accountId}/urlscanner/v2/result/${scanId}`, options);
   }
 
   /**
@@ -85,11 +89,7 @@ export class Scans extends APIResource {
    * http://www.softwareishard.com/blog/har-12-spec/.
    */
   har(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanHARResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}/har`, options) as Core.APIPromise<{
-        result: ScanHARResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.get(`/accounts/${accountId}/urlscanner/v2/har/${scanId}`, options);
   }
 
   /**
@@ -115,7 +115,7 @@ export class Scans extends APIResource {
     if (isRequestOptions(query)) {
       return this.screenshot(accountId, scanId, {}, query);
     }
-    return this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}/screenshot`, {
+    return this._client.get(`/accounts/${accountId}/urlscanner/v2/screenshots/${scanId}.png`, {
       query,
       ...options,
       __binaryResponse: true,
@@ -129,76 +129,489 @@ export class Scans extends APIResource {
 export type ScanCreateResponse = string;
 
 export interface ScanListResponse {
-  tasks: Array<ScanListResponse.Task>;
+  results: Array<ScanListResponse.Result>;
 }
 
 export namespace ScanListResponse {
-  export interface Task {
+  export interface Result {
+    _id: string;
+
+    page: Result.Page;
+
+    result: string;
+
+    stats: Result.Stats;
+
+    task: Result.Task;
+
+    verdicts: Result.Verdicts;
+  }
+
+  export namespace Result {
+    export interface Page {
+      asn: string;
+
+      country: string;
+
+      ip: string;
+
+      url: string;
+    }
+
+    export interface Stats {
+      dataLength: number;
+
+      requests: number;
+
+      uniqCountries: number;
+
+      uniqIPs: number;
+    }
+
+    export interface Task {
+      time: string;
+
+      url: string;
+
+      uuid: string;
+
+      visibility: string;
+    }
+
+    export interface Verdicts {
+      malicious: boolean;
+    }
+  }
+}
+
+export type ScanBulkCreateResponse = Array<ScanBulkCreateResponse.ScanBulkCreateResponseItem>;
+
+export namespace ScanBulkCreateResponse {
+  export interface ScanBulkCreateResponseItem {
     /**
-     * Alpha-2 country code
+     * URL to api report.
      */
-    country: string;
+    api: string;
 
     /**
-     * Whether scan was successful or not
+     * URL to report.
      */
-    success: boolean;
+    result: string;
 
     /**
-     * When scan was submitted (UTC)
-     */
-    time: string;
-
-    /**
-     * Scan url (after redirects)
+     * Submitted URL
      */
     url: string;
 
     /**
-     * Scan id
+     * Scan ID.
      */
     uuid: string;
 
     /**
-     * Visibility status.
+     * Submitted visibility status.
      */
     visibility: string;
+
+    options?: ScanBulkCreateResponseItem.Options;
+  }
+
+  export namespace ScanBulkCreateResponseItem {
+    export interface Options {
+      useragent?: string;
+    }
   }
 }
 
+/**
+ * HTML of webpage.
+ */
+export type ScanDOMResponse = string;
+
 export interface ScanGetResponse {
-  scan: ScanGetResponse.Scan;
+  data: ScanGetResponse.Data;
+
+  lists: ScanGetResponse.Lists;
+
+  meta: ScanGetResponse.Meta;
+
+  page: ScanGetResponse.Page;
+
+  scanner: ScanGetResponse.Scanner;
+
+  stats: ScanGetResponse.Stats;
+
+  task: ScanGetResponse.Task;
+
+  verdicts: ScanGetResponse.Verdicts;
 }
 
 export namespace ScanGetResponse {
-  export interface Scan {
-    certificates: Array<Scan.Certificate>;
+  export interface Data {
+    console: Array<Data.Console>;
 
-    geo: Scan.Geo;
+    cookies: Array<Data.Cookie>;
 
-    meta: Scan.Meta;
+    globals: Array<Data.Global>;
 
-    page: Scan.Page;
+    links: Array<Data.Link>;
 
-    performance: Array<Scan.Performance>;
+    performance: Array<Data.Performance>;
 
-    task: Scan.Task;
-
-    verdicts: Scan.Verdicts;
-
-    /**
-     * Dictionary of Autonomous System Numbers where ASN's are the keys
-     */
-    asns?: Scan.ASNs;
-
-    domains?: Scan.Domains;
-
-    ips?: Scan.IPs;
-
-    links?: Scan.Links;
+    requests: Array<Data.Request>;
   }
 
-  export namespace Scan {
+  export namespace Data {
+    export interface Console {
+      message: Console.Message;
+    }
+
+    export namespace Console {
+      export interface Message {
+        level: string;
+
+        source: string;
+
+        text: string;
+
+        url: string;
+      }
+    }
+
+    export interface Cookie {
+      domain: string;
+
+      expires: number;
+
+      httpOnly: boolean;
+
+      name: string;
+
+      path: string;
+
+      priority: string;
+
+      sameParty: boolean;
+
+      secure: boolean;
+
+      session: boolean;
+
+      size: number;
+
+      sourcePort: number;
+
+      sourceScheme: string;
+
+      value: string;
+    }
+
+    export interface Global {
+      prop: string;
+
+      type: string;
+    }
+
+    export interface Link {
+      href: string;
+
+      text: string;
+    }
+
+    export interface Performance {
+      duration: number;
+
+      entryType: string;
+
+      name: string;
+
+      startTime: number;
+    }
+
+    export interface Request {
+      request: Request.Request;
+
+      response: Request.Response;
+
+      requests?: Array<Request.Request>;
+    }
+
+    export namespace Request {
+      export interface Request {
+        documentURL: string;
+
+        hasUserGesture: boolean;
+
+        initiator: Request.Initiator;
+
+        redirectHasExtraInfo: boolean;
+
+        request: Request.Request;
+
+        requestId: string;
+
+        type: string;
+
+        wallTime: number;
+
+        frameId?: string;
+
+        loaderId?: string;
+
+        primaryRequest?: boolean;
+
+        redirectResponse?: Request.RedirectResponse;
+      }
+
+      export namespace Request {
+        export interface Initiator {
+          host: string;
+
+          type: string;
+
+          url: string;
+        }
+
+        export interface Request {
+          initialPriority: string;
+
+          isSameSite: boolean;
+
+          method: string;
+
+          mixedContentType: string;
+
+          referrerPolicy: string;
+
+          url: string;
+
+          headers?: unknown;
+        }
+
+        export interface RedirectResponse {
+          charset: string;
+
+          mimeType: string;
+
+          protocol: string;
+
+          remoteIPAddress: string;
+
+          remotePort: number;
+
+          securityHeaders: Array<RedirectResponse.SecurityHeader>;
+
+          securityState: string;
+
+          status: number;
+
+          statusText: string;
+
+          url: string;
+
+          headers?: unknown;
+        }
+
+        export namespace RedirectResponse {
+          export interface SecurityHeader {
+            name: string;
+
+            value: string;
+          }
+        }
+      }
+
+      export interface Response {
+        asn: Response.ASN;
+
+        dataLength: number;
+
+        encodedDataLength: number;
+
+        geoip: Response.Geoip;
+
+        hasExtraInfo: boolean;
+
+        requestId: string;
+
+        response: Response.Response;
+
+        size: number;
+
+        type: string;
+
+        contentAvailable?: boolean;
+
+        hash?: string;
+      }
+
+      export namespace Response {
+        export interface ASN {
+          asn: string;
+
+          country: string;
+
+          description: string;
+
+          ip: string;
+
+          name: string;
+
+          org: string;
+        }
+
+        export interface Geoip {
+          city: string;
+
+          country: string;
+
+          country_name: string;
+
+          geonameId: string;
+
+          ll: Array<unknown>;
+
+          region: string;
+        }
+
+        export interface Response {
+          charset: string;
+
+          mimeType: string;
+
+          protocol: string;
+
+          remoteIPAddress: string;
+
+          remotePort: number;
+
+          securityDetails: Response.SecurityDetails;
+
+          securityHeaders: Array<Response.SecurityHeader>;
+
+          securityState: string;
+
+          status: number;
+
+          statusText: string;
+
+          url: string;
+
+          headers?: unknown;
+        }
+
+        export namespace Response {
+          export interface SecurityDetails {
+            certificateId: number;
+
+            certificateTransparencyCompliance: string;
+
+            cipher: string;
+
+            encryptedClientHello: boolean;
+
+            issuer: string;
+
+            keyExchange: string;
+
+            keyExchangeGroup: string;
+
+            protocol: string;
+
+            sanList: Array<string>;
+
+            serverSignatureAlgorithm: number;
+
+            subjectName: string;
+
+            validFrom: number;
+
+            validTo: number;
+          }
+
+          export interface SecurityHeader {
+            name: string;
+
+            value: string;
+          }
+        }
+      }
+
+      export interface Request {
+        documentURL: string;
+
+        frameId: string;
+
+        hasUserGesture: boolean;
+
+        initiator: Request.Initiator;
+
+        loaderId: string;
+
+        redirectHasExtraInfo: boolean;
+
+        request: Request.Request;
+
+        requestId: string;
+
+        type: string;
+
+        wallTime: number;
+      }
+
+      export namespace Request {
+        export interface Initiator {
+          type: string;
+        }
+
+        export interface Request {
+          headers: Request.Headers;
+
+          initialPriority: string;
+
+          isSameSite: boolean;
+
+          method: string;
+
+          mixedContentType: string;
+
+          referrerPolicy: string;
+
+          url: string;
+        }
+
+        export namespace Request {
+          export interface Headers {
+            name: string;
+          }
+        }
+      }
+    }
+  }
+
+  export interface Lists {
+    asns: Array<string>;
+
+    certificates: Array<Lists.Certificate>;
+
+    continents: Array<string>;
+
+    countries: Array<string>;
+
+    domains: Array<string>;
+
+    hashes: Array<string>;
+
+    ips: Array<string>;
+
+    linkDomains: Array<string>;
+
+    servers: Array<string>;
+
+    urls: Array<string>;
+  }
+
+  export namespace Lists {
     export interface Certificate {
       issuer: string;
 
@@ -208,435 +621,56 @@ export namespace ScanGetResponse {
 
       validTo: number;
     }
+  }
 
-    export interface Geo {
-      /**
-       * GeoIP continent location
-       */
-      continents: Array<string>;
+  export interface Meta {
+    processors: Meta.Processors;
+  }
 
-      /**
-       * GeoIP country location
-       */
-      locations: Array<string>;
+  export namespace Meta {
+    export interface Processors {
+      asn: Processors.ASN;
+
+      dns: Processors.DNS;
+
+      domainCategories: Processors.DomainCategories;
+
+      geoip: Processors.Geoip;
+
+      phishing: Processors.Phishing;
+
+      radarRank: Processors.RadarRank;
+
+      wappa: Processors.Wappa;
+
+      urlCategories?: Processors.URLCategories;
     }
 
-    export interface Meta {
-      processors: Meta.Processors;
-    }
-
-    export namespace Meta {
-      export interface Processors {
-        categories: Processors.Categories;
-
-        phishing: Array<string>;
-
-        rank: Processors.Rank;
-
-        tech: Array<Processors.Tech>;
-      }
-
-      export namespace Processors {
-        export interface Categories {
-          content: Array<URLScannerAPI.URLScannerDomain>;
-
-          risks: Array<Categories.Risk>;
-        }
-
-        export namespace Categories {
-          export interface Risk {
-            id: number;
-
-            name: string;
-
-            super_category_id: number;
-          }
-        }
-
-        export interface Rank {
-          bucket: string;
-
-          name: string;
-
-          /**
-           * Rank in the Global Radar Rank, if set. See more at
-           * https://blog.cloudflare.com/radar-domain-rankings/
-           */
-          rank?: number;
-        }
-
-        export interface Tech {
-          categories: Array<Tech.Category>;
-
-          confidence: number;
-
-          evidence: Tech.Evidence;
-
-          icon: string;
-
-          name: string;
-
-          slug: string;
-
-          website: string;
-
-          description?: string;
-        }
-
-        export namespace Tech {
-          export interface Category {
-            id: number;
-
-            groups: Array<number>;
-
-            name: string;
-
-            priority: number;
-
-            slug: string;
-          }
-
-          export interface Evidence {
-            impliedBy: Array<string>;
-
-            patterns: Array<Evidence.Pattern>;
-          }
-
-          export namespace Evidence {
-            export interface Pattern {
-              confidence: number;
-
-              excludes: Array<string>;
-
-              implies: Array<string>;
-
-              match: string;
-
-              /**
-               * Header or Cookie name when set
-               */
-              name: string;
-
-              regex: string;
-
-              type: string;
-
-              value: string;
-
-              version: string;
-            }
-          }
-        }
-      }
-    }
-
-    export interface Page {
-      asn: string;
-
-      asnLocationAlpha2: string;
-
-      asnname: string;
-
-      console: Array<Page.Console>;
-
-      cookies: Array<Page.Cookie>;
-
-      country: string;
-
-      countryLocationAlpha2: string;
-
-      domain: string;
-
-      headers: Array<Page.Header>;
-
-      ip: string;
-
-      js: Page.JS;
-
-      securityViolations: Array<Page.SecurityViolation>;
-
-      status: number;
-
-      subdivision1Name: string;
-
-      subdivision2name: string;
-
-      url: string;
-    }
-
-    export namespace Page {
-      export interface Console {
-        category: string;
-
-        text: string;
-
-        type: string;
-
-        url?: string;
-      }
-
-      export interface Cookie {
-        domain: string;
-
-        expires: number;
-
-        httpOnly: boolean;
-
-        name: string;
-
-        path: string;
-
-        sameParty: boolean;
-
-        secure: boolean;
-
-        session: boolean;
-
-        size: number;
-
-        sourcePort: number;
-
-        sourceScheme: string;
-
-        value: string;
-
-        priority?: string;
-      }
-
-      export interface Header {
-        name: string;
-
-        value: string;
-      }
-
-      export interface JS {
-        variables: Array<JS.Variable>;
-      }
-
-      export namespace JS {
-        export interface Variable {
-          name: string;
-
-          type: string;
-        }
-      }
-
-      export interface SecurityViolation {
-        category: string;
-
-        text: string;
-
-        url: string;
-      }
-    }
-
-    export interface Performance {
-      connectEnd: number;
-
-      connectStart: number;
-
-      decodedBodySize: number;
-
-      domainLookupEnd: number;
-
-      domainLookupStart: number;
-
-      domComplete: number;
-
-      domContentLoadedEventEnd: number;
-
-      domContentLoadedEventStart: number;
-
-      domInteractive: number;
-
-      duration: number;
-
-      encodedBodySize: number;
-
-      entryType: string;
-
-      fetchStart: number;
-
-      initiatorType: string;
-
-      loadEventEnd: number;
-
-      loadEventStart: number;
-
-      name: string;
-
-      nextHopProtocol: string;
-
-      redirectCount: number;
-
-      redirectEnd: number;
-
-      redirectStart: number;
-
-      requestStart: number;
-
-      responseEnd: number;
-
-      responseStart: number;
-
-      secureConnectionStart: number;
-
-      startTime: number;
-
-      transferSize: number;
-
-      type: string;
-
-      unloadEventEnd: number;
-
-      unloadEventStart: number;
-
-      workerStart: number;
-    }
-
-    export interface Task {
-      /**
-       * Submitter location
-       */
-      clientLocation: string;
-
-      clientType: 'Site' | 'Automatic' | 'Api';
-
-      /**
-       * URL of the primary request, after all HTTP redirects
-       */
-      effectiveUrl: string;
-
-      errors: Array<Task.Error>;
-
-      scannedFrom: Task.ScannedFrom;
-
-      status: 'Queued' | 'InProgress' | 'InPostProcessing' | 'Finished';
-
-      success: boolean;
-
-      time: string;
-
-      timeEnd: string;
-
-      /**
-       * Submitted URL
-       */
-      url: string;
-
-      /**
-       * Scan ID
-       */
-      uuid: string;
-
-      visibility: 'Public' | 'Unlisted';
-    }
-
-    export namespace Task {
-      export interface Error {
-        message: string;
-      }
-
-      export interface ScannedFrom {
-        /**
-         * IATA code of Cloudflare datacenter
-         */
-        colo: string;
-      }
-    }
-
-    export interface Verdicts {
-      overall: Verdicts.Overall;
-    }
-
-    export namespace Verdicts {
-      export interface Overall {
-        categories: Array<Overall.Category>;
-
-        /**
-         * At least one of our subsystems marked the site as potentially malicious at the
-         * time of the scan.
-         */
-        malicious: boolean;
-
-        phishing: Array<string>;
-      }
-
-      export namespace Overall {
-        export interface Category {
-          id: number;
-
-          name: string;
-
-          super_category_id: number;
-        }
-      }
-    }
-
-    /**
-     * Dictionary of Autonomous System Numbers where ASN's are the keys
-     */
-    export interface ASNs {
-      /**
-       * ASN's contacted
-       */
-      asn?: ASNs.ASN;
-    }
-
-    export namespace ASNs {
-      /**
-       * ASN's contacted
-       */
+    export namespace Processors {
       export interface ASN {
-        asn: string;
-
-        description: string;
-
-        location_alpha2: string;
-
-        name: string;
-
-        org_name: string;
-      }
-    }
-
-    export interface Domains {
-      'example.com'?: Domains.ExampleCom;
-    }
-
-    export namespace Domains {
-      export interface ExampleCom {
-        categories: ExampleCom.Categories;
-
-        dns: Array<ExampleCom.DNS>;
-
-        name: string;
-
-        rank: ExampleCom.Rank;
-
-        type: string;
+        data: Array<ASN.Data>;
       }
 
-      export namespace ExampleCom {
-        export interface Categories {
-          inherited: Categories.Inherited;
+      export namespace ASN {
+        export interface Data {
+          asn: string;
 
-          content?: Array<URLScannerAPI.URLScannerDomain>;
+          country: string;
 
-          risks?: Array<URLScannerAPI.URLScannerDomain>;
+          description: string;
+
+          ip: string;
+
+          name: string;
         }
+      }
 
-        export namespace Categories {
-          export interface Inherited {
-            content?: Array<URLScannerAPI.URLScannerDomain>;
+      export interface DNS {
+        data: Array<DNS.Data>;
+      }
 
-            from?: string;
-
-            risks?: Array<URLScannerAPI.URLScannerDomain>;
-          }
-        }
-
-        export interface DNS {
+      export namespace DNS {
+        export interface Data {
           address: string;
 
           dnssec_valid: boolean;
@@ -645,211 +679,577 @@ export namespace ScanGetResponse {
 
           type: string;
         }
+      }
 
-        export interface Rank {
-          bucket: string;
+      export interface DomainCategories {
+        data: Array<DomainCategories.Data>;
+      }
+
+      export namespace DomainCategories {
+        export interface Data {
+          inherited: unknown;
+
+          isPrimary: boolean;
 
           name: string;
+        }
+      }
 
-          /**
-           * Rank in the Global Radar Rank, if set. See more at
-           * https://blog.cloudflare.com/radar-domain-rankings/
-           */
+      export interface Geoip {
+        data: Array<Geoip.Data>;
+      }
+
+      export namespace Geoip {
+        export interface Data {
+          geoip: Data.Geoip;
+
+          ip: string;
+        }
+
+        export namespace Data {
+          export interface Geoip {
+            city: string;
+
+            country: string;
+
+            country_name: string;
+
+            ll: Array<number>;
+
+            region: string;
+          }
+        }
+      }
+
+      export interface Phishing {
+        data: Array<string>;
+      }
+
+      export interface RadarRank {
+        data: Array<RadarRank.Data>;
+      }
+
+      export namespace RadarRank {
+        export interface Data {
+          bucket: string;
+
+          hostname: string;
+
           rank?: number;
         }
       }
+
+      export interface Wappa {
+        data: Array<Wappa.Data>;
+      }
+
+      export namespace Wappa {
+        export interface Data {
+          app: string;
+
+          categories: Array<Data.Category>;
+
+          confidence: Array<Data.Confidence>;
+
+          confidenceTotal: number;
+
+          icon: string;
+
+          website: string;
+        }
+
+        export namespace Data {
+          export interface Category {
+            name: string;
+
+            priority: number;
+          }
+
+          export interface Confidence {
+            confidence: number;
+
+            name: string;
+
+            pattern: string;
+
+            patternType: string;
+          }
+        }
+      }
+
+      export interface URLCategories {
+        data: Array<URLCategories.Data>;
+      }
+
+      export namespace URLCategories {
+        export interface Data {
+          content: Array<Data.Content>;
+
+          inherited: Data.Inherited;
+
+          name: string;
+
+          risks: Array<Data.Risk>;
+        }
+
+        export namespace Data {
+          export interface Content {
+            id: number;
+
+            name: string;
+
+            super_category_id: number;
+          }
+
+          export interface Inherited {
+            content: Array<Inherited.Content>;
+
+            from: string;
+
+            risks: Array<Inherited.Risk>;
+          }
+
+          export namespace Inherited {
+            export interface Content {
+              id: number;
+
+              name: string;
+
+              super_category_id: number;
+            }
+
+            export interface Risk {
+              id: number;
+
+              name: string;
+
+              super_category_id: number;
+            }
+          }
+
+          export interface Risk {
+            id: number;
+
+            name: string;
+
+            super_category_id: number;
+          }
+        }
+      }
+    }
+  }
+
+  export interface Page {
+    apexDomain: string;
+
+    asn: string;
+
+    asnname: string;
+
+    city: string;
+
+    country: string;
+
+    domain: string;
+
+    ip: string;
+
+    mimeType: string;
+
+    server: string;
+
+    status: string;
+
+    title: string;
+
+    tlsAgeDays: number;
+
+    tlsIssuer: string;
+
+    tlsValidDays: number;
+
+    tlsValidFrom: string;
+
+    url: string;
+
+    screenshot?: Page.Screenshot;
+  }
+
+  export namespace Page {
+    export interface Screenshot {
+      dhash: string;
+
+      mm3Hash: number;
+
+      name: string;
+
+      phash: string;
+    }
+  }
+
+  export interface Scanner {
+    colo: string;
+
+    country: string;
+  }
+
+  export interface Stats {
+    domainStats: Array<Stats.DomainStat>;
+
+    ipStats: Array<Stats.IPStat>;
+
+    IPv6Percentage: number;
+
+    malicious: number;
+
+    protocolStats: Array<Stats.ProtocolStat>;
+
+    resourceStats: Array<Stats.ResourceStat>;
+
+    securePercentage: number;
+
+    secureRequests: number;
+
+    serverStats: Array<Stats.ServerStat>;
+
+    tlsStats: Array<Stats.TLSStat>;
+
+    totalLinks: number;
+
+    uniqASNs: number;
+
+    uniqCountries: number;
+  }
+
+  export namespace Stats {
+    export interface DomainStat {
+      count: number;
+
+      countries: Array<string>;
+
+      domain: string;
+
+      encodedSize: number;
+
+      index: number;
+
+      initiators: Array<string>;
+
+      ips: Array<string>;
+
+      redirects: number;
+
+      size: number;
     }
 
-    export interface IPs {
-      ip?: IPs.IP;
+    export interface IPStat {
+      asn: IPStat.ASN;
+
+      countries: Array<string>;
+
+      domains: Array<string>;
+
+      encodedSize: number;
+
+      geoip: IPStat.Geoip;
+
+      index: number;
+
+      ip: string;
+
+      ipv6: boolean;
+
+      redirects: number;
+
+      requests: number;
+
+      size: number;
+
+      count?: number;
     }
 
-    export namespace IPs {
-      export interface IP {
+    export namespace IPStat {
+      export interface ASN {
         asn: string;
 
-        asnDescription: string;
+        country: string;
 
-        asnLocationAlpha2: string;
-
-        asnName: string;
-
-        asnOrgName: string;
-
-        continent: string;
-
-        geonameId: string;
+        description: string;
 
         ip: string;
 
-        ipVersion: string;
+        name: string;
 
-        latitude: string;
+        org: string;
+      }
 
-        locationAlpha2: string;
+      export interface Geoip {
+        city: string;
 
-        locationName: string;
+        country: string;
 
-        longitude: string;
+        country_name: string;
 
-        subdivision1Name: string;
+        ll: Array<number>;
 
-        subdivision2Name: string;
+        region: string;
       }
     }
 
-    export interface Links {
-      link?: Links.Link;
+    export interface ProtocolStat {
+      count: number;
+
+      countries: Array<string>;
+
+      encodedSize: number;
+
+      ips: Array<string>;
+
+      protocol: string;
+
+      size: number;
     }
 
-    export namespace Links {
-      export interface Link {
-        /**
-         * Outgoing link detected in the DOM
-         */
-        href: string;
+    export interface ResourceStat {
+      compression: number;
 
-        text: string;
+      count: number;
+
+      countries: Array<string>;
+
+      encodedSize: number;
+
+      ips: Array<string>;
+
+      percentage: number;
+
+      size: number;
+
+      type: string;
+    }
+
+    export interface ServerStat {
+      count: number;
+
+      countries: Array<string>;
+
+      encodedSize: number;
+
+      ips: Array<string>;
+
+      server: string;
+
+      size: number;
+    }
+
+    export interface TLSStat {
+      count: number;
+
+      countries: Array<string>;
+
+      encodedSize: number;
+
+      ips: Array<string>;
+
+      protocols: TLSStat.Protocols;
+
+      securityState: string;
+
+      size: number;
+    }
+
+    export namespace TLSStat {
+      export interface Protocols {
+        'TLS 1.3 / AES_128_GCM': number;
       }
+    }
+  }
+
+  export interface Task {
+    apexDomain: string;
+
+    domain: string;
+
+    domURL: string;
+
+    method: string;
+
+    options: Task.Options;
+
+    reportURL: string;
+
+    screenshotURL: string;
+
+    source: string;
+
+    success: boolean;
+
+    time: string;
+
+    url: string;
+
+    uuid: string;
+
+    visibility: string;
+  }
+
+  export namespace Task {
+    export interface Options {
+      /**
+       * Custom headers set.
+       */
+      customHeaders?: unknown;
+
+      screenshotsResolutions?: Array<string>;
+    }
+  }
+
+  export interface Verdicts {
+    overall: Verdicts.Overall;
+  }
+
+  export namespace Verdicts {
+    export interface Overall {
+      categories: Array<string>;
+
+      hasVerdicts: boolean;
+
+      malicious: boolean;
+
+      tags: Array<string>;
     }
   }
 }
 
 export interface ScanHARResponse {
-  har: ScanHARResponse.HAR;
+  log: ScanHARResponse.Log;
 }
 
 export namespace ScanHARResponse {
-  export interface HAR {
-    log: HAR.Log;
+  export interface Log {
+    creator: Log.Creator;
+
+    entries: Array<Log.Entry>;
+
+    pages: Array<Log.Page>;
+
+    version: string;
   }
 
-  export namespace HAR {
-    export interface Log {
-      creator: Log.Creator;
+  export namespace Log {
+    export interface Creator {
+      comment: string;
 
-      entries: Array<Log.Entry>;
-
-      pages: Array<Log.Page>;
+      name: string;
 
       version: string;
     }
 
-    export namespace Log {
-      export interface Creator {
-        comment: string;
+    export interface Entry {
+      _initialPriority: string;
 
-        name: string;
+      _initiator_type: string;
 
-        version: string;
+      _priority: string;
+
+      _requestId: string;
+
+      _requestTime: number;
+
+      _resourceType: string;
+
+      cache: unknown;
+
+      connection: string;
+
+      pageref: string;
+
+      request: Entry.Request;
+
+      response: Entry.Response;
+
+      serverIPAddress: string;
+
+      startedDateTime: string;
+
+      time: number;
+    }
+
+    export namespace Entry {
+      export interface Request {
+        bodySize: number;
+
+        headers: Array<Request.Header>;
+
+        headersSize: number;
+
+        httpVersion: string;
+
+        method: string;
+
+        url: string;
       }
 
-      export interface Entry {
-        _initialPriority: string;
+      export namespace Request {
+        export interface Header {
+          name: string;
 
-        _initiator_type: string;
-
-        _priority: string;
-
-        _requestId: string;
-
-        _requestTime: number;
-
-        _resourceType: string;
-
-        cache: unknown;
-
-        connection: string;
-
-        pageref: string;
-
-        request: Entry.Request;
-
-        response: Entry.Response;
-
-        serverIPAddress: string;
-
-        startedDateTime: string;
-
-        time: number;
-      }
-
-      export namespace Entry {
-        export interface Request {
-          bodySize: number;
-
-          headers: Array<Request.Header>;
-
-          headersSize: number;
-
-          httpVersion: string;
-
-          method: string;
-
-          url: string;
-        }
-
-        export namespace Request {
-          export interface Header {
-            name: string;
-
-            value: string;
-          }
-        }
-
-        export interface Response {
-          _transferSize: number;
-
-          bodySize: number;
-
-          content: Response.Content;
-
-          headers: Array<Response.Header>;
-
-          headersSize: number;
-
-          httpVersion: string;
-
-          redirectURL: string;
-
-          status: number;
-
-          statusText: string;
-        }
-
-        export namespace Response {
-          export interface Content {
-            mimeType: string;
-
-            size: number;
-
-            compression?: number;
-          }
-
-          export interface Header {
-            name: string;
-
-            value: string;
-          }
+          value: string;
         }
       }
 
-      export interface Page {
-        id: string;
+      export interface Response {
+        _transferSize: number;
 
-        pageTimings: Page.PageTimings;
+        bodySize: number;
 
-        startedDateTime: string;
+        content: Response.Content;
 
-        title: string;
+        headers: Array<Response.Header>;
+
+        headersSize: number;
+
+        httpVersion: string;
+
+        redirectURL: string;
+
+        status: number;
+
+        statusText: string;
       }
 
-      export namespace Page {
-        export interface PageTimings {
-          onContentLoad: number;
+      export namespace Response {
+        export interface Content {
+          mimeType: string;
 
-          onLoad: number;
+          size: number;
+
+          compression?: number;
         }
+
+        export interface Header {
+          name: string;
+
+          value: string;
+        }
+      }
+    }
+
+    export interface Page {
+      id: string;
+
+      pageTimings: Page.PageTimings;
+
+      startedDateTime: string;
+
+      title: string;
+    }
+
+    export namespace Page {
+      export interface PageTimings {
+        onContentLoad: number;
+
+        onLoad: number;
       }
     }
   }
@@ -884,102 +1284,45 @@ export interface ScanCreateParams {
 
 export interface ScanListParams {
   /**
-   * Return only scans created by account.
+   * Filter scans
    */
-  account_scans?: boolean;
-
-  /**
-   * Filter scans by Autonomous System Number (ASN) of _any_ request made by the
-   * webpage.
-   */
-  asn?: string;
-
-  /**
-   * Filter scans requested before date (inclusive).
-   */
-  date_end?: string;
-
-  /**
-   * Filter scans requested after date (inclusive).
-   */
-  date_start?: string;
-
-  /**
-   * Filter scans by hash of any html/js/css request made by the webpage.
-   */
-  hash?: string;
-
-  /**
-   * Filter scans by hostname of _any_ request made by the webpage.
-   */
-  hostname?: string;
-
-  /**
-   * Filter scans by IP address (IPv4 or IPv6) of _any_ request made by the webpage.
-   */
-  ip?: string;
-
-  /**
-   * Filter scans by malicious verdict.
-   */
-  is_malicious?: boolean;
+  q?: string;
 
   /**
    * Limit the number of objects in the response.
    */
-  limit?: number;
-
-  /**
-   * Pagination cursor to get the next set of results.
-   */
-  next_cursor?: string;
-
-  /**
-   * Filter scans by main page Autonomous System Number (ASN).
-   */
-  page_asn?: string;
-
-  /**
-   * Filter scans by main page hostname (domain of effective URL).
-   */
-  page_hostname?: string;
-
-  /**
-   * Filter scans by main page IP address (IPv4 or IPv6).
-   */
-  page_ip?: string;
-
-  /**
-   * Filter scans by exact match of effective URL path (also supports suffix search).
-   */
-  page_path?: string;
-
-  /**
-   * Filter scans by submitted or scanned URL
-   */
-  page_url?: string;
-
-  /**
-   * Filter scans by url path of _any_ request made by the webpage.
-   */
-  path?: string;
-
-  /**
-   * Scan uuid
-   */
-  scanId?: string;
-
-  /**
-   * Filter scans by URL of _any_ request made by the webpage
-   */
-  url?: string;
+  size?: number;
 }
 
-export interface ScanGetParams {
-  /**
-   * Whether to return full report (scan summary and network log).
-   */
-  full?: boolean;
+export type ScanBulkCreateParams = Array<ScanBulkCreateParams.Body>;
+
+export namespace ScanBulkCreateParams {
+  export interface Body {
+    url: string;
+
+    customagent?: string;
+
+    /**
+     * Set custom headers.
+     */
+    customHeaders?: Record<string, string>;
+
+    referer?: string;
+
+    /**
+     * Take multiple screenshots targeting different device types.
+     */
+    screenshotsResolutions?: Array<'desktop' | 'mobile' | 'tablet'>;
+
+    /**
+     * The option `Public` means it will be included in listings like recent scans and
+     * search results. `Unlisted` means it will not be included in the aforementioned
+     * listings, users will need to have the scan's ID to access it. A a scan will be
+     * automatically marked as unlisted if it fails, if it contains potential PII or
+     * other sensitive material.
+     */
+    visibility?: 'Public' | 'Unlisted';
+  }
 }
 
 export interface ScanScreenshotParams {
@@ -993,11 +1336,13 @@ export declare namespace Scans {
   export {
     type ScanCreateResponse as ScanCreateResponse,
     type ScanListResponse as ScanListResponse,
+    type ScanBulkCreateResponse as ScanBulkCreateResponse,
+    type ScanDOMResponse as ScanDOMResponse,
     type ScanGetResponse as ScanGetResponse,
     type ScanHARResponse as ScanHARResponse,
     type ScanCreateParams as ScanCreateParams,
     type ScanListParams as ScanListParams,
-    type ScanGetParams as ScanGetParams,
+    type ScanBulkCreateParams as ScanBulkCreateParams,
     type ScanScreenshotParams as ScanScreenshotParams,
   };
 }
