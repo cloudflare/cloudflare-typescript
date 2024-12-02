@@ -53,30 +53,53 @@ describe('resource scans', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.urlScanner.scans.list(
-        'accountId',
-        {
-          account_scans: true,
-          asn: '13335',
-          date_end: '2019-12-27T18:11:19.117Z',
-          date_start: '2019-12-27T18:11:19.117Z',
-          hash: 'hash',
-          hostname: 'example.com',
-          ip: '1.1.1.1',
-          is_malicious: true,
-          limit: 100,
-          next_cursor: 'next_cursor',
-          page_asn: 'page_asn',
-          page_hostname: 'page_hostname',
-          page_ip: 'page_ip',
-          page_path: 'page_path',
-          page_url: 'page_url',
-          path: '/samples/subresource-integrity/',
-          scanId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-          url: 'https://example.com/?hello',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.urlScanner.scans.list('accountId', { q: 'q', size: 100 }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('bulkCreate: only required params', async () => {
+    const responsePromise = client.urlScanner.scans.bulkCreate('accountId', [
+      { url: 'https://www.example.com' },
+    ]);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkCreate: required and optional params', async () => {
+    const response = await client.urlScanner.scans.bulkCreate('accountId', [
+      {
+        url: 'https://www.example.com',
+        customagent: 'customagent',
+        customHeaders: { foo: 'string' },
+        referer: 'referer',
+        screenshotsResolutions: ['desktop'],
+        visibility: 'Public',
+      },
+    ]);
+  });
+
+  test('dom', async () => {
+    const responsePromise = client.urlScanner.scans.dom('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('dom: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.urlScanner.scans.dom('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
@@ -97,18 +120,6 @@ describe('resource scans', () => {
       client.urlScanner.scans.get('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
         path: '/_stainless_unknown_path',
       }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.urlScanner.scans.get(
-        'accountId',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { full: true },
-        { path: '/_stainless_unknown_path' },
-      ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
