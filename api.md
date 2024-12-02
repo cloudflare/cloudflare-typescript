@@ -5639,11 +5639,6 @@ Types:
 
 - <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerDomain</a></code>
 - <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerTask</a></code>
-- <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerBulkResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{accountId}/urlscanner/v2/bulk">client.urlScanner.<a href="./src/resources/url-scanner/url-scanner.ts">bulk</a>(accountId, [ ...body ]) -> URLScannerBulkResponse</code>
 
 ## Responses
 
@@ -5661,52 +5656,20 @@ Types:
 
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanCreateResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanListResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanBulkCreateResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanDOMResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanGetResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanHARResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{accountId}/urlscanner/v2/scan">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">create</a>(accountId, { ...params }) -> ScanCreateResponse</code>
-- <code title="get /accounts/{accountId}/urlscanner/scan">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">list</a>(accountId, { ...params }) -> ScanListResponse</code>
-- <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">get</a>(accountId, scanId, { ...params }) -> ScanGetResponse</code>
-- <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/har">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">har</a>(accountId, scanId) -> ScanHARResponse</code>
-- <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/screenshot">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">screenshot</a>(accountId, scanId, { ...params }) -> Response</code>
-
-## DOM
-
-Types:
-
-- <code><a href="./src/resources/url-scanner/dom.ts">DOMGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{accountId}/urlscanner/v2/dom/{scanId}">client.urlScanner.dom.<a href="./src/resources/url-scanner/dom.ts">get</a>(accountId, scanId) -> string</code>
-
-## HAR
-
-Types:
-
-- <code><a href="./src/resources/url-scanner/har.ts">HARGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{accountId}/urlscanner/v2/har/{scanId}">client.urlScanner.har.<a href="./src/resources/url-scanner/har.ts">get</a>(accountId, scanId) -> HARGetResponse</code>
-
-## Result
-
-Types:
-
-- <code><a href="./src/resources/url-scanner/result.ts">ResultGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{accountId}/urlscanner/v2/result/{scanId}">client.urlScanner.result.<a href="./src/resources/url-scanner/result.ts">get</a>(accountId, scanId) -> ResultGetResponse</code>
-
-## Screenshot
-
-Methods:
-
-- <code title="get /accounts/{accountId}/urlscanner/v2/screenshots/{scanId}.png">client.urlScanner.screenshot.<a href="./src/resources/url-scanner/screenshot.ts">get</a>(accountId, scanId, { ...params }) -> Response</code>
+- <code title="get /accounts/{accountId}/urlscanner/v2/search">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">list</a>(accountId, { ...params }) -> ScanListResponse</code>
+- <code title="post /accounts/{accountId}/urlscanner/v2/bulk">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">bulkCreate</a>(accountId, [ ...body ]) -> ScanBulkCreateResponse</code>
+- <code title="get /accounts/{accountId}/urlscanner/v2/dom/{scanId}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">dom</a>(accountId, scanId) -> string</code>
+- <code title="get /accounts/{accountId}/urlscanner/v2/result/{scanId}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">get</a>(accountId, scanId) -> ScanGetResponse</code>
+- <code title="get /accounts/{accountId}/urlscanner/v2/har/{scanId}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">har</a>(accountId, scanId) -> ScanHARResponse</code>
+- <code title="get /accounts/{accountId}/urlscanner/v2/screenshots/{scanId}.png">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">screenshot</a>(accountId, scanId, { ...params }) -> Response</code>
 
 # Radar
 
