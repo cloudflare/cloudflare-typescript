@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../resource';
-import * as Core from '../core';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
 
 export class DNSSECResource extends APIResource {
   /**
@@ -169,4 +169,14 @@ export interface DNSSECGetParams {
    * Identifier
    */
   zone_id: string;
+}
+
+export declare namespace DNSSECResource {
+  export {
+    type DNSSEC as DNSSEC,
+    type DNSSECDeleteResponse as DNSSECDeleteResponse,
+    type DNSSECDeleteParams as DNSSECDeleteParams,
+    type DNSSECEditParams as DNSSECEditParams,
+    type DNSSECGetParams as DNSSECGetParams,
+  };
 }

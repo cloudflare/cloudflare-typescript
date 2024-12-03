@@ -861,6 +861,19 @@ Types:
 - <code><a href="./src/resources/dns/dns.ts">DNSAnalyticsNominalMetric</a></code>
 - <code><a href="./src/resources/dns/dns.ts">DNSAnalyticsQuery</a></code>
 
+## DNSSEC
+
+Types:
+
+- <code><a href="./src/resources/dns/dnssec.ts">DNSSEC</a></code>
+- <code><a href="./src/resources/dns/dnssec.ts">DNSSECDeleteResponse</a></code>
+
+Methods:
+
+- <code title="delete /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">delete</a>({ ...params }) -> DNSSECDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">edit</a>({ ...params }) -> DNSSEC</code>
+- <code title="get /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">get</a>({ ...params }) -> DNSSEC</code>
+
 ## Records
 
 Types:
@@ -1016,19 +1029,6 @@ Methods:
 
 - <code title="patch /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns">client.dns.firewall.reverseDNS.<a href="./src/resources/dns/firewall/reverse-dns.ts">edit</a>(dnsFirewallId, { ...params }) -> ReverseDNSEditResponse</code>
 - <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns">client.dns.firewall.reverseDNS.<a href="./src/resources/dns/firewall/reverse-dns.ts">get</a>(dnsFirewallId, { ...params }) -> ReverseDNSGetResponse</code>
-
-# DNSSEC
-
-Types:
-
-- <code><a href="./src/resources/dnssec.ts">DNSSEC</a></code>
-- <code><a href="./src/resources/dnssec.ts">DNSSECDeleteResponse</a></code>
-
-Methods:
-
-- <code title="delete /zones/{zone_id}/dnssec">client.dnssec.<a href="./src/resources/dnssec.ts">delete</a>({ ...params }) -> DNSSECDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/dnssec">client.dnssec.<a href="./src/resources/dnssec.ts">edit</a>({ ...params }) -> DNSSEC</code>
-- <code title="get /zones/{zone_id}/dnssec">client.dnssec.<a href="./src/resources/dnssec.ts">get</a>({ ...params }) -> DNSSEC</code>
 
 # EmailSecurity
 

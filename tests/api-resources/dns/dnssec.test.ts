@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource dnssec', () => {
   test('delete: only required params', async () => {
-    const responsePromise = client.dnssec.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.dns.dnssec.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,11 +22,11 @@ describe('resource dnssec', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.dnssec.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.dns.dnssec.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.dnssec.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.dns.dnssec.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -37,7 +37,7 @@ describe('resource dnssec', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.dnssec.edit({
+    const response = await client.dns.dnssec.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dnssec_multi_signer: false,
       dnssec_presigned: true,
@@ -46,7 +46,7 @@ describe('resource dnssec', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.dnssec.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.dns.dnssec.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,6 +57,6 @@ describe('resource dnssec', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.dnssec.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.dns.dnssec.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

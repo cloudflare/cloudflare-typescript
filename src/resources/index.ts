@@ -24,7 +24,6 @@ export { CustomNameservers } from './custom-nameservers';
 export { D1Resource } from './d1/d1';
 export { DCVDelegation } from './dcv-delegation';
 export { DNS } from './dns/dns';
-export { DNSSECResource } from './dnssec';
 export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
 export { EmailRouting } from './email-routing/email-routing';
