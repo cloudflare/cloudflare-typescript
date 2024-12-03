@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource forceAXFR', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.secondaryDNS.forceAXFR.create({
+    const responsePromise = client.dns.zoneTransfers.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       body: {},
     });
@@ -25,7 +25,7 @@ describe('resource forceAXFR', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.secondaryDNS.forceAXFR.create({
+    const response = await client.dns.zoneTransfers.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       body: {},
     });

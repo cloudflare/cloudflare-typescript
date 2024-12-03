@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource status', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.secondaryDNS.outgoing.status.get({
+    const responsePromise = client.dns.zoneTransfers.outgoing.status.get({
       zone_id: '269d8f4853475ca241c4e730be286b20',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource status', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.secondaryDNS.outgoing.status.get({
+    const response = await client.dns.zoneTransfers.outgoing.status.get({
       zone_id: '269d8f4853475ca241c4e730be286b20',
     });
   });

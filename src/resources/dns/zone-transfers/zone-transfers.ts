@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../../resource';
 import * as ACLsAPI from './acls';
 import {
   ACL,
@@ -73,7 +73,7 @@ import {
   OutgoingUpdateResponse,
 } from './outgoing/outgoing';
 
-export class SecondaryDNS extends APIResource {
+export class ZoneTransfers extends APIResource {
   forceAXFR: ForceAXFRAPI.ForceAXFRResource = new ForceAXFRAPI.ForceAXFRResource(this._client);
   incoming: IncomingAPI.IncomingResource = new IncomingAPI.IncomingResource(this._client);
   outgoing: OutgoingAPI.OutgoingResource = new OutgoingAPI.OutgoingResource(this._client);
@@ -82,17 +82,17 @@ export class SecondaryDNS extends APIResource {
   tsigs: TSIGsAPI.TSIGs = new TSIGsAPI.TSIGs(this._client);
 }
 
-SecondaryDNS.ForceAXFRResource = ForceAXFRResource;
-SecondaryDNS.IncomingResource = IncomingResource;
-SecondaryDNS.OutgoingResource = OutgoingResource;
-SecondaryDNS.ACLs = ACLs;
-SecondaryDNS.ACLsSinglePage = ACLsSinglePage;
-SecondaryDNS.Peers = Peers;
-SecondaryDNS.PeersSinglePage = PeersSinglePage;
-SecondaryDNS.TSIGs = TSIGs;
-SecondaryDNS.TSIGsSinglePage = TSIGsSinglePage;
+ZoneTransfers.ForceAXFRResource = ForceAXFRResource;
+ZoneTransfers.IncomingResource = IncomingResource;
+ZoneTransfers.OutgoingResource = OutgoingResource;
+ZoneTransfers.ACLs = ACLs;
+ZoneTransfers.ACLsSinglePage = ACLsSinglePage;
+ZoneTransfers.Peers = Peers;
+ZoneTransfers.PeersSinglePage = PeersSinglePage;
+ZoneTransfers.TSIGs = TSIGs;
+ZoneTransfers.TSIGsSinglePage = TSIGsSinglePage;
 
-export declare namespace SecondaryDNS {
+export declare namespace ZoneTransfers {
   export {
     ForceAXFRResource as ForceAXFRResource,
     type ForceAXFR as ForceAXFR,

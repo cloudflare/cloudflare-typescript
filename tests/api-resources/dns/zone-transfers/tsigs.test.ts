@@ -9,12 +9,14 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource peers', () => {
-  // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.secondaryDNS.peers.create({
+describe('resource tsigs', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.dns.zoneTransfers.tsigs.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      name: 'my-peer-1',
+      algo: 'hmac-sha512.',
+      name: 'tsig.customer.cf.',
+      secret:
+        'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,18 +27,23 @@ describe('resource peers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
-    const response = await client.secondaryDNS.peers.create({
+  test('create: required and optional params', async () => {
+    const response = await client.dns.zoneTransfers.tsigs.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      name: 'my-peer-1',
+      algo: 'hmac-sha512.',
+      name: 'tsig.customer.cf.',
+      secret:
+        'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.secondaryDNS.peers.update('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.dns.zoneTransfers.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      name: 'my-peer-1',
+      algo: 'hmac-sha512.',
+      name: 'tsig.customer.cf.',
+      secret:
+        'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,18 +55,17 @@ describe('resource peers', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.secondaryDNS.peers.update('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.dns.zoneTransfers.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      name: 'my-peer-1',
-      ip: '192.0.2.53',
-      ixfr_enable: false,
-      port: 53,
-      tsig_id: '69cd1e104af3e6ed3cb344f263fd0d5a',
+      algo: 'hmac-sha512.',
+      name: 'tsig.customer.cf.',
+      secret:
+        'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.secondaryDNS.peers.list({
+    const responsePromise = client.dns.zoneTransfers.tsigs.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -72,11 +78,13 @@ describe('resource peers', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.secondaryDNS.peers.list({ account_id: '01a7362d577a6c3019a474fd6f485823' });
+    const response = await client.dns.zoneTransfers.tsigs.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.secondaryDNS.peers.delete('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.dns.zoneTransfers.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -89,13 +97,13 @@ describe('resource peers', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.secondaryDNS.peers.delete('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.dns.zoneTransfers.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.secondaryDNS.peers.get('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.dns.zoneTransfers.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -108,7 +116,7 @@ describe('resource peers', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.secondaryDNS.peers.get('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.dns.zoneTransfers.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });

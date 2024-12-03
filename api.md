@@ -1030,6 +1030,110 @@ Methods:
 - <code title="patch /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns">client.dns.firewall.reverseDNS.<a href="./src/resources/dns/firewall/reverse-dns.ts">edit</a>(dnsFirewallId, { ...params }) -> ReverseDNSEditResponse</code>
 - <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns">client.dns.firewall.reverseDNS.<a href="./src/resources/dns/firewall/reverse-dns.ts">get</a>(dnsFirewallId, { ...params }) -> ReverseDNSGetResponse</code>
 
+## ZoneTransfers
+
+### ForceAXFR
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/force-axfr.ts">ForceAXFR</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/secondary_dns/force_axfr">client.dns.zoneTransfers.forceAXFR.<a href="./src/resources/dns/zone-transfers/force-axfr.ts">create</a>({ ...params }) -> ForceAXFR</code>
+
+### Incoming
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">Incoming</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">IncomingCreateResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">IncomingUpdateResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">IncomingDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">IncomingGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/secondary_dns/incoming">client.dns.zoneTransfers.incoming.<a href="./src/resources/dns/zone-transfers/incoming.ts">create</a>({ ...params }) -> IncomingCreateResponse</code>
+- <code title="put /zones/{zone_id}/secondary_dns/incoming">client.dns.zoneTransfers.incoming.<a href="./src/resources/dns/zone-transfers/incoming.ts">update</a>({ ...params }) -> IncomingUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/secondary_dns/incoming">client.dns.zoneTransfers.incoming.<a href="./src/resources/dns/zone-transfers/incoming.ts">delete</a>({ ...params }) -> IncomingDeleteResponse</code>
+- <code title="get /zones/{zone_id}/secondary_dns/incoming">client.dns.zoneTransfers.incoming.<a href="./src/resources/dns/zone-transfers/incoming.ts">get</a>({ ...params }) -> IncomingGetResponse</code>
+
+### Outgoing
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">DisableTransfer</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">EnableTransfer</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">Outgoing</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingStatus</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingCreateResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingUpdateResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingForceNotifyResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/secondary_dns/outgoing">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">create</a>({ ...params }) -> OutgoingCreateResponse</code>
+- <code title="put /zones/{zone_id}/secondary_dns/outgoing">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">update</a>({ ...params }) -> OutgoingUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/secondary_dns/outgoing">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">delete</a>({ ...params }) -> OutgoingDeleteResponse</code>
+- <code title="post /zones/{zone_id}/secondary_dns/outgoing/disable">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">disable</a>({ ...params }) -> DisableTransfer</code>
+- <code title="post /zones/{zone_id}/secondary_dns/outgoing/enable">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">enable</a>({ ...params }) -> EnableTransfer</code>
+- <code title="post /zones/{zone_id}/secondary_dns/outgoing/force_notify">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">forceNotify</a>({ ...params }) -> OutgoingForceNotifyResponse</code>
+- <code title="get /zones/{zone_id}/secondary_dns/outgoing">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">get</a>({ ...params }) -> OutgoingGetResponse</code>
+
+#### Status
+
+Methods:
+
+- <code title="get /zones/{zone_id}/secondary_dns/outgoing/status">client.dns.zoneTransfers.outgoing.status.<a href="./src/resources/dns/zone-transfers/outgoing/status.ts">get</a>({ ...params }) -> EnableTransfer</code>
+
+### ACLs
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/acls.ts">ACL</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/acls.ts">ACLDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/secondary_dns/acls">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">create</a>({ ...params }) -> ACL</code>
+- <code title="put /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">update</a>(aclId, { ...params }) -> ACL</code>
+- <code title="get /accounts/{account_id}/secondary_dns/acls">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">list</a>({ ...params }) -> ACLsSinglePage</code>
+- <code title="delete /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">delete</a>(aclId, { ...params }) -> ACLDeleteResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">get</a>(aclId, { ...params }) -> ACL</code>
+
+### Peers
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/peers.ts">Peer</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/peers.ts">PeerDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/secondary_dns/peers">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">create</a>({ ...params }) -> Peer</code>
+- <code title="put /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">update</a>(peerId, { ...params }) -> Peer</code>
+- <code title="get /accounts/{account_id}/secondary_dns/peers">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">list</a>({ ...params }) -> PeersSinglePage</code>
+- <code title="delete /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">delete</a>(peerId, { ...params }) -> PeerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">get</a>(peerId, { ...params }) -> Peer</code>
+
+### TSIGs
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/tsigs.ts">TSIG</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/tsigs.ts">TSIGDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/secondary_dns/tsigs">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">create</a>({ ...params }) -> TSIG</code>
+- <code title="put /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">update</a>(tsigId, { ...params }) -> TSIG</code>
+- <code title="get /accounts/{account_id}/secondary_dns/tsigs">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">list</a>({ ...params }) -> TSIGsSinglePage</code>
+- <code title="delete /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">delete</a>(tsigId, { ...params }) -> TSIGDeleteResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">get</a>(tsigId, { ...params }) -> TSIG</code>
+
 # EmailSecurity
 
 ## Investigate
@@ -1730,110 +1834,6 @@ Methods:
 - <code title="delete /zones/{zone_id}/rate_limits/{rate_limit_id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">delete</a>(rateLimitId, { ...params }) -> RateLimitDeleteResponse</code>
 - <code title="put /zones/{zone_id}/rate_limits/{rate_limit_id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">edit</a>(rateLimitId, { ...params }) -> RateLimit</code>
 - <code title="get /zones/{zone_id}/rate_limits/{rate_limit_id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">get</a>(rateLimitId, { ...params }) -> RateLimit</code>
-
-# SecondaryDNS
-
-## ForceAXFR
-
-Types:
-
-- <code><a href="./src/resources/secondary-dns/force-axfr.ts">ForceAXFR</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/secondary_dns/force_axfr">client.secondaryDNS.forceAXFR.<a href="./src/resources/secondary-dns/force-axfr.ts">create</a>({ ...params }) -> ForceAXFR</code>
-
-## Incoming
-
-Types:
-
-- <code><a href="./src/resources/secondary-dns/incoming.ts">Incoming</a></code>
-- <code><a href="./src/resources/secondary-dns/incoming.ts">IncomingCreateResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/incoming.ts">IncomingUpdateResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/incoming.ts">IncomingDeleteResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/incoming.ts">IncomingGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/secondary_dns/incoming">client.secondaryDNS.incoming.<a href="./src/resources/secondary-dns/incoming.ts">create</a>({ ...params }) -> IncomingCreateResponse</code>
-- <code title="put /zones/{zone_id}/secondary_dns/incoming">client.secondaryDNS.incoming.<a href="./src/resources/secondary-dns/incoming.ts">update</a>({ ...params }) -> IncomingUpdateResponse</code>
-- <code title="delete /zones/{zone_id}/secondary_dns/incoming">client.secondaryDNS.incoming.<a href="./src/resources/secondary-dns/incoming.ts">delete</a>({ ...params }) -> IncomingDeleteResponse</code>
-- <code title="get /zones/{zone_id}/secondary_dns/incoming">client.secondaryDNS.incoming.<a href="./src/resources/secondary-dns/incoming.ts">get</a>({ ...params }) -> IncomingGetResponse</code>
-
-## Outgoing
-
-Types:
-
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">DisableTransfer</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">EnableTransfer</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">Outgoing</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingStatus</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingCreateResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingUpdateResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingDeleteResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingForceNotifyResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/secondary_dns/outgoing">client.secondaryDNS.outgoing.<a href="./src/resources/secondary-dns/outgoing/outgoing.ts">create</a>({ ...params }) -> OutgoingCreateResponse</code>
-- <code title="put /zones/{zone_id}/secondary_dns/outgoing">client.secondaryDNS.outgoing.<a href="./src/resources/secondary-dns/outgoing/outgoing.ts">update</a>({ ...params }) -> OutgoingUpdateResponse</code>
-- <code title="delete /zones/{zone_id}/secondary_dns/outgoing">client.secondaryDNS.outgoing.<a href="./src/resources/secondary-dns/outgoing/outgoing.ts">delete</a>({ ...params }) -> OutgoingDeleteResponse</code>
-- <code title="post /zones/{zone_id}/secondary_dns/outgoing/disable">client.secondaryDNS.outgoing.<a href="./src/resources/secondary-dns/outgoing/outgoing.ts">disable</a>({ ...params }) -> DisableTransfer</code>
-- <code title="post /zones/{zone_id}/secondary_dns/outgoing/enable">client.secondaryDNS.outgoing.<a href="./src/resources/secondary-dns/outgoing/outgoing.ts">enable</a>({ ...params }) -> EnableTransfer</code>
-- <code title="post /zones/{zone_id}/secondary_dns/outgoing/force_notify">client.secondaryDNS.outgoing.<a href="./src/resources/secondary-dns/outgoing/outgoing.ts">forceNotify</a>({ ...params }) -> OutgoingForceNotifyResponse</code>
-- <code title="get /zones/{zone_id}/secondary_dns/outgoing">client.secondaryDNS.outgoing.<a href="./src/resources/secondary-dns/outgoing/outgoing.ts">get</a>({ ...params }) -> OutgoingGetResponse</code>
-
-### Status
-
-Methods:
-
-- <code title="get /zones/{zone_id}/secondary_dns/outgoing/status">client.secondaryDNS.outgoing.status.<a href="./src/resources/secondary-dns/outgoing/status.ts">get</a>({ ...params }) -> EnableTransfer</code>
-
-## ACLs
-
-Types:
-
-- <code><a href="./src/resources/secondary-dns/acls.ts">ACL</a></code>
-- <code><a href="./src/resources/secondary-dns/acls.ts">ACLDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/secondary_dns/acls">client.secondaryDNS.acls.<a href="./src/resources/secondary-dns/acls.ts">create</a>({ ...params }) -> ACL</code>
-- <code title="put /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.secondaryDNS.acls.<a href="./src/resources/secondary-dns/acls.ts">update</a>(aclId, { ...params }) -> ACL</code>
-- <code title="get /accounts/{account_id}/secondary_dns/acls">client.secondaryDNS.acls.<a href="./src/resources/secondary-dns/acls.ts">list</a>({ ...params }) -> ACLsSinglePage</code>
-- <code title="delete /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.secondaryDNS.acls.<a href="./src/resources/secondary-dns/acls.ts">delete</a>(aclId, { ...params }) -> ACLDeleteResponse</code>
-- <code title="get /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.secondaryDNS.acls.<a href="./src/resources/secondary-dns/acls.ts">get</a>(aclId, { ...params }) -> ACL</code>
-
-## Peers
-
-Types:
-
-- <code><a href="./src/resources/secondary-dns/peers.ts">Peer</a></code>
-- <code><a href="./src/resources/secondary-dns/peers.ts">PeerDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">create</a>({ ...params }) -> Peer</code>
-- <code title="put /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">update</a>(peerId, { ...params }) -> Peer</code>
-- <code title="get /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">list</a>({ ...params }) -> PeersSinglePage</code>
-- <code title="delete /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">delete</a>(peerId, { ...params }) -> PeerDeleteResponse</code>
-- <code title="get /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">get</a>(peerId, { ...params }) -> Peer</code>
-
-## TSIGs
-
-Types:
-
-- <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIG</a></code>
-- <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIGDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/secondary_dns/tsigs">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">create</a>({ ...params }) -> TSIG</code>
-- <code title="put /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">update</a>(tsigId, { ...params }) -> TSIG</code>
-- <code title="get /accounts/{account_id}/secondary_dns/tsigs">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">list</a>({ ...params }) -> TSIGsSinglePage</code>
-- <code title="delete /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">delete</a>(tsigId, { ...params }) -> TSIGDeleteResponse</code>
-- <code title="get /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">get</a>(tsigId, { ...params }) -> TSIG</code>
 
 # WaitingRooms
 

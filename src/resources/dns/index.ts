@@ -83,3 +83,4 @@ export {
   type SettingEditParams,
   type SettingGetParams,
 } from './settings/index';
+export { ZoneTransfers } from './zone-transfers/index';

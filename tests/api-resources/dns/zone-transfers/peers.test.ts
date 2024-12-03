@@ -9,13 +9,12 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource acls', () => {
+describe('resource peers', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.secondaryDNS.acls.create({
+    const responsePromise = client.dns.zoneTransfers.peers.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      ip_range: '192.0.2.53/28',
-      name: 'my-acl-1',
+      name: 'my-peer-1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,18 +27,16 @@ describe('resource acls', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.secondaryDNS.acls.create({
+    const response = await client.dns.zoneTransfers.peers.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      ip_range: '192.0.2.53/28',
-      name: 'my-acl-1',
+      name: 'my-peer-1',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.secondaryDNS.acls.update('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.dns.zoneTransfers.peers.update('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      ip_range: '192.0.2.53/28',
-      name: 'my-acl-1',
+      name: 'my-peer-1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -51,15 +48,20 @@ describe('resource acls', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.secondaryDNS.acls.update('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.dns.zoneTransfers.peers.update('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      ip_range: '192.0.2.53/28',
-      name: 'my-acl-1',
+      name: 'my-peer-1',
+      ip: '192.0.2.53',
+      ixfr_enable: false,
+      port: 53,
+      tsig_id: '69cd1e104af3e6ed3cb344f263fd0d5a',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.secondaryDNS.acls.list({ account_id: '01a7362d577a6c3019a474fd6f485823' });
+    const responsePromise = client.dns.zoneTransfers.peers.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -70,11 +72,13 @@ describe('resource acls', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.secondaryDNS.acls.list({ account_id: '01a7362d577a6c3019a474fd6f485823' });
+    const response = await client.dns.zoneTransfers.peers.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.secondaryDNS.acls.delete('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.dns.zoneTransfers.peers.delete('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -87,13 +91,13 @@ describe('resource acls', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.secondaryDNS.acls.delete('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.dns.zoneTransfers.peers.delete('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.secondaryDNS.acls.get('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.dns.zoneTransfers.peers.get('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -106,7 +110,7 @@ describe('resource acls', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.secondaryDNS.acls.get('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.dns.zoneTransfers.peers.get('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });

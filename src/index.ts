@@ -90,7 +90,6 @@ import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
-import { SecondaryDNS } from './resources/secondary-dns/secondary-dns';
 import { Snippets } from './resources/snippets/snippets';
 import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
@@ -274,7 +273,6 @@ export class Cloudflare extends Core.APIClient {
   originTLSClientAuth: API.OriginTLSClientAuth = new API.OriginTLSClientAuth(this);
   pagerules: API.Pagerules = new API.Pagerules(this);
   rateLimits: API.RateLimits = new API.RateLimits(this);
-  secondaryDNS: API.SecondaryDNS = new API.SecondaryDNS(this);
   waitingRooms: API.WaitingRooms = new API.WaitingRooms(this);
   web3: API.Web3 = new API.Web3(this);
   workers: API.Workers = new API.Workers(this);
@@ -484,7 +482,6 @@ Cloudflare.Logs = Logs;
 Cloudflare.OriginTLSClientAuth = OriginTLSClientAuth;
 Cloudflare.Pagerules = Pagerules;
 Cloudflare.RateLimits = RateLimits;
-Cloudflare.SecondaryDNS = SecondaryDNS;
 Cloudflare.WaitingRooms = WaitingRooms;
 Cloudflare.Web3 = Web3;
 Cloudflare.Workers = Workers;
@@ -625,8 +622,6 @@ export declare namespace Cloudflare {
   export { Pagerules as Pagerules };
 
   export { RateLimits as RateLimits };
-
-  export { SecondaryDNS as SecondaryDNS };
 
   export { WaitingRooms as WaitingRooms };
 
