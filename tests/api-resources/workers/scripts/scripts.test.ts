@@ -31,7 +31,10 @@ describe('resource scripts', () => {
       rollback_to: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       '<any part name>': [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: {
-        assets: { config: { html_handling: 'auto-trailing-slash', not_found_handling: 'none' }, jwt: 'jwt' },
+        assets: {
+          config: { html_handling: 'auto-trailing-slash', not_found_handling: 'none', serve_directly: true },
+          jwt: 'jwt',
+        },
         bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
         body_part: 'worker.js',
         compatibility_date: '2023-07-25',

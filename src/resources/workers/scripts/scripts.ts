@@ -427,6 +427,13 @@ export namespace ScriptUpdateParams {
            * is no Worker script.
            */
           not_found_handling?: 'none' | '404-page' | 'single-page-application';
+
+          /**
+           * When true and the incoming request matches an asset, that will be served instead
+           * of invoking the Worker script. When false, requests will always invoke the
+           * Worker script.
+           */
+          serve_directly?: boolean;
         }
       }
 
