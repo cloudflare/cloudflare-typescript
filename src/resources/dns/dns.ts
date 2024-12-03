@@ -59,26 +59,9 @@ import {
   TXTRecord,
   URIRecord,
 } from './records';
-import * as AnalyticsAPI from './analytics/analytics';
+import * as AnalyticsAPI from '../dns-firewall/analytics/analytics';
+import * as AnalyticsAnalyticsAPI from './analytics/analytics';
 import { Analytics } from './analytics/analytics';
-import * as FirewallAPI from './firewall/firewall';
-import {
-  AttackMitigation,
-  Firewall,
-  FirewallCreateParams,
-  FirewallCreateResponse,
-  FirewallDeleteParams,
-  FirewallDeleteResponse,
-  FirewallEditParams,
-  FirewallEditResponse,
-  FirewallGetParams,
-  FirewallGetResponse,
-  FirewallIPs,
-  FirewallListParams,
-  FirewallListResponse,
-  FirewallListResponsesV4PagePaginationArray,
-  UpstreamIPs,
-} from './firewall/firewall';
 import * as SettingsAPI from './settings/settings';
 import {
   DNSSetting,
@@ -90,14 +73,12 @@ import {
 } from './settings/settings';
 import * as ZoneTransfersAPI from './zone-transfers/zone-transfers';
 import { ZoneTransfers } from './zone-transfers/zone-transfers';
-import * as AnalyticsAnalyticsAPI from './firewall/analytics/analytics';
 
 export class DNS extends APIResource {
   dnssec: DNSSECAPI.DNSSECResource = new DNSSECAPI.DNSSECResource(this._client);
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
-  firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
+  analytics: AnalyticsAnalyticsAPI.Analytics = new AnalyticsAnalyticsAPI.Analytics(this._client);
   zoneTransfers: ZoneTransfersAPI.ZoneTransfers = new ZoneTransfersAPI.ZoneTransfers(this._client);
 }
 
@@ -130,7 +111,7 @@ export interface DNSAnalyticsQuery {
   /**
    * Unit of time to group data by.
    */
-  time_delta: AnalyticsAnalyticsAPI.Delta;
+  time_delta: AnalyticsAPI.Delta;
 
   /**
    * End date and time of requesting data period in ISO 8601 format.
@@ -154,8 +135,6 @@ DNS.Records = Records;
 DNS.RecordListResponsesV4PagePaginationArray = RecordListResponsesV4PagePaginationArray;
 DNS.Settings = Settings;
 DNS.Analytics = Analytics;
-DNS.Firewall = Firewall;
-DNS.FirewallListResponsesV4PagePaginationArray = FirewallListResponsesV4PagePaginationArray;
 DNS.ZoneTransfers = ZoneTransfers;
 
 export declare namespace DNS {
@@ -227,24 +206,6 @@ export declare namespace DNS {
   };
 
   export { Analytics as Analytics };
-
-  export {
-    Firewall as Firewall,
-    type AttackMitigation as AttackMitigation,
-    type FirewallIPs as FirewallIPs,
-    type UpstreamIPs as UpstreamIPs,
-    type FirewallCreateResponse as FirewallCreateResponse,
-    type FirewallListResponse as FirewallListResponse,
-    type FirewallDeleteResponse as FirewallDeleteResponse,
-    type FirewallEditResponse as FirewallEditResponse,
-    type FirewallGetResponse as FirewallGetResponse,
-    FirewallListResponsesV4PagePaginationArray as FirewallListResponsesV4PagePaginationArray,
-    type FirewallCreateParams as FirewallCreateParams,
-    type FirewallListParams as FirewallListParams,
-    type FirewallDeleteParams as FirewallDeleteParams,
-    type FirewallEditParams as FirewallEditParams,
-    type FirewallGetParams as FirewallGetParams,
-  };
 
   export { ZoneTransfers as ZoneTransfers };
 }

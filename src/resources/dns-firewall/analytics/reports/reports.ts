@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../resource';
-import * as Core from '../../../../../core';
-import * as ReportsAPI from '../../../analytics/reports/reports';
+import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
 import * as BytimesAPI from './bytimes';
 import { BytimeGetParams, Bytimes } from './bytimes';
+import * as ReportsReportsAPI from '../../../dns/analytics/reports/reports';
 
 export class Reports extends APIResource {
   bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);
@@ -20,13 +20,13 @@ export class Reports extends APIResource {
     dnsFirewallId: string,
     params: ReportGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsAPI.Report> {
+  ): Core.APIPromise<ReportsReportsAPI.Report> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}/dns_analytics/report`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ReportsAPI.Report }>
+      }) as Core.APIPromise<{ result: ReportsReportsAPI.Report }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

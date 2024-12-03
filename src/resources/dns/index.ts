@@ -11,23 +11,6 @@ export {
   type DNSSECGetParams,
 } from './dnssec';
 export {
-  FirewallListResponsesV4PagePaginationArray,
-  Firewall,
-  type AttackMitigation,
-  type FirewallIPs,
-  type UpstreamIPs,
-  type FirewallCreateResponse,
-  type FirewallListResponse,
-  type FirewallDeleteResponse,
-  type FirewallEditResponse,
-  type FirewallGetResponse,
-  type FirewallCreateParams,
-  type FirewallListParams,
-  type FirewallDeleteParams,
-  type FirewallEditParams,
-  type FirewallGetParams,
-} from './firewall/index';
-export {
   RecordListResponsesV4PagePaginationArray,
   Records,
   type ARecord,

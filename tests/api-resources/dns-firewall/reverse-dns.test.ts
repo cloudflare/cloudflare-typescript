@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource reverseDNS', () => {
   test('edit: only required params', async () => {
-    const responsePromise = client.dns.firewall.reverseDNS.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dnsFirewall.reverseDNS.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,14 +24,14 @@ describe('resource reverseDNS', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.dns.firewall.reverseDNS.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dnsFirewall.reverseDNS.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ptr: { foo: 'string' },
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.dns.firewall.reverseDNS.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dnsFirewall.reverseDNS.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +44,7 @@ describe('resource reverseDNS', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.dns.firewall.reverseDNS.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dnsFirewall.reverseDNS.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
