@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../resource';
-import * as Core from '../../../../../core';
-import * as BytimesAPI from '../../../analytics/reports/bytimes';
+import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
 import * as AnalyticsAPI from '../analytics';
+import * as ReportsBytimesAPI from '../../../dns/analytics/reports/bytimes';
 
 export class Bytimes extends APIResource {
   /**
@@ -17,13 +17,13 @@ export class Bytimes extends APIResource {
     dnsFirewallId: string,
     params: BytimeGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BytimesAPI.ByTime> {
+  ): Core.APIPromise<ReportsBytimesAPI.ByTime> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}/dns_analytics/report/bytime`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: BytimesAPI.ByTime }>
+      }) as Core.APIPromise<{ result: ReportsBytimesAPI.ByTime }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource firewall', () => {
+describe('resource dnsFirewall', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.dns.firewall.create({
+    const responsePromise = client.dnsFirewall.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Awesome DNS Firewall cluster',
       upstream_ips: ['192.0.2.1', '198.51.100.1', 'string'],
@@ -26,7 +26,7 @@ describe('resource firewall', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.dns.firewall.create({
+    const response = await client.dnsFirewall.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Awesome DNS Firewall cluster',
       upstream_ips: ['192.0.2.1', '198.51.100.1', 'string'],
@@ -42,7 +42,7 @@ describe('resource firewall', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.dns.firewall.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.dnsFirewall.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,7 +53,7 @@ describe('resource firewall', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.dns.firewall.list({
+    const response = await client.dnsFirewall.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 1,
@@ -61,7 +61,7 @@ describe('resource firewall', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.dns.firewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dnsFirewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -74,13 +74,13 @@ describe('resource firewall', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.dns.firewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dnsFirewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dnsFirewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -93,7 +93,7 @@ describe('resource firewall', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dnsFirewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       attack_mitigation: { enabled: true, only_when_upstream_unhealthy: false },
       deprecate_any_requests: true,
@@ -109,7 +109,7 @@ describe('resource firewall', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dnsFirewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -122,7 +122,7 @@ describe('resource firewall', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dnsFirewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

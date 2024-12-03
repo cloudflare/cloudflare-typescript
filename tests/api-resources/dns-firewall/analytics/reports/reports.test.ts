@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource reports', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.dns.firewall.analytics.reports.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dnsFirewall.analytics.reports.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource reports', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.dns.firewall.analytics.reports.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dnsFirewall.analytics.reports.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dimensions: 'queryType',
       filters: 'responseCode==NOERROR,queryType==A',

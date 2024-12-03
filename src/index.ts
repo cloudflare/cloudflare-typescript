@@ -53,6 +53,7 @@ import { CustomCertificates } from './resources/custom-certificates/custom-certi
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
 import { D1Resource } from './resources/d1/d1';
 import { Diagnostics } from './resources/diagnostics/diagnostics';
+import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
 import { DurableObjects } from './resources/durable-objects/durable-objects';
 import { EmailRouting } from './resources/email-routing/email-routing';
@@ -261,6 +262,7 @@ export class Cloudflare extends Core.APIClient {
   customCertificates: API.CustomCertificates = new API.CustomCertificates(this);
   customHostnames: API.CustomHostnames = new API.CustomHostnames(this);
   customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
+  dnsFirewall: API.DNSFirewall = new API.DNSFirewall(this);
   dns: API.DNS = new API.DNS(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
   emailRouting: API.EmailRouting = new API.EmailRouting(this);
@@ -470,6 +472,7 @@ Cloudflare.ClientCertificates = ClientCertificates;
 Cloudflare.CustomCertificates = CustomCertificates;
 Cloudflare.CustomHostnames = CustomHostnames;
 Cloudflare.CustomNameservers = CustomNameservers;
+Cloudflare.DNSFirewall = DNSFirewall;
 Cloudflare.DNS = DNS;
 Cloudflare.EmailSecurity = EmailSecurity;
 Cloudflare.EmailRouting = EmailRouting;
@@ -598,6 +601,8 @@ export declare namespace Cloudflare {
   export { CustomHostnames as CustomHostnames };
 
   export { CustomNameservers as CustomNameservers };
+
+  export { DNSFirewall as DNSFirewall };
 
   export { DNS as DNS };
 
