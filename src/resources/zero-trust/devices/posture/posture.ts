@@ -773,7 +773,7 @@ export interface OSVersionInput {
   os_distro_revision?: string;
 
   /**
-   * Additional version data. For Mac or iOS, the Product Verison Extra. For Linux,
+   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
    * the kernel release version. (Mac, iOS, and Linux only)
    */
   os_version_extra?: string;
@@ -806,7 +806,7 @@ export interface OSVersionInputParam {
   os_distro_revision?: string;
 
   /**
-   * Additional version data. For Mac or iOS, the Product Verison Extra. For Linux,
+   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
    * the kernel release version. (Mac, iOS, and Linux only)
    */
   os_version_extra?: string;
