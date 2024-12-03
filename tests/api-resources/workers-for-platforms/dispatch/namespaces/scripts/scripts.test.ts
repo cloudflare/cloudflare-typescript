@@ -36,7 +36,11 @@ describe('resource scripts', () => {
         '<any part name>': [await toFile(Buffer.from('# my file contents'), 'README.md')],
         metadata: {
           assets: {
-            config: { html_handling: 'auto-trailing-slash', not_found_handling: 'none' },
+            config: {
+              html_handling: 'auto-trailing-slash',
+              not_found_handling: 'none',
+              serve_directly: true,
+            },
             jwt: 'jwt',
           },
           bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
