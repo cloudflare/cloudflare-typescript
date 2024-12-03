@@ -88,6 +88,8 @@ import {
   SettingGetResponse,
   Settings,
 } from './settings/settings';
+import * as ZoneTransfersAPI from './zone-transfers/zone-transfers';
+import { ZoneTransfers } from './zone-transfers/zone-transfers';
 import * as AnalyticsAnalyticsAPI from './firewall/analytics/analytics';
 
 export class DNS extends APIResource {
@@ -96,6 +98,7 @@ export class DNS extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
+  zoneTransfers: ZoneTransfersAPI.ZoneTransfers = new ZoneTransfersAPI.ZoneTransfers(this._client);
 }
 
 /**
@@ -153,6 +156,7 @@ DNS.Settings = Settings;
 DNS.Analytics = Analytics;
 DNS.Firewall = Firewall;
 DNS.FirewallListResponsesV4PagePaginationArray = FirewallListResponsesV4PagePaginationArray;
+DNS.ZoneTransfers = ZoneTransfers;
 
 export declare namespace DNS {
   export {
@@ -241,4 +245,6 @@ export declare namespace DNS {
     type FirewallEditParams as FirewallEditParams,
     type FirewallGetParams as FirewallGetParams,
   };
+
+  export { ZoneTransfers as ZoneTransfers };
 }
