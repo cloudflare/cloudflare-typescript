@@ -1,6 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import * as DNSSECAPI from './dnssec';
+import {
+  DNSSEC,
+  DNSSECDeleteParams,
+  DNSSECDeleteResponse,
+  DNSSECEditParams,
+  DNSSECGetParams,
+  DNSSECResource,
+} from './dnssec';
 import * as RecordsAPI from './records';
 import {
   AAAARecord,
@@ -82,6 +91,7 @@ import {
 import * as AnalyticsAnalyticsAPI from './firewall/analytics/analytics';
 
 export class DNS extends APIResource {
+  dnssec: DNSSECAPI.DNSSECResource = new DNSSECAPI.DNSSECResource(this._client);
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
@@ -136,6 +146,7 @@ export interface DNSAnalyticsQuery {
   sort?: Array<string>;
 }
 
+DNS.DNSSECResource = DNSSECResource;
 DNS.Records = Records;
 DNS.RecordListResponsesV4PagePaginationArray = RecordListResponsesV4PagePaginationArray;
 DNS.Settings = Settings;
@@ -144,6 +155,15 @@ DNS.Firewall = Firewall;
 DNS.FirewallListResponsesV4PagePaginationArray = FirewallListResponsesV4PagePaginationArray;
 
 export declare namespace DNS {
+  export {
+    DNSSECResource as DNSSECResource,
+    type DNSSEC as DNSSEC,
+    type DNSSECDeleteResponse as DNSSECDeleteResponse,
+    type DNSSECDeleteParams as DNSSECDeleteParams,
+    type DNSSECEditParams as DNSSECEditParams,
+    type DNSSECGetParams as DNSSECGetParams,
+  };
+
   export {
     Records as Records,
     type ARecord as ARecord,

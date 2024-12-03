@@ -24,7 +24,6 @@ import { BrandProtection } from './resources/brand-protection';
 import { ClientCertificates } from './resources/client-certificates';
 import { CustomNameservers } from './resources/custom-nameservers';
 import { DCVDelegation } from './resources/dcv-delegation';
-import { DNSSECResource } from './resources/dnssec';
 import { Filters } from './resources/filters';
 import { IPs } from './resources/ips';
 import { KeylessCertificates } from './resources/keyless-certificates';
@@ -264,7 +263,6 @@ export class Cloudflare extends Core.APIClient {
   customHostnames: API.CustomHostnames = new API.CustomHostnames(this);
   customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
   dns: API.DNS = new API.DNS(this);
-  dnssec: API.DNSSECResource = new API.DNSSECResource(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
   emailRouting: API.EmailRouting = new API.EmailRouting(this);
   filters: API.Filters = new API.Filters(this);
@@ -475,7 +473,6 @@ Cloudflare.CustomCertificates = CustomCertificates;
 Cloudflare.CustomHostnames = CustomHostnames;
 Cloudflare.CustomNameservers = CustomNameservers;
 Cloudflare.DNS = DNS;
-Cloudflare.DNSSECResource = DNSSECResource;
 Cloudflare.EmailSecurity = EmailSecurity;
 Cloudflare.EmailRouting = EmailRouting;
 Cloudflare.Filters = Filters;
@@ -606,8 +603,6 @@ export declare namespace Cloudflare {
   export { CustomNameservers as CustomNameservers };
 
   export { DNS as DNS };
-
-  export { DNSSECResource as DNSSECResource };
 
   export { EmailSecurity as EmailSecurity };
 
