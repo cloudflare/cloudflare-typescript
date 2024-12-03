@@ -54,7 +54,6 @@ export {
   type PeerDeleteParams,
   type PeerGetParams,
 } from './peers';
-export { SecondaryDNS } from './secondary-dns';
 export {
   TSIGsSinglePage,
   TSIGs,
@@ -66,3 +65,4 @@ export {
   type TSIGDeleteParams,
   type TSIGGetParams,
 } from './tsigs';
+export { ZoneTransfers } from './zone-transfers';
