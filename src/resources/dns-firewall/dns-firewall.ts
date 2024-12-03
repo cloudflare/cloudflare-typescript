@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as ReverseDNSAPI from './reverse-dns';
 import {
   ReverseDNS,
@@ -12,9 +12,9 @@ import {
 } from './reverse-dns';
 import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics, Delta } from './analytics/analytics';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
-export class Firewall extends APIResource {
+export class DNSFirewall extends APIResource {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   reverseDNS: ReverseDNSAPI.ReverseDNS = new ReverseDNSAPI.ReverseDNS(this._client);
 
@@ -22,13 +22,13 @@ export class Firewall extends APIResource {
    * Create a DNS Firewall cluster
    */
   create(
-    params: FirewallCreateParams,
+    params: DNSFirewallCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallCreateResponse> {
+  ): Core.APIPromise<DNSFirewallCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dns_firewall`, { body, ...options }) as Core.APIPromise<{
-        result: FirewallCreateResponse;
+        result: DNSFirewallCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,13 +37,13 @@ export class Firewall extends APIResource {
    * List DNS Firewall clusters for an account
    */
   list(
-    params: FirewallListParams,
+    params: DNSFirewallListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallListResponsesV4PagePaginationArray, FirewallListResponse> {
+  ): Core.PagePromise<DNSFirewallListResponsesV4PagePaginationArray, DNSFirewallListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dns_firewall`,
-      FirewallListResponsesV4PagePaginationArray,
+      DNSFirewallListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -53,15 +53,15 @@ export class Firewall extends APIResource {
    */
   delete(
     dnsFirewallId: string,
-    params: FirewallDeleteParams,
+    params: DNSFirewallDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallDeleteResponse> {
+  ): Core.APIPromise<DNSFirewallDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dns_firewall/${dnsFirewallId}`,
         options,
-      ) as Core.APIPromise<{ result: FirewallDeleteResponse }>
+      ) as Core.APIPromise<{ result: DNSFirewallDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -70,15 +70,15 @@ export class Firewall extends APIResource {
    */
   edit(
     dnsFirewallId: string,
-    params: FirewallEditParams,
+    params: DNSFirewallEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallEditResponse> {
+  ): Core.APIPromise<DNSFirewallEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: FirewallEditResponse }>
+      }) as Core.APIPromise<{ result: DNSFirewallEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -87,19 +87,19 @@ export class Firewall extends APIResource {
    */
   get(
     dnsFirewallId: string,
-    params: FirewallGetParams,
+    params: DNSFirewallGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallGetResponse> {
+  ): Core.APIPromise<DNSFirewallGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{
-        result: FirewallGetResponse;
+        result: DNSFirewallGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class FirewallListResponsesV4PagePaginationArray extends V4PagePaginationArray<FirewallListResponse> {}
+export class DNSFirewallListResponsesV4PagePaginationArray extends V4PagePaginationArray<DNSFirewallListResponse> {}
 
 /**
  * Attack mitigation settings
@@ -148,7 +148,7 @@ export type UpstreamIPs = string;
  */
 export type UpstreamIPsParam = string;
 
-export interface FirewallCreateResponse {
+export interface DNSFirewallCreateResponse {
   /**
    * Identifier
    */
@@ -216,7 +216,7 @@ export interface FirewallCreateResponse {
   attack_mitigation?: AttackMitigation | null;
 }
 
-export interface FirewallListResponse {
+export interface DNSFirewallListResponse {
   /**
    * Identifier
    */
@@ -284,14 +284,14 @@ export interface FirewallListResponse {
   attack_mitigation?: AttackMitigation | null;
 }
 
-export interface FirewallDeleteResponse {
+export interface DNSFirewallDeleteResponse {
   /**
    * Identifier
    */
   id?: string;
 }
 
-export interface FirewallEditResponse {
+export interface DNSFirewallEditResponse {
   /**
    * Identifier
    */
@@ -359,7 +359,7 @@ export interface FirewallEditResponse {
   attack_mitigation?: AttackMitigation | null;
 }
 
-export interface FirewallGetResponse {
+export interface DNSFirewallGetResponse {
   /**
    * Identifier
    */
@@ -427,7 +427,7 @@ export interface FirewallGetResponse {
   attack_mitigation?: AttackMitigation | null;
 }
 
-export interface FirewallCreateParams {
+export interface DNSFirewallCreateParams {
   /**
    * Path param: Identifier
    */
@@ -492,21 +492,21 @@ export interface FirewallCreateParams {
   retries?: number;
 }
 
-export interface FirewallListParams extends V4PagePaginationArrayParams {
+export interface DNSFirewallListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
   account_id: string;
 }
 
-export interface FirewallDeleteParams {
+export interface DNSFirewallDeleteParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface FirewallEditParams {
+export interface DNSFirewallEditParams {
   /**
    * Path param: Identifier
    */
@@ -571,35 +571,17 @@ export interface FirewallEditParams {
   upstream_ips?: Array<UpstreamIPsParam>;
 }
 
-export interface FirewallGetParams {
+export interface DNSFirewallGetParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-Firewall.FirewallListResponsesV4PagePaginationArray = FirewallListResponsesV4PagePaginationArray;
-Firewall.Analytics = Analytics;
-Firewall.ReverseDNS = ReverseDNS;
+DNSFirewall.Analytics = Analytics;
+DNSFirewall.ReverseDNS = ReverseDNS;
 
-export declare namespace Firewall {
-  export {
-    type AttackMitigation as AttackMitigation,
-    type FirewallIPs as FirewallIPs,
-    type UpstreamIPs as UpstreamIPs,
-    type FirewallCreateResponse as FirewallCreateResponse,
-    type FirewallListResponse as FirewallListResponse,
-    type FirewallDeleteResponse as FirewallDeleteResponse,
-    type FirewallEditResponse as FirewallEditResponse,
-    type FirewallGetResponse as FirewallGetResponse,
-    FirewallListResponsesV4PagePaginationArray as FirewallListResponsesV4PagePaginationArray,
-    type FirewallCreateParams as FirewallCreateParams,
-    type FirewallListParams as FirewallListParams,
-    type FirewallDeleteParams as FirewallDeleteParams,
-    type FirewallEditParams as FirewallEditParams,
-    type FirewallGetParams as FirewallGetParams,
-  };
-
+export declare namespace DNSFirewall {
   export { Analytics as Analytics, type Delta as Delta };
 
   export {

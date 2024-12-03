@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as DNSAPI from '../../dns';
-import * as AnalyticsAPI from '../../firewall/analytics/analytics';
+import * as AnalyticsAPI from '../../../dns-firewall/analytics/analytics';
 
 export class Bytimes extends APIResource {
   /**

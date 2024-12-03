@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource bytimes', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.dns.firewall.analytics.reports.bytimes.get(
+    const responsePromise = client.dnsFirewall.analytics.reports.bytimes.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -25,7 +25,7 @@ describe('resource bytimes', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.dns.firewall.analytics.reports.bytimes.get(
+    const response = await client.dnsFirewall.analytics.reports.bytimes.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
