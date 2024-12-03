@@ -3,6 +3,14 @@
 export { Analytics } from './analytics/index';
 export { DNS } from './dns';
 export {
+  DNSSECResource,
+  type DNSSEC,
+  type DNSSECDeleteResponse,
+  type DNSSECDeleteParams,
+  type DNSSECEditParams,
+  type DNSSECGetParams,
+} from './dnssec';
+export {
   FirewallListResponsesV4PagePaginationArray,
   Firewall,
   type AttackMitigation,
