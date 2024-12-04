@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as AnalyticsAPI from './analytics';
+import { Analytics, AnalyticsListParams, AnalyticsStoredParams, Components, Schema } from './analytics';
 import * as KeysAPI from './keys';
 import { Key, KeyListParams, Keys, KeysCursorLimitPagination } from './keys';
 import * as MetadataAPI from './metadata';
@@ -18,6 +20,7 @@ import {
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Namespaces extends APIResource {
+  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
   metadata: MetadataAPI.Metadata = new MetadataAPI.Metadata(this._client);
   values: ValuesAPI.Values = new ValuesAPI.Values(this._client);
@@ -311,6 +314,7 @@ export interface NamespaceGetParams {
 }
 
 Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
+Namespaces.Analytics = Analytics;
 Namespaces.Keys = Keys;
 Namespaces.KeysCursorLimitPagination = KeysCursorLimitPagination;
 Namespaces.Metadata = Metadata;
@@ -331,6 +335,14 @@ export declare namespace Namespaces {
     type NamespaceBulkDeleteParams as NamespaceBulkDeleteParams,
     type NamespaceBulkUpdateParams as NamespaceBulkUpdateParams,
     type NamespaceGetParams as NamespaceGetParams,
+  };
+
+  export {
+    Analytics as Analytics,
+    type Components as Components,
+    type Schema as Schema,
+    type AnalyticsListParams as AnalyticsListParams,
+    type AnalyticsStoredParams as AnalyticsStoredParams,
   };
 
   export {

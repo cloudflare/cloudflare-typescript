@@ -76,7 +76,6 @@ export { SecurityTXT } from './security-txt';
 export { Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
 export { Speed } from './speed/speed';
-export { Storage } from './storage/storage';
 export { Stream } from './stream/stream';
 export { Turnstile } from './turnstile/turnstile';
 export { URLNormalization } from './url-normalization';
