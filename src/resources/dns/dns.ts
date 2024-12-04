@@ -59,8 +59,7 @@ import {
   TXTRecord,
   URIRecord,
 } from './records';
-import * as AnalyticsAPI from '../dns-firewall/analytics/analytics';
-import * as AnalyticsAnalyticsAPI from './analytics/analytics';
+import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics } from './analytics/analytics';
 import * as SettingsAPI from './settings/settings';
 import {
@@ -78,7 +77,7 @@ export class DNS extends APIResource {
   dnssec: DNSSECAPI.DNSSECResource = new DNSSECAPI.DNSSECResource(this._client);
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  analytics: AnalyticsAnalyticsAPI.Analytics = new AnalyticsAnalyticsAPI.Analytics(this._client);
+  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   zoneTransfers: ZoneTransfersAPI.ZoneTransfers = new ZoneTransfersAPI.ZoneTransfers(this._client);
 }
 
@@ -111,7 +110,17 @@ export interface DNSAnalyticsQuery {
   /**
    * Unit of time to group data by.
    */
-  time_delta: AnalyticsAPI.Delta;
+  time_delta:
+    | 'all'
+    | 'auto'
+    | 'year'
+    | 'quarter'
+    | 'month'
+    | 'week'
+    | 'day'
+    | 'hour'
+    | 'dekaminute'
+    | 'minute';
 
   /**
    * End date and time of requesting data period in ISO 8601 format.

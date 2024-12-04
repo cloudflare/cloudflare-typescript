@@ -877,10 +877,6 @@ Methods:
 
 ## Analytics
 
-Types:
-
-- <code><a href="./src/resources/dns-firewall/analytics/analytics.ts">Delta</a></code>
-
 ### Reports
 
 Methods:

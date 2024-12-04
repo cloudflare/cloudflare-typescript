@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Analytics, type Delta } from './analytics/index';
+export { Analytics } from './analytics/index';
 export { DNSFirewall } from './dns-firewall';
 export {
   ReverseDNS,
