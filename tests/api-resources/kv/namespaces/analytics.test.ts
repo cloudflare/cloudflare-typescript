@@ -11,7 +11,9 @@ const client = new Cloudflare({
 
 describe('resource analytics', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.storage.analytics.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.kv.namespaces.analytics.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +24,7 @@ describe('resource analytics', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.storage.analytics.list({
+    const response = await client.kv.namespaces.analytics.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       query: {
         dimensions: ['accountId'],
@@ -37,7 +39,7 @@ describe('resource analytics', () => {
   });
 
   test('stored: only required params', async () => {
-    const responsePromise = client.storage.analytics.stored({
+    const responsePromise = client.kv.namespaces.analytics.stored({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -50,7 +52,7 @@ describe('resource analytics', () => {
   });
 
   test('stored: required and optional params', async () => {
-    const response = await client.storage.analytics.stored({
+    const response = await client.kv.namespaces.analytics.stored({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       query: {
         dimensions: ['namespaceId'],

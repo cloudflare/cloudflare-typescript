@@ -95,7 +95,6 @@ import { Snippets } from './resources/snippets/snippets';
 import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
 import { SSL } from './resources/ssl/ssl';
-import { Storage } from './resources/storage/storage';
 import { Stream } from './resources/stream/stream';
 import { Turnstile } from './resources/turnstile/turnstile';
 import { URLScanner } from './resources/url-scanner/url-scanner';
@@ -301,7 +300,6 @@ export class Cloudflare extends Core.APIClient {
   registrar: API.Registrar = new API.Registrar(this);
   requestTracers: API.RequestTracers = new API.RequestTracers(this);
   rules: API.Rules = new API.Rules(this);
-  storage: API.Storage = new API.Storage(this);
   stream: API.Stream = new API.Stream(this);
   alerting: API.Alerting = new API.Alerting(this);
   d1: API.D1Resource = new API.D1Resource(this);
@@ -511,7 +509,6 @@ Cloudflare.Pages = Pages;
 Cloudflare.Registrar = Registrar;
 Cloudflare.RequestTracers = RequestTracers;
 Cloudflare.Rules = Rules;
-Cloudflare.Storage = Storage;
 Cloudflare.Stream = Stream;
 Cloudflare.Alerting = Alerting;
 Cloudflare.D1Resource = D1Resource;
@@ -679,8 +676,6 @@ export declare namespace Cloudflare {
   export { RequestTracers as RequestTracers };
 
   export { Rules as Rules };
-
-  export { Storage as Storage };
 
   export { Stream as Stream };
 
