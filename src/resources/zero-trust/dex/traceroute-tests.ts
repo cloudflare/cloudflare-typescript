@@ -309,12 +309,12 @@ export interface TracerouteTestPercentilesParams {
   account_id: string;
 
   /**
-   * Query param: Start time for aggregate metrics in ISO format
+   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format
    */
   from: string;
 
   /**
-   * Query param: End time for aggregate metrics in ISO format
+   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format
    */
   to: string;
 
