@@ -135,7 +135,8 @@ export namespace TargetCreateResponse {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -150,7 +151,8 @@ export namespace TargetCreateResponse {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -211,7 +213,8 @@ export namespace TargetUpdateResponse {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -226,7 +229,8 @@ export namespace TargetUpdateResponse {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -287,7 +291,8 @@ export namespace TargetListResponse {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -302,7 +307,8 @@ export namespace TargetListResponse {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -363,7 +369,8 @@ export namespace TargetGetResponse {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -378,7 +385,8 @@ export namespace TargetGetResponse {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -432,7 +440,8 @@ export namespace TargetCreateParams {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -447,7 +456,8 @@ export namespace TargetCreateParams {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -501,7 +511,8 @@ export namespace TargetUpdateParams {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
@@ -516,7 +527,8 @@ export namespace TargetUpdateParams {
       ip_addr?: string;
 
       /**
-       * Private virtual network identifier for the target
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
       virtual_network_id?: string;
     }
