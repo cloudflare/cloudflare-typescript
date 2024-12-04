@@ -33,12 +33,12 @@ export interface ColoListParams {
   account_id: string;
 
   /**
-   * Query param: Start time for connection period in RFC3339 (ISO 8601) format.
+   * Query param: Start time for connection period in ISO (RFC3339 - ISO 8601) format
    */
   from: string;
 
   /**
-   * Query param: End time for connection period in RFC3339 (ISO 8601) format.
+   * Query param: End time for connection period in ISO (RFC3339 - ISO 8601) format
    */
   to: string;
 
