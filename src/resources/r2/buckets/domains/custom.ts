@@ -269,15 +269,15 @@ export interface CustomCreateParams {
   domain: string;
 
   /**
-   * Body param: Zone ID of the custom domain
-   */
-  zoneId: string;
-
-  /**
    * Body param: Whether to enable public bucket access at the custom domain. If
    * undefined, the domain will be enabled.
    */
-  enabled?: boolean;
+  enabled: boolean;
+
+  /**
+   * Body param: Zone ID of the custom domain
+   */
+  zoneId: string;
 
   /**
    * Body param: Minimum TLS Version the custom domain will accept for incoming
