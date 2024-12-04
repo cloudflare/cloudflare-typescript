@@ -2202,6 +2202,18 @@ Methods:
 - <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">bulkUpdate</a>(namespaceId, [ ...body ]) -> NamespaceBulkUpdateResponse | null</code>
 - <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">get</a>(namespaceId, { ...params }) -> Namespace</code>
 
+### Analytics
+
+Types:
+
+- <code><a href="./src/resources/kv/namespaces/analytics.ts">Components</a></code>
+- <code><a href="./src/resources/kv/namespaces/analytics.ts">Schema</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/storage/analytics">client.kv.namespaces.analytics.<a href="./src/resources/kv/namespaces/analytics.ts">list</a>({ ...params }) -> Schema</code>
+- <code title="get /accounts/{account_id}/storage/analytics/stored">client.kv.namespaces.analytics.<a href="./src/resources/kv/namespaces/analytics.ts">stored</a>({ ...params }) -> Components</code>
+
 ### Keys
 
 Types:
@@ -3644,20 +3656,6 @@ Methods:
 - <code title="get /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">list</a>(listId, { ...params }) -> ItemListResponsesCursorPagination</code>
 - <code title="delete /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">delete</a>(listId, { ...params }) -> ItemDeleteResponse</code>
 - <code title="get /accounts/{account_identifier}/rules/lists/{list_id}/items/{item_id}">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">get</a>(accountIdentifier, listId, itemId) -> ItemGetResponse</code>
-
-# Storage
-
-## Analytics
-
-Types:
-
-- <code><a href="./src/resources/storage/analytics.ts">Components</a></code>
-- <code><a href="./src/resources/storage/analytics.ts">Schema</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/storage/analytics">client.storage.analytics.<a href="./src/resources/storage/analytics.ts">list</a>({ ...params }) -> Schema</code>
-- <code title="get /accounts/{account_id}/storage/analytics/stored">client.storage.analytics.<a href="./src/resources/storage/analytics.ts">stored</a>({ ...params }) -> Components</code>
 
 # Stream
 
