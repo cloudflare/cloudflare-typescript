@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as AnalyticsAPI from '../analytics';
 import * as ReportsBytimesAPI from '../../../dns/analytics/reports/bytimes';
 
 export class Bytimes extends APIResource {
@@ -68,7 +67,17 @@ export interface BytimeGetParams {
   /**
    * Query param: Unit of time to group data by.
    */
-  time_delta?: AnalyticsAPI.DeltaParam;
+  time_delta?:
+    | 'all'
+    | 'auto'
+    | 'year'
+    | 'quarter'
+    | 'month'
+    | 'week'
+    | 'day'
+    | 'hour'
+    | 'dekaminute'
+    | 'minute';
 
   /**
    * Query param: End date and time of requesting data period in ISO 8601 format.
