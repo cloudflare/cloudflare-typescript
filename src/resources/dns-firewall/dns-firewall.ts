@@ -11,7 +11,7 @@ import {
   ReverseDNSGetResponse,
 } from './reverse-dns';
 import * as AnalyticsAPI from './analytics/analytics';
-import { Analytics, Delta } from './analytics/analytics';
+import { Analytics } from './analytics/analytics';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class DNSFirewall extends APIResource {
@@ -582,7 +582,7 @@ DNSFirewall.Analytics = Analytics;
 DNSFirewall.ReverseDNS = ReverseDNS;
 
 export declare namespace DNSFirewall {
-  export { Analytics as Analytics, type Delta as Delta };
+  export { Analytics as Analytics };
 
   export {
     ReverseDNS as ReverseDNS,
