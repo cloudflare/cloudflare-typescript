@@ -90,7 +90,7 @@ export class IdentityProviders extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -110,7 +110,7 @@ export class IdentityProviders extends APIResource {
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
       IdentityProviderListResponsesSinglePage,
-      options,
+      { query, ...options },
     );
   }
 
@@ -697,6 +697,11 @@ export namespace IdentityProvider {
       email_claim_name?: string;
 
       /**
+       * Enable Proof Key for Code Exchange (PKCE)
+       */
+      pkce_enabled?: boolean;
+
+      /**
        * OAuth scopes
        */
       scopes?: Array<string>;
@@ -1091,13 +1096,15 @@ export interface IdentityProviderSCIMConfig {
   enabled?: boolean;
 
   /**
-   * Indicates how a SCIM event updates an Access identity. Use "automatic" to
-   * automatically update a user's Access identity and augment it with fields from
-   * the SCIM user resource. Use "reauth" to force re-authentication on group
-   * membership updates. With "reauth" Access identities will not contain fields from
-   * the SCIM user resource.
+   * Indicates how a SCIM event updates a user identity used for policy evaluation.
+   * Use "automatic" to automatically update a user's identity and augment it with
+   * fields from the SCIM user resource. Use "reauth" to force re-authentication on
+   * group membership updates, user identity update will only occur after successful
+   * re-authentication. With "reauth" identities will not contain fields from the
+   * SCIM user resource. With "no_action" identities will not be changed by SCIM
+   * updates in any way and users will not be prompted to reauthenticate.
    */
-  identity_update_behavior?: 'automatic' | 'reauth';
+  identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
 
   /**
    * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
@@ -1131,13 +1138,15 @@ export interface IdentityProviderSCIMConfigParam {
   enabled?: boolean;
 
   /**
-   * Indicates how a SCIM event updates an Access identity. Use "automatic" to
-   * automatically update a user's Access identity and augment it with fields from
-   * the SCIM user resource. Use "reauth" to force re-authentication on group
-   * membership updates. With "reauth" Access identities will not contain fields from
-   * the SCIM user resource.
+   * Indicates how a SCIM event updates a user identity used for policy evaluation.
+   * Use "automatic" to automatically update a user's identity and augment it with
+   * fields from the SCIM user resource. Use "reauth" to force re-authentication on
+   * group membership updates, user identity update will only occur after successful
+   * re-authentication. With "reauth" identities will not contain fields from the
+   * SCIM user resource. With "no_action" identities will not be changed by SCIM
+   * updates in any way and users will not be prompted to reauthenticate.
    */
-  identity_update_behavior?: 'automatic' | 'reauth';
+  identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
 
   /**
    * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
@@ -1573,6 +1582,11 @@ export namespace IdentityProviderListResponse {
        * The claim name for email in the id_token response.
        */
       email_claim_name?: string;
+
+      /**
+       * Enable Proof Key for Code Exchange (PKCE)
+       */
+      pkce_enabled?: boolean;
 
       /**
        * OAuth scopes
@@ -2445,6 +2459,11 @@ export namespace IdentityProviderCreateParams {
        * The claim name for email in the id_token response.
        */
       email_claim_name?: string;
+
+      /**
+       * Enable Proof Key for Code Exchange (PKCE)
+       */
+      pkce_enabled?: boolean;
 
       /**
        * OAuth scopes
@@ -3395,6 +3414,11 @@ export namespace IdentityProviderUpdateParams {
       email_claim_name?: string;
 
       /**
+       * Enable Proof Key for Code Exchange (PKCE)
+       */
+      pkce_enabled?: boolean;
+
+      /**
        * OAuth scopes
        */
       scopes?: Array<string>;
@@ -3820,14 +3844,22 @@ export namespace IdentityProviderUpdateParams {
 
 export interface IdentityProviderListParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
+
+  /**
+   * Query param: Indicates to Access to only retrieve identity providers that have
+   * the System for Cross-Domain Identity Management (SCIM) enabled.
+   */
+  scim_enabled?: string;
 }
 
 export interface IdentityProviderDeleteParams {
