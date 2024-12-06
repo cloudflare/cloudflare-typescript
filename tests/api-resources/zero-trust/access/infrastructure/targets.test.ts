@@ -119,6 +119,57 @@ describe('resource targets', () => {
     );
   });
 
+  test('bulkDelete: only required params', async () => {
+    const responsePromise = client.zeroTrust.access.infrastructure.targets.bulkDelete({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkDelete: required and optional params', async () => {
+    const response = await client.zeroTrust.access.infrastructure.targets.bulkDelete({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('bulkUpdate: only required params', async () => {
+    const responsePromise = client.zeroTrust.access.infrastructure.targets.bulkUpdate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [{ hostname: 'infra-access-target', ip: {} }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkUpdate: required and optional params', async () => {
+    const response = await client.zeroTrust.access.infrastructure.targets.bulkUpdate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [
+        {
+          hostname: 'infra-access-target',
+          ip: {
+            ipv4: { ip_addr: '187.26.29.249', virtual_network_id: 'c77b744e-acc8-428f-9257-6878c046ed55' },
+            ipv6: {
+              ip_addr: '64c0:64e8:f0b4:8dbf:7104:72b0:ec8f:f5e0',
+              virtual_network_id: 'c77b744e-acc8-428f-9257-6878c046ed55',
+            },
+          },
+        },
+      ],
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
