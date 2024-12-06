@@ -228,7 +228,6 @@ export interface GatewayRule {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh'
     | 'resolve'
     | 'quarantine';
 
@@ -330,6 +329,11 @@ export namespace GatewayRule {
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
+
+    /**
+     * Whether the policy has expired.
+     */
+    expired?: boolean;
   }
 }
 
@@ -1099,7 +1103,6 @@ export interface RuleCreateParams {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh'
     | 'resolve'
     | 'quarantine';
 
@@ -1192,6 +1195,11 @@ export namespace RuleCreateParams {
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
+
+    /**
+     * Whether the policy has expired.
+     */
+    expired?: boolean;
   }
 }
 
@@ -1219,7 +1227,6 @@ export interface RuleUpdateParams {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh'
     | 'resolve'
     | 'quarantine';
 
@@ -1312,6 +1319,11 @@ export namespace RuleUpdateParams {
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
+
+    /**
+     * Whether the policy has expired.
+     */
+    expired?: boolean;
   }
 }
 
