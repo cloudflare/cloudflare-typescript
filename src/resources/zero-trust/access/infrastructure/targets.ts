@@ -62,6 +62,31 @@ export class Targets extends APIResource {
   }
 
   /**
+   * Removes one or more targets.
+   */
+  bulkDelete(params: TargetBulkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/infrastructure/targets/batch`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
+  }
+
+  /**
+   * Adds one or more targets.
+   */
+  bulkUpdate(
+    params: TargetBulkUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TargetBulkUpdateResponse> {
+    const { account_id, body } = params;
+    return this._client.put(`/accounts/${account_id}/infrastructure/targets/batch`, {
+      body: body,
+      ...options,
+    });
+  }
+
+  /**
    * Get target
    */
   get(
@@ -311,6 +336,88 @@ export namespace TargetListResponse {
        * default virtual network ID will be used.
        */
       virtual_network_id?: string;
+    }
+  }
+}
+
+export type TargetBulkUpdateResponse = Array<TargetBulkUpdateResponse.TargetBulkUpdateResponseItem>;
+
+export namespace TargetBulkUpdateResponse {
+  export interface TargetBulkUpdateResponseItem {
+    /**
+     * Target identifier
+     */
+    id: string;
+
+    /**
+     * Date and time at which the target was created
+     */
+    created_at: string;
+
+    /**
+     * A non-unique field that refers to a target
+     */
+    hostname: string;
+
+    /**
+     * The IPv4/IPv6 address that identifies where to reach a target
+     */
+    ip: TargetBulkUpdateResponseItem.IP;
+
+    /**
+     * Date and time at which the target was modified
+     */
+    modified_at: string;
+  }
+
+  export namespace TargetBulkUpdateResponseItem {
+    /**
+     * The IPv4/IPv6 address that identifies where to reach a target
+     */
+    export interface IP {
+      /**
+       * The target's IPv4 address
+       */
+      ipv4?: IP.IPV4;
+
+      /**
+       * The target's IPv6 address
+       */
+      ipv6?: IP.IPV6;
+    }
+
+    export namespace IP {
+      /**
+       * The target's IPv4 address
+       */
+      export interface IPV4 {
+        /**
+         * IP address of the target
+         */
+        ip_addr?: string;
+
+        /**
+         * (optional) Private virtual network identifier for the target. If omitted, the
+         * default virtual network ID will be used.
+         */
+        virtual_network_id?: string;
+      }
+
+      /**
+       * The target's IPv6 address
+       */
+      export interface IPV6 {
+        /**
+         * IP address of the target
+         */
+        ip_addr?: string;
+
+        /**
+         * (optional) Private virtual network identifier for the target. If omitted, the
+         * default virtual network ID will be used.
+         */
+        virtual_network_id?: string;
+      }
     }
   }
 }
@@ -584,6 +691,92 @@ export interface TargetDeleteParams {
   account_id: string;
 }
 
+export interface TargetBulkDeleteParams {
+  /**
+   * Account identifier
+   */
+  account_id: string;
+}
+
+export interface TargetBulkUpdateParams {
+  /**
+   * Path param: Account identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Array<TargetBulkUpdateParams.Body>;
+}
+
+export namespace TargetBulkUpdateParams {
+  export interface Body {
+    /**
+     * A non-unique field that refers to a target. Case insensitive, maximum length of
+     * 255 characters, supports the use of special characters dash and period, does not
+     * support spaces, and must start and end with an alphanumeric character.
+     */
+    hostname: string;
+
+    /**
+     * The IPv4/IPv6 address that identifies where to reach a target
+     */
+    ip: Body.IP;
+  }
+
+  export namespace Body {
+    /**
+     * The IPv4/IPv6 address that identifies where to reach a target
+     */
+    export interface IP {
+      /**
+       * The target's IPv4 address
+       */
+      ipv4?: IP.IPV4;
+
+      /**
+       * The target's IPv6 address
+       */
+      ipv6?: IP.IPV6;
+    }
+
+    export namespace IP {
+      /**
+       * The target's IPv4 address
+       */
+      export interface IPV4 {
+        /**
+         * IP address of the target
+         */
+        ip_addr?: string;
+
+        /**
+         * (optional) Private virtual network identifier for the target. If omitted, the
+         * default virtual network ID will be used.
+         */
+        virtual_network_id?: string;
+      }
+
+      /**
+       * The target's IPv6 address
+       */
+      export interface IPV6 {
+        /**
+         * IP address of the target
+         */
+        ip_addr?: string;
+
+        /**
+         * (optional) Private virtual network identifier for the target. If omitted, the
+         * default virtual network ID will be used.
+         */
+        virtual_network_id?: string;
+      }
+    }
+  }
+}
+
 export interface TargetGetParams {
   /**
    * Account identifier
@@ -598,12 +791,15 @@ export declare namespace Targets {
     type TargetCreateResponse as TargetCreateResponse,
     type TargetUpdateResponse as TargetUpdateResponse,
     type TargetListResponse as TargetListResponse,
+    type TargetBulkUpdateResponse as TargetBulkUpdateResponse,
     type TargetGetResponse as TargetGetResponse,
     TargetListResponsesV4PagePaginationArray as TargetListResponsesV4PagePaginationArray,
     type TargetCreateParams as TargetCreateParams,
     type TargetUpdateParams as TargetUpdateParams,
     type TargetListParams as TargetListParams,
     type TargetDeleteParams as TargetDeleteParams,
+    type TargetBulkDeleteParams as TargetBulkDeleteParams,
+    type TargetBulkUpdateParams as TargetBulkUpdateParams,
     type TargetGetParams as TargetGetParams,
   };
 }
