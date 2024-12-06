@@ -3,6 +3,9 @@
 import { APIResource } from '../../../../resource';
 import * as TargetsAPI from './targets';
 import {
+  TargetBulkDeleteParams,
+  TargetBulkUpdateParams,
+  TargetBulkUpdateResponse,
   TargetCreateParams,
   TargetCreateResponse,
   TargetDeleteParams,
@@ -29,12 +32,15 @@ export declare namespace Infrastructure {
     type TargetCreateResponse as TargetCreateResponse,
     type TargetUpdateResponse as TargetUpdateResponse,
     type TargetListResponse as TargetListResponse,
+    type TargetBulkUpdateResponse as TargetBulkUpdateResponse,
     type TargetGetResponse as TargetGetResponse,
     TargetListResponsesV4PagePaginationArray as TargetListResponsesV4PagePaginationArray,
     type TargetCreateParams as TargetCreateParams,
     type TargetUpdateParams as TargetUpdateParams,
     type TargetListParams as TargetListParams,
     type TargetDeleteParams as TargetDeleteParams,
+    type TargetBulkDeleteParams as TargetBulkDeleteParams,
+    type TargetBulkUpdateParams as TargetBulkUpdateParams,
     type TargetGetParams as TargetGetParams,
   };
 }
