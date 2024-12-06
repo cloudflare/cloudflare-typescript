@@ -116,9 +116,10 @@ export interface CertificateCreateResponse {
 
   /**
    * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
    * The CA certificate
@@ -167,9 +168,10 @@ export interface CertificateListResponse {
 
   /**
    * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
    * The CA certificate
@@ -218,9 +220,10 @@ export interface CertificateDeleteResponse {
 
   /**
    * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
    * The CA certificate
@@ -269,9 +272,10 @@ export interface CertificateActivateResponse {
 
   /**
    * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
    * The CA certificate
@@ -320,9 +324,10 @@ export interface CertificateDeactivateResponse {
 
   /**
    * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
    * The CA certificate
@@ -371,9 +376,10 @@ export interface CertificateGetResponse {
 
   /**
    * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
    * The CA certificate
