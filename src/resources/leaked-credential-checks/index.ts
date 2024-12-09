@@ -12,10 +12,4 @@ export {
   type DetectionListParams,
   type DetectionDeleteParams,
 } from './detections';
-export {
-  LeakedCredentialChecks,
-  type LeakedCredentialCheckCreateResponse,
-  type LeakedCredentialCheckGetResponse,
-  type LeakedCredentialCheckCreateParams,
-  type LeakedCredentialCheckGetParams,
-} from './leaked-credential-checks';
+export { LeakedCredentialChecks } from './leaked-credential-checks';
