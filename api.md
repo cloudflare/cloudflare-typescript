@@ -4865,6 +4865,34 @@ Types:
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPathResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">Percentiles</a></code>
 
+### Commands
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/commands/commands.ts">CommandCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/commands/commands.ts">CommandListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/commands">client.zeroTrust.dex.commands.<a href="./src/resources/zero-trust/dex/commands/commands.ts">create</a>({ ...params }) -> CommandCreateResponse</code>
+- <code title="get /accounts/{account_id}/commands">client.zeroTrust.dex.commands.<a href="./src/resources/zero-trust/dex/commands/commands.ts">list</a>({ ...params }) -> CommandListResponsesV4PagePagination</code>
+
+#### Downloads
+
+Methods:
+
+- <code title="get /accounts/{account_id}/commands/{command_id}/downloads/{filename}">client.zeroTrust.dex.commands.downloads.<a href="./src/resources/zero-trust/dex/commands/downloads.ts">get</a>(commandId, filename, { ...params }) -> Response</code>
+
+#### Quota
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/commands/quota.ts">QuotaGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/commands/quota">client.zeroTrust.dex.commands.quota.<a href="./src/resources/zero-trust/dex/commands/quota.ts">get</a>({ ...params }) -> QuotaGetResponse</code>
+
 ### Colos
 
 Types:

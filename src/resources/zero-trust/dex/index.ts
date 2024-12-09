@@ -2,6 +2,14 @@
 
 export { ColoListResponsesSinglePage, Colos, type ColoListResponse, type ColoListParams } from './colos';
 export {
+  CommandListResponsesV4PagePagination,
+  Commands,
+  type CommandCreateResponse,
+  type CommandListResponse,
+  type CommandCreateParams,
+  type CommandListParams,
+} from './commands/index';
+export {
   DEX,
   type DigitalExperienceMonitor,
   type NetworkPath,
