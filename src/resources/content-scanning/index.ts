@@ -1,12 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  ContentScanning,
-  type ContentScanningDisableResponse,
-  type ContentScanningEnableResponse,
-  type ContentScanningDisableParams,
-  type ContentScanningEnableParams,
-} from './content-scanning';
+export { ContentScanning } from './content-scanning';
 export {
   PayloadListResponsesSinglePage,
   Payloads,

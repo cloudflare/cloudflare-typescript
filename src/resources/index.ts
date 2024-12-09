@@ -18,13 +18,7 @@ export { CertificateAuthorities } from './certificate-authorities/certificate-au
 export { ClientCertificates } from './client-certificates';
 export { CloudConnector } from './cloud-connector/cloud-connector';
 export { CloudforceOne } from './cloudforce-one/cloudforce-one';
-export {
-  ContentScanning,
-  type ContentScanningDisableResponse,
-  type ContentScanningEnableResponse,
-  type ContentScanningDisableParams,
-  type ContentScanningEnableParams,
-} from './content-scanning/content-scanning';
+export { ContentScanning } from './content-scanning/content-scanning';
 export { CustomCertificates } from './custom-certificates/custom-certificates';
 export { CustomHostnames } from './custom-hostnames/custom-hostnames';
 export { CustomNameservers } from './custom-nameservers';
@@ -47,13 +41,7 @@ export { Images } from './images/images';
 export { Intel } from './intel/intel';
 export { KV } from './kv/kv';
 export { KeylessCertificates } from './keyless-certificates';
-export {
-  LeakedCredentialChecks,
-  type LeakedCredentialCheckCreateResponse,
-  type LeakedCredentialCheckGetResponse,
-  type LeakedCredentialCheckCreateParams,
-  type LeakedCredentialCheckGetParams,
-} from './leaked-credential-checks/leaked-credential-checks';
+export { LeakedCredentialChecks } from './leaked-credential-checks/leaked-credential-checks';
 export { LoadBalancers } from './load-balancers/load-balancers';
 export { Logpush } from './logpush/logpush';
 export { Logs } from './logs/logs';

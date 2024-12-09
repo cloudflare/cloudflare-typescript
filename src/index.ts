@@ -49,13 +49,7 @@ import { Calls } from './resources/calls/calls';
 import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
 import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
-import {
-  ContentScanning,
-  ContentScanningDisableParams,
-  ContentScanningDisableResponse,
-  ContentScanningEnableParams,
-  ContentScanningEnableResponse,
-} from './resources/content-scanning/content-scanning';
+import { ContentScanning } from './resources/content-scanning/content-scanning';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
 import { D1Resource } from './resources/d1/d1';
@@ -73,13 +67,7 @@ import { IAM } from './resources/iam/iam';
 import { Images } from './resources/images/images';
 import { Intel } from './resources/intel/intel';
 import { KV } from './resources/kv/kv';
-import {
-  LeakedCredentialCheckCreateParams,
-  LeakedCredentialCheckCreateResponse,
-  LeakedCredentialCheckGetParams,
-  LeakedCredentialCheckGetResponse,
-  LeakedCredentialChecks,
-} from './resources/leaked-credential-checks/leaked-credential-checks';
+import { LeakedCredentialChecks } from './resources/leaked-credential-checks/leaked-credential-checks';
 import { LoadBalancers } from './resources/load-balancers/load-balancers';
 import { Logpush } from './resources/logpush/logpush';
 import { Logs } from './resources/logs/logs';
@@ -740,21 +728,9 @@ export declare namespace Cloudflare {
 
   export { ResourceSharing as ResourceSharing };
 
-  export {
-    LeakedCredentialChecks as LeakedCredentialChecks,
-    type LeakedCredentialCheckCreateResponse as LeakedCredentialCheckCreateResponse,
-    type LeakedCredentialCheckGetResponse as LeakedCredentialCheckGetResponse,
-    type LeakedCredentialCheckCreateParams as LeakedCredentialCheckCreateParams,
-    type LeakedCredentialCheckGetParams as LeakedCredentialCheckGetParams,
-  };
+  export { LeakedCredentialChecks as LeakedCredentialChecks };
 
-  export {
-    ContentScanning as ContentScanning,
-    type ContentScanningDisableResponse as ContentScanningDisableResponse,
-    type ContentScanningEnableResponse as ContentScanningEnableResponse,
-    type ContentScanningDisableParams as ContentScanningDisableParams,
-    type ContentScanningEnableParams as ContentScanningEnableParams,
-  };
+  export { ContentScanning as ContentScanning };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;
