@@ -49,6 +49,13 @@ import { Calls } from './resources/calls/calls';
 import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
 import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
+import {
+  ContentScanning,
+  ContentScanningDisableParams,
+  ContentScanningDisableResponse,
+  ContentScanningEnableParams,
+  ContentScanningEnableResponse,
+} from './resources/content-scanning/content-scanning';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
 import { D1Resource } from './resources/d1/d1';
@@ -328,6 +335,7 @@ export class Cloudflare extends Core.APIClient {
   workflows: API.Workflows = new API.Workflows(this);
   resourceSharing: API.ResourceSharing = new API.ResourceSharing(this);
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
+  contentScanning: API.ContentScanning = new API.ContentScanning(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -537,6 +545,7 @@ Cloudflare.SecurityTXT = SecurityTXT;
 Cloudflare.Workflows = Workflows;
 Cloudflare.ResourceSharing = ResourceSharing;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
+Cloudflare.ContentScanning = ContentScanning;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -737,6 +746,14 @@ export declare namespace Cloudflare {
     type LeakedCredentialCheckGetResponse as LeakedCredentialCheckGetResponse,
     type LeakedCredentialCheckCreateParams as LeakedCredentialCheckCreateParams,
     type LeakedCredentialCheckGetParams as LeakedCredentialCheckGetParams,
+  };
+
+  export {
+    ContentScanning as ContentScanning,
+    type ContentScanningDisableResponse as ContentScanningDisableResponse,
+    type ContentScanningEnableResponse as ContentScanningEnableResponse,
+    type ContentScanningDisableParams as ContentScanningDisableParams,
+    type ContentScanningEnableParams as ContentScanningEnableParams,
   };
 
   export type ASN = API.ASN;
