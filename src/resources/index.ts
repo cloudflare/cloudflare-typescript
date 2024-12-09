@@ -18,6 +18,13 @@ export { CertificateAuthorities } from './certificate-authorities/certificate-au
 export { ClientCertificates } from './client-certificates';
 export { CloudConnector } from './cloud-connector/cloud-connector';
 export { CloudforceOne } from './cloudforce-one/cloudforce-one';
+export {
+  ContentScanning,
+  type ContentScanningDisableResponse,
+  type ContentScanningEnableResponse,
+  type ContentScanningDisableParams,
+  type ContentScanningEnableParams,
+} from './content-scanning/content-scanning';
 export { CustomCertificates } from './custom-certificates/custom-certificates';
 export { CustomHostnames } from './custom-hostnames/custom-hostnames';
 export { CustomNameservers } from './custom-nameservers';
