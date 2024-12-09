@@ -114,9 +114,9 @@ export declare namespace Firewall {
 
   export {
     Rules as Rules,
+    type DeletedFilter as DeletedFilter,
     type FirewallRule as FirewallRule,
     type Product as Product,
-    type DeletedFilter as DeletedFilter,
     type RuleCreateResponse as RuleCreateResponse,
     type RuleBulkDeleteResponse as RuleBulkDeleteResponse,
     type RuleBulkEditResponse as RuleBulkEditResponse,
