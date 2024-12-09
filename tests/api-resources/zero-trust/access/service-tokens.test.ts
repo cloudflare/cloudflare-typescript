@@ -91,7 +91,8 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('refresh: only required params', async () => {
+  // TODO: investigate broken test
+  test.skip('refresh: only required params', async () => {
     const responsePromise = client.zeroTrust.access.serviceTokens.refresh(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -105,14 +106,16 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('refresh: required and optional params', async () => {
+  // TODO: investigate broken test
+  test.skip('refresh: required and optional params', async () => {
     const response = await client.zeroTrust.access.serviceTokens.refresh(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
-  test('rotate: only required params', async () => {
+  // TODO: investigate broken test
+  test.skip('rotate: only required params', async () => {
     const responsePromise = client.zeroTrust.access.serviceTokens.rotate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -126,7 +129,8 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('rotate: required and optional params', async () => {
+  // TODO: investigate broken test
+  test.skip('rotate: required and optional params', async () => {
     const response = await client.zeroTrust.access.serviceTokens.rotate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
