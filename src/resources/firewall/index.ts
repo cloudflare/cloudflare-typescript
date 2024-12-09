@@ -23,9 +23,9 @@ export { Firewall } from './firewall';
 export {
   FirewallRulesV4PagePaginationArray,
   Rules,
+  type DeletedFilter,
   type FirewallRule,
   type Product,
-  type DeletedFilter,
   type RuleCreateResponse,
   type RuleBulkDeleteResponse,
   type RuleBulkEditResponse,

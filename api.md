@@ -1434,9 +1434,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/firewall/rules.ts">DeletedFilter</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">FirewallRule</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">Product</a></code>
-- <code><a href="./src/resources/firewall/rules.ts">DeletedFilter</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">RuleCreateResponse</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">RuleBulkDeleteResponse</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">RuleBulkEditResponse</a></code>

@@ -166,6 +166,18 @@ export class Rules extends APIResource {
 
 export class FirewallRulesV4PagePaginationArray extends V4PagePaginationArray<FirewallRule> {}
 
+export interface DeletedFilter {
+  /**
+   * The unique identifier of the filter.
+   */
+  id: string;
+
+  /**
+   * When true, indicates that the firewall rule was deleted.
+   */
+  deleted: boolean;
+}
+
 export interface FirewallRule {
   /**
    * The unique identifier of the firewall rule.
@@ -209,18 +221,6 @@ export interface FirewallRule {
  * A list of products to bypass for a request when using the `bypass` action.
  */
 export type Product = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
-
-export interface DeletedFilter {
-  /**
-   * The unique identifier of the filter.
-   */
-  id: string;
-
-  /**
-   * When true, indicates that the firewall rule was deleted.
-   */
-  deleted: boolean;
-}
 
 export type RuleCreateResponse = Array<FirewallRule>;
 
@@ -466,9 +466,9 @@ Rules.FirewallRulesV4PagePaginationArray = FirewallRulesV4PagePaginationArray;
 
 export declare namespace Rules {
   export {
+    type DeletedFilter as DeletedFilter,
     type FirewallRule as FirewallRule,
     type Product as Product,
-    type DeletedFilter as DeletedFilter,
     type RuleCreateResponse as RuleCreateResponse,
     type RuleBulkDeleteResponse as RuleBulkDeleteResponse,
     type RuleBulkEditResponse as RuleBulkEditResponse,
