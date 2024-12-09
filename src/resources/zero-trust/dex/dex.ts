@@ -12,6 +12,15 @@ import {
   TracerouteTestPercentilesResponse,
   TracerouteTests,
 } from './traceroute-tests';
+import * as CommandsAPI from './commands/commands';
+import {
+  CommandCreateParams,
+  CommandCreateResponse,
+  CommandListParams,
+  CommandListResponse,
+  CommandListResponsesV4PagePagination,
+  Commands,
+} from './commands/commands';
 import * as FleetStatusAPI from './fleet-status/fleet-status';
 import {
   FleetStatus,
@@ -28,6 +37,7 @@ import * as TracerouteTestResultsAPI from './traceroute-test-results/traceroute-
 import { TracerouteTestResults } from './traceroute-test-results/traceroute-test-results';
 
 export class DEX extends APIResource {
+  commands: CommandsAPI.Commands = new CommandsAPI.Commands(this._client);
   colos: ColosAPI.Colos = new ColosAPI.Colos(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
   httpTests: HTTPTestsAPI.HTTPTests = new HTTPTestsAPI.HTTPTests(this._client);
@@ -148,6 +158,8 @@ export interface Percentiles {
   p99?: number | null;
 }
 
+DEX.Commands = Commands;
+DEX.CommandListResponsesV4PagePagination = CommandListResponsesV4PagePagination;
 DEX.Colos = Colos;
 DEX.ColoListResponsesSinglePage = ColoListResponsesSinglePage;
 DEX.FleetStatus = FleetStatus;
@@ -162,6 +174,15 @@ export declare namespace DEX {
     type NetworkPath as NetworkPath,
     type NetworkPathResponse as NetworkPathResponse,
     type Percentiles as Percentiles,
+  };
+
+  export {
+    Commands as Commands,
+    type CommandCreateResponse as CommandCreateResponse,
+    type CommandListResponse as CommandListResponse,
+    CommandListResponsesV4PagePagination as CommandListResponsesV4PagePagination,
+    type CommandCreateParams as CommandCreateParams,
+    type CommandListParams as CommandListParams,
   };
 
   export {
