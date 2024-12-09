@@ -95,13 +95,6 @@ LeakedCredentialChecks.DetectionListResponsesSinglePage = DetectionListResponses
 
 export declare namespace LeakedCredentialChecks {
   export {
-    type LeakedCredentialCheckCreateResponse as LeakedCredentialCheckCreateResponse,
-    type LeakedCredentialCheckGetResponse as LeakedCredentialCheckGetResponse,
-    type LeakedCredentialCheckCreateParams as LeakedCredentialCheckCreateParams,
-    type LeakedCredentialCheckGetParams as LeakedCredentialCheckGetParams,
-  };
-
-  export {
     Detections as Detections,
     type DetectionCreateResponse as DetectionCreateResponse,
     type DetectionUpdateResponse as DetectionUpdateResponse,
