@@ -11,13 +11,13 @@ export class Responses extends APIResource {
   get(accountId: string, responseId: string, options?: Core.RequestOptions): Core.APIPromise<string> {
     return this._client.get(`/accounts/${accountId}/urlscanner/v2/responses/${responseId}`, {
       ...options,
-      headers: { Accept: 'text/plain or image', ...options?.headers },
+      headers: { Accept: 'text/plain', ...options?.headers },
     });
   }
 }
 
 /**
- * Web resource or image.
+ * Web resource text/image.
  */
 export type ResponseGetResponse = string;
 
