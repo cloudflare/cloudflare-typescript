@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource quota', () => {
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.dex.commands.quota.get({
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
@@ -24,8 +23,7 @@ describe('resource quota', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.dex.commands.quota.get({
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });

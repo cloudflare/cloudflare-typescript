@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource policyTests', () => {
-  // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.access.applications.policyTests.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource policyTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.zeroTrust.access.applications.policyTests.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -37,8 +35,7 @@ describe('resource policyTests', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.access.applications.policyTests.get(
       'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -52,8 +49,7 @@ describe('resource policyTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.access.applications.policyTests.get(
       'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

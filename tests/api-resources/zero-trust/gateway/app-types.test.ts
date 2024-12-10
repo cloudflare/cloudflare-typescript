@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource appTypes', () => {
-  // TODO: investigate broken test
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.appTypes.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource appTypes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.appTypes.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource doh', () => {
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.organizations.doh.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource doh', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zeroTrust.organizations.doh.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       jwt_duration: '800h',
@@ -33,8 +31,7 @@ describe('resource doh', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.organizations.doh.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -47,8 +44,7 @@ describe('resource doh', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.organizations.doh.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

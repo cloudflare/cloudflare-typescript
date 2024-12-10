@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource customNameservers', () => {
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zones.customNameservers.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource customNameservers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zones.customNameservers.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
@@ -33,8 +31,7 @@ describe('resource customNameservers', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zones.customNameservers.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -47,8 +44,7 @@ describe('resource customNameservers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zones.customNameservers.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

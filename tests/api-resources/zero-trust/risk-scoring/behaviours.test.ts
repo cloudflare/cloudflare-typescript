@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource behaviours', () => {
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.riskScoring.behaviours.update({
       account_id: 'account_id',
       behaviors: { foo: { enabled: true, risk_level: 'low' } },
@@ -25,16 +24,14 @@ describe('resource behaviours', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zeroTrust.riskScoring.behaviours.update({
       account_id: 'account_id',
       behaviors: { foo: { enabled: true, risk_level: 'low' } },
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.riskScoring.behaviours.get({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -45,8 +42,7 @@ describe('resource behaviours', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.riskScoring.behaviours.get({ account_id: 'account_id' });
   });
 });

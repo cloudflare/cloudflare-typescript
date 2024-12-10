@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource versions', () => {
-  // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.datasets.versions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
@@ -26,8 +25,7 @@ describe('resource versions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.zeroTrust.dlp.datasets.versions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,

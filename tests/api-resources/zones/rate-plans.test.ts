@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource ratePlans', () => {
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zones.ratePlans.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource ratePlans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zones.ratePlans.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

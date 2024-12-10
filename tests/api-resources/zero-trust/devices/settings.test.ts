@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource settings', () => {
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.settings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -24,8 +23,7 @@ describe('resource settings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zeroTrust.devices.settings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       disable_for_time: 0,
@@ -36,8 +34,7 @@ describe('resource settings', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.settings.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -50,15 +47,13 @@ describe('resource settings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.zeroTrust.devices.settings.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.settings.edit({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -71,8 +66,7 @@ describe('resource settings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await client.zeroTrust.devices.settings.edit({
       account_id: '699d98642c564d2e855e9661899b7252',
       disable_for_time: 0,

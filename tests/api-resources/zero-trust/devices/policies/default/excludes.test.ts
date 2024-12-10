@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource excludes', () => {
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.default.excludes.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       body: [{ address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' }],
@@ -25,8 +24,7 @@ describe('resource excludes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zeroTrust.devices.policies.default.excludes.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       body: [
@@ -39,8 +37,7 @@ describe('resource excludes', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.default.excludes.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -53,8 +50,7 @@ describe('resource excludes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.devices.policies.default.excludes.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });

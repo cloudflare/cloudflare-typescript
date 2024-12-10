@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource certificates', () => {
-  // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.certificates.create({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -24,16 +23,14 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.certificates.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       validity_period_days: 1826,
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.certificates.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -46,15 +43,13 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.certificates.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.certificates.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -68,16 +63,14 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.certificates.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 
-  // TODO: investigate broken test
-  test.skip('activate: only required params', async () => {
+  test('activate: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.certificates.activate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
@@ -91,16 +84,14 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('activate: required and optional params', async () => {
+  test('activate: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.certificates.activate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
   });
 
-  // TODO: investigate broken test
-  test.skip('deactivate: only required params', async () => {
+  test('deactivate: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.certificates.deactivate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
@@ -114,16 +105,14 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('deactivate: required and optional params', async () => {
+  test('deactivate: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.certificates.deactivate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.certificates.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -137,8 +126,7 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.certificates.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
