@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource activationCheck', () => {
-  // TODO: investigate broken test
-  test.skip('trigger: only required params', async () => {
+  test('trigger: only required params', async () => {
     const responsePromise = client.zones.activationCheck.trigger({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource activationCheck', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('trigger: required and optional params', async () => {
+  test('trigger: required and optional params', async () => {
     const response = await client.zones.activationCheck.trigger({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

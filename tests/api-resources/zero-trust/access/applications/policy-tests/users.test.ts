@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource users', () => {
-  // TODO: investigate broken test
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.access.applications.policyTests.users.list(
       'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -25,8 +24,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.zeroTrust.access.applications.policyTests.users.list(
       'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

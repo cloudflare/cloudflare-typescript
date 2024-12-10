@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource settings', () => {
-  // TODO: investigate broken test
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = client.zones.settings.edit('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '0rtt',
@@ -26,8 +25,7 @@ describe('resource settings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await client.zones.settings.edit('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '0rtt',
@@ -35,8 +33,7 @@ describe('resource settings', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zones.settings.get('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -49,8 +46,7 @@ describe('resource settings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zones.settings.get('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource targets', () => {
-  // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'infra-access-target',
@@ -26,8 +25,7 @@ describe('resource targets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.zeroTrust.access.infrastructure.targets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'infra-access-target',
@@ -41,8 +39,7 @@ describe('resource targets', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', hostname: 'infra-access-target', ip: {} },
@@ -56,8 +53,7 @@ describe('resource targets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zeroTrust.access.infrastructure.targets.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
@@ -74,8 +70,7 @@ describe('resource targets', () => {
     );
   });
 
-  // TODO: investigate broken test
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -88,8 +83,7 @@ describe('resource targets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.zeroTrust.access.infrastructure.targets.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       created_after: '2019-12-27T18:11:19.117Z',
@@ -104,8 +98,7 @@ describe('resource targets', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -119,16 +112,14 @@ describe('resource targets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await client.zeroTrust.access.infrastructure.targets.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
-  // TODO: investigate broken test
-  test.skip('bulkDelete: only required params', async () => {
+  test('bulkDelete: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.bulkDelete({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -141,15 +132,13 @@ describe('resource targets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('bulkDelete: required and optional params', async () => {
+  test('bulkDelete: required and optional params', async () => {
     const response = await client.zeroTrust.access.infrastructure.targets.bulkDelete({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('bulkUpdate: only required params', async () => {
+  test('bulkUpdate: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.bulkUpdate({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [{ hostname: 'infra-access-target', ip: {} }],
@@ -163,8 +152,7 @@ describe('resource targets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('bulkUpdate: required and optional params', async () => {
+  test('bulkUpdate: required and optional params', async () => {
     const response = await client.zeroTrust.access.infrastructure.targets.bulkUpdate({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [
@@ -182,8 +170,7 @@ describe('resource targets', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -197,8 +184,7 @@ describe('resource targets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.access.infrastructure.targets.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

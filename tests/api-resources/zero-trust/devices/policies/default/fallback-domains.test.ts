@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource fallbackDomains', () => {
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.default.fallbackDomains.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       domains: [{ suffix: 'example.com' }],
@@ -25,8 +24,7 @@ describe('resource fallbackDomains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zeroTrust.devices.policies.default.fallbackDomains.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       domains: [
@@ -39,8 +37,7 @@ describe('resource fallbackDomains', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.default.fallbackDomains.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -53,8 +50,7 @@ describe('resource fallbackDomains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.devices.policies.default.fallbackDomains.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });

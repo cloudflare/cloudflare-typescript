@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource references', () => {
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.riskScoring.integrations.references.get('reference_id', {
       account_id: 'account_id',
     });
@@ -24,8 +23,7 @@ describe('resource references', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.riskScoring.integrations.references.get('reference_id', {
       account_id: 'account_id',
     });
