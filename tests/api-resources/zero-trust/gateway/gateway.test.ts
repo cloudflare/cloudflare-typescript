@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource gateway', () => {
-  // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.create({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -24,15 +23,13 @@ describe('resource gateway', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.create({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.list({ account_id: '699d98642c564d2e855e9661899b7252' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,8 +40,7 @@ describe('resource gateway', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.list({ account_id: '699d98642c564d2e855e9661899b7252' });
   });
 });

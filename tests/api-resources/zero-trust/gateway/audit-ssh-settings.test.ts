@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource auditSSHSettings', () => {
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.auditSSHSettings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       public_key: '1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=',
@@ -25,16 +24,14 @@ describe('resource auditSSHSettings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.auditSSHSettings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       public_key: '1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.auditSSHSettings.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -47,15 +44,13 @@ describe('resource auditSSHSettings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.auditSSHSettings.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('rotateSeed: only required params', async () => {
+  test('rotateSeed: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.auditSSHSettings.rotateSeed({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -68,8 +63,7 @@ describe('resource auditSSHSettings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('rotateSeed: required and optional params', async () => {
+  test('rotateSeed: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.auditSSHSettings.rotateSeed({
       account_id: '699d98642c564d2e855e9661899b7252',
     });

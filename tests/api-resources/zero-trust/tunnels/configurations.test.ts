@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource configurations', () => {
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.tunnels.configurations.update(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -25,8 +24,7 @@ describe('resource configurations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.zeroTrust.tunnels.configurations.update(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       {
@@ -76,8 +74,7 @@ describe('resource configurations', () => {
     );
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.tunnels.configurations.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -91,8 +88,7 @@ describe('resource configurations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.tunnels.configurations.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

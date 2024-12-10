@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource summary', () => {
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.riskScoring.summary.get({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource summary', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.zeroTrust.riskScoring.summary.get({ account_id: 'account_id' });
   });
 });
