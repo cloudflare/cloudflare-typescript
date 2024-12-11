@@ -4,11 +4,11 @@ import { APIResource } from '../resource';
 import * as Core from '../core';
 import * as SettingsAPI from './zones/settings';
 
-export class Pagerules extends APIResource {
+export class PageRules extends APIResource {
   /**
    * Creates a new Page Rule.
    */
-  create(params: PageruleCreateParams, options?: Core.RequestOptions): Core.APIPromise<PageRule> {
+  create(params: PageRuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<PageRule> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/pagerules`, { body, ...options }) as Core.APIPromise<{
@@ -23,7 +23,7 @@ export class Pagerules extends APIResource {
    */
   update(
     pageruleId: string,
-    params: PageruleUpdateParams,
+    params: PageRuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageRule> {
     const { zone_id, ...body } = params;
@@ -37,11 +37,11 @@ export class Pagerules extends APIResource {
   /**
    * Fetches Page Rules in a zone.
    */
-  list(params: PageruleListParams, options?: Core.RequestOptions): Core.APIPromise<PageruleListResponse> {
+  list(params: PageRuleListParams, options?: Core.RequestOptions): Core.APIPromise<PageRuleListResponse> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/pagerules`, { query, ...options }) as Core.APIPromise<{
-        result: PageruleListResponse;
+        result: PageRuleListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -51,13 +51,13 @@ export class Pagerules extends APIResource {
    */
   delete(
     pageruleId: string,
-    params: PageruleDeleteParams,
+    params: PageRuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageruleDeleteResponse | null> {
+  ): Core.APIPromise<PageRuleDeleteResponse | null> {
     const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
-        result: PageruleDeleteResponse | null;
+        result: PageRuleDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -67,7 +67,7 @@ export class Pagerules extends APIResource {
    */
   edit(
     pageruleId: string,
-    params: PageruleEditParams,
+    params: PageRuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageRule> {
     const { zone_id, ...body } = params;
@@ -84,7 +84,7 @@ export class Pagerules extends APIResource {
    */
   get(
     pageruleId: string,
-    params: PageruleGetParams,
+    params: PageRuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageRule> {
     const { zone_id } = params;
@@ -549,16 +549,16 @@ export namespace TargetParam {
   }
 }
 
-export type PageruleListResponse = Array<PageRule>;
+export type PageRuleListResponse = Array<PageRule>;
 
-export interface PageruleDeleteResponse {
+export interface PageRuleDeleteResponse {
   /**
    * Identifier
    */
   id: string;
 }
 
-export interface PageruleCreateParams {
+export interface PageRuleCreateParams {
   /**
    * Path param: Identifier
    */
@@ -573,28 +573,28 @@ export interface PageruleCreateParams {
     | SettingsAPI.AutomaticHTTPSRewritesParam
     | SettingsAPI.BrowserCacheTTLParam
     | SettingsAPI.BrowserCheckParam
-    | PageruleCreateParams.BypassCacheOnCookie
-    | PageruleCreateParams.CacheByDeviceType
-    | PageruleCreateParams.CacheDeceptionArmor
-    | PageruleCreateParams.CacheKey
+    | PageRuleCreateParams.BypassCacheOnCookie
+    | PageRuleCreateParams.CacheByDeviceType
+    | PageRuleCreateParams.CacheDeceptionArmor
+    | PageRuleCreateParams.CacheKey
     | SettingsAPI.CacheLevelParam
-    | PageruleCreateParams.CacheOnCookie
-    | PageruleCreateParams.DisableApps
-    | PageruleCreateParams.DisablePerformance
-    | PageruleCreateParams.DisableSecurity
-    | PageruleCreateParams.DisableZaraz
-    | PageruleCreateParams.EdgeCacheTTL
+    | PageRuleCreateParams.CacheOnCookie
+    | PageRuleCreateParams.DisableApps
+    | PageRuleCreateParams.DisablePerformance
+    | PageRuleCreateParams.DisableSecurity
+    | PageRuleCreateParams.DisableZaraz
+    | PageRuleCreateParams.EdgeCacheTTL
     | SettingsAPI.EmailObfuscationParam
-    | PageruleCreateParams.ExplicitCacheControl
-    | PageruleCreateParams.ForwardingURL
-    | PageruleCreateParams.HostHeaderOverride
+    | PageRuleCreateParams.ExplicitCacheControl
+    | PageRuleCreateParams.ForwardingURL
+    | PageRuleCreateParams.HostHeaderOverride
     | SettingsAPI.IPGeolocationParam
     | SettingsAPI.MirageParam
     | SettingsAPI.OpportunisticEncryptionParam
     | SettingsAPI.OriginErrorPagePassThruParam
     | SettingsAPI.PolishParam
-    | PageruleCreateParams.ResolveOverride
-    | PageruleCreateParams.RespectStrongEtag
+    | PageRuleCreateParams.ResolveOverride
+    | PageRuleCreateParams.RespectStrongEtag
     | SettingsAPI.ResponseBufferingParam
     | SettingsAPI.RocketLoaderParam
     | SettingsAPI.SecurityLevelParam
@@ -624,7 +624,7 @@ export interface PageruleCreateParams {
   status?: 'active' | 'disabled';
 }
 
-export namespace PageruleCreateParams {
+export namespace PageRuleCreateParams {
   export interface BypassCacheOnCookie {
     /**
      * Bypass cache and fetch resources from the origin server if a regular expression
@@ -935,7 +935,7 @@ export namespace PageruleCreateParams {
   }
 }
 
-export interface PageruleUpdateParams {
+export interface PageRuleUpdateParams {
   /**
    * Path param: Identifier
    */
@@ -950,28 +950,28 @@ export interface PageruleUpdateParams {
     | SettingsAPI.AutomaticHTTPSRewritesParam
     | SettingsAPI.BrowserCacheTTLParam
     | SettingsAPI.BrowserCheckParam
-    | PageruleUpdateParams.BypassCacheOnCookie
-    | PageruleUpdateParams.CacheByDeviceType
-    | PageruleUpdateParams.CacheDeceptionArmor
-    | PageruleUpdateParams.CacheKey
+    | PageRuleUpdateParams.BypassCacheOnCookie
+    | PageRuleUpdateParams.CacheByDeviceType
+    | PageRuleUpdateParams.CacheDeceptionArmor
+    | PageRuleUpdateParams.CacheKey
     | SettingsAPI.CacheLevelParam
-    | PageruleUpdateParams.CacheOnCookie
-    | PageruleUpdateParams.DisableApps
-    | PageruleUpdateParams.DisablePerformance
-    | PageruleUpdateParams.DisableSecurity
-    | PageruleUpdateParams.DisableZaraz
-    | PageruleUpdateParams.EdgeCacheTTL
+    | PageRuleUpdateParams.CacheOnCookie
+    | PageRuleUpdateParams.DisableApps
+    | PageRuleUpdateParams.DisablePerformance
+    | PageRuleUpdateParams.DisableSecurity
+    | PageRuleUpdateParams.DisableZaraz
+    | PageRuleUpdateParams.EdgeCacheTTL
     | SettingsAPI.EmailObfuscationParam
-    | PageruleUpdateParams.ExplicitCacheControl
-    | PageruleUpdateParams.ForwardingURL
-    | PageruleUpdateParams.HostHeaderOverride
+    | PageRuleUpdateParams.ExplicitCacheControl
+    | PageRuleUpdateParams.ForwardingURL
+    | PageRuleUpdateParams.HostHeaderOverride
     | SettingsAPI.IPGeolocationParam
     | SettingsAPI.MirageParam
     | SettingsAPI.OpportunisticEncryptionParam
     | SettingsAPI.OriginErrorPagePassThruParam
     | SettingsAPI.PolishParam
-    | PageruleUpdateParams.ResolveOverride
-    | PageruleUpdateParams.RespectStrongEtag
+    | PageRuleUpdateParams.ResolveOverride
+    | PageRuleUpdateParams.RespectStrongEtag
     | SettingsAPI.ResponseBufferingParam
     | SettingsAPI.RocketLoaderParam
     | SettingsAPI.SecurityLevelParam
@@ -1001,7 +1001,7 @@ export interface PageruleUpdateParams {
   status?: 'active' | 'disabled';
 }
 
-export namespace PageruleUpdateParams {
+export namespace PageRuleUpdateParams {
   export interface BypassCacheOnCookie {
     /**
      * Bypass cache and fetch resources from the origin server if a regular expression
@@ -1312,7 +1312,7 @@ export namespace PageruleUpdateParams {
   }
 }
 
-export interface PageruleListParams {
+export interface PageRuleListParams {
   /**
    * Path param: Identifier
    */
@@ -1340,14 +1340,14 @@ export interface PageruleListParams {
   status?: 'active' | 'disabled';
 }
 
-export interface PageruleDeleteParams {
+export interface PageRuleDeleteParams {
   /**
    * Identifier
    */
   zone_id: string;
 }
 
-export interface PageruleEditParams {
+export interface PageRuleEditParams {
   /**
    * Path param: Identifier
    */
@@ -1362,28 +1362,28 @@ export interface PageruleEditParams {
     | SettingsAPI.AutomaticHTTPSRewritesParam
     | SettingsAPI.BrowserCacheTTLParam
     | SettingsAPI.BrowserCheckParam
-    | PageruleEditParams.BypassCacheOnCookie
-    | PageruleEditParams.CacheByDeviceType
-    | PageruleEditParams.CacheDeceptionArmor
-    | PageruleEditParams.CacheKey
+    | PageRuleEditParams.BypassCacheOnCookie
+    | PageRuleEditParams.CacheByDeviceType
+    | PageRuleEditParams.CacheDeceptionArmor
+    | PageRuleEditParams.CacheKey
     | SettingsAPI.CacheLevelParam
-    | PageruleEditParams.CacheOnCookie
-    | PageruleEditParams.DisableApps
-    | PageruleEditParams.DisablePerformance
-    | PageruleEditParams.DisableSecurity
-    | PageruleEditParams.DisableZaraz
-    | PageruleEditParams.EdgeCacheTTL
+    | PageRuleEditParams.CacheOnCookie
+    | PageRuleEditParams.DisableApps
+    | PageRuleEditParams.DisablePerformance
+    | PageRuleEditParams.DisableSecurity
+    | PageRuleEditParams.DisableZaraz
+    | PageRuleEditParams.EdgeCacheTTL
     | SettingsAPI.EmailObfuscationParam
-    | PageruleEditParams.ExplicitCacheControl
-    | PageruleEditParams.ForwardingURL
-    | PageruleEditParams.HostHeaderOverride
+    | PageRuleEditParams.ExplicitCacheControl
+    | PageRuleEditParams.ForwardingURL
+    | PageRuleEditParams.HostHeaderOverride
     | SettingsAPI.IPGeolocationParam
     | SettingsAPI.MirageParam
     | SettingsAPI.OpportunisticEncryptionParam
     | SettingsAPI.OriginErrorPagePassThruParam
     | SettingsAPI.PolishParam
-    | PageruleEditParams.ResolveOverride
-    | PageruleEditParams.RespectStrongEtag
+    | PageRuleEditParams.ResolveOverride
+    | PageRuleEditParams.RespectStrongEtag
     | SettingsAPI.ResponseBufferingParam
     | SettingsAPI.RocketLoaderParam
     | SettingsAPI.SecurityLevelParam
@@ -1413,7 +1413,7 @@ export interface PageruleEditParams {
   targets?: Array<TargetParam>;
 }
 
-export namespace PageruleEditParams {
+export namespace PageRuleEditParams {
   export interface BypassCacheOnCookie {
     /**
      * Bypass cache and fetch resources from the origin server if a regular expression
@@ -1724,7 +1724,7 @@ export namespace PageruleEditParams {
   }
 }
 
-export interface PageruleGetParams {
+export interface PageRuleGetParams {
   /**
    * Identifier
    */
