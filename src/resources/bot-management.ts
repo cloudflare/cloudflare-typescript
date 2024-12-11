@@ -165,6 +165,24 @@ export namespace BotFightModeConfiguration {
   }
 }
 
+export interface BotFightModeConfigurationParam {
+  /**
+   * Enable rule to block AI Scrapers and Crawlers.
+   */
+  ai_bots_protection?: 'block' | 'disabled';
+
+  /**
+   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+   */
+  enable_js?: boolean;
+
+  /**
+   * Whether to enable Bot Fight Mode.
+   */
+  fight_mode?: boolean;
+}
+
 export interface SubscriptionConfiguration {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
@@ -243,6 +261,32 @@ export namespace SubscriptionConfiguration {
   }
 }
 
+export interface SubscriptionConfigurationParam {
+  /**
+   * Enable rule to block AI Scrapers and Crawlers.
+   */
+  ai_bots_protection?: 'block' | 'disabled';
+
+  /**
+   * Automatically update to the newest bot detection models created by Cloudflare as
+   * they are released.
+   * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
+   */
+  auto_update_model?: boolean;
+
+  /**
+   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+   */
+  enable_js?: boolean;
+
+  /**
+   * Whether to disable tracking the highest bot score for a session in the Bot
+   * Management cookie.
+   */
+  suppress_session_score?: boolean;
+}
+
 export interface SuperBotFightModeDefinitelyConfiguration {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
@@ -309,6 +353,41 @@ export namespace SuperBotFightModeDefinitelyConfiguration {
   }
 }
 
+export interface SuperBotFightModeDefinitelyConfigurationParam {
+  /**
+   * Enable rule to block AI Scrapers and Crawlers.
+   */
+  ai_bots_protection?: 'block' | 'disabled';
+
+  /**
+   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+   */
+  enable_js?: boolean;
+
+  /**
+   * Whether to optimize Super Bot Fight Mode protections for Wordpress.
+   */
+  optimize_wordpress?: boolean;
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
+   */
+  sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
+
+  /**
+   * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
+   * static resources on your application need bot protection. Note: Static resource
+   * protection can also result in legitimate traffic being blocked.
+   */
+  sbfm_static_resource_protection?: boolean;
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
+   */
+  sbfm_verified_bots?: 'allow' | 'block';
+}
+
 export interface SuperBotFightModeLikelyConfiguration {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
@@ -372,6 +451,46 @@ export namespace SuperBotFightModeLikelyConfiguration {
      */
     fight_mode?: boolean;
   }
+}
+
+export interface SuperBotFightModeLikelyConfigurationParam {
+  /**
+   * Enable rule to block AI Scrapers and Crawlers.
+   */
+  ai_bots_protection?: 'block' | 'disabled';
+
+  /**
+   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+   */
+  enable_js?: boolean;
+
+  /**
+   * Whether to optimize Super Bot Fight Mode protections for Wordpress.
+   */
+  optimize_wordpress?: boolean;
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
+   */
+  sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on likely automated requests.
+   */
+  sbfm_likely_automated?: 'allow' | 'block' | 'managed_challenge';
+
+  /**
+   * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
+   * static resources on your application need bot protection. Note: Static resource
+   * protection can also result in legitimate traffic being blocked.
+   */
+  sbfm_static_resource_protection?: boolean;
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
+   */
+  sbfm_verified_bots?: 'allow' | 'block';
 }
 
 export type BotManagementUpdateResponse =
