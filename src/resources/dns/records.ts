@@ -1143,6 +1143,12 @@ export interface RecordProcessTiming {
  */
 export type RecordTags = string;
 
+/**
+ * Individual tag of the form name:value (the name must consist of only letters,
+ * numbers, underscores and hyphens)
+ */
+export type RecordTagsParam = string;
+
 export interface SMIMEARecord {
   /**
    * Formatted SMIMEA content. See 'data' to set SMIMEA properties.
@@ -1547,6 +1553,13 @@ export namespace TLSARecordParam {
  * Enterprise zones.
  */
 export type TTL = number | 1;
+
+/**
+ * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+ * Value must be between 60 and 86400, with the minimum reduced to 30 for
+ * Enterprise zones.
+ */
+export type TTLParam = number | 1;
 
 export interface TXTRecord {
   /**

@@ -292,6 +292,89 @@ export namespace AzureAD {
   }
 }
 
+export interface AzureADParam {
+  /**
+   * The configuration parameters for the identity provider. To view the required
+   * parameters for a specific provider, refer to our
+   * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+   */
+  config: AzureADParam.Config;
+
+  /**
+   * The name of the identity provider, shown to users on the login page.
+   */
+  name: string;
+
+  /**
+   * The type of identity provider. To determine the value for a specific provider,
+   * refer to our
+   * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+   */
+  type: IdentityProviderTypeParam;
+
+  /**
+   * The configuration settings for enabling a System for Cross-Domain Identity
+   * Management (SCIM) with the identity provider.
+   */
+  scim_config?: IdentityProviderSCIMConfigParam;
+}
+
+export namespace AzureADParam {
+  /**
+   * The configuration parameters for the identity provider. To view the required
+   * parameters for a specific provider, refer to our
+   * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+   */
+  export interface Config {
+    /**
+     * Custom claims
+     */
+    claims?: Array<string>;
+
+    /**
+     * Your OAuth Client ID
+     */
+    client_id?: string;
+
+    /**
+     * Your OAuth Client Secret
+     */
+    client_secret?: string;
+
+    /**
+     * Should Cloudflare try to load authentication contexts from your account
+     */
+    conditional_access_enabled?: boolean;
+
+    /**
+     * Your Azure directory uuid
+     */
+    directory_id?: string;
+
+    /**
+     * The claim name for email in the id_token response.
+     */
+    email_claim_name?: string;
+
+    /**
+     * Indicates the type of user interaction that is required. prompt=login forces the
+     * user to enter their credentials on that request, negating single-sign on.
+     * prompt=none is the opposite. It ensures that the user isn't presented with any
+     * interactive prompt. If the request can't be completed silently by using
+     * single-sign on, the Microsoft identity platform returns an interaction_required
+     * error. prompt=select_account interrupts single sign-on providing account
+     * selection experience listing all the accounts either in session or any
+     * remembered account or an option to choose to use a different account altogether.
+     */
+    prompt?: 'login' | 'select_account' | 'none';
+
+    /**
+     * Should Cloudflare try to load groups from your account
+     */
+    support_groups?: boolean;
+  }
+}
+
 export interface GenericOAuthConfig {
   /**
    * Your OAuth Client ID
@@ -1082,6 +1165,708 @@ export namespace IdentityProvider {
     export interface Config {
       redirect_url?: string;
     }
+  }
+}
+
+export type IdentityProviderParam =
+  | AzureADParam
+  | IdentityProviderParam.AccessCentrify
+  | IdentityProviderParam.AccessFacebook
+  | IdentityProviderParam.AccessGitHub
+  | IdentityProviderParam.AccessGoogle
+  | IdentityProviderParam.AccessGoogleApps
+  | IdentityProviderParam.AccessLinkedin
+  | IdentityProviderParam.AccessOIDC
+  | IdentityProviderParam.AccessOkta
+  | IdentityProviderParam.AccessOnelogin
+  | IdentityProviderParam.AccessPingone
+  | IdentityProviderParam.AccessSAML
+  | IdentityProviderParam.AccessYandex
+  | IdentityProviderParam.AccessOnetimepin;
+
+export namespace IdentityProviderParam {
+  export interface AccessCentrify {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessCentrify.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessCentrify {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your centrify account url
+       */
+      centrify_account?: string;
+
+      /**
+       * Your centrify app id
+       */
+      centrify_app_id?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+  }
+
+  export interface AccessFacebook {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProvidersAPI.GenericOAuthConfigParam;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export interface AccessGitHub {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProvidersAPI.GenericOAuthConfigParam;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export interface AccessGoogle {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessGoogle.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessGoogle {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+  }
+
+  export interface AccessGoogleApps {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessGoogleApps.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessGoogleApps {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your companies TLD
+       */
+      apps_domain?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+  }
+
+  export interface AccessLinkedin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProvidersAPI.GenericOAuthConfigParam;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export interface AccessOIDC {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessOIDC.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessOIDC {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * The authorization_endpoint URL of your IdP
+       */
+      auth_url?: string;
+
+      /**
+       * The jwks_uri endpoint of your IdP to allow the IdP keys to sign the tokens
+       */
+      certs_url?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Enable Proof Key for Code Exchange (PKCE)
+       */
+      pkce_enabled?: boolean;
+
+      /**
+       * OAuth scopes
+       */
+      scopes?: Array<string>;
+
+      /**
+       * The token_endpoint URL of your IdP
+       */
+      token_url?: string;
+    }
+  }
+
+  export interface AccessOkta {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessOkta.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessOkta {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your okta authorization server id
+       */
+      authorization_server_id?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your okta account url
+       */
+      okta_account?: string;
+    }
+  }
+
+  export interface AccessOnelogin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessOnelogin.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessOnelogin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your OneLogin account url
+       */
+      onelogin_account?: string;
+    }
+  }
+
+  export interface AccessPingone {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessPingone.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessPingone {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your PingOne environment identifier
+       */
+      ping_env_id?: string;
+    }
+  }
+
+  export interface AccessSAML {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessSAML.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessSAML {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * A list of SAML attribute names that will be added to your signed JWT token and
+       * can be used in SAML policy rules.
+       */
+      attributes?: Array<string>;
+
+      /**
+       * The attribute name for email in the SAML response.
+       */
+      email_attribute_name?: string;
+
+      /**
+       * Add a list of attribute names that will be returned in the response header from
+       * the Access callback.
+       */
+      header_attributes?: Array<Config.HeaderAttribute>;
+
+      /**
+       * X509 certificate to verify the signature in the SAML authentication response
+       */
+      idp_public_certs?: Array<string>;
+
+      /**
+       * IdP Entity ID or Issuer URL
+       */
+      issuer_url?: string;
+
+      /**
+       * Sign the SAML authentication request with Access credentials. To verify the
+       * signature, use the public key from the Access certs endpoints.
+       */
+      sign_request?: boolean;
+
+      /**
+       * URL to send the SAML authentication requests to
+       */
+      sso_target_url?: string;
+    }
+
+    export namespace Config {
+      export interface HeaderAttribute {
+        /**
+         * attribute name from the IDP
+         */
+        attribute_name?: string;
+
+        /**
+         * header that will be added on the request to the origin
+         */
+        header_name?: string;
+      }
+    }
+  }
+
+  export interface AccessYandex {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProvidersAPI.GenericOAuthConfigParam;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export interface AccessOnetimepin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessOnetimepin.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessOnetimepin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {}
   }
 }
 
