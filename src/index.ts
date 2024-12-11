@@ -31,7 +31,7 @@ import { ManagedTransforms } from './resources/managed-transforms';
 import { Memberships } from './resources/memberships';
 import { OriginCACertificates } from './resources/origin-ca-certificates';
 import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption';
-import { Pagerules } from './resources/pagerules';
+import { PageRules } from './resources/page-rules';
 import { RateLimits } from './resources/rate-limits';
 import { SecurityTXT } from './resources/security-txt';
 import { URLNormalization } from './resources/url-normalization';
@@ -267,7 +267,7 @@ export class Cloudflare extends Core.APIClient {
   logpush: API.Logpush = new API.Logpush(this);
   logs: API.Logs = new API.Logs(this);
   originTLSClientAuth: API.OriginTLSClientAuth = new API.OriginTLSClientAuth(this);
-  pagerules: API.Pagerules = new API.Pagerules(this);
+  pageRules: API.PageRules = new API.PageRules(this);
   rateLimits: API.RateLimits = new API.RateLimits(this);
   waitingRooms: API.WaitingRooms = new API.WaitingRooms(this);
   web3: API.Web3 = new API.Web3(this);
@@ -477,7 +477,7 @@ Cloudflare.KeylessCertificates = KeylessCertificates;
 Cloudflare.Logpush = Logpush;
 Cloudflare.Logs = Logs;
 Cloudflare.OriginTLSClientAuth = OriginTLSClientAuth;
-Cloudflare.Pagerules = Pagerules;
+Cloudflare.PageRules = PageRules;
 Cloudflare.RateLimits = RateLimits;
 Cloudflare.WaitingRooms = WaitingRooms;
 Cloudflare.Web3 = Web3;
@@ -618,7 +618,7 @@ export declare namespace Cloudflare {
 
   export { OriginTLSClientAuth as OriginTLSClientAuth };
 
-  export { Pagerules as Pagerules };
+  export { PageRules as PageRules };
 
   export { RateLimits as RateLimits };
 
