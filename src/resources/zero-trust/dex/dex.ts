@@ -13,14 +13,7 @@ import {
   TracerouteTests,
 } from './traceroute-tests';
 import * as CommandsAPI from './commands/commands';
-import {
-  CommandCreateParams,
-  CommandCreateResponse,
-  CommandListParams,
-  CommandListResponse,
-  CommandListResponsesV4PagePagination,
-  Commands,
-} from './commands/commands';
+import { Commands } from './commands/commands';
 import * as FleetStatusAPI from './fleet-status/fleet-status';
 import {
   FleetStatus,
@@ -159,7 +152,6 @@ export interface Percentiles {
 }
 
 DEX.Commands = Commands;
-DEX.CommandListResponsesV4PagePagination = CommandListResponsesV4PagePagination;
 DEX.Colos = Colos;
 DEX.ColoListResponsesSinglePage = ColoListResponsesSinglePage;
 DEX.FleetStatus = FleetStatus;
@@ -176,14 +168,7 @@ export declare namespace DEX {
     type Percentiles as Percentiles,
   };
 
-  export {
-    Commands as Commands,
-    type CommandCreateResponse as CommandCreateResponse,
-    type CommandListResponse as CommandListResponse,
-    CommandListResponsesV4PagePagination as CommandListResponsesV4PagePagination,
-    type CommandCreateParams as CommandCreateParams,
-    type CommandListParams as CommandListParams,
-  };
+  export { Commands as Commands };
 
   export {
     Colos as Colos,

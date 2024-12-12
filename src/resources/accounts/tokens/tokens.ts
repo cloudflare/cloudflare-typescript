@@ -164,7 +164,7 @@ export namespace TokenCreateResponse {
     /**
      * Client IP restrictions.
      */
-    'request.ip'?: Condition.RequestIP;
+    request_ip?: Condition.RequestIP;
   }
 
   export namespace Condition {
@@ -253,7 +253,7 @@ export namespace TokenCreateParams {
     /**
      * Client IP restrictions.
      */
-    'request.ip'?: Condition.RequestIP;
+    request_ip?: Condition.RequestIP;
   }
 
   export namespace Condition {
@@ -317,7 +317,7 @@ export namespace TokenUpdateParams {
     /**
      * Client IP restrictions.
      */
-    'request.ip'?: Condition.RequestIP;
+    request_ip?: Condition.RequestIP;
   }
 
   export namespace Condition {

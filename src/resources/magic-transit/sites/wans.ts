@@ -119,6 +119,12 @@ export interface WAN {
    */
   id?: string;
 
+  /**
+   * Magic WAN health check rate for tunnels created on this link. The default value
+   * is `mid`.
+   */
+  health_check_rate?: 'low' | 'mid' | 'high';
+
   name?: string;
 
   physport?: number;

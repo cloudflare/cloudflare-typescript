@@ -14,7 +14,16 @@ describe('resource tokens', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.user.tokens.create({
       name: 'readonly token',
-      policies: [{ effect: 'allow', permission_groups: [{}, {}], resources: {} }],
+      policies: [
+        {
+          effect: 'allow',
+          permission_groups: [{}, {}],
+          resources: {
+            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
+            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
+          },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -36,11 +45,14 @@ describe('resource tokens', () => {
             { meta: { key: 'key', value: 'value' } },
             { meta: { key: 'key', value: 'value' } },
           ],
-          resources: { resource: 'resource', scope: 'scope' },
+          resources: {
+            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
+            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
+          },
         },
       ],
       condition: {
-        'request.ip': {
+        request_ip: {
           in: ['123.123.123.0/24', '2606:4700::/32'],
           not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
         },
@@ -54,7 +66,16 @@ describe('resource tokens', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.user.tokens.update('ed17574386854bf78a67040be0a770b0', {
       name: 'readonly token',
-      policies: [{ effect: 'allow', permission_groups: [{}, {}], resources: {} }],
+      policies: [
+        {
+          effect: 'allow',
+          permission_groups: [{}, {}],
+          resources: {
+            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
+            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
+          },
+        },
+      ],
       status: 'active',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -77,12 +98,15 @@ describe('resource tokens', () => {
             { meta: { key: 'key', value: 'value' } },
             { meta: { key: 'key', value: 'value' } },
           ],
-          resources: { resource: 'resource', scope: 'scope' },
+          resources: {
+            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
+            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
+          },
         },
       ],
       status: 'active',
       condition: {
-        'request.ip': {
+        request_ip: {
           in: ['123.123.123.0/24', '2606:4700::/32'],
           not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
         },

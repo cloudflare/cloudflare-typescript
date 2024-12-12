@@ -17,7 +17,7 @@ import {
   SchemaHTTPSSinglePage,
 } from './dex-tests';
 import * as FleetStatusAPI from './fleet-status';
-import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
+import { FleetStatus } from './fleet-status';
 import * as NetworksAPI from './networks';
 import {
   DeviceNetwork,
@@ -297,11 +297,7 @@ export declare namespace Devices {
     type NetworkGetParams as NetworkGetParams,
   };
 
-  export {
-    FleetStatus as FleetStatus,
-    type FleetStatusGetResponse as FleetStatusGetResponse,
-    type FleetStatusGetParams as FleetStatusGetParams,
-  };
+  export { FleetStatus as FleetStatus };
 
   export {
     Policies as Policies,
