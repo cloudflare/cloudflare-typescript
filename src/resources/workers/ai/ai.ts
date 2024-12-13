@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as ModelsAPI from './models/models';
 import { Models } from './models/models';
 
@@ -755,5 +755,7 @@ export namespace AIRunParams {
 AI.Models = Models;
 
 export declare namespace AI {
+  export { type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
+
   export { Models as Models };
 }
