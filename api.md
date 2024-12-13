@@ -1998,28 +1998,6 @@ Types:
 - <code><a href="./src/resources/workers/workers.ts">SteppedMigration</a></code>
 - <code><a href="./src/resources/workers/workers.ts">WorkerMetadata</a></code>
 
-## AI
-
-Types:
-
-- <code><a href="./src/resources/workers/ai/ai.ts">AIRunResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.workers.ai.<a href="./src/resources/workers/ai/ai.ts">run</a>(modelName, { ...params }) -> AIRunResponse</code>
-
-### Models
-
-#### Schema
-
-Types:
-
-- <code><a href="./src/resources/workers/ai/models/schema.ts">SchemaGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/ai/models/schema">client.workers.ai.models.schema.<a href="./src/resources/workers/ai/models/schema.ts">get</a>({ ...params }) -> SchemaGetResponse</code>
-
 ## Assets
 
 ### Upload
@@ -7273,3 +7251,25 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/v1/abuse-reports/{report_type}">client.abuseReports.<a href="./src/resources/abuse-reports.ts">create</a>(reportType, { ...params }) -> AbuseReportCreateResponse</code>
+
+# AI
+
+Types:
+
+- <code><a href="./src/resources/ai/ai.ts">AIRunResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.ai.<a href="./src/resources/ai/ai.ts">run</a>(modelName, { ...params }) -> AIRunResponse</code>
+
+## Models
+
+### Schema
+
+Types:
+
+- <code><a href="./src/resources/ai/models/schema.ts">SchemaGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai/models/schema">client.ai.models.schema.<a href="./src/resources/ai/models/schema.ts">get</a>({ ...params }) -> SchemaGetResponse</code>
