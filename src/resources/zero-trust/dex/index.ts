@@ -1,7 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { ColoListResponsesSinglePage, Colos, type ColoListResponse, type ColoListParams } from './colos';
-export { Commands } from './commands/index';
+export {
+  CommandListResponsesV4PagePagination,
+  Commands,
+  type CommandCreateResponse,
+  type CommandListResponse,
+  type CommandCreateParams,
+  type CommandListParams,
+} from './commands/index';
 export {
   DEX,
   type DigitalExperienceMonitor,
