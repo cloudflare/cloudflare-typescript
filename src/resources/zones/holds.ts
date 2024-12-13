@@ -19,6 +19,19 @@ export class Holds extends APIResource {
   }
 
   /**
+   * Update the `hold_after` and/or `include_subdomains` values on an existing zone
+   * hold. The hold is enabled if the `hold_after` date-time value is in the past.
+   */
+  update(params: HoldUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.patch(`/zones/${zone_id}/hold`, { body, ...options }) as Core.APIPromise<{
+        result: ZoneHold;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Stop enforcement of a zone hold on the zone, permanently or temporarily,
    * allowing the creation and activation of zones with this zone's hostname.
    */
@@ -29,19 +42,6 @@ export class Holds extends APIResource {
         query: { hold_after },
         ...options,
       }) as Core.APIPromise<{ result: ZoneHold }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Update the `hold_after` and/or `include_subdomains` values on an existing zone
-   * hold. The hold is enabled if the `hold_after` date-time value is in the past.
-   */
-  edit(params: HoldEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/hold`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneHold;
-      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -80,21 +80,7 @@ export interface HoldCreateParams {
   include_subdomains?: boolean;
 }
 
-export interface HoldDeleteParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Query param: If `hold_after` is provided, the hold will be temporarily disabled,
-   * then automatically re-enabled by the system at the time specified in this
-   * RFC3339-formatted timestamp. Otherwise, the hold will be disabled indefinitely.
-   */
-  hold_after?: string;
-}
-
-export interface HoldEditParams {
+export interface HoldUpdateParams {
   /**
    * Path param: Identifier
    */
@@ -118,6 +104,20 @@ export interface HoldEditParams {
   include_subdomains?: boolean;
 }
 
+export interface HoldDeleteParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: If `hold_after` is provided, the hold will be temporarily disabled,
+   * then automatically re-enabled by the system at the time specified in this
+   * RFC3339-formatted timestamp. Otherwise, the hold will be disabled indefinitely.
+   */
+  hold_after?: string;
+}
+
 export interface HoldGetParams {
   /**
    * Identifier
@@ -129,8 +129,8 @@ export declare namespace Holds {
   export {
     type ZoneHold as ZoneHold,
     type HoldCreateParams as HoldCreateParams,
+    type HoldUpdateParams as HoldUpdateParams,
     type HoldDeleteParams as HoldDeleteParams,
-    type HoldEditParams as HoldEditParams,
     type HoldGetParams as HoldGetParams,
   };
 }
