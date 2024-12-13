@@ -26,12 +26,7 @@ describe('resource records', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comment: 'Domain verification record',
       content: '198.51.100.4',
-      name: 'example.com',
-      proxied: true,
-      tags: ['owner:dns-team'],
-      ttl: 3600,
       type: 'A',
     });
   });
@@ -54,12 +49,7 @@ describe('resource records', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comment: 'Domain verification record',
       content: '198.51.100.4',
-      name: 'example.com',
-      proxied: true,
-      tags: ['owner:dns-team'],
-      ttl: 3600,
       type: 'A',
     });
   });
@@ -149,39 +139,9 @@ describe('resource records', () => {
     const response = await client.dns.records.batch({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deletes: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
-      patches: [
-        {
-          comment: 'Domain verification record',
-          content: '198.51.100.4',
-          name: 'example.com',
-          proxied: true,
-          tags: ['owner:dns-team'],
-          ttl: 3600,
-          type: 'A',
-        },
-      ],
-      posts: [
-        {
-          comment: 'Domain verification record',
-          content: '198.51.100.4',
-          name: 'example.com',
-          proxied: true,
-          tags: ['owner:dns-team'],
-          ttl: 3600,
-          type: 'A',
-        },
-      ],
-      puts: [
-        {
-          comment: 'Domain verification record',
-          content: '198.51.100.4',
-          name: 'example.com',
-          proxied: true,
-          tags: ['owner:dns-team'],
-          ttl: 3600,
-          type: 'A',
-        },
-      ],
+      patches: [{ content: '198.51.100.4', type: 'A' }],
+      posts: [{ content: '198.51.100.4', type: 'A' }],
+      puts: [{ content: '198.51.100.4', type: 'A' }],
     });
   });
 
@@ -203,12 +163,7 @@ describe('resource records', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comment: 'Domain verification record',
       content: '198.51.100.4',
-      name: 'example.com',
-      proxied: true,
-      tags: ['owner:dns-team'],
-      ttl: 3600,
       type: 'A',
     });
   });
