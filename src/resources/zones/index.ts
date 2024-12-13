@@ -23,8 +23,8 @@ export {
   Holds,
   type ZoneHold,
   type HoldCreateParams,
-  type HoldUpdateParams,
   type HoldDeleteParams,
+  type HoldEditParams,
   type HoldGetParams,
 } from './holds';
 export { RatePlans, type RatePlanGetResponse, type RatePlanGetParams } from './rate-plans';

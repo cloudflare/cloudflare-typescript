@@ -9,11 +9,11 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource schema', () => {
-  test('get: only required params', async () => {
-    const responsePromise = client.ai.models.schema.get({
+describe('resource ai', () => {
+  test('run: only required params', async () => {
+    const responsePromise = client.workers.ai.run('model_name', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      model: 'model',
+      text: 'x',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,10 +24,10 @@ describe('resource schema', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
-    const response = await client.ai.models.schema.get({
+  test('run: required and optional params', async () => {
+    const response = await client.workers.ai.run('model_name', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      model: 'model',
+      text: 'x',
     });
   });
 });
