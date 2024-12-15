@@ -27,8 +27,6 @@ import {
   SubdomainUpdateResponse,
   Subdomains,
 } from './subdomains';
-import * as AIAPI from './ai/ai';
-import { AI, AIRunParams, AIRunResponse } from './ai/ai';
 import * as AssetsAPI from './assets/assets';
 import { Assets } from './assets/assets';
 import * as ScriptsAPI from './scripts/scripts';
@@ -45,7 +43,6 @@ import {
 } from './scripts/scripts';
 
 export class Workers extends APIResource {
-  ai: AIAPI.AI = new AIAPI.AI(this._client);
   assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
   accountSettings: AccountSettingsAPI.AccountSettings = new AccountSettingsAPI.AccountSettings(this._client);
@@ -750,7 +747,6 @@ export interface WorkerMetadataParam {
   main_module?: string;
 }
 
-Workers.AI = AI;
 Workers.Assets = Assets;
 Workers.Scripts = Scripts;
 Workers.ScriptsSinglePage = ScriptsSinglePage;
@@ -760,8 +756,6 @@ Workers.DomainsSinglePage = DomainsSinglePage;
 Workers.Subdomains = Subdomains;
 
 export declare namespace Workers {
-  export { AI as AI, type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
-
   export { Assets as Assets };
 
   export {
