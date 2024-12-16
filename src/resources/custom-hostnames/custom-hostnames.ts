@@ -397,7 +397,7 @@ export namespace CustomHostname {
     /**
      * Unique metadata for this hostname.
      */
-    key?: string;
+    [key: string]: string;
   }
 
   /**
