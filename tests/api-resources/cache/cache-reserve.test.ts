@@ -13,7 +13,7 @@ describe('resource cacheReserve', () => {
   test('clear: only required params', async () => {
     const responsePromise = client.cache.cacheReserve.clear({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '{}',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource cacheReserve', () => {
   test('clear: required and optional params', async () => {
     const response = await client.cache.cacheReserve.clear({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '{}',
+      body: {},
     });
   });
 
