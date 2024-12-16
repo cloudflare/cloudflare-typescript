@@ -18,6 +18,20 @@ export {
   type DomainGetParams,
 } from './domains';
 export {
+  RouteListResponsesSinglePage,
+  Routes,
+  type RouteCreateResponse,
+  type RouteUpdateResponse,
+  type RouteListResponse,
+  type RouteDeleteResponse,
+  type RouteGetResponse,
+  type RouteCreateParams,
+  type RouteUpdateParams,
+  type RouteListParams,
+  type RouteDeleteParams,
+  type RouteGetParams,
+} from './routes';
+export {
   ScriptsSinglePage,
   Scripts,
   type Script,
