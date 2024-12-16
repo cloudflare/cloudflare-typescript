@@ -1998,6 +1998,24 @@ Types:
 - <code><a href="./src/resources/workers/workers.ts">SteppedMigration</a></code>
 - <code><a href="./src/resources/workers/workers.ts">WorkerMetadata</a></code>
 
+## Routes
+
+Types:
+
+- <code><a href="./src/resources/workers/routes.ts">RouteCreateResponse</a></code>
+- <code><a href="./src/resources/workers/routes.ts">RouteUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/routes.ts">RouteListResponse</a></code>
+- <code><a href="./src/resources/workers/routes.ts">RouteDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/routes.ts">RouteGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/workers/routes">client.workers.routes.<a href="./src/resources/workers/routes.ts">create</a>({ ...params }) -> RouteCreateResponse</code>
+- <code title="put /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">update</a>(routeId, { ...params }) -> RouteUpdateResponse</code>
+- <code title="get /zones/{zone_id}/workers/routes">client.workers.routes.<a href="./src/resources/workers/routes.ts">list</a>({ ...params }) -> RouteListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">delete</a>(routeId, { ...params }) -> RouteDeleteResponse</code>
+- <code title="get /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">get</a>(routeId, { ...params }) -> RouteGetResponse</code>
+
 ## Assets
 
 ### Upload

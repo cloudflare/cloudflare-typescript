@@ -19,6 +19,21 @@ import {
   Domains,
   DomainsSinglePage,
 } from './domains';
+import * as RoutesAPI from './routes';
+import {
+  RouteCreateParams,
+  RouteCreateResponse,
+  RouteDeleteParams,
+  RouteDeleteResponse,
+  RouteGetParams,
+  RouteGetResponse,
+  RouteListParams,
+  RouteListResponse,
+  RouteListResponsesSinglePage,
+  RouteUpdateParams,
+  RouteUpdateResponse,
+  Routes,
+} from './routes';
 import * as SubdomainsAPI from './subdomains';
 import {
   SubdomainGetParams,
@@ -43,6 +58,7 @@ import {
 } from './scripts/scripts';
 
 export class Workers extends APIResource {
+  routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
   accountSettings: AccountSettingsAPI.AccountSettings = new AccountSettingsAPI.AccountSettings(this._client);
@@ -747,6 +763,8 @@ export interface WorkerMetadataParam {
   main_module?: string;
 }
 
+Workers.Routes = Routes;
+Workers.RouteListResponsesSinglePage = RouteListResponsesSinglePage;
 Workers.Assets = Assets;
 Workers.Scripts = Scripts;
 Workers.ScriptsSinglePage = ScriptsSinglePage;
@@ -756,6 +774,21 @@ Workers.DomainsSinglePage = DomainsSinglePage;
 Workers.Subdomains = Subdomains;
 
 export declare namespace Workers {
+  export {
+    Routes as Routes,
+    type RouteCreateResponse as RouteCreateResponse,
+    type RouteUpdateResponse as RouteUpdateResponse,
+    type RouteListResponse as RouteListResponse,
+    type RouteDeleteResponse as RouteDeleteResponse,
+    type RouteGetResponse as RouteGetResponse,
+    RouteListResponsesSinglePage as RouteListResponsesSinglePage,
+    type RouteCreateParams as RouteCreateParams,
+    type RouteUpdateParams as RouteUpdateParams,
+    type RouteListParams as RouteListParams,
+    type RouteDeleteParams as RouteDeleteParams,
+    type RouteGetParams as RouteGetParams,
+  };
+
   export { Assets as Assets };
 
   export {
