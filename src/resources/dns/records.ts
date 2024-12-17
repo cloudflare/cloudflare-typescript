@@ -226,6 +226,11 @@ export interface ARecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: ARecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -241,6 +246,29 @@ export interface ARecord {
    * Record type.
    */
   type?: 'A';
+}
+
+export namespace ARecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface ARecordParam {
@@ -267,6 +295,11 @@ export interface ARecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: ARecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -282,6 +315,29 @@ export interface ARecordParam {
    * Record type.
    */
   type?: 'A';
+}
+
+export namespace ARecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface AAAARecord {
@@ -308,6 +364,11 @@ export interface AAAARecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: AAAARecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -323,6 +384,29 @@ export interface AAAARecord {
    * Record type.
    */
   type?: 'AAAA';
+}
+
+export namespace AAAARecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface AAAARecordParam {
@@ -349,6 +433,11 @@ export interface AAAARecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: AAAARecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -364,6 +453,29 @@ export interface AAAARecordParam {
    * Record type.
    */
   type?: 'AAAA';
+}
+
+export namespace AAAARecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CAARecord {
@@ -393,6 +505,11 @@ export interface CAARecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: CAARecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -432,6 +549,27 @@ export namespace CAARecord {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CAARecordParam {
@@ -456,6 +594,11 @@ export interface CAARecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: CAARecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -495,6 +638,27 @@ export namespace CAARecordParam {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CERTRecord {
@@ -524,6 +688,11 @@ export interface CERTRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: CERTRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -568,6 +737,27 @@ export namespace CERTRecord {
      */
     type?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CERTRecordParam {
@@ -592,6 +782,11 @@ export interface CERTRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: CERTRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -636,6 +831,27 @@ export namespace CERTRecordParam {
      */
     type?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CNAMERecord {
@@ -661,6 +877,9 @@ export interface CNAMERecord {
    */
   proxied?: boolean;
 
+  /**
+   * Settings for the DNS record.
+   */
   settings?: CNAMERecord.Settings;
 
   /**
@@ -682,6 +901,9 @@ export interface CNAMERecord {
 }
 
 export namespace CNAMERecord {
+  /**
+   * Settings for the DNS record.
+   */
   export interface Settings {
     /**
      * If enabled, causes the CNAME record to be resolved externally and the resulting
@@ -690,6 +912,22 @@ export namespace CNAMERecord {
      * flattened.
      */
     flatten_cname?: boolean;
+
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
   }
 }
 
@@ -716,6 +954,9 @@ export interface CNAMERecordParam {
    */
   proxied?: boolean;
 
+  /**
+   * Settings for the DNS record.
+   */
   settings?: CNAMERecordParam.Settings;
 
   /**
@@ -737,6 +978,9 @@ export interface CNAMERecordParam {
 }
 
 export namespace CNAMERecordParam {
+  /**
+   * Settings for the DNS record.
+   */
   export interface Settings {
     /**
      * If enabled, causes the CNAME record to be resolved externally and the resulting
@@ -745,6 +989,22 @@ export namespace CNAMERecordParam {
      * flattened.
      */
     flatten_cname?: boolean;
+
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
   }
 }
 
@@ -775,6 +1035,11 @@ export interface DNSKEYRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: DNSKEYRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -819,6 +1084,27 @@ export namespace DNSKEYRecord {
      */
     public_key?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface DNSKEYRecordParam {
@@ -843,6 +1129,11 @@ export interface DNSKEYRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: DNSKEYRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -887,6 +1178,27 @@ export namespace DNSKEYRecordParam {
      */
     public_key?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface DSRecord {
@@ -916,6 +1228,11 @@ export interface DSRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: DSRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -960,6 +1277,27 @@ export namespace DSRecord {
      */
     key_tag?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface DSRecordParam {
@@ -984,6 +1322,11 @@ export interface DSRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: DSRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1028,6 +1371,27 @@ export namespace DSRecordParam {
      */
     key_tag?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface HTTPSRecord {
@@ -1057,6 +1421,11 @@ export interface HTTPSRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: HTTPSRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1096,6 +1465,27 @@ export namespace HTTPSRecord {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface HTTPSRecordParam {
@@ -1120,6 +1510,11 @@ export interface HTTPSRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: HTTPSRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1159,6 +1554,27 @@ export namespace HTTPSRecordParam {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface LOCRecord {
@@ -1188,6 +1604,11 @@ export interface LOCRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: LOCRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1272,6 +1693,27 @@ export namespace LOCRecord {
      */
     size?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface LOCRecordParam {
@@ -1296,6 +1738,11 @@ export interface LOCRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: LOCRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1380,6 +1827,27 @@ export namespace LOCRecordParam {
      */
     size?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface MXRecord {
@@ -1412,6 +1880,11 @@ export interface MXRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: MXRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -1427,6 +1900,29 @@ export interface MXRecord {
    * Record type.
    */
   type?: 'MX';
+}
+
+export namespace MXRecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface MXRecordParam {
@@ -1459,6 +1955,11 @@ export interface MXRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: MXRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -1474,6 +1975,29 @@ export interface MXRecordParam {
    * Record type.
    */
   type?: 'MX';
+}
+
+export namespace MXRecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface NAPTRRecord {
@@ -1503,6 +2027,11 @@ export interface NAPTRRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: NAPTRRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1557,6 +2086,27 @@ export namespace NAPTRRecord {
      */
     service?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface NAPTRRecordParam {
@@ -1581,6 +2131,11 @@ export interface NAPTRRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: NAPTRRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1635,6 +2190,27 @@ export namespace NAPTRRecordParam {
      */
     service?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface NSRecord {
@@ -1661,6 +2237,11 @@ export interface NSRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: NSRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -1676,6 +2257,29 @@ export interface NSRecord {
    * Record type.
    */
   type?: 'NS';
+}
+
+export namespace NSRecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface NSRecordParam {
@@ -1702,6 +2306,11 @@ export interface NSRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: NSRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -1717,6 +2326,29 @@ export interface NSRecordParam {
    * Record type.
    */
   type?: 'NS';
+}
+
+export namespace NSRecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface PTRRecord {
@@ -1743,6 +2375,11 @@ export interface PTRRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: PTRRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -1758,6 +2395,29 @@ export interface PTRRecord {
    * Record type.
    */
   type?: 'PTR';
+}
+
+export namespace PTRRecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface PTRRecordParam {
@@ -1784,6 +2444,11 @@ export interface PTRRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: PTRRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -1799,6 +2464,29 @@ export interface PTRRecordParam {
    * Record type.
    */
   type?: 'PTR';
+}
+
+export namespace PTRRecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export type Record =
@@ -1849,6 +2537,11 @@ export namespace Record {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -1864,6 +2557,29 @@ export namespace Record {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -1915,6 +2631,11 @@ export namespace RecordParam {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTagsParam>;
@@ -1930,6 +2651,29 @@ export namespace RecordParam {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -1991,6 +2735,11 @@ export interface SMIMEARecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: SMIMEARecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -2033,6 +2782,27 @@ export namespace SMIMEARecord {
      */
     usage?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SMIMEARecordParam {
@@ -2057,6 +2827,11 @@ export interface SMIMEARecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SMIMEARecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2101,6 +2876,27 @@ export namespace SMIMEARecordParam {
      */
     usage?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SRVRecord {
@@ -2131,6 +2927,11 @@ export interface SRVRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SRVRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2176,6 +2977,27 @@ export namespace SRVRecord {
      */
     weight?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SRVRecordParam {
@@ -2200,6 +3022,11 @@ export interface SRVRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SRVRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2245,6 +3072,27 @@ export namespace SRVRecordParam {
      */
     weight?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SSHFPRecord {
@@ -2274,6 +3122,11 @@ export interface SSHFPRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SSHFPRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2313,6 +3166,27 @@ export namespace SSHFPRecord {
      */
     type?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SSHFPRecordParam {
@@ -2337,6 +3211,11 @@ export interface SSHFPRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SSHFPRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2376,6 +3255,27 @@ export namespace SSHFPRecordParam {
      */
     type?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SVCBRecord {
@@ -2405,6 +3305,11 @@ export interface SVCBRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SVCBRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2444,6 +3349,27 @@ export namespace SVCBRecord {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SVCBRecordParam {
@@ -2468,6 +3394,11 @@ export interface SVCBRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SVCBRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2507,6 +3438,27 @@ export namespace SVCBRecordParam {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface TLSARecord {
@@ -2536,6 +3488,11 @@ export interface TLSARecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: TLSARecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2580,6 +3537,27 @@ export namespace TLSARecord {
      */
     usage?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface TLSARecordParam {
@@ -2604,6 +3582,11 @@ export interface TLSARecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: TLSARecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2647,6 +3630,27 @@ export namespace TLSARecordParam {
      * Usage.
      */
     usage?: number;
+  }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
   }
 }
 
@@ -2693,6 +3697,11 @@ export interface TXTRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: TXTRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -2708,6 +3717,29 @@ export interface TXTRecord {
    * Record type.
    */
   type?: 'TXT';
+}
+
+export namespace TXTRecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface TXTRecordParam {
@@ -2739,6 +3771,11 @@ export interface TXTRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: TXTRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -2754,6 +3791,29 @@ export interface TXTRecordParam {
    * Record type.
    */
   type?: 'TXT';
+}
+
+export namespace TXTRecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface URIRecord {
@@ -2791,6 +3851,11 @@ export interface URIRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: URIRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -2822,6 +3887,27 @@ export namespace URIRecord {
      * The record weight.
      */
     weight?: number;
+  }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
   }
 }
 
@@ -2855,6 +3941,11 @@ export interface URIRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: URIRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -2886,6 +3977,27 @@ export namespace URIRecordParam {
      * The record weight.
      */
     weight?: number;
+  }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
   }
 }
 
@@ -2937,6 +4049,11 @@ export namespace RecordCreateResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -2952,6 +4069,29 @@ export namespace RecordCreateResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -3003,6 +4143,11 @@ export namespace RecordUpdateResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -3018,6 +4163,29 @@ export namespace RecordUpdateResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -3069,6 +4237,11 @@ export namespace RecordListResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -3084,6 +4257,29 @@ export namespace RecordListResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -3217,6 +4413,11 @@ export namespace RecordBatchResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -3232,6 +4433,29 @@ export namespace RecordBatchResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -3258,6 +4482,11 @@ export namespace RecordBatchResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -3273,6 +4502,29 @@ export namespace RecordBatchResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -3299,6 +4551,11 @@ export namespace RecordBatchResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -3314,6 +4571,29 @@ export namespace RecordBatchResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -3340,6 +4620,11 @@ export namespace RecordBatchResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -3355,6 +4640,29 @@ export namespace RecordBatchResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -3406,6 +4714,11 @@ export namespace RecordEditResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -3421,6 +4734,29 @@ export namespace RecordEditResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -3477,6 +4813,11 @@ export namespace RecordGetResponse {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
@@ -3492,6 +4833,29 @@ export namespace RecordGetResponse {
      * Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -3572,6 +4936,11 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.ARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -3588,6 +4957,29 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'A';
+  }
+
+  export namespace ARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface AAAARecord {
@@ -3619,6 +5011,11 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.AAAARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -3635,6 +5032,29 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'AAAA';
+  }
+
+  export namespace AAAARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CAARecord {
@@ -3664,6 +5084,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -3704,6 +5129,27 @@ export namespace RecordCreateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CERTRecord {
@@ -3733,6 +5179,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -3778,6 +5229,27 @@ export namespace RecordCreateParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CNAMERecord {
@@ -3809,7 +5281,7 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
-     * Body param:
+     * Body param: Settings for the DNS record.
      */
     settings?: RecordCreateParams.CNAMERecord.Settings;
 
@@ -3833,6 +5305,9 @@ export namespace RecordCreateParams {
   }
 
   export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
     export interface Settings {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
@@ -3841,6 +5316,22 @@ export namespace RecordCreateParams {
        * flattened.
        */
       flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 
@@ -3871,6 +5362,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -3916,6 +5412,27 @@ export namespace RecordCreateParams {
        */
       public_key?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DSRecord {
@@ -3945,6 +5462,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -3990,6 +5512,27 @@ export namespace RecordCreateParams {
        */
       key_tag?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface HTTPSRecord {
@@ -4019,6 +5562,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -4059,6 +5607,27 @@ export namespace RecordCreateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface LOCRecord {
@@ -4088,6 +5657,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -4173,6 +5747,27 @@ export namespace RecordCreateParams {
        */
       size?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface MXRecord {
@@ -4210,6 +5805,11 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.MXRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -4226,6 +5826,29 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NAPTRRecord {
@@ -4255,6 +5878,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -4310,6 +5938,27 @@ export namespace RecordCreateParams {
        */
       service?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NSRecord {
@@ -4341,6 +5990,11 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.NSRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -4357,6 +6011,29 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -4389,6 +6066,11 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -4405,6 +6087,29 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface PTRRecord {
@@ -4436,6 +6141,11 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.PTRRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -4452,6 +6162,29 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SMIMEARecord {
@@ -4481,6 +6214,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -4526,6 +6264,27 @@ export namespace RecordCreateParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SRVRecord {
@@ -4555,6 +6314,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -4601,6 +6365,27 @@ export namespace RecordCreateParams {
        */
       weight?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SSHFPRecord {
@@ -4630,6 +6415,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -4670,6 +6460,27 @@ export namespace RecordCreateParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SVCBRecord {
@@ -4699,6 +6510,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -4739,6 +6555,27 @@ export namespace RecordCreateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TLSARecord {
@@ -4768,6 +6605,11 @@ export namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -4813,6 +6655,27 @@ export namespace RecordCreateParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TXTRecord {
@@ -4849,6 +6712,11 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.TXTRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -4865,6 +6733,29 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface URIRecord {
@@ -4902,6 +6793,11 @@ export namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.URIRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -4934,6 +6830,27 @@ export namespace RecordCreateParams {
        * The record weight.
        */
       weight?: number;
+    }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 }
@@ -4991,6 +6908,11 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.ARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -5007,6 +6929,29 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'A';
+  }
+
+  export namespace ARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface AAAARecord {
@@ -5038,6 +6983,11 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.AAAARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -5054,6 +7004,29 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'AAAA';
+  }
+
+  export namespace AAAARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CAARecord {
@@ -5083,6 +7056,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5123,6 +7101,27 @@ export namespace RecordUpdateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CERTRecord {
@@ -5152,6 +7151,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5197,6 +7201,27 @@ export namespace RecordUpdateParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CNAMERecord {
@@ -5228,7 +7253,7 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
-     * Body param:
+     * Body param: Settings for the DNS record.
      */
     settings?: RecordUpdateParams.CNAMERecord.Settings;
 
@@ -5252,6 +7277,9 @@ export namespace RecordUpdateParams {
   }
 
   export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
     export interface Settings {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
@@ -5260,6 +7288,22 @@ export namespace RecordUpdateParams {
        * flattened.
        */
       flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 
@@ -5290,6 +7334,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5335,6 +7384,27 @@ export namespace RecordUpdateParams {
        */
       public_key?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DSRecord {
@@ -5364,6 +7434,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5409,6 +7484,27 @@ export namespace RecordUpdateParams {
        */
       key_tag?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface HTTPSRecord {
@@ -5438,6 +7534,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5478,6 +7579,27 @@ export namespace RecordUpdateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface LOCRecord {
@@ -5507,6 +7629,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5592,6 +7719,27 @@ export namespace RecordUpdateParams {
        */
       size?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface MXRecord {
@@ -5629,6 +7777,11 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.MXRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -5645,6 +7798,29 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NAPTRRecord {
@@ -5674,6 +7850,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5729,6 +7910,27 @@ export namespace RecordUpdateParams {
        */
       service?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NSRecord {
@@ -5760,6 +7962,11 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.NSRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -5776,6 +7983,29 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -5808,6 +8038,11 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -5824,6 +8059,29 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface PTRRecord {
@@ -5855,6 +8113,11 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.PTRRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -5871,6 +8134,29 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SMIMEARecord {
@@ -5900,6 +8186,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5945,6 +8236,27 @@ export namespace RecordUpdateParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SRVRecord {
@@ -5974,6 +8286,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6020,6 +8337,27 @@ export namespace RecordUpdateParams {
        */
       weight?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SSHFPRecord {
@@ -6049,6 +8387,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6089,6 +8432,27 @@ export namespace RecordUpdateParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SVCBRecord {
@@ -6118,6 +8482,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6158,6 +8527,27 @@ export namespace RecordUpdateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TLSARecord {
@@ -6187,6 +8577,11 @@ export namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6232,6 +8627,27 @@ export namespace RecordUpdateParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TXTRecord {
@@ -6268,6 +8684,11 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.TXTRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -6284,6 +8705,29 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface URIRecord {
@@ -6321,6 +8765,11 @@ export namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.URIRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -6353,6 +8802,27 @@ export namespace RecordUpdateParams {
        * The record weight.
        */
       weight?: number;
+    }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 }
@@ -6668,6 +9138,11 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.ARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -6684,6 +9159,29 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'A';
+  }
+
+  export namespace ARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface AAAARecord {
@@ -6715,6 +9213,11 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.AAAARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -6731,6 +9234,29 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'AAAA';
+  }
+
+  export namespace AAAARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CAARecord {
@@ -6760,6 +9286,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6800,6 +9331,27 @@ export namespace RecordEditParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CERTRecord {
@@ -6829,6 +9381,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6874,6 +9431,27 @@ export namespace RecordEditParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CNAMERecord {
@@ -6905,7 +9483,7 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
-     * Body param:
+     * Body param: Settings for the DNS record.
      */
     settings?: RecordEditParams.CNAMERecord.Settings;
 
@@ -6929,6 +9507,9 @@ export namespace RecordEditParams {
   }
 
   export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
     export interface Settings {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
@@ -6937,6 +9518,22 @@ export namespace RecordEditParams {
        * flattened.
        */
       flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 
@@ -6967,6 +9564,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7012,6 +9614,27 @@ export namespace RecordEditParams {
        */
       public_key?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DSRecord {
@@ -7041,6 +9664,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7086,6 +9714,27 @@ export namespace RecordEditParams {
        */
       key_tag?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface HTTPSRecord {
@@ -7115,6 +9764,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7155,6 +9809,27 @@ export namespace RecordEditParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface LOCRecord {
@@ -7184,6 +9859,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7269,6 +9949,27 @@ export namespace RecordEditParams {
        */
       size?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface MXRecord {
@@ -7306,6 +10007,11 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.MXRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -7322,6 +10028,29 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NAPTRRecord {
@@ -7351,6 +10080,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7406,6 +10140,27 @@ export namespace RecordEditParams {
        */
       service?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NSRecord {
@@ -7437,6 +10192,11 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.NSRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -7453,6 +10213,29 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -7485,6 +10268,11 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -7501,6 +10289,29 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface PTRRecord {
@@ -7532,6 +10343,11 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.PTRRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -7548,6 +10364,29 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SMIMEARecord {
@@ -7577,6 +10416,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7622,6 +10466,27 @@ export namespace RecordEditParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SRVRecord {
@@ -7651,6 +10516,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7697,6 +10567,27 @@ export namespace RecordEditParams {
        */
       weight?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SSHFPRecord {
@@ -7726,6 +10617,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7766,6 +10662,27 @@ export namespace RecordEditParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SVCBRecord {
@@ -7795,6 +10712,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7835,6 +10757,27 @@ export namespace RecordEditParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TLSARecord {
@@ -7864,6 +10807,11 @@ export namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7909,6 +10857,27 @@ export namespace RecordEditParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TXTRecord {
@@ -7945,6 +10914,11 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.TXTRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -7961,6 +10935,29 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface URIRecord {
@@ -7998,6 +10995,11 @@ export namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.URIRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -8030,6 +11032,27 @@ export namespace RecordEditParams {
        * The record weight.
        */
       weight?: number;
+    }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 }

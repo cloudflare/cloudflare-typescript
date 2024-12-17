@@ -90,45 +90,29 @@ export class BlockSenders extends APIResource {
 
 export class BlockSenderListResponsesV4PagePaginationArray extends V4PagePaginationArray<BlockSenderListResponse> {}
 
-export type BlockSenderCreateResponse =
-  | BlockSenderCreateResponse.EmailSecurityBlockedSender
-  | Array<BlockSenderCreateResponse.UnionMember1>;
+export interface BlockSenderCreateResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
+  id: number;
 
-export namespace BlockSenderCreateResponse {
-  export interface EmailSecurityBlockedSender {
-    id: number;
+  created_at: string;
 
-    created_at: string;
+  is_regex: boolean;
 
-    is_regex: boolean;
+  last_modified: string;
 
-    last_modified: string;
+  pattern: string;
 
-    pattern: string;
+  pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
-    pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
-
-    comments?: string | null;
-  }
-
-  export interface UnionMember1 {
-    id: number;
-
-    created_at: string;
-
-    is_regex: boolean;
-
-    last_modified: string;
-
-    pattern: string;
-
-    pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
-
-    comments?: string | null;
-  }
+  comments?: string | null;
 }
 
 export interface BlockSenderListResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 
   created_at: string;
@@ -145,10 +129,16 @@ export interface BlockSenderListResponse {
 }
 
 export interface BlockSenderDeleteResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 }
 
 export interface BlockSenderEditResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 
   created_at: string;
@@ -165,6 +155,9 @@ export interface BlockSenderEditResponse {
 }
 
 export interface BlockSenderGetResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 
   created_at: string;
@@ -180,61 +173,31 @@ export interface BlockSenderGetResponse {
   comments?: string | null;
 }
 
-export type BlockSenderCreateParams =
-  | BlockSenderCreateParams.EmailSecurityCreateBlockedSender
-  | BlockSenderCreateParams.Variant1;
+export interface BlockSenderCreateParams {
+  /**
+   * Path param: Account Identifier
+   */
+  account_id: string;
 
-export namespace BlockSenderCreateParams {
-  export interface EmailSecurityCreateBlockedSender {
-    /**
-     * Path param: Account Identifier
-     */
-    account_id: string;
+  /**
+   * Body param:
+   */
+  is_regex: boolean;
 
-    /**
-     * Body param:
-     */
-    is_regex: boolean;
+  /**
+   * Body param:
+   */
+  pattern: string;
 
-    /**
-     * Body param:
-     */
-    pattern: string;
+  /**
+   * Body param:
+   */
+  pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
-    /**
-     * Body param:
-     */
-    pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
-
-    /**
-     * Body param:
-     */
-    comments?: string | null;
-  }
-
-  export interface Variant1 {
-    /**
-     * Path param: Account Identifier
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body: Array<BlockSenderCreateParams.Variant1.Body>;
-  }
-
-  export namespace Variant1 {
-    export interface Body {
-      is_regex: boolean;
-
-      pattern: string;
-
-      pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
-
-      comments?: string | null;
-    }
-  }
+  /**
+   * Body param:
+   */
+  comments?: string | null;
 }
 
 export interface BlockSenderListParams extends V4PagePaginationArrayParams {
