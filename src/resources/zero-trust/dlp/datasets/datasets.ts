@@ -99,6 +99,11 @@ export interface Dataset {
 
   status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
 
+  /**
+   * When the dataset was last updated.
+   *
+   * This includes name or description changes as well as uploads.
+   */
   updated_at: string;
 
   uploads: Array<Dataset.Upload>;
