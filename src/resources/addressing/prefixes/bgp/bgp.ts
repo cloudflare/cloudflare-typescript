@@ -16,6 +16,7 @@ import * as PrefixesAPI from './prefixes';
 import {
   BGPPrefix,
   BGPPrefixesSinglePage,
+  PrefixCreateParams,
   PrefixEditParams,
   PrefixGetParams,
   PrefixListParams,
@@ -58,6 +59,7 @@ export declare namespace BGP {
     Prefixes as Prefixes,
     type BGPPrefix as BGPPrefix,
     BGPPrefixesSinglePage as BGPPrefixesSinglePage,
+    type PrefixCreateParams as PrefixCreateParams,
     type PrefixListParams as PrefixListParams,
     type PrefixEditParams as PrefixEditParams,
     type PrefixGetParams as PrefixGetParams,

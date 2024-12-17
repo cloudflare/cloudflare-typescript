@@ -5,6 +5,7 @@ export {
   BGPPrefixesSinglePage,
   Prefixes,
   type BGPPrefix,
+  type PrefixCreateParams,
   type PrefixListParams,
   type PrefixEditParams,
   type PrefixGetParams,
