@@ -6,6 +6,25 @@ import { SinglePage } from '../../../../pagination';
 
 export class Prefixes extends APIResource {
   /**
+   * Create a BGP prefix, controlling the BGP advertisement status of a specific
+   * subnet. When created, BGP prefixes are initially withdrawn, and can be
+   * advertised with the Update BGP Prefix API.
+   */
+  create(
+    prefixId: string,
+    params: PrefixCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BGPPrefix> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BGPPrefix }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List all BGP Prefixes within the specified IP Prefix. BGP Prefixes are used to
    * control which specific subnets are advertised to the Internet. It is possible to
    * advertise subnets more specific than an IP Prefix by creating more specific BGP
@@ -131,6 +150,18 @@ export namespace BGPPrefix {
   }
 }
 
+export interface PrefixCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: IP Prefix in Classless Inter-Domain Routing format.
+   */
+  cidr?: string;
+}
+
 export interface PrefixListParams {
   /**
    * Identifier
@@ -169,6 +200,7 @@ export declare namespace Prefixes {
   export {
     type BGPPrefix as BGPPrefix,
     BGPPrefixesSinglePage as BGPPrefixesSinglePage,
+    type PrefixCreateParams as PrefixCreateParams,
     type PrefixListParams as PrefixListParams,
     type PrefixEditParams as PrefixEditParams,
     type PrefixGetParams as PrefixGetParams,
