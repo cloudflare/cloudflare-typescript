@@ -231,7 +231,7 @@ describe('instantiate client', () => {
     expect(client.apiEmail).toBe('user@example.com');
   });
 
-  test('with overriden environment variable arguments', () => {
+  test('with overridden environment variable arguments', () => {
     // set options via env var
     process.env['CLOUDFLARE_API_KEY'] = 'another 144c9defac04969c7bfad8efaa8ea194';
     process.env['CLOUDFLARE_EMAIL'] = 'another user@example.com';
