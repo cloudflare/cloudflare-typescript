@@ -2464,7 +2464,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/managed-transforms.ts">RequestModel</a></code>
 - <code><a href="./src/resources/managed-transforms.ts">ManagedTransformListResponse</a></code>
 - <code><a href="./src/resources/managed-transforms.ts">ManagedTransformEditResponse</a></code>
 

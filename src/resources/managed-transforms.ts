@@ -12,7 +12,11 @@ export class ManagedTransforms extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedTransformListResponse> {
     const { zone_id } = params;
-    return this._client.get(`/zones/${zone_id}/managed_headers`, options);
+    return (
+      this._client.get(`/zones/${zone_id}/managed_headers`, options) as Core.APIPromise<{
+        result: ManagedTransformListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -23,102 +27,232 @@ export class ManagedTransforms extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedTransformEditResponse> {
     const { zone_id, ...body } = params;
-    return this._client.patch(`/zones/${zone_id}/managed_headers`, { body, ...options });
+    return (
+      this._client.patch(`/zones/${zone_id}/managed_headers`, { body, ...options }) as Core.APIPromise<{
+        result: ManagedTransformEditResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface RequestModel {
-  /**
-   * Human-readable identifier of the Managed Transform.
-   */
-  id?: string;
-
-  /**
-   * When true, the Managed Transform is enabled.
-   */
-  enabled?: boolean;
-}
-
-export interface RequestModelParam {
-  /**
-   * Human-readable identifier of the Managed Transform.
-   */
-  id?: string;
-
-  /**
-   * When true, the Managed Transform is enabled.
-   */
-  enabled?: boolean;
-}
-
+/**
+ * A result.
+ */
 export interface ManagedTransformListResponse {
-  managed_request_headers?: Array<RequestModel>;
+  /**
+   * The list of Managed Request Transforms.
+   */
+  managed_request_headers: Array<ManagedTransformListResponse.ManagedRequestHeader>;
 
-  managed_response_headers?: Array<RequestModel>;
+  /**
+   * The list of Managed Response Transforms.
+   */
+  managed_response_headers: Array<ManagedTransformListResponse.ManagedResponseHeader>;
 }
 
-export interface ManagedTransformEditResponse {
-  managed_request_headers?: Array<ManagedTransformEditResponse.ManagedRequestHeader>;
+export namespace ManagedTransformListResponse {
+  /**
+   * A Managed Transform object.
+   */
+  export interface ManagedRequestHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    id: string;
 
-  managed_response_headers?: Array<ManagedTransformEditResponse.ManagedResponseHeader>;
+    /**
+     * Whether the Managed Transform is enabled.
+     */
+    enabled: boolean;
+
+    /**
+     * Whether the Managed Transform conflicts with the currently-enabled Managed
+     * Transforms.
+     */
+    has_conflict: boolean;
+
+    /**
+     * The Managed Transforms that this Managed Transform conflicts with.
+     */
+    conflicts_with?: Array<ManagedRequestHeader.ConflictsWith>;
+  }
+
+  export namespace ManagedRequestHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    export interface ConflictsWith {}
+  }
+
+  /**
+   * A Managed Transform object.
+   */
+  export interface ManagedResponseHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    id: string;
+
+    /**
+     * Whether the Managed Transform is enabled.
+     */
+    enabled: boolean;
+
+    /**
+     * Whether the Managed Transform conflicts with the currently-enabled Managed
+     * Transforms.
+     */
+    has_conflict: boolean;
+
+    /**
+     * The Managed Transforms that this Managed Transform conflicts with.
+     */
+    conflicts_with?: Array<ManagedResponseHeader.ConflictsWith>;
+  }
+
+  export namespace ManagedResponseHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    export interface ConflictsWith {}
+  }
+}
+
+/**
+ * A result.
+ */
+export interface ManagedTransformEditResponse {
+  /**
+   * The list of Managed Request Transforms.
+   */
+  managed_request_headers: Array<ManagedTransformEditResponse.ManagedRequestHeader>;
+
+  /**
+   * The list of Managed Response Transforms.
+   */
+  managed_response_headers: Array<ManagedTransformEditResponse.ManagedResponseHeader>;
 }
 
 export namespace ManagedTransformEditResponse {
+  /**
+   * A Managed Transform object.
+   */
   export interface ManagedRequestHeader {
     /**
-     * Human-readable identifier of the Managed Transform.
+     * The human-readable identifier of the Managed Transform.
      */
-    id?: string;
+    id: string;
 
     /**
-     * When true, the Managed Transform is available in the current Cloudflare plan.
+     * Whether the Managed Transform is enabled.
      */
-    available?: boolean;
+    enabled: boolean;
 
     /**
-     * When true, the Managed Transform is enabled.
+     * Whether the Managed Transform conflicts with the currently-enabled Managed
+     * Transforms.
      */
-    enabled?: boolean;
+    has_conflict: boolean;
+
+    /**
+     * The Managed Transforms that this Managed Transform conflicts with.
+     */
+    conflicts_with?: Array<ManagedRequestHeader.ConflictsWith>;
   }
 
+  export namespace ManagedRequestHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    export interface ConflictsWith {}
+  }
+
+  /**
+   * A Managed Transform object.
+   */
   export interface ManagedResponseHeader {
     /**
-     * Human-readable identifier of the Managed Transform.
+     * The human-readable identifier of the Managed Transform.
      */
-    id?: string;
+    id: string;
 
     /**
-     * When true, the Managed Transform is available in the current Cloudflare plan.
+     * Whether the Managed Transform is enabled.
      */
-    available?: boolean;
+    enabled: boolean;
 
     /**
-     * When true, the Managed Transform is enabled.
+     * Whether the Managed Transform conflicts with the currently-enabled Managed
+     * Transforms.
      */
-    enabled?: boolean;
+    has_conflict: boolean;
+
+    /**
+     * The Managed Transforms that this Managed Transform conflicts with.
+     */
+    conflicts_with?: Array<ManagedResponseHeader.ConflictsWith>;
+  }
+
+  export namespace ManagedResponseHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    export interface ConflictsWith {}
   }
 }
 
 export interface ManagedTransformListParams {
   /**
-   * Identifier
+   * The unique ID of the zone.
    */
   zone_id: string;
 }
 
 export interface ManagedTransformEditParams {
   /**
-   * Path param: Identifier
+   * Path param: The unique ID of the zone.
    */
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param: The list of Managed Request Transforms.
    */
-  managed_request_headers: Array<RequestModelParam>;
+  managed_request_headers: Array<ManagedTransformEditParams.ManagedRequestHeader>;
 
   /**
-   * Body param:
+   * Body param: The list of Managed Response Transforms.
    */
-  managed_response_headers: Array<RequestModelParam>;
+  managed_response_headers: Array<ManagedTransformEditParams.ManagedResponseHeader>;
+}
+
+export namespace ManagedTransformEditParams {
+  /**
+   * A Managed Transform object.
+   */
+  export interface ManagedRequestHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    id: string;
+
+    /**
+     * Whether the Managed Transform is enabled.
+     */
+    enabled: boolean;
+  }
+
+  /**
+   * A Managed Transform object.
+   */
+  export interface ManagedResponseHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    id: string;
+
+    /**
+     * Whether the Managed Transform is enabled.
+     */
+    enabled: boolean;
+  }
 }
