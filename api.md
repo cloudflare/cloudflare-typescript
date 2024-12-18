@@ -2007,7 +2007,6 @@ Types:
 - <code><a href="./src/resources/workers/workers.ts">R2Binding</a></code>
 - <code><a href="./src/resources/workers/workers.ts">ServiceBinding</a></code>
 - <code><a href="./src/resources/workers/workers.ts">SingleStepMigration</a></code>
-- <code><a href="./src/resources/workers/workers.ts">SteppedMigration</a></code>
 - <code><a href="./src/resources/workers/workers.ts">WorkerMetadata</a></code>
 
 ## Routes

@@ -50,12 +50,15 @@ export interface SettingEditResponse {
   bindings?: Array<WorkersAPI.Binding>;
 
   /**
-   * Opt your Worker into changes after this date
+   * Date indicating targeted support in the Workers runtime. Backwards incompatible
+   * fixes to the runtime following this date will not affect this Worker.
    */
   compatibility_date?: string;
 
   /**
-   * Opt your Worker into specific changes
+   * Flags that enable or disable certain features in the Workers runtime. Used to
+   * enable upcoming features or opt in or out of specific changes not included in a
+   * `compatibility_date`.
    */
   compatibility_flags?: Array<string>;
 
@@ -72,7 +75,7 @@ export interface SettingEditResponse {
   /**
    * Migrations to apply for Durable Objects associated with this Worker.
    */
-  migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
+  migrations?: WorkersAPI.SingleStepMigration | SettingEditResponse.WorkersMultipleStepMigrations;
 
   /**
    * Observability settings for the Worker.
@@ -92,9 +95,9 @@ export interface SettingEditResponse {
   tail_consumers?: Array<TailAPI.ConsumerScript>;
 
   /**
-   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   * Usage model for the Worker invocations.
    */
-  usage_model?: string;
+  usage_model?: 'bundled' | 'unbound';
 }
 
 export namespace SettingEditResponse {
@@ -106,6 +109,24 @@ export namespace SettingEditResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
+  }
+
+  export interface WorkersMultipleStepMigrations {
+    /**
+     * Tag to set as the latest migration tag.
+     */
+    new_tag?: string;
+
+    /**
+     * Tag used to verify against the latest migration tag for this Worker. If they
+     * don't match, the upload is rejected.
+     */
+    old_tag?: string;
+
+    /**
+     * Migrations to apply in order.
+     */
+    steps?: Array<WorkersAPI.MigrationStep>;
   }
 
   /**
@@ -132,12 +153,15 @@ export interface SettingGetResponse {
   bindings?: Array<WorkersAPI.Binding>;
 
   /**
-   * Opt your Worker into changes after this date
+   * Date indicating targeted support in the Workers runtime. Backwards incompatible
+   * fixes to the runtime following this date will not affect this Worker.
    */
   compatibility_date?: string;
 
   /**
-   * Opt your Worker into specific changes
+   * Flags that enable or disable certain features in the Workers runtime. Used to
+   * enable upcoming features or opt in or out of specific changes not included in a
+   * `compatibility_date`.
    */
   compatibility_flags?: Array<string>;
 
@@ -154,7 +178,7 @@ export interface SettingGetResponse {
   /**
    * Migrations to apply for Durable Objects associated with this Worker.
    */
-  migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
+  migrations?: WorkersAPI.SingleStepMigration | SettingGetResponse.WorkersMultipleStepMigrations;
 
   /**
    * Observability settings for the Worker.
@@ -174,9 +198,9 @@ export interface SettingGetResponse {
   tail_consumers?: Array<TailAPI.ConsumerScript>;
 
   /**
-   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   * Usage model for the Worker invocations.
    */
-  usage_model?: string;
+  usage_model?: 'bundled' | 'unbound';
 }
 
 export namespace SettingGetResponse {
@@ -188,6 +212,24 @@ export namespace SettingGetResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
+  }
+
+  export interface WorkersMultipleStepMigrations {
+    /**
+     * Tag to set as the latest migration tag.
+     */
+    new_tag?: string;
+
+    /**
+     * Tag used to verify against the latest migration tag for this Worker. If they
+     * don't match, the upload is rejected.
+     */
+    old_tag?: string;
+
+    /**
+     * Migrations to apply in order.
+     */
+    steps?: Array<WorkersAPI.MigrationStep>;
   }
 
   /**
@@ -227,12 +269,15 @@ export namespace SettingEditParams {
     bindings?: Array<WorkersAPI.BindingParam>;
 
     /**
-     * Opt your Worker into changes after this date
+     * Date indicating targeted support in the Workers runtime. Backwards incompatible
+     * fixes to the runtime following this date will not affect this Worker.
      */
     compatibility_date?: string;
 
     /**
-     * Opt your Worker into specific changes
+     * Flags that enable or disable certain features in the Workers runtime. Used to
+     * enable upcoming features or opt in or out of specific changes not included in a
+     * `compatibility_date`.
      */
     compatibility_flags?: Array<string>;
 
@@ -249,7 +294,7 @@ export namespace SettingEditParams {
     /**
      * Migrations to apply for Durable Objects associated with this Worker.
      */
-    migrations?: WorkersAPI.SingleStepMigrationParam | WorkersAPI.SteppedMigrationParam;
+    migrations?: WorkersAPI.SingleStepMigrationParam | Settings.WorkersMultipleStepMigrations;
 
     /**
      * Observability settings for the Worker.
@@ -269,9 +314,9 @@ export namespace SettingEditParams {
     tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
 
     /**
-     * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+     * Usage model for the Worker invocations.
      */
-    usage_model?: string;
+    usage_model?: 'bundled' | 'unbound';
   }
 
   export namespace Settings {
@@ -283,6 +328,24 @@ export namespace SettingEditParams {
        * The amount of CPU time this Worker can use in milliseconds.
        */
       cpu_ms?: number;
+    }
+
+    export interface WorkersMultipleStepMigrations {
+      /**
+       * Tag to set as the latest migration tag.
+       */
+      new_tag?: string;
+
+      /**
+       * Tag used to verify against the latest migration tag for this Worker. If they
+       * don't match, the upload is rejected.
+       */
+      old_tag?: string;
+
+      /**
+       * Migrations to apply in order.
+       */
+      steps?: Array<WorkersAPI.MigrationStepParam>;
     }
 
     /**

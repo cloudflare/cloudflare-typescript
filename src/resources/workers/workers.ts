@@ -691,42 +691,6 @@ export namespace SingleStepMigrationParam {
   }
 }
 
-export interface SteppedMigration {
-  /**
-   * Tag to set as the latest migration tag.
-   */
-  new_tag?: string;
-
-  /**
-   * Tag used to verify against the latest migration tag for this Worker. If they
-   * don't match, the upload is rejected.
-   */
-  old_tag?: string;
-
-  /**
-   * Migrations to apply in order.
-   */
-  steps?: Array<MigrationStep>;
-}
-
-export interface SteppedMigrationParam {
-  /**
-   * Tag to set as the latest migration tag.
-   */
-  new_tag?: string;
-
-  /**
-   * Tag used to verify against the latest migration tag for this Worker. If they
-   * don't match, the upload is rejected.
-   */
-  old_tag?: string;
-
-  /**
-   * Migrations to apply in order.
-   */
-  steps?: Array<MigrationStepParam>;
-}
-
 /**
  * JSON encoded metadata about the uploaded parts and Worker configuration.
  */

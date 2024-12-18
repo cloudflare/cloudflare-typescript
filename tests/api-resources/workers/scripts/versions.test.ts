@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare, { toFile } from 'cloudflare';
+import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -14,6 +14,7 @@ describe('resource versions', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.workers.scripts.versions.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      metadata: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +29,6 @@ describe('resource versions', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.workers.scripts.versions.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      '<any part name>': [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: {
         annotations: { 'workers/message': 'Fixed worker code.', 'workers/tag': 'workers/tag' },
         bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],

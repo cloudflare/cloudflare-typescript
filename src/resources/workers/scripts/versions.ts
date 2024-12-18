@@ -98,17 +98,10 @@ export interface VersionCreateParams {
   account_id: string;
 
   /**
-   * Body param: A module comprising a Worker script, often a javascript file.
-   * Multiple modules may be provided as separate named parts, but at least one
-   * module must be present and referenced in the metadata as `main_module`.
-   */
-  '<any part name>'?: Array<Core.Uploadable>;
-
-  /**
    * Body param: JSON encoded metadata about the uploaded parts and Worker
    * configuration.
    */
-  metadata?: VersionCreateParams.Metadata;
+  metadata: VersionCreateParams.Metadata;
 }
 
 export namespace VersionCreateParams {
