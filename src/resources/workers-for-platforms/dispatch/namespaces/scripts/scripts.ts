@@ -5,6 +5,8 @@ import * as Core from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import * as TailAPI from '../../../../workers/scripts/tail';
+import * as AssetUploadAPI from './asset-upload';
+import { AssetUpload, AssetUploadCreateParams, AssetUploadCreateResponse } from './asset-upload';
 import * as BindingsAPI from './bindings';
 import { BindingGetParams, BindingGetResponse, Bindings } from './bindings';
 import * as ContentAPI from './content';
@@ -42,6 +44,7 @@ import {
 } from './tags';
 
 export class Scripts extends APIResource {
+  assetUpload: AssetUploadAPI.AssetUpload = new AssetUploadAPI.AssetUpload(this._client);
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
@@ -416,6 +419,7 @@ export interface ScriptGetParams {
   account_id: string;
 }
 
+Scripts.AssetUpload = AssetUpload;
 Scripts.Content = Content;
 Scripts.Settings = Settings;
 Scripts.Bindings = Bindings;
@@ -431,6 +435,12 @@ export declare namespace Scripts {
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptDeleteParams as ScriptDeleteParams,
     type ScriptGetParams as ScriptGetParams,
+  };
+
+  export {
+    AssetUpload as AssetUpload,
+    type AssetUploadCreateResponse as AssetUploadCreateResponse,
+    type AssetUploadCreateParams as AssetUploadCreateParams,
   };
 
   export {

@@ -20,6 +20,17 @@ export class ManagedTransforms extends APIResource {
   }
 
   /**
+   * Disables all Managed Transforms.
+   */
+  delete(params: ManagedTransformDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/managed_headers`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
+  }
+
+  /**
    * Updates the status of one or more Managed Transforms.
    */
   edit(
@@ -202,6 +213,13 @@ export namespace ManagedTransformEditResponse {
 }
 
 export interface ManagedTransformListParams {
+  /**
+   * The unique ID of the zone.
+   */
+  zone_id: string;
+}
+
+export interface ManagedTransformDeleteParams {
   /**
    * The unique ID of the zone.
    */
