@@ -2468,6 +2468,7 @@ Types:
 Methods:
 
 - <code title="get /zones/{zone_id}/managed_headers">client.managedTransforms.<a href="./src/resources/managed-transforms.ts">list</a>({ ...params }) -> ManagedTransformListResponse</code>
+- <code title="delete /zones/{zone_id}/managed_headers">client.managedTransforms.<a href="./src/resources/managed-transforms.ts">delete</a>({ ...params }) -> void</code>
 - <code title="patch /zones/{zone_id}/managed_headers">client.managedTransforms.<a href="./src/resources/managed-transforms.ts">edit</a>({ ...params }) -> ManagedTransformEditResponse</code>
 
 # PageShield
@@ -2635,6 +2636,7 @@ Types:
 Methods:
 
 - <code title="put /zones/{zone_id}/url_normalization">client.urlNormalization.<a href="./src/resources/url-normalization.ts">update</a>({ ...params }) -> URLNormalizationUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/url_normalization">client.urlNormalization.<a href="./src/resources/url-normalization.ts">delete</a>({ ...params }) -> void</code>
 - <code title="get /zones/{zone_id}/url_normalization">client.urlNormalization.<a href="./src/resources/url-normalization.ts">get</a>({ ...params }) -> URLNormalizationGetResponse</code>
 
 # Spectrum
@@ -4136,6 +4138,16 @@ Methods:
 - <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">update</a>(dispatchNamespace, scriptName, { ...params }) -> ScriptUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">delete</a>(dispatchNamespace, scriptName, { ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> Script</code>
+
+##### AssetUpload
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/asset-upload.ts">AssetUploadCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/assets-upload-session">client.workersForPlatforms.dispatch.namespaces.scripts.assetUpload.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/asset-upload.ts">create</a>(dispatchNamespace, scriptName, { ...params }) -> AssetUploadCreateResponse</code>
 
 ##### Content
 

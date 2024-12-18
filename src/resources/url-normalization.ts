@@ -20,6 +20,17 @@ export class URLNormalization extends APIResource {
   }
 
   /**
+   * Deletes the URL Normalization settings.
+   */
+  delete(params: URLNormalizationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/url_normalization`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
+  }
+
+  /**
    * Fetches the current URL Normalization settings.
    */
   get(
@@ -80,6 +91,13 @@ export interface URLNormalizationUpdateParams {
    * Body param: The type of URL normalization performed by Cloudflare.
    */
   type: 'cloudflare' | 'rfc3986';
+}
+
+export interface URLNormalizationDeleteParams {
+  /**
+   * The unique ID of the zone.
+   */
+  zone_id: string;
 }
 
 export interface URLNormalizationGetParams {
