@@ -13,8 +13,8 @@ describe('resource audit', () => {
   test('list: only required params', async () => {
     const responsePromise = client.accounts.logs.audit.list({
       account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
-      before: '2014-10-30',
-      since: '2014-10-30',
+      before: '2024-10-31',
+      since: '2024-10-30',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,8 +28,8 @@ describe('resource audit', () => {
   test('list: required and optional params', async () => {
     const response = await client.accounts.logs.audit.list({
       account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
-      before: '2014-10-30',
-      since: '2014-10-30',
+      before: '2024-10-31',
+      since: '2024-10-30',
       account_name: 'account_name',
       action_result: 'success',
       action_type: 'create',

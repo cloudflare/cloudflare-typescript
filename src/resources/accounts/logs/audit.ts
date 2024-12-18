@@ -225,16 +225,16 @@ export interface AuditListParams extends CursorLimitPaginationParams {
   account_id: string;
 
   /**
-   * Query param: Filters actions based on a given timestamp, returning only logs
-   * that occurred before the specified date.
+   * Query param: Filters actions based on a given timestamp in the format
+   * yyyy-mm-dd, returning only logs that occurred on and before the specified date.
    */
-  before: string | string;
+  before: string;
 
   /**
-   * Query param: Filters actions based on a given timestamp, returning only logs
-   * that occurred after the specified date.
+   * Query param: Filters actions based on a given timestamp in the format
+   * yyyy-mm-dd, returning only logs that occurred on and after the specified date.
    */
-  since: string | string;
+  since: string;
 
   /**
    * Query param: Filters by the account name.
