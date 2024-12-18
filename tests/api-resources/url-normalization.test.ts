@@ -11,7 +11,11 @@ const client = new Cloudflare({
 
 describe('resource urlNormalization', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.urlNormalization.update({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.urlNormalization.update({
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
+      scope: 'incoming',
+      type: 'cloudflare',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,14 +27,14 @@ describe('resource urlNormalization', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.urlNormalization.update({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
       scope: 'incoming',
       type: 'cloudflare',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.urlNormalization.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.urlNormalization.get({ zone_id: '9f1839b6152d298aca64c4e906b6d074' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -41,6 +45,6 @@ describe('resource urlNormalization', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.urlNormalization.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.urlNormalization.get({ zone_id: '9f1839b6152d298aca64c4e906b6d074' });
   });
 });
