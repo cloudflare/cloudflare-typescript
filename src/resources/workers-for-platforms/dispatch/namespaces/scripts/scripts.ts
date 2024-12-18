@@ -179,9 +179,9 @@ export interface ScriptUpdateResponse {
   tail_consumers?: Array<TailAPI.ConsumerScript>;
 
   /**
-   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   * Usage model for the Worker invocations.
    */
-  usage_model?: string;
+  usage_model?: 'bundled' | 'unbound';
 }
 
 export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
@@ -194,19 +194,10 @@ export namespace ScriptUpdateParams {
     account_id: string;
 
     /**
-     * Body param: A module comprising a Worker script, often a javascript file.
-     * Multiple modules may be provided as separate named parts, but at least one
-     * module must be present and referenced in the metadata as `main_module` or
-     * `body_part` by part name. Source maps may also be included using the
-     * `application/source-map` content type.
-     */
-    '<any part name>'?: Array<Core.Uploadable>;
-
-    /**
      * Body param: JSON encoded metadata about the uploaded parts and Worker
      * configuration.
      */
-    metadata?: ScriptUpdateParams.Variant0.Metadata;
+    metadata: ScriptUpdateParams.Variant0.Metadata;
   }
 
   export namespace Variant0 {
@@ -269,7 +260,7 @@ export namespace ScriptUpdateParams {
       /**
        * Migrations to apply for Durable Objects associated with this Worker.
        */
-      migrations?: WorkersAPI.SingleStepMigrationParam | WorkersAPI.SteppedMigrationParam;
+      migrations?: WorkersAPI.SingleStepMigrationParam | Metadata.WorkersMultipleStepMigrations;
 
       /**
        * Observability settings for the Worker.
@@ -289,7 +280,7 @@ export namespace ScriptUpdateParams {
       tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
 
       /**
-       * Usage model to apply to invocations.
+       * Usage model for the Worker invocations.
        */
       usage_model?: 'bundled' | 'unbound';
 
@@ -352,6 +343,24 @@ export namespace ScriptUpdateParams {
          */
         type?: string;
         [k: string]: unknown;
+      }
+
+      export interface WorkersMultipleStepMigrations {
+        /**
+         * Tag to set as the latest migration tag.
+         */
+        new_tag?: string;
+
+        /**
+         * Tag used to verify against the latest migration tag for this Worker. If they
+         * don't match, the upload is rejected.
+         */
+        old_tag?: string;
+
+        /**
+         * Migrations to apply in order.
+         */
+        steps?: Array<WorkersAPI.MigrationStepParam>;
       }
 
       /**

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare, { toFile } from 'cloudflare';
+import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -15,7 +15,7 @@ describe('resource scripts', () => {
     const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.update(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', metadata: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,7 +33,6 @@ describe('resource scripts', () => {
       'this-is_my_script-01',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        '<any part name>': [await toFile(Buffer.from('# my file contents'), 'README.md')],
         metadata: {
           assets: {
             config: {
@@ -45,8 +44,8 @@ describe('resource scripts', () => {
           },
           bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
           body_part: 'worker.js',
-          compatibility_date: '2023-07-25',
-          compatibility_flags: ['string'],
+          compatibility_date: '2021-01-01',
+          compatibility_flags: ['nodejs_compat'],
           keep_assets: false,
           keep_bindings: ['string'],
           logpush: false,
