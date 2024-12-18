@@ -27,7 +27,6 @@ export {
   type NSRecord,
   type PTRRecord,
   type Record,
-  type RecordProcessTiming,
   type RecordTags,
   type SMIMEARecord,
   type SRVRecord,
