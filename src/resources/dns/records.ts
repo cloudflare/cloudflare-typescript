@@ -2677,23 +2677,6 @@ export namespace RecordParam {
   }
 }
 
-export interface RecordProcessTiming {
-  /**
-   * When the file parsing ended.
-   */
-  end_time?: string;
-
-  /**
-   * Processing time of the file in seconds.
-   */
-  process_time?: number;
-
-  /**
-   * When the file parsing started.
-   */
-  start_time?: string;
-}
-
 /**
  * Individual tag of the form name:value (the name must consist of only letters,
  * numbers, underscores and hyphens)
@@ -11124,7 +11107,6 @@ export declare namespace Records {
     type NSRecord as NSRecord,
     type PTRRecord as PTRRecord,
     type Record as Record,
-    type RecordProcessTiming as RecordProcessTiming,
     type RecordTags as RecordTags,
     type SMIMEARecord as SMIMEARecord,
     type SRVRecord as SRVRecord,
