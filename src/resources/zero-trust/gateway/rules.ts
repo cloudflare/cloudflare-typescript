@@ -301,6 +301,11 @@ export interface GatewayRule {
   traffic?: string;
 
   updated_at?: string;
+
+  /**
+   * version number of the rule
+   */
+  version?: number;
 }
 
 export namespace GatewayRule {
