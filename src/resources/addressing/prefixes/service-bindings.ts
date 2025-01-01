@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../resource';
-import * as Core from '../../../../core';
-import * as Shared from '../../../shared';
-import { SinglePage } from '../../../../pagination';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
+import * as Shared from '../../shared';
+import { SinglePage } from '../../../pagination';
 
-export class Bindings extends APIResource {
+export class ServiceBindings extends APIResource {
   /**
    * Creates a new Service Binding, routing traffic to IPs within the given CIDR to a
    * service running on Cloudflare's network. **Note:** This API may only be used on
@@ -14,7 +14,7 @@ export class Bindings extends APIResource {
    */
   create(
     prefixId: string,
-    params: BindingCreateParams,
+    params: ServiceBindingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceBinding> {
     const { account_id, ...body } = params;
@@ -36,7 +36,7 @@ export class Bindings extends APIResource {
    */
   list(
     prefixId: string,
-    params: BindingListParams,
+    params: ServiceBindingListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ServiceBindingsSinglePage, ServiceBinding> {
     const { account_id } = params;
@@ -53,9 +53,9 @@ export class Bindings extends APIResource {
   delete(
     prefixId: string,
     bindingId: string,
-    params: BindingDeleteParams,
+    params: ServiceBindingDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BindingDeleteResponse> {
+  ): Core.APIPromise<ServiceBindingDeleteResponse> {
     const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
@@ -69,7 +69,7 @@ export class Bindings extends APIResource {
   get(
     prefixId: string,
     bindingId: string,
-    params: BindingGetParams,
+    params: ServiceBindingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceBinding> {
     const { account_id } = params;
@@ -124,7 +124,7 @@ export namespace ServiceBinding {
   }
 }
 
-export interface BindingDeleteResponse {
+export interface ServiceBindingDeleteResponse {
   errors: Array<Shared.ResponseInfo>;
 
   messages: Array<Shared.ResponseInfo>;
@@ -135,7 +135,7 @@ export interface BindingDeleteResponse {
   success: true;
 }
 
-export interface BindingCreateParams {
+export interface ServiceBindingCreateParams {
   /**
    * Path param: Identifier
    */
@@ -152,37 +152,37 @@ export interface BindingCreateParams {
   service_id?: string;
 }
 
-export interface BindingListParams {
+export interface ServiceBindingListParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface BindingDeleteParams {
+export interface ServiceBindingDeleteParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface BindingGetParams {
+export interface ServiceBindingGetParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-Bindings.ServiceBindingsSinglePage = ServiceBindingsSinglePage;
+ServiceBindings.ServiceBindingsSinglePage = ServiceBindingsSinglePage;
 
-export declare namespace Bindings {
+export declare namespace ServiceBindings {
   export {
     type ServiceBinding as ServiceBinding,
-    type BindingDeleteResponse as BindingDeleteResponse,
+    type ServiceBindingDeleteResponse as ServiceBindingDeleteResponse,
     ServiceBindingsSinglePage as ServiceBindingsSinglePage,
-    type BindingCreateParams as BindingCreateParams,
-    type BindingListParams as BindingListParams,
-    type BindingDeleteParams as BindingDeleteParams,
-    type BindingGetParams as BindingGetParams,
+    type ServiceBindingCreateParams as ServiceBindingCreateParams,
+    type ServiceBindingListParams as ServiceBindingListParams,
+    type ServiceBindingDeleteParams as ServiceBindingDeleteParams,
+    type ServiceBindingGetParams as ServiceBindingGetParams,
   };
 }

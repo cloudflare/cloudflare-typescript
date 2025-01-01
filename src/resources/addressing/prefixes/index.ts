@@ -20,3 +20,13 @@ export {
   type PrefixEditParams,
   type PrefixGetParams,
 } from './prefixes';
+export {
+  ServiceBindingsSinglePage,
+  ServiceBindings,
+  type ServiceBinding,
+  type ServiceBindingDeleteResponse,
+  type ServiceBindingCreateParams,
+  type ServiceBindingListParams,
+  type ServiceBindingDeleteParams,
+  type ServiceBindingGetParams,
+} from './service-bindings';

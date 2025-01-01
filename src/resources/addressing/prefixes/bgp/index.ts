@@ -11,16 +11,6 @@ export {
   type PrefixGetParams,
 } from './prefixes';
 export {
-  ServiceBindingsSinglePage,
-  Bindings,
-  type ServiceBinding,
-  type BindingDeleteResponse,
-  type BindingCreateParams,
-  type BindingListParams,
-  type BindingDeleteParams,
-  type BindingGetParams,
-} from './bindings';
-export {
   Statuses,
   type StatusEditResponse,
   type StatusGetResponse,
