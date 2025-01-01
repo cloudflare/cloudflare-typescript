@@ -19,7 +19,8 @@ export {
   LOADocuments,
   type LOADocumentCreateResponse,
   type LOADocumentCreateParams,
-} from './loa-documents/index';
+  type LOADocumentGetParams,
+} from './loa-documents';
 export {
   PrefixesSinglePage,
   Prefixes,
