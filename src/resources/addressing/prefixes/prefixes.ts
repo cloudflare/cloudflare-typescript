@@ -12,11 +12,23 @@ import {
   Delegations,
   DelegationsSinglePage,
 } from './delegations';
+import * as ServiceBindingsAPI from './service-bindings';
+import {
+  ServiceBinding,
+  ServiceBindingCreateParams,
+  ServiceBindingDeleteParams,
+  ServiceBindingDeleteResponse,
+  ServiceBindingGetParams,
+  ServiceBindingListParams,
+  ServiceBindings,
+  ServiceBindingsSinglePage,
+} from './service-bindings';
 import * as BGPAPI from './bgp/bgp';
 import { BGP } from './bgp/bgp';
 import { SinglePage } from '../../../pagination';
 
 export class Prefixes extends APIResource {
+  serviceBindings: ServiceBindingsAPI.ServiceBindings = new ServiceBindingsAPI.ServiceBindings(this._client);
   bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
   delegations: DelegationsAPI.Delegations = new DelegationsAPI.Delegations(this._client);
 
@@ -247,6 +259,8 @@ export interface PrefixGetParams {
 }
 
 Prefixes.PrefixesSinglePage = PrefixesSinglePage;
+Prefixes.ServiceBindings = ServiceBindings;
+Prefixes.ServiceBindingsSinglePage = ServiceBindingsSinglePage;
 Prefixes.BGP = BGP;
 Prefixes.DelegationsSinglePage = DelegationsSinglePage;
 
@@ -260,6 +274,17 @@ export declare namespace Prefixes {
     type PrefixDeleteParams as PrefixDeleteParams,
     type PrefixEditParams as PrefixEditParams,
     type PrefixGetParams as PrefixGetParams,
+  };
+
+  export {
+    ServiceBindings as ServiceBindings,
+    type ServiceBinding as ServiceBinding,
+    type ServiceBindingDeleteResponse as ServiceBindingDeleteResponse,
+    ServiceBindingsSinglePage as ServiceBindingsSinglePage,
+    type ServiceBindingCreateParams as ServiceBindingCreateParams,
+    type ServiceBindingListParams as ServiceBindingListParams,
+    type ServiceBindingDeleteParams as ServiceBindingDeleteParams,
+    type ServiceBindingGetParams as ServiceBindingGetParams,
   };
 
   export { BGP as BGP };
