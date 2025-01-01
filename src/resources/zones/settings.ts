@@ -1225,9 +1225,24 @@ export interface OriginErrorPagePassThruParam {
 }
 
 /**
- * Value of the zone setting.
+ * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will
+ * attempt to use with your origin. This setting allows Cloudflare to make HTTP/2
+ * requests to your origin. (Refer to
+ * [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),
+ * for more information.). The default value is "2" for all plan types except ENT
+ * where it is "1"
  */
-export type OriginMaxHTTPVersion = 'origin_max_http_version';
+export interface OriginMaxHTTPVersion {
+  /**
+   * Value of the zone setting.
+   */
+  id: 'origin_max_http_version';
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on: string | null;
+}
 
 export interface Polish {
   /**
