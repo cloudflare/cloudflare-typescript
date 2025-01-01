@@ -1,13 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
-import * as DownloadsAPI from './downloads';
-import { DownloadGetParams, Downloads } from './downloads';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import { type Response } from '../../_shims/index';
 
 export class LOADocuments extends APIResource {
-  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
-
   /**
    * Submit LOA document (pdf format) under the account.
    */
@@ -22,6 +19,21 @@ export class LOADocuments extends APIResource {
         Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: LOADocumentCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Download specified LOA document under the account.
+   */
+  get(
+    loaDocumentId: string | null,
+    params: LOADocumentGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Response> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/addressing/loa_documents/${loaDocumentId}/download`, {
+      ...options,
+      __binaryResponse: true,
+    });
   }
 }
 
@@ -71,13 +83,17 @@ export interface LOADocumentCreateParams {
   loa_document: string;
 }
 
-LOADocuments.Downloads = Downloads;
+export interface LOADocumentGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
 
 export declare namespace LOADocuments {
   export {
     type LOADocumentCreateResponse as LOADocumentCreateResponse,
     type LOADocumentCreateParams as LOADocumentCreateParams,
+    type LOADocumentGetParams as LOADocumentGetParams,
   };
-
-  export { Downloads as Downloads, type DownloadGetParams as DownloadGetParams };
 }
