@@ -2,10 +2,30 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as AuthorsAPI from './authors';
+import { AuthorListParams, AuthorListResponse, AuthorListResponsesSinglePage, Authors } from './authors';
+import * as TasksAPI from './tasks';
+import { TaskListParams, TaskListResponse, TaskListResponsesSinglePage, Tasks } from './tasks';
+import * as FinetunesAPI from './finetunes/finetunes';
+import {
+  FinetuneCreateParams,
+  FinetuneCreateResponse,
+  FinetuneListParams,
+  FinetuneListResponse,
+  Finetunes,
+} from './finetunes/finetunes';
 import * as ModelsAPI from './models/models';
-import { Models } from './models/models';
+import {
+  ModelListParams,
+  ModelListResponse,
+  ModelListResponsesV4PagePaginationArray,
+  Models,
+} from './models/models';
 
 export class AI extends APIResource {
+  finetunes: FinetunesAPI.Finetunes = new FinetunesAPI.Finetunes(this._client);
+  authors: AuthorsAPI.Authors = new AuthorsAPI.Authors(this._client);
+  tasks: TasksAPI.Tasks = new TasksAPI.Tasks(this._client);
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
 
   /**
@@ -752,8 +772,41 @@ export namespace AIRunParams {
   }
 }
 
+AI.Finetunes = Finetunes;
+AI.Authors = Authors;
+AI.AuthorListResponsesSinglePage = AuthorListResponsesSinglePage;
+AI.Tasks = Tasks;
+AI.TaskListResponsesSinglePage = TaskListResponsesSinglePage;
 AI.Models = Models;
+AI.ModelListResponsesV4PagePaginationArray = ModelListResponsesV4PagePaginationArray;
 
 export declare namespace AI {
-  export { Models as Models };
+  export {
+    Finetunes as Finetunes,
+    type FinetuneCreateResponse as FinetuneCreateResponse,
+    type FinetuneListResponse as FinetuneListResponse,
+    type FinetuneCreateParams as FinetuneCreateParams,
+    type FinetuneListParams as FinetuneListParams,
+  };
+
+  export {
+    Authors as Authors,
+    type AuthorListResponse as AuthorListResponse,
+    AuthorListResponsesSinglePage as AuthorListResponsesSinglePage,
+    type AuthorListParams as AuthorListParams,
+  };
+
+  export {
+    Tasks as Tasks,
+    type TaskListResponse as TaskListResponse,
+    TaskListResponsesSinglePage as TaskListResponsesSinglePage,
+    type TaskListParams as TaskListParams,
+  };
+
+  export {
+    Models as Models,
+    type ModelListResponse as ModelListResponse,
+    ModelListResponsesV4PagePaginationArray as ModelListResponsesV4PagePaginationArray,
+    type ModelListParams as ModelListParams,
+  };
 }
