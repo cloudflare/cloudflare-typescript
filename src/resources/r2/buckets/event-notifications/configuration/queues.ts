@@ -13,7 +13,7 @@ export class Queues extends APIResource {
     params: QueueUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueUpdateResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration/queues/${queueId}`,
@@ -21,8 +21,8 @@ export class Queues extends APIResource {
           body,
           ...options,
           headers: {
-            ...(cfR2Jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+            ...(jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
             : undefined),
             ...options?.headers,
           },
@@ -41,15 +41,15 @@ export class Queues extends APIResource {
     params: QueueDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueDeleteResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration/queues/${queueId}`,
         {
           ...options,
           headers: {
-            ...(cfR2Jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+            ...(jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
             : undefined),
             ...options?.headers,
           },
@@ -77,7 +77,7 @@ export interface QueueUpdateParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace QueueUpdateParams {
@@ -116,7 +116,7 @@ export interface QueueDeleteParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export declare namespace Queues {

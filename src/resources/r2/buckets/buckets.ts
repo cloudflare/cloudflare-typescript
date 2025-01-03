@@ -90,13 +90,13 @@ export class Buckets extends APIResource {
     params: BucketDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BucketDeleteResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -108,13 +108,13 @@ export class Buckets extends APIResource {
    * Gets metadata for an existing R2 bucket.
    */
   get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -236,7 +236,7 @@ export interface BucketDeleteParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketGetParams {
@@ -248,7 +248,7 @@ export interface BucketGetParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 Buckets.Lifecycle = Lifecycle;
