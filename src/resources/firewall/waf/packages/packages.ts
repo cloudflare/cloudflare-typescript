@@ -3,6 +3,8 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as Shared from '../../../shared';
+import * as SettingsAPI from '../../../zones/settings';
+import { OriginMaxHTTPVersionsV4PagePaginationArray } from '../../../zones/settings';
 import * as GroupsAPI from './groups';
 import {
   Group,
@@ -27,7 +29,7 @@ import {
   Rules,
   WAFRuleGroup,
 } from './rules';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
+import { type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Packages extends APIResource {
   groups: GroupsAPI.Groups = new GroupsAPI.Groups(this._client);
@@ -42,11 +44,11 @@ export class Packages extends APIResource {
   list(
     params: PackageListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse> {
+  ): Core.PagePromise<OriginMaxHTTPVersionsV4PagePaginationArray, SettingsAPI.OriginMaxHTTPVersion> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/waf/packages`,
-      PackageListResponsesV4PagePaginationArray,
+      OriginMaxHTTPVersionsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -66,10 +68,6 @@ export class Packages extends APIResource {
     return this._client.get(`/zones/${zone_id}/firewall/waf/packages/${packageId}`, options);
   }
 }
-
-export class PackageListResponsesV4PagePaginationArray extends V4PagePaginationArray<PackageListResponse> {}
-
-export type PackageListResponse = unknown;
 
 export type PackageGetResponse = PackageGetResponse.FirewallAPIResponseSingle | PackageGetResponse.Result;
 
@@ -127,7 +125,6 @@ export interface PackageGetParams {
   zone_id: string;
 }
 
-Packages.PackageListResponsesV4PagePaginationArray = PackageListResponsesV4PagePaginationArray;
 Packages.Groups = Groups;
 Packages.GroupsV4PagePaginationArray = GroupsV4PagePaginationArray;
 Packages.Rules = Rules;
@@ -135,9 +132,7 @@ Packages.RuleListResponsesV4PagePaginationArray = RuleListResponsesV4PagePaginat
 
 export declare namespace Packages {
   export {
-    type PackageListResponse as PackageListResponse,
     type PackageGetResponse as PackageGetResponse,
-    PackageListResponsesV4PagePaginationArray as PackageListResponsesV4PagePaginationArray,
     type PackageListParams as PackageListParams,
     type PackageGetParams as PackageGetParams,
   };
@@ -166,3 +161,5 @@ export declare namespace Packages {
     type RuleGetParams as RuleGetParams,
   };
 }
+
+export { OriginMaxHTTPVersionsV4PagePaginationArray };
