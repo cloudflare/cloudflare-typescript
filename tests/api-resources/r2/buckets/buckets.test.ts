@@ -32,7 +32,7 @@ describe('resource buckets', () => {
       name: 'example-bucket',
       locationHint: 'apac',
       storageClass: 'Standard',
-      'cf-r2-jurisdiction': 'default',
+      jurisdiction: 'default',
     });
   });
 
