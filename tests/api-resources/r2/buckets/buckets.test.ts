@@ -58,7 +58,7 @@ describe('resource buckets', () => {
       order: 'name',
       per_page: 1,
       start_after: 'my-bucket',
-      'cf-r2-jurisdiction': 'default',
+      jurisdiction: 'default',
     });
   });
 
