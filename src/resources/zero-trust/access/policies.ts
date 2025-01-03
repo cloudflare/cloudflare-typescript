@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SettingsAPI from '../../zones/settings';
 import * as AccessAPI from './access';
 import * as ApplicationsAPI from './applications/applications';
 import { SinglePage } from '../../../pagination';
@@ -211,7 +210,7 @@ export namespace Policy {
     /**
      * A list of emails that can approve the access request.
      */
-    email_addresses?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+    email_addresses?: Array<unknown>;
 
     /**
      * The UUID of an re-usable email list.

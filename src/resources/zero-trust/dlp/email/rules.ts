@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as SettingsAPI from '../../../zones/settings';
 import { SinglePage } from '../../../../pagination';
 
 export class Rules extends APIResource {
@@ -132,7 +131,7 @@ export namespace RuleCreateResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: SettingsAPI.OriginMaxHTTPVersion;
+    value: unknown;
   }
 }
 
@@ -171,7 +170,7 @@ export namespace RuleUpdateResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: SettingsAPI.OriginMaxHTTPVersion;
+    value: unknown;
   }
 }
 
@@ -210,7 +209,7 @@ export namespace RuleListResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: SettingsAPI.OriginMaxHTTPVersion;
+    value: unknown;
   }
 }
 
@@ -249,7 +248,7 @@ export namespace RuleDeleteResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: SettingsAPI.OriginMaxHTTPVersion;
+    value: unknown;
   }
 }
 
@@ -288,7 +287,7 @@ export namespace RuleBulkEditResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: SettingsAPI.OriginMaxHTTPVersion;
+    value: unknown;
   }
 }
 
@@ -327,7 +326,7 @@ export namespace RuleGetResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: SettingsAPI.OriginMaxHTTPVersion;
+    value: unknown;
   }
 }
 
@@ -375,7 +374,7 @@ export namespace RuleCreateParams {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: SettingsAPI.OriginMaxHTTPVersionParam;
+    value: unknown;
   }
 }
 
@@ -423,7 +422,7 @@ export namespace RuleUpdateParams {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: SettingsAPI.OriginMaxHTTPVersionParam;
+    value: unknown;
   }
 }
 

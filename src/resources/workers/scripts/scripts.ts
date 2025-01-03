@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as WorkersAPI from '../workers';
-import * as SettingsAPI from '../../zones/settings';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as DeploymentsAPI from './deployments';
@@ -24,7 +23,7 @@ import {
   ScheduleUpdateResponse,
   Schedules,
 } from './schedules';
-import * as ScriptsSettingsAPI from './settings';
+import * as SettingsAPI from './settings';
 import { SettingEditParams, SettingGetParams, Settings } from './settings';
 import * as SubdomainAPI from './subdomain';
 import {
@@ -67,7 +66,7 @@ export class Scripts extends APIResource {
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
   tail: TailAPI.Tail = new TailAPI.Tail(this._client);
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
-  settings: ScriptsSettingsAPI.Settings = new ScriptsSettingsAPI.Settings(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
@@ -440,7 +439,7 @@ export namespace ScriptUpdateParams {
          * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
          */
         type?: string;
-        [k: string]: SettingsAPI.OriginMaxHTTPVersionParam;
+        [k: string]: unknown;
       }
 
       export interface WorkersMultipleStepMigrations {

@@ -15,7 +15,6 @@ import {
 } from './payloads';
 import * as SettingsAPI from './settings';
 import { SettingGetParams, SettingGetResponse, Settings } from './settings';
-import * as ZonesSettingsAPI from '../zones/settings';
 
 export class ContentScanning extends APIResource {
   payloads: PayloadsAPI.Payloads = new PayloadsAPI.Payloads(this._client);
@@ -27,11 +26,11 @@ export class ContentScanning extends APIResource {
   disable(
     params: ContentScanningDisableParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesSettingsAPI.OriginMaxHTTPVersion> {
+  ): Core.APIPromise<ContentScanningDisableResponse> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/content-upload-scan/disable`, options) as Core.APIPromise<{
-        result: ZonesSettingsAPI.OriginMaxHTTPVersion;
+        result: ContentScanningDisableResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -42,15 +41,19 @@ export class ContentScanning extends APIResource {
   enable(
     params: ContentScanningEnableParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesSettingsAPI.OriginMaxHTTPVersion> {
+  ): Core.APIPromise<ContentScanningEnableResponse> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/content-upload-scan/enable`, options) as Core.APIPromise<{
-        result: ZonesSettingsAPI.OriginMaxHTTPVersion;
+        result: ContentScanningEnableResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type ContentScanningDisableResponse = unknown;
+
+export type ContentScanningEnableResponse = unknown;
 
 export interface ContentScanningDisableParams {
   /**

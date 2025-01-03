@@ -15,7 +15,9 @@ export {
   type OverrideGetParams,
 } from './overrides';
 export {
+  PackageListResponsesV4PagePaginationArray,
   Packages,
+  type PackageListResponse,
   type PackageGetResponse,
   type PackageListParams,
   type PackageGetParams,

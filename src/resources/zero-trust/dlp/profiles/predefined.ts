@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as SettingsAPI from '../../../zones/settings';
 import * as CustomAPI from './custom';
 import * as ProfilesAPI from './profiles';
 
@@ -168,7 +167,7 @@ export namespace PredefinedProfile {
 
     updated_at: string;
 
-    word_list: SettingsAPI.OriginMaxHTTPVersion;
+    word_list: unknown;
 
     profile_id?: string | null;
   }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
-import * as SettingsAPI from './zones/settings';
 
 export class ManagedTransforms extends APIResource {
   /**
@@ -86,7 +85,14 @@ export namespace ManagedTransformListResponse {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
      */
-    conflicts_with?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+    conflicts_with?: Array<ManagedRequestHeader.ConflictsWith>;
+  }
+
+  export namespace ManagedRequestHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    export interface ConflictsWith {}
   }
 
   /**
@@ -112,7 +118,14 @@ export namespace ManagedTransformListResponse {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
      */
-    conflicts_with?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+    conflicts_with?: Array<ManagedResponseHeader.ConflictsWith>;
+  }
+
+  export namespace ManagedResponseHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    export interface ConflictsWith {}
   }
 }
 
@@ -155,7 +168,14 @@ export namespace ManagedTransformEditResponse {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
      */
-    conflicts_with?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+    conflicts_with?: Array<ManagedRequestHeader.ConflictsWith>;
+  }
+
+  export namespace ManagedRequestHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    export interface ConflictsWith {}
   }
 
   /**
@@ -181,7 +201,14 @@ export namespace ManagedTransformEditResponse {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
      */
-    conflicts_with?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+    conflicts_with?: Array<ManagedResponseHeader.ConflictsWith>;
+  }
+
+  export namespace ManagedResponseHeader {
+    /**
+     * The human-readable identifier of the Managed Transform.
+     */
+    export interface ConflictsWith {}
   }
 }
 
