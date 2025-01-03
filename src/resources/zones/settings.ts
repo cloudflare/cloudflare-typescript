@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as SettingsAPI from './settings';
+import { V4PagePaginationArray } from '../../pagination';
 
 export class Settings extends APIResource {
   /**
@@ -37,6 +38,8 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class OriginMaxHTTPVersionsV4PagePaginationArray extends V4PagePaginationArray<OriginMaxHTTPVersion> {}
 
 /**
  * Advanced protection from Distributed Denial of Service (DDoS) attacks on your
@@ -1224,44 +1227,9 @@ export interface OriginErrorPagePassThruParam {
   value?: 'on' | 'off';
 }
 
-export interface OriginMaxHTTPVersion {
-  /**
-   * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will
-   * attempt to use with your origin. This setting allows Cloudflare to make HTTP/2
-   * requests to your origin. (Refer to
-   * [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),
-   * for more information.). The default value is "2" for all plan types except ENT
-   * where it is "1"
-   */
-  result?: OriginMaxHTTPVersion.Result;
-}
+export type OriginMaxHTTPVersion = unknown;
 
-export namespace OriginMaxHTTPVersion {
-  /**
-   * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will
-   * attempt to use with your origin. This setting allows Cloudflare to make HTTP/2
-   * requests to your origin. (Refer to
-   * [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),
-   * for more information.). The default value is "2" for all plan types except ENT
-   * where it is "1"
-   */
-  export interface Result {
-    /**
-     * Value of the zone setting.
-     */
-    id: 'origin_max_http_version';
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on: string | null;
-
-    /**
-     * Value of the Origin Max HTTP Version Setting.
-     */
-    value: '2' | '1';
-  }
-}
+export type OriginMaxHTTPVersionParam = unknown;
 
 export interface Polish {
   /**

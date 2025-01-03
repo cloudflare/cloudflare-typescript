@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as SettingsAPI from '../../zones/settings';
 import * as BehavioursAPI from './behaviours';
 import {
   BehaviourGetParams,
@@ -89,7 +90,7 @@ export namespace RiskScoringGetResponse {
 
     timestamp: string;
 
-    event_details?: unknown;
+    event_details?: SettingsAPI.OriginMaxHTTPVersion;
   }
 }
 

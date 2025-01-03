@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
+import * as SettingsAPI from '../../../../zones/settings';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import * as TailAPI from '../../../../workers/scripts/tail';
 import * as AssetUploadAPI from './asset-upload';
@@ -23,7 +24,7 @@ import {
   Secrets,
   WorkersSecretModel,
 } from './secrets';
-import * as SettingsAPI from './settings';
+import * as ScriptsSettingsAPI from './settings';
 import {
   SettingEditParams,
   SettingEditResponse,
@@ -46,7 +47,7 @@ import {
 export class Scripts extends APIResource {
   assetUpload: AssetUploadAPI.AssetUpload = new AssetUploadAPI.AssetUpload(this._client);
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  settings: ScriptsSettingsAPI.Settings = new ScriptsSettingsAPI.Settings(this._client);
   bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
   secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
@@ -345,7 +346,7 @@ export namespace ScriptUpdateParams {
          * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
          */
         type?: string;
-        [k: string]: unknown;
+        [k: string]: SettingsAPI.OriginMaxHTTPVersionParam;
       }
 
       export interface WorkersMultipleStepMigrations {
