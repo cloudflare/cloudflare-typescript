@@ -2,9 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SettingsAPI from '../zones/settings';
-import { OriginMaxHTTPVersionsV4PagePaginationArray } from '../zones/settings';
-import { type V4PagePaginationArrayParams } from '../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class PermissionGroups extends APIResource {
   /**
@@ -13,11 +11,11 @@ export class PermissionGroups extends APIResource {
   list(
     params: PermissionGroupListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginMaxHTTPVersionsV4PagePaginationArray, SettingsAPI.OriginMaxHTTPVersion> {
+  ): Core.PagePromise<PermissionGroupListResponsesV4PagePaginationArray, PermissionGroupListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/permission_groups`,
-      OriginMaxHTTPVersionsV4PagePaginationArray,
+      PermissionGroupListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -34,6 +32,10 @@ export class PermissionGroups extends APIResource {
     return this._client.get(`/accounts/${account_id}/iam/permission_groups/${permissionGroupId}`, options);
   }
 }
+
+export class PermissionGroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<PermissionGroupListResponse> {}
+
+export type PermissionGroupListResponse = unknown;
 
 /**
  * A named group of permissions that map to a group of operations against
@@ -96,12 +98,15 @@ export interface PermissionGroupGetParams {
   account_id: string;
 }
 
+PermissionGroups.PermissionGroupListResponsesV4PagePaginationArray =
+  PermissionGroupListResponsesV4PagePaginationArray;
+
 export declare namespace PermissionGroups {
   export {
+    type PermissionGroupListResponse as PermissionGroupListResponse,
     type PermissionGroupGetResponse as PermissionGroupGetResponse,
+    PermissionGroupListResponsesV4PagePaginationArray as PermissionGroupListResponsesV4PagePaginationArray,
     type PermissionGroupListParams as PermissionGroupListParams,
     type PermissionGroupGetParams as PermissionGroupGetParams,
   };
 }
-
-export { OriginMaxHTTPVersionsV4PagePaginationArray };

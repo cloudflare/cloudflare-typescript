@@ -17,7 +17,14 @@ import {
   WAFRule,
 } from './overrides';
 import * as PackagesAPI from './packages/packages';
-import { PackageGetParams, PackageGetResponse, PackageListParams, Packages } from './packages/packages';
+import {
+  PackageGetParams,
+  PackageGetResponse,
+  PackageListParams,
+  PackageListResponse,
+  PackageListResponsesV4PagePaginationArray,
+  Packages,
+} from './packages/packages';
 
 export class WAF extends APIResource {
   overrides: OverridesAPI.Overrides = new OverridesAPI.Overrides(this._client);
@@ -27,6 +34,7 @@ export class WAF extends APIResource {
 WAF.Overrides = Overrides;
 WAF.OverridesV4PagePaginationArray = OverridesV4PagePaginationArray;
 WAF.Packages = Packages;
+WAF.PackageListResponsesV4PagePaginationArray = PackageListResponsesV4PagePaginationArray;
 
 export declare namespace WAF {
   export {
@@ -46,7 +54,9 @@ export declare namespace WAF {
 
   export {
     Packages as Packages,
+    type PackageListResponse as PackageListResponse,
     type PackageGetResponse as PackageGetResponse,
+    PackageListResponsesV4PagePaginationArray as PackageListResponsesV4PagePaginationArray,
     type PackageListParams as PackageListParams,
     type PackageGetParams as PackageGetParams,
   };
