@@ -27,8 +27,8 @@ export {
   type HoldEditParams,
   type HoldGetParams,
 } from './holds';
+export { RatePlans, type RatePlanGetResponse, type RatePlanGetParams } from './rate-plans';
 export {
-  OriginMaxHTTPVersionsV4PagePaginationArray,
   Settings,
   type AdvancedDDoS,
   type AlwaysOnline,
@@ -84,7 +84,6 @@ export {
   type SettingEditParams,
   type SettingGetParams,
 } from './settings';
-export { RatePlans, type RatePlanGetResponse, type RatePlanGetParams } from './rate-plans';
 export {
   Subscriptions,
   type SubscriptionCreateResponse,

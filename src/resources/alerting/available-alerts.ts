@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SettingsAPI from '../zones/settings';
 
 export class AvailableAlerts extends APIResource {
   /**
@@ -39,7 +38,7 @@ export namespace AvailableAlertListResponse {
      * Format of additional configuration options (filters) for the alert type. Data
      * type of filters during policy creation: Array of strings.
      */
-    filter_options?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+    filter_options?: Array<unknown>;
 
     /**
      * Use this value when creating and updating a notification policy.

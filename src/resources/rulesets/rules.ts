@@ -6,7 +6,6 @@ import * as Core from '../../core';
 import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from './rules';
 import * as RulesetsAPI from './rulesets';
-import * as SettingsAPI from '../zones/settings';
 
 export class Rules extends APIResource {
   /**
@@ -3978,7 +3977,10 @@ export interface ScoreRule {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersion;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -4106,7 +4108,10 @@ export interface ScoreRuleParam {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -4249,7 +4254,10 @@ export interface ServeErrorRule {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersion;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -4386,7 +4394,10 @@ export interface ServeErrorRuleParam {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -4538,7 +4549,10 @@ export interface SetCacheSettingsRule {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersion;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -5039,7 +5053,10 @@ export interface SetCacheSettingsRuleParam {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -5555,7 +5572,10 @@ export interface SetConfigRule {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersion;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -5784,7 +5804,10 @@ export interface SetConfigRuleParam {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -6028,7 +6051,10 @@ export interface SkipRule {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersion;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -6179,7 +6205,10 @@ export interface SkipRuleParam {
    */
   description?: string;
 
-  enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 
   /**
    * Configure checks for exposed credentials.
@@ -9050,9 +9079,9 @@ export namespace RuleCreateParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -9193,9 +9222,9 @@ export namespace RuleCreateParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -9345,9 +9374,9 @@ export namespace RuleCreateParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -9589,9 +9618,9 @@ export namespace RuleCreateParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -9755,9 +9784,9 @@ export namespace RuleCreateParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -12431,9 +12460,9 @@ export namespace RuleEditParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -12574,9 +12603,9 @@ export namespace RuleEditParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -12726,9 +12755,9 @@ export namespace RuleEditParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -12970,9 +12999,9 @@ export namespace RuleEditParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.
@@ -13136,9 +13165,9 @@ export namespace RuleEditParams {
     description?: string;
 
     /**
-     * Body param:
+     * Body param: Whether the rule should be executed.
      */
-    enabled?: SettingsAPI.OriginMaxHTTPVersionParam;
+    enabled?: boolean;
 
     /**
      * Body param: Configure checks for exposed credentials.

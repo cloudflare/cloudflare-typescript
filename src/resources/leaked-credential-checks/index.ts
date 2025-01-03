@@ -6,6 +6,7 @@ export {
   type DetectionCreateResponse,
   type DetectionUpdateResponse,
   type DetectionListResponse,
+  type DetectionDeleteResponse,
   type DetectionCreateParams,
   type DetectionUpdateParams,
   type DetectionListParams,

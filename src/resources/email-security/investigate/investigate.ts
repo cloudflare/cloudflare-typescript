@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SettingsAPI from '../../zones/settings';
 import * as DetectionsAPI from './detections';
 import { DetectionGetParams, DetectionGetResponse, Detections } from './detections';
 import * as MoveAPI from './move';
@@ -72,7 +71,7 @@ export class InvestigateListResponsesV4PagePaginationArray extends V4PagePaginat
 export interface InvestigateListResponse {
   id: string;
 
-  action_log: SettingsAPI.OriginMaxHTTPVersion;
+  action_log: unknown;
 
   client_recipients: Array<string>;
 
@@ -154,7 +153,7 @@ export namespace InvestigateListResponse {
 export interface InvestigateGetResponse {
   id: string;
 
-  action_log: SettingsAPI.OriginMaxHTTPVersion;
+  action_log: unknown;
 
   client_recipients: Array<string>;
 

@@ -5,8 +5,8 @@ import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { CloudflareError } from 'cloudflare/error';
 import * as ApplicationsAPI from './applications';
-import * as SettingsAPI from '../../../zones/settings';
 import * as AccessAPI from '../access';
+import * as PoliciesAPI from '../policies';
 import * as CAsAPI from './cas';
 import {
   CA,
@@ -18,7 +18,7 @@ import {
   CAs,
   CAsSinglePage,
 } from './cas';
-import * as PoliciesAPI from './policies';
+import * as ApplicationsPoliciesAPI from './policies';
 import {
   Policies,
   PolicyCreateParams,
@@ -50,7 +50,7 @@ export class Applications extends APIResource {
   userPolicyChecks: UserPolicyChecksAPI.UserPolicyChecks = new UserPolicyChecksAPI.UserPolicyChecks(
     this._client,
   );
-  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
+  policies: ApplicationsPoliciesAPI.Policies = new ApplicationsPoliciesAPI.Policies(this._client);
   policyTests: PolicyTestsAPI.PolicyTests = new PolicyTestsAPI.PolicyTests(this._client);
 
   /**
@@ -494,7 +494,7 @@ export namespace Application {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+      allowed_headers?: Array<unknown>;
 
       /**
        * Allowed HTTP request methods.
@@ -504,7 +504,7 @@ export namespace Application {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+      allowed_origins?: Array<unknown>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -936,7 +936,7 @@ export namespace Application {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+      allowed_headers?: Array<unknown>;
 
       /**
        * Allowed HTTP request methods.
@@ -946,7 +946,7 @@ export namespace Application {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+      allowed_origins?: Array<unknown>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -1095,7 +1095,7 @@ export namespace Application {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+      allowed_headers?: Array<unknown>;
 
       /**
        * Allowed HTTP request methods.
@@ -1105,7 +1105,7 @@ export namespace Application {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<SettingsAPI.OriginMaxHTTPVersion>;
+      allowed_origins?: Array<unknown>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -1298,7 +1298,7 @@ export namespace Application {
      */
     id?: string;
 
-    app_launcher_visible?: SettingsAPI.OriginMaxHTTPVersion;
+    app_launcher_visible?: unknown;
 
     /**
      * Audience tag.
@@ -10762,8 +10762,8 @@ export namespace ApplicationCreateParams {
      */
     policies?: Array<
       | ApplicationCreateParams.SelfHostedApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationCreateParams.SelfHostedApplication.UnionMember2
     >;
 
     /**
@@ -10840,6 +10840,54 @@ export namespace ApplicationCreateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -10995,8 +11043,8 @@ export namespace ApplicationCreateParams {
      */
     policies?: Array<
       | ApplicationCreateParams.SaaSApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationCreateParams.SaaSApplication.UnionMember2
     >;
 
     /**
@@ -11037,6 +11085,54 @@ export namespace ApplicationCreateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -11266,8 +11362,8 @@ export namespace ApplicationCreateParams {
      */
     policies?: Array<
       | ApplicationCreateParams.BrowserSSHApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationCreateParams.BrowserSSHApplication.UnionMember2
     >;
 
     /**
@@ -11344,6 +11440,54 @@ export namespace ApplicationCreateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -11573,8 +11717,8 @@ export namespace ApplicationCreateParams {
      */
     policies?: Array<
       | ApplicationCreateParams.BrowserVNCApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationCreateParams.BrowserVNCApplication.UnionMember2
     >;
 
     /**
@@ -11651,6 +11795,54 @@ export namespace ApplicationCreateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -11816,8 +12008,8 @@ export namespace ApplicationCreateParams {
      */
     policies?: Array<
       | ApplicationCreateParams.AppLauncherApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationCreateParams.AppLauncherApplication.UnionMember2
     >;
 
     /**
@@ -11896,6 +12088,54 @@ export namespace ApplicationCreateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -12061,8 +12301,8 @@ export namespace ApplicationCreateParams {
      */
     policies?: Array<
       | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.UnionMember2
     >;
 
     /**
@@ -12141,6 +12381,54 @@ export namespace ApplicationCreateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -12306,8 +12594,8 @@ export namespace ApplicationCreateParams {
      */
     policies?: Array<
       | ApplicationCreateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationCreateParams.BrowserIsolationPermissionsApplication.UnionMember2
     >;
 
     /**
@@ -12386,6 +12674,54 @@ export namespace ApplicationCreateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -12865,8 +13201,8 @@ export namespace ApplicationUpdateParams {
      */
     policies?: Array<
       | ApplicationUpdateParams.SelfHostedApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationUpdateParams.SelfHostedApplication.UnionMember2
     >;
 
     /**
@@ -12943,6 +13279,54 @@ export namespace ApplicationUpdateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -13098,8 +13482,8 @@ export namespace ApplicationUpdateParams {
      */
     policies?: Array<
       | ApplicationUpdateParams.SaaSApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationUpdateParams.SaaSApplication.UnionMember2
     >;
 
     /**
@@ -13140,6 +13524,54 @@ export namespace ApplicationUpdateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -13369,8 +13801,8 @@ export namespace ApplicationUpdateParams {
      */
     policies?: Array<
       | ApplicationUpdateParams.BrowserSSHApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationUpdateParams.BrowserSSHApplication.UnionMember2
     >;
 
     /**
@@ -13447,6 +13879,54 @@ export namespace ApplicationUpdateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -13676,8 +14156,8 @@ export namespace ApplicationUpdateParams {
      */
     policies?: Array<
       | ApplicationUpdateParams.BrowserVNCApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationUpdateParams.BrowserVNCApplication.UnionMember2
     >;
 
     /**
@@ -13754,6 +14234,54 @@ export namespace ApplicationUpdateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -13919,8 +14447,8 @@ export namespace ApplicationUpdateParams {
      */
     policies?: Array<
       | ApplicationUpdateParams.AppLauncherApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationUpdateParams.AppLauncherApplication.UnionMember2
     >;
 
     /**
@@ -13999,6 +14527,54 @@ export namespace ApplicationUpdateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -14164,8 +14740,8 @@ export namespace ApplicationUpdateParams {
      */
     policies?: Array<
       | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.UnionMember2
     >;
 
     /**
@@ -14244,6 +14820,54 @@ export namespace ApplicationUpdateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**
@@ -14409,8 +15033,8 @@ export namespace ApplicationUpdateParams {
      */
     policies?: Array<
       | ApplicationUpdateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink
-      | SettingsAPI.OriginMaxHTTPVersionParam
-      | SettingsAPI.OriginMaxHTTPVersionParam
+      | string
+      | ApplicationUpdateParams.BrowserIsolationPermissionsApplication.UnionMember2
     >;
 
     /**
@@ -14489,6 +15113,54 @@ export namespace ApplicationUpdateParams {
        * app.
        */
       precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
     }
 
     /**

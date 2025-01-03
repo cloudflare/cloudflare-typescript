@@ -10,7 +10,14 @@ export {
   type GroupEditParams,
   type GroupGetParams,
 } from './groups';
-export { Packages, type PackageGetResponse, type PackageListParams, type PackageGetParams } from './packages';
+export {
+  PackageListResponsesV4PagePaginationArray,
+  Packages,
+  type PackageListResponse,
+  type PackageGetResponse,
+  type PackageListParams,
+  type PackageGetParams,
+} from './packages';
 export {
   RuleListResponsesV4PagePaginationArray,
   Rules,
