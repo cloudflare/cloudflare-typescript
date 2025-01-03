@@ -22,13 +22,13 @@ export class Configuration extends APIResource {
     params: ConfigurationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationGetResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration`, {
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -111,7 +111,7 @@ export interface ConfigurationGetParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 Configuration.Queues = Queues;
