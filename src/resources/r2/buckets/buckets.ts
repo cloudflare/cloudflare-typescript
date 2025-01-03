@@ -48,14 +48,14 @@ export class Buckets extends APIResource {
    * Creates a new R2 bucket.
    */
   create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/buckets`, {
         body,
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -179,7 +179,7 @@ export interface BucketCreateParams {
   /**
    * Header param: Creates the bucket in the provided jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketListParams {
