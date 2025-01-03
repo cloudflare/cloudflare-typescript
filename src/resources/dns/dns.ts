@@ -58,9 +58,10 @@ import {
   TXTRecord,
   URIRecord,
 } from './records';
+import * as SettingsAPI from '../zones/settings';
 import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics } from './analytics/analytics';
-import * as SettingsAPI from './settings/settings';
+import * as SettingsSettingsAPI from './settings/settings';
 import {
   DNSSetting,
   SettingEditParams,
@@ -75,7 +76,7 @@ import { ZoneTransfers } from './zone-transfers/zone-transfers';
 export class DNS extends APIResource {
   dnssec: DNSSECAPI.DNSSECResource = new DNSSECAPI.DNSSECResource(this._client);
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  settings: SettingsSettingsAPI.Settings = new SettingsSettingsAPI.Settings(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   zoneTransfers: ZoneTransfersAPI.ZoneTransfers = new ZoneTransfersAPI.ZoneTransfers(this._client);
 }
@@ -83,7 +84,7 @@ export class DNS extends APIResource {
 /**
  * Nominal metric values, broken down by time interval.
  */
-export type DNSAnalyticsNominalMetric = Array<unknown>;
+export type DNSAnalyticsNominalMetric = Array<SettingsAPI.OriginMaxHTTPVersion>;
 
 export interface DNSAnalyticsQuery {
   /**

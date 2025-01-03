@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as ProfilesAPI from './profiles';
+import * as SettingsAPI from '../../../zones/settings';
 import * as CustomAPI from './custom';
 import {
   Custom,
@@ -235,7 +236,7 @@ export namespace Profile {
 
       updated_at: string;
 
-      word_list: unknown;
+      word_list: SettingsAPI.OriginMaxHTTPVersion;
 
       profile_id?: string | null;
     }
@@ -369,7 +370,7 @@ export namespace Profile {
 
       updated_at: string;
 
-      word_list: unknown;
+      word_list: SettingsAPI.OriginMaxHTTPVersion;
 
       profile_id?: string | null;
     }
@@ -489,7 +490,7 @@ export namespace Profile {
 
       updated_at: string;
 
-      word_list: unknown;
+      word_list: SettingsAPI.OriginMaxHTTPVersion;
 
       profile_id?: string | null;
     }

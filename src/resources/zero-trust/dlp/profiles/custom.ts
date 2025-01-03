@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
+import * as SettingsAPI from '../../../zones/settings';
 import * as ProfilesAPI from './profiles';
 
 export class Custom extends APIResource {
@@ -210,7 +211,7 @@ export namespace CustomProfile {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: SettingsAPI.OriginMaxHTTPVersion;
 
     profile_id?: string | null;
   }
@@ -376,7 +377,7 @@ export namespace CustomCreateResponse {
 
       updated_at: string;
 
-      word_list: unknown;
+      word_list: SettingsAPI.OriginMaxHTTPVersion;
 
       profile_id?: string | null;
     }
@@ -510,7 +511,7 @@ export namespace CustomCreateResponse {
 
       updated_at: string;
 
-      word_list: unknown;
+      word_list: SettingsAPI.OriginMaxHTTPVersion;
 
       profile_id?: string | null;
     }
@@ -630,7 +631,7 @@ export namespace CustomCreateResponse {
 
       updated_at: string;
 
-      word_list: unknown;
+      word_list: SettingsAPI.OriginMaxHTTPVersion;
 
       profile_id?: string | null;
     }

@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import * as SettingsAPI from '../zones/settings';
+import { OriginMaxHTTPVersionsV4PagePaginationArray } from '../zones/settings';
+import { type V4PagePaginationArrayParams } from '../../pagination';
 
 export class ResourceGroups extends APIResource {
   /**
@@ -37,11 +39,11 @@ export class ResourceGroups extends APIResource {
   list(
     params: ResourceGroupListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ResourceGroupListResponsesV4PagePaginationArray, ResourceGroupListResponse> {
+  ): Core.PagePromise<OriginMaxHTTPVersionsV4PagePaginationArray, SettingsAPI.OriginMaxHTTPVersion> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/resource_groups`,
-      ResourceGroupListResponsesV4PagePaginationArray,
+      OriginMaxHTTPVersionsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -75,8 +77,6 @@ export class ResourceGroups extends APIResource {
     return this._client.get(`/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`, options);
   }
 }
-
-export class ResourceGroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<ResourceGroupListResponse> {}
 
 /**
  * A group of scoped resources.
@@ -196,8 +196,6 @@ export namespace ResourceGroupUpdateResponse {
     value?: string;
   }
 }
-
-export type ResourceGroupListResponse = unknown;
 
 export interface ResourceGroupDeleteResponse {
   /**
@@ -405,17 +403,12 @@ export interface ResourceGroupGetParams {
   account_id: string;
 }
 
-ResourceGroups.ResourceGroupListResponsesV4PagePaginationArray =
-  ResourceGroupListResponsesV4PagePaginationArray;
-
 export declare namespace ResourceGroups {
   export {
     type ResourceGroupCreateResponse as ResourceGroupCreateResponse,
     type ResourceGroupUpdateResponse as ResourceGroupUpdateResponse,
-    type ResourceGroupListResponse as ResourceGroupListResponse,
     type ResourceGroupDeleteResponse as ResourceGroupDeleteResponse,
     type ResourceGroupGetResponse as ResourceGroupGetResponse,
-    ResourceGroupListResponsesV4PagePaginationArray as ResourceGroupListResponsesV4PagePaginationArray,
     type ResourceGroupCreateParams as ResourceGroupCreateParams,
     type ResourceGroupUpdateParams as ResourceGroupUpdateParams,
     type ResourceGroupListParams as ResourceGroupListParams,
@@ -423,3 +416,5 @@ export declare namespace ResourceGroups {
     type ResourceGroupGetParams as ResourceGroupGetParams,
   };
 }
+
+export { OriginMaxHTTPVersionsV4PagePaginationArray };

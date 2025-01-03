@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as SettingsAPI from '../zones/settings';
 import { SinglePage } from '../../pagination';
 
 export class Detections extends APIResource {
@@ -60,13 +61,13 @@ export class Detections extends APIResource {
     detectionId: string,
     params: DetectionDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DetectionDeleteResponse> {
+  ): Core.APIPromise<SettingsAPI.OriginMaxHTTPVersion> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/leaked-credential-checks/detections/${detectionId}`,
         options,
-      ) as Core.APIPromise<{ result: DetectionDeleteResponse }>
+      ) as Core.APIPromise<{ result: SettingsAPI.OriginMaxHTTPVersion }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -136,8 +137,6 @@ export interface DetectionListResponse {
   username?: string;
 }
 
-export type DetectionDeleteResponse = unknown;
-
 export interface DetectionCreateParams {
   /**
    * Path param: Identifier
@@ -193,7 +192,6 @@ export declare namespace Detections {
     type DetectionCreateResponse as DetectionCreateResponse,
     type DetectionUpdateResponse as DetectionUpdateResponse,
     type DetectionListResponse as DetectionListResponse,
-    type DetectionDeleteResponse as DetectionDeleteResponse,
     DetectionListResponsesSinglePage as DetectionListResponsesSinglePage,
     type DetectionCreateParams as DetectionCreateParams,
     type DetectionUpdateParams as DetectionUpdateParams,

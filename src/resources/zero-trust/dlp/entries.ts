@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as SettingsAPI from '../../zones/settings';
 import * as CustomAPI from './profiles/custom';
 import { SinglePage } from '../../../pagination';
 
@@ -197,7 +198,7 @@ export namespace EntryUpdateResponse {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: SettingsAPI.OriginMaxHTTPVersion;
 
     profile_id?: string | null;
   }
@@ -299,7 +300,7 @@ export namespace EntryListResponse {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: SettingsAPI.OriginMaxHTTPVersion;
 
     profile_id?: string | null;
   }
@@ -403,7 +404,7 @@ export namespace EntryGetResponse {
 
     updated_at: string;
 
-    word_list: unknown;
+    word_list: SettingsAPI.OriginMaxHTTPVersion;
 
     profile_id?: string | null;
   }

@@ -1532,12 +1532,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/firewall/waf/packages/packages.ts">PackageListResponse</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/packages.ts">PackageGetResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/firewall/waf/packages">client.firewall.waf.packages.<a href="./src/resources/firewall/waf/packages/packages.ts">list</a>({ ...params }) -> PackageListResponsesV4PagePaginationArray</code>
+- <code title="get /zones/{zone_id}/firewall/waf/packages">client.firewall.waf.packages.<a href="./src/resources/firewall/waf/packages/packages.ts">list</a>({ ...params }) -> OriginMaxHTTPVersionsV4PagePaginationArray</code>
 - <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}">client.firewall.waf.packages.<a href="./src/resources/firewall/waf/packages/packages.ts">get</a>(packageId, { ...params }) -> PackageGetResponse</code>
 
 #### Groups
@@ -7077,12 +7076,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/iam/permission-groups.ts">PermissionGroupListResponse</a></code>
 - <code><a href="./src/resources/iam/permission-groups.ts">PermissionGroupGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/iam/permission_groups">client.iam.permissionGroups.<a href="./src/resources/iam/permission-groups.ts">list</a>({ ...params }) -> PermissionGroupListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/iam/permission_groups">client.iam.permissionGroups.<a href="./src/resources/iam/permission-groups.ts">list</a>({ ...params }) -> OriginMaxHTTPVersionsV4PagePaginationArray</code>
 - <code title="get /accounts/{account_id}/iam/permission_groups/{permission_group_id}">client.iam.permissionGroups.<a href="./src/resources/iam/permission-groups.ts">get</a>(permissionGroupId, { ...params }) -> PermissionGroupGetResponse</code>
 
 ## ResourceGroups
@@ -7091,7 +7089,6 @@ Types:
 
 - <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupCreateResponse</a></code>
 - <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupUpdateResponse</a></code>
-- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupListResponse</a></code>
 - <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupDeleteResponse</a></code>
 - <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupGetResponse</a></code>
 
@@ -7099,7 +7096,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">create</a>({ ...params }) -> ResourceGroupCreateResponse</code>
 - <code title="put /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">update</a>(resourceGroupId, { ...params }) -> ResourceGroupUpdateResponse</code>
-- <code title="get /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">list</a>({ ...params }) -> ResourceGroupListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">list</a>({ ...params }) -> OriginMaxHTTPVersionsV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">delete</a>(resourceGroupId, { ...params }) -> ResourceGroupDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">get</a>(resourceGroupId, { ...params }) -> ResourceGroupGetResponse</code>
 
@@ -7280,26 +7277,20 @@ Types:
 - <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionCreateResponse</a></code>
 - <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionUpdateResponse</a></code>
 - <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionListResponse</a></code>
-- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/leaked-credential-checks/detections">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">create</a>({ ...params }) -> DetectionCreateResponse</code>
 - <code title="put /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">update</a>(detectionId, { ...params }) -> DetectionUpdateResponse</code>
 - <code title="get /zones/{zone_id}/leaked-credential-checks/detections">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">list</a>({ ...params }) -> DetectionListResponsesSinglePage</code>
-- <code title="delete /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">delete</a>(detectionId, { ...params }) -> DetectionDeleteResponse</code>
+- <code title="delete /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">delete</a>(detectionId, { ...params }) -> OriginMaxHTTPVersion</code>
 
 # ContentScanning
 
-Types:
-
-- <code><a href="./src/resources/content-scanning/content-scanning.ts">ContentScanningDisableResponse</a></code>
-- <code><a href="./src/resources/content-scanning/content-scanning.ts">ContentScanningEnableResponse</a></code>
-
 Methods:
 
-- <code title="post /zones/{zone_id}/content-upload-scan/disable">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">disable</a>({ ...params }) -> ContentScanningDisableResponse</code>
-- <code title="post /zones/{zone_id}/content-upload-scan/enable">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">enable</a>({ ...params }) -> ContentScanningEnableResponse</code>
+- <code title="post /zones/{zone_id}/content-upload-scan/disable">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">disable</a>({ ...params }) -> OriginMaxHTTPVersion</code>
+- <code title="post /zones/{zone_id}/content-upload-scan/enable">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">enable</a>({ ...params }) -> OriginMaxHTTPVersion</code>
 
 ## Payloads
 
