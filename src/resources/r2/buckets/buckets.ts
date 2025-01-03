@@ -67,14 +67,14 @@ export class Buckets extends APIResource {
    * Lists all R2 buckets on your account
    */
   list(params: BucketListParams, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...query } = params;
+    const { account_id, jurisdiction, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets`, {
         query,
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -224,7 +224,7 @@ export interface BucketListParams {
   /**
    * Header param: Lists buckets in the provided jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketDeleteParams {
