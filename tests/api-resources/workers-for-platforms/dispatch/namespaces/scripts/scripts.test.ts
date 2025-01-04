@@ -65,8 +65,7 @@ describe('resource scripts', () => {
           tail_consumers: [
             { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
           ],
-          usage_model: 'bundled',
-          version_tags: { foo: 'string' },
+          usage_model: 'standard',
         },
       },
     );

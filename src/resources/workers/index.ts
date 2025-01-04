@@ -37,6 +37,7 @@ export {
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
+  type ScriptGetResponse,
   type ScriptUpdateParams,
   type ScriptListParams,
   type ScriptDeleteParams,

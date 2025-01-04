@@ -57,10 +57,8 @@ describe('resource scripts', () => {
         tail_consumers: [
           { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
         ],
-        usage_model: 'bundled',
-        version_tags: { foo: 'string' },
+        usage_model: 'standard',
       },
-      rollback_to: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     });
   });
 
@@ -97,6 +95,19 @@ describe('resource scripts', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       force: true,
     });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.workers.scripts.get('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   test('get: required and optional params', async () => {
