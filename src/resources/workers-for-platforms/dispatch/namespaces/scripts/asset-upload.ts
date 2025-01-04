@@ -5,7 +5,9 @@ import * as Core from '../../../../../core';
 
 export class AssetUpload extends APIResource {
   /**
-   * Start uploading a collection of assets for use in a Worker version.
+   * Start uploading a collection of assets for use in a Worker version. To learn
+   * more about the direct uploads of assets, see
+   * https://developers.cloudflare.com/workers/static-assets/direct-upload/
    */
   create(
     dispatchNamespace: string,
