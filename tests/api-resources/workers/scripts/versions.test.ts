@@ -14,7 +14,7 @@ describe('resource versions', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.workers.scripts.versions.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: {},
+      metadata: { main_module: 'worker.js' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,12 +30,12 @@ describe('resource versions', () => {
     const response = await client.workers.scripts.versions.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: {
-        annotations: { 'workers/message': 'Fixed worker code.', 'workers/tag': 'workers/tag' },
-        bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
-        compatibility_date: '2023-07-25',
-        compatibility_flags: ['string'],
-        keep_bindings: ['string'],
         main_module: 'worker.js',
+        annotations: { 'workers/message': 'Fixed worker code.', 'workers/tag': 'workers/tag' },
+        bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
+        compatibility_date: '2021-01-01',
+        compatibility_flags: ['nodejs_compat'],
+        keep_bindings: ['string'],
         usage_model: 'standard',
       },
     });

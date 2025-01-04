@@ -1995,16 +1995,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/workers/workers.ts">Binding</a></code>
-- <code><a href="./src/resources/workers/workers.ts">D1Binding</a></code>
-- <code><a href="./src/resources/workers/workers.ts">DispatchNamespaceBinding</a></code>
-- <code><a href="./src/resources/workers/workers.ts">DurableObjectBinding</a></code>
-- <code><a href="./src/resources/workers/workers.ts">KVNamespaceBinding</a></code>
 - <code><a href="./src/resources/workers/workers.ts">MigrationStep</a></code>
-- <code><a href="./src/resources/workers/workers.ts">MTLSCERTBinding</a></code>
-- <code><a href="./src/resources/workers/workers.ts">PlacementConfiguration</a></code>
-- <code><a href="./src/resources/workers/workers.ts">R2Binding</a></code>
-- <code><a href="./src/resources/workers/workers.ts">ServiceBinding</a></code>
 - <code><a href="./src/resources/workers/workers.ts">SingleStepMigration</a></code>
 - <code><a href="./src/resources/workers/workers.ts">WorkerMetadata</a></code>
 
@@ -2045,13 +2036,14 @@ Types:
 - <code><a href="./src/resources/workers/scripts/scripts.ts">Script</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSetting</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptGetResponse</a></code>
 
 Methods:
 
 - <code title="put /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">update</a>(scriptName, { ...params }) -> ScriptUpdateResponse</code>
 - <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> void</code>
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> Response</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> string</code>
 
 ### Assets
 
