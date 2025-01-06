@@ -580,6 +580,24 @@ export interface Query {
    * traffic will not go to the waiting room.
    */
   suspended?: boolean;
+
+  /**
+   * Which action to take when a bot is detected using Turnstile. `log` will have no
+   * impact on queueing behavior, simply keeping track of how many bots are detected
+   * in Waiting Room Analytics. `infinite_queue` will send bots to a false queueing
+   * state, where they will never reach your origin. `infinite_queue` requires
+   * Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoom {
@@ -951,6 +969,24 @@ export interface WaitingRoom {
    * around the world.
    */
   total_active_users?: number;
+
+  /**
+   * Which action to take when a bot is detected using Turnstile. `log` will have no
+   * impact on queueing behavior, simply keeping track of how many bots are detected
+   * in Waiting Room Analytics. `infinite_queue` will send bots to a false queueing
+   * state, where they will never reach your origin. `infinite_queue` requires
+   * Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoomDeleteResponse {
@@ -1318,6 +1354,24 @@ export interface WaitingRoomCreateParams {
    * `true`, the traffic will not go to the waiting room.
    */
   suspended?: boolean;
+
+  /**
+   * Body param: Which action to take when a bot is detected using Turnstile. `log`
+   * will have no impact on queueing behavior, simply keeping track of how many bots
+   * are detected in Waiting Room Analytics. `infinite_queue` will send bots to a
+   * false queueing state, where they will never reach your origin. `infinite_queue`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Body param: Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoomUpdateParams {
@@ -1681,6 +1735,24 @@ export interface WaitingRoomUpdateParams {
    * `true`, the traffic will not go to the waiting room.
    */
   suspended?: boolean;
+
+  /**
+   * Body param: Which action to take when a bot is detected using Turnstile. `log`
+   * will have no impact on queueing behavior, simply keeping track of how many bots
+   * are detected in Waiting Room Analytics. `infinite_queue` will send bots to a
+   * false queueing state, where they will never reach your origin. `infinite_queue`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Body param: Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
@@ -2058,6 +2130,24 @@ export interface WaitingRoomEditParams {
    * `true`, the traffic will not go to the waiting room.
    */
   suspended?: boolean;
+
+  /**
+   * Body param: Which action to take when a bot is detected using Turnstile. `log`
+   * will have no impact on queueing behavior, simply keeping track of how many bots
+   * are detected in Waiting Room Analytics. `infinite_queue` will send bots to a
+   * false queueing state, where they will never reach your origin. `infinite_queue`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Body param: Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoomGetParams {

@@ -50,6 +50,8 @@ describe('resource waitingRooms', () => {
       queueing_status_code: 200,
       session_duration: 1,
       suspended: true,
+      turnstile_action: 'log',
+      turnstile_mode: 'off',
     });
   });
 
@@ -93,6 +95,8 @@ describe('resource waitingRooms', () => {
       queueing_status_code: 200,
       session_duration: 1,
       suspended: true,
+      turnstile_action: 'log',
+      turnstile_mode: 'off',
     });
   });
 
@@ -174,6 +178,8 @@ describe('resource waitingRooms', () => {
       queueing_status_code: 200,
       session_duration: 1,
       suspended: true,
+      turnstile_action: 'log',
+      turnstile_mode: 'off',
     });
   });
 
