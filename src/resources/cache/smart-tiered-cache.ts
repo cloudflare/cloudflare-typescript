@@ -5,7 +5,12 @@ import * as Core from '../../core';
 
 export class SmartTieredCache extends APIResource {
   /**
-   * Remvoves enablement of Smart Tiered Cache
+   * Smart Tiered Cache dynamically selects the single closest upper tier for each of
+   * your website’s origins with no configuration required, using our in-house
+   * performance and routing data. Cloudflare collects latency data for each request
+   * to an origin, and uses the latency data to determine how well any upper-tier
+   * data center is connected with an origin. As a result, Cloudflare can select the
+   * data center with the lowest latency to be the upper-tier for an origin.
    */
   delete(
     params: SmartTieredCacheDeleteParams,
@@ -21,7 +26,12 @@ export class SmartTieredCache extends APIResource {
   }
 
   /**
-   * Updates enablement of Tiered Cache
+   * Smart Tiered Cache dynamically selects the single closest upper tier for each of
+   * your website’s origins with no configuration required, using our in-house
+   * performance and routing data. Cloudflare collects latency data for each request
+   * to an origin, and uses the latency data to determine how well any upper-tier
+   * data center is connected with an origin. As a result, Cloudflare can select the
+   * data center with the lowest latency to be the upper-tier for an origin.
    */
   edit(
     params: SmartTieredCacheEditParams,
@@ -37,7 +47,12 @@ export class SmartTieredCache extends APIResource {
   }
 
   /**
-   * Get Smart Tiered Cache setting
+   * Smart Tiered Cache dynamically selects the single closest upper tier for each of
+   * your website’s origins with no configuration required, using our in-house
+   * performance and routing data. Cloudflare collects latency data for each request
+   * to an origin, and uses the latency data to determine how well any upper-tier
+   * data center is connected with an origin. As a result, Cloudflare can select the
+   * data center with the lowest latency to be the upper-tier for an origin.
    */
   get(
     params: SmartTieredCacheGetParams,
@@ -55,9 +70,9 @@ export class SmartTieredCache extends APIResource {
 
 export interface SmartTieredCacheDeleteResponse {
   /**
-   * The identifier of the caching setting
+   * ID of the zone setting.
    */
-  id: string;
+  id: 'tiered_cache_smart_topology_enable';
 
   /**
    * Whether the setting is editable
@@ -65,21 +80,16 @@ export interface SmartTieredCacheDeleteResponse {
   editable: boolean;
 
   /**
-   * The time when the setting was last modified
+   * Last time this setting was modified.
    */
-  modified_on: string;
-
-  /**
-   * The status of the feature being on / off
-   */
-  value: 'on' | 'off';
+  modified_on?: string | null;
 }
 
 export interface SmartTieredCacheEditResponse {
   /**
-   * The identifier of the caching setting
+   * ID of the zone setting.
    */
-  id: string;
+  id: 'tiered_cache_smart_topology_enable';
 
   /**
    * Whether the setting is editable
@@ -87,21 +97,21 @@ export interface SmartTieredCacheEditResponse {
   editable: boolean;
 
   /**
-   * The time when the setting was last modified
-   */
-  modified_on: string;
-
-  /**
-   * The status of the feature being on / off
+   * The value of the feature
    */
   value: 'on' | 'off';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 export interface SmartTieredCacheGetResponse {
   /**
-   * The identifier of the caching setting
+   * ID of the zone setting.
    */
-  id: string;
+  id: 'tiered_cache_smart_topology_enable';
 
   /**
    * Whether the setting is editable
@@ -109,14 +119,14 @@ export interface SmartTieredCacheGetResponse {
   editable: boolean;
 
   /**
-   * The time when the setting was last modified
-   */
-  modified_on: string;
-
-  /**
-   * The status of the feature being on / off
+   * The value of the feature
    */
   value: 'on' | 'off';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 export interface SmartTieredCacheDeleteParams {
