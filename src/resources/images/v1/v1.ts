@@ -153,7 +153,7 @@ export interface V1ListResponse {
   images?: Array<Image>;
 }
 
-export type V1DeleteResponse = unknown | string | null;
+export type V1DeleteResponse = unknown | string;
 
 export interface V1CreateParams {
   /**
