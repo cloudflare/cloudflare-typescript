@@ -6745,10 +6745,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionEditResponse</a></code>
 - <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionGetResponse</a></code>
 
 Methods:
 
+- <code title="patch /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">edit</a>({ ...params }) -> OriginPostQuantumEncryptionEditResponse</code>
 - <code title="get /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">get</a>({ ...params }) -> OriginPostQuantumEncryptionGetResponse</code>
 
 # Speed
