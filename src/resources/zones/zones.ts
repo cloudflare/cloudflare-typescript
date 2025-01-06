@@ -32,6 +32,7 @@ import { RatePlanGetParams, RatePlanGetResponse, RatePlans } from './rate-plans'
 import * as SettingsAPI from './settings';
 import {
   AdvancedDDoS,
+  Aegis,
   AlwaysOnline,
   AlwaysUseHTTPS,
   AutomaticHTTPSRewrites,
@@ -500,6 +501,7 @@ export declare namespace Zones {
   export {
     Settings as Settings,
     type AdvancedDDoS as AdvancedDDoS,
+    type Aegis as Aegis,
     type AlwaysOnline as AlwaysOnline,
     type AlwaysUseHTTPS as AlwaysUseHTTPS,
     type AutomaticHTTPSRewrites as AutomaticHTTPSRewrites,

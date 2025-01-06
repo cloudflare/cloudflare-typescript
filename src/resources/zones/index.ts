@@ -31,6 +31,7 @@ export { RatePlans, type RatePlanGetResponse, type RatePlanGetParams } from './r
 export {
   Settings,
   type AdvancedDDoS,
+  type Aegis,
   type AlwaysOnline,
   type AlwaysUseHTTPS,
   type AutomaticHTTPSRewrites,
