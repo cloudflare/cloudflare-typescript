@@ -311,6 +311,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zones/settings.ts">AdvancedDDoS</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Aegis</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AlwaysOnline</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AlwaysUseHTTPS</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AutomaticHTTPSRewrites</a></code>
