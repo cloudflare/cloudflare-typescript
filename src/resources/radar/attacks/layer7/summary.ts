@@ -210,7 +210,7 @@ export namespace SummaryGetResponse {
 export interface SummaryHTTPMethodResponse {
   meta: SummaryHTTPMethodResponse.Meta;
 
-  summary_0: SummaryHTTPMethodResponse.Summary0;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryHTTPMethodResponse {
@@ -260,12 +260,6 @@ export namespace SummaryHTTPMethodResponse {
         startTime?: string;
       }
     }
-  }
-
-  export interface Summary0 {
-    GET: string;
-
-    POST: string;
   }
 }
 
@@ -398,7 +392,7 @@ export namespace SummaryIPVersionResponse {
 export interface SummaryManagedRulesResponse {
   meta: SummaryManagedRulesResponse.Meta;
 
-  summary_0: Record<string, Array<string>>;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryManagedRulesResponse {
@@ -454,7 +448,7 @@ export namespace SummaryManagedRulesResponse {
 export interface SummaryMitigationProductResponse {
   meta: SummaryMitigationProductResponse.Meta;
 
-  summary_0: SummaryMitigationProductResponse.Summary0;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryMitigationProductResponse {
@@ -504,12 +498,6 @@ export namespace SummaryMitigationProductResponse {
         startTime?: string;
       }
     }
-  }
-
-  export interface Summary0 {
-    DDOS: string;
-
-    WAF: string;
   }
 }
 
@@ -609,6 +597,12 @@ export interface SummaryHTTPMethodParams {
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
@@ -976,6 +970,12 @@ export interface SummaryManagedRulesParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -1099,6 +1099,12 @@ export interface SummaryMitigationProductParams {
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
