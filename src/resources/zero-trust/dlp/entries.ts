@@ -441,7 +441,7 @@ export type EntryUpdateParams =
   | EntryUpdateParams.Variant1
   | EntryUpdateParams.Variant2;
 
-export namespace EntryUpdateParams {
+export declare namespace EntryUpdateParams {
   export interface Variant0 {
     /**
      * Path param:

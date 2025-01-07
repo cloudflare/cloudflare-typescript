@@ -7366,7 +7366,7 @@ export type RuleCreateParams =
   | RuleCreateParams.DDoSDynamicRule
   | RuleCreateParams.ForceConnectionCloseRule;
 
-export namespace RuleCreateParams {
+export declare namespace RuleCreateParams {
   export interface BlockRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -10747,7 +10747,7 @@ export type RuleEditParams =
   | RuleEditParams.DDoSDynamicRule
   | RuleEditParams.ForceConnectionCloseRule;
 
-export namespace RuleEditParams {
+export declare namespace RuleEditParams {
   export interface BlockRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the

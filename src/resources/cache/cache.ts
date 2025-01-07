@@ -150,7 +150,7 @@ export type CachePurgeParams =
   | CachePurgeParams.CachePurgeSingleFile
   | CachePurgeParams.CachePurgeSingleFileWithURLAndHeaders;
 
-export namespace CachePurgeParams {
+export declare namespace CachePurgeParams {
   export interface CachePurgeFlexPurgeByTags {
     /**
      * Path param:

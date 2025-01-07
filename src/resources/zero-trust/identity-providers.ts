@@ -2737,7 +2737,7 @@ export type IdentityProviderCreateParams =
   | IdentityProviderCreateParams.AccessYandex
   | IdentityProviderCreateParams.AccessOnetimepin;
 
-export namespace IdentityProviderCreateParams {
+export declare namespace IdentityProviderCreateParams {
   export interface AzureAD {
     /**
      * Body param: The configuration parameters for the identity provider. To view the
@@ -3690,7 +3690,7 @@ export type IdentityProviderUpdateParams =
   | IdentityProviderUpdateParams.AccessYandex
   | IdentityProviderUpdateParams.AccessOnetimepin;
 
-export namespace IdentityProviderUpdateParams {
+export declare namespace IdentityProviderUpdateParams {
   export interface AzureAD {
     /**
      * Body param: The configuration parameters for the identity provider. To view the
