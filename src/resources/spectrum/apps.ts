@@ -598,7 +598,7 @@ export type AppCreateParams =
   | AppCreateParams.SpectrumConfigAppConfig
   | AppCreateParams.SpectrumConfigPaygoAppConfig;
 
-export namespace AppCreateParams {
+export declare namespace AppCreateParams {
   export interface SpectrumConfigAppConfig {
     /**
      * Path param: Zone identifier.
@@ -708,7 +708,7 @@ export type AppUpdateParams =
   | AppUpdateParams.SpectrumConfigAppConfig
   | AppUpdateParams.SpectrumConfigPaygoAppConfig;
 
-export namespace AppUpdateParams {
+export declare namespace AppUpdateParams {
   export interface SpectrumConfigAppConfig {
     /**
      * Path param: Zone identifier.

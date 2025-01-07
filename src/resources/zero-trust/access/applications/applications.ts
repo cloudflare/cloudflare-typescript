@@ -10634,7 +10634,7 @@ export type ApplicationCreateParams =
   | ApplicationCreateParams.BookmarkApplication
   | ApplicationCreateParams.InfrastructureApplication;
 
-export namespace ApplicationCreateParams {
+export declare namespace ApplicationCreateParams {
   export interface SelfHostedApplication {
     /**
      * Body param: The primary hostname and path secured by Access. This domain will be
@@ -13073,7 +13073,7 @@ export type ApplicationUpdateParams =
   | ApplicationUpdateParams.BookmarkApplication
   | ApplicationUpdateParams.InfrastructureApplication;
 
-export namespace ApplicationUpdateParams {
+export declare namespace ApplicationUpdateParams {
   export interface SelfHostedApplication {
     /**
      * Body param: The primary hostname and path secured by Access. This domain will be

@@ -99,7 +99,7 @@ export type MemberCreateParams =
   | MemberCreateParams.IAMCreateMemberWithRoles
   | MemberCreateParams.IAMCreateMemberWithPolicies;
 
-export namespace MemberCreateParams {
+export declare namespace MemberCreateParams {
   export interface IAMCreateMemberWithRoles {
     /**
      * Path param: Account identifier tag.
@@ -190,7 +190,7 @@ export type MemberUpdateParams =
   | MemberUpdateParams.IAMUpdateMemberWithRoles
   | MemberUpdateParams.IAMUpdateMemberWithPolicies;
 
-export namespace MemberUpdateParams {
+export declare namespace MemberUpdateParams {
   export interface IAMUpdateMemberWithRoles {
     /**
      * Path param: Account identifier tag.
