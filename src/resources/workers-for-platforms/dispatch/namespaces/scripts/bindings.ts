@@ -39,7 +39,7 @@ export type BindingGetResponse = Array<
   | BindingGetResponse.WorkersBindingKindDispatchNamespace
   | BindingGetResponse.WorkersBindingKindDo
   | BindingGetResponse.WorkersBindingKindHyperdrive
-  | BindingGetResponse.WorkersBindingKindJSON
+  | BindingGetResponse.WorkersBindingKindJson
   | BindingGetResponse.WorkersBindingKindKVNamespace
   | BindingGetResponse.WorkersBindingKindMTLSCERT
   | BindingGetResponse.WorkersBindingKindPlainText
@@ -243,7 +243,7 @@ export namespace BindingGetResponse {
     type: 'hyperdrive';
   }
 
-  export interface WorkersBindingKindJSON {
+  export interface WorkersBindingKindJson {
     /**
      * JSON data to use.
      */
