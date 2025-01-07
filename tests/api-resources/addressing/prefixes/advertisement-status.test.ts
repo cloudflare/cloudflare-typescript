@@ -9,12 +9,12 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource statuses', () => {
+describe('resource advertisementStatus', () => {
   test('edit: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.bgp.statuses.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      advertised: true,
-    });
+    const responsePromise = client.addressing.prefixes.advertisementStatus.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', advertised: true },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,16 +25,17 @@ describe('resource statuses', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.addressing.prefixes.bgp.statuses.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      advertised: true,
-    });
+    const response = await client.addressing.prefixes.advertisementStatus.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', advertised: true },
+    );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.bgp.statuses.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.addressing.prefixes.advertisementStatus.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,8 +46,9 @@ describe('resource statuses', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.addressing.prefixes.bgp.statuses.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.addressing.prefixes.advertisementStatus.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

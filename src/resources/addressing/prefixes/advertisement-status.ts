@@ -1,23 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../resource';
-import * as Core from '../../../../core';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 
-export class Statuses extends APIResource {
+export class AdvertisementStatus extends APIResource {
   /**
    * Advertise or withdraw BGP route for a prefix.
    */
   edit(
     prefixId: string,
-    params: StatusEditParams,
+    params: AdvertisementStatusEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StatusEditResponse> {
+  ): Core.APIPromise<AdvertisementStatusEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/status`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StatusEditResponse }>
+      }) as Core.APIPromise<{ result: AdvertisementStatusEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,20 +26,20 @@ export class Statuses extends APIResource {
    */
   get(
     prefixId: string,
-    params: StatusGetParams,
+    params: AdvertisementStatusGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StatusGetResponse> {
+  ): Core.APIPromise<AdvertisementStatusGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/status`,
         options,
-      ) as Core.APIPromise<{ result: StatusGetResponse }>
+      ) as Core.APIPromise<{ result: AdvertisementStatusGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface StatusEditResponse {
+export interface AdvertisementStatusEditResponse {
   /**
    * Enablement of prefix advertisement to the Internet.
    */
@@ -52,7 +52,7 @@ export interface StatusEditResponse {
   advertised_modified_at?: string | null;
 }
 
-export interface StatusGetResponse {
+export interface AdvertisementStatusGetResponse {
   /**
    * Enablement of prefix advertisement to the Internet.
    */
@@ -65,7 +65,7 @@ export interface StatusGetResponse {
   advertised_modified_at?: string | null;
 }
 
-export interface StatusEditParams {
+export interface AdvertisementStatusEditParams {
   /**
    * Path param: Identifier
    */
@@ -77,18 +77,18 @@ export interface StatusEditParams {
   advertised: boolean;
 }
 
-export interface StatusGetParams {
+export interface AdvertisementStatusGetParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export declare namespace Statuses {
+export declare namespace AdvertisementStatus {
   export {
-    type StatusEditResponse as StatusEditResponse,
-    type StatusGetResponse as StatusGetResponse,
-    type StatusEditParams as StatusEditParams,
-    type StatusGetParams as StatusGetParams,
+    type AdvertisementStatusEditResponse as AdvertisementStatusEditResponse,
+    type AdvertisementStatusGetResponse as AdvertisementStatusGetResponse,
+    type AdvertisementStatusEditParams as AdvertisementStatusEditParams,
+    type AdvertisementStatusGetParams as AdvertisementStatusGetParams,
   };
 }

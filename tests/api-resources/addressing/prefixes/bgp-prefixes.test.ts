@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource prefixes', () => {
+describe('resource bgpPrefixes', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.bgp.prefixes.create(
+    const responsePromise = client.addressing.prefixes.bgpPrefixes.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -25,14 +25,14 @@ describe('resource prefixes', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.addressing.prefixes.bgp.prefixes.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', cidr: '192.0.2.0/24' },
-    );
+    const response = await client.addressing.prefixes.bgpPrefixes.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cidr: '192.0.2.0/24',
+    });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.bgp.prefixes.list('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.addressing.prefixes.bgpPrefixes.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,13 +45,13 @@ describe('resource prefixes', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.addressing.prefixes.bgp.prefixes.list('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.addressing.prefixes.bgpPrefixes.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.bgp.prefixes.edit(
+    const responsePromise = client.addressing.prefixes.bgpPrefixes.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -66,7 +66,7 @@ describe('resource prefixes', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.addressing.prefixes.bgp.prefixes.edit(
+    const response = await client.addressing.prefixes.bgpPrefixes.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', on_demand: { advertised: true } },
@@ -74,7 +74,7 @@ describe('resource prefixes', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.bgp.prefixes.get(
+    const responsePromise = client.addressing.prefixes.bgpPrefixes.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -89,7 +89,7 @@ describe('resource prefixes', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.addressing.prefixes.bgp.prefixes.get(
+    const response = await client.addressing.prefixes.bgpPrefixes.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
