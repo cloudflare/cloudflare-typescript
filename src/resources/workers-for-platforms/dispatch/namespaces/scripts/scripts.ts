@@ -270,7 +270,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindDispatchNamespace
       | Metadata.WorkersBindingKindDo
       | Metadata.WorkersBindingKindHyperdrive
-      | Metadata.WorkersBindingKindJson
+      | Metadata.WorkersBindingKindJSON
       | Metadata.WorkersBindingKindKVNamespace
       | Metadata.WorkersBindingKindMTLSCERT
       | Metadata.WorkersBindingKindPlainText
@@ -588,7 +588,7 @@ export namespace ScriptUpdateParams {
       type: 'hyperdrive';
     }
 
-    export interface WorkersBindingKindJson {
+    export interface WorkersBindingKindJSON {
       /**
        * JSON data to use.
        */

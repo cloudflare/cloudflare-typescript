@@ -59,7 +59,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindDispatchNamespace
     | SettingEditResponse.WorkersBindingKindDo
     | SettingEditResponse.WorkersBindingKindHyperdrive
-    | SettingEditResponse.WorkersBindingKindJson
+    | SettingEditResponse.WorkersBindingKindJSON
     | SettingEditResponse.WorkersBindingKindKVNamespace
     | SettingEditResponse.WorkersBindingKindMTLSCERT
     | SettingEditResponse.WorkersBindingKindPlainText
@@ -318,7 +318,7 @@ export namespace SettingEditResponse {
     type: 'hyperdrive';
   }
 
-  export interface WorkersBindingKindJson {
+  export interface WorkersBindingKindJSON {
     /**
      * JSON data to use.
      */
@@ -578,7 +578,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindDispatchNamespace
     | SettingGetResponse.WorkersBindingKindDo
     | SettingGetResponse.WorkersBindingKindHyperdrive
-    | SettingGetResponse.WorkersBindingKindJson
+    | SettingGetResponse.WorkersBindingKindJSON
     | SettingGetResponse.WorkersBindingKindKVNamespace
     | SettingGetResponse.WorkersBindingKindMTLSCERT
     | SettingGetResponse.WorkersBindingKindPlainText
@@ -837,7 +837,7 @@ export namespace SettingGetResponse {
     type: 'hyperdrive';
   }
 
-  export interface WorkersBindingKindJson {
+  export interface WorkersBindingKindJSON {
     /**
      * JSON data to use.
      */
@@ -1110,7 +1110,7 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindDispatchNamespace
       | Settings.WorkersBindingKindDo
       | Settings.WorkersBindingKindHyperdrive
-      | Settings.WorkersBindingKindJson
+      | Settings.WorkersBindingKindJSON
       | Settings.WorkersBindingKindKVNamespace
       | Settings.WorkersBindingKindMTLSCERT
       | Settings.WorkersBindingKindPlainText
@@ -1369,7 +1369,7 @@ export namespace SettingEditParams {
       type: 'hyperdrive';
     }
 
-    export interface WorkersBindingKindJson {
+    export interface WorkersBindingKindJSON {
       /**
        * JSON data to use.
        */
