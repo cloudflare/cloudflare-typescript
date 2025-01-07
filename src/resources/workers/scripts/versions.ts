@@ -133,7 +133,7 @@ export namespace VersionCreateParams {
       | Metadata.WorkersBindingKindDispatchNamespace
       | Metadata.WorkersBindingKindDo
       | Metadata.WorkersBindingKindHyperdrive
-      | Metadata.WorkersBindingKindJSON
+      | Metadata.WorkersBindingKindJson
       | Metadata.WorkersBindingKindKVNamespace
       | Metadata.WorkersBindingKindMTLSCERT
       | Metadata.WorkersBindingKindPlainText
@@ -373,7 +373,7 @@ export namespace VersionCreateParams {
       type: 'hyperdrive';
     }
 
-    export interface WorkersBindingKindJSON {
+    export interface WorkersBindingKindJson {
       /**
        * JSON data to use.
        */
