@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../resource';
-import * as Core from '../../../../core';
-import { SinglePage } from '../../../../pagination';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
-export class Prefixes extends APIResource {
+export class BGPPrefixes extends APIResource {
   /**
    * Create a BGP prefix, controlling the BGP advertisement status of a specific
    * subnet. When created, BGP prefixes are initially withdrawn, and can be
@@ -12,7 +12,7 @@ export class Prefixes extends APIResource {
    */
   create(
     prefixId: string,
-    params: PrefixCreateParams,
+    params: BGPPrefixCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefix> {
     const { account_id, ...body } = params;
@@ -32,7 +32,7 @@ export class Prefixes extends APIResource {
    */
   list(
     prefixId: string,
-    params: PrefixListParams,
+    params: BGPPrefixListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<BGPPrefixesSinglePage, BGPPrefix> {
     const { account_id } = params;
@@ -50,7 +50,7 @@ export class Prefixes extends APIResource {
   edit(
     prefixId: string,
     bgpPrefixId: string,
-    params: PrefixEditParams,
+    params: BGPPrefixEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefix> {
     const { account_id, ...body } = params;
@@ -68,7 +68,7 @@ export class Prefixes extends APIResource {
   get(
     prefixId: string,
     bgpPrefixId: string,
-    params: PrefixGetParams,
+    params: BGPPrefixGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefix> {
     const { account_id } = params;
@@ -150,7 +150,7 @@ export namespace BGPPrefix {
   }
 }
 
-export interface PrefixCreateParams {
+export interface BGPPrefixCreateParams {
   /**
    * Path param: Identifier
    */
@@ -162,14 +162,14 @@ export interface PrefixCreateParams {
   cidr?: string;
 }
 
-export interface PrefixListParams {
+export interface BGPPrefixListParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface PrefixEditParams {
+export interface BGPPrefixEditParams {
   /**
    * Path param: Identifier
    */
@@ -178,31 +178,31 @@ export interface PrefixEditParams {
   /**
    * Body param:
    */
-  on_demand?: PrefixEditParams.OnDemand;
+  on_demand?: BGPPrefixEditParams.OnDemand;
 }
 
-export namespace PrefixEditParams {
+export namespace BGPPrefixEditParams {
   export interface OnDemand {
     advertised?: boolean;
   }
 }
 
-export interface PrefixGetParams {
+export interface BGPPrefixGetParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-Prefixes.BGPPrefixesSinglePage = BGPPrefixesSinglePage;
+BGPPrefixes.BGPPrefixesSinglePage = BGPPrefixesSinglePage;
 
-export declare namespace Prefixes {
+export declare namespace BGPPrefixes {
   export {
     type BGPPrefix as BGPPrefix,
     BGPPrefixesSinglePage as BGPPrefixesSinglePage,
-    type PrefixCreateParams as PrefixCreateParams,
-    type PrefixListParams as PrefixListParams,
-    type PrefixEditParams as PrefixEditParams,
-    type PrefixGetParams as PrefixGetParams,
+    type BGPPrefixCreateParams as BGPPrefixCreateParams,
+    type BGPPrefixListParams as BGPPrefixListParams,
+    type BGPPrefixEditParams as BGPPrefixEditParams,
+    type BGPPrefixGetParams as BGPPrefixGetParams,
   };
 }

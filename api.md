@@ -2834,32 +2834,30 @@ Methods:
 - <code title="delete /accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings/{binding_id}">client.addressing.prefixes.serviceBindings.<a href="./src/resources/addressing/prefixes/service-bindings.ts">delete</a>(prefixId, bindingId, { ...params }) -> ServiceBindingDeleteResponse</code>
 - <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings/{binding_id}">client.addressing.prefixes.serviceBindings.<a href="./src/resources/addressing/prefixes/service-bindings.ts">get</a>(prefixId, bindingId, { ...params }) -> ServiceBinding</code>
 
-### BGP
-
-#### Prefixes
+### BGPPrefixes
 
 Types:
 
-- <code><a href="./src/resources/addressing/prefixes/bgp/prefixes.ts">BGPPrefix</a></code>
+- <code><a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">BGPPrefix</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes">client.addressing.prefixes.bgp.prefixes.<a href="./src/resources/addressing/prefixes/bgp/prefixes.ts">create</a>(prefixId, { ...params }) -> BGPPrefix</code>
-- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes">client.addressing.prefixes.bgp.prefixes.<a href="./src/resources/addressing/prefixes/bgp/prefixes.ts">list</a>(prefixId, { ...params }) -> BGPPrefixesSinglePage</code>
-- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgp.prefixes.<a href="./src/resources/addressing/prefixes/bgp/prefixes.ts">edit</a>(prefixId, bgpPrefixId, { ...params }) -> BGPPrefix</code>
-- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgp.prefixes.<a href="./src/resources/addressing/prefixes/bgp/prefixes.ts">get</a>(prefixId, bgpPrefixId, { ...params }) -> BGPPrefix</code>
+- <code title="post /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">create</a>(prefixId, { ...params }) -> BGPPrefix</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">list</a>(prefixId, { ...params }) -> BGPPrefixesSinglePage</code>
+- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">edit</a>(prefixId, bgpPrefixId, { ...params }) -> BGPPrefix</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">get</a>(prefixId, bgpPrefixId, { ...params }) -> BGPPrefix</code>
 
-#### Statuses
+### AdvertisementStatus
 
 Types:
 
-- <code><a href="./src/resources/addressing/prefixes/bgp/statuses.ts">StatusEditResponse</a></code>
-- <code><a href="./src/resources/addressing/prefixes/bgp/statuses.ts">StatusGetResponse</a></code>
+- <code><a href="./src/resources/addressing/prefixes/advertisement-status.ts">AdvertisementStatusEditResponse</a></code>
+- <code><a href="./src/resources/addressing/prefixes/advertisement-status.ts">AdvertisementStatusGetResponse</a></code>
 
 Methods:
 
-- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status">client.addressing.prefixes.bgp.statuses.<a href="./src/resources/addressing/prefixes/bgp/statuses.ts">edit</a>(prefixId, { ...params }) -> StatusEditResponse</code>
-- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status">client.addressing.prefixes.bgp.statuses.<a href="./src/resources/addressing/prefixes/bgp/statuses.ts">get</a>(prefixId, { ...params }) -> StatusGetResponse</code>
+- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status">client.addressing.prefixes.advertisementStatus.<a href="./src/resources/addressing/prefixes/advertisement-status.ts">edit</a>(prefixId, { ...params }) -> AdvertisementStatusEditResponse</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status">client.addressing.prefixes.advertisementStatus.<a href="./src/resources/addressing/prefixes/advertisement-status.ts">get</a>(prefixId, { ...params }) -> AdvertisementStatusGetResponse</code>
 
 ### Delegations
 
