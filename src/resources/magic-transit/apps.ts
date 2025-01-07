@@ -223,7 +223,7 @@ export interface AppDeleteResponse {
 
 export type AppCreateParams = AppCreateParams.Hostnames | AppCreateParams.Subnets;
 
-export namespace AppCreateParams {
+export declare namespace AppCreateParams {
   export interface Hostnames {
     /**
      * Path param: Identifier
@@ -255,7 +255,7 @@ export type AppUpdateParams =
   | AppUpdateParams.UpdateAppHostnames
   | AppUpdateParams.UpdateAppSubnets;
 
-export namespace AppUpdateParams {
+export declare namespace AppUpdateParams {
   export interface UpdateAppName {
     /**
      * Path param: Identifier

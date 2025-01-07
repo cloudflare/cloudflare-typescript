@@ -395,7 +395,7 @@ export type PCAPCreateParams =
   | PCAPCreateParams.MagicVisibilityPCAPsPCAPsRequestSimple
   | PCAPCreateParams.MagicVisibilityPCAPsPCAPsRequestFull;
 
-export namespace PCAPCreateParams {
+export declare namespace PCAPCreateParams {
   export interface MagicVisibilityPCAPsPCAPsRequestSimple {
     /**
      * Path param: Identifier

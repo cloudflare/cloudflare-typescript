@@ -511,7 +511,7 @@ export type BotManagementUpdateParams =
   | BotManagementUpdateParams.SuperBotFightModeLikelyConfiguration
   | BotManagementUpdateParams.SubscriptionConfiguration;
 
-export namespace BotManagementUpdateParams {
+export declare namespace BotManagementUpdateParams {
   export interface BotFightModeConfiguration {
     /**
      * Path param: Identifier

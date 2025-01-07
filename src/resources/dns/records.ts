@@ -4889,7 +4889,7 @@ export type RecordCreateParams =
   | RecordCreateParams.TXTRecord
   | RecordCreateParams.URIRecord;
 
-export namespace RecordCreateParams {
+export declare namespace RecordCreateParams {
   export interface ARecord {
     /**
      * Path param: Identifier
@@ -6861,7 +6861,7 @@ export type RecordUpdateParams =
   | RecordUpdateParams.TXTRecord
   | RecordUpdateParams.URIRecord;
 
-export namespace RecordUpdateParams {
+export declare namespace RecordUpdateParams {
   export interface ARecord {
     /**
      * Path param: Identifier
@@ -9091,7 +9091,7 @@ export type RecordEditParams =
   | RecordEditParams.TXTRecord
   | RecordEditParams.URIRecord;
 
-export namespace RecordEditParams {
+export declare namespace RecordEditParams {
   export interface ARecord {
     /**
      * Path param: Identifier

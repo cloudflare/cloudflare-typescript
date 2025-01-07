@@ -641,7 +641,7 @@ export type CustomDeleteResponse = unknown;
 
 export type CustomCreateParams = CustomCreateParams.Variant0 | CustomCreateParams.DLPNewCustomProfile;
 
-export namespace CustomCreateParams {
+export declare namespace CustomCreateParams {
   export interface Variant0 {
     /**
      * Path param:

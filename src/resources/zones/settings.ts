@@ -3776,7 +3776,7 @@ export type SettingEditParams =
   | SettingEditParams.WebP
   | SettingEditParams.Websocket;
 
-export namespace SettingEditParams {
+export declare namespace SettingEditParams {
   export interface ZeroRTT {
     /**
      * Path param: Identifier

@@ -134,7 +134,7 @@ export interface SippyDeleteResponse {
 
 export type SippyUpdateParams = SippyUpdateParams.R2EnableSippyAws | SippyUpdateParams.R2EnableSippyGcs;
 
-export namespace SippyUpdateParams {
+export declare namespace SippyUpdateParams {
   export interface R2EnableSippyAws {
     /**
      * Path param: Account ID

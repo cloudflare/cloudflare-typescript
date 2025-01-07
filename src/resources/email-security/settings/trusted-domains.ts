@@ -252,7 +252,7 @@ export type TrustedDomainCreateParams =
   | TrustedDomainCreateParams.EmailSecurityCreateTrustedDomain
   | TrustedDomainCreateParams.Variant1;
 
-export namespace TrustedDomainCreateParams {
+export declare namespace TrustedDomainCreateParams {
   export interface EmailSecurityCreateTrustedDomain {
     /**
      * Path param: Account Identifier

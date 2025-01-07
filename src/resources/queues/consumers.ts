@@ -190,7 +190,7 @@ export type ConsumerCreateParams =
   | ConsumerCreateParams.MqWorkerConsumer
   | ConsumerCreateParams.MqHTTPConsumer;
 
-export namespace ConsumerCreateParams {
+export declare namespace ConsumerCreateParams {
   export interface MqWorkerConsumer {
     /**
      * Path param: A Resource identifier.
@@ -293,7 +293,7 @@ export type ConsumerUpdateParams =
   | ConsumerUpdateParams.MqWorkerConsumer
   | ConsumerUpdateParams.MqHTTPConsumer;
 
-export namespace ConsumerUpdateParams {
+export declare namespace ConsumerUpdateParams {
   export interface MqWorkerConsumer {
     /**
      * Path param: A Resource identifier.

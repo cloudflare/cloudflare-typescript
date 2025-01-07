@@ -241,7 +241,7 @@ export type AIRunParams =
   | AIRunParams.Summarization
   | AIRunParams.ImageToText;
 
-export namespace AIRunParams {
+export declare namespace AIRunParams {
   export interface TextClassification {
     /**
      * Path param:

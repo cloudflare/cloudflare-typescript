@@ -442,7 +442,7 @@ export type DatabaseImportParams =
   | DatabaseImportParams.Variant1
   | DatabaseImportParams.Variant2;
 
-export namespace DatabaseImportParams {
+export declare namespace DatabaseImportParams {
   export interface Variant0 {
     /**
      * Path param: Account identifier tag.
