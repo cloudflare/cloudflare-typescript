@@ -1,6 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { BGP } from './bgp/index';
+export {
+  AdvertisementStatus,
+  type AdvertisementStatusEditResponse,
+  type AdvertisementStatusGetResponse,
+  type AdvertisementStatusEditParams,
+  type AdvertisementStatusGetParams,
+} from './advertisement-status';
+export {
+  BGPPrefixesSinglePage,
+  BGPPrefixes,
+  type BGPPrefix,
+  type BGPPrefixCreateParams,
+  type BGPPrefixListParams,
+  type BGPPrefixEditParams,
+  type BGPPrefixGetParams,
+} from './bgp-prefixes';
 export {
   DelegationsSinglePage,
   type Delegations,

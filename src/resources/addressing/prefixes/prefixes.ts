@@ -3,6 +3,24 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
+import * as AdvertisementStatusAPI from './advertisement-status';
+import {
+  AdvertisementStatus,
+  AdvertisementStatusEditParams,
+  AdvertisementStatusEditResponse,
+  AdvertisementStatusGetParams,
+  AdvertisementStatusGetResponse,
+} from './advertisement-status';
+import * as BGPPrefixesAPI from './bgp-prefixes';
+import {
+  BGPPrefix,
+  BGPPrefixCreateParams,
+  BGPPrefixEditParams,
+  BGPPrefixGetParams,
+  BGPPrefixListParams,
+  BGPPrefixes,
+  BGPPrefixesSinglePage,
+} from './bgp-prefixes';
 import * as DelegationsAPI from './delegations';
 import {
   DelegationCreateParams,
@@ -23,13 +41,13 @@ import {
   ServiceBindings,
   ServiceBindingsSinglePage,
 } from './service-bindings';
-import * as BGPAPI from './bgp/bgp';
-import { BGP } from './bgp/bgp';
 import { SinglePage } from '../../../pagination';
 
 export class Prefixes extends APIResource {
   serviceBindings: ServiceBindingsAPI.ServiceBindings = new ServiceBindingsAPI.ServiceBindings(this._client);
-  bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
+  bgpPrefixes: BGPPrefixesAPI.BGPPrefixes = new BGPPrefixesAPI.BGPPrefixes(this._client);
+  advertisementStatus: AdvertisementStatusAPI.AdvertisementStatus =
+    new AdvertisementStatusAPI.AdvertisementStatus(this._client);
   delegations: DelegationsAPI.Delegations = new DelegationsAPI.Delegations(this._client);
 
   /**
@@ -261,7 +279,9 @@ export interface PrefixGetParams {
 Prefixes.PrefixesSinglePage = PrefixesSinglePage;
 Prefixes.ServiceBindings = ServiceBindings;
 Prefixes.ServiceBindingsSinglePage = ServiceBindingsSinglePage;
-Prefixes.BGP = BGP;
+Prefixes.BGPPrefixes = BGPPrefixes;
+Prefixes.BGPPrefixesSinglePage = BGPPrefixesSinglePage;
+Prefixes.AdvertisementStatus = AdvertisementStatus;
 Prefixes.DelegationsSinglePage = DelegationsSinglePage;
 
 export declare namespace Prefixes {
@@ -287,7 +307,23 @@ export declare namespace Prefixes {
     type ServiceBindingGetParams as ServiceBindingGetParams,
   };
 
-  export { BGP as BGP };
+  export {
+    BGPPrefixes as BGPPrefixes,
+    type BGPPrefix as BGPPrefix,
+    BGPPrefixesSinglePage as BGPPrefixesSinglePage,
+    type BGPPrefixCreateParams as BGPPrefixCreateParams,
+    type BGPPrefixListParams as BGPPrefixListParams,
+    type BGPPrefixEditParams as BGPPrefixEditParams,
+    type BGPPrefixGetParams as BGPPrefixGetParams,
+  };
+
+  export {
+    AdvertisementStatus as AdvertisementStatus,
+    type AdvertisementStatusEditResponse as AdvertisementStatusEditResponse,
+    type AdvertisementStatusGetResponse as AdvertisementStatusGetResponse,
+    type AdvertisementStatusEditParams as AdvertisementStatusEditParams,
+    type AdvertisementStatusGetParams as AdvertisementStatusGetParams,
+  };
 
   export {
     type Delegations as Delegations,
