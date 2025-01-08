@@ -490,7 +490,7 @@ export type BatchPatch =
   | MXRecord
   | NAPTRRecord
   | NSRecord
-  | BatchPatch.DNSRecordsOpenpgpkeyRecord
+  | BatchPatch.Openpgpkey
   | PTRRecord
   | SMIMEARecord
   | SRVRecord
@@ -501,7 +501,7 @@ export type BatchPatch =
   | URIRecord;
 
 export namespace BatchPatch {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -527,7 +527,7 @@ export namespace BatchPatch {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: Openpgpkey.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -547,7 +547,7 @@ export namespace BatchPatch {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace Openpgpkey {
     /**
      * Settings for the DNS record.
      */
@@ -584,7 +584,7 @@ export type BatchPatchParam =
   | MXRecordParam
   | NAPTRRecordParam
   | NSRecordParam
-  | BatchPatchParam.DNSRecordsOpenpgpkeyRecord
+  | BatchPatchParam.Openpgpkey
   | PTRRecordParam
   | SMIMEARecordParam
   | SRVRecordParam
@@ -595,7 +595,7 @@ export type BatchPatchParam =
   | URIRecordParam;
 
 export namespace BatchPatchParam {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -621,7 +621,7 @@ export namespace BatchPatchParam {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: Openpgpkey.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -641,7 +641,7 @@ export namespace BatchPatchParam {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace Openpgpkey {
     /**
      * Settings for the DNS record.
      */
@@ -678,7 +678,7 @@ export type BatchPut =
   | MXRecord
   | NAPTRRecord
   | NSRecord
-  | BatchPut.DNSRecordsOpenpgpkeyRecord
+  | BatchPut.Openpgpkey
   | PTRRecord
   | SMIMEARecord
   | SRVRecord
@@ -689,7 +689,7 @@ export type BatchPut =
   | URIRecord;
 
 export namespace BatchPut {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -715,7 +715,7 @@ export namespace BatchPut {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: Openpgpkey.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -735,7 +735,7 @@ export namespace BatchPut {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace Openpgpkey {
     /**
      * Settings for the DNS record.
      */
@@ -772,7 +772,7 @@ export type BatchPutParam =
   | MXRecordParam
   | NAPTRRecordParam
   | NSRecordParam
-  | BatchPutParam.DNSRecordsOpenpgpkeyRecord
+  | BatchPutParam.Openpgpkey
   | PTRRecordParam
   | SMIMEARecordParam
   | SRVRecordParam
@@ -783,7 +783,7 @@ export type BatchPutParam =
   | URIRecordParam;
 
 export namespace BatchPutParam {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -809,7 +809,7 @@ export namespace BatchPutParam {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: Openpgpkey.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -829,7 +829,7 @@ export namespace BatchPutParam {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace Openpgpkey {
     /**
      * Settings for the DNS record.
      */
@@ -2877,7 +2877,7 @@ export type Record =
   | MXRecord
   | NAPTRRecord
   | NSRecord
-  | Record.DNSRecordsOpenpgpkeyRecord
+  | Record.Openpgpkey
   | PTRRecord
   | SMIMEARecord
   | SRVRecord
@@ -2888,7 +2888,7 @@ export type Record =
   | URIRecord;
 
 export namespace Record {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -2914,7 +2914,7 @@ export namespace Record {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: Openpgpkey.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2934,7 +2934,7 @@ export namespace Record {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace Openpgpkey {
     /**
      * Settings for the DNS record.
      */
@@ -2971,7 +2971,7 @@ export type RecordParam =
   | MXRecordParam
   | NAPTRRecordParam
   | NSRecordParam
-  | RecordParam.DNSRecordsOpenpgpkeyRecord
+  | RecordParam.Openpgpkey
   | PTRRecordParam
   | SMIMEARecordParam
   | SRVRecordParam
@@ -2982,7 +2982,7 @@ export type RecordParam =
   | URIRecordParam;
 
 export namespace RecordParam {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -3008,7 +3008,7 @@ export namespace RecordParam {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: Openpgpkey.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -3028,7 +3028,7 @@ export namespace RecordParam {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace Openpgpkey {
     /**
      * Settings for the DNS record.
      */
@@ -3065,7 +3065,7 @@ export type RecordResponse =
   | MXRecord
   | NAPTRRecord
   | NSRecord
-  | RecordResponse.DNSRecordsOpenpgpkeyRecord
+  | RecordResponse.Openpgpkey
   | PTRRecord
   | SMIMEARecord
   | SRVRecord
@@ -3076,7 +3076,7 @@ export type RecordResponse =
   | URIRecord;
 
 export namespace RecordResponse {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -3102,7 +3102,7 @@ export namespace RecordResponse {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: Openpgpkey.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -3122,7 +3122,7 @@ export namespace RecordResponse {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace Openpgpkey {
     /**
      * Settings for the DNS record.
      */
