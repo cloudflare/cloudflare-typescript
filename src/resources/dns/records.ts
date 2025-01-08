@@ -17,11 +17,11 @@ export class Records extends APIResource {
    * - Domain names are always represented in Punycode, even if Unicode characters
    *   were used when creating the record.
    */
-  create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<RecordCreateResponse> {
+  create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<RecordResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/dns_records`, { body, ...options }) as Core.APIPromise<{
-        result: RecordCreateResponse;
+        result: RecordResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,13 +40,13 @@ export class Records extends APIResource {
     dnsRecordId: string,
     params: RecordUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordUpdateResponse> {
+  ): Core.APIPromise<RecordResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RecordUpdateResponse }>
+      }) as Core.APIPromise<{ result: RecordResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -56,13 +56,12 @@ export class Records extends APIResource {
   list(
     params: RecordListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RecordListResponsesV4PagePaginationArray, RecordListResponse> {
+  ): Core.PagePromise<RecordResponsesV4PagePaginationArray, RecordResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/dns_records`,
-      RecordListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/dns_records`, RecordResponsesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -123,13 +122,13 @@ export class Records extends APIResource {
     dnsRecordId: string,
     params: RecordEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordEditResponse> {
+  ): Core.APIPromise<RecordResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RecordEditResponse }>
+      }) as Core.APIPromise<{ result: RecordResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -157,11 +156,11 @@ export class Records extends APIResource {
     dnsRecordId: string,
     params: RecordGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordGetResponse> {
+  ): Core.APIPromise<RecordResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
-        result: RecordGetResponse;
+        result: RecordResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -200,7 +199,7 @@ export class Records extends APIResource {
   }
 }
 
-export class RecordListResponsesV4PagePaginationArray extends V4PagePaginationArray<RecordListResponse> {}
+export class RecordResponsesV4PagePaginationArray extends V4PagePaginationArray<RecordResponse> {}
 
 export interface ARecord {
   /**
@@ -475,6 +474,382 @@ export namespace AAAARecordParam {
      * communicates with the origin using IPv4 or IPv6.
      */
     ipv6_only?: boolean;
+  }
+}
+
+export type BatchPatch =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | BatchPatch.DNSRecordsOpenpgpkeyRecord
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
+
+export namespace BatchPatch {
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTL;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+}
+
+export type BatchPatchParam =
+  | ARecordParam
+  | AAAARecordParam
+  | CAARecordParam
+  | CERTRecordParam
+  | CNAMERecordParam
+  | DNSKEYRecordParam
+  | DSRecordParam
+  | HTTPSRecordParam
+  | LOCRecordParam
+  | MXRecordParam
+  | NAPTRRecordParam
+  | NSRecordParam
+  | BatchPatchParam.DNSRecordsOpenpgpkeyRecord
+  | PTRRecordParam
+  | SMIMEARecordParam
+  | SRVRecordParam
+  | SSHFPRecordParam
+  | SVCBRecordParam
+  | TLSARecordParam
+  | TXTRecordParam
+  | URIRecordParam;
+
+export namespace BatchPatchParam {
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTagsParam>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTLParam;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+}
+
+export type BatchPut =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | BatchPut.DNSRecordsOpenpgpkeyRecord
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
+
+export namespace BatchPut {
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTL;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+}
+
+export type BatchPutParam =
+  | ARecordParam
+  | AAAARecordParam
+  | CAARecordParam
+  | CERTRecordParam
+  | CNAMERecordParam
+  | DNSKEYRecordParam
+  | DSRecordParam
+  | HTTPSRecordParam
+  | LOCRecordParam
+  | MXRecordParam
+  | NAPTRRecordParam
+  | NSRecordParam
+  | BatchPutParam.DNSRecordsOpenpgpkeyRecord
+  | PTRRecordParam
+  | SMIMEARecordParam
+  | SRVRecordParam
+  | SSHFPRecordParam
+  | SVCBRecordParam
+  | TLSARecordParam
+  | TXTRecordParam
+  | URIRecordParam;
+
+export namespace BatchPutParam {
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTagsParam>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTLParam;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 }
 
@@ -2677,6 +3052,100 @@ export namespace RecordParam {
   }
 }
 
+export type RecordResponse =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | RecordResponse.DNSRecordsOpenpgpkeyRecord
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
+
+export namespace RecordResponse {
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTL;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+}
+
 /**
  * Individual tag of the form name:value (the name must consist of only letters,
  * numbers, underscores and hyphens)
@@ -3984,288 +4453,6 @@ export namespace URIRecordParam {
   }
 }
 
-export type RecordCreateResponse =
-  | ARecord
-  | AAAARecord
-  | CAARecord
-  | CERTRecord
-  | CNAMERecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | MXRecord
-  | NAPTRRecord
-  | NSRecord
-  | RecordCreateResponse.DNSRecordsOpenpgpkeyRecord
-  | PTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | TXTRecord
-  | URIRecord;
-
-export namespace RecordCreateResponse {
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-}
-
-export type RecordUpdateResponse =
-  | ARecord
-  | AAAARecord
-  | CAARecord
-  | CERTRecord
-  | CNAMERecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | MXRecord
-  | NAPTRRecord
-  | NSRecord
-  | RecordUpdateResponse.DNSRecordsOpenpgpkeyRecord
-  | PTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | TXTRecord
-  | URIRecord;
-
-export namespace RecordUpdateResponse {
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-}
-
-export type RecordListResponse =
-  | ARecord
-  | AAAARecord
-  | CAARecord
-  | CERTRecord
-  | CNAMERecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | MXRecord
-  | NAPTRRecord
-  | NSRecord
-  | RecordListResponse.DNSRecordsOpenpgpkeyRecord
-  | PTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | TXTRecord
-  | URIRecord;
-
-export namespace RecordListResponse {
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-}
-
 export interface RecordDeleteResponse {
   /**
    * Identifier
@@ -4274,573 +4461,19 @@ export interface RecordDeleteResponse {
 }
 
 export interface RecordBatchResponse {
-  deletes?: Array<
-    | ARecord
-    | AAAARecord
-    | CAARecord
-    | CERTRecord
-    | CNAMERecord
-    | DNSKEYRecord
-    | DSRecord
-    | HTTPSRecord
-    | LOCRecord
-    | MXRecord
-    | NAPTRRecord
-    | NSRecord
-    | RecordBatchResponse.DNSRecordsOpenpgpkeyRecord
-    | PTRRecord
-    | SMIMEARecord
-    | SRVRecord
-    | SSHFPRecord
-    | SVCBRecord
-    | TLSARecord
-    | TXTRecord
-    | URIRecord
-  >;
+  deletes?: Array<RecordResponse>;
 
-  patches?: Array<
-    | ARecord
-    | AAAARecord
-    | CAARecord
-    | CERTRecord
-    | CNAMERecord
-    | DNSKEYRecord
-    | DSRecord
-    | HTTPSRecord
-    | LOCRecord
-    | MXRecord
-    | NAPTRRecord
-    | NSRecord
-    | RecordBatchResponse.DNSRecordsOpenpgpkeyRecord
-    | PTRRecord
-    | SMIMEARecord
-    | SRVRecord
-    | SSHFPRecord
-    | SVCBRecord
-    | TLSARecord
-    | TXTRecord
-    | URIRecord
-  >;
+  patches?: Array<RecordResponse>;
 
-  posts?: Array<
-    | ARecord
-    | AAAARecord
-    | CAARecord
-    | CERTRecord
-    | CNAMERecord
-    | DNSKEYRecord
-    | DSRecord
-    | HTTPSRecord
-    | LOCRecord
-    | MXRecord
-    | NAPTRRecord
-    | NSRecord
-    | RecordBatchResponse.DNSRecordsOpenpgpkeyRecord
-    | PTRRecord
-    | SMIMEARecord
-    | SRVRecord
-    | SSHFPRecord
-    | SVCBRecord
-    | TLSARecord
-    | TXTRecord
-    | URIRecord
-  >;
+  posts?: Array<RecordResponse>;
 
-  puts?: Array<
-    | ARecord
-    | AAAARecord
-    | CAARecord
-    | CERTRecord
-    | CNAMERecord
-    | DNSKEYRecord
-    | DSRecord
-    | HTTPSRecord
-    | LOCRecord
-    | MXRecord
-    | NAPTRRecord
-    | NSRecord
-    | RecordBatchResponse.DNSRecordsOpenpgpkeyRecord
-    | PTRRecord
-    | SMIMEARecord
-    | SRVRecord
-    | SSHFPRecord
-    | SVCBRecord
-    | TLSARecord
-    | TXTRecord
-    | URIRecord
-  >;
-}
-
-export namespace RecordBatchResponse {
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-}
-
-export type RecordEditResponse =
-  | ARecord
-  | AAAARecord
-  | CAARecord
-  | CERTRecord
-  | CNAMERecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | MXRecord
-  | NAPTRRecord
-  | NSRecord
-  | RecordEditResponse.DNSRecordsOpenpgpkeyRecord
-  | PTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | TXTRecord
-  | URIRecord;
-
-export namespace RecordEditResponse {
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
+  puts?: Array<RecordResponse>;
 }
 
 /**
  * Exported BIND zone file.
  */
 export type RecordExportResponse = string;
-
-export type RecordGetResponse =
-  | ARecord
-  | AAAARecord
-  | CAARecord
-  | CERTRecord
-  | CNAMERecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | MXRecord
-  | NAPTRRecord
-  | NSRecord
-  | RecordGetResponse.DNSRecordsOpenpgpkeyRecord
-  | PTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | TXTRecord
-  | URIRecord;
-
-export namespace RecordGetResponse {
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-}
 
 export interface RecordImportResponse {
   /**
@@ -9046,7 +8679,7 @@ export interface RecordBatchParams {
   /**
    * Body param:
    */
-  patches?: Array<RecordParam>;
+  patches?: Array<BatchPatchParam>;
 
   /**
    * Body param:
@@ -9056,7 +8689,7 @@ export interface RecordBatchParams {
   /**
    * Body param:
    */
-  puts?: Array<RecordParam>;
+  puts?: Array<BatchPutParam>;
 }
 
 export namespace RecordBatchParams {
@@ -11089,12 +10722,14 @@ export interface RecordScanParams {
   body: unknown;
 }
 
-Records.RecordListResponsesV4PagePaginationArray = RecordListResponsesV4PagePaginationArray;
+Records.RecordResponsesV4PagePaginationArray = RecordResponsesV4PagePaginationArray;
 
 export declare namespace Records {
   export {
     type ARecord as ARecord,
     type AAAARecord as AAAARecord,
+    type BatchPatch as BatchPatch,
+    type BatchPut as BatchPut,
     type CAARecord as CAARecord,
     type CERTRecord as CERTRecord,
     type CNAMERecord as CNAMERecord,
@@ -11107,6 +10742,7 @@ export declare namespace Records {
     type NSRecord as NSRecord,
     type PTRRecord as PTRRecord,
     type Record as Record,
+    type RecordResponse as RecordResponse,
     type RecordTags as RecordTags,
     type SMIMEARecord as SMIMEARecord,
     type SRVRecord as SRVRecord,
@@ -11116,17 +10752,12 @@ export declare namespace Records {
     type TTL as TTL,
     type TXTRecord as TXTRecord,
     type URIRecord as URIRecord,
-    type RecordCreateResponse as RecordCreateResponse,
-    type RecordUpdateResponse as RecordUpdateResponse,
-    type RecordListResponse as RecordListResponse,
     type RecordDeleteResponse as RecordDeleteResponse,
     type RecordBatchResponse as RecordBatchResponse,
-    type RecordEditResponse as RecordEditResponse,
     type RecordExportResponse as RecordExportResponse,
-    type RecordGetResponse as RecordGetResponse,
     type RecordImportResponse as RecordImportResponse,
     type RecordScanResponse as RecordScanResponse,
-    RecordListResponsesV4PagePaginationArray as RecordListResponsesV4PagePaginationArray,
+    RecordResponsesV4PagePaginationArray as RecordResponsesV4PagePaginationArray,
     type RecordCreateParams as RecordCreateParams,
     type RecordUpdateParams as RecordUpdateParams,
     type RecordListParams as RecordListParams,
