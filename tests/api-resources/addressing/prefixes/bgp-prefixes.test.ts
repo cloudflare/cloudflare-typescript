@@ -12,8 +12,8 @@ const client = new Cloudflare({
 describe('resource bgpPrefixes', () => {
   test('create: only required params', async () => {
     const responsePromise = client.addressing.prefixes.bgpPrefixes.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,15 +25,15 @@ describe('resource bgpPrefixes', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.addressing.prefixes.bgpPrefixes.create('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.addressing.prefixes.bgpPrefixes.create('2af39739cc4e3b5910c918468bb89828', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
       cidr: '192.0.2.0/24',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.bgpPrefixes.list('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.addressing.prefixes.bgpPrefixes.list('2af39739cc4e3b5910c918468bb89828', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -45,16 +45,16 @@ describe('resource bgpPrefixes', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.addressing.prefixes.bgpPrefixes.list('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.addressing.prefixes.bgpPrefixes.list('2af39739cc4e3b5910c918468bb89828', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
 
   test('edit: only required params', async () => {
     const responsePromise = client.addressing.prefixes.bgpPrefixes.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      '7009ba364c7a5760798ceb430e603b74',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -67,17 +67,17 @@ describe('resource bgpPrefixes', () => {
 
   test('edit: required and optional params', async () => {
     const response = await client.addressing.prefixes.bgpPrefixes.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', on_demand: { advertised: true } },
+      '2af39739cc4e3b5910c918468bb89828',
+      '7009ba364c7a5760798ceb430e603b74',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2', on_demand: { advertised: true } },
     );
   });
 
   test('get: only required params', async () => {
     const responsePromise = client.addressing.prefixes.bgpPrefixes.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      '7009ba364c7a5760798ceb430e603b74',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -90,9 +90,9 @@ describe('resource bgpPrefixes', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.addressing.prefixes.bgpPrefixes.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      '7009ba364c7a5760798ceb430e603b74',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
   });
 });

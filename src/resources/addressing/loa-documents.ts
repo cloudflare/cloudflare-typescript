@@ -44,7 +44,7 @@ export interface LOADocumentCreateResponse {
   id?: string | null;
 
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id?: string;
 
@@ -73,7 +73,7 @@ export interface LOADocumentCreateResponse {
 
 export interface LOADocumentCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -85,7 +85,7 @@ export interface LOADocumentCreateParams {
 
 export interface LOADocumentGetParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }

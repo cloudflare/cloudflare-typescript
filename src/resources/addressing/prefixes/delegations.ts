@@ -61,7 +61,7 @@ export class DelegationsSinglePage extends SinglePage<Delegations> {}
 
 export interface Delegations {
   /**
-   * Delegation identifier tag.
+   * Identifier of a Delegation.
    */
   id?: string;
 
@@ -80,21 +80,21 @@ export interface Delegations {
   modified_at?: string;
 
   /**
-   * Identifier
+   * Identifier of an IP Prefix.
    */
   parent_prefix_id?: string;
 }
 
 export interface DelegationDeleteResponse {
   /**
-   * Delegation identifier tag.
+   * Identifier of a Delegation.
    */
   id?: string;
 }
 
 export interface DelegationCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -112,14 +112,14 @@ export interface DelegationCreateParams {
 
 export interface DelegationListParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface DelegationDeleteParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
