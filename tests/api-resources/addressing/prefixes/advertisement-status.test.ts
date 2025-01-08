@@ -12,8 +12,8 @@ const client = new Cloudflare({
 describe('resource advertisementStatus', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.addressing.prefixes.advertisementStatus.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', advertised: true },
+      '2af39739cc4e3b5910c918468bb89828',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2', advertised: true },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,15 +26,15 @@ describe('resource advertisementStatus', () => {
 
   test('edit: required and optional params', async () => {
     const response = await client.addressing.prefixes.advertisementStatus.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', advertised: true },
+      '2af39739cc4e3b5910c918468bb89828',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2', advertised: true },
     );
   });
 
   test('get: only required params', async () => {
     const responsePromise = client.addressing.prefixes.advertisementStatus.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -47,8 +47,8 @@ describe('resource advertisementStatus', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.addressing.prefixes.advertisementStatus.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
   });
 });
