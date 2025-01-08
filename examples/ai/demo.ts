@@ -6,7 +6,7 @@ import Cloudflare from 'cloudflare';
 const client = new Cloudflare();
 
 async function main() {
-  const response = await client.workers.ai.run('@cf/meta/llama-2-7b-chat-int8', {
+  const response = await client.ai.run('@cf/meta/llama-2-7b-chat-int8', {
     account_id: process.env['CLOUDFLARE_ACCOUNT_ID']!,
     prompt: 'Tell me about Workers AI',
   });
