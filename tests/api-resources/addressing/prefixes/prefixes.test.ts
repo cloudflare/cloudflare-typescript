@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource prefixes', () => {
   test('create: only required params', async () => {
     const responsePromise = client.addressing.prefixes.create({
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       asn: 209242,
       cidr: '192.0.2.0/24',
       loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
@@ -28,7 +28,7 @@ describe('resource prefixes', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.addressing.prefixes.create({
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       asn: 209242,
       cidr: '192.0.2.0/24',
       loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
@@ -37,7 +37,7 @@ describe('resource prefixes', () => {
 
   test('list: only required params', async () => {
     const responsePromise = client.addressing.prefixes.list({
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,13 +50,13 @@ describe('resource prefixes', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.addressing.prefixes.list({
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.delete('2af39739cc4e3b5910c918468bb89828', {
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+    const responsePromise = client.addressing.prefixes.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -68,14 +68,14 @@ describe('resource prefixes', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.addressing.prefixes.delete('2af39739cc4e3b5910c918468bb89828', {
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+    const response = await client.addressing.prefixes.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.edit('2af39739cc4e3b5910c918468bb89828', {
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+    const responsePromise = client.addressing.prefixes.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       description: 'Internal test prefix',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -88,15 +88,15 @@ describe('resource prefixes', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.addressing.prefixes.edit('2af39739cc4e3b5910c918468bb89828', {
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+    const response = await client.addressing.prefixes.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       description: 'Internal test prefix',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.get('2af39739cc4e3b5910c918468bb89828', {
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+    const responsePromise = client.addressing.prefixes.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -108,8 +108,8 @@ describe('resource prefixes', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.addressing.prefixes.get('2af39739cc4e3b5910c918468bb89828', {
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
+    const response = await client.addressing.prefixes.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });

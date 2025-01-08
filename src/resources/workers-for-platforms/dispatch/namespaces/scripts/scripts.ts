@@ -185,7 +185,13 @@ export interface ScriptUpdateResponse {
    * @deprecated: Status of
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
-  placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  placement_status?:
+    | 'SUCCESS'
+    | 'NO_VALID_HOSTS'
+    | 'NO_VALID_BINDINGS'
+    | 'UNSUPPORTED_APPLICATION'
+    | 'INSUFFICIENT_INVOCATIONS'
+    | 'INSUFFICIENT_SUBREQUESTS';
 
   startup_time_ms?: number;
 
@@ -216,7 +222,13 @@ export namespace ScriptUpdateResponse {
      * Status of
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
-    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+    status?:
+      | 'SUCCESS'
+      | 'NO_VALID_HOSTS'
+      | 'NO_VALID_BINDINGS'
+      | 'UNSUPPORTED_APPLICATION'
+      | 'INSUFFICIENT_INVOCATIONS'
+      | 'INSUFFICIENT_SUBREQUESTS';
   }
 }
 

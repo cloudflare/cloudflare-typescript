@@ -5,10 +5,7 @@ import * as Core from '../../../core';
 
 export class AdvertisementStatus extends APIResource {
   /**
-   * Advertise or withdraw the BGP route for a prefix.
-   *
-   * **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for
-   * advertising and withdrawing subnets of an IP prefix.
+   * Advertise or withdraw BGP route for a prefix.
    */
   edit(
     prefixId: string,
@@ -25,10 +22,7 @@ export class AdvertisementStatus extends APIResource {
   }
 
   /**
-   * View the current advertisement state for a prefix.
-   *
-   * **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for
-   * advertising and withdrawing subnets of an IP prefix.
+   * List the current advertisement state for a prefix.
    */
   get(
     prefixId: string,
@@ -47,8 +41,7 @@ export class AdvertisementStatus extends APIResource {
 
 export interface AdvertisementStatusEditResponse {
   /**
-   * Advertisement status of the prefix. If `true`, the BGP route for the prefix is
-   * advertised to the Internet. If `false`, the BGP route is withdrawn.
+   * Enablement of prefix advertisement to the Internet.
    */
   advertised?: boolean;
 
@@ -61,8 +54,7 @@ export interface AdvertisementStatusEditResponse {
 
 export interface AdvertisementStatusGetResponse {
   /**
-   * Advertisement status of the prefix. If `true`, the BGP route for the prefix is
-   * advertised to the Internet. If `false`, the BGP route is withdrawn.
+   * Enablement of prefix advertisement to the Internet.
    */
   advertised?: boolean;
 
@@ -75,20 +67,19 @@ export interface AdvertisementStatusGetResponse {
 
 export interface AdvertisementStatusEditParams {
   /**
-   * Path param: Identifier of a Cloudflare account.
+   * Path param: Identifier
    */
   account_id: string;
 
   /**
-   * Body param: Advertisement status of the prefix. If `true`, the BGP route for the
-   * prefix is advertised to the Internet. If `false`, the BGP route is withdrawn.
+   * Body param: Enablement of prefix advertisement to the Internet.
    */
   advertised: boolean;
 }
 
 export interface AdvertisementStatusGetParams {
   /**
-   * Identifier of a Cloudflare account.
+   * Identifier
    */
   account_id: string;
 }
