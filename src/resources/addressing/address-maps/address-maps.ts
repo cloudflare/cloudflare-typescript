@@ -106,7 +106,7 @@ export class AddressMapsSinglePage extends SinglePage<AddressMap> {}
 
 export interface AddressMap {
   /**
-   * Identifier
+   * Identifier of an Address Map.
    */
   id?: string;
 
@@ -160,7 +160,7 @@ export type KindParam = 'zone' | 'account';
 
 export interface AddressMapCreateResponse {
   /**
-   * Identifier
+   * Identifier of an Address Map.
    */
   id?: string;
 
@@ -282,7 +282,7 @@ export namespace AddressMapDeleteResponse {
 
 export interface AddressMapGetResponse {
   /**
-   * Identifier
+   * Identifier of an Address Map.
    */
   id?: string;
 
@@ -367,7 +367,7 @@ export namespace AddressMapGetResponse {
 
 export interface AddressMapCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -411,21 +411,21 @@ export namespace AddressMapCreateParams {
 
 export interface AddressMapListParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface AddressMapDeleteParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface AddressMapEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -453,7 +453,7 @@ export interface AddressMapEditParams {
 
 export interface AddressMapGetParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
