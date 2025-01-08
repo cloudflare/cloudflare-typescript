@@ -112,12 +112,12 @@ export namespace ZoneDeleteResponse {
 
 export interface ZoneUpdateParams {
   /**
-   * Path param: Identifier of a zone.
+   * Path param: Identifier
    */
   zone_id: string;
 
   /**
-   * Path param: Identifier of a Cloudflare account.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -129,12 +129,12 @@ export interface ZoneUpdateParams {
 
 export interface ZoneDeleteParams {
   /**
-   * Identifier of a zone.
+   * Identifier
    */
   zone_id: string;
 
   /**
-   * Identifier of a Cloudflare account.
+   * Identifier
    */
   account_id: string;
 }
