@@ -85,7 +85,7 @@ export class BGPPrefixesSinglePage extends SinglePage<BGPPrefix> {}
 
 export interface BGPPrefix {
   /**
-   * Identifier of BGP Prefix.
+   * Identifier
    */
   id?: string;
 
@@ -152,7 +152,7 @@ export namespace BGPPrefix {
 
 export interface BGPPrefixCreateParams {
   /**
-   * Path param: Identifier of a Cloudflare account.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -164,14 +164,14 @@ export interface BGPPrefixCreateParams {
 
 export interface BGPPrefixListParams {
   /**
-   * Identifier of a Cloudflare account.
+   * Identifier
    */
   account_id: string;
 }
 
 export interface BGPPrefixEditParams {
   /**
-   * Path param: Identifier of a Cloudflare account.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -189,7 +189,7 @@ export namespace BGPPrefixEditParams {
 
 export interface BGPPrefixGetParams {
   /**
-   * Identifier of a Cloudflare account.
+   * Identifier
    */
   account_id: string;
 }
