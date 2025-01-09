@@ -146,6 +146,10 @@ export interface AIGatewayCreateResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -153,6 +157,8 @@ export interface AIGatewayCreateResponse {
   collect_logs: boolean;
 
   created_at: string;
+
+  internal_id: string;
 
   modified_at: string;
 
@@ -173,6 +179,10 @@ export interface AIGatewayUpdateResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -180,6 +190,8 @@ export interface AIGatewayUpdateResponse {
   collect_logs: boolean;
 
   created_at: string;
+
+  internal_id: string;
 
   modified_at: string;
 
@@ -200,6 +212,10 @@ export interface AIGatewayListResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -207,6 +223,8 @@ export interface AIGatewayListResponse {
   collect_logs: boolean;
 
   created_at: string;
+
+  internal_id: string;
 
   modified_at: string;
 
@@ -227,6 +245,10 @@ export interface AIGatewayDeleteResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -234,6 +256,8 @@ export interface AIGatewayDeleteResponse {
   collect_logs: boolean;
 
   created_at: string;
+
+  internal_id: string;
 
   modified_at: string;
 
@@ -254,6 +278,10 @@ export interface AIGatewayGetResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -261,6 +289,8 @@ export interface AIGatewayGetResponse {
   collect_logs: boolean;
 
   created_at: string;
+
+  internal_id: string;
 
   modified_at: string;
 
@@ -379,16 +409,6 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
    * Path param:
    */
   account_id: string;
-
-  /**
-   * Query param: Order By Column Name
-   */
-  order_by?: string;
-
-  /**
-   * Query param: Order By Direction
-   */
-  order_by_direction?: 'asc' | 'desc';
 
   /**
    * Query param: Search by id

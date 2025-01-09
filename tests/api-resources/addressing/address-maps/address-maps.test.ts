@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource addressMaps', () => {
   test('create: only required params', async () => {
     const responsePromise = client.addressing.addressMaps.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +25,7 @@ describe('resource addressMaps', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.addressing.addressMaps.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
       description: 'My Ecommerce zones',
       enabled: true,
       ips: ['192.0.2.1'],
@@ -35,7 +35,7 @@ describe('resource addressMaps', () => {
 
   test('list: only required params', async () => {
     const responsePromise = client.addressing.addressMaps.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,13 +48,13 @@ describe('resource addressMaps', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.addressing.addressMaps.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.addressing.addressMaps.delete('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.addressing.addressMaps.delete('055817b111884e0227e1be16a0be6ee0', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -66,14 +66,14 @@ describe('resource addressMaps', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.delete('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.addressing.addressMaps.delete('055817b111884e0227e1be16a0be6ee0', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.addressing.addressMaps.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.addressing.addressMaps.edit('055817b111884e0227e1be16a0be6ee0', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -85,8 +85,8 @@ describe('resource addressMaps', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.addressing.addressMaps.edit('055817b111884e0227e1be16a0be6ee0', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
       default_sni: '*.example.com',
       description: 'My Ecommerce zones',
       enabled: true,
@@ -94,8 +94,8 @@ describe('resource addressMaps', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.addressing.addressMaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.addressing.addressMaps.get('055817b111884e0227e1be16a0be6ee0', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -107,8 +107,8 @@ describe('resource addressMaps', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.addressing.addressMaps.get('055817b111884e0227e1be16a0be6ee0', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
 });
