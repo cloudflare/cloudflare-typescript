@@ -2352,6 +2352,7 @@ Types:
 - <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationCreateResponse</a></code>
 - <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationListResponse</a></code>
 - <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationBulkCreateResponse</a></code>
 - <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationBulkDeleteResponse</a></code>
 - <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationGetResponse</a></code>
 
@@ -2360,6 +2361,7 @@ Methods:
 - <code title="post /zones/{zone_id}/api_gateway/operations/item">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">create</a>({ ...params }) -> OperationCreateResponse</code>
 - <code title="get /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">list</a>({ ...params }) -> OperationListResponsesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">delete</a>(operationId, { ...params }) -> OperationDeleteResponse</code>
+- <code title="post /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">bulkCreate</a>([ ...body ]) -> OperationBulkCreateResponse</code>
 - <code title="delete /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">bulkDelete</a>({ ...params }) -> OperationBulkDeleteResponse</code>
 - <code title="get /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">get</a>(operationId, { ...params }) -> OperationGetResponse</code>
 
@@ -4895,6 +4897,26 @@ Methods:
 - <code title="post /accounts/{account_id}/dex/commands">client.zeroTrust.dex.commands.<a href="./src/resources/zero-trust/dex/commands/commands.ts">create</a>({ ...params }) -> CommandCreateResponse</code>
 - <code title="get /accounts/{account_id}/dex/commands">client.zeroTrust.dex.commands.<a href="./src/resources/zero-trust/dex/commands/commands.ts">list</a>({ ...params }) -> CommandListResponsesV4PagePagination</code>
 
+#### Users
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/commands/users.ts">UserListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/commands/users">client.zeroTrust.dex.commands.users.<a href="./src/resources/zero-trust/dex/commands/users.ts">list</a>({ ...params }) -> UserListResponse</code>
+
+#### Devices
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/commands/devices.ts">DeviceListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/commands/devices">client.zeroTrust.dex.commands.devices.<a href="./src/resources/zero-trust/dex/commands/devices.ts">list</a>({ ...params }) -> DeviceListResponsesV4PagePagination</code>
+
 #### Downloads
 
 Methods:
@@ -6741,10 +6763,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionUpdateResponse</a></code>
 - <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionGetResponse</a></code>
 
 Methods:
 
+- <code title="put /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">update</a>({ ...params }) -> OriginPostQuantumEncryptionUpdateResponse</code>
 - <code title="get /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">get</a>({ ...params }) -> OriginPostQuantumEncryptionGetResponse</code>
 
 # Speed
@@ -7314,6 +7338,14 @@ Methods:
 - <code title="get /zones/{zone_id}/content-upload-scan/settings">client.contentScanning.settings.<a href="./src/resources/content-scanning/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
 
 # AbuseReports
+
+Types:
+
+- <code><a href="./src/resources/abuse-reports.ts">AbuseReportCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/abuse-reports/{report_type}">client.abuseReports.<a href="./src/resources/abuse-reports.ts">create</a>(reportType, { ...params }) -> AbuseReportCreateResponse</code>
 
 # AI
 
