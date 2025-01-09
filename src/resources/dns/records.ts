@@ -1283,7 +1283,7 @@ export namespace CNAMERecord {
     /**
      * If enabled, causes the CNAME record to be resolved externally and the resulting
      * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting is unavailable for proxied records, since they are always
+     * itself. This setting has no effect on proxied records, which are always
      * flattened.
      */
     flatten_cname?: boolean;
@@ -1360,7 +1360,7 @@ export namespace CNAMERecordParam {
     /**
      * If enabled, causes the CNAME record to be resolved externally and the resulting
      * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting is unavailable for proxied records, since they are always
+     * itself. This setting has no effect on proxied records, which are always
      * flattened.
      */
     flatten_cname?: boolean;
@@ -4928,7 +4928,7 @@ export declare namespace RecordCreateParams {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
        * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting is unavailable for proxied records, since they are always
+       * itself. This setting has no effect on proxied records, which are always
        * flattened.
        */
       flatten_cname?: boolean;
@@ -6900,7 +6900,7 @@ export declare namespace RecordUpdateParams {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
        * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting is unavailable for proxied records, since they are always
+       * itself. This setting has no effect on proxied records, which are always
        * flattened.
        */
       flatten_cname?: boolean;
@@ -9130,7 +9130,7 @@ export declare namespace RecordEditParams {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
        * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting is unavailable for proxied records, since they are always
+       * itself. This setting has no effect on proxied records, which are always
        * flattened.
        */
       flatten_cname?: boolean;
