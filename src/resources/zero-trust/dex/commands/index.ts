@@ -8,5 +8,12 @@ export {
   type CommandCreateParams,
   type CommandListParams,
 } from './commands';
+export {
+  DeviceListResponsesV4PagePagination,
+  Devices,
+  type DeviceListResponse,
+  type DeviceListParams,
+} from './devices';
 export { Downloads, type DownloadGetParams } from './downloads';
 export { Quota, type QuotaGetResponse, type QuotaGetParams } from './quota';
+export { Users, type UserListResponse, type UserListParams } from './users';
