@@ -225,6 +225,22 @@ export interface PolicyCreateResponse {
    */
   id?: string;
 
+  /**
+   * Number of access applications currently using this policy.
+   */
+  app_count?: number;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
   created_at?: string;
 
   /**
@@ -246,15 +262,41 @@ export interface PolicyCreateResponse {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRule>;
+
+  reusable?: true;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
 
   updated_at?: string;
 }
@@ -265,6 +307,22 @@ export interface PolicyUpdateResponse {
    */
   id?: string;
 
+  /**
+   * Number of access applications currently using this policy.
+   */
+  app_count?: number;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
   created_at?: string;
 
   /**
@@ -286,15 +344,41 @@ export interface PolicyUpdateResponse {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRule>;
+
+  reusable?: true;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
 
   updated_at?: string;
 }
@@ -305,6 +389,22 @@ export interface PolicyListResponse {
    */
   id?: string;
 
+  /**
+   * Number of access applications currently using this policy.
+   */
+  app_count?: number;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
   created_at?: string;
 
   /**
@@ -326,15 +426,41 @@ export interface PolicyListResponse {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRule>;
+
+  reusable?: true;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
 
   updated_at?: string;
 }
@@ -352,6 +478,22 @@ export interface PolicyGetResponse {
    */
   id?: string;
 
+  /**
+   * Number of access applications currently using this policy.
+   */
+  app_count?: number;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
   created_at?: string;
 
   /**
@@ -373,15 +515,41 @@ export interface PolicyGetResponse {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRule>;
+
+  reusable?: true;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
 
   updated_at?: string;
 }
@@ -410,16 +578,53 @@ export interface PolicyCreateParams {
   name: string;
 
   /**
+   * Body param: Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<ApprovalGroupParam>;
+
+  /**
+   * Body param: Requires the user to request access from an administrator at the
+   * start of each session.
+   */
+  approval_required?: boolean;
+
+  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
   exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
+   * Body param: Require this application to be served in an isolated browser for
+   * users matching this policy. 'Client Web Isolation' must be on for the account in
+   * order to use this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * Body param: A custom message that will appear on the purpose justification
+   * screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Body param: Require users to enter a justification when they log in to the
+   * application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRuleParam>;
+
+  /**
+   * Body param: The amount of time that tokens issued for the application will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
+   */
+  session_duration?: string;
 }
 
 export interface PolicyUpdateParams {
@@ -446,16 +651,53 @@ export interface PolicyUpdateParams {
   name: string;
 
   /**
+   * Body param: Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<ApprovalGroupParam>;
+
+  /**
+   * Body param: Requires the user to request access from an administrator at the
+   * start of each session.
+   */
+  approval_required?: boolean;
+
+  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
   exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
+   * Body param: Require this application to be served in an isolated browser for
+   * users matching this policy. 'Client Web Isolation' must be on for the account in
+   * order to use this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * Body param: A custom message that will appear on the purpose justification
+   * screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Body param: Require users to enter a justification when they log in to the
+   * application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRuleParam>;
+
+  /**
+   * Body param: The amount of time that tokens issued for the application will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
+   */
+  session_duration?: string;
 }
 
 export interface PolicyListParams {

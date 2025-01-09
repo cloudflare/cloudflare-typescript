@@ -26,6 +26,7 @@ describe('resource consumers', () => {
   test('create: required and optional params', async () => {
     const response = await client.queues.consumers.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      dead_letter_queue: 'example-queue',
       script_name: 'my-consumer-worker',
       settings: {
         batch_size: 50,
@@ -59,6 +60,7 @@ describe('resource consumers', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        dead_letter_queue: 'example-queue',
         script_name: 'my-consumer-worker',
         settings: {
           batch_size: 50,

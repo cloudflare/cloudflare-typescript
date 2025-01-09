@@ -34,11 +34,11 @@ export class OriginTLSClientAuth extends APIResource {
   create(
     params: OriginTLSClientAuthCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
+  ): Core.APIPromise<OriginTLSClientAuthCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneAuthenticatedOriginPull;
+        result: OriginTLSClientAuthCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -49,11 +49,11 @@ export class OriginTLSClientAuth extends APIResource {
   list(
     params: OriginTLSClientAuthListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZoneAuthenticatedOriginPullsSinglePage, ZoneAuthenticatedOriginPull> {
+  ): Core.PagePromise<OriginTLSClientAuthListResponsesSinglePage, OriginTLSClientAuthListResponse> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth`,
-      ZoneAuthenticatedOriginPullsSinglePage,
+      OriginTLSClientAuthListResponsesSinglePage,
       options,
     );
   }
@@ -65,13 +65,13 @@ export class OriginTLSClientAuth extends APIResource {
     certificateId: string,
     params: OriginTLSClientAuthDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
+  ): Core.APIPromise<OriginTLSClientAuthDeleteResponse> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>
+      ) as Core.APIPromise<{ result: OriginTLSClientAuthDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,18 +82,18 @@ export class OriginTLSClientAuth extends APIResource {
     certificateId: string,
     params: OriginTLSClientAuthGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
+  ): Core.APIPromise<OriginTLSClientAuthGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>
+      ) as Core.APIPromise<{ result: OriginTLSClientAuthGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ZoneAuthenticatedOriginPullsSinglePage extends SinglePage<ZoneAuthenticatedOriginPull> {}
+export class OriginTLSClientAuthListResponsesSinglePage extends SinglePage<OriginTLSClientAuthListResponse> {}
 
 export interface ZoneAuthenticatedOriginPull {
   /**
@@ -137,6 +137,94 @@ export interface ZoneAuthenticatedOriginPull {
    * This is the time the certificate was uploaded.
    */
   uploaded_on?: string;
+}
+
+export interface OriginTLSClientAuthCreateResponse extends ZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
+}
+
+export interface OriginTLSClientAuthListResponse extends ZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
+}
+
+export interface OriginTLSClientAuthDeleteResponse extends ZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
+}
+
+export interface OriginTLSClientAuthGetResponse extends ZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
 }
 
 export interface OriginTLSClientAuthCreateParams {

@@ -25,7 +25,6 @@ export {
 } from './access';
 export { AccessUsersSinglePage, Users, type AccessUser, type UserListParams } from './users/index';
 export {
-  ApplicationPoliciesSinglePage,
   ApplicationListResponsesSinglePage,
   Applications,
   type AllowedHeaders,

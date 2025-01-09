@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as AccessAPI from '../../access';
+import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
 import * as UsersAPI from './users';
 import { UserListParams, UserListResponse, Users } from './users';
@@ -105,6 +106,17 @@ export interface PolicyTestCreateParams {
   id?: string;
 
   /**
+   * Body param: Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+  /**
+   * Body param: Requires the user to request access from an administrator at the
+   * start of each session.
+   */
+  approval_required?: boolean;
+
+  /**
    * Body param: The action Access will take if a user matches this policy.
    * Infrastructure application policies can only use the Allow action.
    */
@@ -123,15 +135,41 @@ export interface PolicyTestCreateParams {
   include?: Array<AccessAPI.AccessRuleParam>;
 
   /**
+   * Body param: Require this application to be served in an isolated browser for
+   * users matching this policy. 'Client Web Isolation' must be on for the account in
+   * order to use this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
    * Body param: The name of the Access policy.
    */
   name?: string;
+
+  /**
+   * Body param: A custom message that will appear on the purpose justification
+   * screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Body param: Require users to enter a justification when they log in to the
+   * application.
+   */
+  purpose_justification_required?: boolean;
 
   /**
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRuleParam>;
+
+  /**
+   * Body param: The amount of time that tokens issued for the application will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
+   */
+  session_duration?: string;
 }
 
 export interface PolicyTestGetParams {

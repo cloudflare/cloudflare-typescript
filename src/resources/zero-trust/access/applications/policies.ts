@@ -6,7 +6,7 @@ import * as Core from '../../../../core';
 import { CloudflareError } from 'cloudflare/error';
 import * as PoliciesAPI from '../policies';
 import * as ApplicationsAPI from './applications';
-import { ApplicationPoliciesSinglePage } from './applications';
+import { SinglePage } from '../../../../pagination';
 
 export class Policies extends APIResource {
   /**
@@ -19,7 +19,7 @@ export class Policies extends APIResource {
     appId: string,
     params: PolicyCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
+  ): Core.APIPromise<PolicyCreateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -41,7 +41,7 @@ export class Policies extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>
+      }) as Core.APIPromise<{ result: PolicyCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -54,7 +54,7 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
+  ): Core.APIPromise<PolicyUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -76,7 +76,7 @@ export class Policies extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies/${policyId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>
+      }) as Core.APIPromise<{ result: PolicyUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -88,16 +88,16 @@ export class Policies extends APIResource {
     appId: string,
     params?: PolicyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy>;
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse>;
   list(
     appId: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy>;
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse>;
   list(
     appId: string,
     params: PolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy> {
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
     if (isRequestOptions(params)) {
       return this.list(appId, {}, params);
     }
@@ -120,7 +120,7 @@ export class Policies extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies`,
-      ApplicationPoliciesSinglePage,
+      PolicyListResponsesSinglePage,
       options,
     );
   }
@@ -183,18 +183,14 @@ export class Policies extends APIResource {
     policyId: string,
     params?: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy>;
-  get(
-    appId: string,
-    policyId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy>;
+  ): Core.APIPromise<PolicyGetResponse>;
+  get(appId: string, policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse>;
   get(
     appId: string,
     policyId: string,
     params: PolicyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
+  ): Core.APIPromise<PolicyGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(appId, policyId, {}, params);
     }
@@ -219,9 +215,35 @@ export class Policies extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies/${policyId}`,
         options,
-      ) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>
+      ) as Core.APIPromise<{ result: PolicyGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
+
+export interface PolicyCreateResponse extends ApplicationsAPI.ApplicationPolicy {
+  /**
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
+   */
+  precedence?: number;
+}
+
+export interface PolicyUpdateResponse extends ApplicationsAPI.ApplicationPolicy {
+  /**
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
+   */
+  precedence?: number;
+}
+
+export interface PolicyListResponse extends ApplicationsAPI.ApplicationPolicy {
+  /**
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
+   */
+  precedence?: number;
 }
 
 export interface PolicyDeleteResponse {
@@ -229,6 +251,14 @@ export interface PolicyDeleteResponse {
    * UUID
    */
   id?: string;
+}
+
+export interface PolicyGetResponse extends ApplicationsAPI.ApplicationPolicy {
+  /**
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
+   */
+  precedence?: number;
 }
 
 export interface PolicyCreateParams {
@@ -381,9 +411,16 @@ export interface PolicyGetParams {
   zone_id?: string;
 }
 
+Policies.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
+
 export declare namespace Policies {
   export {
+    type PolicyCreateResponse as PolicyCreateResponse,
+    type PolicyUpdateResponse as PolicyUpdateResponse,
+    type PolicyListResponse as PolicyListResponse,
     type PolicyDeleteResponse as PolicyDeleteResponse,
+    type PolicyGetResponse as PolicyGetResponse,
+    PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
     type PolicyCreateParams as PolicyCreateParams,
     type PolicyUpdateParams as PolicyUpdateParams,
     type PolicyListParams as PolicyListParams,
@@ -391,5 +428,3 @@ export declare namespace Policies {
     type PolicyGetParams as PolicyGetParams,
   };
 }
-
-export { ApplicationPoliciesSinglePage };

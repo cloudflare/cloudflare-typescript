@@ -85,14 +85,7 @@ export namespace ManagedTransformListResponse {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
      */
-    conflicts_with?: Array<ManagedRequestHeader.ConflictsWith>;
-  }
-
-  export namespace ManagedRequestHeader {
-    /**
-     * The human-readable identifier of the Managed Transform.
-     */
-    export interface ConflictsWith {}
+    conflicts_with?: Array<string>;
   }
 
   /**
@@ -118,14 +111,7 @@ export namespace ManagedTransformListResponse {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
      */
-    conflicts_with?: Array<ManagedResponseHeader.ConflictsWith>;
-  }
-
-  export namespace ManagedResponseHeader {
-    /**
-     * The human-readable identifier of the Managed Transform.
-     */
-    export interface ConflictsWith {}
+    conflicts_with?: Array<string>;
   }
 }
 
@@ -168,14 +154,7 @@ export namespace ManagedTransformEditResponse {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
      */
-    conflicts_with?: Array<ManagedRequestHeader.ConflictsWith>;
-  }
-
-  export namespace ManagedRequestHeader {
-    /**
-     * The human-readable identifier of the Managed Transform.
-     */
-    export interface ConflictsWith {}
+    conflicts_with?: Array<string>;
   }
 
   /**
@@ -201,14 +180,7 @@ export namespace ManagedTransformEditResponse {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
      */
-    conflicts_with?: Array<ManagedResponseHeader.ConflictsWith>;
-  }
-
-  export namespace ManagedResponseHeader {
-    /**
-     * The human-readable identifier of the Managed Transform.
-     */
-    export interface ConflictsWith {}
+    conflicts_with?: Array<string>;
   }
 }
 

@@ -133,9 +133,6 @@ export interface CustomHostname {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostname.SSL;
 
   /**
@@ -203,9 +200,6 @@ export interface CustomHostname {
 }
 
 export namespace CustomHostname {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -265,9 +259,6 @@ export namespace CustomHostname {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -327,9 +318,6 @@ export namespace CustomHostname {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -365,9 +353,6 @@ export namespace CustomHostname {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
@@ -471,9 +456,6 @@ export interface CustomHostnameCreateResponse {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostnameCreateResponse.SSL;
 
   /**
@@ -541,9 +523,6 @@ export interface CustomHostnameCreateResponse {
 }
 
 export namespace CustomHostnameCreateResponse {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -603,9 +582,6 @@ export namespace CustomHostnameCreateResponse {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -665,9 +641,6 @@ export namespace CustomHostnameCreateResponse {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -703,9 +676,6 @@ export namespace CustomHostnameCreateResponse {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
@@ -787,9 +757,6 @@ export interface CustomHostnameListResponse {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostnameListResponse.SSL;
 
   /**
@@ -857,9 +824,6 @@ export interface CustomHostnameListResponse {
 }
 
 export namespace CustomHostnameListResponse {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -919,9 +883,6 @@ export namespace CustomHostnameListResponse {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -981,9 +942,6 @@ export namespace CustomHostnameListResponse {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1019,9 +977,6 @@ export namespace CustomHostnameListResponse {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
@@ -1110,9 +1065,6 @@ export interface CustomHostnameEditResponse {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostnameEditResponse.SSL;
 
   /**
@@ -1180,9 +1132,6 @@ export interface CustomHostnameEditResponse {
 }
 
 export namespace CustomHostnameEditResponse {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -1242,9 +1191,6 @@ export namespace CustomHostnameEditResponse {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -1304,9 +1250,6 @@ export namespace CustomHostnameEditResponse {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1342,9 +1285,6 @@ export namespace CustomHostnameEditResponse {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
@@ -1426,9 +1366,6 @@ export interface CustomHostnameGetResponse {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostnameGetResponse.SSL;
 
   /**
@@ -1496,9 +1433,6 @@ export interface CustomHostnameGetResponse {
 }
 
 export namespace CustomHostnameGetResponse {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -1558,9 +1492,6 @@ export namespace CustomHostnameGetResponse {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -1620,9 +1551,6 @@ export namespace CustomHostnameGetResponse {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1658,9 +1586,6 @@ export namespace CustomHostnameGetResponse {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to

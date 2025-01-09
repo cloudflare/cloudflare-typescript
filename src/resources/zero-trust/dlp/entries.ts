@@ -462,6 +462,11 @@ export declare namespace EntryUpdateParams {
      * Body param:
      */
     type: 'custom';
+
+    /**
+     * Body param:
+     */
+    enabled?: boolean;
   }
 
   export interface Variant1 {
@@ -474,6 +479,11 @@ export declare namespace EntryUpdateParams {
      * Body param:
      */
     type: 'predefined';
+
+    /**
+     * Body param:
+     */
+    enabled?: boolean;
   }
 
   export interface Variant2 {
@@ -486,6 +496,11 @@ export declare namespace EntryUpdateParams {
      * Body param:
      */
     type: 'integration';
+
+    /**
+     * Body param:
+     */
+    enabled?: boolean;
   }
 }
 

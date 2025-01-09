@@ -7348,15 +7348,15 @@ export namespace RuleEditResponse {
 
 export type RuleCreateParams =
   | RuleCreateParams.BlockRule
-  | RuleCreateParams.RulesetsChallengeRule
-  | RuleCreateParams.CompressResponseRule
+  | RuleCreateParams.ChallengeRule
+  | RuleCreateParams.CompressionRule
   | RuleCreateParams.ExecuteRule
-  | RuleCreateParams.RulesetsJSChallengeRule
+  | RuleCreateParams.JavascriptChallengeRule
   | RuleCreateParams.LogRule
   | RuleCreateParams.ManagedChallengeRule
   | RuleCreateParams.RedirectRule
   | RuleCreateParams.RewriteRule
-  | RuleCreateParams.RouteRule
+  | RuleCreateParams.OriginRule
   | RuleCreateParams.ScoreRule
   | RuleCreateParams.ServeErrorRule
   | RuleCreateParams.SetConfigRule
@@ -7421,6 +7421,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.BlockRule.BeforePosition
+      | RuleCreateParams.BlockRule.AfterPosition
+      | RuleCreateParams.BlockRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.BlockRule.Ratelimit;
@@ -7480,6 +7488,38 @@ export declare namespace RuleCreateParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -7531,7 +7571,7 @@ export declare namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsChallengeRule {
+  export interface ChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7572,7 +7612,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.RulesetsChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: RuleCreateParams.ChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -7585,9 +7625,17 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.ChallengeRule.BeforePosition
+      | RuleCreateParams.ChallengeRule.AfterPosition
+      | RuleCreateParams.ChallengeRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.RulesetsChallengeRule.Ratelimit;
+    ratelimit?: RuleCreateParams.ChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -7595,7 +7643,7 @@ export declare namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsChallengeRule {
+  export namespace ChallengeRule {
     /**
      * Configure checks for exposed credentials.
      */
@@ -7609,6 +7657,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -7663,7 +7743,7 @@ export declare namespace RuleCreateParams {
     }
   }
 
-  export interface CompressResponseRule {
+  export interface CompressionRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7689,7 +7769,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.CompressResponseRule.ActionParameters;
+    action_parameters?: RuleCreateParams.CompressionRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7704,7 +7784,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.CompressResponseRule.ExposedCredentialCheck;
+    exposed_credential_check?: RuleCreateParams.CompressionRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -7717,9 +7797,17 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.CompressionRule.BeforePosition
+      | RuleCreateParams.CompressionRule.AfterPosition
+      | RuleCreateParams.CompressionRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.CompressResponseRule.Ratelimit;
+    ratelimit?: RuleCreateParams.CompressionRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -7727,7 +7815,7 @@ export declare namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace CompressResponseRule {
+  export namespace CompressionRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -7763,6 +7851,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -7869,6 +7989,14 @@ export declare namespace RuleCreateParams {
      * Body param: An object configuring the rule's logging behavior.
      */
     logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.ExecuteRule.BeforePosition
+      | RuleCreateParams.ExecuteRule.AfterPosition
+      | RuleCreateParams.ExecuteRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
@@ -8021,6 +8149,38 @@ export declare namespace RuleCreateParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -8072,7 +8232,7 @@ export declare namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsJSChallengeRule {
+  export interface JavascriptChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -8113,7 +8273,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.RulesetsJSChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: RuleCreateParams.JavascriptChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -8126,9 +8286,17 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.JavascriptChallengeRule.BeforePosition
+      | RuleCreateParams.JavascriptChallengeRule.AfterPosition
+      | RuleCreateParams.JavascriptChallengeRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.RulesetsJSChallengeRule.Ratelimit;
+    ratelimit?: RuleCreateParams.JavascriptChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -8136,7 +8304,7 @@ export declare namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsJSChallengeRule {
+  export namespace JavascriptChallengeRule {
     /**
      * Configure checks for exposed credentials.
      */
@@ -8150,6 +8318,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -8258,6 +8458,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.LogRule.BeforePosition
+      | RuleCreateParams.LogRule.AfterPosition
+      | RuleCreateParams.LogRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.LogRule.Ratelimit;
@@ -8282,6 +8490,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -8390,6 +8630,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.ManagedChallengeRule.BeforePosition
+      | RuleCreateParams.ManagedChallengeRule.AfterPosition
+      | RuleCreateParams.ManagedChallengeRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.ManagedChallengeRule.Ratelimit;
@@ -8414,6 +8662,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -8522,6 +8802,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.RedirectRule.BeforePosition
+      | RuleCreateParams.RedirectRule.AfterPosition
+      | RuleCreateParams.RedirectRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.RedirectRule.Ratelimit;
@@ -8614,6 +8902,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -8722,6 +9042,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.RewriteRule.BeforePosition
+      | RuleCreateParams.RewriteRule.AfterPosition
+      | RuleCreateParams.RewriteRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.RewriteRule.Ratelimit;
@@ -8815,6 +9143,38 @@ export declare namespace RuleCreateParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -8866,7 +9226,7 @@ export declare namespace RuleCreateParams {
     }
   }
 
-  export interface RouteRule {
+  export interface OriginRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -8892,7 +9252,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RouteRule.ActionParameters;
+    action_parameters?: RuleCreateParams.OriginRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -8907,7 +9267,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.RouteRule.ExposedCredentialCheck;
+    exposed_credential_check?: RuleCreateParams.OriginRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -8920,9 +9280,17 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.OriginRule.BeforePosition
+      | RuleCreateParams.OriginRule.AfterPosition
+      | RuleCreateParams.OriginRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.RouteRule.Ratelimit;
+    ratelimit?: RuleCreateParams.OriginRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -8930,7 +9298,7 @@ export declare namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RouteRule {
+  export namespace OriginRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -8991,6 +9359,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -9099,6 +9499,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.ScoreRule.BeforePosition
+      | RuleCreateParams.ScoreRule.AfterPosition
+      | RuleCreateParams.ScoreRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.ScoreRule.Ratelimit;
@@ -9134,6 +9542,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -9242,6 +9682,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.ServeErrorRule.BeforePosition
+      | RuleCreateParams.ServeErrorRule.AfterPosition
+      | RuleCreateParams.ServeErrorRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.ServeErrorRule.Ratelimit;
@@ -9286,6 +9734,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -9392,6 +9872,14 @@ export declare namespace RuleCreateParams {
      * Body param: An object configuring the rule's logging behavior.
      */
     logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.SetConfigRule.BeforePosition
+      | RuleCreateParams.SetConfigRule.AfterPosition
+      | RuleCreateParams.SetConfigRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
@@ -9533,6 +10021,38 @@ export declare namespace RuleCreateParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -9638,6 +10158,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.SkipRule.BeforePosition
+      | RuleCreateParams.SkipRule.AfterPosition
+      | RuleCreateParams.SkipRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.SkipRule.Ratelimit;
@@ -9696,6 +10224,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -9802,6 +10362,14 @@ export declare namespace RuleCreateParams {
      * Body param: An object configuring the rule's logging behavior.
      */
     logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.SetCacheSettingsRule.BeforePosition
+      | RuleCreateParams.SetCacheSettingsRule.AfterPosition
+      | RuleCreateParams.SetCacheSettingsRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
@@ -10215,6 +10783,38 @@ export declare namespace RuleCreateParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -10320,6 +10920,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.LogCustomFieldRule.BeforePosition
+      | RuleCreateParams.LogCustomFieldRule.AfterPosition
+      | RuleCreateParams.LogCustomFieldRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.LogCustomFieldRule.Ratelimit;
@@ -10396,6 +11004,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -10504,6 +11144,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.DDoSDynamicRule.BeforePosition
+      | RuleCreateParams.DDoSDynamicRule.AfterPosition
+      | RuleCreateParams.DDoSDynamicRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.DDoSDynamicRule.Ratelimit;
@@ -10528,6 +11176,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -10636,6 +11316,14 @@ export declare namespace RuleCreateParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleCreateParams.ForceConnectionCloseRule.BeforePosition
+      | RuleCreateParams.ForceConnectionCloseRule.AfterPosition
+      | RuleCreateParams.ForceConnectionCloseRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleCreateParams.ForceConnectionCloseRule.Ratelimit;
@@ -10660,6 +11348,38 @@ export declare namespace RuleCreateParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -10729,15 +11449,15 @@ export interface RuleDeleteParams {
 
 export type RuleEditParams =
   | RuleEditParams.BlockRule
-  | RuleEditParams.RulesetsChallengeRule
-  | RuleEditParams.CompressResponseRule
+  | RuleEditParams.ChallengeRule
+  | RuleEditParams.CompressionRule
   | RuleEditParams.ExecuteRule
-  | RuleEditParams.RulesetsJSChallengeRule
+  | RuleEditParams.JavascriptChallengeRule
   | RuleEditParams.LogRule
   | RuleEditParams.ManagedChallengeRule
   | RuleEditParams.RedirectRule
   | RuleEditParams.RewriteRule
-  | RuleEditParams.RouteRule
+  | RuleEditParams.OriginRule
   | RuleEditParams.ScoreRule
   | RuleEditParams.ServeErrorRule
   | RuleEditParams.SetConfigRule
@@ -10802,6 +11522,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.BlockRule.BeforePosition
+      | RuleEditParams.BlockRule.AfterPosition
+      | RuleEditParams.BlockRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.BlockRule.Ratelimit;
@@ -10861,6 +11589,38 @@ export declare namespace RuleEditParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -10912,7 +11672,7 @@ export declare namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsChallengeRule {
+  export interface ChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -10953,7 +11713,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.RulesetsChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: RuleEditParams.ChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -10966,9 +11726,17 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.ChallengeRule.BeforePosition
+      | RuleEditParams.ChallengeRule.AfterPosition
+      | RuleEditParams.ChallengeRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.RulesetsChallengeRule.Ratelimit;
+    ratelimit?: RuleEditParams.ChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -10976,7 +11744,7 @@ export declare namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsChallengeRule {
+  export namespace ChallengeRule {
     /**
      * Configure checks for exposed credentials.
      */
@@ -10990,6 +11758,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -11044,7 +11844,7 @@ export declare namespace RuleEditParams {
     }
   }
 
-  export interface CompressResponseRule {
+  export interface CompressionRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -11070,7 +11870,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.CompressResponseRule.ActionParameters;
+    action_parameters?: RuleEditParams.CompressionRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -11085,7 +11885,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.CompressResponseRule.ExposedCredentialCheck;
+    exposed_credential_check?: RuleEditParams.CompressionRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -11098,9 +11898,17 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.CompressionRule.BeforePosition
+      | RuleEditParams.CompressionRule.AfterPosition
+      | RuleEditParams.CompressionRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.CompressResponseRule.Ratelimit;
+    ratelimit?: RuleEditParams.CompressionRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -11108,7 +11916,7 @@ export declare namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace CompressResponseRule {
+  export namespace CompressionRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -11144,6 +11952,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -11250,6 +12090,14 @@ export declare namespace RuleEditParams {
      * Body param: An object configuring the rule's logging behavior.
      */
     logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.ExecuteRule.BeforePosition
+      | RuleEditParams.ExecuteRule.AfterPosition
+      | RuleEditParams.ExecuteRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
@@ -11402,6 +12250,38 @@ export declare namespace RuleEditParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -11453,7 +12333,7 @@ export declare namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsJSChallengeRule {
+  export interface JavascriptChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -11494,7 +12374,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.RulesetsJSChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: RuleEditParams.JavascriptChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -11507,9 +12387,17 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.JavascriptChallengeRule.BeforePosition
+      | RuleEditParams.JavascriptChallengeRule.AfterPosition
+      | RuleEditParams.JavascriptChallengeRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.RulesetsJSChallengeRule.Ratelimit;
+    ratelimit?: RuleEditParams.JavascriptChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -11517,7 +12405,7 @@ export declare namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsJSChallengeRule {
+  export namespace JavascriptChallengeRule {
     /**
      * Configure checks for exposed credentials.
      */
@@ -11531,6 +12419,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -11639,6 +12559,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.LogRule.BeforePosition
+      | RuleEditParams.LogRule.AfterPosition
+      | RuleEditParams.LogRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.LogRule.Ratelimit;
@@ -11663,6 +12591,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -11771,6 +12731,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.ManagedChallengeRule.BeforePosition
+      | RuleEditParams.ManagedChallengeRule.AfterPosition
+      | RuleEditParams.ManagedChallengeRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.ManagedChallengeRule.Ratelimit;
@@ -11795,6 +12763,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -11903,6 +12903,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.RedirectRule.BeforePosition
+      | RuleEditParams.RedirectRule.AfterPosition
+      | RuleEditParams.RedirectRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.RedirectRule.Ratelimit;
@@ -11995,6 +13003,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -12103,6 +13143,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.RewriteRule.BeforePosition
+      | RuleEditParams.RewriteRule.AfterPosition
+      | RuleEditParams.RewriteRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.RewriteRule.Ratelimit;
@@ -12196,6 +13244,38 @@ export declare namespace RuleEditParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -12247,7 +13327,7 @@ export declare namespace RuleEditParams {
     }
   }
 
-  export interface RouteRule {
+  export interface OriginRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -12273,7 +13353,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RouteRule.ActionParameters;
+    action_parameters?: RuleEditParams.OriginRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -12288,7 +13368,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.RouteRule.ExposedCredentialCheck;
+    exposed_credential_check?: RuleEditParams.OriginRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -12301,9 +13381,17 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.OriginRule.BeforePosition
+      | RuleEditParams.OriginRule.AfterPosition
+      | RuleEditParams.OriginRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.RouteRule.Ratelimit;
+    ratelimit?: RuleEditParams.OriginRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -12311,7 +13399,7 @@ export declare namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RouteRule {
+  export namespace OriginRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -12372,6 +13460,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -12480,6 +13600,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.ScoreRule.BeforePosition
+      | RuleEditParams.ScoreRule.AfterPosition
+      | RuleEditParams.ScoreRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.ScoreRule.Ratelimit;
@@ -12515,6 +13643,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -12623,6 +13783,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.ServeErrorRule.BeforePosition
+      | RuleEditParams.ServeErrorRule.AfterPosition
+      | RuleEditParams.ServeErrorRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.ServeErrorRule.Ratelimit;
@@ -12667,6 +13835,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -12773,6 +13973,14 @@ export declare namespace RuleEditParams {
      * Body param: An object configuring the rule's logging behavior.
      */
     logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.SetConfigRule.BeforePosition
+      | RuleEditParams.SetConfigRule.AfterPosition
+      | RuleEditParams.SetConfigRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
@@ -12914,6 +14122,38 @@ export declare namespace RuleEditParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -13019,6 +14259,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.SkipRule.BeforePosition
+      | RuleEditParams.SkipRule.AfterPosition
+      | RuleEditParams.SkipRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.SkipRule.Ratelimit;
@@ -13077,6 +14325,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -13183,6 +14463,14 @@ export declare namespace RuleEditParams {
      * Body param: An object configuring the rule's logging behavior.
      */
     logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.SetCacheSettingsRule.BeforePosition
+      | RuleEditParams.SetCacheSettingsRule.AfterPosition
+      | RuleEditParams.SetCacheSettingsRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
@@ -13596,6 +14884,38 @@ export declare namespace RuleEditParams {
     }
 
     /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
      * An object configuring the rule's ratelimit behavior.
      */
     export interface Ratelimit {
@@ -13701,6 +15021,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.LogCustomFieldRule.BeforePosition
+      | RuleEditParams.LogCustomFieldRule.AfterPosition
+      | RuleEditParams.LogCustomFieldRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.LogCustomFieldRule.Ratelimit;
@@ -13777,6 +15105,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -13885,6 +15245,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.DDoSDynamicRule.BeforePosition
+      | RuleEditParams.DDoSDynamicRule.AfterPosition
+      | RuleEditParams.DDoSDynamicRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.DDoSDynamicRule.Ratelimit;
@@ -13909,6 +15277,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
@@ -14017,6 +15417,14 @@ export declare namespace RuleEditParams {
     logging?: LoggingParam;
 
     /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | RuleEditParams.ForceConnectionCloseRule.BeforePosition
+      | RuleEditParams.ForceConnectionCloseRule.AfterPosition
+      | RuleEditParams.ForceConnectionCloseRule.IndexPosition;
+
+    /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
     ratelimit?: RuleEditParams.ForceConnectionCloseRule.Ratelimit;
@@ -14041,6 +15449,38 @@ export declare namespace RuleEditParams {
        * Expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
     }
 
     /**
