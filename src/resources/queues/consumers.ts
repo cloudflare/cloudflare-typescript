@@ -198,6 +198,11 @@ export declare namespace ConsumerCreateParams {
     account_id: string;
 
     /**
+     * Body param:
+     */
+    dead_letter_queue?: string;
+
+    /**
      * Body param: Name of a Worker
      */
     script_name?: string;
@@ -254,6 +259,11 @@ export declare namespace ConsumerCreateParams {
     /**
      * Body param:
      */
+    dead_letter_queue?: string;
+
+    /**
+     * Body param:
+     */
     settings?: ConsumerCreateParams.MqHTTPConsumer.Settings;
 
     /**
@@ -299,6 +309,11 @@ export declare namespace ConsumerUpdateParams {
      * Path param: A Resource identifier.
      */
     account_id: string;
+
+    /**
+     * Body param:
+     */
+    dead_letter_queue?: string;
 
     /**
      * Body param: Name of a Worker
@@ -353,6 +368,11 @@ export declare namespace ConsumerUpdateParams {
      * Path param: A Resource identifier.
      */
     account_id: string;
+
+    /**
+     * Body param:
+     */
+    dead_letter_queue?: string;
 
     /**
      * Body param:

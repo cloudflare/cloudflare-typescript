@@ -61,6 +61,7 @@ describe('resource entries', () => {
       name: 'name',
       pattern: { regex: 'regex', validation: 'luhn' },
       type: 'custom',
+      enabled: true,
     });
   });
 
