@@ -22,11 +22,16 @@ import * as ApplicationsPoliciesAPI from './policies';
 import {
   Policies,
   PolicyCreateParams,
+  PolicyCreateResponse,
   PolicyDeleteParams,
   PolicyDeleteResponse,
   PolicyGetParams,
+  PolicyGetResponse,
   PolicyListParams,
+  PolicyListResponse,
+  PolicyListResponsesSinglePage,
   PolicyUpdateParams,
+  PolicyUpdateResponse,
 } from './policies';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import {
@@ -290,8 +295,6 @@ export class Applications extends APIResource {
 }
 
 export class ApplicationListResponsesSinglePage extends SinglePage<ApplicationListResponse> {}
-
-export class ApplicationPoliciesSinglePage extends SinglePage<ApplicationPolicy> {}
 
 export type AllowedHeaders = string;
 
@@ -1333,6 +1336,17 @@ export interface ApplicationPolicy {
    */
   id?: string;
 
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
   created_at?: string;
 
   /**
@@ -1354,15 +1368,39 @@ export interface ApplicationPolicy {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
 
   updated_at?: string;
 }
@@ -2493,7 +2531,7 @@ export namespace ApplicationCreateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<SelfHostedApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -2554,6 +2592,14 @@ export namespace ApplicationCreateResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -2701,7 +2747,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<SaaSApplication.Policy>;
 
     saas_app?: ApplicationsAPI.SAMLSaaSApp | ApplicationsAPI.OIDCSaaSApp;
 
@@ -2726,6 +2772,14 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SaaSApplication {
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2941,7 +2995,7 @@ export namespace ApplicationCreateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -3002,6 +3056,14 @@ export namespace ApplicationCreateResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -3219,7 +3281,7 @@ export namespace ApplicationCreateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserVNCApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -3280,6 +3342,14 @@ export namespace ApplicationCreateResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -3448,7 +3518,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<AppLauncherApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -3512,6 +3582,14 @@ export namespace ApplicationCreateResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -3680,7 +3758,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<DeviceEnrollmentPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -3744,6 +3822,14 @@ export namespace ApplicationCreateResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -3912,7 +3998,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserIsolationPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -3976,6 +4062,14 @@ export namespace ApplicationCreateResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -4293,6 +4387,12 @@ export namespace ApplicationCreateResponse {
        */
       id?: string;
 
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -4325,6 +4425,38 @@ export namespace ApplicationCreateResponse {
       require?: Array<AccessAPI.AccessRule>;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+
+          /**
+           * Enables using Identity Provider email alias as SSH username.
+           */
+          allow_email_alias?: boolean;
+        }
+      }
     }
 
     /**
@@ -4555,7 +4687,7 @@ export namespace ApplicationUpdateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<SelfHostedApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -4616,6 +4748,14 @@ export namespace ApplicationUpdateResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -4763,7 +4903,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<SaaSApplication.Policy>;
 
     saas_app?: ApplicationsAPI.SAMLSaaSApp | ApplicationsAPI.OIDCSaaSApp;
 
@@ -4788,6 +4928,14 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SaaSApplication {
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5003,7 +5151,7 @@ export namespace ApplicationUpdateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -5064,6 +5212,14 @@ export namespace ApplicationUpdateResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -5281,7 +5437,7 @@ export namespace ApplicationUpdateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserVNCApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -5342,6 +5498,14 @@ export namespace ApplicationUpdateResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -5510,7 +5674,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<AppLauncherApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -5574,6 +5738,14 @@ export namespace ApplicationUpdateResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -5742,7 +5914,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<DeviceEnrollmentPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -5806,6 +5978,14 @@ export namespace ApplicationUpdateResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -5974,7 +6154,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserIsolationPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -6038,6 +6218,14 @@ export namespace ApplicationUpdateResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -6355,6 +6543,12 @@ export namespace ApplicationUpdateResponse {
        */
       id?: string;
 
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -6387,6 +6581,38 @@ export namespace ApplicationUpdateResponse {
       require?: Array<AccessAPI.AccessRule>;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+
+          /**
+           * Enables using Identity Provider email alias as SSH username.
+           */
+          allow_email_alias?: boolean;
+        }
+      }
     }
 
     /**
@@ -6617,7 +6843,7 @@ export namespace ApplicationListResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<SelfHostedApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -6678,6 +6904,14 @@ export namespace ApplicationListResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -6825,7 +7059,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<SaaSApplication.Policy>;
 
     saas_app?: ApplicationsAPI.SAMLSaaSApp | ApplicationsAPI.OIDCSaaSApp;
 
@@ -6850,6 +7084,14 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SaaSApplication {
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -7065,7 +7307,7 @@ export namespace ApplicationListResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -7126,6 +7368,14 @@ export namespace ApplicationListResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -7343,7 +7593,7 @@ export namespace ApplicationListResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserVNCApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -7404,6 +7654,14 @@ export namespace ApplicationListResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -7572,7 +7830,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<AppLauncherApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -7636,6 +7894,14 @@ export namespace ApplicationListResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -7804,7 +8070,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<DeviceEnrollmentPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -7868,6 +8134,14 @@ export namespace ApplicationListResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -8036,7 +8310,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserIsolationPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -8100,6 +8374,14 @@ export namespace ApplicationListResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -8417,6 +8699,12 @@ export namespace ApplicationListResponse {
        */
       id?: string;
 
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -8449,6 +8737,38 @@ export namespace ApplicationListResponse {
       require?: Array<AccessAPI.AccessRule>;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+
+          /**
+           * Enables using Identity Provider email alias as SSH username.
+           */
+          allow_email_alias?: boolean;
+        }
+      }
     }
 
     /**
@@ -8686,7 +9006,7 @@ export namespace ApplicationGetResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<SelfHostedApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -8747,6 +9067,14 @@ export namespace ApplicationGetResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -8894,7 +9222,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<SaaSApplication.Policy>;
 
     saas_app?: ApplicationsAPI.SAMLSaaSApp | ApplicationsAPI.OIDCSaaSApp;
 
@@ -8919,6 +9247,14 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SaaSApplication {
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -9134,7 +9470,7 @@ export namespace ApplicationGetResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -9195,6 +9531,14 @@ export namespace ApplicationGetResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -9412,7 +9756,7 @@ export namespace ApplicationGetResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserVNCApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -9473,6 +9817,14 @@ export namespace ApplicationGetResponse {
        * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -9641,7 +9993,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<AppLauncherApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -9705,6 +10057,14 @@ export namespace ApplicationGetResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -9873,7 +10233,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<DeviceEnrollmentPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -9937,6 +10297,14 @@ export namespace ApplicationGetResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -10105,7 +10473,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<BrowserIsolationPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -10169,6 +10537,14 @@ export namespace ApplicationGetResponse {
        * The title shown on the landing page.
        */
       title?: string;
+    }
+
+    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
     }
 
     /**
@@ -10486,6 +10862,12 @@ export namespace ApplicationGetResponse {
        */
       id?: string;
 
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -10518,6 +10900,38 @@ export namespace ApplicationGetResponse {
       require?: Array<AccessAPI.AccessRule>;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+
+          /**
+           * Enables using Identity Provider email alias as SSH username.
+           */
+          allow_email_alias?: boolean;
+        }
+      }
     }
 
     /**
@@ -13048,6 +13462,12 @@ export declare namespace ApplicationCreateParams {
       name: string;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -13058,6 +13478,38 @@ export declare namespace ApplicationCreateParams {
        * meet all of the Require rules.
        */
       require?: Array<AccessAPI.AccessRuleParam>;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+
+          /**
+           * Enables using Identity Provider email alias as SSH username.
+           */
+          allow_email_alias?: boolean;
+        }
+      }
     }
   }
 }
@@ -15487,6 +15939,12 @@ export declare namespace ApplicationUpdateParams {
       name: string;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -15497,6 +15955,38 @@ export declare namespace ApplicationUpdateParams {
        * meet all of the Require rules.
        */
       require?: Array<AccessAPI.AccessRuleParam>;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+
+          /**
+           * Enables using Identity Provider email alias as SSH username.
+           */
+          allow_email_alias?: boolean;
+        }
+      }
     }
   }
 }
@@ -15576,6 +16066,7 @@ Applications.CAs = CAs;
 Applications.CAsSinglePage = CAsSinglePage;
 Applications.UserPolicyChecks = UserPolicyChecks;
 Applications.Policies = Policies;
+Applications.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
 Applications.PolicyTests = PolicyTests;
 
 export declare namespace Applications {
@@ -15634,7 +16125,12 @@ export declare namespace Applications {
 
   export {
     Policies as Policies,
+    type PolicyCreateResponse as PolicyCreateResponse,
+    type PolicyUpdateResponse as PolicyUpdateResponse,
+    type PolicyListResponse as PolicyListResponse,
     type PolicyDeleteResponse as PolicyDeleteResponse,
+    type PolicyGetResponse as PolicyGetResponse,
+    PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
     type PolicyCreateParams as PolicyCreateParams,
     type PolicyUpdateParams as PolicyUpdateParams,
     type PolicyListParams as PolicyListParams,

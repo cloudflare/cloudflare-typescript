@@ -9,9 +9,9 @@ export class Apps extends APIResource {
    * Creates a new App for an account
    */
   create(params: AppCreateParams, options?: Core.RequestOptions): Core.APIPromise<AppCreateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/magic/apps`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/magic/apps`, { body, ...options }) as Core.APIPromise<{
         result: AppCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,10 +25,10 @@ export class Apps extends APIResource {
     params: AppUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AppUpdateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/apps/${accountAppId}`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: AppUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -221,88 +221,58 @@ export interface AppDeleteResponse {
   type?: string;
 }
 
-export type AppCreateParams = AppCreateParams.Hostnames | AppCreateParams.Subnets;
+export interface AppCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
 
-export declare namespace AppCreateParams {
-  export interface Hostnames {
-    /**
-     * Path param: Identifier
-     */
-    account_id: string;
+  /**
+   * Body param: Display name for the app.
+   */
+  name: string;
 
-    /**
-     * Body param:
-     */
-    body: unknown;
-  }
+  /**
+   * Body param: Category of the app.
+   */
+  type: string;
 
-  export interface Subnets {
-    /**
-     * Path param: Identifier
-     */
-    account_id: string;
+  /**
+   * Body param: FQDNs to associate with traffic decisions.
+   */
+  hostnames?: Array<string>;
 
-    /**
-     * Body param:
-     */
-    body: unknown;
-  }
+  /**
+   * Body param: CIDRs to associate with traffic decisions.
+   */
+  ip_subnets?: Array<string>;
 }
 
-export type AppUpdateParams =
-  | AppUpdateParams.UpdateAppName
-  | AppUpdateParams.UpdateAppType
-  | AppUpdateParams.UpdateAppHostnames
-  | AppUpdateParams.UpdateAppSubnets;
+export interface AppUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
 
-export declare namespace AppUpdateParams {
-  export interface UpdateAppName {
-    /**
-     * Path param: Identifier
-     */
-    account_id: string;
+  /**
+   * Body param: FQDNs to associate with traffic decisions.
+   */
+  hostnames?: Array<string>;
 
-    /**
-     * Body param:
-     */
-    body: unknown;
-  }
+  /**
+   * Body param: CIDRs to associate with traffic decisions.
+   */
+  ip_subnets?: Array<string>;
 
-  export interface UpdateAppType {
-    /**
-     * Path param: Identifier
-     */
-    account_id: string;
+  /**
+   * Body param: Display name for the app.
+   */
+  name?: string;
 
-    /**
-     * Body param:
-     */
-    body: unknown;
-  }
-
-  export interface UpdateAppHostnames {
-    /**
-     * Path param: Identifier
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body: unknown;
-  }
-
-  export interface UpdateAppSubnets {
-    /**
-     * Path param: Identifier
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body: unknown;
-  }
+  /**
+   * Body param: Category of the app.
+   */
+  type?: string;
 }
 
 export interface AppListParams {
