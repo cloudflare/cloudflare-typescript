@@ -12,8 +12,8 @@ const client = new Cloudflare({
 describe('resource accounts', () => {
   test('update: only required params', async () => {
     const responsePromise = client.addressing.addressMaps.accounts.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      '055817b111884e0227e1be16a0be6ee0',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,16 +25,16 @@ describe('resource accounts', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.accounts.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.addressing.addressMaps.accounts.update('055817b111884e0227e1be16a0be6ee0', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
       body: {},
     });
   });
 
   test('delete: only required params', async () => {
     const responsePromise = client.addressing.addressMaps.accounts.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '055817b111884e0227e1be16a0be6ee0',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,8 +46,8 @@ describe('resource accounts', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.addressing.addressMaps.accounts.delete('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.addressing.addressMaps.accounts.delete('055817b111884e0227e1be16a0be6ee0', {
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
 });
