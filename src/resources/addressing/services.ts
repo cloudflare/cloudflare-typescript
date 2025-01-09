@@ -28,8 +28,7 @@ export class ServiceListResponsesSinglePage extends SinglePage<ServiceListRespon
 
 export interface ServiceListResponse {
   /**
-   * Identifier of a Service on the Cloudflare network. Available services and their
-   * IDs may be found in the **List Services** endpoint.
+   * Identifier
    */
   id?: string;
 
@@ -41,7 +40,7 @@ export interface ServiceListResponse {
 
 export interface ServiceListParams {
   /**
-   * Identifier of a Cloudflare account.
+   * Identifier
    */
   account_id: string;
 }
