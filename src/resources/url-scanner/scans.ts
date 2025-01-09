@@ -314,7 +314,7 @@ export namespace ScanGetResponse {
 
       response: Request.Response;
 
-      requests?: Array<Request.Request>;
+      requests?: Array<Request.RequestItem>;
     }
 
     export namespace Request {
@@ -518,20 +518,20 @@ export namespace ScanGetResponse {
         }
       }
 
-      export interface Request {
+      export interface RequestItem {
         documentURL: string;
 
         frameId: string;
 
         hasUserGesture: boolean;
 
-        initiator: Request.Initiator;
+        initiator: RequestItem.Initiator;
 
         loaderId: string;
 
         redirectHasExtraInfo: boolean;
 
-        request: Request.Request;
+        request: RequestItem.Request;
 
         requestId: string;
 
@@ -540,7 +540,7 @@ export namespace ScanGetResponse {
         wallTime: number;
       }
 
-      export namespace Request {
+      export namespace RequestItem {
         export interface Initiator {
           type: string;
         }
