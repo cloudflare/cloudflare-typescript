@@ -26,7 +26,7 @@ describe('resource doh', () => {
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.organizations.doh.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jwt_duration: '800h',
+      doh_jwt_duration: '800h',
       service_token_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     });
   });

@@ -12,8 +12,8 @@ const client = new Cloudflare({
 describe('resource serviceBindings', () => {
   test('create: only required params', async () => {
     const responsePromise = client.addressing.prefixes.serviceBindings.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,9 +26,9 @@ describe('resource serviceBindings', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.addressing.prefixes.serviceBindings.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      '2af39739cc4e3b5910c918468bb89828',
       {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        account_id: '258def64c72dae45f3e4c8516e2111f2',
         cidr: '192.0.2.0/24',
         service_id: '2db684ee7ca04e159946fd05b99e1bcd',
       },
@@ -37,8 +37,8 @@ describe('resource serviceBindings', () => {
 
   test('list: only required params', async () => {
     const responsePromise = client.addressing.prefixes.serviceBindings.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -51,16 +51,16 @@ describe('resource serviceBindings', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.addressing.prefixes.serviceBindings.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
   });
 
   test('delete: only required params', async () => {
     const responsePromise = client.addressing.prefixes.serviceBindings.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      '0429b49b6a5155297b78e75a44b09e14',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,17 +73,17 @@ describe('resource serviceBindings', () => {
 
   test('delete: required and optional params', async () => {
     const response = await client.addressing.prefixes.serviceBindings.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      '0429b49b6a5155297b78e75a44b09e14',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
   });
 
   test('get: only required params', async () => {
     const responsePromise = client.addressing.prefixes.serviceBindings.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      '0429b49b6a5155297b78e75a44b09e14',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -96,9 +96,9 @@ describe('resource serviceBindings', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.addressing.prefixes.serviceBindings.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      '2af39739cc4e3b5910c918468bb89828',
+      '0429b49b6a5155297b78e75a44b09e14',
+      { account_id: '258def64c72dae45f3e4c8516e2111f2' },
     );
   });
 });
