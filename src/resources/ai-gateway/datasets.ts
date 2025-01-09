@@ -98,6 +98,10 @@ export class DatasetListResponsesV4PagePaginationArray extends V4PagePaginationA
 export interface DatasetCreateResponse {
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   created_at: string;
 
   enable: boolean;
@@ -139,6 +143,10 @@ export namespace DatasetCreateResponse {
 
 export interface DatasetUpdateResponse {
   id: string;
+
+  account_id: string;
+
+  account_tag: string;
 
   created_at: string;
 
@@ -182,6 +190,10 @@ export namespace DatasetUpdateResponse {
 export interface DatasetListResponse {
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   created_at: string;
 
   enable: boolean;
@@ -224,6 +236,10 @@ export namespace DatasetListResponse {
 export interface DatasetDeleteResponse {
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   created_at: string;
 
   enable: boolean;
@@ -265,6 +281,10 @@ export namespace DatasetDeleteResponse {
 
 export interface DatasetGetResponse {
   id: string;
+
+  account_id: string;
+
+  account_tag: string;
 
   created_at: string;
 
@@ -410,16 +430,6 @@ export interface DatasetListParams extends V4PagePaginationArrayParams {
    * Query param:
    */
   name?: string;
-
-  /**
-   * Query param: Order By Column Name
-   */
-  order_by?: string;
-
-  /**
-   * Query param: Order By Direction
-   */
-  order_by_direction?: 'asc' | 'desc';
 
   /**
    * Query param: Search by id, name, filters
