@@ -45,6 +45,14 @@ export interface DOHUpdateResponse {
   created_at?: string;
 
   /**
+   * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`.
+   * Valid time units are: ns, us (or µs), ms, s, m, h. Note that the maximum
+   * duration for this setting is the same as the key rotation period on the account.
+   * Default expiration is 24h
+   */
+  doh_jwt_duration?: string;
+
+  /**
    * The duration for how long the service token will be valid. Must be in the format
    * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
    * default is 1 year in hours (8760h).
@@ -52,14 +60,6 @@ export interface DOHUpdateResponse {
   duration?: string;
 
   expires_at?: string;
-
-  /**
-   * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`.
-   * Valid time units are: ns, us (or µs), ms, s, m, h. Note that the maximum
-   * duration for this setting is the same as the key rotation period on the account.
-   * Default expiration is 24h
-   */
-  jwt_duration?: string;
 
   /**
    * The name of the service token.
@@ -84,6 +84,13 @@ export interface DOHGetResponse {
   created_at?: string;
 
   /**
+   * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`.
+   * Valid time units are: ns, us (or µs), ms, s, m, h. Note that the maximum
+   * duration for this setting is the same as the key rotation period on the account.
+   */
+  doh_jwt_duration?: string;
+
+  /**
    * The duration for how long the service token will be valid. Must be in the format
    * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
    * default is 1 year in hours (8760h).
@@ -91,13 +98,6 @@ export interface DOHGetResponse {
   duration?: string;
 
   expires_at?: string;
-
-  /**
-   * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`.
-   * Valid time units are: ns, us (or µs), ms, s, m, h. Note that the maximum
-   * duration for this setting is the same as the key rotation period on the account.
-   */
-  jwt_duration?: string;
 
   /**
    * The name of the service token.
@@ -119,7 +119,7 @@ export interface DOHUpdateParams {
    * maximum duration for this setting is the same as the key rotation period on the
    * account. Default expiration is 24h
    */
-  jwt_duration?: string;
+  doh_jwt_duration?: string;
 
   /**
    * Body param: The uuid of the service token you want to use for DoH authentication
