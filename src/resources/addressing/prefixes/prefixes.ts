@@ -121,12 +121,12 @@ export class PrefixesSinglePage extends SinglePage<Prefix> {}
 
 export interface Prefix {
   /**
-   * Identifier
+   * Identifier of an IP Prefix.
    */
   id?: string;
 
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id?: string;
 
@@ -223,7 +223,7 @@ export namespace PrefixDeleteResponse {
 
 export interface PrefixCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -245,21 +245,21 @@ export interface PrefixCreateParams {
 
 export interface PrefixListParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface PrefixDeleteParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface PrefixEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -271,7 +271,7 @@ export interface PrefixEditParams {
 
 export interface PrefixGetParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }

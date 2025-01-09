@@ -80,6 +80,10 @@ export class EvaluationListResponsesV4PagePaginationArray extends V4PagePaginati
 export interface EvaluationCreateResponse {
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   created_at: string;
 
   datasets: Array<EvaluationCreateResponse.Dataset>;
@@ -103,6 +107,10 @@ export interface EvaluationCreateResponse {
 export namespace EvaluationCreateResponse {
   export interface Dataset {
     id: string;
+
+    account_id: string;
+
+    account_tag: string;
 
     created_at: string;
 
@@ -167,6 +175,10 @@ export namespace EvaluationCreateResponse {
 export interface EvaluationListResponse {
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   created_at: string;
 
   datasets: Array<EvaluationListResponse.Dataset>;
@@ -190,6 +202,10 @@ export interface EvaluationListResponse {
 export namespace EvaluationListResponse {
   export interface Dataset {
     id: string;
+
+    account_id: string;
+
+    account_tag: string;
 
     created_at: string;
 
@@ -254,6 +270,10 @@ export namespace EvaluationListResponse {
 export interface EvaluationDeleteResponse {
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   created_at: string;
 
   datasets: Array<EvaluationDeleteResponse.Dataset>;
@@ -277,6 +297,10 @@ export interface EvaluationDeleteResponse {
 export namespace EvaluationDeleteResponse {
   export interface Dataset {
     id: string;
+
+    account_id: string;
+
+    account_tag: string;
 
     created_at: string;
 
@@ -341,6 +365,10 @@ export namespace EvaluationDeleteResponse {
 export interface EvaluationGetResponse {
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   created_at: string;
 
   datasets: Array<EvaluationGetResponse.Dataset>;
@@ -364,6 +392,10 @@ export interface EvaluationGetResponse {
 export namespace EvaluationGetResponse {
   export interface Dataset {
     id: string;
+
+    account_id: string;
+
+    account_tag: string;
 
     created_at: string;
 
@@ -457,16 +489,6 @@ export interface EvaluationListParams extends V4PagePaginationArrayParams {
    * Query param:
    */
   name?: string;
-
-  /**
-   * Query param: Order By Column Name
-   */
-  order_by?: string;
-
-  /**
-   * Query param: Order By Direction
-   */
-  order_by_direction?: 'asc' | 'desc';
 
   /**
    * Query param:

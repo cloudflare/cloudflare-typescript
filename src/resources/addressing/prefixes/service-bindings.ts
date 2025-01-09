@@ -86,7 +86,7 @@ export class ServiceBindingsSinglePage extends SinglePage<ServiceBinding> {}
 
 export interface ServiceBinding {
   /**
-   * Identifier
+   * Identifier of a Service Binding.
    */
   id?: string;
 
@@ -101,7 +101,8 @@ export interface ServiceBinding {
   provisioning?: ServiceBinding.Provisioning;
 
   /**
-   * Identifier
+   * Identifier of a Service on the Cloudflare network. Available services and their
+   * IDs may be found in the **List Services** endpoint.
    */
   service_id?: string;
 
@@ -137,7 +138,7 @@ export interface ServiceBindingDeleteResponse {
 
 export interface ServiceBindingCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -147,28 +148,29 @@ export interface ServiceBindingCreateParams {
   cidr?: string;
 
   /**
-   * Body param: Identifier
+   * Body param: Identifier of a Service on the Cloudflare network. Available
+   * services and their IDs may be found in the **List Services** endpoint.
    */
   service_id?: string;
 }
 
 export interface ServiceBindingListParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface ServiceBindingDeleteParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface ServiceBindingGetParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
