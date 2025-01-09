@@ -132,11 +132,49 @@ export interface ItemUpdateResponse {
   operation_id?: string;
 }
 
-/**
- * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
- * maximum of /64.
- */
-export type ItemListResponse = string | ListsAPI.Redirect | ListsAPI.Hostname | number;
+export interface ItemListResponse {
+  /**
+   * The unique ID of the list.
+   */
+  id?: string;
+
+  /**
+   * A non-negative 32 bit integer
+   */
+  asn?: number;
+
+  /**
+   * An informative summary of the list item.
+   */
+  comment?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was created.
+   */
+  created_on?: string;
+
+  /**
+   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+   * 0 to 9, wildcards (\*), and the hyphen (-).
+   */
+  hostname?: ListsAPI.Hostname;
+
+  /**
+   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+   * maximum of /64.
+   */
+  ip?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The definition of the redirect.
+   */
+  redirect?: ListsAPI.Redirect;
+}
 
 export interface ItemDeleteResponse {
   /**
@@ -145,11 +183,49 @@ export interface ItemDeleteResponse {
   operation_id?: string;
 }
 
-/**
- * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
- * maximum of /64.
- */
-export type ItemGetResponse = string | ListsAPI.Redirect | ListsAPI.Hostname | number;
+export interface ItemGetResponse {
+  /**
+   * The unique ID of the list.
+   */
+  id?: string;
+
+  /**
+   * A non-negative 32 bit integer
+   */
+  asn?: number;
+
+  /**
+   * An informative summary of the list item.
+   */
+  comment?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was created.
+   */
+  created_on?: string;
+
+  /**
+   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+   * 0 to 9, wildcards (\*), and the hyphen (-).
+   */
+  hostname?: ListsAPI.Hostname;
+
+  /**
+   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+   * maximum of /64.
+   */
+  ip?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The definition of the redirect.
+   */
+  redirect?: ListsAPI.Redirect;
+}
 
 export interface ItemCreateParams {
   /**
