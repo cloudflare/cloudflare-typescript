@@ -114,7 +114,7 @@ export namespace IPDeleteResponse {
 
 export interface IPUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -126,7 +126,7 @@ export interface IPUpdateParams {
 
 export interface IPDeleteParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
