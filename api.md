@@ -2357,7 +2357,7 @@ Types:
 
 Methods:
 
-- <code title="post /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">create</a>([ ...operations ]) -> OperationCreateResponse</code>
+- <code title="post /zones/{zone_id}/api_gateway/operations/item">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">create</a>({ ...params }) -> OperationCreateResponse</code>
 - <code title="get /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">list</a>({ ...params }) -> OperationListResponsesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">delete</a>(operationId, { ...params }) -> OperationDeleteResponse</code>
 - <code title="delete /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">bulkDelete</a>({ ...params }) -> OperationBulkDeleteResponse</code>
