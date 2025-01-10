@@ -99,6 +99,7 @@ export class Scans extends APIResource {
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/screenshots/${scanId}.png`, {
       query,
       ...options,
+      headers: { Accept: 'image/png', ...options?.headers },
       __binaryResponse: true,
     });
   }

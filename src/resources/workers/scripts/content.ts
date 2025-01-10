@@ -50,6 +50,7 @@ export class Content extends APIResource {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/content/v2`, {
       ...options,
+      headers: { Accept: 'string', ...options?.headers },
       __binaryResponse: true,
     });
   }

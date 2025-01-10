@@ -16,6 +16,7 @@ export class Content extends APIResource {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/snippets/${snippetName}/content`, {
       ...options,
+      headers: { Accept: 'multipart/form-data', ...options?.headers },
       __binaryResponse: true,
     });
   }

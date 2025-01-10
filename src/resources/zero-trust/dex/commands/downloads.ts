@@ -17,6 +17,7 @@ export class Downloads extends APIResource {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/dex/commands/${commandId}/downloads/${filename}`, {
       ...options,
+      headers: { Accept: 'application/zip', ...options?.headers },
       __binaryResponse: true,
     });
   }

@@ -53,7 +53,7 @@ export class Content extends APIResource {
     const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
-      { ...options, __binaryResponse: true },
+      { ...options, headers: { Accept: 'string', ...options?.headers }, __binaryResponse: true },
     );
   }
 }
