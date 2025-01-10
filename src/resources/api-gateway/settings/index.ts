@@ -6,4 +6,4 @@ export {
   type SchemaValidationEditParams,
   type SchemaValidationGetParams,
 } from './schema-validation';
-export { type Settings } from './settings';
+export { Settings } from './settings';

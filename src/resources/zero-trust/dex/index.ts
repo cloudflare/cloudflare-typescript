@@ -24,12 +24,7 @@ export {
   type FleetStatusOverTimeParams,
 } from './fleet-status/index';
 export { HTTPTests, type HTTPDetails, type HTTPTestGetParams } from './http-tests/index';
-export {
-  TestsV4PagePagination,
-  type Tests,
-  type AggregateTimePeriod,
-  type TestListParams,
-} from './tests/index';
+export { TestsV4PagePagination, Tests, type AggregateTimePeriod, type TestListParams } from './tests/index';
 export { TracerouteTestResults } from './traceroute-test-results/index';
 export {
   TracerouteTests,

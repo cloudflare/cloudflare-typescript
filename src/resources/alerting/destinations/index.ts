@@ -16,7 +16,7 @@ export {
 } from './pagerduty';
 export {
   WebhooksSinglePage,
-  type Webhooks,
+  Webhooks,
   type WebhookCreateResponse,
   type WebhookUpdateResponse,
   type WebhookDeleteResponse,
