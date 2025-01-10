@@ -32,6 +32,7 @@ export class LOADocuments extends APIResource {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/addressing/loa_documents/${loaDocumentId}/download`, {
       ...options,
+      headers: { Accept: 'application/pdf', ...options?.headers },
       __binaryResponse: true,
     });
   }

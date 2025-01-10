@@ -13,6 +13,7 @@ export class Blobs extends APIResource {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/images/v1/${imageId}/blob`, {
       ...options,
+      headers: { Accept: 'image/*', ...options?.headers },
       __binaryResponse: true,
     });
   }
