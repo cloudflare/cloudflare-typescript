@@ -29,6 +29,14 @@ export {
 } from './downloads';
 export { Embed, type EmbedGetResponse, type EmbedGetParams } from './embed';
 export {
+  Keys,
+  type KeyDeleteResponse,
+  type KeyGetResponse,
+  type KeyCreateParams,
+  type KeyDeleteParams,
+  type KeyGetParams,
+} from './keys';
+export {
   LiveInputs,
   type LiveInput,
   type LiveInputListResponse,
@@ -60,11 +68,3 @@ export {
   type WebhookDeleteParams,
   type WebhookGetParams,
 } from './webhooks';
-export {
-  type Keys,
-  type KeyDeleteResponse,
-  type KeyGetResponse,
-  type KeyCreateParams,
-  type KeyDeleteParams,
-  type KeyGetParams,
-} from './keys';

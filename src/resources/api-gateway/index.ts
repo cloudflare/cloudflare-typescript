@@ -47,4 +47,4 @@ export {
   type UserSchemaGetParams,
 } from './user-schemas/index';
 export { Schemas, type SchemaListResponse, type SchemaListParams } from './schemas';
-export { type Settings } from './settings/index';
+export { Settings } from './settings/index';
