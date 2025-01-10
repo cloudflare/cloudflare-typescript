@@ -2,7 +2,7 @@
 
 export { ASN, type ASNGetParams } from './asn/index';
 export { AttackSurfaceReport } from './attack-surface-report/index';
-export { DNSV4PagePagination, type DNS, type DNSListParams } from './dns';
+export { DNSV4PagePagination, DNS, type DNSListParams } from './dns';
 export {
   DomainHistoryResource,
   type DomainHistory,
@@ -33,4 +33,4 @@ export {
   type MiscategorizationCreateParams,
 } from './miscategorizations';
 export { SinkholesSinglePage, Sinkholes, type Sinkhole, type SinkholeListParams } from './sinkholes';
-export { type Whois, type WhoisGetResponse, type WhoisGetParams } from './whois';
+export { Whois, type WhoisGetResponse, type WhoisGetParams } from './whois';

@@ -18,7 +18,7 @@ export {
 } from './bgp-prefixes';
 export {
   DelegationsSinglePage,
-  type Delegations,
+  Delegations,
   type DelegationDeleteResponse,
   type DelegationCreateParams,
   type DelegationListParams,
