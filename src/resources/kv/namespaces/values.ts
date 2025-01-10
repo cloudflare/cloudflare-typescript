@@ -70,7 +70,11 @@ export class Values extends APIResource {
     const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-      { ...options, __binaryResponse: true },
+      {
+        ...options,
+        headers: { Accept: 'application/octet-stream', ...options?.headers },
+        __binaryResponse: true,
+      },
     );
   }
 }

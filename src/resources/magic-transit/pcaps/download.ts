@@ -12,6 +12,7 @@ export class Download extends APIResource {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/pcaps/${pcapId}/download`, {
       ...options,
+      headers: { Accept: 'application/vnd.tcpdump.pcap', ...options?.headers },
       __binaryResponse: true,
     });
   }
