@@ -10,7 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource audit', () => {
-  // TODO: investigate broken test
+  // TODO:investigate broken test
   test.skip('list: only required params', async () => {
     const responsePromise = client.accounts.logs.audit.list({
       account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
@@ -26,7 +26,7 @@ describe('resource audit', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
+  // TODO:investigate broken test
   test.skip('list: required and optional params', async () => {
     const response = await client.accounts.logs.audit.list({
       account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
