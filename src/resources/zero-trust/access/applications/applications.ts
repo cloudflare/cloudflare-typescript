@@ -2495,7 +2495,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.Destination>;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -2580,18 +2580,54 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SelfHostedApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -2959,7 +2995,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.Destination>;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3044,18 +3080,54 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserSSHApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -3245,7 +3317,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.Destination>;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3330,18 +3402,54 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserVNCApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -4651,7 +4759,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.Destination>;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -4736,18 +4844,54 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SelfHostedApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -5115,7 +5259,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.Destination>;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -5200,18 +5344,54 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserSSHApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -5401,7 +5581,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.Destination>;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -5486,18 +5666,54 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserVNCApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -6807,7 +7023,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.Destination>;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -6892,18 +7108,54 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SelfHostedApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -7271,7 +7523,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.Destination>;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -7356,18 +7608,54 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserSSHApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -7557,7 +7845,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.Destination>;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -7642,18 +7930,54 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserVNCApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -8970,7 +9294,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.Destination>;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -9055,18 +9379,54 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SelfHostedApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -9434,7 +9794,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.Destination>;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -9519,18 +9879,54 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserSSHApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -9720,7 +10116,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.Destination>;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -9805,18 +10201,54 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserVNCApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -11133,7 +11565,10 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<ApplicationCreateParams.SelfHostedApplication.Destination>;
+    destinations?: Array<
+      | ApplicationCreateParams.SelfHostedApplication.PublicDestination
+      | ApplicationCreateParams.SelfHostedApplication.PrivateDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -11226,18 +11661,54 @@ export declare namespace ApplicationCreateParams {
   }
 
   export namespace SelfHostedApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     /**
@@ -11733,7 +12204,10 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<ApplicationCreateParams.BrowserSSHApplication.Destination>;
+    destinations?: Array<
+      | ApplicationCreateParams.BrowserSSHApplication.PublicDestination
+      | ApplicationCreateParams.BrowserSSHApplication.PrivateDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -11826,18 +12300,54 @@ export declare namespace ApplicationCreateParams {
   }
 
   export namespace BrowserSSHApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     /**
@@ -12088,7 +12598,10 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<ApplicationCreateParams.BrowserVNCApplication.Destination>;
+    destinations?: Array<
+      | ApplicationCreateParams.BrowserVNCApplication.PublicDestination
+      | ApplicationCreateParams.BrowserVNCApplication.PrivateDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -12181,18 +12694,54 @@ export declare namespace ApplicationCreateParams {
   }
 
   export namespace BrowserVNCApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     /**
@@ -13610,7 +14159,10 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<ApplicationUpdateParams.SelfHostedApplication.Destination>;
+    destinations?: Array<
+      | ApplicationUpdateParams.SelfHostedApplication.PublicDestination
+      | ApplicationUpdateParams.SelfHostedApplication.PrivateDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -13703,18 +14255,54 @@ export declare namespace ApplicationUpdateParams {
   }
 
   export namespace SelfHostedApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     /**
@@ -14210,7 +14798,10 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<ApplicationUpdateParams.BrowserSSHApplication.Destination>;
+    destinations?: Array<
+      | ApplicationUpdateParams.BrowserSSHApplication.PublicDestination
+      | ApplicationUpdateParams.BrowserSSHApplication.PrivateDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14303,18 +14894,54 @@ export declare namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserSSHApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     /**
@@ -14565,7 +15192,10 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<ApplicationUpdateParams.BrowserVNCApplication.Destination>;
+    destinations?: Array<
+      | ApplicationUpdateParams.BrowserVNCApplication.PublicDestination
+      | ApplicationUpdateParams.BrowserVNCApplication.PrivateDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14658,18 +15288,54 @@ export declare namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserVNCApplication {
-    export interface Destination {
-      type?: 'public' | 'private';
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
 
       /**
-       * The URI of the destination. Public destinations can include a domain and path
-       * with
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
-       * Private destinations are an early access feature and gated behind a feature
-       * flag. Private destinations support private IPv4, IPv6, and Server Name
-       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
+    }
+
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
     }
 
     /**
