@@ -367,7 +367,9 @@ export namespace LogListParams {
       | 'event_id'
       | 'request_type'
       | 'metadata.key'
-      | 'metadata.value';
+      | 'metadata.value'
+      | 'prompts.prompt_id'
+      | 'prompts.version_id';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
@@ -434,7 +436,9 @@ export namespace LogDeleteParams {
       | 'event_id'
       | 'request_type'
       | 'metadata.key'
-      | 'metadata.value';
+      | 'metadata.value'
+      | 'prompts.prompt_id'
+      | 'prompts.version_id';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
