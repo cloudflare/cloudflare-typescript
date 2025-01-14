@@ -33,7 +33,7 @@ describe('resource apps', () => {
       name: 'Cloudflare Dashboard',
       type: 'Development',
       hostnames: ['auth.cloudflare.com'],
-      ip_subnets: ['1.1.1.1/32'],
+      ip_subnets: ['192.0.2.0/24'],
     });
   });
 
