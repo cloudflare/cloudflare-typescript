@@ -97,7 +97,7 @@ export interface Integration {
   id?: string;
 
   /**
-   * The configuration object containing third-party integration information.
+   * The Workspace One Config Response.
    */
   config?: Integration.Config;
 
@@ -128,7 +128,7 @@ export interface Integration {
 
 export namespace Integration {
   /**
-   * The configuration object containing third-party integration information.
+   * The Workspace One Config Response.
    */
   export interface Config {
     /**

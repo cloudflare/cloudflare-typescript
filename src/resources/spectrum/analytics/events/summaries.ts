@@ -209,8 +209,7 @@ export interface SummaryGetParams {
   >;
 
   /**
-   * Query param: Start of time interval to query, defaults to `until` - 6 hours.
-   * Timestamp must be in RFC3339 format and uses UTC unless otherwise specified.
+   * Query param:
    */
   since?: string;
 
@@ -221,8 +220,7 @@ export interface SummaryGetParams {
   sort?: Array<string>;
 
   /**
-   * Query param: End of time interval to query, defaults to current time. Timestamp
-   * must be in RFC3339 format and uses UTC unless otherwise specified.
+   * Query param:
    */
   until?: string;
 }
