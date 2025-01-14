@@ -13,6 +13,7 @@ export { Argo } from './argo/argo';
 export { AuditLogs } from './audit-logs';
 export { Billing } from './billing/billing';
 export { BotManagement } from './bot-management';
+export { BotnetFeed } from './botnet-feed/botnet-feed';
 export { BrandProtection } from './brand-protection';
 export { Cache } from './cache/cache';
 export { Calls } from './calls/calls';
