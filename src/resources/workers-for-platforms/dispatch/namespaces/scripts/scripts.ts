@@ -2,17 +2,49 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as ScriptsScriptsAPI from './scripts';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import * as TailAPI from '../../../../workers/scripts/tail';
+import * as AssetUploadAPI from './asset-upload';
+import { AssetUpload, AssetUploadCreateParams, AssetUploadCreateResponse } from './asset-upload';
 import * as BindingsAPI from './bindings';
+import { BindingGetParams, BindingGetResponse, Bindings } from './bindings';
 import * as ContentAPI from './content';
+import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as SecretsAPI from './secrets';
+import {
+  SecretGetParams,
+  SecretGetResponse,
+  SecretListParams,
+  SecretListResponse,
+  SecretListResponsesSinglePage,
+  SecretUpdateParams,
+  SecretUpdateResponse,
+  Secrets,
+  WorkersSecretModel,
+} from './secrets';
 import * as SettingsAPI from './settings';
+import {
+  SettingEditParams,
+  SettingEditResponse,
+  SettingGetParams,
+  SettingGetResponse,
+  Settings,
+} from './settings';
 import * as TagsAPI from './tags';
+import {
+  TagDeleteParams,
+  TagDeleteResponse,
+  TagListParams,
+  TagListResponse,
+  TagListResponsesSinglePage,
+  TagUpdateParams,
+  TagUpdateResponse,
+  Tags,
+} from './tags';
 
 export class Scripts extends APIResource {
+  assetUpload: AssetUploadAPI.AssetUpload = new AssetUploadAPI.AssetUpload(this._client);
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
@@ -20,16 +52,16 @@ export class Scripts extends APIResource {
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
 
   /**
-   * Upload a worker module to a Workers for Platforms namespace. You can find an
-   * example of the metadata on our docs:
-   * https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/reference/metadata/
+   * Upload a worker module to a Workers for Platforms namespace. You can find more
+   * about the multipart metadata on our docs:
+   * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
    */
   update(
     dispatchNamespace: string,
     scriptName: string,
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.Script> {
+  ): Core.APIPromise<ScriptUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
@@ -39,7 +71,7 @@ export class Scripts extends APIResource {
           ...options,
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
         }),
-      ) as Core.APIPromise<{ result: ScriptsAPI.Script }>
+      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -101,117 +133,681 @@ export interface Script {
   script?: ScriptsAPI.Script;
 }
 
-export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
+export interface ScriptUpdateResponse {
+  /**
+   * The id of the script in the Workers system. Usually the script name.
+   */
+  id?: string;
+
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
+
+  /**
+   * Hashed script content, can be used in a If-None-Match header when updating.
+   */
+  etag?: string;
+
+  /**
+   * Whether a Worker contains assets.
+   */
+  has_assets?: boolean;
+
+  /**
+   * Whether a Worker contains modules.
+   */
+  has_modules?: boolean;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Configuration for
+   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   */
+  placement?: ScriptUpdateResponse.Placement;
+
+  /**
+   * @deprecated: Enables
+   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   */
+  placement_mode?: 'smart';
+
+  /**
+   * @deprecated: Status of
+   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   */
+  placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+
+  startup_time_ms?: number;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
+
+  /**
+   * Usage model for the Worker invocations.
+   */
+  usage_model?: 'standard';
+}
+
+export namespace ScriptUpdateResponse {
+  /**
+   * Configuration for
+   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   */
+  export interface Placement {
+    /**
+     * Enables
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    mode?: 'smart';
+
+    /**
+     * Status of
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+}
+
+export interface ScriptUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * configuration.
+   */
+  metadata: ScriptUpdateParams.Metadata;
+}
 
 export namespace ScriptUpdateParams {
-  export interface Variant0 {
+  /**
+   * JSON encoded metadata about the uploaded parts and Worker configuration.
+   */
+  export interface Metadata {
     /**
-     * Path param: Identifier
+     * Configuration for assets within a Worker
      */
-    account_id: string;
+    assets?: Metadata.Assets;
 
     /**
-     * Body param: A module comprising a Worker script, often a javascript file.
-     * Multiple modules may be provided as separate named parts, but at least one
-     * module must be present and referenced in the metadata as `main_module` or
-     * `body_part` by part name. Source maps may also be included using the
-     * `application/source-map` content type.
+     * List of bindings attached to a Worker. You can find more about bindings on our
+     * docs:
+     * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
      */
-    '<any part name>'?: Array<Core.Uploadable>;
+    bindings?: Array<
+      | Metadata.WorkersBindingKindAny
+      | Metadata.WorkersBindingKindAI
+      | Metadata.WorkersBindingKindAnalyticsEngine
+      | Metadata.WorkersBindingKindAssets
+      | Metadata.WorkersBindingKindBrowserRendering
+      | Metadata.WorkersBindingKindD1
+      | Metadata.WorkersBindingKindDispatchNamespace
+      | Metadata.WorkersBindingKindDo
+      | Metadata.WorkersBindingKindHyperdrive
+      | Metadata.WorkersBindingKindJson
+      | Metadata.WorkersBindingKindKVNamespace
+      | Metadata.WorkersBindingKindMTLSCERT
+      | Metadata.WorkersBindingKindPlainText
+      | Metadata.WorkersBindingKindQueue
+      | Metadata.WorkersBindingKindR2
+      | Metadata.WorkersBindingKindSecret
+      | Metadata.WorkersBindingKindService
+      | Metadata.WorkersBindingKindTailConsumer
+      | Metadata.WorkersBindingKindVectorize
+      | Metadata.WorkersBindingKindVersionMetadata
+    >;
 
     /**
-     * Body param: JSON encoded metadata about the uploaded parts and Worker
-     * configuration.
+     * Name of the part in the multipart request that contains the script (e.g. the
+     * file adding a listener to the `fetch` event). Indicates a
+     * `service worker syntax` Worker.
      */
-    metadata?: ScriptUpdateParams.Variant0.Metadata;
+    body_part?: string;
+
+    /**
+     * Date indicating targeted support in the Workers runtime. Backwards incompatible
+     * fixes to the runtime following this date will not affect this Worker.
+     */
+    compatibility_date?: string;
+
+    /**
+     * Flags that enable or disable certain features in the Workers runtime. Used to
+     * enable upcoming features or opt in or out of specific changes not included in a
+     * `compatibility_date`.
+     */
+    compatibility_flags?: Array<string>;
+
+    /**
+     * Retain assets which exist for a previously uploaded Worker version; used in lieu
+     * of providing a completion token.
+     */
+    keep_assets?: boolean;
+
+    /**
+     * List of binding types to keep from previous_upload.
+     */
+    keep_bindings?: Array<string>;
+
+    /**
+     * Whether Logpush is turned on for the Worker.
+     */
+    logpush?: boolean;
+
+    /**
+     * Name of the part in the multipart request that contains the main module (e.g.
+     * the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
+     */
+    main_module?: string;
+
+    /**
+     * Migrations to apply for Durable Objects associated with this Worker.
+     */
+    migrations?: WorkersAPI.SingleStepMigrationParam | Metadata.WorkersMultipleStepMigrations;
+
+    /**
+     * Observability settings for the Worker.
+     */
+    observability?: Metadata.Observability;
+
+    /**
+     * Configuration for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    placement?: Metadata.Placement;
+
+    /**
+     * List of strings to use as tags for this Worker.
+     */
+    tags?: Array<string>;
+
+    /**
+     * List of Workers that will consume logs from the attached Worker.
+     */
+    tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
+
+    /**
+     * Usage model for the Worker invocations.
+     */
+    usage_model?: 'standard';
   }
 
-  export namespace Variant0 {
+  export namespace Metadata {
     /**
-     * JSON encoded metadata about the uploaded parts and Worker configuration.
+     * Configuration for assets within a Worker
      */
-    export interface Metadata {
+    export interface Assets {
       /**
-       * List of bindings available to the worker.
+       * Configuration for assets within a Worker.
        */
-      bindings?: Array<unknown>;
+      config?: Assets.Config;
 
       /**
-       * Name of the part in the multipart request that contains the script (e.g. the
-       * file adding a listener to the `fetch` event). Indicates a
-       * `service worker syntax` Worker.
+       * Token provided upon successful upload of all files from a registered manifest.
        */
-      body_part?: string;
-
-      /**
-       * Date indicating targeted support in the Workers runtime. Backwards incompatible
-       * fixes to the runtime following this date will not affect this Worker.
-       */
-      compatibility_date?: string;
-
-      /**
-       * Flags that enable or disable certain features in the Workers runtime. Used to
-       * enable upcoming features or opt in or out of specific changes not included in a
-       * `compatibility_date`.
-       */
-      compatibility_flags?: Array<string>;
-
-      /**
-       * List of binding types to keep from previous_upload.
-       */
-      keep_bindings?: Array<string>;
-
-      /**
-       * Whether Logpush is turned on for the Worker.
-       */
-      logpush?: boolean;
-
-      /**
-       * Name of the part in the multipart request that contains the main module (e.g.
-       * the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
-       */
-      main_module?: string;
-
-      /**
-       * Migrations to apply for Durable Objects associated with this Worker.
-       */
-      migrations?: WorkersAPI.SingleStepMigrationParam | WorkersAPI.SteppedMigrationParam;
-
-      placement?: WorkersAPI.PlacementConfigurationParam;
-
-      /**
-       * List of strings to use as tags for this Worker
-       */
-      tags?: Array<string>;
-
-      /**
-       * List of Workers that will consume logs from the attached Worker.
-       */
-      tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
-
-      /**
-       * Usage model to apply to invocations.
-       */
-      usage_model?: 'bundled' | 'unbound';
-
-      /**
-       * Key-value pairs to use as tags for this version of this Worker
-       */
-      version_tags?: unknown;
+      jwt?: string;
     }
-  }
 
-  export interface Variant1 {
-    /**
-     * Path param: Identifier
-     */
-    account_id: string;
+    export namespace Assets {
+      /**
+       * Configuration for assets within a Worker.
+       */
+      export interface Config {
+        /**
+         * Determines the redirects and rewrites of requests for HTML content.
+         */
+        html_handling?: 'auto-trailing-slash' | 'force-trailing-slash' | 'drop-trailing-slash' | 'none';
+
+        /**
+         * Determines the response when a request does not match a static asset, and there
+         * is no Worker script.
+         */
+        not_found_handling?: 'none' | '404-page' | 'single-page-application';
+
+        /**
+         * When true and the incoming request matches an asset, that will be served instead
+         * of invoking the Worker script. When false, requests will always invoke the
+         * Worker script.
+         */
+        serve_directly?: boolean;
+      }
+    }
+
+    export interface WorkersBindingKindAny {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: string;
+      [k: string]: unknown;
+    }
+
+    export interface WorkersBindingKindAI {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai';
+    }
+
+    export interface WorkersBindingKindAnalyticsEngine {
+      /**
+       * The dataset name to bind to.
+       */
+      dataset: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'analytics_engine';
+    }
+
+    export interface WorkersBindingKindAssets {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'assets';
+    }
+
+    export interface WorkersBindingKindBrowserRendering {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'browser_rendering';
+    }
+
+    export interface WorkersBindingKindD1 {
+      /**
+       * Identifier of the D1 database to bind to.
+       */
+      id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'd1';
+    }
+
+    export interface WorkersBindingKindDispatchNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Namespace to bind to.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'dispatch_namespace';
+
+      /**
+       * Outbound worker.
+       */
+      outbound?: WorkersBindingKindDispatchNamespace.Outbound;
+    }
+
+    export namespace WorkersBindingKindDispatchNamespace {
+      /**
+       * Outbound worker.
+       */
+      export interface Outbound {
+        /**
+         * Pass information from the Dispatch Worker to the Outbound Worker through the
+         * parameters.
+         */
+        params?: Array<string>;
+
+        /**
+         * Outbound worker.
+         */
+        worker?: Outbound.Worker;
+      }
+
+      export namespace Outbound {
+        /**
+         * Outbound worker.
+         */
+        export interface Worker {
+          /**
+           * Environment of the outbound worker.
+           */
+          environment?: string;
+
+          /**
+           * Name of the outbound worker.
+           */
+          service?: string;
+        }
+      }
+    }
+
+    export interface WorkersBindingKindDo {
+      /**
+       * The exported class name of the Durable Object.
+       */
+      class_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'durable_object_namespace';
+
+      /**
+       * The environment of the script_name to bind to.
+       */
+      environment?: string;
+
+      /**
+       * Namespace identifier tag.
+       */
+      namespace_id?: string;
+
+      /**
+       * The script where the Durable Object is defined, if it is external to this
+       * Worker.
+       */
+      script_name?: string;
+    }
+
+    export interface WorkersBindingKindHyperdrive {
+      /**
+       * Identifier of the Hyperdrive connection to bind to.
+       */
+      id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'hyperdrive';
+    }
+
+    export interface WorkersBindingKindJson {
+      /**
+       * JSON data to use.
+       */
+      json: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'json';
+    }
+
+    export interface WorkersBindingKindKVNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Namespace identifier tag.
+       */
+      namespace_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'kv_namespace';
+    }
+
+    export interface WorkersBindingKindMTLSCERT {
+      /**
+       * Identifier of the certificate to bind to.
+       */
+      certificate_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'mtls_certificate';
+    }
+
+    export interface WorkersBindingKindPlainText {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The text value to use.
+       */
+      text: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'plain_text';
+    }
+
+    export interface WorkersBindingKindQueue {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Queue to bind to.
+       */
+      queue_name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'queue';
+    }
+
+    export interface WorkersBindingKindR2 {
+      /**
+       * R2 bucket to bind to.
+       */
+      bucket_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'r2_bucket';
+    }
+
+    export interface WorkersBindingKindSecret {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The secret value to use.
+       */
+      text: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secret_text';
+    }
+
+    export interface WorkersBindingKindService {
+      /**
+       * Optional environment if the Worker utilizes one.
+       */
+      environment: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'service';
+    }
+
+    export interface WorkersBindingKindTailConsumer {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Tail Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'tail_consumer';
+    }
+
+    export interface WorkersBindingKindVectorize {
+      /**
+       * Name of the Vectorize index to bind to.
+       */
+      index_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vectorize';
+    }
+
+    export interface WorkersBindingKindVersionMetadata {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'version_metadata';
+    }
+
+    export interface WorkersMultipleStepMigrations {
+      /**
+       * Tag to set as the latest migration tag.
+       */
+      new_tag?: string;
+
+      /**
+       * Tag used to verify against the latest migration tag for this Worker. If they
+       * don't match, the upload is rejected.
+       */
+      old_tag?: string;
+
+      /**
+       * Migrations to apply in order.
+       */
+      steps?: Array<WorkersAPI.MigrationStepParam>;
+    }
 
     /**
-     * Body param: Rollback message to be associated with this deployment. Only parsed
-     * when query param `"rollback_to"` is present.
+     * Observability settings for the Worker.
      */
-    message?: string;
+    export interface Observability {
+      /**
+       * Whether observability is enabled for the Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       * Default is 1.
+       */
+      head_sampling_rate?: number | null;
+    }
+
+    /**
+     * Configuration for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    export interface Placement {
+      /**
+       * Enables
+       * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+       */
+      mode?: 'smart';
+    }
   }
 }
 
@@ -236,34 +832,70 @@ export interface ScriptGetParams {
   account_id: string;
 }
 
-export namespace Scripts {
-  export import Script = ScriptsScriptsAPI.Script;
-  export import ScriptUpdateParams = ScriptsScriptsAPI.ScriptUpdateParams;
-  export import ScriptDeleteParams = ScriptsScriptsAPI.ScriptDeleteParams;
-  export import ScriptGetParams = ScriptsScriptsAPI.ScriptGetParams;
-  export import Content = ContentAPI.Content;
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
-  export import ContentGetParams = ContentAPI.ContentGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
-  export import Bindings = BindingsAPI.Bindings;
-  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
-  export import BindingGetParams = BindingsAPI.BindingGetParams;
-  export import Secrets = SecretsAPI.Secrets;
-  export import SecretUpdateResponse = SecretsAPI.SecretUpdateResponse;
-  export import SecretListResponse = SecretsAPI.SecretListResponse;
-  export import SecretListResponsesSinglePage = SecretsAPI.SecretListResponsesSinglePage;
-  export import SecretUpdateParams = SecretsAPI.SecretUpdateParams;
-  export import SecretListParams = SecretsAPI.SecretListParams;
-  export import Tags = TagsAPI.Tags;
-  export import TagUpdateResponse = TagsAPI.TagUpdateResponse;
-  export import TagListResponse = TagsAPI.TagListResponse;
-  export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
-  export import TagListResponsesSinglePage = TagsAPI.TagListResponsesSinglePage;
-  export import TagUpdateParams = TagsAPI.TagUpdateParams;
-  export import TagListParams = TagsAPI.TagListParams;
-  export import TagDeleteParams = TagsAPI.TagDeleteParams;
+Scripts.AssetUpload = AssetUpload;
+Scripts.Content = Content;
+Scripts.Settings = Settings;
+Scripts.Bindings = Bindings;
+Scripts.Secrets = Secrets;
+Scripts.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
+Scripts.Tags = Tags;
+Scripts.TagListResponsesSinglePage = TagListResponsesSinglePage;
+
+export declare namespace Scripts {
+  export {
+    type Script as Script,
+    type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptUpdateParams as ScriptUpdateParams,
+    type ScriptDeleteParams as ScriptDeleteParams,
+    type ScriptGetParams as ScriptGetParams,
+  };
+
+  export {
+    AssetUpload as AssetUpload,
+    type AssetUploadCreateResponse as AssetUploadCreateResponse,
+    type AssetUploadCreateParams as AssetUploadCreateParams,
+  };
+
+  export {
+    Content as Content,
+    type ContentUpdateParams as ContentUpdateParams,
+    type ContentGetParams as ContentGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
+
+  export {
+    Bindings as Bindings,
+    type BindingGetResponse as BindingGetResponse,
+    type BindingGetParams as BindingGetParams,
+  };
+
+  export {
+    Secrets as Secrets,
+    type WorkersSecretModel as WorkersSecretModel,
+    type SecretUpdateResponse as SecretUpdateResponse,
+    type SecretListResponse as SecretListResponse,
+    type SecretGetResponse as SecretGetResponse,
+    SecretListResponsesSinglePage as SecretListResponsesSinglePage,
+    type SecretUpdateParams as SecretUpdateParams,
+    type SecretListParams as SecretListParams,
+    type SecretGetParams as SecretGetParams,
+  };
+
+  export {
+    Tags as Tags,
+    type TagUpdateResponse as TagUpdateResponse,
+    type TagListResponse as TagListResponse,
+    type TagDeleteResponse as TagDeleteResponse,
+    TagListResponsesSinglePage as TagListResponsesSinglePage,
+    type TagUpdateParams as TagUpdateParams,
+    type TagListParams as TagListParams,
+    type TagDeleteParams as TagDeleteParams,
+  };
 }

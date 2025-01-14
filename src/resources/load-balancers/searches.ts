@@ -2,24 +2,57 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SearchesAPI from './searches';
 
 export class Searches extends APIResource {
   /**
    * Search for Load Balancing resources.
    */
-  get(params: SearchGetParams, options?: Core.RequestOptions): Core.APIPromise<SearchGetResponse | null> {
+  get(params: SearchGetParams, options?: Core.RequestOptions): Core.APIPromise<SearchGetResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/load_balancers/search`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: SearchGetResponse | null }>
+      }) as Core.APIPromise<{ result: SearchGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type SearchGetResponse = Array<unknown>;
+export interface SearchGetResponse {
+  /**
+   * A list of resources matching the search query.
+   */
+  resources?: Array<SearchGetResponse.Resource>;
+}
+
+export namespace SearchGetResponse {
+  /**
+   * A reference to a load balancer resource.
+   */
+  export interface Resource {
+    /**
+     * When listed as a reference, the type (direction) of the reference.
+     */
+    reference_type?: 'referral' | 'referrer';
+
+    /**
+     * A list of references to (referrer) or from (referral) this resource.
+     */
+    references?: Array<unknown>;
+
+    resource_id?: string;
+
+    /**
+     * The human-identifiable name of the resource.
+     */
+    resource_name?: string;
+
+    /**
+     * The type of the resource.
+     */
+    resource_type?: 'load_balancer' | 'monitor' | 'pool';
+  }
+}
 
 export interface SearchGetParams {
   /**
@@ -30,12 +63,12 @@ export interface SearchGetParams {
   /**
    * Query param:
    */
-  page?: unknown;
+  page?: number;
 
   /**
    * Query param:
    */
-  per_page?: unknown;
+  per_page?: number;
 
   /**
    * Query param:
@@ -57,7 +90,6 @@ export namespace SearchGetParams {
   }
 }
 
-export namespace Searches {
-  export import SearchGetResponse = SearchesAPI.SearchGetResponse;
-  export import SearchGetParams = SearchesAPI.SearchGetParams;
+export declare namespace Searches {
+  export { type SearchGetResponse as SearchGetResponse, type SearchGetParams as SearchGetParams };
 }

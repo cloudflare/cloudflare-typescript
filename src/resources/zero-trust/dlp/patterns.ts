@@ -2,42 +2,60 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PatternsAPI from './patterns';
-import * as OwnershipAPI from '../../logpush/ownership';
 
 export class Patterns extends APIResource {
   /**
    * Validates whether this pattern is a valid regular expression. Rejects it if the
-   * regular expression is too complex or can match an unbounded-length string. Your
-   * regex will be rejected if it uses the Kleene Star -- be sure to bound the
-   * maximum number of characters that can be matched.
+   * regular expression is too complex or can match an unbounded-length string. The
+   * regex will be rejected if it uses `*` or `+`. Bound the maximum number of
+   * characters that can be matched using a range, e.g. `{1,100}`.
    */
   validate(
     params: PatternValidateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OwnershipAPI.OwnershipValidation | null> {
+  ): Core.APIPromise<PatternValidateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/patterns/validate`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OwnershipAPI.OwnershipValidation | null }>
+      }) as Core.APIPromise<{ result: PatternValidateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export interface PatternValidateResponse {
+  valid: boolean;
+}
+
 export interface PatternValidateParams {
   /**
-   * Path param: Identifier
+   * Path param: Account ID
    */
   account_id: string;
 
   /**
-   * Body param: The regex pattern.
+   * Body param:
    */
   regex: string;
+
+  /**
+   * Body param: Maximum number of bytes that the regular expression can match.
+   *
+   * If this is `null` then there is no limit on the length. Patterns can use `*` and
+   * `+`. Otherwise repeats should use a range `{m,n}` to restrict patterns to the
+   * length. If this field is missing, then a default length limit is used.
+   *
+   * Note that the length is specified in bytes. Since regular expressions use UTF-8
+   * the pattern `.` can match up to 4 bytes. Hence `.{1,256}` has a maximum length
+   * of 1024 bytes.
+   */
+  max_match_bytes?: number | null;
 }
 
-export namespace Patterns {
-  export import PatternValidateParams = PatternsAPI.PatternValidateParams;
+export declare namespace Patterns {
+  export {
+    type PatternValidateResponse as PatternValidateResponse,
+    type PatternValidateParams as PatternValidateParams,
+  };
 }

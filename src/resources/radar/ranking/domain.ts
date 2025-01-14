@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as DomainAPI from './domain';
 
 export class Domain extends APIResource {
   /**
@@ -83,6 +82,11 @@ export interface DomainGetParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Include top locations in the response.
+   */
+  includeTopLocations?: boolean;
+
+  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
@@ -98,7 +102,6 @@ export interface DomainGetParams {
   rankingType?: 'POPULAR' | 'TRENDING_RISE' | 'TRENDING_STEADY';
 }
 
-export namespace Domain {
-  export import DomainGetResponse = DomainAPI.DomainGetResponse;
-  export import DomainGetParams = DomainAPI.DomainGetParams;
+export declare namespace Domain {
+  export { type DomainGetResponse as DomainGetResponse, type DomainGetParams as DomainGetParams };
 }

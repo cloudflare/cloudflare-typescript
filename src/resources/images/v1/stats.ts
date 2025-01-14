@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as StatsAPI from './stats';
 
 export class Stats extends APIResource {
   /**
@@ -43,7 +42,6 @@ export interface StatGetParams {
   account_id: string;
 }
 
-export namespace Stats {
-  export import Stat = StatsAPI.Stat;
-  export import StatGetParams = StatsAPI.StatGetParams;
+export declare namespace Stats {
+  export { type Stat as Stat, type StatGetParams as StatGetParams };
 }

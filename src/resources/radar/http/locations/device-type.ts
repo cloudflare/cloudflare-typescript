@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as DeviceTypeAPI from './device-type';
 
 export class DeviceType extends APIResource {
   /**
@@ -189,7 +188,9 @@ export interface DeviceTypeGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace DeviceType {
-  export import DeviceTypeGetResponse = DeviceTypeAPI.DeviceTypeGetResponse;
-  export import DeviceTypeGetParams = DeviceTypeAPI.DeviceTypeGetParams;
+export declare namespace DeviceType {
+  export {
+    type DeviceTypeGetResponse as DeviceTypeGetResponse,
+    type DeviceTypeGetParams as DeviceTypeGetParams,
+  };
 }

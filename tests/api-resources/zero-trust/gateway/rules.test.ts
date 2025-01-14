@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,9 +11,9 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.rules.create({
+    const responsePromise = client.zeroTrust.gateway.rules.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'allow',
+      action: 'on',
       name: 'block bad websites',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,18 +26,19 @@ describe('resource rules', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.rules.create({
+    const response = await client.zeroTrust.gateway.rules.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'allow',
+      action: 'on',
       name: 'block bad websites',
       description: 'Block bad websites based on their host name.',
       device_posture: 'any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})',
       enabled: true,
+      expiration: { expires_at: '2014-01-01T05:20:20Z', duration: 10, expired: false },
       filters: ['http'],
       identity: 'any(identity.groups.name[*] in {"finance"})',
       precedence: 0,
       rule_settings: {
-        add_headers: { 'My-Next-Header': ['foo', 'bar'], 'X-Custom-Header-Name': ['somecustomvalue'] },
+        add_headers: { foo: 'string' },
         allow_child_bypass: false,
         audit_ssh: { command_logging: false },
         biso_admin_controls: { dcp: false, dd: false, dk: false, dp: false, du: false },
@@ -53,32 +54,8 @@ describe('resource rules', () => {
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
-            {
-              ip: '2.2.2.2',
-              port: 5053,
-              route_through_private_network: true,
-              vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-            },
-            {
-              ip: '2.2.2.2',
-              port: 5053,
-              route_through_private_network: true,
-              vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-            },
           ],
           ipv6: [
-            {
-              ip: '2001:DB8::',
-              port: 5053,
-              route_through_private_network: true,
-              vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-            },
-            {
-              ip: '2001:DB8::',
-              port: 5053,
-              route_through_private_network: true,
-              vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-            },
             {
               ip: '2001:DB8::',
               port: 5053,
@@ -97,8 +74,10 @@ describe('resource rules', () => {
         override_host: 'example.com',
         override_ips: ['1.1.1.1', '2.2.2.2'],
         payload_log: { enabled: true },
+        quarantine: { file_types: ['exe'] },
+        resolve_dns_internally: { fallback: 'none', view_id: 'view_id' },
         resolve_dns_through_cloudflare: true,
-        untrusted_cert: { action: 'error' },
+        untrusted_cert: { action: 'pass_through' },
       },
       schedule: {
         fri: '08:00-12:30,13:30-17:00',
@@ -116,10 +95,11 @@ describe('resource rules', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.rules.update(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252', action: 'allow', name: 'block bad websites' },
-    );
+    const responsePromise = client.zeroTrust.gateway.rules.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      action: 'on',
+      name: 'block bad websites',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -130,18 +110,19 @@ describe('resource rules', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.rules.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.gateway.rules.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'allow',
+      action: 'on',
       name: 'block bad websites',
       description: 'Block bad websites based on their host name.',
       device_posture: 'any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})',
       enabled: true,
+      expiration: { expires_at: '2014-01-01T05:20:20Z', duration: 10, expired: false },
       filters: ['http'],
       identity: 'any(identity.groups.name[*] in {"finance"})',
       precedence: 0,
       rule_settings: {
-        add_headers: { 'My-Next-Header': ['foo', 'bar'], 'X-Custom-Header-Name': ['somecustomvalue'] },
+        add_headers: { foo: 'string' },
         allow_child_bypass: false,
         audit_ssh: { command_logging: false },
         biso_admin_controls: { dcp: false, dd: false, dk: false, dp: false, du: false },
@@ -157,32 +138,8 @@ describe('resource rules', () => {
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
-            {
-              ip: '2.2.2.2',
-              port: 5053,
-              route_through_private_network: true,
-              vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-            },
-            {
-              ip: '2.2.2.2',
-              port: 5053,
-              route_through_private_network: true,
-              vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-            },
           ],
           ipv6: [
-            {
-              ip: '2001:DB8::',
-              port: 5053,
-              route_through_private_network: true,
-              vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-            },
-            {
-              ip: '2001:DB8::',
-              port: 5053,
-              route_through_private_network: true,
-              vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-            },
             {
               ip: '2001:DB8::',
               port: 5053,
@@ -201,8 +158,10 @@ describe('resource rules', () => {
         override_host: 'example.com',
         override_ips: ['1.1.1.1', '2.2.2.2'],
         payload_log: { enabled: true },
+        quarantine: { file_types: ['exe'] },
+        resolve_dns_internally: { fallback: 'none', view_id: 'view_id' },
         resolve_dns_through_cloudflare: true,
-        untrusted_cert: { action: 'error' },
+        untrusted_cert: { action: 'pass_through' },
       },
       schedule: {
         fri: '08:00-12:30,13:30-17:00',
@@ -220,7 +179,7 @@ describe('resource rules', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.rules.list({
+    const responsePromise = client.zeroTrust.gateway.rules.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -233,16 +192,15 @@ describe('resource rules', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.rules.list({
+    const response = await client.zeroTrust.gateway.rules.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.rules.delete(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const responsePromise = client.zeroTrust.gateway.rules.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -253,13 +211,13 @@ describe('resource rules', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.rules.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.gateway.rules.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.rules.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const responsePromise = client.zeroTrust.gateway.rules.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -272,8 +230,29 @@ describe('resource rules', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.rules.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.gateway.rules.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
+  });
+
+  test('resetExpiration: only required params', async () => {
+    const responsePromise = client.zeroTrust.gateway.rules.resetExpiration(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('resetExpiration: required and optional params', async () => {
+    const response = await client.zeroTrust.gateway.rules.resetExpiration(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
+    );
   });
 });

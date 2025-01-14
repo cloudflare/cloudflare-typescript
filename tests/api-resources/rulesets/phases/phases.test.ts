@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,8 +12,8 @@ const cloudflare = new Cloudflare({
 describe('resource phases', () => {
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.rulesets.phases.update('http_request_firewall_custom', {
-      rules: [{}, {}, {}],
+    const responsePromise = client.rulesets.phases.update('ddos_l4', {
+      rules: [{}],
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,9 +27,10 @@ describe('resource phases', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.rulesets.phases.update('http_request_firewall_custom', {
+    const response = await client.rulesets.phases.update('ddos_l4', {
       rules: [
         {
+          id: '3a03d665bac047339bb530ecb439a90d',
           action: 'block',
           action_parameters: {
             response: {
@@ -40,41 +41,22 @@ describe('resource phases', () => {
           },
           description: 'Block when the IP address is not 1.1.1.1',
           enabled: true,
-          expression: 'ip.src ne 1.1.1.1',
-          id: '3a03d665bac047339bb530ecb439a90d',
-          logging: { enabled: true },
-          ref: 'my_ref',
-        },
-        {
-          action: 'block',
-          action_parameters: {
-            response: {
-              content: '{\n  "success": false,\n  "error": "you have been blocked"\n}',
-              content_type: 'application/json',
-              status_code: 400,
-            },
+          exposed_credential_check: {
+            password_expression: 'url_decode(http.request.body.form[\\"password\\"][0])',
+            username_expression: 'url_decode(http.request.body.form[\\"username\\"][0])',
           },
-          description: 'Block when the IP address is not 1.1.1.1',
-          enabled: true,
           expression: 'ip.src ne 1.1.1.1',
-          id: '3a03d665bac047339bb530ecb439a90d',
           logging: { enabled: true },
-          ref: 'my_ref',
-        },
-        {
-          action: 'block',
-          action_parameters: {
-            response: {
-              content: '{\n  "success": false,\n  "error": "you have been blocked"\n}',
-              content_type: 'application/json',
-              status_code: 400,
-            },
+          ratelimit: {
+            characteristics: ['ip.src'],
+            period: 10,
+            counting_expression: 'http.request.body.raw eq "abcd"',
+            mitigation_timeout: 600,
+            requests_per_period: 1000,
+            requests_to_origin: true,
+            score_per_period: 400,
+            score_response_header_name: 'my-score',
           },
-          description: 'Block when the IP address is not 1.1.1.1',
-          enabled: true,
-          expression: 'ip.src ne 1.1.1.1',
-          id: '3a03d665bac047339bb530ecb439a90d',
-          logging: { enabled: true },
           ref: 'my_ref',
         },
       ],
@@ -86,9 +68,7 @@ describe('resource phases', () => {
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.rulesets.phases.get('http_request_firewall_custom', {
-      account_id: 'account_id',
-    });
+    const responsePromise = client.rulesets.phases.get('ddos_l4', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

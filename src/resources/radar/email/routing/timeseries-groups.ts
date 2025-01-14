@@ -3,12 +3,11 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 import * as EmailAPI from '../email';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Percentage distribution of emails classified per Arc validation over time.
+   * Percentage distribution of emails classified by ARC validation over time.
    */
   arc(
     query?: TimeseriesGroupARCParams,
@@ -31,7 +30,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DKIM validation over time.
+   * Percentage distribution of emails classified by DKIM validation over time.
    */
   dkim(
     query?: TimeseriesGroupDKIMParams,
@@ -54,7 +53,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DMARC validation over time.
+   * Percentage distribution of emails classified by DMARC validation over time.
    */
   dmarc(
     query?: TimeseriesGroupDMARCParams,
@@ -77,7 +76,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails by Encrypted over time.
+   * Percentage distribution of emails by encryption status over time.
    */
   encrypted(
     query?: TimeseriesGroupEncryptedParams,
@@ -100,7 +99,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails by Ip Version over time.
+   * Percentage distribution of emails by IP version over time.
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -123,7 +122,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per SPF validation over time.
+   * Percentage distribution of emails classified by SPF validation over time.
    */
   spf(
     query?: TimeseriesGroupSPFParams,
@@ -564,17 +563,19 @@ export interface TimeseriesGroupSPFParams {
   name?: Array<string>;
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
-  export import TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
-  export import TimeseriesGroupDMARCResponse = TimeseriesGroupsAPI.TimeseriesGroupDMARCResponse;
-  export import TimeseriesGroupEncryptedResponse = TimeseriesGroupsAPI.TimeseriesGroupEncryptedResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupSPFResponse = TimeseriesGroupsAPI.TimeseriesGroupSPFResponse;
-  export import TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
-  export import TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
-  export import TimeseriesGroupDMARCParams = TimeseriesGroupsAPI.TimeseriesGroupDMARCParams;
-  export import TimeseriesGroupEncryptedParams = TimeseriesGroupsAPI.TimeseriesGroupEncryptedParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupSPFParams = TimeseriesGroupsAPI.TimeseriesGroupSPFParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupARCResponse as TimeseriesGroupARCResponse,
+    type TimeseriesGroupDKIMResponse as TimeseriesGroupDKIMResponse,
+    type TimeseriesGroupDMARCResponse as TimeseriesGroupDMARCResponse,
+    type TimeseriesGroupEncryptedResponse as TimeseriesGroupEncryptedResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupSPFResponse as TimeseriesGroupSPFResponse,
+    type TimeseriesGroupARCParams as TimeseriesGroupARCParams,
+    type TimeseriesGroupDKIMParams as TimeseriesGroupDKIMParams,
+    type TimeseriesGroupDMARCParams as TimeseriesGroupDMARCParams,
+    type TimeseriesGroupEncryptedParams as TimeseriesGroupEncryptedParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupSPFParams as TimeseriesGroupSPFParams,
+  };
 }

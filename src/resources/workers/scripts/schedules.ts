@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SchedulesAPI from './schedules';
 
 export class Schedules extends APIResource {
   /**
@@ -41,11 +40,15 @@ export class Schedules extends APIResource {
 }
 
 export interface Schedule {
-  created_on?: unknown;
+  created_on?: string;
 
-  cron?: unknown;
+  cron?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
+}
+
+export interface ScheduleParam {
+  cron?: string;
 }
 
 export interface ScheduleUpdateResponse {
@@ -65,7 +68,7 @@ export interface ScheduleUpdateParams {
   /**
    * Body param:
    */
-  body: string;
+  body: Array<ScheduleParam>;
 }
 
 export interface ScheduleGetParams {
@@ -75,10 +78,12 @@ export interface ScheduleGetParams {
   account_id: string;
 }
 
-export namespace Schedules {
-  export import Schedule = SchedulesAPI.Schedule;
-  export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
-  export import ScheduleGetResponse = SchedulesAPI.ScheduleGetResponse;
-  export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;
-  export import ScheduleGetParams = SchedulesAPI.ScheduleGetParams;
+export declare namespace Schedules {
+  export {
+    type Schedule as Schedule,
+    type ScheduleUpdateResponse as ScheduleUpdateResponse,
+    type ScheduleGetResponse as ScheduleGetResponse,
+    type ScheduleUpdateParams as ScheduleUpdateParams,
+    type ScheduleGetParams as ScheduleGetParams,
+  };
 }

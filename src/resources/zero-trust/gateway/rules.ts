@@ -73,6 +73,27 @@ export class Rules extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Resets the expiration of a Zero Trust Gateway Rule if its duration has elapsed
+   * and it has a default duration.
+   *
+   * The Zero Trust Gateway Rule must have values for both `expiration.expires_at`
+   * and `expiration.duration`.
+   */
+  resetExpiration(
+    ruleId: string,
+    params: RuleResetExpirationParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewayRule> {
+    const { account_id } = params;
+    return (
+      this._client.post(
+        `/accounts/${account_id}/gateway/rules/${ruleId}/reset_expiration`,
+        options,
+      ) as Core.APIPromise<{ result: GatewayRule }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class GatewayRulesSinglePage extends SinglePage<GatewayRule> {}
@@ -207,8 +228,8 @@ export interface GatewayRule {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh'
-    | 'resolve';
+    | 'resolve'
+    | 'quarantine';
 
   created_at?: string;
 
@@ -231,6 +252,14 @@ export interface GatewayRule {
    * True if the rule is enabled.
    */
   enabled?: boolean;
+
+  /**
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  expiration?: GatewayRule.Expiration;
 
   /**
    * The protocol or layer to evaluate the traffic, identity, and device posture
@@ -272,6 +301,45 @@ export interface GatewayRule {
   traffic?: string;
 
   updated_at?: string;
+
+  /**
+   * version number of the rule
+   */
+  version?: number;
+}
+
+export namespace GatewayRule {
+  /**
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  export interface Expiration {
+    /**
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
+     */
+    expires_at: string;
+
+    /**
+     * The default duration a policy will be active in minutes. Must be set in order to
+     * use the `reset_expiration` endpoint on this rule.
+     */
+    duration?: number;
+
+    /**
+     * Whether the policy has expired.
+     */
+    expired?: boolean;
+  }
 }
 
 /**
@@ -282,7 +350,7 @@ export interface RuleSetting {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: unknown;
+  add_headers?: Record<string, string>;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -297,7 +365,7 @@ export interface RuleSetting {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSetting.BisoAdminControls;
+  biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
    * Enable the custom block page.
@@ -322,9 +390,9 @@ export interface RuleSetting {
 
   /**
    * Add your own custom resolvers to route queries that match the resolver policy.
-   * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-   * route to the address closest to their origin. Only valid when a rule's action is
-   * set to 'resolve'.
+   * Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
+   * are set. DNS queries will route to the address closest to their origin. Only
+   * valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: RuleSetting.DNSResolvers;
 
@@ -386,9 +454,23 @@ export interface RuleSetting {
   payload_log?: RuleSetting.PayloadLog;
 
   /**
+   * Settings that apply to quarantine rules
+   */
+  quarantine?: RuleSetting.Quarantine;
+
+  /**
+   * Configure to forward the query to the internal DNS service, passing the
+   * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
+   * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
+   * set to 'resolve'.
+   */
+  resolve_dns_internally?: RuleSetting.ResolveDNSInternally;
+
+  /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
-   * resolver. Cannot be set when dns_resolvers are specified. Only valid when a
-   * rule's action is set to 'resolve'.
+   * resolver. Cannot be set when 'dns_resolvers' are specified or
+   * 'resolve_dns_internally' is set. Only valid when a rule's action is set to
+   * 'resolve'.
    */
   resolve_dns_through_cloudflare?: boolean;
 
@@ -412,7 +494,7 @@ export namespace RuleSetting {
   /**
    * Configure how browser isolation behaves.
    */
-  export interface BisoAdminControls {
+  export interface BISOAdminControls {
     /**
      * Set to false to enable copy-pasting.
      */
@@ -456,9 +538,9 @@ export namespace RuleSetting {
 
   /**
    * Add your own custom resolvers to route queries that match the resolver policy.
-   * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-   * route to the address closest to their origin. Only valid when a rule's action is
-   * set to 'resolve'.
+   * Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
+   * are set. DNS queries will route to the address closest to their origin. Only
+   * valid when a rule's action is set to 'resolve'.
    */
   export interface DNSResolvers {
     ipv4?: Array<RulesAPI.DNSResolverSettingsV4>;
@@ -538,6 +620,50 @@ export namespace RuleSetting {
   }
 
   /**
+   * Settings that apply to quarantine rules
+   */
+  export interface Quarantine {
+    /**
+     * Types of files to sandbox.
+     */
+    file_types?: Array<
+      | 'exe'
+      | 'pdf'
+      | 'doc'
+      | 'docm'
+      | 'docx'
+      | 'rtf'
+      | 'ppt'
+      | 'pptx'
+      | 'xls'
+      | 'xlsm'
+      | 'xlsx'
+      | 'zip'
+      | 'rar'
+    >;
+  }
+
+  /**
+   * Configure to forward the query to the internal DNS service, passing the
+   * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
+   * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
+   * set to 'resolve'.
+   */
+  export interface ResolveDNSInternally {
+    /**
+     * The fallback behavior to apply when the internal DNS response code is different
+     * from 'NOERROR' or when the response data only contains CNAME records for 'A' or
+     * 'AAAA' queries.
+     */
+    fallback?: 'none' | 'public_dns';
+
+    /**
+     * The internal DNS view identifier that's passed to the internal DNS service.
+     */
+    view_id?: string;
+  }
+
+  /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
   export interface UntrustedCERT {
@@ -557,7 +683,7 @@ export interface RuleSettingParam {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: unknown;
+  add_headers?: Record<string, string>;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -572,7 +698,7 @@ export interface RuleSettingParam {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSettingParam.BisoAdminControls;
+  biso_admin_controls?: RuleSettingParam.BISOAdminControls;
 
   /**
    * Enable the custom block page.
@@ -597,9 +723,9 @@ export interface RuleSettingParam {
 
   /**
    * Add your own custom resolvers to route queries that match the resolver policy.
-   * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-   * route to the address closest to their origin. Only valid when a rule's action is
-   * set to 'resolve'.
+   * Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
+   * are set. DNS queries will route to the address closest to their origin. Only
+   * valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: RuleSettingParam.DNSResolvers;
 
@@ -661,9 +787,23 @@ export interface RuleSettingParam {
   payload_log?: RuleSettingParam.PayloadLog;
 
   /**
+   * Settings that apply to quarantine rules
+   */
+  quarantine?: RuleSettingParam.Quarantine;
+
+  /**
+   * Configure to forward the query to the internal DNS service, passing the
+   * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
+   * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
+   * set to 'resolve'.
+   */
+  resolve_dns_internally?: RuleSettingParam.ResolveDNSInternally;
+
+  /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
-   * resolver. Cannot be set when dns_resolvers are specified. Only valid when a
-   * rule's action is set to 'resolve'.
+   * resolver. Cannot be set when 'dns_resolvers' are specified or
+   * 'resolve_dns_internally' is set. Only valid when a rule's action is set to
+   * 'resolve'.
    */
   resolve_dns_through_cloudflare?: boolean;
 
@@ -687,7 +827,7 @@ export namespace RuleSettingParam {
   /**
    * Configure how browser isolation behaves.
    */
-  export interface BisoAdminControls {
+  export interface BISOAdminControls {
     /**
      * Set to false to enable copy-pasting.
      */
@@ -731,9 +871,9 @@ export namespace RuleSettingParam {
 
   /**
    * Add your own custom resolvers to route queries that match the resolver policy.
-   * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-   * route to the address closest to their origin. Only valid when a rule's action is
-   * set to 'resolve'.
+   * Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
+   * are set. DNS queries will route to the address closest to their origin. Only
+   * valid when a rule's action is set to 'resolve'.
    */
   export interface DNSResolvers {
     ipv4?: Array<RulesAPI.DNSResolverSettingsV4Param>;
@@ -810,6 +950,50 @@ export namespace RuleSettingParam {
      * Set to true to enable DLP payload logging for this rule.
      */
     enabled?: boolean;
+  }
+
+  /**
+   * Settings that apply to quarantine rules
+   */
+  export interface Quarantine {
+    /**
+     * Types of files to sandbox.
+     */
+    file_types?: Array<
+      | 'exe'
+      | 'pdf'
+      | 'doc'
+      | 'docm'
+      | 'docx'
+      | 'rtf'
+      | 'ppt'
+      | 'pptx'
+      | 'xls'
+      | 'xlsm'
+      | 'xlsx'
+      | 'zip'
+      | 'rar'
+    >;
+  }
+
+  /**
+   * Configure to forward the query to the internal DNS service, passing the
+   * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
+   * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
+   * set to 'resolve'.
+   */
+  export interface ResolveDNSInternally {
+    /**
+     * The fallback behavior to apply when the internal DNS response code is different
+     * from 'NOERROR' or when the response data only contains CNAME records for 'A' or
+     * 'AAAA' queries.
+     */
+    fallback?: 'none' | 'public_dns';
+
+    /**
+     * The internal DNS view identifier that's passed to the internal DNS service.
+     */
+    view_id?: string;
   }
 
   /**
@@ -956,7 +1140,7 @@ export interface ScheduleParam {
   wed?: string;
 }
 
-export type RuleDeleteResponse = unknown | string | null;
+export type RuleDeleteResponse = unknown;
 
 export interface RuleCreateParams {
   /**
@@ -982,8 +1166,8 @@ export interface RuleCreateParams {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh'
-    | 'resolve';
+    | 'resolve'
+    | 'quarantine';
 
   /**
    * Body param: The name of the rule.
@@ -1004,6 +1188,14 @@ export interface RuleCreateParams {
    * Body param: True if the rule is enabled.
    */
   enabled?: boolean;
+
+  /**
+   * Body param: The expiration time stamp and default duration of a DNS policy.
+   * Takes precedence over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  expiration?: RuleCreateParams.Expiration;
 
   /**
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
@@ -1038,6 +1230,40 @@ export interface RuleCreateParams {
    * Body param: The wirefilter expression used for traffic matching.
    */
   traffic?: string;
+}
+
+export namespace RuleCreateParams {
+  /**
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  export interface Expiration {
+    /**
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
+     */
+    expires_at: string;
+
+    /**
+     * The default duration a policy will be active in minutes. Must be set in order to
+     * use the `reset_expiration` endpoint on this rule.
+     */
+    duration?: number;
+
+    /**
+     * Whether the policy has expired.
+     */
+    expired?: boolean;
+  }
 }
 
 export interface RuleUpdateParams {
@@ -1064,8 +1290,8 @@ export interface RuleUpdateParams {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh'
-    | 'resolve';
+    | 'resolve'
+    | 'quarantine';
 
   /**
    * Body param: The name of the rule.
@@ -1086,6 +1312,14 @@ export interface RuleUpdateParams {
    * Body param: True if the rule is enabled.
    */
   enabled?: boolean;
+
+  /**
+   * Body param: The expiration time stamp and default duration of a DNS policy.
+   * Takes precedence over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  expiration?: RuleUpdateParams.Expiration;
 
   /**
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
@@ -1122,6 +1356,40 @@ export interface RuleUpdateParams {
   traffic?: string;
 }
 
+export namespace RuleUpdateParams {
+  /**
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  export interface Expiration {
+    /**
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
+     */
+    expires_at: string;
+
+    /**
+     * The default duration a policy will be active in minutes. Must be set in order to
+     * use the `reset_expiration` endpoint on this rule.
+     */
+    duration?: number;
+
+    /**
+     * Whether the policy has expired.
+     */
+    expired?: boolean;
+  }
+}
+
 export interface RuleListParams {
   account_id: string;
 }
@@ -1134,18 +1402,27 @@ export interface RuleGetParams {
   account_id: string;
 }
 
-export namespace Rules {
-  export import DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
-  export import DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
-  export import GatewayFilter = RulesAPI.GatewayFilter;
-  export import GatewayRule = RulesAPI.GatewayRule;
-  export import RuleSetting = RulesAPI.RuleSetting;
-  export import Schedule = RulesAPI.Schedule;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import GatewayRulesSinglePage = RulesAPI.GatewayRulesSinglePage;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+export interface RuleResetExpirationParams {
+  account_id: string;
+}
+
+Rules.GatewayRulesSinglePage = GatewayRulesSinglePage;
+
+export declare namespace Rules {
+  export {
+    type DNSResolverSettingsV4 as DNSResolverSettingsV4,
+    type DNSResolverSettingsV6 as DNSResolverSettingsV6,
+    type GatewayFilter as GatewayFilter,
+    type GatewayRule as GatewayRule,
+    type RuleSetting as RuleSetting,
+    type Schedule as Schedule,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    GatewayRulesSinglePage as GatewayRulesSinglePage,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleGetParams as RuleGetParams,
+    type RuleResetExpirationParams as RuleResetExpirationParams,
+  };
 }

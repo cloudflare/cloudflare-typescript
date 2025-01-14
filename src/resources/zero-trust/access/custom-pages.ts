@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CustomPagesAPI from './custom-pages';
 import { SinglePage } from '../../../pagination';
 
 export class CustomPages extends APIResource {
@@ -180,21 +179,6 @@ export interface CustomPageCreateParams {
    * Body param: Number of apps the custom page is assigned to.
    */
   app_count?: number;
-
-  /**
-   * Body param:
-   */
-  created_at?: string;
-
-  /**
-   * Body param: UUID
-   */
-  uid?: string;
-
-  /**
-   * Body param:
-   */
-  updated_at?: string;
 }
 
 export interface CustomPageUpdateParams {
@@ -222,21 +206,6 @@ export interface CustomPageUpdateParams {
    * Body param: Number of apps the custom page is assigned to.
    */
   app_count?: number;
-
-  /**
-   * Body param:
-   */
-  created_at?: string;
-
-  /**
-   * Body param: UUID
-   */
-  uid?: string;
-
-  /**
-   * Body param:
-   */
-  updated_at?: string;
 }
 
 export interface CustomPageListParams {
@@ -260,14 +229,18 @@ export interface CustomPageGetParams {
   account_id: string;
 }
 
-export namespace CustomPages {
-  export import CustomPage = CustomPagesAPI.CustomPage;
-  export import CustomPageWithoutHTML = CustomPagesAPI.CustomPageWithoutHTML;
-  export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
-  export import CustomPageWithoutHTMLsSinglePage = CustomPagesAPI.CustomPageWithoutHTMLsSinglePage;
-  export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
-  export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
-  export import CustomPageListParams = CustomPagesAPI.CustomPageListParams;
-  export import CustomPageDeleteParams = CustomPagesAPI.CustomPageDeleteParams;
-  export import CustomPageGetParams = CustomPagesAPI.CustomPageGetParams;
+CustomPages.CustomPageWithoutHTMLsSinglePage = CustomPageWithoutHTMLsSinglePage;
+
+export declare namespace CustomPages {
+  export {
+    type CustomPage as CustomPage,
+    type CustomPageWithoutHTML as CustomPageWithoutHTML,
+    type CustomPageDeleteResponse as CustomPageDeleteResponse,
+    CustomPageWithoutHTMLsSinglePage as CustomPageWithoutHTMLsSinglePage,
+    type CustomPageCreateParams as CustomPageCreateParams,
+    type CustomPageUpdateParams as CustomPageUpdateParams,
+    type CustomPageListParams as CustomPageListParams,
+    type CustomPageDeleteParams as CustomPageDeleteParams,
+    type CustomPageGetParams as CustomPageGetParams,
+  };
 }

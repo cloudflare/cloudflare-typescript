@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SubnetsAPI from './subnets';
 import * as Shared from '../../shared';
 
 export class Subnets extends APIResource {
@@ -49,7 +48,6 @@ export interface SubnetGetParams {
   account_id: string;
 }
 
-export namespace Subnets {
-  export import SubnetGetResponse = SubnetsAPI.SubnetGetResponse;
-  export import SubnetGetParams = SubnetsAPI.SubnetGetParams;
+export declare namespace Subnets {
+  export { type SubnetGetResponse as SubnetGetResponse, type SubnetGetParams as SubnetGetParams };
 }

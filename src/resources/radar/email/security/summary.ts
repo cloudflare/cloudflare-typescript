@@ -3,12 +3,11 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SummaryAPI from './summary';
 import * as EmailAPI from '../email';
 
 export class Summary extends APIResource {
   /**
-   * Percentage distribution of emails classified per ARC validation.
+   * Percentage distribution of emails classified by ARC validation.
    */
   arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
   arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
@@ -27,7 +26,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DKIM validation.
+   * Percentage distribution of emails classified by DKIM validation.
    */
   dkim(query?: SummaryDKIMParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
   dkim(options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
@@ -46,7 +45,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DMARC validation.
+   * Percentage distribution of emails classified by DMARC validation.
    */
   dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
   dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
@@ -106,7 +105,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per SPF validation.
+   * Percentage distribution of emails classified by SPF validation.
    */
   spf(query?: SummarySPFParams, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
   spf(options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
@@ -167,7 +166,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per TLS Version.
+   * Percentage distribution of emails classified by TLS version.
    */
   tlsVersion(
     query?: SummaryTLSVersionParams,
@@ -1193,23 +1192,25 @@ export interface SummaryTLSVersionParams {
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
-export namespace Summary {
-  export import SummaryARCResponse = SummaryAPI.SummaryARCResponse;
-  export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
-  export import SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
-  export import SummaryMaliciousResponse = SummaryAPI.SummaryMaliciousResponse;
-  export import SummarySpamResponse = SummaryAPI.SummarySpamResponse;
-  export import SummarySPFResponse = SummaryAPI.SummarySPFResponse;
-  export import SummarySpoofResponse = SummaryAPI.SummarySpoofResponse;
-  export import SummaryThreatCategoryResponse = SummaryAPI.SummaryThreatCategoryResponse;
-  export import SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
-  export import SummaryARCParams = SummaryAPI.SummaryARCParams;
-  export import SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
-  export import SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
-  export import SummaryMaliciousParams = SummaryAPI.SummaryMaliciousParams;
-  export import SummarySpamParams = SummaryAPI.SummarySpamParams;
-  export import SummarySPFParams = SummaryAPI.SummarySPFParams;
-  export import SummarySpoofParams = SummaryAPI.SummarySpoofParams;
-  export import SummaryThreatCategoryParams = SummaryAPI.SummaryThreatCategoryParams;
-  export import SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
+export declare namespace Summary {
+  export {
+    type SummaryARCResponse as SummaryARCResponse,
+    type SummaryDKIMResponse as SummaryDKIMResponse,
+    type SummaryDMARCResponse as SummaryDMARCResponse,
+    type SummaryMaliciousResponse as SummaryMaliciousResponse,
+    type SummarySpamResponse as SummarySpamResponse,
+    type SummarySPFResponse as SummarySPFResponse,
+    type SummarySpoofResponse as SummarySpoofResponse,
+    type SummaryThreatCategoryResponse as SummaryThreatCategoryResponse,
+    type SummaryTLSVersionResponse as SummaryTLSVersionResponse,
+    type SummaryARCParams as SummaryARCParams,
+    type SummaryDKIMParams as SummaryDKIMParams,
+    type SummaryDMARCParams as SummaryDMARCParams,
+    type SummaryMaliciousParams as SummaryMaliciousParams,
+    type SummarySpamParams as SummarySpamParams,
+    type SummarySPFParams as SummarySPFParams,
+    type SummarySpoofParams as SummarySpoofParams,
+    type SummaryThreatCategoryParams as SummaryThreatCategoryParams,
+    type SummaryTLSVersionParams as SummaryTLSVersionParams,
+  };
 }

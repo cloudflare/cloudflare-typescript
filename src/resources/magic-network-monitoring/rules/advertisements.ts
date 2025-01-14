@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AdvertisementsAPI from './advertisements';
 
 export class Advertisements extends APIResource {
   /**
@@ -44,7 +43,6 @@ export interface AdvertisementEditParams {
   body: unknown;
 }
 
-export namespace Advertisements {
-  export import Advertisement = AdvertisementsAPI.Advertisement;
-  export import AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
+export declare namespace Advertisements {
+  export { type Advertisement as Advertisement, type AdvertisementEditParams as AdvertisementEditParams };
 }

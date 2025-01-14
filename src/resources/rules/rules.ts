@@ -2,21 +2,39 @@
 
 import { APIResource } from '../../resource';
 import * as ListsAPI from './lists/lists';
+import {
+  Hostname,
+  ListCreateParams,
+  ListDeleteParams,
+  ListDeleteResponse,
+  ListGetParams,
+  ListListParams,
+  ListUpdateParams,
+  Lists,
+  ListsList,
+  ListsListsSinglePage,
+  Redirect,
+} from './lists/lists';
 
 export class Rules extends APIResource {
   lists: ListsAPI.Lists = new ListsAPI.Lists(this._client);
 }
 
-export namespace Rules {
-  export import Lists = ListsAPI.Lists;
-  export import Hostname = ListsAPI.Hostname;
-  export import ListsList = ListsAPI.ListsList;
-  export import Redirect = ListsAPI.Redirect;
-  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
-  export import ListsListsSinglePage = ListsAPI.ListsListsSinglePage;
-  export import ListCreateParams = ListsAPI.ListCreateParams;
-  export import ListUpdateParams = ListsAPI.ListUpdateParams;
-  export import ListListParams = ListsAPI.ListListParams;
-  export import ListDeleteParams = ListsAPI.ListDeleteParams;
-  export import ListGetParams = ListsAPI.ListGetParams;
+Rules.Lists = Lists;
+Rules.ListsListsSinglePage = ListsListsSinglePage;
+
+export declare namespace Rules {
+  export {
+    Lists as Lists,
+    type Hostname as Hostname,
+    type ListsList as ListsList,
+    type Redirect as Redirect,
+    type ListDeleteResponse as ListDeleteResponse,
+    ListsListsSinglePage as ListsListsSinglePage,
+    type ListCreateParams as ListCreateParams,
+    type ListUpdateParams as ListUpdateParams,
+    type ListListParams as ListListParams,
+    type ListDeleteParams as ListDeleteParams,
+    type ListGetParams as ListGetParams,
+  };
 }

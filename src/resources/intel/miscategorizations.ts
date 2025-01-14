@@ -2,27 +2,31 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as MiscategorizationsAPI from './miscategorizations';
+import * as Shared from '../shared';
 
 export class Miscategorizations extends APIResource {
   /**
-   * Create Miscategorization
+   * Allows you to submit requests to change a domain’s category.
    */
   create(
     params: MiscategorizationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MiscategorizationCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/intel/miscategorization`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: MiscategorizationCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.post(`/accounts/${account_id}/intel/miscategorization`, { body, ...options });
   }
 }
 
-export type MiscategorizationCreateResponse = unknown | string;
+export interface MiscategorizationCreateResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface MiscategorizationCreateParams {
   /**
@@ -48,7 +52,7 @@ export interface MiscategorizationCreateParams {
   /**
    * Body param: Provide only if indicator_type is `ipv4` or `ipv6`.
    */
-  ip?: unknown;
+  ip?: string | null;
 
   /**
    * Body param: Security category IDs to add.
@@ -68,7 +72,9 @@ export interface MiscategorizationCreateParams {
   url?: string;
 }
 
-export namespace Miscategorizations {
-  export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
-  export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
+export declare namespace Miscategorizations {
+  export {
+    type MiscategorizationCreateResponse as MiscategorizationCreateResponse,
+    type MiscategorizationCreateParams as MiscategorizationCreateParams,
+  };
 }

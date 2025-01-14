@@ -3,8 +3,6 @@
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
-import * as SpoofAPI from './spoof';
-import * as TopAPI from '../../../../http/top';
 
 export class Spoof extends APIResource {
   /**
@@ -36,7 +34,7 @@ export class Spoof extends APIResource {
 export interface SpoofGetResponse {
   meta: SpoofGetResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<SpoofGetResponse.Top0>;
 }
 
 export namespace SpoofGetResponse {
@@ -84,6 +82,12 @@ export namespace SpoofGetResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 
@@ -151,7 +155,6 @@ export interface SpoofGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-export namespace Spoof {
-  export import SpoofGetResponse = SpoofAPI.SpoofGetResponse;
-  export import SpoofGetParams = SpoofAPI.SpoofGetParams;
+export declare namespace Spoof {
+  export { type SpoofGetResponse as SpoofGetResponse, type SpoofGetParams as SpoofGetParams };
 }

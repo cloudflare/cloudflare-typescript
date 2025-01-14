@@ -1,31 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as CurrentsAPI from './currents';
 
 export class Currents extends APIResource {
   /**
    * Retrieves analytics aggregated from the last minute of usage on Spectrum
    * applications underneath a given zone.
    */
-  get(
-    zone: string,
-    query?: CurrentGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CurrentGetResponse>;
-  get(zone: string, options?: Core.RequestOptions): Core.APIPromise<CurrentGetResponse>;
-  get(
-    zone: string,
-    query: CurrentGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CurrentGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(zone, {}, query);
-    }
+  get(params: CurrentGetParams, options?: Core.RequestOptions): Core.APIPromise<CurrentGetResponse> {
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zone}/spectrum/analytics/aggregate/current`, {
+      this._client.get(`/zones/${zone_id}/spectrum/analytics/aggregate/current`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: CurrentGetResponse }>
@@ -33,28 +19,55 @@ export class Currents extends APIResource {
   }
 }
 
-export type CurrentGetResponse = Array<unknown>;
+export type CurrentGetResponse = Array<CurrentGetResponse.CurrentGetResponseItem>;
+
+export namespace CurrentGetResponse {
+  export interface CurrentGetResponseItem {
+    /**
+     * Application identifier.
+     */
+    appID: string;
+
+    /**
+     * Number of bytes sent
+     */
+    bytesEgress: number;
+
+    /**
+     * Number of bytes received
+     */
+    bytesIngress: number;
+
+    /**
+     * Number of connections
+     */
+    connections: number;
+
+    /**
+     * Average duration of connections
+     */
+    durationAvg: number;
+  }
+}
 
 export interface CurrentGetParams {
   /**
-   * Comma-delimited list of Spectrum Application Id(s). If provided, the response
-   * will be limited to Spectrum Application Id(s) that match.
+   * Path param: Identifier
    */
-  app_id_param?: string;
+  zone_id: string;
 
   /**
-   * Comma-delimited list of Spectrum Application Id(s). If provided, the response
-   * will be limited to Spectrum Application Id(s) that match.
+   * Query param: Comma-delimited list of Spectrum Application Id(s). If provided,
+   * the response will be limited to Spectrum Application Id(s) that match.
    */
   appID?: string;
 
   /**
-   * Co-location identifier.
+   * Query param: Co-location identifier.
    */
   colo_name?: string;
 }
 
-export namespace Currents {
-  export import CurrentGetResponse = CurrentsAPI.CurrentGetResponse;
-  export import CurrentGetParams = CurrentsAPI.CurrentGetParams;
+export declare namespace Currents {
+  export { type CurrentGetResponse as CurrentGetResponse, type CurrentGetParams as CurrentGetParams };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ConnectionsAPI from './connections';
 import { SinglePage } from '../../pagination';
 
 export class Connections extends APIResource {
@@ -95,8 +94,7 @@ export interface ConnectionListParams {
   exclude_urls?: string;
 
   /**
-   * Query param: Export the list of connections as a file. Cannot be used with
-   * per_page or page options.
+   * Query param: Export the list of connections as a file.
    */
   export?: 'csv';
 
@@ -119,10 +117,9 @@ export interface ConnectionListParams {
    * Query param: The current page number of the paginated results.
    *
    * We additionally support a special value "all". When "all" is used, the API will
-   * return all the connections with the applied filters in a single page.
-   * Additionally, when using this value, the API will not return the categorisation
-   * data for the URL and domain of the connections. This feature is best-effort and
-   * it may only work for zones with a low number of connections
+   * return all the connections with the applied filters in a single page. This
+   * feature is best-effort and it may only work for zones with a low number of
+   * connections
    */
   page?: string;
 
@@ -168,9 +165,13 @@ export interface ConnectionGetParams {
   zone_id: string;
 }
 
-export namespace Connections {
-  export import Connection = ConnectionsAPI.Connection;
-  export import ConnectionsSinglePage = ConnectionsAPI.ConnectionsSinglePage;
-  export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
-  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
+Connections.ConnectionsSinglePage = ConnectionsSinglePage;
+
+export declare namespace Connections {
+  export {
+    type Connection as Connection,
+    ConnectionsSinglePage as ConnectionsSinglePage,
+    type ConnectionListParams as ConnectionListParams,
+    type ConnectionGetParams as ConnectionGetParams,
+  };
 }

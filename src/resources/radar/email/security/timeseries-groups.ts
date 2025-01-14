@@ -3,12 +3,11 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 import * as EmailAPI from '../email';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Percentage distribution of emails classified per Arc validation over time.
+   * Percentage distribution of emails classified by ARC validation over time.
    */
   arc(
     query?: TimeseriesGroupARCParams,
@@ -31,7 +30,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DKIM validation over time.
+   * Percentage distribution of emails classified by DKIM validation over time.
    */
   dkim(
     query?: TimeseriesGroupDKIMParams,
@@ -54,7 +53,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DMARC validation over time.
+   * Percentage distribution of emails classified by DMARC validation over time.
    */
   dmarc(
     query?: TimeseriesGroupDMARCParams,
@@ -123,7 +122,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per SPF validation over time.
+   * Percentage distribution of emails classified by SPF validation over time.
    */
   spf(
     query?: TimeseriesGroupSPFParams,
@@ -169,7 +168,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified in Threat Categories over time.
+   * Percentage distribution of emails classified by threat category over time.
    */
   threatCategory(
     query?: TimeseriesGroupThreatCategoryParams,
@@ -192,7 +191,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per TLS Version over time.
+   * Percentage distribution of emails classified by TLS version over time.
    */
   tlsVersion(
     query?: TimeseriesGroupTLSVersionParams,
@@ -841,23 +840,25 @@ export interface TimeseriesGroupTLSVersionParams {
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
-  export import TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
-  export import TimeseriesGroupDMARCResponse = TimeseriesGroupsAPI.TimeseriesGroupDMARCResponse;
-  export import TimeseriesGroupMaliciousResponse = TimeseriesGroupsAPI.TimeseriesGroupMaliciousResponse;
-  export import TimeseriesGroupSpamResponse = TimeseriesGroupsAPI.TimeseriesGroupSpamResponse;
-  export import TimeseriesGroupSPFResponse = TimeseriesGroupsAPI.TimeseriesGroupSPFResponse;
-  export import TimeseriesGroupSpoofResponse = TimeseriesGroupsAPI.TimeseriesGroupSpoofResponse;
-  export import TimeseriesGroupThreatCategoryResponse = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryResponse;
-  export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
-  export import TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
-  export import TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
-  export import TimeseriesGroupDMARCParams = TimeseriesGroupsAPI.TimeseriesGroupDMARCParams;
-  export import TimeseriesGroupMaliciousParams = TimeseriesGroupsAPI.TimeseriesGroupMaliciousParams;
-  export import TimeseriesGroupSpamParams = TimeseriesGroupsAPI.TimeseriesGroupSpamParams;
-  export import TimeseriesGroupSPFParams = TimeseriesGroupsAPI.TimeseriesGroupSPFParams;
-  export import TimeseriesGroupSpoofParams = TimeseriesGroupsAPI.TimeseriesGroupSpoofParams;
-  export import TimeseriesGroupThreatCategoryParams = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryParams;
-  export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupARCResponse as TimeseriesGroupARCResponse,
+    type TimeseriesGroupDKIMResponse as TimeseriesGroupDKIMResponse,
+    type TimeseriesGroupDMARCResponse as TimeseriesGroupDMARCResponse,
+    type TimeseriesGroupMaliciousResponse as TimeseriesGroupMaliciousResponse,
+    type TimeseriesGroupSpamResponse as TimeseriesGroupSpamResponse,
+    type TimeseriesGroupSPFResponse as TimeseriesGroupSPFResponse,
+    type TimeseriesGroupSpoofResponse as TimeseriesGroupSpoofResponse,
+    type TimeseriesGroupThreatCategoryResponse as TimeseriesGroupThreatCategoryResponse,
+    type TimeseriesGroupTLSVersionResponse as TimeseriesGroupTLSVersionResponse,
+    type TimeseriesGroupARCParams as TimeseriesGroupARCParams,
+    type TimeseriesGroupDKIMParams as TimeseriesGroupDKIMParams,
+    type TimeseriesGroupDMARCParams as TimeseriesGroupDMARCParams,
+    type TimeseriesGroupMaliciousParams as TimeseriesGroupMaliciousParams,
+    type TimeseriesGroupSpamParams as TimeseriesGroupSpamParams,
+    type TimeseriesGroupSPFParams as TimeseriesGroupSPFParams,
+    type TimeseriesGroupSpoofParams as TimeseriesGroupSpoofParams,
+    type TimeseriesGroupThreatCategoryParams as TimeseriesGroupThreatCategoryParams,
+    type TimeseriesGroupTLSVersionParams as TimeseriesGroupTLSVersionParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AssociationsAPI from './associations';
 
 export class Associations extends APIResource {
   /**
@@ -12,13 +11,13 @@ export class Associations extends APIResource {
     mtlsCertificateId: string,
     params: AssociationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AssociationGetResponse | null> {
+  ): Core.APIPromise<AssociationGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}/associations`,
         options,
-      ) as Core.APIPromise<{ result: AssociationGetResponse | null }>
+      ) as Core.APIPromise<{ result: AssociationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -44,8 +43,10 @@ export interface AssociationGetParams {
   account_id: string;
 }
 
-export namespace Associations {
-  export import CertificateAsssociation = AssociationsAPI.CertificateAsssociation;
-  export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
-  export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
+export declare namespace Associations {
+  export {
+    type CertificateAsssociation as CertificateAsssociation,
+    type AssociationGetResponse as AssociationGetResponse,
+    type AssociationGetParams as AssociationGetParams,
+  };
 }

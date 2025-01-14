@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,9 +11,9 @@ const cloudflare = new Cloudflare({
 
 describe('resource items', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.rules.lists.items.create('2c0fc9fa937b11eaa1b71c4d701ab86e', {
+    const responsePromise = client.rules.lists.items.create('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{}, {}, {}],
+      body: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +25,7 @@ describe('resource items', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.rules.lists.items.create('2c0fc9fa937b11eaa1b71c4d701ab86e', {
+    const response = await client.rules.lists.items.create('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [
         {
@@ -34,43 +34,13 @@ describe('resource items', () => {
           hostname: { url_hostname: 'example.com' },
           ip: '10.0.0.1',
           redirect: {
+            source_url: 'example.com/arch',
+            target_url: 'https://archlinux.org/',
             include_subdomains: true,
             preserve_path_suffix: true,
             preserve_query_string: true,
-            source_url: 'example.com/arch',
             status_code: 301,
             subpath_matching: true,
-            target_url: 'https://archlinux.org/',
-          },
-        },
-        {
-          asn: 5567,
-          comment: 'Private IP address',
-          hostname: { url_hostname: 'example.com' },
-          ip: '10.0.0.1',
-          redirect: {
-            include_subdomains: true,
-            preserve_path_suffix: true,
-            preserve_query_string: true,
-            source_url: 'example.com/arch',
-            status_code: 301,
-            subpath_matching: true,
-            target_url: 'https://archlinux.org/',
-          },
-        },
-        {
-          asn: 5567,
-          comment: 'Private IP address',
-          hostname: { url_hostname: 'example.com' },
-          ip: '10.0.0.1',
-          redirect: {
-            include_subdomains: true,
-            preserve_path_suffix: true,
-            preserve_query_string: true,
-            source_url: 'example.com/arch',
-            status_code: 301,
-            subpath_matching: true,
-            target_url: 'https://archlinux.org/',
           },
         },
       ],
@@ -78,9 +48,9 @@ describe('resource items', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.rules.lists.items.update('2c0fc9fa937b11eaa1b71c4d701ab86e', {
+    const responsePromise = client.rules.lists.items.update('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{}, {}, {}],
+      body: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,7 +62,7 @@ describe('resource items', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.rules.lists.items.update('2c0fc9fa937b11eaa1b71c4d701ab86e', {
+    const response = await client.rules.lists.items.update('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [
         {
@@ -101,43 +71,13 @@ describe('resource items', () => {
           hostname: { url_hostname: 'example.com' },
           ip: '10.0.0.1',
           redirect: {
+            source_url: 'example.com/arch',
+            target_url: 'https://archlinux.org/',
             include_subdomains: true,
             preserve_path_suffix: true,
             preserve_query_string: true,
-            source_url: 'example.com/arch',
             status_code: 301,
             subpath_matching: true,
-            target_url: 'https://archlinux.org/',
-          },
-        },
-        {
-          asn: 5567,
-          comment: 'Private IP address',
-          hostname: { url_hostname: 'example.com' },
-          ip: '10.0.0.1',
-          redirect: {
-            include_subdomains: true,
-            preserve_path_suffix: true,
-            preserve_query_string: true,
-            source_url: 'example.com/arch',
-            status_code: 301,
-            subpath_matching: true,
-            target_url: 'https://archlinux.org/',
-          },
-        },
-        {
-          asn: 5567,
-          comment: 'Private IP address',
-          hostname: { url_hostname: 'example.com' },
-          ip: '10.0.0.1',
-          redirect: {
-            include_subdomains: true,
-            preserve_path_suffix: true,
-            preserve_query_string: true,
-            source_url: 'example.com/arch',
-            status_code: 301,
-            subpath_matching: true,
-            target_url: 'https://archlinux.org/',
           },
         },
       ],
@@ -145,7 +85,7 @@ describe('resource items', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.rules.lists.items.list('2c0fc9fa937b11eaa1b71c4d701ab86e', {
+    const responsePromise = client.rules.lists.items.list('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -158,7 +98,7 @@ describe('resource items', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.rules.lists.items.list('2c0fc9fa937b11eaa1b71c4d701ab86e', {
+    const response = await client.rules.lists.items.list('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cursor: 'zzz',
       per_page: 1,
@@ -167,7 +107,7 @@ describe('resource items', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.rules.lists.items.delete('2c0fc9fa937b11eaa1b71c4d701ab86e', {
+    const responsePromise = client.rules.lists.items.delete('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -180,13 +120,13 @@ describe('resource items', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.rules.lists.items.delete('2c0fc9fa937b11eaa1b71c4d701ab86e', {
+    const response = await client.rules.lists.items.delete('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.rules.lists.items.get(
+    const responsePromise = client.rules.lists.items.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '2c0fc9fa937b11eaa1b71c4d701ab86e',
       '34b12448945f11eaa1b71c4d701ab86e',
@@ -203,7 +143,7 @@ describe('resource items', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.rules.lists.items.get(
+      client.rules.lists.items.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '2c0fc9fa937b11eaa1b71c4d701ab86e',
         '34b12448945f11eaa1b71c4d701ab86e',

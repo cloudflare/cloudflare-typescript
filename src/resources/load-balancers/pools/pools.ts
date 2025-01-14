@@ -2,10 +2,17 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PoolsAPI from './pools';
 import * as LoadBalancersAPI from '../load-balancers';
 import * as HealthAPI from './health';
+import {
+  Health,
+  HealthCreateParams,
+  HealthCreateResponse,
+  HealthGetParams,
+  HealthGetResponse,
+} from './health';
 import * as ReferencesAPI from './references';
+import { ReferenceGetParams, ReferenceGetResponse, References } from './references';
 import { SinglePage } from '../../../pagination';
 
 export class Pools extends APIResource {
@@ -63,6 +70,22 @@ export class Pools extends APIResource {
         `/accounts/${account_id}/load_balancers/pools/${poolId}`,
         options,
       ) as Core.APIPromise<{ result: PoolDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Apply changes to a number of existing pools, overwriting the supplied
+   * properties. Pools are ordered by ascending `name`. Returns the list of affected
+   * pools. Supports the standard pagination query parameters, either
+   * `limit`/`offset` or `per_page`/`page`.
+   */
+  bulkEdit(params: PoolBulkEditParams, options?: Core.RequestOptions): Core.APIPromise<PoolBulkEditResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/load_balancers/pools`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PoolBulkEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -153,13 +176,18 @@ export interface Pool {
    * The ID of the Monitor to use for checking the health of origins within this
    * pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 
   /**
    * A short name (tag) for the pool. Only alphanumeric characters, hyphens, and
    * underscores are allowed.
    */
   name?: string;
+
+  /**
+   * List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
 
   /**
    * This field is now deprecated. It has been moved to Cloudflare's Centralized
@@ -192,6 +220,8 @@ export interface Pool {
 export interface PoolDeleteResponse {
   id?: string;
 }
+
+export type PoolBulkEditResponse = Array<Pool>;
 
 export interface PoolCreateParams {
   /**
@@ -252,7 +282,7 @@ export interface PoolCreateParams {
    * Body param: The ID of the Monitor to use for checking the health of origins
    * within this pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 
   /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's
@@ -341,7 +371,7 @@ export interface PoolUpdateParams {
    * Body param: The ID of the Monitor to use for checking the health of origins
    * within this pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 
   /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's
@@ -375,7 +405,7 @@ export interface PoolListParams {
    * Query param: The ID of the Monitor to use for checking the health of origins
    * within this pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 }
 
 export interface PoolDeleteParams {
@@ -383,6 +413,20 @@ export interface PoolDeleteParams {
    * Identifier
    */
   account_id: string;
+}
+
+export interface PoolBulkEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The email address to send health status notifications to. This field
+   * is now deprecated in favor of Cloudflare Notifications for Load Balancing, so
+   * only resetting this field with an empty string `""` is accepted.
+   */
+  notification_email?: '';
 }
 
 export interface PoolEditParams {
@@ -437,7 +481,7 @@ export interface PoolEditParams {
    * Body param: The ID of the Monitor to use for checking the health of origins
    * within this pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 
   /**
    * Body param: A short name (tag) for the pool. Only alphanumeric characters,
@@ -481,22 +525,36 @@ export interface PoolGetParams {
   account_id: string;
 }
 
-export namespace Pools {
-  export import Pool = PoolsAPI.Pool;
-  export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
-  export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
-  export import PoolCreateParams = PoolsAPI.PoolCreateParams;
-  export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
-  export import PoolListParams = PoolsAPI.PoolListParams;
-  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
-  export import PoolEditParams = PoolsAPI.PoolEditParams;
-  export import PoolGetParams = PoolsAPI.PoolGetParams;
-  export import Health = HealthAPI.Health;
-  export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
-  export import HealthGetResponse = HealthAPI.HealthGetResponse;
-  export import HealthCreateParams = HealthAPI.HealthCreateParams;
-  export import HealthGetParams = HealthAPI.HealthGetParams;
-  export import References = ReferencesAPI.References;
-  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+Pools.PoolsSinglePage = PoolsSinglePage;
+Pools.Health = Health;
+Pools.References = References;
+
+export declare namespace Pools {
+  export {
+    type Pool as Pool,
+    type PoolDeleteResponse as PoolDeleteResponse,
+    type PoolBulkEditResponse as PoolBulkEditResponse,
+    PoolsSinglePage as PoolsSinglePage,
+    type PoolCreateParams as PoolCreateParams,
+    type PoolUpdateParams as PoolUpdateParams,
+    type PoolListParams as PoolListParams,
+    type PoolDeleteParams as PoolDeleteParams,
+    type PoolBulkEditParams as PoolBulkEditParams,
+    type PoolEditParams as PoolEditParams,
+    type PoolGetParams as PoolGetParams,
+  };
+
+  export {
+    Health as Health,
+    type HealthCreateResponse as HealthCreateResponse,
+    type HealthGetResponse as HealthGetResponse,
+    type HealthCreateParams as HealthCreateParams,
+    type HealthGetParams as HealthGetParams,
+  };
+
+  export {
+    References as References,
+    type ReferenceGetResponse as ReferenceGetResponse,
+    type ReferenceGetParams as ReferenceGetParams,
+  };
 }

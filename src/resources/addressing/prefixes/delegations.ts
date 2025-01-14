@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DelegationsAPI from './delegations';
 import { SinglePage } from '../../../pagination';
 
 export class Delegations extends APIResource {
@@ -62,7 +61,7 @@ export class DelegationsSinglePage extends SinglePage<Delegations> {}
 
 export interface Delegations {
   /**
-   * Delegation identifier tag.
+   * Identifier of a Delegation.
    */
   id?: string;
 
@@ -81,21 +80,21 @@ export interface Delegations {
   modified_at?: string;
 
   /**
-   * Identifier
+   * Identifier of an IP Prefix.
    */
   parent_prefix_id?: string;
 }
 
 export interface DelegationDeleteResponse {
   /**
-   * Delegation identifier tag.
+   * Identifier of a Delegation.
    */
   id?: string;
 }
 
 export interface DelegationCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -113,23 +112,27 @@ export interface DelegationCreateParams {
 
 export interface DelegationListParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface DelegationDeleteParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
-export namespace Delegations {
-  export import Delegations = DelegationsAPI.Delegations;
-  export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
-  export import DelegationsSinglePage = DelegationsAPI.DelegationsSinglePage;
-  export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
-  export import DelegationListParams = DelegationsAPI.DelegationListParams;
-  export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
+Delegations.DelegationsSinglePage = DelegationsSinglePage;
+
+export declare namespace Delegations {
+  export {
+    type Delegations as Delegations,
+    type DelegationDeleteResponse as DelegationDeleteResponse,
+    DelegationsSinglePage as DelegationsSinglePage,
+    type DelegationCreateParams as DelegationCreateParams,
+    type DelegationListParams as DelegationListParams,
+    type DelegationDeleteParams as DelegationDeleteParams,
+  };
 }

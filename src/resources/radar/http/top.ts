@@ -3,66 +3,59 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TopAPI from './top';
 
 export class Top extends APIResource {
-  /**
-   * Get the top user agents aggregated in families by HTTP traffic. Values are a
-   * percentage out of the total traffic.
-   */
-  browserFamilies(
-    query?: TopBrowserFamiliesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopBrowserFamiliesResponse>;
-  browserFamilies(options?: Core.RequestOptions): Core.APIPromise<TopBrowserFamiliesResponse>;
-  browserFamilies(
-    query: TopBrowserFamiliesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopBrowserFamiliesResponse> {
-    if (isRequestOptions(query)) {
-      return this.browserFamilies({}, query);
-    }
-    return (
-      this._client.get('/radar/http/top/browser_families', { query, ...options }) as Core.APIPromise<{
-        result: TopBrowserFamiliesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
   /**
    * Get the top user agents by HTTP traffic. Values are a percentage out of the
    * total traffic.
    */
-  browsers(query?: TopBrowsersParams, options?: Core.RequestOptions): Core.APIPromise<TopBrowsersResponse>;
-  browsers(options?: Core.RequestOptions): Core.APIPromise<TopBrowsersResponse>;
-  browsers(
-    query: TopBrowsersParams | Core.RequestOptions = {},
+  browser(query?: TopBrowserParams, options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
+  browser(options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
+  browser(
+    query: TopBrowserParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TopBrowsersResponse> {
+  ): Core.APIPromise<TopBrowserResponse> {
     if (isRequestOptions(query)) {
-      return this.browsers({}, query);
+      return this.browser({}, query);
     }
     return (
-      this._client.get('/radar/http/top/browsers', { query, ...options }) as Core.APIPromise<{
-        result: TopBrowsersResponse;
+      this._client.get('/radar/http/top/browser', { query, ...options }) as Core.APIPromise<{
+        result: TopBrowserResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get the top user agents aggregated in families by HTTP traffic. Values are a
+   * percentage out of the total traffic.
+   */
+  browserFamily(
+    query?: TopBrowserFamilyParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopBrowserFamilyResponse>;
+  browserFamily(options?: Core.RequestOptions): Core.APIPromise<TopBrowserFamilyResponse>;
+  browserFamily(
+    query: TopBrowserFamilyParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopBrowserFamilyResponse> {
+    if (isRequestOptions(query)) {
+      return this.browserFamily({}, query);
+    }
+    return (
+      this._client.get('/radar/http/top/browser_family', { query, ...options }) as Core.APIPromise<{
+        result: TopBrowserFamilyResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface Browser {
-  name: string;
+export interface TopBrowserResponse {
+  meta: TopBrowserResponse.Meta;
 
-  value: string;
+  top_0: Array<TopBrowserResponse.Top0>;
 }
 
-export interface TopBrowserFamiliesResponse {
-  meta: TopBrowserFamiliesResponse.Meta;
-
-  top_0: Array<Browser>;
-}
-
-export namespace TopBrowserFamiliesResponse {
+export namespace TopBrowserResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -108,15 +101,21 @@ export namespace TopBrowserFamiliesResponse {
       }
     }
   }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
+  }
 }
 
-export interface TopBrowsersResponse {
-  meta: TopBrowsersResponse.Meta;
+export interface TopBrowserFamilyResponse {
+  meta: TopBrowserFamilyResponse.Meta;
 
-  top_0: Array<Browser>;
+  top_0: Array<TopBrowserFamilyResponse.Top0>;
 }
 
-export namespace TopBrowsersResponse {
+export namespace TopBrowserFamilyResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -162,9 +161,15 @@ export namespace TopBrowsersResponse {
       }
     }
   }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
+  }
 }
 
-export interface TopBrowserFamiliesParams {
+export interface TopBrowserParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -260,7 +265,7 @@ export interface TopBrowserFamiliesParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export interface TopBrowsersParams {
+export interface TopBrowserFamilyParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -356,10 +361,11 @@ export interface TopBrowsersParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace Top {
-  export import Browser = TopAPI.Browser;
-  export import TopBrowserFamiliesResponse = TopAPI.TopBrowserFamiliesResponse;
-  export import TopBrowsersResponse = TopAPI.TopBrowsersResponse;
-  export import TopBrowserFamiliesParams = TopAPI.TopBrowserFamiliesParams;
-  export import TopBrowsersParams = TopAPI.TopBrowsersParams;
+export declare namespace Top {
+  export {
+    type TopBrowserResponse as TopBrowserResponse,
+    type TopBrowserFamilyResponse as TopBrowserFamilyResponse,
+    type TopBrowserParams as TopBrowserParams,
+    type TopBrowserFamilyParams as TopBrowserFamilyParams,
+  };
 }

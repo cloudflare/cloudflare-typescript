@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as HTTPTestsAPI from './http-tests';
 import * as DEXAPI from '../dex';
 import * as PercentilesAPI from './percentiles';
+import { HTTPDetailsPercentiles, PercentileGetParams, Percentiles, TestStatOverTime } from './percentiles';
 
 export class HTTPTests extends APIResource {
   percentiles: PercentilesAPI.Percentiles = new PercentilesAPI.Percentiles(this._client);
@@ -55,7 +55,7 @@ export interface HTTPDetails {
    */
   name?: string;
 
-  target_policies?: Array<DEXAPI.DeviceExperienceMonitor> | null;
+  target_policies?: Array<DEXAPI.DigitalExperienceMonitor> | null;
 
   targeted?: boolean;
 }
@@ -214,11 +214,15 @@ export interface HTTPTestGetParams {
   deviceId?: Array<string>;
 }
 
-export namespace HTTPTests {
-  export import HTTPDetails = HTTPTestsAPI.HTTPDetails;
-  export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
-  export import Percentiles = PercentilesAPI.Percentiles;
-  export import HTTPDetailsPercentiles = PercentilesAPI.HTTPDetailsPercentiles;
-  export import TestStatOverTime = PercentilesAPI.TestStatOverTime;
-  export import PercentileGetParams = PercentilesAPI.PercentileGetParams;
+HTTPTests.Percentiles = Percentiles;
+
+export declare namespace HTTPTests {
+  export { type HTTPDetails as HTTPDetails, type HTTPTestGetParams as HTTPTestGetParams };
+
+  export {
+    Percentiles as Percentiles,
+    type HTTPDetailsPercentiles as HTTPDetailsPercentiles,
+    type TestStatOverTime as TestStatOverTime,
+    type PercentileGetParams as PercentileGetParams,
+  };
 }

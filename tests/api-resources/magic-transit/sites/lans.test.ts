@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource lans', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
       vlan_tag: 0,
@@ -26,7 +26,7 @@ describe('resource lans', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
       vlan_tag: 0,
@@ -34,13 +34,11 @@ describe('resource lans', () => {
       name: 'name',
       nat: { static_prefix: '192.0.2.0/24' },
       routed_subnets: [
-        { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-        { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-        { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+        { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
       ],
       static_addressing: {
         address: '192.0.2.0/24',
-        dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+        dhcp_relay: { server_addresses: ['192.0.2.1'] },
         dhcp_server: {
           dhcp_pool_end: '192.0.2.1',
           dhcp_pool_start: '192.0.2.1',
@@ -54,7 +52,7 @@ describe('resource lans', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.lans.update(
+    const responsePromise = client.magicTransit.sites.lans.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -69,7 +67,7 @@ describe('resource lans', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.lans.update(
+    const response = await client.magicTransit.sites.lans.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -78,13 +76,11 @@ describe('resource lans', () => {
         nat: { static_prefix: '192.0.2.0/24' },
         physport: 1,
         routed_subnets: [
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
         ],
         static_addressing: {
           address: '192.0.2.0/24',
-          dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+          dhcp_relay: { server_addresses: ['192.0.2.1'] },
           dhcp_server: {
             dhcp_pool_end: '192.0.2.1',
             dhcp_pool_start: '192.0.2.1',
@@ -100,7 +96,7 @@ describe('resource lans', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.lans.list('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.sites.lans.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -113,13 +109,13 @@ describe('resource lans', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.lans.list('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.sites.lans.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.lans.delete(
+    const responsePromise = client.magicTransit.sites.lans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -134,7 +130,7 @@ describe('resource lans', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.lans.delete(
+    const response = await client.magicTransit.sites.lans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -142,7 +138,7 @@ describe('resource lans', () => {
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.lans.edit(
+    const responsePromise = client.magicTransit.sites.lans.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -157,7 +153,7 @@ describe('resource lans', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.lans.edit(
+    const response = await client.magicTransit.sites.lans.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -166,13 +162,11 @@ describe('resource lans', () => {
         nat: { static_prefix: '192.0.2.0/24' },
         physport: 1,
         routed_subnets: [
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
         ],
         static_addressing: {
           address: '192.0.2.0/24',
-          dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+          dhcp_relay: { server_addresses: ['192.0.2.1'] },
           dhcp_server: {
             dhcp_pool_end: '192.0.2.1',
             dhcp_pool_start: '192.0.2.1',
@@ -188,7 +182,7 @@ describe('resource lans', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.lans.get(
+    const responsePromise = client.magicTransit.sites.lans.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -203,7 +197,7 @@ describe('resource lans', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.lans.get(
+    const response = await client.magicTransit.sites.lans.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

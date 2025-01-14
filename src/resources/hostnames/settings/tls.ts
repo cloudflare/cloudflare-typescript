@@ -48,11 +48,11 @@ export class TLS extends APIResource {
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
     params: TLSGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSGetResponse | null> {
+  ): Core.APIPromise<TLSGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/hostnames/settings/${settingId}`, options) as Core.APIPromise<{
-        result: TLSGetResponse | null;
+        result: TLSGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -106,6 +106,9 @@ export interface TLSDeleteResponse {
    */
   hostname?: string;
 
+  /**
+   * Deployment status for the given tls setting.
+   */
   status?: string;
 
   /**
@@ -113,7 +116,10 @@ export interface TLSDeleteResponse {
    */
   updated_at?: string;
 
-  value?: string;
+  /**
+   * The tls setting value.
+   */
+  value?: SettingValue;
 }
 
 export type TLSGetResponse = Array<TLSGetResponse.TLSGetResponseItem>;
@@ -173,12 +179,14 @@ export interface TLSGetParams {
   zone_id: string;
 }
 
-export namespace TLS {
-  export import Setting = TLSAPI.Setting;
-  export import SettingValue = TLSAPI.SettingValue;
-  export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
-  export import TLSGetResponse = TLSAPI.TLSGetResponse;
-  export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
-  export import TLSDeleteParams = TLSAPI.TLSDeleteParams;
-  export import TLSGetParams = TLSAPI.TLSGetParams;
+export declare namespace TLS {
+  export {
+    type Setting as Setting,
+    type SettingValue as SettingValue,
+    type TLSDeleteResponse as TLSDeleteResponse,
+    type TLSGetResponse as TLSGetResponse,
+    type TLSUpdateParams as TLSUpdateParams,
+    type TLSDeleteParams as TLSDeleteParams,
+    type TLSGetParams as TLSGetParams,
+  };
 }

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -53,7 +52,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a timeseries of the percentage distribution of network protocols in Layer
+   * Get a time series of the percentage distribution of network protocols in Layer
    * 3/4 attacks.
    */
   get(
@@ -76,7 +75,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by industry used over time.
+   * Percentage distribution of attacks by industry targeted over time.
    */
   industry(
     query?: TimeseriesGroupIndustryParams,
@@ -168,7 +167,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by vertical used over time.
+   * Percentage distribution of attacks by vertical targeted over time.
    */
   vertical(
     query?: TimeseriesGroupVerticalParams,
@@ -949,21 +948,23 @@ export interface TimeseriesGroupVerticalParams {
   protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupBitrateResponse = TimeseriesGroupsAPI.TimeseriesGroupBitrateResponse;
-  export import TimeseriesGroupDurationResponse = TimeseriesGroupsAPI.TimeseriesGroupDurationResponse;
-  export import TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
-  export import TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
-  export import TimeseriesGroupVectorResponse = TimeseriesGroupsAPI.TimeseriesGroupVectorResponse;
-  export import TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
-  export import TimeseriesGroupBitrateParams = TimeseriesGroupsAPI.TimeseriesGroupBitrateParams;
-  export import TimeseriesGroupDurationParams = TimeseriesGroupsAPI.TimeseriesGroupDurationParams;
-  export import TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
-  export import TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
-  export import TimeseriesGroupVectorParams = TimeseriesGroupsAPI.TimeseriesGroupVectorParams;
-  export import TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupBitrateResponse as TimeseriesGroupBitrateResponse,
+    type TimeseriesGroupDurationResponse as TimeseriesGroupDurationResponse,
+    type TimeseriesGroupGetResponse as TimeseriesGroupGetResponse,
+    type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupProtocolResponse as TimeseriesGroupProtocolResponse,
+    type TimeseriesGroupVectorResponse as TimeseriesGroupVectorResponse,
+    type TimeseriesGroupVerticalResponse as TimeseriesGroupVerticalResponse,
+    type TimeseriesGroupBitrateParams as TimeseriesGroupBitrateParams,
+    type TimeseriesGroupDurationParams as TimeseriesGroupDurationParams,
+    type TimeseriesGroupGetParams as TimeseriesGroupGetParams,
+    type TimeseriesGroupIndustryParams as TimeseriesGroupIndustryParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupProtocolParams as TimeseriesGroupProtocolParams,
+    type TimeseriesGroupVectorParams as TimeseriesGroupVectorParams,
+    type TimeseriesGroupVerticalParams as TimeseriesGroupVerticalParams,
+  };
 }

@@ -107,12 +107,12 @@ export namespace AuditLog {
 /**
  * The Certificate Authority that will issue the certificate
  */
-export type CertificateCA = 'digicert' | 'google' | 'lets_encrypt';
+export type CertificateCA = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
 
 /**
  * The Certificate Authority that will issue the certificate
  */
-export type CertificateCAParam = 'digicert' | 'google' | 'lets_encrypt';
+export type CertificateCAParam = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
 
 /**
  * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
@@ -274,9 +274,14 @@ export interface Member {
   id?: string;
 
   /**
-   * Roles assigned to this member.
+   * Access policy for the membership
    */
-  roles?: Array<Member.Role>;
+  policies?: Array<Member.Policy>;
+
+  /**
+   * Roles assigned to this Member.
+   */
+  roles?: Array<Role>;
 
   /**
    * A member's status in the account.
@@ -290,50 +295,125 @@ export interface Member {
 }
 
 export namespace Member {
-  export interface Role {
+  export interface Policy {
     /**
-     * Role identifier tag.
+     * Policy identifier.
      */
-    id: string;
+    id?: string;
 
     /**
-     * Description of role's permissions.
+     * Allow or deny operations against the resources.
      */
-    description: string;
+    access?: 'allow' | 'deny';
 
     /**
-     * Role name.
+     * A set of permission groups that are specified to the policy.
      */
-    name: string;
+    permission_groups?: Array<Policy.PermissionGroup>;
 
-    permissions: Role.Permissions;
+    /**
+     * A list of resource groups that the policy applies to.
+     */
+    resource_groups?: Array<Policy.ResourceGroup>;
   }
 
-  export namespace Role {
-    export interface Permissions {
-      analytics?: Shared.PermissionGrant;
+  export namespace Policy {
+    /**
+     * A named group of permissions that map to a group of operations against
+     * resources.
+     */
+    export interface PermissionGroup {
+      /**
+       * Identifier of the group.
+       */
+      id: string;
 
-      billing?: Shared.PermissionGrant;
+      /**
+       * Attributes associated to the permission group.
+       */
+      meta?: PermissionGroup.Meta;
 
-      cache_purge?: Shared.PermissionGrant;
+      /**
+       * Name of the group.
+       */
+      name?: string;
+    }
 
-      dns?: Shared.PermissionGrant;
+    export namespace PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      export interface Meta {
+        key?: string;
 
-      dns_records?: Shared.PermissionGrant;
+        value?: string;
+      }
+    }
 
-      lb?: Shared.PermissionGrant;
+    /**
+     * A group of scoped resources.
+     */
+    export interface ResourceGroup {
+      /**
+       * Identifier of the group.
+       */
+      id: string;
 
-      logs?: Shared.PermissionGrant;
+      /**
+       * The scope associated to the resource group
+       */
+      scope: Array<ResourceGroup.Scope>;
 
-      organization?: Shared.PermissionGrant;
+      /**
+       * Attributes associated to the resource group.
+       */
+      meta?: ResourceGroup.Meta;
 
-      ssl?: Shared.PermissionGrant;
+      /**
+       * Name of the resource group.
+       */
+      name?: string;
+    }
 
-      waf?: Shared.PermissionGrant;
+    export namespace ResourceGroup {
+      /**
+       * A scope is a combination of scope objects which provides additional context.
+       */
+      export interface Scope {
+        /**
+         * This is a combination of pre-defined resource name and identifier (like Account
+         * ID etc.)
+         */
+        key: string;
 
-      zone_settings?: Shared.PermissionGrant;
+        /**
+         * A list of scope objects for additional context.
+         */
+        objects: Array<Scope.Object>;
+      }
 
-      zones?: Shared.PermissionGrant;
+      export namespace Scope {
+        /**
+         * A scope object represents any resource that can have actions applied against
+         * invite.
+         */
+        export interface Object {
+          /**
+           * This is a combination of pre-defined resource name and identifier (like Zone ID
+           * etc.)
+           */
+          key: string;
+        }
+      }
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
     }
   }
 
@@ -405,6 +485,86 @@ export interface PermissionGrantParam {
   write?: boolean;
 }
 
+/**
+ * The rate plan applied to the subscription.
+ */
+export interface RatePlan {
+  /**
+   * The ID of the rate plan.
+   */
+  id?: string;
+
+  /**
+   * The currency applied to the rate plan subscription.
+   */
+  currency?: string;
+
+  /**
+   * Whether this rate plan is managed externally from Cloudflare.
+   */
+  externally_managed?: boolean;
+
+  /**
+   * Whether a rate plan is enterprise-based (or newly adopted term contract).
+   */
+  is_contract?: boolean;
+
+  /**
+   * The full name of the rate plan.
+   */
+  public_name?: string;
+
+  /**
+   * The scope that this rate plan applies to.
+   */
+  scope?: string;
+
+  /**
+   * The list of sets this rate plan applies to.
+   */
+  sets?: Array<string>;
+}
+
+/**
+ * The rate plan applied to the subscription.
+ */
+export interface RatePlanParam {
+  /**
+   * The ID of the rate plan.
+   */
+  id?: string;
+
+  /**
+   * The currency applied to the rate plan subscription.
+   */
+  currency?: string;
+
+  /**
+   * Whether this rate plan is managed externally from Cloudflare.
+   */
+  externally_managed?: boolean;
+
+  /**
+   * Whether a rate plan is enterprise-based (or newly adopted term contract).
+   */
+  is_contract?: boolean;
+
+  /**
+   * The full name of the rate plan.
+   */
+  public_name?: string;
+
+  /**
+   * The scope that this rate plan applies to.
+   */
+  scope?: string;
+
+  /**
+   * The list of sets this rate plan applies to.
+   */
+  sets?: Array<string>;
+}
+
 export interface ResponseInfo {
   code: number;
 
@@ -448,14 +608,46 @@ export interface Role {
   description: string;
 
   /**
-   * Role Name.
+   * Role name.
    */
   name: string;
 
+  permissions: Role.Permissions;
+}
+
+export namespace Role {
+  export interface Permissions {
+    analytics?: Shared.PermissionGrant;
+
+    billing?: Shared.PermissionGrant;
+
+    cache_purge?: Shared.PermissionGrant;
+
+    dns?: Shared.PermissionGrant;
+
+    dns_records?: Shared.PermissionGrant;
+
+    lb?: Shared.PermissionGrant;
+
+    logs?: Shared.PermissionGrant;
+
+    organization?: Shared.PermissionGrant;
+
+    ssl?: Shared.PermissionGrant;
+
+    waf?: Shared.PermissionGrant;
+
+    zone_settings?: Shared.PermissionGrant;
+
+    zones?: Shared.PermissionGrant;
+  }
+}
+
+export interface RoleParam {
   /**
-   * Access permissions for this User.
+   * Role identifier tag.
    */
-  permissions: Array<Permission>;
+  id: string;
 }
 
 /**
@@ -468,6 +660,281 @@ export type SortDirection = 'asc' | 'desc';
  */
 export type SortDirectionParam = 'asc' | 'desc';
 
+export interface Subscription {
+  /**
+   * Subscription identifier tag.
+   */
+  id?: string;
+
+  /**
+   * The monetary unit in which pricing information is displayed.
+   */
+  currency?: string;
+
+  /**
+   * The end of the current period and also when the next billing is due.
+   */
+  current_period_end?: string;
+
+  /**
+   * When the current billing period started. May match initial_period_start if this
+   * is the first period.
+   */
+  current_period_start?: string;
+
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+
+  /**
+   * The price of the subscription that will be billed, in US dollars.
+   */
+  price?: number;
+
+  /**
+   * The rate plan applied to the subscription.
+   */
+  rate_plan?: RatePlan;
+
+  /**
+   * The state that the subscription is in.
+   */
+  state?: 'Trial' | 'Provisioned' | 'Paid' | 'AwaitingPayment' | 'Cancelled' | 'Failed' | 'Expired';
+}
+
+/**
+ * A component value for a subscription.
+ */
+export interface SubscriptionComponent {
+  /**
+   * The default amount assigned.
+   */
+  default?: number;
+
+  /**
+   * The name of the component value.
+   */
+  name?: string;
+
+  /**
+   * The unit price for the component value.
+   */
+  price?: number;
+
+  /**
+   * The amount of the component value assigned.
+   */
+  value?: number;
+}
+
+/**
+ * A simple zone object. May have null properties if not a zone subscription.
+ */
+export interface SubscriptionZone {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The domain name
+   */
+  name?: string;
+}
+
+export interface Token {
+  /**
+   * Token identifier tag.
+   */
+  id?: string;
+
+  condition?: Token.Condition;
+
+  /**
+   * The expiration time on or after which the JWT MUST NOT be accepted for
+   * processing.
+   */
+  expires_on?: string;
+
+  /**
+   * The time on which the token was created.
+   */
+  issued_on?: string;
+
+  /**
+   * Last time the token was used.
+   */
+  last_used_on?: string;
+
+  /**
+   * Last time the token was modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Token name.
+   */
+  name?: string;
+
+  /**
+   * The time before which the token MUST NOT be accepted for processing.
+   */
+  not_before?: string;
+
+  /**
+   * List of access policies assigned to the token.
+   */
+  policies?: Array<TokenPolicy>;
+
+  /**
+   * Status of the token.
+   */
+  status?: 'active' | 'disabled' | 'expired';
+}
+
+export namespace Token {
+  export interface Condition {
+    /**
+     * Client IP restrictions.
+     */
+    request_ip?: Condition.RequestIP;
+  }
+
+  export namespace Condition {
+    /**
+     * Client IP restrictions.
+     */
+    export interface RequestIP {
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      in?: Array<Shared.TokenConditionCIDRList>;
+
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      not_in?: Array<Shared.TokenConditionCIDRList>;
+    }
+  }
+}
+
+/**
+ * IPv4/IPv6 CIDR.
+ */
+export type TokenConditionCIDRList = string;
+
+/**
+ * IPv4/IPv6 CIDR.
+ */
+export type TokenConditionCIDRListParam = string;
+
+export interface TokenPolicy {
+  /**
+   * Policy identifier.
+   */
+  id: string;
+
+  /**
+   * Allow or deny operations against the resources.
+   */
+  effect: 'allow' | 'deny';
+
+  /**
+   * A set of permission groups that are specified to the policy.
+   */
+  permission_groups: Array<TokenPolicy.PermissionGroup>;
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  resources: Record<string, string>;
+}
+
+export namespace TokenPolicy {
+  /**
+   * A named group of permissions that map to a group of operations against
+   * resources.
+   */
+  export interface PermissionGroup {
+    /**
+     * Identifier of the group.
+     */
+    id: string;
+
+    /**
+     * Attributes associated to the permission group.
+     */
+    meta?: PermissionGroup.Meta;
+
+    /**
+     * Name of the group.
+     */
+    name?: string;
+  }
+
+  export namespace PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    export interface Meta {
+      key?: string;
+
+      value?: string;
+    }
+  }
+}
+
+export interface TokenPolicyParam {
+  /**
+   * Allow or deny operations against the resources.
+   */
+  effect: 'allow' | 'deny';
+
+  /**
+   * A set of permission groups that are specified to the policy.
+   */
+  permission_groups: Array<TokenPolicyParam.PermissionGroup>;
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  resources: Record<string, string>;
+}
+
+export namespace TokenPolicyParam {
+  /**
+   * A named group of permissions that map to a group of operations against
+   * resources.
+   */
+  export interface PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    meta?: PermissionGroup.Meta;
+  }
+
+  export namespace PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    export interface Meta {
+      key?: string;
+
+      value?: string;
+    }
+  }
+}
+
+/**
+ * The token value.
+ */
+export type TokenValue = string;
+
+export class MembersV4PagePaginationArray extends V4PagePaginationArray<Member> {}
+
 export class RolesSinglePage extends SinglePage<Role> {}
+
+export class TokensV4PagePaginationArray extends V4PagePaginationArray<Token> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}

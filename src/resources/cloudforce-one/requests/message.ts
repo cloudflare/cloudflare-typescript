@@ -2,14 +2,11 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as MessageAPI from './message';
 import * as Shared from '../../shared';
 
 export class MessageResource extends APIResource {
   /**
-   * Creating a request adds the request into the Cloudforce One queue for analysis.
-   * In addition to the content, a short title, type, priority, and releasability
-   * should be provided. If one is not provided a default will be assigned.
+   * Create a New Request Message
    */
   create(
     accountIdentifier: string,
@@ -93,7 +90,7 @@ export interface Message {
   content: string;
 
   /**
-   * Message is a follow-on request
+   * Whether the message is a follow-on request
    */
   is_follow_on_request: boolean;
 
@@ -130,29 +127,9 @@ export interface MessageCreateParams {
 
 export interface MessageUpdateParams {
   /**
-   * Request content
+   * Content of message
    */
   content?: string;
-
-  /**
-   * Priority for analyzing the request
-   */
-  priority?: string;
-
-  /**
-   * Requested information from request
-   */
-  request_type?: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary?: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp?: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
 export interface MessageGetParams {
@@ -187,11 +164,13 @@ export interface MessageGetParams {
   sort_order?: 'asc' | 'desc';
 }
 
-export namespace MessageResource {
-  export import Message = MessageAPI.Message;
-  export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
-  export import MessageGetResponse = MessageAPI.MessageGetResponse;
-  export import MessageCreateParams = MessageAPI.MessageCreateParams;
-  export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
-  export import MessageGetParams = MessageAPI.MessageGetParams;
+export declare namespace MessageResource {
+  export {
+    type Message as Message,
+    type MessageDeleteResponse as MessageDeleteResponse,
+    type MessageGetResponse as MessageGetResponse,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
+    type MessageGetParams as MessageGetParams,
+  };
 }

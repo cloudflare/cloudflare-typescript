@@ -2,9 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as BytimesAPI from './bytimes';
 import * as DNSAPI from '../../dns';
-import * as AnalyticsAPI from '../../firewall/analytics/analytics';
 
 export class Bytimes extends APIResource {
   /**
@@ -125,7 +123,17 @@ export interface BytimeGetParams {
   /**
    * Query param: Unit of time to group data by.
    */
-  time_delta?: AnalyticsAPI.DeltaParam;
+  time_delta?:
+    | 'all'
+    | 'auto'
+    | 'year'
+    | 'quarter'
+    | 'month'
+    | 'week'
+    | 'day'
+    | 'hour'
+    | 'dekaminute'
+    | 'minute';
 
   /**
    * Query param: End date and time of requesting data period in ISO 8601 format.
@@ -133,7 +141,6 @@ export interface BytimeGetParams {
   until?: string;
 }
 
-export namespace Bytimes {
-  export import ByTime = BytimesAPI.ByTime;
-  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
+export declare namespace Bytimes {
+  export { type ByTime as ByTime, type BytimeGetParams as BytimeGetParams };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AudioTracksAPI from './audio-tracks';
 
 export class AudioTracks extends APIResource {
   /**
@@ -102,7 +101,7 @@ export interface Audio {
   uid?: string;
 }
 
-export type AudioTrackDeleteResponse = unknown | string;
+export type AudioTrackDeleteResponse = string;
 
 export type AudioTrackGetResponse = Array<Audio>;
 
@@ -160,12 +159,14 @@ export interface AudioTrackGetParams {
   account_id: string;
 }
 
-export namespace AudioTracks {
-  export import Audio = AudioTracksAPI.Audio;
-  export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
-  export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
-  export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
-  export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;
-  export import AudioTrackEditParams = AudioTracksAPI.AudioTrackEditParams;
-  export import AudioTrackGetParams = AudioTracksAPI.AudioTrackGetParams;
+export declare namespace AudioTracks {
+  export {
+    type Audio as Audio,
+    type AudioTrackDeleteResponse as AudioTrackDeleteResponse,
+    type AudioTrackGetResponse as AudioTrackGetResponse,
+    type AudioTrackDeleteParams as AudioTrackDeleteParams,
+    type AudioTrackCopyParams as AudioTrackCopyParams,
+    type AudioTrackEditParams as AudioTrackEditParams,
+    type AudioTrackGetParams as AudioTrackGetParams,
+  };
 }

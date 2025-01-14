@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TailAPI from './tail';
 import * as Shared from '../../shared';
 
 export class Tail extends APIResource {
@@ -95,11 +94,11 @@ export interface ConsumerScriptParam {
 }
 
 export interface TailCreateResponse {
-  id?: unknown;
+  id?: string;
 
-  expires_at?: unknown;
+  expires_at?: string;
 
-  url?: unknown;
+  url?: string;
 }
 
 export interface TailDeleteResponse {
@@ -114,11 +113,11 @@ export interface TailDeleteResponse {
 }
 
 export interface TailGetResponse {
-  id?: unknown;
+  id?: string;
 
-  expires_at?: unknown;
+  expires_at?: string;
 
-  url?: unknown;
+  url?: string;
 }
 
 export interface TailCreateParams {
@@ -147,12 +146,14 @@ export interface TailGetParams {
   account_id: string;
 }
 
-export namespace Tail {
-  export import ConsumerScript = TailAPI.ConsumerScript;
-  export import TailCreateResponse = TailAPI.TailCreateResponse;
-  export import TailDeleteResponse = TailAPI.TailDeleteResponse;
-  export import TailGetResponse = TailAPI.TailGetResponse;
-  export import TailCreateParams = TailAPI.TailCreateParams;
-  export import TailDeleteParams = TailAPI.TailDeleteParams;
-  export import TailGetParams = TailAPI.TailGetParams;
+export declare namespace Tail {
+  export {
+    type ConsumerScript as ConsumerScript,
+    type TailCreateResponse as TailCreateResponse,
+    type TailDeleteResponse as TailDeleteResponse,
+    type TailGetResponse as TailGetResponse,
+    type TailCreateParams as TailCreateParams,
+    type TailDeleteParams as TailDeleteParams,
+    type TailGetParams as TailGetParams,
+  };
 }

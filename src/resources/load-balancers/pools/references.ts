@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ReferencesAPI from './references';
 
 export class References extends APIResource {
   /**
@@ -12,13 +11,13 @@ export class References extends APIResource {
     poolId: string,
     params: ReferenceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceGetResponse | null> {
+  ): Core.APIPromise<ReferenceGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/pools/${poolId}/references`,
         options,
-      ) as Core.APIPromise<{ result: ReferenceGetResponse | null }>
+      ) as Core.APIPromise<{ result: ReferenceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -47,7 +46,6 @@ export interface ReferenceGetParams {
   account_id: string;
 }
 
-export namespace References {
-  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+export declare namespace References {
+  export { type ReferenceGetResponse as ReferenceGetResponse, type ReferenceGetParams as ReferenceGetParams };
 }

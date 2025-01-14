@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from '../../../../error';
+import { CloudflareError } from 'cloudflare/error';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import * as ApplicationsAPI from './applications';
 
@@ -122,8 +122,10 @@ export interface UserPolicyCheckListParams {
   zone_id?: string;
 }
 
-export namespace UserPolicyChecks {
-  export import UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
-  export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
-  export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
+export declare namespace UserPolicyChecks {
+  export {
+    type UserPolicyCheckGeo as UserPolicyCheckGeo,
+    type UserPolicyCheckListResponse as UserPolicyCheckListResponse,
+    type UserPolicyCheckListParams as UserPolicyCheckListParams,
+  };
 }

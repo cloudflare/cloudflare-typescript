@@ -4,6 +4,12 @@ import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as FleetStatusAPI from './fleet-status';
 import * as DevicesAPI from './devices';
+import {
+  DeviceListParams,
+  DeviceListResponse,
+  DeviceListResponsesV4PagePaginationArray,
+  Devices,
+} from './devices';
 
 export class FleetStatus extends APIResource {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
@@ -71,7 +77,7 @@ export namespace FleetStatusLiveResponse {
 
 export interface FleetStatusLiveParams {
   /**
-   * Path param:
+   * Path param: Unique identifier for account
    */
   account_id: string;
 
@@ -83,17 +89,17 @@ export interface FleetStatusLiveParams {
 
 export interface FleetStatusOverTimeParams {
   /**
-   * Path param:
+   * Path param: Unique identifier for account
    */
   account_id: string;
 
   /**
-   * Query param: Timestamp in ISO format
+   * Query param: Time range beginning in ISO format
    */
   from: string;
 
   /**
-   * Query param: Timestamp in ISO format
+   * Query param: Time range end in ISO format
    */
   to: string;
 
@@ -108,13 +114,21 @@ export interface FleetStatusOverTimeParams {
   device_id?: string;
 }
 
-export namespace FleetStatus {
-  export import LiveStat = FleetStatusAPI.LiveStat;
-  export import FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;
-  export import FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
-  export import FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
-  export import Devices = DevicesAPI.Devices;
-  export import DeviceListResponse = DevicesAPI.DeviceListResponse;
-  export import DeviceListResponsesV4PagePaginationArray = DevicesAPI.DeviceListResponsesV4PagePaginationArray;
-  export import DeviceListParams = DevicesAPI.DeviceListParams;
+FleetStatus.Devices = Devices;
+FleetStatus.DeviceListResponsesV4PagePaginationArray = DeviceListResponsesV4PagePaginationArray;
+
+export declare namespace FleetStatus {
+  export {
+    type LiveStat as LiveStat,
+    type FleetStatusLiveResponse as FleetStatusLiveResponse,
+    type FleetStatusLiveParams as FleetStatusLiveParams,
+    type FleetStatusOverTimeParams as FleetStatusOverTimeParams,
+  };
+
+  export {
+    Devices as Devices,
+    type DeviceListResponse as DeviceListResponse,
+    DeviceListResponsesV4PagePaginationArray as DeviceListResponsesV4PagePaginationArray,
+    type DeviceListParams as DeviceListParams,
+  };
 }

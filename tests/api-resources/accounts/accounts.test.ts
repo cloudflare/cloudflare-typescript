@@ -3,15 +3,37 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource accounts', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.accounts.create({ name: 'name', type: 'standard' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.accounts.create({
+      name: 'name',
+      type: 'standard',
+      unit: { id: 'f267e341f3dd4697bd3b9f71dd96247f' },
+    });
+  });
+
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.accounts.update({ account_id: {}, name: 'Demo Account' });
+    const responsePromise = client.accounts.update({
+      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      name: 'Demo Account',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,8 +44,8 @@ describe('resource accounts', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.accounts.update({
-      account_id: {},
+    const response = await client.accounts.update({
+      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       name: 'Demo Account',
       settings: {
         abuse_contact_email: 'abuse_contact_email',
@@ -35,7 +57,7 @@ describe('resource accounts', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.accounts.list();
+    const responsePromise = client.accounts.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +69,7 @@ describe('resource accounts', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.accounts.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.accounts.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -55,15 +77,30 @@ describe('resource accounts', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.accounts.list(
-        { direction: 'desc', name: 'example.com', page: 1, per_page: 5 },
+      client.accounts.list(
+        { direction: 'asc', name: 'example.com', page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
+  test('delete: only required params', async () => {
+    const responsePromise = client.accounts.delete({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.accounts.delete({ account_id: 'account_id' });
+  });
+
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.accounts.get({ account_id: {} });
+    const responsePromise = client.accounts.get({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,6 +111,6 @@ describe('resource accounts', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.accounts.get({ account_id: {} });
+    const response = await client.accounts.get({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
   });
 });

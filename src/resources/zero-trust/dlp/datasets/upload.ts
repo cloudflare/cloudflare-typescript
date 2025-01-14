@@ -2,12 +2,11 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as UploadAPI from './upload';
 import * as DatasetsAPI from './datasets';
 
 export class Upload extends APIResource {
   /**
-   * Prepare to upload a new version of a dataset.
+   * Prepare to upload a new version of a dataset
    */
   create(
     datasetId: string,
@@ -24,7 +23,10 @@ export class Upload extends APIResource {
   }
 
   /**
-   * Upload a new version of a dataset.
+   * This is used for single-column EDMv1 and Custom Word Lists. The EDM format can
+   * only be created in the Cloudflare dashboard. For other clients, this operation
+   * can only be used for non-secret Custom Word Lists. The body must be a UTF-8
+   * encoded, newline (NL or CRNL) separated list of words to be matched.
    */
   edit(
     datasetId: string,
@@ -45,11 +47,27 @@ export class Upload extends APIResource {
 }
 
 export interface NewVersion {
+  encoding_version: number;
+
   max_cells: number;
 
   version: number;
 
+  columns?: Array<NewVersion.Column>;
+
   secret?: string;
+}
+
+export namespace NewVersion {
+  export interface Column {
+    entry_id: string;
+
+    header_name: string;
+
+    num_cells: number;
+
+    upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+  }
 }
 
 export interface UploadCreateParams {
@@ -68,8 +86,10 @@ export interface UploadEditParams {
   body: string;
 }
 
-export namespace Upload {
-  export import NewVersion = UploadAPI.NewVersion;
-  export import UploadCreateParams = UploadAPI.UploadCreateParams;
-  export import UploadEditParams = UploadAPI.UploadEditParams;
+export declare namespace Upload {
+  export {
+    type NewVersion as NewVersion,
+    type UploadCreateParams as UploadCreateParams,
+    type UploadEditParams as UploadEditParams,
+  };
 }

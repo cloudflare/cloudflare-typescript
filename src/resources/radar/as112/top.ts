@@ -3,11 +3,10 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TopAPI from './top';
 
 export class Top extends APIResource {
   /**
-   * Get the top locations by DNS queries DNSSEC support to AS112.
+   * Get the top locations of DNS queries to AS112 with DNSSEC.
    */
   dnssec(
     dnssec: 'SUPPORTED' | 'NOT_SUPPORTED',
@@ -35,7 +34,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the top locations, by DNS queries EDNS support to AS112.
+   * Get the top locations of DNS queries to AS112 with EDNS support.
    */
   edns(
     edns: 'SUPPORTED' | 'NOT_SUPPORTED',
@@ -59,7 +58,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the top locations by DNS queries IP version to AS112.
+   * Get the top locations of DNS queries to AS112 by IP version.
    */
   ipVersion(
     ipVersion: 'IPv4' | 'IPv6',
@@ -572,13 +571,15 @@ export interface TopLocationsParams {
   name?: Array<string>;
 }
 
-export namespace Top {
-  export import TopDNSSECResponse = TopAPI.TopDNSSECResponse;
-  export import TopEdnsResponse = TopAPI.TopEdnsResponse;
-  export import TopIPVersionResponse = TopAPI.TopIPVersionResponse;
-  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export import TopDNSSECParams = TopAPI.TopDNSSECParams;
-  export import TopEdnsParams = TopAPI.TopEdnsParams;
-  export import TopIPVersionParams = TopAPI.TopIPVersionParams;
-  export import TopLocationsParams = TopAPI.TopLocationsParams;
+export declare namespace Top {
+  export {
+    type TopDNSSECResponse as TopDNSSECResponse,
+    type TopEdnsResponse as TopEdnsResponse,
+    type TopIPVersionResponse as TopIPVersionResponse,
+    type TopLocationsResponse as TopLocationsResponse,
+    type TopDNSSECParams as TopDNSSECParams,
+    type TopEdnsParams as TopEdnsParams,
+    type TopIPVersionParams as TopIPVersionParams,
+    type TopLocationsParams as TopLocationsParams,
+  };
 }

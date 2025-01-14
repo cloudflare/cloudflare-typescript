@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DomainsAPI from './domains';
 import { SinglePage } from '../../pagination';
 
 export class Domains extends APIResource {
@@ -89,7 +88,7 @@ export interface Domain {
 
 export interface DomainUpdateParams {
   /**
-   * Path param:
+   * Path param: Identifer of the account.
    */
   account_id: string;
 
@@ -116,7 +115,7 @@ export interface DomainUpdateParams {
 
 export interface DomainListParams {
   /**
-   * Path param:
+   * Path param: Identifer of the account.
    */
   account_id: string;
 
@@ -147,18 +146,28 @@ export interface DomainListParams {
 }
 
 export interface DomainDeleteParams {
+  /**
+   * Identifer of the account.
+   */
   account_id: string;
 }
 
 export interface DomainGetParams {
+  /**
+   * Identifer of the account.
+   */
   account_id: string;
 }
 
-export namespace Domains {
-  export import Domain = DomainsAPI.Domain;
-  export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
-  export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+Domains.DomainsSinglePage = DomainsSinglePage;
+
+export declare namespace Domains {
+  export {
+    type Domain as Domain,
+    DomainsSinglePage as DomainsSinglePage,
+    type DomainUpdateParams as DomainUpdateParams,
+    type DomainListParams as DomainListParams,
+    type DomainDeleteParams as DomainDeleteParams,
+    type DomainGetParams as DomainGetParams,
+  };
 }

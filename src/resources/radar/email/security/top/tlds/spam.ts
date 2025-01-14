@@ -3,12 +3,10 @@
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
-import * as SpamAPI from './spam';
-import * as TopAPI from '../../../../http/top';
 
 export class Spam extends APIResource {
   /**
-   * Get the top TLDs by emails classified as Spam or not.
+   * Get the top TLDs by emails classified as spam or not.
    */
   get(
     spam: 'SPAM' | 'NOT_SPAM',
@@ -36,7 +34,7 @@ export class Spam extends APIResource {
 export interface SpamGetResponse {
   meta: SpamGetResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<SpamGetResponse.Top0>;
 }
 
 export namespace SpamGetResponse {
@@ -84,6 +82,12 @@ export namespace SpamGetResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 
@@ -151,7 +155,6 @@ export interface SpamGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-export namespace Spam {
-  export import SpamGetResponse = SpamAPI.SpamGetResponse;
-  export import SpamGetParams = SpamAPI.SpamGetParams;
+export declare namespace Spam {
+  export { type SpamGetResponse as SpamGetResponse, type SpamGetParams as SpamGetParams };
 }

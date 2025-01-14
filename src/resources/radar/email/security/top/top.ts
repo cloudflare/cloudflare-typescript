@@ -2,13 +2,14 @@
 
 import { APIResource } from '../../../../../resource';
 import * as TldsAPI from './tlds/tlds';
+import { TldGetParams, TldGetResponse, Tlds } from './tlds/tlds';
 
 export class Top extends APIResource {
   tlds: TldsAPI.Tlds = new TldsAPI.Tlds(this._client);
 }
 
-export namespace Top {
-  export import Tlds = TldsAPI.Tlds;
-  export import TldGetResponse = TldsAPI.TldGetResponse;
-  export import TldGetParams = TldsAPI.TldGetParams;
+Top.Tlds = Tlds;
+
+export declare namespace Top {
+  export { Tlds as Tlds, type TldGetResponse as TldGetResponse, type TldGetParams as TldGetParams };
 }

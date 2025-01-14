@@ -2,8 +2,25 @@
 
 import { APIResource } from '../../resource';
 import * as AvailabilitiesAPI from './availabilities';
+import { Availabilities, Availability, AvailabilityListParams } from './availabilities';
 import * as ScheduleAPI from './schedule';
+import {
+  Schedule,
+  ScheduleCreateParams,
+  ScheduleCreateResponse,
+  ScheduleDeleteParams,
+  ScheduleDeleteResponse,
+  ScheduleGetParams,
+  ScheduleResource,
+} from './schedule';
 import * as PagesAPI from './pages/pages';
+import {
+  PageListParams,
+  PageListResponse,
+  PageListResponsesSinglePage,
+  PageTrendParams,
+  Pages,
+} from './pages/pages';
 
 export class Speed extends APIResource {
   schedule: ScheduleAPI.ScheduleResource = new ScheduleAPI.ScheduleResource(this._client);
@@ -167,20 +184,33 @@ export interface Trend {
   tti?: Array<number | null>;
 }
 
-export namespace Speed {
-  export import ScheduleResource = ScheduleAPI.ScheduleResource;
-  export import Schedule = ScheduleAPI.Schedule;
-  export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
-  export import ScheduleDeleteResponse = ScheduleAPI.ScheduleDeleteResponse;
-  export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
-  export import ScheduleDeleteParams = ScheduleAPI.ScheduleDeleteParams;
-  export import ScheduleGetParams = ScheduleAPI.ScheduleGetParams;
-  export import Availabilities = AvailabilitiesAPI.Availabilities;
-  export import Availability = AvailabilitiesAPI.Availability;
-  export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
-  export import Pages = PagesAPI.Pages;
-  export import PageListResponse = PagesAPI.PageListResponse;
-  export import PageListResponsesSinglePage = PagesAPI.PageListResponsesSinglePage;
-  export import PageListParams = PagesAPI.PageListParams;
-  export import PageTrendParams = PagesAPI.PageTrendParams;
+Speed.ScheduleResource = ScheduleResource;
+Speed.Availabilities = Availabilities;
+Speed.Pages = Pages;
+Speed.PageListResponsesSinglePage = PageListResponsesSinglePage;
+
+export declare namespace Speed {
+  export {
+    ScheduleResource as ScheduleResource,
+    type Schedule as Schedule,
+    type ScheduleCreateResponse as ScheduleCreateResponse,
+    type ScheduleDeleteResponse as ScheduleDeleteResponse,
+    type ScheduleCreateParams as ScheduleCreateParams,
+    type ScheduleDeleteParams as ScheduleDeleteParams,
+    type ScheduleGetParams as ScheduleGetParams,
+  };
+
+  export {
+    Availabilities as Availabilities,
+    type Availability as Availability,
+    type AvailabilityListParams as AvailabilityListParams,
+  };
+
+  export {
+    Pages as Pages,
+    type PageListResponse as PageListResponse,
+    PageListResponsesSinglePage as PageListResponsesSinglePage,
+    type PageListParams as PageListParams,
+    type PageTrendParams as PageTrendParams,
+  };
 }

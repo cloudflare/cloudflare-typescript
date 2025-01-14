@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as TokenAPI from './token';
 
 export class Token extends APIResource {
   /**
@@ -112,7 +111,6 @@ export namespace TokenCreateParams {
   }
 }
 
-export namespace Token {
-  export import TokenCreateResponse = TokenAPI.TokenCreateResponse;
-  export import TokenCreateParams = TokenAPI.TokenCreateParams;
+export declare namespace Token {
+  export { type TokenCreateResponse as TokenCreateResponse, type TokenCreateParams as TokenCreateParams };
 }

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource spam', () => {
   test('get', async () => {
-    const responsePromise = cloudflare.radar.email.security.top.tlds.spam.get('SPAM');
+    const responsePromise = client.radar.email.security.top.tlds.spam.get('SPAM');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,28 +24,28 @@ describe('resource spam', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.security.top.tlds.spam.get('SPAM', { path: '/_stainless_unknown_path' }),
+      client.radar.email.security.top.tlds.spam.get('SPAM', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.security.top.tlds.spam.get(
+      client.radar.email.security.top.tlds.spam.get(
         'SPAM',
         {
-          arc: ['PASS', 'NONE', 'FAIL'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dkim: ['PASS', 'NONE', 'FAIL'],
-          dmarc: ['PASS', 'NONE', 'FAIL'],
+          arc: ['PASS'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          dkim: ['PASS'],
+          dmarc: ['PASS'],
           format: 'JSON',
           limit: 5,
-          name: ['string', 'string', 'string'],
-          spf: ['PASS', 'NONE', 'FAIL'],
+          name: ['string'],
+          spf: ['PASS'],
           tldCategory: 'CLASSIC',
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
+          tlsVersion: ['TLSv1_0'],
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -2,13 +2,21 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as UserSchemasAPI from './user-schemas';
 import * as Shared from '../../shared';
+import * as HostsAPI from './hosts';
+import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
 import * as OperationsAPI from './operations';
+import {
+  OperationListParams,
+  OperationListResponse,
+  OperationListResponsesV4PagePaginationArray,
+  Operations,
+} from './operations';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class UserSchemas extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
+  hosts: HostsAPI.Hosts = new HostsAPI.Hosts(this._client);
 
   /**
    * Upload a schema to a zone
@@ -47,12 +55,7 @@ export class UserSchemas extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserSchemaDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(
-        `/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`,
-        options,
-      ) as Core.APIPromise<{ result: UserSchemaDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, options);
   }
 
   /**
@@ -160,7 +163,16 @@ export namespace SchemaUpload {
   }
 }
 
-export type UserSchemaDeleteResponse = unknown | string;
+export interface UserSchemaDeleteResponse {
+  errors: Message;
+
+  messages: Message;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface UserSchemaCreateParams {
   /**
@@ -237,19 +249,37 @@ export interface UserSchemaGetParams {
   omit_source?: boolean;
 }
 
-export namespace UserSchemas {
-  export import Message = UserSchemasAPI.Message;
-  export import PublicSchema = UserSchemasAPI.PublicSchema;
-  export import SchemaUpload = UserSchemasAPI.SchemaUpload;
-  export import UserSchemaDeleteResponse = UserSchemasAPI.UserSchemaDeleteResponse;
-  export import PublicSchemasV4PagePaginationArray = UserSchemasAPI.PublicSchemasV4PagePaginationArray;
-  export import UserSchemaCreateParams = UserSchemasAPI.UserSchemaCreateParams;
-  export import UserSchemaListParams = UserSchemasAPI.UserSchemaListParams;
-  export import UserSchemaDeleteParams = UserSchemasAPI.UserSchemaDeleteParams;
-  export import UserSchemaEditParams = UserSchemasAPI.UserSchemaEditParams;
-  export import UserSchemaGetParams = UserSchemasAPI.UserSchemaGetParams;
-  export import Operations = OperationsAPI.Operations;
-  export import OperationListResponse = OperationsAPI.OperationListResponse;
-  export import OperationListResponsesV4PagePaginationArray = OperationsAPI.OperationListResponsesV4PagePaginationArray;
-  export import OperationListParams = OperationsAPI.OperationListParams;
+UserSchemas.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
+UserSchemas.Operations = Operations;
+UserSchemas.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
+UserSchemas.Hosts = Hosts;
+UserSchemas.HostListResponsesV4PagePaginationArray = HostListResponsesV4PagePaginationArray;
+
+export declare namespace UserSchemas {
+  export {
+    type Message as Message,
+    type PublicSchema as PublicSchema,
+    type SchemaUpload as SchemaUpload,
+    type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
+    PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
+    type UserSchemaCreateParams as UserSchemaCreateParams,
+    type UserSchemaListParams as UserSchemaListParams,
+    type UserSchemaDeleteParams as UserSchemaDeleteParams,
+    type UserSchemaEditParams as UserSchemaEditParams,
+    type UserSchemaGetParams as UserSchemaGetParams,
+  };
+
+  export {
+    Operations as Operations,
+    type OperationListResponse as OperationListResponse,
+    OperationListResponsesV4PagePaginationArray as OperationListResponsesV4PagePaginationArray,
+    type OperationListParams as OperationListParams,
+  };
+
+  export {
+    Hosts as Hosts,
+    type HostListResponse as HostListResponse,
+    HostListResponsesV4PagePaginationArray as HostListResponsesV4PagePaginationArray,
+    type HostListParams as HostListParams,
+  };
 }

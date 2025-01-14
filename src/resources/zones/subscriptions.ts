@@ -2,9 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ZonesSubscriptionsAPI from './subscriptions';
-import * as SubscriptionsAPI from '../user/subscriptions';
-import { SubscriptionsSinglePage } from '../user/subscriptions';
+import * as Shared from '../shared';
 
 export class Subscriptions extends APIResource {
   /**
@@ -23,17 +21,18 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Lists all of an account's subscriptions.
+   * Updates zone subscriptions, either plan or add-ons.
    */
-  list(
-    accountIdentifier: string,
+  update(
+    identifier: string,
+    body: SubscriptionUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SubscriptionsSinglePage, SubscriptionsAPI.Subscription> {
-    return this._client.getAPIList(
-      `/accounts/${accountIdentifier}/subscriptions`,
-      SubscriptionsSinglePage,
-      options,
-    );
+  ): Core.APIPromise<SubscriptionUpdateResponse> {
+    return (
+      this._client.put(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
+        result: SubscriptionUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -50,16 +49,11 @@ export class Subscriptions extends APIResource {
 
 export type SubscriptionCreateResponse = unknown | string | null;
 
+export type SubscriptionUpdateResponse = unknown | string | null;
+
 export type SubscriptionGetResponse = unknown | string | null;
 
 export interface SubscriptionCreateParams {
-  app?: SubscriptionCreateParams.App;
-
-  /**
-   * The list of add-ons subscribed to.
-   */
-  component_values?: Array<SubscriptionsAPI.SubscriptionComponentParam>;
-
   /**
    * How often the subscription is renewed automatically.
    */
@@ -68,27 +62,27 @@ export interface SubscriptionCreateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionsAPI.RatePlanParam;
+  rate_plan?: Shared.RatePlanParam;
+}
+
+export interface SubscriptionUpdateParams {
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
 
   /**
-   * A simple zone object. May have null properties if not a zone subscription.
+   * The rate plan applied to the subscription.
    */
-  zone?: SubscriptionsAPI.SubscriptionZoneParam;
+  rate_plan?: Shared.RatePlanParam;
 }
 
-export namespace SubscriptionCreateParams {
-  export interface App {
-    /**
-     * app install id.
-     */
-    install_id?: string;
-  }
+export declare namespace Subscriptions {
+  export {
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+  };
 }
-
-export namespace Subscriptions {
-  export import SubscriptionCreateResponse = ZonesSubscriptionsAPI.SubscriptionCreateResponse;
-  export import SubscriptionGetResponse = ZonesSubscriptionsAPI.SubscriptionGetResponse;
-  export import SubscriptionCreateParams = ZonesSubscriptionsAPI.SubscriptionCreateParams;
-}
-
-export { SubscriptionsSinglePage };

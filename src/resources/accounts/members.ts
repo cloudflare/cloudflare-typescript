@@ -2,19 +2,19 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as MembersAPI from './members';
 import * as Shared from '../shared';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { MembersV4PagePaginationArray } from '../shared';
+import { type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Members extends APIResource {
   /**
    * Add a user to the list of members for this account.
    */
-  create(params: MemberCreateParams, options?: Core.RequestOptions): Core.APIPromise<MemberCreateResponse> {
+  create(params: MemberCreateParams, options?: Core.RequestOptions): Core.APIPromise<Shared.Member> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/members`, { body, ...options }) as Core.APIPromise<{
-        result: MemberCreateResponse;
+        result: Shared.Member;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -26,13 +26,13 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberUpdateResponse> {
+  ): Core.APIPromise<Shared.Member> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MemberUpdateResponse }>
+      }) as Core.APIPromise<{ result: Shared.Member }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,13 +42,12 @@ export class Members extends APIResource {
   list(
     params: MemberListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse> {
+  ): Core.PagePromise<MembersV4PagePaginationArray, Shared.Member> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/members`,
-      MemberListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/members`, MembersV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -74,615 +73,20 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberGetResponse> {
+  ): Core.APIPromise<Shared.Member> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: MemberGetResponse;
+        result: Shared.Member;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {}
-
 /**
  * Whether the user is a member of the organization or has an invitation pending.
  */
 export type Status = 'member' | 'invited';
-
-export interface UserWithInviteCode {
-  /**
-   * Membership identifier tag.
-   */
-  id?: string;
-
-  /**
-   * The unique activation code for the account membership.
-   */
-  code?: string;
-
-  /**
-   * Roles assigned to this member.
-   */
-  roles?: Array<UserWithInviteCode.Role>;
-
-  /**
-   * A member's status in the account.
-   */
-  status?: 'accepted' | 'pending';
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  user?: UserWithInviteCode.User;
-}
-
-export namespace UserWithInviteCode {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: Shared.PermissionGrant;
-
-      billing?: Shared.PermissionGrant;
-
-      cache_purge?: Shared.PermissionGrant;
-
-      dns?: Shared.PermissionGrant;
-
-      dns_records?: Shared.PermissionGrant;
-
-      lb?: Shared.PermissionGrant;
-
-      logs?: Shared.PermissionGrant;
-
-      organization?: Shared.PermissionGrant;
-
-      ssl?: Shared.PermissionGrant;
-
-      waf?: Shared.PermissionGrant;
-
-      zone_settings?: Shared.PermissionGrant;
-
-      zones?: Shared.PermissionGrant;
-    }
-  }
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
-
-export interface MemberCreateResponse {
-  /**
-   * Membership identifier tag.
-   */
-  id?: string;
-
-  /**
-   * Access policy for the membership
-   */
-  policies?: Array<MemberCreateResponse.Policy>;
-
-  /**
-   * Roles assigned to this Member.
-   */
-  roles?: Array<Shared.Role>;
-
-  /**
-   * A member's status in the account.
-   */
-  status?: 'accepted' | 'pending';
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  user?: MemberCreateResponse.User;
-}
-
-export namespace MemberCreateResponse {
-  export interface Policy {
-    /**
-     * Policy identifier.
-     */
-    id?: string;
-
-    /**
-     * Allow or deny operations against the resources.
-     */
-    access?: 'allow' | 'deny';
-
-    /**
-     * A set of permission groups that are specified to the policy.
-     */
-    permission_groups?: Array<Policy.PermissionGroup>;
-
-    /**
-     * A list of resource groups that the policy applies to.
-     */
-    resource_groups?: Array<Policy.ResourceGroup>;
-  }
-
-  export namespace Policy {
-    /**
-     * A named group of permissions that map to a group of operations against
-     * resources.
-     */
-    export interface PermissionGroup {
-      /**
-       * Identifier of the group.
-       */
-      id: string;
-
-      /**
-       * Attributes associated to the permission group.
-       */
-      meta?: unknown;
-
-      /**
-       * Name of the group.
-       */
-      name?: string;
-    }
-
-    /**
-     * A group of scoped resources.
-     */
-    export interface ResourceGroup {
-      /**
-       * Identifier of the group.
-       */
-      id: string;
-
-      /**
-       * The scope associated to the resource group
-       */
-      scope: Array<ResourceGroup.Scope>;
-
-      /**
-       * Attributes associated to the resource group.
-       */
-      meta?: unknown;
-
-      /**
-       * Name of the resource group.
-       */
-      name?: string;
-    }
-
-    export namespace ResourceGroup {
-      /**
-       * A scope is a combination of scope objects which provides additional context.
-       */
-      export interface Scope {
-        /**
-         * This is a combination of pre-defined resource name and identifier (like Account
-         * ID etc.)
-         */
-        key: string;
-
-        /**
-         * A list of scope objects for additional context.
-         */
-        objects: Array<Scope.Object>;
-      }
-
-      export namespace Scope {
-        /**
-         * A scope object represents any resource that can have actions applied against
-         * invite.
-         */
-        export interface Object {
-          /**
-           * This is a combination of pre-defined resource name and identifier (like Zone ID
-           * etc.)
-           */
-          key: string;
-        }
-      }
-    }
-  }
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
-
-export interface MemberUpdateResponse {
-  /**
-   * Membership identifier tag.
-   */
-  id?: string;
-
-  /**
-   * Access policy for the membership
-   */
-  policies?: Array<MemberUpdateResponse.Policy>;
-
-  /**
-   * Roles assigned to this Member.
-   */
-  roles?: Array<Shared.Role>;
-
-  /**
-   * A member's status in the account.
-   */
-  status?: 'accepted' | 'pending';
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  user?: MemberUpdateResponse.User;
-}
-
-export namespace MemberUpdateResponse {
-  export interface Policy {
-    /**
-     * Policy identifier.
-     */
-    id?: string;
-
-    /**
-     * Allow or deny operations against the resources.
-     */
-    access?: 'allow' | 'deny';
-
-    /**
-     * A set of permission groups that are specified to the policy.
-     */
-    permission_groups?: Array<Policy.PermissionGroup>;
-
-    /**
-     * A list of resource groups that the policy applies to.
-     */
-    resource_groups?: Array<Policy.ResourceGroup>;
-  }
-
-  export namespace Policy {
-    /**
-     * A named group of permissions that map to a group of operations against
-     * resources.
-     */
-    export interface PermissionGroup {
-      /**
-       * Identifier of the group.
-       */
-      id: string;
-
-      /**
-       * Attributes associated to the permission group.
-       */
-      meta?: unknown;
-
-      /**
-       * Name of the group.
-       */
-      name?: string;
-    }
-
-    /**
-     * A group of scoped resources.
-     */
-    export interface ResourceGroup {
-      /**
-       * Identifier of the group.
-       */
-      id: string;
-
-      /**
-       * The scope associated to the resource group
-       */
-      scope: Array<ResourceGroup.Scope>;
-
-      /**
-       * Attributes associated to the resource group.
-       */
-      meta?: unknown;
-
-      /**
-       * Name of the resource group.
-       */
-      name?: string;
-    }
-
-    export namespace ResourceGroup {
-      /**
-       * A scope is a combination of scope objects which provides additional context.
-       */
-      export interface Scope {
-        /**
-         * This is a combination of pre-defined resource name and identifier (like Account
-         * ID etc.)
-         */
-        key: string;
-
-        /**
-         * A list of scope objects for additional context.
-         */
-        objects: Array<Scope.Object>;
-      }
-
-      export namespace Scope {
-        /**
-         * A scope object represents any resource that can have actions applied against
-         * invite.
-         */
-        export interface Object {
-          /**
-           * This is a combination of pre-defined resource name and identifier (like Zone ID
-           * etc.)
-           */
-          key: string;
-        }
-      }
-    }
-  }
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
-
-export interface MemberListResponse {
-  /**
-   * Membership identifier tag.
-   */
-  id?: string;
-
-  /**
-   * Access policy for the membership
-   */
-  policies?: Array<MemberListResponse.Policy>;
-
-  /**
-   * Roles assigned to this Member.
-   */
-  roles?: Array<Shared.Role>;
-
-  /**
-   * A member's status in the account.
-   */
-  status?: 'accepted' | 'pending';
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  user?: MemberListResponse.User;
-}
-
-export namespace MemberListResponse {
-  export interface Policy {
-    /**
-     * Policy identifier.
-     */
-    id?: string;
-
-    /**
-     * Allow or deny operations against the resources.
-     */
-    access?: 'allow' | 'deny';
-
-    /**
-     * A set of permission groups that are specified to the policy.
-     */
-    permission_groups?: Array<Policy.PermissionGroup>;
-
-    /**
-     * A list of resource groups that the policy applies to.
-     */
-    resource_groups?: Array<Policy.ResourceGroup>;
-  }
-
-  export namespace Policy {
-    /**
-     * A named group of permissions that map to a group of operations against
-     * resources.
-     */
-    export interface PermissionGroup {
-      /**
-       * Identifier of the group.
-       */
-      id: string;
-
-      /**
-       * Attributes associated to the permission group.
-       */
-      meta?: unknown;
-
-      /**
-       * Name of the group.
-       */
-      name?: string;
-    }
-
-    /**
-     * A group of scoped resources.
-     */
-    export interface ResourceGroup {
-      /**
-       * Identifier of the group.
-       */
-      id: string;
-
-      /**
-       * The scope associated to the resource group
-       */
-      scope: Array<ResourceGroup.Scope>;
-
-      /**
-       * Attributes associated to the resource group.
-       */
-      meta?: unknown;
-
-      /**
-       * Name of the resource group.
-       */
-      name?: string;
-    }
-
-    export namespace ResourceGroup {
-      /**
-       * A scope is a combination of scope objects which provides additional context.
-       */
-      export interface Scope {
-        /**
-         * This is a combination of pre-defined resource name and identifier (like Account
-         * ID etc.)
-         */
-        key: string;
-
-        /**
-         * A list of scope objects for additional context.
-         */
-        objects: Array<Scope.Object>;
-      }
-
-      export namespace Scope {
-        /**
-         * A scope object represents any resource that can have actions applied against
-         * invite.
-         */
-        export interface Object {
-          /**
-           * This is a combination of pre-defined resource name and identifier (like Zone ID
-           * etc.)
-           */
-          key: string;
-        }
-      }
-    }
-  }
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
 
 export interface MemberDeleteResponse {
   /**
@@ -691,173 +95,11 @@ export interface MemberDeleteResponse {
   id: string;
 }
 
-export interface MemberGetResponse {
-  /**
-   * Membership identifier tag.
-   */
-  id?: string;
-
-  /**
-   * Access policy for the membership
-   */
-  policies?: Array<MemberGetResponse.Policy>;
-
-  /**
-   * Roles assigned to this Member.
-   */
-  roles?: Array<Shared.Role>;
-
-  /**
-   * A member's status in the account.
-   */
-  status?: 'accepted' | 'pending';
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  user?: MemberGetResponse.User;
-}
-
-export namespace MemberGetResponse {
-  export interface Policy {
-    /**
-     * Policy identifier.
-     */
-    id?: string;
-
-    /**
-     * Allow or deny operations against the resources.
-     */
-    access?: 'allow' | 'deny';
-
-    /**
-     * A set of permission groups that are specified to the policy.
-     */
-    permission_groups?: Array<Policy.PermissionGroup>;
-
-    /**
-     * A list of resource groups that the policy applies to.
-     */
-    resource_groups?: Array<Policy.ResourceGroup>;
-  }
-
-  export namespace Policy {
-    /**
-     * A named group of permissions that map to a group of operations against
-     * resources.
-     */
-    export interface PermissionGroup {
-      /**
-       * Identifier of the group.
-       */
-      id: string;
-
-      /**
-       * Attributes associated to the permission group.
-       */
-      meta?: unknown;
-
-      /**
-       * Name of the group.
-       */
-      name?: string;
-    }
-
-    /**
-     * A group of scoped resources.
-     */
-    export interface ResourceGroup {
-      /**
-       * Identifier of the group.
-       */
-      id: string;
-
-      /**
-       * The scope associated to the resource group
-       */
-      scope: Array<ResourceGroup.Scope>;
-
-      /**
-       * Attributes associated to the resource group.
-       */
-      meta?: unknown;
-
-      /**
-       * Name of the resource group.
-       */
-      name?: string;
-    }
-
-    export namespace ResourceGroup {
-      /**
-       * A scope is a combination of scope objects which provides additional context.
-       */
-      export interface Scope {
-        /**
-         * This is a combination of pre-defined resource name and identifier (like Account
-         * ID etc.)
-         */
-        key: string;
-
-        /**
-         * A list of scope objects for additional context.
-         */
-        objects: Array<Scope.Object>;
-      }
-
-      export namespace Scope {
-        /**
-         * A scope object represents any resource that can have actions applied against
-         * invite.
-         */
-        export interface Object {
-          /**
-           * This is a combination of pre-defined resource name and identifier (like Zone ID
-           * etc.)
-           */
-          key: string;
-        }
-      }
-    }
-  }
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
-
 export type MemberCreateParams =
   | MemberCreateParams.IAMCreateMemberWithRoles
   | MemberCreateParams.IAMCreateMemberWithPolicies;
 
-export namespace MemberCreateParams {
+export declare namespace MemberCreateParams {
   export interface IAMCreateMemberWithRoles {
     /**
      * Path param: Account identifier tag.
@@ -944,10 +186,12 @@ export namespace MemberCreateParams {
   }
 }
 
-export type MemberUpdateParams = MemberUpdateParams.Member | MemberUpdateParams.IAMUpdateMemberWithPolicies;
+export type MemberUpdateParams =
+  | MemberUpdateParams.IAMUpdateMemberWithRoles
+  | MemberUpdateParams.IAMUpdateMemberWithPolicies;
 
-export namespace MemberUpdateParams {
-  export interface Member {
+export declare namespace MemberUpdateParams {
+  export interface IAMUpdateMemberWithRoles {
     /**
      * Path param: Account identifier tag.
      */
@@ -956,16 +200,7 @@ export namespace MemberUpdateParams {
     /**
      * Body param: Roles assigned to this member.
      */
-    roles?: Array<MemberUpdateParams.Member.Role>;
-  }
-
-  export namespace Member {
-    export interface Role {
-      /**
-       * Role identifier tag.
-       */
-      id: string;
-    }
+    roles?: Array<Shared.RoleParam>;
   }
 
   export interface IAMUpdateMemberWithPolicies {
@@ -1058,18 +293,16 @@ export interface MemberGetParams {
   account_id: string;
 }
 
-export namespace Members {
-  export import Status = MembersAPI.Status;
-  export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
-  export import MemberCreateResponse = MembersAPI.MemberCreateResponse;
-  export import MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
-  export import MemberListResponse = MembersAPI.MemberListResponse;
-  export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
-  export import MemberGetResponse = MembersAPI.MemberGetResponse;
-  export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
-  export import MemberCreateParams = MembersAPI.MemberCreateParams;
-  export import MemberUpdateParams = MembersAPI.MemberUpdateParams;
-  export import MemberListParams = MembersAPI.MemberListParams;
-  export import MemberDeleteParams = MembersAPI.MemberDeleteParams;
-  export import MemberGetParams = MembersAPI.MemberGetParams;
+export declare namespace Members {
+  export {
+    type Status as Status,
+    type MemberDeleteResponse as MemberDeleteResponse,
+    type MemberCreateParams as MemberCreateParams,
+    type MemberUpdateParams as MemberUpdateParams,
+    type MemberListParams as MemberListParams,
+    type MemberDeleteParams as MemberDeleteParams,
+    type MemberGetParams as MemberGetParams,
+  };
 }
+
+export { MembersV4PagePaginationArray };

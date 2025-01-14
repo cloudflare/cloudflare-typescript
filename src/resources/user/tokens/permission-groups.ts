@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PermissionGroupsAPI from './permission-groups';
 import { SinglePage } from '../../../pagination';
 
 export class PermissionGroups extends APIResource {
@@ -24,7 +23,11 @@ export class PermissionGroupListResponsesSinglePage extends SinglePage<Permissio
 
 export type PermissionGroupListResponse = unknown;
 
-export namespace PermissionGroups {
-  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
-  export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
+PermissionGroups.PermissionGroupListResponsesSinglePage = PermissionGroupListResponsesSinglePage;
+
+export declare namespace PermissionGroups {
+  export {
+    type PermissionGroupListResponse as PermissionGroupListResponse,
+    PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
+  };
 }

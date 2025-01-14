@@ -1,9 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as AddressesAPI from './addresses';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Addresses extends APIResource {
@@ -11,13 +9,10 @@ export class Addresses extends APIResource {
    * Create a destination address to forward your emails to. Destination addresses
    * need to be verified before they can be used.
    */
-  create(
-    accountIdentifier: string,
-    body: AddressCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Address> {
+  create(params: AddressCreateParams, options?: Core.RequestOptions): Core.APIPromise<Address> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/email/routing/addresses`, {
+      this._client.post(`/accounts/${account_id}/email/routing/addresses`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: Address }>
@@ -28,24 +23,12 @@ export class Addresses extends APIResource {
    * Lists existing destination addresses.
    */
   list(
-    accountIdentifier: string,
-    query?: AddressListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressesV4PagePaginationArray, Address>;
-  list(
-    accountIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressesV4PagePaginationArray, Address>;
-  list(
-    accountIdentifier: string,
-    query: AddressListParams | Core.RequestOptions = {},
+    params: AddressListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AddressesV4PagePaginationArray, Address> {
-    if (isRequestOptions(query)) {
-      return this.list(accountIdentifier, {}, query);
-    }
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountIdentifier}/email/routing/addresses`,
+      `/accounts/${account_id}/email/routing/addresses`,
       AddressesV4PagePaginationArray,
       { query, ...options },
     );
@@ -55,13 +38,14 @@ export class Addresses extends APIResource {
    * Deletes a specific destination address.
    */
   delete(
-    accountIdentifier: string,
     destinationAddressIdentifier: string,
+    params: AddressDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Address> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountIdentifier}/email/routing/addresses/${destinationAddressIdentifier}`,
+        `/accounts/${account_id}/email/routing/addresses/${destinationAddressIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: Address }>
     )._thenUnwrap((obj) => obj.result);
@@ -71,13 +55,14 @@ export class Addresses extends APIResource {
    * Gets information for a specific destination email already created.
    */
   get(
-    accountIdentifier: string,
     destinationAddressIdentifier: string,
+    params: AddressGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Address> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/email/routing/addresses/${destinationAddressIdentifier}`,
+        `/accounts/${account_id}/email/routing/addresses/${destinationAddressIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: Address }>
     )._thenUnwrap((obj) => obj.result);
@@ -122,26 +107,56 @@ export interface Address {
 
 export interface AddressCreateParams {
   /**
-   * The contact email address of the user.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The contact email address of the user.
    */
   email: string;
 }
 
 export interface AddressListParams extends V4PagePaginationArrayParams {
   /**
-   * Sorts results in an ascending or descending order.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Sorts results in an ascending or descending order.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Filter by verified destination addresses.
+   * Query param: Filter by verified destination addresses.
    */
   verified?: true | false;
 }
 
-export namespace Addresses {
-  export import Address = AddressesAPI.Address;
-  export import AddressesV4PagePaginationArray = AddressesAPI.AddressesV4PagePaginationArray;
-  export import AddressCreateParams = AddressesAPI.AddressCreateParams;
-  export import AddressListParams = AddressesAPI.AddressListParams;
+export interface AddressDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface AddressGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+Addresses.AddressesV4PagePaginationArray = AddressesV4PagePaginationArray;
+
+export declare namespace Addresses {
+  export {
+    type Address as Address,
+    AddressesV4PagePaginationArray as AddressesV4PagePaginationArray,
+    type AddressCreateParams as AddressCreateParams,
+    type AddressListParams as AddressListParams,
+    type AddressDeleteParams as AddressDeleteParams,
+    type AddressGetParams as AddressGetParams,
+  };
 }

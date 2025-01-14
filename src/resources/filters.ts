@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
 import * as Core from '../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
@@ -12,12 +11,12 @@ export class Filters extends APIResource {
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   create(
-    zoneIdentifier: string,
-    body: FilterCreateParams,
+    params: FilterCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FilterCreateResponse | null> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneIdentifier}/filters`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/filters`, { body, ...options }) as Core.APIPromise<{
         result: FilterCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,15 +28,16 @@ export class Filters extends APIResource {
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   update(
-    zoneIdentifier: string,
-    id: string,
-    body: FilterUpdateParams,
+    filterId: string,
+    params: FilterUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallFilter> {
+    const { zone_id, body } = params;
     return (
-      this._client.put(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: FirewallFilter;
-      }>
+      this._client.put(`/zones/${zone_id}/filters/${filterId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: FirewallFilter }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,23 +48,11 @@ export class Filters extends APIResource {
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   list(
-    zoneIdentifier: string,
-    query?: FilterListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
-  list(
-    zoneIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
-  list(
-    zoneIdentifier: string,
-    query: FilterListParams | Core.RequestOptions = {},
+    params: FilterListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneIdentifier, {}, query);
-    }
-    return this._client.getAPIList(`/zones/${zoneIdentifier}/filters`, FirewallFiltersV4PagePaginationArray, {
+    const { zone_id, ...query } = params;
+    return this._client.getAPIList(`/zones/${zone_id}/filters`, FirewallFiltersV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -75,10 +63,49 @@ export class Filters extends APIResource {
    *
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallFilter> {
+  delete(
+    filterId: string,
+    params: FilterDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FirewallFilter> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/filters/${filterId}`, options) as Core.APIPromise<{
         result: FirewallFilter;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Deletes one or more existing filters.
+   *
+   * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+   */
+  bulkDelete(
+    params: FilterBulkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FilterBulkDeleteResponse | null> {
+    const { zone_id } = params;
+    return (
+      this._client.delete(`/zones/${zone_id}/filters`, options) as Core.APIPromise<{
+        result: FilterBulkDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates one or more existing filters.
+   *
+   * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+   */
+  bulkUpdate(
+    params: FilterBulkUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FilterBulkUpdateResponse | null> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.put(`/zones/${zone_id}/filters`, { body, ...options }) as Core.APIPromise<{
+        result: FilterBulkUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -88,9 +115,14 @@ export class Filters extends APIResource {
    *
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallFilter> {
+  get(
+    filterId: string,
+    params: FilterGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FirewallFilter> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/filters/${filterId}`, options) as Core.APIPromise<{
         result: FirewallFilter;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -127,25 +159,15 @@ export interface FirewallFilter {
   ref?: string;
 }
 
-export type FilterCreateResponse = Array<FirewallFilter>;
-
-export type FilterCreateParams = unknown;
-
-export type FilterUpdateParams = unknown;
-
-export interface FilterListParams extends V4PagePaginationArrayParams {
+export interface FirewallFilterParam {
   /**
-   * The unique identifier of the filter.
-   */
-  id?: string;
-
-  /**
-   * A case-insensitive string to find in the description.
+   * An informative summary of the filter.
    */
   description?: string;
 
   /**
-   * A case-insensitive string to find in the expression.
+   * The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
    */
   expression?: string;
 
@@ -155,7 +177,99 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
   paused?: boolean;
 
   /**
-   * The filter ref (a short reference tag) to search for. Must be an exact match.
+   * A short reference tag. Allows you to select related filters.
    */
   ref?: string;
+}
+
+export type FilterCreateResponse = Array<FirewallFilter>;
+
+export type FilterBulkDeleteResponse = Array<FirewallFilter>;
+
+export type FilterBulkUpdateResponse = Array<FirewallFilter>;
+
+export interface FilterCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+   */
+  expression: string;
+}
+
+export interface FilterUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface FilterListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: The unique identifier of the filter.
+   */
+  id?: string;
+
+  /**
+   * Query param: A case-insensitive string to find in the description.
+   */
+  description?: string;
+
+  /**
+   * Query param: A case-insensitive string to find in the expression.
+   */
+  expression?: string;
+
+  /**
+   * Query param: When true, indicates that the filter is currently paused.
+   */
+  paused?: boolean;
+
+  /**
+   * Query param: The filter ref (a short reference tag) to search for. Must be an
+   * exact match.
+   */
+  ref?: string;
+}
+
+export interface FilterDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface FilterBulkDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface FilterBulkUpdateParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface FilterGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }

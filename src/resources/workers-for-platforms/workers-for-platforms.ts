@@ -2,11 +2,14 @@
 
 import { APIResource } from '../../resource';
 import * as DispatchAPI from './dispatch/dispatch';
+import { Dispatch } from './dispatch/dispatch';
 
 export class WorkersForPlatforms extends APIResource {
   dispatch: DispatchAPI.Dispatch = new DispatchAPI.Dispatch(this._client);
 }
 
-export namespace WorkersForPlatforms {
-  export import Dispatch = DispatchAPI.Dispatch;
+WorkersForPlatforms.Dispatch = Dispatch;
+
+export declare namespace WorkersForPlatforms {
+  export { Dispatch as Dispatch };
 }

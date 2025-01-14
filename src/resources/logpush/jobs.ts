@@ -3,8 +3,7 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
-import * as JobsAPI from './jobs';
+import { CloudflareError } from 'cloudflare/error';
 import { SinglePage } from '../../pagination';
 
 export class Jobs extends APIResource {
@@ -116,13 +115,13 @@ export class Jobs extends APIResource {
     jobId: number,
     params?: JobDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobDeleteResponse | null>;
-  delete(jobId: number, options?: Core.RequestOptions): Core.APIPromise<JobDeleteResponse | null>;
+  ): Core.APIPromise<JobDeleteResponse>;
+  delete(jobId: number, options?: Core.RequestOptions): Core.APIPromise<JobDeleteResponse>;
   delete(
     jobId: number,
     params: JobDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobDeleteResponse | null> {
+  ): Core.APIPromise<JobDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(jobId, {}, params);
     }
@@ -147,7 +146,7 @@ export class Jobs extends APIResource {
       this._client.delete(
         `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
         options,
-      ) as Core.APIPromise<{ result: JobDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: JobDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -460,7 +459,12 @@ export interface OutputOptionsParam {
   timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
 }
 
-export type JobDeleteResponse = unknown;
+export interface JobDeleteResponse {
+  /**
+   * Unique id of the job.
+   */
+  id?: number;
+}
 
 export interface JobCreateParams {
   /**
@@ -643,6 +647,13 @@ export interface JobUpdateParams {
   max_upload_records?: number | null;
 
   /**
+   * Body param: Optional human readable job name. Not unique. Cloudflare suggests
+   * that you set this to a meaningful string, like the domain name, to make it
+   * easier to identify your job.
+   */
+  name?: string | null;
+
+  /**
    * Body param: The structured replacement for `logpull_options`. When including
    * this field, the `logpull_option` field will be ignored.
    */
@@ -690,14 +701,18 @@ export interface JobGetParams {
   zone_id?: string;
 }
 
-export namespace Jobs {
-  export import LogpushJob = JobsAPI.LogpushJob;
-  export import OutputOptions = JobsAPI.OutputOptions;
-  export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
-  export import LogpushJobsSinglePage = JobsAPI.LogpushJobsSinglePage;
-  export import JobCreateParams = JobsAPI.JobCreateParams;
-  export import JobUpdateParams = JobsAPI.JobUpdateParams;
-  export import JobListParams = JobsAPI.JobListParams;
-  export import JobDeleteParams = JobsAPI.JobDeleteParams;
-  export import JobGetParams = JobsAPI.JobGetParams;
+Jobs.LogpushJobsSinglePage = LogpushJobsSinglePage;
+
+export declare namespace Jobs {
+  export {
+    type LogpushJob as LogpushJob,
+    type OutputOptions as OutputOptions,
+    type JobDeleteResponse as JobDeleteResponse,
+    LogpushJobsSinglePage as LogpushJobsSinglePage,
+    type JobCreateParams as JobCreateParams,
+    type JobUpdateParams as JobUpdateParams,
+    type JobListParams as JobListParams,
+    type JobDeleteParams as JobDeleteParams,
+    type JobGetParams as JobGetParams,
+  };
 }

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource timeseriesGroups', () => {
   test('get', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseriesGroups.get();
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroups.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,24 +24,24 @@ describe('resource timeseriesGroups', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.get({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer7.timeseriesGroups.get({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.get(
+      client.radar.attacks.layer7.timeseriesGroups.get(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
+          location: ['string'],
+          name: ['string'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -49,7 +49,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('httpMethod', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseriesGroups.httpMethod();
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroups.httpMethod();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,27 +62,28 @@ describe('resource timeseriesGroups', () => {
   test('httpMethod: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.httpMethod({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer7.timeseriesGroups.httpMethod({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('httpMethod: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.httpMethod(
+      client.radar.attacks.layer7.timeseriesGroups.httpMethod(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
-          name: ['string', 'string', 'string'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['string'],
           normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
@@ -91,7 +92,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('httpVersion', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseriesGroups.httpVersion();
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroups.httpVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -104,27 +105,27 @@ describe('resource timeseriesGroups', () => {
   test('httpVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.httpVersion({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer7.timeseriesGroups.httpVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('httpVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.httpVersion(
+      client.radar.attacks.layer7.timeseriesGroups.httpVersion(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          httpMethod: ['GET', 'POST', 'DELETE'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
-          name: ['string', 'string', 'string'],
+          httpMethod: ['GET'],
+          ipVersion: ['IPv4'],
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['string'],
           normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
@@ -133,7 +134,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('industry', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseriesGroups.industry();
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroups.industry();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -146,29 +147,29 @@ describe('resource timeseriesGroups', () => {
   test('industry: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.industry({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer7.timeseriesGroups.industry({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('industry: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.industry(
+      client.radar.attacks.layer7.timeseriesGroups.industry(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          httpMethod: ['GET', 'POST', 'DELETE'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          limitPerGroup: 4,
-          location: ['string', 'string', 'string'],
-          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
-          name: ['string', 'string', 'string'],
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['string'],
           normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
@@ -177,7 +178,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('ipVersion', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseriesGroups.ipVersion();
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroups.ipVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -190,27 +191,27 @@ describe('resource timeseriesGroups', () => {
   test('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer7.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.ipVersion(
+      client.radar.attacks.layer7.timeseriesGroups.ipVersion(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          httpMethod: ['GET', 'POST', 'DELETE'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          location: ['string', 'string', 'string'],
-          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
-          name: ['string', 'string', 'string'],
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['string'],
           normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
@@ -219,7 +220,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('managedRules', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseriesGroups.managedRules();
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroups.managedRules();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -232,28 +233,29 @@ describe('resource timeseriesGroups', () => {
   test('managedRules: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.managedRules({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer7.timeseriesGroups.managedRules({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('managedRules: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.managedRules(
+      client.radar.attacks.layer7.timeseriesGroups.managedRules(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          httpMethod: ['GET', 'POST', 'DELETE'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
-          name: ['string', 'string', 'string'],
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['string'],
           normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
@@ -262,7 +264,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('mitigationProduct', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseriesGroups.mitigationProduct();
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroups.mitigationProduct();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -275,29 +277,28 @@ describe('resource timeseriesGroups', () => {
   test('mitigationProduct: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.mitigationProduct({
-        path: '/_stainless_unknown_path',
-      }),
+      client.radar.attacks.layer7.timeseriesGroups.mitigationProduct({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('mitigationProduct: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.mitigationProduct(
+      client.radar.attacks.layer7.timeseriesGroups.mitigationProduct(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          httpMethod: ['GET', 'POST', 'DELETE'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          name: ['string'],
           normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
@@ -306,7 +307,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('vertical', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseriesGroups.vertical();
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroups.vertical();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -319,29 +320,29 @@ describe('resource timeseriesGroups', () => {
   test('vertical: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.vertical({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer7.timeseriesGroups.vertical({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('vertical: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseriesGroups.vertical(
+      client.radar.attacks.layer7.timeseriesGroups.vertical(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          httpMethod: ['GET', 'POST', 'DELETE'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          limitPerGroup: 4,
-          location: ['string', 'string', 'string'],
-          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
-          name: ['string', 'string', 'string'],
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['string'],
           normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },

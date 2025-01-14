@@ -2,21 +2,20 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as EntriesAPI from './entries';
 
 export class Entries extends APIResource {
   /**
    * Create IPFS Universal Path Gateway Content List Entry
    */
   create(
-    zoneIdentifier: string,
     identifier: string,
-    body: EntryCreateParams,
+    params: EntryCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
       this._client.post(
-        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
+        `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
         { body, ...options },
       ) as Core.APIPromise<{ result: EntryCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,15 +25,15 @@ export class Entries extends APIResource {
    * Edit IPFS Universal Path Gateway Content List Entry
    */
   update(
-    zoneIdentifier: string,
     identifier: string,
     contentListEntryIdentifier: string,
-    body: EntryUpdateParams,
+    params: EntryUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
       this._client.put(
-        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
+        `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         { body, ...options },
       ) as Core.APIPromise<{ result: EntryUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,13 +43,14 @@ export class Entries extends APIResource {
    * List IPFS Universal Path Gateway Content List Entries
    */
   list(
-    zoneIdentifier: string,
     identifier: string,
+    params: EntryListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryListResponse | null> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
+        `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
         options,
       ) as Core.APIPromise<{ result: EntryListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -60,14 +60,15 @@ export class Entries extends APIResource {
    * Delete IPFS Universal Path Gateway Content List Entry
    */
   delete(
-    zoneIdentifier: string,
     identifier: string,
     contentListEntryIdentifier: string,
+    params: EntryDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryDeleteResponse | null> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
+        `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: EntryDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -77,14 +78,15 @@ export class Entries extends APIResource {
    * IPFS Universal Path Gateway Content List Entry Details
    */
   get(
-    zoneIdentifier: string,
     identifier: string,
     contentListEntryIdentifier: string,
+    params: EntryGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
+        `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: EntryGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -225,44 +227,80 @@ export interface EntryGetResponse {
 
 export interface EntryCreateParams {
   /**
-   * CID or content path of content to block.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: CID or content path of content to block.
    */
   content: string;
 
   /**
-   * Type of content list entry to block.
+   * Body param: Type of content list entry to block.
    */
   type: 'cid' | 'content_path';
 
   /**
-   * An optional description of the content list entry.
+   * Body param: An optional description of the content list entry.
    */
   description?: string;
 }
 
 export interface EntryUpdateParams {
   /**
-   * CID or content path of content to block.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: CID or content path of content to block.
    */
   content: string;
 
   /**
-   * Type of content list entry to block.
+   * Body param: Type of content list entry to block.
    */
   type: 'cid' | 'content_path';
 
   /**
-   * An optional description of the content list entry.
+   * Body param: An optional description of the content list entry.
    */
   description?: string;
 }
 
-export namespace Entries {
-  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export import EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
-  export import EntryListResponse = EntriesAPI.EntryListResponse;
-  export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
-  export import EntryGetResponse = EntriesAPI.EntryGetResponse;
-  export import EntryCreateParams = EntriesAPI.EntryCreateParams;
-  export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
+export interface EntryListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface EntryDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface EntryGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export declare namespace Entries {
+  export {
+    type EntryCreateResponse as EntryCreateResponse,
+    type EntryUpdateResponse as EntryUpdateResponse,
+    type EntryListResponse as EntryListResponse,
+    type EntryDeleteResponse as EntryDeleteResponse,
+    type EntryGetResponse as EntryGetResponse,
+    type EntryCreateParams as EntryCreateParams,
+    type EntryUpdateParams as EntryUpdateParams,
+    type EntryListParams as EntryListParams,
+    type EntryDeleteParams as EntryDeleteParams,
+    type EntryGetParams as EntryGetParams,
+  };
 }

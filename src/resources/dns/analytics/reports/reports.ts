@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ReportsAPI from './reports';
 import * as BytimesAPI from './bytimes';
+import { ByTime, BytimeGetParams, Bytimes } from './bytimes';
 
 export class Reports extends APIResource {
   bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);
@@ -159,10 +159,10 @@ export interface ReportGetParams {
   until?: string;
 }
 
-export namespace Reports {
-  export import Report = ReportsAPI.Report;
-  export import ReportGetParams = ReportsAPI.ReportGetParams;
-  export import Bytimes = BytimesAPI.Bytimes;
-  export import ByTime = BytimesAPI.ByTime;
-  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
+Reports.Bytimes = Bytimes;
+
+export declare namespace Reports {
+  export { type Report as Report, type ReportGetParams as ReportGetParams };
+
+  export { Bytimes as Bytimes, type ByTime as ByTime, type BytimeGetParams as BytimeGetParams };
 }

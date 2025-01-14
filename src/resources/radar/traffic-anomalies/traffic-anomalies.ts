@@ -3,14 +3,14 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TrafficAnomaliesAPI from './traffic-anomalies';
 import * as LocationsAPI from './locations';
+import { LocationGetParams, LocationGetResponse, Locations as LocationsAPILocations } from './locations';
 
 export class TrafficAnomalies extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
 
   /**
-   * Internet traffic anomalies are signals that might point to an outage, These
+   * Internet traffic anomalies are signals that might point to an outage. These
    * alerts are automatically detected by Radar and then manually verified by our
    * team. This endpoint returns the latest alerts.
    */
@@ -127,10 +127,17 @@ export interface TrafficAnomalyGetParams {
   status?: 'VERIFIED' | 'UNVERIFIED';
 }
 
-export namespace TrafficAnomalies {
-  export import TrafficAnomalyGetResponse = TrafficAnomaliesAPI.TrafficAnomalyGetResponse;
-  export import TrafficAnomalyGetParams = TrafficAnomaliesAPI.TrafficAnomalyGetParams;
-  export import Locations = LocationsAPI.Locations;
-  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
+TrafficAnomalies.Locations = LocationsAPILocations;
+
+export declare namespace TrafficAnomalies {
+  export {
+    type TrafficAnomalyGetResponse as TrafficAnomalyGetResponse,
+    type TrafficAnomalyGetParams as TrafficAnomalyGetParams,
+  };
+
+  export {
+    LocationsAPILocations as Locations,
+    type LocationGetResponse as LocationGetResponse,
+    type LocationGetParams as LocationGetParams,
+  };
 }

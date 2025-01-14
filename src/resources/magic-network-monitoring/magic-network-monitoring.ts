@@ -2,28 +2,57 @@
 
 import { APIResource } from '../../resource';
 import * as ConfigsAPI from './configs/configs';
+import {
+  ConfigCreateParams,
+  ConfigDeleteParams,
+  ConfigEditParams,
+  ConfigGetParams,
+  ConfigUpdateParams,
+  Configs,
+  Configuration,
+} from './configs/configs';
 import * as RulesAPI from './rules/rules';
+import {
+  MagicNetworkMonitoringRule,
+  MagicNetworkMonitoringRulesSinglePage,
+  RuleCreateParams,
+  RuleDeleteParams,
+  RuleEditParams,
+  RuleGetParams,
+  RuleListParams,
+  RuleUpdateParams,
+  Rules,
+} from './rules/rules';
 
 export class MagicNetworkMonitoring extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 }
 
-export namespace MagicNetworkMonitoring {
-  export import Configs = ConfigsAPI.Configs;
-  export import Configuration = ConfigsAPI.Configuration;
-  export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
-  export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
-  export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
-  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
-  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
-  export import Rules = RulesAPI.Rules;
-  export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
-  export import MagicNetworkMonitoringRulesSinglePage = RulesAPI.MagicNetworkMonitoringRulesSinglePage;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+MagicNetworkMonitoring.Configs = Configs;
+MagicNetworkMonitoring.Rules = Rules;
+MagicNetworkMonitoring.MagicNetworkMonitoringRulesSinglePage = MagicNetworkMonitoringRulesSinglePage;
+
+export declare namespace MagicNetworkMonitoring {
+  export {
+    Configs as Configs,
+    type Configuration as Configuration,
+    type ConfigCreateParams as ConfigCreateParams,
+    type ConfigUpdateParams as ConfigUpdateParams,
+    type ConfigDeleteParams as ConfigDeleteParams,
+    type ConfigEditParams as ConfigEditParams,
+    type ConfigGetParams as ConfigGetParams,
+  };
+
+  export {
+    Rules as Rules,
+    type MagicNetworkMonitoringRule as MagicNetworkMonitoringRule,
+    MagicNetworkMonitoringRulesSinglePage as MagicNetworkMonitoringRulesSinglePage,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
 }

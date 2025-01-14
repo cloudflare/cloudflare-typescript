@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OverrideCodesAPI from './override-codes';
 
 export class OverrideCodes extends APIResource {
   /**
@@ -61,7 +60,9 @@ export interface OverrideCodeListParams {
   account_id: string;
 }
 
-export namespace OverrideCodes {
-  export import OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;
-  export import OverrideCodeListParams = OverrideCodesAPI.OverrideCodeListParams;
+export declare namespace OverrideCodes {
+  export {
+    type OverrideCodeListResponse as OverrideCodeListResponse,
+    type OverrideCodeListParams as OverrideCodeListParams,
+  };
 }

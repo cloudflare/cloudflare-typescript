@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as VttAPI from './vtt';
 
 export class Vtt extends APIResource {
   /**
@@ -31,7 +30,6 @@ export interface VttGetParams {
   account_id: string;
 }
 
-export namespace Vtt {
-  export import VttGetResponse = VttAPI.VttGetResponse;
-  export import VttGetParams = VttAPI.VttGetParams;
+export declare namespace Vtt {
+  export { type VttGetResponse as VttGetResponse, type VttGetParams as VttGetParams };
 }

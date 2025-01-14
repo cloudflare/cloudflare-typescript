@@ -2,29 +2,27 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ValueAPI from './value';
+import * as Shared from '../../shared';
 
-export class ValueResource extends APIResource {
+export class Value extends APIResource {
   /**
    * Roll the token secret.
    */
-  update(tokenId: unknown, body: ValueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Value> {
+  update(
+    tokenId: string,
+    body: ValueUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.TokenValue> {
     return (
       this._client.put(`/user/tokens/${tokenId}/value`, { body, ...options }) as Core.APIPromise<{
-        result: Value;
+        result: Shared.TokenValue;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-/**
- * The token value.
- */
-export type Value = string;
-
 export type ValueUpdateParams = unknown;
 
-export namespace ValueResource {
-  export import Value = ValueAPI.Value;
-  export import ValueUpdateParams = ValueAPI.ValueUpdateParams;
+export declare namespace Value {
+  export { type ValueUpdateParams as ValueUpdateParams };
 }

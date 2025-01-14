@@ -3,12 +3,11 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as AsesAPI from './ases';
 
 export class Ases extends APIResource {
   /**
-   * Get the top autonomous systems (AS) by BGP updates (announcements only). Values
-   * are a percentage out of the total updates.
+   * Get the top autonomous systems (ASes) by BGP updates (announcements only).
+   * Values are a percentage out of the total updates.
    */
   get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
@@ -155,27 +154,12 @@ export interface AseGetParams {
   /**
    * Array of BGP network prefixes.
    */
-  prefix?: Array<AseGetParams.Prefix>;
+  prefix?: Array<string>;
 
   /**
    * Array of BGP update types.
    */
   updateType?: Array<'ANNOUNCEMENT' | 'WITHDRAWAL'>;
-}
-
-export namespace AseGetParams {
-  export interface Prefix {
-    in: string;
-
-    name: string;
-
-    test: number;
-
-    /**
-     * Network prefix, IPv4 or IPv6.
-     */
-    type?: string;
-  }
 }
 
 export interface AsePrefixesParams {
@@ -195,9 +179,11 @@ export interface AsePrefixesParams {
   limit?: number;
 }
 
-export namespace Ases {
-  export import AseGetResponse = AsesAPI.AseGetResponse;
-  export import AsePrefixesResponse = AsesAPI.AsePrefixesResponse;
-  export import AseGetParams = AsesAPI.AseGetParams;
-  export import AsePrefixesParams = AsesAPI.AsePrefixesParams;
+export declare namespace Ases {
+  export {
+    type AseGetResponse as AseGetResponse,
+    type AsePrefixesResponse as AsePrefixesResponse,
+    type AseGetParams as AseGetParams,
+    type AsePrefixesParams as AsePrefixesParams,
+  };
 }

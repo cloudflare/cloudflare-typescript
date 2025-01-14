@@ -1,17 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { RegionListResponse, RegionListParams, RegionListResponsesSinglePage, Regions } from './regions';
 export {
-  RegionalHostnameCreateResponse,
-  RegionalHostnameListResponse,
-  RegionalHostnameDeleteResponse,
-  RegionalHostnameEditResponse,
-  RegionalHostnameGetResponse,
-  RegionalHostnameCreateParams,
-  RegionalHostnameListParams,
-  RegionalHostnameDeleteParams,
-  RegionalHostnameEditParams,
-  RegionalHostnameGetParams,
+  RegionListResponsesSinglePage,
+  Regions,
+  type RegionListResponse,
+  type RegionListParams,
+} from './regions';
+export {
   RegionalHostnameListResponsesSinglePage,
   RegionalHostnames,
+  type RegionalHostnameCreateResponse,
+  type RegionalHostnameListResponse,
+  type RegionalHostnameDeleteResponse,
+  type RegionalHostnameEditResponse,
+  type RegionalHostnameGetResponse,
+  type RegionalHostnameCreateParams,
+  type RegionalHostnameListParams,
+  type RegionalHostnameDeleteParams,
+  type RegionalHostnameEditParams,
+  type RegionalHostnameGetParams,
 } from './regional-hostnames';

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as HTTPProtocolAPI from './http-protocol';
 
 export class HTTPProtocol extends APIResource {
   /**
@@ -184,7 +183,9 @@ export interface HTTPProtocolGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace HTTPProtocol {
-  export import HTTPProtocolGetResponse = HTTPProtocolAPI.HTTPProtocolGetResponse;
-  export import HTTPProtocolGetParams = HTTPProtocolAPI.HTTPProtocolGetParams;
+export declare namespace HTTPProtocol {
+  export {
+    type HTTPProtocolGetResponse as HTTPProtocolGetResponse,
+    type HTTPProtocolGetParams as HTTPProtocolGetParams,
+  };
 }

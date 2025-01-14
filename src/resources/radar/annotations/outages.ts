@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as OutagesAPI from './outages';
 
 export class Outages extends APIResource {
   /**
@@ -26,7 +25,7 @@ export class Outages extends APIResource {
   }
 
   /**
-   * Get the number of outages for locations.
+   * Get the number of outages by location.
    */
   locations(
     query?: OutageLocationsParams,
@@ -197,9 +196,11 @@ export interface OutageLocationsParams {
   limit?: number;
 }
 
-export namespace Outages {
-  export import OutageGetResponse = OutagesAPI.OutageGetResponse;
-  export import OutageLocationsResponse = OutagesAPI.OutageLocationsResponse;
-  export import OutageGetParams = OutagesAPI.OutageGetParams;
-  export import OutageLocationsParams = OutagesAPI.OutageLocationsParams;
+export declare namespace Outages {
+  export {
+    type OutageGetResponse as OutageGetResponse,
+    type OutageLocationsResponse as OutageLocationsResponse,
+    type OutageGetParams as OutageGetParams,
+    type OutageLocationsParams as OutageLocationsParams,
+  };
 }

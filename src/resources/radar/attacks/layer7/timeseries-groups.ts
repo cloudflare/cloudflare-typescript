@@ -3,12 +3,10 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Get a time series of the percentual distribution of mitigation techniques, over
-   * time.
+   * Get a time series of the distribution of mitigation techniques over time.
    */
   get(
     query?: TimeseriesGroupGetParams,
@@ -76,7 +74,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by industry used over time.
+   * Percentage distribution of attacks by targeted industry over time.
    */
   industry(
     query?: TimeseriesGroupIndustryParams,
@@ -168,7 +166,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by vertical used over time.
+   * Percentage distribution of attacks by targeted vertical over time.
    */
   vertical(
     query?: TimeseriesGroupVerticalParams,
@@ -273,9 +271,8 @@ export interface TimeseriesGroupHTTPMethodResponse {
 
 export namespace TimeseriesGroupHTTPMethodResponse {
   export interface Serie0 {
-    GET: Array<string>;
-
     timestamps: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -288,6 +285,10 @@ export interface TimeseriesGroupHTTPVersionResponse {
 export namespace TimeseriesGroupHTTPVersionResponse {
   export interface Serie0 {
     'HTTP/1.x': Array<string>;
+
+    'HTTP/2': Array<string>;
+
+    'HTTP/3': Array<string>;
 
     timestamps: Array<string>;
   }
@@ -330,9 +331,8 @@ export interface TimeseriesGroupManagedRulesResponse {
 
 export namespace TimeseriesGroupManagedRulesResponse {
   export interface Serie0 {
-    Bot: Array<string>;
-
     timestamps: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -344,9 +344,8 @@ export interface TimeseriesGroupMitigationProductResponse {
 
 export namespace TimeseriesGroupMitigationProductResponse {
   export interface Serie0 {
-    DDOS: Array<string>;
-
     timestamps: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -473,6 +472,12 @@ export interface TimeseriesGroupHTTPMethodParams {
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
@@ -1023,6 +1028,12 @@ export interface TimeseriesGroupManagedRulesParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -1159,6 +1170,12 @@ export interface TimeseriesGroupMitigationProductParams {
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
@@ -1323,21 +1340,23 @@ export interface TimeseriesGroupVerticalParams {
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
-  export import TimeseriesGroupHTTPMethodResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodResponse;
-  export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
-  export import TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupManagedRulesResponse = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesResponse;
-  export import TimeseriesGroupMitigationProductResponse = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductResponse;
-  export import TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
-  export import TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
-  export import TimeseriesGroupHTTPMethodParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodParams;
-  export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
-  export import TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupManagedRulesParams = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesParams;
-  export import TimeseriesGroupMitigationProductParams = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductParams;
-  export import TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupGetResponse as TimeseriesGroupGetResponse,
+    type TimeseriesGroupHTTPMethodResponse as TimeseriesGroupHTTPMethodResponse,
+    type TimeseriesGroupHTTPVersionResponse as TimeseriesGroupHTTPVersionResponse,
+    type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupManagedRulesResponse as TimeseriesGroupManagedRulesResponse,
+    type TimeseriesGroupMitigationProductResponse as TimeseriesGroupMitigationProductResponse,
+    type TimeseriesGroupVerticalResponse as TimeseriesGroupVerticalResponse,
+    type TimeseriesGroupGetParams as TimeseriesGroupGetParams,
+    type TimeseriesGroupHTTPMethodParams as TimeseriesGroupHTTPMethodParams,
+    type TimeseriesGroupHTTPVersionParams as TimeseriesGroupHTTPVersionParams,
+    type TimeseriesGroupIndustryParams as TimeseriesGroupIndustryParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupManagedRulesParams as TimeseriesGroupManagedRulesParams,
+    type TimeseriesGroupMitigationProductParams as TimeseriesGroupMitigationProductParams,
+    type TimeseriesGroupVerticalParams as TimeseriesGroupVerticalParams,
+  };
 }

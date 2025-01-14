@@ -3,8 +3,8 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as TopAPI from './top';
 import * as AsesAPI from './ases';
+import { AseGetParams, AseGetResponse, AsePrefixesParams, AsePrefixesResponse, Ases } from './ases';
 
 export class Top extends APIResource {
   ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
@@ -108,12 +108,16 @@ export interface TopPrefixesParams {
   updateType?: Array<'ANNOUNCEMENT' | 'WITHDRAWAL'>;
 }
 
-export namespace Top {
-  export import TopPrefixesResponse = TopAPI.TopPrefixesResponse;
-  export import TopPrefixesParams = TopAPI.TopPrefixesParams;
-  export import Ases = AsesAPI.Ases;
-  export import AseGetResponse = AsesAPI.AseGetResponse;
-  export import AsePrefixesResponse = AsesAPI.AsePrefixesResponse;
-  export import AseGetParams = AsesAPI.AseGetParams;
-  export import AsePrefixesParams = AsesAPI.AsePrefixesParams;
+Top.Ases = Ases;
+
+export declare namespace Top {
+  export { type TopPrefixesResponse as TopPrefixesResponse, type TopPrefixesParams as TopPrefixesParams };
+
+  export {
+    Ases as Ases,
+    type AseGetResponse as AseGetResponse,
+    type AsePrefixesResponse as AsePrefixesResponse,
+    type AseGetParams as AseGetParams,
+    type AsePrefixesParams as AsePrefixesParams,
+  };
 }

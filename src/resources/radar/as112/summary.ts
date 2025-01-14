@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -26,7 +25,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of DNS queries, to AS112, by EDNS support.
+   * Percentage distribution of DNS queries to AS112 by EDNS support.
    */
   edns(query?: SummaryEdnsParams, options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
   edns(options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
@@ -89,7 +88,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of DNS queries to AS112 by Query Type.
+   * Percentage distribution of DNS queries to AS112 by query type.
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -111,7 +110,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 dns requests classified per Response Codes.
+   * Percentage distribution of AS112 DNS requests classified by response code.
    */
   responseCodes(
     query?: SummaryResponseCodesParams,
@@ -384,7 +383,7 @@ export namespace SummaryProtocolResponse {
 export interface SummaryQueryTypeResponse {
   meta: SummaryQueryTypeResponse.Meta;
 
-  summary_0: SummaryQueryTypeResponse.Summary0;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryQueryTypeResponse {
@@ -435,24 +434,12 @@ export namespace SummaryQueryTypeResponse {
       }
     }
   }
-
-  export interface Summary0 {
-    A: string;
-
-    AAAA: string;
-
-    PTR: string;
-
-    SOA: string;
-
-    SRV: string;
-  }
 }
 
 export interface SummaryResponseCodesResponse {
   meta: SummaryResponseCodesResponse.Meta;
 
-  summary_0: SummaryResponseCodesResponse.Summary0;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryResponseCodesResponse {
@@ -502,12 +489,6 @@ export namespace SummaryResponseCodesResponse {
         startTime?: string;
       }
     }
-  }
-
-  export interface Summary0 {
-    NOERROR: string;
-
-    NXDOMAIN: string;
   }
 }
 
@@ -749,6 +730,12 @@ export interface SummaryQueryTypeParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -799,6 +786,12 @@ export interface SummaryResponseCodesParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -811,17 +804,19 @@ export interface SummaryResponseCodesParams {
   name?: Array<string>;
 }
 
-export namespace Summary {
-  export import SummaryDNSSECResponse = SummaryAPI.SummaryDNSSECResponse;
-  export import SummaryEdnsResponse = SummaryAPI.SummaryEdnsResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export import SummaryQueryTypeResponse = SummaryAPI.SummaryQueryTypeResponse;
-  export import SummaryResponseCodesResponse = SummaryAPI.SummaryResponseCodesResponse;
-  export import SummaryDNSSECParams = SummaryAPI.SummaryDNSSECParams;
-  export import SummaryEdnsParams = SummaryAPI.SummaryEdnsParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export import SummaryQueryTypeParams = SummaryAPI.SummaryQueryTypeParams;
-  export import SummaryResponseCodesParams = SummaryAPI.SummaryResponseCodesParams;
+export declare namespace Summary {
+  export {
+    type SummaryDNSSECResponse as SummaryDNSSECResponse,
+    type SummaryEdnsResponse as SummaryEdnsResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryProtocolResponse as SummaryProtocolResponse,
+    type SummaryQueryTypeResponse as SummaryQueryTypeResponse,
+    type SummaryResponseCodesResponse as SummaryResponseCodesResponse,
+    type SummaryDNSSECParams as SummaryDNSSECParams,
+    type SummaryEdnsParams as SummaryEdnsParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryProtocolParams as SummaryProtocolParams,
+    type SummaryQueryTypeParams as SummaryQueryTypeParams,
+    type SummaryResponseCodesParams as SummaryResponseCodesParams,
+  };
 }

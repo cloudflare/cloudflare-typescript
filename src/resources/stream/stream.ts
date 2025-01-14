@@ -3,18 +3,81 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as AudioTracksAPI from './audio-tracks';
+import {
+  Audio,
+  AudioTrackCopyParams,
+  AudioTrackDeleteParams,
+  AudioTrackDeleteResponse,
+  AudioTrackEditParams,
+  AudioTrackGetParams,
+  AudioTrackGetResponse,
+  AudioTracks,
+} from './audio-tracks';
 import * as ClipAPI from './clip';
+import { Clip, ClipCreateParams, ClipResource } from './clip';
 import * as CopyAPI from './copy';
+import { Copy, CopyCreateParams } from './copy';
 import * as DirectUploadAPI from './direct-upload';
+import { DirectUpload, DirectUploadCreateParams, DirectUploadCreateResponse } from './direct-upload';
 import * as DownloadsAPI from './downloads';
+import {
+  DownloadCreateParams,
+  DownloadCreateResponse,
+  DownloadDeleteParams,
+  DownloadDeleteResponse,
+  DownloadGetParams,
+  DownloadGetResponse,
+  Downloads,
+} from './downloads';
 import * as EmbedAPI from './embed';
+import { Embed, EmbedGetParams, EmbedGetResponse } from './embed';
 import * as KeysAPI from './keys';
+import {
+  KeyCreateParams,
+  KeyDeleteParams,
+  KeyDeleteResponse,
+  KeyGetParams,
+  KeyGetResponse,
+  Keys,
+} from './keys';
 import * as TokenAPI from './token';
+import { Token, TokenCreateParams, TokenCreateResponse } from './token';
 import * as VideosAPI from './videos';
+import { VideoStorageUsageParams, VideoStorageUsageResponse, Videos } from './videos';
 import * as WatermarksAPI from './watermarks';
+import {
+  Watermark,
+  WatermarkCreateParams,
+  WatermarkDeleteParams,
+  WatermarkDeleteResponse,
+  WatermarkGetParams,
+  WatermarkListParams,
+  Watermarks,
+  WatermarksSinglePage,
+} from './watermarks';
 import * as WebhooksAPI from './webhooks';
+import {
+  WebhookDeleteParams,
+  WebhookDeleteResponse,
+  WebhookGetParams,
+  WebhookGetResponse,
+  WebhookUpdateParams,
+  WebhookUpdateResponse,
+  Webhooks,
+} from './webhooks';
 import * as CaptionsAPI from './captions/captions';
+import { Caption, CaptionGetParams, CaptionGetResponse, Captions } from './captions/captions';
 import * as LiveInputsAPI from './live-inputs/live-inputs';
+import {
+  LiveInput,
+  LiveInputCreateParams,
+  LiveInputDeleteParams,
+  LiveInputGetParams,
+  LiveInputListParams,
+  LiveInputListResponse,
+  LiveInputUpdateParams,
+  LiveInputs,
+} from './live-inputs/live-inputs';
 import { SinglePage } from '../../pagination';
 
 export class Stream extends APIResource {
@@ -83,6 +146,19 @@ export class Stream extends APIResource {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
+  }
+
+  /**
+   * Edit details for a single video.
+   */
+  edit(identifier: string, params: StreamEditParams, options?: Core.RequestOptions): Core.APIPromise<Video> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/stream/${identifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Video }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -388,6 +464,69 @@ export interface StreamDeleteParams {
   account_id: string;
 }
 
+export interface StreamEditParams {
+  /**
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Lists the origins allowed to display the video. Enter allowed origin
+   * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
+   * video to be viewed on any origin.
+   */
+  allowedOrigins?: Array<AllowedOriginsParam>;
+
+  /**
+   * Body param: A user-defined identifier for the media creator.
+   */
+  creator?: string;
+
+  /**
+   * Body param: The maximum duration in seconds for a video upload. Can be set for a
+   * video that is not yet uploaded to limit its duration. Uploads that exceed the
+   * specified duration will fail during processing. A value of `-1` means the value
+   * is unknown.
+   */
+  maxDurationSeconds?: number;
+
+  /**
+   * Body param: A user modifiable key-value store used to reference other systems of
+   * record for managing videos.
+   */
+  meta?: unknown;
+
+  /**
+   * Body param: Indicates whether the video can be a accessed using the UID. When
+   * set to `true`, a signed token must be generated with a signing key to view the
+   * video.
+   */
+  requireSignedURLs?: boolean;
+
+  /**
+   * Body param: Indicates the date and time at which the video will be deleted. Omit
+   * the field to indicate no change, or include with a `null` value to remove an
+   * existing scheduled deletion. If specified, must be at least 30 days from upload
+   * time.
+   */
+  scheduledDeletion?: string;
+
+  /**
+   * Body param: The timestamp for a thumbnail image calculated as a percentage value
+   * of the video's duration. To convert from a second-wise timestamp to a
+   * percentage, divide the desired timestamp by the total duration of the video. If
+   * this value is not set, the default thumbnail image is taken from 0s of the
+   * video.
+   */
+  thumbnailTimestampPct?: number;
+
+  /**
+   * Body param: The date and time when the video upload URL is no longer valid for
+   * direct user uploads.
+   */
+  uploadExpiry?: string;
+}
+
 export interface StreamGetParams {
   /**
    * The account identifier tag.
@@ -395,70 +534,111 @@ export interface StreamGetParams {
   account_id: string;
 }
 
-export namespace Stream {
-  export import AudioTracks = AudioTracksAPI.AudioTracks;
-  export import Audio = AudioTracksAPI.Audio;
-  export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
-  export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
-  export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
-  export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;
-  export import AudioTrackEditParams = AudioTracksAPI.AudioTrackEditParams;
-  export import AudioTrackGetParams = AudioTracksAPI.AudioTrackGetParams;
-  export import Videos = VideosAPI.Videos;
-  export import VideoStorageUsageResponse = VideosAPI.VideoStorageUsageResponse;
-  export import VideoStorageUsageParams = VideosAPI.VideoStorageUsageParams;
-  export import ClipResource = ClipAPI.ClipResource;
-  export import Clip = ClipAPI.Clip;
-  export import ClipCreateParams = ClipAPI.ClipCreateParams;
-  export import Copy = CopyAPI.Copy;
-  export import CopyCreateParams = CopyAPI.CopyCreateParams;
-  export import DirectUpload = DirectUploadAPI.DirectUpload;
-  export import DirectUploadCreateResponse = DirectUploadAPI.DirectUploadCreateResponse;
-  export import DirectUploadCreateParams = DirectUploadAPI.DirectUploadCreateParams;
-  export import Keys = KeysAPI.Keys;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
-  export import KeyCreateParams = KeysAPI.KeyCreateParams;
-  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
-  export import KeyGetParams = KeysAPI.KeyGetParams;
-  export import LiveInputs = LiveInputsAPI.LiveInputs;
-  export import LiveInput = LiveInputsAPI.LiveInput;
-  export import LiveInputListResponse = LiveInputsAPI.LiveInputListResponse;
-  export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
-  export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
-  export import LiveInputListParams = LiveInputsAPI.LiveInputListParams;
-  export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
-  export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
-  export import Watermarks = WatermarksAPI.Watermarks;
-  export import Watermark = WatermarksAPI.Watermark;
-  export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
-  export import WatermarksSinglePage = WatermarksAPI.WatermarksSinglePage;
-  export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
-  export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
-  export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
-  export import WatermarkGetParams = WatermarksAPI.WatermarkGetParams;
-  export import Webhooks = WebhooksAPI.Webhooks;
-  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
-  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
-  export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
-  export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
-  export import Captions = CaptionsAPI.Captions;
-  export import Caption = CaptionsAPI.Caption;
-  export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
-  export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
-  export import Downloads = DownloadsAPI.Downloads;
-  export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
-  export import DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
-  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
-  export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
-  export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
-  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
-  export import Embed = EmbedAPI.Embed;
-  export import EmbedGetResponse = EmbedAPI.EmbedGetResponse;
-  export import EmbedGetParams = EmbedAPI.EmbedGetParams;
-  export import Token = TokenAPI.Token;
-  export import TokenCreateResponse = TokenAPI.TokenCreateResponse;
-  export import TokenCreateParams = TokenAPI.TokenCreateParams;
+Stream.AudioTracks = AudioTracks;
+Stream.Videos = Videos;
+Stream.ClipResource = ClipResource;
+Stream.Copy = Copy;
+Stream.DirectUpload = DirectUpload;
+Stream.LiveInputs = LiveInputs;
+Stream.Watermarks = Watermarks;
+Stream.WatermarksSinglePage = WatermarksSinglePage;
+Stream.Webhooks = Webhooks;
+Stream.Captions = Captions;
+Stream.Downloads = Downloads;
+Stream.Embed = Embed;
+Stream.Token = Token;
+
+export declare namespace Stream {
+  export {
+    AudioTracks as AudioTracks,
+    type Audio as Audio,
+    type AudioTrackDeleteResponse as AudioTrackDeleteResponse,
+    type AudioTrackGetResponse as AudioTrackGetResponse,
+    type AudioTrackDeleteParams as AudioTrackDeleteParams,
+    type AudioTrackCopyParams as AudioTrackCopyParams,
+    type AudioTrackEditParams as AudioTrackEditParams,
+    type AudioTrackGetParams as AudioTrackGetParams,
+  };
+
+  export {
+    Videos as Videos,
+    type VideoStorageUsageResponse as VideoStorageUsageResponse,
+    type VideoStorageUsageParams as VideoStorageUsageParams,
+  };
+
+  export { ClipResource as ClipResource, type Clip as Clip, type ClipCreateParams as ClipCreateParams };
+
+  export { Copy as Copy, type CopyCreateParams as CopyCreateParams };
+
+  export {
+    DirectUpload as DirectUpload,
+    type DirectUploadCreateResponse as DirectUploadCreateResponse,
+    type DirectUploadCreateParams as DirectUploadCreateParams,
+  };
+
+  export {
+    type Keys as Keys,
+    type KeyDeleteResponse as KeyDeleteResponse,
+    type KeyGetResponse as KeyGetResponse,
+    type KeyCreateParams as KeyCreateParams,
+    type KeyDeleteParams as KeyDeleteParams,
+    type KeyGetParams as KeyGetParams,
+  };
+
+  export {
+    LiveInputs as LiveInputs,
+    type LiveInput as LiveInput,
+    type LiveInputListResponse as LiveInputListResponse,
+    type LiveInputCreateParams as LiveInputCreateParams,
+    type LiveInputUpdateParams as LiveInputUpdateParams,
+    type LiveInputListParams as LiveInputListParams,
+    type LiveInputDeleteParams as LiveInputDeleteParams,
+    type LiveInputGetParams as LiveInputGetParams,
+  };
+
+  export {
+    Watermarks as Watermarks,
+    type Watermark as Watermark,
+    type WatermarkDeleteResponse as WatermarkDeleteResponse,
+    WatermarksSinglePage as WatermarksSinglePage,
+    type WatermarkCreateParams as WatermarkCreateParams,
+    type WatermarkListParams as WatermarkListParams,
+    type WatermarkDeleteParams as WatermarkDeleteParams,
+    type WatermarkGetParams as WatermarkGetParams,
+  };
+
+  export {
+    Webhooks as Webhooks,
+    type WebhookUpdateResponse as WebhookUpdateResponse,
+    type WebhookDeleteResponse as WebhookDeleteResponse,
+    type WebhookGetResponse as WebhookGetResponse,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookDeleteParams as WebhookDeleteParams,
+    type WebhookGetParams as WebhookGetParams,
+  };
+
+  export {
+    Captions as Captions,
+    type Caption as Caption,
+    type CaptionGetResponse as CaptionGetResponse,
+    type CaptionGetParams as CaptionGetParams,
+  };
+
+  export {
+    Downloads as Downloads,
+    type DownloadCreateResponse as DownloadCreateResponse,
+    type DownloadDeleteResponse as DownloadDeleteResponse,
+    type DownloadGetResponse as DownloadGetResponse,
+    type DownloadCreateParams as DownloadCreateParams,
+    type DownloadDeleteParams as DownloadDeleteParams,
+    type DownloadGetParams as DownloadGetParams,
+  };
+
+  export { Embed as Embed, type EmbedGetResponse as EmbedGetResponse, type EmbedGetParams as EmbedGetParams };
+
+  export {
+    Token as Token,
+    type TokenCreateResponse as TokenCreateResponse,
+    type TokenCreateParams as TokenCreateParams,
+  };
 }

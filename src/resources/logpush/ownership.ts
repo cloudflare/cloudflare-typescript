@@ -2,8 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
-import * as OwnershipAPI from './ownership';
+import { CloudflareError } from 'cloudflare/error';
 
 export class Ownership extends APIResource {
   /**
@@ -130,9 +129,11 @@ export interface OwnershipValidateParams {
   zone_id?: string;
 }
 
-export namespace Ownership {
-  export import OwnershipValidation = OwnershipAPI.OwnershipValidation;
-  export import OwnershipCreateResponse = OwnershipAPI.OwnershipCreateResponse;
-  export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
-  export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
+export declare namespace Ownership {
+  export {
+    type OwnershipValidation as OwnershipValidation,
+    type OwnershipCreateResponse as OwnershipCreateResponse,
+    type OwnershipCreateParams as OwnershipCreateParams,
+    type OwnershipValidateParams as OwnershipValidateParams,
+  };
 }

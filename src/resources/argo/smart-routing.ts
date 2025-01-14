@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SmartRoutingAPI from './smart-routing';
 
 export class SmartRouting extends APIResource {
   /**
@@ -59,9 +58,11 @@ export interface SmartRoutingGetParams {
   zone_id: string;
 }
 
-export namespace SmartRouting {
-  export import SmartRoutingEditResponse = SmartRoutingAPI.SmartRoutingEditResponse;
-  export import SmartRoutingGetResponse = SmartRoutingAPI.SmartRoutingGetResponse;
-  export import SmartRoutingEditParams = SmartRoutingAPI.SmartRoutingEditParams;
-  export import SmartRoutingGetParams = SmartRoutingAPI.SmartRoutingGetParams;
+export declare namespace SmartRouting {
+  export {
+    type SmartRoutingEditResponse as SmartRoutingEditResponse,
+    type SmartRoutingGetResponse as SmartRoutingGetResponse,
+    type SmartRoutingEditParams as SmartRoutingEditParams,
+    type SmartRoutingGetParams as SmartRoutingGetParams,
+  };
 }

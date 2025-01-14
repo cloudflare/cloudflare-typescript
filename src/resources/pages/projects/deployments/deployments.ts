@@ -2,10 +2,10 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DeploymentsAPI from './deployments';
 import * as ProjectsAPI from '../projects';
 import { DeploymentsSinglePage } from '../projects';
 import * as HistoryAPI from './history/history';
+import { History } from './history/history';
 
 export class Deployments extends APIResource {
   history: HistoryAPI.History = new HistoryAPI.History(this._client);
@@ -52,12 +52,14 @@ export class Deployments extends APIResource {
     deploymentId: string,
     params: DeploymentDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<DeploymentDeleteResponse | null> {
     const { account_id } = params;
-    return this._client.delete(
-      `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
-      options,
-    );
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
+        options,
+      ) as Core.APIPromise<{ result: DeploymentDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -181,15 +183,20 @@ export interface DeploymentRollbackParams {
   body: unknown;
 }
 
-export namespace Deployments {
-  export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
-  export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
-  export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
-  export import DeploymentDeleteParams = DeploymentsAPI.DeploymentDeleteParams;
-  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
-  export import DeploymentRetryParams = DeploymentsAPI.DeploymentRetryParams;
-  export import DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
-  export import History = HistoryAPI.History;
+Deployments.History = History;
+
+export declare namespace Deployments {
+  export {
+    type DeploymentDeleteResponse as DeploymentDeleteResponse,
+    type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentListParams as DeploymentListParams,
+    type DeploymentDeleteParams as DeploymentDeleteParams,
+    type DeploymentGetParams as DeploymentGetParams,
+    type DeploymentRetryParams as DeploymentRetryParams,
+    type DeploymentRollbackParams as DeploymentRollbackParams,
+  };
+
+  export { History as History };
 }
 
 export { DeploymentsSinglePage };

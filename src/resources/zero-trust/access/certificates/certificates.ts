@@ -3,9 +3,16 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from '../../../../error';
-import * as CertificatesAPI from './certificates';
+import { CloudflareError } from 'cloudflare/error';
 import * as SettingsAPI from './settings';
+import {
+  CertificateSettings,
+  SettingGetParams,
+  SettingGetResponse,
+  SettingUpdateParams,
+  SettingUpdateResponse,
+  Settings,
+} from './settings';
 import { SinglePage } from '../../../../pagination';
 
 export class Certificates extends APIResource {
@@ -333,20 +340,28 @@ export interface CertificateGetParams {
   zone_id?: string;
 }
 
-export namespace Certificates {
-  export import AssociatedHostnames = CertificatesAPI.AssociatedHostnames;
-  export import Certificate = CertificatesAPI.Certificate;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificatesSinglePage = CertificatesAPI.CertificatesSinglePage;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import CertificateSettings = SettingsAPI.CertificateSettings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+Certificates.CertificatesSinglePage = CertificatesSinglePage;
+Certificates.Settings = Settings;
+
+export declare namespace Certificates {
+  export {
+    type AssociatedHostnames as AssociatedHostnames,
+    type Certificate as Certificate,
+    type CertificateDeleteResponse as CertificateDeleteResponse,
+    CertificatesSinglePage as CertificatesSinglePage,
+    type CertificateCreateParams as CertificateCreateParams,
+    type CertificateUpdateParams as CertificateUpdateParams,
+    type CertificateListParams as CertificateListParams,
+    type CertificateDeleteParams as CertificateDeleteParams,
+    type CertificateGetParams as CertificateGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type CertificateSettings as CertificateSettings,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

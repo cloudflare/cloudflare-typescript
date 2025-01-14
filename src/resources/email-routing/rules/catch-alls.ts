@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CatchAllsAPI from './catch-alls';
 
 export class CatchAlls extends APIResource {
   /**
@@ -10,12 +9,12 @@ export class CatchAlls extends APIResource {
    * specific destination address.
    */
   update(
-    zoneIdentifier: string,
-    body: CatchAllUpdateParams,
+    params: CatchAllUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CatchAllUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/catch_all`, {
+      this._client.put(`/zones/${zone_id}/email/routing/rules/catch_all`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CatchAllUpdateResponse }>
@@ -25,9 +24,10 @@ export class CatchAlls extends APIResource {
   /**
    * Get information on the default catch-all routing rule.
    */
-  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<CatchAllGetResponse> {
+  get(params: CatchAllGetParams, options?: Core.RequestOptions): Core.APIPromise<CatchAllGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/email/routing/rules/catch_all`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/email/routing/rules/catch_all`, options) as Core.APIPromise<{
         result: CatchAllGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -144,30 +144,45 @@ export interface CatchAllGetResponse {
 
 export interface CatchAllUpdateParams {
   /**
-   * List actions for the catch-all routing rule.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: List actions for the catch-all routing rule.
    */
   actions: Array<CatchAllActionParam>;
 
   /**
-   * List of matchers for the catch-all routing rule.
+   * Body param: List of matchers for the catch-all routing rule.
    */
   matchers: Array<CatchAllMatcherParam>;
 
   /**
-   * Routing rule status.
+   * Body param: Routing rule status.
    */
   enabled?: true | false;
 
   /**
-   * Routing rule name.
+   * Body param: Routing rule name.
    */
   name?: string;
 }
 
-export namespace CatchAlls {
-  export import CatchAllAction = CatchAllsAPI.CatchAllAction;
-  export import CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
-  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
-  export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
-  export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
+export interface CatchAllGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export declare namespace CatchAlls {
+  export {
+    type CatchAllAction as CatchAllAction,
+    type CatchAllMatcher as CatchAllMatcher,
+    type CatchAllUpdateResponse as CatchAllUpdateResponse,
+    type CatchAllGetResponse as CatchAllGetResponse,
+    type CatchAllUpdateParams as CatchAllUpdateParams,
+    type CatchAllGetParams as CatchAllGetParams,
+  };
 }

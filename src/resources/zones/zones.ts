@@ -4,10 +4,98 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ActivationCheckAPI from './activation-check';
+import {
+  ActivationCheck,
+  ActivationCheckTriggerParams,
+  ActivationCheckTriggerResponse,
+} from './activation-check';
 import * as CustomNameserversAPI from './custom-nameservers';
+import {
+  CustomNameserverGetParams,
+  CustomNameserverGetResponse,
+  CustomNameserverUpdateParams,
+  CustomNameserverUpdateResponse,
+  CustomNameservers,
+} from './custom-nameservers';
 import * as HoldsAPI from './holds';
+import { HoldCreateParams, HoldDeleteParams, HoldEditParams, HoldGetParams, Holds, ZoneHold } from './holds';
+import * as PlansAPI from './plans';
+import {
+  AvailableRatePlan,
+  AvailableRatePlansSinglePage,
+  PlanGetParams,
+  PlanListParams,
+  Plans,
+} from './plans';
+import * as RatePlansAPI from './rate-plans';
+import { RatePlanGetParams, RatePlanGetResponse, RatePlans } from './rate-plans';
 import * as SettingsAPI from './settings';
+import {
+  AdvancedDDoS,
+  Aegis,
+  AlwaysOnline,
+  AlwaysUseHTTPS,
+  AutomaticHTTPSRewrites,
+  AutomaticPlatformOptimization,
+  Brotli,
+  BrowserCacheTTL,
+  BrowserCheck,
+  CacheLevel,
+  ChallengeTTL,
+  Ciphers,
+  DevelopmentMode,
+  EarlyHints,
+  EmailObfuscation,
+  FontSettings,
+  H2Prioritization,
+  HTTP2,
+  HTTP3,
+  HotlinkProtection,
+  IPGeolocation,
+  IPV6,
+  ImageResizing,
+  MinTLSVersion,
+  Mirage,
+  NEL,
+  OpportunisticEncryption,
+  OpportunisticOnion,
+  OrangeToOrange,
+  OriginErrorPagePassThru,
+  OriginMaxHTTPVersion,
+  Polish,
+  PrefetchPreload,
+  ProxyReadTimeout,
+  PseudoIPV4,
+  ResponseBuffering,
+  RocketLoader,
+  SSL,
+  SSLRecommender,
+  SecurityHeaders,
+  SecurityLevel,
+  ServerSideExcludes,
+  SettingEditParams,
+  SettingEditResponse,
+  SettingGetParams,
+  SettingGetResponse,
+  Settings,
+  SortQueryStringForCache,
+  TLS1_3,
+  TLSClientAuth,
+  TrueClientIPHeader,
+  WAF,
+  WebP,
+  Websocket,
+  ZeroRTT,
+} from './settings';
 import * as SubscriptionsAPI from './subscriptions';
+import {
+  SubscriptionCreateParams,
+  SubscriptionCreateResponse,
+  SubscriptionGetResponse,
+  SubscriptionUpdateParams,
+  SubscriptionUpdateResponse,
+  Subscriptions,
+} from './subscriptions';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Zones extends APIResource {
@@ -18,6 +106,8 @@ export class Zones extends APIResource {
   );
   holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
+  ratePlans: RatePlansAPI.RatePlans = new RatePlansAPI.RatePlans(this._client);
 
   /**
    * Create Zone
@@ -29,7 +119,8 @@ export class Zones extends APIResource {
   }
 
   /**
-   * Lists, searches, sorts, and filters your zones.
+   * Lists, searches, sorts, and filters your zones. Listing zones across more than
+   * 500 accounts is currently not allowed.
    */
   list(
     query?: ZoneListParams,
@@ -163,6 +254,23 @@ export interface Zone {
    * The owner of the zone
    */
   owner: Zone.Owner;
+
+  /**
+   * Indicates whether the zone is only using Cloudflare DNS services. A true value
+   * means the zone will not receive security or performance benefits.
+   */
+  paused?: boolean;
+
+  /**
+   * The zone status on Cloudflare.
+   */
+  status?: 'initializing' | 'pending' | 'active' | 'moved';
+
+  /**
+   * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
+   * typically a partner-hosted zone or a CNAME setup.
+   */
+  type?: Type;
 
   /**
    * An array of domains used for custom name servers. This is only available for
@@ -353,13 +461,6 @@ export interface ZoneEditParams {
   zone_id: string;
 
   /**
-   * Body param: (Deprecated) Please use the `/zones/{zone_id}/subscription` API to
-   * update a zone's plan. Changing this value will create/cancel associated
-   * subscriptions. To view available plans for this zone, see Zone Plans.
-   */
-  plan?: ZoneEditParams.Plan;
-
-  /**
    * Body param: A full zone implies that DNS is hosted with Cloudflare. A partial
    * zone is typically a partner-hosted zone or a CNAME setup. This parameter is only
    * available to Enterprise customers or if it has been explicitly enabled on a
@@ -374,20 +475,6 @@ export interface ZoneEditParams {
   vanity_name_servers?: Array<string>;
 }
 
-export namespace ZoneEditParams {
-  /**
-   * (Deprecated) Please use the `/zones/{zone_id}/subscription` API to update a
-   * zone's plan. Changing this value will create/cancel associated subscriptions. To
-   * view available plans for this zone, see Zone Plans.
-   */
-  export interface Plan {
-    /**
-     * Identifier
-     */
-    id?: string;
-  }
-}
-
 export interface ZoneGetParams {
   /**
    * Identifier
@@ -395,78 +482,117 @@ export interface ZoneGetParams {
   zone_id: string;
 }
 
-export namespace Zones {
-  export import ActivationCheck = ActivationCheckAPI.ActivationCheck;
-  export import ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
-  export import ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
-  export import Settings = SettingsAPI.Settings;
-  export import AdvancedDDoS = SettingsAPI.AdvancedDDoS;
-  export import AlwaysOnline = SettingsAPI.AlwaysOnline;
-  export import AlwaysUseHTTPS = SettingsAPI.AlwaysUseHTTPS;
-  export import AutomaticHTTPSRewrites = SettingsAPI.AutomaticHTTPSRewrites;
-  export import AutomaticPlatformOptimization = SettingsAPI.AutomaticPlatformOptimization;
-  export import Brotli = SettingsAPI.Brotli;
-  export import BrowserCacheTTL = SettingsAPI.BrowserCacheTTL;
-  export import BrowserCheck = SettingsAPI.BrowserCheck;
-  export import CacheLevel = SettingsAPI.CacheLevel;
-  export import ChallengeTTL = SettingsAPI.ChallengeTTL;
-  export import Ciphers = SettingsAPI.Ciphers;
-  export import DevelopmentMode = SettingsAPI.DevelopmentMode;
-  export import EarlyHints = SettingsAPI.EarlyHints;
-  export import EmailObfuscation = SettingsAPI.EmailObfuscation;
-  export import FontSettings = SettingsAPI.FontSettings;
-  export import H2Prioritization = SettingsAPI.H2Prioritization;
-  export import HotlinkProtection = SettingsAPI.HotlinkProtection;
-  export import HTTP2 = SettingsAPI.HTTP2;
-  export import HTTP3 = SettingsAPI.HTTP3;
-  export import ImageResizing = SettingsAPI.ImageResizing;
-  export import IPGeolocation = SettingsAPI.IPGeolocation;
-  export import IPV6 = SettingsAPI.IPV6;
-  export import MinTLSVersion = SettingsAPI.MinTLSVersion;
-  export import Minify = SettingsAPI.Minify;
-  export import Mirage = SettingsAPI.Mirage;
-  export import MobileRedirect = SettingsAPI.MobileRedirect;
-  export import NEL = SettingsAPI.NEL;
-  export import OpportunisticEncryption = SettingsAPI.OpportunisticEncryption;
-  export import OpportunisticOnion = SettingsAPI.OpportunisticOnion;
-  export import OrangeToOrange = SettingsAPI.OrangeToOrange;
-  export import OriginErrorPagePassThru = SettingsAPI.OriginErrorPagePassThru;
-  export import OriginMaxHTTPVersion = SettingsAPI.OriginMaxHTTPVersion;
-  export import Polish = SettingsAPI.Polish;
-  export import PrefetchPreload = SettingsAPI.PrefetchPreload;
-  export import ProxyReadTimeout = SettingsAPI.ProxyReadTimeout;
-  export import PseudoIPV4 = SettingsAPI.PseudoIPV4;
-  export import ResponseBuffering = SettingsAPI.ResponseBuffering;
-  export import RocketLoader = SettingsAPI.RocketLoader;
-  export import SecurityHeaders = SettingsAPI.SecurityHeaders;
-  export import SecurityLevel = SettingsAPI.SecurityLevel;
-  export import ServerSideExcludes = SettingsAPI.ServerSideExcludes;
-  export import SortQueryStringForCache = SettingsAPI.SortQueryStringForCache;
-  export import SSL = SettingsAPI.SSL;
-  export import SSLRecommender = SettingsAPI.SSLRecommender;
-  export import TLS1_3 = SettingsAPI.TLS1_3;
-  export import TLSClientAuth = SettingsAPI.TLSClientAuth;
-  export import TrueClientIPHeader = SettingsAPI.TrueClientIPHeader;
-  export import WAF = SettingsAPI.WAF;
-  export import WebP = SettingsAPI.WebP;
-  export import Websocket = SettingsAPI.Websocket;
-  export import ZeroRTT = SettingsAPI.ZeroRTT;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
-  export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
-  export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
-  export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
-  export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
-  export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
-  export import Holds = HoldsAPI.Holds;
-  export import ZoneHold = HoldsAPI.ZoneHold;
-  export import HoldCreateParams = HoldsAPI.HoldCreateParams;
-  export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
-  export import HoldGetParams = HoldsAPI.HoldGetParams;
-  export import Subscriptions = SubscriptionsAPI.Subscriptions;
-  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
-  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
+Zones.ActivationCheck = ActivationCheck;
+Zones.Settings = Settings;
+Zones.CustomNameservers = CustomNameservers;
+Zones.Holds = Holds;
+Zones.Subscriptions = Subscriptions;
+Zones.Plans = Plans;
+Zones.AvailableRatePlansSinglePage = AvailableRatePlansSinglePage;
+Zones.RatePlans = RatePlans;
+
+export declare namespace Zones {
+  export {
+    ActivationCheck as ActivationCheck,
+    type ActivationCheckTriggerResponse as ActivationCheckTriggerResponse,
+    type ActivationCheckTriggerParams as ActivationCheckTriggerParams,
+  };
+
+  export {
+    Settings as Settings,
+    type AdvancedDDoS as AdvancedDDoS,
+    type Aegis as Aegis,
+    type AlwaysOnline as AlwaysOnline,
+    type AlwaysUseHTTPS as AlwaysUseHTTPS,
+    type AutomaticHTTPSRewrites as AutomaticHTTPSRewrites,
+    type AutomaticPlatformOptimization as AutomaticPlatformOptimization,
+    type Brotli as Brotli,
+    type BrowserCacheTTL as BrowserCacheTTL,
+    type BrowserCheck as BrowserCheck,
+    type CacheLevel as CacheLevel,
+    type ChallengeTTL as ChallengeTTL,
+    type Ciphers as Ciphers,
+    type DevelopmentMode as DevelopmentMode,
+    type EarlyHints as EarlyHints,
+    type EmailObfuscation as EmailObfuscation,
+    type FontSettings as FontSettings,
+    type H2Prioritization as H2Prioritization,
+    type HotlinkProtection as HotlinkProtection,
+    type HTTP2 as HTTP2,
+    type HTTP3 as HTTP3,
+    type ImageResizing as ImageResizing,
+    type IPGeolocation as IPGeolocation,
+    type IPV6 as IPV6,
+    type MinTLSVersion as MinTLSVersion,
+    type Mirage as Mirage,
+    type NEL as NEL,
+    type OpportunisticEncryption as OpportunisticEncryption,
+    type OpportunisticOnion as OpportunisticOnion,
+    type OrangeToOrange as OrangeToOrange,
+    type OriginErrorPagePassThru as OriginErrorPagePassThru,
+    type OriginMaxHTTPVersion as OriginMaxHTTPVersion,
+    type Polish as Polish,
+    type PrefetchPreload as PrefetchPreload,
+    type ProxyReadTimeout as ProxyReadTimeout,
+    type PseudoIPV4 as PseudoIPV4,
+    type ResponseBuffering as ResponseBuffering,
+    type RocketLoader as RocketLoader,
+    type SecurityHeaders as SecurityHeaders,
+    type SecurityLevel as SecurityLevel,
+    type ServerSideExcludes as ServerSideExcludes,
+    type SortQueryStringForCache as SortQueryStringForCache,
+    type SSL as SSL,
+    type SSLRecommender as SSLRecommender,
+    type TLS1_3 as TLS1_3,
+    type TLSClientAuth as TLSClientAuth,
+    type TrueClientIPHeader as TrueClientIPHeader,
+    type WAF as WAF,
+    type WebP as WebP,
+    type Websocket as Websocket,
+    type ZeroRTT as ZeroRTT,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
+
+  export {
+    CustomNameservers as CustomNameservers,
+    type CustomNameserverUpdateResponse as CustomNameserverUpdateResponse,
+    type CustomNameserverGetResponse as CustomNameserverGetResponse,
+    type CustomNameserverUpdateParams as CustomNameserverUpdateParams,
+    type CustomNameserverGetParams as CustomNameserverGetParams,
+  };
+
+  export {
+    Holds as Holds,
+    type ZoneHold as ZoneHold,
+    type HoldCreateParams as HoldCreateParams,
+    type HoldDeleteParams as HoldDeleteParams,
+    type HoldEditParams as HoldEditParams,
+    type HoldGetParams as HoldGetParams,
+  };
+
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+  };
+
+  export {
+    Plans as Plans,
+    type AvailableRatePlan as AvailableRatePlan,
+    AvailableRatePlansSinglePage as AvailableRatePlansSinglePage,
+    type PlanListParams as PlanListParams,
+    type PlanGetParams as PlanGetParams,
+  };
+
+  export {
+    RatePlans as RatePlans,
+    type RatePlanGetResponse as RatePlanGetResponse,
+    type RatePlanGetParams as RatePlanGetParams,
+  };
 }

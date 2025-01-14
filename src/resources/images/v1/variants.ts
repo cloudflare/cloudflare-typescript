@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as VariantsAPI from './variants';
 
 export class Variants extends APIResource {
   /**
@@ -186,7 +185,7 @@ export namespace VariantCreateResponse {
   }
 }
 
-export type VariantDeleteResponse = unknown | string | null;
+export type VariantDeleteResponse = unknown | string;
 
 export interface VariantEditResponse {
   variant?: VariantEditResponse.Variant;
@@ -404,15 +403,17 @@ export interface VariantGetParams {
   account_id: string;
 }
 
-export namespace Variants {
-  export import Variant = VariantsAPI.Variant;
-  export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
-  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
-  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
-  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
-  export import VariantCreateParams = VariantsAPI.VariantCreateParams;
-  export import VariantListParams = VariantsAPI.VariantListParams;
-  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
-  export import VariantEditParams = VariantsAPI.VariantEditParams;
-  export import VariantGetParams = VariantsAPI.VariantGetParams;
+export declare namespace Variants {
+  export {
+    type Variant as Variant,
+    type VariantCreateResponse as VariantCreateResponse,
+    type VariantDeleteResponse as VariantDeleteResponse,
+    type VariantEditResponse as VariantEditResponse,
+    type VariantGetResponse as VariantGetResponse,
+    type VariantCreateParams as VariantCreateParams,
+    type VariantListParams as VariantListParams,
+    type VariantDeleteParams as VariantDeleteParams,
+    type VariantEditParams as VariantEditParams,
+    type VariantGetParams as VariantGetParams,
+  };
 }

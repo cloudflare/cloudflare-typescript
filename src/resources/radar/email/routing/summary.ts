@@ -3,12 +3,11 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SummaryAPI from './summary';
 import * as EmailAPI from '../email';
 
 export class Summary extends APIResource {
   /**
-   * Percentage distribution of emails classified per ARC validation.
+   * Percentage distribution of emails classified by ARC validation.
    */
   arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
   arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
@@ -27,7 +26,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DKIM validation.
+   * Percentage distribution of emails classified by DKIM validation.
    */
   dkim(query?: SummaryDKIMParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
   dkim(options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
@@ -46,7 +45,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DMARC validation.
+   * Percentage distribution of emails classified by DMARC validation.
    */
   dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
   dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
@@ -65,7 +64,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails by Encrypted
+   * Percentage distribution of emails by encryption status.
    */
   encrypted(
     query?: SummaryEncryptedParams,
@@ -87,7 +86,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails by Ip Version.
+   * Percentage distribution of emails by IP version.
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -109,7 +108,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per SPF validation.
+   * Percentage distribution of emails classified by SPF validation.
    */
   spf(query?: SummarySPFParams, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
   spf(options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
@@ -800,17 +799,19 @@ export interface SummarySPFParams {
   name?: Array<string>;
 }
 
-export namespace Summary {
-  export import SummaryARCResponse = SummaryAPI.SummaryARCResponse;
-  export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
-  export import SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
-  export import SummaryEncryptedResponse = SummaryAPI.SummaryEncryptedResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummarySPFResponse = SummaryAPI.SummarySPFResponse;
-  export import SummaryARCParams = SummaryAPI.SummaryARCParams;
-  export import SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
-  export import SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
-  export import SummaryEncryptedParams = SummaryAPI.SummaryEncryptedParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummarySPFParams = SummaryAPI.SummarySPFParams;
+export declare namespace Summary {
+  export {
+    type SummaryARCResponse as SummaryARCResponse,
+    type SummaryDKIMResponse as SummaryDKIMResponse,
+    type SummaryDMARCResponse as SummaryDMARCResponse,
+    type SummaryEncryptedResponse as SummaryEncryptedResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummarySPFResponse as SummarySPFResponse,
+    type SummaryARCParams as SummaryARCParams,
+    type SummaryDKIMParams as SummaryDKIMParams,
+    type SummaryDMARCParams as SummaryDMARCParams,
+    type SummaryEncryptedParams as SummaryEncryptedParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummarySPFParams as SummarySPFParams,
+  };
 }

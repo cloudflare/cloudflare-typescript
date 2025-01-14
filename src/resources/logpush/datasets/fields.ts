@@ -3,8 +3,7 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
-import * as FieldsAPI from './fields';
+import { CloudflareError } from 'cloudflare/error';
 
 export class Fields extends APIResource {
   /**
@@ -65,7 +64,6 @@ export interface FieldGetParams {
   zone_id?: string;
 }
 
-export namespace Fields {
-  export import FieldGetResponse = FieldsAPI.FieldGetResponse;
-  export import FieldGetParams = FieldsAPI.FieldGetParams;
+export declare namespace Fields {
+  export { type FieldGetResponse as FieldGetResponse, type FieldGetParams as FieldGetParams };
 }

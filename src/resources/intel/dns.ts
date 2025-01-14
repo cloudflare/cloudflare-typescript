@@ -2,27 +2,22 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DNSAPI from './dns';
-import * as Shared from '../shared';
 import { V4PagePagination, type V4PagePaginationParams } from '../../pagination';
 
 export class DNS extends APIResource {
   /**
-   * Get Passive DNS by IP
+   * Gets a list of all the domains that have resolved to a specific IP address.
    */
-  list(
-    params: DNSListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DNSListResponsesV4PagePagination, DNSListResponse> {
+  list(params: DNSListParams, options?: Core.RequestOptions): Core.PagePromise<DNSV4PagePagination, DNS> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/intel/dns`, DNSListResponsesV4PagePagination, {
+    return this._client.getAPIList(`/accounts/${account_id}/intel/dns`, DNSV4PagePagination, {
       query,
       ...options,
     });
   }
 }
 
-export class DNSListResponsesV4PagePagination extends V4PagePagination<DNSListResponse> {}
+export class DNSV4PagePagination extends V4PagePagination<DNS> {}
 
 export interface DNS {
   /**
@@ -56,26 +51,13 @@ export namespace DNS {
     /**
      * Hostname that the IP was observed resolving to.
      */
-    hostname?: unknown;
+    hostname?: string;
 
     /**
      * Last seen date of the DNS record during the time period.
      */
     last_seen?: string;
   }
-}
-
-export interface DNSListResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-
-  result?: DNS;
 }
 
 export interface DNSListParams extends V4PagePaginationParams {
@@ -109,9 +91,8 @@ export namespace DNSListParams {
   }
 }
 
-export namespace DNS {
-  export import DNS = DNSAPI.DNS;
-  export import DNSListResponse = DNSAPI.DNSListResponse;
-  export import DNSListResponsesV4PagePagination = DNSAPI.DNSListResponsesV4PagePagination;
-  export import DNSListParams = DNSAPI.DNSListParams;
+DNS.DNSV4PagePagination = DNSV4PagePagination;
+
+export declare namespace DNS {
+  export { type DNS as DNS, DNSV4PagePagination as DNSV4PagePagination, type DNSListParams as DNSListParams };
 }

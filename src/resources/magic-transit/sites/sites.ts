@@ -2,10 +2,53 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SitesAPI from './sites';
 import * as ACLsAPI from './acls';
+import {
+  ACL,
+  ACLConfiguration,
+  ACLCreateParams,
+  ACLDeleteParams,
+  ACLEditParams,
+  ACLGetParams,
+  ACLListParams,
+  ACLUpdateParams,
+  ACLs,
+  ACLsSinglePage,
+  AllowedProtocol,
+  Subnet,
+} from './acls';
 import * as LANsAPI from './lans';
+import {
+  DHCPRelay,
+  DHCPServer,
+  LAN,
+  LANCreateParams,
+  LANCreateResponse,
+  LANDeleteParams,
+  LANEditParams,
+  LANGetParams,
+  LANListParams,
+  LANStaticAddressing,
+  LANUpdateParams,
+  LANs,
+  LANsSinglePage,
+  Nat,
+  RoutedSubnet,
+} from './lans';
 import * as WANsAPI from './wans';
+import {
+  WAN,
+  WANCreateParams,
+  WANCreateResponse,
+  WANDeleteParams,
+  WANEditParams,
+  WANGetParams,
+  WANListParams,
+  WANStaticAddressing,
+  WANUpdateParams,
+  WANs,
+  WANsSinglePage,
+} from './wans';
 import { SinglePage } from '../../../pagination';
 
 export class Sites extends APIResource {
@@ -80,11 +123,17 @@ export class Sites extends APIResource {
    * Get a specific Site.
    */
   get(siteId: string, params: SiteGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id } = params;
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
-      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
-        result: Site;
-      }>
+      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, {
+        ...options,
+        headers: {
+          ...(xMagicNewHcTarget?.toString() != null ?
+            { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: Site }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -282,57 +331,82 @@ export interface SiteEditParams {
 
 export interface SiteGetParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Header param: If true, the health check target in the response body will be
+   * presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
 }
 
-export namespace Sites {
-  export import Site = SitesAPI.Site;
-  export import SiteLocation = SitesAPI.SiteLocation;
-  export import SitesSinglePage = SitesAPI.SitesSinglePage;
-  export import SiteCreateParams = SitesAPI.SiteCreateParams;
-  export import SiteUpdateParams = SitesAPI.SiteUpdateParams;
-  export import SiteListParams = SitesAPI.SiteListParams;
-  export import SiteDeleteParams = SitesAPI.SiteDeleteParams;
-  export import SiteEditParams = SitesAPI.SiteEditParams;
-  export import SiteGetParams = SitesAPI.SiteGetParams;
-  export import ACLs = ACLsAPI.ACLs;
-  export import ACL = ACLsAPI.ACL;
-  export import ACLConfiguration = ACLsAPI.ACLConfiguration;
-  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
-  export import Subnet = ACLsAPI.Subnet;
-  export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
-  export import ACLCreateParams = ACLsAPI.ACLCreateParams;
-  export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
-  export import ACLListParams = ACLsAPI.ACLListParams;
-  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
-  export import ACLEditParams = ACLsAPI.ACLEditParams;
-  export import ACLGetParams = ACLsAPI.ACLGetParams;
-  export import LANs = LANsAPI.LANs;
-  export import DHCPRelay = LANsAPI.DHCPRelay;
-  export import DHCPServer = LANsAPI.DHCPServer;
-  export import LAN = LANsAPI.LAN;
-  export import LANStaticAddressing = LANsAPI.LANStaticAddressing;
-  export import Nat = LANsAPI.Nat;
-  export import RoutedSubnet = LANsAPI.RoutedSubnet;
-  export import LANCreateResponse = LANsAPI.LANCreateResponse;
-  export import LANsSinglePage = LANsAPI.LANsSinglePage;
-  export import LANCreateParams = LANsAPI.LANCreateParams;
-  export import LANUpdateParams = LANsAPI.LANUpdateParams;
-  export import LANListParams = LANsAPI.LANListParams;
-  export import LANDeleteParams = LANsAPI.LANDeleteParams;
-  export import LANEditParams = LANsAPI.LANEditParams;
-  export import LANGetParams = LANsAPI.LANGetParams;
-  export import WANs = WANsAPI.WANs;
-  export import WAN = WANsAPI.WAN;
-  export import WANStaticAddressing = WANsAPI.WANStaticAddressing;
-  export import WANCreateResponse = WANsAPI.WANCreateResponse;
-  export import WANsSinglePage = WANsAPI.WANsSinglePage;
-  export import WANCreateParams = WANsAPI.WANCreateParams;
-  export import WANUpdateParams = WANsAPI.WANUpdateParams;
-  export import WANListParams = WANsAPI.WANListParams;
-  export import WANDeleteParams = WANsAPI.WANDeleteParams;
-  export import WANEditParams = WANsAPI.WANEditParams;
-  export import WANGetParams = WANsAPI.WANGetParams;
+Sites.SitesSinglePage = SitesSinglePage;
+Sites.ACLs = ACLs;
+Sites.ACLsSinglePage = ACLsSinglePage;
+Sites.LANs = LANs;
+Sites.LANsSinglePage = LANsSinglePage;
+Sites.WANs = WANs;
+Sites.WANsSinglePage = WANsSinglePage;
+
+export declare namespace Sites {
+  export {
+    type Site as Site,
+    type SiteLocation as SiteLocation,
+    SitesSinglePage as SitesSinglePage,
+    type SiteCreateParams as SiteCreateParams,
+    type SiteUpdateParams as SiteUpdateParams,
+    type SiteListParams as SiteListParams,
+    type SiteDeleteParams as SiteDeleteParams,
+    type SiteEditParams as SiteEditParams,
+    type SiteGetParams as SiteGetParams,
+  };
+
+  export {
+    ACLs as ACLs,
+    type ACL as ACL,
+    type ACLConfiguration as ACLConfiguration,
+    type AllowedProtocol as AllowedProtocol,
+    type Subnet as Subnet,
+    ACLsSinglePage as ACLsSinglePage,
+    type ACLCreateParams as ACLCreateParams,
+    type ACLUpdateParams as ACLUpdateParams,
+    type ACLListParams as ACLListParams,
+    type ACLDeleteParams as ACLDeleteParams,
+    type ACLEditParams as ACLEditParams,
+    type ACLGetParams as ACLGetParams,
+  };
+
+  export {
+    LANs as LANs,
+    type DHCPRelay as DHCPRelay,
+    type DHCPServer as DHCPServer,
+    type LAN as LAN,
+    type LANStaticAddressing as LANStaticAddressing,
+    type Nat as Nat,
+    type RoutedSubnet as RoutedSubnet,
+    type LANCreateResponse as LANCreateResponse,
+    LANsSinglePage as LANsSinglePage,
+    type LANCreateParams as LANCreateParams,
+    type LANUpdateParams as LANUpdateParams,
+    type LANListParams as LANListParams,
+    type LANDeleteParams as LANDeleteParams,
+    type LANEditParams as LANEditParams,
+    type LANGetParams as LANGetParams,
+  };
+
+  export {
+    WANs as WANs,
+    type WAN as WAN,
+    type WANStaticAddressing as WANStaticAddressing,
+    type WANCreateResponse as WANCreateResponse,
+    WANsSinglePage as WANsSinglePage,
+    type WANCreateParams as WANCreateParams,
+    type WANUpdateParams as WANUpdateParams,
+    type WANListParams as WANListParams,
+    type WANDeleteParams as WANDeleteParams,
+    type WANEditParams as WANEditParams,
+    type WANGetParams as WANGetParams,
+  };
 }

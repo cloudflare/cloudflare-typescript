@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as EligibleAPI from './eligible';
 
 export class Eligible extends APIResource {
   /**
@@ -19,10 +18,10 @@ export class Eligible extends APIResource {
   }
 }
 
-export type EligibleGetResponse = Record<string, Array<EligibleGetResponse.UnnamedSchemaWithMapParent2>>;
+export type EligibleGetResponse = Record<string, Array<EligibleGetResponse.Item>>;
 
 export namespace EligibleGetResponse {
-  export interface UnnamedSchemaWithMapParent2 {
+  export interface Item {
     /**
      * Determines whether or not the account is eligible for the delivery mechanism.
      */
@@ -48,7 +47,6 @@ export interface EligibleGetParams {
   account_id: string;
 }
 
-export namespace Eligible {
-  export import EligibleGetResponse = EligibleAPI.EligibleGetResponse;
-  export import EligibleGetParams = EligibleAPI.EligibleGetParams;
+export declare namespace Eligible {
+  export { type EligibleGetResponse as EligibleGetResponse, type EligibleGetParams as EligibleGetParams };
 }

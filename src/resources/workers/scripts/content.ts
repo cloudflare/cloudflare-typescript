@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ContentAPI from './content';
 import * as WorkersAPI from '../workers';
 import * as ScriptsAPI from './scripts';
 import { type Response } from '../../../_shims/index';
@@ -51,6 +50,7 @@ export class Content extends APIResource {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/content/v2`, {
       ...options,
+      headers: { Accept: 'string', ...options?.headers },
       __binaryResponse: true,
     });
   }
@@ -63,21 +63,10 @@ export interface ContentUpdateParams {
   account_id: string;
 
   /**
-   * Body param: A module comprising a Worker script, often a javascript file.
-   * Multiple modules may be provided as separate named parts, but at least one
-   * module must be present. This should be referenced either in the metadata as
-   * `main_module` (esm)/`body_part` (service worker) or as a header
-   * `CF-WORKER-MAIN-MODULE-PART` (esm) /`CF-WORKER-BODY-PART` (service worker) by
-   * part name. Source maps may also be included using the `application/source-map`
-   * content type.
-   */
-  '<any part name>'?: Array<Core.Uploadable>;
-
-  /**
    * Body param: JSON encoded metadata about the uploaded parts and Worker
    * configuration.
    */
-  metadata?: WorkersAPI.WorkerMetadataParam;
+  metadata: WorkersAPI.WorkerMetadataParam;
 
   /**
    * Header param: The multipart name of a script upload part containing script
@@ -99,7 +88,6 @@ export interface ContentGetParams {
   account_id: string;
 }
 
-export namespace Content {
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
-  export import ContentGetParams = ContentAPI.ContentGetParams;
+export declare namespace Content {
+  export { type ContentUpdateParams as ContentUpdateParams, type ContentGetParams as ContentGetParams };
 }

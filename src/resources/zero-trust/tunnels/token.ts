@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TokenAPI from './token';
 
 export class Token extends APIResource {
   /**
@@ -22,7 +21,7 @@ export class Token extends APIResource {
   }
 }
 
-export type TokenGetResponse = unknown | Array<unknown> | string;
+export type TokenGetResponse = string;
 
 export interface TokenGetParams {
   /**
@@ -31,7 +30,6 @@ export interface TokenGetParams {
   account_id: string;
 }
 
-export namespace Token {
-  export import TokenGetResponse = TokenAPI.TokenGetResponse;
-  export import TokenGetParams = TokenAPI.TokenGetParams;
+export declare namespace Token {
+  export { type TokenGetResponse as TokenGetResponse, type TokenGetParams as TokenGetParams };
 }

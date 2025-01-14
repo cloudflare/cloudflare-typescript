@@ -1,25 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as UARulesAPI from './ua-rules';
+import * as AccessRulesAPI from './access-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class UARules extends APIResource {
   /**
    * Creates a new User Agent Blocking rule in a zone.
    */
-  create(
-    zoneIdentifier: string,
-    body: UARuleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UARuleCreateResponse> {
+  create(params: UARuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<UARuleCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneIdentifier}/firewall/ua_rules`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: UARuleCreateResponse }>
+      this._client.post(`/zones/${zone_id}/firewall/ua_rules`, { body, ...options }) as Core.APIPromise<{
+        result: UARuleCreateResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,13 +22,13 @@ export class UARules extends APIResource {
    * Updates an existing User Agent Blocking rule.
    */
   update(
-    zoneIdentifier: string,
-    id: string,
-    body: UARuleUpdateParams,
+    uaRuleId: string,
+    params: UARuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UARuleUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, {
+      this._client.put(`/zones/${zone_id}/firewall/ua_rules/${uaRuleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: UARuleUpdateResponse }>
@@ -45,24 +40,12 @@ export class UARules extends APIResource {
    * several optional parameters.
    */
   list(
-    zoneIdentifier: string,
-    query?: UARuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>;
-  list(
-    zoneIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>;
-  list(
-    zoneIdentifier: string,
-    query: UARuleListParams | Core.RequestOptions = {},
+    params: UARuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneIdentifier, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/firewall/ua_rules`,
+      `/zones/${zone_id}/firewall/ua_rules`,
       UARuleListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -72,12 +55,13 @@ export class UARules extends APIResource {
    * Deletes an existing User Agent Blocking rule.
    */
   delete(
-    zoneIdentifier: string,
-    id: string,
+    uaRuleId: string,
+    params: UARuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UARuleDeleteResponse> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/firewall/ua_rules/${uaRuleId}`, options) as Core.APIPromise<{
         result: UARuleDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -86,9 +70,14 @@ export class UARules extends APIResource {
   /**
    * Fetches the details of a User Agent Blocking rule.
    */
-  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<UARuleGetResponse> {
+  get(
+    uaRuleId: string,
+    params: UARuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UARuleGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/firewall/ua_rules/${uaRuleId}`, options) as Core.APIPromise<{
         result: UARuleGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -156,35 +145,100 @@ export interface UARuleDeleteResponse {
 
 export type UARuleGetResponse = unknown | string | null;
 
-export type UARuleCreateParams = unknown;
+export interface UARuleCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
 
-export type UARuleUpdateParams = unknown;
+  /**
+   * Body param: The rule configuration.
+   */
+  configuration:
+    | AccessRulesAPI.AccessRuleIPConfigurationParam
+    | AccessRulesAPI.IPV6ConfigurationParam
+    | AccessRulesAPI.AccessRuleCIDRConfigurationParam
+    | AccessRulesAPI.ASNConfigurationParam
+    | AccessRulesAPI.CountryConfigurationParam;
+
+  /**
+   * Body param: The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+}
+
+export interface UARuleUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The rule configuration.
+   */
+  configuration:
+    | AccessRulesAPI.AccessRuleIPConfigurationParam
+    | AccessRulesAPI.IPV6ConfigurationParam
+    | AccessRulesAPI.AccessRuleCIDRConfigurationParam
+    | AccessRulesAPI.ASNConfigurationParam
+    | AccessRulesAPI.CountryConfigurationParam;
+
+  /**
+   * Body param: The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+}
 
 export interface UARuleListParams extends V4PagePaginationArrayParams {
   /**
-   * A string to search for in the description of existing rules.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: A string to search for in the description of existing rules.
    */
   description?: string;
 
   /**
-   * A string to search for in the description of existing rules.
+   * Query param: A string to search for in the description of existing rules.
    */
   description_search?: string;
 
   /**
-   * A string to search for in the user agent values of existing rules.
+   * Query param: A string to search for in the user agent values of existing rules.
    */
   ua_search?: string;
 }
 
-export namespace UARules {
-  export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
-  export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
-  export import UARuleListResponse = UARulesAPI.UARuleListResponse;
-  export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
-  export import UARuleGetResponse = UARulesAPI.UARuleGetResponse;
-  export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;
-  export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
-  export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
-  export import UARuleListParams = UARulesAPI.UARuleListParams;
+export interface UARuleDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface UARuleGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+UARules.UARuleListResponsesV4PagePaginationArray = UARuleListResponsesV4PagePaginationArray;
+
+export declare namespace UARules {
+  export {
+    type UARuleCreateResponse as UARuleCreateResponse,
+    type UARuleUpdateResponse as UARuleUpdateResponse,
+    type UARuleListResponse as UARuleListResponse,
+    type UARuleDeleteResponse as UARuleDeleteResponse,
+    type UARuleGetResponse as UARuleGetResponse,
+    UARuleListResponsesV4PagePaginationArray as UARuleListResponsesV4PagePaginationArray,
+    type UARuleCreateParams as UARuleCreateParams,
+    type UARuleUpdateParams as UARuleUpdateParams,
+    type UARuleListParams as UARuleListParams,
+    type UARuleDeleteParams as UARuleDeleteParams,
+    type UARuleGetParams as UARuleGetParams,
+  };
 }

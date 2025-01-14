@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DetailsAPI from './details';
 
 export class Details extends APIResource {
   /**
@@ -184,8 +183,10 @@ export interface DetailGetParams {
   zone_id: string;
 }
 
-export namespace Details {
-  export import EventQuery = DetailsAPI.EventQuery;
-  export import DetailGetResponse = DetailsAPI.DetailGetResponse;
-  export import DetailGetParams = DetailsAPI.DetailGetParams;
+export declare namespace Details {
+  export {
+    type EventQuery as EventQuery,
+    type DetailGetResponse as DetailGetResponse,
+    type DetailGetParams as DetailGetParams,
+  };
 }

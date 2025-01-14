@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ACLsAPI from './acls';
 import { SinglePage } from '../../../pagination';
 
 export class ACLs extends APIResource {
@@ -207,12 +206,12 @@ export type AllowedProtocolParam = 'tcp' | 'udp' | 'icmp';
 /**
  * A valid IPv4 address.
  */
-export type Subnet = string | string;
+export type Subnet = string;
 
 /**
  * A valid IPv4 address.
  */
-export type SubnetParam = string | string;
+export type SubnetParam = string;
 
 export interface ACLCreateParams {
   /**
@@ -355,16 +354,20 @@ export interface ACLGetParams {
   account_id: string;
 }
 
-export namespace ACLs {
-  export import ACL = ACLsAPI.ACL;
-  export import ACLConfiguration = ACLsAPI.ACLConfiguration;
-  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
-  export import Subnet = ACLsAPI.Subnet;
-  export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
-  export import ACLCreateParams = ACLsAPI.ACLCreateParams;
-  export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
-  export import ACLListParams = ACLsAPI.ACLListParams;
-  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
-  export import ACLEditParams = ACLsAPI.ACLEditParams;
-  export import ACLGetParams = ACLsAPI.ACLGetParams;
+ACLs.ACLsSinglePage = ACLsSinglePage;
+
+export declare namespace ACLs {
+  export {
+    type ACL as ACL,
+    type ACLConfiguration as ACLConfiguration,
+    type AllowedProtocol as AllowedProtocol,
+    type Subnet as Subnet,
+    ACLsSinglePage as ACLsSinglePage,
+    type ACLCreateParams as ACLCreateParams,
+    type ACLUpdateParams as ACLUpdateParams,
+    type ACLListParams as ACLListParams,
+    type ACLDeleteParams as ACLDeleteParams,
+    type ACLEditParams as ACLEditParams,
+    type ACLGetParams as ACLGetParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as IntegrationsAPI from './integrations';
 import { SinglePage } from '../../../../pagination';
 
 export class Integrations extends APIResource {
@@ -44,13 +43,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationDeleteResponse> {
+  ): Core.APIPromise<IntegrationDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
         options,
-      ) as Core.APIPromise<{ result: IntegrationDeleteResponse }>
+      ) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -98,7 +97,7 @@ export interface Integration {
   id?: string;
 
   /**
-   * The configuration object containing third-party integration information.
+   * The Workspace One Config Response.
    */
   config?: Integration.Config;
 
@@ -116,12 +115,20 @@ export interface Integration {
   /**
    * The type of device posture integration.
    */
-  type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
+  type?:
+    | 'workspace_one'
+    | 'crowdstrike_s2s'
+    | 'uptycs'
+    | 'intune'
+    | 'kolide'
+    | 'tanium'
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 }
 
 export namespace Integration {
   /**
-   * The configuration object containing third-party integration information.
+   * The Workspace One Config Response.
    */
   export interface Config {
     /**
@@ -141,7 +148,7 @@ export namespace Integration {
   }
 }
 
-export type IntegrationDeleteResponse = unknown | string | null;
+export type IntegrationDeleteResponse = unknown | string;
 
 export interface IntegrationCreateParams {
   /**
@@ -160,7 +167,8 @@ export interface IntegrationCreateParams {
     | IntegrationCreateParams.TeamsDevicesIntuneConfigRequest
     | IntegrationCreateParams.TeamsDevicesKolideConfigRequest
     | IntegrationCreateParams.TeamsDevicesTaniumConfigRequest
-    | IntegrationCreateParams.TeamsDevicesSentineloneS2sConfigRequest;
+    | IntegrationCreateParams.TeamsDevicesSentineloneS2sConfigRequest
+    | IntegrationCreateParams.TeamsDevicesCustomS2sConfigRequest;
 
   /**
    * Body param: The interval between each posture check with the third-party API.
@@ -176,7 +184,15 @@ export interface IntegrationCreateParams {
   /**
    * Body param: The type of device posture integration.
    */
-  type: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
+  type:
+    | 'workspace_one'
+    | 'crowdstrike_s2s'
+    | 'uptycs'
+    | 'intune'
+    | 'kolide'
+    | 'tanium'
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 }
 
 export namespace IntegrationCreateParams {
@@ -310,6 +326,25 @@ export namespace IntegrationCreateParams {
      */
     client_secret: string;
   }
+
+  export interface TeamsDevicesCustomS2sConfigRequest {
+    /**
+     * This id will be passed in the `CF-Access-Client-ID` header when hitting the
+     * `api_url`
+     */
+    access_client_id: string;
+
+    /**
+     * This secret will be passed in the `CF-Access-Client-Secret` header when hitting
+     * the `api_url`
+     */
+    access_client_secret: string;
+
+    /**
+     * The Custom Device Posture Integration API URL.
+     */
+    api_url: string;
+  }
 }
 
 export interface IntegrationListParams {
@@ -337,7 +372,8 @@ export interface IntegrationEditParams {
     | IntegrationEditParams.TeamsDevicesIntuneConfigRequest
     | IntegrationEditParams.TeamsDevicesKolideConfigRequest
     | IntegrationEditParams.TeamsDevicesTaniumConfigRequest
-    | IntegrationEditParams.TeamsDevicesSentineloneS2sConfigRequest;
+    | IntegrationEditParams.TeamsDevicesSentineloneS2sConfigRequest
+    | IntegrationEditParams.TeamsDevicesCustomS2sConfigRequest;
 
   /**
    * Body param: The interval between each posture check with the third-party API.
@@ -353,7 +389,15 @@ export interface IntegrationEditParams {
   /**
    * Body param: The type of device posture integration.
    */
-  type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
+  type?:
+    | 'workspace_one'
+    | 'crowdstrike_s2s'
+    | 'uptycs'
+    | 'intune'
+    | 'kolide'
+    | 'tanium'
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 }
 
 export namespace IntegrationEditParams {
@@ -487,19 +531,42 @@ export namespace IntegrationEditParams {
      */
     client_secret: string;
   }
+
+  export interface TeamsDevicesCustomS2sConfigRequest {
+    /**
+     * This id will be passed in the `CF-Access-Client-ID` header when hitting the
+     * `api_url`
+     */
+    access_client_id: string;
+
+    /**
+     * This secret will be passed in the `CF-Access-Client-Secret` header when hitting
+     * the `api_url`
+     */
+    access_client_secret: string;
+
+    /**
+     * The Custom Device Posture Integration API URL.
+     */
+    api_url: string;
+  }
 }
 
 export interface IntegrationGetParams {
   account_id: string;
 }
 
-export namespace Integrations {
-  export import Integration = IntegrationsAPI.Integration;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
-  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export import IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
-  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+Integrations.IntegrationsSinglePage = IntegrationsSinglePage;
+
+export declare namespace Integrations {
+  export {
+    type Integration as Integration,
+    type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    IntegrationsSinglePage as IntegrationsSinglePage,
+    type IntegrationCreateParams as IntegrationCreateParams,
+    type IntegrationListParams as IntegrationListParams,
+    type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationEditParams as IntegrationEditParams,
+    type IntegrationGetParams as IntegrationGetParams,
+  };
 }

@@ -2,9 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TestsAPI from './tests';
-import * as Shared from '../../shared';
 import * as SpeedAPI from '../speed';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tests extends APIResource {
   /**
@@ -27,9 +26,13 @@ export class Tests extends APIResource {
     url: string,
     params: TestListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TestListResponse> {
+  ): Core.PagePromise<TestsV4PagePaginationArray, Test> {
     const { zone_id, ...query } = params;
-    return this._client.get(`/zones/${zone_id}/speed_api/pages/${url}/tests`, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/speed_api/pages/${url}/tests`,
+      TestsV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -69,6 +72,8 @@ export class Tests extends APIResource {
   }
 }
 
+export class TestsV4PagePaginationArray extends V4PagePaginationArray<Test> {}
+
 export interface Test {
   /**
    * UUID
@@ -101,31 +106,6 @@ export interface Test {
    * A URL.
    */
   url?: string;
-}
-
-export interface TestListResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful.
-   */
-  success: boolean;
-
-  result_info?: TestListResponse.ResultInfo;
-}
-
-export namespace TestListResponse {
-  export interface ResultInfo {
-    count?: number;
-
-    page?: number;
-
-    per_page?: number;
-
-    total_count?: number;
-  }
 }
 
 export interface TestDeleteResponse {
@@ -168,21 +148,11 @@ export interface TestCreateParams {
     | 'us-west1';
 }
 
-export interface TestListParams {
+export interface TestListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
   zone_id: string;
-
-  /**
-   * Query param:
-   */
-  page?: number;
-
-  /**
-   * Query param:
-   */
-  per_page?: number;
 
   /**
    * Query param: A test region.
@@ -251,12 +221,16 @@ export interface TestGetParams {
   zone_id: string;
 }
 
-export namespace Tests {
-  export import Test = TestsAPI.Test;
-  export import TestListResponse = TestsAPI.TestListResponse;
-  export import TestDeleteResponse = TestsAPI.TestDeleteResponse;
-  export import TestCreateParams = TestsAPI.TestCreateParams;
-  export import TestListParams = TestsAPI.TestListParams;
-  export import TestDeleteParams = TestsAPI.TestDeleteParams;
-  export import TestGetParams = TestsAPI.TestGetParams;
+Tests.TestsV4PagePaginationArray = TestsV4PagePaginationArray;
+
+export declare namespace Tests {
+  export {
+    type Test as Test,
+    type TestDeleteResponse as TestDeleteResponse,
+    TestsV4PagePaginationArray as TestsV4PagePaginationArray,
+    type TestCreateParams as TestCreateParams,
+    type TestListParams as TestListParams,
+    type TestDeleteParams as TestDeleteParams,
+    type TestGetParams as TestGetParams,
+  };
 }

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -211,7 +210,7 @@ export namespace SummaryGetResponse {
 export interface SummaryHTTPMethodResponse {
   meta: SummaryHTTPMethodResponse.Meta;
 
-  summary_0: SummaryHTTPMethodResponse.Summary0;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryHTTPMethodResponse {
@@ -261,12 +260,6 @@ export namespace SummaryHTTPMethodResponse {
         startTime?: string;
       }
     }
-  }
-
-  export interface Summary0 {
-    GET: string;
-
-    POST: string;
   }
 }
 
@@ -399,7 +392,7 @@ export namespace SummaryIPVersionResponse {
 export interface SummaryManagedRulesResponse {
   meta: SummaryManagedRulesResponse.Meta;
 
-  summary_0: SummaryManagedRulesResponse.Summary0;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryManagedRulesResponse {
@@ -450,18 +443,12 @@ export namespace SummaryManagedRulesResponse {
       }
     }
   }
-
-  export interface Summary0 {
-    Bot: string;
-
-    'HTTP Anomaly': string;
-  }
 }
 
 export interface SummaryMitigationProductResponse {
   meta: SummaryMitigationProductResponse.Meta;
 
-  summary_0: SummaryMitigationProductResponse.Summary0;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryMitigationProductResponse {
@@ -511,12 +498,6 @@ export namespace SummaryMitigationProductResponse {
         startTime?: string;
       }
     }
-  }
-
-  export interface Summary0 {
-    DDOS: string;
-
-    WAF: string;
   }
 }
 
@@ -616,6 +597,12 @@ export interface SummaryHTTPMethodParams {
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
@@ -983,6 +970,12 @@ export interface SummaryManagedRulesParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -1108,6 +1101,12 @@ export interface SummaryMitigationProductParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -1120,17 +1119,19 @@ export interface SummaryMitigationProductParams {
   name?: Array<string>;
 }
 
-export namespace Summary {
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryHTTPMethodResponse = SummaryAPI.SummaryHTTPMethodResponse;
-  export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryManagedRulesResponse = SummaryAPI.SummaryManagedRulesResponse;
-  export import SummaryMitigationProductResponse = SummaryAPI.SummaryMitigationProductResponse;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import SummaryHTTPMethodParams = SummaryAPI.SummaryHTTPMethodParams;
-  export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryManagedRulesParams = SummaryAPI.SummaryManagedRulesParams;
-  export import SummaryMitigationProductParams = SummaryAPI.SummaryMitigationProductParams;
+export declare namespace Summary {
+  export {
+    type SummaryGetResponse as SummaryGetResponse,
+    type SummaryHTTPMethodResponse as SummaryHTTPMethodResponse,
+    type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryManagedRulesResponse as SummaryManagedRulesResponse,
+    type SummaryMitigationProductResponse as SummaryMitigationProductResponse,
+    type SummaryGetParams as SummaryGetParams,
+    type SummaryHTTPMethodParams as SummaryHTTPMethodParams,
+    type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryManagedRulesParams as SummaryManagedRulesParams,
+    type SummaryMitigationProductParams as SummaryMitigationProductParams,
+  };
 }

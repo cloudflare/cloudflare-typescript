@@ -2,10 +2,39 @@
 
 import { APIResource } from '../../resource';
 import * as AnalyzeAPI from './analyze';
+import { Analyze, AnalyzeCreateParams, AnalyzeCreateResponse } from './analyze';
 import * as RecommendationsAPI from './recommendations';
+import { RecommendationGetResponse, Recommendations } from './recommendations';
 import * as VerificationAPI from './verification';
+import {
+  Verification,
+  VerificationEditParams,
+  VerificationEditResponse,
+  VerificationGetParams,
+  VerificationGetResponse,
+  VerificationResource,
+} from './verification';
 import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
+import {
+  CertificatePackCreateParams,
+  CertificatePackCreateResponse,
+  CertificatePackDeleteParams,
+  CertificatePackDeleteResponse,
+  CertificatePackEditParams,
+  CertificatePackEditResponse,
+  CertificatePackGetParams,
+  CertificatePackGetResponse,
+  CertificatePackListParams,
+  CertificatePackListResponse,
+  CertificatePackListResponsesSinglePage,
+  CertificatePacks,
+  Host,
+  RequestValidity,
+  Status,
+  ValidationMethod,
+} from './certificate-packs/certificate-packs';
 import * as UniversalAPI from './universal/universal';
+import { Universal } from './universal/universal';
 
 export class SSL extends APIResource {
   analyze: AnalyzeAPI.Analyze = new AnalyzeAPI.Analyze(this._client);
@@ -17,31 +46,49 @@ export class SSL extends APIResource {
   verification: VerificationAPI.VerificationResource = new VerificationAPI.VerificationResource(this._client);
 }
 
-export namespace SSL {
-  export import Analyze = AnalyzeAPI.Analyze;
-  export import AnalyzeCreateResponse = AnalyzeAPI.AnalyzeCreateResponse;
-  export import AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
-  export import CertificatePacks = CertificatePacksAPI.CertificatePacks;
-  export import Host = CertificatePacksAPI.Host;
-  export import RequestValidity = CertificatePacksAPI.RequestValidity;
-  export import Status = CertificatePacksAPI.Status;
-  export import ValidationMethod = CertificatePacksAPI.ValidationMethod;
-  export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
-  export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
-  export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
-  export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
-  export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
-  export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
-  export import CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;
-  export import CertificatePackEditParams = CertificatePacksAPI.CertificatePackEditParams;
-  export import CertificatePackGetParams = CertificatePacksAPI.CertificatePackGetParams;
-  export import Recommendations = RecommendationsAPI.Recommendations;
-  export import RecommendationGetResponse = RecommendationsAPI.RecommendationGetResponse;
-  export import Universal = UniversalAPI.Universal;
-  export import VerificationResource = VerificationAPI.VerificationResource;
-  export import Verification = VerificationAPI.Verification;
-  export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
-  export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
-  export import VerificationEditParams = VerificationAPI.VerificationEditParams;
-  export import VerificationGetParams = VerificationAPI.VerificationGetParams;
+SSL.Analyze = Analyze;
+SSL.CertificatePacks = CertificatePacks;
+SSL.CertificatePackListResponsesSinglePage = CertificatePackListResponsesSinglePage;
+SSL.Recommendations = Recommendations;
+SSL.Universal = Universal;
+SSL.VerificationResource = VerificationResource;
+
+export declare namespace SSL {
+  export {
+    Analyze as Analyze,
+    type AnalyzeCreateResponse as AnalyzeCreateResponse,
+    type AnalyzeCreateParams as AnalyzeCreateParams,
+  };
+
+  export {
+    CertificatePacks as CertificatePacks,
+    type Host as Host,
+    type RequestValidity as RequestValidity,
+    type Status as Status,
+    type ValidationMethod as ValidationMethod,
+    type CertificatePackCreateResponse as CertificatePackCreateResponse,
+    type CertificatePackListResponse as CertificatePackListResponse,
+    type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
+    type CertificatePackEditResponse as CertificatePackEditResponse,
+    type CertificatePackGetResponse as CertificatePackGetResponse,
+    CertificatePackListResponsesSinglePage as CertificatePackListResponsesSinglePage,
+    type CertificatePackCreateParams as CertificatePackCreateParams,
+    type CertificatePackListParams as CertificatePackListParams,
+    type CertificatePackDeleteParams as CertificatePackDeleteParams,
+    type CertificatePackEditParams as CertificatePackEditParams,
+    type CertificatePackGetParams as CertificatePackGetParams,
+  };
+
+  export { Recommendations as Recommendations, type RecommendationGetResponse as RecommendationGetResponse };
+
+  export { Universal as Universal };
+
+  export {
+    VerificationResource as VerificationResource,
+    type Verification as Verification,
+    type VerificationEditResponse as VerificationEditResponse,
+    type VerificationGetResponse as VerificationGetResponse,
+    type VerificationEditParams as VerificationEditParams,
+    type VerificationGetParams as VerificationGetParams,
+  };
 }

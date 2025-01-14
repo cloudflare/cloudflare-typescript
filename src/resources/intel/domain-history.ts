@@ -2,11 +2,11 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DomainHistoryAPI from './domain-history';
 
 export class DomainHistoryResource extends APIResource {
   /**
-   * Get Domain History
+   * Gets historical security threat and content categories currently and previously
+   * assigned to a domain.
    */
   get(
     params: DomainHistoryGetParams,
@@ -52,8 +52,10 @@ export interface DomainHistoryGetParams {
   domain?: string;
 }
 
-export namespace DomainHistoryResource {
-  export import DomainHistory = DomainHistoryAPI.DomainHistory;
-  export import DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
-  export import DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
+export declare namespace DomainHistoryResource {
+  export {
+    type DomainHistory as DomainHistory,
+    type DomainHistoryGetResponse as DomainHistoryGetResponse,
+    type DomainHistoryGetParams as DomainHistoryGetParams,
+  };
 }

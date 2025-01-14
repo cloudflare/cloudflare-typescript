@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as FallbackOriginAPI from './fallback-origin';
 
 export class FallbackOrigin extends APIResource {
   /**
@@ -52,11 +51,107 @@ export class FallbackOrigin extends APIResource {
   }
 }
 
-export type FallbackOriginUpdateResponse = unknown | string | null;
+export interface FallbackOriginUpdateResponse {
+  /**
+   * This is the time the fallback origin was created.
+   */
+  created_at?: string;
 
-export type FallbackOriginDeleteResponse = unknown | string | null;
+  /**
+   * These are errors that were encountered while trying to activate a fallback
+   * origin.
+   */
+  errors?: Array<string>;
 
-export type FallbackOriginGetResponse = unknown | string | null;
+  /**
+   * Your origin hostname that requests to your custom hostnames will be sent to.
+   */
+  origin?: string;
+
+  /**
+   * Status of the fallback origin's activation.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * This is the time the fallback origin was updated.
+   */
+  updated_at?: string;
+}
+
+export interface FallbackOriginDeleteResponse {
+  /**
+   * This is the time the fallback origin was created.
+   */
+  created_at?: string;
+
+  /**
+   * These are errors that were encountered while trying to activate a fallback
+   * origin.
+   */
+  errors?: Array<string>;
+
+  /**
+   * Your origin hostname that requests to your custom hostnames will be sent to.
+   */
+  origin?: string;
+
+  /**
+   * Status of the fallback origin's activation.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * This is the time the fallback origin was updated.
+   */
+  updated_at?: string;
+}
+
+export interface FallbackOriginGetResponse {
+  /**
+   * This is the time the fallback origin was created.
+   */
+  created_at?: string;
+
+  /**
+   * These are errors that were encountered while trying to activate a fallback
+   * origin.
+   */
+  errors?: Array<string>;
+
+  /**
+   * Your origin hostname that requests to your custom hostnames will be sent to.
+   */
+  origin?: string;
+
+  /**
+   * Status of the fallback origin's activation.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * This is the time the fallback origin was updated.
+   */
+  updated_at?: string;
+}
 
 export interface FallbackOriginUpdateParams {
   /**
@@ -85,11 +180,13 @@ export interface FallbackOriginGetParams {
   zone_id: string;
 }
 
-export namespace FallbackOrigin {
-  export import FallbackOriginUpdateResponse = FallbackOriginAPI.FallbackOriginUpdateResponse;
-  export import FallbackOriginDeleteResponse = FallbackOriginAPI.FallbackOriginDeleteResponse;
-  export import FallbackOriginGetResponse = FallbackOriginAPI.FallbackOriginGetResponse;
-  export import FallbackOriginUpdateParams = FallbackOriginAPI.FallbackOriginUpdateParams;
-  export import FallbackOriginDeleteParams = FallbackOriginAPI.FallbackOriginDeleteParams;
-  export import FallbackOriginGetParams = FallbackOriginAPI.FallbackOriginGetParams;
+export declare namespace FallbackOrigin {
+  export {
+    type FallbackOriginUpdateResponse as FallbackOriginUpdateResponse,
+    type FallbackOriginDeleteResponse as FallbackOriginDeleteResponse,
+    type FallbackOriginGetResponse as FallbackOriginGetResponse,
+    type FallbackOriginUpdateParams as FallbackOriginUpdateParams,
+    type FallbackOriginDeleteParams as FallbackOriginDeleteParams,
+    type FallbackOriginGetParams as FallbackOriginGetParams,
+  };
 }

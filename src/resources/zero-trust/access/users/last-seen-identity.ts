@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as LastSeenIdentityAPI from './last-seen-identity';
 import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 
 export class LastSeenIdentity extends APIResource {
@@ -121,7 +120,6 @@ export interface LastSeenIdentityGetParams {
   account_id: string;
 }
 
-export namespace LastSeenIdentity {
-  export import Identity = LastSeenIdentityAPI.Identity;
-  export import LastSeenIdentityGetParams = LastSeenIdentityAPI.LastSeenIdentityGetParams;
+export declare namespace LastSeenIdentity {
+  export { type Identity as Identity, type LastSeenIdentityGetParams as LastSeenIdentityGetParams };
 }

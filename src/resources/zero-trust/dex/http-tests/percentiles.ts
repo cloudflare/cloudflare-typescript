@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as PercentilesAPI from './percentiles';
 import * as DEXAPI from '../dex';
 
 export class Percentiles extends APIResource {
@@ -67,12 +66,12 @@ export interface PercentileGetParams {
   account_id: string;
 
   /**
-   * Query param: Start time for aggregate metrics in ISO format
+   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format
    */
   from: string;
 
   /**
-   * Query param: End time for aggregate metrics in ISO format
+   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format
    */
   to: string;
 
@@ -89,8 +88,10 @@ export interface PercentileGetParams {
   deviceId?: Array<string>;
 }
 
-export namespace Percentiles {
-  export import HTTPDetailsPercentiles = PercentilesAPI.HTTPDetailsPercentiles;
-  export import TestStatOverTime = PercentilesAPI.TestStatOverTime;
-  export import PercentileGetParams = PercentilesAPI.PercentileGetParams;
+export declare namespace Percentiles {
+  export {
+    type HTTPDetailsPercentiles as HTTPDetailsPercentiles,
+    type TestStatOverTime as TestStatOverTime,
+    type PercentileGetParams as PercentileGetParams,
+  };
 }

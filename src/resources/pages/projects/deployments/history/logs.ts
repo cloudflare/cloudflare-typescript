@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as LogsAPI from './logs';
 
 export class Logs extends APIResource {
   /**
@@ -24,7 +23,21 @@ export class Logs extends APIResource {
   }
 }
 
-export type LogGetResponse = unknown | Array<unknown> | string;
+export interface LogGetResponse {
+  data?: Array<LogGetResponse.Data>;
+
+  includes_container_logs?: boolean;
+
+  total?: number;
+}
+
+export namespace LogGetResponse {
+  export interface Data {
+    line?: string;
+
+    ts?: string;
+  }
+}
 
 export interface LogGetParams {
   /**
@@ -33,7 +46,6 @@ export interface LogGetParams {
   account_id: string;
 }
 
-export namespace Logs {
-  export import LogGetResponse = LogsAPI.LogGetResponse;
-  export import LogGetParams = LogsAPI.LogGetParams;
+export declare namespace Logs {
+  export { type LogGetResponse as LogGetResponse, type LogGetParams as LogGetParams };
 }

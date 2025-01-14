@@ -2,7 +2,29 @@
 
 import { APIResource } from '../../resource';
 import * as PermissionGroupsAPI from './permission-groups';
+import {
+  PermissionGroupGetParams,
+  PermissionGroupGetResponse,
+  PermissionGroupListParams,
+  PermissionGroupListResponse,
+  PermissionGroupListResponsesV4PagePaginationArray,
+  PermissionGroups,
+} from './permission-groups';
 import * as ResourceGroupsAPI from './resource-groups';
+import {
+  ResourceGroupCreateParams,
+  ResourceGroupCreateResponse,
+  ResourceGroupDeleteParams,
+  ResourceGroupDeleteResponse,
+  ResourceGroupGetParams,
+  ResourceGroupGetResponse,
+  ResourceGroupListParams,
+  ResourceGroupListResponse,
+  ResourceGroupListResponsesV4PagePaginationArray,
+  ResourceGroupUpdateParams,
+  ResourceGroupUpdateResponse,
+  ResourceGroups,
+} from './resource-groups';
 
 export class IAM extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
@@ -11,23 +33,33 @@ export class IAM extends APIResource {
   resourceGroups: ResourceGroupsAPI.ResourceGroups = new ResourceGroupsAPI.ResourceGroups(this._client);
 }
 
-export namespace IAM {
-  export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
-  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
-  export import PermissionGroupGetResponse = PermissionGroupsAPI.PermissionGroupGetResponse;
-  export import PermissionGroupListResponsesV4PagePaginationArray = PermissionGroupsAPI.PermissionGroupListResponsesV4PagePaginationArray;
-  export import PermissionGroupListParams = PermissionGroupsAPI.PermissionGroupListParams;
-  export import PermissionGroupGetParams = PermissionGroupsAPI.PermissionGroupGetParams;
-  export import ResourceGroups = ResourceGroupsAPI.ResourceGroups;
-  export import ResourceGroupCreateResponse = ResourceGroupsAPI.ResourceGroupCreateResponse;
-  export import ResourceGroupUpdateResponse = ResourceGroupsAPI.ResourceGroupUpdateResponse;
-  export import ResourceGroupListResponse = ResourceGroupsAPI.ResourceGroupListResponse;
-  export import ResourceGroupDeleteResponse = ResourceGroupsAPI.ResourceGroupDeleteResponse;
-  export import ResourceGroupGetResponse = ResourceGroupsAPI.ResourceGroupGetResponse;
-  export import ResourceGroupListResponsesV4PagePaginationArray = ResourceGroupsAPI.ResourceGroupListResponsesV4PagePaginationArray;
-  export import ResourceGroupCreateParams = ResourceGroupsAPI.ResourceGroupCreateParams;
-  export import ResourceGroupUpdateParams = ResourceGroupsAPI.ResourceGroupUpdateParams;
-  export import ResourceGroupListParams = ResourceGroupsAPI.ResourceGroupListParams;
-  export import ResourceGroupDeleteParams = ResourceGroupsAPI.ResourceGroupDeleteParams;
-  export import ResourceGroupGetParams = ResourceGroupsAPI.ResourceGroupGetParams;
+IAM.PermissionGroups = PermissionGroups;
+IAM.PermissionGroupListResponsesV4PagePaginationArray = PermissionGroupListResponsesV4PagePaginationArray;
+IAM.ResourceGroups = ResourceGroups;
+IAM.ResourceGroupListResponsesV4PagePaginationArray = ResourceGroupListResponsesV4PagePaginationArray;
+
+export declare namespace IAM {
+  export {
+    PermissionGroups as PermissionGroups,
+    type PermissionGroupListResponse as PermissionGroupListResponse,
+    type PermissionGroupGetResponse as PermissionGroupGetResponse,
+    PermissionGroupListResponsesV4PagePaginationArray as PermissionGroupListResponsesV4PagePaginationArray,
+    type PermissionGroupListParams as PermissionGroupListParams,
+    type PermissionGroupGetParams as PermissionGroupGetParams,
+  };
+
+  export {
+    ResourceGroups as ResourceGroups,
+    type ResourceGroupCreateResponse as ResourceGroupCreateResponse,
+    type ResourceGroupUpdateResponse as ResourceGroupUpdateResponse,
+    type ResourceGroupListResponse as ResourceGroupListResponse,
+    type ResourceGroupDeleteResponse as ResourceGroupDeleteResponse,
+    type ResourceGroupGetResponse as ResourceGroupGetResponse,
+    ResourceGroupListResponsesV4PagePaginationArray as ResourceGroupListResponsesV4PagePaginationArray,
+    type ResourceGroupCreateParams as ResourceGroupCreateParams,
+    type ResourceGroupUpdateParams as ResourceGroupUpdateParams,
+    type ResourceGroupListParams as ResourceGroupListParams,
+    type ResourceGroupDeleteParams as ResourceGroupDeleteParams,
+    type ResourceGroupGetParams as ResourceGroupGetParams,
+  };
 }

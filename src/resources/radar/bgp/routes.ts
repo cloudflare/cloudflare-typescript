@@ -3,11 +3,10 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as RoutesAPI from './routes';
 
 export class Routes extends APIResource {
   /**
-   * List all ASes on current global routing tables with routing statistics
+   * List all ASes in current global routing tables with routing statistics
    */
   ases(query?: RouteAsesParams, options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
   ases(options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
@@ -26,7 +25,7 @@ export class Routes extends APIResource {
   }
 
   /**
-   * List all Multi-origin AS (MOAS) prefixes on the global routing tables.
+   * List all Multi-Origin AS (MOAS) prefixes on the global routing tables.
    */
   moas(query?: RouteMoasParams, options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;
   moas(options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;
@@ -363,13 +362,15 @@ export interface RouteStatsParams {
   location?: string;
 }
 
-export namespace Routes {
-  export import RouteAsesResponse = RoutesAPI.RouteAsesResponse;
-  export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
-  export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
-  export import RouteStatsResponse = RoutesAPI.RouteStatsResponse;
-  export import RouteAsesParams = RoutesAPI.RouteAsesParams;
-  export import RouteMoasParams = RoutesAPI.RouteMoasParams;
-  export import RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
-  export import RouteStatsParams = RoutesAPI.RouteStatsParams;
+export declare namespace Routes {
+  export {
+    type RouteAsesResponse as RouteAsesResponse,
+    type RouteMoasResponse as RouteMoasResponse,
+    type RoutePfx2asResponse as RoutePfx2asResponse,
+    type RouteStatsResponse as RouteStatsResponse,
+    type RouteAsesParams as RouteAsesParams,
+    type RouteMoasParams as RouteMoasParams,
+    type RoutePfx2asParams as RoutePfx2asParams,
+    type RouteStatsParams as RouteStatsParams,
+  };
 }

@@ -2,8 +2,26 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 import * as ConsumersAPI from './consumers';
+import {
+  Consumer,
+  ConsumerCreateParams,
+  ConsumerDeleteParams,
+  ConsumerDeleteResponse,
+  ConsumerGetParams,
+  ConsumerGetResponse,
+  ConsumerUpdateParams,
+  Consumers,
+} from './consumers';
 import * as MessagesAPI from './messages';
+import {
+  MessageAckParams,
+  MessageAckResponse,
+  MessagePullParams,
+  MessagePullResponse,
+  Messages,
+} from './messages';
 import { SinglePage } from '../../pagination';
 
 export class Queues extends APIResource {
@@ -11,31 +29,28 @@ export class Queues extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
 
   /**
-   * Creates a new queue.
+   * Create a new queue
    */
-  create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<QueueCreated | null> {
-    const { account_id, body } = params;
+  create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/queues`, { body: body, ...options }) as Core.APIPromise<{
-        result: QueueCreated | null;
+      this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{
+        result: Queue;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Updates a queue.
+   * Updates a Queue. Note that this endpoint does not support partial updates. If
+   * successful, the Queue's configuration is overwritten with the supplied
+   * configuration.
    */
-  update(
-    queueId: string,
-    params: QueueUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueUpdated | null> {
-    const { account_id, body } = params;
+  update(queueId: string, params: QueueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/queues/${queueId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: QueueUpdated | null }>
+      this._client.put(`/accounts/${account_id}/queues/${queueId}`, { body, ...options }) as Core.APIPromise<{
+        result: Queue;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,29 +63,25 @@ export class Queues extends APIResource {
   }
 
   /**
-   * Deletes a queue.
+   * Deletes a queue
    */
   delete(
     queueId: string,
     params: QueueDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueDeleteResponse | null> {
+  ): Core.APIPromise<QueueDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
-        result: QueueDeleteResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/accounts/${account_id}/queues/${queueId}`, options);
   }
 
   /**
-   * Get information about a specific queue.
+   * Get details about a specific queue.
    */
-  get(queueId: string, params: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue | null> {
+  get(queueId: string, params: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
-        result: Queue | null;
+        result: Queue;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -79,104 +90,146 @@ export class Queues extends APIResource {
 export class QueuesSinglePage extends SinglePage<Queue> {}
 
 export interface Queue {
-  consumers?: unknown;
+  consumers?: Array<ConsumersAPI.Consumer>;
 
-  consumers_total_count?: unknown;
+  consumers_total_count?: number;
 
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
-  producers?: unknown;
+  producers?: Array<Queue.MqWorkerProducer | Queue.MqR2Producer>;
 
-  producers_total_count?: unknown;
-
-  queue_id?: string;
-
-  queue_name?: string;
-}
-
-export interface QueueCreated {
-  created_on?: unknown;
-
-  modified_on?: unknown;
+  producers_total_count?: number;
 
   queue_id?: string;
 
   queue_name?: string;
+
+  settings?: Queue.Settings;
 }
 
-export interface QueueUpdated {
-  created_on?: unknown;
+export namespace Queue {
+  export interface MqWorkerProducer {
+    script?: string;
 
-  modified_on?: unknown;
+    type?: 'worker';
+  }
 
-  queue_id?: string;
+  export interface MqR2Producer {
+    bucket_name?: string;
 
-  queue_name?: string;
+    type?: 'r2_bucket';
+  }
+
+  export interface Settings {
+    /**
+     * Number of seconds to delay delivery of all messages to consumers.
+     */
+    delivery_delay?: number;
+
+    /**
+     * Number of seconds after which an unconsumed message will be delayed.
+     */
+    message_retention_period?: number;
+  }
 }
 
-export type QueueDeleteResponse = unknown | Array<unknown> | string;
+export interface QueueDeleteResponse {
+  errors?: Array<Shared.ResponseInfo>;
+
+  messages?: Array<string>;
+
+  /**
+   * Indicates if the API call was successful or not.
+   */
+  success?: true;
+}
 
 export interface QueueCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: A Resource identifier.
    */
   account_id: string;
 
   /**
    * Body param:
    */
-  body: unknown;
+  queue_name: string;
 }
 
 export interface QueueUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: A Resource identifier.
    */
   account_id: string;
 
   /**
    * Body param:
    */
-  body: unknown;
+  queue_name?: string;
+
+  /**
+   * Body param:
+   */
+  settings?: QueueUpdateParams.Settings;
+}
+
+export namespace QueueUpdateParams {
+  export interface Settings {
+    /**
+     * Number of seconds to delay delivery of all messages to consumers.
+     */
+    delivery_delay?: number;
+
+    /**
+     * Number of seconds after which an unconsumed message will be delayed.
+     */
+    message_retention_period?: number;
+  }
 }
 
 export interface QueueListParams {
   /**
-   * Identifier
+   * A Resource identifier.
    */
   account_id: string;
 }
 
 export interface QueueDeleteParams {
   /**
-   * Identifier
+   * A Resource identifier.
    */
   account_id: string;
 }
 
 export interface QueueGetParams {
   /**
-   * Identifier
+   * A Resource identifier.
    */
   account_id: string;
 }
 
-export namespace Queues {
-  export import Consumers = ConsumersAPI.Consumers;
-  export import Consumer = ConsumersAPI.Consumer;
-  export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
-  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
-  export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
-  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
-  export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
-  export import Messages = MessagesAPI.Messages;
-  export import MessageAckResponse = MessagesAPI.MessageAckResponse;
-  export import MessagePullResponse = MessagesAPI.MessagePullResponse;
-  export import MessageAckParams = MessagesAPI.MessageAckParams;
-  export import MessagePullParams = MessagesAPI.MessagePullParams;
+Queues.Consumers = Consumers;
+Queues.Messages = Messages;
+
+export declare namespace Queues {
+  export {
+    Consumers as Consumers,
+    type Consumer as Consumer,
+    type ConsumerDeleteResponse as ConsumerDeleteResponse,
+    type ConsumerGetResponse as ConsumerGetResponse,
+    type ConsumerCreateParams as ConsumerCreateParams,
+    type ConsumerUpdateParams as ConsumerUpdateParams,
+    type ConsumerDeleteParams as ConsumerDeleteParams,
+    type ConsumerGetParams as ConsumerGetParams,
+  };
+
+  export {
+    Messages as Messages,
+    type MessageAckResponse as MessageAckResponse,
+    type MessagePullResponse as MessagePullResponse,
+    type MessageAckParams as MessageAckParams,
+    type MessagePullParams as MessagePullParams,
+  };
 }

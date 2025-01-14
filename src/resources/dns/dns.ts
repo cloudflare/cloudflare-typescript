@@ -1,17 +1,81 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import * as DNSSECAPI from './dnssec';
+import {
+  DNSSEC,
+  DNSSECDeleteParams,
+  DNSSECDeleteResponse,
+  DNSSECEditParams,
+  DNSSECGetParams,
+  DNSSECResource,
+} from './dnssec';
 import * as RecordsAPI from './records';
-import * as SettingsAPI from './settings';
+import {
+  AAAARecord,
+  ARecord,
+  BatchPatch,
+  BatchPut,
+  CAARecord,
+  CERTRecord,
+  CNAMERecord,
+  DNSKEYRecord,
+  DSRecord,
+  HTTPSRecord,
+  LOCRecord,
+  MXRecord,
+  NAPTRRecord,
+  NSRecord,
+  PTRRecord,
+  Record,
+  RecordBatchParams,
+  RecordBatchResponse,
+  RecordCreateParams,
+  RecordDeleteParams,
+  RecordDeleteResponse,
+  RecordEditParams,
+  RecordExportParams,
+  RecordExportResponse,
+  RecordGetParams,
+  RecordImportParams,
+  RecordImportResponse,
+  RecordListParams,
+  RecordResponse,
+  RecordResponsesV4PagePaginationArray,
+  RecordScanParams,
+  RecordScanResponse,
+  RecordTags,
+  RecordUpdateParams,
+  Records,
+  SMIMEARecord,
+  SRVRecord,
+  SSHFPRecord,
+  SVCBRecord,
+  TLSARecord,
+  TTL,
+  TXTRecord,
+  URIRecord,
+} from './records';
 import * as AnalyticsAPI from './analytics/analytics';
-import * as FirewallAPI from './firewall/firewall';
-import * as AnalyticsAnalyticsAPI from './firewall/analytics/analytics';
+import { Analytics } from './analytics/analytics';
+import * as SettingsAPI from './settings/settings';
+import {
+  DNSSetting,
+  SettingEditParams,
+  SettingEditResponse,
+  SettingGetParams,
+  SettingGetResponse,
+  Settings,
+} from './settings/settings';
+import * as ZoneTransfersAPI from './zone-transfers/zone-transfers';
+import { ZoneTransfers } from './zone-transfers/zone-transfers';
 
 export class DNS extends APIResource {
+  dnssec: DNSSECAPI.DNSSECResource = new DNSSECAPI.DNSSECResource(this._client);
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
-  firewall: FirewallAPI.FirewallResource = new FirewallAPI.FirewallResource(this._client);
+  zoneTransfers: ZoneTransfersAPI.ZoneTransfers = new ZoneTransfersAPI.ZoneTransfers(this._client);
 }
 
 /**
@@ -43,7 +107,17 @@ export interface DNSAnalyticsQuery {
   /**
    * Unit of time to group data by.
    */
-  time_delta: AnalyticsAnalyticsAPI.Delta;
+  time_delta:
+    | 'all'
+    | 'auto'
+    | 'year'
+    | 'quarter'
+    | 'month'
+    | 'week'
+    | 'day'
+    | 'hour'
+    | 'dekaminute'
+    | 'minute';
 
   /**
    * End date and time of requesting data period in ISO 8601 format.
@@ -62,65 +136,79 @@ export interface DNSAnalyticsQuery {
   sort?: Array<string>;
 }
 
-export namespace DNS {
-  export import Records = RecordsAPI.Records;
-  export import ARecord = RecordsAPI.ARecord;
-  export import AAAARecord = RecordsAPI.AAAARecord;
-  export import CAARecord = RecordsAPI.CAARecord;
-  export import CERTRecord = RecordsAPI.CERTRecord;
-  export import CNAMERecord = RecordsAPI.CNAMERecord;
-  export import DNSKEYRecord = RecordsAPI.DNSKEYRecord;
-  export import DSRecord = RecordsAPI.DSRecord;
-  export import HTTPSRecord = RecordsAPI.HTTPSRecord;
-  export import LOCRecord = RecordsAPI.LOCRecord;
-  export import MXRecord = RecordsAPI.MXRecord;
-  export import NAPTRRecord = RecordsAPI.NAPTRRecord;
-  export import NSRecord = RecordsAPI.NSRecord;
-  export import PTRRecord = RecordsAPI.PTRRecord;
-  export import Record = RecordsAPI.Record;
-  export import RecordMetadata = RecordsAPI.RecordMetadata;
-  export import RecordProcessTiming = RecordsAPI.RecordProcessTiming;
-  export import RecordTags = RecordsAPI.RecordTags;
-  export import SMIMEARecord = RecordsAPI.SMIMEARecord;
-  export import SRVRecord = RecordsAPI.SRVRecord;
-  export import SSHFPRecord = RecordsAPI.SSHFPRecord;
-  export import SVCBRecord = RecordsAPI.SVCBRecord;
-  export import TLSARecord = RecordsAPI.TLSARecord;
-  export import TTL = RecordsAPI.TTL;
-  export import TXTRecord = RecordsAPI.TXTRecord;
-  export import URIRecord = RecordsAPI.URIRecord;
-  export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
-  export import RecordExportResponse = RecordsAPI.RecordExportResponse;
-  export import RecordImportResponse = RecordsAPI.RecordImportResponse;
-  export import RecordScanResponse = RecordsAPI.RecordScanResponse;
-  export import RecordsV4PagePaginationArray = RecordsAPI.RecordsV4PagePaginationArray;
-  export import RecordCreateParams = RecordsAPI.RecordCreateParams;
-  export import RecordUpdateParams = RecordsAPI.RecordUpdateParams;
-  export import RecordListParams = RecordsAPI.RecordListParams;
-  export import RecordDeleteParams = RecordsAPI.RecordDeleteParams;
-  export import RecordEditParams = RecordsAPI.RecordEditParams;
-  export import RecordExportParams = RecordsAPI.RecordExportParams;
-  export import RecordGetParams = RecordsAPI.RecordGetParams;
-  export import RecordImportParams = RecordsAPI.RecordImportParams;
-  export import RecordScanParams = RecordsAPI.RecordScanParams;
-  export import Settings = SettingsAPI.Settings;
-  export import DNSSetting = SettingsAPI.DNSSetting;
-  export import Nameserver = SettingsAPI.Nameserver;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
-  export import Analytics = AnalyticsAPI.Analytics;
-  export import FirewallResource = FirewallAPI.FirewallResource;
-  export import AttackMitigation = FirewallAPI.AttackMitigation;
-  export import Firewall = FirewallAPI.Firewall;
-  export import FirewallIPs = FirewallAPI.FirewallIPs;
-  export import UpstreamIPs = FirewallAPI.UpstreamIPs;
-  export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import FirewallsV4PagePaginationArray = FirewallAPI.FirewallsV4PagePaginationArray;
-  export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
-  export import FirewallListParams = FirewallAPI.FirewallListParams;
-  export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;
-  export import FirewallEditParams = FirewallAPI.FirewallEditParams;
-  export import FirewallGetParams = FirewallAPI.FirewallGetParams;
+DNS.DNSSECResource = DNSSECResource;
+DNS.Records = Records;
+DNS.RecordResponsesV4PagePaginationArray = RecordResponsesV4PagePaginationArray;
+DNS.Settings = Settings;
+DNS.Analytics = Analytics;
+DNS.ZoneTransfers = ZoneTransfers;
+
+export declare namespace DNS {
+  export {
+    DNSSECResource as DNSSECResource,
+    type DNSSEC as DNSSEC,
+    type DNSSECDeleteResponse as DNSSECDeleteResponse,
+    type DNSSECDeleteParams as DNSSECDeleteParams,
+    type DNSSECEditParams as DNSSECEditParams,
+    type DNSSECGetParams as DNSSECGetParams,
+  };
+
+  export {
+    Records as Records,
+    type ARecord as ARecord,
+    type AAAARecord as AAAARecord,
+    type BatchPatch as BatchPatch,
+    type BatchPut as BatchPut,
+    type CAARecord as CAARecord,
+    type CERTRecord as CERTRecord,
+    type CNAMERecord as CNAMERecord,
+    type DNSKEYRecord as DNSKEYRecord,
+    type DSRecord as DSRecord,
+    type HTTPSRecord as HTTPSRecord,
+    type LOCRecord as LOCRecord,
+    type MXRecord as MXRecord,
+    type NAPTRRecord as NAPTRRecord,
+    type NSRecord as NSRecord,
+    type PTRRecord as PTRRecord,
+    type Record as Record,
+    type RecordResponse as RecordResponse,
+    type RecordTags as RecordTags,
+    type SMIMEARecord as SMIMEARecord,
+    type SRVRecord as SRVRecord,
+    type SSHFPRecord as SSHFPRecord,
+    type SVCBRecord as SVCBRecord,
+    type TLSARecord as TLSARecord,
+    type TTL as TTL,
+    type TXTRecord as TXTRecord,
+    type URIRecord as URIRecord,
+    type RecordDeleteResponse as RecordDeleteResponse,
+    type RecordBatchResponse as RecordBatchResponse,
+    type RecordExportResponse as RecordExportResponse,
+    type RecordImportResponse as RecordImportResponse,
+    type RecordScanResponse as RecordScanResponse,
+    RecordResponsesV4PagePaginationArray as RecordResponsesV4PagePaginationArray,
+    type RecordCreateParams as RecordCreateParams,
+    type RecordUpdateParams as RecordUpdateParams,
+    type RecordListParams as RecordListParams,
+    type RecordDeleteParams as RecordDeleteParams,
+    type RecordBatchParams as RecordBatchParams,
+    type RecordEditParams as RecordEditParams,
+    type RecordExportParams as RecordExportParams,
+    type RecordGetParams as RecordGetParams,
+    type RecordImportParams as RecordImportParams,
+    type RecordScanParams as RecordScanParams,
+  };
+
+  export {
+    Settings as Settings,
+    type DNSSetting as DNSSetting,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
+
+  export { Analytics as Analytics };
+
+  export { ZoneTransfers as ZoneTransfers };
 }

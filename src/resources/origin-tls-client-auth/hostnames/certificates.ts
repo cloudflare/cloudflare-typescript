@@ -2,9 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CertificatesAPI from './certificates';
 import * as HostnamesAPI from './hostnames';
-import { AuthenticatedOriginPullsSinglePage } from './hostnames';
+import { SinglePage } from '../../../pagination';
 
 export class Certificates extends APIResource {
   /**
@@ -30,11 +29,11 @@ export class Certificates extends APIResource {
   list(
     params: CertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AuthenticatedOriginPullsSinglePage, HostnamesAPI.AuthenticatedOriginPull> {
+  ): Core.PagePromise<CertificateListResponsesSinglePage, CertificateListResponse> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`,
-      AuthenticatedOriginPullsSinglePage,
+      CertificateListResponsesSinglePage,
       options,
     );
   }
@@ -73,6 +72,8 @@ export class Certificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class CertificateListResponsesSinglePage extends SinglePage<CertificateListResponse> {}
 
 export interface Certificate {
   /**
@@ -170,6 +171,40 @@ export interface CertificateCreateResponse {
    * The time when the certificate was uploaded.
    */
   uploaded_on?: string;
+}
+
+export interface CertificateListResponse extends HostnamesAPI.AuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Identifier
+   */
+  cert_id?: string;
+
+  /**
+   * The hostname certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether hostname-level authenticated origin pulls is enabled. A null
+   * value voids the association.
+   */
+  enabled?: boolean | null;
+
+  /**
+   * The hostname on the origin for which the client certificate uploaded will be
+   * used.
+   */
+  hostname?: string;
+
+  /**
+   * The hostname certificate's private key.
+   */
+  private_key?: string;
 }
 
 export interface CertificateDeleteResponse {
@@ -308,15 +343,19 @@ export interface CertificateGetParams {
   zone_id: string;
 }
 
-export namespace Certificates {
-  export import Certificate = CertificatesAPI.Certificate;
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
-}
+Certificates.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;
 
-export { AuthenticatedOriginPullsSinglePage };
+export declare namespace Certificates {
+  export {
+    type Certificate as Certificate,
+    type CertificateCreateResponse as CertificateCreateResponse,
+    type CertificateListResponse as CertificateListResponse,
+    type CertificateDeleteResponse as CertificateDeleteResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    CertificateListResponsesSinglePage as CertificateListResponsesSinglePage,
+    type CertificateCreateParams as CertificateCreateParams,
+    type CertificateListParams as CertificateListParams,
+    type CertificateDeleteParams as CertificateDeleteParams,
+    type CertificateGetParams as CertificateGetParams,
+  };
+}

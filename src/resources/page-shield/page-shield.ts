@@ -3,9 +3,46 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as ConnectionsAPI from './connections';
+import {
+  Connection,
+  ConnectionGetParams,
+  ConnectionListParams,
+  Connections,
+  ConnectionsSinglePage,
+} from './connections';
 import * as CookiesAPI from './cookies';
+import {
+  CookieGetParams,
+  CookieGetResponse,
+  CookieListParams,
+  CookieListResponse,
+  CookieListResponsesSinglePage,
+  Cookies,
+} from './cookies';
 import * as PoliciesAPI from './policies';
+import {
+  Policies,
+  Policy,
+  PolicyCreateParams,
+  PolicyCreateResponse,
+  PolicyDeleteParams,
+  PolicyGetParams,
+  PolicyGetResponse,
+  PolicyListParams,
+  PolicyListResponse,
+  PolicyListResponsesSinglePage,
+  PolicyUpdateParams,
+  PolicyUpdateResponse,
+} from './policies';
 import * as ScriptsAPI from './scripts';
+import {
+  Script,
+  ScriptGetParams,
+  ScriptGetResponse,
+  ScriptListParams,
+  Scripts,
+  ScriptsSinglePage,
+} from './scripts';
 
 export class PageShield extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
@@ -118,34 +155,54 @@ export interface PageShieldGetParams {
   zone_id: string;
 }
 
-export namespace PageShield {
-  export import Policies = PoliciesAPI.Policies;
-  export import Policy = PoliciesAPI.Policy;
-  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
-  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
-  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
-  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
-  export import Connections = ConnectionsAPI.Connections;
-  export import Connection = ConnectionsAPI.Connection;
-  export import ConnectionsSinglePage = ConnectionsAPI.ConnectionsSinglePage;
-  export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
-  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
-  export import Scripts = ScriptsAPI.Scripts;
-  export import Script = ScriptsAPI.Script;
-  export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
-  export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
-  export import ScriptListParams = ScriptsAPI.ScriptListParams;
-  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
-  export import Cookies = CookiesAPI.Cookies;
-  export import CookieListResponse = CookiesAPI.CookieListResponse;
-  export import CookieGetResponse = CookiesAPI.CookieGetResponse;
-  export import CookieListResponsesSinglePage = CookiesAPI.CookieListResponsesSinglePage;
-  export import CookieListParams = CookiesAPI.CookieListParams;
-  export import CookieGetParams = CookiesAPI.CookieGetParams;
+PageShield.Policies = Policies;
+PageShield.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
+PageShield.Connections = Connections;
+PageShield.ConnectionsSinglePage = ConnectionsSinglePage;
+PageShield.Scripts = Scripts;
+PageShield.ScriptsSinglePage = ScriptsSinglePage;
+PageShield.Cookies = Cookies;
+PageShield.CookieListResponsesSinglePage = CookieListResponsesSinglePage;
+
+export declare namespace PageShield {
+  export {
+    Policies as Policies,
+    type Policy as Policy,
+    type PolicyCreateResponse as PolicyCreateResponse,
+    type PolicyUpdateResponse as PolicyUpdateResponse,
+    type PolicyListResponse as PolicyListResponse,
+    type PolicyGetResponse as PolicyGetResponse,
+    PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyUpdateParams as PolicyUpdateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
+
+  export {
+    Connections as Connections,
+    type Connection as Connection,
+    ConnectionsSinglePage as ConnectionsSinglePage,
+    type ConnectionListParams as ConnectionListParams,
+    type ConnectionGetParams as ConnectionGetParams,
+  };
+
+  export {
+    Scripts as Scripts,
+    type Script as Script,
+    type ScriptGetResponse as ScriptGetResponse,
+    ScriptsSinglePage as ScriptsSinglePage,
+    type ScriptListParams as ScriptListParams,
+    type ScriptGetParams as ScriptGetParams,
+  };
+
+  export {
+    Cookies as Cookies,
+    type CookieListResponse as CookieListResponse,
+    type CookieGetResponse as CookieGetResponse,
+    CookieListResponsesSinglePage as CookieListResponsesSinglePage,
+    type CookieListParams as CookieListParams,
+    type CookieGetParams as CookieGetParams,
+  };
 }

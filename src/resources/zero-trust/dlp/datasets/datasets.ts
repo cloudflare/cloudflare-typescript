@@ -2,15 +2,18 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DatasetsAPI from './datasets';
 import * as UploadAPI from './upload';
+import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
+import * as VersionsAPI from './versions/versions';
+import { VersionCreateParams, VersionCreateResponse, Versions } from './versions/versions';
 import { SinglePage } from '../../../../pagination';
 
 export class Datasets extends APIResource {
   upload: UploadAPI.Upload = new UploadAPI.Upload(this._client);
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
-   * Create a new dataset.
+   * Create a new dataset
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreation> {
     const { account_id, ...body } = params;
@@ -22,7 +25,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Update details about a dataset.
+   * Update details about a dataset
    */
   update(
     datasetId: string,
@@ -39,7 +42,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Fetch all datasets with information about available versions.
+   * Fetch all datasets
    */
   list(
     params: DatasetListParams,
@@ -50,8 +53,6 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Delete a dataset.
-   *
    * This deletes all versions of the dataset.
    */
   delete(
@@ -67,7 +68,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Fetch a specific dataset with information about available versions.
+   * Fetch a specific dataset
    */
   get(datasetId: string, params: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<Dataset> {
     const { account_id } = params;
@@ -84,7 +85,11 @@ export class DatasetsSinglePage extends SinglePage<Dataset> {}
 export interface Dataset {
   id: string;
 
+  columns: Array<Dataset.Column>;
+
   created_at: string;
+
+  encoding_version: number;
 
   name: string;
 
@@ -92,20 +97,38 @@ export interface Dataset {
 
   secret: boolean;
 
-  status: 'empty' | 'uploading' | 'failed' | 'complete';
+  status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
 
+  /**
+   * When the dataset was last updated.
+   *
+   * This includes name or description changes as well as uploads.
+   */
   updated_at: string;
 
   uploads: Array<Dataset.Upload>;
 
+  /**
+   * The description of the dataset
+   */
   description?: string | null;
 }
 
 export namespace Dataset {
+  export interface Column {
+    entry_id: string;
+
+    header_name: string;
+
+    num_cells: number;
+
+    upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+  }
+
   export interface Upload {
     num_cells: number;
 
-    status: 'empty' | 'uploading' | 'failed' | 'complete';
+    status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
 
     version: number;
   }
@@ -115,6 +138,11 @@ export type DatasetArray = Array<Dataset>;
 
 export interface DatasetCreation {
   dataset: Dataset;
+
+  /**
+   * Encoding version to use for dataset
+   */
+  encoding_version: number;
 
   max_cells: number;
 
@@ -142,9 +170,19 @@ export interface DatasetCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param: The description of the dataset
    */
   description?: string | null;
+
+  /**
+   * Body param: Dataset encoding version
+   *
+   * Non-secret custom word lists with no header are always version 1. Secret EDM
+   * lists with no header are version 1. Multicolumn CSV with headers are version 2.
+   * Omitting this field provides the default value 0, which is interpreted the same
+   * as 1.
+   */
+  encoding_version?: number;
 
   /**
    * Body param: Generate a secret dataset.
@@ -162,12 +200,12 @@ export interface DatasetUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The description of the dataset
    */
   description?: string | null;
 
   /**
-   * Body param:
+   * Body param: The name of the dataset, must be unique
    */
   name?: string | null;
 }
@@ -184,18 +222,33 @@ export interface DatasetGetParams {
   account_id: string;
 }
 
-export namespace Datasets {
-  export import Dataset = DatasetsAPI.Dataset;
-  export import DatasetArray = DatasetsAPI.DatasetArray;
-  export import DatasetCreation = DatasetsAPI.DatasetCreation;
-  export import DatasetsSinglePage = DatasetsAPI.DatasetsSinglePage;
-  export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
-  export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
-  export import DatasetListParams = DatasetsAPI.DatasetListParams;
-  export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
-  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
-  export import Upload = UploadAPI.Upload;
-  export import NewVersion = UploadAPI.NewVersion;
-  export import UploadCreateParams = UploadAPI.UploadCreateParams;
-  export import UploadEditParams = UploadAPI.UploadEditParams;
+Datasets.DatasetsSinglePage = DatasetsSinglePage;
+Datasets.Upload = UploadAPIUpload;
+Datasets.Versions = Versions;
+
+export declare namespace Datasets {
+  export {
+    type Dataset as Dataset,
+    type DatasetArray as DatasetArray,
+    type DatasetCreation as DatasetCreation,
+    DatasetsSinglePage as DatasetsSinglePage,
+    type DatasetCreateParams as DatasetCreateParams,
+    type DatasetUpdateParams as DatasetUpdateParams,
+    type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
+    type DatasetGetParams as DatasetGetParams,
+  };
+
+  export {
+    UploadAPIUpload as Upload,
+    type NewVersion as NewVersion,
+    type UploadCreateParams as UploadCreateParams,
+    type UploadEditParams as UploadEditParams,
+  };
+
+  export {
+    Versions as Versions,
+    type VersionCreateResponse as VersionCreateResponse,
+    type VersionCreateParams as VersionCreateParams,
+  };
 }

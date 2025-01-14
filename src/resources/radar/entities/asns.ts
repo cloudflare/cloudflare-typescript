@@ -3,11 +3,10 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as ASNsAPI from './asns';
 
 export class ASNs extends APIResource {
   /**
-   * Gets a list of autonomous systems (AS).
+   * Get a list of autonomous systems (ASes).
    */
   list(query?: ASNListParams, options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
@@ -26,7 +25,7 @@ export class ASNs extends APIResource {
   }
 
   /**
-   * Get the requested autonomous system information. A confidence level below `5`
+   * Get the requested autonomous system information. (A confidence level below `5`
    * indicates a low level of confidence in the traffic data - normally this happens
    * because Cloudflare has a small amount of traffic from/to this AS). Population
    * estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
@@ -351,13 +350,15 @@ export interface ASNRelParams {
   format?: 'JSON' | 'CSV';
 }
 
-export namespace ASNs {
-  export import ASNListResponse = ASNsAPI.ASNListResponse;
-  export import ASNGetResponse = ASNsAPI.ASNGetResponse;
-  export import ASNIPResponse = ASNsAPI.ASNIPResponse;
-  export import ASNRelResponse = ASNsAPI.ASNRelResponse;
-  export import ASNListParams = ASNsAPI.ASNListParams;
-  export import ASNGetParams = ASNsAPI.ASNGetParams;
-  export import ASNIPParams = ASNsAPI.ASNIPParams;
-  export import ASNRelParams = ASNsAPI.ASNRelParams;
+export declare namespace ASNs {
+  export {
+    type ASNListResponse as ASNListResponse,
+    type ASNGetResponse as ASNGetResponse,
+    type ASNIPResponse as ASNIPResponse,
+    type ASNRelResponse as ASNRelResponse,
+    type ASNListParams as ASNListParams,
+    type ASNGetParams as ASNGetParams,
+    type ASNIPParams as ASNIPParams,
+    type ASNRelParams as ASNRelParams,
+  };
 }

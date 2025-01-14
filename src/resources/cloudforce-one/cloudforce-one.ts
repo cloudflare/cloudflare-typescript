@@ -2,21 +2,39 @@
 
 import { APIResource } from '../../resource';
 import * as RequestsAPI from './requests/requests';
+import {
+  Item,
+  ListItem,
+  ListItemsV4PagePaginationArray,
+  Quota,
+  RequestConstants,
+  RequestCreateParams,
+  RequestDeleteResponse,
+  RequestListParams,
+  RequestTypes,
+  RequestUpdateParams,
+  Requests,
+} from './requests/requests';
 
 export class CloudforceOne extends APIResource {
   requests: RequestsAPI.Requests = new RequestsAPI.Requests(this._client);
 }
 
-export namespace CloudforceOne {
-  export import Requests = RequestsAPI.Requests;
-  export import Item = RequestsAPI.Item;
-  export import ListItem = RequestsAPI.ListItem;
-  export import Quota = RequestsAPI.Quota;
-  export import RequestConstants = RequestsAPI.RequestConstants;
-  export import RequestTypes = RequestsAPI.RequestTypes;
-  export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
-  export import ListItemsV4PagePaginationArray = RequestsAPI.ListItemsV4PagePaginationArray;
-  export import RequestCreateParams = RequestsAPI.RequestCreateParams;
-  export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
-  export import RequestListParams = RequestsAPI.RequestListParams;
+CloudforceOne.Requests = Requests;
+CloudforceOne.ListItemsV4PagePaginationArray = ListItemsV4PagePaginationArray;
+
+export declare namespace CloudforceOne {
+  export {
+    Requests as Requests,
+    type Item as Item,
+    type ListItem as ListItem,
+    type Quota as Quota,
+    type RequestConstants as RequestConstants,
+    type RequestTypes as RequestTypes,
+    type RequestDeleteResponse as RequestDeleteResponse,
+    ListItemsV4PagePaginationArray as ListItemsV4PagePaginationArray,
+    type RequestCreateParams as RequestCreateParams,
+    type RequestUpdateParams as RequestUpdateParams,
+    type RequestListParams as RequestListParams,
+  };
 }

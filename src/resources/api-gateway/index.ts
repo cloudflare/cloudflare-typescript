@@ -2,44 +2,49 @@
 
 export { APIGateway } from './api-gateway';
 export {
-  APIShield,
-  OperationCreateResponse,
-  OperationListResponse,
-  OperationDeleteResponse,
-  OperationGetResponse,
-  OperationCreateParams,
-  OperationListParams,
-  OperationDeleteParams,
-  OperationGetParams,
-  OperationListResponsesV4PagePaginationArray,
-  Operations,
-} from './operations/index';
-export {
-  Configuration,
-  ConfigurationUpdateResponse,
-  ConfigurationUpdateParams,
-  ConfigurationGetParams,
   Configurations,
+  type Configuration,
+  type ConfigurationUpdateResponse,
+  type ConfigurationUpdateParams,
+  type ConfigurationGetParams,
 } from './configurations';
 export {
-  DiscoveryOperation,
-  DiscoveryGetResponse,
-  DiscoveryGetParams,
   DiscoveryOperationsV4PagePaginationArray,
   Discovery,
+  type DiscoveryOperation,
+  type DiscoveryGetResponse,
+  type DiscoveryGetParams,
 } from './discovery/index';
+export { ExpressionTemplate } from './expression-template/index';
 export {
-  Message,
-  PublicSchema,
-  SchemaUpload,
-  UserSchemaDeleteResponse,
-  UserSchemaCreateParams,
-  UserSchemaListParams,
-  UserSchemaDeleteParams,
-  UserSchemaEditParams,
-  UserSchemaGetParams,
+  OperationListResponsesV4PagePaginationArray,
+  Operations,
+  type APIShield,
+  type OperationCreateResponse,
+  type OperationListResponse,
+  type OperationDeleteResponse,
+  type OperationBulkCreateResponse,
+  type OperationBulkDeleteResponse,
+  type OperationGetResponse,
+  type OperationCreateParams,
+  type OperationListParams,
+  type OperationDeleteParams,
+  type OperationBulkCreateParams,
+  type OperationBulkDeleteParams,
+  type OperationGetParams,
+} from './operations/index';
+export {
   PublicSchemasV4PagePaginationArray,
   UserSchemas,
+  type Message,
+  type PublicSchema,
+  type SchemaUpload,
+  type UserSchemaDeleteResponse,
+  type UserSchemaCreateParams,
+  type UserSchemaListParams,
+  type UserSchemaDeleteParams,
+  type UserSchemaEditParams,
+  type UserSchemaGetParams,
 } from './user-schemas/index';
-export { SchemaListResponse, SchemaListParams, Schemas } from './schemas';
+export { Schemas, type SchemaListResponse, type SchemaListParams } from './schemas';
 export { Settings } from './settings/index';

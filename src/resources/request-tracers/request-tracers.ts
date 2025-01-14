@@ -2,15 +2,20 @@
 
 import { APIResource } from '../../resource';
 import * as TracesAPI from './traces';
+import { Trace, TraceCreateParams, TraceCreateResponse, TraceItem, Traces } from './traces';
 
 export class RequestTracers extends APIResource {
   traces: TracesAPI.Traces = new TracesAPI.Traces(this._client);
 }
 
-export namespace RequestTracers {
-  export import Traces = TracesAPI.Traces;
-  export import Trace = TracesAPI.Trace;
-  export import TraceItem = TracesAPI.TraceItem;
-  export import TraceCreateResponse = TracesAPI.TraceCreateResponse;
-  export import TraceCreateParams = TracesAPI.TraceCreateParams;
+RequestTracers.Traces = Traces;
+
+export declare namespace RequestTracers {
+  export {
+    Traces as Traces,
+    type Trace as Trace,
+    type TraceItem as TraceItem,
+    type TraceCreateResponse as TraceCreateResponse,
+    type TraceCreateParams as TraceCreateParams,
+  };
 }

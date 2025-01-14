@@ -2,10 +2,80 @@
 
 import { APIResource } from '../../resource';
 import * as AccessRulesAPI from './access-rules';
+import {
+  ASNConfiguration,
+  AccessRuleCIDRConfiguration,
+  AccessRuleCreateParams,
+  AccessRuleCreateResponse,
+  AccessRuleDeleteParams,
+  AccessRuleDeleteResponse,
+  AccessRuleEditParams,
+  AccessRuleEditResponse,
+  AccessRuleGetParams,
+  AccessRuleGetResponse,
+  AccessRuleIPConfiguration,
+  AccessRuleListParams,
+  AccessRuleListResponse,
+  AccessRuleListResponsesV4PagePaginationArray,
+  AccessRules,
+  CountryConfiguration,
+  IPV6Configuration,
+} from './access-rules';
 import * as LockdownsAPI from './lockdowns';
+import {
+  Configuration,
+  Lockdown,
+  LockdownCIDRConfiguration,
+  LockdownCreateParams,
+  LockdownDeleteParams,
+  LockdownDeleteResponse,
+  LockdownGetParams,
+  LockdownIPConfiguration,
+  LockdownListParams,
+  LockdownURL,
+  LockdownUpdateParams,
+  Lockdowns,
+  LockdownsV4PagePaginationArray,
+} from './lockdowns';
 import * as RulesAPI from './rules';
+import {
+  DeletedFilter,
+  FirewallRule,
+  FirewallRulesV4PagePaginationArray,
+  Product,
+  RuleBulkDeleteParams,
+  RuleBulkDeleteResponse,
+  RuleBulkEditParams,
+  RuleBulkEditResponse,
+  RuleBulkUpdateParams,
+  RuleBulkUpdateResponse,
+  RuleCreateParams,
+  RuleCreateResponse,
+  RuleDeleteParams,
+  RuleEditParams,
+  RuleEditResponse,
+  RuleGetParams,
+  RuleListParams,
+  RuleUpdateParams,
+  Rules,
+} from './rules';
 import * as UARulesAPI from './ua-rules';
+import {
+  UARuleCreateParams,
+  UARuleCreateResponse,
+  UARuleDeleteParams,
+  UARuleDeleteResponse,
+  UARuleGetParams,
+  UARuleGetResponse,
+  UARuleListParams,
+  UARuleListResponse,
+  UARuleListResponsesV4PagePaginationArray,
+  UARuleUpdateParams,
+  UARuleUpdateResponse,
+  UARules,
+} from './ua-rules';
 import * as WAFAPI from './waf/waf';
+import { WAF } from './waf/waf';
 
 export class Firewall extends APIResource {
   lockdowns: LockdownsAPI.Lockdowns = new LockdownsAPI.Lockdowns(this._client);
@@ -15,56 +85,89 @@ export class Firewall extends APIResource {
   waf: WAFAPI.WAF = new WAFAPI.WAF(this._client);
 }
 
-export namespace Firewall {
-  export import Lockdowns = LockdownsAPI.Lockdowns;
-  export import Configuration = LockdownsAPI.Configuration;
-  export import Lockdown = LockdownsAPI.Lockdown;
-  export import LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
-  export import LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
-  export import LockdownURL = LockdownsAPI.LockdownURL;
-  export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
-  export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
-  export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
-  export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
-  export import LockdownListParams = LockdownsAPI.LockdownListParams;
-  export import Rules = RulesAPI.Rules;
-  export import FirewallRule = RulesAPI.FirewallRule;
-  export import Product = RulesAPI.Product;
-  export import DeletedFilter = RulesAPI.DeletedFilter;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import FirewallRulesV4PagePaginationArray = RulesAPI.FirewallRulesV4PagePaginationArray;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import AccessRules = AccessRulesAPI.AccessRules;
-  export import AccessRuleCIDRConfiguration = AccessRulesAPI.AccessRuleCIDRConfiguration;
-  export import AccessRuleIPConfiguration = AccessRulesAPI.AccessRuleIPConfiguration;
-  export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
-  export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
-  export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
-  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
-  export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
-  export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
-  export import AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
-  export import AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
-  export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
-  export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
-  export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
-  export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
-  export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
-  export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
-  export import UARules = UARulesAPI.UARules;
-  export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
-  export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
-  export import UARuleListResponse = UARulesAPI.UARuleListResponse;
-  export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
-  export import UARuleGetResponse = UARulesAPI.UARuleGetResponse;
-  export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;
-  export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
-  export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
-  export import UARuleListParams = UARulesAPI.UARuleListParams;
-  export import WAF = WAFAPI.WAF;
+Firewall.Lockdowns = Lockdowns;
+Firewall.LockdownsV4PagePaginationArray = LockdownsV4PagePaginationArray;
+Firewall.Rules = Rules;
+Firewall.FirewallRulesV4PagePaginationArray = FirewallRulesV4PagePaginationArray;
+Firewall.AccessRules = AccessRules;
+Firewall.AccessRuleListResponsesV4PagePaginationArray = AccessRuleListResponsesV4PagePaginationArray;
+Firewall.UARules = UARules;
+Firewall.UARuleListResponsesV4PagePaginationArray = UARuleListResponsesV4PagePaginationArray;
+Firewall.WAF = WAF;
+
+export declare namespace Firewall {
+  export {
+    Lockdowns as Lockdowns,
+    type Configuration as Configuration,
+    type Lockdown as Lockdown,
+    type LockdownCIDRConfiguration as LockdownCIDRConfiguration,
+    type LockdownIPConfiguration as LockdownIPConfiguration,
+    type LockdownURL as LockdownURL,
+    type LockdownDeleteResponse as LockdownDeleteResponse,
+    LockdownsV4PagePaginationArray as LockdownsV4PagePaginationArray,
+    type LockdownCreateParams as LockdownCreateParams,
+    type LockdownUpdateParams as LockdownUpdateParams,
+    type LockdownListParams as LockdownListParams,
+    type LockdownDeleteParams as LockdownDeleteParams,
+    type LockdownGetParams as LockdownGetParams,
+  };
+
+  export {
+    Rules as Rules,
+    type DeletedFilter as DeletedFilter,
+    type FirewallRule as FirewallRule,
+    type Product as Product,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleBulkDeleteResponse as RuleBulkDeleteResponse,
+    type RuleBulkEditResponse as RuleBulkEditResponse,
+    type RuleBulkUpdateResponse as RuleBulkUpdateResponse,
+    type RuleEditResponse as RuleEditResponse,
+    FirewallRulesV4PagePaginationArray as FirewallRulesV4PagePaginationArray,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleBulkDeleteParams as RuleBulkDeleteParams,
+    type RuleBulkEditParams as RuleBulkEditParams,
+    type RuleBulkUpdateParams as RuleBulkUpdateParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    AccessRules as AccessRules,
+    type AccessRuleCIDRConfiguration as AccessRuleCIDRConfiguration,
+    type AccessRuleIPConfiguration as AccessRuleIPConfiguration,
+    type ASNConfiguration as ASNConfiguration,
+    type CountryConfiguration as CountryConfiguration,
+    type IPV6Configuration as IPV6Configuration,
+    type AccessRuleCreateResponse as AccessRuleCreateResponse,
+    type AccessRuleListResponse as AccessRuleListResponse,
+    type AccessRuleDeleteResponse as AccessRuleDeleteResponse,
+    type AccessRuleEditResponse as AccessRuleEditResponse,
+    type AccessRuleGetResponse as AccessRuleGetResponse,
+    AccessRuleListResponsesV4PagePaginationArray as AccessRuleListResponsesV4PagePaginationArray,
+    type AccessRuleCreateParams as AccessRuleCreateParams,
+    type AccessRuleListParams as AccessRuleListParams,
+    type AccessRuleDeleteParams as AccessRuleDeleteParams,
+    type AccessRuleEditParams as AccessRuleEditParams,
+    type AccessRuleGetParams as AccessRuleGetParams,
+  };
+
+  export {
+    UARules as UARules,
+    type UARuleCreateResponse as UARuleCreateResponse,
+    type UARuleUpdateResponse as UARuleUpdateResponse,
+    type UARuleListResponse as UARuleListResponse,
+    type UARuleDeleteResponse as UARuleDeleteResponse,
+    type UARuleGetResponse as UARuleGetResponse,
+    UARuleListResponsesV4PagePaginationArray as UARuleListResponsesV4PagePaginationArray,
+    type UARuleCreateParams as UARuleCreateParams,
+    type UARuleUpdateParams as UARuleUpdateParams,
+    type UARuleListParams as UARuleListParams,
+    type UARuleDeleteParams as UARuleDeleteParams,
+    type UARuleGetParams as UARuleGetParams,
+  };
+
+  export { WAF as WAF };
 }

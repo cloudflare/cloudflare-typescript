@@ -3,11 +3,10 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as LocationsAPI from './locations';
 
 export class Locations extends APIResource {
   /**
-   * Internet traffic anomalies are signals that might point to an outage, These
+   * Internet traffic anomalies are signals that might point to an outage. These
    * alerts are automatically detected by Radar and then manually verified by our
    * team. This endpoint returns the sum of alerts grouped by location.
    */
@@ -72,7 +71,6 @@ export interface LocationGetParams {
   status?: 'VERIFIED' | 'UNVERIFIED';
 }
 
-export namespace Locations {
-  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
+export declare namespace Locations {
+  export { type LocationGetResponse as LocationGetResponse, type LocationGetParams as LocationGetParams };
 }

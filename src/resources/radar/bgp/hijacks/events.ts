@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as EventsAPI from './events';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Events extends APIResource {
@@ -34,86 +33,66 @@ export class Events extends APIResource {
 export class EventListResponsesV4PagePagination extends V4PagePagination<EventListResponse> {}
 
 export interface EventListResponse {
-  result: EventListResponse.Result;
+  asn_info: Array<EventListResponse.ASNInfo>;
 
-  result_info: EventListResponse.ResultInfo;
+  events: Array<EventListResponse.Event>;
 
-  success: boolean;
+  total_monitors: number;
 }
 
 export namespace EventListResponse {
-  export interface Result {
-    asn_info: Array<Result.ASNInfo>;
+  export interface ASNInfo {
+    asn: number;
 
-    events: Array<Result.Event>;
+    country_code: string;
 
-    total_monitors: number;
+    org_name: string;
   }
 
-  export namespace Result {
-    export interface ASNInfo {
-      asn: number;
+  export interface Event {
+    id: number;
 
-      country_code: string;
+    confidence_score: number;
 
-      org_name: string;
-    }
+    duration: number;
 
-    export interface Event {
-      id: number;
+    event_type: number;
 
-      confidence_score: number;
+    hijack_msgs_count: number;
 
-      duration: number;
+    hijacker_asn: number;
 
-      event_type: number;
+    hijacker_country: string;
 
-      hijack_msgs_count: number;
+    is_stale: boolean;
 
-      hijacker_asn: number;
+    max_hijack_ts: string;
 
-      hijacker_country: string;
+    max_msg_ts: string;
 
-      is_stale: boolean;
+    min_hijack_ts: string;
 
-      max_hijack_ts: string;
+    on_going_count: number;
 
-      max_msg_ts: string;
+    peer_asns: Array<number>;
 
-      min_hijack_ts: string;
+    peer_ip_count: number;
 
-      on_going_count: number;
+    prefixes: Array<string>;
 
-      peer_asns: Array<number>;
+    tags: Array<Event.Tag>;
 
-      peer_ip_count: number;
+    victim_asns: Array<number>;
 
-      prefixes: Array<string>;
-
-      tags: Array<Event.Tag>;
-
-      victim_asns: Array<number>;
-
-      victim_countries: Array<string>;
-    }
-
-    export namespace Event {
-      export interface Tag {
-        name: string;
-
-        score: number;
-      }
-    }
+    victim_countries: Array<string>;
   }
 
-  export interface ResultInfo {
-    count: number;
+  export namespace Event {
+    export interface Tag {
+      name: string;
 
-    page: number;
-
-    per_page: number;
-
-    total_count: number;
+      score: number;
+    }
   }
 }
 
@@ -190,8 +169,12 @@ export interface EventListParams extends V4PagePaginationParams {
   victimAsn?: number;
 }
 
-export namespace Events {
-  export import EventListResponse = EventsAPI.EventListResponse;
-  export import EventListResponsesV4PagePagination = EventsAPI.EventListResponsesV4PagePagination;
-  export import EventListParams = EventsAPI.EventListParams;
+Events.EventListResponsesV4PagePagination = EventListResponsesV4PagePagination;
+
+export declare namespace Events {
+  export {
+    type EventListResponse as EventListResponse,
+    EventListResponsesV4PagePagination as EventListResponsesV4PagePagination,
+    type EventListParams as EventListParams,
+  };
 }

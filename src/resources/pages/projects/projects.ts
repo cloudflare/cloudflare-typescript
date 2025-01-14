@@ -2,9 +2,32 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ProjectsAPI from './projects';
 import * as DomainsAPI from './domains';
+import {
+  DomainCreateParams,
+  DomainCreateResponse,
+  DomainDeleteParams,
+  DomainDeleteResponse,
+  DomainEditParams,
+  DomainEditResponse,
+  DomainGetParams,
+  DomainGetResponse,
+  DomainListParams,
+  DomainListResponse,
+  DomainListResponsesSinglePage,
+  Domains,
+} from './domains';
 import * as DeploymentsAPI from './deployments/deployments';
+import {
+  DeploymentCreateParams,
+  DeploymentDeleteParams,
+  DeploymentDeleteResponse,
+  DeploymentGetParams,
+  DeploymentListParams,
+  DeploymentRetryParams,
+  DeploymentRollbackParams,
+  Deployments,
+} from './deployments/deployments';
 import { SinglePage } from '../../../pagination';
 
 export class Projects extends APIResource {
@@ -14,11 +37,11 @@ export class Projects extends APIResource {
   /**
    * Create a new project.
    */
-  create(params: ProjectCreateParams, options?: Core.RequestOptions): Core.APIPromise<ProjectCreateResponse> {
+  create(params: ProjectCreateParams, options?: Core.RequestOptions): Core.APIPromise<Project> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pages/projects`, { body, ...options }) as Core.APIPromise<{
-        result: ProjectCreateResponse;
+        result: Project;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -41,9 +64,14 @@ export class Projects extends APIResource {
     projectName: string,
     params: ProjectDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<ProjectDeleteResponse | null> {
     const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/pages/projects/${projectName}`, options);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/pages/projects/${projectName}`,
+        options,
+      ) as Core.APIPromise<{ result: ProjectDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -54,13 +82,13 @@ export class Projects extends APIResource {
     projectName: string,
     params: ProjectEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectEditResponse> {
-    const { account_id, body } = params;
+  ): Core.APIPromise<Project> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}`, {
-        body: body,
+        body,
         ...options,
-      }) as Core.APIPromise<{ result: ProjectEditResponse }>
+      }) as Core.APIPromise<{ result: Project }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -87,12 +115,14 @@ export class Projects extends APIResource {
     projectName: string,
     params: ProjectPurgeBuildCacheParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<ProjectPurgeBuildCacheResponse | null> {
     const { account_id } = params;
-    return this._client.post(
-      `/accounts/${account_id}/pages/projects/${projectName}/purge_build_cache`,
-      options,
-    );
+    return (
+      this._client.post(
+        `/accounts/${account_id}/pages/projects/${projectName}/purge_build_cache`,
+        options,
+      ) as Core.APIPromise<{ result: ProjectPurgeBuildCacheResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -107,9 +137,12 @@ export interface Deployment {
   /**
    * A list of alias URLs pointing to this deployment.
    */
-  aliases?: Array<unknown> | null;
+  aliases?: Array<string> | null;
 
-  build_config?: unknown;
+  /**
+   * Configs for the project build process.
+   */
+  build_config?: Deployment.BuildConfig;
 
   /**
    * When the deployment was created.
@@ -124,7 +157,7 @@ export interface Deployment {
   /**
    * A dict of env variables to build this deploy.
    */
-  env_vars?: unknown;
+  env_vars?: Record<string, Deployment.EnvVars | null>;
 
   /**
    * Type of deploy.
@@ -136,7 +169,10 @@ export interface Deployment {
    */
   is_skipped?: boolean;
 
-  latest_stage?: unknown;
+  /**
+   * The status of the deployment.
+   */
+  latest_stage?: Stage;
 
   /**
    * When the deployment was last modified.
@@ -158,7 +194,7 @@ export interface Deployment {
    */
   short_id?: string;
 
-  source?: unknown;
+  source?: Deployment.Source;
 
   /**
    * List of past stages.
@@ -172,6 +208,41 @@ export interface Deployment {
 }
 
 export namespace Deployment {
+  /**
+   * Configs for the project build process.
+   */
+  export interface BuildConfig {
+    /**
+     * Enable build caching for the project.
+     */
+    build_caching?: boolean | null;
+
+    /**
+     * Command used to build project.
+     */
+    build_command?: string | null;
+
+    /**
+     * Output directory of the build.
+     */
+    destination_dir?: string | null;
+
+    /**
+     * Directory to run the command.
+     */
+    root_dir?: string | null;
+
+    /**
+     * The classifying tag for analytics.
+     */
+    web_analytics_tag?: string | null;
+
+    /**
+     * The auth token for analytics.
+     */
+    web_analytics_token?: string | null;
+  }
+
   /**
    * Info about what caused the deployment.
    */
@@ -208,9 +279,54 @@ export namespace Deployment {
       commit_message?: string;
     }
   }
-}
 
-export interface DeploymentParam {}
+  /**
+   * Environment variable.
+   */
+  export interface EnvVars {
+    /**
+     * Environment variable value.
+     */
+    value: string;
+
+    /**
+     * The type of environment variable.
+     */
+    type?: string;
+  }
+
+  export interface Source {
+    config?: Source.Config;
+
+    type?: string;
+  }
+
+  export namespace Source {
+    export interface Config {
+      deployments_enabled?: boolean;
+
+      owner?: string;
+
+      path_excludes?: Array<string>;
+
+      path_includes?: Array<string>;
+
+      pr_comments_enabled?: boolean;
+
+      preview_branch_excludes?: Array<string>;
+
+      preview_branch_includes?: Array<string>;
+
+      preview_deployment_setting?: 'all' | 'none' | 'custom';
+
+      production_branch?: string;
+
+      production_deployments_enabled?: boolean;
+
+      repo_name?: string;
+    }
+  }
+}
 
 export interface Project {
   /**
@@ -223,7 +339,10 @@ export interface Project {
    */
   build_config?: Project.BuildConfig;
 
-  canonical_deployment?: Deployment;
+  /**
+   * Most recent deployment to the repo.
+   */
+  canonical_deployment?: Deployment | null;
 
   /**
    * When the project was created.
@@ -238,9 +357,12 @@ export interface Project {
   /**
    * A list of associated custom domains for the project.
    */
-  domains?: Array<unknown>;
+  domains?: Array<string>;
 
-  latest_deployment?: Deployment;
+  /**
+   * Most recent deployment to the repo.
+   */
+  latest_deployment?: Deployment | null;
 
   /**
    * Name of the project.
@@ -252,7 +374,7 @@ export interface Project {
    */
   production_branch?: string;
 
-  source?: unknown;
+  source?: Project.Source;
 
   /**
    * The Cloudflare subdomain associated with the project.
@@ -319,17 +441,17 @@ export namespace Project {
       /**
        * Constellation bindings used for Pages Functions.
        */
-      ai_bindings?: Preview.AIBindings | null;
+      ai_bindings?: Record<string, Preview.AIBindings | null> | null;
 
       /**
        * Analytics Engine bindings used for Pages Functions.
        */
-      analytics_engine_datasets?: Preview.AnalyticsEngineDatasets | null;
+      analytics_engine_datasets?: Record<string, Preview.AnalyticsEngineDatasets | null> | null;
 
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Preview.Browsers | null;
+      browsers?: Record<string, Preview.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -339,37 +461,37 @@ export namespace Project {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<unknown>;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
        */
-      d1_databases?: Preview.D1Databases | null;
+      d1_databases?: Record<string, Preview.D1Databases | null> | null;
 
       /**
        * Durabble Object namespaces used for Pages Functions.
        */
-      durable_object_namespaces?: Preview.DurableObjectNamespaces | null;
+      durable_object_namespaces?: Record<string, Preview.DurableObjectNamespaces | null> | null;
 
       /**
        * Environment variables for build configs.
        */
-      env_vars?: Preview.EnvVars | null;
+      env_vars?: Record<string, Preview.EnvVars | null> | null;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
        */
-      hyperdrive_bindings?: Preview.HyperdriveBindings | null;
+      hyperdrive_bindings?: Record<string, Preview.HyperdriveBindings | null> | null;
 
       /**
        * KV namespaces used for Pages Functions.
        */
-      kv_namespaces?: Preview.KVNamespaces;
+      kv_namespaces?: Record<string, Preview.KVNamespaces | null> | null;
 
       /**
        * mTLS bindings used for Pages Functions.
        */
-      mtls_certificates?: Preview.MTLSCertificates | null;
+      mtls_certificates?: Record<string, Preview.MTLSCertificates | null> | null;
 
       /**
        * Placement setting used for Pages Functions.
@@ -379,205 +501,104 @@ export namespace Project {
       /**
        * Queue Producer bindings used for Pages Functions.
        */
-      queue_producers?: Preview.QueueProducers | null;
+      queue_producers?: Record<string, Preview.QueueProducers | null> | null;
 
       /**
        * R2 buckets used for Pages Functions.
        */
-      r2_buckets?: Preview.R2Buckets | null;
+      r2_buckets?: Record<string, Preview.R2Buckets | null> | null;
 
       /**
        * Services used for Pages Functions.
        */
-      services?: Preview.Services | null;
+      services?: Record<string, Preview.Services | null> | null;
 
       /**
        * Vectorize bindings used for Pages Functions.
        */
-      vectorize_bindings?: Preview.VectorizeBindings | null;
+      vectorize_bindings?: Record<string, Preview.VectorizeBindings | null> | null;
     }
 
     export namespace Preview {
       /**
-       * Constellation bindings used for Pages Functions.
+       * AI binding.
        */
       export interface AIBindings {
-        /**
-         * AI binding.
-         */
-        AI_BINDING?: AIBindings.AIBinding;
-      }
-
-      export namespace AIBindings {
-        /**
-         * AI binding.
-         */
-        export interface AIBinding {
-          project_id?: unknown;
-        }
+        project_id?: string;
       }
 
       /**
-       * Analytics Engine bindings used for Pages Functions.
+       * Analytics Engine binding.
        */
       export interface AnalyticsEngineDatasets {
         /**
-         * Analytics Engine binding.
+         * Name of the dataset.
          */
-        ANALYTICS_ENGINE_BINDING?: AnalyticsEngineDatasets.AnalyticsEngineBinding;
-      }
-
-      export namespace AnalyticsEngineDatasets {
-        /**
-         * Analytics Engine binding.
-         */
-        export interface AnalyticsEngineBinding {
-          /**
-           * Name of the dataset.
-           */
-          dataset?: string;
-        }
+        dataset?: string;
       }
 
       /**
-       * Browser bindings used for Pages Functions.
+       * Browser binding.
        */
-      export interface Browsers {
-        /**
-         * Browser binding.
-         */
-        BROWSER?: unknown;
-      }
+      export interface Browsers {}
 
       /**
-       * D1 databases used for Pages Functions.
+       * D1 binding.
        */
       export interface D1Databases {
         /**
-         * D1 binding.
+         * UUID of the D1 database.
          */
-        D1_BINDING?: D1Databases.D1Binding;
-      }
-
-      export namespace D1Databases {
-        /**
-         * D1 binding.
-         */
-        export interface D1Binding {
-          /**
-           * UUID of the D1 database.
-           */
-          id?: string;
-        }
+        id?: string;
       }
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durabble Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * Durabble Object binding.
+         * ID of the Durabble Object namespace.
          */
-        DO_BINDING?: DurableObjectNamespaces.DoBinding;
-      }
-
-      export namespace DurableObjectNamespaces {
-        /**
-         * Durabble Object binding.
-         */
-        export interface DoBinding {
-          /**
-           * ID of the Durabble Object namespace.
-           */
-          namespace_id?: string;
-        }
+        namespace_id?: string;
       }
 
       /**
-       * Environment variables for build configs.
+       * Environment variable.
        */
       export interface EnvVars {
         /**
-         * Environment variable.
+         * Environment variable value.
          */
-        ENVIRONMENT_VARIABLE?: EnvVars.EnvironmentVariable;
-      }
+        value: string;
 
-      export namespace EnvVars {
         /**
-         * Environment variable.
+         * The type of environment variable.
          */
-        export interface EnvironmentVariable {
-          /**
-           * The type of environment variable (plain text or secret)
-           */
-          type?: 'plain_text' | 'secret_text';
-
-          /**
-           * Environment variable value.
-           */
-          value?: string;
-        }
+        type?: 'plain_text' | 'secret_text';
       }
 
       /**
-       * Hyperdrive bindings used for Pages Functions.
+       * Hyperdrive binding.
        */
       export interface HyperdriveBindings {
-        /**
-         * Hyperdrive binding.
-         */
-        HYPERDRIVE?: HyperdriveBindings.Hyperdrive;
-      }
-
-      export namespace HyperdriveBindings {
-        /**
-         * Hyperdrive binding.
-         */
-        export interface Hyperdrive {
-          id?: string;
-        }
+        id?: string;
       }
 
       /**
-       * KV namespaces used for Pages Functions.
+       * KV namespace binding.
        */
       export interface KVNamespaces {
         /**
-         * KV binding.
+         * ID of the KV namespace.
          */
-        KV_BINDING?: KVNamespaces.KVBinding;
-      }
-
-      export namespace KVNamespaces {
-        /**
-         * KV binding.
-         */
-        export interface KVBinding {
-          /**
-           * ID of the KV namespace.
-           */
-          namespace_id?: string;
-        }
+        namespace_id?: string;
       }
 
       /**
-       * mTLS bindings used for Pages Functions.
+       * mTLS binding.
        */
       export interface MTLSCertificates {
-        /**
-         * mTLS binding.
-         */
-        MTLS?: MTLSCertificates.MTLS;
-      }
-
-      export namespace MTLSCertificates {
-        /**
-         * mTLS binding.
-         */
-        export interface MTLS {
-          certificate_id?: string;
-        }
+        certificate_id?: string;
       }
 
       /**
@@ -591,103 +612,55 @@ export namespace Project {
       }
 
       /**
-       * Queue Producer bindings used for Pages Functions.
+       * Queue Producer binding.
        */
       export interface QueueProducers {
         /**
-         * Queue Producer binding.
+         * Name of the Queue.
          */
-        QUEUE_PRODUCER_BINDING?: QueueProducers.QueueProducerBinding;
-      }
-
-      export namespace QueueProducers {
-        /**
-         * Queue Producer binding.
-         */
-        export interface QueueProducerBinding {
-          /**
-           * Name of the Queue.
-           */
-          name?: string;
-        }
+        name?: string;
       }
 
       /**
-       * R2 buckets used for Pages Functions.
+       * R2 binding.
        */
       export interface R2Buckets {
         /**
-         * R2 binding.
+         * Jurisdiction of the R2 bucket.
          */
-        R2_BINDING?: R2Buckets.R2Binding;
-      }
+        jurisdiction?: string | null;
 
-      export namespace R2Buckets {
         /**
-         * R2 binding.
+         * Name of the R2 bucket.
          */
-        export interface R2Binding {
-          /**
-           * Jurisdiction of the R2 bucket.
-           */
-          jurisdiction?: string | null;
-
-          /**
-           * Name of the R2 bucket.
-           */
-          name?: string;
-        }
+        name?: string;
       }
 
       /**
-       * Services used for Pages Functions.
+       * Service binding.
        */
       export interface Services {
         /**
-         * Service binding.
+         * The entrypoint to bind to.
          */
-        SERVICE_BINDING?: Services.ServiceBinding;
-      }
+        entrypoint?: string | null;
 
-      export namespace Services {
         /**
-         * Service binding.
+         * The Service environment.
          */
-        export interface ServiceBinding {
-          /**
-           * The entrypoint to bind to.
-           */
-          entrypoint?: string | null;
+        environment?: string;
 
-          /**
-           * The Service environment.
-           */
-          environment?: string;
-
-          /**
-           * The Service name.
-           */
-          service?: string;
-        }
+        /**
+         * The Service name.
+         */
+        service?: string;
       }
 
       /**
-       * Vectorize bindings used for Pages Functions.
+       * Vectorize binding.
        */
       export interface VectorizeBindings {
-        /**
-         * Vectorize binding.
-         */
-        VECTORIZE?: VectorizeBindings.Vectorize;
-      }
-
-      export namespace VectorizeBindings {
-        /**
-         * Vectorize binding.
-         */
-        export interface Vectorize {
-          index_name?: string;
-        }
+        index_name?: string;
       }
     }
 
@@ -698,17 +671,17 @@ export namespace Project {
       /**
        * Constellation bindings used for Pages Functions.
        */
-      ai_bindings?: Production.AIBindings | null;
+      ai_bindings?: Record<string, Production.AIBindings | null> | null;
 
       /**
        * Analytics Engine bindings used for Pages Functions.
        */
-      analytics_engine_datasets?: Production.AnalyticsEngineDatasets | null;
+      analytics_engine_datasets?: Record<string, Production.AnalyticsEngineDatasets | null> | null;
 
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Production.Browsers | null;
+      browsers?: Record<string, Production.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -718,37 +691,37 @@ export namespace Project {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<unknown>;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
        */
-      d1_databases?: Production.D1Databases | null;
+      d1_databases?: Record<string, Production.D1Databases | null> | null;
 
       /**
        * Durabble Object namespaces used for Pages Functions.
        */
-      durable_object_namespaces?: Production.DurableObjectNamespaces | null;
+      durable_object_namespaces?: Record<string, Production.DurableObjectNamespaces | null> | null;
 
       /**
        * Environment variables for build configs.
        */
-      env_vars?: Production.EnvVars | null;
+      env_vars?: Record<string, Production.EnvVars | null> | null;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
        */
-      hyperdrive_bindings?: Production.HyperdriveBindings | null;
+      hyperdrive_bindings?: Record<string, Production.HyperdriveBindings | null> | null;
 
       /**
        * KV namespaces used for Pages Functions.
        */
-      kv_namespaces?: Production.KVNamespaces;
+      kv_namespaces?: Record<string, Production.KVNamespaces | null> | null;
 
       /**
        * mTLS bindings used for Pages Functions.
        */
-      mtls_certificates?: Production.MTLSCertificates | null;
+      mtls_certificates?: Record<string, Production.MTLSCertificates | null> | null;
 
       /**
        * Placement setting used for Pages Functions.
@@ -758,205 +731,104 @@ export namespace Project {
       /**
        * Queue Producer bindings used for Pages Functions.
        */
-      queue_producers?: Production.QueueProducers | null;
+      queue_producers?: Record<string, Production.QueueProducers | null> | null;
 
       /**
        * R2 buckets used for Pages Functions.
        */
-      r2_buckets?: Production.R2Buckets | null;
+      r2_buckets?: Record<string, Production.R2Buckets | null> | null;
 
       /**
        * Services used for Pages Functions.
        */
-      services?: Production.Services | null;
+      services?: Record<string, Production.Services | null> | null;
 
       /**
        * Vectorize bindings used for Pages Functions.
        */
-      vectorize_bindings?: Production.VectorizeBindings | null;
+      vectorize_bindings?: Record<string, Production.VectorizeBindings | null> | null;
     }
 
     export namespace Production {
       /**
-       * Constellation bindings used for Pages Functions.
+       * AI binding.
        */
       export interface AIBindings {
-        /**
-         * AI binding.
-         */
-        AI_BINDING?: AIBindings.AIBinding;
-      }
-
-      export namespace AIBindings {
-        /**
-         * AI binding.
-         */
-        export interface AIBinding {
-          project_id?: unknown;
-        }
+        project_id?: string;
       }
 
       /**
-       * Analytics Engine bindings used for Pages Functions.
+       * Analytics Engine binding.
        */
       export interface AnalyticsEngineDatasets {
         /**
-         * Analytics Engine binding.
+         * Name of the dataset.
          */
-        ANALYTICS_ENGINE_BINDING?: AnalyticsEngineDatasets.AnalyticsEngineBinding;
-      }
-
-      export namespace AnalyticsEngineDatasets {
-        /**
-         * Analytics Engine binding.
-         */
-        export interface AnalyticsEngineBinding {
-          /**
-           * Name of the dataset.
-           */
-          dataset?: string;
-        }
+        dataset?: string;
       }
 
       /**
-       * Browser bindings used for Pages Functions.
+       * Browser binding.
        */
-      export interface Browsers {
-        /**
-         * Browser binding.
-         */
-        BROWSER?: unknown;
-      }
+      export interface Browsers {}
 
       /**
-       * D1 databases used for Pages Functions.
+       * D1 binding.
        */
       export interface D1Databases {
         /**
-         * D1 binding.
+         * UUID of the D1 database.
          */
-        D1_BINDING?: D1Databases.D1Binding;
-      }
-
-      export namespace D1Databases {
-        /**
-         * D1 binding.
-         */
-        export interface D1Binding {
-          /**
-           * UUID of the D1 database.
-           */
-          id?: string;
-        }
+        id?: string;
       }
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durabble Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * Durabble Object binding.
+         * ID of the Durabble Object namespace.
          */
-        DO_BINDING?: DurableObjectNamespaces.DoBinding;
-      }
-
-      export namespace DurableObjectNamespaces {
-        /**
-         * Durabble Object binding.
-         */
-        export interface DoBinding {
-          /**
-           * ID of the Durabble Object namespace.
-           */
-          namespace_id?: string;
-        }
+        namespace_id?: string;
       }
 
       /**
-       * Environment variables for build configs.
+       * Environment variable.
        */
       export interface EnvVars {
         /**
-         * Environment variable.
+         * Environment variable value.
          */
-        ENVIRONMENT_VARIABLE?: EnvVars.EnvironmentVariable;
-      }
+        value: string;
 
-      export namespace EnvVars {
         /**
-         * Environment variable.
+         * The type of environment variable.
          */
-        export interface EnvironmentVariable {
-          /**
-           * The type of environment variable (plain text or secret)
-           */
-          type?: 'plain_text' | 'secret_text';
-
-          /**
-           * Environment variable value.
-           */
-          value?: string;
-        }
+        type?: 'plain_text' | 'secret_text';
       }
 
       /**
-       * Hyperdrive bindings used for Pages Functions.
+       * Hyperdrive binding.
        */
       export interface HyperdriveBindings {
-        /**
-         * Hyperdrive binding.
-         */
-        HYPERDRIVE?: HyperdriveBindings.Hyperdrive;
-      }
-
-      export namespace HyperdriveBindings {
-        /**
-         * Hyperdrive binding.
-         */
-        export interface Hyperdrive {
-          id?: string;
-        }
+        id?: string;
       }
 
       /**
-       * KV namespaces used for Pages Functions.
+       * KV namespace binding.
        */
       export interface KVNamespaces {
         /**
-         * KV binding.
+         * ID of the KV namespace.
          */
-        KV_BINDING?: KVNamespaces.KVBinding;
-      }
-
-      export namespace KVNamespaces {
-        /**
-         * KV binding.
-         */
-        export interface KVBinding {
-          /**
-           * ID of the KV namespace.
-           */
-          namespace_id?: string;
-        }
+        namespace_id?: string;
       }
 
       /**
-       * mTLS bindings used for Pages Functions.
+       * mTLS binding.
        */
       export interface MTLSCertificates {
-        /**
-         * mTLS binding.
-         */
-        MTLS?: MTLSCertificates.MTLS;
-      }
-
-      export namespace MTLSCertificates {
-        /**
-         * mTLS binding.
-         */
-        export interface MTLS {
-          certificate_id?: string;
-        }
+        certificate_id?: string;
       }
 
       /**
@@ -970,104 +842,88 @@ export namespace Project {
       }
 
       /**
-       * Queue Producer bindings used for Pages Functions.
+       * Queue Producer binding.
        */
       export interface QueueProducers {
         /**
-         * Queue Producer binding.
+         * Name of the Queue.
          */
-        QUEUE_PRODUCER_BINDING?: QueueProducers.QueueProducerBinding;
-      }
-
-      export namespace QueueProducers {
-        /**
-         * Queue Producer binding.
-         */
-        export interface QueueProducerBinding {
-          /**
-           * Name of the Queue.
-           */
-          name?: string;
-        }
+        name?: string;
       }
 
       /**
-       * R2 buckets used for Pages Functions.
+       * R2 binding.
        */
       export interface R2Buckets {
         /**
-         * R2 binding.
+         * Jurisdiction of the R2 bucket.
          */
-        R2_BINDING?: R2Buckets.R2Binding;
-      }
+        jurisdiction?: string | null;
 
-      export namespace R2Buckets {
         /**
-         * R2 binding.
+         * Name of the R2 bucket.
          */
-        export interface R2Binding {
-          /**
-           * Jurisdiction of the R2 bucket.
-           */
-          jurisdiction?: string | null;
-
-          /**
-           * Name of the R2 bucket.
-           */
-          name?: string;
-        }
+        name?: string;
       }
 
       /**
-       * Services used for Pages Functions.
+       * Service binding.
        */
       export interface Services {
         /**
-         * Service binding.
+         * The entrypoint to bind to.
          */
-        SERVICE_BINDING?: Services.ServiceBinding;
-      }
+        entrypoint?: string | null;
 
-      export namespace Services {
         /**
-         * Service binding.
+         * The Service environment.
          */
-        export interface ServiceBinding {
-          /**
-           * The entrypoint to bind to.
-           */
-          entrypoint?: string | null;
+        environment?: string;
 
-          /**
-           * The Service environment.
-           */
-          environment?: string;
-
-          /**
-           * The Service name.
-           */
-          service?: string;
-        }
+        /**
+         * The Service name.
+         */
+        service?: string;
       }
 
       /**
-       * Vectorize bindings used for Pages Functions.
+       * Vectorize binding.
        */
       export interface VectorizeBindings {
-        /**
-         * Vectorize binding.
-         */
-        VECTORIZE?: VectorizeBindings.Vectorize;
+        index_name?: string;
       }
+    }
+  }
 
-      export namespace VectorizeBindings {
-        /**
-         * Vectorize binding.
-         */
-        export interface Vectorize {
-          index_name?: string;
-        }
-      }
+  export interface Source {
+    config?: Source.Config;
+
+    type?: string;
+  }
+
+  export namespace Source {
+    export interface Config {
+      deployments_enabled?: boolean;
+
+      owner?: string;
+
+      path_excludes?: Array<string>;
+
+      path_includes?: Array<string>;
+
+      pr_comments_enabled?: boolean;
+
+      preview_branch_excludes?: Array<string>;
+
+      preview_branch_includes?: Array<string>;
+
+      preview_deployment_setting?: 'all' | 'none' | 'custom';
+
+      production_branch?: string;
+
+      production_deployments_enabled?: boolean;
+
+      repo_name?: string;
     }
   }
 }
@@ -1097,21 +953,7 @@ export interface Stage {
   status?: string;
 }
 
-/**
- * The status of the deployment.
- */
-export interface StageParam {
-  /**
-   * The current build stage.
-   */
-  name?: string;
-}
-
-export type ProjectCreateResponse = unknown | Array<unknown> | string;
-
 export type ProjectDeleteResponse = unknown;
-
-export type ProjectEditResponse = unknown | Array<unknown> | string;
 
 export type ProjectPurgeBuildCacheResponse = unknown;
 
@@ -1127,19 +969,9 @@ export interface ProjectCreateParams {
   build_config?: ProjectCreateParams.BuildConfig;
 
   /**
-   * Body param:
-   */
-  canonical_deployment?: DeploymentParam;
-
-  /**
    * Body param: Configs for deployments in a project.
    */
   deployment_configs?: ProjectCreateParams.DeploymentConfigs;
-
-  /**
-   * Body param:
-   */
-  latest_deployment?: DeploymentParam;
 
   /**
    * Body param: Name of the project.
@@ -1212,17 +1044,17 @@ export namespace ProjectCreateParams {
       /**
        * Constellation bindings used for Pages Functions.
        */
-      ai_bindings?: Preview.AIBindings | null;
+      ai_bindings?: Record<string, Preview.AIBindings | null> | null;
 
       /**
        * Analytics Engine bindings used for Pages Functions.
        */
-      analytics_engine_datasets?: Preview.AnalyticsEngineDatasets | null;
+      analytics_engine_datasets?: Record<string, Preview.AnalyticsEngineDatasets | null> | null;
 
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Preview.Browsers | null;
+      browsers?: Record<string, Preview.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -1232,37 +1064,37 @@ export namespace ProjectCreateParams {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<unknown>;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
        */
-      d1_databases?: Preview.D1Databases | null;
+      d1_databases?: Record<string, Preview.D1Databases | null> | null;
 
       /**
        * Durabble Object namespaces used for Pages Functions.
        */
-      durable_object_namespaces?: Preview.DurableObjectNamespaces | null;
+      durable_object_namespaces?: Record<string, Preview.DurableObjectNamespaces | null> | null;
 
       /**
        * Environment variables for build configs.
        */
-      env_vars?: Preview.EnvVars | null;
+      env_vars?: Record<string, Preview.EnvVars | null> | null;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
        */
-      hyperdrive_bindings?: Preview.HyperdriveBindings | null;
+      hyperdrive_bindings?: Record<string, Preview.HyperdriveBindings | null> | null;
 
       /**
        * KV namespaces used for Pages Functions.
        */
-      kv_namespaces?: Preview.KVNamespaces;
+      kv_namespaces?: Record<string, Preview.KVNamespaces | null> | null;
 
       /**
        * mTLS bindings used for Pages Functions.
        */
-      mtls_certificates?: Preview.MTLSCertificates | null;
+      mtls_certificates?: Record<string, Preview.MTLSCertificates | null> | null;
 
       /**
        * Placement setting used for Pages Functions.
@@ -1272,205 +1104,104 @@ export namespace ProjectCreateParams {
       /**
        * Queue Producer bindings used for Pages Functions.
        */
-      queue_producers?: Preview.QueueProducers | null;
+      queue_producers?: Record<string, Preview.QueueProducers | null> | null;
 
       /**
        * R2 buckets used for Pages Functions.
        */
-      r2_buckets?: Preview.R2Buckets | null;
+      r2_buckets?: Record<string, Preview.R2Buckets | null> | null;
 
       /**
        * Services used for Pages Functions.
        */
-      services?: Preview.Services | null;
+      services?: Record<string, Preview.Services | null> | null;
 
       /**
        * Vectorize bindings used for Pages Functions.
        */
-      vectorize_bindings?: Preview.VectorizeBindings | null;
+      vectorize_bindings?: Record<string, Preview.VectorizeBindings | null> | null;
     }
 
     export namespace Preview {
       /**
-       * Constellation bindings used for Pages Functions.
+       * AI binding.
        */
       export interface AIBindings {
-        /**
-         * AI binding.
-         */
-        AI_BINDING?: AIBindings.AIBinding;
-      }
-
-      export namespace AIBindings {
-        /**
-         * AI binding.
-         */
-        export interface AIBinding {
-          project_id?: unknown;
-        }
+        project_id?: string;
       }
 
       /**
-       * Analytics Engine bindings used for Pages Functions.
+       * Analytics Engine binding.
        */
       export interface AnalyticsEngineDatasets {
         /**
-         * Analytics Engine binding.
+         * Name of the dataset.
          */
-        ANALYTICS_ENGINE_BINDING?: AnalyticsEngineDatasets.AnalyticsEngineBinding;
-      }
-
-      export namespace AnalyticsEngineDatasets {
-        /**
-         * Analytics Engine binding.
-         */
-        export interface AnalyticsEngineBinding {
-          /**
-           * Name of the dataset.
-           */
-          dataset?: string;
-        }
+        dataset?: string;
       }
 
       /**
-       * Browser bindings used for Pages Functions.
+       * Browser binding.
        */
-      export interface Browsers {
-        /**
-         * Browser binding.
-         */
-        BROWSER?: unknown;
-      }
+      export interface Browsers {}
 
       /**
-       * D1 databases used for Pages Functions.
+       * D1 binding.
        */
       export interface D1Databases {
         /**
-         * D1 binding.
+         * UUID of the D1 database.
          */
-        D1_BINDING?: D1Databases.D1Binding;
-      }
-
-      export namespace D1Databases {
-        /**
-         * D1 binding.
-         */
-        export interface D1Binding {
-          /**
-           * UUID of the D1 database.
-           */
-          id?: string;
-        }
+        id?: string;
       }
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durabble Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * Durabble Object binding.
+         * ID of the Durabble Object namespace.
          */
-        DO_BINDING?: DurableObjectNamespaces.DoBinding;
-      }
-
-      export namespace DurableObjectNamespaces {
-        /**
-         * Durabble Object binding.
-         */
-        export interface DoBinding {
-          /**
-           * ID of the Durabble Object namespace.
-           */
-          namespace_id?: string;
-        }
+        namespace_id?: string;
       }
 
       /**
-       * Environment variables for build configs.
+       * Environment variable.
        */
       export interface EnvVars {
         /**
-         * Environment variable.
+         * Environment variable value.
          */
-        ENVIRONMENT_VARIABLE?: EnvVars.EnvironmentVariable;
-      }
+        value: string;
 
-      export namespace EnvVars {
         /**
-         * Environment variable.
+         * The type of environment variable.
          */
-        export interface EnvironmentVariable {
-          /**
-           * The type of environment variable (plain text or secret)
-           */
-          type?: 'plain_text' | 'secret_text';
-
-          /**
-           * Environment variable value.
-           */
-          value?: string;
-        }
+        type?: 'plain_text' | 'secret_text';
       }
 
       /**
-       * Hyperdrive bindings used for Pages Functions.
+       * Hyperdrive binding.
        */
       export interface HyperdriveBindings {
-        /**
-         * Hyperdrive binding.
-         */
-        HYPERDRIVE?: HyperdriveBindings.Hyperdrive;
-      }
-
-      export namespace HyperdriveBindings {
-        /**
-         * Hyperdrive binding.
-         */
-        export interface Hyperdrive {
-          id?: string;
-        }
+        id?: string;
       }
 
       /**
-       * KV namespaces used for Pages Functions.
+       * KV namespace binding.
        */
       export interface KVNamespaces {
         /**
-         * KV binding.
+         * ID of the KV namespace.
          */
-        KV_BINDING?: KVNamespaces.KVBinding;
-      }
-
-      export namespace KVNamespaces {
-        /**
-         * KV binding.
-         */
-        export interface KVBinding {
-          /**
-           * ID of the KV namespace.
-           */
-          namespace_id?: string;
-        }
+        namespace_id?: string;
       }
 
       /**
-       * mTLS bindings used for Pages Functions.
+       * mTLS binding.
        */
       export interface MTLSCertificates {
-        /**
-         * mTLS binding.
-         */
-        MTLS?: MTLSCertificates.MTLS;
-      }
-
-      export namespace MTLSCertificates {
-        /**
-         * mTLS binding.
-         */
-        export interface MTLS {
-          certificate_id?: string;
-        }
+        certificate_id?: string;
       }
 
       /**
@@ -1484,103 +1215,55 @@ export namespace ProjectCreateParams {
       }
 
       /**
-       * Queue Producer bindings used for Pages Functions.
+       * Queue Producer binding.
        */
       export interface QueueProducers {
         /**
-         * Queue Producer binding.
+         * Name of the Queue.
          */
-        QUEUE_PRODUCER_BINDING?: QueueProducers.QueueProducerBinding;
-      }
-
-      export namespace QueueProducers {
-        /**
-         * Queue Producer binding.
-         */
-        export interface QueueProducerBinding {
-          /**
-           * Name of the Queue.
-           */
-          name?: string;
-        }
+        name?: string;
       }
 
       /**
-       * R2 buckets used for Pages Functions.
+       * R2 binding.
        */
       export interface R2Buckets {
         /**
-         * R2 binding.
+         * Jurisdiction of the R2 bucket.
          */
-        R2_BINDING?: R2Buckets.R2Binding;
-      }
+        jurisdiction?: string | null;
 
-      export namespace R2Buckets {
         /**
-         * R2 binding.
+         * Name of the R2 bucket.
          */
-        export interface R2Binding {
-          /**
-           * Jurisdiction of the R2 bucket.
-           */
-          jurisdiction?: string | null;
-
-          /**
-           * Name of the R2 bucket.
-           */
-          name?: string;
-        }
+        name?: string;
       }
 
       /**
-       * Services used for Pages Functions.
+       * Service binding.
        */
       export interface Services {
         /**
-         * Service binding.
+         * The entrypoint to bind to.
          */
-        SERVICE_BINDING?: Services.ServiceBinding;
-      }
+        entrypoint?: string | null;
 
-      export namespace Services {
         /**
-         * Service binding.
+         * The Service environment.
          */
-        export interface ServiceBinding {
-          /**
-           * The entrypoint to bind to.
-           */
-          entrypoint?: string | null;
+        environment?: string;
 
-          /**
-           * The Service environment.
-           */
-          environment?: string;
-
-          /**
-           * The Service name.
-           */
-          service?: string;
-        }
+        /**
+         * The Service name.
+         */
+        service?: string;
       }
 
       /**
-       * Vectorize bindings used for Pages Functions.
+       * Vectorize binding.
        */
       export interface VectorizeBindings {
-        /**
-         * Vectorize binding.
-         */
-        VECTORIZE?: VectorizeBindings.Vectorize;
-      }
-
-      export namespace VectorizeBindings {
-        /**
-         * Vectorize binding.
-         */
-        export interface Vectorize {
-          index_name?: string;
-        }
+        index_name?: string;
       }
     }
 
@@ -1591,17 +1274,17 @@ export namespace ProjectCreateParams {
       /**
        * Constellation bindings used for Pages Functions.
        */
-      ai_bindings?: Production.AIBindings | null;
+      ai_bindings?: Record<string, Production.AIBindings | null> | null;
 
       /**
        * Analytics Engine bindings used for Pages Functions.
        */
-      analytics_engine_datasets?: Production.AnalyticsEngineDatasets | null;
+      analytics_engine_datasets?: Record<string, Production.AnalyticsEngineDatasets | null> | null;
 
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Production.Browsers | null;
+      browsers?: Record<string, Production.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -1611,37 +1294,37 @@ export namespace ProjectCreateParams {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<unknown>;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
        */
-      d1_databases?: Production.D1Databases | null;
+      d1_databases?: Record<string, Production.D1Databases | null> | null;
 
       /**
        * Durabble Object namespaces used for Pages Functions.
        */
-      durable_object_namespaces?: Production.DurableObjectNamespaces | null;
+      durable_object_namespaces?: Record<string, Production.DurableObjectNamespaces | null> | null;
 
       /**
        * Environment variables for build configs.
        */
-      env_vars?: Production.EnvVars | null;
+      env_vars?: Record<string, Production.EnvVars | null> | null;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
        */
-      hyperdrive_bindings?: Production.HyperdriveBindings | null;
+      hyperdrive_bindings?: Record<string, Production.HyperdriveBindings | null> | null;
 
       /**
        * KV namespaces used for Pages Functions.
        */
-      kv_namespaces?: Production.KVNamespaces;
+      kv_namespaces?: Record<string, Production.KVNamespaces | null> | null;
 
       /**
        * mTLS bindings used for Pages Functions.
        */
-      mtls_certificates?: Production.MTLSCertificates | null;
+      mtls_certificates?: Record<string, Production.MTLSCertificates | null> | null;
 
       /**
        * Placement setting used for Pages Functions.
@@ -1651,205 +1334,104 @@ export namespace ProjectCreateParams {
       /**
        * Queue Producer bindings used for Pages Functions.
        */
-      queue_producers?: Production.QueueProducers | null;
+      queue_producers?: Record<string, Production.QueueProducers | null> | null;
 
       /**
        * R2 buckets used for Pages Functions.
        */
-      r2_buckets?: Production.R2Buckets | null;
+      r2_buckets?: Record<string, Production.R2Buckets | null> | null;
 
       /**
        * Services used for Pages Functions.
        */
-      services?: Production.Services | null;
+      services?: Record<string, Production.Services | null> | null;
 
       /**
        * Vectorize bindings used for Pages Functions.
        */
-      vectorize_bindings?: Production.VectorizeBindings | null;
+      vectorize_bindings?: Record<string, Production.VectorizeBindings | null> | null;
     }
 
     export namespace Production {
       /**
-       * Constellation bindings used for Pages Functions.
+       * AI binding.
        */
       export interface AIBindings {
-        /**
-         * AI binding.
-         */
-        AI_BINDING?: AIBindings.AIBinding;
-      }
-
-      export namespace AIBindings {
-        /**
-         * AI binding.
-         */
-        export interface AIBinding {
-          project_id?: unknown;
-        }
+        project_id?: string;
       }
 
       /**
-       * Analytics Engine bindings used for Pages Functions.
+       * Analytics Engine binding.
        */
       export interface AnalyticsEngineDatasets {
         /**
-         * Analytics Engine binding.
+         * Name of the dataset.
          */
-        ANALYTICS_ENGINE_BINDING?: AnalyticsEngineDatasets.AnalyticsEngineBinding;
-      }
-
-      export namespace AnalyticsEngineDatasets {
-        /**
-         * Analytics Engine binding.
-         */
-        export interface AnalyticsEngineBinding {
-          /**
-           * Name of the dataset.
-           */
-          dataset?: string;
-        }
+        dataset?: string;
       }
 
       /**
-       * Browser bindings used for Pages Functions.
+       * Browser binding.
        */
-      export interface Browsers {
-        /**
-         * Browser binding.
-         */
-        BROWSER?: unknown;
-      }
+      export interface Browsers {}
 
       /**
-       * D1 databases used for Pages Functions.
+       * D1 binding.
        */
       export interface D1Databases {
         /**
-         * D1 binding.
+         * UUID of the D1 database.
          */
-        D1_BINDING?: D1Databases.D1Binding;
-      }
-
-      export namespace D1Databases {
-        /**
-         * D1 binding.
-         */
-        export interface D1Binding {
-          /**
-           * UUID of the D1 database.
-           */
-          id?: string;
-        }
+        id?: string;
       }
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durabble Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * Durabble Object binding.
+         * ID of the Durabble Object namespace.
          */
-        DO_BINDING?: DurableObjectNamespaces.DoBinding;
-      }
-
-      export namespace DurableObjectNamespaces {
-        /**
-         * Durabble Object binding.
-         */
-        export interface DoBinding {
-          /**
-           * ID of the Durabble Object namespace.
-           */
-          namespace_id?: string;
-        }
+        namespace_id?: string;
       }
 
       /**
-       * Environment variables for build configs.
+       * Environment variable.
        */
       export interface EnvVars {
         /**
-         * Environment variable.
+         * Environment variable value.
          */
-        ENVIRONMENT_VARIABLE?: EnvVars.EnvironmentVariable;
-      }
+        value: string;
 
-      export namespace EnvVars {
         /**
-         * Environment variable.
+         * The type of environment variable.
          */
-        export interface EnvironmentVariable {
-          /**
-           * The type of environment variable (plain text or secret)
-           */
-          type?: 'plain_text' | 'secret_text';
-
-          /**
-           * Environment variable value.
-           */
-          value?: string;
-        }
+        type?: 'plain_text' | 'secret_text';
       }
 
       /**
-       * Hyperdrive bindings used for Pages Functions.
+       * Hyperdrive binding.
        */
       export interface HyperdriveBindings {
-        /**
-         * Hyperdrive binding.
-         */
-        HYPERDRIVE?: HyperdriveBindings.Hyperdrive;
-      }
-
-      export namespace HyperdriveBindings {
-        /**
-         * Hyperdrive binding.
-         */
-        export interface Hyperdrive {
-          id?: string;
-        }
+        id?: string;
       }
 
       /**
-       * KV namespaces used for Pages Functions.
+       * KV namespace binding.
        */
       export interface KVNamespaces {
         /**
-         * KV binding.
+         * ID of the KV namespace.
          */
-        KV_BINDING?: KVNamespaces.KVBinding;
-      }
-
-      export namespace KVNamespaces {
-        /**
-         * KV binding.
-         */
-        export interface KVBinding {
-          /**
-           * ID of the KV namespace.
-           */
-          namespace_id?: string;
-        }
+        namespace_id?: string;
       }
 
       /**
-       * mTLS bindings used for Pages Functions.
+       * mTLS binding.
        */
       export interface MTLSCertificates {
-        /**
-         * mTLS binding.
-         */
-        MTLS?: MTLSCertificates.MTLS;
-      }
-
-      export namespace MTLSCertificates {
-        /**
-         * mTLS binding.
-         */
-        export interface MTLS {
-          certificate_id?: string;
-        }
+        certificate_id?: string;
       }
 
       /**
@@ -1863,103 +1445,55 @@ export namespace ProjectCreateParams {
       }
 
       /**
-       * Queue Producer bindings used for Pages Functions.
+       * Queue Producer binding.
        */
       export interface QueueProducers {
         /**
-         * Queue Producer binding.
+         * Name of the Queue.
          */
-        QUEUE_PRODUCER_BINDING?: QueueProducers.QueueProducerBinding;
-      }
-
-      export namespace QueueProducers {
-        /**
-         * Queue Producer binding.
-         */
-        export interface QueueProducerBinding {
-          /**
-           * Name of the Queue.
-           */
-          name?: string;
-        }
+        name?: string;
       }
 
       /**
-       * R2 buckets used for Pages Functions.
+       * R2 binding.
        */
       export interface R2Buckets {
         /**
-         * R2 binding.
+         * Jurisdiction of the R2 bucket.
          */
-        R2_BINDING?: R2Buckets.R2Binding;
-      }
+        jurisdiction?: string | null;
 
-      export namespace R2Buckets {
         /**
-         * R2 binding.
+         * Name of the R2 bucket.
          */
-        export interface R2Binding {
-          /**
-           * Jurisdiction of the R2 bucket.
-           */
-          jurisdiction?: string | null;
-
-          /**
-           * Name of the R2 bucket.
-           */
-          name?: string;
-        }
+        name?: string;
       }
 
       /**
-       * Services used for Pages Functions.
+       * Service binding.
        */
       export interface Services {
         /**
-         * Service binding.
+         * The entrypoint to bind to.
          */
-        SERVICE_BINDING?: Services.ServiceBinding;
-      }
+        entrypoint?: string | null;
 
-      export namespace Services {
         /**
-         * Service binding.
+         * The Service environment.
          */
-        export interface ServiceBinding {
-          /**
-           * The entrypoint to bind to.
-           */
-          entrypoint?: string | null;
+        environment?: string;
 
-          /**
-           * The Service environment.
-           */
-          environment?: string;
-
-          /**
-           * The Service name.
-           */
-          service?: string;
-        }
+        /**
+         * The Service name.
+         */
+        service?: string;
       }
 
       /**
-       * Vectorize bindings used for Pages Functions.
+       * Vectorize binding.
        */
       export interface VectorizeBindings {
-        /**
-         * Vectorize binding.
-         */
-        VECTORIZE?: VectorizeBindings.Vectorize;
-      }
-
-      export namespace VectorizeBindings {
-        /**
-         * Vectorize binding.
-         */
-        export interface Vectorize {
-          index_name?: string;
-        }
+        index_name?: string;
       }
     }
   }
@@ -1986,9 +1520,539 @@ export interface ProjectEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Configs for the project build process.
    */
-  body: unknown;
+  build_config?: ProjectEditParams.BuildConfig;
+
+  /**
+   * Body param: Configs for deployments in a project.
+   */
+  deployment_configs?: ProjectEditParams.DeploymentConfigs;
+
+  /**
+   * Body param: Name of the project.
+   */
+  name?: string;
+
+  /**
+   * Body param: Production branch of the project. Used to identify production
+   * deployments.
+   */
+  production_branch?: string;
+}
+
+export namespace ProjectEditParams {
+  /**
+   * Configs for the project build process.
+   */
+  export interface BuildConfig {
+    /**
+     * Enable build caching for the project.
+     */
+    build_caching?: boolean | null;
+
+    /**
+     * Command used to build project.
+     */
+    build_command?: string | null;
+
+    /**
+     * Output directory of the build.
+     */
+    destination_dir?: string | null;
+
+    /**
+     * Directory to run the command.
+     */
+    root_dir?: string | null;
+
+    /**
+     * The classifying tag for analytics.
+     */
+    web_analytics_tag?: string | null;
+
+    /**
+     * The auth token for analytics.
+     */
+    web_analytics_token?: string | null;
+  }
+
+  /**
+   * Configs for deployments in a project.
+   */
+  export interface DeploymentConfigs {
+    /**
+     * Configs for preview deploys.
+     */
+    preview?: DeploymentConfigs.Preview;
+
+    /**
+     * Configs for production deploys.
+     */
+    production?: DeploymentConfigs.Production;
+  }
+
+  export namespace DeploymentConfigs {
+    /**
+     * Configs for preview deploys.
+     */
+    export interface Preview {
+      /**
+       * Constellation bindings used for Pages Functions.
+       */
+      ai_bindings?: Record<string, Preview.AIBindings | null> | null;
+
+      /**
+       * Analytics Engine bindings used for Pages Functions.
+       */
+      analytics_engine_datasets?: Record<string, Preview.AnalyticsEngineDatasets | null> | null;
+
+      /**
+       * Browser bindings used for Pages Functions.
+       */
+      browsers?: Record<string, Preview.Browsers | null> | null;
+
+      /**
+       * Compatibility date used for Pages Functions.
+       */
+      compatibility_date?: string;
+
+      /**
+       * Compatibility flags used for Pages Functions.
+       */
+      compatibility_flags?: Array<string>;
+
+      /**
+       * D1 databases used for Pages Functions.
+       */
+      d1_databases?: Record<string, Preview.D1Databases | null> | null;
+
+      /**
+       * Durabble Object namespaces used for Pages Functions.
+       */
+      durable_object_namespaces?: Record<string, Preview.DurableObjectNamespaces | null> | null;
+
+      /**
+       * Environment variables for build configs.
+       */
+      env_vars?: Record<string, Preview.EnvVars | null> | null;
+
+      /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      hyperdrive_bindings?: Record<string, Preview.HyperdriveBindings | null> | null;
+
+      /**
+       * KV namespaces used for Pages Functions.
+       */
+      kv_namespaces?: Record<string, Preview.KVNamespaces | null> | null;
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      mtls_certificates?: Record<string, Preview.MTLSCertificates | null> | null;
+
+      /**
+       * Placement setting used for Pages Functions.
+       */
+      placement?: Preview.Placement | null;
+
+      /**
+       * Queue Producer bindings used for Pages Functions.
+       */
+      queue_producers?: Record<string, Preview.QueueProducers | null> | null;
+
+      /**
+       * R2 buckets used for Pages Functions.
+       */
+      r2_buckets?: Record<string, Preview.R2Buckets | null> | null;
+
+      /**
+       * Services used for Pages Functions.
+       */
+      services?: Record<string, Preview.Services | null> | null;
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      vectorize_bindings?: Record<string, Preview.VectorizeBindings | null> | null;
+    }
+
+    export namespace Preview {
+      /**
+       * AI binding.
+       */
+      export interface AIBindings {
+        project_id?: string;
+      }
+
+      /**
+       * Analytics Engine binding.
+       */
+      export interface AnalyticsEngineDatasets {
+        /**
+         * Name of the dataset.
+         */
+        dataset?: string;
+      }
+
+      /**
+       * Browser binding.
+       */
+      export interface Browsers {}
+
+      /**
+       * D1 binding.
+       */
+      export interface D1Databases {
+        /**
+         * UUID of the D1 database.
+         */
+        id?: string;
+      }
+
+      /**
+       * Durabble Object binding.
+       */
+      export interface DurableObjectNamespaces {
+        /**
+         * ID of the Durabble Object namespace.
+         */
+        namespace_id?: string;
+      }
+
+      /**
+       * Environment variable.
+       */
+      export interface EnvVars {
+        /**
+         * Environment variable value.
+         */
+        value: string;
+
+        /**
+         * The type of environment variable.
+         */
+        type?: 'plain_text' | 'secret_text';
+      }
+
+      /**
+       * Hyperdrive binding.
+       */
+      export interface HyperdriveBindings {
+        id?: string;
+      }
+
+      /**
+       * KV namespace binding.
+       */
+      export interface KVNamespaces {
+        /**
+         * ID of the KV namespace.
+         */
+        namespace_id?: string;
+      }
+
+      /**
+       * mTLS binding.
+       */
+      export interface MTLSCertificates {
+        certificate_id?: string;
+      }
+
+      /**
+       * Placement setting used for Pages Functions.
+       */
+      export interface Placement {
+        /**
+         * Placement mode.
+         */
+        mode?: string;
+      }
+
+      /**
+       * Queue Producer binding.
+       */
+      export interface QueueProducers {
+        /**
+         * Name of the Queue.
+         */
+        name?: string;
+      }
+
+      /**
+       * R2 binding.
+       */
+      export interface R2Buckets {
+        /**
+         * Jurisdiction of the R2 bucket.
+         */
+        jurisdiction?: string | null;
+
+        /**
+         * Name of the R2 bucket.
+         */
+        name?: string;
+      }
+
+      /**
+       * Service binding.
+       */
+      export interface Services {
+        /**
+         * The entrypoint to bind to.
+         */
+        entrypoint?: string | null;
+
+        /**
+         * The Service environment.
+         */
+        environment?: string;
+
+        /**
+         * The Service name.
+         */
+        service?: string;
+      }
+
+      /**
+       * Vectorize binding.
+       */
+      export interface VectorizeBindings {
+        index_name?: string;
+      }
+    }
+
+    /**
+     * Configs for production deploys.
+     */
+    export interface Production {
+      /**
+       * Constellation bindings used for Pages Functions.
+       */
+      ai_bindings?: Record<string, Production.AIBindings | null> | null;
+
+      /**
+       * Analytics Engine bindings used for Pages Functions.
+       */
+      analytics_engine_datasets?: Record<string, Production.AnalyticsEngineDatasets | null> | null;
+
+      /**
+       * Browser bindings used for Pages Functions.
+       */
+      browsers?: Record<string, Production.Browsers | null> | null;
+
+      /**
+       * Compatibility date used for Pages Functions.
+       */
+      compatibility_date?: string;
+
+      /**
+       * Compatibility flags used for Pages Functions.
+       */
+      compatibility_flags?: Array<string>;
+
+      /**
+       * D1 databases used for Pages Functions.
+       */
+      d1_databases?: Record<string, Production.D1Databases | null> | null;
+
+      /**
+       * Durabble Object namespaces used for Pages Functions.
+       */
+      durable_object_namespaces?: Record<string, Production.DurableObjectNamespaces | null> | null;
+
+      /**
+       * Environment variables for build configs.
+       */
+      env_vars?: Record<string, Production.EnvVars | null> | null;
+
+      /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      hyperdrive_bindings?: Record<string, Production.HyperdriveBindings | null> | null;
+
+      /**
+       * KV namespaces used for Pages Functions.
+       */
+      kv_namespaces?: Record<string, Production.KVNamespaces | null> | null;
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      mtls_certificates?: Record<string, Production.MTLSCertificates | null> | null;
+
+      /**
+       * Placement setting used for Pages Functions.
+       */
+      placement?: Production.Placement | null;
+
+      /**
+       * Queue Producer bindings used for Pages Functions.
+       */
+      queue_producers?: Record<string, Production.QueueProducers | null> | null;
+
+      /**
+       * R2 buckets used for Pages Functions.
+       */
+      r2_buckets?: Record<string, Production.R2Buckets | null> | null;
+
+      /**
+       * Services used for Pages Functions.
+       */
+      services?: Record<string, Production.Services | null> | null;
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      vectorize_bindings?: Record<string, Production.VectorizeBindings | null> | null;
+    }
+
+    export namespace Production {
+      /**
+       * AI binding.
+       */
+      export interface AIBindings {
+        project_id?: string;
+      }
+
+      /**
+       * Analytics Engine binding.
+       */
+      export interface AnalyticsEngineDatasets {
+        /**
+         * Name of the dataset.
+         */
+        dataset?: string;
+      }
+
+      /**
+       * Browser binding.
+       */
+      export interface Browsers {}
+
+      /**
+       * D1 binding.
+       */
+      export interface D1Databases {
+        /**
+         * UUID of the D1 database.
+         */
+        id?: string;
+      }
+
+      /**
+       * Durabble Object binding.
+       */
+      export interface DurableObjectNamespaces {
+        /**
+         * ID of the Durabble Object namespace.
+         */
+        namespace_id?: string;
+      }
+
+      /**
+       * Environment variable.
+       */
+      export interface EnvVars {
+        /**
+         * Environment variable value.
+         */
+        value: string;
+
+        /**
+         * The type of environment variable.
+         */
+        type?: 'plain_text' | 'secret_text';
+      }
+
+      /**
+       * Hyperdrive binding.
+       */
+      export interface HyperdriveBindings {
+        id?: string;
+      }
+
+      /**
+       * KV namespace binding.
+       */
+      export interface KVNamespaces {
+        /**
+         * ID of the KV namespace.
+         */
+        namespace_id?: string;
+      }
+
+      /**
+       * mTLS binding.
+       */
+      export interface MTLSCertificates {
+        certificate_id?: string;
+      }
+
+      /**
+       * Placement setting used for Pages Functions.
+       */
+      export interface Placement {
+        /**
+         * Placement mode.
+         */
+        mode?: string;
+      }
+
+      /**
+       * Queue Producer binding.
+       */
+      export interface QueueProducers {
+        /**
+         * Name of the Queue.
+         */
+        name?: string;
+      }
+
+      /**
+       * R2 binding.
+       */
+      export interface R2Buckets {
+        /**
+         * Jurisdiction of the R2 bucket.
+         */
+        jurisdiction?: string | null;
+
+        /**
+         * Name of the R2 bucket.
+         */
+        name?: string;
+      }
+
+      /**
+       * Service binding.
+       */
+      export interface Services {
+        /**
+         * The entrypoint to bind to.
+         */
+        entrypoint?: string | null;
+
+        /**
+         * The Service environment.
+         */
+        environment?: string;
+
+        /**
+         * The Service name.
+         */
+        service?: string;
+      }
+
+      /**
+       * Vectorize binding.
+       */
+      export interface VectorizeBindings {
+        index_name?: string;
+      }
+    }
+  }
 }
 
 export interface ProjectGetParams {
@@ -2005,39 +2069,50 @@ export interface ProjectPurgeBuildCacheParams {
   account_id: string;
 }
 
-export namespace Projects {
-  export import Deployment = ProjectsAPI.Deployment;
-  export import Project = ProjectsAPI.Project;
-  export import Stage = ProjectsAPI.Stage;
-  export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
-  export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
-  export import ProjectEditResponse = ProjectsAPI.ProjectEditResponse;
-  export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
-  export import DeploymentsSinglePage = ProjectsAPI.DeploymentsSinglePage;
-  export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
-  export import ProjectListParams = ProjectsAPI.ProjectListParams;
-  export import ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;
-  export import ProjectEditParams = ProjectsAPI.ProjectEditParams;
-  export import ProjectGetParams = ProjectsAPI.ProjectGetParams;
-  export import ProjectPurgeBuildCacheParams = ProjectsAPI.ProjectPurgeBuildCacheParams;
-  export import Deployments = DeploymentsAPI.Deployments;
-  export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
-  export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
-  export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
-  export import DeploymentDeleteParams = DeploymentsAPI.DeploymentDeleteParams;
-  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
-  export import DeploymentRetryParams = DeploymentsAPI.DeploymentRetryParams;
-  export import DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
-  export import Domains = DomainsAPI.Domains;
-  export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
-  export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
-  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
-  export import DomainCreateParams = DomainsAPI.DomainCreateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainEditParams = DomainsAPI.DomainEditParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+Projects.DeploymentsSinglePage = DeploymentsSinglePage;
+Projects.Deployments = Deployments;
+Projects.Domains = Domains;
+Projects.DomainListResponsesSinglePage = DomainListResponsesSinglePage;
+
+export declare namespace Projects {
+  export {
+    type Deployment as Deployment,
+    type Project as Project,
+    type Stage as Stage,
+    type ProjectDeleteResponse as ProjectDeleteResponse,
+    type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
+    DeploymentsSinglePage as DeploymentsSinglePage,
+    type ProjectCreateParams as ProjectCreateParams,
+    type ProjectListParams as ProjectListParams,
+    type ProjectDeleteParams as ProjectDeleteParams,
+    type ProjectEditParams as ProjectEditParams,
+    type ProjectGetParams as ProjectGetParams,
+    type ProjectPurgeBuildCacheParams as ProjectPurgeBuildCacheParams,
+  };
+
+  export {
+    Deployments as Deployments,
+    type DeploymentDeleteResponse as DeploymentDeleteResponse,
+    type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentListParams as DeploymentListParams,
+    type DeploymentDeleteParams as DeploymentDeleteParams,
+    type DeploymentGetParams as DeploymentGetParams,
+    type DeploymentRetryParams as DeploymentRetryParams,
+    type DeploymentRollbackParams as DeploymentRollbackParams,
+  };
+
+  export {
+    Domains as Domains,
+    type DomainCreateResponse as DomainCreateResponse,
+    type DomainListResponse as DomainListResponse,
+    type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainEditResponse as DomainEditResponse,
+    type DomainGetResponse as DomainGetResponse,
+    DomainListResponsesSinglePage as DomainListResponsesSinglePage,
+    type DomainCreateParams as DomainCreateParams,
+    type DomainListParams as DomainListParams,
+    type DomainDeleteParams as DomainDeleteParams,
+    type DomainEditParams as DomainEditParams,
+    type DomainGetParams as DomainGetParams,
+  };
 }

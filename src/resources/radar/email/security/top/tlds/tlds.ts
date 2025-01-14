@@ -3,11 +3,12 @@
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
-import * as TldsAPI from './tlds';
-import * as TopAPI from '../../../../http/top';
 import * as MaliciousAPI from './malicious';
+import { Malicious, MaliciousGetParams, MaliciousGetResponse } from './malicious';
 import * as SpamAPI from './spam';
+import { Spam, SpamGetParams, SpamGetResponse } from './spam';
 import * as SpoofAPI from './spoof';
+import { Spoof, SpoofGetParams, SpoofGetResponse } from './spoof';
 
 export class Tlds extends APIResource {
   malicious: MaliciousAPI.Malicious = new MaliciousAPI.Malicious(this._client);
@@ -15,8 +16,8 @@ export class Tlds extends APIResource {
   spoof: SpoofAPI.Spoof = new SpoofAPI.Spoof(this._client);
 
   /**
-   * Get the top TLDs by email messages. Values are a percentage out of the total
-   * emails.
+   * Get the top TLDs by email messages. Values are a percentage out of total email
+   * volume.
    */
   get(query?: TldGetParams, options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
@@ -38,7 +39,7 @@ export class Tlds extends APIResource {
 export interface TldGetResponse {
   meta: TldGetResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<TldGetResponse.Top0>;
 }
 
 export namespace TldGetResponse {
@@ -86,6 +87,12 @@ export namespace TldGetResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 
@@ -153,16 +160,20 @@ export interface TldGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-export namespace Tlds {
-  export import TldGetResponse = TldsAPI.TldGetResponse;
-  export import TldGetParams = TldsAPI.TldGetParams;
-  export import Malicious = MaliciousAPI.Malicious;
-  export import MaliciousGetResponse = MaliciousAPI.MaliciousGetResponse;
-  export import MaliciousGetParams = MaliciousAPI.MaliciousGetParams;
-  export import Spam = SpamAPI.Spam;
-  export import SpamGetResponse = SpamAPI.SpamGetResponse;
-  export import SpamGetParams = SpamAPI.SpamGetParams;
-  export import Spoof = SpoofAPI.Spoof;
-  export import SpoofGetResponse = SpoofAPI.SpoofGetResponse;
-  export import SpoofGetParams = SpoofAPI.SpoofGetParams;
+Tlds.Malicious = Malicious;
+Tlds.Spam = Spam;
+Tlds.Spoof = Spoof;
+
+export declare namespace Tlds {
+  export { type TldGetResponse as TldGetResponse, type TldGetParams as TldGetParams };
+
+  export {
+    Malicious as Malicious,
+    type MaliciousGetResponse as MaliciousGetResponse,
+    type MaliciousGetParams as MaliciousGetParams,
+  };
+
+  export { Spam as Spam, type SpamGetResponse as SpamGetResponse, type SpamGetParams as SpamGetParams };
+
+  export { Spoof as Spoof, type SpoofGetResponse as SpoofGetResponse, type SpoofGetParams as SpoofGetParams };
 }

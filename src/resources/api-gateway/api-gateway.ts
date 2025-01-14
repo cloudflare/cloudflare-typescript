@@ -2,11 +2,58 @@
 
 import { APIResource } from '../../resource';
 import * as ConfigurationsAPI from './configurations';
+import {
+  Configuration,
+  ConfigurationGetParams,
+  ConfigurationUpdateParams,
+  ConfigurationUpdateResponse,
+  Configurations,
+} from './configurations';
 import * as SchemasAPI from './schemas';
+import { SchemaListParams, SchemaListResponse, Schemas } from './schemas';
 import * as DiscoveryAPI from './discovery/discovery';
+import {
+  Discovery,
+  DiscoveryGetParams,
+  DiscoveryGetResponse,
+  DiscoveryOperation,
+} from './discovery/discovery';
+import * as ExpressionTemplateAPI from './expression-template/expression-template';
+import { ExpressionTemplate } from './expression-template/expression-template';
 import * as OperationsAPI from './operations/operations';
+import {
+  APIShield,
+  OperationBulkCreateParams,
+  OperationBulkCreateResponse,
+  OperationBulkDeleteParams,
+  OperationBulkDeleteResponse,
+  OperationCreateParams,
+  OperationCreateResponse,
+  OperationDeleteParams,
+  OperationDeleteResponse,
+  OperationGetParams,
+  OperationGetResponse,
+  OperationListParams,
+  OperationListResponse,
+  OperationListResponsesV4PagePaginationArray,
+  Operations,
+} from './operations/operations';
 import * as SettingsAPI from './settings/settings';
+import { Settings } from './settings/settings';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
+import {
+  Message,
+  PublicSchema,
+  PublicSchemasV4PagePaginationArray,
+  SchemaUpload,
+  UserSchemaCreateParams,
+  UserSchemaDeleteParams,
+  UserSchemaDeleteResponse,
+  UserSchemaEditParams,
+  UserSchemaGetParams,
+  UserSchemaListParams,
+  UserSchemas,
+} from './user-schemas/user-schemas';
 
 export class APIGateway extends APIResource {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
@@ -15,42 +62,75 @@ export class APIGateway extends APIResource {
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   userSchemas: UserSchemasAPI.UserSchemas = new UserSchemasAPI.UserSchemas(this._client);
+  expressionTemplate: ExpressionTemplateAPI.ExpressionTemplate = new ExpressionTemplateAPI.ExpressionTemplate(
+    this._client,
+  );
 }
 
-export namespace APIGateway {
-  export import Configurations = ConfigurationsAPI.Configurations;
-  export import Configuration = ConfigurationsAPI.Configuration;
-  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
-  export import Discovery = DiscoveryAPI.Discovery;
-  export import DiscoveryOperation = DiscoveryAPI.DiscoveryOperation;
-  export import DiscoveryGetResponse = DiscoveryAPI.DiscoveryGetResponse;
-  export import DiscoveryGetParams = DiscoveryAPI.DiscoveryGetParams;
-  export import Operations = OperationsAPI.Operations;
-  export import APIShield = OperationsAPI.APIShield;
-  export import OperationCreateResponse = OperationsAPI.OperationCreateResponse;
-  export import OperationListResponse = OperationsAPI.OperationListResponse;
-  export import OperationDeleteResponse = OperationsAPI.OperationDeleteResponse;
-  export import OperationGetResponse = OperationsAPI.OperationGetResponse;
-  export import OperationListResponsesV4PagePaginationArray = OperationsAPI.OperationListResponsesV4PagePaginationArray;
-  export import OperationCreateParams = OperationsAPI.OperationCreateParams;
-  export import OperationListParams = OperationsAPI.OperationListParams;
-  export import OperationDeleteParams = OperationsAPI.OperationDeleteParams;
-  export import OperationGetParams = OperationsAPI.OperationGetParams;
-  export import Schemas = SchemasAPI.Schemas;
-  export import SchemaListResponse = SchemasAPI.SchemaListResponse;
-  export import SchemaListParams = SchemasAPI.SchemaListParams;
-  export import Settings = SettingsAPI.Settings;
-  export import UserSchemas = UserSchemasAPI.UserSchemas;
-  export import Message = UserSchemasAPI.Message;
-  export import PublicSchema = UserSchemasAPI.PublicSchema;
-  export import SchemaUpload = UserSchemasAPI.SchemaUpload;
-  export import UserSchemaDeleteResponse = UserSchemasAPI.UserSchemaDeleteResponse;
-  export import PublicSchemasV4PagePaginationArray = UserSchemasAPI.PublicSchemasV4PagePaginationArray;
-  export import UserSchemaCreateParams = UserSchemasAPI.UserSchemaCreateParams;
-  export import UserSchemaListParams = UserSchemasAPI.UserSchemaListParams;
-  export import UserSchemaDeleteParams = UserSchemasAPI.UserSchemaDeleteParams;
-  export import UserSchemaEditParams = UserSchemasAPI.UserSchemaEditParams;
-  export import UserSchemaGetParams = UserSchemasAPI.UserSchemaGetParams;
+APIGateway.Configurations = Configurations;
+APIGateway.Discovery = Discovery;
+APIGateway.Operations = Operations;
+APIGateway.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
+APIGateway.Schemas = Schemas;
+APIGateway.UserSchemas = UserSchemas;
+APIGateway.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
+APIGateway.ExpressionTemplate = ExpressionTemplate;
+
+export declare namespace APIGateway {
+  export {
+    Configurations as Configurations,
+    type Configuration as Configuration,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
+
+  export {
+    Discovery as Discovery,
+    type DiscoveryOperation as DiscoveryOperation,
+    type DiscoveryGetResponse as DiscoveryGetResponse,
+    type DiscoveryGetParams as DiscoveryGetParams,
+  };
+
+  export {
+    Operations as Operations,
+    type APIShield as APIShield,
+    type OperationCreateResponse as OperationCreateResponse,
+    type OperationListResponse as OperationListResponse,
+    type OperationDeleteResponse as OperationDeleteResponse,
+    type OperationBulkCreateResponse as OperationBulkCreateResponse,
+    type OperationBulkDeleteResponse as OperationBulkDeleteResponse,
+    type OperationGetResponse as OperationGetResponse,
+    OperationListResponsesV4PagePaginationArray as OperationListResponsesV4PagePaginationArray,
+    type OperationCreateParams as OperationCreateParams,
+    type OperationListParams as OperationListParams,
+    type OperationDeleteParams as OperationDeleteParams,
+    type OperationBulkCreateParams as OperationBulkCreateParams,
+    type OperationBulkDeleteParams as OperationBulkDeleteParams,
+    type OperationGetParams as OperationGetParams,
+  };
+
+  export {
+    Schemas as Schemas,
+    type SchemaListResponse as SchemaListResponse,
+    type SchemaListParams as SchemaListParams,
+  };
+
+  export { type Settings as Settings };
+
+  export {
+    UserSchemas as UserSchemas,
+    type Message as Message,
+    type PublicSchema as PublicSchema,
+    type SchemaUpload as SchemaUpload,
+    type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
+    PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
+    type UserSchemaCreateParams as UserSchemaCreateParams,
+    type UserSchemaListParams as UserSchemaListParams,
+    type UserSchemaDeleteParams as UserSchemaDeleteParams,
+    type UserSchemaEditParams as UserSchemaEditParams,
+    type UserSchemaGetParams as UserSchemaGetParams,
+  };
+
+  export { ExpressionTemplate as ExpressionTemplate };
 }

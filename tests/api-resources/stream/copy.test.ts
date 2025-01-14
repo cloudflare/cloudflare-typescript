@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource copy', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.stream.copy.create({
+    const responsePromise = client.stream.copy.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       url: 'https://example.com/myvideo.mp4',
     });
@@ -25,7 +25,7 @@ describe('resource copy', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.stream.copy.create({
+    const response = await client.stream.copy.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       url: 'https://example.com/myvideo.mp4',
       allowedOrigins: ['example.com'],

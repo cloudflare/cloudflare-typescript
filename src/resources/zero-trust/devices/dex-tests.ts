@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DEXTestsAPI from './dex-tests';
 import { SinglePage } from '../../../pagination';
 
 export class DEXTests extends APIResource {
@@ -59,13 +58,13 @@ export class DEXTests extends APIResource {
     dexTestId: string,
     params: DEXTestDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestDeleteResponse | null> {
+  ): Core.APIPromise<DEXTestDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/devices/dex_tests/${dexTestId}`,
         options,
-      ) as Core.APIPromise<{ result: DEXTestDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: DEXTestDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -121,6 +120,11 @@ export interface DEXTest {
   target_policies?: Array<DEXTest.TargetPolicy>;
 
   targeted?: boolean;
+
+  /**
+   * The unique identifier for the test.
+   */
+  test_id?: string;
 }
 
 export namespace DEXTest {
@@ -217,6 +221,11 @@ export interface SchemaHTTP {
   target_policies?: Array<SchemaHTTP.TargetPolicy>;
 
   targeted?: boolean;
+
+  /**
+   * The unique identifier for the test.
+   */
+  test_id?: string;
 }
 
 export namespace SchemaHTTP {
@@ -238,7 +247,9 @@ export namespace SchemaHTTP {
   }
 }
 
-export type DEXTestDeleteResponse = Array<SchemaHTTP>;
+export interface DEXTestDeleteResponse {
+  dex_tests?: Array<SchemaHTTP>;
+}
 
 export interface DEXTestCreateParams {
   /**
@@ -376,15 +387,19 @@ export interface DEXTestGetParams {
   account_id: string;
 }
 
-export namespace DEXTests {
-  export import DEXTest = DEXTestsAPI.DEXTest;
-  export import SchemaData = DEXTestsAPI.SchemaData;
-  export import SchemaHTTP = DEXTestsAPI.SchemaHTTP;
-  export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
-  export import SchemaHTTPSSinglePage = DEXTestsAPI.SchemaHTTPSSinglePage;
-  export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
-  export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
-  export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;
-  export import DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
-  export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
+DEXTests.SchemaHTTPSSinglePage = SchemaHTTPSSinglePage;
+
+export declare namespace DEXTests {
+  export {
+    type DEXTest as DEXTest,
+    type SchemaData as SchemaData,
+    type SchemaHTTP as SchemaHTTP,
+    type DEXTestDeleteResponse as DEXTestDeleteResponse,
+    SchemaHTTPSSinglePage as SchemaHTTPSSinglePage,
+    type DEXTestCreateParams as DEXTestCreateParams,
+    type DEXTestUpdateParams as DEXTestUpdateParams,
+    type DEXTestListParams as DEXTestListParams,
+    type DEXTestDeleteParams as DEXTestDeleteParams,
+    type DEXTestGetParams as DEXTestGetParams,
+  };
 }

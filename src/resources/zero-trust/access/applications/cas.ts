@@ -3,25 +3,20 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from '../../../../error';
-import * as CAsAPI from './cas';
+import { CloudflareError } from 'cloudflare/error';
 import { SinglePage } from '../../../../pagination';
 
 export class CAs extends APIResource {
   /**
    * Generates a new short-lived certificate CA and public key.
    */
-  create(
-    appId: string,
-    params?: CACreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CACreateResponse>;
-  create(appId: string, options?: Core.RequestOptions): Core.APIPromise<CACreateResponse>;
+  create(appId: string, params?: CACreateParams, options?: Core.RequestOptions): Core.APIPromise<CA>;
+  create(appId: string, options?: Core.RequestOptions): Core.APIPromise<CA>;
   create(
     appId: string,
     params: CACreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CACreateResponse> {
+  ): Core.APIPromise<CA> {
     if (isRequestOptions(params)) {
       return this.create(appId, {}, params);
     }
@@ -46,7 +41,7 @@ export class CAs extends APIResource {
       this._client.post(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/ca`,
         options,
-      ) as Core.APIPromise<{ result: CACreateResponse }>
+      ) as Core.APIPromise<{ result: CA }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -131,13 +126,13 @@ export class CAs extends APIResource {
   /**
    * Fetches a short-lived certificate CA and its public key.
    */
-  get(appId: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
-  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
+  get(appId: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CA>;
+  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<CA>;
   get(
     appId: string,
     params: CAGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CAGetResponse> {
+  ): Core.APIPromise<CA> {
     if (isRequestOptions(params)) {
       return this.get(appId, {}, params);
     }
@@ -162,7 +157,7 @@ export class CAs extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/ca`,
         options,
-      ) as Core.APIPromise<{ result: CAGetResponse }>
+      ) as Core.APIPromise<{ result: CA }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -187,16 +182,12 @@ export interface CA {
   public_key?: string;
 }
 
-export type CACreateResponse = unknown | string | null;
-
 export interface CADeleteResponse {
   /**
    * The ID of the CA.
    */
   id?: string;
 }
-
-export type CAGetResponse = unknown | string | null;
 
 export interface CACreateParams {
   /**
@@ -246,14 +237,16 @@ export interface CAGetParams {
   zone_id?: string;
 }
 
-export namespace CAs {
-  export import CA = CAsAPI.CA;
-  export import CACreateResponse = CAsAPI.CACreateResponse;
-  export import CADeleteResponse = CAsAPI.CADeleteResponse;
-  export import CAGetResponse = CAsAPI.CAGetResponse;
-  export import CAsSinglePage = CAsAPI.CAsSinglePage;
-  export import CACreateParams = CAsAPI.CACreateParams;
-  export import CAListParams = CAsAPI.CAListParams;
-  export import CADeleteParams = CAsAPI.CADeleteParams;
-  export import CAGetParams = CAsAPI.CAGetParams;
+CAs.CAsSinglePage = CAsSinglePage;
+
+export declare namespace CAs {
+  export {
+    type CA as CA,
+    type CADeleteResponse as CADeleteResponse,
+    CAsSinglePage as CAsSinglePage,
+    type CACreateParams as CACreateParams,
+    type CAListParams as CAListParams,
+    type CADeleteParams as CADeleteParams,
+    type CAGetParams as CAGetParams,
+  };
 }

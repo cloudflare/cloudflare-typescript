@@ -3,9 +3,14 @@
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
-import * as TopTopAPI from './top';
-import * as TopAPI from '../../../http/top';
 import * as LocationsAPI from './locations';
+import {
+  LocationOriginParams,
+  LocationOriginResponse,
+  LocationTargetParams,
+  LocationTargetResponse,
+  Locations,
+} from './locations';
 
 export class Top extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
@@ -33,7 +38,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the Industry of attacks.
+   * Get the industries targeted by attacks.
    */
   industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
   industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
@@ -52,7 +57,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the Verticals of attacks.
+   * Get the verticals targeted by attacks.
    */
   vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
   vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
@@ -136,7 +141,7 @@ export namespace TopAttacksResponse {
 export interface TopIndustryResponse {
   meta: TopIndustryResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<TopIndustryResponse.Top0>;
 }
 
 export namespace TopIndustryResponse {
@@ -185,12 +190,18 @@ export namespace TopIndustryResponse {
       }
     }
   }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
+  }
 }
 
 export interface TopVerticalResponse {
   meta: TopVerticalResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<TopVerticalResponse.Top0>;
 }
 
 export namespace TopVerticalResponse {
@@ -238,6 +249,12 @@ export namespace TopVerticalResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 
@@ -434,16 +451,23 @@ export interface TopVerticalParams {
   protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
-export namespace Top {
-  export import TopAttacksResponse = TopTopAPI.TopAttacksResponse;
-  export import TopIndustryResponse = TopTopAPI.TopIndustryResponse;
-  export import TopVerticalResponse = TopTopAPI.TopVerticalResponse;
-  export import TopAttacksParams = TopTopAPI.TopAttacksParams;
-  export import TopIndustryParams = TopTopAPI.TopIndustryParams;
-  export import TopVerticalParams = TopTopAPI.TopVerticalParams;
-  export import Locations = LocationsAPI.Locations;
-  export import LocationOriginResponse = LocationsAPI.LocationOriginResponse;
-  export import LocationTargetResponse = LocationsAPI.LocationTargetResponse;
-  export import LocationOriginParams = LocationsAPI.LocationOriginParams;
-  export import LocationTargetParams = LocationsAPI.LocationTargetParams;
+Top.Locations = Locations;
+
+export declare namespace Top {
+  export {
+    type TopAttacksResponse as TopAttacksResponse,
+    type TopIndustryResponse as TopIndustryResponse,
+    type TopVerticalResponse as TopVerticalResponse,
+    type TopAttacksParams as TopAttacksParams,
+    type TopIndustryParams as TopIndustryParams,
+    type TopVerticalParams as TopVerticalParams,
+  };
+
+  export {
+    Locations as Locations,
+    type LocationOriginResponse as LocationOriginResponse,
+    type LocationTargetResponse as LocationTargetResponse,
+    type LocationOriginParams as LocationOriginParams,
+    type LocationTargetParams as LocationTargetParams,
+  };
 }

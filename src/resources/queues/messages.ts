@@ -2,52 +2,51 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as MessagesAPI from './messages';
 
 export class Messages extends APIResource {
   /**
-   * Acknowledge + Retry messages from a Queue.
+   * Acknowledge + Retry messages from a Queue
    */
   ack(
     queueId: string,
     params: MessageAckParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MessageAckResponse | null> {
+  ): Core.APIPromise<MessageAckResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/ack`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MessageAckResponse | null }>
+      }) as Core.APIPromise<{ result: MessageAckResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Pull a batch of messages from a Queue.
+   * Pull a batch of messages from a Queue
    */
   pull(
     queueId: string,
     params: MessagePullParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MessagePullResponse | null> {
+  ): Core.APIPromise<MessagePullResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/pull`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MessagePullResponse | null }>
+      }) as Core.APIPromise<{ result: MessagePullResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export interface MessageAckResponse {
   /**
-   * The number of messages that were succesfully acknowledged
+   * The number of messages that were succesfully acknowledged.
    */
   ackCount?: number;
 
   /**
-   * The number of messages that were succesfully retried
+   * The number of messages that were succesfully retried.
    */
   retryCount?: number;
 
@@ -64,6 +63,10 @@ export namespace MessagePullResponse {
 
     body?: string;
 
+    /**
+     * An ID that represents an "in-flight" message that has been pulled from a Queue.
+     * You must hold on to this ID and use it to acknowledge this message.
+     */
     lease_id?: string;
 
     metadata?: unknown;
@@ -74,7 +77,7 @@ export namespace MessagePullResponse {
 
 export interface MessageAckParams {
   /**
-   * Path param: Identifier
+   * Path param: A Resource identifier.
    */
   account_id: string;
 
@@ -92,7 +95,8 @@ export interface MessageAckParams {
 export namespace MessageAckParams {
   export interface Ack {
     /**
-     * Lease ID for a message to acknowledge.
+     * An ID that represents an "in-flight" message that has been pulled from a Queue.
+     * You must hold on to this ID and use it to acknowledge this message.
      */
     lease_id?: string;
   }
@@ -105,7 +109,8 @@ export namespace MessageAckParams {
     delay_seconds?: number;
 
     /**
-     * Lease ID for a message to retry.
+     * An ID that represents an "in-flight" message that has been pulled from a Queue.
+     * You must hold on to this ID and use it to acknowledge this message.
      */
     lease_id?: string;
   }
@@ -113,12 +118,12 @@ export namespace MessageAckParams {
 
 export interface MessagePullParams {
   /**
-   * Path param: Identifier
+   * Path param: A Resource identifier.
    */
   account_id: string;
 
   /**
-   * Body param: The maximum number of messages to include in a batch
+   * Body param: The maximum number of messages to include in a batch.
    */
   batch_size?: number;
 
@@ -129,9 +134,11 @@ export interface MessagePullParams {
   visibility_timeout_ms?: number;
 }
 
-export namespace Messages {
-  export import MessageAckResponse = MessagesAPI.MessageAckResponse;
-  export import MessagePullResponse = MessagesAPI.MessagePullResponse;
-  export import MessageAckParams = MessagesAPI.MessageAckParams;
-  export import MessagePullParams = MessagesAPI.MessagePullParams;
+export declare namespace Messages {
+  export {
+    type MessageAckResponse as MessageAckResponse,
+    type MessagePullResponse as MessagePullResponse,
+    type MessageAckParams as MessageAckParams,
+    type MessagePullParams as MessagePullParams,
+  };
 }

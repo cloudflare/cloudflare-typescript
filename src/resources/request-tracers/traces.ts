@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as TracesAPI from './traces';
 
 export class Traces extends APIResource {
   /**
@@ -204,9 +203,11 @@ export namespace TraceCreateParams {
   }
 }
 
-export namespace Traces {
-  export import Trace = TracesAPI.Trace;
-  export import TraceItem = TracesAPI.TraceItem;
-  export import TraceCreateResponse = TracesAPI.TraceCreateResponse;
-  export import TraceCreateParams = TracesAPI.TraceCreateParams;
+export declare namespace Traces {
+  export {
+    type Trace as Trace,
+    type TraceItem as TraceItem,
+    type TraceCreateResponse as TraceCreateResponse,
+    type TraceCreateParams as TraceCreateParams,
+  };
 }

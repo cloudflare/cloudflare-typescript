@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PoliciesAPI from './policies';
 import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
@@ -84,14 +83,14 @@ export class PoliciesSinglePage extends SinglePage<Policy> {}
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type Mechanism = Record<string, Array<Mechanism.UnnamedSchemaWithMapParent3>>;
+export type Mechanism = Record<string, Array<Mechanism.Item>>;
 
 export namespace Mechanism {
-  export interface UnnamedSchemaWithMapParent3 {
+  export interface Item {
     /**
      * UUID
      */
-    id?: string | string;
+    id?: string;
   }
 }
 
@@ -99,14 +98,14 @@ export namespace Mechanism {
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type MechanismParam = Record<string, Array<MechanismParam.UnnamedSchemaWithMapParent3>>;
+export type MechanismParam = Record<string, Array<MechanismParam.Item>>;
 
 export namespace MechanismParam {
-  export interface UnnamedSchemaWithMapParent3 {
+  export interface Item {
     /**
      * UUID
      */
-    id?: string | string;
+    id?: string;
   }
 }
 
@@ -115,6 +114,12 @@ export interface Policy {
    * The unique identifier of a notification policy
    */
   id?: string;
+
+  /**
+   * Optional specification of how often to re-alert from the same incident, not
+   * support on all alert types.
+   */
+  alert_interval?: string;
 
   /**
    * Refers to which event will trigger a Notification dispatch. You can use the
@@ -135,8 +140,11 @@ export interface Policy {
     | 'brand_protection_digest'
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
+    | 'cloudforce_one_request_notification'
+    | 'custom_analytics'
     | 'custom_ssl_certificate_event_type'
     | 'dedicated_ssl_certificate_event_type'
+    | 'device_connectivity_anomaly_alert'
     | 'dos_attack_l4'
     | 'dos_attack_l7'
     | 'expiring_service_token_alert'
@@ -149,10 +157,13 @@ export interface Policy {
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
     | 'incident_alert'
+    | 'image_notification'
+    | 'image_resizing_notification'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'
     | 'magic_tunnel_health_check_event'
+    | 'magic_wan_tunnel_health'
     | 'maintenance_event_notification'
     | 'mtls_certificate_store_certificate_expiration_type'
     | 'pages_event_alert'
@@ -167,10 +178,13 @@ export interface Policy {
     | 'scriptmonitor_alert_new_resources'
     | 'secondary_dns_all_primaries_failing'
     | 'secondary_dns_primaries_failing'
+    | 'secondary_dns_warning'
     | 'secondary_dns_zone_successfully_updated'
     | 'secondary_dns_zone_validation_warning'
     | 'sentinel_alert'
     | 'stream_live_notifications'
+    | 'synthetic_test_latency_alert'
+    | 'synthetic_test_low_availability_alert'
     | 'traffic_anomalies_alert'
     | 'tunnel_health_event'
     | 'tunnel_update_event'
@@ -228,8 +242,7 @@ export interface PolicyFilter {
   affected_asns?: Array<string>;
 
   /**
-   * Used for configuring incident_alert. A list of identifiers for each component to
-   * monitor.
+   * Used for configuring incident_alert
    */
   affected_components?: Array<string>;
 
@@ -249,9 +262,9 @@ export interface PolicyFilter {
   alert_trigger_preferences?: Array<string>;
 
   /**
-   * Used for configuring magic_tunnel_health_check_event
+   * Usage depends on specific alert type
    */
-  alert_trigger_preferences_value?: Array<'99.0' | '98.0' | '97.0'>;
+  alert_trigger_preferences_value?: Array<string>;
 
   /**
    * Used for configuring load_balancing_pool_enablement_alert
@@ -336,6 +349,11 @@ export interface PolicyFilter {
   pool_id?: Array<string>;
 
   /**
+   * Usage depends on specific alert type
+   */
+  pop_name?: Array<string>;
+
+  /**
    * Used for configuring billing_usage_alert
    */
   product?: Array<string>;
@@ -406,7 +424,7 @@ export interface PolicyFilter {
   tunnel_id?: Array<string>;
 
   /**
-   * Used for configuring magic_tunnel_health_check_event
+   * Usage depends on specific alert type
    */
   tunnel_name?: Array<string>;
 
@@ -438,8 +456,7 @@ export interface PolicyFilterParam {
   affected_asns?: Array<string>;
 
   /**
-   * Used for configuring incident_alert. A list of identifiers for each component to
-   * monitor.
+   * Used for configuring incident_alert
    */
   affected_components?: Array<string>;
 
@@ -459,9 +476,9 @@ export interface PolicyFilterParam {
   alert_trigger_preferences?: Array<string>;
 
   /**
-   * Used for configuring magic_tunnel_health_check_event
+   * Usage depends on specific alert type
    */
-  alert_trigger_preferences_value?: Array<'99.0' | '98.0' | '97.0'>;
+  alert_trigger_preferences_value?: Array<string>;
 
   /**
    * Used for configuring load_balancing_pool_enablement_alert
@@ -546,6 +563,11 @@ export interface PolicyFilterParam {
   pool_id?: Array<string>;
 
   /**
+   * Usage depends on specific alert type
+   */
+  pop_name?: Array<string>;
+
+  /**
    * Used for configuring billing_usage_alert
    */
   product?: Array<string>;
@@ -616,7 +638,7 @@ export interface PolicyFilterParam {
   tunnel_id?: Array<string>;
 
   /**
-   * Used for configuring magic_tunnel_health_check_event
+   * Usage depends on specific alert type
    */
   tunnel_name?: Array<string>;
 
@@ -707,8 +729,11 @@ export interface PolicyCreateParams {
     | 'brand_protection_digest'
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
+    | 'cloudforce_one_request_notification'
+    | 'custom_analytics'
     | 'custom_ssl_certificate_event_type'
     | 'dedicated_ssl_certificate_event_type'
+    | 'device_connectivity_anomaly_alert'
     | 'dos_attack_l4'
     | 'dos_attack_l7'
     | 'expiring_service_token_alert'
@@ -721,10 +746,13 @@ export interface PolicyCreateParams {
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
     | 'incident_alert'
+    | 'image_notification'
+    | 'image_resizing_notification'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'
     | 'magic_tunnel_health_check_event'
+    | 'magic_wan_tunnel_health'
     | 'maintenance_event_notification'
     | 'mtls_certificate_store_certificate_expiration_type'
     | 'pages_event_alert'
@@ -739,10 +767,13 @@ export interface PolicyCreateParams {
     | 'scriptmonitor_alert_new_resources'
     | 'secondary_dns_all_primaries_failing'
     | 'secondary_dns_primaries_failing'
+    | 'secondary_dns_warning'
     | 'secondary_dns_zone_successfully_updated'
     | 'secondary_dns_zone_validation_warning'
     | 'sentinel_alert'
     | 'stream_live_notifications'
+    | 'synthetic_test_latency_alert'
+    | 'synthetic_test_low_availability_alert'
     | 'traffic_anomalies_alert'
     | 'tunnel_health_event'
     | 'tunnel_update_event'
@@ -767,6 +798,12 @@ export interface PolicyCreateParams {
   name: string;
 
   /**
+   * Body param: Optional specification of how often to re-alert from the same
+   * incident, not support on all alert types.
+   */
+  alert_interval?: string;
+
+  /**
    * Body param: Optional description for the Notification policy.
    */
   description?: string;
@@ -784,6 +821,12 @@ export interface PolicyUpdateParams {
    * Path param: The account id
    */
   account_id: string;
+
+  /**
+   * Body param: Optional specification of how often to re-alert from the same
+   * incident, not support on all alert types.
+   */
+  alert_interval?: string;
 
   /**
    * Body param: Refers to which event will trigger a Notification dispatch. You can
@@ -804,8 +847,11 @@ export interface PolicyUpdateParams {
     | 'brand_protection_digest'
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
+    | 'cloudforce_one_request_notification'
+    | 'custom_analytics'
     | 'custom_ssl_certificate_event_type'
     | 'dedicated_ssl_certificate_event_type'
+    | 'device_connectivity_anomaly_alert'
     | 'dos_attack_l4'
     | 'dos_attack_l7'
     | 'expiring_service_token_alert'
@@ -818,10 +864,13 @@ export interface PolicyUpdateParams {
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
     | 'incident_alert'
+    | 'image_notification'
+    | 'image_resizing_notification'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'
     | 'magic_tunnel_health_check_event'
+    | 'magic_wan_tunnel_health'
     | 'maintenance_event_notification'
     | 'mtls_certificate_store_certificate_expiration_type'
     | 'pages_event_alert'
@@ -836,10 +885,13 @@ export interface PolicyUpdateParams {
     | 'scriptmonitor_alert_new_resources'
     | 'secondary_dns_all_primaries_failing'
     | 'secondary_dns_primaries_failing'
+    | 'secondary_dns_warning'
     | 'secondary_dns_zone_successfully_updated'
     | 'secondary_dns_zone_validation_warning'
     | 'sentinel_alert'
     | 'stream_live_notifications'
+    | 'synthetic_test_latency_alert'
+    | 'synthetic_test_low_availability_alert'
     | 'traffic_anomalies_alert'
     | 'tunnel_health_event'
     | 'tunnel_update_event'
@@ -897,17 +949,21 @@ export interface PolicyGetParams {
   account_id: string;
 }
 
-export namespace Policies {
-  export import Mechanism = PoliciesAPI.Mechanism;
-  export import Policy = PoliciesAPI.Policy;
-  export import PolicyFilter = PoliciesAPI.PolicyFilter;
-  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
-  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
+Policies.PoliciesSinglePage = PoliciesSinglePage;
+
+export declare namespace Policies {
+  export {
+    type Mechanism as Mechanism,
+    type Policy as Policy,
+    type PolicyFilter as PolicyFilter,
+    type PolicyCreateResponse as PolicyCreateResponse,
+    type PolicyUpdateResponse as PolicyUpdateResponse,
+    type PolicyDeleteResponse as PolicyDeleteResponse,
+    PoliciesSinglePage as PoliciesSinglePage,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyUpdateParams as PolicyUpdateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
 }

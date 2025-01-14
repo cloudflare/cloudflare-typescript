@@ -3,8 +3,7 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
-import * as DatasetsJobsAPI from './jobs';
+import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from '../jobs';
 
 export class Jobs extends APIResource {
@@ -65,7 +64,6 @@ export interface JobGetParams {
   zone_id?: string;
 }
 
-export namespace Jobs {
-  export import JobGetResponse = DatasetsJobsAPI.JobGetResponse;
-  export import JobGetParams = DatasetsJobsAPI.JobGetParams;
+export declare namespace Jobs {
+  export { type JobGetResponse as JobGetResponse, type JobGetParams as JobGetParams };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SchemaValidationAPI from './schema-validation';
 import * as SettingsAPI from './settings';
 
 export class SchemaValidation extends APIResource {
@@ -115,8 +114,10 @@ export interface SchemaValidationGetParams {
   zone_id: string;
 }
 
-export namespace SchemaValidation {
-  export import SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
-  export import SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
-  export import SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
+export declare namespace SchemaValidation {
+  export {
+    type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
+    type SchemaValidationEditParams as SchemaValidationEditParams,
+    type SchemaValidationGetParams as SchemaValidationGetParams,
+  };
 }

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource message', () => {
   test('create', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.message.create(
+    const responsePromise = client.cloudforceOne.requests.message.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {},
@@ -26,7 +26,7 @@ describe('resource message', () => {
   });
 
   test('update', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.message.update(
+    const responsePromise = client.cloudforceOne.requests.message.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       0,
@@ -42,7 +42,7 @@ describe('resource message', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.message.delete(
+    const responsePromise = client.cloudforceOne.requests.message.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       0,
@@ -59,7 +59,7 @@ describe('resource message', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.message.delete(
+      client.cloudforceOne.requests.message.delete(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         0,
@@ -69,7 +69,7 @@ describe('resource message', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.message.get(
+    const responsePromise = client.cloudforceOne.requests.message.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { page: 0, per_page: 10 },
@@ -84,7 +84,7 @@ describe('resource message', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.cloudforceOne.requests.message.get(
+    const response = await client.cloudforceOne.requests.message.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {

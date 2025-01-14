@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as LanguageAPI from './language';
 import * as CaptionsAPI from '../captions';
 import * as VttAPI from './vtt';
+import { Vtt, VttGetParams, VttGetResponse } from './vtt';
 
 export class Language extends APIResource {
   vtt: VttAPI.Vtt = new VttAPI.Vtt(this._client);
@@ -118,13 +118,16 @@ export interface LanguageGetParams {
   account_id: string;
 }
 
-export namespace Language {
-  export import LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
-  export import LanguageCreateParams = LanguageAPI.LanguageCreateParams;
-  export import LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
-  export import LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
-  export import LanguageGetParams = LanguageAPI.LanguageGetParams;
-  export import Vtt = VttAPI.Vtt;
-  export import VttGetResponse = VttAPI.VttGetResponse;
-  export import VttGetParams = VttAPI.VttGetParams;
+Language.Vtt = Vtt;
+
+export declare namespace Language {
+  export {
+    type LanguageDeleteResponse as LanguageDeleteResponse,
+    type LanguageCreateParams as LanguageCreateParams,
+    type LanguageUpdateParams as LanguageUpdateParams,
+    type LanguageDeleteParams as LanguageDeleteParams,
+    type LanguageGetParams as LanguageGetParams,
+  };
+
+  export { Vtt as Vtt, type VttGetResponse as VttGetResponse, type VttGetParams as VttGetParams };
 }

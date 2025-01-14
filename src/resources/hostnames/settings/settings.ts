@@ -2,18 +2,32 @@
 
 import { APIResource } from '../../../resource';
 import * as TLSAPI from './tls';
+import {
+  Setting,
+  SettingValue,
+  TLS,
+  TLSDeleteParams,
+  TLSDeleteResponse,
+  TLSGetParams,
+  TLSGetResponse,
+  TLSUpdateParams,
+} from './tls';
 
 export class Settings extends APIResource {
   tls: TLSAPI.TLS = new TLSAPI.TLS(this._client);
 }
 
-export namespace Settings {
-  export import TLS = TLSAPI.TLS;
-  export import Setting = TLSAPI.Setting;
-  export import SettingValue = TLSAPI.SettingValue;
-  export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
-  export import TLSGetResponse = TLSAPI.TLSGetResponse;
-  export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
-  export import TLSDeleteParams = TLSAPI.TLSDeleteParams;
-  export import TLSGetParams = TLSAPI.TLSGetParams;
+Settings.TLS = TLS;
+
+export declare namespace Settings {
+  export {
+    TLS as TLS,
+    type Setting as Setting,
+    type SettingValue as SettingValue,
+    type TLSDeleteResponse as TLSDeleteResponse,
+    type TLSGetResponse as TLSGetResponse,
+    type TLSUpdateParams as TLSUpdateParams,
+    type TLSDeleteParams as TLSDeleteParams,
+    type TLSGetParams as TLSGetParams,
+  };
 }

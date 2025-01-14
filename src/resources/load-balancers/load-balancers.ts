@@ -4,10 +4,39 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as LoadBalancersAPI from './load-balancers';
 import * as PreviewsAPI from './previews';
+import { PreviewGetParams, PreviewGetResponse, Previews } from './previews';
 import * as RegionsAPI from './regions';
+import { RegionGetParams, RegionGetResponse, RegionListParams, RegionListResponse, Regions } from './regions';
 import * as SearchesAPI from './searches';
+import { SearchGetParams, SearchGetResponse, Searches } from './searches';
 import * as MonitorsAPI from './monitors/monitors';
+import {
+  Monitor,
+  MonitorCreateParams,
+  MonitorDeleteParams,
+  MonitorDeleteResponse,
+  MonitorEditParams,
+  MonitorGetParams,
+  MonitorListParams,
+  MonitorUpdateParams,
+  Monitors,
+  MonitorsSinglePage,
+} from './monitors/monitors';
 import * as PoolsAPI from './pools/pools';
+import {
+  Pool,
+  PoolBulkEditParams,
+  PoolBulkEditResponse,
+  PoolCreateParams,
+  PoolDeleteParams,
+  PoolDeleteResponse,
+  PoolEditParams,
+  PoolGetParams,
+  PoolListParams,
+  PoolUpdateParams,
+  Pools,
+  PoolsSinglePage,
+} from './pools/pools';
 import { SinglePage } from '../../pagination';
 
 export class LoadBalancers extends APIResource {
@@ -286,7 +315,7 @@ export interface LoadBalancer {
    * back to using the corresponding region_pool mapping if it exists else to
    * default_pools.
    */
-  country_pools?: unknown;
+  country_pools?: Record<string, Array<string>>;
 
   created_on?: string;
 
@@ -309,7 +338,7 @@ export interface LoadBalancer {
   /**
    * The pool ID to use when all other pools are detected as unhealthy.
    */
-  fallback_pool?: unknown;
+  fallback_pool?: string;
 
   /**
    * Controls location-based steering for non-proxied requests. See `steering_policy`
@@ -327,12 +356,17 @@ export interface LoadBalancer {
   name?: string;
 
   /**
+   * List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
+
+  /**
    * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
    * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
    * explicitly defined will fall back to using the corresponding country_pool, then
    * region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: unknown;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Whether the hostname should be gray clouded (false) or orange clouded (true).
@@ -356,7 +390,7 @@ export interface LoadBalancer {
    * priority) for the given region. Any regions not explicitly defined will fall
    * back to using default_pools.
    */
-  region_pools?: unknown;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * BETA Field Not General Access: A list of rules for this load balancer to
@@ -366,7 +400,7 @@ export interface LoadBalancer {
 
   /**
    * Specifies the type of session affinity the load balancer should use unless
-   * specified as `"none"` or "" (default). The supported types are:
+   * specified as `"none"`. The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -760,7 +794,7 @@ export interface RandomSteering {
    * A mapping of pool IDs to custom weights. The weight is relative to other pools
    * in the load balancer.
    */
-  pool_weights?: unknown;
+  pool_weights?: Record<string, number>;
 }
 
 /**
@@ -784,7 +818,7 @@ export interface RandomSteeringParam {
    * A mapping of pool IDs to custom weights. The weight is relative to other pools
    * in the load balancer.
    */
-  pool_weights?: unknown;
+  pool_weights?: Record<string, number>;
 }
 
 /**
@@ -888,7 +922,7 @@ export namespace Rules {
      * back to using the corresponding region_pool mapping if it exists else to
      * default_pools.
      */
-    country_pools?: unknown;
+    country_pools?: Record<string, Array<string>>;
 
     /**
      * A list of pool IDs ordered by their failover priority. Pools defined here are
@@ -899,7 +933,7 @@ export namespace Rules {
     /**
      * The pool ID to use when all other pools are detected as unhealthy.
      */
-    fallback_pool?: unknown;
+    fallback_pool?: string;
 
     /**
      * Controls location-based steering for non-proxied requests. See `steering_policy`
@@ -913,7 +947,7 @@ export namespace Rules {
      * explicitly defined will fall back to using the corresponding country_pool, then
      * region_pool mapping if it exists else to default_pools.
      */
-    pop_pools?: unknown;
+    pop_pools?: Record<string, Array<string>>;
 
     /**
      * Configures pool weights.
@@ -932,11 +966,11 @@ export namespace Rules {
      * priority) for the given region. Any regions not explicitly defined will fall
      * back to using default_pools.
      */
-    region_pools?: unknown;
+    region_pools?: Record<string, Array<string>>;
 
     /**
      * Specifies the type of session affinity the load balancer should use unless
-     * specified as `"none"` or "" (default). The supported types are:
+     * specified as `"none"`. The supported types are:
      *
      * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
      *   generated, encoding information of which origin the request will be forwarded
@@ -1115,7 +1149,7 @@ export namespace RulesParam {
      * back to using the corresponding region_pool mapping if it exists else to
      * default_pools.
      */
-    country_pools?: unknown;
+    country_pools?: Record<string, Array<string>>;
 
     /**
      * A list of pool IDs ordered by their failover priority. Pools defined here are
@@ -1126,7 +1160,7 @@ export namespace RulesParam {
     /**
      * The pool ID to use when all other pools are detected as unhealthy.
      */
-    fallback_pool?: unknown;
+    fallback_pool?: string;
 
     /**
      * Controls location-based steering for non-proxied requests. See `steering_policy`
@@ -1140,7 +1174,7 @@ export namespace RulesParam {
      * explicitly defined will fall back to using the corresponding country_pool, then
      * region_pool mapping if it exists else to default_pools.
      */
-    pop_pools?: unknown;
+    pop_pools?: Record<string, Array<string>>;
 
     /**
      * Configures pool weights.
@@ -1159,11 +1193,11 @@ export namespace RulesParam {
      * priority) for the given region. Any regions not explicitly defined will fall
      * back to using default_pools.
      */
-    region_pools?: unknown;
+    region_pools?: Record<string, Array<string>>;
 
     /**
      * Specifies the type of session affinity the load balancer should use unless
-     * specified as `"none"` or "" (default). The supported types are:
+     * specified as `"none"`. The supported types are:
      *
      * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
      *   generated, encoding information of which origin the request will be forwarded
@@ -1243,7 +1277,7 @@ export namespace RulesParam {
 
 /**
  * Specifies the type of session affinity the load balancer should use unless
- * specified as `"none"` or "" (default). The supported types are:
+ * specified as `"none"`. The supported types are:
  *
  * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
  *   generated, encoding information of which origin the request will be forwarded
@@ -1266,11 +1300,11 @@ export namespace RulesParam {
  *   `headers` in `session_affinity_attributes` for additional required
  *   configuration.
  */
-export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header';
 
 /**
  * Specifies the type of session affinity the load balancer should use unless
- * specified as `"none"` or "" (default). The supported types are:
+ * specified as `"none"`. The supported types are:
  *
  * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
  *   generated, encoding information of which origin the request will be forwarded
@@ -1293,7 +1327,7 @@ export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
  *   `headers` in `session_affinity_attributes` for additional required
  *   configuration.
  */
-export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header';
 
 /**
  * Configures attributes for session affinity.
@@ -1461,7 +1495,7 @@ export type SteeringPolicy =
   | 'proximity'
   | 'least_outstanding_requests'
   | 'least_connections'
-  | '""';
+  | '';
 
 /**
  * Steering Policy for this load balancer.
@@ -1495,7 +1529,7 @@ export type SteeringPolicyParam =
   | 'proximity'
   | 'least_outstanding_requests'
   | 'least_connections'
-  | '""';
+  | '';
 
 export interface LoadBalancerDeleteResponse {
   id?: string;
@@ -1517,7 +1551,7 @@ export interface LoadBalancerCreateParams {
   /**
    * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
-  fallback_pool: unknown;
+  fallback_pool: string;
 
   /**
    * Body param: The DNS hostname to associate with your Load Balancer. If this
@@ -1542,7 +1576,7 @@ export interface LoadBalancerCreateParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: unknown;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Object description.
@@ -1556,12 +1590,17 @@ export interface LoadBalancerCreateParams {
   location_strategy?: LocationStrategyParam;
 
   /**
+   * Body param: List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
+
+  /**
    * Body param: (Enterprise only): A mapping of Cloudflare PoP identifiers to a list
    * of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: unknown;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -1586,7 +1625,7 @@ export interface LoadBalancerCreateParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: unknown;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load
@@ -1596,7 +1635,7 @@ export interface LoadBalancerCreateParams {
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use
-   * unless specified as `"none"` or "" (default). The supported types are:
+   * unless specified as `"none"`. The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -1691,7 +1730,7 @@ export interface LoadBalancerUpdateParams {
   /**
    * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
-  fallback_pool: unknown;
+  fallback_pool: string;
 
   /**
    * Body param: The DNS hostname to associate with your Load Balancer. If this
@@ -1716,7 +1755,7 @@ export interface LoadBalancerUpdateParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: unknown;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Object description.
@@ -1735,12 +1774,17 @@ export interface LoadBalancerUpdateParams {
   location_strategy?: LocationStrategyParam;
 
   /**
+   * Body param: List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
+
+  /**
    * Body param: (Enterprise only): A mapping of Cloudflare PoP identifiers to a list
    * of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: unknown;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -1765,7 +1809,7 @@ export interface LoadBalancerUpdateParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: unknown;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load
@@ -1775,7 +1819,7 @@ export interface LoadBalancerUpdateParams {
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use
-   * unless specified as `"none"` or "" (default). The supported types are:
+   * unless specified as `"none"`. The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -1884,7 +1928,7 @@ export interface LoadBalancerEditParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: unknown;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
@@ -1906,7 +1950,7 @@ export interface LoadBalancerEditParams {
   /**
    * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
-  fallback_pool?: unknown;
+  fallback_pool?: string;
 
   /**
    * Body param: Controls location-based steering for non-proxied requests. See
@@ -1927,7 +1971,7 @@ export interface LoadBalancerEditParams {
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: unknown;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -1952,7 +1996,7 @@ export interface LoadBalancerEditParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: unknown;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load
@@ -1962,7 +2006,7 @@ export interface LoadBalancerEditParams {
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use
-   * unless specified as `"none"` or "" (default). The supported types are:
+   * unless specified as `"none"`. The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -2045,36 +2089,60 @@ export interface LoadBalancerGetParams {
   zone_id: string;
 }
 
-export namespace LoadBalancers {
-  export import Monitors = MonitorsAPI.Monitors;
-  export import Monitor = MonitorsAPI.Monitor;
-  export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
-  export import MonitorsSinglePage = MonitorsAPI.MonitorsSinglePage;
-  export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
-  export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
-  export import MonitorListParams = MonitorsAPI.MonitorListParams;
-  export import MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;
-  export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
-  export import MonitorGetParams = MonitorsAPI.MonitorGetParams;
-  export import Pools = PoolsAPI.Pools;
-  export import Pool = PoolsAPI.Pool;
-  export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
-  export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
-  export import PoolCreateParams = PoolsAPI.PoolCreateParams;
-  export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
-  export import PoolListParams = PoolsAPI.PoolListParams;
-  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
-  export import PoolEditParams = PoolsAPI.PoolEditParams;
-  export import PoolGetParams = PoolsAPI.PoolGetParams;
-  export import Previews = PreviewsAPI.Previews;
-  export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
-  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
-  export import Regions = RegionsAPI.Regions;
-  export import RegionListResponse = RegionsAPI.RegionListResponse;
-  export import RegionGetResponse = RegionsAPI.RegionGetResponse;
-  export import RegionListParams = RegionsAPI.RegionListParams;
-  export import RegionGetParams = RegionsAPI.RegionGetParams;
-  export import Searches = SearchesAPI.Searches;
-  export import SearchGetResponse = SearchesAPI.SearchGetResponse;
-  export import SearchGetParams = SearchesAPI.SearchGetParams;
+LoadBalancers.Monitors = Monitors;
+LoadBalancers.MonitorsSinglePage = MonitorsSinglePage;
+LoadBalancers.Pools = Pools;
+LoadBalancers.PoolsSinglePage = PoolsSinglePage;
+LoadBalancers.Previews = Previews;
+LoadBalancers.Regions = Regions;
+LoadBalancers.Searches = Searches;
+
+export declare namespace LoadBalancers {
+  export {
+    Monitors as Monitors,
+    type Monitor as Monitor,
+    type MonitorDeleteResponse as MonitorDeleteResponse,
+    MonitorsSinglePage as MonitorsSinglePage,
+    type MonitorCreateParams as MonitorCreateParams,
+    type MonitorUpdateParams as MonitorUpdateParams,
+    type MonitorListParams as MonitorListParams,
+    type MonitorDeleteParams as MonitorDeleteParams,
+    type MonitorEditParams as MonitorEditParams,
+    type MonitorGetParams as MonitorGetParams,
+  };
+
+  export {
+    Pools as Pools,
+    type Pool as Pool,
+    type PoolDeleteResponse as PoolDeleteResponse,
+    type PoolBulkEditResponse as PoolBulkEditResponse,
+    PoolsSinglePage as PoolsSinglePage,
+    type PoolCreateParams as PoolCreateParams,
+    type PoolUpdateParams as PoolUpdateParams,
+    type PoolListParams as PoolListParams,
+    type PoolDeleteParams as PoolDeleteParams,
+    type PoolBulkEditParams as PoolBulkEditParams,
+    type PoolEditParams as PoolEditParams,
+    type PoolGetParams as PoolGetParams,
+  };
+
+  export {
+    Previews as Previews,
+    type PreviewGetResponse as PreviewGetResponse,
+    type PreviewGetParams as PreviewGetParams,
+  };
+
+  export {
+    Regions as Regions,
+    type RegionListResponse as RegionListResponse,
+    type RegionGetResponse as RegionGetResponse,
+    type RegionListParams as RegionListParams,
+    type RegionGetParams as RegionGetParams,
+  };
+
+  export {
+    Searches as Searches,
+    type SearchGetResponse as SearchGetResponse,
+    type SearchGetParams as SearchGetParams,
+  };
 }

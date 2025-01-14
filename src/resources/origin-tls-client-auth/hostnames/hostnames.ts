@@ -4,7 +4,19 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as HostnamesAPI from './hostnames';
 import * as CertificatesAPI from './certificates';
-import { SinglePage } from '../../../pagination';
+import {
+  Certificate,
+  CertificateCreateParams,
+  CertificateCreateResponse,
+  CertificateDeleteParams,
+  CertificateDeleteResponse,
+  CertificateGetParams,
+  CertificateGetResponse,
+  CertificateListParams,
+  CertificateListResponse,
+  CertificateListResponsesSinglePage,
+  Certificates,
+} from './certificates';
 
 export class Hostnames extends APIResource {
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
@@ -19,13 +31,13 @@ export class Hostnames extends APIResource {
   update(
     params: HostnameUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameUpdateResponse | null> {
+  ): Core.APIPromise<HostnameUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/origin_tls_client_auth/hostnames`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: HostnameUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: HostnameUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,8 +58,6 @@ export class Hostnames extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class AuthenticatedOriginPullsSinglePage extends SinglePage<AuthenticatedOriginPull> {}
 
 export interface AuthenticatedOriginPull {
   /**
@@ -137,7 +147,43 @@ export interface AuthenticatedOriginPull {
   updated_at?: string;
 }
 
-export type HostnameUpdateResponse = Array<AuthenticatedOriginPull>;
+export type HostnameUpdateResponse = Array<HostnameUpdateResponse.HostnameUpdateResponseItem>;
+
+export namespace HostnameUpdateResponse {
+  export interface HostnameUpdateResponseItem extends HostnamesAPI.AuthenticatedOriginPull {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Identifier
+     */
+    cert_id?: string;
+
+    /**
+     * The hostname certificate.
+     */
+    certificate?: string;
+
+    /**
+     * Indicates whether hostname-level authenticated origin pulls is enabled. A null
+     * value voids the association.
+     */
+    enabled?: boolean | null;
+
+    /**
+     * The hostname on the origin for which the client certificate uploaded will be
+     * used.
+     */
+    hostname?: string;
+
+    /**
+     * The hostname certificate's private key.
+     */
+    private_key?: string;
+  }
+}
 
 export interface HostnameUpdateParams {
   /**
@@ -179,18 +225,28 @@ export interface HostnameGetParams {
   zone_id: string;
 }
 
-export namespace Hostnames {
-  export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
-  export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
-  export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
-  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
-  export import Certificates = CertificatesAPI.Certificates;
-  export import Certificate = CertificatesAPI.Certificate;
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
+Hostnames.Certificates = Certificates;
+Hostnames.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;
+
+export declare namespace Hostnames {
+  export {
+    type AuthenticatedOriginPull as AuthenticatedOriginPull,
+    type HostnameUpdateResponse as HostnameUpdateResponse,
+    type HostnameUpdateParams as HostnameUpdateParams,
+    type HostnameGetParams as HostnameGetParams,
+  };
+
+  export {
+    Certificates as Certificates,
+    type Certificate as Certificate,
+    type CertificateCreateResponse as CertificateCreateResponse,
+    type CertificateListResponse as CertificateListResponse,
+    type CertificateDeleteResponse as CertificateDeleteResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    CertificateListResponsesSinglePage as CertificateListResponsesSinglePage,
+    type CertificateCreateParams as CertificateCreateParams,
+    type CertificateListParams as CertificateListParams,
+    type CertificateDeleteParams as CertificateDeleteParams,
+    type CertificateGetParams as CertificateGetParams,
+  };
 }

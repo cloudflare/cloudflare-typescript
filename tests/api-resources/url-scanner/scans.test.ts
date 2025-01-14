@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource scans', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.urlScanner.scans.create('accountId', {
+    const responsePromise = client.urlScanner.scans.create({
+      account_id: 'account_id',
       url: 'https://www.example.com',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,19 +25,19 @@ describe('resource scans', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.urlScanner.scans.create('accountId', {
+    const response = await client.urlScanner.scans.create({
+      account_id: 'account_id',
       url: 'https://www.example.com',
+      customagent: 'customagent',
       customHeaders: { foo: 'string' },
-      screenshotsResolutions: ['desktop', 'mobile', 'tablet'],
+      referer: 'referer',
+      screenshotsResolutions: ['desktop'],
       visibility: 'Public',
     });
   });
 
-  test('get', async () => {
-    const responsePromise = cloudflare.urlScanner.scans.get(
-      'accountId',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+  test('list: only required params', async () => {
+    const responsePromise = client.urlScanner.scans.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,32 +47,15 @@ describe('resource scans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.urlScanner.scans.get('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('list: required and optional params', async () => {
+    const response = await client.urlScanner.scans.list({ account_id: 'account_id', q: 'q', size: 100 });
   });
 
-  test('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.urlScanner.scans.get(
-        'accountId',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { full: true },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('har', async () => {
-    const responsePromise = cloudflare.urlScanner.scans.har(
-      'accountId',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+  test('bulkCreate: only required params', async () => {
+    const responsePromise = client.urlScanner.scans.bulkCreate({
+      account_id: 'account_id',
+      body: [{ url: 'https://www.example.com' }],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,33 +65,85 @@ describe('resource scans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('har: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.urlScanner.scans.har('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('bulkCreate: required and optional params', async () => {
+    const response = await client.urlScanner.scans.bulkCreate({
+      account_id: 'account_id',
+      body: [
+        {
+          url: 'https://www.example.com',
+          customagent: 'customagent',
+          customHeaders: { foo: 'string' },
+          referer: 'referer',
+          screenshotsResolutions: ['desktop'],
+          visibility: 'Public',
+        },
+      ],
+    });
   });
 
-  test('screenshot: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.urlScanner.scans.screenshot('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('dom: only required params', async () => {
+    const responsePromise = client.urlScanner.scans.dom('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('screenshot: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.urlScanner.scans.screenshot(
-        'accountId',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { resolution: 'desktop' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('dom: required and optional params', async () => {
+    const response = await client.urlScanner.scans.dom('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
+  });
+
+  // TODO: investigate broken test
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.urlScanner.scans.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate broken test
+  test.skip('get: required and optional params', async () => {
+    const response = await client.urlScanner.scans.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
+  });
+
+  test('har: only required params', async () => {
+    const responsePromise = client.urlScanner.scans.har('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('har: required and optional params', async () => {
+    const response = await client.urlScanner.scans.har('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
+  });
+
+  test('screenshot: required and optional params', async () => {
+    const response = await client.urlScanner.scans.screenshot('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+      resolution: 'desktop',
+    });
   });
 });

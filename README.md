@@ -20,13 +20,13 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Cloudflare from 'cloudflare';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const zone = await cloudflare.zones.create({
+  const zone = await client.zones.create({
     account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
     name: 'example.com',
     type: 'full',
@@ -46,7 +46,7 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Cloudflare from 'cloudflare';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
@@ -57,7 +57,7 @@ async function main() {
     name: 'example.com',
     type: 'full',
   };
-  const zone: Cloudflare.Zone = await cloudflare.zones.create(params);
+  const zone: Cloudflare.Zone = await client.zones.create(params);
 }
 
 main();
@@ -74,17 +74,15 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const zone = await cloudflare.zones
-    .get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' })
-    .catch(async (err) => {
-      if (err instanceof Cloudflare.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
+  const zone = await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }).catch(async (err) => {
+    if (err instanceof Cloudflare.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 }
 
 main();
@@ -114,12 +112,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
+await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   maxRetries: 5,
 });
 ```
@@ -131,12 +129,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await cloudflare.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
+await client.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -148,30 +146,30 @@ Note that requests which time out will be [retried twice by default](#retries).
 ## Auto-pagination
 
 List methods in the Cloudflare API are paginated.
-You can use `for await … of` syntax to iterate through items across all pages:
+You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
 async function fetchAllAccounts(params) {
   const allAccounts = [];
   // Automatically fetches more pages as needed.
-  for await (const accountListResponse of cloudflare.accounts.list()) {
-    allAccounts.push(accountListResponse);
+  for await (const account of client.accounts.list()) {
+    allAccounts.push(account);
   }
   return allAccounts;
 }
 ```
 
-Alternatively, you can make request a single page at a time:
+Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await cloudflare.accounts.list();
-for (const accountListResponse of page.result) {
-  console.log(accountListResponse);
+let page = await client.accounts.list();
+for (const account of page.result) {
+  console.log(account);
 }
 
 // Convenience methods are provided for manually paginating:
 while (page.hasNextPage()) {
-  page = page.getNextPage();
+  page = await page.getNextPage();
   // ...
 }
 ```
@@ -186,15 +184,15 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 
 <!-- prettier-ignore -->
 ```ts
-const cloudflare = new Cloudflare();
+const client = new Cloudflare();
 
-const response = await cloudflare.zones
+const response = await client.zones
   .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: zone, response: raw } = await cloudflare.zones
+const { data: zone, response: raw } = await client.zones
   .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
@@ -297,12 +295,12 @@ import http from 'http';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
 });
 
 // Override per-request:
-await cloudflare.zones.delete(
+await client.zones.delete(
   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
@@ -315,12 +313,8 @@ await cloudflare.zones.delete(
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
-1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals)_.
+1. Changes to library internals which are technically public but not intended or documented for external use.
 1. Changes that we do not expect to impact the vast majority of users in practice.
-
-> [!WARNING]
-> In addition to the above, changes to type names, structure or methods _may_ occur as we stabilise the automated codegen pipeline. This will be removed in the future once we are further along and the service owner OpenAPI schemas have reached a higher maturity level where changes are not as constant.
-> If this isn't suitable for your project, we recommend pinning to a known version or using the previous major version.
 
 ## Requirements
 
@@ -330,7 +324,7 @@ The following runtimes are supported:
 
 - Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
 - Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
-- Deno v1.28.0 or higher, using `import Cloudflare from "npm:cloudflare"`.
+- Deno v1.28.0 or higher.
 - Bun 1.0 or later.
 - Cloudflare Workers.
 - Vercel Edge Runtime.
@@ -340,3 +334,7 @@ The following runtimes are supported:
 Note that React Native is not supported at this time.
 
 If you are interested in other runtime environments, please open or upvote an issue on GitHub.
+
+## Contributing
+
+See [the contributing documentation](./CONTRIBUTING.md).

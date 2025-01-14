@@ -3,12 +3,26 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as BGPAPI from './bgp';
 import * as IPsAPI from './ips';
+import { IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips';
 import * as RoutesAPI from './routes';
+import {
+  RouteAsesParams,
+  RouteAsesResponse,
+  RouteMoasParams,
+  RouteMoasResponse,
+  RoutePfx2asParams,
+  RoutePfx2asResponse,
+  RouteStatsParams,
+  RouteStatsResponse,
+  Routes,
+} from './routes';
 import * as HijacksAPI from './hijacks/hijacks';
+import { Hijacks } from './hijacks/hijacks';
 import * as LeaksAPI from './leaks/leaks';
+import { Leaks } from './leaks/leaks';
 import * as TopAPI from './top/top';
+import { Top, TopPrefixesParams, TopPrefixesResponse } from './top/top';
 
 export class BGP extends APIResource {
   leaks: LeaksAPI.Leaks = new LeaksAPI.Leaks(this._client);
@@ -18,8 +32,8 @@ export class BGP extends APIResource {
   ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
 
   /**
-   * Gets BGP updates change over time. Raw values are returned. When requesting
-   * updates of an autonomous system (AS), only BGP updates of type announcement are
+   * Get BGP updates change over time. Raw values are returned. When requesting
+   * updates for an autonomous system (AS), only BGP updates of type announcement are
    * returned.
    */
   timeseries(
@@ -149,7 +163,7 @@ export interface BGPTimeseriesParams {
   /**
    * Array of BGP network prefixes.
    */
-  prefix?: Array<BGPTimeseriesParams.Prefix>;
+  prefix?: Array<string>;
 
   /**
    * Array of BGP update types.
@@ -157,39 +171,43 @@ export interface BGPTimeseriesParams {
   updateType?: Array<'ANNOUNCEMENT' | 'WITHDRAWAL'>;
 }
 
-export namespace BGPTimeseriesParams {
-  export interface Prefix {
-    in: string;
+BGP.Leaks = Leaks;
+BGP.Top = Top;
+BGP.Hijacks = Hijacks;
+BGP.Routes = Routes;
+BGP.IPs = IPs;
 
-    name: string;
+export declare namespace BGP {
+  export {
+    type BGPTimeseriesResponse as BGPTimeseriesResponse,
+    type BGPTimeseriesParams as BGPTimeseriesParams,
+  };
 
-    test: number;
+  export { Leaks as Leaks };
 
-    /**
-     * Network prefix, IPv4 or IPv6.
-     */
-    type?: string;
-  }
-}
+  export {
+    Top as Top,
+    type TopPrefixesResponse as TopPrefixesResponse,
+    type TopPrefixesParams as TopPrefixesParams,
+  };
 
-export namespace BGP {
-  export import BGPTimeseriesResponse = BGPAPI.BGPTimeseriesResponse;
-  export import BGPTimeseriesParams = BGPAPI.BGPTimeseriesParams;
-  export import Leaks = LeaksAPI.Leaks;
-  export import Top = TopAPI.Top;
-  export import TopPrefixesResponse = TopAPI.TopPrefixesResponse;
-  export import TopPrefixesParams = TopAPI.TopPrefixesParams;
-  export import Hijacks = HijacksAPI.Hijacks;
-  export import Routes = RoutesAPI.Routes;
-  export import RouteAsesResponse = RoutesAPI.RouteAsesResponse;
-  export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
-  export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
-  export import RouteStatsResponse = RoutesAPI.RouteStatsResponse;
-  export import RouteAsesParams = RoutesAPI.RouteAsesParams;
-  export import RouteMoasParams = RoutesAPI.RouteMoasParams;
-  export import RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
-  export import RouteStatsParams = RoutesAPI.RouteStatsParams;
-  export import IPs = IPsAPI.IPs;
-  export import IPTimeseriesResponse = IPsAPI.IPTimeseriesResponse;
-  export import IPTimeseriesParams = IPsAPI.IPTimeseriesParams;
+  export { Hijacks as Hijacks };
+
+  export {
+    Routes as Routes,
+    type RouteAsesResponse as RouteAsesResponse,
+    type RouteMoasResponse as RouteMoasResponse,
+    type RoutePfx2asResponse as RoutePfx2asResponse,
+    type RouteStatsResponse as RouteStatsResponse,
+    type RouteAsesParams as RouteAsesParams,
+    type RouteMoasParams as RouteMoasParams,
+    type RoutePfx2asParams as RoutePfx2asParams,
+    type RouteStatsParams as RouteStatsParams,
+  };
+
+  export {
+    IPs as IPs,
+    type IPTimeseriesResponse as IPTimeseriesResponse,
+    type IPTimeseriesParams as IPTimeseriesParams,
+  };
 }

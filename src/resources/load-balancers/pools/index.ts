@@ -1,22 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  HealthCreateResponse,
-  HealthGetResponse,
-  HealthCreateParams,
-  HealthGetParams,
   Health,
+  type HealthCreateResponse,
+  type HealthGetResponse,
+  type HealthCreateParams,
+  type HealthGetParams,
 } from './health';
 export {
-  Pool,
-  PoolDeleteResponse,
-  PoolCreateParams,
-  PoolUpdateParams,
-  PoolListParams,
-  PoolDeleteParams,
-  PoolEditParams,
-  PoolGetParams,
   PoolsSinglePage,
   Pools,
+  type Pool,
+  type PoolDeleteResponse,
+  type PoolBulkEditResponse,
+  type PoolCreateParams,
+  type PoolUpdateParams,
+  type PoolListParams,
+  type PoolDeleteParams,
+  type PoolBulkEditParams,
+  type PoolEditParams,
+  type PoolGetParams,
 } from './pools';
-export { ReferenceGetResponse, ReferenceGetParams, References } from './references';
+export { References, type ReferenceGetResponse, type ReferenceGetParams } from './references';

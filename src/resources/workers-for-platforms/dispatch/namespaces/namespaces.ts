@@ -2,8 +2,15 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as NamespacesAPI from './namespaces';
 import * as ScriptsAPI from './scripts/scripts';
+import {
+  Script,
+  ScriptDeleteParams,
+  ScriptGetParams,
+  ScriptUpdateParams,
+  ScriptUpdateResponse,
+  Scripts,
+} from './scripts/scripts';
 import { SinglePage } from '../../../../pagination';
 
 export class Namespaces extends APIResource {
@@ -223,19 +230,28 @@ export interface NamespaceGetParams {
   account_id: string;
 }
 
-export namespace Namespaces {
-  export import NamespaceCreateResponse = NamespacesAPI.NamespaceCreateResponse;
-  export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
-  export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
-  export import NamespaceGetResponse = NamespacesAPI.NamespaceGetResponse;
-  export import NamespaceListResponsesSinglePage = NamespacesAPI.NamespaceListResponsesSinglePage;
-  export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
-  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
-  export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
-  export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
-  export import Scripts = ScriptsAPI.Scripts;
-  export import Script = ScriptsAPI.Script;
-  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
-  export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
-  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
+Namespaces.NamespaceListResponsesSinglePage = NamespaceListResponsesSinglePage;
+Namespaces.Scripts = Scripts;
+
+export declare namespace Namespaces {
+  export {
+    type NamespaceCreateResponse as NamespaceCreateResponse,
+    type NamespaceListResponse as NamespaceListResponse,
+    type NamespaceDeleteResponse as NamespaceDeleteResponse,
+    type NamespaceGetResponse as NamespaceGetResponse,
+    NamespaceListResponsesSinglePage as NamespaceListResponsesSinglePage,
+    type NamespaceCreateParams as NamespaceCreateParams,
+    type NamespaceListParams as NamespaceListParams,
+    type NamespaceDeleteParams as NamespaceDeleteParams,
+    type NamespaceGetParams as NamespaceGetParams,
+  };
+
+  export {
+    Scripts as Scripts,
+    type Script as Script,
+    type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptUpdateParams as ScriptUpdateParams,
+    type ScriptDeleteParams as ScriptDeleteParams,
+    type ScriptGetParams as ScriptGetParams,
+  };
 }

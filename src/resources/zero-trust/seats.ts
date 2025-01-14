@@ -2,20 +2,19 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SeatsAPI from './seats';
 
 export class Seats extends APIResource {
   /**
    * Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat`
    * are set to false.
    */
-  edit(params: SeatEditParams, options?: Core.RequestOptions): Core.APIPromise<SeatEditResponse | null> {
+  edit(params: SeatEditParams, options?: Core.RequestOptions): Core.APIPromise<SeatEditResponse> {
     const { account_id, body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/access/seats`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SeatEditResponse | null }>
+      }) as Core.APIPromise<{ result: SeatEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -74,8 +73,10 @@ export namespace SeatEditParams {
   }
 }
 
-export namespace Seats {
-  export import Seat = SeatsAPI.Seat;
-  export import SeatEditResponse = SeatsAPI.SeatEditResponse;
-  export import SeatEditParams = SeatsAPI.SeatEditParams;
+export declare namespace Seats {
+  export {
+    type Seat as Seat,
+    type SeatEditResponse as SeatEditResponse,
+    type SeatEditParams as SeatEditParams,
+  };
 }

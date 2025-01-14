@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as VerificationAPI from './verification';
 import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
 
 export class VerificationResource extends APIResource {
@@ -147,10 +146,12 @@ export interface VerificationGetParams {
   retry?: true;
 }
 
-export namespace VerificationResource {
-  export import Verification = VerificationAPI.Verification;
-  export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
-  export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
-  export import VerificationEditParams = VerificationAPI.VerificationEditParams;
-  export import VerificationGetParams = VerificationAPI.VerificationGetParams;
+export declare namespace VerificationResource {
+  export {
+    type Verification as Verification,
+    type VerificationEditResponse as VerificationEditResponse,
+    type VerificationGetResponse as VerificationGetResponse,
+    type VerificationEditParams as VerificationEditParams,
+    type VerificationGetParams as VerificationGetParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PreviewsAPI from './previews';
 import * as HealthchecksAPI from './healthchecks';
 
 export class Previews extends APIResource {
@@ -158,9 +157,11 @@ export interface PreviewGetParams {
   zone_id: string;
 }
 
-export namespace Previews {
-  export import PreviewDeleteResponse = PreviewsAPI.PreviewDeleteResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
-  export import PreviewDeleteParams = PreviewsAPI.PreviewDeleteParams;
-  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
+export declare namespace Previews {
+  export {
+    type PreviewDeleteResponse as PreviewDeleteResponse,
+    type PreviewCreateParams as PreviewCreateParams,
+    type PreviewDeleteParams as PreviewDeleteParams,
+    type PreviewGetParams as PreviewGetParams,
+  };
 }

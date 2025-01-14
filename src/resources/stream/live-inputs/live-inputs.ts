@@ -2,8 +2,16 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as LiveInputsAPI from './live-inputs';
 import * as OutputsAPI from './outputs';
+import {
+  Output,
+  OutputCreateParams,
+  OutputDeleteParams,
+  OutputListParams,
+  OutputUpdateParams,
+  Outputs,
+  OutputsSinglePage,
+} from './outputs';
 
 export class LiveInputs extends APIResource {
   outputs: OutputsAPI.Outputs = new OutputsAPI.Outputs(this._client);
@@ -186,6 +194,12 @@ export namespace LiveInput {
      * array allows videos to be viewed on any origin.
      */
     allowedOrigins?: Array<string>;
+
+    /**
+     * Disables reporting the number of live viewers when this property is set to
+     * `true`.
+     */
+    hideLiveViewerCount?: boolean;
 
     /**
      * Specifies the recording behavior for the live input. Set this value to `off` to
@@ -397,6 +411,12 @@ export namespace LiveInputCreateParams {
     allowedOrigins?: Array<string>;
 
     /**
+     * Disables reporting the number of live viewers when this property is set to
+     * `true`.
+     */
+    hideLiveViewerCount?: boolean;
+
+    /**
      * Specifies the recording behavior for the live input. Set this value to `off` to
      * prevent a recording. Set the value to `automatic` to begin a recording and
      * transition to on-demand after Stream Live stops receiving input.
@@ -468,6 +488,12 @@ export namespace LiveInputUpdateParams {
     allowedOrigins?: Array<string>;
 
     /**
+     * Disables reporting the number of live viewers when this property is set to
+     * `true`.
+     */
+    hideLiveViewerCount?: boolean;
+
+    /**
      * Specifies the recording behavior for the live input. Set this value to `off` to
      * prevent a recording. Set the value to `automatic` to begin a recording and
      * transition to on-demand after Stream Live stops receiving input.
@@ -517,19 +543,27 @@ export interface LiveInputGetParams {
   account_id: string;
 }
 
-export namespace LiveInputs {
-  export import LiveInput = LiveInputsAPI.LiveInput;
-  export import LiveInputListResponse = LiveInputsAPI.LiveInputListResponse;
-  export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
-  export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
-  export import LiveInputListParams = LiveInputsAPI.LiveInputListParams;
-  export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
-  export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
-  export import Outputs = OutputsAPI.Outputs;
-  export import Output = OutputsAPI.Output;
-  export import OutputsSinglePage = OutputsAPI.OutputsSinglePage;
-  export import OutputCreateParams = OutputsAPI.OutputCreateParams;
-  export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
-  export import OutputListParams = OutputsAPI.OutputListParams;
-  export import OutputDeleteParams = OutputsAPI.OutputDeleteParams;
+LiveInputs.Outputs = Outputs;
+LiveInputs.OutputsSinglePage = OutputsSinglePage;
+
+export declare namespace LiveInputs {
+  export {
+    type LiveInput as LiveInput,
+    type LiveInputListResponse as LiveInputListResponse,
+    type LiveInputCreateParams as LiveInputCreateParams,
+    type LiveInputUpdateParams as LiveInputUpdateParams,
+    type LiveInputListParams as LiveInputListParams,
+    type LiveInputDeleteParams as LiveInputDeleteParams,
+    type LiveInputGetParams as LiveInputGetParams,
+  };
+
+  export {
+    Outputs as Outputs,
+    type Output as Output,
+    OutputsSinglePage as OutputsSinglePage,
+    type OutputCreateParams as OutputCreateParams,
+    type OutputUpdateParams as OutputUpdateParams,
+    type OutputListParams as OutputListParams,
+    type OutputDeleteParams as OutputDeleteParams,
+  };
 }

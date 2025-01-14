@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as HistoryAPI from './history';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class HistoryResource extends APIResource {
@@ -93,8 +92,12 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
   since?: string;
 }
 
-export namespace HistoryResource {
-  export import History = HistoryAPI.History;
-  export import HistoriesV4PagePaginationArray = HistoryAPI.HistoriesV4PagePaginationArray;
-  export import HistoryListParams = HistoryAPI.HistoryListParams;
+HistoryResource.HistoriesV4PagePaginationArray = HistoriesV4PagePaginationArray;
+
+export declare namespace HistoryResource {
+  export {
+    type History as History,
+    HistoriesV4PagePaginationArray as HistoriesV4PagePaginationArray,
+    type HistoryListParams as HistoryListParams,
+  };
 }

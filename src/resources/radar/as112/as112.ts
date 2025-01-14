@@ -3,10 +3,50 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as AS112API from './as112';
 import * as SummaryAPI from './summary';
+import {
+  Summary,
+  SummaryDNSSECParams,
+  SummaryDNSSECResponse,
+  SummaryEdnsParams,
+  SummaryEdnsResponse,
+  SummaryIPVersionParams,
+  SummaryIPVersionResponse,
+  SummaryProtocolParams,
+  SummaryProtocolResponse,
+  SummaryQueryTypeParams,
+  SummaryQueryTypeResponse,
+  SummaryResponseCodesParams,
+  SummaryResponseCodesResponse,
+} from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
+import {
+  TimeseriesGroupDNSSECParams,
+  TimeseriesGroupDNSSECResponse,
+  TimeseriesGroupEdnsParams,
+  TimeseriesGroupEdnsResponse,
+  TimeseriesGroupIPVersionParams,
+  TimeseriesGroupIPVersionResponse,
+  TimeseriesGroupProtocolParams,
+  TimeseriesGroupProtocolResponse,
+  TimeseriesGroupQueryTypeParams,
+  TimeseriesGroupQueryTypeResponse,
+  TimeseriesGroupResponseCodesParams,
+  TimeseriesGroupResponseCodesResponse,
+  TimeseriesGroups,
+} from './timeseries-groups';
 import * as TopAPI from './top';
+import {
+  Top,
+  TopDNSSECParams,
+  TopDNSSECResponse,
+  TopEdnsParams,
+  TopEdnsResponse,
+  TopIPVersionParams,
+  TopIPVersionResponse,
+  TopLocationsParams,
+  TopLocationsResponse,
+} from './top';
 
 export class AS112 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
@@ -157,42 +197,57 @@ export interface AS112TimeseriesParams {
   name?: Array<string>;
 }
 
-export namespace AS112 {
-  export import AS112TimeseriesResponse = AS112API.AS112TimeseriesResponse;
-  export import AS112TimeseriesParams = AS112API.AS112TimeseriesParams;
-  export import Summary = SummaryAPI.Summary;
-  export import SummaryDNSSECResponse = SummaryAPI.SummaryDNSSECResponse;
-  export import SummaryEdnsResponse = SummaryAPI.SummaryEdnsResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export import SummaryQueryTypeResponse = SummaryAPI.SummaryQueryTypeResponse;
-  export import SummaryResponseCodesResponse = SummaryAPI.SummaryResponseCodesResponse;
-  export import SummaryDNSSECParams = SummaryAPI.SummaryDNSSECParams;
-  export import SummaryEdnsParams = SummaryAPI.SummaryEdnsParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export import SummaryQueryTypeParams = SummaryAPI.SummaryQueryTypeParams;
-  export import SummaryResponseCodesParams = SummaryAPI.SummaryResponseCodesParams;
-  export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
-  export import TimeseriesGroupDNSSECResponse = TimeseriesGroupsAPI.TimeseriesGroupDNSSECResponse;
-  export import TimeseriesGroupEdnsResponse = TimeseriesGroupsAPI.TimeseriesGroupEdnsResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
-  export import TimeseriesGroupQueryTypeResponse = TimeseriesGroupsAPI.TimeseriesGroupQueryTypeResponse;
-  export import TimeseriesGroupResponseCodesResponse = TimeseriesGroupsAPI.TimeseriesGroupResponseCodesResponse;
-  export import TimeseriesGroupDNSSECParams = TimeseriesGroupsAPI.TimeseriesGroupDNSSECParams;
-  export import TimeseriesGroupEdnsParams = TimeseriesGroupsAPI.TimeseriesGroupEdnsParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
-  export import TimeseriesGroupQueryTypeParams = TimeseriesGroupsAPI.TimeseriesGroupQueryTypeParams;
-  export import TimeseriesGroupResponseCodesParams = TimeseriesGroupsAPI.TimeseriesGroupResponseCodesParams;
-  export import Top = TopAPI.Top;
-  export import TopDNSSECResponse = TopAPI.TopDNSSECResponse;
-  export import TopEdnsResponse = TopAPI.TopEdnsResponse;
-  export import TopIPVersionResponse = TopAPI.TopIPVersionResponse;
-  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export import TopDNSSECParams = TopAPI.TopDNSSECParams;
-  export import TopEdnsParams = TopAPI.TopEdnsParams;
-  export import TopIPVersionParams = TopAPI.TopIPVersionParams;
-  export import TopLocationsParams = TopAPI.TopLocationsParams;
+AS112.Summary = Summary;
+AS112.TimeseriesGroups = TimeseriesGroups;
+AS112.Top = Top;
+
+export declare namespace AS112 {
+  export {
+    type AS112TimeseriesResponse as AS112TimeseriesResponse,
+    type AS112TimeseriesParams as AS112TimeseriesParams,
+  };
+
+  export {
+    Summary as Summary,
+    type SummaryDNSSECResponse as SummaryDNSSECResponse,
+    type SummaryEdnsResponse as SummaryEdnsResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryProtocolResponse as SummaryProtocolResponse,
+    type SummaryQueryTypeResponse as SummaryQueryTypeResponse,
+    type SummaryResponseCodesResponse as SummaryResponseCodesResponse,
+    type SummaryDNSSECParams as SummaryDNSSECParams,
+    type SummaryEdnsParams as SummaryEdnsParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryProtocolParams as SummaryProtocolParams,
+    type SummaryQueryTypeParams as SummaryQueryTypeParams,
+    type SummaryResponseCodesParams as SummaryResponseCodesParams,
+  };
+
+  export {
+    TimeseriesGroups as TimeseriesGroups,
+    type TimeseriesGroupDNSSECResponse as TimeseriesGroupDNSSECResponse,
+    type TimeseriesGroupEdnsResponse as TimeseriesGroupEdnsResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupProtocolResponse as TimeseriesGroupProtocolResponse,
+    type TimeseriesGroupQueryTypeResponse as TimeseriesGroupQueryTypeResponse,
+    type TimeseriesGroupResponseCodesResponse as TimeseriesGroupResponseCodesResponse,
+    type TimeseriesGroupDNSSECParams as TimeseriesGroupDNSSECParams,
+    type TimeseriesGroupEdnsParams as TimeseriesGroupEdnsParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupProtocolParams as TimeseriesGroupProtocolParams,
+    type TimeseriesGroupQueryTypeParams as TimeseriesGroupQueryTypeParams,
+    type TimeseriesGroupResponseCodesParams as TimeseriesGroupResponseCodesParams,
+  };
+
+  export {
+    Top as Top,
+    type TopDNSSECResponse as TopDNSSECResponse,
+    type TopEdnsResponse as TopEdnsResponse,
+    type TopIPVersionResponse as TopIPVersionResponse,
+    type TopLocationsResponse as TopLocationsResponse,
+    type TopDNSSECParams as TopDNSSECParams,
+    type TopEdnsParams as TopEdnsParams,
+    type TopIPVersionParams as TopIPVersionParams,
+    type TopLocationsParams as TopLocationsParams,
+  };
 }

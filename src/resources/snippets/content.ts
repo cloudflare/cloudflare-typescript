@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ContentAPI from './content';
 import { type Response } from '../../_shims/index';
 
 export class Content extends APIResource {
@@ -17,6 +16,7 @@ export class Content extends APIResource {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/snippets/${snippetName}/content`, {
       ...options,
+      headers: { Accept: 'multipart/form-data', ...options?.headers },
       __binaryResponse: true,
     });
   }
@@ -29,6 +29,6 @@ export interface ContentGetParams {
   zone_id: string;
 }
 
-export namespace Content {
-  export import ContentGetParams = ContentAPI.ContentGetParams;
+export declare namespace Content {
+  export { type ContentGetParams as ContentGetParams };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OutputsAPI from './outputs';
 import { SinglePage } from '../../../pagination';
 
 export class Outputs extends APIResource {
@@ -160,11 +159,15 @@ export interface OutputDeleteParams {
   account_id: string;
 }
 
-export namespace Outputs {
-  export import Output = OutputsAPI.Output;
-  export import OutputsSinglePage = OutputsAPI.OutputsSinglePage;
-  export import OutputCreateParams = OutputsAPI.OutputCreateParams;
-  export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
-  export import OutputListParams = OutputsAPI.OutputListParams;
-  export import OutputDeleteParams = OutputsAPI.OutputDeleteParams;
+Outputs.OutputsSinglePage = OutputsSinglePage;
+
+export declare namespace Outputs {
+  export {
+    type Output as Output,
+    OutputsSinglePage as OutputsSinglePage,
+    type OutputCreateParams as OutputCreateParams,
+    type OutputUpdateParams as OutputUpdateParams,
+    type OutputListParams as OutputListParams,
+    type OutputDeleteParams as OutputDeleteParams,
+  };
 }

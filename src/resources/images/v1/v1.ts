@@ -2,12 +2,35 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as V1API from './v1';
-import * as Shared from '../../shared';
 import * as BlobsAPI from './blobs';
+import { BlobGetParams, Blobs } from './blobs';
 import * as KeysAPI from './keys';
+import {
+  Key,
+  KeyDeleteParams,
+  KeyDeleteResponse,
+  KeyListParams,
+  KeyListResponse,
+  KeyUpdateParams,
+  KeyUpdateResponse,
+  Keys,
+} from './keys';
 import * as StatsAPI from './stats';
+import { Stat, StatGetParams, Stats } from './stats';
 import * as VariantsAPI from './variants';
+import {
+  Variant,
+  VariantCreateParams,
+  VariantCreateResponse,
+  VariantDeleteParams,
+  VariantDeleteResponse,
+  VariantEditParams,
+  VariantEditResponse,
+  VariantGetParams,
+  VariantGetResponse,
+  VariantListParams,
+  Variants,
+} from './variants';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class V1 extends APIResource {
@@ -123,29 +146,14 @@ export interface Image {
   /**
    * Object specifying available variants for an image.
    */
-  variants?: Array<string | string | string>;
+  variants?: Array<string>;
 }
 
 export interface V1ListResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  result: V1ListResponse.Result;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
+  images?: Array<Image>;
 }
 
-export namespace V1ListResponse {
-  export interface Result {
-    images?: Array<V1API.Image>;
-  }
-}
-
-export type V1DeleteResponse = unknown | string | null;
+export type V1DeleteResponse = unknown | string;
 
 export interface V1CreateParams {
   /**
@@ -218,38 +226,51 @@ export interface V1GetParams {
   account_id: string;
 }
 
-export namespace V1 {
-  export import Image = V1API.Image;
-  export import V1ListResponse = V1API.V1ListResponse;
-  export import V1DeleteResponse = V1API.V1DeleteResponse;
-  export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;
-  export import V1CreateParams = V1API.V1CreateParams;
-  export import V1ListParams = V1API.V1ListParams;
-  export import V1DeleteParams = V1API.V1DeleteParams;
-  export import V1EditParams = V1API.V1EditParams;
-  export import V1GetParams = V1API.V1GetParams;
-  export import Keys = KeysAPI.Keys;
-  export import Key = KeysAPI.Key;
-  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
-  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
-  export import KeyListParams = KeysAPI.KeyListParams;
-  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
-  export import Stats = StatsAPI.Stats;
-  export import Stat = StatsAPI.Stat;
-  export import StatGetParams = StatsAPI.StatGetParams;
-  export import Variants = VariantsAPI.Variants;
-  export import Variant = VariantsAPI.Variant;
-  export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
-  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
-  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
-  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
-  export import VariantCreateParams = VariantsAPI.VariantCreateParams;
-  export import VariantListParams = VariantsAPI.VariantListParams;
-  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
-  export import VariantEditParams = VariantsAPI.VariantEditParams;
-  export import VariantGetParams = VariantsAPI.VariantGetParams;
-  export import Blobs = BlobsAPI.Blobs;
-  export import BlobGetParams = BlobsAPI.BlobGetParams;
+V1.V1ListResponsesV4PagePagination = V1ListResponsesV4PagePagination;
+V1.Keys = Keys;
+V1.Stats = Stats;
+V1.Variants = Variants;
+V1.Blobs = Blobs;
+
+export declare namespace V1 {
+  export {
+    type Image as Image,
+    type V1ListResponse as V1ListResponse,
+    type V1DeleteResponse as V1DeleteResponse,
+    V1ListResponsesV4PagePagination as V1ListResponsesV4PagePagination,
+    type V1CreateParams as V1CreateParams,
+    type V1ListParams as V1ListParams,
+    type V1DeleteParams as V1DeleteParams,
+    type V1EditParams as V1EditParams,
+    type V1GetParams as V1GetParams,
+  };
+
+  export {
+    Keys as Keys,
+    type Key as Key,
+    type KeyUpdateResponse as KeyUpdateResponse,
+    type KeyListResponse as KeyListResponse,
+    type KeyDeleteResponse as KeyDeleteResponse,
+    type KeyUpdateParams as KeyUpdateParams,
+    type KeyListParams as KeyListParams,
+    type KeyDeleteParams as KeyDeleteParams,
+  };
+
+  export { Stats as Stats, type Stat as Stat, type StatGetParams as StatGetParams };
+
+  export {
+    Variants as Variants,
+    type Variant as Variant,
+    type VariantCreateResponse as VariantCreateResponse,
+    type VariantDeleteResponse as VariantDeleteResponse,
+    type VariantEditResponse as VariantEditResponse,
+    type VariantGetResponse as VariantGetResponse,
+    type VariantCreateParams as VariantCreateParams,
+    type VariantListParams as VariantListParams,
+    type VariantDeleteParams as VariantDeleteParams,
+    type VariantEditParams as VariantEditParams,
+    type VariantGetParams as VariantGetParams,
+  };
+
+  export { Blobs as Blobs, type BlobGetParams as BlobGetParams };
 }

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource requests', () => {
   test('create', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const responsePromise = client.cloudforceOne.requests.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource requests', () => {
   });
 
   test('update', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.update(
+    const responsePromise = client.cloudforceOne.requests.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {},
@@ -37,7 +37,7 @@ describe('resource requests', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.list('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.cloudforceOne.requests.list('023e105f4ecef8ad9ca31a8372d0c353', {
       page: 0,
       per_page: 10,
     });
@@ -51,7 +51,7 @@ describe('resource requests', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.cloudforceOne.requests.list('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.cloudforceOne.requests.list('023e105f4ecef8ad9ca31a8372d0c353', {
       page: 0,
       per_page: 10,
       completed_after: '2022-01-01T00:00:00Z',
@@ -66,7 +66,7 @@ describe('resource requests', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.delete(
+    const responsePromise = client.cloudforceOne.requests.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     );
@@ -82,7 +82,7 @@ describe('resource requests', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.delete(
+      client.cloudforceOne.requests.delete(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { path: '/_stainless_unknown_path' },
@@ -91,7 +91,7 @@ describe('resource requests', () => {
   });
 
   test('constants', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.constants('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.cloudforceOne.requests.constants('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -104,14 +104,14 @@ describe('resource requests', () => {
   test('constants: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.constants('023e105f4ecef8ad9ca31a8372d0c353', {
+      client.cloudforceOne.requests.constants('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.get(
+    const responsePromise = client.cloudforceOne.requests.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     );
@@ -127,7 +127,7 @@ describe('resource requests', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.get(
+      client.cloudforceOne.requests.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { path: '/_stainless_unknown_path' },
@@ -136,7 +136,7 @@ describe('resource requests', () => {
   });
 
   test('quota', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.quota('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.cloudforceOne.requests.quota('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -149,14 +149,14 @@ describe('resource requests', () => {
   test('quota: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.quota('023e105f4ecef8ad9ca31a8372d0c353', {
+      client.cloudforceOne.requests.quota('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('types', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.types('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.cloudforceOne.requests.types('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -169,7 +169,7 @@ describe('resource requests', () => {
   test('types: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.types('023e105f4ecef8ad9ca31a8372d0c353', {
+      client.cloudforceOne.requests.types('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);

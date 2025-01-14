@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ActiveSessionsAPI from './active-sessions';
 import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 import { SinglePage } from '../../../../pagination';
 
@@ -184,10 +183,14 @@ export interface ActiveSessionGetParams {
   account_id: string;
 }
 
-export namespace ActiveSessions {
-  export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
-  export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
-  export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
-  export import ActiveSessionListParams = ActiveSessionsAPI.ActiveSessionListParams;
-  export import ActiveSessionGetParams = ActiveSessionsAPI.ActiveSessionGetParams;
+ActiveSessions.ActiveSessionListResponsesSinglePage = ActiveSessionListResponsesSinglePage;
+
+export declare namespace ActiveSessions {
+  export {
+    type ActiveSessionListResponse as ActiveSessionListResponse,
+    type ActiveSessionGetResponse as ActiveSessionGetResponse,
+    ActiveSessionListResponsesSinglePage as ActiveSessionListResponsesSinglePage,
+    type ActiveSessionListParams as ActiveSessionListParams,
+    type ActiveSessionGetParams as ActiveSessionGetParams,
+  };
 }

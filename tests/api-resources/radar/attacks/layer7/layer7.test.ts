@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource layer7', () => {
   test('timeseries', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.timeseries();
+    const responsePromise = client.radar.attacks.layer7.timeseries();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,30 +24,30 @@ describe('resource layer7', () => {
   test('timeseries: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseries({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer7.timeseries({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('timeseries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.timeseries(
+      client.radar.attacks.layer7.timeseries(
         {
-          aggInterval: '1h',
-          asn: ['string', 'string', 'string'],
-          attack: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          aggInterval: '15m',
+          asn: ['string'],
+          attack: ['DDOS'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          httpMethod: ['GET', 'POST', 'DELETE'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
-          name: ['string', 'string', 'string'],
-          normalization: 'MIN0_MAX',
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['string'],
+          normalization: 'PERCENTAGE_CHANGE',
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as WebhooksAPI from './webhooks';
 import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
@@ -252,15 +251,19 @@ export interface WebhookGetParams {
   account_id: string;
 }
 
-export namespace Webhooks {
-  export import Webhooks = WebhooksAPI.Webhooks;
-  export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
-  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhooksSinglePage = WebhooksAPI.WebhooksSinglePage;
-  export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
-  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
-  export import WebhookListParams = WebhooksAPI.WebhookListParams;
-  export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
-  export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
+Webhooks.WebhooksSinglePage = WebhooksSinglePage;
+
+export declare namespace Webhooks {
+  export {
+    type Webhooks as Webhooks,
+    type WebhookCreateResponse as WebhookCreateResponse,
+    type WebhookUpdateResponse as WebhookUpdateResponse,
+    type WebhookDeleteResponse as WebhookDeleteResponse,
+    WebhooksSinglePage as WebhooksSinglePage,
+    type WebhookCreateParams as WebhookCreateParams,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookListParams as WebhookListParams,
+    type WebhookDeleteParams as WebhookDeleteParams,
+    type WebhookGetParams as WebhookGetParams,
+  };
 }

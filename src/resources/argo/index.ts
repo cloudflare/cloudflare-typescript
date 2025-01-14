@@ -2,16 +2,16 @@
 
 export { Argo } from './argo';
 export {
-  SmartRoutingEditResponse,
-  SmartRoutingGetResponse,
-  SmartRoutingEditParams,
-  SmartRoutingGetParams,
   SmartRouting,
+  type SmartRoutingEditResponse,
+  type SmartRoutingGetResponse,
+  type SmartRoutingEditParams,
+  type SmartRoutingGetParams,
 } from './smart-routing';
 export {
-  TieredCachingEditResponse,
-  TieredCachingGetResponse,
-  TieredCachingEditParams,
-  TieredCachingGetParams,
   TieredCaching,
+  type TieredCachingEditResponse,
+  type TieredCachingGetResponse,
+  type TieredCachingEditParams,
+  type TieredCachingGetParams,
 } from './tiered-caching';

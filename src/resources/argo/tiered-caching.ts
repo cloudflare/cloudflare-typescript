@@ -2,11 +2,20 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as TieredCachingAPI from './tiered-caching';
 
 export class TieredCaching extends APIResource {
   /**
-   * Updates enablement of Tiered Caching
+   * Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of
+   * lower-tiers and upper-tiers. If content is not cached in lower-tier data centers
+   * (generally the ones closest to a visitor), the lower-tier must ask an upper-tier
+   * to see if it has the content. If the upper-tier does not have the content, only
+   * the upper-tier can ask the origin for content. This practice improves bandwidth
+   * efficiency by limiting the number of data centers that can ask the origin for
+   * content, which reduces origin load and makes websites more cost-effective to
+   * operate. Additionally, Tiered Cache concentrates connections to origin servers
+   * so they come from a small number of data centers rather than the full set of
+   * network locations. This results in fewer open connections using server
+   * resources.
    */
   edit(
     params: TieredCachingEditParams,
@@ -21,7 +30,17 @@ export class TieredCaching extends APIResource {
   }
 
   /**
-   * Get Tiered Caching setting
+   * Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of
+   * lower-tiers and upper-tiers. If content is not cached in lower-tier data centers
+   * (generally the ones closest to a visitor), the lower-tier must ask an upper-tier
+   * to see if it has the content. If the upper-tier does not have the content, only
+   * the upper-tier can ask the origin for content. This practice improves bandwidth
+   * efficiency by limiting the number of data centers that can ask the origin for
+   * content, which reduces origin load and makes websites more cost-effective to
+   * operate. Additionally, Tiered Cache concentrates connections to origin servers
+   * so they come from a small number of data centers rather than the full set of
+   * network locations. This results in fewer open connections using server
+   * resources.
    */
   get(
     params: TieredCachingGetParams,
@@ -38,9 +57,9 @@ export class TieredCaching extends APIResource {
 
 export interface TieredCachingEditResponse {
   /**
-   * The identifier of the caching setting
+   * ID of the zone setting.
    */
-  id: string;
+  id: 'tiered_caching';
 
   /**
    * Whether the setting is editable
@@ -48,21 +67,21 @@ export interface TieredCachingEditResponse {
   editable: boolean;
 
   /**
-   * The time when the setting was last modified
-   */
-  modified_on: string;
-
-  /**
-   * The status of the feature being on / off
+   * The value of the feature
    */
   value: 'on' | 'off';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 export interface TieredCachingGetResponse {
   /**
-   * The identifier of the caching setting
+   * ID of the zone setting.
    */
-  id: string;
+  id: 'tiered_caching';
 
   /**
    * Whether the setting is editable
@@ -70,14 +89,14 @@ export interface TieredCachingGetResponse {
   editable: boolean;
 
   /**
-   * The time when the setting was last modified
-   */
-  modified_on: string;
-
-  /**
-   * The status of the feature being on / off
+   * The value of the feature
    */
   value: 'on' | 'off';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 export interface TieredCachingEditParams {
@@ -99,9 +118,11 @@ export interface TieredCachingGetParams {
   zone_id: string;
 }
 
-export namespace TieredCaching {
-  export import TieredCachingEditResponse = TieredCachingAPI.TieredCachingEditResponse;
-  export import TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
-  export import TieredCachingEditParams = TieredCachingAPI.TieredCachingEditParams;
-  export import TieredCachingGetParams = TieredCachingAPI.TieredCachingGetParams;
+export declare namespace TieredCaching {
+  export {
+    type TieredCachingEditResponse as TieredCachingEditResponse,
+    type TieredCachingGetResponse as TieredCachingGetResponse,
+    type TieredCachingEditParams as TieredCachingEditParams,
+    type TieredCachingGetParams as TieredCachingGetParams,
+  };
 }

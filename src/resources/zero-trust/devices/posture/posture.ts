@@ -2,8 +2,18 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as PostureAPI from './posture';
 import * as IntegrationsAPI from './integrations';
+import {
+  Integration,
+  IntegrationCreateParams,
+  IntegrationDeleteParams,
+  IntegrationDeleteResponse,
+  IntegrationEditParams,
+  IntegrationGetParams,
+  IntegrationListParams,
+  Integrations,
+  IntegrationsSinglePage,
+} from './integrations';
 import { SinglePage } from '../../../../pagination';
 
 export class Posture extends APIResource {
@@ -227,12 +237,14 @@ export type DeviceInput =
   | DiskEncryptionInput
   | DeviceInput.TeamsDevicesApplicationInputRequest
   | ClientCertificateInput
+  | DeviceInput.TeamsDevicesClientCertificateV2InputRequest
   | WorkspaceOneInput
   | CrowdstrikeInput
   | IntuneInput
   | KolideInput
   | TaniumInput
-  | SentineloneS2sInput;
+  | SentineloneS2sInput
+  | DeviceInput.TeamsDevicesCustomS2sInputRequest;
 
 export namespace DeviceInput {
   export interface TeamsDevicesCarbonblackInputRequest {
@@ -278,6 +290,70 @@ export namespace DeviceInput {
      */
     thumbprint?: string;
   }
+
+  export interface TeamsDevicesClientCertificateV2InputRequest {
+    /**
+     * UUID of Cloudflare managed certificate.
+     */
+    certificate_id: string;
+
+    /**
+     * Confirm the certificate was not imported from another device. We recommend
+     * keeping this enabled unless the certificate was deployed without a private key.
+     */
+    check_private_key: boolean;
+
+    /**
+     * Operating system
+     */
+    operating_system: 'windows' | 'linux' | 'mac';
+
+    /**
+     * Common Name that is protected by the client certificate. This may include one or
+     * more variables in the ${ } notation. Only ${serial_number} and ${hostname} are
+     * valid variables.
+     */
+    cn?: string;
+
+    /**
+     * List of values indicating purposes for which the certificate public key can be
+     * used
+     */
+    extended_key_usage?: Array<'clientAuth' | 'emailProtection'>;
+
+    locations?: TeamsDevicesClientCertificateV2InputRequest.Locations;
+  }
+
+  export namespace TeamsDevicesClientCertificateV2InputRequest {
+    export interface Locations {
+      /**
+       * List of paths to check for client certificate on linux.
+       */
+      paths?: Array<string>;
+
+      /**
+       * List of trust stores to check for client certificate.
+       */
+      trust_stores?: Array<'system' | 'user'>;
+    }
+  }
+
+  export interface TeamsDevicesCustomS2sInputRequest {
+    /**
+     * Posture Integration ID.
+     */
+    connection_id: string;
+
+    /**
+     * operator
+     */
+    operator: '<' | '<=' | '>' | '>=' | '==';
+
+    /**
+     * A value between 0-100 assigned to devices set by the 3rd party posture provider.
+     */
+    score: number;
+  }
 }
 
 /**
@@ -294,12 +370,14 @@ export type DeviceInputParam =
   | DiskEncryptionInputParam
   | DeviceInputParam.TeamsDevicesApplicationInputRequest
   | ClientCertificateInputParam
+  | DeviceInputParam.TeamsDevicesClientCertificateV2InputRequest
   | WorkspaceOneInputParam
   | CrowdstrikeInputParam
   | IntuneInputParam
   | KolideInputParam
   | TaniumInputParam
-  | SentineloneS2sInputParam;
+  | SentineloneS2sInputParam
+  | DeviceInputParam.TeamsDevicesCustomS2sInputRequest;
 
 export namespace DeviceInputParam {
   export interface TeamsDevicesCarbonblackInputRequest {
@@ -344,6 +422,70 @@ export namespace DeviceInputParam {
      * Signing certificate thumbprint.
      */
     thumbprint?: string;
+  }
+
+  export interface TeamsDevicesClientCertificateV2InputRequest {
+    /**
+     * UUID of Cloudflare managed certificate.
+     */
+    certificate_id: string;
+
+    /**
+     * Confirm the certificate was not imported from another device. We recommend
+     * keeping this enabled unless the certificate was deployed without a private key.
+     */
+    check_private_key: boolean;
+
+    /**
+     * Operating system
+     */
+    operating_system: 'windows' | 'linux' | 'mac';
+
+    /**
+     * Common Name that is protected by the client certificate. This may include one or
+     * more variables in the ${ } notation. Only ${serial_number} and ${hostname} are
+     * valid variables.
+     */
+    cn?: string;
+
+    /**
+     * List of values indicating purposes for which the certificate public key can be
+     * used
+     */
+    extended_key_usage?: Array<'clientAuth' | 'emailProtection'>;
+
+    locations?: TeamsDevicesClientCertificateV2InputRequest.Locations;
+  }
+
+  export namespace TeamsDevicesClientCertificateV2InputRequest {
+    export interface Locations {
+      /**
+       * List of paths to check for client certificate on linux.
+       */
+      paths?: Array<string>;
+
+      /**
+       * List of trust stores to check for client certificate.
+       */
+      trust_stores?: Array<'system' | 'user'>;
+    }
+  }
+
+  export interface TeamsDevicesCustomS2sInputRequest {
+    /**
+     * Posture Integration ID.
+     */
+    connection_id: string;
+
+    /**
+     * operator
+     */
+    operator: '<' | '<=' | '>' | '>=' | '==';
+
+    /**
+     * A value between 0-100 assigned to devices set by the 3rd party posture provider.
+     */
+    score: number;
   }
 }
 
@@ -409,13 +551,15 @@ export interface DevicePostureRule {
     | 'os_version'
     | 'domain_joined'
     | 'client_certificate'
+    | 'client_certificate_v2'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'
     | 'crowdstrike_s2s'
     | 'intune'
     | 'workspace_one'
-    | 'sentinelone_s2s';
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 }
 
 export interface DiskEncryptionInput {
@@ -629,7 +773,7 @@ export interface OSVersionInput {
   os_distro_revision?: string;
 
   /**
-   * Additional version data. For Mac or iOS, the Product Verison Extra. For Linux,
+   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
    * the kernel release version. (Mac, iOS, and Linux only)
    */
   os_version_extra?: string;
@@ -662,7 +806,7 @@ export interface OSVersionInputParam {
   os_distro_revision?: string;
 
   /**
-   * Additional version data. For Mac or iOS, the Product Verison Extra. For Linux,
+   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
    * the kernel release version. (Mac, iOS, and Linux only)
    */
   os_version_extra?: string;
@@ -739,6 +883,18 @@ export interface SentineloneS2sInput {
   network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
 
   /**
+   * Agent operational state.
+   */
+  operational_state?:
+    | 'na'
+    | 'partially_disabled'
+    | 'auto_fully_disabled'
+    | 'fully_disabled'
+    | 'auto_partially_disabled'
+    | 'disabled_error'
+    | 'db_corruption';
+
+  /**
    * operator
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
@@ -769,6 +925,18 @@ export interface SentineloneS2sInputParam {
    * Network status of device.
    */
   network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
+
+  /**
+   * Agent operational state.
+   */
+  operational_state?:
+    | 'na'
+    | 'partially_disabled'
+    | 'auto_fully_disabled'
+    | 'fully_disabled'
+    | 'auto_partially_disabled'
+    | 'disabled_error'
+    | 'db_corruption';
 
   /**
    * operator
@@ -922,13 +1090,15 @@ export interface PostureCreateParams {
     | 'os_version'
     | 'domain_joined'
     | 'client_certificate'
+    | 'client_certificate_v2'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'
     | 'crowdstrike_s2s'
     | 'intune'
     | 'workspace_one'
-    | 'sentinelone_s2s';
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 
   /**
    * Body param: The description of the device posture rule.
@@ -985,13 +1155,15 @@ export interface PostureUpdateParams {
     | 'os_version'
     | 'domain_joined'
     | 'client_certificate'
+    | 'client_certificate_v2'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'
     | 'crowdstrike_s2s'
     | 'intune'
     | 'workspace_one'
-    | 'sentinelone_s2s';
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 
   /**
    * Body param: The description of the device posture rule.
@@ -1033,39 +1205,48 @@ export interface PostureGetParams {
   account_id: string;
 }
 
-export namespace Posture {
-  export import CarbonblackInput = PostureAPI.CarbonblackInput;
-  export import ClientCertificateInput = PostureAPI.ClientCertificateInput;
-  export import CrowdstrikeInput = PostureAPI.CrowdstrikeInput;
-  export import DeviceInput = PostureAPI.DeviceInput;
-  export import DeviceMatch = PostureAPI.DeviceMatch;
-  export import DevicePostureRule = PostureAPI.DevicePostureRule;
-  export import DiskEncryptionInput = PostureAPI.DiskEncryptionInput;
-  export import DomainJoinedInput = PostureAPI.DomainJoinedInput;
-  export import FileInput = PostureAPI.FileInput;
-  export import FirewallInput = PostureAPI.FirewallInput;
-  export import IntuneInput = PostureAPI.IntuneInput;
-  export import KolideInput = PostureAPI.KolideInput;
-  export import OSVersionInput = PostureAPI.OSVersionInput;
-  export import SentineloneInput = PostureAPI.SentineloneInput;
-  export import SentineloneS2sInput = PostureAPI.SentineloneS2sInput;
-  export import TaniumInput = PostureAPI.TaniumInput;
-  export import UniqueClientIDInput = PostureAPI.UniqueClientIDInput;
-  export import WorkspaceOneInput = PostureAPI.WorkspaceOneInput;
-  export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
-  export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
-  export import PostureCreateParams = PostureAPI.PostureCreateParams;
-  export import PostureUpdateParams = PostureAPI.PostureUpdateParams;
-  export import PostureListParams = PostureAPI.PostureListParams;
-  export import PostureDeleteParams = PostureAPI.PostureDeleteParams;
-  export import PostureGetParams = PostureAPI.PostureGetParams;
-  export import Integrations = IntegrationsAPI.Integrations;
-  export import Integration = IntegrationsAPI.Integration;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
-  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export import IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
-  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+Posture.DevicePostureRulesSinglePage = DevicePostureRulesSinglePage;
+Posture.Integrations = Integrations;
+Posture.IntegrationsSinglePage = IntegrationsSinglePage;
+
+export declare namespace Posture {
+  export {
+    type CarbonblackInput as CarbonblackInput,
+    type ClientCertificateInput as ClientCertificateInput,
+    type CrowdstrikeInput as CrowdstrikeInput,
+    type DeviceInput as DeviceInput,
+    type DeviceMatch as DeviceMatch,
+    type DevicePostureRule as DevicePostureRule,
+    type DiskEncryptionInput as DiskEncryptionInput,
+    type DomainJoinedInput as DomainJoinedInput,
+    type FileInput as FileInput,
+    type FirewallInput as FirewallInput,
+    type IntuneInput as IntuneInput,
+    type KolideInput as KolideInput,
+    type OSVersionInput as OSVersionInput,
+    type SentineloneInput as SentineloneInput,
+    type SentineloneS2sInput as SentineloneS2sInput,
+    type TaniumInput as TaniumInput,
+    type UniqueClientIDInput as UniqueClientIDInput,
+    type WorkspaceOneInput as WorkspaceOneInput,
+    type PostureDeleteResponse as PostureDeleteResponse,
+    DevicePostureRulesSinglePage as DevicePostureRulesSinglePage,
+    type PostureCreateParams as PostureCreateParams,
+    type PostureUpdateParams as PostureUpdateParams,
+    type PostureListParams as PostureListParams,
+    type PostureDeleteParams as PostureDeleteParams,
+    type PostureGetParams as PostureGetParams,
+  };
+
+  export {
+    Integrations as Integrations,
+    type Integration as Integration,
+    type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    IntegrationsSinglePage as IntegrationsSinglePage,
+    type IntegrationCreateParams as IntegrationCreateParams,
+    type IntegrationListParams as IntegrationListParams,
+    type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationEditParams as IntegrationEditParams,
+    type IntegrationGetParams as IntegrationGetParams,
+  };
 }

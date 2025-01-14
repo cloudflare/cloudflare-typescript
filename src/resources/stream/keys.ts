@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as KeysAPI from './keys';
 
 export class Keys extends APIResource {
   /**
@@ -71,7 +70,7 @@ export interface Keys {
   pem?: string;
 }
 
-export type KeyDeleteResponse = unknown | string;
+export type KeyDeleteResponse = string;
 
 export type KeyGetResponse = Array<KeyGetResponse.KeyGetResponseItem>;
 
@@ -115,11 +114,13 @@ export interface KeyGetParams {
   account_id: string;
 }
 
-export namespace Keys {
-  export import Keys = KeysAPI.Keys;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
-  export import KeyCreateParams = KeysAPI.KeyCreateParams;
-  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
-  export import KeyGetParams = KeysAPI.KeyGetParams;
+export declare namespace Keys {
+  export {
+    type Keys as Keys,
+    type KeyDeleteResponse as KeyDeleteResponse,
+    type KeyGetResponse as KeyGetResponse,
+    type KeyCreateParams as KeyCreateParams,
+    type KeyDeleteParams as KeyDeleteParams,
+    type KeyGetParams as KeyGetParams,
+  };
 }

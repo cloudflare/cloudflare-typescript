@@ -2,13 +2,24 @@
 
 import { APIResource } from '../../../../resource';
 import * as ContentListsAPI from './content-lists/content-lists';
+import {
+  ContentList,
+  ContentListGetParams,
+  ContentListUpdateParams,
+  ContentLists,
+} from './content-lists/content-lists';
 
 export class IPFSUniversalPaths extends APIResource {
   contentLists: ContentListsAPI.ContentLists = new ContentListsAPI.ContentLists(this._client);
 }
 
-export namespace IPFSUniversalPaths {
-  export import ContentLists = ContentListsAPI.ContentLists;
-  export import ContentList = ContentListsAPI.ContentList;
-  export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
+IPFSUniversalPaths.ContentLists = ContentLists;
+
+export declare namespace IPFSUniversalPaths {
+  export {
+    ContentLists as ContentLists,
+    type ContentList as ContentList,
+    type ContentListUpdateParams as ContentListUpdateParams,
+    type ContentListGetParams as ContentListGetParams,
+  };
 }

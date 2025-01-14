@@ -2,19 +2,18 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BehavioursAPI from './behaviours';
 
 export class Behaviours extends APIResource {
   /**
    * Update configuration for risk behaviors
    */
   update(
-    accountIdentifier: string,
-    body: BehaviourUpdateParams,
+    params: BehaviourUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BehaviourUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/zt_risk_scoring/behaviors`, {
+      this._client.put(`/accounts/${account_id}/zt_risk_scoring/behaviors`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: BehaviourUpdateResponse }>
@@ -24,50 +23,54 @@ export class Behaviours extends APIResource {
   /**
    * Get all behaviors and associated configuration
    */
-  get(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<BehaviourGetResponse> {
+  get(params: BehaviourGetParams, options?: Core.RequestOptions): Core.APIPromise<BehaviourGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/zt_risk_scoring/behaviors`,
-        options,
-      ) as Core.APIPromise<{ result: BehaviourGetResponse }>
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/behaviors`, options) as Core.APIPromise<{
+        result: BehaviourGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export interface BehaviourUpdateResponse {
-  behaviors?: Record<string, BehaviourUpdateResponse.Behaviors>;
+  behaviors: Record<string, BehaviourUpdateResponse.Behaviors>;
 }
 
 export namespace BehaviourUpdateResponse {
   export interface Behaviors {
-    description?: string;
+    enabled: boolean;
 
-    enabled?: boolean;
-
-    name?: string;
-
-    risk_level?: 'low' | 'medium' | 'high';
+    risk_level: 'low' | 'medium' | 'high';
   }
 }
 
 export interface BehaviourGetResponse {
-  behaviors?: Record<string, BehaviourGetResponse.Behaviors>;
+  behaviors: Record<string, BehaviourGetResponse.Behaviors>;
 }
 
 export namespace BehaviourGetResponse {
   export interface Behaviors {
-    description?: string;
+    description: string;
 
-    enabled?: boolean;
+    enabled: boolean;
 
-    name?: string;
+    name: string;
 
-    risk_level?: 'low' | 'medium' | 'high';
+    risk_level: 'low' | 'medium' | 'high';
   }
 }
 
 export interface BehaviourUpdateParams {
-  behaviors?: Record<string, BehaviourUpdateParams.Behaviors>;
+  /**
+   * Path param: Account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  behaviors: Record<string, BehaviourUpdateParams.Behaviors>;
 }
 
 export namespace BehaviourUpdateParams {
@@ -78,8 +81,15 @@ export namespace BehaviourUpdateParams {
   }
 }
 
-export namespace Behaviours {
-  export import BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
-  export import BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
-  export import BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
+export interface BehaviourGetParams {
+  account_id: string;
+}
+
+export declare namespace Behaviours {
+  export {
+    type BehaviourUpdateResponse as BehaviourUpdateResponse,
+    type BehaviourGetResponse as BehaviourGetResponse,
+    type BehaviourUpdateParams as BehaviourUpdateParams,
+    type BehaviourGetParams as BehaviourGetParams,
+  };
 }

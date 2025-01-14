@@ -2,9 +2,18 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PagesAPI from './pages';
 import * as SpeedAPI from '../speed';
 import * as TestsAPI from './tests';
+import {
+  Test,
+  TestCreateParams,
+  TestDeleteParams,
+  TestDeleteResponse,
+  TestGetParams,
+  TestListParams,
+  Tests,
+  TestsV4PagePaginationArray,
+} from './tests';
 import { SinglePage } from '../../../pagination';
 
 export class Pages extends APIResource {
@@ -125,17 +134,26 @@ export interface PageTrendParams {
   end?: string;
 }
 
-export namespace Pages {
-  export import PageListResponse = PagesAPI.PageListResponse;
-  export import PageListResponsesSinglePage = PagesAPI.PageListResponsesSinglePage;
-  export import PageListParams = PagesAPI.PageListParams;
-  export import PageTrendParams = PagesAPI.PageTrendParams;
-  export import Tests = TestsAPI.Tests;
-  export import Test = TestsAPI.Test;
-  export import TestListResponse = TestsAPI.TestListResponse;
-  export import TestDeleteResponse = TestsAPI.TestDeleteResponse;
-  export import TestCreateParams = TestsAPI.TestCreateParams;
-  export import TestListParams = TestsAPI.TestListParams;
-  export import TestDeleteParams = TestsAPI.TestDeleteParams;
-  export import TestGetParams = TestsAPI.TestGetParams;
+Pages.PageListResponsesSinglePage = PageListResponsesSinglePage;
+Pages.Tests = Tests;
+Pages.TestsV4PagePaginationArray = TestsV4PagePaginationArray;
+
+export declare namespace Pages {
+  export {
+    type PageListResponse as PageListResponse,
+    PageListResponsesSinglePage as PageListResponsesSinglePage,
+    type PageListParams as PageListParams,
+    type PageTrendParams as PageTrendParams,
+  };
+
+  export {
+    Tests as Tests,
+    type Test as Test,
+    type TestDeleteResponse as TestDeleteResponse,
+    TestsV4PagePaginationArray as TestsV4PagePaginationArray,
+    type TestCreateParams as TestCreateParams,
+    type TestListParams as TestListParams,
+    type TestDeleteParams as TestDeleteParams,
+    type TestGetParams as TestGetParams,
+  };
 }

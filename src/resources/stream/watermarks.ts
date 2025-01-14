@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as WatermarksAPI from './watermarks';
 import { SinglePage } from '../../pagination';
 
 export class Watermarks extends APIResource {
@@ -139,7 +138,7 @@ export interface Watermark {
   width?: number;
 }
 
-export type WatermarkDeleteResponse = unknown | string;
+export type WatermarkDeleteResponse = string;
 
 export interface WatermarkCreateParams {
   /**
@@ -209,12 +208,16 @@ export interface WatermarkGetParams {
   account_id: string;
 }
 
-export namespace Watermarks {
-  export import Watermark = WatermarksAPI.Watermark;
-  export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
-  export import WatermarksSinglePage = WatermarksAPI.WatermarksSinglePage;
-  export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
-  export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
-  export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
-  export import WatermarkGetParams = WatermarksAPI.WatermarkGetParams;
+Watermarks.WatermarksSinglePage = WatermarksSinglePage;
+
+export declare namespace Watermarks {
+  export {
+    type Watermark as Watermark,
+    type WatermarkDeleteResponse as WatermarkDeleteResponse,
+    WatermarksSinglePage as WatermarksSinglePage,
+    type WatermarkCreateParams as WatermarkCreateParams,
+    type WatermarkListParams as WatermarkListParams,
+    type WatermarkDeleteParams as WatermarkDeleteParams,
+    type WatermarkGetParams as WatermarkGetParams,
+  };
 }

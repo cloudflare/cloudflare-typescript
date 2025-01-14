@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SinkholesAPI from './sinkholes';
 import { SinglePage } from '../../pagination';
 
 export class Sinkholes extends APIResource {
@@ -64,8 +63,12 @@ export interface SinkholeListParams {
   account_id: string;
 }
 
-export namespace Sinkholes {
-  export import Sinkhole = SinkholesAPI.Sinkhole;
-  export import SinkholesSinglePage = SinkholesAPI.SinkholesSinglePage;
-  export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
+Sinkholes.SinkholesSinglePage = SinkholesSinglePage;
+
+export declare namespace Sinkholes {
+  export {
+    type Sinkhole as Sinkhole,
+    SinkholesSinglePage as SinkholesSinglePage,
+    type SinkholeListParams as SinkholeListParams,
+  };
 }

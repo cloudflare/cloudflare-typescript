@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource lists', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.lists.create({
+    const responsePromise = client.zeroTrust.gateway.lists.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Admin Serial Numbers',
       type: 'SERIAL',
@@ -26,24 +26,20 @@ describe('resource lists', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.lists.create({
+    const response = await client.zeroTrust.gateway.lists.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Admin Serial Numbers',
       type: 'SERIAL',
       description: 'The serial numbers for administrators',
-      items: [
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-      ],
+      items: [{ description: 'Austin office IP', value: '8GE8721REF' }],
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.lists.update(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252', name: 'Admin Serial Numbers' },
-    );
+    const responsePromise = client.zeroTrust.gateway.lists.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      name: 'Admin Serial Numbers',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -54,15 +50,16 @@ describe('resource lists', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.lists.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.gateway.lists.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Admin Serial Numbers',
       description: 'The serial numbers for administrators',
+      items: [{ description: 'Austin office IP', value: '8GE8721REF' }],
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.lists.list({
+    const responsePromise = client.zeroTrust.gateway.lists.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -75,17 +72,16 @@ describe('resource lists', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.lists.list({
+    const response = await client.zeroTrust.gateway.lists.list({
       account_id: '699d98642c564d2e855e9661899b7252',
       type: 'SERIAL',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.lists.delete(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const responsePromise = client.zeroTrust.gateway.lists.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,13 +92,13 @@ describe('resource lists', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.lists.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.gateway.lists.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.lists.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const responsePromise = client.zeroTrust.gateway.lists.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -115,19 +111,15 @@ describe('resource lists', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.lists.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.gateway.lists.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      append: [
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-      ],
-      remove: ['8GE8721REF', '8GE8721REF', '8GE8721REF'],
+      append: [{ description: 'Austin office IP', value: '8GE8721REF' }],
+      remove: ['8GE8721REF'],
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.lists.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const responsePromise = client.zeroTrust.gateway.lists.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -140,7 +132,7 @@ describe('resource lists', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.lists.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.gateway.lists.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });

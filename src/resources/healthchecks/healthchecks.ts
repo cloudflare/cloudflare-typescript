@@ -3,7 +3,14 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as PreviewsAPI from './previews';
-import { SinglePage } from '../../pagination';
+import {
+  PreviewCreateParams,
+  PreviewDeleteParams,
+  PreviewDeleteResponse,
+  PreviewGetParams,
+  Previews,
+} from './previews';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Healthchecks extends APIResource {
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
@@ -43,9 +50,9 @@ export class Healthchecks extends APIResource {
   list(
     params: HealthcheckListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<HealthchecksSinglePage, Healthcheck> {
+  ): Core.PagePromise<HealthchecksV4PagePaginationArray, Healthcheck> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksSinglePage, {
+    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -101,7 +108,7 @@ export class Healthchecks extends APIResource {
   }
 }
 
-export class HealthchecksSinglePage extends SinglePage<Healthcheck> {}
+export class HealthchecksV4PagePaginationArray extends V4PagePaginationArray<Healthcheck> {}
 
 /**
  * WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe,
@@ -615,21 +622,11 @@ export interface HealthcheckUpdateParams {
   type?: string;
 }
 
-export interface HealthcheckListParams {
+export interface HealthcheckListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
   zone_id: string;
-
-  /**
-   * Query param: Page number of paginated results.
-   */
-  page?: unknown;
-
-  /**
-   * Query param: Maximum number of results per page. Must be a multiple of 5.
-   */
-  per_page?: unknown;
 }
 
 export interface HealthcheckDeleteParams {
@@ -727,10 +724,14 @@ export interface HealthcheckGetParams {
   zone_id: string;
 }
 
-export namespace Healthchecks {
-  export import Previews = PreviewsAPI.Previews;
-  export import PreviewDeleteResponse = PreviewsAPI.PreviewDeleteResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
-  export import PreviewDeleteParams = PreviewsAPI.PreviewDeleteParams;
-  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
+Healthchecks.Previews = Previews;
+
+export declare namespace Healthchecks {
+  export {
+    Previews as Previews,
+    type PreviewDeleteResponse as PreviewDeleteResponse,
+    type PreviewCreateParams as PreviewCreateParams,
+    type PreviewDeleteParams as PreviewDeleteParams,
+    type PreviewGetParams as PreviewGetParams,
+  };
 }

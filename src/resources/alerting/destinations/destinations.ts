@@ -2,8 +2,33 @@
 
 import { APIResource } from '../../../resource';
 import * as EligibleAPI from './eligible';
+import { Eligible, EligibleGetParams, EligibleGetResponse } from './eligible';
 import * as PagerdutyAPI from './pagerduty';
+import {
+  Pagerduty,
+  PagerdutyCreateParams,
+  PagerdutyCreateResponse,
+  PagerdutyDeleteParams,
+  PagerdutyDeleteResponse,
+  PagerdutyGetParams,
+  PagerdutyGetResponse,
+  PagerdutyLinkParams,
+  PagerdutyLinkResponse,
+  PagerdutyResource,
+} from './pagerduty';
 import * as WebhooksAPI from './webhooks';
+import {
+  WebhookCreateParams,
+  WebhookCreateResponse,
+  WebhookDeleteParams,
+  WebhookDeleteResponse,
+  WebhookGetParams,
+  WebhookListParams,
+  WebhookUpdateParams,
+  WebhookUpdateResponse,
+  Webhooks,
+  WebhooksSinglePage,
+} from './webhooks';
 
 export class Destinations extends APIResource {
   eligible: EligibleAPI.Eligible = new EligibleAPI.Eligible(this._client);
@@ -11,28 +36,40 @@ export class Destinations extends APIResource {
   webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
 }
 
-export namespace Destinations {
-  export import Eligible = EligibleAPI.Eligible;
-  export import EligibleGetResponse = EligibleAPI.EligibleGetResponse;
-  export import EligibleGetParams = EligibleAPI.EligibleGetParams;
-  export import PagerdutyResource = PagerdutyAPI.PagerdutyResource;
-  export import Pagerduty = PagerdutyAPI.Pagerduty;
-  export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
-  export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
-  export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
-  export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
-  export import PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;
-  export import PagerdutyDeleteParams = PagerdutyAPI.PagerdutyDeleteParams;
-  export import PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
-  export import PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
-  export import Webhooks = WebhooksAPI.Webhooks;
-  export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
-  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhooksSinglePage = WebhooksAPI.WebhooksSinglePage;
-  export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
-  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
-  export import WebhookListParams = WebhooksAPI.WebhookListParams;
-  export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
-  export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
+Destinations.Eligible = Eligible;
+Destinations.PagerdutyResource = PagerdutyResource;
+Destinations.WebhooksSinglePage = WebhooksSinglePage;
+
+export declare namespace Destinations {
+  export {
+    Eligible as Eligible,
+    type EligibleGetResponse as EligibleGetResponse,
+    type EligibleGetParams as EligibleGetParams,
+  };
+
+  export {
+    PagerdutyResource as PagerdutyResource,
+    type Pagerduty as Pagerduty,
+    type PagerdutyCreateResponse as PagerdutyCreateResponse,
+    type PagerdutyDeleteResponse as PagerdutyDeleteResponse,
+    type PagerdutyGetResponse as PagerdutyGetResponse,
+    type PagerdutyLinkResponse as PagerdutyLinkResponse,
+    type PagerdutyCreateParams as PagerdutyCreateParams,
+    type PagerdutyDeleteParams as PagerdutyDeleteParams,
+    type PagerdutyGetParams as PagerdutyGetParams,
+    type PagerdutyLinkParams as PagerdutyLinkParams,
+  };
+
+  export {
+    type Webhooks as Webhooks,
+    type WebhookCreateResponse as WebhookCreateResponse,
+    type WebhookUpdateResponse as WebhookUpdateResponse,
+    type WebhookDeleteResponse as WebhookDeleteResponse,
+    WebhooksSinglePage as WebhooksSinglePage,
+    type WebhookCreateParams as WebhookCreateParams,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookListParams as WebhookListParams,
+    type WebhookDeleteParams as WebhookDeleteParams,
+    type WebhookGetParams as WebhookGetParams,
+  };
 }

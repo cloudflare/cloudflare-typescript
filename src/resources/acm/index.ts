@@ -2,10 +2,10 @@
 
 export { ACM } from './acm';
 export {
-  CertificateAuthority,
-  TotalTLSCreateResponse,
-  TotalTLSGetResponse,
-  TotalTLSCreateParams,
-  TotalTLSGetParams,
   TotalTLS,
+  type CertificateAuthority,
+  type TotalTLSCreateResponse,
+  type TotalTLSGetResponse,
+  type TotalTLSCreateParams,
+  type TotalTLSGetParams,
 } from './total-tls';

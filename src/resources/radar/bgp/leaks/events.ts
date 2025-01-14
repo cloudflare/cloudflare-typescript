@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as EventsAPI from './events';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Events extends APIResource {
@@ -34,66 +33,46 @@ export class Events extends APIResource {
 export class EventListResponsesV4PagePagination extends V4PagePagination<EventListResponse> {}
 
 export interface EventListResponse {
-  result: EventListResponse.Result;
+  asn_info: Array<EventListResponse.ASNInfo>;
 
-  result_info: EventListResponse.ResultInfo;
-
-  success: boolean;
+  events: Array<EventListResponse.Event>;
 }
 
 export namespace EventListResponse {
-  export interface Result {
-    asn_info: Array<Result.ASNInfo>;
+  export interface ASNInfo {
+    asn: number;
 
-    events: Array<Result.Event>;
+    country_code: string;
+
+    org_name: string;
   }
 
-  export namespace Result {
-    export interface ASNInfo {
-      asn: number;
+  export interface Event {
+    id: number;
 
-      country_code: string;
+    countries: Array<string>;
 
-      org_name: string;
-    }
+    detected_ts: string;
 
-    export interface Event {
-      id: number;
+    finished: boolean;
 
-      countries: Array<string>;
+    leak_asn: number;
 
-      detected_ts: string;
+    leak_count: number;
 
-      finished: boolean;
+    leak_seg: Array<number>;
 
-      leak_asn: number;
+    leak_type: number;
 
-      leak_count: number;
+    max_ts: string;
 
-      leak_seg: Array<number>;
+    min_ts: string;
 
-      leak_type: number;
+    origin_count: number;
 
-      max_ts: string;
+    peer_count: number;
 
-      min_ts: string;
-
-      origin_count: number;
-
-      peer_count: number;
-
-      prefix_count: number;
-    }
-  }
-
-  export interface ResultInfo {
-    count: number;
-
-    page: number;
-
-    per_page: number;
-
-    total_count: number;
+    prefix_count: number;
   }
 }
 
@@ -150,8 +129,12 @@ export interface EventListParams extends V4PagePaginationParams {
   sortOrder?: 'ASC' | 'DESC';
 }
 
-export namespace Events {
-  export import EventListResponse = EventsAPI.EventListResponse;
-  export import EventListResponsesV4PagePagination = EventsAPI.EventListResponsesV4PagePagination;
-  export import EventListParams = EventsAPI.EventListParams;
+Events.EventListResponsesV4PagePagination = EventListResponsesV4PagePagination;
+
+export declare namespace Events {
+  export {
+    type EventListResponse as EventListResponse,
+    EventListResponsesV4PagePagination as EventListResponsesV4PagePagination,
+    type EventListParams as EventListParams,
+  };
 }

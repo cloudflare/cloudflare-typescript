@@ -5,6 +5,15 @@ import * as Core from '../../core';
 import * as CustomHostnamesAPI from './custom-hostnames';
 import * as Shared from '../shared';
 import * as FallbackOriginAPI from './fallback-origin';
+import {
+  FallbackOrigin,
+  FallbackOriginDeleteParams,
+  FallbackOriginDeleteResponse,
+  FallbackOriginGetParams,
+  FallbackOriginGetResponse,
+  FallbackOriginUpdateParams,
+  FallbackOriginUpdateResponse,
+} from './fallback-origin';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class CustomHostnames extends APIResource {
@@ -124,9 +133,6 @@ export interface CustomHostname {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostname.SSL;
 
   /**
@@ -135,9 +141,10 @@ export interface CustomHostname {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostname.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -189,13 +196,10 @@ export interface CustomHostname {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostname {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -238,7 +242,7 @@ export namespace CustomHostname {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -255,9 +259,6 @@ export namespace CustomHostname {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -317,9 +318,6 @@ export namespace CustomHostname {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -355,15 +353,12 @@ export namespace CustomHostname {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -388,16 +383,6 @@ export namespace CustomHostname {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
   }
 
   /**
@@ -471,9 +456,6 @@ export interface CustomHostnameCreateResponse {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostnameCreateResponse.SSL;
 
   /**
@@ -482,9 +464,10 @@ export interface CustomHostnameCreateResponse {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostnameCreateResponse.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -536,13 +519,10 @@ export interface CustomHostnameCreateResponse {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostnameCreateResponse {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -585,7 +565,7 @@ export namespace CustomHostnameCreateResponse {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -602,9 +582,6 @@ export namespace CustomHostnameCreateResponse {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -664,9 +641,6 @@ export namespace CustomHostnameCreateResponse {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -702,15 +676,12 @@ export namespace CustomHostnameCreateResponse {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -735,16 +706,6 @@ export namespace CustomHostnameCreateResponse {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
   }
 
   /**
@@ -796,9 +757,6 @@ export interface CustomHostnameListResponse {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostnameListResponse.SSL;
 
   /**
@@ -807,9 +765,10 @@ export interface CustomHostnameListResponse {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostnameListResponse.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -861,13 +820,10 @@ export interface CustomHostnameListResponse {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostnameListResponse {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -910,7 +866,7 @@ export namespace CustomHostnameListResponse {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -927,9 +883,6 @@ export namespace CustomHostnameListResponse {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -989,9 +942,6 @@ export namespace CustomHostnameListResponse {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1027,15 +977,12 @@ export namespace CustomHostnameListResponse {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -1060,16 +1007,6 @@ export namespace CustomHostnameListResponse {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
   }
 
   /**
@@ -1128,9 +1065,6 @@ export interface CustomHostnameEditResponse {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostnameEditResponse.SSL;
 
   /**
@@ -1139,9 +1073,10 @@ export interface CustomHostnameEditResponse {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostnameEditResponse.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -1193,13 +1128,10 @@ export interface CustomHostnameEditResponse {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostnameEditResponse {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -1242,7 +1174,7 @@ export namespace CustomHostnameEditResponse {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -1259,9 +1191,6 @@ export namespace CustomHostnameEditResponse {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -1321,9 +1250,6 @@ export namespace CustomHostnameEditResponse {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1359,15 +1285,12 @@ export namespace CustomHostnameEditResponse {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -1392,16 +1315,6 @@ export namespace CustomHostnameEditResponse {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
   }
 
   /**
@@ -1453,9 +1366,6 @@ export interface CustomHostnameGetResponse {
    */
   hostname: string;
 
-  /**
-   * SSL properties for the custom hostname.
-   */
   ssl: CustomHostnameGetResponse.SSL;
 
   /**
@@ -1464,9 +1374,10 @@ export interface CustomHostnameGetResponse {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostnameGetResponse.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -1518,13 +1429,10 @@ export interface CustomHostnameGetResponse {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostnameGetResponse {
-  /**
-   * SSL properties for the custom hostname.
-   */
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -1567,7 +1475,7 @@ export namespace CustomHostnameGetResponse {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -1584,9 +1492,6 @@ export namespace CustomHostnameGetResponse {
      */
     serial_number?: string;
 
-    /**
-     * SSL specific settings.
-     */
     settings?: SSL.Settings;
 
     /**
@@ -1646,9 +1551,6 @@ export namespace CustomHostnameGetResponse {
   }
 
   export namespace SSL {
-    /**
-     * SSL specific settings.
-     */
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1684,15 +1586,12 @@ export namespace CustomHostnameGetResponse {
       message?: string;
     }
 
-    /**
-     * Certificate's required validation record.
-     */
     export interface ValidationRecord {
       /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -1717,16 +1616,6 @@ export namespace CustomHostnameGetResponse {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
   }
 
   /**
@@ -1784,9 +1673,10 @@ export interface CustomHostnameCreateParams {
   ssl: CustomHostnameCreateParams.SSL;
 
   /**
-   * Body param: These are per-hostname (customer) settings.
+   * Body param: Unique key/value metadata for this hostname. These are per-hostname
+   * (customer) settings.
    */
-  custom_metadata?: CustomHostnameCreateParams.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 }
 
 export namespace CustomHostnameCreateParams {
@@ -1806,6 +1696,12 @@ export namespace CustomHostnameCreateParams {
      * The Certificate Authority that will issue the certificate
      */
     certificate_authority?: Shared.CertificateCAParam;
+
+    /**
+     * Whether or not to add Cloudflare Branding for the order. This will add a
+     * subdomain of sni.cloudflaressl.com as the Common Name if set to true
+     */
+    cloudflare_branding?: boolean;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1871,16 +1767,6 @@ export namespace CustomHostnameCreateParams {
       tls_1_3?: 'on' | 'off';
     }
   }
-
-  /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
 }
 
 export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
@@ -1932,9 +1818,10 @@ export interface CustomHostnameEditParams {
   zone_id: string;
 
   /**
-   * Body param: These are per-hostname (customer) settings.
+   * Body param: Unique key/value metadata for this hostname. These are per-hostname
+   * (customer) settings.
    */
-  custom_metadata?: CustomHostnameEditParams.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * Body param: a valid hostname that’s been added to your DNS zone as an A, AAAA,
@@ -1959,16 +1846,6 @@ export interface CustomHostnameEditParams {
 
 export namespace CustomHostnameEditParams {
   /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
-
-  /**
    * SSL properties used when creating the custom hostname.
    */
   export interface SSL {
@@ -1984,6 +1861,12 @@ export namespace CustomHostnameEditParams {
      * The Certificate Authority that will issue the certificate
      */
     certificate_authority?: Shared.CertificateCAParam;
+
+    /**
+     * Whether or not to add Cloudflare Branding for the order. This will add a
+     * subdomain of sni.cloudflaressl.com as the Common Name if set to true
+     */
+    cloudflare_branding?: boolean;
 
     /**
      * If a custom uploaded certificate is used.
@@ -2058,12 +1941,16 @@ export interface CustomHostnameGetParams {
   zone_id: string;
 }
 
-export namespace CustomHostnames {
-  export import FallbackOrigin = FallbackOriginAPI.FallbackOrigin;
-  export import FallbackOriginUpdateResponse = FallbackOriginAPI.FallbackOriginUpdateResponse;
-  export import FallbackOriginDeleteResponse = FallbackOriginAPI.FallbackOriginDeleteResponse;
-  export import FallbackOriginGetResponse = FallbackOriginAPI.FallbackOriginGetResponse;
-  export import FallbackOriginUpdateParams = FallbackOriginAPI.FallbackOriginUpdateParams;
-  export import FallbackOriginDeleteParams = FallbackOriginAPI.FallbackOriginDeleteParams;
-  export import FallbackOriginGetParams = FallbackOriginAPI.FallbackOriginGetParams;
+CustomHostnames.FallbackOrigin = FallbackOrigin;
+
+export declare namespace CustomHostnames {
+  export {
+    FallbackOrigin as FallbackOrigin,
+    type FallbackOriginUpdateResponse as FallbackOriginUpdateResponse,
+    type FallbackOriginDeleteResponse as FallbackOriginDeleteResponse,
+    type FallbackOriginGetResponse as FallbackOriginGetResponse,
+    type FallbackOriginUpdateParams as FallbackOriginUpdateParams,
+    type FallbackOriginDeleteParams as FallbackOriginDeleteParams,
+    type FallbackOriginGetParams as FallbackOriginGetParams,
+  };
 }

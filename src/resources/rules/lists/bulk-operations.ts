@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BulkOperationsAPI from './bulk-operations';
 
 export class BulkOperations extends APIResource {
   /**
@@ -16,12 +15,12 @@ export class BulkOperations extends APIResource {
     accountIdentifier: string,
     operationId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkOperationGetResponse | null> {
+  ): Core.APIPromise<BulkOperationGetResponse> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/rules/lists/bulk_operations/${operationId}`,
         options,
-      ) as Core.APIPromise<{ result: BulkOperationGetResponse | null }>
+      ) as Core.APIPromise<{ result: BulkOperationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -31,9 +30,31 @@ export class BulkOperations extends APIResource {
  */
 export type OperationStatus = 'pending' | 'running' | 'completed' | 'failed';
 
-export type BulkOperationGetResponse = Array<unknown>;
+export interface BulkOperationGetResponse {
+  /**
+   * The unique operation ID of the asynchronous action.
+   */
+  id: string;
 
-export namespace BulkOperations {
-  export import OperationStatus = BulkOperationsAPI.OperationStatus;
-  export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
+  /**
+   * The current status of the asynchronous operation.
+   */
+  status: OperationStatus;
+
+  /**
+   * The RFC 3339 timestamp of when the operation was completed.
+   */
+  completed?: string;
+
+  /**
+   * A message describing the error when the status is `failed`.
+   */
+  error?: string;
+}
+
+export declare namespace BulkOperations {
+  export {
+    type OperationStatus as OperationStatus,
+    type BulkOperationGetResponse as BulkOperationGetResponse,
+  };
 }

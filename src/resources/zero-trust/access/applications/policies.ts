@@ -3,9 +3,8 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from '../../../../error';
-import * as PoliciesAPI from './policies';
-import * as AccessAPI from '../access';
+import { CloudflareError } from 'cloudflare/error';
+import * as PoliciesAPI from '../policies';
 import * as ApplicationsAPI from './applications';
 import { SinglePage } from '../../../../pagination';
 
@@ -223,359 +222,28 @@ export class Policies extends APIResource {
 
 export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
 
-/**
- * A group of email addresses that can approve a temporary authentication request.
- */
-export interface ApprovalGroup {
+export interface PolicyCreateResponse extends ApplicationsAPI.ApplicationPolicy {
   /**
-   * The number of approvals needed to obtain access.
-   */
-  approvals_needed: number;
-
-  /**
-   * A list of emails that can approve the access request.
-   */
-  email_addresses?: Array<string>;
-
-  /**
-   * The UUID of an re-usable email list.
-   */
-  email_list_uuid?: string;
-}
-
-/**
- * A group of email addresses that can approve a temporary authentication request.
- */
-export interface ApprovalGroupParam {
-  /**
-   * The number of approvals needed to obtain access.
-   */
-  approvals_needed: number;
-
-  /**
-   * A list of emails that can approve the access request.
-   */
-  email_addresses?: Array<string>;
-
-  /**
-   * The UUID of an re-usable email list.
-   */
-  email_list_uuid?: string;
-}
-
-export interface Policy {
-  /**
-   * UUID
-   */
-  id?: string;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<Policy.ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  created_at?: string;
-
-  /**
-   * The action Access will take if a user matches this policy.
-   */
-  decision?: ApplicationsAPI.Decision;
-
-  /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
-   */
-  include?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * The name of the Access policy.
-   */
-  name?: string;
-
-  /**
-   * The order of execution for this policy. Must be unique for each policy.
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
    */
   precedence?: number;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRule>;
-
-  updated_at?: string;
 }
 
-export namespace Policy {
+export interface PolicyUpdateResponse extends ApplicationsAPI.ApplicationPolicy {
   /**
-   * A group of email addresses that can approve a temporary authentication request.
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
    */
-  export interface ApprovalGroup {
-    /**
-     * The number of approvals needed to obtain access.
-     */
-    approvals_needed: number;
-
-    /**
-     * A list of emails that can approve the access request.
-     */
-    email_addresses?: Array<unknown>;
-
-    /**
-     * The UUID of an re-usable email list.
-     */
-    email_list_uuid?: string;
-  }
+  precedence?: number;
 }
 
-export interface PolicyCreateResponse {
+export interface PolicyListResponse extends ApplicationsAPI.ApplicationPolicy {
   /**
-   * The UUID of the policy
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
    */
-  id?: string;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  created_at?: string;
-
-  /**
-   * The action Access will take if a user matches this policy.
-   */
-  decision?: ApplicationsAPI.Decision;
-
-  /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
-   */
-  include?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * The name of the Access policy.
-   */
-  name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
-  updated_at?: string;
-}
-
-export interface PolicyUpdateResponse {
-  /**
-   * The UUID of the policy
-   */
-  id?: string;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  created_at?: string;
-
-  /**
-   * The action Access will take if a user matches this policy.
-   */
-  decision?: ApplicationsAPI.Decision;
-
-  /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
-   */
-  include?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * The name of the Access policy.
-   */
-  name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
-  updated_at?: string;
-}
-
-export interface PolicyListResponse {
-  /**
-   * The UUID of the policy
-   */
-  id?: string;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  created_at?: string;
-
-  /**
-   * The action Access will take if a user matches this policy.
-   */
-  decision?: ApplicationsAPI.Decision;
-
-  /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
-   */
-  include?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * The name of the Access policy.
-   */
-  name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
-  updated_at?: string;
+  precedence?: number;
 }
 
 export interface PolicyDeleteResponse {
@@ -585,97 +253,15 @@ export interface PolicyDeleteResponse {
   id?: string;
 }
 
-export interface PolicyGetResponse {
+export interface PolicyGetResponse extends ApplicationsAPI.ApplicationPolicy {
   /**
-   * The UUID of the policy
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
    */
-  id?: string;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  created_at?: string;
-
-  /**
-   * The action Access will take if a user matches this policy.
-   */
-  decision?: ApplicationsAPI.Decision;
-
-  /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
-   */
-  include?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * The name of the Access policy.
-   */
-  name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
-  updated_at?: string;
+  precedence?: number;
 }
 
 export interface PolicyCreateParams {
-  /**
-   * Body param: The action Access will take if a user matches this policy.
-   */
-  decision: ApplicationsAPI.DecisionParam;
-
-  /**
-   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
-   * only one of the Include rules.
-   */
-  include: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * Body param: The name of the Access policy.
-   */
-  name: string;
-
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
@@ -691,19 +277,13 @@ export interface PolicyCreateParams {
   /**
    * Body param: Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<ApprovalGroupParam>;
+  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
 
   /**
    * Body param: Requires the user to request access from an administrator at the
    * start of each session.
    */
   approval_required?: boolean;
-
-  /**
-   * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
-   * user cannot meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: Require this application to be served in an isolated browser for
@@ -729,12 +309,6 @@ export interface PolicyCreateParams {
    * application.
    */
   purpose_justification_required?: boolean;
-
-  /**
-   * Body param: Rules evaluated with an AND logical operator. To match the policy, a
-   * user must meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: The amount of time that tokens issued for the application will be
@@ -746,22 +320,6 @@ export interface PolicyCreateParams {
 
 export interface PolicyUpdateParams {
   /**
-   * Body param: The action Access will take if a user matches this policy.
-   */
-  decision: ApplicationsAPI.DecisionParam;
-
-  /**
-   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
-   * only one of the Include rules.
-   */
-  include: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * Body param: The name of the Access policy.
-   */
-  name: string;
-
-  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -776,19 +334,13 @@ export interface PolicyUpdateParams {
   /**
    * Body param: Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<ApprovalGroupParam>;
+  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
 
   /**
    * Body param: Requires the user to request access from an administrator at the
    * start of each session.
    */
   approval_required?: boolean;
-
-  /**
-   * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
-   * user cannot meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: Require this application to be served in an isolated browser for
@@ -814,12 +366,6 @@ export interface PolicyUpdateParams {
    * application.
    */
   purpose_justification_required?: boolean;
-
-  /**
-   * Body param: Rules evaluated with an AND logical operator. To match the policy, a
-   * user must meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: The amount of time that tokens issued for the application will be
@@ -865,18 +411,20 @@ export interface PolicyGetParams {
   zone_id?: string;
 }
 
-export namespace Policies {
-  export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
-  export import Policy = PoliciesAPI.Policy;
-  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
-  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
-  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
-  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
+Policies.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
+
+export declare namespace Policies {
+  export {
+    type PolicyCreateResponse as PolicyCreateResponse,
+    type PolicyUpdateResponse as PolicyUpdateResponse,
+    type PolicyListResponse as PolicyListResponse,
+    type PolicyDeleteResponse as PolicyDeleteResponse,
+    type PolicyGetResponse as PolicyGetResponse,
+    PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyUpdateParams as PolicyUpdateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
 }

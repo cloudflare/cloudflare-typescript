@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PreviewsAPI from './previews';
 
 export class Previews extends APIResource {
   /**
@@ -40,12 +39,6 @@ export interface PreviewCreateParams {
   account_id: string;
 
   /**
-   * Body param: The expected HTTP response code or code range of the health check.
-   * This parameter is only valid for HTTP and HTTPS monitors.
-   */
-  expected_codes: string;
-
-  /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
    * parameter is currently only valid for HTTP and HTTPS monitors.
    */
@@ -76,6 +69,12 @@ export interface PreviewCreateParams {
   expected_body?: string;
 
   /**
+   * Body param: The expected HTTP response code or code range of the health check.
+   * This parameter is only valid for HTTP and HTTPS monitors.
+   */
+  expected_codes?: string;
+
+  /**
    * Body param: Follow redirects if returned by the origin. This parameter is only
    * valid for HTTP and HTTPS monitors.
    */
@@ -86,7 +85,7 @@ export interface PreviewCreateParams {
    * recommended you set a Host header by default. The User-Agent header cannot be
    * overridden. This parameter is only valid for HTTP and HTTPS monitors.
    */
-  header?: unknown;
+  header?: Record<string, Array<string>>;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may
@@ -139,7 +138,9 @@ export interface PreviewCreateParams {
   type?: 'http' | 'https' | 'tcp' | 'udp_icmp' | 'icmp_ping' | 'smtp';
 }
 
-export namespace Previews {
-  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
+export declare namespace Previews {
+  export {
+    type PreviewCreateResponse as PreviewCreateResponse,
+    type PreviewCreateParams as PreviewCreateParams,
+  };
 }

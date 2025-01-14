@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as SecretsAPI from './secrets';
 import { SinglePage } from '../../../../../pagination';
 
 export class Secrets extends APIResource {
@@ -25,7 +24,7 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * Fetch secrets from a script uploaded to a Workers for Platforms namespace.
+   * List secrets from a script uploaded to a Workers for Platforms namespace.
    */
   list(
     dispatchNamespace: string,
@@ -40,15 +39,40 @@ export class Secrets extends APIResource {
       options,
     );
   }
+
+  /**
+   * Get secret from a script uploaded to a Workers for Platforms namespace.
+   */
+  get(
+    dispatchNamespace: string,
+    scriptName: string,
+    secretName: string,
+    params: SecretGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecretGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets/${secretName}`,
+        options,
+      ) as Core.APIPromise<{ result: SecretGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class SecretListResponsesSinglePage extends SinglePage<SecretListResponse> {}
 
-export interface SecretUpdateResponse {
+export interface WorkersSecretModel {
   /**
-   * The name of this secret, this is what will be to access it inside the Worker.
+   * The name of this secret, this is what will be used to access it inside the
+   * Worker.
    */
   name?: string;
+
+  /**
+   * The value of the secret.
+   */
+  text?: string;
 
   /**
    * The type of secret to put.
@@ -56,14 +80,41 @@ export interface SecretUpdateResponse {
   type?: 'secret_text';
 }
 
-export interface SecretListResponse {
+export interface SecretUpdateResponse {
   /**
-   * The name of this secret, this is what will be to access it inside the Worker.
+   * The name of this secret, this is what will be used to access it inside the
+   * Worker.
    */
   name?: string;
 
   /**
-   * The type of secret to put.
+   * The type of secret.
+   */
+  type?: 'secret_text';
+}
+
+export interface SecretListResponse {
+  /**
+   * The name of this secret, this is what will be used to access it inside the
+   * Worker.
+   */
+  name?: string;
+
+  /**
+   * The type of secret.
+   */
+  type?: 'secret_text';
+}
+
+export interface SecretGetResponse {
+  /**
+   * The name of this secret, this is what will be used to access it inside the
+   * Worker.
+   */
+  name?: string;
+
+  /**
+   * The type of secret.
    */
   type?: 'secret_text';
 }
@@ -75,8 +126,8 @@ export interface SecretUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The name of this secret, this is what will be to access it inside
-   * the Worker.
+   * Body param: The name of this secret, this is what will be used to access it
+   * inside the Worker.
    */
   name?: string;
 
@@ -98,10 +149,24 @@ export interface SecretListParams {
   account_id: string;
 }
 
-export namespace Secrets {
-  export import SecretUpdateResponse = SecretsAPI.SecretUpdateResponse;
-  export import SecretListResponse = SecretsAPI.SecretListResponse;
-  export import SecretListResponsesSinglePage = SecretsAPI.SecretListResponsesSinglePage;
-  export import SecretUpdateParams = SecretsAPI.SecretUpdateParams;
-  export import SecretListParams = SecretsAPI.SecretListParams;
+export interface SecretGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+Secrets.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
+
+export declare namespace Secrets {
+  export {
+    type WorkersSecretModel as WorkersSecretModel,
+    type SecretUpdateResponse as SecretUpdateResponse,
+    type SecretListResponse as SecretListResponse,
+    type SecretGetResponse as SecretGetResponse,
+    SecretListResponsesSinglePage as SecretListResponsesSinglePage,
+    type SecretUpdateParams as SecretUpdateParams,
+    type SecretListParams as SecretListParams,
+    type SecretGetParams as SecretGetParams,
+  };
 }

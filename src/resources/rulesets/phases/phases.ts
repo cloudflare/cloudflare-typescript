@@ -3,11 +3,18 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
-import * as PhasesAPI from './phases';
+import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
 import * as VersionsAPI from './versions';
+import {
+  VersionGetParams,
+  VersionGetResponse,
+  VersionListParams,
+  VersionListResponse,
+  VersionListResponsesSinglePage,
+  Versions,
+} from './versions';
 
 export class Phases extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
@@ -123,10 +130,10 @@ export interface PhaseUpdateResponse {
    */
   rules: Array<
     | RulesAPI.BlockRule
-    | RulesAPI.ChallengeRule
+    | PhaseUpdateResponse.RulesetsChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JSChallengeRule
+    | PhaseUpdateResponse.RulesetsJSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
@@ -137,9 +144,9 @@ export interface PhaseUpdateResponse {
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
     | RulesAPI.SetCacheSettingsRule
-    | PhaseUpdateResponse.RulesetsLogCustomFieldRule
-    | PhaseUpdateResponse.RulesetsDDoSDynamicRule
-    | PhaseUpdateResponse.RulesetsForceConnectionCloseRule
+    | RulesAPI.LogCustomFieldRule
+    | RulesAPI.DDoSDynamicRule
+    | RulesAPI.ForceConnectionCloseRule
   >;
 
   /**
@@ -154,7 +161,7 @@ export interface PhaseUpdateResponse {
 }
 
 export namespace PhaseUpdateResponse {
-  export interface RulesetsLogCustomFieldRule {
+  export interface RulesetsChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -173,118 +180,7 @@ export namespace PhaseUpdateResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'log_custom_field';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsLogCustomFieldRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsLogCustomFieldRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The cookie fields to log.
-       */
-      cookie_fields?: Array<ActionParameters.CookieField>;
-
-      /**
-       * The request fields to log.
-       */
-      request_fields?: Array<ActionParameters.RequestField>;
-
-      /**
-       * The response fields to log.
-       */
-      response_fields?: Array<ActionParameters.ResponseField>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The cookie field to log.
-       */
-      export interface CookieField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The request field to log.
-       */
-      export interface RequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The response field to log.
-       */
-      export interface ResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-    }
-  }
-
-  export interface RulesetsDDoSDynamicRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'ddos_dynamic';
+    action?: 'challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -307,6 +203,11 @@ export namespace PhaseUpdateResponse {
     enabled?: boolean;
 
     /**
+     * Configure checks for exposed credentials.
+     */
+    exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
+
+    /**
      * The expression defining which traffic will match the rule.
      */
     expression?: string;
@@ -317,12 +218,85 @@ export namespace PhaseUpdateResponse {
     logging?: RulesAPI.Logging;
 
     /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    ratelimit?: RulesetsChallengeRule.Ratelimit;
+
+    /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
   }
 
-  export interface RulesetsForceConnectionCloseRule {
+  export namespace RulesetsChallengeRule {
+    /**
+     * Configure checks for exposed credentials.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * Expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * Expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the ratelimiter counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: 10 | 60 | 600 | 3600;
+
+      /**
+       * Defines when the ratelimit counter should be incremented. It is optional and
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Defines if ratelimit counting is only done when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * The response header name provided by the origin which should contain the score
+       * to increment ratelimit counter on.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsJSChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -341,7 +315,7 @@ export namespace PhaseUpdateResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'force_connection_close';
+    action?: 'js_challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -364,6 +338,11 @@ export namespace PhaseUpdateResponse {
     enabled?: boolean;
 
     /**
+     * Configure checks for exposed credentials.
+     */
+    exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
+
+    /**
      * The expression defining which traffic will match the rule.
      */
     expression?: string;
@@ -374,9 +353,82 @@ export namespace PhaseUpdateResponse {
     logging?: RulesAPI.Logging;
 
     /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    ratelimit?: RulesetsJSChallengeRule.Ratelimit;
+
+    /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
+  }
+
+  export namespace RulesetsJSChallengeRule {
+    /**
+     * Configure checks for exposed credentials.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * Expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * Expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the ratelimiter counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: 10 | 60 | 600 | 3600;
+
+      /**
+       * Defines when the ratelimit counter should be incremented. It is optional and
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Defines if ratelimit counting is only done when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * The response header name provided by the origin which should contain the score
+       * to increment ratelimit counter on.
+       */
+      score_response_header_name?: string;
+    }
   }
 }
 
@@ -414,10 +466,10 @@ export interface PhaseGetResponse {
    */
   rules: Array<
     | RulesAPI.BlockRule
-    | RulesAPI.ChallengeRule
+    | PhaseGetResponse.RulesetsChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JSChallengeRule
+    | PhaseGetResponse.RulesetsJSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
@@ -428,9 +480,9 @@ export interface PhaseGetResponse {
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
     | RulesAPI.SetCacheSettingsRule
-    | PhaseGetResponse.RulesetsLogCustomFieldRule
-    | PhaseGetResponse.RulesetsDDoSDynamicRule
-    | PhaseGetResponse.RulesetsForceConnectionCloseRule
+    | RulesAPI.LogCustomFieldRule
+    | RulesAPI.DDoSDynamicRule
+    | RulesAPI.ForceConnectionCloseRule
   >;
 
   /**
@@ -445,7 +497,7 @@ export interface PhaseGetResponse {
 }
 
 export namespace PhaseGetResponse {
-  export interface RulesetsLogCustomFieldRule {
+  export interface RulesetsChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -464,118 +516,7 @@ export namespace PhaseGetResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'log_custom_field';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsLogCustomFieldRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsLogCustomFieldRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The cookie fields to log.
-       */
-      cookie_fields?: Array<ActionParameters.CookieField>;
-
-      /**
-       * The request fields to log.
-       */
-      request_fields?: Array<ActionParameters.RequestField>;
-
-      /**
-       * The response fields to log.
-       */
-      response_fields?: Array<ActionParameters.ResponseField>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The cookie field to log.
-       */
-      export interface CookieField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The request field to log.
-       */
-      export interface RequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The response field to log.
-       */
-      export interface ResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-    }
-  }
-
-  export interface RulesetsDDoSDynamicRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'ddos_dynamic';
+    action?: 'challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -598,6 +539,11 @@ export namespace PhaseGetResponse {
     enabled?: boolean;
 
     /**
+     * Configure checks for exposed credentials.
+     */
+    exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
+
+    /**
      * The expression defining which traffic will match the rule.
      */
     expression?: string;
@@ -608,12 +554,85 @@ export namespace PhaseGetResponse {
     logging?: RulesAPI.Logging;
 
     /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    ratelimit?: RulesetsChallengeRule.Ratelimit;
+
+    /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
   }
 
-  export interface RulesetsForceConnectionCloseRule {
+  export namespace RulesetsChallengeRule {
+    /**
+     * Configure checks for exposed credentials.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * Expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * Expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the ratelimiter counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: 10 | 60 | 600 | 3600;
+
+      /**
+       * Defines when the ratelimit counter should be incremented. It is optional and
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Defines if ratelimit counting is only done when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * The response header name provided by the origin which should contain the score
+       * to increment ratelimit counter on.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsJSChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -632,7 +651,7 @@ export namespace PhaseGetResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'force_connection_close';
+    action?: 'js_challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -655,6 +674,11 @@ export namespace PhaseGetResponse {
     enabled?: boolean;
 
     /**
+     * Configure checks for exposed credentials.
+     */
+    exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
+
+    /**
      * The expression defining which traffic will match the rule.
      */
     expression?: string;
@@ -665,9 +689,82 @@ export namespace PhaseGetResponse {
     logging?: RulesAPI.Logging;
 
     /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    ratelimit?: RulesetsJSChallengeRule.Ratelimit;
+
+    /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
+  }
+
+  export namespace RulesetsJSChallengeRule {
+    /**
+     * Configure checks for exposed credentials.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * Expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * Expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the ratelimiter counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: 10 | 60 | 600 | 3600;
+
+      /**
+       * Defines when the ratelimit counter should be incremented. It is optional and
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Defines if ratelimit counting is only done when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * The response header name provided by the origin which should contain the score
+       * to increment ratelimit counter on.
+       */
+      score_response_header_name?: string;
+    }
   }
 }
 
@@ -677,10 +774,10 @@ export interface PhaseUpdateParams {
    */
   rules: Array<
     | RulesAPI.BlockRuleParam
-    | RulesAPI.ChallengeRuleParam
+    | PhaseUpdateParams.RulesetsChallengeRule
     | RulesAPI.CompressResponseRuleParam
     | RulesAPI.ExecuteRuleParam
-    | RulesAPI.JSChallengeRuleParam
+    | PhaseUpdateParams.RulesetsJSChallengeRule
     | RulesAPI.LogRuleParam
     | RulesAPI.ManagedChallengeRuleParam
     | RulesAPI.RedirectRuleParam
@@ -691,9 +788,9 @@ export interface PhaseUpdateParams {
     | RulesAPI.SetConfigRuleParam
     | RulesAPI.SkipRuleParam
     | RulesAPI.SetCacheSettingsRuleParam
-    | PhaseUpdateParams.RulesetsLogCustomFieldRule
-    | PhaseUpdateParams.RulesetsDDoSDynamicRule
-    | PhaseUpdateParams.RulesetsForceConnectionCloseRule
+    | RulesAPI.LogCustomFieldRuleParam
+    | RulesAPI.DDoSDynamicRuleParam
+    | RulesAPI.ForceConnectionCloseRuleParam
   >;
 
   /**
@@ -720,7 +817,7 @@ export interface PhaseUpdateParams {
 }
 
 export namespace PhaseUpdateParams {
-  export interface RulesetsLogCustomFieldRule {
+  export interface RulesetsChallengeRule {
     /**
      * The unique ID of the rule.
      */
@@ -729,103 +826,7 @@ export namespace PhaseUpdateParams {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'log_custom_field';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsLogCustomFieldRule.ActionParameters;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.LoggingParam;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsLogCustomFieldRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The cookie fields to log.
-       */
-      cookie_fields?: Array<ActionParameters.CookieField>;
-
-      /**
-       * The request fields to log.
-       */
-      request_fields?: Array<ActionParameters.RequestField>;
-
-      /**
-       * The response fields to log.
-       */
-      response_fields?: Array<ActionParameters.ResponseField>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The cookie field to log.
-       */
-      export interface CookieField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The request field to log.
-       */
-      export interface RequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The response field to log.
-       */
-      export interface ResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-    }
-  }
-
-  export interface RulesetsDDoSDynamicRule {
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'ddos_dynamic';
+    action?: 'challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -843,6 +844,11 @@ export namespace PhaseUpdateParams {
     enabled?: boolean;
 
     /**
+     * Configure checks for exposed credentials.
+     */
+    exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
+
+    /**
      * The expression defining which traffic will match the rule.
      */
     expression?: string;
@@ -853,12 +859,85 @@ export namespace PhaseUpdateParams {
     logging?: RulesAPI.LoggingParam;
 
     /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    ratelimit?: RulesetsChallengeRule.Ratelimit;
+
+    /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
   }
 
-  export interface RulesetsForceConnectionCloseRule {
+  export namespace RulesetsChallengeRule {
+    /**
+     * Configure checks for exposed credentials.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * Expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * Expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the ratelimiter counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: 10 | 60 | 600 | 3600;
+
+      /**
+       * Defines when the ratelimit counter should be incremented. It is optional and
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Defines if ratelimit counting is only done when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * The response header name provided by the origin which should contain the score
+       * to increment ratelimit counter on.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsJSChallengeRule {
     /**
      * The unique ID of the rule.
      */
@@ -867,7 +946,7 @@ export namespace PhaseUpdateParams {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'force_connection_close';
+    action?: 'js_challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -885,6 +964,11 @@ export namespace PhaseUpdateParams {
     enabled?: boolean;
 
     /**
+     * Configure checks for exposed credentials.
+     */
+    exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
+
+    /**
      * The expression defining which traffic will match the rule.
      */
     expression?: string;
@@ -895,9 +979,82 @@ export namespace PhaseUpdateParams {
     logging?: RulesAPI.LoggingParam;
 
     /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    ratelimit?: RulesetsJSChallengeRule.Ratelimit;
+
+    /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
+  }
+
+  export namespace RulesetsJSChallengeRule {
+    /**
+     * Configure checks for exposed credentials.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * Expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * Expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's ratelimit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the ratelimiter counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: 10 | 60 | 600 | 3600;
+
+      /**
+       * Defines when the ratelimit counter should be incremented. It is optional and
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Defines if ratelimit counting is only done when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * The response header name provided by the origin which should contain the score
+       * to increment ratelimit counter on.
+       */
+      score_response_header_name?: string;
+    }
   }
 }
 
@@ -913,15 +1070,23 @@ export interface PhaseGetParams {
   zone_id?: string;
 }
 
-export namespace Phases {
-  export import PhaseUpdateResponse = PhasesAPI.PhaseUpdateResponse;
-  export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;
-  export import PhaseUpdateParams = PhasesAPI.PhaseUpdateParams;
-  export import PhaseGetParams = PhasesAPI.PhaseGetParams;
-  export import Versions = VersionsAPI.Versions;
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
-  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+Phases.Versions = Versions;
+Phases.VersionListResponsesSinglePage = VersionListResponsesSinglePage;
+
+export declare namespace Phases {
+  export {
+    type PhaseUpdateResponse as PhaseUpdateResponse,
+    type PhaseGetResponse as PhaseGetResponse,
+    type PhaseUpdateParams as PhaseUpdateParams,
+    type PhaseGetParams as PhaseGetParams,
+  };
+
+  export {
+    Versions as Versions,
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    VersionListResponsesSinglePage as VersionListResponsesSinglePage,
+    type VersionListParams as VersionListParams,
+    type VersionGetParams as VersionGetParams,
+  };
 }

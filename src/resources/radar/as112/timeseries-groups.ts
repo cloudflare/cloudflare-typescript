@@ -3,11 +3,10 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Percentage distribution of DNS AS112 queries by DNSSEC support over time.
+   * Percentage distribution of AS112 DNS queries by DNSSEC support over time.
    */
   dnssec(
     query?: TimeseriesGroupDNSSECParams,
@@ -51,7 +50,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 DNS queries by IP Version over time.
+   * Percentage distribution of AS112 DNS queries by IP version over time.
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -74,7 +73,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 dns requests classified per Protocol over time.
+   * Percentage distribution of AS112 DNS requests classified by protocol over time.
    */
   protocol(
     query?: TimeseriesGroupProtocolParams,
@@ -96,7 +95,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 DNS queries by Query Type over time.
+   * Percentage distribution of AS112 DNS queries by query type over time.
    */
   queryType(
     query?: TimeseriesGroupQueryTypeParams,
@@ -119,7 +118,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 dns requests classified per Response Codes over
+   * Percentage distribution of AS112 DNS requests classified by response code over
    * time.
    */
   responseCodes(
@@ -506,6 +505,12 @@ export interface TimeseriesGroupQueryTypeParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -563,6 +568,12 @@ export interface TimeseriesGroupResponseCodesParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -575,17 +586,19 @@ export interface TimeseriesGroupResponseCodesParams {
   name?: Array<string>;
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupDNSSECResponse = TimeseriesGroupsAPI.TimeseriesGroupDNSSECResponse;
-  export import TimeseriesGroupEdnsResponse = TimeseriesGroupsAPI.TimeseriesGroupEdnsResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
-  export import TimeseriesGroupQueryTypeResponse = TimeseriesGroupsAPI.TimeseriesGroupQueryTypeResponse;
-  export import TimeseriesGroupResponseCodesResponse = TimeseriesGroupsAPI.TimeseriesGroupResponseCodesResponse;
-  export import TimeseriesGroupDNSSECParams = TimeseriesGroupsAPI.TimeseriesGroupDNSSECParams;
-  export import TimeseriesGroupEdnsParams = TimeseriesGroupsAPI.TimeseriesGroupEdnsParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
-  export import TimeseriesGroupQueryTypeParams = TimeseriesGroupsAPI.TimeseriesGroupQueryTypeParams;
-  export import TimeseriesGroupResponseCodesParams = TimeseriesGroupsAPI.TimeseriesGroupResponseCodesParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupDNSSECResponse as TimeseriesGroupDNSSECResponse,
+    type TimeseriesGroupEdnsResponse as TimeseriesGroupEdnsResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupProtocolResponse as TimeseriesGroupProtocolResponse,
+    type TimeseriesGroupQueryTypeResponse as TimeseriesGroupQueryTypeResponse,
+    type TimeseriesGroupResponseCodesResponse as TimeseriesGroupResponseCodesResponse,
+    type TimeseriesGroupDNSSECParams as TimeseriesGroupDNSSECParams,
+    type TimeseriesGroupEdnsParams as TimeseriesGroupEdnsParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupProtocolParams as TimeseriesGroupProtocolParams,
+    type TimeseriesGroupQueryTypeParams as TimeseriesGroupQueryTypeParams,
+    type TimeseriesGroupResponseCodesParams as TimeseriesGroupResponseCodesParams,
+  };
 }

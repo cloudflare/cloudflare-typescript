@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CertificatesAPI from './certificates';
 import { SinglePage } from '../../../pagination';
 
 export class Certificates extends APIResource {
@@ -38,7 +37,8 @@ export class Certificates extends APIResource {
   }
 
   /**
-   * Deletes a gateway-managed Zero Trust certificate.
+   * Deletes a gateway-managed Zero Trust certificate. A certificate must be
+   * deactivated from the edge (inactive) before it is deleted.
    */
   delete(
     certificateId: string,
@@ -51,6 +51,40 @@ export class Certificates extends APIResource {
         `/accounts/${account_id}/gateway/certificates/${certificateId}`,
         options,
       ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Binds a single Zero Trust certificate to the edge.
+   */
+  activate(
+    certificateId: string,
+    params: CertificateActivateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateActivateResponse> {
+    const { account_id, body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/gateway/certificates/${certificateId}/activate`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificateActivateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Unbinds a single Zero Trust certificate from the edge
+   */
+  deactivate(
+    certificateId: string,
+    params: CertificateDeactivateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeactivateResponse> {
+    const { account_id, body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/gateway/certificates/${certificateId}/deactivate`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificateDeactivateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,18 +115,40 @@ export interface CertificateCreateResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge.
+   * The deployment status of the certificate on Cloudflare's edge. Certificates in
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
+
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
 
   created_at?: string;
+
+  expires_on?: string;
+
+  /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
 
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
+  in_use?: boolean;
 
-  expires_on?: string;
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -111,18 +167,40 @@ export interface CertificateListResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge.
+   * The deployment status of the certificate on Cloudflare's edge. Certificates in
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
+
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
 
   created_at?: string;
+
+  expires_on?: string;
+
+  /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
 
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
+  in_use?: boolean;
 
-  expires_on?: string;
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -141,18 +219,144 @@ export interface CertificateDeleteResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge.
+   * The deployment status of the certificate on Cloudflare's edge. Certificates in
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
+
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
 
   created_at?: string;
+
+  expires_on?: string;
+
+  /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
 
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
+  in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
+
+  /**
+   * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+   */
+  type?: 'custom' | 'gateway_managed';
+
+  updated_at?: string;
+
+  uploaded_on?: string;
+}
+
+export interface CertificateActivateResponse {
+  /**
+   * Certificate UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The deployment status of the certificate on Cloudflare's edge. Certificates in
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
+   */
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
+
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
+
+  created_at?: string;
 
   expires_on?: string;
+
+  /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
+   * Use this certificate for Gateway TLS interception
+   */
+  in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
+
+  /**
+   * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+   */
+  type?: 'custom' | 'gateway_managed';
+
+  updated_at?: string;
+
+  uploaded_on?: string;
+}
+
+export interface CertificateDeactivateResponse {
+  /**
+   * Certificate UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The deployment status of the certificate on Cloudflare's edge. Certificates in
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
+   */
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
+
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
+
+  created_at?: string;
+
+  expires_on?: string;
+
+  /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
+   * Use this certificate for Gateway TLS interception
+   */
+  in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -171,18 +375,40 @@ export interface CertificateGetResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge.
+   * The deployment status of the certificate on Cloudflare's edge. Certificates in
+   * the 'available' (previously called 'active') state may be used for Gateway TLS
+   * interception.
    */
-  binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
+  binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
+
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
 
   created_at?: string;
+
+  expires_on?: string;
+
+  /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
 
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
+  in_use?: boolean;
 
-  expires_on?: string;
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -215,18 +441,50 @@ export interface CertificateDeleteParams {
   account_id: string;
 }
 
+export interface CertificateActivateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface CertificateDeactivateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
 export interface CertificateGetParams {
   account_id: string;
 }
 
-export namespace Certificates {
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateListResponsesSinglePage = CertificatesAPI.CertificateListResponsesSinglePage;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
+Certificates.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;
+
+export declare namespace Certificates {
+  export {
+    type CertificateCreateResponse as CertificateCreateResponse,
+    type CertificateListResponse as CertificateListResponse,
+    type CertificateDeleteResponse as CertificateDeleteResponse,
+    type CertificateActivateResponse as CertificateActivateResponse,
+    type CertificateDeactivateResponse as CertificateDeactivateResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    CertificateListResponsesSinglePage as CertificateListResponsesSinglePage,
+    type CertificateCreateParams as CertificateCreateParams,
+    type CertificateListParams as CertificateListParams,
+    type CertificateDeleteParams as CertificateDeleteParams,
+    type CertificateActivateParams as CertificateActivateParams,
+    type CertificateDeactivateParams as CertificateDeactivateParams,
+    type CertificateGetParams as CertificateGetParams,
+  };
 }

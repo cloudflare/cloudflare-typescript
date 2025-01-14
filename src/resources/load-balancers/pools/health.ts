@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as HealthAPI from './health';
 
 export class Health extends APIResource {
   /**
@@ -54,19 +53,67 @@ export interface HealthCreateResponse {
  * A list of regions from which to run health checks. Null means every Cloudflare
  * data center.
  */
-export type HealthGetResponse = unknown | string | null;
+export interface HealthGetResponse {
+  /**
+   * Pool ID
+   */
+  pool_id?: string;
+
+  /**
+   * List of regions and associated health status.
+   */
+  pop_health?: HealthGetResponse.POPHealth;
+}
+
+export namespace HealthGetResponse {
+  /**
+   * List of regions and associated health status.
+   */
+  export interface POPHealth {
+    /**
+     * Whether health check in region is healthy.
+     */
+    healthy?: boolean;
+
+    origins?: Array<POPHealth.Origin>;
+  }
+
+  export namespace POPHealth {
+    export interface Origin {
+      ip?: Origin.IP;
+    }
+
+    export namespace Origin {
+      export interface IP {
+        /**
+         * Failure reason.
+         */
+        failure_reason?: string;
+
+        /**
+         * Origin health status.
+         */
+        healthy?: boolean;
+
+        /**
+         * Response code from origin health check.
+         */
+        response_code?: number;
+
+        /**
+         * Origin RTT (Round Trip Time) response.
+         */
+        rtt?: string;
+      }
+    }
+  }
+}
 
 export interface HealthCreateParams {
   /**
    * Path param: Identifier
    */
   account_id: string;
-
-  /**
-   * Body param: The expected HTTP response code or code range of the health check.
-   * This parameter is only valid for HTTP and HTTPS monitors.
-   */
-  expected_codes: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -99,6 +146,12 @@ export interface HealthCreateParams {
   expected_body?: string;
 
   /**
+   * Body param: The expected HTTP response code or code range of the health check.
+   * This parameter is only valid for HTTP and HTTPS monitors.
+   */
+  expected_codes?: string;
+
+  /**
    * Body param: Follow redirects if returned by the origin. This parameter is only
    * valid for HTTP and HTTPS monitors.
    */
@@ -109,7 +162,7 @@ export interface HealthCreateParams {
    * recommended you set a Host header by default. The User-Agent header cannot be
    * overridden. This parameter is only valid for HTTP and HTTPS monitors.
    */
-  header?: unknown;
+  header?: Record<string, Array<string>>;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may
@@ -169,9 +222,11 @@ export interface HealthGetParams {
   account_id: string;
 }
 
-export namespace Health {
-  export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
-  export import HealthGetResponse = HealthAPI.HealthGetResponse;
-  export import HealthCreateParams = HealthAPI.HealthCreateParams;
-  export import HealthGetParams = HealthAPI.HealthGetParams;
+export declare namespace Health {
+  export {
+    type HealthCreateResponse as HealthCreateResponse,
+    type HealthGetResponse as HealthGetResponse,
+    type HealthCreateParams as HealthCreateParams,
+    type HealthGetParams as HealthGetParams,
+  };
 }

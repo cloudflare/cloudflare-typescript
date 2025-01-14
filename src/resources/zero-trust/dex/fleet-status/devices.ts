@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DevicesAPI from './devices';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Devices extends APIResource {
@@ -36,6 +35,11 @@ export interface DeviceListResponse {
   deviceId: string;
 
   /**
+   * The mode under which the WARP client is run
+   */
+  mode: string;
+
+  /**
    * Operating system
    */
   platform: string;
@@ -46,43 +50,267 @@ export interface DeviceListResponse {
   status: string;
 
   /**
+   * Timestamp in ISO format
+   */
+  timestamp: string;
+
+  /**
    * WARP client version
    */
   version: string;
+
+  alwaysOn?: boolean | null;
+
+  batteryCharging?: boolean | null;
+
+  batteryCycles?: number | null;
+
+  batteryPct?: number | null;
+
+  connectionType?: string | null;
+
+  cpuPct?: number | null;
+
+  cpuPctByApp?: Array<Array<DeviceListResponse.CPUPctByApp>> | null;
+
+  deviceIpv4?: DeviceListResponse.DeviceIPV4;
+
+  deviceIpv6?: DeviceListResponse.DeviceIPV6;
 
   /**
    * Device identifier (human readable)
    */
   deviceName?: string;
 
+  diskReadBps?: number | null;
+
+  diskUsagePct?: number | null;
+
+  diskWriteBps?: number | null;
+
+  dohSubdomain?: string | null;
+
+  estimatedLossPct?: number | null;
+
+  firewallEnabled?: boolean | null;
+
+  gatewayIpv4?: DeviceListResponse.GatewayIPV4;
+
+  gatewayIpv6?: DeviceListResponse.GatewayIPV6;
+
+  handshakeLatencyMs?: number | null;
+
+  ispIpv4?: DeviceListResponse.ISPIPV4;
+
+  ispIpv6?: DeviceListResponse.ISPIPV6;
+
+  metal?: string | null;
+
+  networkRcvdBps?: number | null;
+
+  networkSentBps?: number | null;
+
+  networkSsid?: string | null;
+
   /**
    * User contact email address
    */
   personEmail?: string;
+
+  ramAvailableKb?: number | null;
+
+  ramUsedPct?: number | null;
+
+  ramUsedPctByApp?: Array<Array<DeviceListResponse.RamUsedPctByApp>> | null;
+
+  switchLocked?: boolean | null;
+
+  wifiStrengthDbm?: number | null;
+}
+
+export namespace DeviceListResponse {
+  export interface CPUPctByApp {
+    cpu_pct?: number;
+
+    name?: string;
+  }
+
+  export interface DeviceIPV4 {
+    address?: string | null;
+
+    asn?: number | null;
+
+    aso?: string | null;
+
+    location?: DeviceIPV4.Location;
+
+    netmask?: string | null;
+
+    version?: string | null;
+  }
+
+  export namespace DeviceIPV4 {
+    export interface Location {
+      city?: string | null;
+
+      country_iso?: string | null;
+
+      state_iso?: string | null;
+
+      zip?: string | null;
+    }
+  }
+
+  export interface DeviceIPV6 {
+    address?: string | null;
+
+    asn?: number | null;
+
+    aso?: string | null;
+
+    location?: DeviceIPV6.Location;
+
+    netmask?: string | null;
+
+    version?: string | null;
+  }
+
+  export namespace DeviceIPV6 {
+    export interface Location {
+      city?: string | null;
+
+      country_iso?: string | null;
+
+      state_iso?: string | null;
+
+      zip?: string | null;
+    }
+  }
+
+  export interface GatewayIPV4 {
+    address?: string | null;
+
+    asn?: number | null;
+
+    aso?: string | null;
+
+    location?: GatewayIPV4.Location;
+
+    netmask?: string | null;
+
+    version?: string | null;
+  }
+
+  export namespace GatewayIPV4 {
+    export interface Location {
+      city?: string | null;
+
+      country_iso?: string | null;
+
+      state_iso?: string | null;
+
+      zip?: string | null;
+    }
+  }
+
+  export interface GatewayIPV6 {
+    address?: string | null;
+
+    asn?: number | null;
+
+    aso?: string | null;
+
+    location?: GatewayIPV6.Location;
+
+    netmask?: string | null;
+
+    version?: string | null;
+  }
+
+  export namespace GatewayIPV6 {
+    export interface Location {
+      city?: string | null;
+
+      country_iso?: string | null;
+
+      state_iso?: string | null;
+
+      zip?: string | null;
+    }
+  }
+
+  export interface ISPIPV4 {
+    address?: string | null;
+
+    asn?: number | null;
+
+    aso?: string | null;
+
+    location?: ISPIPV4.Location;
+
+    netmask?: string | null;
+
+    version?: string | null;
+  }
+
+  export namespace ISPIPV4 {
+    export interface Location {
+      city?: string | null;
+
+      country_iso?: string | null;
+
+      state_iso?: string | null;
+
+      zip?: string | null;
+    }
+  }
+
+  export interface ISPIPV6 {
+    address?: string | null;
+
+    asn?: number | null;
+
+    aso?: string | null;
+
+    location?: ISPIPV6.Location;
+
+    netmask?: string | null;
+
+    version?: string | null;
+  }
+
+  export namespace ISPIPV6 {
+    export interface Location {
+      city?: string | null;
+
+      country_iso?: string | null;
+
+      state_iso?: string | null;
+
+      zip?: string | null;
+    }
+  }
+
+  export interface RamUsedPctByApp {
+    name?: string;
+
+    ram_used_pct?: number;
+  }
 }
 
 export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param: Unique identifier for account
    */
   account_id: string;
 
   /**
-   * Query param: Timestamp in ISO format
+   * Query param: Time range beginning in ISO format
    */
   from: string;
 
   /**
-   * Query param: Source:
-   *
-   * - `hourly` - device details aggregated hourly, up to 7 days prior
-   * - `last_seen` - device details, up to 24 hours prior
-   * - `raw` - device details, up to 7 days prior
-   */
-  source: 'last_seen' | 'hourly' | 'raw';
-
-  /**
-   * Query param: Timestamp in ISO format
+   * Query param: Time range end in ISO format
    */
   to: string;
 
@@ -112,6 +340,15 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   sort_by?: 'colo' | 'device_id' | 'mode' | 'platform' | 'status' | 'timestamp' | 'version';
 
   /**
+   * Query param: Source:
+   *
+   * - `hourly` - device details aggregated hourly, up to 7 days prior
+   * - `last_seen` - device details, up to 24 hours prior
+   * - `raw` - device details, up to 7 days prior
+   */
+  source?: 'last_seen' | 'hourly' | 'raw';
+
+  /**
    * Query param: Network status
    */
   status?: string;
@@ -122,8 +359,12 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   version?: string;
 }
 
-export namespace Devices {
-  export import DeviceListResponse = DevicesAPI.DeviceListResponse;
-  export import DeviceListResponsesV4PagePaginationArray = DevicesAPI.DeviceListResponsesV4PagePaginationArray;
-  export import DeviceListParams = DevicesAPI.DeviceListParams;
+Devices.DeviceListResponsesV4PagePaginationArray = DeviceListResponsesV4PagePaginationArray;
+
+export declare namespace Devices {
+  export {
+    type DeviceListResponse as DeviceListResponse,
+    DeviceListResponsesV4PagePaginationArray as DeviceListResponsesV4PagePaginationArray,
+    type DeviceListParams as DeviceListParams,
+  };
 }

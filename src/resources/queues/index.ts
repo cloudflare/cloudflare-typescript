@@ -1,22 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Consumer,
-  ConsumerCreateResponse,
-  ConsumerUpdateResponse,
-  ConsumerDeleteResponse,
-  ConsumerGetResponse,
-  ConsumerCreateParams,
-  ConsumerUpdateParams,
-  ConsumerDeleteParams,
-  ConsumerGetParams,
   Consumers,
+  type Consumer,
+  type ConsumerDeleteResponse,
+  type ConsumerGetResponse,
+  type ConsumerCreateParams,
+  type ConsumerUpdateParams,
+  type ConsumerDeleteParams,
+  type ConsumerGetParams,
 } from './consumers';
 export {
-  MessageAckResponse,
-  MessagePullResponse,
-  MessageAckParams,
-  MessagePullParams,
   Messages,
+  type MessageAckResponse,
+  type MessagePullResponse,
+  type MessageAckParams,
+  type MessagePullParams,
 } from './messages';
 export { Queues } from './queues';

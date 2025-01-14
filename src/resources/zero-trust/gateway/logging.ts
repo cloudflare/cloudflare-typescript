@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as LoggingAPI from './logging';
 
 export class Logging extends APIResource {
   /**
@@ -110,8 +109,10 @@ export interface LoggingGetParams {
   account_id: string;
 }
 
-export namespace Logging {
-  export import LoggingSetting = LoggingAPI.LoggingSetting;
-  export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
-  export import LoggingGetParams = LoggingAPI.LoggingGetParams;
+export declare namespace Logging {
+  export {
+    type LoggingSetting as LoggingSetting,
+    type LoggingUpdateParams as LoggingUpdateParams,
+    type LoggingGetParams as LoggingGetParams,
+  };
 }

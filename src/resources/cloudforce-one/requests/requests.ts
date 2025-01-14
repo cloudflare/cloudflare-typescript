@@ -2,20 +2,48 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RequestsAPI from './requests';
 import * as Shared from '../../shared';
+import * as AssetsAPI from './assets';
+import {
+  AssetCreateParams,
+  AssetCreateResponse,
+  AssetDeleteResponse,
+  AssetGetResponse,
+  AssetUpdateParams,
+  AssetUpdateResponse,
+  Assets,
+} from './assets';
 import * as MessageAPI from './message';
+import {
+  Message,
+  MessageCreateParams,
+  MessageDeleteResponse,
+  MessageGetParams,
+  MessageGetResponse,
+  MessageResource,
+  MessageUpdateParams,
+} from './message';
 import * as PriorityAPI from './priority';
+import {
+  Label,
+  Priority,
+  PriorityCreateParams,
+  PriorityDeleteResponse,
+  PriorityEdit,
+  PriorityResource,
+  PriorityUpdateParams,
+} from './priority';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Requests extends APIResource {
   message: MessageAPI.MessageResource = new MessageAPI.MessageResource(this._client);
   priority: PriorityAPI.PriorityResource = new PriorityAPI.PriorityResource(this._client);
+  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
 
   /**
    * Creating a request adds the request into the Cloudforce One queue for analysis.
    * In addition to the content, a short title, type, priority, and releasability
-   * should be provided. If one is not provided a default will be assigned.
+   * should be provided. If one is not provided, a default will be assigned.
    */
   create(
     accountIdentifier: string,
@@ -33,7 +61,7 @@ export class Requests extends APIResource {
   /**
    * Updating a request alters the request in the Cloudforce One queue. This API may
    * be used to update any attributes of the request after the initial submission.
-   * Only fields that you choose to update need to be add to the request body
+   * Only fields that you choose to update need to be add to the request body.
    */
   update(
     accountIdentifier: string,
@@ -386,29 +414,52 @@ export interface RequestListParams extends V4PagePaginationArrayParams {
   status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
 }
 
-export namespace Requests {
-  export import Item = RequestsAPI.Item;
-  export import ListItem = RequestsAPI.ListItem;
-  export import Quota = RequestsAPI.Quota;
-  export import RequestConstants = RequestsAPI.RequestConstants;
-  export import RequestTypes = RequestsAPI.RequestTypes;
-  export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
-  export import ListItemsV4PagePaginationArray = RequestsAPI.ListItemsV4PagePaginationArray;
-  export import RequestCreateParams = RequestsAPI.RequestCreateParams;
-  export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
-  export import RequestListParams = RequestsAPI.RequestListParams;
-  export import MessageResource = MessageAPI.MessageResource;
-  export import Message = MessageAPI.Message;
-  export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
-  export import MessageGetResponse = MessageAPI.MessageGetResponse;
-  export import MessageCreateParams = MessageAPI.MessageCreateParams;
-  export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
-  export import MessageGetParams = MessageAPI.MessageGetParams;
-  export import PriorityResource = PriorityAPI.PriorityResource;
-  export import Label = PriorityAPI.Label;
-  export import Priority = PriorityAPI.Priority;
-  export import PriorityEdit = PriorityAPI.PriorityEdit;
-  export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
-  export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
-  export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
+Requests.ListItemsV4PagePaginationArray = ListItemsV4PagePaginationArray;
+Requests.MessageResource = MessageResource;
+Requests.PriorityResource = PriorityResource;
+Requests.Assets = Assets;
+
+export declare namespace Requests {
+  export {
+    type Item as Item,
+    type ListItem as ListItem,
+    type Quota as Quota,
+    type RequestConstants as RequestConstants,
+    type RequestTypes as RequestTypes,
+    type RequestDeleteResponse as RequestDeleteResponse,
+    ListItemsV4PagePaginationArray as ListItemsV4PagePaginationArray,
+    type RequestCreateParams as RequestCreateParams,
+    type RequestUpdateParams as RequestUpdateParams,
+    type RequestListParams as RequestListParams,
+  };
+
+  export {
+    MessageResource as MessageResource,
+    type Message as Message,
+    type MessageDeleteResponse as MessageDeleteResponse,
+    type MessageGetResponse as MessageGetResponse,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
+    type MessageGetParams as MessageGetParams,
+  };
+
+  export {
+    PriorityResource as PriorityResource,
+    type Label as Label,
+    type Priority as Priority,
+    type PriorityEdit as PriorityEdit,
+    type PriorityDeleteResponse as PriorityDeleteResponse,
+    type PriorityCreateParams as PriorityCreateParams,
+    type PriorityUpdateParams as PriorityUpdateParams,
+  };
+
+  export {
+    Assets as Assets,
+    type AssetCreateResponse as AssetCreateResponse,
+    type AssetUpdateResponse as AssetUpdateResponse,
+    type AssetDeleteResponse as AssetDeleteResponse,
+    type AssetGetResponse as AssetGetResponse,
+    type AssetCreateParams as AssetCreateParams,
+    type AssetUpdateParams as AssetUpdateParams,
+  };
 }

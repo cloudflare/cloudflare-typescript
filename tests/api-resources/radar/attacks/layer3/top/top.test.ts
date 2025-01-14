@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource top', () => {
   test('attacks', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer3.top.attacks();
+    const responsePromise = client.radar.attacks.layer3.top.attacks();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,28 +24,28 @@ describe('resource top', () => {
   test('attacks: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer3.top.attacks({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer3.top.attacks({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('attacks: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer3.top.attacks(
+      client.radar.attacks.layer3.top.attacks(
         {
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
+          ipVersion: ['IPv4'],
           limit: 5,
           limitDirection: 'ORIGIN',
           limitPerLocation: 10,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
+          location: ['string'],
+          name: ['string'],
           normalization: 'PERCENTAGE',
-          protocol: ['UDP', 'TCP', 'ICMP'],
+          protocol: ['UDP'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -53,7 +53,7 @@ describe('resource top', () => {
   });
 
   test('industry', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer3.top.industry();
+    const responsePromise = client.radar.attacks.layer3.top.industry();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,25 +66,25 @@ describe('resource top', () => {
   test('industry: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer3.top.industry({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer3.top.industry({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('industry: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer3.top.industry(
+      client.radar.attacks.layer3.top.industry(
         {
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
+          ipVersion: ['IPv4'],
           limit: 5,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
+          location: ['string'],
+          name: ['string'],
+          protocol: ['UDP'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -92,7 +92,7 @@ describe('resource top', () => {
   });
 
   test('vertical', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer3.top.vertical();
+    const responsePromise = client.radar.attacks.layer3.top.vertical();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -105,25 +105,25 @@ describe('resource top', () => {
   test('vertical: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer3.top.vertical({ path: '/_stainless_unknown_path' }),
+      client.radar.attacks.layer3.top.vertical({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('vertical: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer3.top.vertical(
+      client.radar.attacks.layer3.top.vertical(
         {
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
+          ipVersion: ['IPv4'],
           limit: 5,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
+          location: ['string'],
+          name: ['string'],
+          protocol: ['UDP'],
         },
         { path: '/_stainless_unknown_path' },
       ),

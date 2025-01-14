@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as HistoryAPI from './history';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class History extends APIResource {
@@ -74,7 +73,7 @@ export interface BillingHistory {
 
 export namespace BillingHistory {
   export interface Zone {
-    name?: unknown;
+    name?: string;
   }
 }
 
@@ -87,17 +86,12 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
   /**
    * When the billing item was created.
    */
-  occured_at?: string;
-
-  /**
-   * When the billing item was created.
-   */
   occurred_at?: string;
 
   /**
    * Field to order billing history by.
    */
-  order?: 'type' | 'occured_at' | 'action';
+  order?: 'type' | 'occurred_at' | 'action';
 
   /**
    * The billing item type.
@@ -105,8 +99,12 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
   type?: string;
 }
 
-export namespace History {
-  export import BillingHistory = HistoryAPI.BillingHistory;
-  export import BillingHistoriesV4PagePaginationArray = HistoryAPI.BillingHistoriesV4PagePaginationArray;
-  export import HistoryListParams = HistoryAPI.HistoryListParams;
+History.BillingHistoriesV4PagePaginationArray = BillingHistoriesV4PagePaginationArray;
+
+export declare namespace History {
+  export {
+    type BillingHistory as BillingHistory,
+    BillingHistoriesV4PagePaginationArray as BillingHistoriesV4PagePaginationArray,
+    type HistoryListParams as HistoryListParams,
+  };
 }

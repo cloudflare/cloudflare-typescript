@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ScriptsAPI from './scripts';
 import { SinglePage } from '../../pagination';
 
 export class Scripts extends APIResource {
@@ -55,6 +54,11 @@ export interface Script {
   url_contains_cdn_cgi_path: boolean;
 
   /**
+   * The cryptomining score of the JavaScript content.
+   */
+  cryptomining_score?: number | null;
+
+  /**
    * The dataflow score of the JavaScript content.
    */
   dataflow_score?: number | null;
@@ -78,9 +82,19 @@ export interface Script {
    */
   js_integrity_score?: number | null;
 
+  /**
+   * The magecart score of the JavaScript content.
+   */
+  magecart_score?: number | null;
+
   malicious_domain_categories?: Array<string>;
 
   malicious_url_categories?: Array<string>;
+
+  /**
+   * The malware score of the JavaScript content.
+   */
+  malware_score?: number | null;
 
   /**
    * The obfuscation score of the JavaScript content.
@@ -111,6 +125,11 @@ export interface ScriptGetResponse {
   url_contains_cdn_cgi_path: boolean;
 
   /**
+   * The cryptomining score of the JavaScript content.
+   */
+  cryptomining_score?: number | null;
+
+  /**
    * The dataflow score of the JavaScript content.
    */
   dataflow_score?: number | null;
@@ -134,9 +153,19 @@ export interface ScriptGetResponse {
    */
   js_integrity_score?: number | null;
 
+  /**
+   * The magecart score of the JavaScript content.
+   */
+  magecart_score?: number | null;
+
   malicious_domain_categories?: Array<string>;
 
   malicious_url_categories?: Array<string>;
+
+  /**
+   * The malware score of the JavaScript content.
+   */
+  malware_score?: number | null;
 
   /**
    * The obfuscation score of the JavaScript content.
@@ -156,6 +185,11 @@ export namespace ScriptGetResponse {
    */
   export interface Version {
     /**
+     * The cryptomining score of the JavaScript content.
+     */
+    cryptomining_score?: number | null;
+
+    /**
      * The dataflow score of the JavaScript content.
      */
     dataflow_score?: number | null;
@@ -174,6 +208,16 @@ export namespace ScriptGetResponse {
      * The integrity score of the JavaScript content.
      */
     js_integrity_score?: number | null;
+
+    /**
+     * The magecart score of the JavaScript content.
+     */
+    magecart_score?: number | null;
+
+    /**
+     * The malware score of the JavaScript content.
+     */
+    malware_score?: number | null;
 
     /**
      * The obfuscation score of the JavaScript content.
@@ -214,8 +258,7 @@ export interface ScriptListParams {
   exclude_urls?: string;
 
   /**
-   * Query param: Export the list of scripts as a file. Cannot be used with per_page
-   * or page options.
+   * Query param: Export the list of scripts as a file.
    */
   export?: 'csv';
 
@@ -238,10 +281,8 @@ export interface ScriptListParams {
    * Query param: The current page number of the paginated results.
    *
    * We additionally support a special value "all". When "all" is used, the API will
-   * return all the scripts with the applied filters in a single page. Additionally,
-   * when using this value, the API will not return the script versions or
-   * categorisation data for the URL and domain of the scripts. This feature is
-   * best-effort and it may only work for zones with a low number of scripts
+   * return all the scripts with the applied filters in a single page. This feature
+   * is best-effort and it may only work for zones with a low number of scripts
    */
   page?: string;
 
@@ -286,10 +327,14 @@ export interface ScriptGetParams {
   zone_id: string;
 }
 
-export namespace Scripts {
-  export import Script = ScriptsAPI.Script;
-  export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
-  export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
-  export import ScriptListParams = ScriptsAPI.ScriptListParams;
-  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
+Scripts.ScriptsSinglePage = ScriptsSinglePage;
+
+export declare namespace Scripts {
+  export {
+    type Script as Script,
+    type ScriptGetResponse as ScriptGetResponse,
+    ScriptsSinglePage as ScriptsSinglePage,
+    type ScriptListParams as ScriptListParams,
+    type ScriptGetParams as ScriptGetParams,
+  };
 }

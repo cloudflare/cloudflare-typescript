@@ -1,11 +1,57 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import * as LOADocumentsAPI from './loa-documents';
+import {
+  LOADocumentCreateParams,
+  LOADocumentCreateResponse,
+  LOADocumentGetParams,
+  LOADocuments,
+} from './loa-documents';
 import * as ServicesAPI from './services';
+import { ServiceListParams, ServiceListResponse, ServiceListResponsesSinglePage, Services } from './services';
 import * as AddressMapsAPI from './address-maps/address-maps';
-import * as LOADocumentsAPI from './loa-documents/loa-documents';
+import {
+  AddressMap,
+  AddressMapCreateParams,
+  AddressMapCreateResponse,
+  AddressMapDeleteParams,
+  AddressMapDeleteResponse,
+  AddressMapEditParams,
+  AddressMapGetParams,
+  AddressMapGetResponse,
+  AddressMapListParams,
+  AddressMaps,
+  AddressMapsSinglePage,
+  Kind,
+} from './address-maps/address-maps';
 import * as PrefixesAPI from './prefixes/prefixes';
+import {
+  Prefix,
+  PrefixCreateParams,
+  PrefixDeleteParams,
+  PrefixDeleteResponse,
+  PrefixEditParams,
+  PrefixGetParams,
+  PrefixListParams,
+  Prefixes,
+  PrefixesSinglePage,
+} from './prefixes/prefixes';
 import * as RegionalHostnamesAPI from './regional-hostnames/regional-hostnames';
+import {
+  RegionalHostnameCreateParams,
+  RegionalHostnameCreateResponse,
+  RegionalHostnameDeleteParams,
+  RegionalHostnameDeleteResponse,
+  RegionalHostnameEditParams,
+  RegionalHostnameEditResponse,
+  RegionalHostnameGetParams,
+  RegionalHostnameGetResponse,
+  RegionalHostnameListParams,
+  RegionalHostnameListResponse,
+  RegionalHostnameListResponsesSinglePage,
+  RegionalHostnames,
+} from './regional-hostnames/regional-hostnames';
 
 export class Addressing extends APIResource {
   regionalHostnames: RegionalHostnamesAPI.RegionalHostnames = new RegionalHostnamesAPI.RegionalHostnames(
@@ -17,45 +63,70 @@ export class Addressing extends APIResource {
   prefixes: PrefixesAPI.Prefixes = new PrefixesAPI.Prefixes(this._client);
 }
 
-export namespace Addressing {
-  export import RegionalHostnames = RegionalHostnamesAPI.RegionalHostnames;
-  export import RegionalHostnameCreateResponse = RegionalHostnamesAPI.RegionalHostnameCreateResponse;
-  export import RegionalHostnameListResponse = RegionalHostnamesAPI.RegionalHostnameListResponse;
-  export import RegionalHostnameDeleteResponse = RegionalHostnamesAPI.RegionalHostnameDeleteResponse;
-  export import RegionalHostnameEditResponse = RegionalHostnamesAPI.RegionalHostnameEditResponse;
-  export import RegionalHostnameGetResponse = RegionalHostnamesAPI.RegionalHostnameGetResponse;
-  export import RegionalHostnameListResponsesSinglePage = RegionalHostnamesAPI.RegionalHostnameListResponsesSinglePage;
-  export import RegionalHostnameCreateParams = RegionalHostnamesAPI.RegionalHostnameCreateParams;
-  export import RegionalHostnameListParams = RegionalHostnamesAPI.RegionalHostnameListParams;
-  export import RegionalHostnameDeleteParams = RegionalHostnamesAPI.RegionalHostnameDeleteParams;
-  export import RegionalHostnameEditParams = RegionalHostnamesAPI.RegionalHostnameEditParams;
-  export import RegionalHostnameGetParams = RegionalHostnamesAPI.RegionalHostnameGetParams;
-  export import Services = ServicesAPI.Services;
-  export import ServiceListResponse = ServicesAPI.ServiceListResponse;
-  export import ServiceListResponsesSinglePage = ServicesAPI.ServiceListResponsesSinglePage;
-  export import ServiceListParams = ServicesAPI.ServiceListParams;
-  export import AddressMaps = AddressMapsAPI.AddressMaps;
-  export import AddressMap = AddressMapsAPI.AddressMap;
-  export import Kind = AddressMapsAPI.Kind;
-  export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
-  export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
-  export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
-  export import AddressMapsSinglePage = AddressMapsAPI.AddressMapsSinglePage;
-  export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
-  export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
-  export import AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;
-  export import AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
-  export import AddressMapGetParams = AddressMapsAPI.AddressMapGetParams;
-  export import LOADocuments = LOADocumentsAPI.LOADocuments;
-  export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
-  export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
-  export import Prefixes = PrefixesAPI.Prefixes;
-  export import Prefix = PrefixesAPI.Prefix;
-  export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
-  export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
-  export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
-  export import PrefixListParams = PrefixesAPI.PrefixListParams;
-  export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
-  export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
-  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
+Addressing.RegionalHostnames = RegionalHostnames;
+Addressing.RegionalHostnameListResponsesSinglePage = RegionalHostnameListResponsesSinglePage;
+Addressing.Services = Services;
+Addressing.ServiceListResponsesSinglePage = ServiceListResponsesSinglePage;
+Addressing.AddressMaps = AddressMaps;
+Addressing.AddressMapsSinglePage = AddressMapsSinglePage;
+Addressing.LOADocuments = LOADocuments;
+Addressing.Prefixes = Prefixes;
+Addressing.PrefixesSinglePage = PrefixesSinglePage;
+
+export declare namespace Addressing {
+  export {
+    RegionalHostnames as RegionalHostnames,
+    type RegionalHostnameCreateResponse as RegionalHostnameCreateResponse,
+    type RegionalHostnameListResponse as RegionalHostnameListResponse,
+    type RegionalHostnameDeleteResponse as RegionalHostnameDeleteResponse,
+    type RegionalHostnameEditResponse as RegionalHostnameEditResponse,
+    type RegionalHostnameGetResponse as RegionalHostnameGetResponse,
+    RegionalHostnameListResponsesSinglePage as RegionalHostnameListResponsesSinglePage,
+    type RegionalHostnameCreateParams as RegionalHostnameCreateParams,
+    type RegionalHostnameListParams as RegionalHostnameListParams,
+    type RegionalHostnameDeleteParams as RegionalHostnameDeleteParams,
+    type RegionalHostnameEditParams as RegionalHostnameEditParams,
+    type RegionalHostnameGetParams as RegionalHostnameGetParams,
+  };
+
+  export {
+    Services as Services,
+    type ServiceListResponse as ServiceListResponse,
+    ServiceListResponsesSinglePage as ServiceListResponsesSinglePage,
+    type ServiceListParams as ServiceListParams,
+  };
+
+  export {
+    AddressMaps as AddressMaps,
+    type AddressMap as AddressMap,
+    type Kind as Kind,
+    type AddressMapCreateResponse as AddressMapCreateResponse,
+    type AddressMapDeleteResponse as AddressMapDeleteResponse,
+    type AddressMapGetResponse as AddressMapGetResponse,
+    AddressMapsSinglePage as AddressMapsSinglePage,
+    type AddressMapCreateParams as AddressMapCreateParams,
+    type AddressMapListParams as AddressMapListParams,
+    type AddressMapDeleteParams as AddressMapDeleteParams,
+    type AddressMapEditParams as AddressMapEditParams,
+    type AddressMapGetParams as AddressMapGetParams,
+  };
+
+  export {
+    LOADocuments as LOADocuments,
+    type LOADocumentCreateResponse as LOADocumentCreateResponse,
+    type LOADocumentCreateParams as LOADocumentCreateParams,
+    type LOADocumentGetParams as LOADocumentGetParams,
+  };
+
+  export {
+    Prefixes as Prefixes,
+    type Prefix as Prefix,
+    type PrefixDeleteResponse as PrefixDeleteResponse,
+    PrefixesSinglePage as PrefixesSinglePage,
+    type PrefixCreateParams as PrefixCreateParams,
+    type PrefixListParams as PrefixListParams,
+    type PrefixDeleteParams as PrefixDeleteParams,
+    type PrefixEditParams as PrefixEditParams,
+    type PrefixGetParams as PrefixGetParams,
+  };
 }

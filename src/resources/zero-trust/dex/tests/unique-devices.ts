@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as UniqueDevicesAPI from './unique-devices';
 
 export class UniqueDevices extends APIResource {
   /**
@@ -45,7 +44,6 @@ export interface UniqueDeviceListParams {
   testName?: string;
 }
 
-export namespace UniqueDevices {
-  export import UniqueDevices = UniqueDevicesAPI.UniqueDevices;
-  export import UniqueDeviceListParams = UniqueDevicesAPI.UniqueDeviceListParams;
+export declare namespace UniqueDevices {
+  export { type UniqueDevices as UniqueDevices, type UniqueDeviceListParams as UniqueDeviceListParams };
 }

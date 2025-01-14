@@ -32,7 +32,7 @@ npm exec tsc-multi
 # copy over handwritten .js/.mjs/.d.ts files
 cp src/_shims/*.{d.ts,js,mjs,md} dist/_shims
 cp src/_shims/auto/*.{d.ts,js,mjs} dist/_shims/auto
-# we need to add exports = module.exports = Cloudflare Node to index.js;
+# we need to add exports = module.exports = Cloudflare to index.js;
 # No way to get that from index.ts because it would cause compile errors
 # when building .mjs
 node scripts/utils/fix-index-exports.cjs
@@ -50,7 +50,7 @@ node scripts/utils/postprocess-files.cjs
 (cd dist && node -e 'require("cloudflare")')
 (cd dist && node -e 'import("cloudflare")' --input-type=module)
 
-if command -v deno &> /dev/null && [ -e ./scripts/build-deno ]
+if [ -e ./scripts/build-deno ]
 then
   ./scripts/build-deno
 fi

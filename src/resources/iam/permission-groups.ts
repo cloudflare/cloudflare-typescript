@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PermissionGroupsAPI from './permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class PermissionGroups extends APIResource {
@@ -51,12 +50,23 @@ export interface PermissionGroupGetResponse {
   /**
    * Attributes associated to the permission group.
    */
-  meta?: unknown;
+  meta?: PermissionGroupGetResponse.Meta;
 
   /**
    * Name of the group.
    */
   name?: string;
+}
+
+export namespace PermissionGroupGetResponse {
+  /**
+   * Attributes associated to the permission group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
+  }
 }
 
 export interface PermissionGroupListParams extends V4PagePaginationArrayParams {
@@ -88,10 +98,15 @@ export interface PermissionGroupGetParams {
   account_id: string;
 }
 
-export namespace PermissionGroups {
-  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
-  export import PermissionGroupGetResponse = PermissionGroupsAPI.PermissionGroupGetResponse;
-  export import PermissionGroupListResponsesV4PagePaginationArray = PermissionGroupsAPI.PermissionGroupListResponsesV4PagePaginationArray;
-  export import PermissionGroupListParams = PermissionGroupsAPI.PermissionGroupListParams;
-  export import PermissionGroupGetParams = PermissionGroupsAPI.PermissionGroupGetParams;
+PermissionGroups.PermissionGroupListResponsesV4PagePaginationArray =
+  PermissionGroupListResponsesV4PagePaginationArray;
+
+export declare namespace PermissionGroups {
+  export {
+    type PermissionGroupListResponse as PermissionGroupListResponse,
+    type PermissionGroupGetResponse as PermissionGroupGetResponse,
+    PermissionGroupListResponsesV4PagePaginationArray as PermissionGroupListResponsesV4PagePaginationArray,
+    type PermissionGroupListParams as PermissionGroupListParams,
+    type PermissionGroupGetParams as PermissionGroupGetParams,
+  };
 }

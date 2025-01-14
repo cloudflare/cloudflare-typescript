@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RegionalHostnamesAPI from './regional-hostnames';
 import * as Shared from '../../shared';
 import * as RegionsAPI from './regions';
+import { RegionListParams, RegionListResponse, RegionListResponsesSinglePage, Regions } from './regions';
 import { SinglePage } from '../../../pagination';
 
 export class RegionalHostnames extends APIResource {
@@ -228,20 +228,29 @@ export interface RegionalHostnameGetParams {
   zone_id: string;
 }
 
-export namespace RegionalHostnames {
-  export import RegionalHostnameCreateResponse = RegionalHostnamesAPI.RegionalHostnameCreateResponse;
-  export import RegionalHostnameListResponse = RegionalHostnamesAPI.RegionalHostnameListResponse;
-  export import RegionalHostnameDeleteResponse = RegionalHostnamesAPI.RegionalHostnameDeleteResponse;
-  export import RegionalHostnameEditResponse = RegionalHostnamesAPI.RegionalHostnameEditResponse;
-  export import RegionalHostnameGetResponse = RegionalHostnamesAPI.RegionalHostnameGetResponse;
-  export import RegionalHostnameListResponsesSinglePage = RegionalHostnamesAPI.RegionalHostnameListResponsesSinglePage;
-  export import RegionalHostnameCreateParams = RegionalHostnamesAPI.RegionalHostnameCreateParams;
-  export import RegionalHostnameListParams = RegionalHostnamesAPI.RegionalHostnameListParams;
-  export import RegionalHostnameDeleteParams = RegionalHostnamesAPI.RegionalHostnameDeleteParams;
-  export import RegionalHostnameEditParams = RegionalHostnamesAPI.RegionalHostnameEditParams;
-  export import RegionalHostnameGetParams = RegionalHostnamesAPI.RegionalHostnameGetParams;
-  export import Regions = RegionsAPI.Regions;
-  export import RegionListResponse = RegionsAPI.RegionListResponse;
-  export import RegionListResponsesSinglePage = RegionsAPI.RegionListResponsesSinglePage;
-  export import RegionListParams = RegionsAPI.RegionListParams;
+RegionalHostnames.RegionalHostnameListResponsesSinglePage = RegionalHostnameListResponsesSinglePage;
+RegionalHostnames.Regions = Regions;
+RegionalHostnames.RegionListResponsesSinglePage = RegionListResponsesSinglePage;
+
+export declare namespace RegionalHostnames {
+  export {
+    type RegionalHostnameCreateResponse as RegionalHostnameCreateResponse,
+    type RegionalHostnameListResponse as RegionalHostnameListResponse,
+    type RegionalHostnameDeleteResponse as RegionalHostnameDeleteResponse,
+    type RegionalHostnameEditResponse as RegionalHostnameEditResponse,
+    type RegionalHostnameGetResponse as RegionalHostnameGetResponse,
+    RegionalHostnameListResponsesSinglePage as RegionalHostnameListResponsesSinglePage,
+    type RegionalHostnameCreateParams as RegionalHostnameCreateParams,
+    type RegionalHostnameListParams as RegionalHostnameListParams,
+    type RegionalHostnameDeleteParams as RegionalHostnameDeleteParams,
+    type RegionalHostnameEditParams as RegionalHostnameEditParams,
+    type RegionalHostnameGetParams as RegionalHostnameGetParams,
+  };
+
+  export {
+    Regions as Regions,
+    type RegionListResponse as RegionListResponse,
+    RegionListResponsesSinglePage as RegionListResponsesSinglePage,
+    type RegionListParams as RegionListParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as WebhooksAPI from './webhooks';
 
 export class Webhooks extends APIResource {
   /**
@@ -42,11 +41,11 @@ export class Webhooks extends APIResource {
   }
 }
 
-export type WebhookUpdateResponse = unknown | string | null;
+export type WebhookUpdateResponse = unknown;
 
-export type WebhookDeleteResponse = unknown | string;
+export type WebhookDeleteResponse = string;
 
-export type WebhookGetResponse = unknown | string | null;
+export type WebhookGetResponse = unknown;
 
 export interface WebhookUpdateParams {
   /**
@@ -74,11 +73,13 @@ export interface WebhookGetParams {
   account_id: string;
 }
 
-export namespace Webhooks {
-  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
-  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
-  export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
-  export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
+export declare namespace Webhooks {
+  export {
+    type WebhookUpdateResponse as WebhookUpdateResponse,
+    type WebhookDeleteResponse as WebhookDeleteResponse,
+    type WebhookGetResponse as WebhookGetResponse,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookDeleteParams as WebhookDeleteParams,
+    type WebhookGetParams as WebhookGetParams,
+  };
 }

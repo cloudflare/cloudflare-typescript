@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource mtlsCertificates', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.mtlsCertificates.create({
+    const responsePromise = client.mtlsCertificates.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ca: true,
       certificates:
@@ -27,7 +27,7 @@ describe('resource mtlsCertificates', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.mtlsCertificates.create({
+    const response = await client.mtlsCertificates.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ca: true,
       certificates:
@@ -39,9 +39,7 @@ describe('resource mtlsCertificates', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.mtlsCertificates.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.mtlsCertificates.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -52,13 +50,11 @@ describe('resource mtlsCertificates', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.mtlsCertificates.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.mtlsCertificates.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.mtlsCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.mtlsCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -71,13 +67,13 @@ describe('resource mtlsCertificates', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.mtlsCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.mtlsCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.mtlsCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.mtlsCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -90,7 +86,7 @@ describe('resource mtlsCertificates', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.mtlsCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.mtlsCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

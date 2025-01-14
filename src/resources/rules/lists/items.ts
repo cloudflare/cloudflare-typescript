@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ItemsAPI from './items';
 import * as ListsAPI from './lists';
 import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
 
@@ -18,13 +17,13 @@ export class Items extends APIResource {
     listId: string,
     params: ItemCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemCreateResponse | null> {
+  ): Core.APIPromise<ItemCreateResponse> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ItemCreateResponse | null }>
+      }) as Core.APIPromise<{ result: ItemCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -40,13 +39,13 @@ export class Items extends APIResource {
     listId: string,
     params: ItemUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemUpdateResponse | null> {
+  ): Core.APIPromise<ItemUpdateResponse> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ItemUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: ItemUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,11 +76,11 @@ export class Items extends APIResource {
     listId: string,
     params: ItemDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemDeleteResponse | null> {
+  ): Core.APIPromise<ItemDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/rules/lists/${listId}/items`, options) as Core.APIPromise<{
-        result: ItemDeleteResponse | null;
+        result: ItemDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -94,12 +93,12 @@ export class Items extends APIResource {
     listId: string,
     itemId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemGetResponse | null> {
+  ): Core.APIPromise<ItemGetResponse> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/rules/lists/${listId}/items/${itemId}`,
         options,
-      ) as Core.APIPromise<{ result: ItemGetResponse | null }>
+      ) as Core.APIPromise<{ result: ItemGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -133,7 +132,49 @@ export interface ItemUpdateResponse {
   operation_id?: string;
 }
 
-export type ItemListResponse = unknown;
+export interface ItemListResponse {
+  /**
+   * The unique ID of the list.
+   */
+  id?: string;
+
+  /**
+   * A non-negative 32 bit integer
+   */
+  asn?: number;
+
+  /**
+   * An informative summary of the list item.
+   */
+  comment?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was created.
+   */
+  created_on?: string;
+
+  /**
+   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+   * 0 to 9, wildcards (\*), and the hyphen (-).
+   */
+  hostname?: ListsAPI.Hostname;
+
+  /**
+   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+   * maximum of /64.
+   */
+  ip?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The definition of the redirect.
+   */
+  redirect?: ListsAPI.Redirect;
+}
 
 export interface ItemDeleteResponse {
   /**
@@ -142,11 +183,49 @@ export interface ItemDeleteResponse {
   operation_id?: string;
 }
 
-/**
- * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
- * maximum of /64.
- */
-export type ItemGetResponse = string | ListsAPI.Redirect | ListsAPI.Hostname | number;
+export interface ItemGetResponse {
+  /**
+   * The unique ID of the list.
+   */
+  id?: string;
+
+  /**
+   * A non-negative 32 bit integer
+   */
+  asn?: number;
+
+  /**
+   * An informative summary of the list item.
+   */
+  comment?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was created.
+   */
+  created_on?: string;
+
+  /**
+   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+   * 0 to 9, wildcards (\*), and the hyphen (-).
+   */
+  hostname?: ListsAPI.Hostname;
+
+  /**
+   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+   * maximum of /64.
+   */
+  ip?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The definition of the redirect.
+   */
+  redirect?: ListsAPI.Redirect;
+}
 
 export interface ItemCreateParams {
   /**
@@ -255,17 +334,21 @@ export interface ItemDeleteParams {
   account_id: string;
 }
 
-export namespace Items {
-  export import ListCursor = ItemsAPI.ListCursor;
-  export import ListItem = ItemsAPI.ListItem;
-  export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
-  export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
-  export import ItemListResponse = ItemsAPI.ItemListResponse;
-  export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
-  export import ItemGetResponse = ItemsAPI.ItemGetResponse;
-  export import ItemListResponsesCursorPagination = ItemsAPI.ItemListResponsesCursorPagination;
-  export import ItemCreateParams = ItemsAPI.ItemCreateParams;
-  export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
-  export import ItemListParams = ItemsAPI.ItemListParams;
-  export import ItemDeleteParams = ItemsAPI.ItemDeleteParams;
+Items.ItemListResponsesCursorPagination = ItemListResponsesCursorPagination;
+
+export declare namespace Items {
+  export {
+    type ListCursor as ListCursor,
+    type ListItem as ListItem,
+    type ItemCreateResponse as ItemCreateResponse,
+    type ItemUpdateResponse as ItemUpdateResponse,
+    type ItemListResponse as ItemListResponse,
+    type ItemDeleteResponse as ItemDeleteResponse,
+    type ItemGetResponse as ItemGetResponse,
+    ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
+    type ItemCreateParams as ItemCreateParams,
+    type ItemUpdateParams as ItemUpdateParams,
+    type ItemListParams as ItemListParams,
+    type ItemDeleteParams as ItemDeleteParams,
+  };
 }

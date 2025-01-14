@@ -3,8 +3,7 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
-import * as ServiceTokensAPI from './service-tokens';
+import { CloudflareError } from 'cloudflare/error';
 import { SinglePage } from '../../../pagination';
 
 export class ServiceTokens extends APIResource {
@@ -90,7 +89,7 @@ export class ServiceTokens extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -110,7 +109,7 @@ export class ServiceTokens extends APIResource {
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
       ServiceTokensSinglePage,
-      options,
+      { query, ...options },
     );
   }
 
@@ -256,6 +255,8 @@ export interface ServiceToken {
    */
   duration?: string;
 
+  expires_at?: string;
+
   /**
    * The name of the service token.
    */
@@ -388,14 +389,26 @@ export interface ServiceTokenUpdateParams {
 
 export interface ServiceTokenListParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
+
+  /**
+   * Query param: The name of the service token.
+   */
+  name?: string;
+
+  /**
+   * Query param: Search for service tokens by other listed query parameters.
+   */
+  search?: string;
 }
 
 export interface ServiceTokenDeleteParams {
@@ -436,16 +449,20 @@ export interface ServiceTokenRotateParams {
   account_id: string;
 }
 
-export namespace ServiceTokens {
-  export import ServiceToken = ServiceTokensAPI.ServiceToken;
-  export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
-  export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
-  export import ServiceTokensSinglePage = ServiceTokensAPI.ServiceTokensSinglePage;
-  export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
-  export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
-  export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
-  export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
-  export import ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
-  export import ServiceTokenRefreshParams = ServiceTokensAPI.ServiceTokenRefreshParams;
-  export import ServiceTokenRotateParams = ServiceTokensAPI.ServiceTokenRotateParams;
+ServiceTokens.ServiceTokensSinglePage = ServiceTokensSinglePage;
+
+export declare namespace ServiceTokens {
+  export {
+    type ServiceToken as ServiceToken,
+    type ServiceTokenCreateResponse as ServiceTokenCreateResponse,
+    type ServiceTokenRotateResponse as ServiceTokenRotateResponse,
+    ServiceTokensSinglePage as ServiceTokensSinglePage,
+    type ServiceTokenCreateParams as ServiceTokenCreateParams,
+    type ServiceTokenUpdateParams as ServiceTokenUpdateParams,
+    type ServiceTokenListParams as ServiceTokenListParams,
+    type ServiceTokenDeleteParams as ServiceTokenDeleteParams,
+    type ServiceTokenGetParams as ServiceTokenGetParams,
+    type ServiceTokenRefreshParams as ServiceTokenRefreshParams,
+    type ServiceTokenRotateParams as ServiceTokenRotateParams,
+  };
 }

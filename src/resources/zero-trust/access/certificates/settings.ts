@@ -3,17 +3,13 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from '../../../../error';
-import * as SettingsAPI from './settings';
+import { CloudflareError } from 'cloudflare/error';
 
 export class Settings extends APIResource {
   /**
    * Updates an mTLS certificate's hostname settings.
    */
-  update(
-    params: SettingUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingUpdateResponse | null> {
+  update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SettingUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -35,19 +31,19 @@ export class Settings extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SettingUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: SettingUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all mTLS hostname settings for this account or zone.
    */
-  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse | null>;
+  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse>;
   get(
     params: SettingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingGetResponse | null> {
+  ): Core.APIPromise<SettingGetResponse> {
     if (isRequestOptions(params)) {
       return this.get({}, params);
     }
@@ -72,7 +68,7 @@ export class Settings extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/certificates/settings`,
         options,
-      ) as Core.APIPromise<{ result: SettingGetResponse | null }>
+      ) as Core.APIPromise<{ result: SettingGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -152,10 +148,12 @@ export interface SettingGetParams {
   zone_id?: string;
 }
 
-export namespace Settings {
-  export import CertificateSettings = SettingsAPI.CertificateSettings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export {
+    type CertificateSettings as CertificateSettings,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

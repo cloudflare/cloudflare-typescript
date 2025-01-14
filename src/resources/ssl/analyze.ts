@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AnalyzeAPI from './analyze';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
 
 export class Analyze extends APIResource {
@@ -20,7 +19,7 @@ export class Analyze extends APIResource {
   }
 }
 
-export type AnalyzeCreateResponse = unknown | string | null;
+export type AnalyzeCreateResponse = unknown;
 
 export interface AnalyzeCreateParams {
   /**
@@ -42,7 +41,9 @@ export interface AnalyzeCreateParams {
   certificate?: string;
 }
 
-export namespace Analyze {
-  export import AnalyzeCreateResponse = AnalyzeAPI.AnalyzeCreateResponse;
-  export import AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
+export declare namespace Analyze {
+  export {
+    type AnalyzeCreateResponse as AnalyzeCreateResponse,
+    type AnalyzeCreateParams as AnalyzeCreateParams,
+  };
 }

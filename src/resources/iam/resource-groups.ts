@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ResourceGroupsAPI from './resource-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class ResourceGroups extends APIResource {
@@ -149,7 +148,7 @@ export interface ResourceGroupUpdateResponse {
   /**
    * Attributes associated to the resource group.
    */
-  meta?: unknown;
+  meta?: ResourceGroupUpdateResponse.Meta;
 
   /**
    * Name of the resource group.
@@ -187,6 +186,15 @@ export namespace ResourceGroupUpdateResponse {
       key: string;
     }
   }
+
+  /**
+   * Attributes associated to the resource group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
+  }
 }
 
 export type ResourceGroupListResponse = unknown;
@@ -215,7 +223,7 @@ export interface ResourceGroupGetResponse {
   /**
    * Attributes associated to the resource group.
    */
-  meta?: unknown;
+  meta?: ResourceGroupGetResponse.Meta;
 
   /**
    * Name of the resource group.
@@ -252,6 +260,15 @@ export namespace ResourceGroupGetResponse {
        */
       key: string;
     }
+  }
+
+  /**
+   * Attributes associated to the resource group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
   }
 }
 
@@ -388,16 +405,21 @@ export interface ResourceGroupGetParams {
   account_id: string;
 }
 
-export namespace ResourceGroups {
-  export import ResourceGroupCreateResponse = ResourceGroupsAPI.ResourceGroupCreateResponse;
-  export import ResourceGroupUpdateResponse = ResourceGroupsAPI.ResourceGroupUpdateResponse;
-  export import ResourceGroupListResponse = ResourceGroupsAPI.ResourceGroupListResponse;
-  export import ResourceGroupDeleteResponse = ResourceGroupsAPI.ResourceGroupDeleteResponse;
-  export import ResourceGroupGetResponse = ResourceGroupsAPI.ResourceGroupGetResponse;
-  export import ResourceGroupListResponsesV4PagePaginationArray = ResourceGroupsAPI.ResourceGroupListResponsesV4PagePaginationArray;
-  export import ResourceGroupCreateParams = ResourceGroupsAPI.ResourceGroupCreateParams;
-  export import ResourceGroupUpdateParams = ResourceGroupsAPI.ResourceGroupUpdateParams;
-  export import ResourceGroupListParams = ResourceGroupsAPI.ResourceGroupListParams;
-  export import ResourceGroupDeleteParams = ResourceGroupsAPI.ResourceGroupDeleteParams;
-  export import ResourceGroupGetParams = ResourceGroupsAPI.ResourceGroupGetParams;
+ResourceGroups.ResourceGroupListResponsesV4PagePaginationArray =
+  ResourceGroupListResponsesV4PagePaginationArray;
+
+export declare namespace ResourceGroups {
+  export {
+    type ResourceGroupCreateResponse as ResourceGroupCreateResponse,
+    type ResourceGroupUpdateResponse as ResourceGroupUpdateResponse,
+    type ResourceGroupListResponse as ResourceGroupListResponse,
+    type ResourceGroupDeleteResponse as ResourceGroupDeleteResponse,
+    type ResourceGroupGetResponse as ResourceGroupGetResponse,
+    ResourceGroupListResponsesV4PagePaginationArray as ResourceGroupListResponsesV4PagePaginationArray,
+    type ResourceGroupCreateParams as ResourceGroupCreateParams,
+    type ResourceGroupUpdateParams as ResourceGroupUpdateParams,
+    type ResourceGroupListParams as ResourceGroupListParams,
+    type ResourceGroupDeleteParams as ResourceGroupDeleteParams,
+    type ResourceGroupGetParams as ResourceGroupGetParams,
+  };
 }

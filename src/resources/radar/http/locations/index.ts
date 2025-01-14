@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { BotClassGetResponse, BotClassGetParams, BotClass } from './bot-class';
-export { BrowserFamilyGetResponse, BrowserFamilyGetParams, BrowserFamily } from './browser-family';
-export { DeviceTypeGetResponse, DeviceTypeGetParams, DeviceType } from './device-type';
-export { HTTPMethodGetResponse, HTTPMethodGetParams, HTTPMethod } from './http-method';
-export { HTTPProtocolGetResponse, HTTPProtocolGetParams, HTTPProtocol } from './http-protocol';
-export { IPVersionGetResponse, IPVersionGetParams, IPVersion } from './ip-version';
-export { LocationGetResponse, LocationGetParams, Locations } from './locations';
-export { OSGetResponse, OSGetParams, OS } from './os';
-export { TLSVersionGetResponse, TLSVersionGetParams, TLSVersion } from './tls-version';
+export { BotClass, type BotClassGetResponse, type BotClassGetParams } from './bot-class';
+export { BrowserFamily, type BrowserFamilyGetResponse, type BrowserFamilyGetParams } from './browser-family';
+export { DeviceType, type DeviceTypeGetResponse, type DeviceTypeGetParams } from './device-type';
+export { HTTPMethod, type HTTPMethodGetResponse, type HTTPMethodGetParams } from './http-method';
+export { HTTPProtocol, type HTTPProtocolGetResponse, type HTTPProtocolGetParams } from './http-protocol';
+export { IPVersion, type IPVersionGetResponse, type IPVersionGetParams } from './ip-version';
+export { Locations, type LocationGetResponse, type LocationGetParams } from './locations';
+export { OS, type OSGetResponse, type OSGetParams } from './os';
+export { TLSVersion, type TLSVersionGetResponse, type TLSVersionGetParams } from './tls-version';

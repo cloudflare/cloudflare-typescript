@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as CookiesAPI from './cookies';
 import { SinglePage } from '../../pagination';
 
 export class Cookies extends APIResource {
@@ -123,8 +122,7 @@ export interface CookieListParams {
   domain?: string;
 
   /**
-   * Query param: Export the list of cookies as a file. Cannot be used with per_page
-   * or page options.
+   * Query param: Export the list of cookies as a file.
    */
   export?: 'csv';
 
@@ -157,6 +155,10 @@ export interface CookieListParams {
 
   /**
    * Query param: The current page number of the paginated results.
+   *
+   * We additionally support a special value "all". When "all" is used, the API will
+   * return all the cookies with the applied filters in a single page. This feature
+   * is best-effort and it may only work for zones with a low number of cookies
    */
   page?: string;
 
@@ -206,10 +208,14 @@ export interface CookieGetParams {
   zone_id: string;
 }
 
-export namespace Cookies {
-  export import CookieListResponse = CookiesAPI.CookieListResponse;
-  export import CookieGetResponse = CookiesAPI.CookieGetResponse;
-  export import CookieListResponsesSinglePage = CookiesAPI.CookieListResponsesSinglePage;
-  export import CookieListParams = CookiesAPI.CookieListParams;
-  export import CookieGetParams = CookiesAPI.CookieGetParams;
+Cookies.CookieListResponsesSinglePage = CookieListResponsesSinglePage;
+
+export declare namespace Cookies {
+  export {
+    type CookieListResponse as CookieListResponse,
+    type CookieGetResponse as CookieGetResponse,
+    CookieListResponsesSinglePage as CookieListResponsesSinglePage,
+    type CookieListParams as CookieListParams,
+    type CookieGetParams as CookieGetParams,
+  };
 }

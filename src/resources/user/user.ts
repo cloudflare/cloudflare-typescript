@@ -3,11 +3,38 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as AuditLogsAPI from './audit-logs';
+import { AuditLogListParams, AuditLogs } from './audit-logs';
 import * as InvitesAPI from './invites';
+import { Invite, InviteEditParams, Invites, InvitesSinglePage } from './invites';
 import * as OrganizationsAPI from './organizations';
+import {
+  Organization,
+  OrganizationDeleteResponse,
+  OrganizationGetResponse,
+  OrganizationListParams,
+  Organizations,
+  OrganizationsV4PagePaginationArray,
+} from './organizations';
 import * as SubscriptionsAPI from './subscriptions';
+import {
+  SubscriptionDeleteResponse,
+  SubscriptionGetResponse,
+  SubscriptionUpdateParams,
+  SubscriptionUpdateResponse,
+  Subscriptions,
+} from './subscriptions';
 import * as BillingAPI from './billing/billing';
+import { Billing } from './billing/billing';
 import * as TokensAPI from './tokens/tokens';
+import {
+  TokenCreateParams,
+  TokenCreateResponse,
+  TokenDeleteResponse,
+  TokenListParams,
+  TokenUpdateParams,
+  TokenVerifyResponse,
+  Tokens,
+} from './tokens/tokens';
 
 export class User extends APIResource {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
@@ -67,45 +94,51 @@ export interface UserEditParams {
   zipcode?: string | null;
 }
 
-export namespace User {
-  export import AuditLogs = AuditLogsAPI.AuditLogs;
-  export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
-  export import Billing = BillingAPI.Billing;
-  export import Invites = InvitesAPI.Invites;
-  export import Invite = InvitesAPI.Invite;
-  export import InviteEditResponse = InvitesAPI.InviteEditResponse;
-  export import InviteGetResponse = InvitesAPI.InviteGetResponse;
-  export import InvitesSinglePage = InvitesAPI.InvitesSinglePage;
-  export import InviteEditParams = InvitesAPI.InviteEditParams;
-  export import Organizations = OrganizationsAPI.Organizations;
-  export import Organization = OrganizationsAPI.Organization;
-  export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
-  export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
-  export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
-  export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
-  export import Subscriptions = SubscriptionsAPI.Subscriptions;
-  export import RatePlan = SubscriptionsAPI.RatePlan;
-  export import Subscription = SubscriptionsAPI.Subscription;
-  export import SubscriptionComponent = SubscriptionsAPI.SubscriptionComponent;
-  export import SubscriptionZone = SubscriptionsAPI.SubscriptionZone;
-  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
-  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
-  export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
-  export import Tokens = TokensAPI.Tokens;
-  export import CIDRList = TokensAPI.CIDRList;
-  export import Policy = TokensAPI.Policy;
-  export import Token = TokensAPI.Token;
-  export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
-  export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
-  export import TokenListResponse = TokensAPI.TokenListResponse;
-  export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
-  export import TokenGetResponse = TokensAPI.TokenGetResponse;
-  export import TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
-  export import TokenListResponsesV4PagePaginationArray = TokensAPI.TokenListResponsesV4PagePaginationArray;
-  export import TokenCreateParams = TokensAPI.TokenCreateParams;
-  export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
-  export import TokenListParams = TokensAPI.TokenListParams;
+User.AuditLogs = AuditLogs;
+User.Billing = Billing;
+User.Invites = Invites;
+User.InvitesSinglePage = InvitesSinglePage;
+User.Organizations = Organizations;
+User.OrganizationsV4PagePaginationArray = OrganizationsV4PagePaginationArray;
+User.Subscriptions = Subscriptions;
+User.Tokens = Tokens;
+
+export declare namespace User {
+  export { AuditLogs as AuditLogs, type AuditLogListParams as AuditLogListParams };
+
+  export { Billing as Billing };
+
+  export {
+    Invites as Invites,
+    type Invite as Invite,
+    InvitesSinglePage as InvitesSinglePage,
+    type InviteEditParams as InviteEditParams,
+  };
+
+  export {
+    Organizations as Organizations,
+    type Organization as Organization,
+    type OrganizationDeleteResponse as OrganizationDeleteResponse,
+    type OrganizationGetResponse as OrganizationGetResponse,
+    OrganizationsV4PagePaginationArray as OrganizationsV4PagePaginationArray,
+    type OrganizationListParams as OrganizationListParams,
+  };
+
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+  };
+
+  export {
+    Tokens as Tokens,
+    type TokenCreateResponse as TokenCreateResponse,
+    type TokenDeleteResponse as TokenDeleteResponse,
+    type TokenVerifyResponse as TokenVerifyResponse,
+    type TokenCreateParams as TokenCreateParams,
+    type TokenUpdateParams as TokenUpdateParams,
+    type TokenListParams as TokenListParams,
+  };
 }

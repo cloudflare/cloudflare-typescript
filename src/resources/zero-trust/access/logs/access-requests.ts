@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as AccessRequestsAPI from './access-requests';
 
 export class AccessRequests extends APIResource {
   /**
@@ -95,8 +94,10 @@ export interface AccessRequestListParams {
   until?: string;
 }
 
-export namespace AccessRequests {
-  export import AccessRequests = AccessRequestsAPI.AccessRequests;
-  export import AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
-  export import AccessRequestListParams = AccessRequestsAPI.AccessRequestListParams;
+export declare namespace AccessRequests {
+  export {
+    type AccessRequests as AccessRequests,
+    type AccessRequestListResponse as AccessRequestListResponse,
+    type AccessRequestListParams as AccessRequestListParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SiteInfoAPI from './site-info';
 import * as RulesAPI from './rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -209,13 +208,17 @@ export interface SiteInfoGetParams {
   account_id: string;
 }
 
-export namespace SiteInfo {
-  export import Site = SiteInfoAPI.Site;
-  export import SiteInfoDeleteResponse = SiteInfoAPI.SiteInfoDeleteResponse;
-  export import SitesV4PagePaginationArray = SiteInfoAPI.SitesV4PagePaginationArray;
-  export import SiteInfoCreateParams = SiteInfoAPI.SiteInfoCreateParams;
-  export import SiteInfoUpdateParams = SiteInfoAPI.SiteInfoUpdateParams;
-  export import SiteInfoListParams = SiteInfoAPI.SiteInfoListParams;
-  export import SiteInfoDeleteParams = SiteInfoAPI.SiteInfoDeleteParams;
-  export import SiteInfoGetParams = SiteInfoAPI.SiteInfoGetParams;
+SiteInfo.SitesV4PagePaginationArray = SitesV4PagePaginationArray;
+
+export declare namespace SiteInfo {
+  export {
+    type Site as Site,
+    type SiteInfoDeleteResponse as SiteInfoDeleteResponse,
+    SitesV4PagePaginationArray as SitesV4PagePaginationArray,
+    type SiteInfoCreateParams as SiteInfoCreateParams,
+    type SiteInfoUpdateParams as SiteInfoUpdateParams,
+    type SiteInfoListParams as SiteInfoListParams,
+    type SiteInfoDeleteParams as SiteInfoDeleteParams,
+    type SiteInfoGetParams as SiteInfoGetParams,
+  };
 }

@@ -2,17 +2,124 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as GatewayAPI from './gateway';
 import * as AppTypesAPI from './app-types';
+import { AppType, AppTypeListParams, AppTypes, AppTypesSinglePage } from './app-types';
 import * as AuditSSHSettingsAPI from './audit-ssh-settings';
+import {
+  AuditSSHSettingGetParams,
+  AuditSSHSettingRotateSeedParams,
+  AuditSSHSettingUpdateParams,
+  AuditSSHSettings,
+  GatewaySettings,
+} from './audit-ssh-settings';
 import * as CategoriesAPI from './categories';
+import { Categories, CategoriesSinglePage, Category, CategoryListParams } from './categories';
 import * as CertificatesAPI from './certificates';
-import * as ConfigurationsAPI from './configurations';
+import {
+  CertificateActivateParams,
+  CertificateActivateResponse,
+  CertificateCreateParams,
+  CertificateCreateResponse,
+  CertificateDeactivateParams,
+  CertificateDeactivateResponse,
+  CertificateDeleteParams,
+  CertificateDeleteResponse,
+  CertificateGetParams,
+  CertificateGetResponse,
+  CertificateListParams,
+  CertificateListResponse,
+  CertificateListResponsesSinglePage,
+  Certificates,
+} from './certificates';
 import * as LocationsAPI from './locations';
+import {
+  DOHEndpoint,
+  DOTEndpoint,
+  Endpoint,
+  IPNetwork,
+  IPV4Endpoint,
+  IPV6Endpoint,
+  IPV6Network,
+  Location,
+  LocationCreateParams,
+  LocationDeleteParams,
+  LocationDeleteResponse,
+  LocationGetParams,
+  LocationListParams,
+  LocationUpdateParams,
+  Locations,
+  LocationsSinglePage,
+} from './locations';
 import * as LoggingAPI from './logging';
+import { Logging, LoggingGetParams, LoggingSetting, LoggingUpdateParams } from './logging';
 import * as ProxyEndpointsAPI from './proxy-endpoints';
+import {
+  GatewayIPs,
+  ProxyEndpoint,
+  ProxyEndpointCreateParams,
+  ProxyEndpointDeleteParams,
+  ProxyEndpointDeleteResponse,
+  ProxyEndpointEditParams,
+  ProxyEndpointGetParams,
+  ProxyEndpointGetResponse,
+  ProxyEndpointListParams,
+  ProxyEndpoints,
+} from './proxy-endpoints';
 import * as RulesAPI from './rules';
+import {
+  DNSResolverSettingsV4,
+  DNSResolverSettingsV6,
+  GatewayFilter,
+  GatewayRule,
+  GatewayRulesSinglePage,
+  RuleCreateParams,
+  RuleDeleteParams,
+  RuleDeleteResponse,
+  RuleGetParams,
+  RuleListParams,
+  RuleResetExpirationParams,
+  RuleSetting,
+  RuleUpdateParams,
+  Rules,
+  Schedule,
+} from './rules';
+import * as ConfigurationsAPI from './configurations/configurations';
+import {
+  ActivityLogSettings,
+  AntiVirusSettings,
+  BlockPageSettings,
+  BodyScanningSettings,
+  BrowserIsolationSettings,
+  ConfigurationEditParams,
+  ConfigurationEditResponse,
+  ConfigurationGetParams,
+  ConfigurationGetResponse,
+  ConfigurationUpdateParams,
+  ConfigurationUpdateResponse,
+  Configurations,
+  CustomCertificateSettings,
+  ExtendedEmailMatching,
+  FipsSettings,
+  GatewayConfigurationSettings,
+  NotificationSettings,
+  ProtocolDetection,
+  TLSSettings,
+} from './configurations/configurations';
 import * as ListsAPI from './lists/lists';
+import {
+  GatewayItem,
+  GatewayList,
+  GatewayListsSinglePage,
+  ListCreateParams,
+  ListCreateResponse,
+  ListDeleteParams,
+  ListDeleteResponse,
+  ListEditParams,
+  ListGetParams,
+  ListListParams,
+  ListUpdateParams,
+  Lists,
+} from './lists/lists';
 
 export class Gateway extends APIResource {
   auditSSHSettings: AuditSSHSettingsAPI.AuditSSHSettings = new AuditSSHSettingsAPI.AuditSSHSettings(
@@ -95,99 +202,161 @@ export interface GatewayListParams {
   account_id: string;
 }
 
-export namespace Gateway {
-  export import GatewayCreateResponse = GatewayAPI.GatewayCreateResponse;
-  export import GatewayListResponse = GatewayAPI.GatewayListResponse;
-  export import GatewayCreateParams = GatewayAPI.GatewayCreateParams;
-  export import GatewayListParams = GatewayAPI.GatewayListParams;
-  export import AuditSSHSettings = AuditSSHSettingsAPI.AuditSSHSettings;
-  export import GatewaySettings = AuditSSHSettingsAPI.GatewaySettings;
-  export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
-  export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
-  export import Categories = CategoriesAPI.Categories;
-  export import Category = CategoriesAPI.Category;
-  export import CategoriesSinglePage = CategoriesAPI.CategoriesSinglePage;
-  export import CategoryListParams = CategoriesAPI.CategoryListParams;
-  export import AppTypes = AppTypesAPI.AppTypes;
-  export import AppType = AppTypesAPI.AppType;
-  export import AppTypesSinglePage = AppTypesAPI.AppTypesSinglePage;
-  export import AppTypeListParams = AppTypesAPI.AppTypeListParams;
-  export import Configurations = ConfigurationsAPI.Configurations;
-  export import ActivityLogSettings = ConfigurationsAPI.ActivityLogSettings;
-  export import AntiVirusSettings = ConfigurationsAPI.AntiVirusSettings;
-  export import BlockPageSettings = ConfigurationsAPI.BlockPageSettings;
-  export import BodyScanningSettings = ConfigurationsAPI.BodyScanningSettings;
-  export import BrowserIsolationSettings = ConfigurationsAPI.BrowserIsolationSettings;
-  export import CustomCertificateSettings = ConfigurationsAPI.CustomCertificateSettings;
-  export import ExtendedEmailMatching = ConfigurationsAPI.ExtendedEmailMatching;
-  export import FipsSettings = ConfigurationsAPI.FipsSettings;
-  export import GatewayConfigurationSettings = ConfigurationsAPI.GatewayConfigurationSettings;
-  export import NotificationSettings = ConfigurationsAPI.NotificationSettings;
-  export import ProtocolDetection = ConfigurationsAPI.ProtocolDetection;
-  export import TLSSettings = ConfigurationsAPI.TLSSettings;
-  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationEditResponse = ConfigurationsAPI.ConfigurationEditResponse;
-  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
-  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationEditParams = ConfigurationsAPI.ConfigurationEditParams;
-  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
-  export import Lists = ListsAPI.Lists;
-  export import GatewayItem = ListsAPI.GatewayItem;
-  export import GatewayList = ListsAPI.GatewayList;
-  export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
-  export import GatewayListsSinglePage = ListsAPI.GatewayListsSinglePage;
-  export import ListCreateParams = ListsAPI.ListCreateParams;
-  export import ListUpdateParams = ListsAPI.ListUpdateParams;
-  export import ListListParams = ListsAPI.ListListParams;
-  export import ListDeleteParams = ListsAPI.ListDeleteParams;
-  export import ListEditParams = ListsAPI.ListEditParams;
-  export import ListGetParams = ListsAPI.ListGetParams;
-  export import Locations = LocationsAPI.Locations;
-  export import Location = LocationsAPI.Location;
-  export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
-  export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
-  export import LocationCreateParams = LocationsAPI.LocationCreateParams;
-  export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;
-  export import LocationListParams = LocationsAPI.LocationListParams;
-  export import LocationDeleteParams = LocationsAPI.LocationDeleteParams;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
-  export import Logging = LoggingAPI.Logging;
-  export import LoggingSetting = LoggingAPI.LoggingSetting;
-  export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
-  export import LoggingGetParams = LoggingAPI.LoggingGetParams;
-  export import ProxyEndpoints = ProxyEndpointsAPI.ProxyEndpoints;
-  export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
-  export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
-  export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
-  export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
-  export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
-  export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
-  export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;
-  export import ProxyEndpointEditParams = ProxyEndpointsAPI.ProxyEndpointEditParams;
-  export import ProxyEndpointGetParams = ProxyEndpointsAPI.ProxyEndpointGetParams;
-  export import Rules = RulesAPI.Rules;
-  export import DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
-  export import DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
-  export import GatewayFilter = RulesAPI.GatewayFilter;
-  export import GatewayRule = RulesAPI.GatewayRule;
-  export import RuleSetting = RulesAPI.RuleSetting;
-  export import Schedule = RulesAPI.Schedule;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import GatewayRulesSinglePage = RulesAPI.GatewayRulesSinglePage;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import Certificates = CertificatesAPI.Certificates;
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateListResponsesSinglePage = CertificatesAPI.CertificateListResponsesSinglePage;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
+Gateway.AuditSSHSettings = AuditSSHSettings;
+Gateway.Categories = Categories;
+Gateway.CategoriesSinglePage = CategoriesSinglePage;
+Gateway.AppTypes = AppTypes;
+Gateway.AppTypesSinglePage = AppTypesSinglePage;
+Gateway.Configurations = Configurations;
+Gateway.Lists = Lists;
+Gateway.GatewayListsSinglePage = GatewayListsSinglePage;
+Gateway.Locations = Locations;
+Gateway.LocationsSinglePage = LocationsSinglePage;
+Gateway.Logging = Logging;
+Gateway.ProxyEndpoints = ProxyEndpoints;
+Gateway.Rules = Rules;
+Gateway.GatewayRulesSinglePage = GatewayRulesSinglePage;
+Gateway.Certificates = Certificates;
+Gateway.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;
+
+export declare namespace Gateway {
+  export {
+    type GatewayCreateResponse as GatewayCreateResponse,
+    type GatewayListResponse as GatewayListResponse,
+    type GatewayCreateParams as GatewayCreateParams,
+    type GatewayListParams as GatewayListParams,
+  };
+
+  export {
+    AuditSSHSettings as AuditSSHSettings,
+    type GatewaySettings as GatewaySettings,
+    type AuditSSHSettingUpdateParams as AuditSSHSettingUpdateParams,
+    type AuditSSHSettingGetParams as AuditSSHSettingGetParams,
+    type AuditSSHSettingRotateSeedParams as AuditSSHSettingRotateSeedParams,
+  };
+
+  export {
+    Categories as Categories,
+    type Category as Category,
+    CategoriesSinglePage as CategoriesSinglePage,
+    type CategoryListParams as CategoryListParams,
+  };
+
+  export {
+    AppTypes as AppTypes,
+    type AppType as AppType,
+    AppTypesSinglePage as AppTypesSinglePage,
+    type AppTypeListParams as AppTypeListParams,
+  };
+
+  export {
+    Configurations as Configurations,
+    type ActivityLogSettings as ActivityLogSettings,
+    type AntiVirusSettings as AntiVirusSettings,
+    type BlockPageSettings as BlockPageSettings,
+    type BodyScanningSettings as BodyScanningSettings,
+    type BrowserIsolationSettings as BrowserIsolationSettings,
+    type CustomCertificateSettings as CustomCertificateSettings,
+    type ExtendedEmailMatching as ExtendedEmailMatching,
+    type FipsSettings as FipsSettings,
+    type GatewayConfigurationSettings as GatewayConfigurationSettings,
+    type NotificationSettings as NotificationSettings,
+    type ProtocolDetection as ProtocolDetection,
+    type TLSSettings as TLSSettings,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationEditResponse as ConfigurationEditResponse,
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationEditParams as ConfigurationEditParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
+
+  export {
+    Lists as Lists,
+    type GatewayItem as GatewayItem,
+    type GatewayList as GatewayList,
+    type ListCreateResponse as ListCreateResponse,
+    type ListDeleteResponse as ListDeleteResponse,
+    GatewayListsSinglePage as GatewayListsSinglePage,
+    type ListCreateParams as ListCreateParams,
+    type ListUpdateParams as ListUpdateParams,
+    type ListListParams as ListListParams,
+    type ListDeleteParams as ListDeleteParams,
+    type ListEditParams as ListEditParams,
+    type ListGetParams as ListGetParams,
+  };
+
+  export {
+    Locations as Locations,
+    type DOHEndpoint as DOHEndpoint,
+    type DOTEndpoint as DOTEndpoint,
+    type Endpoint as Endpoint,
+    type IPNetwork as IPNetwork,
+    type IPV4Endpoint as IPV4Endpoint,
+    type IPV6Endpoint as IPV6Endpoint,
+    type IPV6Network as IPV6Network,
+    type Location as Location,
+    type LocationDeleteResponse as LocationDeleteResponse,
+    LocationsSinglePage as LocationsSinglePage,
+    type LocationCreateParams as LocationCreateParams,
+    type LocationUpdateParams as LocationUpdateParams,
+    type LocationListParams as LocationListParams,
+    type LocationDeleteParams as LocationDeleteParams,
+    type LocationGetParams as LocationGetParams,
+  };
+
+  export {
+    Logging as Logging,
+    type LoggingSetting as LoggingSetting,
+    type LoggingUpdateParams as LoggingUpdateParams,
+    type LoggingGetParams as LoggingGetParams,
+  };
+
+  export {
+    ProxyEndpoints as ProxyEndpoints,
+    type GatewayIPs as GatewayIPs,
+    type ProxyEndpoint as ProxyEndpoint,
+    type ProxyEndpointDeleteResponse as ProxyEndpointDeleteResponse,
+    type ProxyEndpointGetResponse as ProxyEndpointGetResponse,
+    type ProxyEndpointCreateParams as ProxyEndpointCreateParams,
+    type ProxyEndpointListParams as ProxyEndpointListParams,
+    type ProxyEndpointDeleteParams as ProxyEndpointDeleteParams,
+    type ProxyEndpointEditParams as ProxyEndpointEditParams,
+    type ProxyEndpointGetParams as ProxyEndpointGetParams,
+  };
+
+  export {
+    Rules as Rules,
+    type DNSResolverSettingsV4 as DNSResolverSettingsV4,
+    type DNSResolverSettingsV6 as DNSResolverSettingsV6,
+    type GatewayFilter as GatewayFilter,
+    type GatewayRule as GatewayRule,
+    type RuleSetting as RuleSetting,
+    type Schedule as Schedule,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    GatewayRulesSinglePage as GatewayRulesSinglePage,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleGetParams as RuleGetParams,
+    type RuleResetExpirationParams as RuleResetExpirationParams,
+  };
+
+  export {
+    Certificates as Certificates,
+    type CertificateCreateResponse as CertificateCreateResponse,
+    type CertificateListResponse as CertificateListResponse,
+    type CertificateDeleteResponse as CertificateDeleteResponse,
+    type CertificateActivateResponse as CertificateActivateResponse,
+    type CertificateDeactivateResponse as CertificateDeactivateResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    CertificateListResponsesSinglePage as CertificateListResponsesSinglePage,
+    type CertificateCreateParams as CertificateCreateParams,
+    type CertificateListParams as CertificateListParams,
+    type CertificateDeleteParams as CertificateDeleteParams,
+    type CertificateActivateParams as CertificateActivateParams,
+    type CertificateDeactivateParams as CertificateDeactivateParams,
+    type CertificateGetParams as CertificateGetParams,
+  };
 }

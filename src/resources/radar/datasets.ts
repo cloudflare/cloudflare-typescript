@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as DatasetsAPI from './datasets';
 
 export class Datasets extends APIResource {
   /**
@@ -43,7 +42,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Get the csv content of a given dataset by alias or id. When getting the content
+   * Get the CSV content of a given dataset by alias or ID. When getting the content
    * by alias the latest dataset is returned, optionally filtered by the latest
    * available at a given date.
    */
@@ -121,10 +120,12 @@ export interface DatasetDownloadParams {
   format?: 'JSON' | 'CSV';
 }
 
-export namespace Datasets {
-  export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
-  export import DatasetDownloadResponse = DatasetsAPI.DatasetDownloadResponse;
-  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
-  export import DatasetListParams = DatasetsAPI.DatasetListParams;
-  export import DatasetDownloadParams = DatasetsAPI.DatasetDownloadParams;
+export declare namespace Datasets {
+  export {
+    type DatasetListResponse as DatasetListResponse,
+    type DatasetDownloadResponse as DatasetDownloadResponse,
+    type DatasetGetResponse as DatasetGetResponse,
+    type DatasetListParams as DatasetListParams,
+    type DatasetDownloadParams as DatasetDownloadParams,
+  };
 }

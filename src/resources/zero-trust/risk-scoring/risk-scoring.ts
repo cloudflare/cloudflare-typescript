@@ -1,12 +1,32 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as RiskScoringAPI from './risk-scoring';
 import * as BehavioursAPI from './behaviours';
+import {
+  BehaviourGetParams,
+  BehaviourGetResponse,
+  BehaviourUpdateParams,
+  BehaviourUpdateResponse,
+  Behaviours,
+} from './behaviours';
 import * as SummaryAPI from './summary';
+import { Summary, SummaryGetParams, SummaryGetResponse } from './summary';
 import * as IntegrationsAPI from './integrations/integrations';
+import {
+  IntegrationCreateParams,
+  IntegrationCreateResponse,
+  IntegrationDeleteParams,
+  IntegrationDeleteResponse,
+  IntegrationGetParams,
+  IntegrationGetResponse,
+  IntegrationListParams,
+  IntegrationListResponse,
+  IntegrationListResponsesSinglePage,
+  IntegrationUpdateParams,
+  IntegrationUpdateResponse,
+  Integrations,
+} from './integrations/integrations';
 
 export class RiskScoring extends APIResource {
   behaviours: BehavioursAPI.Behaviours = new BehavioursAPI.Behaviours(this._client);
@@ -17,30 +37,15 @@ export class RiskScoring extends APIResource {
    * Get risk event/score information for a specific user
    */
   get(
-    accountIdentifier: string,
     userId: string,
-    query?: RiskScoringGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RiskScoringGetResponse>;
-  get(
-    accountIdentifier: string,
-    userId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RiskScoringGetResponse>;
-  get(
-    accountIdentifier: string,
-    userId: string,
-    query: RiskScoringGetParams | Core.RequestOptions = {},
+    params: RiskScoringGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RiskScoringGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(accountIdentifier, userId, {}, query);
-    }
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/zt_risk_scoring/${userId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: RiskScoringGetResponse }>
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/${userId}`, options) as Core.APIPromise<{
+        result: RiskScoringGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,29 +53,30 @@ export class RiskScoring extends APIResource {
    * Clear the risk score for a particular user
    */
   reset(
-    accountIdentifier: string,
     userId: string,
+    params: RiskScoringResetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RiskScoringResetResponse> {
+  ): Core.APIPromise<RiskScoringResetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountIdentifier}/zt_risk_scoring/${userId}/reset`,
+        `/accounts/${account_id}/zt_risk_scoring/${userId}/reset`,
         options,
-      ) as Core.APIPromise<{ result: RiskScoringResetResponse }>
+      ) as Core.APIPromise<{ result: RiskScoringResetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export interface RiskScoringGetResponse {
-  email?: string;
+  email: string;
 
-  events?: Array<RiskScoringGetResponse.Event>;
+  events: Array<RiskScoringGetResponse.Event>;
+
+  name: string;
 
   last_reset_time?: string | null;
 
-  name?: string;
-
-  risk_level?: 'low' | 'medium' | 'high' | null;
+  risk_level?: 'low' | 'medium' | 'high';
 }
 
 export namespace RiskScoringGetResponse {
@@ -87,39 +93,55 @@ export namespace RiskScoringGetResponse {
   }
 }
 
-export type RiskScoringResetResponse = unknown | string | null;
+export type RiskScoringResetResponse = unknown;
 
 export interface RiskScoringGetParams {
-  direction?: 'desc' | 'asc';
-
-  order_by?: 'timestamp' | 'risk_level';
-
-  page?: number;
-
-  per_page?: number;
+  account_id: string;
 }
 
-export namespace RiskScoring {
-  export import RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
-  export import RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
-  export import RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
-  export import Behaviours = BehavioursAPI.Behaviours;
-  export import BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
-  export import BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
-  export import BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
-  export import Summary = SummaryAPI.Summary;
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import Integrations = IntegrationsAPI.Integrations;
-  export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
-  export import IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
-  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
-  export import IntegrationListResponsesSinglePage = IntegrationsAPI.IntegrationListResponsesSinglePage;
-  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
-  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+export interface RiskScoringResetParams {
+  account_id: string;
+}
+
+RiskScoring.Behaviours = Behaviours;
+RiskScoring.Summary = Summary;
+RiskScoring.Integrations = Integrations;
+RiskScoring.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;
+
+export declare namespace RiskScoring {
+  export {
+    type RiskScoringGetResponse as RiskScoringGetResponse,
+    type RiskScoringResetResponse as RiskScoringResetResponse,
+    type RiskScoringGetParams as RiskScoringGetParams,
+    type RiskScoringResetParams as RiskScoringResetParams,
+  };
+
+  export {
+    Behaviours as Behaviours,
+    type BehaviourUpdateResponse as BehaviourUpdateResponse,
+    type BehaviourGetResponse as BehaviourGetResponse,
+    type BehaviourUpdateParams as BehaviourUpdateParams,
+    type BehaviourGetParams as BehaviourGetParams,
+  };
+
+  export {
+    Summary as Summary,
+    type SummaryGetResponse as SummaryGetResponse,
+    type SummaryGetParams as SummaryGetParams,
+  };
+
+  export {
+    Integrations as Integrations,
+    type IntegrationCreateResponse as IntegrationCreateResponse,
+    type IntegrationUpdateResponse as IntegrationUpdateResponse,
+    type IntegrationListResponse as IntegrationListResponse,
+    type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    type IntegrationGetResponse as IntegrationGetResponse,
+    IntegrationListResponsesSinglePage as IntegrationListResponsesSinglePage,
+    type IntegrationCreateParams as IntegrationCreateParams,
+    type IntegrationUpdateParams as IntegrationUpdateParams,
+    type IntegrationListParams as IntegrationListParams,
+    type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationGetParams as IntegrationGetParams,
+  };
 }

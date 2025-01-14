@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as StatusesAPI from './statuses';
 
 export class Statuses extends APIResource {
   /**
@@ -59,7 +58,6 @@ export interface StatusGetParams {
   zone_id: string;
 }
 
-export namespace Statuses {
-  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export import StatusGetParams = StatusesAPI.StatusGetParams;
+export declare namespace Statuses {
+  export { type StatusGetResponse as StatusGetResponse, type StatusGetParams as StatusGetParams };
 }

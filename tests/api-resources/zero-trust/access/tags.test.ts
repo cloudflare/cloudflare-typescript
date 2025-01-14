@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,9 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource tags', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.create({
+    const responsePromise = client.zeroTrust.access.tags.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'engineers',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,16 +24,14 @@ describe('resource tags', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.tags.create({
+    const response = await client.zeroTrust.access.tags.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'engineers',
-      created_at: '2014-01-01T05:20:00.12345Z',
-      updated_at: '2014-01-01T05:20:00.12345Z',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.update('engineers', {
+    const responsePromise = client.zeroTrust.access.tags.update('engineers', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'engineers',
     });
@@ -48,16 +45,14 @@ describe('resource tags', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.tags.update('engineers', {
+    const response = await client.zeroTrust.access.tags.update('engineers', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'engineers',
-      created_at: '2014-01-01T05:20:00.12345Z',
-      updated_at: '2014-01-01T05:20:00.12345Z',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.list({
+    const responsePromise = client.zeroTrust.access.tags.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -70,13 +65,13 @@ describe('resource tags', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.tags.list({
+    const response = await client.zeroTrust.access.tags.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.delete('engineers', {
+    const responsePromise = client.zeroTrust.access.tags.delete('engineers', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -89,13 +84,13 @@ describe('resource tags', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.tags.delete('engineers', {
+    const response = await client.zeroTrust.access.tags.delete('engineers', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.get('engineers', {
+    const responsePromise = client.zeroTrust.access.tags.get('engineers', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -108,7 +103,7 @@ describe('resource tags', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.tags.get('engineers', {
+    const response = await client.zeroTrust.access.tags.get('engineers', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

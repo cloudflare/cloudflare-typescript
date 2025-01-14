@@ -1,20 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Action,
-  EmailRoutingRule,
-  Matcher,
-  RuleCreateParams,
-  RuleUpdateParams,
-  RuleListParams,
+  CatchAlls,
+  type CatchAllAction,
+  type CatchAllMatcher,
+  type CatchAllUpdateResponse,
+  type CatchAllGetResponse,
+  type CatchAllUpdateParams,
+  type CatchAllGetParams,
+} from './catch-alls';
+export {
   EmailRoutingRulesV4PagePaginationArray,
   Rules,
+  type Action,
+  type EmailRoutingRule,
+  type Matcher,
+  type RuleCreateParams,
+  type RuleUpdateParams,
+  type RuleListParams,
+  type RuleDeleteParams,
+  type RuleGetParams,
 } from './rules';
-export {
-  CatchAllAction,
-  CatchAllMatcher,
-  CatchAllUpdateResponse,
-  CatchAllGetResponse,
-  CatchAllUpdateParams,
-  CatchAlls,
-} from './catch-alls';

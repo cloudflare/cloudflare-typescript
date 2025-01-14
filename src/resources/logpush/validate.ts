@@ -2,8 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
-import * as ValidateAPI from './validate';
+import { CloudflareError } from 'cloudflare/error';
 
 export class Validate extends APIResource {
   /**
@@ -125,9 +124,11 @@ export interface ValidateOriginParams {
   zone_id?: string;
 }
 
-export namespace Validate {
-  export import ValidateDestinationResponse = ValidateAPI.ValidateDestinationResponse;
-  export import ValidateOriginResponse = ValidateAPI.ValidateOriginResponse;
-  export import ValidateDestinationParams = ValidateAPI.ValidateDestinationParams;
-  export import ValidateOriginParams = ValidateAPI.ValidateOriginParams;
+export declare namespace Validate {
+  export {
+    type ValidateDestinationResponse as ValidateDestinationResponse,
+    type ValidateOriginResponse as ValidateOriginResponse,
+    type ValidateDestinationParams as ValidateDestinationParams,
+    type ValidateOriginParams as ValidateOriginParams,
+  };
 }

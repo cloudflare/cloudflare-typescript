@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as IPsAPI from './ips';
 import * as RoutesAPI from './routes';
 
 export class IPs extends APIResource {
@@ -32,6 +31,6 @@ export interface IPGetParams {
   virtual_network_id?: string;
 }
 
-export namespace IPs {
-  export import IPGetParams = IPsAPI.IPGetParams;
+export declare namespace IPs {
+  export { type IPGetParams as IPGetParams };
 }

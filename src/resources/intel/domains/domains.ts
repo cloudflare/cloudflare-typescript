@@ -2,14 +2,14 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DomainsAPI from './domains';
 import * as BulksAPI from './bulks';
+import { BulkGetParams, BulkGetResponse, Bulks } from './bulks';
 
 export class Domains extends APIResource {
   bulks: BulksAPI.Bulks = new BulksAPI.Bulks(this._client);
 
   /**
-   * Get Domain Details
+   * Gets security details and statistics about a domain.
    */
   get(params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
     const { account_id, ...query } = params;
@@ -32,10 +32,7 @@ export interface Domain {
    */
   application?: Domain.Application;
 
-  /**
-   * Current content categories.
-   */
-  content_categories?: Array<unknown>;
+  content_categories?: Array<Domain.ContentCategory>;
 
   domain?: string;
 
@@ -67,7 +64,7 @@ export interface Domain {
    */
   risk_score?: number;
 
-  risk_types?: Array<unknown>;
+  risk_types?: Array<Domain.RiskType>;
 }
 
 export namespace Domain {
@@ -88,6 +85,17 @@ export namespace Domain {
     id?: number;
 
     name?: string;
+  }
+
+  /**
+   * Current content categories.
+   */
+  export interface ContentCategory {
+    id?: number;
+
+    name?: string;
+
+    super_category_id?: number;
   }
 
   export interface InheritedContentCategory {
@@ -118,6 +126,14 @@ export namespace Domain {
      */
     value?: string;
   }
+
+  export interface RiskType {
+    id?: number;
+
+    name?: string;
+
+    super_category_id?: number;
+  }
 }
 
 export interface DomainGetParams {
@@ -132,10 +148,10 @@ export interface DomainGetParams {
   domain?: string;
 }
 
-export namespace Domains {
-  export import Domain = DomainsAPI.Domain;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
-  export import Bulks = BulksAPI.Bulks;
-  export import BulkGetResponse = BulksAPI.BulkGetResponse;
-  export import BulkGetParams = BulksAPI.BulkGetParams;
+Domains.Bulks = Bulks;
+
+export declare namespace Domains {
+  export { type Domain as Domain, type DomainGetParams as DomainGetParams };
+
+  export { Bulks as Bulks, type BulkGetResponse as BulkGetResponse, type BulkGetParams as BulkGetParams };
 }

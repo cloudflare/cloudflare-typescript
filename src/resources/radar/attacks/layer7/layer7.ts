@@ -3,10 +3,52 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as Layer7API from './layer7';
 import * as SummaryAPI from './summary';
+import {
+  Summary,
+  SummaryGetParams,
+  SummaryGetResponse,
+  SummaryHTTPMethodParams,
+  SummaryHTTPMethodResponse,
+  SummaryHTTPVersionParams,
+  SummaryHTTPVersionResponse,
+  SummaryIPVersionParams,
+  SummaryIPVersionResponse,
+  SummaryManagedRulesParams,
+  SummaryManagedRulesResponse,
+  SummaryMitigationProductParams,
+  SummaryMitigationProductResponse,
+} from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
+import {
+  TimeseriesGroupGetParams,
+  TimeseriesGroupGetResponse,
+  TimeseriesGroupHTTPMethodParams,
+  TimeseriesGroupHTTPMethodResponse,
+  TimeseriesGroupHTTPVersionParams,
+  TimeseriesGroupHTTPVersionResponse,
+  TimeseriesGroupIPVersionParams,
+  TimeseriesGroupIPVersionResponse,
+  TimeseriesGroupIndustryParams,
+  TimeseriesGroupIndustryResponse,
+  TimeseriesGroupManagedRulesParams,
+  TimeseriesGroupManagedRulesResponse,
+  TimeseriesGroupMitigationProductParams,
+  TimeseriesGroupMitigationProductResponse,
+  TimeseriesGroupVerticalParams,
+  TimeseriesGroupVerticalResponse,
+  TimeseriesGroups,
+} from './timeseries-groups';
 import * as TopAPI from './top/top';
+import {
+  Top,
+  TopAttacksParams,
+  TopAttacksResponse,
+  TopIndustryParams,
+  TopIndustryResponse,
+  TopVerticalParams,
+  TopVerticalResponse,
+} from './top/top';
 
 export class Layer7 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
@@ -252,44 +294,59 @@ export interface Layer7TimeseriesParams {
   normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
 }
 
-export namespace Layer7 {
-  export import Layer7TimeseriesResponse = Layer7API.Layer7TimeseriesResponse;
-  export import Layer7TimeseriesParams = Layer7API.Layer7TimeseriesParams;
-  export import Summary = SummaryAPI.Summary;
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryHTTPMethodResponse = SummaryAPI.SummaryHTTPMethodResponse;
-  export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryManagedRulesResponse = SummaryAPI.SummaryManagedRulesResponse;
-  export import SummaryMitigationProductResponse = SummaryAPI.SummaryMitigationProductResponse;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import SummaryHTTPMethodParams = SummaryAPI.SummaryHTTPMethodParams;
-  export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryManagedRulesParams = SummaryAPI.SummaryManagedRulesParams;
-  export import SummaryMitigationProductParams = SummaryAPI.SummaryMitigationProductParams;
-  export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
-  export import TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
-  export import TimeseriesGroupHTTPMethodResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodResponse;
-  export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
-  export import TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupManagedRulesResponse = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesResponse;
-  export import TimeseriesGroupMitigationProductResponse = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductResponse;
-  export import TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
-  export import TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
-  export import TimeseriesGroupHTTPMethodParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodParams;
-  export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
-  export import TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupManagedRulesParams = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesParams;
-  export import TimeseriesGroupMitigationProductParams = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductParams;
-  export import TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
-  export import Top = TopAPI.Top;
-  export import TopAttacksResponse = TopAPI.TopAttacksResponse;
-  export import TopIndustryResponse = TopAPI.TopIndustryResponse;
-  export import TopVerticalResponse = TopAPI.TopVerticalResponse;
-  export import TopAttacksParams = TopAPI.TopAttacksParams;
-  export import TopIndustryParams = TopAPI.TopIndustryParams;
-  export import TopVerticalParams = TopAPI.TopVerticalParams;
+Layer7.Summary = Summary;
+Layer7.TimeseriesGroups = TimeseriesGroups;
+Layer7.Top = Top;
+
+export declare namespace Layer7 {
+  export {
+    type Layer7TimeseriesResponse as Layer7TimeseriesResponse,
+    type Layer7TimeseriesParams as Layer7TimeseriesParams,
+  };
+
+  export {
+    Summary as Summary,
+    type SummaryGetResponse as SummaryGetResponse,
+    type SummaryHTTPMethodResponse as SummaryHTTPMethodResponse,
+    type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryManagedRulesResponse as SummaryManagedRulesResponse,
+    type SummaryMitigationProductResponse as SummaryMitigationProductResponse,
+    type SummaryGetParams as SummaryGetParams,
+    type SummaryHTTPMethodParams as SummaryHTTPMethodParams,
+    type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryManagedRulesParams as SummaryManagedRulesParams,
+    type SummaryMitigationProductParams as SummaryMitigationProductParams,
+  };
+
+  export {
+    TimeseriesGroups as TimeseriesGroups,
+    type TimeseriesGroupGetResponse as TimeseriesGroupGetResponse,
+    type TimeseriesGroupHTTPMethodResponse as TimeseriesGroupHTTPMethodResponse,
+    type TimeseriesGroupHTTPVersionResponse as TimeseriesGroupHTTPVersionResponse,
+    type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupManagedRulesResponse as TimeseriesGroupManagedRulesResponse,
+    type TimeseriesGroupMitigationProductResponse as TimeseriesGroupMitigationProductResponse,
+    type TimeseriesGroupVerticalResponse as TimeseriesGroupVerticalResponse,
+    type TimeseriesGroupGetParams as TimeseriesGroupGetParams,
+    type TimeseriesGroupHTTPMethodParams as TimeseriesGroupHTTPMethodParams,
+    type TimeseriesGroupHTTPVersionParams as TimeseriesGroupHTTPVersionParams,
+    type TimeseriesGroupIndustryParams as TimeseriesGroupIndustryParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupManagedRulesParams as TimeseriesGroupManagedRulesParams,
+    type TimeseriesGroupMitigationProductParams as TimeseriesGroupMitigationProductParams,
+    type TimeseriesGroupVerticalParams as TimeseriesGroupVerticalParams,
+  };
+
+  export {
+    Top as Top,
+    type TopAttacksResponse as TopAttacksResponse,
+    type TopIndustryResponse as TopIndustryResponse,
+    type TopVerticalResponse as TopVerticalResponse,
+    type TopAttacksParams as TopAttacksParams,
+    type TopIndustryParams as TopIndustryParams,
+    type TopVerticalParams as TopVerticalParams,
+  };
 }

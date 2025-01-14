@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DomainsAPI from './domains';
 import { SinglePage } from '../../../pagination';
 
 export class Domains extends APIResource {
@@ -14,10 +13,10 @@ export class Domains extends APIResource {
     params: DomainCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainCreateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pages/projects/${projectName}/domains`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: DomainCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -47,12 +46,14 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<DomainDeleteResponse | null> {
     const { account_id } = params;
-    return this._client.delete(
-      `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
-      options,
-    );
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
+        options,
+      ) as Core.APIPromise<{ result: DomainDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -94,15 +95,167 @@ export class Domains extends APIResource {
 
 export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {}
 
-export type DomainCreateResponse = unknown | Array<unknown> | string;
+export interface DomainCreateResponse {
+  id?: string;
 
-export type DomainListResponse = unknown;
+  certificate_authority?: 'google' | 'lets_encrypt';
+
+  created_on?: string;
+
+  domain_id?: string;
+
+  name?: string;
+
+  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+
+  validation_data?: DomainCreateResponse.ValidationData;
+
+  verification_data?: DomainCreateResponse.VerificationData;
+
+  zone_tag?: string;
+}
+
+export namespace DomainCreateResponse {
+  export interface ValidationData {
+    error_message?: string;
+
+    method?: 'http' | 'txt';
+
+    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
+    txt_name?: string;
+
+    txt_value?: string;
+  }
+
+  export interface VerificationData {
+    error_message?: string;
+
+    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  }
+}
+
+export interface DomainListResponse {
+  id?: string;
+
+  certificate_authority?: 'google' | 'lets_encrypt';
+
+  created_on?: string;
+
+  domain_id?: string;
+
+  name?: string;
+
+  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+
+  validation_data?: DomainListResponse.ValidationData;
+
+  verification_data?: DomainListResponse.VerificationData;
+
+  zone_tag?: string;
+}
+
+export namespace DomainListResponse {
+  export interface ValidationData {
+    error_message?: string;
+
+    method?: 'http' | 'txt';
+
+    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
+    txt_name?: string;
+
+    txt_value?: string;
+  }
+
+  export interface VerificationData {
+    error_message?: string;
+
+    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  }
+}
 
 export type DomainDeleteResponse = unknown;
 
-export type DomainEditResponse = unknown | Array<unknown> | string;
+export interface DomainEditResponse {
+  id?: string;
 
-export type DomainGetResponse = unknown | Array<unknown> | string;
+  certificate_authority?: 'google' | 'lets_encrypt';
+
+  created_on?: string;
+
+  domain_id?: string;
+
+  name?: string;
+
+  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+
+  validation_data?: DomainEditResponse.ValidationData;
+
+  verification_data?: DomainEditResponse.VerificationData;
+
+  zone_tag?: string;
+}
+
+export namespace DomainEditResponse {
+  export interface ValidationData {
+    error_message?: string;
+
+    method?: 'http' | 'txt';
+
+    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
+    txt_name?: string;
+
+    txt_value?: string;
+  }
+
+  export interface VerificationData {
+    error_message?: string;
+
+    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  }
+}
+
+export interface DomainGetResponse {
+  id?: string;
+
+  certificate_authority?: 'google' | 'lets_encrypt';
+
+  created_on?: string;
+
+  domain_id?: string;
+
+  name?: string;
+
+  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+
+  validation_data?: DomainGetResponse.ValidationData;
+
+  verification_data?: DomainGetResponse.VerificationData;
+
+  zone_tag?: string;
+}
+
+export namespace DomainGetResponse {
+  export interface ValidationData {
+    error_message?: string;
+
+    method?: 'http' | 'txt';
+
+    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
+    txt_name?: string;
+
+    txt_value?: string;
+  }
+
+  export interface VerificationData {
+    error_message?: string;
+
+    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  }
+}
 
 export interface DomainCreateParams {
   /**
@@ -113,7 +266,7 @@ export interface DomainCreateParams {
   /**
    * Body param:
    */
-  body: unknown;
+  name?: string;
 }
 
 export interface DomainListParams {
@@ -149,16 +302,20 @@ export interface DomainGetParams {
   account_id: string;
 }
 
-export namespace Domains {
-  export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
-  export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
-  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
-  export import DomainCreateParams = DomainsAPI.DomainCreateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainEditParams = DomainsAPI.DomainEditParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+Domains.DomainListResponsesSinglePage = DomainListResponsesSinglePage;
+
+export declare namespace Domains {
+  export {
+    type DomainCreateResponse as DomainCreateResponse,
+    type DomainListResponse as DomainListResponse,
+    type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainEditResponse as DomainEditResponse,
+    type DomainGetResponse as DomainGetResponse,
+    DomainListResponsesSinglePage as DomainListResponsesSinglePage,
+    type DomainCreateParams as DomainCreateParams,
+    type DomainListParams as DomainListParams,
+    type DomainDeleteParams as DomainDeleteParams,
+    type DomainEditParams as DomainEditParams,
+    type DomainGetParams as DomainGetParams,
+  };
 }

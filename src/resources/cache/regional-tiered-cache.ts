@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 
 export class RegionalTieredCacheResource extends APIResource {
   /**
@@ -46,11 +45,6 @@ export class RegionalTieredCacheResource extends APIResource {
  */
 export type RegionalTieredCache = 'tc_regional';
 
-/**
- * Instructs Cloudflare to check a regional hub data center on the way to your
- * upper tier. This can help improve performance for smart and custom tiered cache
- * topologies.
- */
 export interface RegionalTieredCacheEditResponse {
   /**
    * ID of the zone setting.
@@ -58,42 +52,21 @@ export interface RegionalTieredCacheEditResponse {
   id: RegionalTieredCache;
 
   /**
-   * last time this setting was modified.
+   * Whether the setting is editable
    */
-  modified_on: string | null;
+  editable: boolean;
 
   /**
-   * Instructs Cloudflare to check a regional hub data center on the way to your
-   * upper tier. This can help improve performance for smart and custom tiered cache
-   * topologies.
+   * The value of the feature
    */
-  value: RegionalTieredCacheEditResponse.Value;
-}
+  value: 'on' | 'off';
 
-export namespace RegionalTieredCacheEditResponse {
   /**
-   * Instructs Cloudflare to check a regional hub data center on the way to your
-   * upper tier. This can help improve performance for smart and custom tiered cache
-   * topologies.
+   * Last time this setting was modified.
    */
-  export interface Value {
-    /**
-     * ID of the zone setting.
-     */
-    id: RegionalTieredCacheAPI.RegionalTieredCache;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on: string | null;
-  }
+  modified_on?: string | null;
 }
 
-/**
- * Instructs Cloudflare to check a regional hub data center on the way to your
- * upper tier. This can help improve performance for smart and custom tiered cache
- * topologies.
- */
 export interface RegionalTieredCacheGetResponse {
   /**
    * ID of the zone setting.
@@ -101,35 +74,19 @@ export interface RegionalTieredCacheGetResponse {
   id: RegionalTieredCache;
 
   /**
-   * last time this setting was modified.
+   * Whether the setting is editable
    */
-  modified_on: string | null;
+  editable: boolean;
 
   /**
-   * Instructs Cloudflare to check a regional hub data center on the way to your
-   * upper tier. This can help improve performance for smart and custom tiered cache
-   * topologies.
+   * The value of the feature
    */
-  value: RegionalTieredCacheGetResponse.Value;
-}
+  value: 'on' | 'off';
 
-export namespace RegionalTieredCacheGetResponse {
   /**
-   * Instructs Cloudflare to check a regional hub data center on the way to your
-   * upper tier. This can help improve performance for smart and custom tiered cache
-   * topologies.
+   * Last time this setting was modified.
    */
-  export interface Value {
-    /**
-     * ID of the zone setting.
-     */
-    id: RegionalTieredCacheAPI.RegionalTieredCache;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on: string | null;
-  }
+  modified_on?: string | null;
 }
 
 export interface RegionalTieredCacheEditParams {
@@ -151,10 +108,12 @@ export interface RegionalTieredCacheGetParams {
   zone_id: string;
 }
 
-export namespace RegionalTieredCacheResource {
-  export import RegionalTieredCache = RegionalTieredCacheAPI.RegionalTieredCache;
-  export import RegionalTieredCacheEditResponse = RegionalTieredCacheAPI.RegionalTieredCacheEditResponse;
-  export import RegionalTieredCacheGetResponse = RegionalTieredCacheAPI.RegionalTieredCacheGetResponse;
-  export import RegionalTieredCacheEditParams = RegionalTieredCacheAPI.RegionalTieredCacheEditParams;
-  export import RegionalTieredCacheGetParams = RegionalTieredCacheAPI.RegionalTieredCacheGetParams;
+export declare namespace RegionalTieredCacheResource {
+  export {
+    type RegionalTieredCache as RegionalTieredCache,
+    type RegionalTieredCacheEditResponse as RegionalTieredCacheEditResponse,
+    type RegionalTieredCacheGetResponse as RegionalTieredCacheGetResponse,
+    type RegionalTieredCacheEditParams as RegionalTieredCacheEditParams,
+    type RegionalTieredCacheGetParams as RegionalTieredCacheGetParams,
+  };
 }

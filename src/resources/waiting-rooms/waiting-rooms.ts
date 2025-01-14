@@ -3,11 +3,49 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as PageAPI from './page';
+import { Page, PagePreviewParams, PagePreviewResponse } from './page';
 import * as RulesAPI from './rules';
+import {
+  RuleCreateParams,
+  RuleCreateResponse,
+  RuleDeleteParams,
+  RuleDeleteResponse,
+  RuleEditParams,
+  RuleEditResponse,
+  RuleGetParams,
+  RuleGetResponse,
+  RuleUpdateParams,
+  RuleUpdateResponse,
+  Rules,
+  WaitingRoomRule,
+} from './rules';
 import * as SettingsAPI from './settings';
+import {
+  Setting,
+  SettingEditParams,
+  SettingEditResponse,
+  SettingGetParams,
+  SettingGetResponse,
+  SettingUpdateParams,
+  SettingUpdateResponse,
+  Settings,
+} from './settings';
 import * as StatusesAPI from './statuses';
+import { StatusGetParams, StatusGetResponse, Statuses } from './statuses';
 import * as EventsAPI from './events/events';
-import { SinglePage } from '../../pagination';
+import {
+  Event,
+  EventCreateParams,
+  EventDeleteParams,
+  EventDeleteResponse,
+  EventEditParams,
+  EventGetParams,
+  EventListParams,
+  EventUpdateParams,
+  Events,
+  EventsV4PagePaginationArray,
+} from './events/events';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class WaitingRooms extends APIResource {
   page: PageAPI.Page = new PageAPI.Page(this._client);
@@ -51,9 +89,9 @@ export class WaitingRooms extends APIResource {
   list(
     params: WaitingRoomListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomsSinglePage, WaitingRoom> {
+  ): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsSinglePage, {
+    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -109,7 +147,7 @@ export class WaitingRooms extends APIResource {
   }
 }
 
-export class WaitingRoomsSinglePage extends SinglePage<WaitingRoom> {}
+export class WaitingRoomsV4PagePaginationArray extends V4PagePaginationArray<WaitingRoom> {}
 
 export interface AdditionalRoutes {
   /**
@@ -288,7 +326,28 @@ export interface Query {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * A note that you can use to add more details about the waiting room.
@@ -303,6 +362,11 @@ export interface Query {
    * automatically renewed on every request.
    */
   disable_session_renewal?: boolean;
+
+  /**
+   * A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
 
   /**
    * Only available for the Waiting Room Advanced subscription. If `true`, requests
@@ -516,6 +580,24 @@ export interface Query {
    * traffic will not go to the waiting room.
    */
   suspended?: boolean;
+
+  /**
+   * Which action to take when a bot is detected using Turnstile. `log` will have no
+   * impact on queueing behavior, simply keeping track of how many bots are detected
+   * in Waiting Room Analytics. `infinite_queue` will send bots to a false queueing
+   * state, where they will never reach your origin. `infinite_queue` requires
+   * Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoom {
@@ -590,7 +672,28 @@ export interface WaitingRoom {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * A note that you can use to add more details about the waiting room.
@@ -605,6 +708,11 @@ export interface WaitingRoom {
    * automatically renewed on every request.
    */
   disable_session_renewal?: boolean;
+
+  /**
+   * A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
 
   /**
    * The host name to which the waiting room will be applied (no wildcards). Please
@@ -861,6 +969,24 @@ export interface WaitingRoom {
    * around the world.
    */
   total_active_users?: number;
+
+  /**
+   * Which action to take when a bot is detected using Turnstile. `log` will have no
+   * impact on queueing behavior, simply keeping track of how many bots are detected
+   * in Waiting Room Analytics. `infinite_queue` will send bots to a false queueing
+   * state, where they will never reach your origin. `infinite_queue` requires
+   * Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoomDeleteResponse {
@@ -973,7 +1099,28 @@ export interface WaitingRoomCreateParams {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.
@@ -988,6 +1135,11 @@ export interface WaitingRoomCreateParams {
    * automatically renewed on every request.
    */
   disable_session_renewal?: boolean;
+
+  /**
+   * Body param: A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
 
   /**
    * Body param: Only available for the Waiting Room Advanced subscription. If
@@ -1202,6 +1354,24 @@ export interface WaitingRoomCreateParams {
    * `true`, the traffic will not go to the waiting room.
    */
   suspended?: boolean;
+
+  /**
+   * Body param: Which action to take when a bot is detected using Turnstile. `log`
+   * will have no impact on queueing behavior, simply keeping track of how many bots
+   * are detected in Waiting Room Analytics. `infinite_queue` will send bots to a
+   * false queueing state, where they will never reach your origin. `infinite_queue`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Body param: Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoomUpdateParams {
@@ -1310,7 +1480,28 @@ export interface WaitingRoomUpdateParams {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.
@@ -1325,6 +1516,11 @@ export interface WaitingRoomUpdateParams {
    * automatically renewed on every request.
    */
   disable_session_renewal?: boolean;
+
+  /**
+   * Body param: A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
 
   /**
    * Body param: Only available for the Waiting Room Advanced subscription. If
@@ -1539,23 +1735,31 @@ export interface WaitingRoomUpdateParams {
    * `true`, the traffic will not go to the waiting room.
    */
   suspended?: boolean;
+
+  /**
+   * Body param: Which action to take when a bot is detected using Turnstile. `log`
+   * will have no impact on queueing behavior, simply keeping track of how many bots
+   * are detected in Waiting Room Analytics. `infinite_queue` will send bots to a
+   * false queueing state, where they will never reach your origin. `infinite_queue`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Body param: Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
-export interface WaitingRoomListParams {
+export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
   zone_id: string;
-
-  /**
-   * Query param: Page number of paginated results.
-   */
-  page?: unknown;
-
-  /**
-   * Query param: Maximum number of results per page. Must be a multiple of 5.
-   */
-  per_page?: unknown;
 }
 
 export interface WaitingRoomDeleteParams {
@@ -1671,7 +1875,28 @@ export interface WaitingRoomEditParams {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.
@@ -1686,6 +1911,11 @@ export interface WaitingRoomEditParams {
    * automatically renewed on every request.
    */
   disable_session_renewal?: boolean;
+
+  /**
+   * Body param: A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
 
   /**
    * Body param: Only available for the Waiting Room Advanced subscription. If
@@ -1900,6 +2130,24 @@ export interface WaitingRoomEditParams {
    * `true`, the traffic will not go to the waiting room.
    */
   suspended?: boolean;
+
+  /**
+   * Body param: Which action to take when a bot is detected using Turnstile. `log`
+   * will have no impact on queueing behavior, simply keeping track of how many bots
+   * are detected in Waiting Room Analytics. `infinite_queue` will send bots to a
+   * false queueing state, where they will never reach your origin. `infinite_queue`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_action?: 'log' | 'infinite_queue';
+
+  /**
+   * Body param: Which Turnstile widget type to use for detecting bot traffic. See
+   * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+   * for the definitions of these widget types. Set to `off` to disable the Turnstile
+   * integration entirely. Setting this to anything other than `off` or `invisible`
+   * requires Advanced Waiting Room.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
 export interface WaitingRoomGetParams {
@@ -1909,41 +2157,62 @@ export interface WaitingRoomGetParams {
   zone_id: string;
 }
 
-export namespace WaitingRooms {
-  export import Page = PageAPI.Page;
-  export import PagePreviewResponse = PageAPI.PagePreviewResponse;
-  export import PagePreviewParams = PageAPI.PagePreviewParams;
-  export import Events = EventsAPI.Events;
-  export import Event = EventsAPI.Event;
-  export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
-  export import EventsSinglePage = EventsAPI.EventsSinglePage;
-  export import EventCreateParams = EventsAPI.EventCreateParams;
-  export import EventUpdateParams = EventsAPI.EventUpdateParams;
-  export import EventListParams = EventsAPI.EventListParams;
-  export import EventDeleteParams = EventsAPI.EventDeleteParams;
-  export import EventEditParams = EventsAPI.EventEditParams;
-  export import EventGetParams = EventsAPI.EventGetParams;
-  export import Rules = RulesAPI.Rules;
-  export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import WaitingRoomRulesSinglePage = RulesAPI.WaitingRoomRulesSinglePage;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import Statuses = StatusesAPI.Statuses;
-  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export import StatusGetParams = StatusesAPI.StatusGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import Setting = SettingsAPI.Setting;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+WaitingRooms.Page = Page;
+WaitingRooms.Events = Events;
+WaitingRooms.EventsV4PagePaginationArray = EventsV4PagePaginationArray;
+WaitingRooms.Rules = Rules;
+WaitingRooms.Statuses = Statuses;
+WaitingRooms.Settings = Settings;
+
+export declare namespace WaitingRooms {
+  export {
+    Page as Page,
+    type PagePreviewResponse as PagePreviewResponse,
+    type PagePreviewParams as PagePreviewParams,
+  };
+
+  export {
+    Events as Events,
+    type Event as Event,
+    type EventDeleteResponse as EventDeleteResponse,
+    EventsV4PagePaginationArray as EventsV4PagePaginationArray,
+    type EventCreateParams as EventCreateParams,
+    type EventUpdateParams as EventUpdateParams,
+    type EventListParams as EventListParams,
+    type EventDeleteParams as EventDeleteParams,
+    type EventEditParams as EventEditParams,
+    type EventGetParams as EventGetParams,
+  };
+
+  export {
+    Rules as Rules,
+    type WaitingRoomRule as WaitingRoomRule,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleGetResponse as RuleGetResponse,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    Statuses as Statuses,
+    type StatusGetResponse as StatusGetResponse,
+    type StatusGetParams as StatusGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type Setting as Setting,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

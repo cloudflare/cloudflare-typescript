@@ -1,28 +1,28 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Destinations } from './destinations';
-export { EligibleGetResponse, EligibleGetParams, Eligible } from './eligible';
+export { Eligible, type EligibleGetResponse, type EligibleGetParams } from './eligible';
 export {
-  Pagerduty,
-  PagerdutyCreateResponse,
-  PagerdutyDeleteResponse,
-  PagerdutyGetResponse,
-  PagerdutyLinkResponse,
-  PagerdutyCreateParams,
-  PagerdutyDeleteParams,
-  PagerdutyGetParams,
-  PagerdutyLinkParams,
   PagerdutyResource,
+  type Pagerduty,
+  type PagerdutyCreateResponse,
+  type PagerdutyDeleteResponse,
+  type PagerdutyGetResponse,
+  type PagerdutyLinkResponse,
+  type PagerdutyCreateParams,
+  type PagerdutyDeleteParams,
+  type PagerdutyGetParams,
+  type PagerdutyLinkParams,
 } from './pagerduty';
 export {
-  Webhooks,
-  WebhookCreateResponse,
-  WebhookUpdateResponse,
-  WebhookDeleteResponse,
-  WebhookCreateParams,
-  WebhookUpdateParams,
-  WebhookListParams,
-  WebhookDeleteParams,
-  WebhookGetParams,
   WebhooksSinglePage,
+  Webhooks,
+  type WebhookCreateResponse,
+  type WebhookUpdateResponse,
+  type WebhookDeleteResponse,
+  type WebhookCreateParams,
+  type WebhookUpdateParams,
+  type WebhookListParams,
+  type WebhookDeleteParams,
+  type WebhookGetParams,
 } from './webhooks';

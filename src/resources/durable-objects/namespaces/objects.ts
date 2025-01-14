@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ObjectsAPI from './objects';
 import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
 
 export class Objects extends APIResource {
@@ -44,8 +43,12 @@ export interface ObjectListParams extends CursorLimitPaginationParams {
   account_id: string;
 }
 
-export namespace Objects {
-  export import DurableObject = ObjectsAPI.DurableObject;
-  export import DurableObjectsCursorLimitPagination = ObjectsAPI.DurableObjectsCursorLimitPagination;
-  export import ObjectListParams = ObjectsAPI.ObjectListParams;
+Objects.DurableObjectsCursorLimitPagination = DurableObjectsCursorLimitPagination;
+
+export declare namespace Objects {
+  export {
+    type DurableObject as DurableObject,
+    DurableObjectsCursorLimitPagination as DurableObjectsCursorLimitPagination,
+    type ObjectListParams as ObjectListParams,
+  };
 }

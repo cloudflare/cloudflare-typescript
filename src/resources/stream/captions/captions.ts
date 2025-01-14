@@ -2,8 +2,15 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CaptionsAPI from './captions';
 import * as LanguageAPI from './language/language';
+import {
+  Language,
+  LanguageCreateParams,
+  LanguageDeleteParams,
+  LanguageDeleteResponse,
+  LanguageGetParams,
+  LanguageUpdateParams,
+} from './language/language';
 
 export class Captions extends APIResource {
   language: LanguageAPI.Language = new LanguageAPI.Language(this._client);
@@ -56,14 +63,21 @@ export interface CaptionGetParams {
   account_id: string;
 }
 
-export namespace Captions {
-  export import Caption = CaptionsAPI.Caption;
-  export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
-  export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
-  export import Language = LanguageAPI.Language;
-  export import LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
-  export import LanguageCreateParams = LanguageAPI.LanguageCreateParams;
-  export import LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
-  export import LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
-  export import LanguageGetParams = LanguageAPI.LanguageGetParams;
+Captions.Language = Language;
+
+export declare namespace Captions {
+  export {
+    type Caption as Caption,
+    type CaptionGetResponse as CaptionGetResponse,
+    type CaptionGetParams as CaptionGetParams,
+  };
+
+  export {
+    Language as Language,
+    type LanguageDeleteResponse as LanguageDeleteResponse,
+    type LanguageCreateParams as LanguageCreateParams,
+    type LanguageUpdateParams as LanguageUpdateParams,
+    type LanguageDeleteParams as LanguageDeleteParams,
+    type LanguageGetParams as LanguageGetParams,
+  };
 }

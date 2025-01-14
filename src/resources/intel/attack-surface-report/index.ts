@@ -2,19 +2,19 @@
 
 export { AttackSurfaceReport } from './attack-surface-report';
 export {
-  IssueType,
-  SeverityQueryParam,
-  IssueListResponse,
-  IssueClassResponse,
-  IssueDismissResponse,
-  IssueSeverityResponse,
-  IssueTypeResponse,
-  IssueListParams,
-  IssueClassParams,
-  IssueDismissParams,
-  IssueSeverityParams,
-  IssueTypeParams,
   IssueListResponsesV4PagePagination,
   Issues,
+  type IssueType,
+  type SeverityQueryParam,
+  type IssueListResponse,
+  type IssueClassResponse,
+  type IssueDismissResponse,
+  type IssueSeverityResponse,
+  type IssueTypeResponse,
+  type IssueListParams,
+  type IssueClassParams,
+  type IssueDismissParams,
+  type IssueSeverityParams,
+  type IssueTypeParams,
 } from './issues';
-export { IssueTypeGetResponse, IssueTypeGetParams, IssueTypes } from './issue-types';
+export { IssueTypes, type IssueTypeGetResponse, type IssueTypeGetParams } from './issue-types';

@@ -2,11 +2,60 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as DatasetsAPI from './datasets';
+import {
+  DatasetCreateParams,
+  DatasetCreateResponse,
+  DatasetDeleteParams,
+  DatasetDeleteResponse,
+  DatasetGetParams,
+  DatasetGetResponse,
+  DatasetListParams,
+  DatasetListResponse,
+  DatasetListResponsesV4PagePaginationArray,
+  DatasetUpdateParams,
+  DatasetUpdateResponse,
+  Datasets,
+} from './datasets';
+import * as EvaluationTypesAPI from './evaluation-types';
+import { EvaluationTypeGetParams, EvaluationTypeGetResponse, EvaluationTypes } from './evaluation-types';
+import * as EvaluationsAPI from './evaluations';
+import {
+  EvaluationCreateParams,
+  EvaluationCreateResponse,
+  EvaluationDeleteParams,
+  EvaluationDeleteResponse,
+  EvaluationGetParams,
+  EvaluationGetResponse,
+  EvaluationListParams,
+  EvaluationListResponse,
+  EvaluationListResponsesV4PagePaginationArray,
+  Evaluations,
+} from './evaluations';
 import * as LogsAPI from './logs';
+import {
+  LogDeleteParams,
+  LogDeleteResponse,
+  LogEditParams,
+  LogEditResponse,
+  LogGetParams,
+  LogGetResponse,
+  LogListParams,
+  LogListResponse,
+  LogListResponsesV4PagePaginationArray,
+  LogRequestParams,
+  LogRequestResponse,
+  LogResponseParams,
+  LogResponseResponse,
+  Logs,
+} from './logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AIGateway extends APIResource {
+  evaluationTypes: EvaluationTypesAPI.EvaluationTypes = new EvaluationTypesAPI.EvaluationTypes(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+  datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
+  evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
 
   /**
    * Create a new Gateway
@@ -92,32 +141,36 @@ export class AIGateway extends APIResource {
 export class AIGatewayListResponsesV4PagePaginationArray extends V4PagePaginationArray<AIGatewayListResponse> {}
 
 export interface AIGatewayCreateResponse {
-  task: AIGatewayCreateResponse.Task;
-}
+  /**
+   * gateway id
+   */
+  id: string;
 
-export namespace AIGatewayCreateResponse {
-  export interface Task {
-    /**
-     * gateway id
-     */
-    id: string;
+  account_id: string;
 
-    cache_invalidate_on_update: boolean;
+  account_tag: string;
 
-    cache_ttl: number | null;
+  cache_invalidate_on_update: boolean;
 
-    collect_logs: boolean;
+  cache_ttl: number | null;
 
-    created_at: string;
+  collect_logs: boolean;
 
-    modified_at: string;
+  created_at: string;
 
-    rate_limiting_interval: number | null;
+  internal_id: string;
 
-    rate_limiting_limit: number | null;
+  modified_at: string;
 
-    rate_limiting_technique: 'fixed' | 'sliding';
-  }
+  rate_limiting_interval: number | null;
+
+  rate_limiting_limit: number | null;
+
+  rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayUpdateResponse {
@@ -126,6 +179,10 @@ export interface AIGatewayUpdateResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -134,6 +191,8 @@ export interface AIGatewayUpdateResponse {
 
   created_at: string;
 
+  internal_id: string;
+
   modified_at: string;
 
   rate_limiting_interval: number | null;
@@ -141,6 +200,10 @@ export interface AIGatewayUpdateResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayListResponse {
@@ -149,6 +212,10 @@ export interface AIGatewayListResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -157,6 +224,8 @@ export interface AIGatewayListResponse {
 
   created_at: string;
 
+  internal_id: string;
+
   modified_at: string;
 
   rate_limiting_interval: number | null;
@@ -164,6 +233,10 @@ export interface AIGatewayListResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayDeleteResponse {
@@ -172,6 +245,10 @@ export interface AIGatewayDeleteResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -180,6 +257,8 @@ export interface AIGatewayDeleteResponse {
 
   created_at: string;
 
+  internal_id: string;
+
   modified_at: string;
 
   rate_limiting_interval: number | null;
@@ -187,6 +266,10 @@ export interface AIGatewayDeleteResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayGetResponse {
@@ -195,6 +278,10 @@ export interface AIGatewayGetResponse {
    */
   id: string;
 
+  account_id: string;
+
+  account_tag: string;
+
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -203,6 +290,8 @@ export interface AIGatewayGetResponse {
 
   created_at: string;
 
+  internal_id: string;
+
   modified_at: string;
 
   rate_limiting_interval: number | null;
@@ -210,6 +299,10 @@ export interface AIGatewayGetResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayCreateParams {
@@ -252,6 +345,16 @@ export interface AIGatewayCreateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  /**
+   * Body param:
+   */
+  logpush?: boolean;
+
+  /**
+   * Body param:
+   */
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayUpdateParams {
@@ -289,6 +392,16 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  /**
+   * Body param:
+   */
+  logpush?: boolean;
+
+  /**
+   * Body param:
+   */
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {
@@ -298,14 +411,9 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: gateway id
+   * Query param: Search by id
    */
-  id?: string;
-
-  /**
-   * Query param: Order By Column Name
-   */
-  order_by?: string;
+  search?: string;
 }
 
 export interface AIGatewayDeleteParams {
@@ -316,9 +424,63 @@ export interface AIGatewayGetParams {
   account_id: string;
 }
 
-export namespace AIGateway {
-  export import Logs = LogsAPI.Logs;
-  export import LogListResponse = LogsAPI.LogListResponse;
-  export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
-  export import LogListParams = LogsAPI.LogListParams;
+AIGateway.EvaluationTypes = EvaluationTypes;
+AIGateway.Logs = Logs;
+AIGateway.LogListResponsesV4PagePaginationArray = LogListResponsesV4PagePaginationArray;
+AIGateway.Datasets = Datasets;
+AIGateway.DatasetListResponsesV4PagePaginationArray = DatasetListResponsesV4PagePaginationArray;
+AIGateway.Evaluations = Evaluations;
+AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponsesV4PagePaginationArray;
+
+export declare namespace AIGateway {
+  export {
+    EvaluationTypes as EvaluationTypes,
+    type EvaluationTypeGetResponse as EvaluationTypeGetResponse,
+    type EvaluationTypeGetParams as EvaluationTypeGetParams,
+  };
+
+  export {
+    Logs as Logs,
+    type LogListResponse as LogListResponse,
+    type LogDeleteResponse as LogDeleteResponse,
+    type LogEditResponse as LogEditResponse,
+    type LogGetResponse as LogGetResponse,
+    type LogRequestResponse as LogRequestResponse,
+    type LogResponseResponse as LogResponseResponse,
+    LogListResponsesV4PagePaginationArray as LogListResponsesV4PagePaginationArray,
+    type LogListParams as LogListParams,
+    type LogDeleteParams as LogDeleteParams,
+    type LogEditParams as LogEditParams,
+    type LogGetParams as LogGetParams,
+    type LogRequestParams as LogRequestParams,
+    type LogResponseParams as LogResponseParams,
+  };
+
+  export {
+    Datasets as Datasets,
+    type DatasetCreateResponse as DatasetCreateResponse,
+    type DatasetUpdateResponse as DatasetUpdateResponse,
+    type DatasetListResponse as DatasetListResponse,
+    type DatasetDeleteResponse as DatasetDeleteResponse,
+    type DatasetGetResponse as DatasetGetResponse,
+    DatasetListResponsesV4PagePaginationArray as DatasetListResponsesV4PagePaginationArray,
+    type DatasetCreateParams as DatasetCreateParams,
+    type DatasetUpdateParams as DatasetUpdateParams,
+    type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
+    type DatasetGetParams as DatasetGetParams,
+  };
+
+  export {
+    Evaluations as Evaluations,
+    type EvaluationCreateResponse as EvaluationCreateResponse,
+    type EvaluationListResponse as EvaluationListResponse,
+    type EvaluationDeleteResponse as EvaluationDeleteResponse,
+    type EvaluationGetResponse as EvaluationGetResponse,
+    EvaluationListResponsesV4PagePaginationArray as EvaluationListResponsesV4PagePaginationArray,
+    type EvaluationCreateParams as EvaluationCreateParams,
+    type EvaluationListParams as EvaluationListParams,
+    type EvaluationDeleteParams as EvaluationDeleteParams,
+    type EvaluationGetParams as EvaluationGetParams,
+  };
 }

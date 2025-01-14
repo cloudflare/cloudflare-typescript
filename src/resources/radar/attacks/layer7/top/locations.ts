@@ -3,13 +3,12 @@
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
-import * as LocationsAPI from './locations';
 
 export class Locations extends APIResource {
   /**
-   * Get the top origin locations of and by layer 7 attacks. Values are a percentage
-   * out of the total layer 7 attacks. The origin location is determined by the
-   * client IP.
+   * Get the top origin locations of and by Layer 7 attacks. Values are a percentage
+   * out of the total Layer 7 attacks. The origin location is determined by the
+   * client IP address.
    */
   origin(
     query?: LocationOriginParams,
@@ -424,9 +423,11 @@ export interface LocationTargetParams {
   name?: Array<string>;
 }
 
-export namespace Locations {
-  export import LocationOriginResponse = LocationsAPI.LocationOriginResponse;
-  export import LocationTargetResponse = LocationsAPI.LocationTargetResponse;
-  export import LocationOriginParams = LocationsAPI.LocationOriginParams;
-  export import LocationTargetParams = LocationsAPI.LocationTargetParams;
+export declare namespace Locations {
+  export {
+    type LocationOriginResponse as LocationOriginResponse,
+    type LocationTargetResponse as LocationTargetResponse,
+    type LocationOriginParams as LocationOriginParams,
+    type LocationTargetParams as LocationTargetParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SettingsAPI from './settings';
 import * as ScriptsAPI from './scripts';
 import * as TailAPI from './tail';
 
@@ -10,7 +9,7 @@ export class Settings extends APIResource {
   /**
    * Patch script-level settings when using
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
-   * Includes Logpush and Tail Consumers.
+   * Including but not limited to Logpush and Tail Consumers.
    */
   edit(
     scriptName: string,
@@ -58,9 +57,32 @@ export interface SettingEditParams {
   logpush?: boolean;
 
   /**
+   * Body param: Observability settings for the Worker.
+   */
+  observability?: SettingEditParams.Observability;
+
+  /**
    * Body param: List of Workers that will consume logs from the attached Worker.
    */
   tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
+}
+
+export namespace SettingEditParams {
+  /**
+   * Observability settings for the Worker.
+   */
+  export interface Observability {
+    /**
+     * Whether observability is enabled for the Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
+     * Default is 1.
+     */
+    head_sampling_rate?: number | null;
+  }
 }
 
 export interface SettingGetParams {
@@ -70,7 +92,6 @@ export interface SettingGetParams {
   account_id: string;
 }
 
-export namespace Settings {
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export { type SettingEditParams as SettingEditParams, type SettingGetParams as SettingGetParams };
 }

@@ -3,15 +3,15 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource top', () => {
-  test('browserFamilies', async () => {
-    const responsePromise = cloudflare.radar.http.top.browserFamilies();
+  test('browser', async () => {
+    const responsePromise = client.radar.http.top.browser();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,43 +21,43 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('browserFamilies: request options instead of params are passed correctly', async () => {
+  test('browser: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.http.top.browserFamilies({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.top.browser({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
-  test('browserFamilies: request options and params are passed correctly', async () => {
+  test('browser: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.top.browserFamilies(
+      client.radar.http.top.browser(
         {
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          browserFamily: ['CHROME', 'EDGE', 'FIREFOX'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
+          asn: ['string'],
+          botClass: ['LIKELY_AUTOMATED'],
+          browserFamily: ['CHROME'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          deviceType: ['DESKTOP'],
           format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
+          httpProtocol: ['HTTP'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
           limit: 5,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
+          location: ['string'],
+          name: ['string'],
+          os: ['WINDOWS'],
+          tlsVersion: ['TLSv1_0'],
         },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('browsers', async () => {
-    const responsePromise = cloudflare.radar.http.top.browsers();
+  test('browserFamily', async () => {
+    const responsePromise = client.radar.http.top.browserFamily();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,35 +67,35 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('browsers: request options instead of params are passed correctly', async () => {
+  test('browserFamily: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.radar.http.top.browsers({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.http.top.browserFamily({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  test('browsers: request options and params are passed correctly', async () => {
+  test('browserFamily: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.top.browsers(
+      client.radar.http.top.browserFamily(
         {
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          browserFamily: ['CHROME', 'EDGE', 'FIREFOX'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
+          asn: ['string'],
+          botClass: ['LIKELY_AUTOMATED'],
+          browserFamily: ['CHROME'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          deviceType: ['DESKTOP'],
           format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
+          httpProtocol: ['HTTP'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
           limit: 5,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
+          location: ['string'],
+          name: ['string'],
+          os: ['WINDOWS'],
+          tlsVersion: ['TLSv1_0'],
         },
         { path: '/_stainless_unknown_path' },
       ),

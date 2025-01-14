@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as VariantsAPI from './variants';
 
 export class Variants extends APIResource {
   /**
@@ -12,11 +11,11 @@ export class Variants extends APIResource {
    * does not serve the variant requested, the response will not be cached. This will
    * be indicated with BYPASS cache status in the response headers.
    */
-  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CacheVariant> {
+  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse> {
     const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
-        result: CacheVariant;
+        result: VariantDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -65,211 +64,73 @@ export interface CacheVariant {
   /**
    * ID of the zone setting.
    */
-  id: CacheVariantIdentifier;
+  id: 'variants';
 
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    */
-  modified_on: string | null;
+  modified_on?: string | null;
 }
 
-/**
- * ID of the zone setting.
- */
-export type CacheVariantIdentifier = 'variants';
+export interface VariantDeleteResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'variants';
 
-/**
- * Variant support enables caching variants of images with certain file extensions
- * in addition to the original. This only applies when the origin server sends the
- * 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but
- * does not serve the variant requested, the response will not be cached. This will
- * be indicated with BYPASS cache status in the response headers.
- */
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
 export interface VariantEditResponse {
   /**
    * ID of the zone setting.
    */
-  id: CacheVariantIdentifier;
+  id: 'variants';
 
   /**
-   * last time this setting was modified.
+   * Whether the setting is editable
    */
-  modified_on: string | null;
+  editable: boolean;
 
   /**
-   * Value of the zone setting.
+   * The value of the feature
    */
-  value: VariantEditResponse.Value;
+  value: string;
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
-export namespace VariantEditResponse {
-  /**
-   * Value of the zone setting.
-   */
-  export interface Value {
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for avif.
-     */
-    avif?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for bmp.
-     */
-    bmp?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for gif.
-     */
-    gif?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for jp2.
-     */
-    jp2?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for jpeg.
-     */
-    jpeg?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for jpg.
-     */
-    jpg?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for jpg2.
-     */
-    jpg2?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for png.
-     */
-    png?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for tif.
-     */
-    tif?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for tiff.
-     */
-    tiff?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for webp.
-     */
-    webp?: Array<string>;
-  }
-}
-
-/**
- * Variant support enables caching variants of images with certain file extensions
- * in addition to the original. This only applies when the origin server sends the
- * 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but
- * does not serve the variant requested, the response will not be cached. This will
- * be indicated with BYPASS cache status in the response headers.
- */
 export interface VariantGetResponse {
   /**
    * ID of the zone setting.
    */
-  id: CacheVariantIdentifier;
+  id: 'variants';
 
   /**
-   * last time this setting was modified.
+   * Whether the setting is editable
    */
-  modified_on: string | null;
+  editable: boolean;
 
   /**
-   * Value of the zone setting.
+   * The value of the feature
    */
-  value: VariantGetResponse.Value;
-}
+  value: string;
 
-export namespace VariantGetResponse {
   /**
-   * Value of the zone setting.
+   * Last time this setting was modified.
    */
-  export interface Value {
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for avif.
-     */
-    avif?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for bmp.
-     */
-    bmp?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for gif.
-     */
-    gif?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for jp2.
-     */
-    jp2?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for jpeg.
-     */
-    jpeg?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for jpg.
-     */
-    jpg?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for jpg2.
-     */
-    jpg2?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for png.
-     */
-    png?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for tif.
-     */
-    tif?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for tiff.
-     */
-    tiff?: Array<string>;
-
-    /**
-     * List of strings with the MIME types of all the variants that should be served
-     * for webp.
-     */
-    webp?: Array<string>;
-  }
+  modified_on?: string | null;
 }
 
 export interface VariantDeleteParams {
@@ -371,12 +232,14 @@ export interface VariantGetParams {
   zone_id: string;
 }
 
-export namespace Variants {
-  export import CacheVariant = VariantsAPI.CacheVariant;
-  export import CacheVariantIdentifier = VariantsAPI.CacheVariantIdentifier;
-  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
-  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
-  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
-  export import VariantEditParams = VariantsAPI.VariantEditParams;
-  export import VariantGetParams = VariantsAPI.VariantGetParams;
+export declare namespace Variants {
+  export {
+    type CacheVariant as CacheVariant,
+    type VariantDeleteResponse as VariantDeleteResponse,
+    type VariantEditResponse as VariantEditResponse,
+    type VariantGetResponse as VariantGetResponse,
+    type VariantDeleteParams as VariantDeleteParams,
+    type VariantEditParams as VariantEditParams,
+    type VariantGetParams as VariantGetParams,
+  };
 }

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,9 +11,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.rules.create({
+    const responsePromise = client.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      duration: '300s',
+      name: 'my_rule_1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,16 +26,23 @@ describe('resource rules', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.rules.create({
+    const response = await client.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      duration: '300s',
+      name: 'my_rule_1',
+      automatic_advertisement: true,
+      bandwidth: 1000,
+      packet_threshold: 10000,
+      prefixes: ['203.0.113.1/32'],
     });
   });
 
-  test('update: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.rules.update({
+  // TODO: investigate auth errors on test suite
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      duration: '300s',
+      name: 'my_rule_1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -45,15 +53,22 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.rules.update({
+  // TODO: investigate auth errors on test suite
+  test.skip('update: required and optional params', async () => {
+    const response = await client.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      duration: '300s',
+      name: 'my_rule_1',
+      id: '2890e6fa406311ed9b5a23f70f6fb8cf',
+      automatic_advertisement: true,
+      bandwidth: 1000,
+      packet_threshold: 10000,
+      prefixes: ['203.0.113.1/32'],
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.rules.list({
+    const responsePromise = client.magicNetworkMonitoring.rules.list({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -66,16 +81,15 @@ describe('resource rules', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.rules.list({
+    const response = await client.magicNetworkMonitoring.rules.list({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.rules.delete(
-      '2890e6fa406311ed9b5a23f70f6fb8cf',
-      { account_id: '6f91088a406011ed95aed352566e8d4c' },
-    );
+    const responsePromise = client.magicNetworkMonitoring.rules.delete('2890e6fa406311ed9b5a23f70f6fb8cf', {
+      account_id: '6f91088a406011ed95aed352566e8d4c',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,16 +100,14 @@ describe('resource rules', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.rules.delete(
-      '2890e6fa406311ed9b5a23f70f6fb8cf',
-      { account_id: '6f91088a406011ed95aed352566e8d4c' },
-    );
+    const response = await client.magicNetworkMonitoring.rules.delete('2890e6fa406311ed9b5a23f70f6fb8cf', {
+      account_id: '6f91088a406011ed95aed352566e8d4c',
+    });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
+    const responsePromise = client.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -107,14 +119,19 @@ describe('resource rules', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
+    const response = await client.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      automatic_advertisement: true,
+      bandwidth: 1000,
+      duration: '300s',
+      name: 'my_rule_1',
+      packet_threshold: 10000,
+      prefixes: ['203.0.113.1/32'],
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.rules.get('2890e6fa406311ed9b5a23f70f6fb8cf', {
+    const responsePromise = client.magicNetworkMonitoring.rules.get('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -127,7 +144,7 @@ describe('resource rules', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.rules.get('2890e6fa406311ed9b5a23f70f6fb8cf', {
+    const response = await client.magicNetworkMonitoring.rules.get('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
   });

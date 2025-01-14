@@ -3,8 +3,7 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
-import * as GroupsAPI from './groups';
+import { CloudflareError } from 'cloudflare/error';
 import * as AccessAPI from './access';
 import { SinglePage } from '../../../pagination';
 
@@ -86,7 +85,7 @@ export class Groups extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -106,7 +105,7 @@ export class Groups extends APIResource {
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/groups`,
       ZeroTrustGroupsSinglePage,
-      options,
+      { query, ...options },
     );
   }
 
@@ -330,14 +329,26 @@ export interface GroupUpdateParams {
 
 export interface GroupListParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
+
+  /**
+   * Query param: The name of the group.
+   */
+  name?: string;
+
+  /**
+   * Query param: Search for groups by other listed query parameters.
+   */
+  search?: string;
 }
 
 export interface GroupDeleteParams {
@@ -364,13 +375,17 @@ export interface GroupGetParams {
   zone_id?: string;
 }
 
-export namespace Groups {
-  export import ZeroTrustGroup = GroupsAPI.ZeroTrustGroup;
-  export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
-  export import ZeroTrustGroupsSinglePage = GroupsAPI.ZeroTrustGroupsSinglePage;
-  export import GroupCreateParams = GroupsAPI.GroupCreateParams;
-  export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
-  export import GroupListParams = GroupsAPI.GroupListParams;
-  export import GroupDeleteParams = GroupsAPI.GroupDeleteParams;
-  export import GroupGetParams = GroupsAPI.GroupGetParams;
+Groups.ZeroTrustGroupsSinglePage = ZeroTrustGroupsSinglePage;
+
+export declare namespace Groups {
+  export {
+    type ZeroTrustGroup as ZeroTrustGroup,
+    type GroupDeleteResponse as GroupDeleteResponse,
+    ZeroTrustGroupsSinglePage as ZeroTrustGroupsSinglePage,
+    type GroupCreateParams as GroupCreateParams,
+    type GroupUpdateParams as GroupUpdateParams,
+    type GroupListParams as GroupListParams,
+    type GroupDeleteParams as GroupDeleteParams,
+    type GroupGetParams as GroupGetParams,
+  };
 }

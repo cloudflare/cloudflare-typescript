@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ConfigurationsAPI from './configurations';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
 
 export class Configurations extends APIResource {
@@ -33,7 +32,7 @@ export class Configurations extends APIResource {
 
 export interface Configuration {
   auth_id_characteristics: Array<
-    Configuration.APIShieldAuthIDCharacteristic | Configuration.APIShieldAuthIDCharacteristicJwtClaim
+    Configuration.APIShieldAuthIDCharacteristic | Configuration.APIShieldAuthIDCharacteristicJWTClaim
   >;
 }
 
@@ -56,7 +55,7 @@ export namespace Configuration {
   /**
    * Auth ID Characteristic extracted from JWT Token Claims
    */
-  export interface APIShieldAuthIDCharacteristicJwtClaim {
+  export interface APIShieldAuthIDCharacteristicJWTClaim {
     /**
      * Claim location expressed as `$(token_config_id):$(json_path)`, where
      * `token_config_id` is the ID of the token configuration used in validating the
@@ -97,7 +96,7 @@ export interface ConfigurationUpdateParams {
    */
   auth_id_characteristics: Array<
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic
-    | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJwtClaim
+    | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJWTClaim
   >;
 }
 
@@ -120,7 +119,7 @@ export namespace ConfigurationUpdateParams {
   /**
    * Auth ID Characteristic extracted from JWT Token Claims
    */
-  export interface APIShieldAuthIDCharacteristicJwtClaim {
+  export interface APIShieldAuthIDCharacteristicJWTClaim {
     /**
      * Claim location expressed as `$(token_config_id):$(json_path)`, where
      * `token_config_id` is the ID of the token configuration used in validating the
@@ -151,9 +150,11 @@ export interface ConfigurationGetParams {
   properties?: Array<'auth_id_characteristics'>;
 }
 
-export namespace Configurations {
-  export import Configuration = ConfigurationsAPI.Configuration;
-  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
+export declare namespace Configurations {
+  export {
+    type Configuration as Configuration,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
 }

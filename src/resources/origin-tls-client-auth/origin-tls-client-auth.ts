@@ -3,7 +3,21 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as SettingsAPI from './settings';
+import {
+  SettingGetParams,
+  SettingGetResponse,
+  SettingUpdateParams,
+  SettingUpdateResponse,
+  Settings,
+} from './settings';
 import * as HostnamesAPI from './hostnames/hostnames';
+import {
+  AuthenticatedOriginPull,
+  HostnameGetParams,
+  HostnameUpdateParams,
+  HostnameUpdateResponse,
+  Hostnames,
+} from './hostnames/hostnames';
 import { SinglePage } from '../../pagination';
 
 export class OriginTLSClientAuth extends APIResource {
@@ -35,11 +49,11 @@ export class OriginTLSClientAuth extends APIResource {
   list(
     params: OriginTLSClientAuthListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZoneAuthenticatedOriginPullsSinglePage, ZoneAuthenticatedOriginPull> {
+  ): Core.PagePromise<OriginTLSClientAuthListResponsesSinglePage, OriginTLSClientAuthListResponse> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth`,
-      ZoneAuthenticatedOriginPullsSinglePage,
+      OriginTLSClientAuthListResponsesSinglePage,
       options,
     );
   }
@@ -79,7 +93,7 @@ export class OriginTLSClientAuth extends APIResource {
   }
 }
 
-export class ZoneAuthenticatedOriginPullsSinglePage extends SinglePage<ZoneAuthenticatedOriginPull> {}
+export class OriginTLSClientAuthListResponsesSinglePage extends SinglePage<OriginTLSClientAuthListResponse> {}
 
 export interface ZoneAuthenticatedOriginPull {
   /**
@@ -125,11 +139,93 @@ export interface ZoneAuthenticatedOriginPull {
   uploaded_on?: string;
 }
 
-export type OriginTLSClientAuthCreateResponse = unknown | string | null;
+export interface OriginTLSClientAuthCreateResponse extends ZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
 
-export type OriginTLSClientAuthDeleteResponse = unknown | string | null;
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
 
-export type OriginTLSClientAuthGetResponse = unknown | string | null;
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
+}
+
+export interface OriginTLSClientAuthListResponse extends ZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
+}
+
+export interface OriginTLSClientAuthDeleteResponse extends ZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
+}
+
+export interface OriginTLSClientAuthGetResponse extends ZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
+}
 
 export interface OriginTLSClientAuthCreateParams {
   /**
@@ -169,15 +265,23 @@ export interface OriginTLSClientAuthGetParams {
   zone_id: string;
 }
 
-export namespace OriginTLSClientAuth {
-  export import Hostnames = HostnamesAPI.Hostnames;
-  export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
-  export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
-  export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
-  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+OriginTLSClientAuth.Hostnames = Hostnames;
+OriginTLSClientAuth.Settings = Settings;
+
+export declare namespace OriginTLSClientAuth {
+  export {
+    Hostnames as Hostnames,
+    type AuthenticatedOriginPull as AuthenticatedOriginPull,
+    type HostnameUpdateResponse as HostnameUpdateResponse,
+    type HostnameUpdateParams as HostnameUpdateParams,
+    type HostnameGetParams as HostnameGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

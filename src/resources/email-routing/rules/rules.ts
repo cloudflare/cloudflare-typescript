@@ -1,10 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as RulesAPI from './rules';
 import * as CatchAllsAPI from './catch-alls';
+import {
+  CatchAllAction,
+  CatchAllGetParams,
+  CatchAllGetResponse,
+  CatchAllMatcher,
+  CatchAllUpdateParams,
+  CatchAllUpdateResponse,
+  CatchAlls,
+} from './catch-alls';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Rules extends APIResource {
@@ -15,16 +22,12 @@ export class Rules extends APIResource {
    * sent to a specific custom email address) plus a set of actions to take on the
    * email (like forwarding it to a specific destination address).
    */
-  create(
-    zoneIdentifier: string,
-    body: RuleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRoutingRule> {
+  create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingRule> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneIdentifier}/email/routing/rules`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: EmailRoutingRule }>
+      this._client.post(`/zones/${zone_id}/email/routing/rules`, { body, ...options }) as Core.APIPromise<{
+        result: EmailRoutingRule;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,13 +35,13 @@ export class Rules extends APIResource {
    * Update actions and matches, or enable/disable specific routing rules.
    */
   update(
-    zoneIdentifier: string,
     ruleIdentifier: string,
-    body: RuleUpdateParams,
+    params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailRoutingRule> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`, {
+      this._client.put(`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: EmailRoutingRule }>
@@ -49,24 +52,12 @@ export class Rules extends APIResource {
    * Lists existing routing rules.
    */
   list(
-    zoneIdentifier: string,
-    query?: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule>;
-  list(
-    zoneIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule>;
-  list(
-    zoneIdentifier: string,
-    query: RuleListParams | Core.RequestOptions = {},
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneIdentifier, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/email/routing/rules`,
+      `/zones/${zone_id}/email/routing/rules`,
       EmailRoutingRulesV4PagePaginationArray,
       { query, ...options },
     );
@@ -76,13 +67,14 @@ export class Rules extends APIResource {
    * Delete a specific routing rule.
    */
   delete(
-    zoneIdentifier: string,
     ruleIdentifier: string,
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailRoutingRule> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`,
+        `/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: EmailRoutingRule }>
     )._thenUnwrap((obj) => obj.result);
@@ -92,13 +84,14 @@ export class Rules extends APIResource {
    * Get information for a specific routing rule already created.
    */
   get(
-    zoneIdentifier: string,
     ruleIdentifier: string,
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailRoutingRule> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`,
+        `/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: EmailRoutingRule }>
     )._thenUnwrap((obj) => obj.result);
@@ -210,77 +203,117 @@ export interface MatcherParam {
 
 export interface RuleCreateParams {
   /**
-   * List actions patterns.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: List actions patterns.
    */
   actions: Array<ActionParam>;
 
   /**
-   * Matching patterns to forward to your actions.
+   * Body param: Matching patterns to forward to your actions.
    */
   matchers: Array<MatcherParam>;
 
   /**
-   * Routing rule status.
+   * Body param: Routing rule status.
    */
   enabled?: true | false;
 
   /**
-   * Routing rule name.
+   * Body param: Routing rule name.
    */
   name?: string;
 
   /**
-   * Priority of the routing rule.
+   * Body param: Priority of the routing rule.
    */
   priority?: number;
 }
 
 export interface RuleUpdateParams {
   /**
-   * List actions patterns.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: List actions patterns.
    */
   actions: Array<ActionParam>;
 
   /**
-   * Matching patterns to forward to your actions.
+   * Body param: Matching patterns to forward to your actions.
    */
   matchers: Array<MatcherParam>;
 
   /**
-   * Routing rule status.
+   * Body param: Routing rule status.
    */
   enabled?: true | false;
 
   /**
-   * Routing rule name.
+   * Body param: Routing rule name.
    */
   name?: string;
 
   /**
-   * Priority of the routing rule.
+   * Body param: Priority of the routing rule.
    */
   priority?: number;
 }
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
-   * Filter by enabled routing rules.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: Filter by enabled routing rules.
    */
   enabled?: true | false;
 }
 
-export namespace Rules {
-  export import Action = RulesAPI.Action;
-  export import EmailRoutingRule = RulesAPI.EmailRoutingRule;
-  export import Matcher = RulesAPI.Matcher;
-  export import EmailRoutingRulesV4PagePaginationArray = RulesAPI.EmailRoutingRulesV4PagePaginationArray;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import CatchAlls = CatchAllsAPI.CatchAlls;
-  export import CatchAllAction = CatchAllsAPI.CatchAllAction;
-  export import CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
-  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
-  export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
-  export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
+export interface RuleDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface RuleGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+Rules.EmailRoutingRulesV4PagePaginationArray = EmailRoutingRulesV4PagePaginationArray;
+Rules.CatchAlls = CatchAlls;
+
+export declare namespace Rules {
+  export {
+    type Action as Action,
+    type EmailRoutingRule as EmailRoutingRule,
+    type Matcher as Matcher,
+    EmailRoutingRulesV4PagePaginationArray as EmailRoutingRulesV4PagePaginationArray,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    CatchAlls as CatchAlls,
+    type CatchAllAction as CatchAllAction,
+    type CatchAllMatcher as CatchAllMatcher,
+    type CatchAllUpdateResponse as CatchAllUpdateResponse,
+    type CatchAllGetResponse as CatchAllGetResponse,
+    type CatchAllUpdateParams as CatchAllUpdateParams,
+    type CatchAllGetParams as CatchAllGetParams,
+  };
 }

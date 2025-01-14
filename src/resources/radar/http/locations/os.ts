@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as OSAPI from './os';
 
 export class OS extends APIResource {
   /**
@@ -188,7 +187,6 @@ export interface OSGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace OS {
-  export import OSGetResponse = OSAPI.OSGetResponse;
-  export import OSGetParams = OSAPI.OSGetParams;
+export declare namespace OS {
+  export { type OSGetResponse as OSGetResponse, type OSGetParams as OSGetParams };
 }

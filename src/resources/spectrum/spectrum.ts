@@ -2,7 +2,22 @@
 
 import { APIResource } from '../../resource';
 import * as AppsAPI from './apps';
+import {
+  AppCreateParams,
+  AppCreateResponse,
+  AppDeleteParams,
+  AppDeleteResponse,
+  AppGetParams,
+  AppGetResponse,
+  AppListParams,
+  AppListResponse,
+  AppListResponsesV4PagePaginationArray,
+  AppUpdateParams,
+  AppUpdateResponse,
+  Apps,
+} from './apps';
 import * as AnalyticsAPI from './analytics/analytics';
+import { Analytics } from './analytics/analytics';
 
 export class Spectrum extends APIResource {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
@@ -42,10 +57,10 @@ export interface DNSParam {
 /**
  * The anycast edge IP configuration for the hostname of this application.
  */
-export type EdgeIPs = EdgeIPs.EyeballIPs | EdgeIPs.CustomerOwnedIPs;
+export type EdgeIPs = EdgeIPs.UnionMember0 | EdgeIPs.UnionMember1;
 
 export namespace EdgeIPs {
-  export interface EyeballIPs {
+  export interface UnionMember0 {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -59,7 +74,7 @@ export namespace EdgeIPs {
     type?: 'dynamic';
   }
 
-  export interface CustomerOwnedIPs {
+  export interface UnionMember1 {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -78,10 +93,10 @@ export namespace EdgeIPs {
 /**
  * The anycast edge IP configuration for the hostname of this application.
  */
-export type EdgeIPsParam = EdgeIPsParam.EyeballIPs | EdgeIPsParam.CustomerOwnedIPs;
+export type EdgeIPsParam = EdgeIPsParam.UnionMember0 | EdgeIPsParam.UnionMember1;
 
 export namespace EdgeIPsParam {
-  export interface EyeballIPs {
+  export interface UnionMember0 {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -95,7 +110,7 @@ export namespace EdgeIPsParam {
     type?: 'dynamic';
   }
 
-  export interface CustomerOwnedIPs {
+  export interface UnionMember1 {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -171,16 +186,25 @@ export type OriginPort = number | string;
  */
 export type OriginPortParam = number | string;
 
-export namespace Spectrum {
-  export import Analytics = AnalyticsAPI.Analytics;
-  export import Apps = AppsAPI.Apps;
-  export import AppCreateResponse = AppsAPI.AppCreateResponse;
-  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
-  export import AppListResponse = AppsAPI.AppListResponse;
-  export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
-  export import AppGetResponse = AppsAPI.AppGetResponse;
-  export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
-  export import AppCreateParams = AppsAPI.AppCreateParams;
-  export import AppUpdateParams = AppsAPI.AppUpdateParams;
-  export import AppListParams = AppsAPI.AppListParams;
+Spectrum.Analytics = Analytics;
+Spectrum.Apps = Apps;
+Spectrum.AppListResponsesV4PagePaginationArray = AppListResponsesV4PagePaginationArray;
+
+export declare namespace Spectrum {
+  export { Analytics as Analytics };
+
+  export {
+    Apps as Apps,
+    type AppCreateResponse as AppCreateResponse,
+    type AppUpdateResponse as AppUpdateResponse,
+    type AppListResponse as AppListResponse,
+    type AppDeleteResponse as AppDeleteResponse,
+    type AppGetResponse as AppGetResponse,
+    AppListResponsesV4PagePaginationArray as AppListResponsesV4PagePaginationArray,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+    type AppDeleteParams as AppDeleteParams,
+    type AppGetParams as AppGetParams,
+  };
 }

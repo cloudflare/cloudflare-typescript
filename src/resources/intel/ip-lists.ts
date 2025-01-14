@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as IPListsAPI from './ip-lists';
 
 export class IPLists extends APIResource {
   /**
@@ -35,8 +34,10 @@ export interface IPListGetParams {
   account_id: string;
 }
 
-export namespace IPLists {
-  export import IPList = IPListsAPI.IPList;
-  export import IPListGetResponse = IPListsAPI.IPListGetResponse;
-  export import IPListGetParams = IPListsAPI.IPListGetParams;
+export declare namespace IPLists {
+  export {
+    type IPList as IPList,
+    type IPListGetResponse as IPListGetResponse,
+    type IPListGetParams as IPListGetParams,
+  };
 }

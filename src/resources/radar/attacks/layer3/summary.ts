@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -51,7 +50,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of network protocols in layer 3/4 attacks over a given
+   * Percentage distribution of network protocols in Layer 3/4 attacks over a given
    * time period.
    */
   get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
@@ -465,7 +464,7 @@ export namespace SummaryProtocolResponse {
 export interface SummaryVectorResponse {
   meta: SummaryVectorResponse.Meta;
 
-  summary_0: Record<string, Array<string>>;
+  summary_0: Record<string, string>;
 }
 
 export namespace SummaryVectorResponse {
@@ -836,6 +835,12 @@ export interface SummaryVectorParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -853,17 +858,19 @@ export interface SummaryVectorParams {
   protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
-export namespace Summary {
-  export import SummaryBitrateResponse = SummaryAPI.SummaryBitrateResponse;
-  export import SummaryDurationResponse = SummaryAPI.SummaryDurationResponse;
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export import SummaryVectorResponse = SummaryAPI.SummaryVectorResponse;
-  export import SummaryBitrateParams = SummaryAPI.SummaryBitrateParams;
-  export import SummaryDurationParams = SummaryAPI.SummaryDurationParams;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export import SummaryVectorParams = SummaryAPI.SummaryVectorParams;
+export declare namespace Summary {
+  export {
+    type SummaryBitrateResponse as SummaryBitrateResponse,
+    type SummaryDurationResponse as SummaryDurationResponse,
+    type SummaryGetResponse as SummaryGetResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryProtocolResponse as SummaryProtocolResponse,
+    type SummaryVectorResponse as SummaryVectorResponse,
+    type SummaryBitrateParams as SummaryBitrateParams,
+    type SummaryDurationParams as SummaryDurationParams,
+    type SummaryGetParams as SummaryGetParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryProtocolParams as SummaryProtocolParams,
+    type SummaryVectorParams as SummaryVectorParams,
+  };
 }

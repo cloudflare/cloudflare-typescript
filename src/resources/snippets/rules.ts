@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RulesAPI from './rules';
+import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Rules extends APIResource {
@@ -31,6 +31,14 @@ export class Rules extends APIResource {
       RuleListResponsesSinglePage,
       options,
     );
+  }
+
+  /**
+   * Delete All Rules
+   */
+  delete(params: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse> {
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/snippets/snippet_rules`, options);
   }
 }
 
@@ -69,6 +77,17 @@ export interface RuleListResponse {
   snippet_name?: string;
 }
 
+export interface RuleDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
+
 export interface RuleUpdateParams {
   /**
    * Path param: Identifier
@@ -103,10 +122,23 @@ export interface RuleListParams {
   zone_id: string;
 }
 
-export namespace Rules {
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
+export interface RuleDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+Rules.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
+
+export declare namespace Rules {
+  export {
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleListResponse as RuleListResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    RuleListResponsesSinglePage as RuleListResponsesSinglePage,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+  };
 }

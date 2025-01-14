@@ -86,7 +86,7 @@ export interface Membership {
   permissions?: Membership.Permissions;
 
   /**
-   * List of role names for the user at the account.
+   * List of role names the membership has for this account.
    */
   roles?: Array<string>;
 
@@ -152,7 +152,7 @@ export interface MembershipUpdateResponse {
   policies?: Array<MembershipUpdateResponse.Policy>;
 
   /**
-   * List of role names for the user at the account.
+   * List of role names the membership has for this account.
    */
   roles?: Array<string>;
 
@@ -228,12 +228,23 @@ export namespace MembershipUpdateResponse {
       /**
        * Attributes associated to the permission group.
        */
-      meta?: unknown;
+      meta?: PermissionGroup.Meta;
 
       /**
        * Name of the group.
        */
       name?: string;
+    }
+
+    export namespace PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
     }
 
     /**
@@ -253,7 +264,7 @@ export namespace MembershipUpdateResponse {
       /**
        * Attributes associated to the resource group.
        */
-      meta?: unknown;
+      meta?: ResourceGroup.Meta;
 
       /**
        * Name of the resource group.
@@ -291,6 +302,15 @@ export namespace MembershipUpdateResponse {
           key: string;
         }
       }
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
     }
   }
 }
@@ -327,7 +347,7 @@ export interface MembershipGetResponse {
   policies?: Array<MembershipGetResponse.Policy>;
 
   /**
-   * List of role names for the user at the account.
+   * List of role names the membership has for this account.
    */
   roles?: Array<string>;
 
@@ -403,12 +423,23 @@ export namespace MembershipGetResponse {
       /**
        * Attributes associated to the permission group.
        */
-      meta?: unknown;
+      meta?: PermissionGroup.Meta;
 
       /**
        * Name of the group.
        */
       name?: string;
+    }
+
+    export namespace PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
     }
 
     /**
@@ -428,7 +459,7 @@ export namespace MembershipGetResponse {
       /**
        * Attributes associated to the resource group.
        */
-      meta?: unknown;
+      meta?: ResourceGroup.Meta;
 
       /**
        * Name of the resource group.
@@ -465,6 +496,15 @@ export namespace MembershipGetResponse {
            */
           key: string;
         }
+      }
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
       }
     }
   }

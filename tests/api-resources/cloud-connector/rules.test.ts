@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,9 +11,9 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.cloudConnector.rules.update({
+    const responsePromise = client.cloudConnector.rules.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{}, {}, {}],
+      rules: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,30 +25,14 @@ describe('resource rules', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.cloudConnector.rules.update({
+    const response = await client.cloudConnector.rules.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [
+      rules: [
         {
+          id: '95c365e17e1b46599cd99e5b231fac4e',
           description: 'Rule description',
           enabled: true,
           expression: 'http.cookie eq "a=b"',
-          id: '95c365e17e1b46599cd99e5b231fac4e',
-          parameters: { host: 'examplebucket.s3.eu-north-1.amazonaws.com' },
-          provider: 'aws_s3',
-        },
-        {
-          description: 'Rule description',
-          enabled: true,
-          expression: 'http.cookie eq "a=b"',
-          id: '95c365e17e1b46599cd99e5b231fac4e',
-          parameters: { host: 'examplebucket.s3.eu-north-1.amazonaws.com' },
-          provider: 'aws_s3',
-        },
-        {
-          description: 'Rule description',
-          enabled: true,
-          expression: 'http.cookie eq "a=b"',
-          id: '95c365e17e1b46599cd99e5b231fac4e',
           parameters: { host: 'examplebucket.s3.eu-north-1.amazonaws.com' },
           provider: 'aws_s3',
         },
@@ -57,9 +41,7 @@ describe('resource rules', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.cloudConnector.rules.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.cloudConnector.rules.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -70,8 +52,6 @@ describe('resource rules', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.cloudConnector.rules.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.cloudConnector.rules.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

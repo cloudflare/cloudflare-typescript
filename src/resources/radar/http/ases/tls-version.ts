@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as TLSVersionAPI from './tls-version';
 
 export class TLSVersion extends APIResource {
   /**
@@ -189,7 +188,9 @@ export interface TLSVersionGetParams {
   os?: Array<'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV'>;
 }
 
-export namespace TLSVersion {
-  export import TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
-  export import TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;
+export declare namespace TLSVersion {
+  export {
+    type TLSVersionGetResponse as TLSVersionGetResponse,
+    type TLSVersionGetParams as TLSVersionGetParams,
+  };
 }

@@ -2,23 +2,19 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as VirtualNetworksAPI from './virtual-networks';
 import { SinglePage } from '../../../pagination';
 
 export class VirtualNetworks extends APIResource {
   /**
    * Adds a new virtual network to an account.
    */
-  create(
-    params: VirtualNetworkCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkCreateResponse> {
+  create(params: VirtualNetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<VirtualNetwork> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/teamnet/virtual_networks`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkCreateResponse }>
+      }) as Core.APIPromise<{ result: VirtualNetwork }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,13 +40,13 @@ export class VirtualNetworks extends APIResource {
     virtualNetworkId: string,
     params: VirtualNetworkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkDeleteResponse> {
+  ): Core.APIPromise<VirtualNetwork> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`,
         options,
-      ) as Core.APIPromise<{ result: VirtualNetworkDeleteResponse }>
+      ) as Core.APIPromise<{ result: VirtualNetwork }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,13 +57,30 @@ export class VirtualNetworks extends APIResource {
     virtualNetworkId: string,
     params: VirtualNetworkEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkEditResponse> {
+  ): Core.APIPromise<VirtualNetwork> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkEditResponse }>
+      }) as Core.APIPromise<{ result: VirtualNetwork }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a virtual network.
+   */
+  get(
+    virtualNetworkId: string,
+    params: VirtualNetworkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VirtualNetwork> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`,
+        options,
+      ) as Core.APIPromise<{ result: VirtualNetwork }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -106,12 +119,6 @@ export interface VirtualNetwork {
    */
   deleted_at?: string;
 }
-
-export type VirtualNetworkCreateResponse = unknown | Array<unknown> | string;
-
-export type VirtualNetworkDeleteResponse = unknown | Array<unknown> | string;
-
-export type VirtualNetworkEditResponse = unknown | Array<unknown> | string;
 
 export interface VirtualNetworkCreateParams {
   /**
@@ -195,14 +202,23 @@ export interface VirtualNetworkEditParams {
   name?: string;
 }
 
-export namespace VirtualNetworks {
-  export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
-  export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
-  export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
-  export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
-  export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
-  export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
-  export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
-  export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
-  export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
+export interface VirtualNetworkGetParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
+VirtualNetworks.VirtualNetworksSinglePage = VirtualNetworksSinglePage;
+
+export declare namespace VirtualNetworks {
+  export {
+    type VirtualNetwork as VirtualNetwork,
+    VirtualNetworksSinglePage as VirtualNetworksSinglePage,
+    type VirtualNetworkCreateParams as VirtualNetworkCreateParams,
+    type VirtualNetworkListParams as VirtualNetworkListParams,
+    type VirtualNetworkDeleteParams as VirtualNetworkDeleteParams,
+    type VirtualNetworkEditParams as VirtualNetworkEditParams,
+    type VirtualNetworkGetParams as VirtualNetworkGetParams,
+  };
 }

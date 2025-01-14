@@ -2,13 +2,52 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PrefixesAPI from './prefixes';
+import * as Shared from '../../shared';
+import * as AdvertisementStatusAPI from './advertisement-status';
+import {
+  AdvertisementStatus,
+  AdvertisementStatusEditParams,
+  AdvertisementStatusEditResponse,
+  AdvertisementStatusGetParams,
+  AdvertisementStatusGetResponse,
+} from './advertisement-status';
+import * as BGPPrefixesAPI from './bgp-prefixes';
+import {
+  BGPPrefix,
+  BGPPrefixCreateParams,
+  BGPPrefixEditParams,
+  BGPPrefixGetParams,
+  BGPPrefixListParams,
+  BGPPrefixes,
+  BGPPrefixesSinglePage,
+} from './bgp-prefixes';
 import * as DelegationsAPI from './delegations';
-import * as BGPAPI from './bgp/bgp';
+import {
+  DelegationCreateParams,
+  DelegationDeleteParams,
+  DelegationDeleteResponse,
+  DelegationListParams,
+  Delegations,
+  DelegationsSinglePage,
+} from './delegations';
+import * as ServiceBindingsAPI from './service-bindings';
+import {
+  ServiceBinding,
+  ServiceBindingCreateParams,
+  ServiceBindingDeleteParams,
+  ServiceBindingDeleteResponse,
+  ServiceBindingGetParams,
+  ServiceBindingListParams,
+  ServiceBindings,
+  ServiceBindingsSinglePage,
+} from './service-bindings';
 import { SinglePage } from '../../../pagination';
 
 export class Prefixes extends APIResource {
-  bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
+  serviceBindings: ServiceBindingsAPI.ServiceBindings = new ServiceBindingsAPI.ServiceBindings(this._client);
+  bgpPrefixes: BGPPrefixesAPI.BGPPrefixes = new BGPPrefixesAPI.BGPPrefixes(this._client);
+  advertisementStatus: AdvertisementStatusAPI.AdvertisementStatus =
+    new AdvertisementStatusAPI.AdvertisementStatus(this._client);
   delegations: DelegationsAPI.Delegations = new DelegationsAPI.Delegations(this._client);
 
   /**
@@ -46,14 +85,9 @@ export class Prefixes extends APIResource {
     prefixId: string,
     params: PrefixDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixDeleteResponse | null> {
+  ): Core.APIPromise<PrefixDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/addressing/prefixes/${prefixId}`,
-        options,
-      ) as Core.APIPromise<{ result: PrefixDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, options);
   }
 
   /**
@@ -87,12 +121,12 @@ export class PrefixesSinglePage extends SinglePage<Prefix> {}
 
 export interface Prefix {
   /**
-   * Identifier
+   * Identifier of an IP Prefix.
    */
   id?: string;
 
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id?: string;
 
@@ -150,11 +184,46 @@ export interface Prefix {
   on_demand_locked?: boolean;
 }
 
-export type PrefixDeleteResponse = Array<unknown>;
+export interface PrefixDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: PrefixDeleteResponse.ResultInfo;
+}
+
+export namespace PrefixDeleteResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
 
 export interface PrefixCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -176,21 +245,21 @@ export interface PrefixCreateParams {
 
 export interface PrefixListParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface PrefixDeleteParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
 export interface PrefixEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier of a Cloudflare account.
    */
   account_id: string;
 
@@ -202,25 +271,66 @@ export interface PrefixEditParams {
 
 export interface PrefixGetParams {
   /**
-   * Identifier
+   * Identifier of a Cloudflare account.
    */
   account_id: string;
 }
 
-export namespace Prefixes {
-  export import Prefix = PrefixesAPI.Prefix;
-  export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
-  export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
-  export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
-  export import PrefixListParams = PrefixesAPI.PrefixListParams;
-  export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
-  export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
-  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
-  export import BGP = BGPAPI.BGP;
-  export import Delegations = DelegationsAPI.Delegations;
-  export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
-  export import DelegationsSinglePage = DelegationsAPI.DelegationsSinglePage;
-  export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
-  export import DelegationListParams = DelegationsAPI.DelegationListParams;
-  export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
+Prefixes.PrefixesSinglePage = PrefixesSinglePage;
+Prefixes.ServiceBindings = ServiceBindings;
+Prefixes.ServiceBindingsSinglePage = ServiceBindingsSinglePage;
+Prefixes.BGPPrefixes = BGPPrefixes;
+Prefixes.BGPPrefixesSinglePage = BGPPrefixesSinglePage;
+Prefixes.AdvertisementStatus = AdvertisementStatus;
+Prefixes.DelegationsSinglePage = DelegationsSinglePage;
+
+export declare namespace Prefixes {
+  export {
+    type Prefix as Prefix,
+    type PrefixDeleteResponse as PrefixDeleteResponse,
+    PrefixesSinglePage as PrefixesSinglePage,
+    type PrefixCreateParams as PrefixCreateParams,
+    type PrefixListParams as PrefixListParams,
+    type PrefixDeleteParams as PrefixDeleteParams,
+    type PrefixEditParams as PrefixEditParams,
+    type PrefixGetParams as PrefixGetParams,
+  };
+
+  export {
+    ServiceBindings as ServiceBindings,
+    type ServiceBinding as ServiceBinding,
+    type ServiceBindingDeleteResponse as ServiceBindingDeleteResponse,
+    ServiceBindingsSinglePage as ServiceBindingsSinglePage,
+    type ServiceBindingCreateParams as ServiceBindingCreateParams,
+    type ServiceBindingListParams as ServiceBindingListParams,
+    type ServiceBindingDeleteParams as ServiceBindingDeleteParams,
+    type ServiceBindingGetParams as ServiceBindingGetParams,
+  };
+
+  export {
+    BGPPrefixes as BGPPrefixes,
+    type BGPPrefix as BGPPrefix,
+    BGPPrefixesSinglePage as BGPPrefixesSinglePage,
+    type BGPPrefixCreateParams as BGPPrefixCreateParams,
+    type BGPPrefixListParams as BGPPrefixListParams,
+    type BGPPrefixEditParams as BGPPrefixEditParams,
+    type BGPPrefixGetParams as BGPPrefixGetParams,
+  };
+
+  export {
+    AdvertisementStatus as AdvertisementStatus,
+    type AdvertisementStatusEditResponse as AdvertisementStatusEditResponse,
+    type AdvertisementStatusGetResponse as AdvertisementStatusGetResponse,
+    type AdvertisementStatusEditParams as AdvertisementStatusEditParams,
+    type AdvertisementStatusGetParams as AdvertisementStatusGetParams,
+  };
+
+  export {
+    type Delegations as Delegations,
+    type DelegationDeleteResponse as DelegationDeleteResponse,
+    DelegationsSinglePage as DelegationsSinglePage,
+    type DelegationCreateParams as DelegationCreateParams,
+    type DelegationListParams as DelegationListParams,
+    type DelegationDeleteParams as DelegationDeleteParams,
+  };
 }

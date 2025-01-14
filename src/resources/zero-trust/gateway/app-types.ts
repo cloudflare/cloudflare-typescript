@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AppTypesAPI from './app-types';
 import { SinglePage } from '../../../pagination';
 
 export class AppTypes extends APIResource {
@@ -71,8 +70,12 @@ export interface AppTypeListParams {
   account_id: string;
 }
 
-export namespace AppTypes {
-  export import AppType = AppTypesAPI.AppType;
-  export import AppTypesSinglePage = AppTypesAPI.AppTypesSinglePage;
-  export import AppTypeListParams = AppTypesAPI.AppTypeListParams;
+AppTypes.AppTypesSinglePage = AppTypesSinglePage;
+
+export declare namespace AppTypes {
+  export {
+    type AppType as AppType,
+    AppTypesSinglePage as AppTypesSinglePage,
+    type AppTypeListParams as AppTypeListParams,
+  };
 }

@@ -1,35 +1,51 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Client,
-  ConnectionDeleteResponse,
-  ConnectionGetResponse,
-  ConnectionDeleteParams,
-  ConnectionGetParams,
-  Connections,
-} from './connections';
-export {
-  ConfigurationUpdateResponse,
-  ConfigurationGetResponse,
-  ConfigurationUpdateParams,
-  ConfigurationGetParams,
   Configurations,
+  type ConfigurationUpdateResponse,
+  type ConfigurationGetResponse,
+  type ConfigurationUpdateParams,
+  type ConfigurationGetParams,
 } from './configurations';
 export {
-  Connection,
-  TunnelCreateResponse,
-  TunnelListResponse,
-  TunnelDeleteResponse,
-  TunnelEditResponse,
-  TunnelGetResponse,
-  TunnelCreateParams,
-  TunnelListParams,
-  TunnelDeleteParams,
-  TunnelEditParams,
-  TunnelGetParams,
+  Connections,
+  type Client,
+  type ConnectionDeleteResponse,
+  type ConnectionGetResponse,
+  type ConnectionDeleteParams,
+  type ConnectionGetParams,
+} from './connections';
+export { Connectors, type ConnectorGetParams } from './connectors';
+export { Management, type ManagementCreateResponse, type ManagementCreateParams } from './management';
+export { Token, type TokenGetResponse, type TokenGetParams } from './token';
+export {
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
+  type Connection,
+  type TunnelCreateResponse,
+  type TunnelListResponse,
+  type TunnelDeleteResponse,
+  type TunnelEditResponse,
+  type TunnelGetResponse,
+  type TunnelCreateParams,
+  type TunnelListParams,
+  type TunnelDeleteParams,
+  type TunnelEditParams,
+  type TunnelGetParams,
 } from './tunnels';
-export { ConnectorGetParams, Connectors } from './connectors';
-export { ManagementCreateResponse, ManagementCreateParams, Management } from './management';
-export { TokenGetResponse, TokenGetParams, Token } from './token';
+export {
+  WARPConnectorListResponsesV4PagePaginationArray,
+  WARPConnector,
+  type WARPConnectorCreateResponse,
+  type WARPConnectorListResponse,
+  type WARPConnectorDeleteResponse,
+  type WARPConnectorEditResponse,
+  type WARPConnectorGetResponse,
+  type WARPConnectorTokenResponse,
+  type WARPConnectorCreateParams,
+  type WARPConnectorListParams,
+  type WARPConnectorDeleteParams,
+  type WARPConnectorEditParams,
+  type WARPConnectorGetParams,
+  type WARPConnectorTokenParams,
+} from './warp-connector';

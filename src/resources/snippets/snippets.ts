@@ -4,7 +4,18 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import * as ContentAPI from './content';
+import { Content, ContentGetParams } from './content';
 import * as RulesAPI from './rules';
+import {
+  RuleDeleteParams,
+  RuleDeleteResponse,
+  RuleListParams,
+  RuleListResponse,
+  RuleListResponsesSinglePage,
+  RuleUpdateParams,
+  RuleUpdateResponse,
+  Rules,
+} from './rules';
 import { SinglePage } from '../../pagination';
 
 export class Snippets extends APIResource {
@@ -148,13 +159,21 @@ export interface SnippetGetParams {
   zone_id: string;
 }
 
-export namespace Snippets {
-  export import Content = ContentAPI.Content;
-  export import ContentGetParams = ContentAPI.ContentGetParams;
-  export import Rules = RulesAPI.Rules;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
+Snippets.Content = Content;
+Snippets.Rules = Rules;
+Snippets.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
+
+export declare namespace Snippets {
+  export { Content as Content, type ContentGetParams as ContentGetParams };
+
+  export {
+    Rules as Rules,
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleListResponse as RuleListResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    RuleListResponsesSinglePage as RuleListResponsesSinglePage,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+  };
 }

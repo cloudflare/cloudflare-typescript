@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as AuditLogsAPI from './audit-logs';
 import * as Shared from '../shared';
 import { AuditLogsV4PagePaginationArray } from '../shared';
 import { type V4PagePaginationArrayParams } from '../../pagination';
@@ -40,10 +39,10 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
   actor?: AuditLogListParams.Actor;
 
   /**
-   * Limits the returned results to logs older than the specified date. This can be a
-   * date string `2019-04-30` or an absolute timestamp that conforms to RFC3339.
+   * Limits the returned results to logs older than the specified date. A `full-date`
+   * that conforms to RFC3339.
    */
-  before?: string;
+  before?: string | string;
 
   /**
    * Changes the direction of the chronological sorting.
@@ -61,10 +60,10 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
   hide_user_logs?: boolean;
 
   /**
-   * Limits the returned results to logs newer than the specified date. This can be a
-   * date string `2019-04-30` or an absolute timestamp that conforms to RFC3339.
+   * Limits the returned results to logs newer than the specified date. A `full-date`
+   * that conforms to RFC3339.
    */
-  since?: string;
+  since?: string | string;
 
   zone?: AuditLogListParams.Zone;
 }
@@ -98,8 +97,8 @@ export namespace AuditLogListParams {
   }
 }
 
-export namespace AuditLogs {
-  export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
+export declare namespace AuditLogs {
+  export { type AuditLogListParams as AuditLogListParams };
 }
 
 export { AuditLogsV4PagePaginationArray };

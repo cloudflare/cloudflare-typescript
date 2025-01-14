@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RegionsAPI from './regions';
 
 export class Regions extends APIResource {
   /**
@@ -85,9 +84,11 @@ export interface RegionGetParams {
   account_id: string;
 }
 
-export namespace Regions {
-  export import RegionListResponse = RegionsAPI.RegionListResponse;
-  export import RegionGetResponse = RegionsAPI.RegionGetResponse;
-  export import RegionListParams = RegionsAPI.RegionListParams;
-  export import RegionGetParams = RegionsAPI.RegionGetParams;
+export declare namespace Regions {
+  export {
+    type RegionListResponse as RegionListResponse,
+    type RegionGetResponse as RegionGetResponse,
+    type RegionListParams as RegionListParams,
+    type RegionGetParams as RegionGetParams,
+  };
 }

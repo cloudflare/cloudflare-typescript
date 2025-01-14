@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as FailedLoginsAPI from './failed-logins';
 import { SinglePage } from '../../../../pagination';
 
 export class FailedLogins extends APIResource {
@@ -38,8 +37,12 @@ export interface FailedLoginListParams {
   account_id: string;
 }
 
-export namespace FailedLogins {
-  export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
-  export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
-  export import FailedLoginListParams = FailedLoginsAPI.FailedLoginListParams;
+FailedLogins.FailedLoginListResponsesSinglePage = FailedLoginListResponsesSinglePage;
+
+export declare namespace FailedLogins {
+  export {
+    type FailedLoginListResponse as FailedLoginListResponse,
+    FailedLoginListResponsesSinglePage as FailedLoginListResponsesSinglePage,
+    type FailedLoginListParams as FailedLoginListParams,
+  };
 }

@@ -3,13 +3,12 @@
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
-import * as AsesAPI from './ases';
 
 export class Ases extends APIResource {
   /**
-   * Get the top origin Autonomous Systems of and by layer 7 attacks. Values are a
-   * percentage out of the total layer 7 attacks. The origin Autonomous Systems is
-   * determined by the client IP.
+   * Get the top origin Autonomous Systems of and by Layer 7 attacks. Values are a
+   * percentage out of the total Layer 7 attacks. The origin Autonomous Systems is
+   * determined by the client IP address.
    */
   origin(query?: AseOriginParams, options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>;
   origin(options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>;
@@ -215,7 +214,6 @@ export interface AseOriginParams {
   name?: Array<string>;
 }
 
-export namespace Ases {
-  export import AseOriginResponse = AsesAPI.AseOriginResponse;
-  export import AseOriginParams = AsesAPI.AseOriginParams;
+export declare namespace Ases {
+  export { type AseOriginResponse as AseOriginResponse, type AseOriginParams as AseOriginParams };
 }

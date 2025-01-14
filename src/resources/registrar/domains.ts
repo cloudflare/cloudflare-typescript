@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DomainsAPI from './domains';
 import { SinglePage } from '../../pagination';
 
 export class Domains extends APIResource {
@@ -195,12 +194,12 @@ export namespace Domain {
     /**
      * Form of authorization has been accepted by the registrant.
      */
-    accept_foa?: string;
+    accept_foa?: 'needed' | 'ok';
 
     /**
      * Shows transfer status with the registry.
      */
-    approve_transfer?: string;
+    approve_transfer?: 'needed' | 'ok' | 'pending' | 'trying' | 'rejected' | 'unknown';
 
     /**
      * Indicates if cancellation is still possible.
@@ -210,23 +209,23 @@ export namespace Domain {
     /**
      * Privacy guards are disabled at the foreign registrar.
      */
-    disable_privacy?: unknown;
+    disable_privacy?: 'needed' | 'ok' | 'unknown';
 
     /**
      * Auth code has been entered and verified.
      */
-    enter_auth_code?: string;
+    enter_auth_code?: 'needed' | 'ok' | 'pending' | 'trying' | 'rejected';
 
     /**
      * Domain is unlocked at the foreign registrar.
      */
-    unlock_domain?: unknown;
+    unlock_domain?: 'needed' | 'ok' | 'pending' | 'trying' | 'unknown';
   }
 }
 
-export type DomainUpdateResponse = unknown | Array<unknown> | string;
+export type DomainUpdateResponse = unknown;
 
-export type DomainGetResponse = unknown | Array<unknown> | string;
+export type DomainGetResponse = unknown;
 
 export interface DomainUpdateParams {
   /**
@@ -265,12 +264,16 @@ export interface DomainGetParams {
   account_id: string;
 }
 
-export namespace Domains {
-  export import Domain = DomainsAPI.Domain;
-  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
-  export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+Domains.DomainsSinglePage = DomainsSinglePage;
+
+export declare namespace Domains {
+  export {
+    type Domain as Domain,
+    type DomainUpdateResponse as DomainUpdateResponse,
+    type DomainGetResponse as DomainGetResponse,
+    DomainsSinglePage as DomainsSinglePage,
+    type DomainUpdateParams as DomainUpdateParams,
+    type DomainListParams as DomainListParams,
+    type DomainGetParams as DomainGetParams,
+  };
 }

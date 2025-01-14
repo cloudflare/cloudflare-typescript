@@ -18,7 +18,7 @@ export class BrandProtection extends APIResource {
   }
 
   /**
-   * Get results for a URL scan
+   * Gets phishing details about a URL.
    */
   urlInfo(params: BrandProtectionURLInfoParams, options?: Core.RequestOptions): Core.APIPromise<Info> {
     const { account_id, ...query } = params;
@@ -212,21 +212,12 @@ export interface BrandProtectionURLInfoParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param: Submission URL(s) to filter submission results by.
    */
-  url?: string;
+  url?: Array<string>;
 
   /**
-   * Query param:
+   * Query param: Submission ID(s) to filter submission results by.
    */
-  url_id_param?: BrandProtectionURLInfoParams.URLIDParam;
-}
-
-export namespace BrandProtectionURLInfoParams {
-  export interface URLIDParam {
-    /**
-     * Submission ID(s) to filter submission results by.
-     */
-    url_id?: number;
-  }
+  url_id?: Array<number>;
 }

@@ -1,14 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { URLScanner } from './url-scanner';
+export { Responses, type ResponseGetResponse, type ResponseGetParams } from './responses';
 export {
-  URLScannerDomain,
-  URLScannerTask,
-  ScanCreateResponse,
-  ScanGetResponse,
-  ScanHarResponse,
-  ScanCreateParams,
-  ScanGetParams,
-  ScanScreenshotParams,
   Scans,
+  type ScanCreateResponse,
+  type ScanListResponse,
+  type ScanBulkCreateResponse,
+  type ScanDOMResponse,
+  type ScanGetResponse,
+  type ScanHARResponse,
+  type ScanCreateParams,
+  type ScanListParams,
+  type ScanBulkCreateParams,
+  type ScanDOMParams,
+  type ScanGetParams,
+  type ScanHARParams,
+  type ScanScreenshotParams,
 } from './scans';
+export { URLScanner } from './url-scanner';

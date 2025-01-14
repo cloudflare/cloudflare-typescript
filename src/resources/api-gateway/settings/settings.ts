@@ -1,8 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as SettingsAPI from './settings';
 import * as SchemaValidationAPI from './schema-validation';
+import {
+  SchemaValidation,
+  SchemaValidationEditParams,
+  SchemaValidationGetParams,
+  SchemaValidationUpdateParams,
+} from './schema-validation';
 
 export class Settings extends APIResource {
   schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
@@ -34,10 +39,15 @@ export interface Settings {
   validation_override_mitigation_action?: 'none' | null;
 }
 
-export namespace Settings {
-  export import Settings = SettingsAPI.Settings;
-  export import SchemaValidation = SchemaValidationAPI.SchemaValidation;
-  export import SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
-  export import SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
-  export import SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
+Settings.SchemaValidation = SchemaValidation;
+
+export declare namespace Settings {
+  export { type Settings as Settings };
+
+  export {
+    SchemaValidation as SchemaValidation,
+    type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
+    type SchemaValidationEditParams as SchemaValidationEditParams,
+    type SchemaValidationGetParams as SchemaValidationGetParams,
+  };
 }

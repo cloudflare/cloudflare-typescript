@@ -2,11 +2,11 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as IPsAPI from './ips';
 
 export class IPs extends APIResource {
   /**
-   * Get IP Overview
+   * Gets the geolocation, ASN, infrastructure type of the ASN, and any security
+   * threat categories of an IP address.
    */
   get(params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null> {
     const { account_id, ...query } = params;
@@ -25,9 +25,9 @@ export interface IP {
    */
   belongs_to_ref?: IP.BelongsToRef;
 
-  ip?: string | string;
+  ip?: string;
 
-  risk_types?: Array<unknown>;
+  risk_types?: Array<IP.RiskType>;
 }
 
 export namespace IP {
@@ -48,6 +48,14 @@ export namespace IP {
     type?: 'hosting_provider' | 'isp' | 'organization';
 
     value?: string;
+  }
+
+  export interface RiskType {
+    id?: number;
+
+    name?: string;
+
+    super_category_id?: number;
   }
 }
 
@@ -70,8 +78,6 @@ export interface IPGetParams {
   ipv6?: string;
 }
 
-export namespace IPs {
-  export import IP = IPsAPI.IP;
-  export import IPGetResponse = IPsAPI.IPGetResponse;
-  export import IPGetParams = IPsAPI.IPGetParams;
+export declare namespace IPs {
+  export { type IP as IP, type IPGetResponse as IPGetResponse, type IPGetParams as IPGetParams };
 }

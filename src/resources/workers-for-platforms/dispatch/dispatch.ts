@@ -2,20 +2,37 @@
 
 import { APIResource } from '../../../resource';
 import * as NamespacesAPI from './namespaces/namespaces';
+import {
+  NamespaceCreateParams,
+  NamespaceCreateResponse,
+  NamespaceDeleteParams,
+  NamespaceDeleteResponse,
+  NamespaceGetParams,
+  NamespaceGetResponse,
+  NamespaceListParams,
+  NamespaceListResponse,
+  NamespaceListResponsesSinglePage,
+  Namespaces,
+} from './namespaces/namespaces';
 
 export class Dispatch extends APIResource {
   namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);
 }
 
-export namespace Dispatch {
-  export import Namespaces = NamespacesAPI.Namespaces;
-  export import NamespaceCreateResponse = NamespacesAPI.NamespaceCreateResponse;
-  export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
-  export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
-  export import NamespaceGetResponse = NamespacesAPI.NamespaceGetResponse;
-  export import NamespaceListResponsesSinglePage = NamespacesAPI.NamespaceListResponsesSinglePage;
-  export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
-  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
-  export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
-  export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
+Dispatch.Namespaces = Namespaces;
+Dispatch.NamespaceListResponsesSinglePage = NamespaceListResponsesSinglePage;
+
+export declare namespace Dispatch {
+  export {
+    Namespaces as Namespaces,
+    type NamespaceCreateResponse as NamespaceCreateResponse,
+    type NamespaceListResponse as NamespaceListResponse,
+    type NamespaceDeleteResponse as NamespaceDeleteResponse,
+    type NamespaceGetResponse as NamespaceGetResponse,
+    NamespaceListResponsesSinglePage as NamespaceListResponsesSinglePage,
+    type NamespaceCreateParams as NamespaceCreateParams,
+    type NamespaceListParams as NamespaceListParams,
+    type NamespaceDeleteParams as NamespaceDeleteParams,
+    type NamespaceGetParams as NamespaceGetParams,
+  };
 }

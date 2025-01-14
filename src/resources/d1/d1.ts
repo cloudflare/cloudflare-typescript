@@ -2,6 +2,25 @@
 
 import { APIResource } from '../../resource';
 import * as DatabaseAPI from './database';
+import {
+  Database,
+  DatabaseCreateParams,
+  DatabaseDeleteParams,
+  DatabaseDeleteResponse,
+  DatabaseExportParams,
+  DatabaseExportResponse,
+  DatabaseGetParams,
+  DatabaseImportParams,
+  DatabaseImportResponse,
+  DatabaseListParams,
+  DatabaseListResponse,
+  DatabaseListResponsesV4PagePaginationArray,
+  DatabaseQueryParams,
+  DatabaseQueryResponse,
+  DatabaseRawParams,
+  DatabaseRawResponse,
+  QueryResult,
+} from './database';
 
 export class D1Resource extends APIResource {
   database: DatabaseAPI.Database = new DatabaseAPI.Database(this._client);
@@ -27,19 +46,27 @@ export interface D1 {
   version?: string;
 }
 
-export namespace D1Resource {
-  export import Database = DatabaseAPI.Database;
-  export import QueryResult = DatabaseAPI.QueryResult;
-  export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
-  export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
-  export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
-  export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
-  export import DatabaseRawResponse = DatabaseAPI.DatabaseRawResponse;
-  export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
-  export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
-  export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
-  export import DatabaseDeleteParams = DatabaseAPI.DatabaseDeleteParams;
-  export import DatabaseGetParams = DatabaseAPI.DatabaseGetParams;
-  export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
-  export import DatabaseRawParams = DatabaseAPI.DatabaseRawParams;
+D1Resource.Database = Database;
+D1Resource.DatabaseListResponsesV4PagePaginationArray = DatabaseListResponsesV4PagePaginationArray;
+
+export declare namespace D1Resource {
+  export {
+    Database as Database,
+    type QueryResult as QueryResult,
+    type DatabaseListResponse as DatabaseListResponse,
+    type DatabaseDeleteResponse as DatabaseDeleteResponse,
+    type DatabaseExportResponse as DatabaseExportResponse,
+    type DatabaseImportResponse as DatabaseImportResponse,
+    type DatabaseQueryResponse as DatabaseQueryResponse,
+    type DatabaseRawResponse as DatabaseRawResponse,
+    DatabaseListResponsesV4PagePaginationArray as DatabaseListResponsesV4PagePaginationArray,
+    type DatabaseCreateParams as DatabaseCreateParams,
+    type DatabaseListParams as DatabaseListParams,
+    type DatabaseDeleteParams as DatabaseDeleteParams,
+    type DatabaseExportParams as DatabaseExportParams,
+    type DatabaseGetParams as DatabaseGetParams,
+    type DatabaseImportParams as DatabaseImportParams,
+    type DatabaseQueryParams as DatabaseQueryParams,
+    type DatabaseRawParams as DatabaseRawParams,
+  };
 }

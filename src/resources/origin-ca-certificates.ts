@@ -9,23 +9,23 @@ import { SinglePage } from '../pagination';
 
 export class OriginCACertificates extends APIResource {
   /**
-   * Create an Origin CA certificate. Use your Origin CA Key as your User Service Key
-   * when calling this endpoint ([see above](#requests)).
+   * Create an Origin CA certificate. You can use an Origin CA Key as your User
+   * Service Key or an API token when calling this endpoint ([see above](#requests)).
    */
   create(
     body: OriginCACertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCACertificateCreateResponse> {
+  ): Core.APIPromise<OriginCACertificate> {
     return (
       this._client.post('/certificates', { body, ...options }) as Core.APIPromise<{
-        result: OriginCACertificateCreateResponse;
+        result: OriginCACertificate;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * List all existing Origin CA certificates for a given zone. Use your Origin CA
-   * Key as your User Service Key when calling this endpoint
+   * List all existing Origin CA certificates for a given zone. You can use an Origin
+   * CA Key as your User Service Key or an API token when calling this endpoint
    * ([see above](#requests)).
    */
   list(
@@ -44,9 +44,9 @@ export class OriginCACertificates extends APIResource {
   }
 
   /**
-   * Revoke an existing Origin CA certificate by its serial number. Use your Origin
-   * CA Key as your User Service Key when calling this endpoint
-   * ([see above](#requests)).
+   * Revoke an existing Origin CA certificate by its serial number. You can use an
+   * Origin CA Key as your User Service Key or an API token when calling this
+   * endpoint ([see above](#requests)).
    */
   delete(
     certificateId: string,
@@ -60,14 +60,14 @@ export class OriginCACertificates extends APIResource {
   }
 
   /**
-   * Get an existing Origin CA certificate by its serial number. Use your Origin CA
-   * Key as your User Service Key when calling this endpoint
-   * ([see above](#requests)).
+   * Get an existing Origin CA certificate by its serial number. You can use an
+   * Origin CA Key as your User Service Key or an API token when calling this
+   * endpoint ([see above](#requests)).
    */
-  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificateGetResponse> {
+  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificate> {
     return (
       this._client.get(`/certificates/${certificateId}`, options) as Core.APIPromise<{
-        result: OriginCACertificateGetResponse;
+        result: OriginCACertificate;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -85,7 +85,7 @@ export interface OriginCACertificate {
    * Array of hostnames or wildcard names (e.g., \*.example.com) bound to the
    * certificate.
    */
-  hostnames: Array<unknown>;
+  hostnames: Array<string>;
 
   /**
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
@@ -114,16 +114,17 @@ export interface OriginCACertificate {
   expires_on?: string;
 }
 
-export type OriginCACertificateCreateResponse = unknown | string | null;
-
 export interface OriginCACertificateDeleteResponse {
   /**
    * Identifier
    */
   id?: string;
-}
 
-export type OriginCACertificateGetResponse = unknown | string | null;
+  /**
+   * When the certificate was revoked.
+   */
+  revoked_at?: string;
+}
 
 export interface OriginCACertificateCreateParams {
   /**
@@ -135,7 +136,7 @@ export interface OriginCACertificateCreateParams {
    * Array of hostnames or wildcard names (e.g., \*.example.com) bound to the
    * certificate.
    */
-  hostnames?: Array<unknown>;
+  hostnames?: Array<string>;
 
   /**
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),

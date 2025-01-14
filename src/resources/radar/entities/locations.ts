@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as LocationsAPI from './locations';
 
 export class Locations extends APIResource {
   /**
@@ -26,8 +25,8 @@ export class Locations extends APIResource {
   }
 
   /**
-   * Get the requested location information. A confidence level below `5` indicates a
-   * low level of confidence in the traffic data - normally this happens because
+   * Get the requested location information. (A confidence level below `5` indicates
+   * a low level of confidence in the traffic data - normally this happens because
    * Cloudflare has a small amount of traffic from/to this location).
    */
   get(
@@ -119,9 +118,11 @@ export interface LocationGetParams {
   format?: 'JSON' | 'CSV';
 }
 
-export namespace Locations {
-  export import LocationListResponse = LocationsAPI.LocationListResponse;
-  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationListParams = LocationsAPI.LocationListParams;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
+export declare namespace Locations {
+  export {
+    type LocationListResponse as LocationListResponse,
+    type LocationGetResponse as LocationGetResponse,
+    type LocationListParams as LocationListParams,
+    type LocationGetParams as LocationGetParams,
+  };
 }

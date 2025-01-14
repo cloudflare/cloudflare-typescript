@@ -2,12 +2,11 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as FullAPI from './full';
 import * as ConfigsAPI from './configs';
 
 export class Full extends APIResource {
   /**
-   * Lists default sampling, router IPs, and rules for account.
+   * Lists default sampling, router IPs, warp devices, and rules for account.
    */
   get(params: FullGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigsAPI.Configuration> {
     const { account_id } = params;
@@ -23,6 +22,6 @@ export interface FullGetParams {
   account_id: string;
 }
 
-export namespace Full {
-  export import FullGetParams = FullAPI.FullGetParams;
+export declare namespace Full {
+  export { type FullGetParams as FullGetParams };
 }

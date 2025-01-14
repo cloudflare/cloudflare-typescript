@@ -2,11 +2,10 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PayloadLogsAPI from './payload-logs';
 
 export class PayloadLogs extends APIResource {
   /**
-   * Updates the DLP payload log settings for this account.
+   * Set payload log settings
    */
   update(
     params: PayloadLogUpdateParams,
@@ -21,7 +20,7 @@ export class PayloadLogs extends APIResource {
   }
 
   /**
-   * Gets the current DLP payload log settings for this account.
+   * Get payload log settings
    */
   get(params: PayloadLogGetParams, options?: Core.RequestOptions): Core.APIPromise<PayloadLogGetResponse> {
     const { account_id } = params;
@@ -34,36 +33,38 @@ export class PayloadLogs extends APIResource {
 }
 
 export interface PayloadLogUpdateResponse {
-  public_key: string | null;
+  updated_at: string;
+
+  public_key?: string | null;
 }
 
 export interface PayloadLogGetResponse {
-  public_key: string | null;
+  updated_at: string;
+
+  public_key?: string | null;
 }
 
 export interface PayloadLogUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param:
    */
   account_id: string;
 
   /**
-   * Body param: The public key to use when encrypting extracted payloads, as a
-   * base64 string
+   * Body param:
    */
-  public_key: string | null;
+  public_key?: string | null;
 }
 
 export interface PayloadLogGetParams {
-  /**
-   * Identifier
-   */
   account_id: string;
 }
 
-export namespace PayloadLogs {
-  export import PayloadLogUpdateResponse = PayloadLogsAPI.PayloadLogUpdateResponse;
-  export import PayloadLogGetResponse = PayloadLogsAPI.PayloadLogGetResponse;
-  export import PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
-  export import PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
+export declare namespace PayloadLogs {
+  export {
+    type PayloadLogUpdateResponse as PayloadLogUpdateResponse,
+    type PayloadLogGetResponse as PayloadLogGetResponse,
+    type PayloadLogUpdateParams as PayloadLogUpdateParams,
+    type PayloadLogGetParams as PayloadLogGetParams,
+  };
 }

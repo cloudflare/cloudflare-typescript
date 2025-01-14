@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SettingsAPI from './settings';
 
 export class Settings extends APIResource {
   /**
@@ -116,12 +115,14 @@ export interface SettingGetParams {
   zone_id: string;
 }
 
-export namespace Settings {
-  export import Setting = SettingsAPI.Setting;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export {
+    type Setting as Setting,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

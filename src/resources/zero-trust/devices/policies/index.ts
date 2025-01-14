@@ -1,45 +1,28 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { DefaultPolicyGetResponse, DefaultPolicyGetParams, DefaultPolicy } from './default-policy';
 export {
-  FallbackDomain,
-  FallbackDomainPolicy,
-  FallbackDomainUpdateResponse,
-  FallbackDomainGetResponse,
-  FallbackDomainUpdateParams,
-  FallbackDomainListParams,
-  FallbackDomainGetParams,
-  FallbackDomainsSinglePage,
-  FallbackDomains,
-} from './fallback-domains';
+  Custom,
+  type CustomDeleteResponse,
+  type CustomCreateParams,
+  type CustomListParams,
+  type CustomDeleteParams,
+  type CustomEditParams,
+  type CustomGetParams,
+} from './custom/index';
 export {
-  SettingsPolicy,
-  PolicyDeleteResponse,
-  PolicyCreateParams,
-  PolicyListParams,
-  PolicyDeleteParams,
-  PolicyEditParams,
-  PolicyGetParams,
+  Default,
+  type DefaultEditResponse,
+  type DefaultGetResponse,
+  type DefaultEditParams,
+  type DefaultGetParams,
+} from './default/index';
+export {
   SettingsPoliciesSinglePage,
   Policies,
+  type DevicePolicyCertificates,
+  type FallbackDomain,
+  type FallbackDomainPolicy,
+  type SettingsPolicy,
+  type SplitTunnelExclude,
+  type SplitTunnelInclude,
 } from './policies';
-export {
-  SplitTunnelExclude,
-  ExcludeUpdateResponse,
-  ExcludeGetResponse,
-  ExcludeUpdateParams,
-  ExcludeListParams,
-  ExcludeGetParams,
-  SplitTunnelExcludesSinglePage,
-  Excludes,
-} from './excludes';
-export {
-  SplitTunnelInclude,
-  IncludeUpdateResponse,
-  IncludeGetResponse,
-  IncludeUpdateParams,
-  IncludeListParams,
-  IncludeGetParams,
-  SplitTunnelIncludesSinglePage,
-  Includes,
-} from './includes';

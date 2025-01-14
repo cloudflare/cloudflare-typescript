@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as NamespacesAPI from './namespaces';
 import * as ObjectsAPI from './objects';
+import { DurableObject, DurableObjectsCursorLimitPagination, ObjectListParams, Objects } from './objects';
 import { SinglePage } from '../../../pagination';
 
 export class Namespaces extends APIResource {
@@ -28,13 +28,15 @@ export class Namespaces extends APIResource {
 export class NamespacesSinglePage extends SinglePage<Namespace> {}
 
 export interface Namespace {
-  id?: unknown;
+  id?: string;
 
-  class?: unknown;
+  class?: string;
 
-  name?: unknown;
+  name?: string;
 
-  script?: unknown;
+  script?: string;
+
+  use_sqlite?: boolean;
 }
 
 export interface NamespaceListParams {
@@ -44,12 +46,21 @@ export interface NamespaceListParams {
   account_id: string;
 }
 
-export namespace Namespaces {
-  export import Namespace = NamespacesAPI.Namespace;
-  export import NamespacesSinglePage = NamespacesAPI.NamespacesSinglePage;
-  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
-  export import Objects = ObjectsAPI.Objects;
-  export import DurableObject = ObjectsAPI.DurableObject;
-  export import DurableObjectsCursorLimitPagination = ObjectsAPI.DurableObjectsCursorLimitPagination;
-  export import ObjectListParams = ObjectsAPI.ObjectListParams;
+Namespaces.NamespacesSinglePage = NamespacesSinglePage;
+Namespaces.Objects = Objects;
+Namespaces.DurableObjectsCursorLimitPagination = DurableObjectsCursorLimitPagination;
+
+export declare namespace Namespaces {
+  export {
+    type Namespace as Namespace,
+    NamespacesSinglePage as NamespacesSinglePage,
+    type NamespaceListParams as NamespaceListParams,
+  };
+
+  export {
+    Objects as Objects,
+    type DurableObject as DurableObject,
+    DurableObjectsCursorLimitPagination as DurableObjectsCursorLimitPagination,
+    type ObjectListParams as ObjectListParams,
+  };
 }

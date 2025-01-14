@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PermissionsAPI from './permissions';
 
 export class Permissions extends APIResource {
   /**
@@ -78,6 +77,11 @@ export namespace PermissionListResponse {
     is_attributable?: boolean;
 
     /**
+     * Whether the indicator feed can be downloaded
+     */
+    is_downloadable?: boolean;
+
+    /**
      * Whether the indicator feed is exposed to customers
      */
     is_public?: boolean;
@@ -137,11 +141,13 @@ export interface PermissionDeleteParams {
   feed_id?: number;
 }
 
-export namespace Permissions {
-  export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
-  export import PermissionListResponse = PermissionsAPI.PermissionListResponse;
-  export import PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
-  export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
-  export import PermissionListParams = PermissionsAPI.PermissionListParams;
-  export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
+export declare namespace Permissions {
+  export {
+    type PermissionCreateResponse as PermissionCreateResponse,
+    type PermissionListResponse as PermissionListResponse,
+    type PermissionDeleteResponse as PermissionDeleteResponse,
+    type PermissionCreateParams as PermissionCreateParams,
+    type PermissionListParams as PermissionListParams,
+    type PermissionDeleteParams as PermissionDeleteParams,
+  };
 }

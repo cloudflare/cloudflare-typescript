@@ -2,16 +2,49 @@
 
 import { APIResource } from '../../resource';
 import * as DNSAPI from './dns';
+import { DNS, DNSListParams, DNSV4PagePagination } from './dns';
 import * as DomainHistoryAPI from './domain-history';
+import {
+  DomainHistory,
+  DomainHistoryGetParams,
+  DomainHistoryGetResponse,
+  DomainHistoryResource,
+} from './domain-history';
 import * as IPListsAPI from './ip-lists';
+import { IPList, IPListGetParams, IPListGetResponse, IPLists } from './ip-lists';
 import * as IPsAPI from './ips';
+import { IP, IPGetParams, IPGetResponse, IPs } from './ips';
 import * as MiscategorizationsAPI from './miscategorizations';
+import {
+  MiscategorizationCreateParams,
+  MiscategorizationCreateResponse,
+  Miscategorizations,
+} from './miscategorizations';
 import * as SinkholesAPI from './sinkholes';
+import { Sinkhole, SinkholeListParams, Sinkholes, SinkholesSinglePage } from './sinkholes';
 import * as WhoisAPI from './whois';
+import { Whois, WhoisGetParams, WhoisGetResponse } from './whois';
 import * as ASNAPI from './asn/asn';
+import { ASN, ASNGetParams } from './asn/asn';
 import * as AttackSurfaceReportAPI from './attack-surface-report/attack-surface-report';
+import { AttackSurfaceReport } from './attack-surface-report/attack-surface-report';
 import * as DomainsAPI from './domains/domains';
+import { Domain, DomainGetParams, Domains } from './domains/domains';
 import * as IndicatorFeedsAPI from './indicator-feeds/indicator-feeds';
+import {
+  IndicatorFeedCreateParams,
+  IndicatorFeedCreateResponse,
+  IndicatorFeedDataParams,
+  IndicatorFeedDataResponse,
+  IndicatorFeedGetParams,
+  IndicatorFeedGetResponse,
+  IndicatorFeedListParams,
+  IndicatorFeedListResponse,
+  IndicatorFeedListResponsesSinglePage,
+  IndicatorFeedUpdateParams,
+  IndicatorFeedUpdateResponse,
+  IndicatorFeeds,
+} from './indicator-feeds/indicator-feeds';
 
 export class Intel extends APIResource {
   asn: ASNAPI.ASN = new ASNAPI.ASN(this._client);
@@ -32,49 +65,75 @@ export class Intel extends APIResource {
     new AttackSurfaceReportAPI.AttackSurfaceReport(this._client);
 }
 
-export namespace Intel {
-  export import ASN = ASNAPI.ASN;
-  export import ASNGetParams = ASNAPI.ASNGetParams;
-  export import DNS = DNSAPI.DNS;
-  export import DNSListResponse = DNSAPI.DNSListResponse;
-  export import DNSListResponsesV4PagePagination = DNSAPI.DNSListResponsesV4PagePagination;
-  export import DNSListParams = DNSAPI.DNSListParams;
-  export import Domains = DomainsAPI.Domains;
-  export import Domain = DomainsAPI.Domain;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
-  export import DomainHistoryResource = DomainHistoryAPI.DomainHistoryResource;
-  export import DomainHistory = DomainHistoryAPI.DomainHistory;
-  export import DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
-  export import DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
-  export import IPs = IPsAPI.IPs;
-  export import IP = IPsAPI.IP;
-  export import IPGetResponse = IPsAPI.IPGetResponse;
-  export import IPGetParams = IPsAPI.IPGetParams;
-  export import IPLists = IPListsAPI.IPLists;
-  export import IPList = IPListsAPI.IPList;
-  export import IPListGetResponse = IPListsAPI.IPListGetResponse;
-  export import IPListGetParams = IPListsAPI.IPListGetParams;
-  export import Miscategorizations = MiscategorizationsAPI.Miscategorizations;
-  export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
-  export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
-  export import Whois = WhoisAPI.Whois;
-  export import WhoisGetResponse = WhoisAPI.WhoisGetResponse;
-  export import WhoisGetParams = WhoisAPI.WhoisGetParams;
-  export import IndicatorFeeds = IndicatorFeedsAPI.IndicatorFeeds;
-  export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
-  export import IndicatorFeedUpdateResponse = IndicatorFeedsAPI.IndicatorFeedUpdateResponse;
-  export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
-  export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
-  export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
-  export import IndicatorFeedListResponsesSinglePage = IndicatorFeedsAPI.IndicatorFeedListResponsesSinglePage;
-  export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
-  export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
-  export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
-  export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
-  export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
-  export import Sinkholes = SinkholesAPI.Sinkholes;
-  export import Sinkhole = SinkholesAPI.Sinkhole;
-  export import SinkholesSinglePage = SinkholesAPI.SinkholesSinglePage;
-  export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
-  export import AttackSurfaceReport = AttackSurfaceReportAPI.AttackSurfaceReport;
+Intel.ASN = ASN;
+Intel.DNSV4PagePagination = DNSV4PagePagination;
+Intel.Domains = Domains;
+Intel.DomainHistoryResource = DomainHistoryResource;
+Intel.IPs = IPs;
+Intel.IPLists = IPLists;
+Intel.Miscategorizations = Miscategorizations;
+Intel.IndicatorFeeds = IndicatorFeeds;
+Intel.IndicatorFeedListResponsesSinglePage = IndicatorFeedListResponsesSinglePage;
+Intel.Sinkholes = Sinkholes;
+Intel.SinkholesSinglePage = SinkholesSinglePage;
+Intel.AttackSurfaceReport = AttackSurfaceReport;
+
+export declare namespace Intel {
+  export { ASN as ASN, type ASNGetParams as ASNGetParams };
+
+  export { type DNS as DNS, DNSV4PagePagination as DNSV4PagePagination, type DNSListParams as DNSListParams };
+
+  export { Domains as Domains, type Domain as Domain, type DomainGetParams as DomainGetParams };
+
+  export {
+    DomainHistoryResource as DomainHistoryResource,
+    type DomainHistory as DomainHistory,
+    type DomainHistoryGetResponse as DomainHistoryGetResponse,
+    type DomainHistoryGetParams as DomainHistoryGetParams,
+  };
+
+  export { IPs as IPs, type IP as IP, type IPGetResponse as IPGetResponse, type IPGetParams as IPGetParams };
+
+  export {
+    IPLists as IPLists,
+    type IPList as IPList,
+    type IPListGetResponse as IPListGetResponse,
+    type IPListGetParams as IPListGetParams,
+  };
+
+  export {
+    Miscategorizations as Miscategorizations,
+    type MiscategorizationCreateResponse as MiscategorizationCreateResponse,
+    type MiscategorizationCreateParams as MiscategorizationCreateParams,
+  };
+
+  export {
+    type Whois as Whois,
+    type WhoisGetResponse as WhoisGetResponse,
+    type WhoisGetParams as WhoisGetParams,
+  };
+
+  export {
+    IndicatorFeeds as IndicatorFeeds,
+    type IndicatorFeedCreateResponse as IndicatorFeedCreateResponse,
+    type IndicatorFeedUpdateResponse as IndicatorFeedUpdateResponse,
+    type IndicatorFeedListResponse as IndicatorFeedListResponse,
+    type IndicatorFeedDataResponse as IndicatorFeedDataResponse,
+    type IndicatorFeedGetResponse as IndicatorFeedGetResponse,
+    IndicatorFeedListResponsesSinglePage as IndicatorFeedListResponsesSinglePage,
+    type IndicatorFeedCreateParams as IndicatorFeedCreateParams,
+    type IndicatorFeedUpdateParams as IndicatorFeedUpdateParams,
+    type IndicatorFeedListParams as IndicatorFeedListParams,
+    type IndicatorFeedDataParams as IndicatorFeedDataParams,
+    type IndicatorFeedGetParams as IndicatorFeedGetParams,
+  };
+
+  export {
+    Sinkholes as Sinkholes,
+    type Sinkhole as Sinkhole,
+    SinkholesSinglePage as SinkholesSinglePage,
+    type SinkholeListParams as SinkholeListParams,
+  };
+
+  export { AttackSurfaceReport as AttackSurfaceReport };
 }

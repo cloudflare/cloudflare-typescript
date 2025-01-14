@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as NetworksAPI from './networks';
 import * as RoutesAPI from './routes';
 
 export class Networks extends APIResource {
@@ -117,8 +116,10 @@ export interface NetworkEditParams {
   account_id: string;
 }
 
-export namespace Networks {
-  export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
-  export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
-  export import NetworkEditParams = NetworksAPI.NetworkEditParams;
+export declare namespace Networks {
+  export {
+    type NetworkCreateParams as NetworkCreateParams,
+    type NetworkDeleteParams as NetworkDeleteParams,
+    type NetworkEditParams as NetworkEditParams,
+  };
 }

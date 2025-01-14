@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BlobsAPI from './blobs';
 import { type Response } from '../../../_shims/index';
 
 export class Blobs extends APIResource {
@@ -14,6 +13,7 @@ export class Blobs extends APIResource {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/images/v1/${imageId}/blob`, {
       ...options,
+      headers: { Accept: 'image/*', ...options?.headers },
       __binaryResponse: true,
     });
   }
@@ -26,6 +26,6 @@ export interface BlobGetParams {
   account_id: string;
 }
 
-export namespace Blobs {
-  export import BlobGetParams = BlobsAPI.BlobGetParams;
+export declare namespace Blobs {
+  export { type BlobGetParams as BlobGetParams };
 }
