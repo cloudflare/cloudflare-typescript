@@ -36,9 +36,8 @@ export class Targets extends APIResource {
   }
 
   /**
-   * Lists and sorts an account’s targets. Filters are optional and are ORed
-   * together. However, when a timestamp is specified with both its before and after
-   * counterparts, the timestamp filters are ANDed.
+   * Lists and sorts an account’s targets. Filters are optional and are ANDed
+   * together.
    */
   list(
     params: TargetListParams,
