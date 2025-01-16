@@ -192,14 +192,33 @@ export namespace TCPResetsTimeoutTimeseriesGroupsResponse {
   }
 
   export interface Serie0 {
+    /**
+     * Connection resets within the first 10 packets from the client, but after the
+     * server has received multiple data packets.
+     */
     later_in_flow: Array<string>;
 
+    /**
+     * All other connections.
+     */
     no_match: Array<string>;
 
+    /**
+     * Connection resets or timeouts after the server received both a SYN packet and an
+     * ACK packet, meaning the connection was successfully established.
+     */
     post_ack: Array<string>;
 
+    /**
+     * Connection resets or timeouts after the server received a packet with PSH flag
+     * set, following connection establishment.
+     */
     post_psh: Array<string>;
 
+    /**
+     * Connection resets or timeouts after the server received only a single SYN
+     * packet.
+     */
     post_syn: Array<string>;
 
     timestamps: Array<string>;

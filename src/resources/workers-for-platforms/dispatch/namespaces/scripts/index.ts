@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AssetUpload, type AssetUploadCreateResponse, type AssetUploadCreateParams } from './asset-upload';
 export { Bindings, type BindingGetResponse, type BindingGetParams } from './bindings';
 export { Content, type ContentUpdateParams, type ContentGetParams } from './content';
 export {

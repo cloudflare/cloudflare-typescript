@@ -2,18 +2,15 @@
 
 import { APIResource } from '../../resource';
 import * as ResponsesAPI from './responses';
-import { ResponseGetParams, ResponseGetResponse, Responses } from './responses';
+import { ResponseGetResponse, Responses } from './responses';
 import * as ScansAPI from './scans';
 import {
   ScanBulkCreateParams,
   ScanBulkCreateResponse,
   ScanCreateParams,
   ScanCreateResponse,
-  ScanDOMParams,
   ScanDOMResponse,
-  ScanGetParams,
   ScanGetResponse,
-  ScanHARParams,
   ScanHARResponse,
   ScanListParams,
   ScanListResponse,
@@ -66,11 +63,7 @@ URLScanner.Responses = Responses;
 URLScanner.Scans = Scans;
 
 export declare namespace URLScanner {
-  export {
-    Responses as Responses,
-    type ResponseGetResponse as ResponseGetResponse,
-    type ResponseGetParams as ResponseGetParams,
-  };
+  export { Responses as Responses, type ResponseGetResponse as ResponseGetResponse };
 
   export {
     Scans as Scans,
@@ -83,9 +76,6 @@ export declare namespace URLScanner {
     type ScanCreateParams as ScanCreateParams,
     type ScanListParams as ScanListParams,
     type ScanBulkCreateParams as ScanBulkCreateParams,
-    type ScanDOMParams as ScanDOMParams,
-    type ScanGetParams as ScanGetParams,
-    type ScanHARParams as ScanHARParams,
     type ScanScreenshotParams as ScanScreenshotParams,
   };
 }

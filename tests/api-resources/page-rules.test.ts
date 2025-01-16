@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource pageRules', () => {
-  // generated params are incorrect
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.pageRules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{}],
@@ -26,8 +25,7 @@ describe('resource pageRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // generated params are incorrect
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.pageRules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{ id: 'browser_check', value: 'on' }],
@@ -37,8 +35,7 @@ describe('resource pageRules', () => {
     });
   });
 
-  // generated params are incorrect
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.pageRules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{}],
@@ -53,8 +50,7 @@ describe('resource pageRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // generated params are incorrect
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.pageRules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{ id: 'browser_check', value: 'on' }],

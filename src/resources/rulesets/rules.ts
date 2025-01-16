@@ -4725,9 +4725,10 @@ export namespace SetCacheSettingsRule {
         host?: CustomKey.Host;
 
         /**
-         * Use the presence of parameters in the query string to build the cache key.
+         * Use the presence or absence of parameters in the query string to build the cache
+         * key.
          */
-        query_string?: CustomKey.IncludedQueryStringParameters | CustomKey.ExcludedQueryStringParameters;
+        query_string?: CustomKey.QueryString;
 
         /**
          * Characteristics of the request user agent used in building the cache key.
@@ -4794,69 +4795,56 @@ export namespace SetCacheSettingsRule {
         }
 
         /**
-         * Use the presence of parameters in the query string to build the cache key.
+         * Use the presence or absence of parameters in the query string to build the cache
+         * key.
          */
-        export interface IncludedQueryStringParameters {
+        export interface QueryString {
           /**
-           * A list of query string parameters used to build the cache key.
+           * build the cache key using all query string parameters EXCECPT these excluded
+           * parameters
            */
-          include?:
-            | IncludedQueryStringParameters.SomeQueryStringParameters
-            | IncludedQueryStringParameters.AllQueryStringParameters;
-        }
-
-        export namespace IncludedQueryStringParameters {
-          /**
-           * A list of query string parameters used to build the cache key.
-           */
-          export interface SomeQueryStringParameters {
-            list?: Array<string>;
-          }
+          exclude?: QueryString.Exclude;
 
           /**
-           * Build the cache key using ALL query string parameters that are in the request.
-           */
-          export interface AllQueryStringParameters {
-            /**
-             * Determines whether to include all query string parameters in the cache key.
-             */
-            all?: boolean;
-          }
-        }
-
-        /**
-         * Use the absence of parameters in the query string to build the cache key.
-         */
-        export interface ExcludedQueryStringParameters {
-          /**
-           * A list of query string parameters NOT used to build the cache key. All
-           * parameters present in the request but missing in this list will be used to build
-           * the cache key.
-           */
-          exclude?:
-            | ExcludedQueryStringParameters.SomeQueryStringParameters
-            | ExcludedQueryStringParameters.AllQueryStringParameters;
-        }
-
-        export namespace ExcludedQueryStringParameters {
-          /**
-           * A list of query string parameters NOT used to build the cache key. All
-           * parameters present in the request but missing in this list will be used to build
-           * the cache key.
-           */
-          export interface SomeQueryStringParameters {
-            list?: Array<string>;
-          }
-
-          /**
-           * Build the cache key excluding ALL query string parameters that are in the
+           * build the cache key using a list of query string parameters that ARE in the
            * request.
            */
-          export interface AllQueryStringParameters {
+          include?: QueryString.Include;
+        }
+
+        export namespace QueryString {
+          /**
+           * build the cache key using all query string parameters EXCECPT these excluded
+           * parameters
+           */
+          export interface Exclude {
             /**
-             * Determines whether to exclude all query string parameters from the cache key.
+             * Exclude all query string parameters from use in building the cache key.
              */
             all?: boolean;
+
+            /**
+             * A list of query string parameters NOT used to build the cache key. All
+             * parameters present in the request but missing in this list will be used to build
+             * the cache key.
+             */
+            list?: Array<string>;
+          }
+
+          /**
+           * build the cache key using a list of query string parameters that ARE in the
+           * request.
+           */
+          export interface Include {
+            /**
+             * Use all query string parameters in the cache key.
+             */
+            all?: boolean;
+
+            /**
+             * A list of query string parameters used to build the cache key.
+             */
+            list?: Array<string>;
           }
         }
 
@@ -5241,9 +5229,10 @@ export namespace SetCacheSettingsRuleParam {
         host?: CustomKey.Host;
 
         /**
-         * Use the presence of parameters in the query string to build the cache key.
+         * Use the presence or absence of parameters in the query string to build the cache
+         * key.
          */
-        query_string?: CustomKey.IncludedQueryStringParameters | CustomKey.ExcludedQueryStringParameters;
+        query_string?: CustomKey.QueryString;
 
         /**
          * Characteristics of the request user agent used in building the cache key.
@@ -5310,69 +5299,56 @@ export namespace SetCacheSettingsRuleParam {
         }
 
         /**
-         * Use the presence of parameters in the query string to build the cache key.
+         * Use the presence or absence of parameters in the query string to build the cache
+         * key.
          */
-        export interface IncludedQueryStringParameters {
+        export interface QueryString {
           /**
-           * A list of query string parameters used to build the cache key.
+           * build the cache key using all query string parameters EXCECPT these excluded
+           * parameters
            */
-          include?:
-            | IncludedQueryStringParameters.SomeQueryStringParameters
-            | IncludedQueryStringParameters.AllQueryStringParameters;
-        }
-
-        export namespace IncludedQueryStringParameters {
-          /**
-           * A list of query string parameters used to build the cache key.
-           */
-          export interface SomeQueryStringParameters {
-            list?: Array<string>;
-          }
+          exclude?: QueryString.Exclude;
 
           /**
-           * Build the cache key using ALL query string parameters that are in the request.
-           */
-          export interface AllQueryStringParameters {
-            /**
-             * Determines whether to include all query string parameters in the cache key.
-             */
-            all?: boolean;
-          }
-        }
-
-        /**
-         * Use the absence of parameters in the query string to build the cache key.
-         */
-        export interface ExcludedQueryStringParameters {
-          /**
-           * A list of query string parameters NOT used to build the cache key. All
-           * parameters present in the request but missing in this list will be used to build
-           * the cache key.
-           */
-          exclude?:
-            | ExcludedQueryStringParameters.SomeQueryStringParameters
-            | ExcludedQueryStringParameters.AllQueryStringParameters;
-        }
-
-        export namespace ExcludedQueryStringParameters {
-          /**
-           * A list of query string parameters NOT used to build the cache key. All
-           * parameters present in the request but missing in this list will be used to build
-           * the cache key.
-           */
-          export interface SomeQueryStringParameters {
-            list?: Array<string>;
-          }
-
-          /**
-           * Build the cache key excluding ALL query string parameters that are in the
+           * build the cache key using a list of query string parameters that ARE in the
            * request.
            */
-          export interface AllQueryStringParameters {
+          include?: QueryString.Include;
+        }
+
+        export namespace QueryString {
+          /**
+           * build the cache key using all query string parameters EXCECPT these excluded
+           * parameters
+           */
+          export interface Exclude {
             /**
-             * Determines whether to exclude all query string parameters from the cache key.
+             * Exclude all query string parameters from use in building the cache key.
              */
             all?: boolean;
+
+            /**
+             * A list of query string parameters NOT used to build the cache key. All
+             * parameters present in the request but missing in this list will be used to build
+             * the cache key.
+             */
+            list?: Array<string>;
+          }
+
+          /**
+           * build the cache key using a list of query string parameters that ARE in the
+           * request.
+           */
+          export interface Include {
+            /**
+             * Use all query string parameters in the cache key.
+             */
+            all?: boolean;
+
+            /**
+             * A list of query string parameters used to build the cache key.
+             */
+            list?: Array<string>;
           }
         }
 
@@ -10551,9 +10527,10 @@ export declare namespace RuleCreateParams {
           host?: CustomKey.Host;
 
           /**
-           * Use the presence of parameters in the query string to build the cache key.
+           * Use the presence or absence of parameters in the query string to build the cache
+           * key.
            */
-          query_string?: CustomKey.IncludedQueryStringParameters | CustomKey.ExcludedQueryStringParameters;
+          query_string?: CustomKey.QueryString;
 
           /**
            * Characteristics of the request user agent used in building the cache key.
@@ -10620,69 +10597,56 @@ export declare namespace RuleCreateParams {
           }
 
           /**
-           * Use the presence of parameters in the query string to build the cache key.
+           * Use the presence or absence of parameters in the query string to build the cache
+           * key.
            */
-          export interface IncludedQueryStringParameters {
+          export interface QueryString {
             /**
-             * A list of query string parameters used to build the cache key.
+             * build the cache key using all query string parameters EXCECPT these excluded
+             * parameters
              */
-            include?:
-              | IncludedQueryStringParameters.SomeQueryStringParameters
-              | IncludedQueryStringParameters.AllQueryStringParameters;
-          }
-
-          export namespace IncludedQueryStringParameters {
-            /**
-             * A list of query string parameters used to build the cache key.
-             */
-            export interface SomeQueryStringParameters {
-              list?: Array<string>;
-            }
+            exclude?: QueryString.Exclude;
 
             /**
-             * Build the cache key using ALL query string parameters that are in the request.
-             */
-            export interface AllQueryStringParameters {
-              /**
-               * Determines whether to include all query string parameters in the cache key.
-               */
-              all?: boolean;
-            }
-          }
-
-          /**
-           * Use the absence of parameters in the query string to build the cache key.
-           */
-          export interface ExcludedQueryStringParameters {
-            /**
-             * A list of query string parameters NOT used to build the cache key. All
-             * parameters present in the request but missing in this list will be used to build
-             * the cache key.
-             */
-            exclude?:
-              | ExcludedQueryStringParameters.SomeQueryStringParameters
-              | ExcludedQueryStringParameters.AllQueryStringParameters;
-          }
-
-          export namespace ExcludedQueryStringParameters {
-            /**
-             * A list of query string parameters NOT used to build the cache key. All
-             * parameters present in the request but missing in this list will be used to build
-             * the cache key.
-             */
-            export interface SomeQueryStringParameters {
-              list?: Array<string>;
-            }
-
-            /**
-             * Build the cache key excluding ALL query string parameters that are in the
+             * build the cache key using a list of query string parameters that ARE in the
              * request.
              */
-            export interface AllQueryStringParameters {
+            include?: QueryString.Include;
+          }
+
+          export namespace QueryString {
+            /**
+             * build the cache key using all query string parameters EXCECPT these excluded
+             * parameters
+             */
+            export interface Exclude {
               /**
-               * Determines whether to exclude all query string parameters from the cache key.
+               * Exclude all query string parameters from use in building the cache key.
                */
               all?: boolean;
+
+              /**
+               * A list of query string parameters NOT used to build the cache key. All
+               * parameters present in the request but missing in this list will be used to build
+               * the cache key.
+               */
+              list?: Array<string>;
+            }
+
+            /**
+             * build the cache key using a list of query string parameters that ARE in the
+             * request.
+             */
+            export interface Include {
+              /**
+               * Use all query string parameters in the cache key.
+               */
+              all?: boolean;
+
+              /**
+               * A list of query string parameters used to build the cache key.
+               */
+              list?: Array<string>;
             }
           }
 
@@ -14664,9 +14628,10 @@ export declare namespace RuleEditParams {
           host?: CustomKey.Host;
 
           /**
-           * Use the presence of parameters in the query string to build the cache key.
+           * Use the presence or absence of parameters in the query string to build the cache
+           * key.
            */
-          query_string?: CustomKey.IncludedQueryStringParameters | CustomKey.ExcludedQueryStringParameters;
+          query_string?: CustomKey.QueryString;
 
           /**
            * Characteristics of the request user agent used in building the cache key.
@@ -14733,69 +14698,56 @@ export declare namespace RuleEditParams {
           }
 
           /**
-           * Use the presence of parameters in the query string to build the cache key.
+           * Use the presence or absence of parameters in the query string to build the cache
+           * key.
            */
-          export interface IncludedQueryStringParameters {
+          export interface QueryString {
             /**
-             * A list of query string parameters used to build the cache key.
+             * build the cache key using all query string parameters EXCECPT these excluded
+             * parameters
              */
-            include?:
-              | IncludedQueryStringParameters.SomeQueryStringParameters
-              | IncludedQueryStringParameters.AllQueryStringParameters;
-          }
-
-          export namespace IncludedQueryStringParameters {
-            /**
-             * A list of query string parameters used to build the cache key.
-             */
-            export interface SomeQueryStringParameters {
-              list?: Array<string>;
-            }
+            exclude?: QueryString.Exclude;
 
             /**
-             * Build the cache key using ALL query string parameters that are in the request.
-             */
-            export interface AllQueryStringParameters {
-              /**
-               * Determines whether to include all query string parameters in the cache key.
-               */
-              all?: boolean;
-            }
-          }
-
-          /**
-           * Use the absence of parameters in the query string to build the cache key.
-           */
-          export interface ExcludedQueryStringParameters {
-            /**
-             * A list of query string parameters NOT used to build the cache key. All
-             * parameters present in the request but missing in this list will be used to build
-             * the cache key.
-             */
-            exclude?:
-              | ExcludedQueryStringParameters.SomeQueryStringParameters
-              | ExcludedQueryStringParameters.AllQueryStringParameters;
-          }
-
-          export namespace ExcludedQueryStringParameters {
-            /**
-             * A list of query string parameters NOT used to build the cache key. All
-             * parameters present in the request but missing in this list will be used to build
-             * the cache key.
-             */
-            export interface SomeQueryStringParameters {
-              list?: Array<string>;
-            }
-
-            /**
-             * Build the cache key excluding ALL query string parameters that are in the
+             * build the cache key using a list of query string parameters that ARE in the
              * request.
              */
-            export interface AllQueryStringParameters {
+            include?: QueryString.Include;
+          }
+
+          export namespace QueryString {
+            /**
+             * build the cache key using all query string parameters EXCECPT these excluded
+             * parameters
+             */
+            export interface Exclude {
               /**
-               * Determines whether to exclude all query string parameters from the cache key.
+               * Exclude all query string parameters from use in building the cache key.
                */
               all?: boolean;
+
+              /**
+               * A list of query string parameters NOT used to build the cache key. All
+               * parameters present in the request but missing in this list will be used to build
+               * the cache key.
+               */
+              list?: Array<string>;
+            }
+
+            /**
+             * build the cache key using a list of query string parameters that ARE in the
+             * request.
+             */
+            export interface Include {
+              /**
+               * Use all query string parameters in the cache key.
+               */
+              all?: boolean;
+
+              /**
+               * A list of query string parameters used to build the cache key.
+               */
+              list?: Array<string>;
             }
           }
 

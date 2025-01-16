@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 
 export class RegionalTieredCacheResource extends APIResource {
   /**
@@ -45,6 +46,11 @@ export class RegionalTieredCacheResource extends APIResource {
  */
 export type RegionalTieredCache = 'tc_regional';
 
+/**
+ * Instructs Cloudflare to check a regional hub data center on the way to your
+ * upper tier. This can help improve performance for smart and custom tiered cache
+ * topologies.
+ */
 export interface RegionalTieredCacheEditResponse {
   /**
    * ID of the zone setting.
@@ -52,21 +58,42 @@ export interface RegionalTieredCacheEditResponse {
   id: RegionalTieredCache;
 
   /**
-   * Whether the setting is editable
+   * last time this setting was modified.
    */
-  editable: boolean;
+  modified_on: string | null;
 
   /**
-   * The value of the feature
+   * Instructs Cloudflare to check a regional hub data center on the way to your
+   * upper tier. This can help improve performance for smart and custom tiered cache
+   * topologies.
    */
-  value: 'on' | 'off';
-
-  /**
-   * Last time this setting was modified.
-   */
-  modified_on?: string | null;
+  value: RegionalTieredCacheEditResponse.Value;
 }
 
+export namespace RegionalTieredCacheEditResponse {
+  /**
+   * Instructs Cloudflare to check a regional hub data center on the way to your
+   * upper tier. This can help improve performance for smart and custom tiered cache
+   * topologies.
+   */
+  export interface Value {
+    /**
+     * ID of the zone setting.
+     */
+    id: RegionalTieredCacheAPI.RegionalTieredCache;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on: string | null;
+  }
+}
+
+/**
+ * Instructs Cloudflare to check a regional hub data center on the way to your
+ * upper tier. This can help improve performance for smart and custom tiered cache
+ * topologies.
+ */
 export interface RegionalTieredCacheGetResponse {
   /**
    * ID of the zone setting.
@@ -74,19 +101,35 @@ export interface RegionalTieredCacheGetResponse {
   id: RegionalTieredCache;
 
   /**
-   * Whether the setting is editable
+   * last time this setting was modified.
    */
-  editable: boolean;
+  modified_on: string | null;
 
   /**
-   * The value of the feature
+   * Instructs Cloudflare to check a regional hub data center on the way to your
+   * upper tier. This can help improve performance for smart and custom tiered cache
+   * topologies.
    */
-  value: 'on' | 'off';
+  value: RegionalTieredCacheGetResponse.Value;
+}
 
+export namespace RegionalTieredCacheGetResponse {
   /**
-   * Last time this setting was modified.
+   * Instructs Cloudflare to check a regional hub data center on the way to your
+   * upper tier. This can help improve performance for smart and custom tiered cache
+   * topologies.
    */
-  modified_on?: string | null;
+  export interface Value {
+    /**
+     * ID of the zone setting.
+     */
+    id: RegionalTieredCacheAPI.RegionalTieredCache;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on: string | null;
+  }
 }
 
 export interface RegionalTieredCacheEditParams {

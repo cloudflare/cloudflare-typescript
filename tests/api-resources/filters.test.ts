@@ -116,8 +116,7 @@ describe('resource filters', () => {
     const response = await client.filters.bulkDelete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
-  // TODO: investigate broken test
-  test.skip('bulkUpdate: only required params', async () => {
+  test('bulkUpdate: only required params', async () => {
     const responsePromise = client.filters.bulkUpdate({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -128,8 +127,7 @@ describe('resource filters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('bulkUpdate: required and optional params', async () => {
+  test('bulkUpdate: required and optional params', async () => {
     const response = await client.filters.bulkUpdate({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 

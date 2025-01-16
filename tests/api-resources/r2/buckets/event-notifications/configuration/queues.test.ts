@@ -41,7 +41,7 @@ describe('resource queues', () => {
             suffix: '.jpeg',
           },
         ],
-        jurisdiction: 'default',
+        'cf-r2-jurisdiction': 'default',
       },
     );
   });
@@ -67,7 +67,7 @@ describe('resource queues', () => {
     const response = await client.r2.buckets.eventNotifications.configuration.queues.delete(
       'example-bucket',
       'queue_id',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', jurisdiction: 'default' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', 'cf-r2-jurisdiction': 'default' },
     );
   });
 });

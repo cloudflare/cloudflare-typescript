@@ -111,11 +111,11 @@ export class Devices extends APIResource {
     deviceId: string,
     params: DeviceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceGetResponse | null> {
+  ): Core.APIPromise<DeviceGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
-        result: DeviceGetResponse | null;
+        result: DeviceGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -238,129 +238,7 @@ export namespace Device {
   }
 }
 
-export interface DeviceGetResponse {
-  /**
-   * Device ID.
-   */
-  id?: string;
-
-  account?: DeviceGetResponse.Account;
-
-  /**
-   * When the device was created.
-   */
-  created?: string;
-
-  /**
-   * True if the device was deleted.
-   */
-  deleted?: boolean;
-
-  device_type?: string;
-
-  /**
-   * @deprecated
-   */
-  gateway_device_id?: string;
-
-  /**
-   * IPv4 or IPv6 address.
-   */
-  ip?: string;
-
-  /**
-   * The device's public key.
-   */
-  key?: string;
-
-  /**
-   * Type of the key.
-   */
-  key_type?: string;
-
-  /**
-   * When the device last connected to Cloudflare services.
-   */
-  last_seen?: string;
-
-  /**
-   * The device mac address.
-   */
-  mac_address?: string;
-
-  /**
-   * The device model name.
-   */
-  model?: string;
-
-  /**
-   * The device name.
-   */
-  name?: string;
-
-  /**
-   * The operating system version.
-   */
-  os_version?: string;
-
-  /**
-   * The device serial number.
-   */
-  serial_number?: string;
-
-  /**
-   * Type of the tunnel connection used.
-   */
-  tunnel_type?: string;
-
-  /**
-   * When the device was updated.
-   */
-  updated?: string;
-
-  user?: DeviceGetResponse.User;
-
-  /**
-   * The WARP client version.
-   */
-  version?: string;
-}
-
-export namespace DeviceGetResponse {
-  export interface Account {
-    /**
-     * @deprecated
-     */
-    id?: string;
-
-    /**
-     * @deprecated
-     */
-    account_type?: string;
-
-    /**
-     * The name of the enrolled account.
-     */
-    name?: string;
-  }
-
-  export interface User {
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The contact email address of the user.
-     */
-    email?: string;
-
-    /**
-     * The enrolled device user's name.
-     */
-    name?: string;
-  }
-}
+export type DeviceGetResponse = unknown | string | null;
 
 export interface DeviceListParams {
   account_id: string;

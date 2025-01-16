@@ -14,7 +14,7 @@ export class FleetStatus extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<FleetStatusGetResponse> {
     const { account_id, ...query } = params;
-    return this._client.get(`/accounts/${account_id}/dex/devices/${deviceId}/fleet-status/live`, {
+    return this._client.get(`/accounts/${account_id}/devices/${deviceId}/fleet-status/live`, {
       query,
       ...options,
     });

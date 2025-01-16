@@ -26,17 +26,6 @@ import {
   CustomPageWithoutHTMLsSinglePage,
   CustomPages,
 } from './custom-pages';
-import * as GatewayCAAPI from './gateway-ca';
-import {
-  GatewayCA,
-  GatewayCACreateParams,
-  GatewayCACreateResponse,
-  GatewayCADeleteParams,
-  GatewayCADeleteResponse,
-  GatewayCAListParams,
-  GatewayCAListResponse,
-  GatewayCAListResponsesSinglePage,
-} from './gateway-ca';
 import * as GroupsAPI from './groups';
 import {
   GroupCreateParams,
@@ -160,7 +149,6 @@ import * as UsersAPI from './users/users';
 import { AccessUser, AccessUsersSinglePage, UserListParams, Users } from './users/users';
 
 export class Access extends APIResource {
-  gatewayCA: GatewayCAAPI.GatewayCA = new GatewayCAAPI.GatewayCA(this._client);
   infrastructure: InfrastructureAPI.Infrastructure = new InfrastructureAPI.Infrastructure(this._client);
   applications: ApplicationsAPI.Applications = new ApplicationsAPI.Applications(this._client);
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
@@ -1003,8 +991,6 @@ export namespace ServiceTokenRuleParam {
   }
 }
 
-Access.GatewayCA = GatewayCA;
-Access.GatewayCAListResponsesSinglePage = GatewayCAListResponsesSinglePage;
 Access.Infrastructure = Infrastructure;
 Access.Applications = Applications;
 Access.ApplicationListResponsesSinglePage = ApplicationListResponsesSinglePage;
@@ -1049,17 +1035,6 @@ export declare namespace Access {
     type OktaGroupRule as OktaGroupRule,
     type SAMLGroupRule as SAMLGroupRule,
     type ServiceTokenRule as ServiceTokenRule,
-  };
-
-  export {
-    GatewayCA as GatewayCA,
-    type GatewayCACreateResponse as GatewayCACreateResponse,
-    type GatewayCAListResponse as GatewayCAListResponse,
-    type GatewayCADeleteResponse as GatewayCADeleteResponse,
-    GatewayCAListResponsesSinglePage as GatewayCAListResponsesSinglePage,
-    type GatewayCACreateParams as GatewayCACreateParams,
-    type GatewayCAListParams as GatewayCAListParams,
-    type GatewayCADeleteParams as GatewayCADeleteParams,
   };
 
   export { Infrastructure as Infrastructure };

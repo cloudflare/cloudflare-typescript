@@ -41,8 +41,6 @@ import {
   Datasets,
   DatasetsSinglePage,
 } from './datasets/datasets';
-import * as EmailAPI from './email/email';
-import { Email } from './email/email';
 import * as ProfilesAPI from './profiles/profiles';
 import {
   ContextAwareness,
@@ -58,7 +56,6 @@ export class DLP extends APIResource {
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   patterns: PatternsAPI.Patterns = new PatternsAPI.Patterns(this._client);
   payloadLogs: PayloadLogsAPI.PayloadLogs = new PayloadLogsAPI.PayloadLogs(this._client);
-  email: EmailAPI.Email = new EmailAPI.Email(this._client);
   profiles: ProfilesAPI.Profiles = new ProfilesAPI.Profiles(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
   entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
@@ -68,7 +65,6 @@ DLP.Datasets = Datasets;
 DLP.DatasetsSinglePage = DatasetsSinglePage;
 DLP.Patterns = Patterns;
 DLP.PayloadLogs = PayloadLogs;
-DLP.Email = Email;
 DLP.Profiles = Profiles;
 DLP.ProfilesSinglePage = ProfilesSinglePage;
 DLP.Limits = Limits;
@@ -102,8 +98,6 @@ export declare namespace DLP {
     type PayloadLogUpdateParams as PayloadLogUpdateParams,
     type PayloadLogGetParams as PayloadLogGetParams,
   };
-
-  export { Email as Email };
 
   export {
     Profiles as Profiles,

@@ -93,31 +93,64 @@ export class ImpersonationRegistry extends APIResource {
 
 export class ImpersonationRegistryListResponsesV4PagePaginationArray extends V4PagePaginationArray<ImpersonationRegistryListResponse> {}
 
-export interface ImpersonationRegistryCreateResponse {
-  id: number;
+export type ImpersonationRegistryCreateResponse =
+  | ImpersonationRegistryCreateResponse.EmailSecurityDisplayName
+  | Array<ImpersonationRegistryCreateResponse.UnionMember1>;
 
-  created_at: string;
+export namespace ImpersonationRegistryCreateResponse {
+  export interface EmailSecurityDisplayName {
+    id: number;
 
-  email: string;
+    created_at: string;
 
-  is_email_regex: boolean;
+    is_email_regex: boolean;
 
-  last_modified: string;
+    last_modified: string;
 
-  name: string;
+    name: string;
 
-  comments?: string | null;
+    comments?: string | null;
 
-  directory_id?: number | null;
+    directory_id?: number | null;
 
-  directory_node_id?: number | null;
+    directory_node_id?: number | null;
 
-  /**
-   * @deprecated
-   */
-  external_directory_node_id?: string | null;
+    email?: string | null;
 
-  provenance?: string | null;
+    /**
+     * @deprecated
+     */
+    external_directory_node_id?: string | null;
+
+    provenance?: string | null;
+  }
+
+  export interface UnionMember1 {
+    id: number;
+
+    created_at: string;
+
+    is_email_regex: boolean;
+
+    last_modified: string;
+
+    name: string;
+
+    comments?: string | null;
+
+    directory_id?: number | null;
+
+    directory_node_id?: number | null;
+
+    email?: string | null;
+
+    /**
+     * @deprecated
+     */
+    external_directory_node_id?: string | null;
+
+    provenance?: string | null;
+  }
 }
 
 export interface ImpersonationRegistryListResponse {
@@ -125,8 +158,6 @@ export interface ImpersonationRegistryListResponse {
 
   created_at: string;
 
-  email: string;
-
   is_email_regex: boolean;
 
   last_modified: string;
@@ -138,6 +169,8 @@ export interface ImpersonationRegistryListResponse {
   directory_id?: number | null;
 
   directory_node_id?: number | null;
+
+  email?: string | null;
 
   /**
    * @deprecated
@@ -156,8 +189,6 @@ export interface ImpersonationRegistryEditResponse {
 
   created_at: string;
 
-  email: string;
-
   is_email_regex: boolean;
 
   last_modified: string;
@@ -169,6 +200,8 @@ export interface ImpersonationRegistryEditResponse {
   directory_id?: number | null;
 
   directory_node_id?: number | null;
+
+  email?: string | null;
 
   /**
    * @deprecated
@@ -183,8 +216,6 @@ export interface ImpersonationRegistryGetResponse {
 
   created_at: string;
 
-  email: string;
-
   is_email_regex: boolean;
 
   last_modified: string;
@@ -197,6 +228,8 @@ export interface ImpersonationRegistryGetResponse {
 
   directory_node_id?: number | null;
 
+  email?: string | null;
+
   /**
    * @deprecated
    */
@@ -205,26 +238,54 @@ export interface ImpersonationRegistryGetResponse {
   provenance?: string | null;
 }
 
-export interface ImpersonationRegistryCreateParams {
-  /**
-   * Path param: Account Identifier
-   */
-  account_id: string;
+export type ImpersonationRegistryCreateParams =
+  | ImpersonationRegistryCreateParams.EmailSecurityCreateDisplayName
+  | ImpersonationRegistryCreateParams.Variant1;
 
-  /**
-   * Body param:
-   */
-  email: string;
+export declare namespace ImpersonationRegistryCreateParams {
+  export interface EmailSecurityCreateDisplayName {
+    /**
+     * Path param: Account Identifier
+     */
+    account_id: string;
 
-  /**
-   * Body param:
-   */
-  is_email_regex: boolean;
+    /**
+     * Body param:
+     */
+    email: string;
 
-  /**
-   * Body param:
-   */
-  name: string;
+    /**
+     * Body param:
+     */
+    is_email_regex: boolean;
+
+    /**
+     * Body param:
+     */
+    name: string;
+  }
+
+  export interface Variant1 {
+    /**
+     * Path param: Account Identifier
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body: Array<ImpersonationRegistryCreateParams.Variant1.Body>;
+  }
+
+  export namespace Variant1 {
+    export interface Body {
+      email: string;
+
+      is_email_regex: boolean;
+
+      name: string;
+    }
+  }
 }
 
 export interface ImpersonationRegistryListParams extends V4PagePaginationArrayParams {

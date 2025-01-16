@@ -12,14 +12,14 @@ export class Custom extends APIResource {
     params: CustomCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCreateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`, {
         body,
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -36,14 +36,14 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
         body,
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -59,13 +59,13 @@ export class Custom extends APIResource {
     params: CustomListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomListResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`, {
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -82,13 +82,13 @@ export class Custom extends APIResource {
     params: CustomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -105,13 +105,13 @@ export class Custom extends APIResource {
     params: CustomGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomGetResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -288,7 +288,7 @@ export interface CustomCreateParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomUpdateParams {
@@ -312,7 +312,7 @@ export interface CustomUpdateParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomListParams {
@@ -324,7 +324,7 @@ export interface CustomListParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomDeleteParams {
@@ -336,7 +336,7 @@ export interface CustomDeleteParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomGetParams {
@@ -348,7 +348,7 @@ export interface CustomGetParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export declare namespace Custom {

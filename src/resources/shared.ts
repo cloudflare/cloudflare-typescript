@@ -798,7 +798,7 @@ export namespace Token {
     /**
      * Client IP restrictions.
      */
-    request_ip?: Condition.RequestIP;
+    'request.ip'?: Condition.RequestIP;
   }
 
   export namespace Condition {
@@ -848,7 +848,7 @@ export interface TokenPolicy {
   /**
    * A list of resource names that the policy applies to.
    */
-  resources: Record<string, string>;
+  resources: TokenPolicy.Resources;
 }
 
 export namespace TokenPolicy {
@@ -883,6 +883,15 @@ export namespace TokenPolicy {
       value?: string;
     }
   }
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  export interface Resources {
+    resource?: string;
+
+    scope?: string;
+  }
 }
 
 export interface TokenPolicyParam {
@@ -899,7 +908,7 @@ export interface TokenPolicyParam {
   /**
    * A list of resource names that the policy applies to.
    */
-  resources: Record<string, string>;
+  resources: TokenPolicyParam.Resources;
 }
 
 export namespace TokenPolicyParam {
@@ -923,6 +932,15 @@ export namespace TokenPolicyParam {
 
       value?: string;
     }
+  }
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  export interface Resources {
+    resource?: string;
+
+    scope?: string;
   }
 }
 

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -14,7 +14,6 @@ describe('resource content', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.workers.scripts.content.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,6 +28,7 @@ describe('resource content', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.workers.scripts.content.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      '<any part name>': [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: { body_part: 'worker.js', main_module: 'worker.js' },
       'CF-WORKER-BODY-PART': 'CF-WORKER-BODY-PART',
       'CF-WORKER-MAIN-MODULE-PART': 'CF-WORKER-MAIN-MODULE-PART',

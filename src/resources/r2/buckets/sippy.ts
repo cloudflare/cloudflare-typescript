@@ -13,14 +13,14 @@ export class SippyResource extends APIResource {
     params: SippyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Sippy> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         body,
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -36,13 +36,13 @@ export class SippyResource extends APIResource {
     params: SippyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SippyDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -54,13 +54,13 @@ export class SippyResource extends APIResource {
    * Gets configuration for Sippy for an existing R2 bucket.
    */
   get(bucketName: string, params: SippyGetParams, options?: Core.RequestOptions): Core.APIPromise<Sippy> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -154,7 +154,7 @@ export declare namespace SippyUpdateParams {
     /**
      * Header param: The bucket jurisdiction
      */
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
   }
 
   export namespace R2EnableSippyAws {
@@ -232,7 +232,7 @@ export declare namespace SippyUpdateParams {
     /**
      * Header param: The bucket jurisdiction
      */
-    jurisdiction?: 'default' | 'eu' | 'fedramp';
+    'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
   }
 
   export namespace R2EnableSippyGcs {
@@ -296,7 +296,7 @@ export interface SippyDeleteParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface SippyGetParams {
@@ -308,7 +308,7 @@ export interface SippyGetParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export declare namespace SippyResource {

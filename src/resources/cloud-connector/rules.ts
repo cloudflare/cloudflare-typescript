@@ -9,10 +9,10 @@ export class Rules extends APIResource {
    * Put Rules
    */
   update(params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RuleUpdateResponse> {
-    const { zone_id, rules } = params;
+    const { zone_id, body } = params;
     return (
       this._client.put(`/zones/${zone_id}/cloud_connector/rules`, {
-        body: rules,
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: RuleUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -116,11 +116,11 @@ export interface RuleUpdateParams {
   /**
    * Body param: List of Cloud Connector rules
    */
-  rules: Array<RuleUpdateParams.Rule>;
+  body: Array<RuleUpdateParams.Body>;
 }
 
 export namespace RuleUpdateParams {
-  export interface Rule {
+  export interface Body {
     id?: string;
 
     description?: string;
@@ -132,7 +132,7 @@ export namespace RuleUpdateParams {
     /**
      * Parameters of Cloud Connector Rule
      */
-    parameters?: Rule.Parameters;
+    parameters?: Body.Parameters;
 
     /**
      * Cloud Provider type
@@ -140,7 +140,7 @@ export namespace RuleUpdateParams {
     provider?: 'aws_s3' | 'r2' | 'gcp_storage' | 'azure_storage';
   }
 
-  export namespace Rule {
+  export namespace Body {
     /**
      * Parameters of Cloud Connector Rule
      */
