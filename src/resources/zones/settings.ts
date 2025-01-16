@@ -84,6 +84,47 @@ export interface AdvancedDDoSParam {
 }
 
 /**
+ * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your
+ * layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your
+ * account so that you can increase your origin security by only allowing traffic
+ * from a small list of IP addresses.
+ */
+export interface Aegis {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'aegis';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
+
+  /**
+   * Value of the zone setting.
+   */
+  value?: Aegis.Value;
+}
+
+export namespace Aegis {
+  /**
+   * Value of the zone setting.
+   */
+  export interface Value {
+    /**
+     * Whether the feature is enabled or not.
+     */
+    enabled?: boolean;
+
+    /**
+     * Egress pool id which refers to a grouping of dedicated egress IPs through which
+     * Cloudflare will connect to origin.
+     */
+    pool_id?: string;
+  }
+}
+
+/**
  * When enabled, Cloudflare serves limited copies of web pages available from the
  * [Internet Archive's Wayback Machine](https://archive.org/web/) if your server is
  * offline. Refer to
@@ -1224,10 +1265,27 @@ export interface OriginErrorPagePassThruParam {
   value?: 'on' | 'off';
 }
 
-/**
- * Value of the zone setting.
- */
-export type OriginMaxHTTPVersion = 'origin_max_http_version';
+export interface OriginMaxHTTPVersion {
+  /**
+   * Value of the zone setting.
+   */
+  id: 'origin_max_http_version';
+
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * The value of the feature
+   */
+  value: '2' | '1';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
 
 export interface Polish {
   /**
@@ -4747,6 +4805,7 @@ export interface SettingGetParams {
 export declare namespace Settings {
   export {
     type AdvancedDDoS as AdvancedDDoS,
+    type Aegis as Aegis,
     type AlwaysOnline as AlwaysOnline,
     type AlwaysUseHTTPS as AlwaysUseHTTPS,
     type AutomaticHTTPSRewrites as AutomaticHTTPSRewrites,

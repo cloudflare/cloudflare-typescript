@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare, { toFile } from 'cloudflare';
+import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -14,6 +14,7 @@ describe('resource scripts', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.workers.scripts.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      metadata: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,8 +29,6 @@ describe('resource scripts', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.workers.scripts.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      rollback_to: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      '<any part name>': [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: {
         assets: {
           config: { html_handling: 'auto-trailing-slash', not_found_handling: 'none', serve_directly: true },
@@ -37,8 +36,8 @@ describe('resource scripts', () => {
         },
         bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
         body_part: 'worker.js',
-        compatibility_date: '2023-07-25',
-        compatibility_flags: ['string'],
+        compatibility_date: '2021-01-01',
+        compatibility_flags: ['nodejs_compat'],
         keep_assets: false,
         keep_bindings: ['string'],
         logpush: false,
@@ -58,8 +57,7 @@ describe('resource scripts', () => {
         tail_consumers: [
           { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
         ],
-        usage_model: 'bundled',
-        version_tags: { foo: 'string' },
+        usage_model: 'standard',
       },
     });
   });
@@ -97,6 +95,19 @@ describe('resource scripts', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       force: true,
     });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.workers.scripts.get('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   test('get: required and optional params', async () => {

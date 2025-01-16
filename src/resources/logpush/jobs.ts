@@ -647,6 +647,13 @@ export interface JobUpdateParams {
   max_upload_records?: number | null;
 
   /**
+   * Body param: Optional human readable job name. Not unique. Cloudflare suggests
+   * that you set this to a meaningful string, like the domain name, to make it
+   * easier to identify your job.
+   */
+  name?: string | null;
+
+  /**
    * Body param: The structured replacement for `logpull_options`. When including
    * this field, the `logpull_option` field will be ignored.
    */

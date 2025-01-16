@@ -94,6 +94,16 @@ export {
   type CustomPageDeleteParams,
   type CustomPageGetParams,
 } from './custom-pages';
+export {
+  GatewayCAListResponsesSinglePage,
+  GatewayCA,
+  type GatewayCACreateResponse,
+  type GatewayCAListResponse,
+  type GatewayCADeleteResponse,
+  type GatewayCACreateParams,
+  type GatewayCAListParams,
+  type GatewayCADeleteParams,
+} from './gateway-ca';
 export { Infrastructure } from './infrastructure/index';
 export {
   Keys,

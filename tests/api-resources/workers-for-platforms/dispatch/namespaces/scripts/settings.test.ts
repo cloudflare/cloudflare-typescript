@@ -34,9 +34,9 @@ describe('resource settings', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         settings: {
-          bindings: [{ type: 'kv_namespace' }],
-          compatibility_date: '2022-04-05',
-          compatibility_flags: ['formdata_parser_supports_files'],
+          bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
+          compatibility_date: '2021-01-01',
+          compatibility_flags: ['nodejs_compat'],
           limits: { cpu_ms: 50 },
           logpush: false,
           migrations: {
@@ -54,7 +54,7 @@ describe('resource settings', () => {
           tail_consumers: [
             { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
           ],
-          usage_model: 'unbound',
+          usage_model: 'standard',
         },
       },
     );

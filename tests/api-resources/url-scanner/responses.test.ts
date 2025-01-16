@@ -10,8 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource responses', () => {
-  test('get', async () => {
-    const responsePromise = client.urlScanner.responses.get('accountId', 'responseId');
+  test('get: only required params', async () => {
+    const responsePromise = client.urlScanner.responses.get('response_id', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,10 +21,7 @@ describe('resource responses', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.urlScanner.responses.get('accountId', 'responseId', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await client.urlScanner.responses.get('response_id', { account_id: 'account_id' });
   });
 });

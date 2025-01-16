@@ -132,122 +132,48 @@ export interface ItemUpdateResponse {
   operation_id?: string;
 }
 
-/**
- * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
- * maximum of /64.
- */
-export type ItemListResponse =
-  | ItemListResponse.UnionMember0
-  | ItemListResponse.RulesListsRedirect
-  | ItemListResponse.RulesListsHostname
-  | ItemListResponse.UnionMember3;
-
-export namespace ItemListResponse {
+export interface ItemListResponse {
   /**
-   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-   * maximum of /64.
+   * The unique ID of the list.
    */
-  export interface UnionMember0 {}
+  id?: string;
 
   /**
-   * The definition of the redirect.
+   * A non-negative 32 bit integer
    */
-  export interface RulesListsRedirect extends ListsAPI.Redirect {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
+  asn?: number;
 
-    /**
-     * A non-negative 32 bit integer
-     */
-    asn?: number;
+  /**
+   * An informative summary of the list item.
+   */
+  comment?: string;
 
-    /**
-     * An informative summary of the list item.
-     */
-    comment?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the item was created.
-     */
-    created_on?: string;
-
-    /**
-     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-     * 0 to 9, wildcards (\*), and the hyphen (-).
-     */
-    hostname?: ListsAPI.Hostname;
-
-    /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
-     */
-    ip?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the item was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * The definition of the redirect.
-     */
-    redirect?: ListsAPI.Redirect;
-  }
+  /**
+   * The RFC 3339 timestamp of when the item was created.
+   */
+  created_on?: string;
 
   /**
    * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
    * 0 to 9, wildcards (\*), and the hyphen (-).
    */
-  export interface RulesListsHostname extends ListsAPI.Hostname {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
-
-    /**
-     * A non-negative 32 bit integer
-     */
-    asn?: number;
-
-    /**
-     * An informative summary of the list item.
-     */
-    comment?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the item was created.
-     */
-    created_on?: string;
-
-    /**
-     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-     * 0 to 9, wildcards (\*), and the hyphen (-).
-     */
-    hostname?: ListsAPI.Hostname;
-
-    /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
-     */
-    ip?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the item was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * The definition of the redirect.
-     */
-    redirect?: ListsAPI.Redirect;
-  }
+  hostname?: ListsAPI.Hostname;
 
   /**
-   * A non-negative 32 bit integer
+   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+   * maximum of /64.
    */
-  export interface UnionMember3 {}
+  ip?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The definition of the redirect.
+   */
+  redirect?: ListsAPI.Redirect;
 }
 
 export interface ItemDeleteResponse {
@@ -257,122 +183,48 @@ export interface ItemDeleteResponse {
   operation_id?: string;
 }
 
-/**
- * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
- * maximum of /64.
- */
-export type ItemGetResponse =
-  | ItemGetResponse.UnionMember0
-  | ItemGetResponse.RulesListsRedirect
-  | ItemGetResponse.RulesListsHostname
-  | ItemGetResponse.UnionMember3;
-
-export namespace ItemGetResponse {
+export interface ItemGetResponse {
   /**
-   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-   * maximum of /64.
+   * The unique ID of the list.
    */
-  export interface UnionMember0 {}
+  id?: string;
 
   /**
-   * The definition of the redirect.
+   * A non-negative 32 bit integer
    */
-  export interface RulesListsRedirect extends ListsAPI.Redirect {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
+  asn?: number;
 
-    /**
-     * A non-negative 32 bit integer
-     */
-    asn?: number;
+  /**
+   * An informative summary of the list item.
+   */
+  comment?: string;
 
-    /**
-     * An informative summary of the list item.
-     */
-    comment?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the item was created.
-     */
-    created_on?: string;
-
-    /**
-     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-     * 0 to 9, wildcards (\*), and the hyphen (-).
-     */
-    hostname?: ListsAPI.Hostname;
-
-    /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
-     */
-    ip?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the item was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * The definition of the redirect.
-     */
-    redirect?: ListsAPI.Redirect;
-  }
+  /**
+   * The RFC 3339 timestamp of when the item was created.
+   */
+  created_on?: string;
 
   /**
    * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
    * 0 to 9, wildcards (\*), and the hyphen (-).
    */
-  export interface RulesListsHostname extends ListsAPI.Hostname {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
-
-    /**
-     * A non-negative 32 bit integer
-     */
-    asn?: number;
-
-    /**
-     * An informative summary of the list item.
-     */
-    comment?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the item was created.
-     */
-    created_on?: string;
-
-    /**
-     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-     * 0 to 9, wildcards (\*), and the hyphen (-).
-     */
-    hostname?: ListsAPI.Hostname;
-
-    /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
-     */
-    ip?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the item was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * The definition of the redirect.
-     */
-    redirect?: ListsAPI.Redirect;
-  }
+  hostname?: ListsAPI.Hostname;
 
   /**
-   * A non-negative 32 bit integer
+   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+   * maximum of /64.
    */
-  export interface UnionMember3 {}
+  ip?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the item was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The definition of the redirect.
+   */
+  redirect?: ListsAPI.Redirect;
 }
 
 export interface ItemCreateParams {

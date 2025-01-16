@@ -11,7 +11,7 @@ export class Quota extends APIResource {
   get(params: QuotaGetParams, options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse> {
     const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/commands/quota`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/dex/commands/quota`, options) as Core.APIPromise<{
         result: QuotaGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);

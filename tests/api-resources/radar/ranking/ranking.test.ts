@@ -71,7 +71,7 @@ describe('resource ranking', () => {
     await expect(
       client.radar.ranking.top(
         {
-          date: ['string'],
+          date: ['2019-12-27'],
           format: 'JSON',
           limit: 5,
           location: ['string'],

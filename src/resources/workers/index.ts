@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AI, type AIRunResponse, type AIRunParams } from './ai/index';
 export {
   AccountSettings,
   type AccountSettingUpdateResponse,
@@ -19,11 +18,26 @@ export {
   type DomainGetParams,
 } from './domains';
 export {
+  RouteListResponsesSinglePage,
+  Routes,
+  type RouteCreateResponse,
+  type RouteUpdateResponse,
+  type RouteListResponse,
+  type RouteDeleteResponse,
+  type RouteGetResponse,
+  type RouteCreateParams,
+  type RouteUpdateParams,
+  type RouteListParams,
+  type RouteDeleteParams,
+  type RouteGetParams,
+} from './routes';
+export {
   ScriptsSinglePage,
   Scripts,
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
+  type ScriptGetResponse,
   type ScriptUpdateParams,
   type ScriptListParams,
   type ScriptDeleteParams,

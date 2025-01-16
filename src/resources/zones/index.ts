@@ -24,12 +24,14 @@ export {
   type ZoneHold,
   type HoldCreateParams,
   type HoldDeleteParams,
+  type HoldEditParams,
   type HoldGetParams,
 } from './holds';
 export { RatePlans, type RatePlanGetResponse, type RatePlanGetParams } from './rate-plans';
 export {
   Settings,
   type AdvancedDDoS,
+  type Aegis,
   type AlwaysOnline,
   type AlwaysUseHTTPS,
   type AutomaticHTTPSRewrites,

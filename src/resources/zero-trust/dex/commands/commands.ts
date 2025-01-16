@@ -2,13 +2,24 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
+import * as DevicesAPI from './devices';
+import {
+  DeviceListParams,
+  DeviceListResponse,
+  DeviceListResponsesV4PagePagination,
+  Devices,
+} from './devices';
 import * as DownloadsAPI from './downloads';
 import { DownloadGetParams, Downloads } from './downloads';
 import * as QuotaAPI from './quota';
 import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
+import * as UsersAPI from './users';
+import { UserListParams, UserListResponse, Users } from './users';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Commands extends APIResource {
+  users: UsersAPI.Users = new UsersAPI.Users(this._client);
+  devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
   quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
 
@@ -18,7 +29,7 @@ export class Commands extends APIResource {
   create(params: CommandCreateParams, options?: Core.RequestOptions): Core.APIPromise<CommandCreateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/commands`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/dex/commands`, { body, ...options }) as Core.APIPromise<{
         result: CommandCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -33,10 +44,11 @@ export class Commands extends APIResource {
     options?: Core.RequestOptions,
   ): Core.PagePromise<CommandListResponsesV4PagePagination, CommandListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/commands`, CommandListResponsesV4PagePagination, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/dex/commands`,
+      CommandListResponsesV4PagePagination,
+      { query, ...options },
+    );
   }
 }
 
@@ -207,6 +219,9 @@ export interface CommandListParams extends V4PagePaginationParams {
 }
 
 Commands.CommandListResponsesV4PagePagination = CommandListResponsesV4PagePagination;
+Commands.Users = Users;
+Commands.Devices = Devices;
+Commands.DeviceListResponsesV4PagePagination = DeviceListResponsesV4PagePagination;
 Commands.Downloads = Downloads;
 Commands.Quota = Quota;
 
@@ -217,6 +232,15 @@ export declare namespace Commands {
     CommandListResponsesV4PagePagination as CommandListResponsesV4PagePagination,
     type CommandCreateParams as CommandCreateParams,
     type CommandListParams as CommandListParams,
+  };
+
+  export { Users as Users, type UserListResponse as UserListResponse, type UserListParams as UserListParams };
+
+  export {
+    Devices as Devices,
+    type DeviceListResponse as DeviceListResponse,
+    DeviceListResponsesV4PagePagination as DeviceListResponsesV4PagePagination,
+    type DeviceListParams as DeviceListParams,
   };
 
   export { Downloads as Downloads, type DownloadGetParams as DownloadGetParams };

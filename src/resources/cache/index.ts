@@ -35,6 +35,7 @@ export {
 export {
   Variants,
   type CacheVariant,
+  type VariantDeleteResponse,
   type VariantEditResponse,
   type VariantGetResponse,
   type VariantDeleteParams,
