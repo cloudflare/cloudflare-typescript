@@ -16,4 +16,4 @@ export {
 } from './devices';
 export { Downloads, type DownloadGetParams } from './downloads';
 export { Quota, type QuotaGetResponse, type QuotaGetParams } from './quota';
-export { Users, type UserListResponse, type UserListParams } from './users';
+export { Users } from './users';
