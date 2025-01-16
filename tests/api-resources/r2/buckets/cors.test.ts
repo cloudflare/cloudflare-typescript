@@ -36,7 +36,7 @@ describe('resource cors', () => {
           maxAgeSeconds: 3600,
         },
       ],
-      'cf-r2-jurisdiction': 'default',
+      jurisdiction: 'default',
     });
   });
 
@@ -58,7 +58,7 @@ describe('resource cors', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.r2.buckets.cors.delete('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      'cf-r2-jurisdiction': 'default',
+      jurisdiction: 'default',
     });
   });
 
@@ -80,7 +80,7 @@ describe('resource cors', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.r2.buckets.cors.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      'cf-r2-jurisdiction': 'default',
+      jurisdiction: 'default',
     });
   });
 });

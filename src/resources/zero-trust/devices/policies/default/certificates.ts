@@ -12,32 +12,35 @@ export class Certificates extends APIResource {
   edit(
     params: CertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateEditResponse> {
+  ): Core.APIPromise<CertificateEditResponse | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/devices/policy/certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CertificateEditResponse }>
+      }) as Core.APIPromise<{ result: CertificateEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches device certificate provisioning
    */
-  get(params: CertificateGetParams, options?: Core.RequestOptions): Core.APIPromise<CertificateGetResponse> {
+  get(
+    params: CertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateGetResponse | null> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/devices/policy/certificates`, options) as Core.APIPromise<{
-        result: CertificateGetResponse;
+        result: CertificateGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type CertificateEditResponse = unknown | string | null;
+export type CertificateEditResponse = unknown | string;
 
-export type CertificateGetResponse = unknown | string | null;
+export type CertificateGetResponse = unknown | string;
 
 export interface CertificateEditParams {
   /**

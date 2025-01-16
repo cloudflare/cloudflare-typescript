@@ -23,11 +23,13 @@ export {
   type OperationCreateResponse,
   type OperationListResponse,
   type OperationDeleteResponse,
+  type OperationBulkCreateResponse,
   type OperationBulkDeleteResponse,
   type OperationGetResponse,
   type OperationCreateParams,
   type OperationListParams,
   type OperationDeleteParams,
+  type OperationBulkCreateParams,
   type OperationBulkDeleteParams,
   type OperationGetParams,
 } from './operations/index';

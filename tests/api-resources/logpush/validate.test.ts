@@ -34,6 +34,29 @@ describe('resource validate', () => {
   });
 
   // TODO: investigate broken test
+  test.skip('destinationExists: only required params', async () => {
+    const responsePromise = client.logpush.validate.destinationExists({
+      destination_conf: 's3://mybucket/logs?region=us-west-2',
+      account_id: 'account_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate broken test
+  test.skip('destinationExists: required and optional params', async () => {
+    const response = await client.logpush.validate.destinationExists({
+      destination_conf: 's3://mybucket/logs?region=us-west-2',
+      account_id: 'account_id',
+    });
+  });
+
+  // TODO: investigate broken test
   test.skip('origin: only required params', async () => {
     const responsePromise = client.logpush.validate.origin({
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',

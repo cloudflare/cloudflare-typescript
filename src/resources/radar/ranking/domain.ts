@@ -82,6 +82,11 @@ export interface DomainGetParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Include top locations in the response.
+   */
+  includeTopLocations?: boolean;
+
+  /**
    * Limit the number of objects in the response.
    */
   limit?: number;

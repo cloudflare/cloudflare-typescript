@@ -48,14 +48,14 @@ export class Buckets extends APIResource {
    * Creates a new R2 bucket.
    */
   create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/buckets`, {
         body,
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -67,14 +67,14 @@ export class Buckets extends APIResource {
    * Lists all R2 buckets on your account
    */
   list(params: BucketListParams, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...query } = params;
+    const { account_id, jurisdiction, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets`, {
         query,
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -90,13 +90,13 @@ export class Buckets extends APIResource {
     params: BucketDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BucketDeleteResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -108,13 +108,13 @@ export class Buckets extends APIResource {
    * Gets metadata for an existing R2 bucket.
    */
   get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -179,7 +179,7 @@ export interface BucketCreateParams {
   /**
    * Header param: Creates the bucket in the provided jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketListParams {
@@ -224,7 +224,7 @@ export interface BucketListParams {
   /**
    * Header param: Lists buckets in the provided jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketDeleteParams {
@@ -236,7 +236,7 @@ export interface BucketDeleteParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketGetParams {
@@ -248,7 +248,7 @@ export interface BucketGetParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 Buckets.Lifecycle = Lifecycle;

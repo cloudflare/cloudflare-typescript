@@ -12,14 +12,14 @@ export class Managed extends APIResource {
     params: ManagedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedUpdateResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         body,
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -35,13 +35,13 @@ export class Managed extends APIResource {
     params: ManagedListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedListResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         ...options,
         headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -98,7 +98,7 @@ export interface ManagedUpdateParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface ManagedListParams {
@@ -110,7 +110,7 @@ export interface ManagedListParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export declare namespace Managed {
