@@ -14,7 +14,7 @@ import { DownloadGetParams, Downloads } from './downloads';
 import * as QuotaAPI from './quota';
 import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
 import * as UsersAPI from './users';
-import { UserListParams, UserListResponse, Users } from './users';
+import { Users } from './users';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Commands extends APIResource {
@@ -234,7 +234,7 @@ export declare namespace Commands {
     type CommandListParams as CommandListParams,
   };
 
-  export { Users as Users, type UserListResponse as UserListResponse, type UserListParams as UserListParams };
+  export { Users as Users };
 
   export {
     Devices as Devices,

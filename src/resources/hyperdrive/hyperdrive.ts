@@ -4,21 +4,24 @@ import { APIResource } from '../../resource';
 import * as ConfigsAPI from './configs';
 import {
   ConfigCreateParams,
+  ConfigCreateResponse,
   ConfigDeleteParams,
   ConfigDeleteResponse,
   ConfigEditParams,
+  ConfigEditResponse,
   ConfigGetParams,
+  ConfigGetResponse,
   ConfigListParams,
+  ConfigListResponse,
+  ConfigListResponsesSinglePage,
   ConfigUpdateParams,
+  ConfigUpdateResponse,
   Configs,
 } from './configs';
-import { SinglePage } from '../../pagination';
 
 export class HyperdriveResource extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
 }
-
-export class HyperdrivesSinglePage extends SinglePage<Hyperdrive> {}
 
 export type Configuration =
   | Configuration.HyperdriveHyperdriveInternetOrigin
@@ -54,7 +57,7 @@ export namespace Configuration {
 
   export interface HyperdriveHyperdriveOverAccessOrigin {
     /**
-     * The Client ID of the Access token to use when connecting to the origin database
+     * The Client ID of the Access token to use when connecting to the origin database.
      */
     access_client_id: string;
 
@@ -123,7 +126,7 @@ export namespace Hyperdrive {
 
   export interface AccessProtectedDatabaseBehindCloudflareTunnel {
     /**
-     * The Client ID of the Access token to use when connecting to the origin database
+     * The Client ID of the Access token to use when connecting to the origin database.
      */
     access_client_id: string;
 
@@ -176,11 +179,18 @@ export namespace Hyperdrive {
 }
 
 HyperdriveResource.Configs = Configs;
+HyperdriveResource.ConfigListResponsesSinglePage = ConfigListResponsesSinglePage;
 
 export declare namespace HyperdriveResource {
   export {
     Configs as Configs,
+    type ConfigCreateResponse as ConfigCreateResponse,
+    type ConfigUpdateResponse as ConfigUpdateResponse,
+    type ConfigListResponse as ConfigListResponse,
     type ConfigDeleteResponse as ConfigDeleteResponse,
+    type ConfigEditResponse as ConfigEditResponse,
+    type ConfigGetResponse as ConfigGetResponse,
+    ConfigListResponsesSinglePage as ConfigListResponsesSinglePage,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigListParams as ConfigListParams,

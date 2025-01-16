@@ -2553,7 +2553,7 @@ Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">create</a>({ ...params }) -> RulesetCreateResponse</code>
 - <code title="put /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">update</a>(rulesetId, { ...params }) -> RulesetUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">list</a>({ ...params }) -> RulesetListResponsesSinglePage</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">list</a>({ ...params }) -> RulesetListResponsesCursorPagination</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">delete</a>(rulesetId, { ...params }) -> void</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">get</a>(rulesetId, { ...params }) -> RulesetGetResponse</code>
 
@@ -4910,14 +4910,6 @@ Methods:
 
 #### Users
 
-Types:
-
-- <code><a href="./src/resources/zero-trust/dex/commands/users.ts">UserListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/dex/commands/users">client.zeroTrust.dex.commands.users.<a href="./src/resources/zero-trust/dex/commands/users.ts">list</a>({ ...params }) -> UserListResponse</code>
-
 #### Devices
 
 Types:
@@ -5651,16 +5643,21 @@ Types:
 
 Types:
 
+- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigCreateResponse</a></code>
+- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigUpdateResponse</a></code>
+- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigListResponse</a></code>
 - <code><a href="./src/resources/hyperdrive/configs.ts">ConfigDeleteResponse</a></code>
+- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigEditResponse</a></code>
+- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">create</a>({ ...params }) -> Hyperdrive</code>
-- <code title="put /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">update</a>(hyperdriveId, { ...params }) -> Hyperdrive</code>
-- <code title="get /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">list</a>({ ...params }) -> HyperdrivesSinglePage</code>
+- <code title="post /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
+- <code title="put /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">update</a>(hyperdriveId, { ...params }) -> ConfigUpdateResponse</code>
+- <code title="get /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">list</a>({ ...params }) -> ConfigListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">delete</a>(hyperdriveId, { ...params }) -> ConfigDeleteResponse | null</code>
-- <code title="patch /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">edit</a>(hyperdriveId, { ...params }) -> Hyperdrive</code>
-- <code title="get /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">get</a>(hyperdriveId, { ...params }) -> Hyperdrive</code>
+- <code title="patch /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">edit</a>(hyperdriveId, { ...params }) -> ConfigEditResponse</code>
+- <code title="get /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">get</a>(hyperdriveId, { ...params }) -> ConfigGetResponse</code>
 
 # RUM
 
