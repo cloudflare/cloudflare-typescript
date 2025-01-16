@@ -349,7 +349,6 @@ export interface LogListParams extends V4PagePaginationArrayParams {
 export namespace LogListParams {
   export interface Filter {
     key:
-      | 'id'
       | 'created_at'
       | 'request_content_type'
       | 'response_content_type'
@@ -363,13 +362,7 @@ export namespace LogListParams {
       | 'tokens_in'
       | 'tokens_out'
       | 'duration'
-      | 'feedback'
-      | 'event_id'
-      | 'request_type'
-      | 'metadata.key'
-      | 'metadata.value'
-      | 'prompts.prompt_id'
-      | 'prompts.version_id';
+      | 'feedback';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
@@ -418,7 +411,6 @@ export interface LogDeleteParams {
 export namespace LogDeleteParams {
   export interface Filter {
     key:
-      | 'id'
       | 'created_at'
       | 'request_content_type'
       | 'response_content_type'
@@ -432,13 +424,7 @@ export namespace LogDeleteParams {
       | 'tokens_in'
       | 'tokens_out'
       | 'duration'
-      | 'feedback'
-      | 'event_id'
-      | 'request_type'
-      | 'metadata.key'
-      | 'metadata.value'
-      | 'prompts.prompt_id'
-      | 'prompts.version_id';
+      | 'feedback';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 

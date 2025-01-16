@@ -40,7 +40,6 @@ import * as VariantsAPI from './variants';
 import {
   CacheVariant,
   VariantDeleteParams,
-  VariantDeleteResponse,
   VariantEditParams,
   VariantEditResponse,
   VariantGetParams,
@@ -274,7 +273,6 @@ export declare namespace Cache {
   export {
     Variants as Variants,
     type CacheVariant as CacheVariant,
-    type VariantDeleteResponse as VariantDeleteResponse,
     type VariantEditResponse as VariantEditResponse,
     type VariantGetResponse as VariantGetResponse,
     type VariantDeleteParams as VariantDeleteParams,

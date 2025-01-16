@@ -39,7 +39,6 @@ describe('resource summary', () => {
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          limitPerGroup: 10,
           location: ['string'],
           name: ['string'],
         },

@@ -464,7 +464,7 @@ export namespace SummaryProtocolResponse {
 export interface SummaryVectorResponse {
   meta: SummaryVectorResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: Record<string, Array<string>>;
 }
 
 export namespace SummaryVectorResponse {
@@ -833,12 +833,6 @@ export interface SummaryVectorParams {
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
-   */
-  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with

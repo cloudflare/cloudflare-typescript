@@ -366,7 +366,7 @@ export interface FipsSettingsParam {
 }
 
 /**
- * Account settings
+ * account settings.
  */
 export interface GatewayConfigurationSettings {
   /**
@@ -463,7 +463,7 @@ export namespace GatewayConfigurationSettings {
 }
 
 /**
- * Account settings
+ * account settings.
  */
 export interface GatewayConfigurationSettingsParam {
   /**
@@ -644,13 +644,13 @@ export interface TLSSettingsParam {
 }
 
 /**
- * Account settings
+ * account settings.
  */
 export interface ConfigurationUpdateResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -658,13 +658,13 @@ export interface ConfigurationUpdateResponse {
 }
 
 /**
- * Account settings
+ * account settings.
  */
 export interface ConfigurationEditResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -672,13 +672,13 @@ export interface ConfigurationEditResponse {
 }
 
 /**
- * Account settings
+ * account settings.
  */
 export interface ConfigurationGetResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -692,7 +692,7 @@ export interface ConfigurationUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Account settings
+   * Body param: account settings.
    */
   settings?: GatewayConfigurationSettingsParam;
 }
@@ -704,7 +704,7 @@ export interface ConfigurationEditParams {
   account_id: string;
 
   /**
-   * Body param: Account settings
+   * Body param: account settings.
    */
   settings?: GatewayConfigurationSettingsParam;
 }

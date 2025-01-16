@@ -28,8 +28,6 @@ import {
   SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
-import * as LogsAPI from './logs/logs';
-import { Logs } from './logs/logs';
 import * as TokensAPI from './tokens/tokens';
 import {
   TokenCreateParams,
@@ -50,7 +48,6 @@ export class Accounts extends APIResource {
   roles: RolesAPI.Roles = new RolesAPI.Roles(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
-  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 
   /**
    * Create an account (only available for tenant admins at this time)
@@ -319,7 +316,6 @@ Accounts.Members = Members;
 Accounts.Roles = Roles;
 Accounts.Subscriptions = Subscriptions;
 Accounts.Tokens = Tokens;
-Accounts.Logs = Logs;
 
 export declare namespace Accounts {
   export {
@@ -359,6 +355,4 @@ export declare namespace Accounts {
     type TokenGetParams as TokenGetParams,
     type TokenVerifyParams as TokenVerifyParams,
   };
-
-  export { Logs as Logs };
 }

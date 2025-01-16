@@ -5,9 +5,7 @@ import * as Core from '../../../core';
 
 export class Upload extends APIResource {
   /**
-   * Upload assets ahead of creating a Worker version. To learn more about the direct
-   * uploads of assets, see
-   * https://developers.cloudflare.com/workers/static-assets/direct-upload/
+   * Upload assets ahead of creating a Worker version.
    */
   create(params: UploadCreateParams, options?: Core.RequestOptions): Core.APIPromise<UploadCreateResponse> {
     const { account_id, base64, ...body } = params;

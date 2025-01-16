@@ -18,7 +18,7 @@ import {
   CustomNameservers,
 } from './custom-nameservers';
 import * as HoldsAPI from './holds';
-import { HoldCreateParams, HoldDeleteParams, HoldEditParams, HoldGetParams, Holds, ZoneHold } from './holds';
+import { HoldCreateParams, HoldDeleteParams, HoldGetParams, Holds, ZoneHold } from './holds';
 import * as PlansAPI from './plans';
 import {
   AvailableRatePlan,
@@ -32,7 +32,6 @@ import { RatePlanGetParams, RatePlanGetResponse, RatePlans } from './rate-plans'
 import * as SettingsAPI from './settings';
 import {
   AdvancedDDoS,
-  Aegis,
   AlwaysOnline,
   AlwaysUseHTTPS,
   AutomaticHTTPSRewrites,
@@ -501,7 +500,6 @@ export declare namespace Zones {
   export {
     Settings as Settings,
     type AdvancedDDoS as AdvancedDDoS,
-    type Aegis as Aegis,
     type AlwaysOnline as AlwaysOnline,
     type AlwaysUseHTTPS as AlwaysUseHTTPS,
     type AutomaticHTTPSRewrites as AutomaticHTTPSRewrites,
@@ -569,7 +567,6 @@ export declare namespace Zones {
     type ZoneHold as ZoneHold,
     type HoldCreateParams as HoldCreateParams,
     type HoldDeleteParams as HoldDeleteParams,
-    type HoldEditParams as HoldEditParams,
     type HoldGetParams as HoldGetParams,
   };
 

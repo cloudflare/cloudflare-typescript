@@ -23,8 +23,6 @@ import { ExpressionTemplate } from './expression-template/expression-template';
 import * as OperationsAPI from './operations/operations';
 import {
   APIShield,
-  OperationBulkCreateParams,
-  OperationBulkCreateResponse,
   OperationBulkDeleteParams,
   OperationBulkDeleteResponse,
   OperationCreateParams,
@@ -98,14 +96,12 @@ export declare namespace APIGateway {
     type OperationCreateResponse as OperationCreateResponse,
     type OperationListResponse as OperationListResponse,
     type OperationDeleteResponse as OperationDeleteResponse,
-    type OperationBulkCreateResponse as OperationBulkCreateResponse,
     type OperationBulkDeleteResponse as OperationBulkDeleteResponse,
     type OperationGetResponse as OperationGetResponse,
     OperationListResponsesV4PagePaginationArray as OperationListResponsesV4PagePaginationArray,
     type OperationCreateParams as OperationCreateParams,
     type OperationListParams as OperationListParams,
     type OperationDeleteParams as OperationDeleteParams,
-    type OperationBulkCreateParams as OperationBulkCreateParams,
     type OperationBulkDeleteParams as OperationBulkDeleteParams,
     type OperationGetParams as OperationGetParams,
   };

@@ -271,8 +271,9 @@ export interface TimeseriesGroupHTTPMethodResponse {
 
 export namespace TimeseriesGroupHTTPMethodResponse {
   export interface Serie0 {
+    GET: Array<string>;
+
     timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -285,10 +286,6 @@ export interface TimeseriesGroupHTTPVersionResponse {
 export namespace TimeseriesGroupHTTPVersionResponse {
   export interface Serie0 {
     'HTTP/1.x': Array<string>;
-
-    'HTTP/2': Array<string>;
-
-    'HTTP/3': Array<string>;
 
     timestamps: Array<string>;
   }
@@ -344,8 +341,9 @@ export interface TimeseriesGroupMitigationProductResponse {
 
 export namespace TimeseriesGroupMitigationProductResponse {
   export interface Serie0 {
+    DDOS: Array<string>;
+
     timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -472,12 +470,6 @@ export interface TimeseriesGroupHTTPMethodParams {
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
-   */
-  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
@@ -1028,12 +1020,6 @@ export interface TimeseriesGroupManagedRulesParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
-   */
-  limitPerGroup?: number;
-
-  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -1170,12 +1156,6 @@ export interface TimeseriesGroupMitigationProductParams {
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
-   */
-  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with

@@ -1,13 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import * as LOADocumentsAPI from './loa-documents';
-import {
-  LOADocumentCreateParams,
-  LOADocumentCreateResponse,
-  LOADocumentGetParams,
-  LOADocuments,
-} from './loa-documents';
 import * as ServicesAPI from './services';
 import { ServiceListParams, ServiceListResponse, ServiceListResponsesSinglePage, Services } from './services';
 import * as AddressMapsAPI from './address-maps/address-maps';
@@ -25,6 +18,12 @@ import {
   AddressMapsSinglePage,
   Kind,
 } from './address-maps/address-maps';
+import * as LOADocumentsAPI from './loa-documents/loa-documents';
+import {
+  LOADocumentCreateParams,
+  LOADocumentCreateResponse,
+  LOADocuments,
+} from './loa-documents/loa-documents';
 import * as PrefixesAPI from './prefixes/prefixes';
 import {
   Prefix,
@@ -115,7 +114,6 @@ export declare namespace Addressing {
     LOADocuments as LOADocuments,
     type LOADocumentCreateResponse as LOADocumentCreateResponse,
     type LOADocumentCreateParams as LOADocumentCreateParams,
-    type LOADocumentGetParams as LOADocumentGetParams,
   };
 
   export {

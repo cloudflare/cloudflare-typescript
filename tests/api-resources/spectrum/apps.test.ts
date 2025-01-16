@@ -86,8 +86,7 @@ describe('resource apps', () => {
     });
   });
 
-  // TODO: investigate HTTP 422 errors on test suite
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.spectrum.apps.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -98,8 +97,7 @@ describe('resource apps', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate HTTP 422 errors on test suite
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.spectrum.apps.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',

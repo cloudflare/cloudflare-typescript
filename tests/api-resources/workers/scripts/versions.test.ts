@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -14,7 +14,6 @@ describe('resource versions', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.workers.scripts.versions.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: { main_module: 'worker.js' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,13 +28,14 @@ describe('resource versions', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.workers.scripts.versions.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      '<any part name>': [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: {
-        main_module: 'worker.js',
         annotations: { 'workers/message': 'Fixed worker code.', 'workers/tag': 'workers/tag' },
-        bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
-        compatibility_date: '2021-01-01',
-        compatibility_flags: ['nodejs_compat'],
+        bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
+        compatibility_date: '2023-07-25',
+        compatibility_flags: ['string'],
         keep_bindings: ['string'],
+        main_module: 'worker.js',
         usage_model: 'standard',
       },
     });

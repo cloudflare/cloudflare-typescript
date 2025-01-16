@@ -30,7 +30,6 @@ describe('resource records', () => {
       content: '198.51.100.4',
       name: 'example.com',
       proxied: true,
-      settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
       ttl: 3600,
       type: 'A',
@@ -59,15 +58,13 @@ describe('resource records', () => {
       content: '198.51.100.4',
       name: 'example.com',
       proxied: true,
-      settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
       ttl: 3600,
       type: 'A',
     });
   });
 
-  // mock server returns invalid data
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.dns.records.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -78,8 +75,7 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // mock server returns invalid data
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.dns.records.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       comment: {
@@ -159,7 +155,6 @@ describe('resource records', () => {
           content: '198.51.100.4',
           name: 'example.com',
           proxied: true,
-          settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
           ttl: 3600,
           type: 'A',
@@ -172,7 +167,6 @@ describe('resource records', () => {
           content: '198.51.100.4',
           name: 'example.com',
           proxied: true,
-          settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
           ttl: 3600,
           type: 'A',
@@ -184,7 +178,6 @@ describe('resource records', () => {
           content: '198.51.100.4',
           name: 'example.com',
           proxied: true,
-          settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
           ttl: 3600,
           type: 'A',
@@ -216,7 +209,6 @@ describe('resource records', () => {
       content: '198.51.100.4',
       name: 'example.com',
       proxied: true,
-      settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
       ttl: 3600,
       type: 'A',
@@ -238,8 +230,7 @@ describe('resource records', () => {
     const response = await client.dns.records.export({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
-  // mock server returns invalid data
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.dns.records.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -252,8 +243,7 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // mock server returns invalid data
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.dns.records.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

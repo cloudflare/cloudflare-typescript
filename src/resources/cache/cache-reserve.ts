@@ -110,6 +110,11 @@ export interface CacheReserveClearResponse {
   id: CacheReserveClear;
 
   /**
+   * last time this setting was modified.
+   */
+  modified_on: string | null;
+
+  /**
    * The time that the latest Cache Reserve Clear operation started.
    */
   start_ts: string;
@@ -123,13 +128,16 @@ export interface CacheReserveClearResponse {
    * The time that the latest Cache Reserve Clear operation completed.
    */
   end_ts?: string;
-
-  /**
-   * Last time this setting was modified.
-   */
-  modified_on?: string | null;
 }
 
+/**
+ * Increase cache lifetimes by automatically storing all cacheable files into
+ * Cloudflare's persistent object storage buckets. Requires Cache Reserve
+ * subscription. Note: using Tiered Cache with Cache Reserve is highly recommended
+ * to reduce Reserve operations costs. See the
+ * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
+ * for more information.
+ */
 export interface CacheReserveEditResponse {
   /**
    * ID of the zone setting.
@@ -137,21 +145,24 @@ export interface CacheReserveEditResponse {
   id: CacheReserve;
 
   /**
-   * Whether the setting is editable
+   * last time this setting was modified.
    */
-  editable: boolean;
+  modified_on: string | null;
 
   /**
-   * The value of the feature
+   * Value of the Cache Reserve zone setting.
    */
   value: 'on' | 'off';
-
-  /**
-   * Last time this setting was modified.
-   */
-  modified_on?: string | null;
 }
 
+/**
+ * Increase cache lifetimes by automatically storing all cacheable files into
+ * Cloudflare's persistent object storage buckets. Requires Cache Reserve
+ * subscription. Note: using Tiered Cache with Cache Reserve is highly recommended
+ * to reduce Reserve operations costs. See the
+ * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
+ * for more information.
+ */
 export interface CacheReserveGetResponse {
   /**
    * ID of the zone setting.
@@ -159,19 +170,14 @@ export interface CacheReserveGetResponse {
   id: CacheReserve;
 
   /**
-   * Whether the setting is editable
+   * last time this setting was modified.
    */
-  editable: boolean;
+  modified_on: string | null;
 
   /**
-   * The value of the feature
+   * Value of the Cache Reserve zone setting.
    */
   value: 'on' | 'off';
-
-  /**
-   * Last time this setting was modified.
-   */
-  modified_on?: string | null;
 }
 
 /**
@@ -187,6 +193,11 @@ export interface CacheReserveStatusResponse {
   id: CacheReserveClear;
 
   /**
+   * last time this setting was modified.
+   */
+  modified_on: string | null;
+
+  /**
    * The time that the latest Cache Reserve Clear operation started.
    */
   start_ts: string;
@@ -200,11 +211,6 @@ export interface CacheReserveStatusResponse {
    * The time that the latest Cache Reserve Clear operation completed.
    */
   end_ts?: string;
-
-  /**
-   * Last time this setting was modified.
-   */
-  modified_on?: string | null;
 }
 
 export interface CacheReserveClearParams {

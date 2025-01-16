@@ -22,8 +22,7 @@ export class Lists extends APIResource {
   }
 
   /**
-   * Updates a configured Zero Trust list. Skips updating list items if not included
-   * in the payload.
+   * Updates a configured Zero Trust list.
    */
   update(
     listId: string,
@@ -229,11 +228,6 @@ export interface ListUpdateParams {
    * Body param: The description of the list.
    */
   description?: string;
-
-  /**
-   * Body param: The items in the list.
-   */
-  items?: Array<GatewayItemParam>;
 }
 
 export interface ListListParams {

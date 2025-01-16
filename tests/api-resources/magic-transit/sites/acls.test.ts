@@ -35,7 +35,6 @@ describe('resource acls', () => {
       description: 'Allows local traffic between PIN pads and cash register.',
       forward_locally: true,
       protocols: ['tcp'],
-      unidirectional: true,
     });
   });
 
@@ -66,7 +65,6 @@ describe('resource acls', () => {
         lan_2: { lan_id: 'lan_id', lan_name: 'lan_name', ports: [1], subnets: ['192.0.2.1'] },
         name: 'PIN Pad - Cash Register',
         protocols: ['tcp'],
-        unidirectional: true,
       },
     );
   });
@@ -140,7 +138,6 @@ describe('resource acls', () => {
         lan_2: { lan_id: 'lan_id', lan_name: 'lan_name', ports: [1], subnets: ['192.0.2.1'] },
         name: 'PIN Pad - Cash Register',
         protocols: ['tcp'],
-        unidirectional: true,
       },
     );
   });

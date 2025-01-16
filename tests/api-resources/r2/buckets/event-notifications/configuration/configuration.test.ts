@@ -28,7 +28,7 @@ describe('resource configuration', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.r2.buckets.eventNotifications.configuration.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 });

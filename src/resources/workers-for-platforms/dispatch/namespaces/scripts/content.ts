@@ -65,10 +65,21 @@ export interface ContentUpdateParams {
   account_id: string;
 
   /**
+   * Body param: A module comprising a Worker script, often a javascript file.
+   * Multiple modules may be provided as separate named parts, but at least one
+   * module must be present. This should be referenced either in the metadata as
+   * `main_module` (esm)/`body_part` (service worker) or as a header
+   * `CF-WORKER-MAIN-MODULE-PART` (esm) /`CF-WORKER-BODY-PART` (service worker) by
+   * part name. Source maps may also be included using the `application/source-map`
+   * content type.
+   */
+  '<any part name>'?: Array<Core.Uploadable>;
+
+  /**
    * Body param: JSON encoded metadata about the uploaded parts and Worker
    * configuration.
    */
-  metadata: WorkersAPI.WorkerMetadataParam;
+  metadata?: WorkersAPI.WorkerMetadataParam;
 
   /**
    * Header param: The multipart name of a script upload part containing script

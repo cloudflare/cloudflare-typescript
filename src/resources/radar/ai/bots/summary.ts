@@ -32,7 +32,7 @@ export class Summary extends APIResource {
 export interface SummaryUserAgentResponse {
   meta: SummaryUserAgentResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: Record<string, Array<string>>;
 }
 
 export namespace SummaryUserAgentResponse {
@@ -121,12 +121,6 @@ export interface SummaryUserAgentParams {
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
-   */
-  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with

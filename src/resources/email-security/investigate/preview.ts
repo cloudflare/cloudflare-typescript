@@ -37,10 +37,9 @@ export class Preview extends APIResource {
 }
 
 export interface PreviewCreateResponse {
-  /**
-   * A base64 encoded PNG image of the email.
-   */
   screenshot: string;
+
+  error?: string | null;
 }
 
 export interface PreviewGetResponse {
