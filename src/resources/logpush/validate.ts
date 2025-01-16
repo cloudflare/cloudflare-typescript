@@ -6,7 +6,7 @@ import { CloudflareError } from 'cloudflare/error';
 
 export class Validate extends APIResource {
   /**
-   * Checks if there is an existing job with a destination.
+   * Validates destination.
    */
   destination(
     params: ValidateDestinationParams,
@@ -30,10 +30,42 @@ export class Validate extends APIResource {
           accountOrZoneId: zone_id,
         };
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/destination/exists`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/destination`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ValidateDestinationResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Checks if there is an existing job with a destination.
+   */
+  destinationExists(
+    params: ValidateDestinationExistsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ValidateDestinationExistsResponse | null> {
+    const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/destination/exists`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ValidateDestinationExistsResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -71,6 +103,12 @@ export class Validate extends APIResource {
 }
 
 export interface ValidateDestinationResponse {
+  message?: string;
+
+  valid?: boolean;
+}
+
+export interface ValidateDestinationExistsResponse {
   exists?: boolean;
 }
 
@@ -81,6 +119,27 @@ export interface ValidateOriginResponse {
 }
 
 export interface ValidateDestinationParams {
+  /**
+   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
+   * will be pushed. Additional configuration parameters supported by the destination
+   * may be included.
+   */
+  destination_conf: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
+}
+
+export interface ValidateDestinationExistsParams {
   /**
    * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
    * will be pushed. Additional configuration parameters supported by the destination
@@ -127,8 +186,10 @@ export interface ValidateOriginParams {
 export declare namespace Validate {
   export {
     type ValidateDestinationResponse as ValidateDestinationResponse,
+    type ValidateDestinationExistsResponse as ValidateDestinationExistsResponse,
     type ValidateOriginResponse as ValidateOriginResponse,
     type ValidateDestinationParams as ValidateDestinationParams,
+    type ValidateDestinationExistsParams as ValidateDestinationExistsParams,
     type ValidateOriginParams as ValidateOriginParams,
   };
 }

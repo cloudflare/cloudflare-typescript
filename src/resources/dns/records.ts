@@ -17,11 +17,11 @@ export class Records extends APIResource {
    * - Domain names are always represented in Punycode, even if Unicode characters
    *   were used when creating the record.
    */
-  create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<RecordCreateResponse> {
+  create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<RecordResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/dns_records`, { body, ...options }) as Core.APIPromise<{
-        result: RecordCreateResponse;
+        result: RecordResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,13 +40,13 @@ export class Records extends APIResource {
     dnsRecordId: string,
     params: RecordUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordUpdateResponse> {
+  ): Core.APIPromise<RecordResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RecordUpdateResponse }>
+      }) as Core.APIPromise<{ result: RecordResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -56,13 +56,12 @@ export class Records extends APIResource {
   list(
     params: RecordListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RecordListResponsesV4PagePaginationArray, RecordListResponse> {
+  ): Core.PagePromise<RecordResponsesV4PagePaginationArray, RecordResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/dns_records`,
-      RecordListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/dns_records`, RecordResponsesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -123,13 +122,13 @@ export class Records extends APIResource {
     dnsRecordId: string,
     params: RecordEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordEditResponse> {
+  ): Core.APIPromise<RecordResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RecordEditResponse }>
+      }) as Core.APIPromise<{ result: RecordResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -157,11 +156,11 @@ export class Records extends APIResource {
     dnsRecordId: string,
     params: RecordGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordGetResponse> {
+  ): Core.APIPromise<RecordResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
-        result: RecordGetResponse;
+        result: RecordResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -200,7 +199,7 @@ export class Records extends APIResource {
   }
 }
 
-export class RecordListResponsesV4PagePaginationArray extends V4PagePaginationArray<RecordListResponse> {}
+export class RecordResponsesV4PagePaginationArray extends V4PagePaginationArray<RecordResponse> {}
 
 export interface ARecord {
   /**
@@ -226,6 +225,11 @@ export interface ARecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: ARecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -241,6 +245,29 @@ export interface ARecord {
    * Record type.
    */
   type?: 'A';
+}
+
+export namespace ARecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface ARecordParam {
@@ -267,6 +294,11 @@ export interface ARecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: ARecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -282,6 +314,29 @@ export interface ARecordParam {
    * Record type.
    */
   type?: 'A';
+}
+
+export namespace ARecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface AAAARecord {
@@ -308,6 +363,11 @@ export interface AAAARecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: AAAARecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -323,6 +383,29 @@ export interface AAAARecord {
    * Record type.
    */
   type?: 'AAAA';
+}
+
+export namespace AAAARecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface AAAARecordParam {
@@ -349,6 +432,11 @@ export interface AAAARecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: AAAARecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -364,6 +452,985 @@ export interface AAAARecordParam {
    * Record type.
    */
   type?: 'AAAA';
+}
+
+export namespace AAAARecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
+}
+
+export type BatchPatch =
+  | BatchPatch.ARecord
+  | BatchPatch.AAAARecord
+  | BatchPatch.CAARecord
+  | BatchPatch.CERTRecord
+  | BatchPatch.CNAMERecord
+  | BatchPatch.DNSKEYRecord
+  | BatchPatch.DSRecord
+  | BatchPatch.HTTPSRecord
+  | BatchPatch.LOCRecord
+  | BatchPatch.MXRecord
+  | BatchPatch.NAPTRRecord
+  | BatchPatch.NSRecord
+  | BatchPatch.Openpgpkey
+  | BatchPatch.PTRRecord
+  | BatchPatch.SMIMEARecord
+  | BatchPatch.SRVRecord
+  | BatchPatch.SSHFPRecord
+  | BatchPatch.SVCBRecord
+  | BatchPatch.TLSARecord
+  | BatchPatch.TXTRecord
+  | BatchPatch.URIRecord;
+
+export namespace BatchPatch {
+  export interface ARecord extends RecordsAPI.ARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface Openpgpkey {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: Openpgpkey.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTL;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace Openpgpkey {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+}
+
+export type BatchPatchParam =
+  | BatchPatchParam.ARecord
+  | BatchPatchParam.AAAARecord
+  | BatchPatchParam.CAARecord
+  | BatchPatchParam.CERTRecord
+  | BatchPatchParam.CNAMERecord
+  | BatchPatchParam.DNSKEYRecord
+  | BatchPatchParam.DSRecord
+  | BatchPatchParam.HTTPSRecord
+  | BatchPatchParam.LOCRecord
+  | BatchPatchParam.MXRecord
+  | BatchPatchParam.NAPTRRecord
+  | BatchPatchParam.NSRecord
+  | BatchPatchParam.Openpgpkey
+  | BatchPatchParam.PTRRecord
+  | BatchPatchParam.SMIMEARecord
+  | BatchPatchParam.SRVRecord
+  | BatchPatchParam.SSHFPRecord
+  | BatchPatchParam.SVCBRecord
+  | BatchPatchParam.TLSARecord
+  | BatchPatchParam.TXTRecord
+  | BatchPatchParam.URIRecord;
+
+export namespace BatchPatchParam {
+  export interface ARecord extends RecordsAPI.ARecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface Openpgpkey {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: Openpgpkey.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTagsParam>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTLParam;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace Openpgpkey {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecordParam {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+}
+
+export type BatchPut =
+  | BatchPut.ARecord
+  | BatchPut.AAAARecord
+  | BatchPut.CAARecord
+  | BatchPut.CERTRecord
+  | BatchPut.CNAMERecord
+  | BatchPut.DNSKEYRecord
+  | BatchPut.DSRecord
+  | BatchPut.HTTPSRecord
+  | BatchPut.LOCRecord
+  | BatchPut.MXRecord
+  | BatchPut.NAPTRRecord
+  | BatchPut.NSRecord
+  | BatchPut.Openpgpkey
+  | BatchPut.PTRRecord
+  | BatchPut.SMIMEARecord
+  | BatchPut.SRVRecord
+  | BatchPut.SSHFPRecord
+  | BatchPut.SVCBRecord
+  | BatchPut.TLSARecord
+  | BatchPut.TXTRecord
+  | BatchPut.URIRecord;
+
+export namespace BatchPut {
+  export interface ARecord extends RecordsAPI.ARecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: Openpgpkey.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTL;
+  }
+
+  export namespace Openpgpkey {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecord {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+}
+
+export type BatchPutParam =
+  | BatchPutParam.ARecord
+  | BatchPutParam.AAAARecord
+  | BatchPutParam.CAARecord
+  | BatchPutParam.CERTRecord
+  | BatchPutParam.CNAMERecord
+  | BatchPutParam.DNSKEYRecord
+  | BatchPutParam.DSRecord
+  | BatchPutParam.HTTPSRecord
+  | BatchPutParam.LOCRecord
+  | BatchPutParam.MXRecord
+  | BatchPutParam.NAPTRRecord
+  | BatchPutParam.NSRecord
+  | BatchPutParam.Openpgpkey
+  | BatchPutParam.PTRRecord
+  | BatchPutParam.SMIMEARecord
+  | BatchPutParam.SRVRecord
+  | BatchPutParam.SSHFPRecord
+  | BatchPutParam.SVCBRecord
+  | BatchPutParam.TLSARecord
+  | BatchPutParam.TXTRecord
+  | BatchPutParam.URIRecord;
+
+export namespace BatchPutParam {
+  export interface ARecord extends RecordsAPI.ARecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: Openpgpkey.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTagsParam>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTLParam;
+  }
+
+  export namespace Openpgpkey {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecordParam {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
 }
 
 export interface CAARecord {
@@ -393,6 +1460,11 @@ export interface CAARecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: CAARecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -432,6 +1504,27 @@ export namespace CAARecord {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CAARecordParam {
@@ -456,6 +1549,11 @@ export interface CAARecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: CAARecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -495,6 +1593,27 @@ export namespace CAARecordParam {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CERTRecord {
@@ -524,6 +1643,11 @@ export interface CERTRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: CERTRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -568,6 +1692,27 @@ export namespace CERTRecord {
      */
     type?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CERTRecordParam {
@@ -592,6 +1737,11 @@ export interface CERTRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: CERTRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -636,6 +1786,27 @@ export namespace CERTRecordParam {
      */
     type?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface CNAMERecord {
@@ -661,6 +1832,9 @@ export interface CNAMERecord {
    */
   proxied?: boolean;
 
+  /**
+   * Settings for the DNS record.
+   */
   settings?: CNAMERecord.Settings;
 
   /**
@@ -682,14 +1856,33 @@ export interface CNAMERecord {
 }
 
 export namespace CNAMERecord {
+  /**
+   * Settings for the DNS record.
+   */
   export interface Settings {
     /**
      * If enabled, causes the CNAME record to be resolved externally and the resulting
      * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
+     * itself. This setting is unavailable for proxied records, since they are always
      * flattened.
      */
     flatten_cname?: boolean;
+
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
   }
 }
 
@@ -716,6 +1909,9 @@ export interface CNAMERecordParam {
    */
   proxied?: boolean;
 
+  /**
+   * Settings for the DNS record.
+   */
   settings?: CNAMERecordParam.Settings;
 
   /**
@@ -737,14 +1933,33 @@ export interface CNAMERecordParam {
 }
 
 export namespace CNAMERecordParam {
+  /**
+   * Settings for the DNS record.
+   */
   export interface Settings {
     /**
      * If enabled, causes the CNAME record to be resolved externally and the resulting
      * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
+     * itself. This setting is unavailable for proxied records, since they are always
      * flattened.
      */
     flatten_cname?: boolean;
+
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
   }
 }
 
@@ -775,6 +1990,11 @@ export interface DNSKEYRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: DNSKEYRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -819,6 +2039,27 @@ export namespace DNSKEYRecord {
      */
     public_key?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface DNSKEYRecordParam {
@@ -843,6 +2084,11 @@ export interface DNSKEYRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: DNSKEYRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -887,6 +2133,27 @@ export namespace DNSKEYRecordParam {
      */
     public_key?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface DSRecord {
@@ -916,6 +2183,11 @@ export interface DSRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: DSRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -960,6 +2232,27 @@ export namespace DSRecord {
      */
     key_tag?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface DSRecordParam {
@@ -984,6 +2277,11 @@ export interface DSRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: DSRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1028,6 +2326,27 @@ export namespace DSRecordParam {
      */
     key_tag?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface HTTPSRecord {
@@ -1057,6 +2376,11 @@ export interface HTTPSRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: HTTPSRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1096,6 +2420,27 @@ export namespace HTTPSRecord {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface HTTPSRecordParam {
@@ -1120,6 +2465,11 @@ export interface HTTPSRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: HTTPSRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1159,6 +2509,27 @@ export namespace HTTPSRecordParam {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface LOCRecord {
@@ -1188,6 +2559,11 @@ export interface LOCRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: LOCRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1272,6 +2648,27 @@ export namespace LOCRecord {
      */
     size?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface LOCRecordParam {
@@ -1296,6 +2693,11 @@ export interface LOCRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: LOCRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1380,6 +2782,27 @@ export namespace LOCRecordParam {
      */
     size?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface MXRecord {
@@ -1412,6 +2835,11 @@ export interface MXRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: MXRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -1427,6 +2855,29 @@ export interface MXRecord {
    * Record type.
    */
   type?: 'MX';
+}
+
+export namespace MXRecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface MXRecordParam {
@@ -1459,6 +2910,11 @@ export interface MXRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: MXRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -1474,6 +2930,29 @@ export interface MXRecordParam {
    * Record type.
    */
   type?: 'MX';
+}
+
+export namespace MXRecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface NAPTRRecord {
@@ -1503,6 +2982,11 @@ export interface NAPTRRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: NAPTRRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1557,6 +3041,27 @@ export namespace NAPTRRecord {
      */
     service?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface NAPTRRecordParam {
@@ -1581,6 +3086,11 @@ export interface NAPTRRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: NAPTRRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1635,6 +3145,27 @@ export namespace NAPTRRecordParam {
      */
     service?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface NSRecord {
@@ -1661,6 +3192,11 @@ export interface NSRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: NSRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -1676,6 +3212,29 @@ export interface NSRecord {
    * Record type.
    */
   type?: 'NS';
+}
+
+export namespace NSRecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface NSRecordParam {
@@ -1702,6 +3261,11 @@ export interface NSRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: NSRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -1717,6 +3281,29 @@ export interface NSRecordParam {
    * Record type.
    */
   type?: 'NS';
+}
+
+export namespace NSRecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface PTRRecord {
@@ -1743,6 +3330,11 @@ export interface PTRRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: PTRRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -1758,6 +3350,29 @@ export interface PTRRecord {
    * Record type.
    */
   type?: 'PTR';
+}
+
+export namespace PTRRecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface PTRRecordParam {
@@ -1784,6 +3399,11 @@ export interface PTRRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: PTRRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -1801,6 +3421,29 @@ export interface PTRRecordParam {
   type?: 'PTR';
 }
 
+export namespace PTRRecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
+}
+
 export type Record =
   | ARecord
   | AAAARecord
@@ -1814,7 +3457,7 @@ export type Record =
   | MXRecord
   | NAPTRRecord
   | NSRecord
-  | Record.DNSRecordsOpenpgpkeyRecord
+  | Record.Openpgpkey
   | PTRRecord
   | SMIMEARecord
   | SRVRecord
@@ -1825,7 +3468,7 @@ export type Record =
   | URIRecord;
 
 export namespace Record {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -1847,6 +3490,11 @@ export namespace Record {
      * Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: Openpgpkey.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1865,6 +3513,29 @@ export namespace Record {
      */
     type?: 'OPENPGPKEY';
   }
+
+  export namespace Openpgpkey {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
 }
 
 export type RecordParam =
@@ -1880,7 +3551,7 @@ export type RecordParam =
   | MXRecordParam
   | NAPTRRecordParam
   | NSRecordParam
-  | RecordParam.DNSRecordsOpenpgpkeyRecord
+  | RecordParam.Openpgpkey
   | PTRRecordParam
   | SMIMEARecordParam
   | SRVRecordParam
@@ -1891,7 +3562,7 @@ export type RecordParam =
   | URIRecordParam;
 
 export namespace RecordParam {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface Openpgpkey {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -1915,6 +3586,11 @@ export namespace RecordParam {
     proxied?: boolean;
 
     /**
+     * Settings for the DNS record.
+     */
+    settings?: Openpgpkey.Settings;
+
+    /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTagsParam>;
@@ -1931,23 +3607,898 @@ export namespace RecordParam {
      */
     type?: 'OPENPGPKEY';
   }
+
+  export namespace Openpgpkey {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
 }
 
-export interface RecordProcessTiming {
-  /**
-   * When the file parsing ended.
-   */
-  end_time?: string;
+export type RecordResponse =
+  | RecordResponse.ARecord
+  | RecordResponse.AAAARecord
+  | RecordResponse.CAARecord
+  | RecordResponse.CERTRecord
+  | RecordResponse.CNAMERecord
+  | RecordResponse.DNSKEYRecord
+  | RecordResponse.DSRecord
+  | RecordResponse.HTTPSRecord
+  | RecordResponse.LOCRecord
+  | RecordResponse.MXRecord
+  | RecordResponse.NAPTRRecord
+  | RecordResponse.NSRecord
+  | RecordResponse.Openpgpkey
+  | RecordResponse.PTRRecord
+  | RecordResponse.SMIMEARecord
+  | RecordResponse.SRVRecord
+  | RecordResponse.SSHFPRecord
+  | RecordResponse.SVCBRecord
+  | RecordResponse.TLSARecord
+  | RecordResponse.TXTRecord
+  | RecordResponse.URIRecord;
 
-  /**
-   * Processing time of the file in seconds.
-   */
-  process_time?: number;
+export namespace RecordResponse {
+  export interface ARecord extends RecordsAPI.ARecord {
+    /**
+     * Identifier
+     */
+    id: string;
 
-  /**
-   * When the file parsing started.
-   */
-  start_time?: string;
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface Openpgpkey {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings: Openpgpkey.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTL;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export namespace Openpgpkey {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecord {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
 }
 
 /**
@@ -1989,6 +4540,11 @@ export interface SMIMEARecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SMIMEARecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2033,6 +4589,27 @@ export namespace SMIMEARecord {
      */
     usage?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SMIMEARecordParam {
@@ -2057,6 +4634,11 @@ export interface SMIMEARecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SMIMEARecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2101,6 +4683,27 @@ export namespace SMIMEARecordParam {
      */
     usage?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SRVRecord {
@@ -2131,6 +4734,11 @@ export interface SRVRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SRVRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2176,6 +4784,27 @@ export namespace SRVRecord {
      */
     weight?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SRVRecordParam {
@@ -2200,6 +4829,11 @@ export interface SRVRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SRVRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2245,6 +4879,27 @@ export namespace SRVRecordParam {
      */
     weight?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SSHFPRecord {
@@ -2274,6 +4929,11 @@ export interface SSHFPRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SSHFPRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2313,6 +4973,27 @@ export namespace SSHFPRecord {
      */
     type?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SSHFPRecordParam {
@@ -2337,6 +5018,11 @@ export interface SSHFPRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SSHFPRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2376,6 +5062,27 @@ export namespace SSHFPRecordParam {
      */
     type?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SVCBRecord {
@@ -2405,6 +5112,11 @@ export interface SVCBRecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SVCBRecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2444,6 +5156,27 @@ export namespace SVCBRecord {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface SVCBRecordParam {
@@ -2468,6 +5201,11 @@ export interface SVCBRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: SVCBRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2507,6 +5245,27 @@ export namespace SVCBRecordParam {
      */
     value?: string;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface TLSARecord {
@@ -2536,6 +5295,11 @@ export interface TLSARecord {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: TLSARecord.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2580,6 +5344,27 @@ export namespace TLSARecord {
      */
     usage?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface TLSARecordParam {
@@ -2604,6 +5389,11 @@ export interface TLSARecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: TLSARecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2647,6 +5437,27 @@ export namespace TLSARecordParam {
      * Usage.
      */
     usage?: number;
+  }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
   }
 }
 
@@ -2693,6 +5504,11 @@ export interface TXTRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: TXTRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -2708,6 +5524,29 @@ export interface TXTRecord {
    * Record type.
    */
   type?: 'TXT';
+}
+
+export namespace TXTRecord {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface TXTRecordParam {
@@ -2739,6 +5578,11 @@ export interface TXTRecordParam {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: TXTRecordParam.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
@@ -2754,6 +5598,29 @@ export interface TXTRecordParam {
    * Record type.
    */
   type?: 'TXT';
+}
+
+export namespace TXTRecordParam {
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface URIRecord {
@@ -2791,6 +5658,11 @@ export interface URIRecord {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: URIRecord.Settings;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -2823,6 +5695,27 @@ export namespace URIRecord {
      */
     weight?: number;
   }
+
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
+    /**
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv4_only?: boolean;
+
+    /**
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
+     */
+    ipv6_only?: boolean;
+  }
 }
 
 export interface URIRecordParam {
@@ -2853,6 +5746,11 @@ export interface URIRecordParam {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: URIRecordParam.Settings;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2887,2528 +5785,26 @@ export namespace URIRecordParam {
      */
     weight?: number;
   }
-}
 
-export type RecordCreateResponse =
-  | RecordCreateResponse.ARecord
-  | RecordCreateResponse.AAAARecord
-  | RecordCreateResponse.CAARecord
-  | RecordCreateResponse.CERTRecord
-  | RecordCreateResponse.CNAMERecord
-  | RecordCreateResponse.DNSKEYRecord
-  | RecordCreateResponse.DSRecord
-  | RecordCreateResponse.HTTPSRecord
-  | RecordCreateResponse.LOCRecord
-  | RecordCreateResponse.MXRecord
-  | RecordCreateResponse.NAPTRRecord
-  | RecordCreateResponse.NSRecord
-  | RecordCreateResponse.OpenpgpkeyRecord
-  | RecordCreateResponse.PTRRecord
-  | RecordCreateResponse.SMIMEARecord
-  | RecordCreateResponse.SRVRecord
-  | RecordCreateResponse.SSHFPRecord
-  | RecordCreateResponse.SVCBRecord
-  | RecordCreateResponse.TLSARecord
-  | RecordCreateResponse.TXTRecord
-  | RecordCreateResponse.URIRecord;
-
-export namespace RecordCreateResponse {
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-}
-
-export type RecordUpdateResponse =
-  | RecordUpdateResponse.ARecord
-  | RecordUpdateResponse.AAAARecord
-  | RecordUpdateResponse.CAARecord
-  | RecordUpdateResponse.CERTRecord
-  | RecordUpdateResponse.CNAMERecord
-  | RecordUpdateResponse.DNSKEYRecord
-  | RecordUpdateResponse.DSRecord
-  | RecordUpdateResponse.HTTPSRecord
-  | RecordUpdateResponse.LOCRecord
-  | RecordUpdateResponse.MXRecord
-  | RecordUpdateResponse.NAPTRRecord
-  | RecordUpdateResponse.NSRecord
-  | RecordUpdateResponse.OpenpgpkeyRecord
-  | RecordUpdateResponse.PTRRecord
-  | RecordUpdateResponse.SMIMEARecord
-  | RecordUpdateResponse.SRVRecord
-  | RecordUpdateResponse.SSHFPRecord
-  | RecordUpdateResponse.SVCBRecord
-  | RecordUpdateResponse.TLSARecord
-  | RecordUpdateResponse.TXTRecord
-  | RecordUpdateResponse.URIRecord;
-
-export namespace RecordUpdateResponse {
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-}
-
-export type RecordListResponse =
-  | RecordListResponse.ARecord
-  | RecordListResponse.AAAARecord
-  | RecordListResponse.CAARecord
-  | RecordListResponse.CERTRecord
-  | RecordListResponse.CNAMERecord
-  | RecordListResponse.DNSKEYRecord
-  | RecordListResponse.DSRecord
-  | RecordListResponse.HTTPSRecord
-  | RecordListResponse.LOCRecord
-  | RecordListResponse.MXRecord
-  | RecordListResponse.NAPTRRecord
-  | RecordListResponse.NSRecord
-  | RecordListResponse.OpenpgpkeyRecord
-  | RecordListResponse.PTRRecord
-  | RecordListResponse.SMIMEARecord
-  | RecordListResponse.SRVRecord
-  | RecordListResponse.SSHFPRecord
-  | RecordListResponse.SVCBRecord
-  | RecordListResponse.TLSARecord
-  | RecordListResponse.TXTRecord
-  | RecordListResponse.URIRecord;
-
-export namespace RecordListResponse {
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
+  /**
+   * Settings for the DNS record.
+   */
+  export interface Settings {
     /**
-     * When the record comment was last modified. Omitted if there is no comment.
+     * When enabled, only A records will be generated, and AAAA records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
      */
-    comment_modified_on?: string;
+    ipv4_only?: boolean;
 
     /**
-     * When the record tags were last modified. Omitted if there are no tags.
+     * When enabled, only AAAA records will be generated, and A records will not be
+     * created. This setting is intended for exceptional cases. Note that this option
+     * only applies to proxied records and it has no effect on whether Cloudflare
+     * communicates with the origin using IPv4 or IPv6.
      */
-    tags_modified_on?: string;
+    ipv6_only?: boolean;
   }
 }
 
@@ -5420,5055 +5816,19 @@ export interface RecordDeleteResponse {
 }
 
 export interface RecordBatchResponse {
-  deletes?: Array<
-    | RecordBatchResponse.ARecord
-    | RecordBatchResponse.AAAARecord
-    | RecordBatchResponse.CAARecord
-    | RecordBatchResponse.CERTRecord
-    | RecordBatchResponse.CNAMERecord
-    | RecordBatchResponse.DNSKEYRecord
-    | RecordBatchResponse.DSRecord
-    | RecordBatchResponse.HTTPSRecord
-    | RecordBatchResponse.LOCRecord
-    | RecordBatchResponse.MXRecord
-    | RecordBatchResponse.NAPTRRecord
-    | RecordBatchResponse.NSRecord
-    | RecordBatchResponse.OpenpgpkeyRecord
-    | RecordBatchResponse.PTRRecord
-    | RecordBatchResponse.SMIMEARecord
-    | RecordBatchResponse.SRVRecord
-    | RecordBatchResponse.SSHFPRecord
-    | RecordBatchResponse.SVCBRecord
-    | RecordBatchResponse.TLSARecord
-    | RecordBatchResponse.TXTRecord
-    | RecordBatchResponse.URIRecord
-  >;
+  deletes?: Array<RecordResponse>;
 
-  patches?: Array<
-    | RecordBatchResponse.ARecord
-    | RecordBatchResponse.AAAARecord
-    | RecordBatchResponse.CAARecord
-    | RecordBatchResponse.CERTRecord
-    | RecordBatchResponse.CNAMERecord
-    | RecordBatchResponse.DNSKEYRecord
-    | RecordBatchResponse.DSRecord
-    | RecordBatchResponse.HTTPSRecord
-    | RecordBatchResponse.LOCRecord
-    | RecordBatchResponse.MXRecord
-    | RecordBatchResponse.NAPTRRecord
-    | RecordBatchResponse.NSRecord
-    | RecordBatchResponse.OpenpgpkeyRecord
-    | RecordBatchResponse.PTRRecord
-    | RecordBatchResponse.SMIMEARecord
-    | RecordBatchResponse.SRVRecord
-    | RecordBatchResponse.SSHFPRecord
-    | RecordBatchResponse.SVCBRecord
-    | RecordBatchResponse.TLSARecord
-    | RecordBatchResponse.TXTRecord
-    | RecordBatchResponse.URIRecord
-  >;
+  patches?: Array<RecordResponse>;
 
-  posts?: Array<
-    | RecordBatchResponse.ARecord
-    | RecordBatchResponse.AAAARecord
-    | RecordBatchResponse.CAARecord
-    | RecordBatchResponse.CERTRecord
-    | RecordBatchResponse.CNAMERecord
-    | RecordBatchResponse.DNSKEYRecord
-    | RecordBatchResponse.DSRecord
-    | RecordBatchResponse.HTTPSRecord
-    | RecordBatchResponse.LOCRecord
-    | RecordBatchResponse.MXRecord
-    | RecordBatchResponse.NAPTRRecord
-    | RecordBatchResponse.NSRecord
-    | RecordBatchResponse.OpenpgpkeyRecord
-    | RecordBatchResponse.PTRRecord
-    | RecordBatchResponse.SMIMEARecord
-    | RecordBatchResponse.SRVRecord
-    | RecordBatchResponse.SSHFPRecord
-    | RecordBatchResponse.SVCBRecord
-    | RecordBatchResponse.TLSARecord
-    | RecordBatchResponse.TXTRecord
-    | RecordBatchResponse.URIRecord
-  >;
+  posts?: Array<RecordResponse>;
 
-  puts?: Array<
-    | RecordBatchResponse.ARecord
-    | RecordBatchResponse.AAAARecord
-    | RecordBatchResponse.CAARecord
-    | RecordBatchResponse.CERTRecord
-    | RecordBatchResponse.CNAMERecord
-    | RecordBatchResponse.DNSKEYRecord
-    | RecordBatchResponse.DSRecord
-    | RecordBatchResponse.HTTPSRecord
-    | RecordBatchResponse.LOCRecord
-    | RecordBatchResponse.MXRecord
-    | RecordBatchResponse.NAPTRRecord
-    | RecordBatchResponse.NSRecord
-    | RecordBatchResponse.OpenpgpkeyRecord
-    | RecordBatchResponse.PTRRecord
-    | RecordBatchResponse.SMIMEARecord
-    | RecordBatchResponse.SRVRecord
-    | RecordBatchResponse.SSHFPRecord
-    | RecordBatchResponse.SVCBRecord
-    | RecordBatchResponse.TLSARecord
-    | RecordBatchResponse.TXTRecord
-    | RecordBatchResponse.URIRecord
-  >;
-}
-
-export namespace RecordBatchResponse {
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-}
-
-export type RecordEditResponse =
-  | RecordEditResponse.ARecord
-  | RecordEditResponse.AAAARecord
-  | RecordEditResponse.CAARecord
-  | RecordEditResponse.CERTRecord
-  | RecordEditResponse.CNAMERecord
-  | RecordEditResponse.DNSKEYRecord
-  | RecordEditResponse.DSRecord
-  | RecordEditResponse.HTTPSRecord
-  | RecordEditResponse.LOCRecord
-  | RecordEditResponse.MXRecord
-  | RecordEditResponse.NAPTRRecord
-  | RecordEditResponse.NSRecord
-  | RecordEditResponse.OpenpgpkeyRecord
-  | RecordEditResponse.PTRRecord
-  | RecordEditResponse.SMIMEARecord
-  | RecordEditResponse.SRVRecord
-  | RecordEditResponse.SSHFPRecord
-  | RecordEditResponse.SVCBRecord
-  | RecordEditResponse.TLSARecord
-  | RecordEditResponse.TXTRecord
-  | RecordEditResponse.URIRecord;
-
-export namespace RecordEditResponse {
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
+  puts?: Array<RecordResponse>;
 }
 
 /**
  * Exported BIND zone file.
  */
 export type RecordExportResponse = string;
-
-export type RecordGetResponse =
-  | RecordGetResponse.ARecord
-  | RecordGetResponse.AAAARecord
-  | RecordGetResponse.CAARecord
-  | RecordGetResponse.CERTRecord
-  | RecordGetResponse.CNAMERecord
-  | RecordGetResponse.DNSKEYRecord
-  | RecordGetResponse.DSRecord
-  | RecordGetResponse.HTTPSRecord
-  | RecordGetResponse.LOCRecord
-  | RecordGetResponse.MXRecord
-  | RecordGetResponse.NAPTRRecord
-  | RecordGetResponse.NSRecord
-  | RecordGetResponse.OpenpgpkeyRecord
-  | RecordGetResponse.PTRRecord
-  | RecordGetResponse.SMIMEARecord
-  | RecordGetResponse.SRVRecord
-  | RecordGetResponse.SSHFPRecord
-  | RecordGetResponse.SVCBRecord
-  | RecordGetResponse.TLSARecord
-  | RecordGetResponse.TXTRecord
-  | RecordGetResponse.URIRecord;
-
-export namespace RecordGetResponse {
-  export interface ARecord extends RecordsAPI.ARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-}
 
 export interface RecordImportResponse {
   /**
@@ -10547,6 +5907,11 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.ARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -10563,6 +5928,29 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'A';
+  }
+
+  export namespace ARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface AAAARecord {
@@ -10594,6 +5982,11 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.AAAARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -10610,6 +6003,29 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'AAAA';
+  }
+
+  export namespace AAAARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CAARecord {
@@ -10639,6 +6055,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10679,6 +6100,27 @@ export declare namespace RecordCreateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CERTRecord {
@@ -10708,6 +6150,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10753,6 +6200,27 @@ export declare namespace RecordCreateParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CNAMERecord {
@@ -10784,7 +6252,7 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
-     * Body param:
+     * Body param: Settings for the DNS record.
      */
     settings?: RecordCreateParams.CNAMERecord.Settings;
 
@@ -10808,14 +6276,33 @@ export declare namespace RecordCreateParams {
   }
 
   export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
     export interface Settings {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
        * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting has no effect on proxied records, which are always
+       * itself. This setting is unavailable for proxied records, since they are always
        * flattened.
        */
       flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 
@@ -10846,6 +6333,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10891,6 +6383,27 @@ export declare namespace RecordCreateParams {
        */
       public_key?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DSRecord {
@@ -10920,6 +6433,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10965,6 +6483,27 @@ export declare namespace RecordCreateParams {
        */
       key_tag?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface HTTPSRecord {
@@ -10994,6 +6533,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11034,6 +6578,27 @@ export declare namespace RecordCreateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface LOCRecord {
@@ -11063,6 +6628,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11148,6 +6718,27 @@ export declare namespace RecordCreateParams {
        */
       size?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface MXRecord {
@@ -11185,6 +6776,11 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.MXRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -11201,6 +6797,29 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NAPTRRecord {
@@ -11230,6 +6849,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11285,6 +6909,27 @@ export declare namespace RecordCreateParams {
        */
       service?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NSRecord {
@@ -11316,6 +6961,11 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.NSRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -11332,6 +6982,29 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -11364,6 +7037,11 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -11380,6 +7058,29 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface PTRRecord {
@@ -11411,6 +7112,11 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.PTRRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -11427,6 +7133,29 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SMIMEARecord {
@@ -11456,6 +7185,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11501,6 +7235,27 @@ export declare namespace RecordCreateParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SRVRecord {
@@ -11530,6 +7285,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11576,6 +7336,27 @@ export declare namespace RecordCreateParams {
        */
       weight?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SSHFPRecord {
@@ -11605,6 +7386,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11645,6 +7431,27 @@ export declare namespace RecordCreateParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SVCBRecord {
@@ -11674,6 +7481,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11714,6 +7526,27 @@ export declare namespace RecordCreateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TLSARecord {
@@ -11743,6 +7576,11 @@ export declare namespace RecordCreateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11788,6 +7626,27 @@ export declare namespace RecordCreateParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TXTRecord {
@@ -11824,6 +7683,11 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.TXTRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -11840,6 +7704,29 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface URIRecord {
@@ -11877,6 +7764,11 @@ export declare namespace RecordCreateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordCreateParams.URIRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -11909,6 +7801,27 @@ export declare namespace RecordCreateParams {
        * The record weight.
        */
       weight?: number;
+    }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 }
@@ -11966,6 +7879,11 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.ARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -11982,6 +7900,29 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'A';
+  }
+
+  export namespace ARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface AAAARecord {
@@ -12013,6 +7954,11 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.AAAARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -12029,6 +7975,29 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'AAAA';
+  }
+
+  export namespace AAAARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CAARecord {
@@ -12058,6 +8027,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12098,6 +8072,27 @@ export declare namespace RecordUpdateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CERTRecord {
@@ -12127,6 +8122,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12172,6 +8172,27 @@ export declare namespace RecordUpdateParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CNAMERecord {
@@ -12203,7 +8224,7 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
-     * Body param:
+     * Body param: Settings for the DNS record.
      */
     settings?: RecordUpdateParams.CNAMERecord.Settings;
 
@@ -12227,14 +8248,33 @@ export declare namespace RecordUpdateParams {
   }
 
   export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
     export interface Settings {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
        * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting has no effect on proxied records, which are always
+       * itself. This setting is unavailable for proxied records, since they are always
        * flattened.
        */
       flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 
@@ -12265,6 +8305,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12310,6 +8355,27 @@ export declare namespace RecordUpdateParams {
        */
       public_key?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DSRecord {
@@ -12339,6 +8405,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12384,6 +8455,27 @@ export declare namespace RecordUpdateParams {
        */
       key_tag?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface HTTPSRecord {
@@ -12413,6 +8505,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12453,6 +8550,27 @@ export declare namespace RecordUpdateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface LOCRecord {
@@ -12482,6 +8600,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12567,6 +8690,27 @@ export declare namespace RecordUpdateParams {
        */
       size?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface MXRecord {
@@ -12604,6 +8748,11 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.MXRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -12620,6 +8769,29 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NAPTRRecord {
@@ -12649,6 +8821,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12704,6 +8881,27 @@ export declare namespace RecordUpdateParams {
        */
       service?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NSRecord {
@@ -12735,6 +8933,11 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.NSRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -12751,6 +8954,29 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -12783,6 +9009,11 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -12799,6 +9030,29 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface PTRRecord {
@@ -12830,6 +9084,11 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.PTRRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -12846,6 +9105,29 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SMIMEARecord {
@@ -12875,6 +9157,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12920,6 +9207,27 @@ export declare namespace RecordUpdateParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SRVRecord {
@@ -12949,6 +9257,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -12995,6 +9308,27 @@ export declare namespace RecordUpdateParams {
        */
       weight?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SSHFPRecord {
@@ -13024,6 +9358,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -13064,6 +9403,27 @@ export declare namespace RecordUpdateParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SVCBRecord {
@@ -13093,6 +9453,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -13133,6 +9498,27 @@ export declare namespace RecordUpdateParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TLSARecord {
@@ -13162,6 +9548,11 @@ export declare namespace RecordUpdateParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -13207,6 +9598,27 @@ export declare namespace RecordUpdateParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TXTRecord {
@@ -13243,6 +9655,11 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.TXTRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -13259,6 +9676,29 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface URIRecord {
@@ -13296,6 +9736,11 @@ export declare namespace RecordUpdateParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordUpdateParams.URIRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -13328,6 +9773,27 @@ export declare namespace RecordUpdateParams {
        * The record weight.
        */
       weight?: number;
+    }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 }
@@ -13568,29 +10034,7 @@ export interface RecordBatchParams {
   /**
    * Body param:
    */
-  patches?: Array<
-    | RecordBatchParams.ARecord
-    | RecordBatchParams.AAAARecord
-    | RecordBatchParams.CAARecord
-    | RecordBatchParams.CERTRecord
-    | RecordBatchParams.CNAMERecord
-    | RecordBatchParams.DNSKEYRecord
-    | RecordBatchParams.DSRecord
-    | RecordBatchParams.HTTPSRecord
-    | RecordBatchParams.LOCRecord
-    | RecordBatchParams.MXRecord
-    | RecordBatchParams.NAPTRRecord
-    | RecordBatchParams.NSRecord
-    | RecordBatchParams.OpenpgpkeyRecord
-    | RecordBatchParams.PTRRecord
-    | RecordBatchParams.SMIMEARecord
-    | RecordBatchParams.SRVRecord
-    | RecordBatchParams.SSHFPRecord
-    | RecordBatchParams.SVCBRecord
-    | RecordBatchParams.TLSARecord
-    | RecordBatchParams.TXTRecord
-    | RecordBatchParams.URIRecord
-  >;
+  patches?: Array<BatchPatchParam>;
 
   /**
    * Body param:
@@ -13600,405 +10044,11 @@ export interface RecordBatchParams {
   /**
    * Body param:
    */
-  puts?: Array<
-    | RecordBatchParams.ARecord
-    | RecordBatchParams.AAAARecord
-    | RecordBatchParams.CAARecord
-    | RecordBatchParams.CERTRecord
-    | RecordBatchParams.CNAMERecord
-    | RecordBatchParams.DNSKEYRecord
-    | RecordBatchParams.DSRecord
-    | RecordBatchParams.HTTPSRecord
-    | RecordBatchParams.LOCRecord
-    | RecordBatchParams.MXRecord
-    | RecordBatchParams.NAPTRRecord
-    | RecordBatchParams.NSRecord
-    | RecordBatchParams.OpenpgpkeyRecord
-    | RecordBatchParams.PTRRecord
-    | RecordBatchParams.SMIMEARecord
-    | RecordBatchParams.SRVRecord
-    | RecordBatchParams.SSHFPRecord
-    | RecordBatchParams.SVCBRecord
-    | RecordBatchParams.TLSARecord
-    | RecordBatchParams.TXTRecord
-    | RecordBatchParams.URIRecord
-  >;
+  puts?: Array<BatchPutParam>;
 }
 
 export namespace RecordBatchParams {
   export interface Delete {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface ARecord extends RecordsAPI.ARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTagsParam>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTLParam;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface ARecord extends RecordsAPI.ARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface AAAARecord extends RecordsAPI.AAAARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface CAARecord extends RecordsAPI.CAARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface CERTRecord extends RecordsAPI.CERTRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface CNAMERecord extends RecordsAPI.CNAMERecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface DSRecord extends RecordsAPI.DSRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface LOCRecord extends RecordsAPI.LOCRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface MXRecord extends RecordsAPI.MXRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface NSRecord extends RecordsAPI.NSRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface OpenpgpkeyRecord {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTagsParam>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTLParam;
-  }
-
-  export interface PTRRecord extends RecordsAPI.PTRRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface SRVRecord extends RecordsAPI.SRVRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface SVCBRecord extends RecordsAPI.SVCBRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface TLSARecord extends RecordsAPI.TLSARecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface TXTRecord extends RecordsAPI.TXTRecordParam {
-    /**
-     * Identifier
-     */
-    id: string;
-  }
-
-  export interface URIRecord extends RecordsAPI.URIRecordParam {
     /**
      * Identifier
      */
@@ -14059,6 +10109,11 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.ARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -14075,6 +10130,29 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'A';
+  }
+
+  export namespace ARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface AAAARecord {
@@ -14106,6 +10184,11 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.AAAARecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -14122,6 +10205,29 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'AAAA';
+  }
+
+  export namespace AAAARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CAARecord {
@@ -14151,6 +10257,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -14191,6 +10302,27 @@ export declare namespace RecordEditParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CERTRecord {
@@ -14220,6 +10352,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -14265,6 +10402,27 @@ export declare namespace RecordEditParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface CNAMERecord {
@@ -14296,7 +10454,7 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
-     * Body param:
+     * Body param: Settings for the DNS record.
      */
     settings?: RecordEditParams.CNAMERecord.Settings;
 
@@ -14320,14 +10478,33 @@ export declare namespace RecordEditParams {
   }
 
   export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
     export interface Settings {
       /**
        * If enabled, causes the CNAME record to be resolved externally and the resulting
        * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting has no effect on proxied records, which are always
+       * itself. This setting is unavailable for proxied records, since they are always
        * flattened.
        */
       flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 
@@ -14358,6 +10535,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -14403,6 +10585,27 @@ export declare namespace RecordEditParams {
        */
       public_key?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DSRecord {
@@ -14432,6 +10635,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -14477,6 +10685,27 @@ export declare namespace RecordEditParams {
        */
       key_tag?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface HTTPSRecord {
@@ -14506,6 +10735,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -14546,6 +10780,27 @@ export declare namespace RecordEditParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface LOCRecord {
@@ -14575,6 +10830,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -14660,6 +10920,27 @@ export declare namespace RecordEditParams {
        */
       size?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface MXRecord {
@@ -14697,6 +10978,11 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.MXRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -14713,6 +10999,29 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NAPTRRecord {
@@ -14742,6 +11051,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -14797,6 +11111,27 @@ export declare namespace RecordEditParams {
        */
       service?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface NSRecord {
@@ -14828,6 +11163,11 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.NSRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -14844,6 +11184,29 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface DNSRecordsOpenpgpkeyRecord {
@@ -14876,6 +11239,11 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -14892,6 +11260,29 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface PTRRecord {
@@ -14923,6 +11314,11 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.PTRRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -14939,6 +11335,29 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SMIMEARecord {
@@ -14968,6 +11387,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -15013,6 +11437,27 @@ export declare namespace RecordEditParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SRVRecord {
@@ -15042,6 +11487,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -15088,6 +11538,27 @@ export declare namespace RecordEditParams {
        */
       weight?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SSHFPRecord {
@@ -15117,6 +11588,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -15157,6 +11633,27 @@ export declare namespace RecordEditParams {
        */
       type?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface SVCBRecord {
@@ -15186,6 +11683,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -15226,6 +11728,27 @@ export declare namespace RecordEditParams {
        */
       value?: string;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TLSARecord {
@@ -15255,6 +11778,11 @@ export declare namespace RecordEditParams {
      * benefits of Cloudflare.
      */
     proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -15300,6 +11828,27 @@ export declare namespace RecordEditParams {
        */
       usage?: number;
     }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface TXTRecord {
@@ -15336,6 +11885,11 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.TXTRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -15352,6 +11906,29 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
   }
 
   export interface URIRecord {
@@ -15389,6 +11966,11 @@ export declare namespace RecordEditParams {
     proxied?: boolean;
 
     /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: RecordEditParams.URIRecord.Settings;
+
+    /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -15421,6 +12003,27 @@ export declare namespace RecordEditParams {
        * The record weight.
        */
       weight?: number;
+    }
+
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
     }
   }
 }
@@ -15474,12 +12077,14 @@ export interface RecordScanParams {
   body: unknown;
 }
 
-Records.RecordListResponsesV4PagePaginationArray = RecordListResponsesV4PagePaginationArray;
+Records.RecordResponsesV4PagePaginationArray = RecordResponsesV4PagePaginationArray;
 
 export declare namespace Records {
   export {
     type ARecord as ARecord,
     type AAAARecord as AAAARecord,
+    type BatchPatch as BatchPatch,
+    type BatchPut as BatchPut,
     type CAARecord as CAARecord,
     type CERTRecord as CERTRecord,
     type CNAMERecord as CNAMERecord,
@@ -15492,7 +12097,7 @@ export declare namespace Records {
     type NSRecord as NSRecord,
     type PTRRecord as PTRRecord,
     type Record as Record,
-    type RecordProcessTiming as RecordProcessTiming,
+    type RecordResponse as RecordResponse,
     type RecordTags as RecordTags,
     type SMIMEARecord as SMIMEARecord,
     type SRVRecord as SRVRecord,
@@ -15502,17 +12107,12 @@ export declare namespace Records {
     type TTL as TTL,
     type TXTRecord as TXTRecord,
     type URIRecord as URIRecord,
-    type RecordCreateResponse as RecordCreateResponse,
-    type RecordUpdateResponse as RecordUpdateResponse,
-    type RecordListResponse as RecordListResponse,
     type RecordDeleteResponse as RecordDeleteResponse,
     type RecordBatchResponse as RecordBatchResponse,
-    type RecordEditResponse as RecordEditResponse,
     type RecordExportResponse as RecordExportResponse,
-    type RecordGetResponse as RecordGetResponse,
     type RecordImportResponse as RecordImportResponse,
     type RecordScanResponse as RecordScanResponse,
-    RecordListResponsesV4PagePaginationArray as RecordListResponsesV4PagePaginationArray,
+    RecordResponsesV4PagePaginationArray as RecordResponsesV4PagePaginationArray,
     type RecordCreateParams as RecordCreateParams,
     type RecordUpdateParams as RecordUpdateParams,
     type RecordListParams as RecordListParams,

@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource services', () => {
   test('list: only required params', async () => {
     const responsePromise = client.addressing.services.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +25,7 @@ describe('resource services', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.addressing.services.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
 });

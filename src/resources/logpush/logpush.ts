@@ -27,6 +27,8 @@ import {
 import * as ValidateAPI from './validate';
 import {
   Validate,
+  ValidateDestinationExistsParams,
+  ValidateDestinationExistsResponse,
   ValidateDestinationParams,
   ValidateDestinationResponse,
   ValidateOriginParams,
@@ -85,8 +87,10 @@ export declare namespace Logpush {
   export {
     Validate as Validate,
     type ValidateDestinationResponse as ValidateDestinationResponse,
+    type ValidateDestinationExistsResponse as ValidateDestinationExistsResponse,
     type ValidateOriginResponse as ValidateOriginResponse,
     type ValidateDestinationParams as ValidateDestinationParams,
+    type ValidateDestinationExistsParams as ValidateDestinationExistsParams,
     type ValidateOriginParams as ValidateOriginParams,
   };
 }

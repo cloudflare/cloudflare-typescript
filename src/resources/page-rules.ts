@@ -114,9 +114,10 @@ export interface PageRule {
     | PageRule.BypassCacheOnCookie
     | PageRule.CacheByDeviceType
     | PageRule.CacheDeceptionArmor
-    | PageRule.CacheKey
+    | PageRule.CacheKeyFields
     | SettingsAPI.CacheLevel
     | PageRule.CacheOnCookie
+    | PageRule.CacheTTLByStatus
     | PageRule.DisableApps
     | PageRule.DisablePerformance
     | PageRule.DisableSecurity
@@ -214,18 +215,18 @@ export namespace PageRule {
     value?: 'on' | 'off';
   }
 
-  export interface CacheKey {
+  export interface CacheKeyFields {
     /**
      * Control specifically what variables to include when deciding which resources to
      * cache. This allows customers to determine what to cache based on something other
      * than just the URL.
      */
-    id?: 'cache_key';
+    id?: 'cache_key_fields';
 
-    value?: CacheKey.Value;
+    value?: CacheKeyFields.Value;
   }
 
-  export namespace CacheKey {
+  export namespace CacheKeyFields {
     export interface Value {
       /**
        * Controls which cookies appear in the Cache Key.
@@ -355,6 +356,36 @@ export namespace PageRule {
      * The regular expression to use for matching cookie names in the request.
      */
     value?: string;
+  }
+
+  export interface CacheTTLByStatus {
+    /**
+     * Enterprise customers can set cache time-to-live (TTL) based on the response
+     * status from the origin web server. Cache TTL refers to the duration of a
+     * resource in the Cloudflare network before being marked as stale or discarded
+     * from cache. Status codes are returned by a resource's origin. Setting cache TTL
+     * based on response status overrides the default cache behavior (standard caching)
+     * for static files and overrides cache instructions sent by the origin web server.
+     * To cache non-static assets, set a Cache Level of Cache Everything using a Page
+     * Rule. Setting no-store Cache-Control or a low TTL (using `max-age`/`s-maxage`)
+     * increases requests to origin web servers and decreases performance.
+     */
+    id?: 'cache_ttl_by_status';
+
+    /**
+     * A JSON object containing status codes and their corresponding TTLs. Each
+     * key-value pair in the cache TTL by status cache rule has the following syntax
+     *
+     * - `status_code`: An integer value such as 200 or 500. status_code matches the
+     *   exact status code from the origin web server. Valid status codes are between
+     *   100-999.
+     * - `status_code_range`: Integer values for from and to. status_code_range matches
+     *   any status code from the origin web server within the specified range.
+     * - `value`: An integer value that defines the duration an asset is valid in
+     *   seconds or one of the following strings: no-store (equivalent to -1), no-cache
+     *   (equivalent to 0).
+     */
+    value?: Record<string, 'no-cache' | 'no-store' | number>;
   }
 
   export interface DisableApps {
@@ -576,9 +607,10 @@ export interface PageRuleCreateParams {
     | PageRuleCreateParams.BypassCacheOnCookie
     | PageRuleCreateParams.CacheByDeviceType
     | PageRuleCreateParams.CacheDeceptionArmor
-    | PageRuleCreateParams.CacheKey
+    | PageRuleCreateParams.CacheKeyFields
     | SettingsAPI.CacheLevelParam
     | PageRuleCreateParams.CacheOnCookie
+    | PageRuleCreateParams.CacheTTLByStatus
     | PageRuleCreateParams.DisableApps
     | PageRuleCreateParams.DisablePerformance
     | PageRuleCreateParams.DisableSecurity
@@ -666,18 +698,18 @@ export namespace PageRuleCreateParams {
     value?: 'on' | 'off';
   }
 
-  export interface CacheKey {
+  export interface CacheKeyFields {
     /**
      * Control specifically what variables to include when deciding which resources to
      * cache. This allows customers to determine what to cache based on something other
      * than just the URL.
      */
-    id?: 'cache_key';
+    id?: 'cache_key_fields';
 
-    value?: CacheKey.Value;
+    value?: CacheKeyFields.Value;
   }
 
-  export namespace CacheKey {
+  export namespace CacheKeyFields {
     export interface Value {
       /**
        * Controls which cookies appear in the Cache Key.
@@ -807,6 +839,36 @@ export namespace PageRuleCreateParams {
      * The regular expression to use for matching cookie names in the request.
      */
     value?: string;
+  }
+
+  export interface CacheTTLByStatus {
+    /**
+     * Enterprise customers can set cache time-to-live (TTL) based on the response
+     * status from the origin web server. Cache TTL refers to the duration of a
+     * resource in the Cloudflare network before being marked as stale or discarded
+     * from cache. Status codes are returned by a resource's origin. Setting cache TTL
+     * based on response status overrides the default cache behavior (standard caching)
+     * for static files and overrides cache instructions sent by the origin web server.
+     * To cache non-static assets, set a Cache Level of Cache Everything using a Page
+     * Rule. Setting no-store Cache-Control or a low TTL (using `max-age`/`s-maxage`)
+     * increases requests to origin web servers and decreases performance.
+     */
+    id?: 'cache_ttl_by_status';
+
+    /**
+     * A JSON object containing status codes and their corresponding TTLs. Each
+     * key-value pair in the cache TTL by status cache rule has the following syntax
+     *
+     * - `status_code`: An integer value such as 200 or 500. status_code matches the
+     *   exact status code from the origin web server. Valid status codes are between
+     *   100-999.
+     * - `status_code_range`: Integer values for from and to. status_code_range matches
+     *   any status code from the origin web server within the specified range.
+     * - `value`: An integer value that defines the duration an asset is valid in
+     *   seconds or one of the following strings: no-store (equivalent to -1), no-cache
+     *   (equivalent to 0).
+     */
+    value?: Record<string, 'no-cache' | 'no-store' | number>;
   }
 
   export interface DisableApps {
@@ -953,9 +1015,10 @@ export interface PageRuleUpdateParams {
     | PageRuleUpdateParams.BypassCacheOnCookie
     | PageRuleUpdateParams.CacheByDeviceType
     | PageRuleUpdateParams.CacheDeceptionArmor
-    | PageRuleUpdateParams.CacheKey
+    | PageRuleUpdateParams.CacheKeyFields
     | SettingsAPI.CacheLevelParam
     | PageRuleUpdateParams.CacheOnCookie
+    | PageRuleUpdateParams.CacheTTLByStatus
     | PageRuleUpdateParams.DisableApps
     | PageRuleUpdateParams.DisablePerformance
     | PageRuleUpdateParams.DisableSecurity
@@ -1043,18 +1106,18 @@ export namespace PageRuleUpdateParams {
     value?: 'on' | 'off';
   }
 
-  export interface CacheKey {
+  export interface CacheKeyFields {
     /**
      * Control specifically what variables to include when deciding which resources to
      * cache. This allows customers to determine what to cache based on something other
      * than just the URL.
      */
-    id?: 'cache_key';
+    id?: 'cache_key_fields';
 
-    value?: CacheKey.Value;
+    value?: CacheKeyFields.Value;
   }
 
-  export namespace CacheKey {
+  export namespace CacheKeyFields {
     export interface Value {
       /**
        * Controls which cookies appear in the Cache Key.
@@ -1184,6 +1247,36 @@ export namespace PageRuleUpdateParams {
      * The regular expression to use for matching cookie names in the request.
      */
     value?: string;
+  }
+
+  export interface CacheTTLByStatus {
+    /**
+     * Enterprise customers can set cache time-to-live (TTL) based on the response
+     * status from the origin web server. Cache TTL refers to the duration of a
+     * resource in the Cloudflare network before being marked as stale or discarded
+     * from cache. Status codes are returned by a resource's origin. Setting cache TTL
+     * based on response status overrides the default cache behavior (standard caching)
+     * for static files and overrides cache instructions sent by the origin web server.
+     * To cache non-static assets, set a Cache Level of Cache Everything using a Page
+     * Rule. Setting no-store Cache-Control or a low TTL (using `max-age`/`s-maxage`)
+     * increases requests to origin web servers and decreases performance.
+     */
+    id?: 'cache_ttl_by_status';
+
+    /**
+     * A JSON object containing status codes and their corresponding TTLs. Each
+     * key-value pair in the cache TTL by status cache rule has the following syntax
+     *
+     * - `status_code`: An integer value such as 200 or 500. status_code matches the
+     *   exact status code from the origin web server. Valid status codes are between
+     *   100-999.
+     * - `status_code_range`: Integer values for from and to. status_code_range matches
+     *   any status code from the origin web server within the specified range.
+     * - `value`: An integer value that defines the duration an asset is valid in
+     *   seconds or one of the following strings: no-store (equivalent to -1), no-cache
+     *   (equivalent to 0).
+     */
+    value?: Record<string, 'no-cache' | 'no-store' | number>;
   }
 
   export interface DisableApps {
@@ -1365,9 +1458,10 @@ export interface PageRuleEditParams {
     | PageRuleEditParams.BypassCacheOnCookie
     | PageRuleEditParams.CacheByDeviceType
     | PageRuleEditParams.CacheDeceptionArmor
-    | PageRuleEditParams.CacheKey
+    | PageRuleEditParams.CacheKeyFields
     | SettingsAPI.CacheLevelParam
     | PageRuleEditParams.CacheOnCookie
+    | PageRuleEditParams.CacheTTLByStatus
     | PageRuleEditParams.DisableApps
     | PageRuleEditParams.DisablePerformance
     | PageRuleEditParams.DisableSecurity
@@ -1455,18 +1549,18 @@ export namespace PageRuleEditParams {
     value?: 'on' | 'off';
   }
 
-  export interface CacheKey {
+  export interface CacheKeyFields {
     /**
      * Control specifically what variables to include when deciding which resources to
      * cache. This allows customers to determine what to cache based on something other
      * than just the URL.
      */
-    id?: 'cache_key';
+    id?: 'cache_key_fields';
 
-    value?: CacheKey.Value;
+    value?: CacheKeyFields.Value;
   }
 
-  export namespace CacheKey {
+  export namespace CacheKeyFields {
     export interface Value {
       /**
        * Controls which cookies appear in the Cache Key.
@@ -1596,6 +1690,36 @@ export namespace PageRuleEditParams {
      * The regular expression to use for matching cookie names in the request.
      */
     value?: string;
+  }
+
+  export interface CacheTTLByStatus {
+    /**
+     * Enterprise customers can set cache time-to-live (TTL) based on the response
+     * status from the origin web server. Cache TTL refers to the duration of a
+     * resource in the Cloudflare network before being marked as stale or discarded
+     * from cache. Status codes are returned by a resource's origin. Setting cache TTL
+     * based on response status overrides the default cache behavior (standard caching)
+     * for static files and overrides cache instructions sent by the origin web server.
+     * To cache non-static assets, set a Cache Level of Cache Everything using a Page
+     * Rule. Setting no-store Cache-Control or a low TTL (using `max-age`/`s-maxage`)
+     * increases requests to origin web servers and decreases performance.
+     */
+    id?: 'cache_ttl_by_status';
+
+    /**
+     * A JSON object containing status codes and their corresponding TTLs. Each
+     * key-value pair in the cache TTL by status cache rule has the following syntax
+     *
+     * - `status_code`: An integer value such as 200 or 500. status_code matches the
+     *   exact status code from the origin web server. Valid status codes are between
+     *   100-999.
+     * - `status_code_range`: Integer values for from and to. status_code_range matches
+     *   any status code from the origin web server within the specified range.
+     * - `value`: An integer value that defines the duration an asset is valid in
+     *   seconds or one of the following strings: no-store (equivalent to -1), no-cache
+     *   (equivalent to 0).
+     */
+    value?: Record<string, 'no-cache' | 'no-store' | number>;
   }
 
   export interface DisableApps {

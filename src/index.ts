@@ -18,6 +18,7 @@ import {
 } from './pagination';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
+import { AbuseReports } from './resources/abuse-reports';
 import { AuditLogs } from './resources/audit-logs';
 import { BotManagement } from './resources/bot-management';
 import { BrandProtection } from './resources/brand-protection';
@@ -39,6 +40,7 @@ import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
 import { AIGateway } from './resources/ai-gateway/ai-gateway';
+import { AI } from './resources/ai/ai';
 import { Alerting } from './resources/alerting/alerting';
 import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
@@ -324,6 +326,8 @@ export class Cloudflare extends Core.APIClient {
   resourceSharing: API.ResourceSharing = new API.ResourceSharing(this);
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
+  abuseReports: API.AbuseReports = new API.AbuseReports(this);
+  ai: API.AI = new API.AI(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -534,6 +538,8 @@ Cloudflare.Workflows = Workflows;
 Cloudflare.ResourceSharing = ResourceSharing;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
+Cloudflare.AbuseReports = AbuseReports;
+Cloudflare.AI = AI;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -731,6 +737,10 @@ export declare namespace Cloudflare {
   export { LeakedCredentialChecks as LeakedCredentialChecks };
 
   export { ContentScanning as ContentScanning };
+
+  export { AbuseReports as AbuseReports };
+
+  export { AI as AI };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

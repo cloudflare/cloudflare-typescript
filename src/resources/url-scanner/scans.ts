@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { type Response as FetchResponse } from '../../_shims/index';
 
@@ -10,13 +9,10 @@ export class Scans extends APIResource {
    * Submit a URL to scan. Check limits at
    * https://developers.cloudflare.com/security-center/investigate/scan-limits/.
    */
-  create(
-    accountId: string,
-    body: ScanCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanCreateResponse> {
+  create(params: ScanCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScanCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/urlscanner/v2/scan`, {
+      this._client.post(`/accounts/${account_id}/urlscanner/v2/scan`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ScanCreateResponse }>
@@ -35,21 +31,9 @@ export class Scans extends APIResource {
    * 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource
    * with the given hash was downloaded.
    */
-  list(
-    accountId: string,
-    query?: ScanListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ScanListResponse>;
-  list(
-    accountId: string,
-    query: ScanListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
-    return this._client.get(`/accounts/${accountId}/urlscanner/v2/search`, { query, ...options });
+  list(params: ScanListParams, options?: Core.RequestOptions): Core.APIPromise<ScanListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.get(`/accounts/${account_id}/urlscanner/v2/search`, { query, ...options });
   }
 
   /**
@@ -59,19 +43,20 @@ export class Scans extends APIResource {
    * longer to finish.
    */
   bulkCreate(
-    accountId: string,
-    body: ScanBulkCreateParams,
+    params: ScanBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanBulkCreateResponse> {
-    return this._client.post(`/accounts/${accountId}/urlscanner/v2/bulk`, { body, ...options });
+    const { account_id, body } = params;
+    return this._client.post(`/accounts/${account_id}/urlscanner/v2/bulk`, { body: body, ...options });
   }
 
   /**
    * Returns a plain text response, with the scan's DOM content as rendered by
    * Chrome.
    */
-  dom(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<string> {
-    return this._client.get(`/accounts/${accountId}/urlscanner/v2/dom/${scanId}`, {
+  dom(scanId: string, params: ScanDOMParams, options?: Core.RequestOptions): Core.APIPromise<string> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/urlscanner/v2/dom/${scanId}`, {
       ...options,
       headers: { Accept: 'text/plain', ...options?.headers },
     });
@@ -80,42 +65,38 @@ export class Scans extends APIResource {
   /**
    * Get URL scan by uuid
    */
-  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse> {
-    return this._client.get(`/accounts/${accountId}/urlscanner/v2/result/${scanId}`, options);
+  get(
+    scanId: string,
+    params: ScanGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanGetResponse> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/urlscanner/v2/result/${scanId}`, options);
   }
 
   /**
    * Get a URL scan's HAR file. See HAR spec at
    * http://www.softwareishard.com/blog/har-12-spec/.
    */
-  har(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanHARResponse> {
-    return this._client.get(`/accounts/${accountId}/urlscanner/v2/har/${scanId}`, options);
+  har(
+    scanId: string,
+    params: ScanHARParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanHARResponse> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/urlscanner/v2/har/${scanId}`, options);
   }
 
   /**
    * Get scan's screenshot by resolution (desktop/mobile/tablet).
    */
   screenshot(
-    accountId: string,
     scanId: string,
-    query?: ScanScreenshotParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FetchResponse>;
-  screenshot(
-    accountId: string,
-    scanId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FetchResponse>;
-  screenshot(
-    accountId: string,
-    scanId: string,
-    query: ScanScreenshotParams | Core.RequestOptions = {},
+    params: ScanScreenshotParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FetchResponse> {
-    if (isRequestOptions(query)) {
-      return this.screenshot(accountId, scanId, {}, query);
-    }
-    return this._client.get(`/accounts/${accountId}/urlscanner/v2/screenshots/${scanId}.png`, {
+    const { account_id, ...query } = params;
+    return this._client.get(`/accounts/${account_id}/urlscanner/v2/screenshots/${scanId}.png`, {
       query,
       ...options,
       headers: { Accept: 'image/png', ...options?.headers },
@@ -334,7 +315,7 @@ export namespace ScanGetResponse {
 
       response: Request.Response;
 
-      requests?: Array<Request.Request>;
+      requests?: Array<Request.RequestItem>;
     }
 
     export namespace Request {
@@ -538,20 +519,20 @@ export namespace ScanGetResponse {
         }
       }
 
-      export interface Request {
+      export interface RequestItem {
         documentURL: string;
 
         frameId: string;
 
         hasUserGesture: boolean;
 
-        initiator: Request.Initiator;
+        initiator: RequestItem.Initiator;
 
         loaderId: string;
 
         redirectHasExtraInfo: boolean;
 
-        request: Request.Request;
+        request: RequestItem.Request;
 
         requestId: string;
 
@@ -560,7 +541,7 @@ export namespace ScanGetResponse {
         wallTime: number;
       }
 
-      export namespace Request {
+      export namespace RequestItem {
         export interface Initiator {
           type: string;
         }
@@ -1257,45 +1238,74 @@ export namespace ScanHARResponse {
 }
 
 export interface ScanCreateParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   url: string;
 
+  /**
+   * Body param:
+   */
   customagent?: string;
 
   /**
-   * Set custom headers.
+   * Body param: Set custom headers.
    */
   customHeaders?: Record<string, string>;
 
+  /**
+   * Body param:
+   */
   referer?: string;
 
   /**
-   * Take multiple screenshots targeting different device types.
+   * Body param: Take multiple screenshots targeting different device types.
    */
   screenshotsResolutions?: Array<'desktop' | 'mobile' | 'tablet'>;
 
   /**
-   * The option `Public` means it will be included in listings like recent scans and
-   * search results. `Unlisted` means it will not be included in the aforementioned
-   * listings, users will need to have the scan's ID to access it. A a scan will be
-   * automatically marked as unlisted if it fails, if it contains potential PII or
-   * other sensitive material.
+   * Body param: The option `Public` means it will be included in listings like
+   * recent scans and search results. `Unlisted` means it will not be included in the
+   * aforementioned listings, users will need to have the scan's ID to access it. A a
+   * scan will be automatically marked as unlisted if it fails, if it contains
+   * potential PII or other sensitive material.
    */
   visibility?: 'Public' | 'Unlisted';
 }
 
 export interface ScanListParams {
   /**
-   * Filter scans
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Filter scans
    */
   q?: string;
 
   /**
-   * Limit the number of objects in the response.
+   * Query param: Limit the number of objects in the response.
    */
   size?: number;
 }
 
-export type ScanBulkCreateParams = Array<ScanBulkCreateParams.Body>;
+export interface ScanBulkCreateParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param: List of urls to scan (up to a 100).
+   */
+  body: Array<ScanBulkCreateParams.Body>;
+}
 
 export namespace ScanBulkCreateParams {
   export interface Body {
@@ -1326,9 +1336,35 @@ export namespace ScanBulkCreateParams {
   }
 }
 
+export interface ScanDOMParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
+export interface ScanGetParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
+export interface ScanHARParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
 export interface ScanScreenshotParams {
   /**
-   * Target device type.
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Target device type.
    */
   resolution?: 'desktop' | 'mobile' | 'tablet';
 }
@@ -1344,6 +1380,9 @@ export declare namespace Scans {
     type ScanCreateParams as ScanCreateParams,
     type ScanListParams as ScanListParams,
     type ScanBulkCreateParams as ScanBulkCreateParams,
+    type ScanDOMParams as ScanDOMParams,
+    type ScanGetParams as ScanGetParams,
+    type ScanHARParams as ScanHARParams,
     type ScanScreenshotParams as ScanScreenshotParams,
   };
 }
