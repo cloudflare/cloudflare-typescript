@@ -231,7 +231,6 @@ describe('resource summary', () => {
           direction: 'ORIGIN',
           format: 'JSON',
           ipVersion: ['IPv4'],
-          limitPerGroup: 10,
           location: ['string'],
           name: ['string'],
           protocol: ['UDP'],

@@ -25,8 +25,7 @@ describe('resource variants', () => {
     const response = await client.cache.variants.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
-  // TODO: investigate HTTP 422 errors on test suite
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = client.cache.variants.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: {},
@@ -40,8 +39,7 @@ describe('resource variants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate HTTP 422 errors on test suite
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await client.cache.variants.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: {
@@ -60,8 +58,7 @@ describe('resource variants', () => {
     });
   });
 
-  // TODO: investigate HTTP 422 errors on test suite
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.cache.variants.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -72,8 +69,7 @@ describe('resource variants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate HTTP 422 errors on test suite
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.cache.variants.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

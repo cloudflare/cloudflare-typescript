@@ -112,7 +112,7 @@ export namespace AccountDeleteResponse {
 
 export interface AccountUpdateParams {
   /**
-   * Path param: Identifier of a Cloudflare account.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -124,7 +124,7 @@ export interface AccountUpdateParams {
 
 export interface AccountDeleteParams {
   /**
-   * Identifier of a Cloudflare account.
+   * Identifier
    */
   account_id: string;
 }

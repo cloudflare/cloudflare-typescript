@@ -36,7 +36,7 @@ describe('resource sippy', () => {
         region: 'region',
         secretAccessKey: 'secretAccessKey',
       },
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -58,7 +58,7 @@ describe('resource sippy', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.r2.buckets.sippy.delete('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -80,7 +80,7 @@ describe('resource sippy', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.r2.buckets.sippy.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      jurisdiction: 'default',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 });

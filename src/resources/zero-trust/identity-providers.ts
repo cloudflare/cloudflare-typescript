@@ -1892,11 +1892,6 @@ export interface IdentityProviderSCIMConfig {
   identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
 
   /**
-   * The base URL of Cloudflare's SCIM V2.0 API endpoint.
-   */
-  scim_base_url?: string;
-
-  /**
    * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
    * in the Identity Provider. This cannot be enabled unless user_deprovision is also
    * enabled.
@@ -1906,7 +1901,7 @@ export interface IdentityProviderSCIMConfig {
   /**
    * A read-only token generated when the SCIM integration is enabled for the first
    * time. It is redacted on subsequent requests. If you lose this you will need to
-   * refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+   * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
    */
   secret?: string;
 

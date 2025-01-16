@@ -36,9 +36,7 @@ export class Targets extends APIResource {
   }
 
   /**
-   * Lists and sorts an account’s targets. Filters are optional and are ORed
-   * together. However, when a timestamp is specified with both its before and after
-   * counterparts, the timestamp filters are ANDed.
+   * List all targets
    */
   list(
     params: TargetListParams,
@@ -651,19 +649,9 @@ export interface TargetListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: Date and time at which the target was created after (inclusive)
+   * Query param: Date and time at which the target was created
    */
   created_after?: string | null;
-
-  /**
-   * Query param: Date and time at which the target was created before (inclusive)
-   */
-  created_before?: string | null;
-
-  /**
-   * Query param: The sorting direction.
-   */
-  direction?: 'asc' | 'desc';
 
   /**
    * Query param: Hostname of a target
@@ -686,25 +674,9 @@ export interface TargetListParams extends V4PagePaginationArrayParams {
   ip_v6?: string | null;
 
   /**
-   * Query param: Filters for targets that have any of the following IP addresses.
-   * Specify `ips` multiple times in query parameter to build list of candidates.
-   */
-  ips?: Array<string>;
-
-  /**
-   * Query param: Date and time at which the target was modified after (inclusive)
+   * Query param: Date and time at which the target was modified
    */
   modified_after?: string | null;
-
-  /**
-   * Query param: Date and time at which the target was modified before (inclusive)
-   */
-  modified_before?: string | null;
-
-  /**
-   * Query param: The field to sort by.
-   */
-  order?: 'hostname' | 'created_at';
 
   /**
    * Query param: Private virtual network identifier of the target

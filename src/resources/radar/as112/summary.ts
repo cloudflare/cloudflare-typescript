@@ -383,7 +383,7 @@ export namespace SummaryProtocolResponse {
 export interface SummaryQueryTypeResponse {
   meta: SummaryQueryTypeResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: SummaryQueryTypeResponse.Summary0;
 }
 
 export namespace SummaryQueryTypeResponse {
@@ -434,12 +434,24 @@ export namespace SummaryQueryTypeResponse {
       }
     }
   }
+
+  export interface Summary0 {
+    A: string;
+
+    AAAA: string;
+
+    PTR: string;
+
+    SOA: string;
+
+    SRV: string;
+  }
 }
 
 export interface SummaryResponseCodesResponse {
   meta: SummaryResponseCodesResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: SummaryResponseCodesResponse.Summary0;
 }
 
 export namespace SummaryResponseCodesResponse {
@@ -489,6 +501,12 @@ export namespace SummaryResponseCodesResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Summary0 {
+    NOERROR: string;
+
+    NXDOMAIN: string;
   }
 }
 
@@ -730,12 +748,6 @@ export interface SummaryQueryTypeParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
-   */
-  limitPerGroup?: number;
-
-  /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
    * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
    * but includes results from PT.
@@ -784,12 +796,6 @@ export interface SummaryResponseCodesParams {
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
-   */
-  limitPerGroup?: number;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with

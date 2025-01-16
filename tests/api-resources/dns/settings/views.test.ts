@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource views', () => {
-  // generated params are incorrect
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.dns.settings.views.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource views', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // generated params are incorrect
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.dns.settings.views.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my view',

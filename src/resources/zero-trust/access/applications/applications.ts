@@ -1428,14 +1428,7 @@ export interface ApplicationSCIMConfig {
   authentication?:
     | SCIMConfigAuthenticationHTTPBasic
     | SCIMConfigAuthenticationOAuthBearerToken
-    | SCIMConfigAuthenticationOauth2
-    | ApplicationSCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-    | Array<
-        | SCIMConfigAuthenticationHTTPBasic
-        | SCIMConfigAuthenticationOAuthBearerToken
-        | SCIMConfigAuthenticationOauth2
-        | ApplicationSCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-      >;
+    | SCIMConfigAuthenticationOauth2;
 
   /**
    * If false, we propagate DELETE requests to the target application for SCIM
@@ -1454,54 +1447,6 @@ export interface ApplicationSCIMConfig {
    * application. These can transform or filter the resources to be provisioned.
    */
   mappings?: Array<SCIMConfigMapping>;
-}
-
-export namespace ApplicationSCIMConfig {
-  /**
-   * Attributes for configuring Access Service Token authentication scheme for SCIM
-   * provisioning to an application.
-   */
-  export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-    /**
-     * Client ID of the Access service token used to authenticate with the remote
-     * service.
-     */
-    client_id: string;
-
-    /**
-     * Client secret of the Access service token used to authenticate with the remote
-     * service.
-     */
-    client_secret: string;
-
-    /**
-     * The authentication scheme to use when making SCIM requests to this application.
-     */
-    scheme: 'access_service_token';
-  }
-
-  /**
-   * Attributes for configuring Access Service Token authentication scheme for SCIM
-   * provisioning to an application.
-   */
-  export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-    /**
-     * Client ID of the Access service token used to authenticate with the remote
-     * service.
-     */
-    client_id: string;
-
-    /**
-     * Client secret of the Access service token used to authenticate with the remote
-     * service.
-     */
-    client_secret: string;
-
-    /**
-     * The authentication scheme to use when making SCIM requests to this application.
-     */
-    scheme: 'access_service_token';
-  }
 }
 
 /**
@@ -2495,7 +2440,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<SelfHostedApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -2580,54 +2525,18 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SelfHostedApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -2661,14 +2570,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -2687,54 +2589,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -2839,14 +2693,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -2865,54 +2712,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -2995,7 +2794,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<BrowserSSHApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3080,54 +2879,18 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserSSHApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -3161,14 +2924,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3187,54 +2943,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -3317,7 +3025,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<BrowserVNCApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3402,54 +3110,18 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserVNCApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -3483,14 +3155,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3509,54 +3174,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -3723,14 +3340,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3749,54 +3359,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -3963,14 +3525,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3989,54 +3544,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -4203,14 +3710,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4229,54 +3729,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -4357,14 +3809,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4383,54 +3828,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -4590,14 +3987,7 @@ export namespace ApplicationCreateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4616,54 +4006,6 @@ export namespace ApplicationCreateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 }
@@ -4759,7 +4101,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<SelfHostedApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -4844,54 +4186,18 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SelfHostedApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -4925,14 +4231,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4951,54 +4250,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -5103,14 +4354,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5129,54 +4373,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -5259,7 +4455,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<BrowserSSHApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -5344,54 +4540,18 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserSSHApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -5425,14 +4585,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5451,54 +4604,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -5581,7 +4686,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<BrowserVNCApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -5666,54 +4771,18 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserVNCApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -5747,14 +4816,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5773,54 +4835,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -5987,14 +5001,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6013,54 +5020,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -6227,14 +5186,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6253,54 +5205,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -6467,14 +5371,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6493,54 +5390,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -6621,14 +5470,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6647,54 +5489,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -6854,14 +5648,7 @@ export namespace ApplicationUpdateResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6880,54 +5667,6 @@ export namespace ApplicationUpdateResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 }
@@ -7023,7 +5762,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<SelfHostedApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -7108,54 +5847,18 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SelfHostedApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -7189,14 +5892,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7215,54 +5911,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -7367,14 +6015,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7393,54 +6034,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -7523,7 +6116,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<BrowserSSHApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -7608,54 +6201,18 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserSSHApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -7689,14 +6246,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7715,54 +6265,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -7845,7 +6347,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<BrowserVNCApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -7930,54 +6432,18 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserVNCApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -8011,14 +6477,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8037,54 +6496,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -8251,14 +6662,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8277,54 +6681,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -8491,14 +6847,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8517,54 +6866,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -8731,14 +7032,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8757,54 +7051,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -8885,14 +7131,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8911,54 +7150,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -9118,14 +7309,7 @@ export namespace ApplicationListResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9144,54 +7328,6 @@ export namespace ApplicationListResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 }
@@ -9294,7 +7430,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<SelfHostedApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -9379,54 +7515,18 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SelfHostedApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -9460,14 +7560,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9486,54 +7579,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -9638,14 +7683,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9664,54 +7702,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -9794,7 +7784,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<BrowserSSHApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -9879,54 +7869,18 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserSSHApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -9960,14 +7914,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9986,54 +7933,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -10116,7 +8015,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<BrowserVNCApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -10201,54 +8100,18 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserVNCApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     export interface Policy extends ApplicationsAPI.ApplicationPolicy {
@@ -10282,14 +8145,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10308,54 +8164,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -10522,14 +8330,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10548,54 +8349,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -10762,14 +8515,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10788,54 +8534,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -11002,14 +8700,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11028,54 +8719,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -11156,14 +8799,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11182,54 +8818,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -11389,14 +8977,7 @@ export namespace ApplicationGetResponse {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11415,54 +8996,6 @@ export namespace ApplicationGetResponse {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 }
@@ -11565,10 +9098,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationCreateParams.SelfHostedApplication.PublicDestination
-      | ApplicationCreateParams.SelfHostedApplication.PrivateDestination
-    >;
+    destinations?: Array<ApplicationCreateParams.SelfHostedApplication.Destination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -11661,54 +9191,18 @@ export declare namespace ApplicationCreateParams {
   }
 
   export namespace SelfHostedApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     /**
@@ -11798,14 +9292,7 @@ export declare namespace ApplicationCreateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11824,54 +9311,6 @@ export declare namespace ApplicationCreateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -12043,14 +9482,7 @@ export declare namespace ApplicationCreateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -12069,54 +9501,6 @@ export declare namespace ApplicationCreateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -12204,10 +9588,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationCreateParams.BrowserSSHApplication.PublicDestination
-      | ApplicationCreateParams.BrowserSSHApplication.PrivateDestination
-    >;
+    destinations?: Array<ApplicationCreateParams.BrowserSSHApplication.Destination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -12300,54 +9681,18 @@ export declare namespace ApplicationCreateParams {
   }
 
   export namespace BrowserSSHApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     /**
@@ -12437,14 +9782,7 @@ export declare namespace ApplicationCreateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -12463,54 +9801,6 @@ export declare namespace ApplicationCreateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -12598,10 +9888,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationCreateParams.BrowserVNCApplication.PublicDestination
-      | ApplicationCreateParams.BrowserVNCApplication.PrivateDestination
-    >;
+    destinations?: Array<ApplicationCreateParams.BrowserVNCApplication.Destination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -12694,54 +9981,18 @@ export declare namespace ApplicationCreateParams {
   }
 
   export namespace BrowserVNCApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     /**
@@ -12831,14 +10082,7 @@ export declare namespace ApplicationCreateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -12857,54 +10101,6 @@ export declare namespace ApplicationCreateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -13124,14 +10320,7 @@ export declare namespace ApplicationCreateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -13150,54 +10339,6 @@ export declare namespace ApplicationCreateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -13417,14 +10558,7 @@ export declare namespace ApplicationCreateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -13443,54 +10577,6 @@ export declare namespace ApplicationCreateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -13710,14 +10796,7 @@ export declare namespace ApplicationCreateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -13736,54 +10815,6 @@ export declare namespace ApplicationCreateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -13862,14 +10893,7 @@ export declare namespace ApplicationCreateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -13888,54 +10912,6 @@ export declare namespace ApplicationCreateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -14159,10 +11135,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationUpdateParams.SelfHostedApplication.PublicDestination
-      | ApplicationUpdateParams.SelfHostedApplication.PrivateDestination
-    >;
+    destinations?: Array<ApplicationUpdateParams.SelfHostedApplication.Destination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14255,54 +11228,18 @@ export declare namespace ApplicationUpdateParams {
   }
 
   export namespace SelfHostedApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     /**
@@ -14392,14 +11329,7 @@ export declare namespace ApplicationUpdateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -14418,54 +11348,6 @@ export declare namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -14637,14 +11519,7 @@ export declare namespace ApplicationUpdateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -14663,54 +11538,6 @@ export declare namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -14798,10 +11625,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationUpdateParams.BrowserSSHApplication.PublicDestination
-      | ApplicationUpdateParams.BrowserSSHApplication.PrivateDestination
-    >;
+    destinations?: Array<ApplicationUpdateParams.BrowserSSHApplication.Destination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14894,54 +11718,18 @@ export declare namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserSSHApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     /**
@@ -15031,14 +11819,7 @@ export declare namespace ApplicationUpdateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -15057,54 +11838,6 @@ export declare namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -15192,10 +11925,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationUpdateParams.BrowserVNCApplication.PublicDestination
-      | ApplicationUpdateParams.BrowserVNCApplication.PrivateDestination
-    >;
+    destinations?: Array<ApplicationUpdateParams.BrowserVNCApplication.Destination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -15288,54 +12018,18 @@ export declare namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserVNCApplication {
-    /**
-     * A public hostname that Access will secure. Public destinations support
-     * sub-domain and path. Wildcard '\*' can be used in the definition.
-     */
-    export interface PublicDestination {
-      type?: 'public';
+    export interface Destination {
+      type?: 'public' | 'private';
 
       /**
-       * The URI of the destination. Public destinations' URIs can include a domain and
-       * path with
+       * The URI of the destination. Public destinations can include a domain and path
+       * with
        * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
        */
       uri?: string;
-    }
-
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
-    export interface PrivateDestination {
-      /**
-       * The CIDR range of the destination. Single IPs will be computed as /32.
-       */
-      cidr?: string;
-
-      /**
-       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
-       */
-      hostname?: string;
-
-      /**
-       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
-       * match.
-       */
-      l4_protocol?: 'tcp' | 'udp';
-
-      /**
-       * The port range of the destination. Can be a single port or a range of ports.
-       * When omitted, all ports will match.
-       */
-      port_range?: string;
-
-      type?: 'private';
-
-      /**
-       * The VNET ID to match the destination. When omitted, all VNETs will match.
-       */
-      vnet_id?: string;
     }
 
     /**
@@ -15425,14 +12119,7 @@ export declare namespace ApplicationUpdateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -15451,54 +12138,6 @@ export declare namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -15718,14 +12357,7 @@ export declare namespace ApplicationUpdateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -15744,54 +12376,6 @@ export declare namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -16011,14 +12595,7 @@ export declare namespace ApplicationUpdateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -16037,54 +12614,6 @@ export declare namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -16304,14 +12833,7 @@ export declare namespace ApplicationUpdateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -16330,54 +12852,6 @@ export declare namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 
@@ -16456,14 +12930,7 @@ export declare namespace ApplicationUpdateParams {
       authentication?:
         | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
         | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-        | Array<
-            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
-            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
-            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-          >;
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -16482,54 +12949,6 @@ export declare namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
-    }
-
-    export namespace SCIMConfig {
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
-
-      /**
-       * Attributes for configuring Access Service Token authentication scheme for SCIM
-       * provisioning to an application.
-       */
-      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-        /**
-         * Client ID of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_id: string;
-
-        /**
-         * Client secret of the Access service token used to authenticate with the remote
-         * service.
-         */
-        client_secret: string;
-
-        /**
-         * The authentication scheme to use when making SCIM requests to this application.
-         */
-        scheme: 'access_service_token';
-      }
     }
   }
 

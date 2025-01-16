@@ -12,14 +12,14 @@ export class Lifecycle extends APIResource {
     params: LifecycleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LifecycleUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/lifecycle`, {
         body,
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -35,13 +35,13 @@ export class Lifecycle extends APIResource {
     params: LifecycleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LifecycleGetResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/lifecycle`, {
         ...options,
         headers: {
-          ...(jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
           : undefined),
           ...options?.headers,
         },
@@ -208,7 +208,7 @@ export interface LifecycleUpdateParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace LifecycleUpdateParams {
@@ -358,7 +358,7 @@ export interface LifecycleGetParams {
   /**
    * Header param: The bucket jurisdiction
    */
-  jurisdiction?: 'default' | 'eu' | 'fedramp';
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export declare namespace Lifecycle {

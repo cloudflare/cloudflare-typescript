@@ -13,7 +13,6 @@ export {
   type DatasetDeleteParams,
   type DatasetGetParams,
 } from './datasets/index';
-export { Email } from './email/index';
 export {
   EntryListResponsesSinglePage,
   Entries,

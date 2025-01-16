@@ -46,25 +46,6 @@ describe('resource holds', () => {
     });
   });
 
-  test('edit: only required params', async () => {
-    const responsePromise = client.zones.holds.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('edit: required and optional params', async () => {
-    const response = await client.zones.holds.edit({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      hold_after: '2023-01-31T15:56:36+00:00',
-      include_subdomains: true,
-    });
-  });
-
   test('get: only required params', async () => {
     const responsePromise = client.zones.holds.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();

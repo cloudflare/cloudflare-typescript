@@ -15,16 +15,7 @@ describe('resource tokens', () => {
     const responsePromise = client.accounts.tokens.create({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       name: 'readonly token',
-      policies: [
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
-      ],
+      policies: [{ effect: 'allow', permission_groups: [{}, {}], resources: {} }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -47,14 +38,11 @@ describe('resource tokens', () => {
             { meta: { key: 'key', value: 'value' } },
             { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
       ],
       condition: {
-        request_ip: {
+        'request.ip': {
           in: ['123.123.123.0/24', '2606:4700::/32'],
           not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
         },
@@ -83,7 +71,7 @@ describe('resource tokens', () => {
     const response = await client.accounts.tokens.update('ed17574386854bf78a67040be0a770b0', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       condition: {
-        request_ip: {
+        'request.ip': {
           in: ['123.123.123.0/24', '2606:4700::/32'],
           not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
         },
@@ -98,10 +86,7 @@ describe('resource tokens', () => {
             { meta: { key: 'key', value: 'value' } },
             { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
       ],
       status: 'active',
