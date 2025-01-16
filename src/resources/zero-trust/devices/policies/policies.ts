@@ -90,7 +90,7 @@ export interface SettingsPolicy {
   allowed_to_leave?: boolean;
 
   /**
-   * The amount of time in minutes to reconnect after having been disabled.
+   * The amount of time in seconds to reconnect after having been disabled.
    */
   auto_connect?: number;
 

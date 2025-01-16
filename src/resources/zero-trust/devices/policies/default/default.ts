@@ -88,7 +88,7 @@ export interface DefaultEditResponse {
   allowed_to_leave?: boolean;
 
   /**
-   * The amount of time in minutes to reconnect after having been disabled.
+   * The amount of time in seconds to reconnect after having been disabled.
    */
   auto_connect?: number;
 
@@ -177,7 +177,7 @@ export interface DefaultGetResponse {
   allowed_to_leave?: boolean;
 
   /**
-   * The amount of time in minutes to reconnect after having been disabled.
+   * The amount of time in seconds to reconnect after having been disabled.
    */
   auto_connect?: number;
 
@@ -271,7 +271,7 @@ export interface DefaultEditParams {
   allowed_to_leave?: boolean;
 
   /**
-   * Body param: The amount of time in minutes to reconnect after having been
+   * Body param: The amount of time in seconds to reconnect after having been
    * disabled.
    */
   auto_connect?: number;
