@@ -2063,6 +2063,7 @@ export interface ZeroRTTParam {
 export type SettingEditResponse =
   | ZeroRTT
   | AdvancedDDoS
+  | SettingEditResponse.ZonesCacheRulesAegis
   | AlwaysOnline
   | SettingEditResponse.ZonesSchemasAlwaysUseHTTPS
   | SettingEditResponse.ZonesSchemasAutomaticHTTPSRewrites
@@ -2092,6 +2093,8 @@ export type SettingEditResponse =
   | OpportunisticOnion
   | OrangeToOrange
   | SettingEditResponse.ZonesSchemasOriginErrorPagePassThru
+  | SettingEditResponse.ZonesCacheRulesOriginH2MaxStreams
+  | SettingEditResponse.ZonesCacheRulesOriginMaxHTTPVersion
   | SettingEditResponse.ZonesSchemasPolish
   | PrefetchPreload
   | ProxyReadTimeout
@@ -2116,6 +2119,47 @@ export type SettingEditResponse =
   | Websocket;
 
 export namespace SettingEditResponse {
+  /**
+   * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your
+   * layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your
+   * account so that you can increase your origin security by only allowing traffic
+   * from a small list of IP addresses.
+   */
+  export interface ZonesCacheRulesAegis {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'aegis';
+
+    /**
+     * Last time this setting was modified.
+     */
+    modified_on?: string | null;
+
+    /**
+     * Value of the zone setting.
+     */
+    value?: ZonesCacheRulesAegis.Value;
+  }
+
+  export namespace ZonesCacheRulesAegis {
+    /**
+     * Value of the zone setting.
+     */
+    export interface Value {
+      /**
+       * Whether the feature is enabled or not.
+       */
+      enabled?: boolean;
+
+      /**
+       * Egress pool id which refers to a grouping of dedicated egress IPs through which
+       * Cloudflare will connect to origin.
+       */
+      pool_id?: string;
+    }
+  }
+
   /**
    * Reply to all requests for URLs that use "http" with a 301 redirect to the
    * equivalent "https" URL. If you only want to redirect for a subset of requests,
@@ -2523,6 +2567,56 @@ export namespace SettingEditResponse {
      * last time this setting was modified.
      */
     modified_on?: string | null;
+  }
+
+  /**
+   * Origin H2 Max Streams configures the max number of concurrent requests that
+   * Cloudflare will send within the same connection when communicating with the
+   * origin server, if the origin supports it. Note that if your origin does not
+   * support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also
+   * note that the default value is `100` for all plan types except Enterprise where
+   * it is `1`. `1` means that H2 multiplexing is disabled.
+   */
+  export interface ZonesCacheRulesOriginH2MaxStreams {
+    /**
+     * Value of the zone setting.
+     */
+    id: 'origin_h2_max_streams';
+
+    /**
+     * Last time this setting was modified.
+     */
+    modified_on?: string | null;
+
+    /**
+     * Value of the Origin H2 Max Streams Setting.
+     */
+    value?: number;
+  }
+
+  /**
+   * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will
+   * attempt to use with your origin. This setting allows Cloudflare to make HTTP/2
+   * requests to your origin. (Refer to
+   * [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),
+   * for more information.). The default value is "2" for all plan types except
+   * Enterprise where it is "1"
+   */
+  export interface ZonesCacheRulesOriginMaxHTTPVersion {
+    /**
+     * Value of the zone setting.
+     */
+    id: 'origin_max_http_version';
+
+    /**
+     * Last time this setting was modified.
+     */
+    modified_on?: string | null;
+
+    /**
+     * Value of the Origin Max HTTP Version Setting.
+     */
+    value?: '2' | '1';
   }
 
   /**
@@ -2895,6 +2989,7 @@ export namespace SettingEditResponse {
 export type SettingGetResponse =
   | ZeroRTT
   | AdvancedDDoS
+  | SettingGetResponse.ZonesCacheRulesAegis
   | AlwaysOnline
   | SettingGetResponse.ZonesSchemasAlwaysUseHTTPS
   | SettingGetResponse.ZonesSchemasAutomaticHTTPSRewrites
@@ -2924,6 +3019,8 @@ export type SettingGetResponse =
   | OpportunisticOnion
   | OrangeToOrange
   | SettingGetResponse.ZonesSchemasOriginErrorPagePassThru
+  | SettingGetResponse.ZonesCacheRulesOriginH2MaxStreams
+  | SettingGetResponse.ZonesCacheRulesOriginMaxHTTPVersion
   | SettingGetResponse.ZonesSchemasPolish
   | PrefetchPreload
   | ProxyReadTimeout
@@ -2948,6 +3045,47 @@ export type SettingGetResponse =
   | Websocket;
 
 export namespace SettingGetResponse {
+  /**
+   * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your
+   * layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your
+   * account so that you can increase your origin security by only allowing traffic
+   * from a small list of IP addresses.
+   */
+  export interface ZonesCacheRulesAegis {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'aegis';
+
+    /**
+     * Last time this setting was modified.
+     */
+    modified_on?: string | null;
+
+    /**
+     * Value of the zone setting.
+     */
+    value?: ZonesCacheRulesAegis.Value;
+  }
+
+  export namespace ZonesCacheRulesAegis {
+    /**
+     * Value of the zone setting.
+     */
+    export interface Value {
+      /**
+       * Whether the feature is enabled or not.
+       */
+      enabled?: boolean;
+
+      /**
+       * Egress pool id which refers to a grouping of dedicated egress IPs through which
+       * Cloudflare will connect to origin.
+       */
+      pool_id?: string;
+    }
+  }
+
   /**
    * Reply to all requests for URLs that use "http" with a 301 redirect to the
    * equivalent "https" URL. If you only want to redirect for a subset of requests,
@@ -3358,6 +3496,56 @@ export namespace SettingGetResponse {
   }
 
   /**
+   * Origin H2 Max Streams configures the max number of concurrent requests that
+   * Cloudflare will send within the same connection when communicating with the
+   * origin server, if the origin supports it. Note that if your origin does not
+   * support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also
+   * note that the default value is `100` for all plan types except Enterprise where
+   * it is `1`. `1` means that H2 multiplexing is disabled.
+   */
+  export interface ZonesCacheRulesOriginH2MaxStreams {
+    /**
+     * Value of the zone setting.
+     */
+    id: 'origin_h2_max_streams';
+
+    /**
+     * Last time this setting was modified.
+     */
+    modified_on?: string | null;
+
+    /**
+     * Value of the Origin H2 Max Streams Setting.
+     */
+    value?: number;
+  }
+
+  /**
+   * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will
+   * attempt to use with your origin. This setting allows Cloudflare to make HTTP/2
+   * requests to your origin. (Refer to
+   * [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),
+   * for more information.). The default value is "2" for all plan types except
+   * Enterprise where it is "1"
+   */
+  export interface ZonesCacheRulesOriginMaxHTTPVersion {
+    /**
+     * Value of the zone setting.
+     */
+    id: 'origin_max_http_version';
+
+    /**
+     * Last time this setting was modified.
+     */
+    modified_on?: string | null;
+
+    /**
+     * Value of the Origin Max HTTP Version Setting.
+     */
+    value?: '2' | '1';
+  }
+
+  /**
    * Removes metadata and compresses your images for faster page load times. Basic
    * (Lossless): Reduce the size of PNG, JPEG, and GIF files - no impact on visual
    * quality. Basic + JPEG (Lossy): Further reduce the size of JPEG files for faster
@@ -3724,6 +3912,7 @@ export namespace SettingGetResponse {
 export type SettingEditParams =
   | SettingEditParams.ZeroRTT
   | SettingEditParams.AdvancedDDoS
+  | SettingEditParams.ZonesCacheRulesAegis
   | SettingEditParams.AlwaysOnline
   | SettingEditParams.ZonesSchemasAlwaysUseHTTPS
   | SettingEditParams.ZonesSchemasAutomaticHTTPSRewrites
@@ -3753,6 +3942,8 @@ export type SettingEditParams =
   | SettingEditParams.OpportunisticOnion
   | SettingEditParams.OrangeToOrange
   | SettingEditParams.ZonesSchemasOriginErrorPagePassThru
+  | SettingEditParams.ZonesCacheRulesOriginH2MaxStreams
+  | SettingEditParams.ZonesCacheRulesOriginMaxHTTPVersion
   | SettingEditParams.ZonesSchemasPolish
   | SettingEditParams.PrefetchPreload
   | SettingEditParams.ProxyReadTimeout
@@ -3809,6 +4000,41 @@ export declare namespace SettingEditParams {
      * Body param: Current value of the zone setting.
      */
     value: 'on' | 'off';
+  }
+
+  export interface ZonesCacheRulesAegis {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'aegis';
+
+    /**
+     * Body param: Value of the zone setting.
+     */
+    value?: SettingEditParams.ZonesCacheRulesAegis.Value;
+  }
+
+  export namespace ZonesCacheRulesAegis {
+    /**
+     * Value of the zone setting.
+     */
+    export interface Value {
+      /**
+       * Whether the feature is enabled or not.
+       */
+      enabled?: boolean;
+
+      /**
+       * Egress pool id which refers to a grouping of dedicated egress IPs through which
+       * Cloudflare will connect to origin.
+       */
+      pool_id?: string;
+    }
   }
 
   export interface AlwaysOnline {
@@ -4374,6 +4600,40 @@ export declare namespace SettingEditParams {
      * Body param: Current value of the zone setting.
      */
     value: 'on' | 'off';
+  }
+
+  export interface ZonesCacheRulesOriginH2MaxStreams {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Value of the zone setting.
+     */
+    id: 'origin_h2_max_streams';
+
+    /**
+     * Body param: Value of the Origin H2 Max Streams Setting.
+     */
+    value?: number;
+  }
+
+  export interface ZonesCacheRulesOriginMaxHTTPVersion {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Value of the zone setting.
+     */
+    id: 'origin_max_http_version';
+
+    /**
+     * Body param: Value of the Origin Max HTTP Version Setting.
+     */
+    value?: '2' | '1';
   }
 
   export interface ZonesSchemasPolish {
