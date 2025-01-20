@@ -4908,8 +4908,6 @@ Methods:
 - <code title="post /accounts/{account_id}/dex/commands">client.zeroTrust.dex.commands.<a href="./src/resources/zero-trust/dex/commands/commands.ts">create</a>({ ...params }) -> CommandCreateResponse</code>
 - <code title="get /accounts/{account_id}/dex/commands">client.zeroTrust.dex.commands.<a href="./src/resources/zero-trust/dex/commands/commands.ts">list</a>({ ...params }) -> CommandListResponsesV4PagePagination</code>
 
-#### Users
-
 #### Devices
 
 Types:
