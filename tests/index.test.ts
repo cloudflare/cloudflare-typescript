@@ -101,6 +101,16 @@ describe('instantiate client', () => {
     expect(response).toEqual({ url: 'http://localhost:5000/foo', custom: true });
   });
 
+  test('explicit global fetch', async () => {
+    // make sure the global fetch type is assignable to our Fetch type
+    const client = new Cloudflare({
+      baseURL: 'http://localhost:5000/',
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
+      fetch: defaultFetch,
+    });
+  });
+
   test('custom signal', async () => {
     const client = new Cloudflare({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
