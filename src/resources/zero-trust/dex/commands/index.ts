@@ -16,4 +16,3 @@ export {
 } from './devices';
 export { Downloads, type DownloadGetParams } from './downloads';
 export { Quota, type QuotaGetResponse, type QuotaGetParams } from './quota';
-export { Users } from './users';
