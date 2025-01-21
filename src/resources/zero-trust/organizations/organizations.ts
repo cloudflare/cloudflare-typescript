@@ -112,7 +112,7 @@ export class Organizations extends APIResource {
     params: OrganizationRevokeUsersParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationRevokeUsersResponse> {
-    const { account_id, zone_id, devices1: devices, ...body } = params;
+    const { account_id, zone_id, devices1, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -131,7 +131,7 @@ export class Organizations extends APIResource {
         };
     return (
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations/revoke_user`, {
-        query: { devices },
+        query: { devices: devices1 },
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrganizationRevokeUsersResponse }>
