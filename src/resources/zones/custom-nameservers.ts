@@ -14,6 +14,8 @@ export class CustomNameservers extends APIResource {
    *
    * Deprecated in favor of
    * [Update DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-update-dns-settings).
+   *
+   * @deprecated Use [DNS settings API](https://developers.cloudflare.com/api/resources/dns/subresources/settings/methods/put/) instead.
    */
   update(
     params: CustomNameserverUpdateParams,
@@ -32,6 +34,8 @@ export class CustomNameservers extends APIResource {
    *
    * Deprecated in favor of
    * [Show DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-list-dns-settings).
+   *
+   * @deprecated Use [DNS settings API](https://developers.cloudflare.com/api/resources/dns/subresources/settings/methods/get/) instead.
    */
   get(
     params: CustomNameserverGetParams,
