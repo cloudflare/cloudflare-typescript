@@ -2546,7 +2546,7 @@ export namespace ApplicationCreateResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -3046,7 +3046,7 @@ export namespace ApplicationCreateResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -3368,7 +3368,7 @@ export namespace ApplicationCreateResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -4810,7 +4810,7 @@ export namespace ApplicationUpdateResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -5310,7 +5310,7 @@ export namespace ApplicationUpdateResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -5632,7 +5632,7 @@ export namespace ApplicationUpdateResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -7074,7 +7074,7 @@ export namespace ApplicationListResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -7574,7 +7574,7 @@ export namespace ApplicationListResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -7896,7 +7896,7 @@ export namespace ApplicationListResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -9345,7 +9345,7 @@ export namespace ApplicationGetResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -9845,7 +9845,7 @@ export namespace ApplicationGetResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -10167,7 +10167,7 @@ export namespace ApplicationGetResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.

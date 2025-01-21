@@ -117,7 +117,7 @@ export interface Settings {
   status?: 'ready' | 'unconfigured' | 'misconfigured' | 'misconfigured/locked' | 'unlocked';
 
   /**
-   * @deprecated: Email Routing settings tag. (Deprecated, replaced by Email Routing
+   * @deprecated Email Routing settings tag. (Deprecated, replaced by Email Routing
    * settings identifier)
    */
   tag?: string;

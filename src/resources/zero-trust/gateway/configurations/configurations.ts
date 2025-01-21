@@ -285,8 +285,8 @@ export interface BrowserIsolationSettingsParam {
 }
 
 /**
- * @deprecated: Custom certificate settings for BYO-PKI. (deprecated and replaced
- * by `certificate`)
+ * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
+ * `certificate`)
  */
 export interface CustomCertificateSettings {
   /**
@@ -308,8 +308,8 @@ export interface CustomCertificateSettings {
 }
 
 /**
- * @deprecated: Custom certificate settings for BYO-PKI. (deprecated and replaced
- * by `certificate`)
+ * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
+ * `certificate`)
  */
 export interface CustomCertificateSettingsParam {
   /**
@@ -401,8 +401,8 @@ export interface GatewayConfigurationSettings {
   certificate?: GatewayConfigurationSettings.Certificate;
 
   /**
-   * @deprecated: Custom certificate settings for BYO-PKI. (deprecated and replaced
-   * by `certificate`)
+   * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
+   * `certificate`)
    */
   custom_certificate?: CustomCertificateSettings;
 
@@ -498,8 +498,8 @@ export interface GatewayConfigurationSettingsParam {
   certificate?: GatewayConfigurationSettingsParam.Certificate;
 
   /**
-   * @deprecated: Custom certificate settings for BYO-PKI. (deprecated and replaced
-   * by `certificate`)
+   * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
+   * `certificate`)
    */
   custom_certificate?: CustomCertificateSettingsParam;
 
