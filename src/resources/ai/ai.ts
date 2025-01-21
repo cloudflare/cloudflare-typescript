@@ -192,6 +192,11 @@ export namespace AIRunResponse {
      * An array of tool calls requests made during the response generation
      */
     tool_calls?: Array<UnionMember7.ToolCall>;
+
+    /**
+     * Usage statistics for the inference request
+     */
+    usage?: UnionMember7.Usage;
   }
 
   export namespace UnionMember7 {
@@ -205,6 +210,26 @@ export namespace AIRunResponse {
        * The name of the tool to be called
        */
       name?: string;
+    }
+
+    /**
+     * Usage statistics for the inference request
+     */
+    export interface Usage {
+      /**
+       * Total number of tokens in output
+       */
+      completion_tokens?: number;
+
+      /**
+       * Total number of tokens in input
+       */
+      prompt_tokens?: number;
+
+      /**
+       * Total number of input and output tokens
+       */
+      total_tokens?: number;
     }
   }
 
