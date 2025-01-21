@@ -13,9 +13,9 @@ export class Recipients extends APIResource {
     params: RecipientCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecipientCreateResponse> {
-    const { account_id1: account_id, ...body } = params;
+    const { account_id1, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/shares/${shareId}/recipients`, {
+      this._client.post(`/accounts/${account_id1}/shares/${shareId}/recipients`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RecipientCreateResponse }>
