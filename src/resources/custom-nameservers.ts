@@ -81,7 +81,7 @@ export interface CustomNameserver {
   ns_name: string;
 
   /**
-   * @deprecated: Verification status of the nameserver.
+   * @deprecated Verification status of the nameserver.
    */
   status: 'moved' | 'pending' | 'verified';
 

@@ -176,13 +176,13 @@ export interface ScriptUpdateResponse {
   placement?: ScriptUpdateResponse.Placement;
 
   /**
-   * @deprecated: Enables
+   * @deprecated Enables
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
   placement_mode?: 'smart';
 
   /**
-   * @deprecated: Status of
+   * @deprecated Status of
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
   placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
