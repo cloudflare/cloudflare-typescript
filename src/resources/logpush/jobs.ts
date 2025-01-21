@@ -193,7 +193,7 @@ export class Jobs extends APIResource {
   }
 }
 
-export class LogpushJobsSinglePage extends SinglePage<LogpushJob> {}
+export class LogpushJobsSinglePage extends SinglePage<LogpushJob | null> {}
 
 export interface LogpushJob {
   /**

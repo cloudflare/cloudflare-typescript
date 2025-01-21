@@ -105,7 +105,7 @@ export class Rules extends APIResource {
   }
 }
 
-export class MagicNetworkMonitoringRulesSinglePage extends SinglePage<MagicNetworkMonitoringRule> {}
+export class MagicNetworkMonitoringRulesSinglePage extends SinglePage<MagicNetworkMonitoringRule | null> {}
 
 export interface MagicNetworkMonitoringRule {
   /**
