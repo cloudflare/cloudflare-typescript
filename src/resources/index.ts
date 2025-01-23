@@ -53,6 +53,7 @@ export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network
 export { MagicTransit } from './magic-transit/magic-transit';
 export { ManagedTransforms } from './managed-transforms';
 export { Memberships } from './memberships';
+export { NetworkInterconnects } from './network-interconnects/network-interconnects';
 export { OriginCACertificates } from './origin-ca-certificates';
 export { OriginPostQuantumEncryption } from './origin-post-quantum-encryption';
 export { OriginTLSClientAuth } from './origin-tls-client-auth/origin-tls-client-auth';
