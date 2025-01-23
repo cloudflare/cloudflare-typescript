@@ -26,10 +26,8 @@ export class Scans extends APIResource {
    * "microsoft".<br/>- 'apikey:me AND date:[2024-01 TO 2024-10]': my scans from 2024
    * January to 2024 October.<br/>- 'page.domain:(blogspot OR www.blogspot)':
    * Searches for scans whose main domain starts with "blogspot" or with
-   * "www.blogspot"<br/>- 'date:>now-7d AND path:okta-sign-in.min.js: scans from the
-   * last 7 days with any request path that ends with "okta-sign-in.min.js"<br/>-
-   * 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource
-   * with the given hash was downloaded.
+   * "www.blogspot"<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940
+   * where a resource with the given hash was downloaded.
    */
   list(params: ScanListParams, options?: Core.RequestOptions): Core.APIPromise<ScanListResponse> {
     const { account_id, ...query } = params;
