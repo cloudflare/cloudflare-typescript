@@ -498,9 +498,15 @@ export namespace ScriptUpdateParams {
         not_found_handling?: 'none' | '404-page' | 'single-page-application';
 
         /**
-         * When true and the incoming request matches an asset, that will be served instead
-         * of invoking the Worker script. When false, requests will always invoke the
-         * Worker script.
+         * When true, requests will always invoke the Worker script. Otherwise, attempt to
+         * serve an asset matching the request, falling back to the Worker script.
+         */
+        run_worker_first?: boolean;
+
+        /**
+         * @deprecated When true and the incoming request matches an asset, that will be
+         * served instead of invoking the Worker script. When false, requests will always
+         * invoke the Worker script.
          */
         serve_directly?: boolean;
       }
