@@ -162,8 +162,15 @@ export interface ACLConfiguration {
   lan_name?: string;
 
   /**
+   * Array of port ranges on the provided LAN that will be included in the ACL. If no
+   * ports or port rangess are provided, communication on any port on this LAN is
+   * allowed.
+   */
+  port_ranges?: Array<string>;
+
+  /**
    * Array of ports on the provided LAN that will be included in the ACL. If no ports
-   * are provided, communication on any port on this LAN is allowed.
+   * or port ranges are provided, communication on any port on this LAN is allowed.
    */
   ports?: Array<number>;
 
@@ -186,8 +193,15 @@ export interface ACLConfigurationParam {
   lan_name?: string;
 
   /**
+   * Array of port ranges on the provided LAN that will be included in the ACL. If no
+   * ports or port rangess are provided, communication on any port on this LAN is
+   * allowed.
+   */
+  port_ranges?: Array<string>;
+
+  /**
    * Array of ports on the provided LAN that will be included in the ACL. If no ports
-   * are provided, communication on any port on this LAN is allowed.
+   * or port ranges are provided, communication on any port on this LAN is allowed.
    */
   ports?: Array<number>;
 
