@@ -123,6 +123,10 @@ export interface DomainListResponse {
 
   transport: string;
 
+  authorization?: DomainListResponse.Authorization | null;
+
+  emails_processed?: DomainListResponse.EmailsProcessed | null;
+
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -134,6 +138,24 @@ export interface DomainListResponse {
   require_tls_inbound?: boolean | null;
 
   require_tls_outbound?: boolean | null;
+}
+
+export namespace DomainListResponse {
+  export interface Authorization {
+    authorized: boolean;
+
+    timestamp: string;
+
+    status_message?: string | null;
+  }
+
+  export interface EmailsProcessed {
+    timestamp: string;
+
+    total_emails_processed: number;
+
+    total_emails_processed_previous: number;
+  }
 }
 
 export interface DomainDeleteResponse {
@@ -187,6 +209,10 @@ export interface DomainEditResponse {
 
   transport: string;
 
+  authorization?: DomainEditResponse.Authorization | null;
+
+  emails_processed?: DomainEditResponse.EmailsProcessed | null;
+
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -198,6 +224,24 @@ export interface DomainEditResponse {
   require_tls_inbound?: boolean | null;
 
   require_tls_outbound?: boolean | null;
+}
+
+export namespace DomainEditResponse {
+  export interface Authorization {
+    authorized: boolean;
+
+    timestamp: string;
+
+    status_message?: string | null;
+  }
+
+  export interface EmailsProcessed {
+    timestamp: string;
+
+    total_emails_processed: number;
+
+    total_emails_processed_previous: number;
+  }
 }
 
 export interface DomainGetResponse {
@@ -233,6 +277,10 @@ export interface DomainGetResponse {
 
   transport: string;
 
+  authorization?: DomainGetResponse.Authorization | null;
+
+  emails_processed?: DomainGetResponse.EmailsProcessed | null;
+
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -246,11 +294,35 @@ export interface DomainGetResponse {
   require_tls_outbound?: boolean | null;
 }
 
+export namespace DomainGetResponse {
+  export interface Authorization {
+    authorized: boolean;
+
+    timestamp: string;
+
+    status_message?: string | null;
+  }
+
+  export interface EmailsProcessed {
+    timestamp: string;
+
+    total_emails_processed: number;
+
+    total_emails_processed_previous: number;
+  }
+}
+
 export interface DomainListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: Filters response to domains with the currently active delivery
+   * mode.
+   */
+  active_delivery_mode?: 'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN';
 
   /**
    * Query param: Filters response to domains with the provided delivery mode.
