@@ -76,6 +76,7 @@ import { Logs } from './resources/logs/logs';
 import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/magic-network-monitoring';
 import { MagicTransit } from './resources/magic-transit/magic-transit';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
+import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
@@ -292,6 +293,7 @@ export class Cloudflare extends Core.APIClient {
   intel: API.Intel = new API.Intel(this);
   magicTransit: API.MagicTransit = new API.MagicTransit(this);
   magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
+  networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
   registrar: API.Registrar = new API.Registrar(this);
@@ -504,6 +506,7 @@ Cloudflare.Images = Images;
 Cloudflare.Intel = Intel;
 Cloudflare.MagicTransit = MagicTransit;
 Cloudflare.MagicNetworkMonitoring = MagicNetworkMonitoring;
+Cloudflare.NetworkInterconnects = NetworkInterconnects;
 Cloudflare.MTLSCertificates = MTLSCertificates;
 Cloudflare.Pages = Pages;
 Cloudflare.Registrar = Registrar;
@@ -669,6 +672,8 @@ export declare namespace Cloudflare {
   export { MagicTransit as MagicTransit };
 
   export { MagicNetworkMonitoring as MagicNetworkMonitoring };
+
+  export { NetworkInterconnects as NetworkInterconnects };
 
   export { MTLSCertificates as MTLSCertificates };
 
