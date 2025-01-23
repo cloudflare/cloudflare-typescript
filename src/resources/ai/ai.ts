@@ -774,9 +774,20 @@ export declare namespace AIRunParams {
     image: Array<number>;
 
     /**
+     * Body param: Decreases the likelihood of the model repeating the same lines
+     * verbatim.
+     */
+    frequency_penalty?: number;
+
+    /**
      * Body param: The maximum number of tokens to generate in the response.
      */
     max_tokens?: number;
+
+    /**
+     * Body param: Increases the likelihood of the model introducing new topics.
+     */
+    presence_penalty?: number;
 
     /**
      * Body param: The input text prompt for the model to generate a response.
@@ -790,10 +801,34 @@ export declare namespace AIRunParams {
     raw?: boolean;
 
     /**
+     * Body param: Penalty for repeated tokens; higher values discourage repetition.
+     */
+    repetition_penalty?: number;
+
+    /**
+     * Body param: Random seed for reproducibility of the generation.
+     */
+    seed?: number;
+
+    /**
      * Body param: Controls the randomness of the output; higher values produce more
      * random results.
      */
     temperature?: number;
+
+    /**
+     * Body param: Limits the AI to choose from the top 'k' most probable words. Lower
+     * values make responses more focused; higher values introduce more variety and
+     * potential surprises.
+     */
+    top_k?: number;
+
+    /**
+     * Body param: Controls the creativity of the AI's responses by adjusting how many
+     * possible words it considers. Lower values make outputs more predictable; higher
+     * values allow for more varied and creative responses.
+     */
+    top_p?: number;
   }
 }
 
