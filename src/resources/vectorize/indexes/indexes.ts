@@ -146,7 +146,6 @@ export class Indexes extends APIResource {
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
-        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexInsertResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -184,7 +183,6 @@ export class Indexes extends APIResource {
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
-        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexUpsertResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -486,7 +484,7 @@ export interface IndexInsertParams {
   /**
    * Body param: ndjson file containing vectors to insert.
    */
-  body: Core.Uploadable;
+  body: string;
 
   /**
    * Query param: Behavior for ndjson parse failures.
@@ -536,7 +534,7 @@ export interface IndexUpsertParams {
   /**
    * Body param: ndjson file containing vectors to upsert.
    */
-  body: Core.Uploadable;
+  body: string;
 
   /**
    * Query param: Behavior for ndjson parse failures.
