@@ -83,10 +83,30 @@ export class PoliciesSinglePage extends SinglePage<Policy> {}
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type Mechanism = Record<string, Array<Mechanism.Item>>;
+export interface Mechanism {
+  email?: Array<Mechanism.Email>;
+
+  pagerduty?: Array<Mechanism.Pagerduty>;
+
+  webhooks?: Array<Mechanism.Webhook>;
+}
 
 export namespace Mechanism {
-  export interface Item {
+  export interface Email {
+    /**
+     * The email address
+     */
+    id?: string;
+  }
+
+  export interface Pagerduty {
+    /**
+     * UUID
+     */
+    id?: string;
+  }
+
+  export interface Webhook {
     /**
      * UUID
      */
@@ -98,15 +118,25 @@ export namespace Mechanism {
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type MechanismParam = Record<string, Array<MechanismParam.Item>>;
+export interface MechanismParam {
+  email?: Array<MechanismParam.Email>;
+
+  pagerduty?: Array<MechanismParam.Pagerduty>;
+
+  webhooks?: Array<MechanismParam.Webhook>;
+}
 
 export namespace MechanismParam {
-  export interface Item {
+  export interface Email {
     /**
-     * UUID
+     * The email address
      */
     id?: string;
   }
+
+  export interface Pagerduty {}
+
+  export interface Webhook {}
 }
 
 export interface Policy {
