@@ -186,9 +186,9 @@ export interface Policy {
     | 'hostname_aop_custom_certificate_expiration_type'
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
-    | 'incident_alert'
     | 'image_notification'
     | 'image_resizing_notification'
+    | 'incident_alert'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'
@@ -211,6 +211,7 @@ export interface Policy {
     | 'secondary_dns_warning'
     | 'secondary_dns_zone_successfully_updated'
     | 'secondary_dns_zone_validation_warning'
+    | 'security_insights_alert'
     | 'sentinel_alert'
     | 'stream_live_notifications'
     | 'synthetic_test_latency_alert'
@@ -344,6 +345,11 @@ export interface PolicyFilter {
   input_id?: Array<string>;
 
   /**
+   * Used for configuring security_insights_alert
+   */
+  insight_class?: Array<string>;
+
+  /**
    * Used for configuring billing_usage_alert
    */
   limit?: Array<string>;
@@ -381,7 +387,7 @@ export interface PolicyFilter {
   /**
    * Usage depends on specific alert type
    */
-  pop_name?: Array<string>;
+  pop_names?: Array<string>;
 
   /**
    * Used for configuring billing_usage_alert
@@ -558,6 +564,11 @@ export interface PolicyFilterParam {
   input_id?: Array<string>;
 
   /**
+   * Used for configuring security_insights_alert
+   */
+  insight_class?: Array<string>;
+
+  /**
    * Used for configuring billing_usage_alert
    */
   limit?: Array<string>;
@@ -595,7 +606,7 @@ export interface PolicyFilterParam {
   /**
    * Usage depends on specific alert type
    */
-  pop_name?: Array<string>;
+  pop_names?: Array<string>;
 
   /**
    * Used for configuring billing_usage_alert
@@ -775,9 +786,9 @@ export interface PolicyCreateParams {
     | 'hostname_aop_custom_certificate_expiration_type'
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
-    | 'incident_alert'
     | 'image_notification'
     | 'image_resizing_notification'
+    | 'incident_alert'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'
@@ -800,6 +811,7 @@ export interface PolicyCreateParams {
     | 'secondary_dns_warning'
     | 'secondary_dns_zone_successfully_updated'
     | 'secondary_dns_zone_validation_warning'
+    | 'security_insights_alert'
     | 'sentinel_alert'
     | 'stream_live_notifications'
     | 'synthetic_test_latency_alert'
@@ -893,9 +905,9 @@ export interface PolicyUpdateParams {
     | 'hostname_aop_custom_certificate_expiration_type'
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
-    | 'incident_alert'
     | 'image_notification'
     | 'image_resizing_notification'
+    | 'incident_alert'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'
@@ -918,6 +930,7 @@ export interface PolicyUpdateParams {
     | 'secondary_dns_warning'
     | 'secondary_dns_zone_successfully_updated'
     | 'secondary_dns_zone_validation_warning'
+    | 'security_insights_alert'
     | 'sentinel_alert'
     | 'stream_live_notifications'
     | 'synthetic_test_latency_alert'
