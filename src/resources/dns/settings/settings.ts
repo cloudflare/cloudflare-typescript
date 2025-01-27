@@ -102,11 +102,6 @@ export interface DNSSetting {
   foundation_dns?: boolean;
 
   /**
-   * Settings for this internal zone.
-   */
-  internal_dns?: DNSSetting.InternalDNS;
-
-  /**
    * Whether to enable multi-provider DNS, which causes Cloudflare to activate the
    * zone even when non-Cloudflare NS records exist, and to respect NS records at the
    * zone apex during outbound zone transfers.
@@ -136,16 +131,6 @@ export interface DNSSetting {
 }
 
 export namespace DNSSetting {
-  /**
-   * Settings for this internal zone.
-   */
-  export interface InternalDNS {
-    /**
-     * The ID of the zone to fallback to.
-     */
-    reference_zone_id?: string;
-  }
-
   /**
    * Components of the zone's SOA record.
    */
@@ -209,11 +194,6 @@ export namespace SettingEditResponse {
     foundation_dns?: boolean;
 
     /**
-     * Settings for this internal zone.
-     */
-    internal_dns?: ZoneDefaults.InternalDNS;
-
-    /**
      * Whether to enable multi-provider DNS, which causes Cloudflare to activate the
      * zone even when non-Cloudflare NS records exist, and to respect NS records at the
      * zone apex during outbound zone transfers.
@@ -248,16 +228,6 @@ export namespace SettingEditResponse {
   }
 
   export namespace ZoneDefaults {
-    /**
-     * Settings for this internal zone.
-     */
-    export interface InternalDNS {
-      /**
-       * The ID of the zone to fallback to.
-       */
-      reference_zone_id?: string;
-    }
-
     /**
      * Settings determining the nameservers through which the zone should be available.
      */
@@ -332,11 +302,6 @@ export namespace SettingGetResponse {
     foundation_dns?: boolean;
 
     /**
-     * Settings for this internal zone.
-     */
-    internal_dns?: ZoneDefaults.InternalDNS;
-
-    /**
      * Whether to enable multi-provider DNS, which causes Cloudflare to activate the
      * zone even when non-Cloudflare NS records exist, and to respect NS records at the
      * zone apex during outbound zone transfers.
@@ -371,16 +336,6 @@ export namespace SettingGetResponse {
   }
 
   export namespace ZoneDefaults {
-    /**
-     * Settings for this internal zone.
-     */
-    export interface InternalDNS {
-      /**
-       * The ID of the zone to fallback to.
-       */
-      reference_zone_id?: string;
-    }
-
     /**
      * Settings determining the nameservers through which the zone should be available.
      */
@@ -470,11 +425,6 @@ export namespace SettingEditParams {
     foundation_dns?: boolean;
 
     /**
-     * Settings for this internal zone.
-     */
-    internal_dns?: ZoneDefaults.InternalDNS;
-
-    /**
      * Whether to enable multi-provider DNS, which causes Cloudflare to activate the
      * zone even when non-Cloudflare NS records exist, and to respect NS records at the
      * zone apex during outbound zone transfers.
@@ -509,16 +459,6 @@ export namespace SettingEditParams {
   }
 
   export namespace ZoneDefaults {
-    /**
-     * Settings for this internal zone.
-     */
-    export interface InternalDNS {
-      /**
-       * The ID of the zone to fallback to.
-       */
-      reference_zone_id?: string;
-    }
-
     /**
      * Settings determining the nameservers through which the zone should be available.
      */
