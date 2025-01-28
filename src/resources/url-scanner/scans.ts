@@ -11,12 +11,10 @@ export class Scans extends APIResource {
    */
   create(params: ScanCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScanCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/urlscanner/v2/scan`, {
+    return this._client.post(`/accounts/${account_id}/urlscanner/v2/scan`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ScanCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+      }) as Core.APIPromise<ScanCreateResponse>;
   }
 
   /**
@@ -108,7 +106,16 @@ export class Scans extends APIResource {
 /**
  * URL to report.
  */
-export type ScanCreateResponse = string;
+export interface ScanCreateResponse = {
+  api: string,
+  message: string,
+  result: string,
+  uuid: string,
+  visibility: string,
+  options?: {
+    useragent: string
+  }
+};
 
 export interface ScanListResponse {
   results: Array<ScanListResponse.Result>;
