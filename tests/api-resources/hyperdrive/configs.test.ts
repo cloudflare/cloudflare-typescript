@@ -18,6 +18,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
+        password: 'password',
         port: 5432,
         scheme: 'postgres',
         user: 'postgres',
@@ -40,6 +41,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
+        password: 'password',
         port: 5432,
         scheme: 'postgres',
         user: 'postgres',
@@ -56,6 +58,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
+        password: 'password',
         port: 5432,
         scheme: 'postgres',
         user: 'postgres',
@@ -78,6 +81,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
+        password: 'password',
         port: 5432,
         scheme: 'postgres',
         user: 'postgres',
@@ -142,7 +146,7 @@ describe('resource configs', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       caching: { disabled: true },
       name: 'example-hyperdrive',
-      origin: { database: 'postgres', scheme: 'postgres', user: 'postgres' },
+      origin: { database: 'postgres', password: 'password', scheme: 'postgres', user: 'postgres' },
     });
   });
 
