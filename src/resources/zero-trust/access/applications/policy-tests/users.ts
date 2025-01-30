@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
+import { SinglePage } from '../../../../../pagination';
 
 export class Users extends APIResource {
   /**
@@ -11,39 +12,38 @@ export class Users extends APIResource {
     policyTestId: string,
     params: UserListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UserListResponse> {
+  ): Core.PagePromise<UserListResponsesSinglePage, UserListResponse> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/access/policy-tests/${policyTestId}/users`, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/access/policy-tests/${policyTestId}/users`,
+      UserListResponsesSinglePage,
+      options,
+    );
   }
 }
 
-/**
- * Page of processed users.
- */
-export type UserListResponse = Array<UserListResponse.UserListResponseItem>;
+export class UserListResponsesSinglePage extends SinglePage<UserListResponse> {}
 
-export namespace UserListResponse {
-  export interface UserListResponseItem {
-    /**
-     * UUID
-     */
-    id?: string;
+export interface UserListResponse {
+  /**
+   * UUID
+   */
+  id?: string;
 
-    /**
-     * The email of the user.
-     */
-    email?: string;
+  /**
+   * The email of the user.
+   */
+  email?: string;
 
-    /**
-     * The name of the user.
-     */
-    name?: string;
+  /**
+   * The name of the user.
+   */
+  name?: string;
 
-    /**
-     * Policy evaluation result for an individual user.
-     */
-    status?: 'approved' | 'blocked';
-  }
+  /**
+   * Policy evaluation result for an individual user.
+   */
+  status?: 'approved' | 'blocked';
 }
 
 export interface UserListParams {
@@ -53,6 +53,12 @@ export interface UserListParams {
   account_id: string;
 }
 
+Users.UserListResponsesSinglePage = UserListResponsesSinglePage;
+
 export declare namespace Users {
-  export { type UserListResponse as UserListResponse, type UserListParams as UserListParams };
+  export {
+    type UserListResponse as UserListResponse,
+    UserListResponsesSinglePage as UserListResponsesSinglePage,
+    type UserListParams as UserListParams,
+  };
 }

@@ -35,18 +35,87 @@ export class Users extends APIResource {
   list(
     params: UserListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessUsersSinglePage, AccessUser> {
+  ): Core.PagePromise<UserListResponsesSinglePage, UserListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/access/users`, AccessUsersSinglePage, {
+    return this._client.getAPIList(`/accounts/${account_id}/access/users`, UserListResponsesSinglePage, {
       query,
       ...options,
     });
   }
 }
 
-export class AccessUsersSinglePage extends SinglePage<AccessUser> {}
+export class UserListResponsesSinglePage extends SinglePage<UserListResponse> {}
 
 export interface AccessUser {
+  /**
+   * The unique Cloudflare-generated Id of the SCIM resource.
+   */
+  id?: string;
+
+  /**
+   * Determines the status of the SCIM User resource.
+   */
+  active?: boolean;
+
+  /**
+   * The name of the SCIM User resource.
+   */
+  displayName?: string;
+
+  emails?: Array<AccessUser.Email>;
+
+  /**
+   * The IdP-generated Id of the SCIM resource.
+   */
+  externalId?: string;
+
+  /**
+   * The metadata of the SCIM resource.
+   */
+  meta?: AccessUser.Meta;
+
+  /**
+   * The list of URIs which indicate the attributes contained within a SCIM resource.
+   */
+  schemas?: Array<string>;
+}
+
+export namespace AccessUser {
+  export interface Email {
+    /**
+     * Indicates if the email address is the primary email belonging to the SCIM User
+     * resource.
+     */
+    primary?: boolean;
+
+    /**
+     * Indicates the type of the email address.
+     */
+    type?: string;
+
+    /**
+     * The email address of the SCIM User resource.
+     */
+    value?: string;
+  }
+
+  /**
+   * The metadata of the SCIM resource.
+   */
+  export interface Meta {
+    /**
+     * The timestamp of when the SCIM resource was created.
+     */
+    created?: string;
+
+    /**
+     * The timestamp of when the SCIM resource was last modified.
+     */
+    lastModified?: string;
+  }
+}
+
+export interface UserListResponse {
   /**
    * UUID
    */
@@ -119,7 +188,7 @@ export interface UserListParams {
   search?: string;
 }
 
-Users.AccessUsersSinglePage = AccessUsersSinglePage;
+Users.UserListResponsesSinglePage = UserListResponsesSinglePage;
 Users.ActiveSessions = ActiveSessions;
 Users.ActiveSessionListResponsesSinglePage = ActiveSessionListResponsesSinglePage;
 Users.LastSeenIdentity = LastSeenIdentity;
@@ -129,7 +198,8 @@ Users.FailedLoginListResponsesSinglePage = FailedLoginListResponsesSinglePage;
 export declare namespace Users {
   export {
     type AccessUser as AccessUser,
-    AccessUsersSinglePage as AccessUsersSinglePage,
+    type UserListResponse as UserListResponse,
+    UserListResponsesSinglePage as UserListResponsesSinglePage,
     type UserListParams as UserListParams,
   };
 
