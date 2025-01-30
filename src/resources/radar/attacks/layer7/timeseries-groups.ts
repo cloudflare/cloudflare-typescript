@@ -6,28 +6,6 @@ import * as Core from '../../../../core';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Get a time series of the distribution of mitigation techniques over time.
-   */
-  get(
-    query?: TimeseriesGroupGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse>;
-  get(
-    query: TimeseriesGroupGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get({}, query);
-    }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Percentage distribution of attacks by http method used over time.
    */
   httpMethod(
@@ -189,80 +167,6 @@ export class TimeseriesGroups extends APIResource {
   }
 }
 
-export interface TimeseriesGroupGetResponse {
-  meta: TimeseriesGroupGetResponse.Meta;
-
-  serie_0: TimeseriesGroupGetResponse.Serie0;
-}
-
-export namespace TimeseriesGroupGetResponse {
-  export interface Meta {
-    aggInterval: string;
-
-    dateRange: Array<Meta.DateRange>;
-
-    lastUpdated: string;
-
-    confidenceInfo?: Meta.ConfidenceInfo;
-  }
-
-  export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
-    export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
-
-      level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Serie0 {
-    ACCESS_RULES: Array<string>;
-
-    API_SHIELD: Array<string>;
-
-    BOT_MANAGEMENT: Array<string>;
-
-    DATA_LOSS_PREVENTION: Array<string>;
-
-    DDOS: Array<string>;
-
-    IP_REPUTATION: Array<string>;
-
-    timestamps: Array<string>;
-
-    WAF: Array<string>;
-  }
-}
-
 export interface TimeseriesGroupHTTPMethodResponse {
   meta: unknown;
 
@@ -360,63 +264,6 @@ export namespace TimeseriesGroupVerticalResponse {
     timestamps: Array<string>;
     [k: string]: Array<string> | undefined;
   }
-}
-
-export interface TimeseriesGroupGetParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
-   */
-  continent?: Array<string>;
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<string>;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
 }
 
 export interface TimeseriesGroupHTTPMethodParams {
@@ -1342,7 +1189,6 @@ export interface TimeseriesGroupVerticalParams {
 
 export declare namespace TimeseriesGroups {
   export {
-    type TimeseriesGroupGetResponse as TimeseriesGroupGetResponse,
     type TimeseriesGroupHTTPMethodResponse as TimeseriesGroupHTTPMethodResponse,
     type TimeseriesGroupHTTPVersionResponse as TimeseriesGroupHTTPVersionResponse,
     type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
@@ -1350,7 +1196,6 @@ export declare namespace TimeseriesGroups {
     type TimeseriesGroupManagedRulesResponse as TimeseriesGroupManagedRulesResponse,
     type TimeseriesGroupMitigationProductResponse as TimeseriesGroupMitigationProductResponse,
     type TimeseriesGroupVerticalResponse as TimeseriesGroupVerticalResponse,
-    type TimeseriesGroupGetParams as TimeseriesGroupGetParams,
     type TimeseriesGroupHTTPMethodParams as TimeseriesGroupHTTPMethodParams,
     type TimeseriesGroupHTTPVersionParams as TimeseriesGroupHTTPVersionParams,
     type TimeseriesGroupIndustryParams as TimeseriesGroupIndustryParams,

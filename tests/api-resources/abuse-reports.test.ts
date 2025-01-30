@@ -15,6 +15,7 @@ describe('resource abuseReports', () => {
     const responsePromise = client.abuseReports.create('abuse_dmca', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       act: 'abuse_dmca',
+      agree: 0,
       email: 'email',
       email2: 'email2',
       host_notification: 'send',
@@ -36,6 +37,7 @@ describe('resource abuseReports', () => {
     const response = await client.abuseReports.create('abuse_dmca', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       act: 'abuse_dmca',
+      agree: 0,
       email: 'email',
       email2: 'email2',
       host_notification: 'send',
@@ -44,7 +46,6 @@ describe('resource abuseReports', () => {
       urls: 'urls',
       address1: 'x',
       agent_name: 'x',
-      agree: 0,
       city: 'x',
       comments: 'x',
       company: 'x',
