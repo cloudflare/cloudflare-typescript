@@ -853,6 +853,20 @@ Methods:
 - <code title="delete /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">delete</a>({ ...params }) -> FallbackOriginDeleteResponse</code>
 - <code title="get /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">get</a>({ ...params }) -> FallbackOriginGetResponse</code>
 
+## CertificatePack
+
+### Certificates
+
+Types:
+
+- <code><a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">CertificateUpdateResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">CertificateDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}">client.customHostnames.certificatePack.certificates.<a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">update</a>(customHostnameId, certificatePackId, certificateId, { ...params }) -> CertificateUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}">client.customHostnames.certificatePack.certificates.<a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">delete</a>(customHostnameId, certificatePackId, certificateId, { ...params }) -> CertificateDeleteResponse</code>
+
 # CustomNameservers
 
 Types:
@@ -4136,6 +4150,28 @@ Methods:
 - <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.configuration.queues.<a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">update</a>(bucketName, queueId, { ...params }) -> QueueUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.configuration.queues.<a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">delete</a>(bucketName, queueId, { ...params }) -> QueueDeleteResponse</code>
 
+### Locks
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/locks.ts">LockUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/locks.ts">LockGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/lock">client.r2.buckets.locks.<a href="./src/resources/r2/buckets/locks.ts">update</a>(bucketName, { ...params }) -> LockUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/lock">client.r2.buckets.locks.<a href="./src/resources/r2/buckets/locks.ts">get</a>(bucketName, { ...params }) -> LockGetResponse</code>
+
+### Metrics
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/metrics.ts">MetricListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/r2/metrics">client.r2.buckets.metrics.<a href="./src/resources/r2/buckets/metrics.ts">list</a>({ ...params }) -> MetricListResponse</code>
+
 ### Sippy
 
 Types:
@@ -4532,21 +4568,35 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">AzureAD</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">GenericOAuthConfig</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProvider</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderSCIMConfig</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderType</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">AzureAD</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">GenericOAuthConfig</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProvider</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProviderSCIMConfig</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProviderType</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProviderListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">create</a>({ ...params }) -> IdentityProvider</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">update</a>(identityProviderId, { ...params }) -> IdentityProvider</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponsesSinglePage</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">delete</a>(identityProviderId, { ...params }) -> IdentityProviderDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">get</a>(identityProviderId, { ...params }) -> IdentityProvider</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">create</a>({ ...params }) -> IdentityProvider</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">update</a>(identityProviderId, { ...params }) -> IdentityProvider</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponsesSinglePage</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">delete</a>(identityProviderId, { ...params }) -> IdentityProviderDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">get</a>(identityProviderId, { ...params }) -> IdentityProvider</code>
+
+### SCIM
+
+#### Groups
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/groups">client.zeroTrust.identityProviders.scim.groups.<a href="./src/resources/zero-trust/identity-providers/scim/groups.ts">list</a>(identityProviderId, { ...params }) -> ZeroTrustGroupsSinglePage</code>
+
+#### Users
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/users">client.zeroTrust.identityProviders.scim.users.<a href="./src/resources/zero-trust/identity-providers/scim/users.ts">list</a>(identityProviderId, { ...params }) -> AccessUsersSinglePage</code>
 
 ## Organizations
 
@@ -4852,12 +4902,27 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/logs/access-requests.ts">AccessRequests</a></code>
 - <code><a href="./src/resources/zero-trust/access/logs/access-requests.ts">AccessRequestListResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/access/logs/access_requests">client.zeroTrust.access.logs.accessRequests.<a href="./src/resources/zero-trust/access/logs/access-requests.ts">list</a>({ ...params }) -> AccessRequestListResponse</code>
+
+#### SCIM
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/logs/scim/scim.ts">AccessRequests</a></code>
+
+##### Updates
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/logs/scim/updates.ts">UpdateListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/logs/scim/updates">client.zeroTrust.access.logs.scim.updates.<a href="./src/resources/zero-trust/access/logs/scim/updates.ts">list</a>({ ...params }) -> UpdateListResponsesSinglePage</code>
 
 ### Users
 
@@ -5846,6 +5911,34 @@ Methods:
 
 ## AI
 
+### Inference
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/inference/summary.ts">SummaryModelResponse</a></code>
+- <code><a href="./src/resources/radar/ai/inference/summary.ts">SummaryTaskResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/inference/summary/model">client.radar.ai.inference.summary.<a href="./src/resources/radar/ai/inference/summary.ts">model</a>({ ...params }) -> SummaryModelResponse</code>
+- <code title="get /radar/ai/inference/summary/task">client.radar.ai.inference.summary.<a href="./src/resources/radar/ai/inference/summary.ts">task</a>({ ...params }) -> SummaryTaskResponse</code>
+
+#### TimeseriesGroups
+
+##### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">SummaryModelResponse</a></code>
+- <code><a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">SummaryTaskResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/inference/timeseries_groups/model">client.radar.ai.inference.timeseriesGroups.summary.<a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">model</a>({ ...params }) -> SummaryModelResponse</code>
+- <code title="get /radar/ai/inference/timeseries_groups/task">client.radar.ai.inference.timeseriesGroups.summary.<a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">task</a>({ ...params }) -> SummaryTaskResponse</code>
+
 ### Bots
 
 #### Summary
@@ -6775,6 +6868,18 @@ Methods:
 
 - <code title="get /radar/ranking/domain/{domain}">client.radar.ranking.domain.<a href="./src/resources/radar/ranking/domain.ts">get</a>(domain, { ...params }) -> DomainGetResponse</code>
 
+### InternetServices
+
+Types:
+
+- <code><a href="./src/resources/radar/ranking/internet-services.ts">InternetServiceTimeseriesGroupsResponse</a></code>
+- <code><a href="./src/resources/radar/ranking/internet-services.ts">InternetServiceTopResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ranking/internet_services/timeseries_groups">client.radar.ranking.internetServices.<a href="./src/resources/radar/ranking/internet-services.ts">timeseriesGroups</a>({ ...params }) -> InternetServiceTimeseriesGroupsResponse</code>
+- <code title="get /radar/ranking/internet_services/top">client.radar.ranking.internetServices.<a href="./src/resources/radar/ranking/internet-services.ts">top</a>({ ...params }) -> InternetServiceTopResponse</code>
+
 ## TrafficAnomalies
 
 Types:
@@ -6806,6 +6911,28 @@ Methods:
 
 - <code title="get /radar/tcp_resets_timeouts/summary">client.radar.tcpResetsTimeouts.<a href="./src/resources/radar/tcp-resets-timeouts.ts">summary</a>({ ...params }) -> TCPResetsTimeoutSummaryResponse</code>
 - <code title="get /radar/tcp_resets_timeouts/timeseries_groups">client.radar.tcpResetsTimeouts.<a href="./src/resources/radar/tcp-resets-timeouts.ts">timeseriesGroups</a>({ ...params }) -> TCPResetsTimeoutTimeseriesGroupsResponse</code>
+
+## RobotsTXT
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/robots-txt/top/top.ts">TopDomainCategoriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/robots_txt/top/domain_categories">client.radar.robotsTXT.top.<a href="./src/resources/radar/robots-txt/top/top.ts">domainCategories</a>({ ...params }) -> TopDomainCategoriesResponse</code>
+
+#### UserAgents
+
+Types:
+
+- <code><a href="./src/resources/radar/robots-txt/top/user-agents.ts">UserAgentDirectiveResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/robots_txt/top/user_agents/directive">client.radar.robotsTXT.top.userAgents.<a href="./src/resources/radar/robots-txt/top/user-agents.ts">directive</a>({ ...params }) -> UserAgentDirectiveResponse</code>
 
 # BotManagement
 
@@ -7492,3 +7619,47 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/ai/models/schema">client.ai.models.schema.<a href="./src/resources/ai/models/schema.ts">get</a>({ ...params }) -> SchemaGetResponse</code>
+
+# SecurityCenter
+
+## Insights
+
+Types:
+
+- <code><a href="./src/resources/security-center/insights/insights.ts">InsightDismissResponse</a></code>
+- <code><a href="./src/resources/security-center/insights/insights.ts">InsightGetResponse</a></code>
+
+Methods:
+
+- <code title="put /{account_or_zone}/{account_or_zone_id}/security-center/insights/{issue_id}/dismiss">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">dismiss</a>(issueId, { ...params }) -> InsightDismissResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/security-center/insights">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">get</a>({ ...params }) -> InsightGetResponse</code>
+
+### Class
+
+Types:
+
+- <code><a href="./src/resources/security-center/insights/class.ts">ClassGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{account_or_zone}/{account_or_zone_id}/security-center/insights/class">client.securityCenter.insights.class.<a href="./src/resources/security-center/insights/class.ts">get</a>({ ...params }) -> ClassGetResponse</code>
+
+### Severity
+
+Types:
+
+- <code><a href="./src/resources/security-center/insights/severity.ts">SeverityGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{account_or_zone}/{account_or_zone_id}/security-center/insights/severity">client.securityCenter.insights.severity.<a href="./src/resources/security-center/insights/severity.ts">get</a>({ ...params }) -> SeverityGetResponse</code>
+
+### Type
+
+Types:
+
+- <code><a href="./src/resources/security-center/insights/type.ts">TypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{account_or_zone}/{account_or_zone_id}/security-center/insights/type">client.securityCenter.insights.type.<a href="./src/resources/security-center/insights/type.ts">get</a>({ ...params }) -> TypeGetResponse</code>

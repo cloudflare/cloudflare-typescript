@@ -1,13 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import * as Core from '../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as Core from '../../../core';
 import { CloudflareError } from 'cloudflare/error';
 import * as IdentityProvidersAPI from './identity-providers';
-import { SinglePage } from '../../pagination';
+import * as SCIMAPI from './scim/scim';
+import { SCIM } from './scim/scim';
+import { SinglePage } from '../../../pagination';
 
 export class IdentityProviders extends APIResource {
+  scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
+
   /**
    * Adds a new identity provider to Access.
    */
@@ -4677,6 +4681,7 @@ export interface IdentityProviderGetParams {
 }
 
 IdentityProviders.IdentityProviderListResponsesSinglePage = IdentityProviderListResponsesSinglePage;
+IdentityProviders.SCIM = SCIM;
 
 export declare namespace IdentityProviders {
   export {
@@ -4694,4 +4699,6 @@ export declare namespace IdentityProviders {
     type IdentityProviderDeleteParams as IdentityProviderDeleteParams,
     type IdentityProviderGetParams as IdentityProviderGetParams,
   };
+
+  export { SCIM as SCIM };
 }
