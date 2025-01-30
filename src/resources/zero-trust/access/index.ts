@@ -1,28 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Access,
-  type AccessDevicePostureRule,
-  type AccessRule,
-  type AnyValidServiceTokenRule,
-  type AuthenticationMethodRule,
-  type AzureGroupRule,
-  type CertificateRule,
-  type CountryRule,
-  type DomainRule,
-  type EmailListRule,
-  type EmailRule,
-  type EveryoneRule,
-  type ExternalEvaluationRule,
-  type GitHubOrganizationRule,
-  type GroupRule,
-  type GSuiteGroupRule,
-  type IPListRule,
-  type IPRule,
-  type OktaGroupRule,
-  type SAMLGroupRule,
-  type ServiceTokenRule,
-} from './access';
+export { Access } from './access';
 export {
   AccessUsersSinglePage,
   UserListResponsesSinglePage,
