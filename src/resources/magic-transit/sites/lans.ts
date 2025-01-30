@@ -144,6 +144,8 @@ export interface DHCPServer {
    */
   dns_server?: string;
 
+  dns_servers?: Array<string>;
+
   /**
    * Mapping of MAC addresses to IP addresses
    */
@@ -165,6 +167,8 @@ export interface DHCPServerParam {
    * A valid IPv4 address.
    */
   dns_server?: string;
+
+  dns_servers?: Array<string>;
 
   /**
    * Mapping of MAC addresses to IP addresses

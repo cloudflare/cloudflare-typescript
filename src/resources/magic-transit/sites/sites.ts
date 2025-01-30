@@ -82,8 +82,8 @@ export class Sites extends APIResource {
   }
 
   /**
-   * Lists Sites associated with an account. Use connector_identifier query param to
-   * return sites where connector_identifier matches either site.ConnectorID or
+   * Lists Sites associated with an account. Use connectorid query param to return
+   * sites where connectorid matches either site.ConnectorID or
    * site.SecondaryConnectorID.
    */
   list(params: SiteListParams, options?: Core.RequestOptions): Core.PagePromise<SitesSinglePage, Site> {
@@ -286,7 +286,7 @@ export interface SiteListParams {
   /**
    * Query param: Identifier
    */
-  connector_identifier?: string;
+  connectorid?: string;
 }
 
 export interface SiteDeleteParams {
