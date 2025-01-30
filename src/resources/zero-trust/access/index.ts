@@ -24,6 +24,14 @@ export {
   type ServiceTokenRule,
 } from './access';
 export {
+  AccessUsersSinglePage,
+  UserListResponsesSinglePage,
+  Users,
+  type AccessUser,
+  type UserListResponse,
+  type UserListParams,
+} from './users/index';
+export {
   ApplicationListResponsesSinglePage,
   Applications,
   type AllowedHeaders,
@@ -103,21 +111,6 @@ export {
   type GatewayCAListParams,
   type GatewayCADeleteParams,
 } from './gateway-ca';
-export {
-  GroupListResponsesSinglePage,
-  Groups,
-  type ZeroTrustGroup,
-  type GroupCreateResponse,
-  type GroupUpdateResponse,
-  type GroupListResponse,
-  type GroupDeleteResponse,
-  type GroupGetResponse,
-  type GroupCreateParams,
-  type GroupUpdateParams,
-  type GroupListParams,
-  type GroupDeleteParams,
-  type GroupGetParams,
-} from './groups';
 export { Infrastructure } from './infrastructure/index';
 export {
   Keys,
@@ -171,9 +164,18 @@ export {
   type TagGetParams,
 } from './tags';
 export {
-  UserListResponsesSinglePage,
-  Users,
-  type AccessUser,
-  type UserListResponse,
-  type UserListParams,
-} from './users/index';
+  ZeroTrustGroupsSinglePage,
+  GroupListResponsesSinglePage,
+  Groups,
+  type ZeroTrustGroup,
+  type GroupCreateResponse,
+  type GroupUpdateResponse,
+  type GroupListResponse,
+  type GroupDeleteResponse,
+  type GroupGetResponse,
+  type GroupCreateParams,
+  type GroupUpdateParams,
+  type GroupListParams,
+  type GroupDeleteParams,
+  type GroupGetParams,
+} from './groups';

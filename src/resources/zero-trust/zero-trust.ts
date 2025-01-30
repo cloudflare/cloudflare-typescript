@@ -9,23 +9,6 @@ import {
   ConnectivitySettingGetResponse,
   ConnectivitySettings,
 } from './connectivity-settings';
-import * as IdentityProvidersAPI from './identity-providers';
-import {
-  AzureAD,
-  GenericOAuthConfig,
-  IdentityProvider,
-  IdentityProviderCreateParams,
-  IdentityProviderDeleteParams,
-  IdentityProviderDeleteResponse,
-  IdentityProviderGetParams,
-  IdentityProviderListParams,
-  IdentityProviderListResponse,
-  IdentityProviderListResponsesSinglePage,
-  IdentityProviderSCIMConfig,
-  IdentityProviderType,
-  IdentityProviderUpdateParams,
-  IdentityProviders,
-} from './identity-providers';
 import * as SeatsAPI from './seats';
 import { Seat, SeatEditParams, SeatEditResponse, Seats } from './seats';
 import * as AccessAPI from './access/access';
@@ -73,6 +56,23 @@ import {
   GatewayListParams,
   GatewayListResponse,
 } from './gateway/gateway';
+import * as IdentityProvidersAPI from './identity-providers/identity-providers';
+import {
+  AzureAD,
+  GenericOAuthConfig,
+  IdentityProvider,
+  IdentityProviderCreateParams,
+  IdentityProviderDeleteParams,
+  IdentityProviderDeleteResponse,
+  IdentityProviderGetParams,
+  IdentityProviderListParams,
+  IdentityProviderListResponse,
+  IdentityProviderListResponsesSinglePage,
+  IdentityProviderSCIMConfig,
+  IdentityProviderType,
+  IdentityProviderUpdateParams,
+  IdentityProviders,
+} from './identity-providers/identity-providers';
 import * as NetworksAPI from './networks/networks';
 import { Networks } from './networks/networks';
 import * as OrganizationsAPI from './organizations/organizations';

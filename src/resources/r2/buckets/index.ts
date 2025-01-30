@@ -29,6 +29,14 @@ export {
   type LifecycleGetParams,
 } from './lifecycle';
 export {
+  Locks,
+  type LockUpdateResponse,
+  type LockGetResponse,
+  type LockUpdateParams,
+  type LockGetParams,
+} from './locks';
+export { Metrics, type MetricListResponse, type MetricListParams } from './metrics';
+export {
   SippyResource,
   type Provider,
   type Sippy,

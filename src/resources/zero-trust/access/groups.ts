@@ -196,6 +196,8 @@ export class Groups extends APIResource {
 
 export class GroupListResponsesSinglePage extends SinglePage<GroupListResponse> {}
 
+export class ZeroTrustGroupsSinglePage extends SinglePage<ZeroTrustGroup> {}
+
 export interface ZeroTrustGroup {
   /**
    * The unique Cloudflare-generated Id of the SCIM resource.

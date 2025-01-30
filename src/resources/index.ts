@@ -71,6 +71,7 @@ export { ResourceSharing } from './resource-sharing/resource-sharing';
 export { Rules } from './rules/rules';
 export { Rulesets } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
+export { SecurityCenter } from './security-center/security-center';
 export { SecurityTXT } from './security-txt';
 export { Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';

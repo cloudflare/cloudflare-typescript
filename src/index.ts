@@ -89,6 +89,7 @@ import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
+import { SecurityCenter } from './resources/security-center/security-center';
 import { Snippets } from './resources/snippets/snippets';
 import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
@@ -330,6 +331,7 @@ export class Cloudflare extends Core.APIClient {
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
+  securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -543,6 +545,7 @@ Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
+Cloudflare.SecurityCenter = SecurityCenter;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -746,6 +749,8 @@ export declare namespace Cloudflare {
   export { AbuseReports as AbuseReports };
 
   export { AI as AI };
+
+  export { SecurityCenter as SecurityCenter };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

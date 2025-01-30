@@ -14,10 +14,13 @@ import {
   FallbackOriginUpdateParams,
   FallbackOriginUpdateResponse,
 } from './fallback-origin';
+import * as CertificatePackAPI from './certificate-pack/certificate-pack';
+import { CertificatePack } from './certificate-pack/certificate-pack';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class CustomHostnames extends APIResource {
   fallbackOrigin: FallbackOriginAPI.FallbackOrigin = new FallbackOriginAPI.FallbackOrigin(this._client);
+  certificatePack: CertificatePackAPI.CertificatePack = new CertificatePackAPI.CertificatePack(this._client);
 
   /**
    * Add a new custom hostname and request that an SSL certificate be issued for it.
@@ -1982,6 +1985,7 @@ export interface CustomHostnameGetParams {
 }
 
 CustomHostnames.FallbackOrigin = FallbackOrigin;
+CustomHostnames.CertificatePack = CertificatePack;
 
 export declare namespace CustomHostnames {
   export {
@@ -1993,4 +1997,6 @@ export declare namespace CustomHostnames {
     type FallbackOriginDeleteParams as FallbackOriginDeleteParams,
     type FallbackOriginGetParams as FallbackOriginGetParams,
   };
+
+  export { CertificatePack as CertificatePack };
 }

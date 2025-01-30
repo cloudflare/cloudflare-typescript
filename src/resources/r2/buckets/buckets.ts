@@ -20,6 +20,10 @@ import {
   LifecycleUpdateParams,
   LifecycleUpdateResponse,
 } from './lifecycle';
+import * as LocksAPI from './locks';
+import { LockGetParams, LockGetResponse, LockUpdateParams, LockUpdateResponse, Locks } from './locks';
+import * as MetricsAPI from './metrics';
+import { MetricListParams, MetricListResponse, Metrics } from './metrics';
 import * as SippyAPI from './sippy';
 import {
   Provider,
@@ -42,6 +46,8 @@ export class Buckets extends APIResource {
   eventNotifications: EventNotificationsAPI.EventNotifications = new EventNotificationsAPI.EventNotifications(
     this._client,
   );
+  locks: LocksAPI.Locks = new LocksAPI.Locks(this._client);
+  metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
   sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
 
   /**
@@ -255,6 +261,8 @@ Buckets.Lifecycle = Lifecycle;
 Buckets.CORS = CORS;
 Buckets.Domains = Domains;
 Buckets.EventNotifications = EventNotifications;
+Buckets.Locks = Locks;
+Buckets.Metrics = Metrics;
 Buckets.SippyResource = SippyResource;
 
 export declare namespace Buckets {
@@ -289,6 +297,20 @@ export declare namespace Buckets {
   export { Domains as Domains };
 
   export { EventNotifications as EventNotifications };
+
+  export {
+    Locks as Locks,
+    type LockUpdateResponse as LockUpdateResponse,
+    type LockGetResponse as LockGetResponse,
+    type LockUpdateParams as LockUpdateParams,
+    type LockGetParams as LockGetParams,
+  };
+
+  export {
+    Metrics as Metrics,
+    type MetricListResponse as MetricListResponse,
+    type MetricListParams as MetricListParams,
+  };
 
   export {
     SippyResource as SippyResource,
