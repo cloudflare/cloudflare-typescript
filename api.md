@@ -4638,29 +4638,6 @@ Methods:
 
 ## Access
 
-Types:
-
-- <code><a href="./src/resources/zero-trust/access/access.ts">AccessDevicePostureRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">AccessRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">AnyValidServiceTokenRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">AuthenticationMethodRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">AzureGroupRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">CertificateRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">CountryRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">DomainRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">EmailListRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">EmailRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">EveryoneRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">ExternalEvaluationRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">GitHubOrganizationRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">GroupRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">GSuiteGroupRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">IPListRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">IPRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">OktaGroupRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">SAMLGroupRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">ServiceTokenRule</a></code>
-
 ### GatewayCA
 
 Types:
@@ -4765,6 +4742,26 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AccessDevicePostureRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AccessRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AnyValidServiceTokenRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AuthenticationMethodRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AzureGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">CertificateRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">CountryRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">DomainRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">EmailListRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">EmailRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">EveryoneRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ExternalEvaluationRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">GitHubOrganizationRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">GroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">GSuiteGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">IPListRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">IPRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">OktaGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">SAMLGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ServiceTokenRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyListResponse</a></code>

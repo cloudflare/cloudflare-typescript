@@ -12,29 +12,7 @@ import {
 import * as SeatsAPI from './seats';
 import { Seat, SeatEditParams, SeatEditResponse, Seats } from './seats';
 import * as AccessAPI from './access/access';
-import {
-  Access,
-  AccessDevicePostureRule,
-  AccessRule,
-  AnyValidServiceTokenRule,
-  AuthenticationMethodRule,
-  AzureGroupRule,
-  CertificateRule,
-  CountryRule,
-  DomainRule,
-  EmailListRule,
-  EmailRule,
-  EveryoneRule,
-  ExternalEvaluationRule,
-  GSuiteGroupRule,
-  GitHubOrganizationRule,
-  GroupRule,
-  IPListRule,
-  IPRule,
-  OktaGroupRule,
-  SAMLGroupRule,
-  ServiceTokenRule,
-} from './access/access';
+import { Access } from './access/access';
 import * as DevicesAPI from './devices/devices';
 import {
   Device,
@@ -190,29 +168,7 @@ export declare namespace ZeroTrust {
     type SeatEditParams as SeatEditParams,
   };
 
-  export {
-    Access as Access,
-    type AccessDevicePostureRule as AccessDevicePostureRule,
-    type AccessRule as AccessRule,
-    type AnyValidServiceTokenRule as AnyValidServiceTokenRule,
-    type AuthenticationMethodRule as AuthenticationMethodRule,
-    type AzureGroupRule as AzureGroupRule,
-    type CertificateRule as CertificateRule,
-    type CountryRule as CountryRule,
-    type DomainRule as DomainRule,
-    type EmailListRule as EmailListRule,
-    type EmailRule as EmailRule,
-    type EveryoneRule as EveryoneRule,
-    type ExternalEvaluationRule as ExternalEvaluationRule,
-    type GitHubOrganizationRule as GitHubOrganizationRule,
-    type GroupRule as GroupRule,
-    type GSuiteGroupRule as GSuiteGroupRule,
-    type IPListRule as IPListRule,
-    type IPRule as IPRule,
-    type OktaGroupRule as OktaGroupRule,
-    type SAMLGroupRule as SAMLGroupRule,
-    type ServiceTokenRule as ServiceTokenRule,
-  };
+  export { Access as Access };
 
   export {
     DEX as DEX,
