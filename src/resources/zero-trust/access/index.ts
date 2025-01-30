@@ -23,7 +23,6 @@ export {
   type SAMLGroupRule,
   type ServiceTokenRule,
 } from './access';
-export { AccessUsersSinglePage, Users, type AccessUser, type UserListParams } from './users/index';
 export {
   ApplicationListResponsesSinglePage,
   Applications,
@@ -104,6 +103,21 @@ export {
   type GatewayCAListParams,
   type GatewayCADeleteParams,
 } from './gateway-ca';
+export {
+  GroupListResponsesSinglePage,
+  Groups,
+  type ZeroTrustGroup,
+  type GroupCreateResponse,
+  type GroupUpdateResponse,
+  type GroupListResponse,
+  type GroupDeleteResponse,
+  type GroupGetResponse,
+  type GroupCreateParams,
+  type GroupUpdateParams,
+  type GroupListParams,
+  type GroupDeleteParams,
+  type GroupGetParams,
+} from './groups';
 export { Infrastructure } from './infrastructure/index';
 export {
   Keys,
@@ -157,13 +171,9 @@ export {
   type TagGetParams,
 } from './tags';
 export {
-  ZeroTrustGroupsSinglePage,
-  Groups,
-  type ZeroTrustGroup,
-  type GroupDeleteResponse,
-  type GroupCreateParams,
-  type GroupUpdateParams,
-  type GroupListParams,
-  type GroupDeleteParams,
-  type GroupGetParams,
-} from './groups';
+  UserListResponsesSinglePage,
+  Users,
+  type AccessUser,
+  type UserListResponse,
+  type UserListParams,
+} from './users/index';
