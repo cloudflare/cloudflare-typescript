@@ -2,6 +2,13 @@
 
 export { Domain, type DomainGetResponse, type DomainGetParams } from './domain';
 export {
+  InternetServices,
+  type InternetServiceTimeseriesGroupsResponse,
+  type InternetServiceTopResponse,
+  type InternetServiceTimeseriesGroupsParams,
+  type InternetServiceTopParams,
+} from './internet-services';
+export {
   Ranking,
   type RankingTimeseriesGroupsResponse,
   type RankingTopResponse,

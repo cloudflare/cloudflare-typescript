@@ -68,7 +68,7 @@ export {
   type IdentityProviderListParams,
   type IdentityProviderDeleteParams,
   type IdentityProviderGetParams,
-} from './identity-providers';
+} from './identity-providers/index';
 export { Networks } from './networks/index';
 export {
   Organizations,

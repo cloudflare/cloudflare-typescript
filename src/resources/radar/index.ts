@@ -33,6 +33,7 @@ export {
   type RankingTimeseriesGroupsParams,
   type RankingTopParams,
 } from './ranking/index';
+export { RobotsTXT } from './robots-txt/index';
 export { Search, type SearchGlobalResponse, type SearchGlobalParams } from './search';
 export {
   TCPResetsTimeouts,

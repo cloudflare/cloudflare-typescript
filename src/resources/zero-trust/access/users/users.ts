@@ -46,6 +46,8 @@ export class Users extends APIResource {
 
 export class UserListResponsesSinglePage extends SinglePage<UserListResponse> {}
 
+export class AccessUsersSinglePage extends SinglePage<AccessUser> {}
+
 export interface AccessUser {
   /**
    * The unique Cloudflare-generated Id of the SCIM resource.
