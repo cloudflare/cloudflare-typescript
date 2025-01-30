@@ -3,13 +3,11 @@
 export { Layer7, type Layer7TimeseriesResponse, type Layer7TimeseriesParams } from './layer7';
 export {
   Summary,
-  type SummaryGetResponse,
   type SummaryHTTPMethodResponse,
   type SummaryHTTPVersionResponse,
   type SummaryIPVersionResponse,
   type SummaryManagedRulesResponse,
   type SummaryMitigationProductResponse,
-  type SummaryGetParams,
   type SummaryHTTPMethodParams,
   type SummaryHTTPVersionParams,
   type SummaryIPVersionParams,
@@ -18,7 +16,6 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
-  type TimeseriesGroupGetResponse,
   type TimeseriesGroupHTTPMethodResponse,
   type TimeseriesGroupHTTPVersionResponse,
   type TimeseriesGroupIndustryResponse,
@@ -26,7 +23,6 @@ export {
   type TimeseriesGroupManagedRulesResponse,
   type TimeseriesGroupMitigationProductResponse,
   type TimeseriesGroupVerticalResponse,
-  type TimeseriesGroupGetParams,
   type TimeseriesGroupHTTPMethodParams,
   type TimeseriesGroupHTTPVersionParams,
   type TimeseriesGroupIndustryParams,
