@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as AccessAPI from '../../access';
 import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
+import * as ApplicationsPoliciesAPI from '../policies';
 import * as UsersAPI from './users';
 import { UserListParams, UserListResponse, UserListResponsesSinglePage, Users } from './users';
 
@@ -128,7 +128,7 @@ export namespace PolicyTestCreateParams {
      * Rules evaluated with an OR logical operator. A user needs to meet only one of
      * the Include rules.
      */
-    include: Array<AccessAPI.AccessRuleParam>;
+    include: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
     /**
      * The name of the Access policy.
@@ -150,7 +150,7 @@ export namespace PolicyTestCreateParams {
      * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
      * meet any of the Exclude rules.
      */
-    exclude?: Array<AccessAPI.AccessRuleParam>;
+    exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
     /**
      * Require this application to be served in an isolated browser for users matching
@@ -173,7 +173,7 @@ export namespace PolicyTestCreateParams {
      * Rules evaluated with an AND logical operator. To match the policy, a user must
      * meet all of the Require rules.
      */
-    require?: Array<AccessAPI.AccessRuleParam>;
+    require?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
     /**
      * The amount of time that tokens issued for the application will be valid. Must be

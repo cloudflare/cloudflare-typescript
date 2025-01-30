@@ -5,7 +5,6 @@ import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { CloudflareError } from 'cloudflare/error';
 import * as ApplicationsAPI from './applications';
-import * as AccessAPI from '../access';
 import * as PoliciesAPI from '../policies';
 import * as CAsAPI from './cas';
 import {
@@ -20,6 +19,24 @@ import {
 } from './cas';
 import * as ApplicationsPoliciesAPI from './policies';
 import {
+  AccessDevicePostureRule,
+  AccessRule,
+  AnyValidServiceTokenRule,
+  AuthenticationMethodRule,
+  AzureGroupRule,
+  CertificateRule,
+  CountryRule,
+  DomainRule,
+  EmailListRule,
+  EmailRule,
+  EveryoneRule,
+  ExternalEvaluationRule,
+  GSuiteGroupRule,
+  GitHubOrganizationRule,
+  GroupRule,
+  IPListRule,
+  IPRule,
+  OktaGroupRule,
   Policies,
   PolicyCreateParams,
   PolicyCreateResponse,
@@ -32,6 +49,8 @@ import {
   PolicyListResponsesSinglePage,
   PolicyUpdateParams,
   PolicyUpdateResponse,
+  SAMLGroupRule,
+  ServiceTokenRule,
 } from './policies';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import {
@@ -1359,13 +1378,13 @@ export interface ApplicationPolicy {
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.AccessRule>;
+  include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Require this application to be served in an isolated browser for users matching
@@ -1393,7 +1412,7 @@ export interface ApplicationPolicy {
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * The amount of time that tokens issued for the application will be valid. Must be
@@ -4513,13 +4532,13 @@ export namespace ApplicationCreateResponse {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRule>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include?: Array<AccessAPI.AccessRule>;
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * The name of the Access policy.
@@ -4530,7 +4549,7 @@ export namespace ApplicationCreateResponse {
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRule>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       updated_at?: string;
     }
@@ -6777,13 +6796,13 @@ export namespace ApplicationUpdateResponse {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRule>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include?: Array<AccessAPI.AccessRule>;
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * The name of the Access policy.
@@ -6794,7 +6813,7 @@ export namespace ApplicationUpdateResponse {
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRule>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       updated_at?: string;
     }
@@ -9041,13 +9060,13 @@ export namespace ApplicationListResponse {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRule>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include?: Array<AccessAPI.AccessRule>;
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * The name of the Access policy.
@@ -9058,7 +9077,7 @@ export namespace ApplicationListResponse {
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRule>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       updated_at?: string;
     }
@@ -11312,13 +11331,13 @@ export namespace ApplicationGetResponse {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRule>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include?: Array<AccessAPI.AccessRule>;
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * The name of the Access policy.
@@ -11329,7 +11348,7 @@ export namespace ApplicationGetResponse {
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRule>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       updated_at?: string;
     }
@@ -14003,7 +14022,7 @@ export declare namespace ApplicationCreateParams {
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include: Array<AccessAPI.AccessRuleParam>;
+      include: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
        * The name of the Access policy.
@@ -14020,13 +14039,13 @@ export declare namespace ApplicationCreateParams {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRuleParam>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
     }
 
     export namespace Policy {
@@ -16597,7 +16616,7 @@ export declare namespace ApplicationUpdateParams {
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include: Array<AccessAPI.AccessRuleParam>;
+      include: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
        * The name of the Access policy.
@@ -16614,13 +16633,13 @@ export declare namespace ApplicationUpdateParams {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRuleParam>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
     }
 
     export namespace Policy {
@@ -16791,6 +16810,26 @@ export declare namespace Applications {
 
   export {
     Policies as Policies,
+    type AccessDevicePostureRule as AccessDevicePostureRule,
+    type AccessRule as AccessRule,
+    type AnyValidServiceTokenRule as AnyValidServiceTokenRule,
+    type AuthenticationMethodRule as AuthenticationMethodRule,
+    type AzureGroupRule as AzureGroupRule,
+    type CertificateRule as CertificateRule,
+    type CountryRule as CountryRule,
+    type DomainRule as DomainRule,
+    type EmailListRule as EmailListRule,
+    type EmailRule as EmailRule,
+    type EveryoneRule as EveryoneRule,
+    type ExternalEvaluationRule as ExternalEvaluationRule,
+    type GitHubOrganizationRule as GitHubOrganizationRule,
+    type GroupRule as GroupRule,
+    type GSuiteGroupRule as GSuiteGroupRule,
+    type IPListRule as IPListRule,
+    type IPRule as IPRule,
+    type OktaGroupRule as OktaGroupRule,
+    type SAMLGroupRule as SAMLGroupRule,
+    type ServiceTokenRule as ServiceTokenRule,
     type PolicyCreateResponse as PolicyCreateResponse,
     type PolicyUpdateResponse as PolicyUpdateResponse,
     type PolicyListResponse as PolicyListResponse,
