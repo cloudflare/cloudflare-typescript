@@ -4749,7 +4749,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/access/policy-tests/{policy_test_id}/users">client.zeroTrust.access.applications.policyTests.users.<a href="./src/resources/zero-trust/access/applications/policy-tests/users.ts">list</a>(policyTestId, { ...params }) -> UserListResponse</code>
+- <code title="get /accounts/{account_id}/access/policy-tests/{policy_test_id}/users">client.zeroTrust.access.applications.policyTests.users.<a href="./src/resources/zero-trust/access/applications/policy-tests/users.ts">list</a>(policyTestId, { ...params }) -> UserListResponsesSinglePage</code>
 
 ### Certificates
 
@@ -4785,15 +4785,19 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/groups.ts">ZeroTrustGroup</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/groups.ts">GroupDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">create</a>({ ...params }) -> ZeroTrustGroup</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">update</a>(groupId, { ...params }) -> ZeroTrustGroup</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">list</a>({ ...params }) -> ZeroTrustGroupsSinglePage</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">create</a>({ ...params }) -> GroupCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">update</a>(groupId, { ...params }) -> GroupUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">list</a>({ ...params }) -> GroupListResponsesSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">delete</a>(groupId, { ...params }) -> GroupDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">get</a>(groupId, { ...params }) -> ZeroTrustGroup</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">get</a>(groupId, { ...params }) -> GroupGetResponse</code>
 
 ### ServiceTokens
 
@@ -4860,10 +4864,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/users/users.ts">AccessUser</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>({ ...params }) -> AccessUsersSinglePage</code>
+- <code title="get /accounts/{account_id}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>({ ...params }) -> UserListResponsesSinglePage</code>
 
 #### ActiveSessions
 

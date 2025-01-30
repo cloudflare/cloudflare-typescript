@@ -40,14 +40,18 @@ import {
 import * as GroupsAPI from './groups';
 import {
   GroupCreateParams,
+  GroupCreateResponse,
   GroupDeleteParams,
   GroupDeleteResponse,
   GroupGetParams,
+  GroupGetResponse,
   GroupListParams,
+  GroupListResponse,
+  GroupListResponsesSinglePage,
   GroupUpdateParams,
+  GroupUpdateResponse,
   Groups,
   ZeroTrustGroup,
-  ZeroTrustGroupsSinglePage,
 } from './groups';
 import * as KeysAPI from './keys';
 import {
@@ -157,7 +161,13 @@ import { Infrastructure } from './infrastructure/infrastructure';
 import * as LogsAPI from './logs/logs';
 import { Logs } from './logs/logs';
 import * as UsersAPI from './users/users';
-import { AccessUser, AccessUsersSinglePage, UserListParams, Users } from './users/users';
+import {
+  AccessUser,
+  UserListParams,
+  UserListResponse,
+  UserListResponsesSinglePage,
+  Users,
+} from './users/users';
 
 export class Access extends APIResource {
   gatewayCA: GatewayCAAPI.GatewayCA = new GatewayCAAPI.GatewayCA(this._client);
@@ -1011,7 +1021,7 @@ Access.ApplicationListResponsesSinglePage = ApplicationListResponsesSinglePage;
 Access.Certificates = Certificates;
 Access.CertificatesSinglePage = CertificatesSinglePage;
 Access.Groups = Groups;
-Access.ZeroTrustGroupsSinglePage = ZeroTrustGroupsSinglePage;
+Access.GroupListResponsesSinglePage = GroupListResponsesSinglePage;
 Access.ServiceTokens = ServiceTokens;
 Access.ServiceTokensSinglePage = ServiceTokensSinglePage;
 Access.Bookmarks = Bookmarks;
@@ -1019,7 +1029,7 @@ Access.BookmarksSinglePage = BookmarksSinglePage;
 Access.Keys = Keys;
 Access.Logs = Logs;
 Access.Users = Users;
-Access.AccessUsersSinglePage = AccessUsersSinglePage;
+Access.UserListResponsesSinglePage = UserListResponsesSinglePage;
 Access.CustomPages = CustomPages;
 Access.CustomPageWithoutHTMLsSinglePage = CustomPageWithoutHTMLsSinglePage;
 Access.Tags = Tags;
@@ -1116,8 +1126,12 @@ export declare namespace Access {
   export {
     Groups as Groups,
     type ZeroTrustGroup as ZeroTrustGroup,
+    type GroupCreateResponse as GroupCreateResponse,
+    type GroupUpdateResponse as GroupUpdateResponse,
+    type GroupListResponse as GroupListResponse,
     type GroupDeleteResponse as GroupDeleteResponse,
-    ZeroTrustGroupsSinglePage as ZeroTrustGroupsSinglePage,
+    type GroupGetResponse as GroupGetResponse,
+    GroupListResponsesSinglePage as GroupListResponsesSinglePage,
     type GroupCreateParams as GroupCreateParams,
     type GroupUpdateParams as GroupUpdateParams,
     type GroupListParams as GroupListParams,
@@ -1167,7 +1181,8 @@ export declare namespace Access {
   export {
     Users as Users,
     type AccessUser as AccessUser,
-    AccessUsersSinglePage as AccessUsersSinglePage,
+    type UserListResponse as UserListResponse,
+    UserListResponsesSinglePage as UserListResponsesSinglePage,
     type UserListParams as UserListParams,
   };
 
