@@ -2,9 +2,9 @@
 
 export { Datasets } from './datasets/index';
 export {
+  InstantLogpushJobsSinglePage,
   Edge,
   type InstantLogpushJob,
-  type EdgeGetResponse,
   type EdgeCreateParams,
   type EdgeGetParams,
 } from './edge';

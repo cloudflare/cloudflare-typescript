@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Keys extends APIResource {
   /**
@@ -38,15 +39,16 @@ export class Keys extends APIResource {
   /**
    * Lists the video ID and creation date and time when a signing key was created.
    */
-  get(params: KeyGetParams, options?: Core.RequestOptions): Core.APIPromise<KeyGetResponse> {
+  get(
+    params: KeyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<KeyGetResponsesSinglePage, KeyGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/keys`, options) as Core.APIPromise<{
-        result: KeyGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/stream/keys`, KeyGetResponsesSinglePage, options);
   }
 }
+
+export class KeyGetResponsesSinglePage extends SinglePage<KeyGetResponse> {}
 
 export interface Keys {
   /**
@@ -72,20 +74,16 @@ export interface Keys {
 
 export type KeyDeleteResponse = string;
 
-export type KeyGetResponse = Array<KeyGetResponse.KeyGetResponseItem>;
+export interface KeyGetResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 
-export namespace KeyGetResponse {
-  export interface KeyGetResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * The date and time a signing key was created.
-     */
-    created?: string;
-  }
+  /**
+   * The date and time a signing key was created.
+   */
+  created?: string;
 }
 
 export interface KeyCreateParams {
@@ -114,11 +112,14 @@ export interface KeyGetParams {
   account_id: string;
 }
 
+Keys.KeyGetResponsesSinglePage = KeyGetResponsesSinglePage;
+
 export declare namespace Keys {
   export {
     type Keys as Keys,
     type KeyDeleteResponse as KeyDeleteResponse,
     type KeyGetResponse as KeyGetResponse,
+    KeyGetResponsesSinglePage as KeyGetResponsesSinglePage,
     type KeyCreateParams as KeyCreateParams,
     type KeyDeleteParams as KeyDeleteParams,
     type KeyGetParams as KeyGetParams,

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Traceroutes extends APIResource {
   /**
@@ -10,16 +11,17 @@ export class Traceroutes extends APIResource {
   create(
     params: TracerouteCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TracerouteCreateResponse | null> {
+  ): Core.PagePromise<TraceroutesSinglePage, Traceroute> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/diagnostics/traceroute`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TracerouteCreateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/diagnostics/traceroute`, TraceroutesSinglePage, {
+      body,
+      method: 'post',
+      ...options,
+    });
   }
 }
+
+export class TraceroutesSinglePage extends SinglePage<Traceroute> {}
 
 export interface Traceroute {
   colos?: Array<Traceroute.Colo>;
@@ -145,8 +147,6 @@ export namespace Traceroute {
   }
 }
 
-export type TracerouteCreateResponse = Array<Traceroute>;
-
 export interface TracerouteCreateParams {
   /**
    * Path param: Identifier
@@ -201,10 +201,12 @@ export namespace TracerouteCreateParams {
   }
 }
 
+Traceroutes.TraceroutesSinglePage = TraceroutesSinglePage;
+
 export declare namespace Traceroutes {
   export {
     type Traceroute as Traceroute,
-    type TracerouteCreateResponse as TracerouteCreateResponse,
+    TraceroutesSinglePage as TraceroutesSinglePage,
     type TracerouteCreateParams as TracerouteCreateParams,
   };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as HostnamesAPI from './hostnames';
 import * as CertificatesAPI from './certificates';
 import {
   Certificate,
@@ -17,6 +16,7 @@ import {
   CertificateListResponsesSinglePage,
   Certificates,
 } from './certificates';
+import { SinglePage } from '../../../pagination';
 
 export class Hostnames extends APIResource {
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
@@ -31,14 +31,13 @@ export class Hostnames extends APIResource {
   update(
     params: HostnameUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameUpdateResponse> {
+  ): Core.PagePromise<HostnameUpdateResponsesSinglePage, HostnameUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/origin_tls_client_auth/hostnames`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HostnameUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/origin_tls_client_auth/hostnames`,
+      HostnameUpdateResponsesSinglePage,
+      { body, method: 'put', ...options },
+    );
   }
 
   /**
@@ -58,6 +57,8 @@ export class Hostnames extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class HostnameUpdateResponsesSinglePage extends SinglePage<HostnameUpdateResponse> {}
 
 export interface AuthenticatedOriginPull {
   /**
@@ -147,42 +148,38 @@ export interface AuthenticatedOriginPull {
   updated_at?: string;
 }
 
-export type HostnameUpdateResponse = Array<HostnameUpdateResponse.HostnameUpdateResponseItem>;
+export interface HostnameUpdateResponse extends AuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
 
-export namespace HostnameUpdateResponse {
-  export interface HostnameUpdateResponseItem extends HostnamesAPI.AuthenticatedOriginPull {
-    /**
-     * Identifier
-     */
-    id?: string;
+  /**
+   * Identifier
+   */
+  cert_id?: string;
 
-    /**
-     * Identifier
-     */
-    cert_id?: string;
+  /**
+   * The hostname certificate.
+   */
+  certificate?: string;
 
-    /**
-     * The hostname certificate.
-     */
-    certificate?: string;
+  /**
+   * Indicates whether hostname-level authenticated origin pulls is enabled. A null
+   * value voids the association.
+   */
+  enabled?: boolean | null;
 
-    /**
-     * Indicates whether hostname-level authenticated origin pulls is enabled. A null
-     * value voids the association.
-     */
-    enabled?: boolean | null;
+  /**
+   * The hostname on the origin for which the client certificate uploaded will be
+   * used.
+   */
+  hostname?: string;
 
-    /**
-     * The hostname on the origin for which the client certificate uploaded will be
-     * used.
-     */
-    hostname?: string;
-
-    /**
-     * The hostname certificate's private key.
-     */
-    private_key?: string;
-  }
+  /**
+   * The hostname certificate's private key.
+   */
+  private_key?: string;
 }
 
 export interface HostnameUpdateParams {
@@ -225,6 +222,7 @@ export interface HostnameGetParams {
   zone_id: string;
 }
 
+Hostnames.HostnameUpdateResponsesSinglePage = HostnameUpdateResponsesSinglePage;
 Hostnames.Certificates = Certificates;
 Hostnames.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;
 
@@ -232,6 +230,7 @@ export declare namespace Hostnames {
   export {
     type AuthenticatedOriginPull as AuthenticatedOriginPull,
     type HostnameUpdateResponse as HostnameUpdateResponse,
+    HostnameUpdateResponsesSinglePage as HostnameUpdateResponsesSinglePage,
     type HostnameUpdateParams as HostnameUpdateParams,
     type HostnameGetParams as HostnameGetParams,
   };

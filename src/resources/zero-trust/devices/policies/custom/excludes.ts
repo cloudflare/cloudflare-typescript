@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
+import { SplitTunnelExcludesSinglePage } from '../policies';
 
 export class Excludes extends APIResource {
   /**
@@ -13,14 +14,13 @@ export class Excludes extends APIResource {
     policyId: string,
     params: ExcludeUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ExcludeUpdateResponse | null> {
+  ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
     const { account_id, body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/devices/policy/${policyId}/exclude`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ExcludeUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/${policyId}/exclude`,
+      SplitTunnelExcludesSinglePage,
+      { body: body, method: 'put', ...options },
+    );
   }
 
   /**
@@ -31,20 +31,15 @@ export class Excludes extends APIResource {
     policyId: string,
     params: ExcludeGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ExcludeGetResponse | null> {
+  ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/devices/policy/${policyId}/exclude`,
-        options,
-      ) as Core.APIPromise<{ result: ExcludeGetResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/${policyId}/exclude`,
+      SplitTunnelExcludesSinglePage,
+      options,
+    );
   }
 }
-
-export type ExcludeUpdateResponse = Array<PoliciesAPI.SplitTunnelExclude>;
-
-export type ExcludeGetResponse = Array<PoliciesAPI.SplitTunnelExclude>;
 
 export interface ExcludeUpdateParams {
   /**
@@ -63,10 +58,7 @@ export interface ExcludeGetParams {
 }
 
 export declare namespace Excludes {
-  export {
-    type ExcludeUpdateResponse as ExcludeUpdateResponse,
-    type ExcludeGetResponse as ExcludeGetResponse,
-    type ExcludeUpdateParams as ExcludeUpdateParams,
-    type ExcludeGetParams as ExcludeGetParams,
-  };
+  export { type ExcludeUpdateParams as ExcludeUpdateParams, type ExcludeGetParams as ExcludeGetParams };
 }
+
+export { SplitTunnelExcludesSinglePage };

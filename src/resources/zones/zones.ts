@@ -15,6 +15,7 @@ import {
   CustomNameserverGetResponse,
   CustomNameserverUpdateParams,
   CustomNameserverUpdateResponse,
+  CustomNameserverUpdateResponsesSinglePage,
   CustomNameservers,
 } from './custom-nameservers';
 import * as HoldsAPI from './holds';
@@ -28,7 +29,12 @@ import {
   Plans,
 } from './plans';
 import * as RatePlansAPI from './rate-plans';
-import { RatePlanGetParams, RatePlanGetResponse, RatePlans } from './rate-plans';
+import {
+  RatePlanGetParams,
+  RatePlanGetResponse,
+  RatePlanGetResponsesSinglePage,
+  RatePlans,
+} from './rate-plans';
 import * as SettingsAPI from './settings';
 import {
   AdvancedDDoS,
@@ -485,11 +491,13 @@ export interface ZoneGetParams {
 Zones.ActivationCheck = ActivationCheck;
 Zones.Settings = Settings;
 Zones.CustomNameservers = CustomNameservers;
+Zones.CustomNameserverUpdateResponsesSinglePage = CustomNameserverUpdateResponsesSinglePage;
 Zones.Holds = Holds;
 Zones.Subscriptions = Subscriptions;
 Zones.Plans = Plans;
 Zones.AvailableRatePlansSinglePage = AvailableRatePlansSinglePage;
 Zones.RatePlans = RatePlans;
+Zones.RatePlanGetResponsesSinglePage = RatePlanGetResponsesSinglePage;
 
 export declare namespace Zones {
   export {
@@ -560,6 +568,7 @@ export declare namespace Zones {
     CustomNameservers as CustomNameservers,
     type CustomNameserverUpdateResponse as CustomNameserverUpdateResponse,
     type CustomNameserverGetResponse as CustomNameserverGetResponse,
+    CustomNameserverUpdateResponsesSinglePage as CustomNameserverUpdateResponsesSinglePage,
     type CustomNameserverUpdateParams as CustomNameserverUpdateParams,
     type CustomNameserverGetParams as CustomNameserverGetParams,
   };
@@ -593,6 +602,7 @@ export declare namespace Zones {
   export {
     RatePlans as RatePlans,
     type RatePlanGetResponse as RatePlanGetResponse,
+    RatePlanGetResponsesSinglePage as RatePlanGetResponsesSinglePage,
     type RatePlanGetParams as RatePlanGetParams,
   };
 }

@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TLSAPI from './tls';
+import { SinglePage } from '../../../pagination';
 
 export class TLS extends APIResource {
   /**
@@ -48,15 +48,17 @@ export class TLS extends APIResource {
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
     params: TLSGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSGetResponse> {
+  ): Core.PagePromise<TLSGetResponsesSinglePage, TLSGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/hostnames/settings/${settingId}`, options) as Core.APIPromise<{
-        result: TLSGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/hostnames/settings/${settingId}`,
+      TLSGetResponsesSinglePage,
+      options,
+    );
   }
 }
+
+export class TLSGetResponsesSinglePage extends SinglePage<TLSGetResponse> {}
 
 export interface Setting {
   /**
@@ -122,35 +124,31 @@ export interface TLSDeleteResponse {
   value?: SettingValue;
 }
 
-export type TLSGetResponse = Array<TLSGetResponse.TLSGetResponseItem>;
+export interface TLSGetResponse {
+  /**
+   * This is the time the tls setting was originally created for this hostname.
+   */
+  created_at?: string;
 
-export namespace TLSGetResponse {
-  export interface TLSGetResponseItem {
-    /**
-     * This is the time the tls setting was originally created for this hostname.
-     */
-    created_at?: string;
+  /**
+   * The hostname for which the tls settings are set.
+   */
+  hostname?: string;
 
-    /**
-     * The hostname for which the tls settings are set.
-     */
-    hostname?: string;
+  /**
+   * Deployment status for the given tls setting.
+   */
+  status?: string;
 
-    /**
-     * Deployment status for the given tls setting.
-     */
-    status?: string;
+  /**
+   * This is the time the tls setting was updated.
+   */
+  updated_at?: string;
 
-    /**
-     * This is the time the tls setting was updated.
-     */
-    updated_at?: string;
-
-    /**
-     * The tls setting value.
-     */
-    value?: TLSAPI.SettingValue;
-  }
+  /**
+   * The tls setting value.
+   */
+  value?: SettingValue;
 }
 
 export interface TLSUpdateParams {
@@ -179,12 +177,15 @@ export interface TLSGetParams {
   zone_id: string;
 }
 
+TLS.TLSGetResponsesSinglePage = TLSGetResponsesSinglePage;
+
 export declare namespace TLS {
   export {
     type Setting as Setting,
     type SettingValue as SettingValue,
     type TLSDeleteResponse as TLSDeleteResponse,
     type TLSGetResponse as TLSGetResponse,
+    TLSGetResponsesSinglePage as TLSGetResponsesSinglePage,
     type TLSUpdateParams as TLSUpdateParams,
     type TLSDeleteParams as TLSDeleteParams,
     type TLSGetParams as TLSGetParams,

@@ -24,7 +24,6 @@ import {
   DeviceNetworksSinglePage,
   NetworkCreateParams,
   NetworkDeleteParams,
-  NetworkDeleteResponse,
   NetworkGetParams,
   NetworkListParams,
   NetworkUpdateParams,
@@ -410,7 +409,6 @@ export declare namespace Devices {
   export {
     Networks as Networks,
     type DeviceNetwork as DeviceNetwork,
-    type NetworkDeleteResponse as NetworkDeleteResponse,
     DeviceNetworksSinglePage as DeviceNetworksSinglePage,
     type NetworkCreateParams as NetworkCreateParams,
     type NetworkUpdateParams as NetworkUpdateParams,

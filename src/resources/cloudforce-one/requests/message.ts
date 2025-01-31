@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
+import { SinglePage } from '../../../pagination';
 
 export class MessageResource extends APIResource {
   /**
@@ -63,15 +64,16 @@ export class MessageResource extends APIResource {
     requestIdentifier: string,
     body: MessageGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MessageGetResponse> {
-    return (
-      this._client.post(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: MessageGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<MessagesSinglePage, Message> {
+    return this._client.getAPIList(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message`,
+      MessagesSinglePage,
+      { body, method: 'post', ...options },
+    );
   }
 }
+
+export class MessagesSinglePage extends SinglePage<Message> {}
 
 export interface Message {
   /**
@@ -115,8 +117,6 @@ export interface MessageDeleteResponse {
    */
   success: true;
 }
-
-export type MessageGetResponse = Array<Message>;
 
 export interface MessageCreateParams {
   /**
@@ -164,11 +164,13 @@ export interface MessageGetParams {
   sort_order?: 'asc' | 'desc';
 }
 
+MessageResource.MessagesSinglePage = MessagesSinglePage;
+
 export declare namespace MessageResource {
   export {
     type Message as Message,
     type MessageDeleteResponse as MessageDeleteResponse,
-    type MessageGetResponse as MessageGetResponse,
+    MessagesSinglePage as MessagesSinglePage,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
     type MessageGetParams as MessageGetParams,

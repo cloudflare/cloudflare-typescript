@@ -2,8 +2,8 @@
 
 export { Diagnostics } from './diagnostics';
 export {
+  TraceroutesSinglePage,
   Traceroutes,
   type Traceroute,
-  type TracerouteCreateResponse,
   type TracerouteCreateParams,
 } from './traceroutes';

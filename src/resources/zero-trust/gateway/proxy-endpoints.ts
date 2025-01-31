@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class ProxyEndpoints extends APIResource {
   /**
@@ -70,16 +71,17 @@ export class ProxyEndpoints extends APIResource {
     proxyEndpointId: string,
     params: ProxyEndpointGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointGetResponse> {
+  ): Core.PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
-        options,
-      ) as Core.APIPromise<{ result: ProxyEndpointGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
+      ProxyEndpointsSinglePage,
+      options,
+    );
   }
 }
+
+export class ProxyEndpointsSinglePage extends SinglePage<ProxyEndpoint> {}
 
 /**
  * The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4
@@ -117,8 +119,6 @@ export interface ProxyEndpoint {
 }
 
 export type ProxyEndpointDeleteResponse = unknown;
-
-export type ProxyEndpointGetResponse = Array<ProxyEndpoint>;
 
 export interface ProxyEndpointCreateParams {
   /**
@@ -166,12 +166,14 @@ export interface ProxyEndpointGetParams {
   account_id: string;
 }
 
+ProxyEndpoints.ProxyEndpointsSinglePage = ProxyEndpointsSinglePage;
+
 export declare namespace ProxyEndpoints {
   export {
     type GatewayIPs as GatewayIPs,
     type ProxyEndpoint as ProxyEndpoint,
     type ProxyEndpointDeleteResponse as ProxyEndpointDeleteResponse,
-    type ProxyEndpointGetResponse as ProxyEndpointGetResponse,
+    ProxyEndpointsSinglePage as ProxyEndpointsSinglePage,
     type ProxyEndpointCreateParams as ProxyEndpointCreateParams,
     type ProxyEndpointListParams as ProxyEndpointListParams,
     type ProxyEndpointDeleteParams as ProxyEndpointDeleteParams,

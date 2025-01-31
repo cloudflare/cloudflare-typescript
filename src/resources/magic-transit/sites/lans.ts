@@ -13,14 +13,13 @@ export class LANs extends APIResource {
     siteId: string,
     params: LANCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LANCreateResponse> {
+  ): Core.PagePromise<LANsSinglePage, LAN> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/lans`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LANCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/lans`, LANsSinglePage, {
+      body,
+      method: 'post',
+      ...options,
+    });
   }
 
   /**
@@ -308,8 +307,6 @@ export interface RoutedSubnetParam {
   nat?: NatParam;
 }
 
-export type LANCreateResponse = Array<LAN>;
-
 export interface LANCreateParams {
   /**
    * Path param: Identifier
@@ -467,7 +464,6 @@ export declare namespace LANs {
     type LANStaticAddressing as LANStaticAddressing,
     type Nat as Nat,
     type RoutedSubnet as RoutedSubnet,
-    type LANCreateResponse as LANCreateResponse,
     LANsSinglePage as LANsSinglePage,
     type LANCreateParams as LANCreateParams,
     type LANUpdateParams as LANUpdateParams,

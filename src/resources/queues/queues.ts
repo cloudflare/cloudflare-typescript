@@ -10,9 +10,9 @@ import {
   ConsumerDeleteParams,
   ConsumerDeleteResponse,
   ConsumerGetParams,
-  ConsumerGetResponse,
   ConsumerUpdateParams,
   Consumers,
+  ConsumersSinglePage,
 } from './consumers';
 import * as MessagesAPI from './messages';
 import {
@@ -20,6 +20,7 @@ import {
   MessageAckResponse,
   MessagePullParams,
   MessagePullResponse,
+  MessagePullResponsesSinglePage,
   Messages,
 } from './messages';
 import { SinglePage } from '../../pagination';
@@ -211,14 +212,16 @@ export interface QueueGetParams {
 }
 
 Queues.Consumers = Consumers;
+Queues.ConsumersSinglePage = ConsumersSinglePage;
 Queues.Messages = Messages;
+Queues.MessagePullResponsesSinglePage = MessagePullResponsesSinglePage;
 
 export declare namespace Queues {
   export {
     Consumers as Consumers,
     type Consumer as Consumer,
     type ConsumerDeleteResponse as ConsumerDeleteResponse,
-    type ConsumerGetResponse as ConsumerGetResponse,
+    ConsumersSinglePage as ConsumersSinglePage,
     type ConsumerCreateParams as ConsumerCreateParams,
     type ConsumerUpdateParams as ConsumerUpdateParams,
     type ConsumerDeleteParams as ConsumerDeleteParams,
@@ -229,6 +232,7 @@ export declare namespace Queues {
     Messages as Messages,
     type MessageAckResponse as MessageAckResponse,
     type MessagePullResponse as MessagePullResponse,
+    MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
     type MessageAckParams as MessageAckParams,
     type MessagePullParams as MessagePullParams,
   };

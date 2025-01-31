@@ -17,11 +17,11 @@ import {
   DNS,
   DNSCreateParams,
   DNSDeleteParams,
-  DNSDeleteResponse,
   DNSEditParams,
   DNSGetParams,
   DNSGetResponse,
   DNSRecord,
+  DNSRecordsSinglePage,
 } from './dns';
 import * as RulesAPI from './rules/rules';
 import {
@@ -155,6 +155,7 @@ export interface EmailRoutingGetParams {
 }
 
 EmailRouting.DNS = DNS;
+EmailRouting.DNSRecordsSinglePage = DNSRecordsSinglePage;
 EmailRouting.Rules = Rules;
 EmailRouting.EmailRoutingRulesV4PagePaginationArray = EmailRoutingRulesV4PagePaginationArray;
 EmailRouting.Addresses = Addresses;
@@ -164,8 +165,8 @@ export declare namespace EmailRouting {
   export {
     DNS as DNS,
     type DNSRecord as DNSRecord,
-    type DNSDeleteResponse as DNSDeleteResponse,
     type DNSGetResponse as DNSGetResponse,
+    DNSRecordsSinglePage as DNSRecordsSinglePage,
     type DNSCreateParams as DNSCreateParams,
     type DNSDeleteParams as DNSDeleteParams,
     type DNSEditParams as DNSEditParams,

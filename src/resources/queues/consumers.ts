@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as Shared from '../shared';
+import { SinglePage } from '../../pagination';
 
 export class Consumers extends APIResource {
   /**
@@ -60,15 +61,17 @@ export class Consumers extends APIResource {
     queueId: string,
     params: ConsumerGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerGetResponse> {
+  ): Core.PagePromise<ConsumersSinglePage, Consumer> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/queues/${queueId}/consumers`, options) as Core.APIPromise<{
-        result: ConsumerGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/queues/${queueId}/consumers`,
+      ConsumersSinglePage,
+      options,
+    );
   }
 }
+
+export class ConsumersSinglePage extends SinglePage<Consumer> {}
 
 export type Consumer = Consumer.MqWorkerConsumer | Consumer.MqHTTPConsumer;
 
@@ -183,8 +186,6 @@ export interface ConsumerDeleteResponse {
    */
   success?: true;
 }
-
-export type ConsumerGetResponse = Array<Consumer>;
 
 export type ConsumerCreateParams =
   | ConsumerCreateParams.MqWorkerConsumer
@@ -426,11 +427,13 @@ export interface ConsumerGetParams {
   account_id: string;
 }
 
+Consumers.ConsumersSinglePage = ConsumersSinglePage;
+
 export declare namespace Consumers {
   export {
     type Consumer as Consumer,
     type ConsumerDeleteResponse as ConsumerDeleteResponse,
-    type ConsumerGetResponse as ConsumerGetResponse,
+    ConsumersSinglePage as ConsumersSinglePage,
     type ConsumerCreateParams as ConsumerCreateParams,
     type ConsumerUpdateParams as ConsumerUpdateParams,
     type ConsumerDeleteParams as ConsumerDeleteParams,

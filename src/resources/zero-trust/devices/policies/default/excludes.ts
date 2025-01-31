@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
+import { SplitTunnelExcludesSinglePage } from '../policies';
 
 export class Excludes extends APIResource {
   /**
@@ -11,32 +12,30 @@ export class Excludes extends APIResource {
   update(
     params: ExcludeUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ExcludeUpdateResponse | null> {
+  ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
     const { account_id, body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/devices/policy/exclude`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ExcludeUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/exclude`,
+      SplitTunnelExcludesSinglePage,
+      { body: body, method: 'put', ...options },
+    );
   }
 
   /**
    * Fetches the list of routes excluded from the WARP client's tunnel.
    */
-  get(params: ExcludeGetParams, options?: Core.RequestOptions): Core.APIPromise<ExcludeGetResponse | null> {
+  get(
+    params: ExcludeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/policy/exclude`, options) as Core.APIPromise<{
-        result: ExcludeGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/exclude`,
+      SplitTunnelExcludesSinglePage,
+      options,
+    );
   }
 }
-
-export type ExcludeUpdateResponse = Array<PoliciesAPI.SplitTunnelExclude>;
-
-export type ExcludeGetResponse = Array<PoliciesAPI.SplitTunnelExclude>;
 
 export interface ExcludeUpdateParams {
   /**
@@ -55,10 +54,7 @@ export interface ExcludeGetParams {
 }
 
 export declare namespace Excludes {
-  export {
-    type ExcludeUpdateResponse as ExcludeUpdateResponse,
-    type ExcludeGetResponse as ExcludeGetResponse,
-    type ExcludeUpdateParams as ExcludeUpdateParams,
-    type ExcludeGetParams as ExcludeGetParams,
-  };
+  export { type ExcludeUpdateParams as ExcludeUpdateParams, type ExcludeGetParams as ExcludeGetParams };
 }
+
+export { SplitTunnelExcludesSinglePage };

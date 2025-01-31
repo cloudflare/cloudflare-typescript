@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class References extends APIResource {
   /**
@@ -11,32 +12,26 @@ export class References extends APIResource {
     poolId: string,
     params: ReferenceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceGetResponse> {
+  ): Core.PagePromise<ReferenceGetResponsesSinglePage, ReferenceGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/load_balancers/pools/${poolId}/references`,
-        options,
-      ) as Core.APIPromise<{ result: ReferenceGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/load_balancers/pools/${poolId}/references`,
+      ReferenceGetResponsesSinglePage,
+      options,
+    );
   }
 }
 
-/**
- * List of resources that reference a given pool.
- */
-export type ReferenceGetResponse = Array<ReferenceGetResponse.ReferenceGetResponseItem>;
+export class ReferenceGetResponsesSinglePage extends SinglePage<ReferenceGetResponse> {}
 
-export namespace ReferenceGetResponse {
-  export interface ReferenceGetResponseItem {
-    reference_type?: '*' | 'referral' | 'referrer';
+export interface ReferenceGetResponse {
+  reference_type?: '*' | 'referral' | 'referrer';
 
-    resource_id?: string;
+  resource_id?: string;
 
-    resource_name?: string;
+  resource_name?: string;
 
-    resource_type?: string;
-  }
+  resource_type?: string;
 }
 
 export interface ReferenceGetParams {
@@ -46,6 +41,12 @@ export interface ReferenceGetParams {
   account_id: string;
 }
 
+References.ReferenceGetResponsesSinglePage = ReferenceGetResponsesSinglePage;
+
 export declare namespace References {
-  export { type ReferenceGetResponse as ReferenceGetResponse, type ReferenceGetParams as ReferenceGetParams };
+  export {
+    type ReferenceGetResponse as ReferenceGetResponse,
+    ReferenceGetResponsesSinglePage as ReferenceGetResponsesSinglePage,
+    type ReferenceGetParams as ReferenceGetParams,
+  };
 }

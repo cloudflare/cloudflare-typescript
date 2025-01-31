@@ -5,7 +5,12 @@ import * as Core from '../../../../core';
 import * as UploadAPI from './upload';
 import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
 import * as VersionsAPI from './versions/versions';
-import { VersionCreateParams, VersionCreateResponse, Versions } from './versions/versions';
+import {
+  VersionCreateParams,
+  VersionCreateResponse,
+  VersionCreateResponsesSinglePage,
+  Versions,
+} from './versions/versions';
 import { SinglePage } from '../../../../pagination';
 
 export class Datasets extends APIResource {
@@ -225,6 +230,7 @@ export interface DatasetGetParams {
 Datasets.DatasetsSinglePage = DatasetsSinglePage;
 Datasets.Upload = UploadAPIUpload;
 Datasets.Versions = Versions;
+Datasets.VersionCreateResponsesSinglePage = VersionCreateResponsesSinglePage;
 
 export declare namespace Datasets {
   export {
@@ -249,6 +255,7 @@ export declare namespace Datasets {
   export {
     Versions as Versions,
     type VersionCreateResponse as VersionCreateResponse,
+    VersionCreateResponsesSinglePage as VersionCreateResponsesSinglePage,
     type VersionCreateParams as VersionCreateParams,
   };
 }

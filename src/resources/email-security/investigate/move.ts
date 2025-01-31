@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class Move extends APIResource {
   /**
@@ -11,68 +12,65 @@ export class Move extends APIResource {
     postfixId: string,
     params: MoveCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MoveCreateResponse> {
+  ): Core.PagePromise<MoveCreateResponsesSinglePage, MoveCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/email-security/investigate/${postfixId}/move`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: MoveCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/email-security/investigate/${postfixId}/move`,
+      MoveCreateResponsesSinglePage,
+      { body, method: 'post', ...options },
+    );
   }
 
   /**
    * Move multiple messages
    */
-  bulk(params: MoveBulkParams, options?: Core.RequestOptions): Core.APIPromise<MoveBulkResponse> {
+  bulk(
+    params: MoveBulkParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MoveBulkResponsesSinglePage, MoveBulkResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/email-security/investigate/move`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: MoveBulkResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/email-security/investigate/move`,
+      MoveBulkResponsesSinglePage,
+      { body, method: 'post', ...options },
+    );
   }
 }
 
-export type MoveCreateResponse = Array<MoveCreateResponse.MoveCreateResponseItem>;
+export class MoveCreateResponsesSinglePage extends SinglePage<MoveCreateResponse> {}
 
-export namespace MoveCreateResponse {
-  export interface MoveCreateResponseItem {
-    completed_timestamp: string;
+export class MoveBulkResponsesSinglePage extends SinglePage<MoveBulkResponse> {}
 
-    destination: string;
+export interface MoveCreateResponse {
+  completed_timestamp: string;
 
-    item_count: number;
+  destination: string;
 
-    message_id: string;
+  item_count: number;
 
-    operation: string;
+  message_id: string;
 
-    recipient: string;
+  operation: string;
 
-    status: string;
-  }
+  recipient: string;
+
+  status: string;
 }
 
-export type MoveBulkResponse = Array<MoveBulkResponse.MoveBulkResponseItem>;
+export interface MoveBulkResponse {
+  completed_timestamp: string;
 
-export namespace MoveBulkResponse {
-  export interface MoveBulkResponseItem {
-    completed_timestamp: string;
+  destination: string;
 
-    destination: string;
+  item_count: number;
 
-    item_count: number;
+  message_id: string;
 
-    message_id: string;
+  operation: string;
 
-    operation: string;
+  recipient: string;
 
-    recipient: string;
-
-    status: string;
-  }
+  status: string;
 }
 
 export interface MoveCreateParams {
@@ -114,10 +112,15 @@ export interface MoveBulkParams {
   postfix_ids: Array<string>;
 }
 
+Move.MoveCreateResponsesSinglePage = MoveCreateResponsesSinglePage;
+Move.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
+
 export declare namespace Move {
   export {
     type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
+    MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
+    MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
     type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,
   };

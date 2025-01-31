@@ -26,7 +26,6 @@ import * as PoolsAPI from './pools/pools';
 import {
   Pool,
   PoolBulkEditParams,
-  PoolBulkEditResponse,
   PoolCreateParams,
   PoolDeleteParams,
   PoolDeleteResponse,
@@ -2115,7 +2114,6 @@ export declare namespace LoadBalancers {
     Pools as Pools,
     type Pool as Pool,
     type PoolDeleteResponse as PoolDeleteResponse,
-    type PoolBulkEditResponse as PoolBulkEditResponse,
     PoolsSinglePage as PoolsSinglePage,
     type PoolCreateParams as PoolCreateParams,
     type PoolUpdateParams as PoolUpdateParams,

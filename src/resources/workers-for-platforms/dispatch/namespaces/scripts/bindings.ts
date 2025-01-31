@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
+import { SinglePage } from '../../../../../pagination';
 
 export class Bindings extends APIResource {
   /**
@@ -13,23 +14,22 @@ export class Bindings extends APIResource {
     scriptName: string,
     params: BindingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BindingGetResponse> {
+  ): Core.PagePromise<BindingGetResponsesSinglePage, BindingGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/bindings`,
-        options,
-      ) as Core.APIPromise<{ result: BindingGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/bindings`,
+      BindingGetResponsesSinglePage,
+      options,
+    );
   }
 }
 
+export class BindingGetResponsesSinglePage extends SinglePage<BindingGetResponse> {}
+
 /**
- * List of bindings attached to a Worker. You can find more about bindings on our
- * docs:
- * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+ * A binding to allow the Worker to communicate with resources
  */
-export type BindingGetResponse = Array<
+export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindAny
   | BindingGetResponse.WorkersBindingKindAI
   | BindingGetResponse.WorkersBindingKindAnalyticsEngine
@@ -49,8 +49,7 @@ export type BindingGetResponse = Array<
   | BindingGetResponse.WorkersBindingKindService
   | BindingGetResponse.WorkersBindingKindTailConsumer
   | BindingGetResponse.WorkersBindingKindVectorize
-  | BindingGetResponse.WorkersBindingKindVersionMetadata
->;
+  | BindingGetResponse.WorkersBindingKindVersionMetadata;
 
 export namespace BindingGetResponse {
   export interface WorkersBindingKindAny {
@@ -438,6 +437,12 @@ export interface BindingGetParams {
   account_id: string;
 }
 
+Bindings.BindingGetResponsesSinglePage = BindingGetResponsesSinglePage;
+
 export declare namespace Bindings {
-  export { type BindingGetResponse as BindingGetResponse, type BindingGetParams as BindingGetParams };
+  export {
+    type BindingGetResponse as BindingGetResponse,
+    BindingGetResponsesSinglePage as BindingGetResponsesSinglePage,
+    type BindingGetParams as BindingGetParams,
+  };
 }

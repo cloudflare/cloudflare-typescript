@@ -2,7 +2,9 @@
 
 export { ContentScanning } from './content-scanning';
 export {
+  PayloadCreateResponsesSinglePage,
   PayloadListResponsesSinglePage,
+  PayloadDeleteResponsesSinglePage,
   Payloads,
   type PayloadCreateResponse,
   type PayloadListResponse,
