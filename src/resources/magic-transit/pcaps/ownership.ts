@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class OwnershipResource extends APIResource {
   /**
@@ -37,13 +38,9 @@ export class OwnershipResource extends APIResource {
   get(
     params: OwnershipGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OwnershipGetResponse | null> {
+  ): Core.PagePromise<OwnershipsSinglePage, Ownership> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/pcaps/ownership`, options) as Core.APIPromise<{
-        result: OwnershipGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/pcaps/ownership`, OwnershipsSinglePage, options);
   }
 
   /**
@@ -59,6 +56,8 @@ export class OwnershipResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class OwnershipsSinglePage extends SinglePage<Ownership> {}
 
 export interface Ownership {
   /**
@@ -91,8 +90,6 @@ export interface Ownership {
    */
   validated?: string;
 }
-
-export type OwnershipGetResponse = Array<Ownership>;
 
 export interface OwnershipCreateParams {
   /**
@@ -139,10 +136,12 @@ export interface OwnershipValidateParams {
   ownership_challenge: string;
 }
 
+OwnershipResource.OwnershipsSinglePage = OwnershipsSinglePage;
+
 export declare namespace OwnershipResource {
   export {
     type Ownership as Ownership,
-    type OwnershipGetResponse as OwnershipGetResponse,
+    OwnershipsSinglePage as OwnershipsSinglePage,
     type OwnershipCreateParams as OwnershipCreateParams,
     type OwnershipDeleteParams as OwnershipDeleteParams,
     type OwnershipGetParams as OwnershipGetParams,

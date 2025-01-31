@@ -10,7 +10,7 @@ export {
   type DomainHistoryGetParams,
 } from './domain-history';
 export { Domains, type Domain, type DomainGetParams } from './domains/index';
-export { IPLists, type IPList, type IPListGetResponse, type IPListGetParams } from './ip-lists';
+export { IPListsSinglePage, IPLists, type IPList, type IPListGetParams } from './ip-lists';
 export { IPs, type IP, type IPGetResponse, type IPGetParams } from './ips';
 export {
   IndicatorFeedListResponsesSinglePage,

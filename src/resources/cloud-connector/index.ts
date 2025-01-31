@@ -2,6 +2,7 @@
 
 export { CloudConnector } from './cloud-connector';
 export {
+  RuleUpdateResponsesSinglePage,
   RuleListResponsesSinglePage,
   Rules,
   type RuleUpdateResponse,

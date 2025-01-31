@@ -65,7 +65,7 @@ export {
   type RiskScoringGetParams,
   type RiskScoringResetParams,
 } from './risk-scoring/index';
-export { Seats, type Seat, type SeatEditResponse, type SeatEditParams } from './seats';
+export { SeatsSinglePage, Seats, type Seat, type SeatEditParams } from './seats';
 export {
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,

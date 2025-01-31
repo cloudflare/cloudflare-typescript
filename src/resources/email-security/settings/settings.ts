@@ -35,6 +35,7 @@ import * as DomainsAPI from './domains';
 import {
   DomainBulkDeleteParams,
   DomainBulkDeleteResponse,
+  DomainBulkDeleteResponsesSinglePage,
   DomainDeleteParams,
   DomainDeleteResponse,
   DomainEditParams,
@@ -92,6 +93,7 @@ Settings.BlockSenders = BlockSenders;
 Settings.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;
 Settings.Domains = Domains;
 Settings.DomainListResponsesV4PagePaginationArray = DomainListResponsesV4PagePaginationArray;
+Settings.DomainBulkDeleteResponsesSinglePage = DomainBulkDeleteResponsesSinglePage;
 Settings.ImpersonationRegistry = ImpersonationRegistry;
 Settings.ImpersonationRegistryListResponsesV4PagePaginationArray =
   ImpersonationRegistryListResponsesV4PagePaginationArray;
@@ -137,6 +139,7 @@ export declare namespace Settings {
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
+    DomainBulkDeleteResponsesSinglePage as DomainBulkDeleteResponsesSinglePage,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
     type DomainBulkDeleteParams as DomainBulkDeleteParams,

@@ -30,6 +30,7 @@ export {
 } from './block-senders';
 export {
   DomainListResponsesV4PagePaginationArray,
+  DomainBulkDeleteResponsesSinglePage,
   Domains,
   type DomainListResponse,
   type DomainDeleteResponse,

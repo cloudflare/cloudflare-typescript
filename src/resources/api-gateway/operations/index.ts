@@ -2,6 +2,7 @@
 
 export {
   OperationListResponsesV4PagePaginationArray,
+  OperationBulkCreateResponsesSinglePage,
   Operations,
   type APIShield,
   type OperationCreateResponse,

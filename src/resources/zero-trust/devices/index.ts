@@ -4,7 +4,6 @@ export {
   DeviceNetworksSinglePage,
   Networks,
   type DeviceNetwork,
-  type NetworkDeleteResponse,
   type NetworkCreateParams,
   type NetworkUpdateParams,
   type NetworkListParams,
@@ -71,6 +70,9 @@ export {
   type SettingEditParams,
 } from './settings';
 export {
+  SplitTunnelExcludesSinglePage,
+  SplitTunnelIncludesSinglePage,
+  FallbackDomainsSinglePage,
   SettingsPoliciesSinglePage,
   Policies,
   type DevicePolicyCertificates,

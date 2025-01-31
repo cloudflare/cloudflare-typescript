@@ -2,7 +2,13 @@
 
 import { APIResource } from '../../resource';
 import * as EdgeAPI from './edge';
-import { Edge, EdgeCreateParams, EdgeGetParams, EdgeGetResponse, InstantLogpushJob } from './edge';
+import {
+  Edge,
+  EdgeCreateParams,
+  EdgeGetParams,
+  InstantLogpushJob,
+  InstantLogpushJobsSinglePage,
+} from './edge';
 import * as JobsAPI from './jobs';
 import {
   JobCreateParams,
@@ -47,6 +53,7 @@ export class Logpush extends APIResource {
 
 Logpush.Datasets = Datasets;
 Logpush.Edge = Edge;
+Logpush.InstantLogpushJobsSinglePage = InstantLogpushJobsSinglePage;
 Logpush.Jobs = Jobs;
 Logpush.LogpushJobsSinglePage = LogpushJobsSinglePage;
 Logpush.Ownership = Ownership;
@@ -58,7 +65,7 @@ export declare namespace Logpush {
   export {
     Edge as Edge,
     type InstantLogpushJob as InstantLogpushJob,
-    type EdgeGetResponse as EdgeGetResponse,
+    InstantLogpushJobsSinglePage as InstantLogpushJobsSinglePage,
     type EdgeCreateParams as EdgeCreateParams,
     type EdgeGetParams as EdgeGetParams,
   };

@@ -10,6 +10,8 @@ export {
   type InvestigateGetParams,
 } from './investigate';
 export {
+  MoveCreateResponsesSinglePage,
+  MoveBulkResponsesSinglePage,
   Move,
   type MoveCreateResponse,
   type MoveBulkResponse,
@@ -25,5 +27,10 @@ export {
 } from './preview';
 export { Raw, type RawGetResponse, type RawGetParams } from './raw';
 export { Reclassify, type ReclassifyCreateResponse, type ReclassifyCreateParams } from './reclassify';
-export { Release, type ReleaseBulkResponse, type ReleaseBulkParams } from './release';
+export {
+  ReleaseBulkResponsesSinglePage,
+  Release,
+  type ReleaseBulkResponse,
+  type ReleaseBulkParams,
+} from './release';
 export { Trace, type TraceGetResponse, type TraceGetParams } from './trace';

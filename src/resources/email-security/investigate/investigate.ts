@@ -5,7 +5,15 @@ import * as Core from '../../../core';
 import * as DetectionsAPI from './detections';
 import { DetectionGetParams, DetectionGetResponse, Detections } from './detections';
 import * as MoveAPI from './move';
-import { Move, MoveBulkParams, MoveBulkResponse, MoveCreateParams, MoveCreateResponse } from './move';
+import {
+  Move,
+  MoveBulkParams,
+  MoveBulkResponse,
+  MoveBulkResponsesSinglePage,
+  MoveCreateParams,
+  MoveCreateResponse,
+  MoveCreateResponsesSinglePage,
+} from './move';
 import * as PreviewAPI from './preview';
 import {
   Preview,
@@ -19,7 +27,7 @@ import { Raw, RawGetParams, RawGetResponse } from './raw';
 import * as ReclassifyAPI from './reclassify';
 import { Reclassify, ReclassifyCreateParams, ReclassifyCreateResponse } from './reclassify';
 import * as ReleaseAPI from './release';
-import { Release, ReleaseBulkParams, ReleaseBulkResponse } from './release';
+import { Release, ReleaseBulkParams, ReleaseBulkResponse, ReleaseBulkResponsesSinglePage } from './release';
 import * as TraceAPI from './trace';
 import { Trace, TraceGetParams, TraceGetResponse } from './trace';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -342,8 +350,11 @@ Investigate.Preview = Preview;
 Investigate.Raw = Raw;
 Investigate.Trace = Trace;
 Investigate.Move = Move;
+Investigate.MoveCreateResponsesSinglePage = MoveCreateResponsesSinglePage;
+Investigate.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
 Investigate.Reclassify = Reclassify;
 Investigate.Release = Release;
+Investigate.ReleaseBulkResponsesSinglePage = ReleaseBulkResponsesSinglePage;
 
 export declare namespace Investigate {
   export {
@@ -376,6 +387,8 @@ export declare namespace Investigate {
     Move as Move,
     type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
+    MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
+    MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
     type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,
   };
@@ -389,6 +402,7 @@ export declare namespace Investigate {
   export {
     Release as Release,
     type ReleaseBulkResponse as ReleaseBulkResponse,
+    ReleaseBulkResponsesSinglePage as ReleaseBulkResponsesSinglePage,
     type ReleaseBulkParams as ReleaseBulkParams,
   };
 }

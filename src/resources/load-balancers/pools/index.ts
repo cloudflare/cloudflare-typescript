@@ -12,7 +12,6 @@ export {
   Pools,
   type Pool,
   type PoolDeleteResponse,
-  type PoolBulkEditResponse,
   type PoolCreateParams,
   type PoolUpdateParams,
   type PoolListParams,
@@ -21,4 +20,9 @@ export {
   type PoolEditParams,
   type PoolGetParams,
 } from './pools';
-export { References, type ReferenceGetResponse, type ReferenceGetParams } from './references';
+export {
+  ReferenceGetResponsesSinglePage,
+  References,
+  type ReferenceGetResponse,
+  type ReferenceGetParams,
+} from './references';

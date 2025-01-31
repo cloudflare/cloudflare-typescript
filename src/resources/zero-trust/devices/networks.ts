@@ -57,14 +57,13 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkDeleteResponse | null> {
+  ): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/devices/networks/${networkId}`,
-        options,
-      ) as Core.APIPromise<{ result: NetworkDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/networks/${networkId}`,
+      DeviceNetworksSinglePage,
+      { method: 'delete', ...options },
+    );
   }
 
   /**
@@ -129,8 +128,6 @@ export namespace DeviceNetwork {
     sha256?: string;
   }
 }
-
-export type NetworkDeleteResponse = Array<DeviceNetwork>;
 
 export interface NetworkCreateParams {
   /**
@@ -227,7 +224,6 @@ Networks.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
 export declare namespace Networks {
   export {
     type DeviceNetwork as DeviceNetwork,
-    type NetworkDeleteResponse as NetworkDeleteResponse,
     DeviceNetworksSinglePage as DeviceNetworksSinglePage,
     type NetworkCreateParams as NetworkCreateParams,
     type NetworkUpdateParams as NetworkUpdateParams,

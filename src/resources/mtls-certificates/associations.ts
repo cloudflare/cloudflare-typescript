@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Associations extends APIResource {
   /**
@@ -11,16 +12,17 @@ export class Associations extends APIResource {
     mtlsCertificateId: string,
     params: AssociationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AssociationGetResponse> {
+  ): Core.PagePromise<CertificateAsssociationsSinglePage, CertificateAsssociation> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}/associations`,
-        options,
-      ) as Core.APIPromise<{ result: AssociationGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}/associations`,
+      CertificateAsssociationsSinglePage,
+      options,
+    );
   }
 }
+
+export class CertificateAsssociationsSinglePage extends SinglePage<CertificateAsssociation> {}
 
 export interface CertificateAsssociation {
   /**
@@ -34,8 +36,6 @@ export interface CertificateAsssociation {
   status?: string;
 }
 
-export type AssociationGetResponse = Array<CertificateAsssociation>;
-
 export interface AssociationGetParams {
   /**
    * Identifier
@@ -43,10 +43,12 @@ export interface AssociationGetParams {
   account_id: string;
 }
 
+Associations.CertificateAsssociationsSinglePage = CertificateAsssociationsSinglePage;
+
 export declare namespace Associations {
   export {
     type CertificateAsssociation as CertificateAsssociation,
-    type AssociationGetResponse as AssociationGetResponse,
+    CertificateAsssociationsSinglePage as CertificateAsssociationsSinglePage,
     type AssociationGetParams as AssociationGetParams,
   };
 }

@@ -2,20 +2,19 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class IPLists extends APIResource {
   /**
    * Get IP Lists
    */
-  get(params: IPListGetParams, options?: Core.RequestOptions): Core.APIPromise<IPListGetResponse | null> {
+  get(params: IPListGetParams, options?: Core.RequestOptions): Core.PagePromise<IPListsSinglePage, IPList> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/intel/ip-list`, options) as Core.APIPromise<{
-        result: IPListGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/intel/ip-list`, IPListsSinglePage, options);
   }
 }
+
+export class IPListsSinglePage extends SinglePage<IPList> {}
 
 export interface IPList {
   id?: number;
@@ -25,8 +24,6 @@ export interface IPList {
   name?: string;
 }
 
-export type IPListGetResponse = Array<IPList>;
-
 export interface IPListGetParams {
   /**
    * Identifier
@@ -34,10 +31,12 @@ export interface IPListGetParams {
   account_id: string;
 }
 
+IPLists.IPListsSinglePage = IPListsSinglePage;
+
 export declare namespace IPLists {
   export {
     type IPList as IPList,
-    type IPListGetResponse as IPListGetResponse,
+    IPListsSinglePage as IPListsSinglePage,
     type IPListGetParams as IPListGetParams,
   };
 }

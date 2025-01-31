@@ -2,37 +2,38 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class Release extends APIResource {
   /**
    * Release messages from quarantine
    */
-  bulk(params: ReleaseBulkParams, options?: Core.RequestOptions): Core.APIPromise<ReleaseBulkResponse> {
+  bulk(
+    params: ReleaseBulkParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ReleaseBulkResponsesSinglePage, ReleaseBulkResponse> {
     const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/email-security/investigate/release`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ReleaseBulkResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/email-security/investigate/release`,
+      ReleaseBulkResponsesSinglePage,
+      { body: body, method: 'post', ...options },
+    );
   }
 }
 
-export type ReleaseBulkResponse = Array<ReleaseBulkResponse.ReleaseBulkResponseItem>;
+export class ReleaseBulkResponsesSinglePage extends SinglePage<ReleaseBulkResponse> {}
 
-export namespace ReleaseBulkResponse {
-  export interface ReleaseBulkResponseItem {
-    /**
-     * The identifier of the message.
-     */
-    postfix_id: string;
+export interface ReleaseBulkResponse {
+  /**
+   * The identifier of the message.
+   */
+  postfix_id: string;
 
-    delivered?: Array<string> | null;
+  delivered?: Array<string> | null;
 
-    failed?: Array<string> | null;
+  failed?: Array<string> | null;
 
-    undelivered?: Array<string> | null;
-  }
+  undelivered?: Array<string> | null;
 }
 
 export interface ReleaseBulkParams {
@@ -48,6 +49,12 @@ export interface ReleaseBulkParams {
   body: Array<string>;
 }
 
+Release.ReleaseBulkResponsesSinglePage = ReleaseBulkResponsesSinglePage;
+
 export declare namespace Release {
-  export { type ReleaseBulkResponse as ReleaseBulkResponse, type ReleaseBulkParams as ReleaseBulkParams };
+  export {
+    type ReleaseBulkResponse as ReleaseBulkResponse,
+    ReleaseBulkResponsesSinglePage as ReleaseBulkResponsesSinglePage,
+    type ReleaseBulkParams as ReleaseBulkParams,
+  };
 }

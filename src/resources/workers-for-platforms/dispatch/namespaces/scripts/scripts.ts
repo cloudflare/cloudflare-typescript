@@ -8,7 +8,7 @@ import * as TailAPI from '../../../../workers/scripts/tail';
 import * as AssetUploadAPI from './asset-upload';
 import { AssetUpload, AssetUploadCreateParams, AssetUploadCreateResponse } from './asset-upload';
 import * as BindingsAPI from './bindings';
-import { BindingGetParams, BindingGetResponse, Bindings } from './bindings';
+import { BindingGetParams, BindingGetResponse, BindingGetResponsesSinglePage, Bindings } from './bindings';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as SecretsAPI from './secrets';
@@ -40,6 +40,7 @@ import {
   TagListResponsesSinglePage,
   TagUpdateParams,
   TagUpdateResponse,
+  TagUpdateResponsesSinglePage,
   Tags,
 } from './tags';
 
@@ -842,9 +843,11 @@ Scripts.AssetUpload = AssetUpload;
 Scripts.Content = Content;
 Scripts.Settings = Settings;
 Scripts.Bindings = Bindings;
+Scripts.BindingGetResponsesSinglePage = BindingGetResponsesSinglePage;
 Scripts.Secrets = Secrets;
 Scripts.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
 Scripts.Tags = Tags;
+Scripts.TagUpdateResponsesSinglePage = TagUpdateResponsesSinglePage;
 Scripts.TagListResponsesSinglePage = TagListResponsesSinglePage;
 
 export declare namespace Scripts {
@@ -879,6 +882,7 @@ export declare namespace Scripts {
   export {
     Bindings as Bindings,
     type BindingGetResponse as BindingGetResponse,
+    BindingGetResponsesSinglePage as BindingGetResponsesSinglePage,
     type BindingGetParams as BindingGetParams,
   };
 
@@ -899,6 +903,7 @@ export declare namespace Scripts {
     type TagUpdateResponse as TagUpdateResponse,
     type TagListResponse as TagListResponse,
     type TagDeleteResponse as TagDeleteResponse,
+    TagUpdateResponsesSinglePage as TagUpdateResponsesSinglePage,
     TagListResponsesSinglePage as TagListResponsesSinglePage,
     type TagUpdateParams as TagUpdateParams,
     type TagListParams as TagListParams,

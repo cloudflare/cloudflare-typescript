@@ -15,7 +15,6 @@ export {
   Subscriptions,
   type SubscriptionUpdateResponse,
   type SubscriptionDeleteResponse,
-  type SubscriptionGetResponse,
   type SubscriptionUpdateParams,
 } from './subscriptions';
 export {
