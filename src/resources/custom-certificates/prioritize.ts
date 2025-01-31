@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as CustomCertificatesAPI from './custom-certificates';
+import { CustomCertificatesSinglePage } from './custom-certificates';
 
 export class Prioritize extends APIResource {
   /**
@@ -13,18 +14,15 @@ export class Prioritize extends APIResource {
   update(
     params: PrioritizeUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PrioritizeUpdateResponse> {
+  ): Core.PagePromise<CustomCertificatesSinglePage, CustomCertificatesAPI.CustomCertificate> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/custom_certificates/prioritize`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PrioritizeUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/custom_certificates/prioritize`,
+      CustomCertificatesSinglePage,
+      { body, method: 'put', ...options },
+    );
   }
 }
-
-export type PrioritizeUpdateResponse = Array<CustomCertificatesAPI.CustomCertificate>;
 
 export interface PrioritizeUpdateParams {
   /**
@@ -56,8 +54,7 @@ export namespace PrioritizeUpdateParams {
 }
 
 export declare namespace Prioritize {
-  export {
-    type PrioritizeUpdateResponse as PrioritizeUpdateResponse,
-    type PrioritizeUpdateParams as PrioritizeUpdateParams,
-  };
+  export { type PrioritizeUpdateParams as PrioritizeUpdateParams };
 }
+
+export { CustomCertificatesSinglePage };

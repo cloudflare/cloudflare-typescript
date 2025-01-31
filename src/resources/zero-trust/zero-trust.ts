@@ -10,7 +10,7 @@ import {
   ConnectivitySettings,
 } from './connectivity-settings';
 import * as SeatsAPI from './seats';
-import { Seat, SeatEditParams, SeatEditResponse, Seats } from './seats';
+import { Seat, SeatEditParams, Seats, SeatsSinglePage } from './seats';
 import * as AccessAPI from './access/access';
 import { Access } from './access/access';
 import * as DevicesAPI from './devices/devices';
@@ -113,6 +113,7 @@ ZeroTrust.IdentityProviders = IdentityProviders;
 ZeroTrust.IdentityProviderListResponsesSinglePage = IdentityProviderListResponsesSinglePage;
 ZeroTrust.Organizations = Organizations;
 ZeroTrust.Seats = Seats;
+ZeroTrust.SeatsSinglePage = SeatsSinglePage;
 ZeroTrust.Access = Access;
 ZeroTrust.DEX = DEX;
 ZeroTrust.Tunnels = Tunnels;
@@ -164,7 +165,7 @@ export declare namespace ZeroTrust {
   export {
     Seats as Seats,
     type Seat as Seat,
-    type SeatEditResponse as SeatEditResponse,
+    SeatsSinglePage as SeatsSinglePage,
     type SeatEditParams as SeatEditParams,
   };
 

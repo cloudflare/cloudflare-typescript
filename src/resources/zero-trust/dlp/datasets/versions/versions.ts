@@ -4,6 +4,7 @@ import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as EntriesAPI from './entries';
 import { Entries, EntryCreateParams, EntryCreateResponse } from './entries';
+import { SinglePage } from '../../../../../pagination';
 
 export class Versions extends APIResource {
   entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
@@ -18,29 +19,26 @@ export class Versions extends APIResource {
     version: number,
     params: VersionCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionCreateResponse> {
+  ): Core.PagePromise<VersionCreateResponsesSinglePage, VersionCreateResponse> {
     const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/versions/${version}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: VersionCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/dlp/datasets/${datasetId}/versions/${version}`,
+      VersionCreateResponsesSinglePage,
+      { body: body, method: 'post', ...options },
+    );
   }
 }
 
-export type VersionCreateResponse = Array<VersionCreateResponse.VersionCreateResponseItem>;
+export class VersionCreateResponsesSinglePage extends SinglePage<VersionCreateResponse> {}
 
-export namespace VersionCreateResponse {
-  export interface VersionCreateResponseItem {
-    entry_id: string;
+export interface VersionCreateResponse {
+  entry_id: string;
 
-    header_name: string;
+  header_name: string;
 
-    num_cells: number;
+  num_cells: number;
 
-    upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
-  }
+  upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
 }
 
 export interface VersionCreateParams {
@@ -73,11 +71,13 @@ export namespace VersionCreateParams {
   }
 }
 
+Versions.VersionCreateResponsesSinglePage = VersionCreateResponsesSinglePage;
 Versions.Entries = Entries;
 
 export declare namespace Versions {
   export {
     type VersionCreateResponse as VersionCreateResponse,
+    VersionCreateResponsesSinglePage as VersionCreateResponsesSinglePage,
     type VersionCreateParams as VersionCreateParams,
   };
 

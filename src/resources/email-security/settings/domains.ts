@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Domains extends APIResource {
   /**
@@ -43,14 +43,13 @@ export class Domains extends APIResource {
   bulkDelete(
     params: DomainBulkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainBulkDeleteResponse> {
+  ): Core.PagePromise<DomainBulkDeleteResponsesSinglePage, DomainBulkDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/email-security/settings/domains`,
-        options,
-      ) as Core.APIPromise<{ result: DomainBulkDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/email-security/settings/domains`,
+      DomainBulkDeleteResponsesSinglePage,
+      { method: 'delete', ...options },
+    );
   }
 
   /**
@@ -89,6 +88,8 @@ export class Domains extends APIResource {
 }
 
 export class DomainListResponsesV4PagePaginationArray extends V4PagePaginationArray<DomainListResponse> {}
+
+export class DomainBulkDeleteResponsesSinglePage extends SinglePage<DomainBulkDeleteResponse> {}
 
 export interface DomainListResponse {
   /**
@@ -165,15 +166,11 @@ export interface DomainDeleteResponse {
   id: number;
 }
 
-export type DomainBulkDeleteResponse = Array<DomainBulkDeleteResponse.DomainBulkDeleteResponseItem>;
-
-export namespace DomainBulkDeleteResponse {
-  export interface DomainBulkDeleteResponseItem {
-    /**
-     * The unique identifier for the domain.
-     */
-    id: number;
-  }
+export interface DomainBulkDeleteResponse {
+  /**
+   * The unique identifier for the domain.
+   */
+  id: number;
 }
 
 export interface DomainEditResponse {
@@ -438,6 +435,7 @@ export interface DomainGetParams {
 }
 
 Domains.DomainListResponsesV4PagePaginationArray = DomainListResponsesV4PagePaginationArray;
+Domains.DomainBulkDeleteResponsesSinglePage = DomainBulkDeleteResponsesSinglePage;
 
 export declare namespace Domains {
   export {
@@ -447,6 +445,7 @@ export declare namespace Domains {
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
+    DomainBulkDeleteResponsesSinglePage as DomainBulkDeleteResponsesSinglePage,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
     type DomainBulkDeleteParams as DomainBulkDeleteParams,

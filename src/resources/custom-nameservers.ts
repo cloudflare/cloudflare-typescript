@@ -2,6 +2,7 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
+import { SinglePage } from '../pagination';
 
 export class CustomNameservers extends APIResource {
   /**
@@ -26,13 +27,13 @@ export class CustomNameservers extends APIResource {
     customNSId: string,
     params: CustomNameserverDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverDeleteResponse> {
+  ): Core.PagePromise<CustomNameserverDeleteResponsesSinglePage, CustomNameserverDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, options) as Core.APIPromise<{
-        result: CustomNameserverDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/custom_ns/${customNSId}`,
+      CustomNameserverDeleteResponsesSinglePage,
+      { method: 'delete', ...options },
+    );
   }
 
   /**
@@ -41,13 +42,13 @@ export class CustomNameservers extends APIResource {
   availabilty(
     params: CustomNameserverAvailabiltyParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverAvailabiltyResponse> {
+  ): Core.PagePromise<CustomNameserverAvailabiltyResponsesSinglePage, CustomNameserverAvailabiltyResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/custom_ns/availability`, options) as Core.APIPromise<{
-        result: CustomNameserverAvailabiltyResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/custom_ns/availability`,
+      CustomNameserverAvailabiltyResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -56,15 +57,17 @@ export class CustomNameservers extends APIResource {
   get(
     params: CustomNameserverGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverGetResponse> {
+  ): Core.PagePromise<CustomNameserversSinglePage, CustomNameserver> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/custom_ns`, options) as Core.APIPromise<{
-        result: CustomNameserverGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/custom_ns`, CustomNameserversSinglePage, options);
   }
 }
+
+export class CustomNameserverDeleteResponsesSinglePage extends SinglePage<CustomNameserverDeleteResponse> {}
+
+export class CustomNameserverAvailabiltyResponsesSinglePage extends SinglePage<CustomNameserverAvailabiltyResponse> {}
+
+export class CustomNameserversSinglePage extends SinglePage<CustomNameserver> {}
 
 /**
  * A single account custom nameserver.
@@ -110,11 +113,17 @@ export namespace CustomNameserver {
   }
 }
 
-export type CustomNameserverDeleteResponse = Array<string>;
+/**
+ * Unused
+ */
+export type CustomNameserverDeleteResponse = string;
 
-export type CustomNameserverAvailabiltyResponse = Array<string>;
-
-export type CustomNameserverGetResponse = Array<CustomNameserver>;
+/**
+ * Name of zone based on which account custom nameservers can be created. For
+ * example, if example.com is returned, then ns1.example.com can be used as an
+ * account custom nameserver.
+ */
+export type CustomNameserverAvailabiltyResponse = string;
 
 export interface CustomNameserverCreateParams {
   /**

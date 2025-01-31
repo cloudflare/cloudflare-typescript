@@ -7,8 +7,10 @@ import * as AssetsAPI from './assets';
 import {
   AssetCreateParams,
   AssetCreateResponse,
+  AssetCreateResponsesSinglePage,
   AssetDeleteResponse,
   AssetGetResponse,
+  AssetGetResponsesSinglePage,
   AssetUpdateParams,
   AssetUpdateResponse,
   Assets,
@@ -19,9 +21,9 @@ import {
   MessageCreateParams,
   MessageDeleteResponse,
   MessageGetParams,
-  MessageGetResponse,
   MessageResource,
   MessageUpdateParams,
+  MessagesSinglePage,
 } from './message';
 import * as PriorityAPI from './priority';
 import {
@@ -33,7 +35,7 @@ import {
   PriorityResource,
   PriorityUpdateParams,
 } from './priority';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { SinglePage } from '../../../pagination';
 
 export class Requests extends APIResource {
   message: MessageAPI.MessageResource = new MessageAPI.MessageResource(this._client);
@@ -84,10 +86,10 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     body: RequestListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ListItemsV4PagePaginationArray, ListItem> {
+  ): Core.PagePromise<ListItemsSinglePage, ListItem> {
     return this._client.getAPIList(
       `/accounts/${accountIdentifier}/cloudforce-one/requests`,
-      ListItemsV4PagePaginationArray,
+      ListItemsSinglePage,
       { body, method: 'post', ...options },
     );
   }
@@ -149,17 +151,21 @@ export class Requests extends APIResource {
   /**
    * Get Request Types
    */
-  types(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestTypes> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/types`,
-        options,
-      ) as Core.APIPromise<{ result: RequestTypes }>
-    )._thenUnwrap((obj) => obj.result);
+  types(
+    accountIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RequestTypesResponsesSinglePage, RequestTypesResponse> {
+    return this._client.getAPIList(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests/types`,
+      RequestTypesResponsesSinglePage,
+      options,
+    );
   }
 }
 
-export class ListItemsV4PagePaginationArray extends V4PagePaginationArray<ListItem> {}
+export class ListItemsSinglePage extends SinglePage<ListItem> {}
+
+export class RequestTypesResponsesSinglePage extends SinglePage<RequestTypesResponse> {}
 
 export interface Item {
   /**
@@ -305,7 +311,7 @@ export interface RequestConstants {
   tlp?: Array<'clear' | 'amber' | 'amber-strict' | 'green' | 'red'>;
 }
 
-export type RequestTypes = Array<string>;
+export type RequestTypes = Array<RequestTypesResponse>;
 
 export interface RequestDeleteResponse {
   errors: Array<Shared.ResponseInfo>;
@@ -317,6 +323,11 @@ export interface RequestDeleteResponse {
    */
   success: true;
 }
+
+/**
+ * Request Types
+ */
+export type RequestTypesResponse = string;
 
 export interface RequestCreateParams {
   /**
@@ -372,7 +383,17 @@ export interface RequestUpdateParams {
   tlp?: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
-export interface RequestListParams extends V4PagePaginationArrayParams {
+export interface RequestListParams {
+  /**
+   * Page number of results
+   */
+  page: number;
+
+  /**
+   * Number of results per page
+   */
+  per_page: number;
+
   /**
    * Retrieve requests completed after this time
    */
@@ -414,10 +435,14 @@ export interface RequestListParams extends V4PagePaginationArrayParams {
   status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
 }
 
-Requests.ListItemsV4PagePaginationArray = ListItemsV4PagePaginationArray;
+Requests.ListItemsSinglePage = ListItemsSinglePage;
+Requests.RequestTypesResponsesSinglePage = RequestTypesResponsesSinglePage;
 Requests.MessageResource = MessageResource;
+Requests.MessagesSinglePage = MessagesSinglePage;
 Requests.PriorityResource = PriorityResource;
 Requests.Assets = Assets;
+Requests.AssetCreateResponsesSinglePage = AssetCreateResponsesSinglePage;
+Requests.AssetGetResponsesSinglePage = AssetGetResponsesSinglePage;
 
 export declare namespace Requests {
   export {
@@ -427,7 +452,9 @@ export declare namespace Requests {
     type RequestConstants as RequestConstants,
     type RequestTypes as RequestTypes,
     type RequestDeleteResponse as RequestDeleteResponse,
-    ListItemsV4PagePaginationArray as ListItemsV4PagePaginationArray,
+    type RequestTypesResponse as RequestTypesResponse,
+    ListItemsSinglePage as ListItemsSinglePage,
+    RequestTypesResponsesSinglePage as RequestTypesResponsesSinglePage,
     type RequestCreateParams as RequestCreateParams,
     type RequestUpdateParams as RequestUpdateParams,
     type RequestListParams as RequestListParams,
@@ -437,7 +464,7 @@ export declare namespace Requests {
     MessageResource as MessageResource,
     type Message as Message,
     type MessageDeleteResponse as MessageDeleteResponse,
-    type MessageGetResponse as MessageGetResponse,
+    MessagesSinglePage as MessagesSinglePage,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
     type MessageGetParams as MessageGetParams,
@@ -459,6 +486,8 @@ export declare namespace Requests {
     type AssetUpdateResponse as AssetUpdateResponse,
     type AssetDeleteResponse as AssetDeleteResponse,
     type AssetGetResponse as AssetGetResponse,
+    AssetCreateResponsesSinglePage as AssetCreateResponsesSinglePage,
+    AssetGetResponsesSinglePage as AssetGetResponsesSinglePage,
     type AssetCreateParams as AssetCreateParams,
     type AssetUpdateParams as AssetUpdateParams,
   };

@@ -11,6 +11,7 @@ import {
   LanguageGetParams,
   LanguageUpdateParams,
 } from './language/language';
+import { SinglePage } from '../../../pagination';
 
 export class Captions extends APIResource {
   language: LanguageAPI.Language = new LanguageAPI.Language(this._client);
@@ -22,15 +23,17 @@ export class Captions extends APIResource {
     identifier: string,
     params: CaptionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CaptionGetResponse> {
+  ): Core.PagePromise<CaptionsSinglePage, Caption> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/${identifier}/captions`, options) as Core.APIPromise<{
-        result: CaptionGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/stream/${identifier}/captions`,
+      CaptionsSinglePage,
+      options,
+    );
   }
 }
+
+export class CaptionsSinglePage extends SinglePage<Caption> {}
 
 export interface Caption {
   /**
@@ -54,8 +57,6 @@ export interface Caption {
   status?: 'ready' | 'inprogress' | 'error';
 }
 
-export type CaptionGetResponse = Array<Caption>;
-
 export interface CaptionGetParams {
   /**
    * Identifier
@@ -63,12 +64,13 @@ export interface CaptionGetParams {
   account_id: string;
 }
 
+Captions.CaptionsSinglePage = CaptionsSinglePage;
 Captions.Language = Language;
 
 export declare namespace Captions {
   export {
     type Caption as Caption,
-    type CaptionGetResponse as CaptionGetResponse,
+    CaptionsSinglePage as CaptionsSinglePage,
     type CaptionGetParams as CaptionGetParams,
   };
 
