@@ -283,6 +283,11 @@ export interface Zone {
    * Business and Enterprise plans.
    */
   vanity_name_servers?: Array<string>;
+
+  /**
+   * Verification key for partial zone setup.
+   */
+  verification_key?: string;
 }
 
 export namespace Zone {
