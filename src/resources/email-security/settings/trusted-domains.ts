@@ -297,7 +297,7 @@ export declare namespace TrustedDomainCreateParams {
     /**
      * Body param:
      */
-    body: Array<TrustedDomainCreateParams.Variant1.Body>;
+    body: Array<Variant1.Body>;
   }
 
   export namespace Variant1 {

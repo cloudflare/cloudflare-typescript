@@ -211,7 +211,7 @@ export declare namespace ConsumerCreateParams {
     /**
      * Body param:
      */
-    settings?: ConsumerCreateParams.MqWorkerConsumer.Settings;
+    settings?: MqWorkerConsumer.Settings;
 
     /**
      * Body param:
@@ -265,7 +265,7 @@ export declare namespace ConsumerCreateParams {
     /**
      * Body param:
      */
-    settings?: ConsumerCreateParams.MqHTTPConsumer.Settings;
+    settings?: MqHTTPConsumer.Settings;
 
     /**
      * Body param:
@@ -324,7 +324,7 @@ export declare namespace ConsumerUpdateParams {
     /**
      * Body param:
      */
-    settings?: ConsumerUpdateParams.MqWorkerConsumer.Settings;
+    settings?: MqWorkerConsumer.Settings;
 
     /**
      * Body param:
@@ -378,7 +378,7 @@ export declare namespace ConsumerUpdateParams {
     /**
      * Body param:
      */
-    settings?: ConsumerUpdateParams.MqHTTPConsumer.Settings;
+    settings?: MqHTTPConsumer.Settings;
 
     /**
      * Body param:

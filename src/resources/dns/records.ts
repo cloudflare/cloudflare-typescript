@@ -5909,7 +5909,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.ARecord.Settings;
+    settings?: ARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -5984,7 +5984,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.AAAARecord.Settings;
+    settings?: AAAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6043,7 +6043,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a CAA record.
      */
-    data?: RecordCreateParams.CAARecord.Data;
+    data?: CAARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -6059,7 +6059,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.CAARecord.Settings;
+    settings?: CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6138,7 +6138,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a CERT record.
      */
-    data?: RecordCreateParams.CERTRecord.Data;
+    data?: CERTRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -6154,7 +6154,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.CERTRecord.Settings;
+    settings?: CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6254,7 +6254,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.CNAMERecord.Settings;
+    settings?: CNAMERecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6321,7 +6321,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a DNSKEY record.
      */
-    data?: RecordCreateParams.DNSKEYRecord.Data;
+    data?: DNSKEYRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -6337,7 +6337,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.DNSKEYRecord.Settings;
+    settings?: DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6421,7 +6421,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a DS record.
      */
-    data?: RecordCreateParams.DSRecord.Data;
+    data?: DSRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -6437,7 +6437,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.DSRecord.Settings;
+    settings?: DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6521,7 +6521,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a HTTPS record.
      */
-    data?: RecordCreateParams.HTTPSRecord.Data;
+    data?: HTTPSRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -6537,7 +6537,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.HTTPSRecord.Settings;
+    settings?: HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6616,7 +6616,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a LOC record.
      */
-    data?: RecordCreateParams.LOCRecord.Data;
+    data?: LOCRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -6632,7 +6632,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.LOCRecord.Settings;
+    settings?: LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6778,7 +6778,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.MXRecord.Settings;
+    settings?: MXRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6837,7 +6837,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a NAPTR record.
      */
-    data?: RecordCreateParams.NAPTRRecord.Data;
+    data?: NAPTRRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -6853,7 +6853,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.NAPTRRecord.Settings;
+    settings?: NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -6963,7 +6963,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.NSRecord.Settings;
+    settings?: NSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7039,7 +7039,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7114,7 +7114,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.PTRRecord.Settings;
+    settings?: PTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7173,7 +7173,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a SMIMEA record.
      */
-    data?: RecordCreateParams.SMIMEARecord.Data;
+    data?: SMIMEARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -7189,7 +7189,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.SMIMEARecord.Settings;
+    settings?: SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7273,7 +7273,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a SRV record.
      */
-    data?: RecordCreateParams.SRVRecord.Data;
+    data?: SRVRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -7289,7 +7289,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.SRVRecord.Settings;
+    settings?: SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7374,7 +7374,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a SSHFP record.
      */
-    data?: RecordCreateParams.SSHFPRecord.Data;
+    data?: SSHFPRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -7390,7 +7390,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.SSHFPRecord.Settings;
+    settings?: SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7469,7 +7469,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a SVCB record.
      */
-    data?: RecordCreateParams.SVCBRecord.Data;
+    data?: SVCBRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -7485,7 +7485,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.SVCBRecord.Settings;
+    settings?: SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7564,7 +7564,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a TLSA record.
      */
-    data?: RecordCreateParams.TLSARecord.Data;
+    data?: TLSARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -7580,7 +7580,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.TLSARecord.Settings;
+    settings?: TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7685,7 +7685,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.TXTRecord.Settings;
+    settings?: TXTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7744,7 +7744,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Components of a URI record.
      */
-    data?: RecordCreateParams.URIRecord.Data;
+    data?: URIRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -7766,7 +7766,7 @@ export declare namespace RecordCreateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordCreateParams.URIRecord.Settings;
+    settings?: URIRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7881,7 +7881,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.ARecord.Settings;
+    settings?: ARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -7956,7 +7956,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.AAAARecord.Settings;
+    settings?: AAAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8015,7 +8015,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a CAA record.
      */
-    data?: RecordUpdateParams.CAARecord.Data;
+    data?: CAARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -8031,7 +8031,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.CAARecord.Settings;
+    settings?: CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8110,7 +8110,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a CERT record.
      */
-    data?: RecordUpdateParams.CERTRecord.Data;
+    data?: CERTRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -8126,7 +8126,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.CERTRecord.Settings;
+    settings?: CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8226,7 +8226,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.CNAMERecord.Settings;
+    settings?: CNAMERecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8293,7 +8293,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a DNSKEY record.
      */
-    data?: RecordUpdateParams.DNSKEYRecord.Data;
+    data?: DNSKEYRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -8309,7 +8309,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.DNSKEYRecord.Settings;
+    settings?: DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8393,7 +8393,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a DS record.
      */
-    data?: RecordUpdateParams.DSRecord.Data;
+    data?: DSRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -8409,7 +8409,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.DSRecord.Settings;
+    settings?: DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8493,7 +8493,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a HTTPS record.
      */
-    data?: RecordUpdateParams.HTTPSRecord.Data;
+    data?: HTTPSRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -8509,7 +8509,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.HTTPSRecord.Settings;
+    settings?: HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8588,7 +8588,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a LOC record.
      */
-    data?: RecordUpdateParams.LOCRecord.Data;
+    data?: LOCRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -8604,7 +8604,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.LOCRecord.Settings;
+    settings?: LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8750,7 +8750,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.MXRecord.Settings;
+    settings?: MXRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8809,7 +8809,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a NAPTR record.
      */
-    data?: RecordUpdateParams.NAPTRRecord.Data;
+    data?: NAPTRRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -8825,7 +8825,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.NAPTRRecord.Settings;
+    settings?: NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -8935,7 +8935,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.NSRecord.Settings;
+    settings?: NSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9011,7 +9011,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9086,7 +9086,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.PTRRecord.Settings;
+    settings?: PTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9145,7 +9145,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a SMIMEA record.
      */
-    data?: RecordUpdateParams.SMIMEARecord.Data;
+    data?: SMIMEARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -9161,7 +9161,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.SMIMEARecord.Settings;
+    settings?: SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9245,7 +9245,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a SRV record.
      */
-    data?: RecordUpdateParams.SRVRecord.Data;
+    data?: SRVRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -9261,7 +9261,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.SRVRecord.Settings;
+    settings?: SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9346,7 +9346,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a SSHFP record.
      */
-    data?: RecordUpdateParams.SSHFPRecord.Data;
+    data?: SSHFPRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -9362,7 +9362,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.SSHFPRecord.Settings;
+    settings?: SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9441,7 +9441,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a SVCB record.
      */
-    data?: RecordUpdateParams.SVCBRecord.Data;
+    data?: SVCBRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -9457,7 +9457,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.SVCBRecord.Settings;
+    settings?: SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9536,7 +9536,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a TLSA record.
      */
-    data?: RecordUpdateParams.TLSARecord.Data;
+    data?: TLSARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -9552,7 +9552,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.TLSARecord.Settings;
+    settings?: TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9657,7 +9657,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.TXTRecord.Settings;
+    settings?: TXTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -9716,7 +9716,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Components of a URI record.
      */
-    data?: RecordUpdateParams.URIRecord.Data;
+    data?: URIRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -9738,7 +9738,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordUpdateParams.URIRecord.Settings;
+    settings?: URIRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10111,7 +10111,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.ARecord.Settings;
+    settings?: ARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10186,7 +10186,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.AAAARecord.Settings;
+    settings?: AAAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10245,7 +10245,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a CAA record.
      */
-    data?: RecordEditParams.CAARecord.Data;
+    data?: CAARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -10261,7 +10261,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.CAARecord.Settings;
+    settings?: CAARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10340,7 +10340,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a CERT record.
      */
-    data?: RecordEditParams.CERTRecord.Data;
+    data?: CERTRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -10356,7 +10356,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.CERTRecord.Settings;
+    settings?: CERTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10456,7 +10456,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.CNAMERecord.Settings;
+    settings?: CNAMERecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10523,7 +10523,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a DNSKEY record.
      */
-    data?: RecordEditParams.DNSKEYRecord.Data;
+    data?: DNSKEYRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -10539,7 +10539,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.DNSKEYRecord.Settings;
+    settings?: DNSKEYRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10623,7 +10623,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a DS record.
      */
-    data?: RecordEditParams.DSRecord.Data;
+    data?: DSRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -10639,7 +10639,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.DSRecord.Settings;
+    settings?: DSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10723,7 +10723,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a HTTPS record.
      */
-    data?: RecordEditParams.HTTPSRecord.Data;
+    data?: HTTPSRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -10739,7 +10739,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.HTTPSRecord.Settings;
+    settings?: HTTPSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10818,7 +10818,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a LOC record.
      */
-    data?: RecordEditParams.LOCRecord.Data;
+    data?: LOCRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -10834,7 +10834,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.LOCRecord.Settings;
+    settings?: LOCRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -10980,7 +10980,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.MXRecord.Settings;
+    settings?: MXRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11039,7 +11039,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a NAPTR record.
      */
-    data?: RecordEditParams.NAPTRRecord.Data;
+    data?: NAPTRRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -11055,7 +11055,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.NAPTRRecord.Settings;
+    settings?: NAPTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11165,7 +11165,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.NSRecord.Settings;
+    settings?: NSRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11241,7 +11241,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11316,7 +11316,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.PTRRecord.Settings;
+    settings?: PTRRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11375,7 +11375,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a SMIMEA record.
      */
-    data?: RecordEditParams.SMIMEARecord.Data;
+    data?: SMIMEARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -11391,7 +11391,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.SMIMEARecord.Settings;
+    settings?: SMIMEARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11475,7 +11475,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a SRV record.
      */
-    data?: RecordEditParams.SRVRecord.Data;
+    data?: SRVRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -11491,7 +11491,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.SRVRecord.Settings;
+    settings?: SRVRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11576,7 +11576,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a SSHFP record.
      */
-    data?: RecordEditParams.SSHFPRecord.Data;
+    data?: SSHFPRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -11592,7 +11592,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.SSHFPRecord.Settings;
+    settings?: SSHFPRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11671,7 +11671,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a SVCB record.
      */
-    data?: RecordEditParams.SVCBRecord.Data;
+    data?: SVCBRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -11687,7 +11687,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.SVCBRecord.Settings;
+    settings?: SVCBRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11766,7 +11766,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a TLSA record.
      */
-    data?: RecordEditParams.TLSARecord.Data;
+    data?: TLSARecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -11782,7 +11782,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.TLSARecord.Settings;
+    settings?: TLSARecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11887,7 +11887,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.TXTRecord.Settings;
+    settings?: TXTRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
@@ -11946,7 +11946,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Components of a URI record.
      */
-    data?: RecordEditParams.URIRecord.Data;
+    data?: URIRecord.Data;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -11968,7 +11968,7 @@ export declare namespace RecordEditParams {
     /**
      * Body param: Settings for the DNS record.
      */
-    settings?: RecordEditParams.URIRecord.Settings;
+    settings?: URIRecord.Settings;
 
     /**
      * Body param: Custom tags for the DNS record. This field has no effect on DNS

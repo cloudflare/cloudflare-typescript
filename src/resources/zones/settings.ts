@@ -4016,7 +4016,7 @@ export declare namespace SettingEditParams {
     /**
      * Body param: Value of the zone setting.
      */
-    value?: SettingEditParams.ZonesCacheRulesAegis.Value;
+    value?: ZonesCacheRulesAegis.Value;
   }
 
   export namespace ZonesCacheRulesAegis {
@@ -4522,7 +4522,7 @@ export declare namespace SettingEditParams {
     /**
      * Body param: Current value of the zone setting.
      */
-    value: SettingEditParams.NEL.Value;
+    value: NEL.Value;
   }
 
   export namespace NEL {
@@ -4786,7 +4786,7 @@ export declare namespace SettingEditParams {
     /**
      * Body param: Current value of the zone setting.
      */
-    value: SettingEditParams.SecurityHeaders.Value;
+    value: SecurityHeaders.Value;
   }
 
   export namespace SecurityHeaders {

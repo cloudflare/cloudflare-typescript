@@ -136,7 +136,7 @@ export declare namespace MemberCreateParams {
     /**
      * Body param: Array of policies associated with this member.
      */
-    policies: Array<MemberCreateParams.IAMCreateMemberWithPolicies.Policy>;
+    policies: Array<IAMCreateMemberWithPolicies.Policy>;
 
     /**
      * Body param:
@@ -212,7 +212,7 @@ export declare namespace MemberUpdateParams {
     /**
      * Body param: Array of policies associated with this member.
      */
-    policies: Array<MemberUpdateParams.IAMUpdateMemberWithPolicies.Policy>;
+    policies: Array<IAMUpdateMemberWithPolicies.Policy>;
   }
 
   export namespace IAMUpdateMemberWithPolicies {

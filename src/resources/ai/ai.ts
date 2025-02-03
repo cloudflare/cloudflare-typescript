@@ -513,7 +513,7 @@ export declare namespace AIRunParams {
     /**
      * Body param: An array of message objects representing the conversation history.
      */
-    messages: Array<AIRunParams.Messages.Message>;
+    messages: Array<Messages.Message>;
 
     /**
      * Body param: Decreases the likelihood of the model repeating the same lines
@@ -524,7 +524,7 @@ export declare namespace AIRunParams {
     /**
      * Body param:
      */
-    functions?: Array<AIRunParams.Messages.Function>;
+    functions?: Array<Messages.Function>;
 
     /**
      * Body param: The maximum number of tokens to generate in the response.
@@ -560,7 +560,7 @@ export declare namespace AIRunParams {
     /**
      * Body param: A list of tools available for the assistant to use.
      */
-    tools?: Array<AIRunParams.Messages.UnionMember0 | AIRunParams.Messages.UnionMember1>;
+    tools?: Array<Messages.UnionMember0 | Messages.UnionMember1>;
 
     /**
      * Body param: Limits the AI to choose from the top 'k' most probable words. Lower
