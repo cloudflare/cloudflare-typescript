@@ -492,7 +492,17 @@ export interface RatePlan {
   /**
    * The ID of the rate plan.
    */
-  id?: string;
+  id?:
+    | 'free'
+    | 'lite'
+    | 'pro'
+    | 'pro_plus'
+    | 'business'
+    | 'enterprise'
+    | 'partners_free'
+    | 'partners_pro'
+    | 'partners_business'
+    | 'partners_enterprise';
 
   /**
    * The currency applied to the rate plan subscription.
@@ -532,7 +542,17 @@ export interface RatePlanParam {
   /**
    * The ID of the rate plan.
    */
-  id?: string;
+  id?:
+    | 'free'
+    | 'lite'
+    | 'pro'
+    | 'pro_plus'
+    | 'business'
+    | 'enterprise'
+    | 'partners_free'
+    | 'partners_pro'
+    | 'partners_business'
+    | 'partners_enterprise';
 
   /**
    * The currency applied to the rate plan subscription.
