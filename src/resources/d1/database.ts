@@ -3,7 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as D1API from './d1';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Database extends APIResource {
   /**
@@ -111,14 +111,13 @@ export class Database extends APIResource {
     databaseId: string,
     params: DatabaseQueryParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseQueryResponse> {
+  ): Core.PagePromise<QueryResultsSinglePage, QueryResult> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/query`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DatabaseQueryResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/d1/database/${databaseId}/query`,
+      QueryResultsSinglePage,
+      { body, method: 'post', ...options },
+    );
   }
 
   /**
@@ -129,18 +128,21 @@ export class Database extends APIResource {
     databaseId: string,
     params: DatabaseRawParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseRawResponse> {
+  ): Core.PagePromise<DatabaseRawResponsesSinglePage, DatabaseRawResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/raw`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DatabaseRawResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/d1/database/${databaseId}/raw`,
+      DatabaseRawResponsesSinglePage,
+      { body, method: 'post', ...options },
+    );
   }
 }
 
 export class DatabaseListResponsesV4PagePaginationArray extends V4PagePaginationArray<DatabaseListResponse> {}
+
+export class QueryResultsSinglePage extends SinglePage<QueryResult> {}
+
+export class DatabaseRawResponsesSinglePage extends SinglePage<DatabaseRawResponse> {}
 
 export interface QueryResult {
   meta?: QueryResult.Meta;
@@ -310,41 +312,35 @@ export namespace DatabaseImportResponse {
   }
 }
 
-export type DatabaseQueryResponse = Array<QueryResult>;
+export interface DatabaseRawResponse {
+  meta?: DatabaseRawResponse.Meta;
 
-export type DatabaseRawResponse = Array<DatabaseRawResponse.DatabaseRawResponseItem>;
+  results?: DatabaseRawResponse.Results;
+
+  success?: boolean;
+}
 
 export namespace DatabaseRawResponse {
-  export interface DatabaseRawResponseItem {
-    meta?: DatabaseRawResponseItem.Meta;
+  export interface Meta {
+    changed_db?: boolean;
 
-    results?: DatabaseRawResponseItem.Results;
+    changes?: number;
 
-    success?: boolean;
+    duration?: number;
+
+    last_row_id?: number;
+
+    rows_read?: number;
+
+    rows_written?: number;
+
+    size_after?: number;
   }
 
-  export namespace DatabaseRawResponseItem {
-    export interface Meta {
-      changed_db?: boolean;
+  export interface Results {
+    columns?: Array<string>;
 
-      changes?: number;
-
-      duration?: number;
-
-      last_row_id?: number;
-
-      rows_read?: number;
-
-      rows_written?: number;
-
-      size_after?: number;
-    }
-
-    export interface Results {
-      columns?: Array<string>;
-
-      rows?: Array<Array<number | string | unknown>>;
-    }
+    rows?: Array<Array<number | string | unknown>>;
   }
 }
 
@@ -542,6 +538,8 @@ export interface DatabaseRawParams {
 }
 
 Database.DatabaseListResponsesV4PagePaginationArray = DatabaseListResponsesV4PagePaginationArray;
+Database.QueryResultsSinglePage = QueryResultsSinglePage;
+Database.DatabaseRawResponsesSinglePage = DatabaseRawResponsesSinglePage;
 
 export declare namespace Database {
   export {
@@ -550,9 +548,10 @@ export declare namespace Database {
     type DatabaseDeleteResponse as DatabaseDeleteResponse,
     type DatabaseExportResponse as DatabaseExportResponse,
     type DatabaseImportResponse as DatabaseImportResponse,
-    type DatabaseQueryResponse as DatabaseQueryResponse,
     type DatabaseRawResponse as DatabaseRawResponse,
     DatabaseListResponsesV4PagePaginationArray as DatabaseListResponsesV4PagePaginationArray,
+    QueryResultsSinglePage as QueryResultsSinglePage,
+    DatabaseRawResponsesSinglePage as DatabaseRawResponsesSinglePage,
     type DatabaseCreateParams as DatabaseCreateParams,
     type DatabaseListParams as DatabaseListParams,
     type DatabaseDeleteParams as DatabaseDeleteParams,

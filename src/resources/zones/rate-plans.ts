@@ -2,73 +2,75 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class RatePlans extends APIResource {
   /**
    * Lists all rate plans the zone can subscribe to.
    */
-  get(params: RatePlanGetParams, options?: Core.RequestOptions): Core.APIPromise<RatePlanGetResponse | null> {
+  get(
+    params: RatePlanGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RatePlanGetResponsesSinglePage, RatePlanGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/available_rate_plans`, options) as Core.APIPromise<{
-        result: RatePlanGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/available_rate_plans`,
+      RatePlanGetResponsesSinglePage,
+      options,
+    );
   }
 }
 
-export type RatePlanGetResponse = Array<RatePlanGetResponse.RatePlanGetResponseItem>;
+export class RatePlanGetResponsesSinglePage extends SinglePage<RatePlanGetResponse> {}
+
+export interface RatePlanGetResponse {
+  /**
+   * Plan identifier tag.
+   */
+  id?: string;
+
+  /**
+   * Array of available components values for the plan.
+   */
+  components?: Array<RatePlanGetResponse.Component>;
+
+  /**
+   * The monetary unit in which pricing information is displayed.
+   */
+  currency?: string;
+
+  /**
+   * The duration of the plan subscription.
+   */
+  duration?: number;
+
+  /**
+   * The frequency at which you will be billed for this plan.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+
+  /**
+   * The plan name.
+   */
+  name?: string;
+}
 
 export namespace RatePlanGetResponse {
-  export interface RatePlanGetResponseItem {
+  export interface Component {
     /**
-     * Plan identifier tag.
+     * The default amount allocated.
      */
-    id?: string;
-
-    /**
-     * Array of available components values for the plan.
-     */
-    components?: Array<RatePlanGetResponseItem.Component>;
+    default?: number;
 
     /**
-     * The monetary unit in which pricing information is displayed.
+     * The unique component.
      */
-    currency?: string;
+    name?: 'zones' | 'page_rules' | 'dedicated_certificates' | 'dedicated_certificates_custom';
 
     /**
-     * The duration of the plan subscription.
+     * The unit price of the addon.
      */
-    duration?: number;
-
-    /**
-     * The frequency at which you will be billed for this plan.
-     */
-    frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
-
-    /**
-     * The plan name.
-     */
-    name?: string;
-  }
-
-  export namespace RatePlanGetResponseItem {
-    export interface Component {
-      /**
-       * The default amount allocated.
-       */
-      default?: number;
-
-      /**
-       * The unique component.
-       */
-      name?: 'zones' | 'page_rules' | 'dedicated_certificates' | 'dedicated_certificates_custom';
-
-      /**
-       * The unit price of the addon.
-       */
-      unit_price?: number;
-    }
+    unit_price?: number;
   }
 }
 
@@ -79,6 +81,12 @@ export interface RatePlanGetParams {
   zone_id: string;
 }
 
+RatePlans.RatePlanGetResponsesSinglePage = RatePlanGetResponsesSinglePage;
+
 export declare namespace RatePlans {
-  export { type RatePlanGetResponse as RatePlanGetResponse, type RatePlanGetParams as RatePlanGetParams };
+  export {
+    type RatePlanGetResponse as RatePlanGetResponse,
+    RatePlanGetResponsesSinglePage as RatePlanGetResponsesSinglePage,
+    type RatePlanGetParams as RatePlanGetParams,
+  };
 }

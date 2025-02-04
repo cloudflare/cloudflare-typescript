@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import * as FieldsAPI from './fields';
 import { FieldGetParams, FieldGetResponse, Fields } from './fields';
 import * as JobsAPI from './jobs';
-import { JobGetParams, JobGetResponse, Jobs } from './jobs';
+import { JobGetParams, Jobs } from './jobs';
 
 export class Datasets extends APIResource {
   fields: FieldsAPI.Fields = new FieldsAPI.Fields(this._client);
@@ -21,5 +21,5 @@ export declare namespace Datasets {
     type FieldGetParams as FieldGetParams,
   };
 
-  export { Jobs as Jobs, type JobGetResponse as JobGetResponse, type JobGetParams as JobGetParams };
+  export { Jobs as Jobs, type JobGetParams as JobGetParams };
 }

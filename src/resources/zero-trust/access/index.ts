@@ -1,29 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Access } from './access';
 export {
-  Access,
-  type AccessDevicePostureRule,
-  type AccessRule,
-  type AnyValidServiceTokenRule,
-  type AuthenticationMethodRule,
-  type AzureGroupRule,
-  type CertificateRule,
-  type CountryRule,
-  type DomainRule,
-  type EmailListRule,
-  type EmailRule,
-  type EveryoneRule,
-  type ExternalEvaluationRule,
-  type GitHubOrganizationRule,
-  type GroupRule,
-  type GSuiteGroupRule,
-  type IPListRule,
-  type IPRule,
-  type OktaGroupRule,
-  type SAMLGroupRule,
-  type ServiceTokenRule,
-} from './access';
-export { AccessUsersSinglePage, Users, type AccessUser, type UserListParams } from './users/index';
+  AccessUsersSinglePage,
+  UserListResponsesSinglePage,
+  Users,
+  type AccessUser,
+  type UserListResponse,
+  type UserListParams,
+} from './users/index';
 export {
   ApplicationListResponsesSinglePage,
   Applications,
@@ -158,9 +143,14 @@ export {
 } from './tags';
 export {
   ZeroTrustGroupsSinglePage,
+  GroupListResponsesSinglePage,
   Groups,
   type ZeroTrustGroup,
+  type GroupCreateResponse,
+  type GroupUpdateResponse,
+  type GroupListResponse,
   type GroupDeleteResponse,
+  type GroupGetResponse,
   type GroupCreateParams,
   type GroupUpdateParams,
   type GroupListParams,

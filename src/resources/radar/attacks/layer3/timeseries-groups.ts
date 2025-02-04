@@ -52,29 +52,6 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a time series of the percentage distribution of network protocols in Layer
-   * 3/4 attacks.
-   */
-  get(
-    query?: TimeseriesGroupGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse>;
-  get(
-    query: TimeseriesGroupGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get({}, query);
-    }
-    return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Percentage distribution of attacks by industry targeted over time.
    */
   industry(
@@ -233,74 +210,6 @@ export namespace TimeseriesGroupDurationResponse {
     timestamps: Array<string>;
 
     UNDER_10_MINS: Array<string>;
-  }
-}
-
-export interface TimeseriesGroupGetResponse {
-  meta: TimeseriesGroupGetResponse.Meta;
-
-  serie_0: TimeseriesGroupGetResponse.Serie0;
-}
-
-export namespace TimeseriesGroupGetResponse {
-  export interface Meta {
-    aggInterval: string;
-
-    dateRange: Array<Meta.DateRange>;
-
-    lastUpdated: string;
-
-    confidenceInfo?: Meta.ConfidenceInfo;
-  }
-
-  export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
-    export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
-
-      level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Serie0 {
-    gre: Array<string>;
-
-    icmp: Array<string>;
-
-    tcp: Array<string>;
-
-    timestamps: Array<string>;
-
-    udp: Array<string>;
   }
 }
 
@@ -521,63 +430,6 @@ export interface TimeseriesGroupDurationParams {
    * Array of L3/4 attack types.
    */
   protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
-}
-
-export interface TimeseriesGroupGetParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
-   */
-  continent?: Array<string>;
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<string>;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
 }
 
 export interface TimeseriesGroupIndustryParams {
@@ -952,7 +804,6 @@ export declare namespace TimeseriesGroups {
   export {
     type TimeseriesGroupBitrateResponse as TimeseriesGroupBitrateResponse,
     type TimeseriesGroupDurationResponse as TimeseriesGroupDurationResponse,
-    type TimeseriesGroupGetResponse as TimeseriesGroupGetResponse,
     type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
     type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
     type TimeseriesGroupProtocolResponse as TimeseriesGroupProtocolResponse,
@@ -960,7 +811,6 @@ export declare namespace TimeseriesGroups {
     type TimeseriesGroupVerticalResponse as TimeseriesGroupVerticalResponse,
     type TimeseriesGroupBitrateParams as TimeseriesGroupBitrateParams,
     type TimeseriesGroupDurationParams as TimeseriesGroupDurationParams,
-    type TimeseriesGroupGetParams as TimeseriesGroupGetParams,
     type TimeseriesGroupIndustryParams as TimeseriesGroupIndustryParams,
     type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
     type TimeseriesGroupProtocolParams as TimeseriesGroupProtocolParams,

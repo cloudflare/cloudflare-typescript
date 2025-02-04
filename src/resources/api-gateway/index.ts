@@ -18,6 +18,7 @@ export {
 export { ExpressionTemplate } from './expression-template/index';
 export {
   OperationListResponsesV4PagePaginationArray,
+  OperationBulkCreateResponsesSinglePage,
   Operations,
   type APIShield,
   type OperationCreateResponse,

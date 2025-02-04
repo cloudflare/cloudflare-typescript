@@ -14,10 +14,13 @@ import {
   FallbackOriginUpdateParams,
   FallbackOriginUpdateResponse,
 } from './fallback-origin';
+import * as CertificatePackAPI from './certificate-pack/certificate-pack';
+import { CertificatePack } from './certificate-pack/certificate-pack';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class CustomHostnames extends APIResource {
   fallbackOrigin: FallbackOriginAPI.FallbackOrigin = new FallbackOriginAPI.FallbackOrigin(this._client);
+  certificatePack: CertificatePackAPI.CertificatePack = new CertificatePackAPI.CertificatePack(this._client);
 
   /**
    * Add a new custom hostname and request that an SSL certificate be issued for it.
@@ -26,7 +29,10 @@ export class CustomHostnames extends APIResource {
    * 'email' will send an email to the WHOIS contacts on file for the base domain
    * plus hostmaster, postmaster, webmaster, admin, administrator. If http is used
    * and the domain is not already pointing to the Managed CNAME host, the PATCH
-   * method must be used once it is (to complete validation).
+   * method must be used once it is (to complete validation). Enable bundling of
+   * certificates using the custom_cert_bundle field. The bundling process requires
+   * the following condition One certificate in the bundle must use an RSA, and the
+   * other must use an ECDSA.
    */
   create(
     params: CustomHostnameCreateParams,
@@ -71,7 +77,10 @@ export class CustomHostnames extends APIResource {
    * Modify SSL configuration for a custom hostname. When sent with SSL config that
    * matches existing config, used to indicate that hostname should pass domain
    * control validation (DCV). Can also be used to change validation type, e.g., from
-   * 'http' to 'email'.
+   * 'http' to 'email'. Bundle an existing certificate with another certificate by
+   * using the "custom_cert_bundle" field. The bundling process supports combining
+   * certificates as long as the following condition is met. One certificate must use
+   * the RSA algorithm, and the other must use the ECDSA algorithm.
    */
   edit(
     customHostnameId: string,
@@ -1704,6 +1713,11 @@ export namespace CustomHostnameCreateParams {
     cloudflare_branding?: boolean;
 
     /**
+     * Array of custom certificate and key pairs (1 or 2 pairs allowed)
+     */
+    custom_cert_bundle?: Array<SSL.CustomCERTBundle>;
+
+    /**
      * If a custom uploaded certificate is used.
      */
     custom_certificate?: string;
@@ -1736,6 +1750,18 @@ export namespace CustomHostnameCreateParams {
   }
 
   export namespace SSL {
+    export interface CustomCERTBundle {
+      /**
+       * If a custom uploaded certificate is used.
+       */
+      custom_certificate: string;
+
+      /**
+       * The key for a custom uploaded certificate.
+       */
+      custom_key: string;
+    }
+
     /**
      * SSL specific settings.
      */
@@ -1869,6 +1895,11 @@ export namespace CustomHostnameEditParams {
     cloudflare_branding?: boolean;
 
     /**
+     * Array of custom certificate and key pairs (1 or 2 pairs allowed)
+     */
+    custom_cert_bundle?: Array<SSL.CustomCERTBundle>;
+
+    /**
      * If a custom uploaded certificate is used.
      */
     custom_certificate?: string;
@@ -1901,6 +1932,18 @@ export namespace CustomHostnameEditParams {
   }
 
   export namespace SSL {
+    export interface CustomCERTBundle {
+      /**
+       * If a custom uploaded certificate is used.
+       */
+      custom_certificate: string;
+
+      /**
+       * The key for a custom uploaded certificate.
+       */
+      custom_key: string;
+    }
+
     /**
      * SSL specific settings.
      */
@@ -1942,6 +1985,7 @@ export interface CustomHostnameGetParams {
 }
 
 CustomHostnames.FallbackOrigin = FallbackOrigin;
+CustomHostnames.CertificatePack = CertificatePack;
 
 export declare namespace CustomHostnames {
   export {
@@ -1953,4 +1997,6 @@ export declare namespace CustomHostnames {
     type FallbackOriginDeleteParams as FallbackOriginDeleteParams,
     type FallbackOriginGetParams as FallbackOriginGetParams,
   };
+
+  export { CertificatePack as CertificatePack };
 }

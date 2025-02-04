@@ -53,6 +53,7 @@ export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network
 export { MagicTransit } from './magic-transit/magic-transit';
 export { ManagedTransforms } from './managed-transforms';
 export { Memberships } from './memberships';
+export { NetworkInterconnects } from './network-interconnects/network-interconnects';
 export { OriginCACertificates } from './origin-ca-certificates';
 export { OriginPostQuantumEncryption } from './origin-post-quantum-encryption';
 export { OriginTLSClientAuth } from './origin-tls-client-auth/origin-tls-client-auth';
@@ -70,6 +71,7 @@ export { ResourceSharing } from './resource-sharing/resource-sharing';
 export { Rules } from './rules/rules';
 export { Rulesets } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
+export { SecurityCenter } from './security-center/security-center';
 export { SecurityTXT } from './security-txt';
 export { Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';

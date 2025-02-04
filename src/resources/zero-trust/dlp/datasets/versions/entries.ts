@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
+import { type BlobLike } from '../../../../../uploads';
 
 export class Entries extends APIResource {
   /**
@@ -49,7 +50,7 @@ export interface EntryCreateParams {
   /**
    * Body param:
    */
-  body: string;
+  body: string | ArrayBufferView | ArrayBuffer | BlobLike;
 }
 
 export declare namespace Entries {

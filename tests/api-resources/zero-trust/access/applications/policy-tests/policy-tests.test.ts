@@ -26,29 +26,32 @@ describe('resource policyTests', () => {
   test('create: required and optional params', async () => {
     const response = await client.zeroTrust.access.applications.policyTests.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      approval_groups: [
+      policies: [
         {
-          approvals_needed: 1,
-          email_addresses: ['test1@cloudflare.com', 'test2@cloudflare.com'],
-          email_list_uuid: 'email_list_uuid',
-        },
-        {
-          approvals_needed: 3,
-          email_addresses: ['test@cloudflare.com', 'test2@cloudflare.com'],
-          email_list_uuid: '597147a1-976b-4ef2-9af0-81d5d007fc34',
+          decision: 'allow',
+          include: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
+          name: 'Allow devs',
+          approval_groups: [
+            {
+              approvals_needed: 1,
+              email_addresses: ['test1@cloudflare.com', 'test2@cloudflare.com'],
+              email_list_uuid: 'email_list_uuid',
+            },
+            {
+              approvals_needed: 3,
+              email_addresses: ['test@cloudflare.com', 'test2@cloudflare.com'],
+              email_list_uuid: '597147a1-976b-4ef2-9af0-81d5d007fc34',
+            },
+          ],
+          approval_required: true,
+          exclude: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
+          isolation_required: false,
+          purpose_justification_prompt: 'Please enter a justification for entering this protected domain.',
+          purpose_justification_required: true,
+          require: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
+          session_duration: '24h',
         },
       ],
-      approval_required: true,
-      decision: 'allow',
-      exclude: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
-      include: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
-      isolation_required: false,
-      name: 'Allow devs',
-      purpose_justification_prompt: 'Please enter a justification for entering this protected domain.',
-      purpose_justification_required: true,
-      require: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
-      session_duration: '24h',
     });
   });
 
@@ -69,7 +72,7 @@ describe('resource policyTests', () => {
   test('get: required and optional params', async () => {
     const response = await client.zeroTrust.access.applications.policyTests.get(
       'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', page: 0 },
     );
   });
 });

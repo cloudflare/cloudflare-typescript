@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
+import { SinglePage } from '../../../pagination';
 
 export class Assets extends APIResource {
   /**
@@ -13,13 +14,12 @@ export class Assets extends APIResource {
     requestIdentifier: string,
     body: AssetCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AssetCreateResponse> {
-    return (
-      this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/asset`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AssetCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<AssetCreateResponsesSinglePage, AssetCreateResponse> {
+    return this._client.getAPIList(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/asset`,
+      AssetCreateResponsesSinglePage,
+      { body, method: 'post', ...options },
+    );
   }
 
   /**
@@ -63,45 +63,44 @@ export class Assets extends APIResource {
     requestIdentifier: string,
     assetIdentifer: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AssetGetResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/asset/${assetIdentifer}`,
-        options,
-      ) as Core.APIPromise<{ result: AssetGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<AssetGetResponsesSinglePage, AssetGetResponse> {
+    return this._client.getAPIList(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/asset/${assetIdentifer}`,
+      AssetGetResponsesSinglePage,
+      options,
+    );
   }
 }
 
-export type AssetCreateResponse = Array<AssetCreateResponse.AssetCreateResponseItem>;
+export class AssetCreateResponsesSinglePage extends SinglePage<AssetCreateResponse> {}
 
-export namespace AssetCreateResponse {
-  export interface AssetCreateResponseItem {
-    /**
-     * Asset ID
-     */
-    id: number;
+export class AssetGetResponsesSinglePage extends SinglePage<AssetGetResponse> {}
 
-    /**
-     * Asset name
-     */
-    name: string;
+export interface AssetCreateResponse {
+  /**
+   * Asset ID
+   */
+  id: number;
 
-    /**
-     * Asset creation time
-     */
-    created?: string;
+  /**
+   * Asset name
+   */
+  name: string;
 
-    /**
-     * Asset description
-     */
-    description?: string;
+  /**
+   * Asset creation time
+   */
+  created?: string;
 
-    /**
-     * Asset file type
-     */
-    file_type?: string;
-  }
+  /**
+   * Asset description
+   */
+  description?: string;
+
+  /**
+   * Asset file type
+   */
+  file_type?: string;
 }
 
 export interface AssetUpdateResponse {
@@ -142,35 +141,31 @@ export interface AssetDeleteResponse {
   success: true;
 }
 
-export type AssetGetResponse = Array<AssetGetResponse.AssetGetResponseItem>;
+export interface AssetGetResponse {
+  /**
+   * Asset ID
+   */
+  id: number;
 
-export namespace AssetGetResponse {
-  export interface AssetGetResponseItem {
-    /**
-     * Asset ID
-     */
-    id: number;
+  /**
+   * Asset name
+   */
+  name: string;
 
-    /**
-     * Asset name
-     */
-    name: string;
+  /**
+   * Asset creation time
+   */
+  created?: string;
 
-    /**
-     * Asset creation time
-     */
-    created?: string;
+  /**
+   * Asset description
+   */
+  description?: string;
 
-    /**
-     * Asset description
-     */
-    description?: string;
-
-    /**
-     * Asset file type
-     */
-    file_type?: string;
-  }
+  /**
+   * Asset file type
+   */
+  file_type?: string;
 }
 
 export interface AssetCreateParams {
@@ -192,12 +187,17 @@ export interface AssetUpdateParams {
   source?: string;
 }
 
+Assets.AssetCreateResponsesSinglePage = AssetCreateResponsesSinglePage;
+Assets.AssetGetResponsesSinglePage = AssetGetResponsesSinglePage;
+
 export declare namespace Assets {
   export {
     type AssetCreateResponse as AssetCreateResponse,
     type AssetUpdateResponse as AssetUpdateResponse,
     type AssetDeleteResponse as AssetDeleteResponse,
     type AssetGetResponse as AssetGetResponse,
+    AssetCreateResponsesSinglePage as AssetCreateResponsesSinglePage,
+    AssetGetResponsesSinglePage as AssetGetResponsesSinglePage,
     type AssetCreateParams as AssetCreateParams,
     type AssetUpdateParams as AssetUpdateParams,
   };

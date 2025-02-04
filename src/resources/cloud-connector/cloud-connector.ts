@@ -8,6 +8,7 @@ import {
   RuleListResponsesSinglePage,
   RuleUpdateParams,
   RuleUpdateResponse,
+  RuleUpdateResponsesSinglePage,
   Rules,
 } from './rules';
 
@@ -16,6 +17,7 @@ export class CloudConnector extends APIResource {
 }
 
 CloudConnector.Rules = Rules;
+CloudConnector.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;
 CloudConnector.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
 
 export declare namespace CloudConnector {
@@ -23,6 +25,7 @@ export declare namespace CloudConnector {
     Rules as Rules,
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
+    RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
     RuleListResponsesSinglePage as RuleListResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,

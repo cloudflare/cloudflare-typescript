@@ -18,7 +18,6 @@ export {
   Pools,
   type Pool,
   type PoolDeleteResponse,
-  type PoolBulkEditResponse,
   type PoolCreateParams,
   type PoolUpdateParams,
   type PoolListParams,

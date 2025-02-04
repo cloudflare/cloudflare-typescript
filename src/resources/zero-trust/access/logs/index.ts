@@ -6,3 +6,4 @@ export {
   type AccessRequestListParams,
 } from './access-requests';
 export { Logs } from './logs';
+export { SCIM, type AccessRequests } from './scim/index';

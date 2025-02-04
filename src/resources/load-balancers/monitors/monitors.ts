@@ -5,7 +5,12 @@ import * as Core from '../../../core';
 import * as PreviewsAPI from './previews';
 import { PreviewCreateParams, PreviewCreateResponse, Previews } from './previews';
 import * as ReferencesAPI from './references';
-import { ReferenceGetParams, ReferenceGetResponse, References } from './references';
+import {
+  ReferenceGetParams,
+  ReferenceGetResponse,
+  ReferenceGetResponsesSinglePage,
+  References,
+} from './references';
 import { SinglePage } from '../../../pagination';
 
 export class Monitors extends APIResource {
@@ -558,6 +563,7 @@ export interface MonitorGetParams {
 Monitors.MonitorsSinglePage = MonitorsSinglePage;
 Monitors.Previews = Previews;
 Monitors.References = References;
+Monitors.ReferenceGetResponsesSinglePage = ReferenceGetResponsesSinglePage;
 
 export declare namespace Monitors {
   export {
@@ -581,6 +587,7 @@ export declare namespace Monitors {
   export {
     References as References,
     type ReferenceGetResponse as ReferenceGetResponse,
+    ReferenceGetResponsesSinglePage as ReferenceGetResponsesSinglePage,
     type ReferenceGetParams as ReferenceGetParams,
   };
 }

@@ -26,6 +26,7 @@ describe('resource domains', () => {
   test('list: required and optional params', async () => {
     const response = await client.emailSecurity.settings.domains.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      active_delivery_mode: 'DIRECT',
       allowed_delivery_mode: 'DIRECT',
       direction: 'asc',
       domain: ['string'],

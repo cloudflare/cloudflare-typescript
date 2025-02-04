@@ -174,13 +174,13 @@ export interface Script {
   placement?: Script.Placement;
 
   /**
-   * @deprecated: Enables
+   * @deprecated Enables
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
   placement_mode?: 'smart';
 
   /**
-   * @deprecated: Status of
+   * @deprecated Status of
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
   placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
@@ -294,13 +294,13 @@ export interface ScriptUpdateResponse {
   placement?: ScriptUpdateResponse.Placement;
 
   /**
-   * @deprecated: Enables
+   * @deprecated Enables
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
   placement_mode?: 'smart';
 
   /**
-   * @deprecated: Status of
+   * @deprecated Status of
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
   placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
@@ -498,9 +498,15 @@ export namespace ScriptUpdateParams {
         not_found_handling?: 'none' | '404-page' | 'single-page-application';
 
         /**
-         * When true and the incoming request matches an asset, that will be served instead
-         * of invoking the Worker script. When false, requests will always invoke the
-         * Worker script.
+         * When true, requests will always invoke the Worker script. Otherwise, attempt to
+         * serve an asset matching the request, falling back to the Worker script.
+         */
+        run_worker_first?: boolean;
+
+        /**
+         * @deprecated When true and the incoming request matches an asset, that will be
+         * served instead of invoking the Worker script. When false, requests will always
+         * invoke the Worker script.
          */
         serve_directly?: boolean;
       }

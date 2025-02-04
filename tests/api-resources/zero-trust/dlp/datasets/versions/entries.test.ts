@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -16,7 +16,7 @@ describe('resource entries', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', body: 'body' },
+      { account_id: 'account_id', body: await toFile(Buffer.from('# my file contents'), 'README.md') },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,7 +33,7 @@ describe('resource entries', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', body: 'body' },
+      { account_id: 'account_id', body: await toFile(Buffer.from('# my file contents'), 'README.md') },
     );
   });
 });

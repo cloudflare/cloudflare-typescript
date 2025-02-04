@@ -18,7 +18,6 @@ import {
 import * as SubscriptionsAPI from './subscriptions';
 import {
   SubscriptionDeleteResponse,
-  SubscriptionGetResponse,
   SubscriptionUpdateParams,
   SubscriptionUpdateResponse,
   Subscriptions,
@@ -128,7 +127,6 @@ export declare namespace User {
     Subscriptions as Subscriptions,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionGetResponse as SubscriptionGetResponse,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
   };
 

@@ -5,6 +5,7 @@ import * as Core from '../../core';
 import * as DNSAPI from './dns';
 import * as Shared from '../shared';
 import * as EmailRoutingAPI from './email-routing';
+import { SinglePage } from '../../pagination';
 
 export class DNS extends APIResource {
   /**
@@ -23,9 +24,15 @@ export class DNS extends APIResource {
    * Disable your Email Routing zone. Also removes additional MX records previously
    * required for Email Routing to work.
    */
-  delete(params: DNSDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSDeleteResponse> {
+  delete(
+    params: DNSDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DNSRecordsSinglePage, DNSRecord> {
     const { zone_id } = params;
-    return this._client.delete(`/zones/${zone_id}/email/routing/dns`, options);
+    return this._client.getAPIList(`/zones/${zone_id}/email/routing/dns`, DNSRecordsSinglePage, {
+      method: 'delete',
+      ...options,
+    });
   }
 
   /**
@@ -48,6 +55,8 @@ export class DNS extends APIResource {
     return this._client.get(`/zones/${zone_id}/email/routing/dns`, { query, ...options });
   }
 }
+
+export class DNSRecordsSinglePage extends SinglePage<DNSRecord> {}
 
 /**
  * List of records needed to enable an Email Routing zone.
@@ -97,62 +106,6 @@ export interface DNSRecord {
     | 'SVCB'
     | 'TLSA'
     | 'URI';
-}
-
-export type DNSDeleteResponse =
-  | DNSDeleteResponse.EmailAPIResponseCommon
-  | DNSDeleteResponse.EmailDNSSettingsResponseCollection;
-
-export namespace DNSDeleteResponse {
-  export interface EmailAPIResponseCommon {
-    errors: Array<Shared.ResponseInfo>;
-
-    messages: Array<Shared.ResponseInfo>;
-
-    /**
-     * Whether the API call was successful
-     */
-    success: true;
-  }
-
-  export interface EmailDNSSettingsResponseCollection {
-    errors: Array<Shared.ResponseInfo>;
-
-    messages: Array<Shared.ResponseInfo>;
-
-    /**
-     * Whether the API call was successful
-     */
-    success: true;
-
-    result?: Array<DNSAPI.DNSRecord>;
-
-    result_info?: EmailDNSSettingsResponseCollection.ResultInfo;
-  }
-
-  export namespace EmailDNSSettingsResponseCollection {
-    export interface ResultInfo {
-      /**
-       * Total number of results for the requested service
-       */
-      count?: number;
-
-      /**
-       * Current page within paginated list of results
-       */
-      page?: number;
-
-      /**
-       * Number of results per page of results
-       */
-      per_page?: number;
-
-      /**
-       * Total results available without any search parameters
-       */
-      total_count?: number;
-    }
-  }
 }
 
 export type DNSGetResponse =
@@ -299,11 +252,13 @@ export interface DNSGetParams {
   subdomain?: string;
 }
 
+DNS.DNSRecordsSinglePage = DNSRecordsSinglePage;
+
 export declare namespace DNS {
   export {
     type DNSRecord as DNSRecord,
-    type DNSDeleteResponse as DNSDeleteResponse,
     type DNSGetResponse as DNSGetResponse,
+    DNSRecordsSinglePage as DNSRecordsSinglePage,
     type DNSCreateParams as DNSCreateParams,
     type DNSDeleteParams as DNSDeleteParams,
     type DNSEditParams as DNSEditParams,

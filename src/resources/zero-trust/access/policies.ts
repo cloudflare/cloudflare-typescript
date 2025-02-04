@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AccessAPI from './access';
 import * as ApplicationsAPI from './applications/applications';
+import * as ApplicationsPoliciesAPI from './applications/policies';
 import { SinglePage } from '../../../pagination';
 
 export class Policies extends APIResource {
@@ -154,13 +154,13 @@ export interface Policy {
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.AccessRule>;
+  include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Require this application to be served in an isolated browser for users matching
@@ -192,7 +192,7 @@ export interface Policy {
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   updated_at?: string;
 }
@@ -253,13 +253,13 @@ export interface PolicyCreateResponse {
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.AccessRule>;
+  include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Require this application to be served in an isolated browser for users matching
@@ -287,7 +287,7 @@ export interface PolicyCreateResponse {
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   reusable?: true;
 
@@ -335,13 +335,13 @@ export interface PolicyUpdateResponse {
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.AccessRule>;
+  include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Require this application to be served in an isolated browser for users matching
@@ -369,7 +369,7 @@ export interface PolicyUpdateResponse {
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   reusable?: true;
 
@@ -417,13 +417,13 @@ export interface PolicyListResponse {
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.AccessRule>;
+  include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Require this application to be served in an isolated browser for users matching
@@ -451,7 +451,7 @@ export interface PolicyListResponse {
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   reusable?: true;
 
@@ -506,13 +506,13 @@ export interface PolicyGetResponse {
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.AccessRule>;
+  include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Require this application to be served in an isolated browser for users matching
@@ -540,7 +540,7 @@ export interface PolicyGetResponse {
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   reusable?: true;
 
@@ -570,7 +570,7 @@ export interface PolicyCreateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.AccessRuleParam>;
+  include: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: The name of the Access policy.
@@ -592,7 +592,7 @@ export interface PolicyCreateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: Require this application to be served in an isolated browser for
@@ -617,7 +617,7 @@ export interface PolicyCreateParams {
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRuleParam>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: The amount of time that tokens issued for the application will be
@@ -643,7 +643,7 @@ export interface PolicyUpdateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.AccessRuleParam>;
+  include: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: The name of the Access policy.
@@ -665,7 +665,7 @@ export interface PolicyUpdateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: Require this application to be served in an isolated browser for
@@ -690,7 +690,7 @@ export interface PolicyUpdateParams {
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRuleParam>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: The amount of time that tokens issued for the application will be

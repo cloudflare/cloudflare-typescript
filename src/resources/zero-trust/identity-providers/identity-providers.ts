@@ -1,13 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import * as Core from '../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as Core from '../../../core';
 import { CloudflareError } from 'cloudflare/error';
 import * as IdentityProvidersAPI from './identity-providers';
-import { SinglePage } from '../../pagination';
+import * as SCIMAPI from './scim/scim';
+import { SCIM } from './scim/scim';
+import { SinglePage } from '../../../pagination';
 
 export class IdentityProviders extends APIResource {
+  scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
+
   /**
    * Adds a new identity provider to Access.
    */
@@ -2749,7 +2753,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AzureAD.Config;
+    config: AzureAD.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2844,7 +2848,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessCentrify.Config;
+    config: AccessCentrify.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3000,7 +3004,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessGoogle.Config;
+    config: AccessGoogle.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3068,7 +3072,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessGoogleApps.Config;
+    config: AccessGoogleApps.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3180,7 +3184,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessOIDC.Config;
+    config: AccessOIDC.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3273,7 +3277,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessOkta.Config;
+    config: AccessOkta.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3351,7 +3355,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessOnelogin.Config;
+    config: AccessOnelogin.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3424,7 +3428,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessPingone.Config;
+    config: AccessPingone.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3497,7 +3501,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessSAML.Config;
+    config: AccessSAML.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3636,7 +3640,7 @@ export declare namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessOnetimepin.Config;
+    config: AccessOnetimepin.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3702,7 +3706,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AzureAD.Config;
+    config: AzureAD.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3797,7 +3801,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessCentrify.Config;
+    config: AccessCentrify.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3953,7 +3957,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessGoogle.Config;
+    config: AccessGoogle.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -4021,7 +4025,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessGoogleApps.Config;
+    config: AccessGoogleApps.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -4133,7 +4137,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessOIDC.Config;
+    config: AccessOIDC.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -4226,7 +4230,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessOkta.Config;
+    config: AccessOkta.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -4304,7 +4308,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessOnelogin.Config;
+    config: AccessOnelogin.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -4377,7 +4381,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessPingone.Config;
+    config: AccessPingone.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -4450,7 +4454,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessSAML.Config;
+    config: AccessSAML.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -4589,7 +4593,7 @@ export declare namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessOnetimepin.Config;
+    config: AccessOnetimepin.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -4677,6 +4681,7 @@ export interface IdentityProviderGetParams {
 }
 
 IdentityProviders.IdentityProviderListResponsesSinglePage = IdentityProviderListResponsesSinglePage;
+IdentityProviders.SCIM = SCIM;
 
 export declare namespace IdentityProviders {
   export {
@@ -4694,4 +4699,6 @@ export declare namespace IdentityProviders {
     type IdentityProviderDeleteParams as IdentityProviderDeleteParams,
     type IdentityProviderGetParams as IdentityProviderGetParams,
   };
+
+  export { SCIM as SCIM };
 }

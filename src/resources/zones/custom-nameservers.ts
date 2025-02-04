@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as Shared from '../shared';
+import { SinglePage } from '../../pagination';
 
 export class CustomNameservers extends APIResource {
   /**
@@ -14,17 +15,19 @@ export class CustomNameservers extends APIResource {
    *
    * Deprecated in favor of
    * [Update DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-update-dns-settings).
+   *
+   * @deprecated Use [DNS settings API](https://developers.cloudflare.com/api/resources/dns/subresources/settings/methods/put/) instead.
    */
   update(
     params: CustomNameserverUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverUpdateResponse> {
+  ): Core.PagePromise<CustomNameserverUpdateResponsesSinglePage, CustomNameserverUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/custom_ns`, { body, ...options }) as Core.APIPromise<{
-        result: CustomNameserverUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/custom_ns`, CustomNameserverUpdateResponsesSinglePage, {
+      body,
+      method: 'put',
+      ...options,
+    });
   }
 
   /**
@@ -32,6 +35,8 @@ export class CustomNameservers extends APIResource {
    *
    * Deprecated in favor of
    * [Show DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-list-dns-settings).
+   *
+   * @deprecated Use [DNS settings API](https://developers.cloudflare.com/api/resources/dns/subresources/settings/methods/get/) instead.
    */
   get(
     params: CustomNameserverGetParams,
@@ -42,7 +47,12 @@ export class CustomNameservers extends APIResource {
   }
 }
 
-export type CustomNameserverUpdateResponse = Array<string>;
+export class CustomNameserverUpdateResponsesSinglePage extends SinglePage<CustomNameserverUpdateResponse> {}
+
+/**
+ * Unused
+ */
+export type CustomNameserverUpdateResponse = string;
 
 export interface CustomNameserverGetResponse {
   errors: Array<Shared.ResponseInfo>;
@@ -115,10 +125,13 @@ export interface CustomNameserverGetParams {
   zone_id: string;
 }
 
+CustomNameservers.CustomNameserverUpdateResponsesSinglePage = CustomNameserverUpdateResponsesSinglePage;
+
 export declare namespace CustomNameservers {
   export {
     type CustomNameserverUpdateResponse as CustomNameserverUpdateResponse,
     type CustomNameserverGetResponse as CustomNameserverGetResponse,
+    CustomNameserverUpdateResponsesSinglePage as CustomNameserverUpdateResponsesSinglePage,
     type CustomNameserverUpdateParams as CustomNameserverUpdateParams,
     type CustomNameserverGetParams as CustomNameserverGetParams,
   };

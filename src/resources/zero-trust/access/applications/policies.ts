@@ -222,6 +222,834 @@ export class Policies extends APIResource {
 
 export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
 
+/**
+ * Enforces a device posture rule has run successfully
+ */
+export interface AccessDevicePostureRule {
+  device_posture: AccessDevicePostureRule.DevicePosture;
+}
+
+export namespace AccessDevicePostureRule {
+  export interface DevicePosture {
+    /**
+     * The ID of a device posture integration.
+     */
+    integration_uid: string;
+  }
+}
+
+/**
+ * Enforces a device posture rule has run successfully
+ */
+export interface AccessDevicePostureRuleParam {
+  device_posture: AccessDevicePostureRuleParam.DevicePosture;
+}
+
+export namespace AccessDevicePostureRuleParam {
+  export interface DevicePosture {
+    /**
+     * The ID of a device posture integration.
+     */
+    integration_uid: string;
+  }
+}
+
+/**
+ * Matches an Access group.
+ */
+export type AccessRule =
+  | GroupRule
+  | AnyValidServiceTokenRule
+  | AccessRule.AccessAuthContextRule
+  | AuthenticationMethodRule
+  | AzureGroupRule
+  | CertificateRule
+  | AccessRule.AccessCommonNameRule
+  | CountryRule
+  | AccessDevicePostureRule
+  | DomainRule
+  | EmailListRule
+  | EmailRule
+  | EveryoneRule
+  | ExternalEvaluationRule
+  | GitHubOrganizationRule
+  | GSuiteGroupRule
+  | IPListRule
+  | IPRule
+  | OktaGroupRule
+  | SAMLGroupRule
+  | ServiceTokenRule;
+
+export namespace AccessRule {
+  /**
+   * Matches an Azure Authentication Context. Requires an Azure identity provider.
+   */
+  export interface AccessAuthContextRule {
+    auth_context: AccessAuthContextRule.AuthContext;
+  }
+
+  export namespace AccessAuthContextRule {
+    export interface AuthContext {
+      /**
+       * The ID of an Authentication context.
+       */
+      id: string;
+
+      /**
+       * The ACID of an Authentication context.
+       */
+      ac_id: string;
+
+      /**
+       * The ID of your Azure identity provider.
+       */
+      identity_provider_id: string;
+    }
+  }
+
+  /**
+   * Matches a specific common name.
+   */
+  export interface AccessCommonNameRule {
+    common_name: AccessCommonNameRule.CommonName;
+  }
+
+  export namespace AccessCommonNameRule {
+    export interface CommonName {
+      /**
+       * The common name to match.
+       */
+      common_name: string;
+    }
+  }
+}
+
+/**
+ * Matches an Access group.
+ */
+export type AccessRuleParam =
+  | GroupRuleParam
+  | AnyValidServiceTokenRuleParam
+  | AccessRuleParam.AccessAuthContextRule
+  | AuthenticationMethodRuleParam
+  | AzureGroupRuleParam
+  | CertificateRuleParam
+  | AccessRuleParam.AccessCommonNameRule
+  | CountryRuleParam
+  | AccessDevicePostureRuleParam
+  | DomainRuleParam
+  | EmailListRuleParam
+  | EmailRuleParam
+  | EveryoneRuleParam
+  | ExternalEvaluationRuleParam
+  | GitHubOrganizationRuleParam
+  | GSuiteGroupRuleParam
+  | IPListRuleParam
+  | IPRuleParam
+  | OktaGroupRuleParam
+  | SAMLGroupRuleParam
+  | ServiceTokenRuleParam;
+
+export namespace AccessRuleParam {
+  /**
+   * Matches an Azure Authentication Context. Requires an Azure identity provider.
+   */
+  export interface AccessAuthContextRule {
+    auth_context: AccessAuthContextRule.AuthContext;
+  }
+
+  export namespace AccessAuthContextRule {
+    export interface AuthContext {
+      /**
+       * The ID of an Authentication context.
+       */
+      id: string;
+
+      /**
+       * The ACID of an Authentication context.
+       */
+      ac_id: string;
+
+      /**
+       * The ID of your Azure identity provider.
+       */
+      identity_provider_id: string;
+    }
+  }
+
+  /**
+   * Matches a specific common name.
+   */
+  export interface AccessCommonNameRule {
+    common_name: AccessCommonNameRule.CommonName;
+  }
+
+  export namespace AccessCommonNameRule {
+    export interface CommonName {
+      /**
+       * The common name to match.
+       */
+      common_name: string;
+    }
+  }
+}
+
+/**
+ * Matches any valid Access Service Token
+ */
+export interface AnyValidServiceTokenRule {
+  /**
+   * An empty object which matches on all service tokens.
+   */
+  any_valid_service_token: AnyValidServiceTokenRule.AnyValidServiceToken;
+}
+
+export namespace AnyValidServiceTokenRule {
+  /**
+   * An empty object which matches on all service tokens.
+   */
+  export interface AnyValidServiceToken {}
+}
+
+/**
+ * Matches any valid Access Service Token
+ */
+export interface AnyValidServiceTokenRuleParam {
+  /**
+   * An empty object which matches on all service tokens.
+   */
+  any_valid_service_token: AnyValidServiceTokenRuleParam.AnyValidServiceToken;
+}
+
+export namespace AnyValidServiceTokenRuleParam {
+  /**
+   * An empty object which matches on all service tokens.
+   */
+  export interface AnyValidServiceToken {}
+}
+
+/**
+ * Enforce different MFA options
+ */
+export interface AuthenticationMethodRule {
+  auth_method: AuthenticationMethodRule.AuthMethod;
+}
+
+export namespace AuthenticationMethodRule {
+  export interface AuthMethod {
+    /**
+     * The type of authentication method
+     * https://datatracker.ietf.org/doc/html/rfc8176#section-2.
+     */
+    auth_method: string;
+  }
+}
+
+/**
+ * Enforce different MFA options
+ */
+export interface AuthenticationMethodRuleParam {
+  auth_method: AuthenticationMethodRuleParam.AuthMethod;
+}
+
+export namespace AuthenticationMethodRuleParam {
+  export interface AuthMethod {
+    /**
+     * The type of authentication method
+     * https://datatracker.ietf.org/doc/html/rfc8176#section-2.
+     */
+    auth_method: string;
+  }
+}
+
+/**
+ * Matches an Azure group. Requires an Azure identity provider.
+ */
+export interface AzureGroupRule {
+  azureAD: AzureGroupRule.AzureAD;
+}
+
+export namespace AzureGroupRule {
+  export interface AzureAD {
+    /**
+     * The ID of an Azure group.
+     */
+    id: string;
+
+    /**
+     * The ID of your Azure identity provider.
+     */
+    identity_provider_id: string;
+  }
+}
+
+/**
+ * Matches an Azure group. Requires an Azure identity provider.
+ */
+export interface AzureGroupRuleParam {
+  azureAD: AzureGroupRuleParam.AzureAD;
+}
+
+export namespace AzureGroupRuleParam {
+  export interface AzureAD {
+    /**
+     * The ID of an Azure group.
+     */
+    id: string;
+
+    /**
+     * The ID of your Azure identity provider.
+     */
+    identity_provider_id: string;
+  }
+}
+
+/**
+ * Matches any valid client certificate.
+ */
+export interface CertificateRule {
+  certificate: CertificateRule.Certificate;
+}
+
+export namespace CertificateRule {
+  export interface Certificate {}
+}
+
+/**
+ * Matches any valid client certificate.
+ */
+export interface CertificateRuleParam {
+  certificate: CertificateRuleParam.Certificate;
+}
+
+export namespace CertificateRuleParam {
+  export interface Certificate {}
+}
+
+/**
+ * Matches a specific country
+ */
+export interface CountryRule {
+  geo: CountryRule.Geo;
+}
+
+export namespace CountryRule {
+  export interface Geo {
+    /**
+     * The country code that should be matched.
+     */
+    country_code: string;
+  }
+}
+
+/**
+ * Matches a specific country
+ */
+export interface CountryRuleParam {
+  geo: CountryRuleParam.Geo;
+}
+
+export namespace CountryRuleParam {
+  export interface Geo {
+    /**
+     * The country code that should be matched.
+     */
+    country_code: string;
+  }
+}
+
+/**
+ * Match an entire email domain.
+ */
+export interface DomainRule {
+  email_domain: DomainRule.EmailDomain;
+}
+
+export namespace DomainRule {
+  export interface EmailDomain {
+    /**
+     * The email domain to match.
+     */
+    domain: string;
+  }
+}
+
+/**
+ * Match an entire email domain.
+ */
+export interface DomainRuleParam {
+  email_domain: DomainRuleParam.EmailDomain;
+}
+
+export namespace DomainRuleParam {
+  export interface EmailDomain {
+    /**
+     * The email domain to match.
+     */
+    domain: string;
+  }
+}
+
+/**
+ * Matches an email address from a list.
+ */
+export interface EmailListRule {
+  email_list: EmailListRule.EmailList;
+}
+
+export namespace EmailListRule {
+  export interface EmailList {
+    /**
+     * The ID of a previously created email list.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches an email address from a list.
+ */
+export interface EmailListRuleParam {
+  email_list: EmailListRuleParam.EmailList;
+}
+
+export namespace EmailListRuleParam {
+  export interface EmailList {
+    /**
+     * The ID of a previously created email list.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches a specific email.
+ */
+export interface EmailRule {
+  email: EmailRule.Email;
+}
+
+export namespace EmailRule {
+  export interface Email {
+    /**
+     * The email of the user.
+     */
+    email: string;
+  }
+}
+
+/**
+ * Matches a specific email.
+ */
+export interface EmailRuleParam {
+  email: EmailRuleParam.Email;
+}
+
+export namespace EmailRuleParam {
+  export interface Email {
+    /**
+     * The email of the user.
+     */
+    email: string;
+  }
+}
+
+/**
+ * Matches everyone.
+ */
+export interface EveryoneRule {
+  /**
+   * An empty object which matches on all users.
+   */
+  everyone: EveryoneRule.Everyone;
+}
+
+export namespace EveryoneRule {
+  /**
+   * An empty object which matches on all users.
+   */
+  export interface Everyone {}
+}
+
+/**
+ * Matches everyone.
+ */
+export interface EveryoneRuleParam {
+  /**
+   * An empty object which matches on all users.
+   */
+  everyone: EveryoneRuleParam.Everyone;
+}
+
+export namespace EveryoneRuleParam {
+  /**
+   * An empty object which matches on all users.
+   */
+  export interface Everyone {}
+}
+
+/**
+ * Create Allow or Block policies which evaluate the user based on custom criteria.
+ */
+export interface ExternalEvaluationRule {
+  external_evaluation: ExternalEvaluationRule.ExternalEvaluation;
+}
+
+export namespace ExternalEvaluationRule {
+  export interface ExternalEvaluation {
+    /**
+     * The API endpoint containing your business logic.
+     */
+    evaluate_url: string;
+
+    /**
+     * The API endpoint containing the key that Access uses to verify that the response
+     * came from your API.
+     */
+    keys_url: string;
+  }
+}
+
+/**
+ * Create Allow or Block policies which evaluate the user based on custom criteria.
+ */
+export interface ExternalEvaluationRuleParam {
+  external_evaluation: ExternalEvaluationRuleParam.ExternalEvaluation;
+}
+
+export namespace ExternalEvaluationRuleParam {
+  export interface ExternalEvaluation {
+    /**
+     * The API endpoint containing your business logic.
+     */
+    evaluate_url: string;
+
+    /**
+     * The API endpoint containing the key that Access uses to verify that the response
+     * came from your API.
+     */
+    keys_url: string;
+  }
+}
+
+/**
+ * Matches a Github organization. Requires a Github identity provider.
+ */
+export interface GitHubOrganizationRule {
+  'github-organization': GitHubOrganizationRule.GitHubOrganization;
+}
+
+export namespace GitHubOrganizationRule {
+  export interface GitHubOrganization {
+    /**
+     * The ID of your Github identity provider.
+     */
+    identity_provider_id: string;
+
+    /**
+     * The name of the organization.
+     */
+    name: string;
+
+    /**
+     * The name of the team
+     */
+    team?: string;
+  }
+}
+
+/**
+ * Matches a Github organization. Requires a Github identity provider.
+ */
+export interface GitHubOrganizationRuleParam {
+  'github-organization': GitHubOrganizationRuleParam.GitHubOrganization;
+}
+
+export namespace GitHubOrganizationRuleParam {
+  export interface GitHubOrganization {
+    /**
+     * The ID of your Github identity provider.
+     */
+    identity_provider_id: string;
+
+    /**
+     * The name of the organization.
+     */
+    name: string;
+
+    /**
+     * The name of the team
+     */
+    team?: string;
+  }
+}
+
+/**
+ * Matches an Access group.
+ */
+export interface GroupRule {
+  group: GroupRule.Group;
+}
+
+export namespace GroupRule {
+  export interface Group {
+    /**
+     * The ID of a previously created Access group.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches an Access group.
+ */
+export interface GroupRuleParam {
+  group: GroupRuleParam.Group;
+}
+
+export namespace GroupRuleParam {
+  export interface Group {
+    /**
+     * The ID of a previously created Access group.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches a group in Google Workspace. Requires a Google Workspace identity
+ * provider.
+ */
+export interface GSuiteGroupRule {
+  gsuite: GSuiteGroupRule.GSuite;
+}
+
+export namespace GSuiteGroupRule {
+  export interface GSuite {
+    /**
+     * The email of the Google Workspace group.
+     */
+    email: string;
+
+    /**
+     * The ID of your Google Workspace identity provider.
+     */
+    identity_provider_id: string;
+  }
+}
+
+/**
+ * Matches a group in Google Workspace. Requires a Google Workspace identity
+ * provider.
+ */
+export interface GSuiteGroupRuleParam {
+  gsuite: GSuiteGroupRuleParam.GSuite;
+}
+
+export namespace GSuiteGroupRuleParam {
+  export interface GSuite {
+    /**
+     * The email of the Google Workspace group.
+     */
+    email: string;
+
+    /**
+     * The ID of your Google Workspace identity provider.
+     */
+    identity_provider_id: string;
+  }
+}
+
+/**
+ * Matches an IP address from a list.
+ */
+export interface IPListRule {
+  ip_list: IPListRule.IPList;
+}
+
+export namespace IPListRule {
+  export interface IPList {
+    /**
+     * The ID of a previously created IP list.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches an IP address from a list.
+ */
+export interface IPListRuleParam {
+  ip_list: IPListRuleParam.IPList;
+}
+
+export namespace IPListRuleParam {
+  export interface IPList {
+    /**
+     * The ID of a previously created IP list.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches an IP address block.
+ */
+export interface IPRule {
+  ip: IPRule.IP;
+}
+
+export namespace IPRule {
+  export interface IP {
+    /**
+     * An IPv4 or IPv6 CIDR block.
+     */
+    ip: string;
+  }
+}
+
+/**
+ * Matches an IP address block.
+ */
+export interface IPRuleParam {
+  ip: IPRuleParam.IP;
+}
+
+export namespace IPRuleParam {
+  export interface IP {
+    /**
+     * An IPv4 or IPv6 CIDR block.
+     */
+    ip: string;
+  }
+}
+
+/**
+ * Matches an Okta group. Requires an Okta identity provider.
+ */
+export interface OktaGroupRule {
+  okta: OktaGroupRule.Okta;
+}
+
+export namespace OktaGroupRule {
+  export interface Okta {
+    /**
+     * The ID of your Okta identity provider.
+     */
+    identity_provider_id: string;
+
+    /**
+     * The name of the Okta group.
+     */
+    name: string;
+  }
+}
+
+/**
+ * Matches an Okta group. Requires an Okta identity provider.
+ */
+export interface OktaGroupRuleParam {
+  okta: OktaGroupRuleParam.Okta;
+}
+
+export namespace OktaGroupRuleParam {
+  export interface Okta {
+    /**
+     * The ID of your Okta identity provider.
+     */
+    identity_provider_id: string;
+
+    /**
+     * The name of the Okta group.
+     */
+    name: string;
+  }
+}
+
+/**
+ * Matches a SAML group. Requires a SAML identity provider.
+ */
+export interface SAMLGroupRule {
+  saml: SAMLGroupRule.SAML;
+}
+
+export namespace SAMLGroupRule {
+  export interface SAML {
+    /**
+     * The name of the SAML attribute.
+     */
+    attribute_name: string;
+
+    /**
+     * The SAML attribute value to look for.
+     */
+    attribute_value: string;
+
+    /**
+     * The ID of your SAML identity provider.
+     */
+    identity_provider_id: string;
+  }
+}
+
+/**
+ * Matches a SAML group. Requires a SAML identity provider.
+ */
+export interface SAMLGroupRuleParam {
+  saml: SAMLGroupRuleParam.SAML;
+}
+
+export namespace SAMLGroupRuleParam {
+  export interface SAML {
+    /**
+     * The name of the SAML attribute.
+     */
+    attribute_name: string;
+
+    /**
+     * The SAML attribute value to look for.
+     */
+    attribute_value: string;
+
+    /**
+     * The ID of your SAML identity provider.
+     */
+    identity_provider_id: string;
+  }
+}
+
+/**
+ * Matches a specific Access Service Token
+ */
+export interface ServiceTokenRule {
+  service_token: ServiceTokenRule.ServiceToken;
+}
+
+export namespace ServiceTokenRule {
+  export interface ServiceToken {
+    /**
+     * The ID of a Service Token.
+     */
+    token_id: string;
+  }
+}
+
+/**
+ * Matches a specific Access Service Token
+ */
+export interface ServiceTokenRuleParam {
+  service_token: ServiceTokenRuleParam.ServiceToken;
+}
+
+export namespace ServiceTokenRuleParam {
+  export interface ServiceToken {
+    /**
+     * The ID of a Service Token.
+     */
+    token_id: string;
+  }
+}
+
 export interface PolicyCreateResponse extends ApplicationsAPI.ApplicationPolicy {
   /**
    * The order of execution for this policy. Must be unique for each policy within an
@@ -415,6 +1243,26 @@ Policies.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
 
 export declare namespace Policies {
   export {
+    type AccessDevicePostureRule as AccessDevicePostureRule,
+    type AccessRule as AccessRule,
+    type AnyValidServiceTokenRule as AnyValidServiceTokenRule,
+    type AuthenticationMethodRule as AuthenticationMethodRule,
+    type AzureGroupRule as AzureGroupRule,
+    type CertificateRule as CertificateRule,
+    type CountryRule as CountryRule,
+    type DomainRule as DomainRule,
+    type EmailListRule as EmailListRule,
+    type EmailRule as EmailRule,
+    type EveryoneRule as EveryoneRule,
+    type ExternalEvaluationRule as ExternalEvaluationRule,
+    type GitHubOrganizationRule as GitHubOrganizationRule,
+    type GroupRule as GroupRule,
+    type GSuiteGroupRule as GSuiteGroupRule,
+    type IPListRule as IPListRule,
+    type IPRule as IPRule,
+    type OktaGroupRule as OktaGroupRule,
+    type SAMLGroupRule as SAMLGroupRule,
+    type ServiceTokenRule as ServiceTokenRule,
     type PolicyCreateResponse as PolicyCreateResponse,
     type PolicyUpdateResponse as PolicyUpdateResponse,
     type PolicyListResponse as PolicyListResponse,

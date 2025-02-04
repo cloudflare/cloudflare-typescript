@@ -38,6 +38,7 @@ describe('resource scripts', () => {
             config: {
               html_handling: 'auto-trailing-slash',
               not_found_handling: 'none',
+              run_worker_first: false,
               serve_directly: true,
             },
             jwt: 'jwt',

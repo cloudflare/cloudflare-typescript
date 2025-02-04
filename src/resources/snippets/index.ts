@@ -2,6 +2,7 @@
 
 export { Content, type ContentGetParams } from './content';
 export {
+  RuleUpdateResponsesSinglePage,
   RuleListResponsesSinglePage,
   Rules,
   type RuleUpdateResponse,

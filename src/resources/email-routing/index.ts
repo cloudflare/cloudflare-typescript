@@ -10,9 +10,9 @@ export {
   type AddressGetParams,
 } from './addresses';
 export {
+  DNSRecordsSinglePage,
   DNS,
   type DNSRecord,
-  type DNSDeleteResponse,
   type DNSGetResponse,
   type DNSCreateParams,
   type DNSDeleteParams,

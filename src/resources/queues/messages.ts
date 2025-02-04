@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Messages extends APIResource {
   /**
@@ -28,16 +29,17 @@ export class Messages extends APIResource {
     queueId: string,
     params: MessagePullParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MessagePullResponse> {
+  ): Core.PagePromise<MessagePullResponsesSinglePage, MessagePullResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/pull`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: MessagePullResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/queues/${queueId}/messages/pull`,
+      MessagePullResponsesSinglePage,
+      { body, method: 'post', ...options },
+    );
   }
 }
+
+export class MessagePullResponsesSinglePage extends SinglePage<MessagePullResponse> {}
 
 export interface MessageAckResponse {
   /**
@@ -53,26 +55,22 @@ export interface MessageAckResponse {
   warnings?: Array<string>;
 }
 
-export type MessagePullResponse = Array<MessagePullResponse.MessagePullResponseItem>;
+export interface MessagePullResponse {
+  id?: string;
 
-export namespace MessagePullResponse {
-  export interface MessagePullResponseItem {
-    id?: string;
+  attempts?: number;
 
-    attempts?: number;
+  body?: string;
 
-    body?: string;
+  /**
+   * An ID that represents an "in-flight" message that has been pulled from a Queue.
+   * You must hold on to this ID and use it to acknowledge this message.
+   */
+  lease_id?: string;
 
-    /**
-     * An ID that represents an "in-flight" message that has been pulled from a Queue.
-     * You must hold on to this ID and use it to acknowledge this message.
-     */
-    lease_id?: string;
+  metadata?: unknown;
 
-    metadata?: unknown;
-
-    timestamp_ms?: number;
-  }
+  timestamp_ms?: number;
 }
 
 export interface MessageAckParams {
@@ -134,10 +132,13 @@ export interface MessagePullParams {
   visibility_timeout_ms?: number;
 }
 
+Messages.MessagePullResponsesSinglePage = MessagePullResponsesSinglePage;
+
 export declare namespace Messages {
   export {
     type MessageAckResponse as MessageAckResponse,
     type MessagePullResponse as MessagePullResponse,
+    MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
     type MessageAckParams as MessageAckParams,
     type MessagePullParams as MessagePullParams,
   };

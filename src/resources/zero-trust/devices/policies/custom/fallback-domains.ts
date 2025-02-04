@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
+import { FallbackDomainsSinglePage } from '../policies';
 
 export class FallbackDomains extends APIResource {
   /**
@@ -14,14 +15,13 @@ export class FallbackDomains extends APIResource {
     policyId: string,
     params: FallbackDomainUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackDomainUpdateResponse | null> {
+  ): Core.PagePromise<FallbackDomainsSinglePage, PoliciesAPI.FallbackDomain> {
     const { account_id, domains } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`, {
-        body: domains,
-        ...options,
-      }) as Core.APIPromise<{ result: FallbackDomainUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`,
+      FallbackDomainsSinglePage,
+      { body: domains, method: 'put', ...options },
+    );
   }
 
   /**
@@ -33,20 +33,15 @@ export class FallbackDomains extends APIResource {
     policyId: string,
     params: FallbackDomainGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackDomainGetResponse | null> {
+  ): Core.PagePromise<FallbackDomainsSinglePage, PoliciesAPI.FallbackDomain> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`,
-        options,
-      ) as Core.APIPromise<{ result: FallbackDomainGetResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`,
+      FallbackDomainsSinglePage,
+      options,
+    );
   }
 }
-
-export type FallbackDomainUpdateResponse = Array<PoliciesAPI.FallbackDomain>;
-
-export type FallbackDomainGetResponse = Array<PoliciesAPI.FallbackDomain>;
 
 export interface FallbackDomainUpdateParams {
   /**
@@ -66,9 +61,9 @@ export interface FallbackDomainGetParams {
 
 export declare namespace FallbackDomains {
   export {
-    type FallbackDomainUpdateResponse as FallbackDomainUpdateResponse,
-    type FallbackDomainGetResponse as FallbackDomainGetResponse,
     type FallbackDomainUpdateParams as FallbackDomainUpdateParams,
     type FallbackDomainGetParams as FallbackDomainGetParams,
   };
 }
+
+export { FallbackDomainsSinglePage };

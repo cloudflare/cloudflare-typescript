@@ -12,14 +12,13 @@ export class WANs extends APIResource {
     siteId: string,
     params: WANCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WANCreateResponse> {
+  ): Core.PagePromise<WANsSinglePage, WAN> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/wans`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: WANCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/wans`, WANsSinglePage, {
+      body,
+      method: 'post',
+      ...options,
+    });
   }
 
   /**
@@ -193,8 +192,6 @@ export interface WANStaticAddressingParam {
   secondary_address?: string;
 }
 
-export type WANCreateResponse = Array<WAN>;
-
 export interface WANCreateParams {
   /**
    * Path param: Identifier
@@ -321,7 +318,6 @@ export declare namespace WANs {
   export {
     type WAN as WAN,
     type WANStaticAddressing as WANStaticAddressing,
-    type WANCreateResponse as WANCreateResponse,
     WANsSinglePage as WANsSinglePage,
     type WANCreateParams as WANCreateParams,
     type WANUpdateParams as WANUpdateParams,

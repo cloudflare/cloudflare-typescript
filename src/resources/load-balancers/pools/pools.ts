@@ -12,7 +12,12 @@ import {
   HealthGetResponse,
 } from './health';
 import * as ReferencesAPI from './references';
-import { ReferenceGetParams, ReferenceGetResponse, References } from './references';
+import {
+  ReferenceGetParams,
+  ReferenceGetResponse,
+  ReferenceGetResponsesSinglePage,
+  References,
+} from './references';
 import { SinglePage } from '../../../pagination';
 
 export class Pools extends APIResource {
@@ -79,14 +84,16 @@ export class Pools extends APIResource {
    * pools. Supports the standard pagination query parameters, either
    * `limit`/`offset` or `per_page`/`page`.
    */
-  bulkEdit(params: PoolBulkEditParams, options?: Core.RequestOptions): Core.APIPromise<PoolBulkEditResponse> {
+  bulkEdit(
+    params: PoolBulkEditParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PoolsSinglePage, Pool> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/load_balancers/pools`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PoolBulkEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/load_balancers/pools`, PoolsSinglePage, {
+      body,
+      method: 'patch',
+      ...options,
+    });
   }
 
   /**
@@ -220,8 +227,6 @@ export interface Pool {
 export interface PoolDeleteResponse {
   id?: string;
 }
-
-export type PoolBulkEditResponse = Array<Pool>;
 
 export interface PoolCreateParams {
   /**
@@ -528,12 +533,12 @@ export interface PoolGetParams {
 Pools.PoolsSinglePage = PoolsSinglePage;
 Pools.Health = Health;
 Pools.References = References;
+Pools.ReferenceGetResponsesSinglePage = ReferenceGetResponsesSinglePage;
 
 export declare namespace Pools {
   export {
     type Pool as Pool,
     type PoolDeleteResponse as PoolDeleteResponse,
-    type PoolBulkEditResponse as PoolBulkEditResponse,
     PoolsSinglePage as PoolsSinglePage,
     type PoolCreateParams as PoolCreateParams,
     type PoolUpdateParams as PoolUpdateParams,
@@ -555,6 +560,7 @@ export declare namespace Pools {
   export {
     References as References,
     type ReferenceGetResponse as ReferenceGetResponse,
+    ReferenceGetResponsesSinglePage as ReferenceGetResponsesSinglePage,
     type ReferenceGetParams as ReferenceGetParams,
   };
 }

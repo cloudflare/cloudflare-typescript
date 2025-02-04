@@ -2,6 +2,7 @@
 
 export { Settings } from './settings';
 export {
+  TLSGetResponsesSinglePage,
   TLS,
   type Setting,
   type SettingValue,

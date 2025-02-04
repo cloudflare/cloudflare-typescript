@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as DatasetsAPI from './datasets';
+import { type BlobLike } from '../../../../uploads';
 
 export class Upload extends APIResource {
   /**
@@ -83,7 +84,7 @@ export interface UploadEditParams {
   /**
    * Body param:
    */
-  body: string;
+  body: string | ArrayBufferView | ArrayBuffer | BlobLike;
 }
 
 export declare namespace Upload {

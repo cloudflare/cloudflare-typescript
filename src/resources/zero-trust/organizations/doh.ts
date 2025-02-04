@@ -61,6 +61,8 @@ export interface DOHUpdateResponse {
 
   expires_at?: string;
 
+  last_seen_at?: string;
+
   /**
    * The name of the service token.
    */
@@ -98,6 +100,8 @@ export interface DOHGetResponse {
   duration?: string;
 
   expires_at?: string;
+
+  last_seen_at?: string;
 
   /**
    * The name of the service token.

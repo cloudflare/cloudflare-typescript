@@ -3,11 +3,11 @@
 export { Destinations } from './destinations';
 export { Eligible, type EligibleGetResponse, type EligibleGetParams } from './eligible';
 export {
+  PagerdutiesSinglePage,
   PagerdutyResource,
   type Pagerduty,
   type PagerdutyCreateResponse,
   type PagerdutyDeleteResponse,
-  type PagerdutyGetResponse,
   type PagerdutyLinkResponse,
   type PagerdutyCreateParams,
   type PagerdutyDeleteParams,

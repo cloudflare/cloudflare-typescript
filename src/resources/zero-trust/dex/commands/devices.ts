@@ -44,6 +44,16 @@ export namespace DeviceListResponse {
     deviceName?: string;
 
     /**
+     * Whether the device is eligible for remote captures
+     */
+    eligible?: boolean;
+
+    /**
+     * If the device is not eligible, the reason why.
+     */
+    ineligibleReason?: string;
+
+    /**
      * User contact email address
      */
     personEmail?: string;

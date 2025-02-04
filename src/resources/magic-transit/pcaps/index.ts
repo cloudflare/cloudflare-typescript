@@ -2,9 +2,9 @@
 
 export { Download, type DownloadGetParams } from './download';
 export {
+  OwnershipsSinglePage,
   OwnershipResource,
   type Ownership,
-  type OwnershipGetResponse,
   type OwnershipCreateParams,
   type OwnershipDeleteParams,
   type OwnershipGetParams,

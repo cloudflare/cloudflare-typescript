@@ -2,7 +2,7 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
 export class Filters extends APIResource {
   /**
@@ -13,13 +13,13 @@ export class Filters extends APIResource {
   create(
     params: FilterCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterCreateResponse | null> {
+  ): Core.PagePromise<FirewallFiltersSinglePage, FirewallFilter> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/filters`, { body, ...options }) as Core.APIPromise<{
-        result: FilterCreateResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/filters`, FirewallFiltersSinglePage, {
+      body,
+      method: 'post',
+      ...options,
+    });
   }
 
   /**
@@ -84,13 +84,12 @@ export class Filters extends APIResource {
   bulkDelete(
     params: FilterBulkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterBulkDeleteResponse | null> {
+  ): Core.PagePromise<FirewallFiltersSinglePage, FirewallFilter> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/filters`, options) as Core.APIPromise<{
-        result: FilterBulkDeleteResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/filters`, FirewallFiltersSinglePage, {
+      method: 'delete',
+      ...options,
+    });
   }
 
   /**
@@ -101,13 +100,13 @@ export class Filters extends APIResource {
   bulkUpdate(
     params: FilterBulkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterBulkUpdateResponse | null> {
+  ): Core.PagePromise<FirewallFiltersSinglePage, FirewallFilter> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/filters`, { body, ...options }) as Core.APIPromise<{
-        result: FilterBulkUpdateResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/filters`, FirewallFiltersSinglePage, {
+      body,
+      method: 'put',
+      ...options,
+    });
   }
 
   /**
@@ -128,6 +127,8 @@ export class Filters extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class FirewallFiltersSinglePage extends SinglePage<FirewallFilter> {}
 
 export class FirewallFiltersV4PagePaginationArray extends V4PagePaginationArray<FirewallFilter> {}
 
@@ -181,12 +182,6 @@ export interface FirewallFilterParam {
    */
   ref?: string;
 }
-
-export type FilterCreateResponse = Array<FirewallFilter>;
-
-export type FilterBulkDeleteResponse = Array<FirewallFilter>;
-
-export type FilterBulkUpdateResponse = Array<FirewallFilter>;
 
 export interface FilterCreateParams {
   /**

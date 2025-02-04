@@ -5,9 +5,20 @@ import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DomainAPI from './domain';
 import { Domain, DomainGetParams, DomainGetResponse } from './domain';
+import * as InternetServicesAPI from './internet-services';
+import {
+  InternetServiceTimeseriesGroupsParams,
+  InternetServiceTimeseriesGroupsResponse,
+  InternetServiceTopParams,
+  InternetServiceTopResponse,
+  InternetServices,
+} from './internet-services';
 
 export class Ranking extends APIResource {
   domain: DomainAPI.Domain = new DomainAPI.Domain(this._client);
+  internetServices: InternetServicesAPI.InternetServices = new InternetServicesAPI.InternetServices(
+    this._client,
+  );
 
   /**
    * Gets Domains Rank updates change over time. Raw values are returned.
@@ -208,6 +219,7 @@ export interface RankingTopParams {
 }
 
 Ranking.Domain = Domain;
+Ranking.InternetServices = InternetServices;
 
 export declare namespace Ranking {
   export {
@@ -221,5 +233,13 @@ export declare namespace Ranking {
     Domain as Domain,
     type DomainGetResponse as DomainGetResponse,
     type DomainGetParams as DomainGetParams,
+  };
+
+  export {
+    InternetServices as InternetServices,
+    type InternetServiceTimeseriesGroupsResponse as InternetServiceTimeseriesGroupsResponse,
+    type InternetServiceTopResponse as InternetServiceTopResponse,
+    type InternetServiceTimeseriesGroupsParams as InternetServiceTimeseriesGroupsParams,
+    type InternetServiceTopParams as InternetServiceTopParams,
   };
 }

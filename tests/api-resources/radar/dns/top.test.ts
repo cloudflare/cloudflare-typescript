@@ -10,8 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource top', () => {
-  test('ases: only required params', async () => {
-    const responsePromise = client.radar.dns.top.ases({ domain: ['string'] });
+  test('ases', async () => {
+    const responsePromise = client.radar.dns.top.ases();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,23 +21,36 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('ases: required and optional params', async () => {
-    const response = await client.radar.dns.top.ases({
-      domain: ['string'],
-      asn: ['string'],
-      continent: ['string'],
-      dateEnd: ['2019-12-27T18:11:19.117Z'],
-      dateRange: ['7d'],
-      dateStart: ['2019-12-27T18:11:19.117Z'],
-      format: 'JSON',
-      limit: 5,
-      location: ['string'],
-      name: ['string'],
-    });
+  test('ases: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.radar.dns.top.ases({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
-  test('locations: only required params', async () => {
-    const responsePromise = client.radar.dns.top.locations({ domain: ['string'] });
+  test('ases: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.dns.top.ases(
+        {
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          domain: ['string'],
+          format: 'JSON',
+          limit: 5,
+          location: ['string'],
+          name: ['string'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('locations', async () => {
+    const responsePromise = client.radar.dns.top.locations();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,18 +60,31 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('locations: required and optional params', async () => {
-    const response = await client.radar.dns.top.locations({
-      domain: ['string'],
-      asn: ['string'],
-      continent: ['string'],
-      dateEnd: ['2019-12-27T18:11:19.117Z'],
-      dateRange: ['7d'],
-      dateStart: ['2019-12-27T18:11:19.117Z'],
-      format: 'JSON',
-      limit: 5,
-      location: ['string'],
-      name: ['string'],
-    });
+  test('locations: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.radar.dns.top.locations({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
+  });
+
+  test('locations: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.dns.top.locations(
+        {
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          domain: ['string'],
+          format: 'JSON',
+          limit: 5,
+          location: ['string'],
+          name: ['string'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

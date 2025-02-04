@@ -156,7 +156,7 @@ export interface EmailRoutingRule {
   priority?: number;
 
   /**
-   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   * @deprecated Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
 }

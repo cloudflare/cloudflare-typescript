@@ -61,9 +61,9 @@ import {
   ProxyEndpointDeleteResponse,
   ProxyEndpointEditParams,
   ProxyEndpointGetParams,
-  ProxyEndpointGetResponse,
   ProxyEndpointListParams,
   ProxyEndpoints,
+  ProxyEndpointsSinglePage,
 } from './proxy-endpoints';
 import * as RulesAPI from './rules';
 import {
@@ -214,6 +214,7 @@ Gateway.Locations = Locations;
 Gateway.LocationsSinglePage = LocationsSinglePage;
 Gateway.Logging = Logging;
 Gateway.ProxyEndpoints = ProxyEndpoints;
+Gateway.ProxyEndpointsSinglePage = ProxyEndpointsSinglePage;
 Gateway.Rules = Rules;
 Gateway.GatewayRulesSinglePage = GatewayRulesSinglePage;
 Gateway.Certificates = Certificates;
@@ -317,7 +318,7 @@ export declare namespace Gateway {
     type GatewayIPs as GatewayIPs,
     type ProxyEndpoint as ProxyEndpoint,
     type ProxyEndpointDeleteResponse as ProxyEndpointDeleteResponse,
-    type ProxyEndpointGetResponse as ProxyEndpointGetResponse,
+    ProxyEndpointsSinglePage as ProxyEndpointsSinglePage,
     type ProxyEndpointCreateParams as ProxyEndpointCreateParams,
     type ProxyEndpointListParams as ProxyEndpointListParams,
     type ProxyEndpointDeleteParams as ProxyEndpointDeleteParams,

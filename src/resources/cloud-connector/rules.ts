@@ -8,14 +8,16 @@ export class Rules extends APIResource {
   /**
    * Put Rules
    */
-  update(params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RuleUpdateResponse> {
+  update(
+    params: RuleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse> {
     const { zone_id, rules } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/cloud_connector/rules`, {
-        body: rules,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/cloud_connector/rules`, RuleUpdateResponsesSinglePage, {
+      body: rules,
+      method: 'put',
+      ...options,
+    });
   }
 
   /**
@@ -34,44 +36,39 @@ export class Rules extends APIResource {
   }
 }
 
+export class RuleUpdateResponsesSinglePage extends SinglePage<RuleUpdateResponse> {}
+
 export class RuleListResponsesSinglePage extends SinglePage<RuleListResponse> {}
 
-/**
- * List of Cloud Connector rules
- */
-export type RuleUpdateResponse = Array<RuleUpdateResponse.RuleUpdateResponseItem>;
+export interface RuleUpdateResponse {
+  id?: string;
+
+  description?: string;
+
+  enabled?: boolean;
+
+  expression?: string;
+
+  /**
+   * Parameters of Cloud Connector Rule
+   */
+  parameters?: RuleUpdateResponse.Parameters;
+
+  /**
+   * Cloud Provider type
+   */
+  provider?: 'aws_s3' | 'r2' | 'gcp_storage' | 'azure_storage';
+}
 
 export namespace RuleUpdateResponse {
-  export interface RuleUpdateResponseItem {
-    id?: string;
-
-    description?: string;
-
-    enabled?: boolean;
-
-    expression?: string;
-
+  /**
+   * Parameters of Cloud Connector Rule
+   */
+  export interface Parameters {
     /**
-     * Parameters of Cloud Connector Rule
+     * Host to perform Cloud Connection to
      */
-    parameters?: RuleUpdateResponseItem.Parameters;
-
-    /**
-     * Cloud Provider type
-     */
-    provider?: 'aws_s3' | 'r2' | 'gcp_storage' | 'azure_storage';
-  }
-
-  export namespace RuleUpdateResponseItem {
-    /**
-     * Parameters of Cloud Connector Rule
-     */
-    export interface Parameters {
-      /**
-       * Host to perform Cloud Connection to
-       */
-      host?: string;
-    }
+    host?: string;
   }
 }
 
@@ -160,12 +157,14 @@ export interface RuleListParams {
   zone_id: string;
 }
 
+Rules.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;
 Rules.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
 
 export declare namespace Rules {
   export {
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
+    RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
     RuleListResponsesSinglePage as RuleListResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,

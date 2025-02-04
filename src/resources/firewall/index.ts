@@ -21,16 +21,12 @@ export {
 } from './access-rules';
 export { Firewall } from './firewall';
 export {
+  FirewallRulesSinglePage,
   FirewallRulesV4PagePaginationArray,
   Rules,
   type DeletedFilter,
   type FirewallRule,
   type Product,
-  type RuleCreateResponse,
-  type RuleBulkDeleteResponse,
-  type RuleBulkEditResponse,
-  type RuleBulkUpdateResponse,
-  type RuleEditResponse,
   type RuleCreateParams,
   type RuleUpdateParams,
   type RuleListParams,

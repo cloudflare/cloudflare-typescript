@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  AudioSinglePage,
   AudioTracks,
   type Audio,
   type AudioTrackDeleteResponse,
-  type AudioTrackGetResponse,
   type AudioTrackDeleteParams,
   type AudioTrackCopyParams,
   type AudioTrackEditParams,
   type AudioTrackGetParams,
 } from './audio-tracks';
-export { Captions, type Caption, type CaptionGetResponse, type CaptionGetParams } from './captions/index';
+export { CaptionsSinglePage, Captions, type Caption, type CaptionGetParams } from './captions/index';
 export { ClipResource, type Clip, type ClipCreateParams } from './clip';
 export { Copy, type CopyCreateParams } from './copy';
 export {
@@ -29,6 +29,7 @@ export {
 } from './downloads';
 export { Embed, type EmbedGetResponse, type EmbedGetParams } from './embed';
 export {
+  KeyGetResponsesSinglePage,
   Keys,
   type KeyDeleteResponse,
   type KeyGetResponse,

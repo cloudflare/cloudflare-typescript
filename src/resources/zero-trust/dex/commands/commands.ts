@@ -13,12 +13,9 @@ import * as DownloadsAPI from './downloads';
 import { DownloadGetParams, Downloads } from './downloads';
 import * as QuotaAPI from './quota';
 import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
-import * as UsersAPI from './users';
-import { UserListParams, UserListResponse, Users } from './users';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Commands extends APIResource {
-  users: UsersAPI.Users = new UsersAPI.Users(this._client);
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
   quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
@@ -219,7 +216,6 @@ export interface CommandListParams extends V4PagePaginationParams {
 }
 
 Commands.CommandListResponsesV4PagePagination = CommandListResponsesV4PagePagination;
-Commands.Users = Users;
 Commands.Devices = Devices;
 Commands.DeviceListResponsesV4PagePagination = DeviceListResponsesV4PagePagination;
 Commands.Downloads = Downloads;
@@ -233,8 +229,6 @@ export declare namespace Commands {
     type CommandCreateParams as CommandCreateParams,
     type CommandListParams as CommandListParams,
   };
-
-  export { Users as Users, type UserListResponse as UserListResponse, type UserListParams as UserListParams };
 
   export {
     Devices as Devices,

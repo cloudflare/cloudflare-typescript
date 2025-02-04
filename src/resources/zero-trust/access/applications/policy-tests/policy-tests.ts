@@ -2,11 +2,11 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as AccessAPI from '../../access';
 import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
+import * as ApplicationsPoliciesAPI from '../policies';
 import * as UsersAPI from './users';
-import { UserListParams, UserListResponse, Users } from './users';
+import { UserListParams, UserListResponse, UserListResponsesSinglePage, Users } from './users';
 
 export class PolicyTests extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
@@ -19,7 +19,12 @@ export class PolicyTests extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyTestCreateResponse> {
     const { account_id, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/access/policy-tests`, { body, ...options });
+    return (
+      this._client.post(`/accounts/${account_id}/access/policy-tests`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PolicyTestCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -30,8 +35,13 @@ export class PolicyTests extends APIResource {
     params: PolicyTestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyTestGetResponse> {
-    const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/access/policy-tests/${policyTestId}`, options);
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/access/policy-tests/${policyTestId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: PolicyTestGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -101,85 +111,93 @@ export interface PolicyTestCreateParams {
   account_id: string;
 
   /**
-   * Body param: The UUID of the policy
+   * Body param:
    */
-  id?: string;
+  policies?: Array<PolicyTestCreateParams.Policy>;
+}
 
-  /**
-   * Body param: Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+export namespace PolicyTestCreateParams {
+  export interface Policy {
+    /**
+     * The action Access will take if a user matches this policy. Infrastructure
+     * application policies can only use the Allow action.
+     */
+    decision: ApplicationsAPI.DecisionParam;
 
-  /**
-   * Body param: Requires the user to request access from an administrator at the
-   * start of each session.
-   */
-  approval_required?: boolean;
+    /**
+     * Rules evaluated with an OR logical operator. A user needs to meet only one of
+     * the Include rules.
+     */
+    include: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
-  /**
-   * Body param: The action Access will take if a user matches this policy.
-   * Infrastructure application policies can only use the Allow action.
-   */
-  decision?: ApplicationsAPI.DecisionParam;
+    /**
+     * The name of the Access policy.
+     */
+    name: string;
 
-  /**
-   * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
-   * user cannot meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
+    /**
+     * Administrators who can approve a temporary authentication request.
+     */
+    approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
 
-  /**
-   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
-   * only one of the Include rules.
-   */
-  include?: Array<AccessAPI.AccessRuleParam>;
+    /**
+     * Requires the user to request access from an administrator at the start of each
+     * session.
+     */
+    approval_required?: boolean;
 
-  /**
-   * Body param: Require this application to be served in an isolated browser for
-   * users matching this policy. 'Client Web Isolation' must be on for the account in
-   * order to use this feature.
-   */
-  isolation_required?: boolean;
+    /**
+     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+     * meet any of the Exclude rules.
+     */
+    exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
-  /**
-   * Body param: The name of the Access policy.
-   */
-  name?: string;
+    /**
+     * Require this application to be served in an isolated browser for users matching
+     * this policy. 'Client Web Isolation' must be on for the account in order to use
+     * this feature.
+     */
+    isolation_required?: boolean;
 
-  /**
-   * Body param: A custom message that will appear on the purpose justification
-   * screen.
-   */
-  purpose_justification_prompt?: string;
+    /**
+     * A custom message that will appear on the purpose justification screen.
+     */
+    purpose_justification_prompt?: string;
 
-  /**
-   * Body param: Require users to enter a justification when they log in to the
-   * application.
-   */
-  purpose_justification_required?: boolean;
+    /**
+     * Require users to enter a justification when they log in to the application.
+     */
+    purpose_justification_required?: boolean;
 
-  /**
-   * Body param: Rules evaluated with an AND logical operator. To match the policy, a
-   * user must meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRuleParam>;
+    /**
+     * Rules evaluated with an AND logical operator. To match the policy, a user must
+     * meet all of the Require rules.
+     */
+    require?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
-  /**
-   * Body param: The amount of time that tokens issued for the application will be
-   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-   * (or µs), ms, s, m, h.
-   */
-  session_duration?: string;
+    /**
+     * The amount of time that tokens issued for the application will be valid. Must be
+     * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+     * m, h.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyTestGetParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Query param:
+   */
+  page?: number;
 }
 
 PolicyTests.Users = Users;
+PolicyTests.UserListResponsesSinglePage = UserListResponsesSinglePage;
 
 export declare namespace PolicyTests {
   export {
@@ -189,5 +207,10 @@ export declare namespace PolicyTests {
     type PolicyTestGetParams as PolicyTestGetParams,
   };
 
-  export { Users as Users, type UserListResponse as UserListResponse, type UserListParams as UserListParams };
+  export {
+    Users as Users,
+    type UserListResponse as UserListResponse,
+    UserListResponsesSinglePage as UserListResponsesSinglePage,
+    type UserListParams as UserListParams,
+  };
 }

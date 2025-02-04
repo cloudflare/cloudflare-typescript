@@ -11,7 +11,7 @@ import {
   DomainHistoryResource,
 } from './domain-history';
 import * as IPListsAPI from './ip-lists';
-import { IPList, IPListGetParams, IPListGetResponse, IPLists } from './ip-lists';
+import { IPList, IPListGetParams, IPLists, IPListsSinglePage } from './ip-lists';
 import * as IPsAPI from './ips';
 import { IP, IPGetParams, IPGetResponse, IPs } from './ips';
 import * as MiscategorizationsAPI from './miscategorizations';
@@ -71,6 +71,7 @@ Intel.Domains = Domains;
 Intel.DomainHistoryResource = DomainHistoryResource;
 Intel.IPs = IPs;
 Intel.IPLists = IPLists;
+Intel.IPListsSinglePage = IPListsSinglePage;
 Intel.Miscategorizations = Miscategorizations;
 Intel.IndicatorFeeds = IndicatorFeeds;
 Intel.IndicatorFeedListResponsesSinglePage = IndicatorFeedListResponsesSinglePage;
@@ -97,7 +98,7 @@ export declare namespace Intel {
   export {
     IPLists as IPLists,
     type IPList as IPList,
-    type IPListGetResponse as IPListGetResponse,
+    IPListsSinglePage as IPListsSinglePage,
     type IPListGetParams as IPListGetParams,
   };
 

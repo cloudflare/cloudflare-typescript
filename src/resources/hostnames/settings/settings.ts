@@ -10,6 +10,7 @@ import {
   TLSDeleteResponse,
   TLSGetParams,
   TLSGetResponse,
+  TLSGetResponsesSinglePage,
   TLSUpdateParams,
 } from './tls';
 
@@ -18,6 +19,7 @@ export class Settings extends APIResource {
 }
 
 Settings.TLS = TLS;
+Settings.TLSGetResponsesSinglePage = TLSGetResponsesSinglePage;
 
 export declare namespace Settings {
   export {
@@ -26,6 +28,7 @@ export declare namespace Settings {
     type SettingValue as SettingValue,
     type TLSDeleteResponse as TLSDeleteResponse,
     type TLSGetResponse as TLSGetResponse,
+    TLSGetResponsesSinglePage as TLSGetResponsesSinglePage,
     type TLSUpdateParams as TLSUpdateParams,
     type TLSDeleteParams as TLSDeleteParams,
     type TLSGetParams as TLSGetParams,

@@ -25,7 +25,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Get a url to download a single dataset.
+   * Get a URL to download a single dataset.
    */
   download(
     params: DatasetDownloadParams,

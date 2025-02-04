@@ -7,10 +7,9 @@ import { CloudflareError } from 'cloudflare/error';
 import * as SettingsAPI from './settings';
 import {
   CertificateSettings,
+  CertificateSettingsSinglePage,
   SettingGetParams,
-  SettingGetResponse,
   SettingUpdateParams,
-  SettingUpdateResponse,
   Settings,
 } from './settings';
 import { SinglePage } from '../../../../pagination';
@@ -342,6 +341,7 @@ export interface CertificateGetParams {
 
 Certificates.CertificatesSinglePage = CertificatesSinglePage;
 Certificates.Settings = Settings;
+Certificates.CertificateSettingsSinglePage = CertificateSettingsSinglePage;
 
 export declare namespace Certificates {
   export {
@@ -359,8 +359,7 @@ export declare namespace Certificates {
   export {
     Settings as Settings,
     type CertificateSettings as CertificateSettings,
-    type SettingUpdateResponse as SettingUpdateResponse,
-    type SettingGetResponse as SettingGetResponse,
+    CertificateSettingsSinglePage as CertificateSettingsSinglePage,
     type SettingUpdateParams as SettingUpdateParams,
     type SettingGetParams as SettingGetParams,
   };

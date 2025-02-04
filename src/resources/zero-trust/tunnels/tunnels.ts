@@ -14,10 +14,10 @@ import {
 import * as ConnectionsAPI from './connections';
 import {
   Client,
+  ClientsSinglePage,
   ConnectionDeleteParams,
   ConnectionDeleteResponse,
   ConnectionGetParams,
-  ConnectionGetResponse,
   Connections,
 } from './connections';
 import * as ConnectorsAPI from './connectors';
@@ -872,6 +872,7 @@ Tunnels.WARPConnector = WARPConnector;
 Tunnels.WARPConnectorListResponsesV4PagePaginationArray = WARPConnectorListResponsesV4PagePaginationArray;
 Tunnels.Configurations = Configurations;
 Tunnels.Connections = Connections;
+Tunnels.ClientsSinglePage = ClientsSinglePage;
 Tunnels.Token = Token;
 Tunnels.Connectors = Connectors;
 Tunnels.Management = Management;
@@ -921,7 +922,7 @@ export declare namespace Tunnels {
     Connections as Connections,
     type Client as Client,
     type ConnectionDeleteResponse as ConnectionDeleteResponse,
-    type ConnectionGetResponse as ConnectionGetResponse,
+    ClientsSinglePage as ClientsSinglePage,
     type ConnectionDeleteParams as ConnectionDeleteParams,
     type ConnectionGetParams as ConnectionGetParams,
   };

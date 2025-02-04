@@ -14,20 +14,6 @@ export {
 } from './events/index';
 export { Page, type PagePreviewResponse, type PagePreviewParams } from './page';
 export {
-  Rules,
-  type WaitingRoomRule,
-  type RuleCreateResponse,
-  type RuleUpdateResponse,
-  type RuleDeleteResponse,
-  type RuleEditResponse,
-  type RuleGetResponse,
-  type RuleCreateParams,
-  type RuleUpdateParams,
-  type RuleDeleteParams,
-  type RuleEditParams,
-  type RuleGetParams,
-} from './rules';
-export {
   Settings,
   type Setting,
   type SettingUpdateResponse,
@@ -38,4 +24,14 @@ export {
   type SettingGetParams,
 } from './settings';
 export { Statuses, type StatusGetResponse, type StatusGetParams } from './statuses';
+export {
+  WaitingRoomRulesSinglePage,
+  Rules,
+  type WaitingRoomRule,
+  type RuleCreateParams,
+  type RuleUpdateParams,
+  type RuleDeleteParams,
+  type RuleEditParams,
+  type RuleGetParams,
+} from './rules';
 export { WaitingRooms } from './waiting-rooms';

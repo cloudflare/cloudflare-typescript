@@ -6,8 +6,6 @@ import * as Core from '../../../../core';
 import * as SummaryAPI from './summary';
 import {
   Summary,
-  SummaryGetParams,
-  SummaryGetResponse,
   SummaryHTTPMethodParams,
   SummaryHTTPMethodResponse,
   SummaryHTTPVersionParams,
@@ -21,8 +19,6 @@ import {
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
-  TimeseriesGroupGetParams,
-  TimeseriesGroupGetResponse,
   TimeseriesGroupHTTPMethodParams,
   TimeseriesGroupHTTPMethodResponse,
   TimeseriesGroupHTTPVersionParams,
@@ -306,13 +302,11 @@ export declare namespace Layer7 {
 
   export {
     Summary as Summary,
-    type SummaryGetResponse as SummaryGetResponse,
     type SummaryHTTPMethodResponse as SummaryHTTPMethodResponse,
     type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
     type SummaryIPVersionResponse as SummaryIPVersionResponse,
     type SummaryManagedRulesResponse as SummaryManagedRulesResponse,
     type SummaryMitigationProductResponse as SummaryMitigationProductResponse,
-    type SummaryGetParams as SummaryGetParams,
     type SummaryHTTPMethodParams as SummaryHTTPMethodParams,
     type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
     type SummaryIPVersionParams as SummaryIPVersionParams,
@@ -322,7 +316,6 @@ export declare namespace Layer7 {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
-    type TimeseriesGroupGetResponse as TimeseriesGroupGetResponse,
     type TimeseriesGroupHTTPMethodResponse as TimeseriesGroupHTTPMethodResponse,
     type TimeseriesGroupHTTPVersionResponse as TimeseriesGroupHTTPVersionResponse,
     type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
@@ -330,7 +323,6 @@ export declare namespace Layer7 {
     type TimeseriesGroupManagedRulesResponse as TimeseriesGroupManagedRulesResponse,
     type TimeseriesGroupMitigationProductResponse as TimeseriesGroupMitigationProductResponse,
     type TimeseriesGroupVerticalResponse as TimeseriesGroupVerticalResponse,
-    type TimeseriesGroupGetParams as TimeseriesGroupGetParams,
     type TimeseriesGroupHTTPMethodParams as TimeseriesGroupHTTPMethodParams,
     type TimeseriesGroupHTTPVersionParams as TimeseriesGroupHTTPVersionParams,
     type TimeseriesGroupIndustryParams as TimeseriesGroupIndustryParams,

@@ -17,4 +17,9 @@ export {
   type IssueSeverityParams,
   type IssueTypeParams,
 } from './issues';
-export { IssueTypes, type IssueTypeGetResponse, type IssueTypeGetParams } from './issue-types';
+export {
+  IssueTypeGetResponsesSinglePage,
+  IssueTypes,
+  type IssueTypeGetResponse,
+  type IssueTypeGetParams,
+} from './issue-types';

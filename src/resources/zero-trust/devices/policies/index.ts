@@ -2,7 +2,6 @@
 
 export {
   Custom,
-  type CustomDeleteResponse,
   type CustomCreateParams,
   type CustomListParams,
   type CustomDeleteParams,
@@ -17,6 +16,9 @@ export {
   type DefaultGetParams,
 } from './default/index';
 export {
+  SplitTunnelExcludesSinglePage,
+  SplitTunnelIncludesSinglePage,
+  FallbackDomainsSinglePage,
   SettingsPoliciesSinglePage,
   Policies,
   type DevicePolicyCertificates,

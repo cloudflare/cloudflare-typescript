@@ -55,7 +55,14 @@ export interface AbuseReportCreateParams {
     | 'abuse_ncsei';
 
   /**
-   * Body param: A valid email of the abuse reporter
+   * Body param: Can be `0` for false or `1` for true
+   */
+  agree: 0 | 1;
+
+  /**
+   * Body param: A valid email of the abuse reporter. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   email: string;
 
@@ -85,27 +92,29 @@ export interface AbuseReportCreateParams {
   /**
    * Body param: A list of valid URLs separated by ‘ ’ (new line character). The list
    * of the URLs should not exceed 250 URLs. All URLs should have the same hostname.
-   * Each URL should be unique
+   * Each URL should be unique. This field may be released by Cloudflare to third
+   * parties such as the Lumen Database (https://lumendatabase.org/).
    */
   urls: string;
 
   /**
-   * Body param: Text not exceeding 100 characters
+   * Body param: Text not exceeding 100 characters. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   address1?: string;
 
   /**
    * Body param: The name of the copyright holder. Text not exceeding 60 characters.
+   * This field may be released by Cloudflare to third parties such as the Lumen
+   * Database (https://lumendatabase.org/).
    */
   agent_name?: string;
 
   /**
-   * Body param: Can be 0 or 1
-   */
-  agree?: 0 | 1;
-
-  /**
-   * Body param: Text not exceeding 255 characters
+   * Body param: Text not exceeding 255 characters. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   city?: string;
 
@@ -116,12 +125,16 @@ export interface AbuseReportCreateParams {
   comments?: string;
 
   /**
-   * Body param: Text not exceeding 100 characters
+   * Body param: Text not exceeding 100 characters. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   company?: string;
 
   /**
-   * Body param: Text not exceeding 255 characters
+   * Body param: Text not exceeding 255 characters. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   country?: string;
 
@@ -140,7 +153,9 @@ export interface AbuseReportCreateParams {
   justification?: string;
 
   /**
-   * Body param: Text not exceeding 255 characters
+   * Body param: Text not exceeding 255 characters. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   name?: string;
 
@@ -151,7 +166,9 @@ export interface AbuseReportCreateParams {
   ncsei_subject_representation?: boolean;
 
   /**
-   * Body param: Text not exceeding 255 characters
+   * Body param: Text not exceeding 255 characters. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   original_work?: string;
 
@@ -178,12 +195,16 @@ export interface AbuseReportCreateParams {
   source_ips?: string;
 
   /**
-   * Body param: Text not exceeding 255 characters
+   * Body param: Text not exceeding 255 characters. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   state?: string;
 
   /**
-   * Body param: Text not exceeding 20 characters
+   * Body param: Text not exceeding 20 characters. This field may be released by
+   * Cloudflare to third parties such as the Lumen Database
+   * (https://lumendatabase.org/).
    */
   tele?: string;
 

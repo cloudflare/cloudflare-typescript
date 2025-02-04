@@ -56,6 +56,8 @@ import {
   RankingTopParams,
   RankingTopResponse,
 } from './ranking/ranking';
+import * as RobotsTXTAPI from './robots-txt/robots-txt';
+import { RobotsTXT } from './robots-txt/robots-txt';
 import * as TrafficAnomaliesAPI from './traffic-anomalies/traffic-anomalies';
 import {
   TrafficAnomalies,
@@ -87,6 +89,7 @@ export class Radar extends APIResource {
   tcpResetsTimeouts: TCPResetsTimeoutsAPI.TCPResetsTimeouts = new TCPResetsTimeoutsAPI.TCPResetsTimeouts(
     this._client,
   );
+  robotsTXT: RobotsTXTAPI.RobotsTXT = new RobotsTXTAPI.RobotsTXT(this._client);
 }
 
 Radar.AI = AI;
@@ -106,6 +109,7 @@ Radar.Quality = Quality;
 Radar.Ranking = Ranking;
 Radar.TrafficAnomalies = TrafficAnomalies;
 Radar.TCPResetsTimeouts = TCPResetsTimeouts;
+Radar.RobotsTXT = RobotsTXT;
 
 export declare namespace Radar {
   export { AI as AI };
@@ -198,4 +202,6 @@ export declare namespace Radar {
     type TCPResetsTimeoutSummaryParams as TCPResetsTimeoutSummaryParams,
     type TCPResetsTimeoutTimeseriesGroupsParams as TCPResetsTimeoutTimeseriesGroupsParams,
   };
+
+  export { RobotsTXT as RobotsTXT };
 }

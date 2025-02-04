@@ -131,7 +131,7 @@ export namespace RuleCreateResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: unknown;
+    value: Array<string> | string;
   }
 }
 
@@ -170,7 +170,7 @@ export namespace RuleUpdateResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: unknown;
+    value: Array<string> | string;
   }
 }
 
@@ -209,7 +209,7 @@ export namespace RuleListResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: unknown;
+    value: Array<string> | string;
   }
 }
 
@@ -248,7 +248,7 @@ export namespace RuleDeleteResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: unknown;
+    value: Array<string> | string;
   }
 }
 
@@ -287,7 +287,7 @@ export namespace RuleBulkEditResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: unknown;
+    value: Array<string> | string;
   }
 }
 
@@ -326,7 +326,7 @@ export namespace RuleGetResponse {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: unknown;
+    value: Array<string> | string;
   }
 }
 
@@ -374,7 +374,7 @@ export namespace RuleCreateParams {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: unknown;
+    value: Array<string> | string;
   }
 }
 
@@ -422,7 +422,7 @@ export namespace RuleUpdateParams {
 
     selector: 'Recipients' | 'Sender' | 'DLPProfiles';
 
-    value: unknown;
+    value: Array<string> | string;
   }
 }
 

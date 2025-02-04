@@ -16,7 +16,7 @@ describe('resource policies', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'access_custom_certificate_expiration_type',
       enabled: true,
-      mechanisms: { email: [{}], pagerduty: [{}], webhooks: [{}] },
+      mechanisms: {},
       name: 'SSL Notification Event Policy',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -34,11 +34,7 @@ describe('resource policies', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'access_custom_certificate_expiration_type',
       enabled: true,
-      mechanisms: {
-        email: [{ id: 'test@example.com' }],
-        pagerduty: [{ id: 'e8133a15-00a4-4d69-aec1-32f70c51f6e5' }],
-        webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
-      },
+      mechanisms: { email: [{ id: 'test@example.com' }], pagerduty: [{}], webhooks: [{}] },
       name: 'SSL Notification Event Policy',
       alert_interval: '30m',
       description: 'Something describing the policy.',
@@ -59,6 +55,7 @@ describe('resource policies', () => {
         health_check_id: ['string'],
         incident_impact: ['INCIDENT_IMPACT_NONE'],
         input_id: ['string'],
+        insight_class: ['string'],
         limit: ['string'],
         logo_tag: ['string'],
         megabits_per_second: ['string'],
@@ -66,7 +63,7 @@ describe('resource policies', () => {
         new_status: ['string'],
         packets_per_second: ['string'],
         pool_id: ['string'],
-        pop_name: ['string'],
+        pop_names: ['string'],
         product: ['string'],
         project_id: ['string'],
         protocol: ['string'],
@@ -127,6 +124,7 @@ describe('resource policies', () => {
         health_check_id: ['string'],
         incident_impact: ['INCIDENT_IMPACT_NONE'],
         input_id: ['string'],
+        insight_class: ['string'],
         limit: ['string'],
         logo_tag: ['string'],
         megabits_per_second: ['string'],
@@ -134,7 +132,7 @@ describe('resource policies', () => {
         new_status: ['string'],
         packets_per_second: ['string'],
         pool_id: ['string'],
-        pop_name: ['string'],
+        pop_names: ['string'],
         product: ['string'],
         project_id: ['string'],
         protocol: ['string'],
@@ -153,11 +151,7 @@ describe('resource policies', () => {
         where: ['string'],
         zones: ['string'],
       },
-      mechanisms: {
-        email: [{ id: 'test@example.com' }],
-        pagerduty: [{ id: 'e8133a15-00a4-4d69-aec1-32f70c51f6e5' }],
-        webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
-      },
+      mechanisms: { email: [{ id: 'test@example.com' }], pagerduty: [{}], webhooks: [{}] },
       name: 'SSL Notification Event Policy',
     });
   });

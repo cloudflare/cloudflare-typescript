@@ -7,17 +7,13 @@ import { Page, PagePreviewParams, PagePreviewResponse } from './page';
 import * as RulesAPI from './rules';
 import {
   RuleCreateParams,
-  RuleCreateResponse,
   RuleDeleteParams,
-  RuleDeleteResponse,
   RuleEditParams,
-  RuleEditResponse,
   RuleGetParams,
-  RuleGetResponse,
   RuleUpdateParams,
-  RuleUpdateResponse,
   Rules,
   WaitingRoomRule,
+  WaitingRoomRulesSinglePage,
 } from './rules';
 import * as SettingsAPI from './settings';
 import {
@@ -2161,6 +2157,7 @@ WaitingRooms.Page = Page;
 WaitingRooms.Events = Events;
 WaitingRooms.EventsV4PagePaginationArray = EventsV4PagePaginationArray;
 WaitingRooms.Rules = Rules;
+WaitingRooms.WaitingRoomRulesSinglePage = WaitingRoomRulesSinglePage;
 WaitingRooms.Statuses = Statuses;
 WaitingRooms.Settings = Settings;
 
@@ -2187,11 +2184,7 @@ export declare namespace WaitingRooms {
   export {
     Rules as Rules,
     type WaitingRoomRule as WaitingRoomRule,
-    type RuleCreateResponse as RuleCreateResponse,
-    type RuleUpdateResponse as RuleUpdateResponse,
-    type RuleDeleteResponse as RuleDeleteResponse,
-    type RuleEditResponse as RuleEditResponse,
-    type RuleGetResponse as RuleGetResponse,
+    WaitingRoomRulesSinglePage as WaitingRoomRulesSinglePage,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleDeleteParams as RuleDeleteParams,

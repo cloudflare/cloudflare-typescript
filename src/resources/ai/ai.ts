@@ -192,6 +192,11 @@ export namespace AIRunResponse {
      * An array of tool calls requests made during the response generation
      */
     tool_calls?: Array<UnionMember7.ToolCall>;
+
+    /**
+     * Usage statistics for the inference request
+     */
+    usage?: UnionMember7.Usage;
   }
 
   export namespace UnionMember7 {
@@ -205,6 +210,26 @@ export namespace AIRunResponse {
        * The name of the tool to be called
        */
       name?: string;
+    }
+
+    /**
+     * Usage statistics for the inference request
+     */
+    export interface Usage {
+      /**
+       * Total number of tokens in output
+       */
+      completion_tokens?: number;
+
+      /**
+       * Total number of tokens in input
+       */
+      prompt_tokens?: number;
+
+      /**
+       * Total number of input and output tokens
+       */
+      total_tokens?: number;
     }
   }
 
@@ -488,7 +513,7 @@ export declare namespace AIRunParams {
     /**
      * Body param: An array of message objects representing the conversation history.
      */
-    messages: Array<AIRunParams.Messages.Message>;
+    messages: Array<Messages.Message>;
 
     /**
      * Body param: Decreases the likelihood of the model repeating the same lines
@@ -499,7 +524,7 @@ export declare namespace AIRunParams {
     /**
      * Body param:
      */
-    functions?: Array<AIRunParams.Messages.Function>;
+    functions?: Array<Messages.Function>;
 
     /**
      * Body param: The maximum number of tokens to generate in the response.
@@ -535,7 +560,7 @@ export declare namespace AIRunParams {
     /**
      * Body param: A list of tools available for the assistant to use.
      */
-    tools?: Array<AIRunParams.Messages.UnionMember0 | AIRunParams.Messages.UnionMember1>;
+    tools?: Array<Messages.UnionMember0 | Messages.UnionMember1>;
 
     /**
      * Body param: Limits the AI to choose from the top 'k' most probable words. Lower
@@ -749,9 +774,20 @@ export declare namespace AIRunParams {
     image: Array<number>;
 
     /**
+     * Body param: Decreases the likelihood of the model repeating the same lines
+     * verbatim.
+     */
+    frequency_penalty?: number;
+
+    /**
      * Body param: The maximum number of tokens to generate in the response.
      */
     max_tokens?: number;
+
+    /**
+     * Body param: Increases the likelihood of the model introducing new topics.
+     */
+    presence_penalty?: number;
 
     /**
      * Body param: The input text prompt for the model to generate a response.
@@ -765,10 +801,34 @@ export declare namespace AIRunParams {
     raw?: boolean;
 
     /**
+     * Body param: Penalty for repeated tokens; higher values discourage repetition.
+     */
+    repetition_penalty?: number;
+
+    /**
+     * Body param: Random seed for reproducibility of the generation.
+     */
+    seed?: number;
+
+    /**
      * Body param: Controls the randomness of the output; higher values produce more
      * random results.
      */
     temperature?: number;
+
+    /**
+     * Body param: Limits the AI to choose from the top 'k' most probable words. Lower
+     * values make responses more focused; higher values introduce more variety and
+     * potential surprises.
+     */
+    top_k?: number;
+
+    /**
+     * Body param: Controls the creativity of the AI's responses by adjusting how many
+     * possible words it considers. Lower values make outputs more predictable; higher
+     * values allow for more varied and creative responses.
+     */
+    top_p?: number;
   }
 }
 

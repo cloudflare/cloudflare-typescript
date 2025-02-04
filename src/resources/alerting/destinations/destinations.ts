@@ -5,13 +5,13 @@ import * as EligibleAPI from './eligible';
 import { Eligible, EligibleGetParams, EligibleGetResponse } from './eligible';
 import * as PagerdutyAPI from './pagerduty';
 import {
+  PagerdutiesSinglePage,
   Pagerduty,
   PagerdutyCreateParams,
   PagerdutyCreateResponse,
   PagerdutyDeleteParams,
   PagerdutyDeleteResponse,
   PagerdutyGetParams,
-  PagerdutyGetResponse,
   PagerdutyLinkParams,
   PagerdutyLinkResponse,
   PagerdutyResource,
@@ -38,6 +38,7 @@ export class Destinations extends APIResource {
 
 Destinations.Eligible = Eligible;
 Destinations.PagerdutyResource = PagerdutyResource;
+Destinations.PagerdutiesSinglePage = PagerdutiesSinglePage;
 Destinations.WebhooksSinglePage = WebhooksSinglePage;
 
 export declare namespace Destinations {
@@ -52,8 +53,8 @@ export declare namespace Destinations {
     type Pagerduty as Pagerduty,
     type PagerdutyCreateResponse as PagerdutyCreateResponse,
     type PagerdutyDeleteResponse as PagerdutyDeleteResponse,
-    type PagerdutyGetResponse as PagerdutyGetResponse,
     type PagerdutyLinkResponse as PagerdutyLinkResponse,
+    PagerdutiesSinglePage as PagerdutiesSinglePage,
     type PagerdutyCreateParams as PagerdutyCreateParams,
     type PagerdutyDeleteParams as PagerdutyDeleteParams,
     type PagerdutyGetParams as PagerdutyGetParams,

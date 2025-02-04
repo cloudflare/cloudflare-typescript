@@ -141,6 +141,13 @@ export interface ACL {
   name?: string;
 
   protocols?: Array<AllowedProtocol>;
+
+  /**
+   * The desired traffic direction for this ACL policy. If set to "false", the policy
+   * will allow bidirectional traffic. If set to "true", the policy will only allow
+   * traffic in one direction. If not included in request, will default to false.
+   */
+  unidirectional?: boolean;
 }
 
 export interface ACLConfiguration {
@@ -155,8 +162,15 @@ export interface ACLConfiguration {
   lan_name?: string;
 
   /**
+   * Array of port ranges on the provided LAN that will be included in the ACL. If no
+   * ports or port rangess are provided, communication on any port on this LAN is
+   * allowed.
+   */
+  port_ranges?: Array<string>;
+
+  /**
    * Array of ports on the provided LAN that will be included in the ACL. If no ports
-   * are provided, communication on any port on this LAN is allowed.
+   * or port ranges are provided, communication on any port on this LAN is allowed.
    */
   ports?: Array<number>;
 
@@ -179,8 +193,15 @@ export interface ACLConfigurationParam {
   lan_name?: string;
 
   /**
+   * Array of port ranges on the provided LAN that will be included in the ACL. If no
+   * ports or port rangess are provided, communication on any port on this LAN is
+   * allowed.
+   */
+  port_ranges?: Array<string>;
+
+  /**
    * Array of ports on the provided LAN that will be included in the ACL. If no ports
-   * are provided, communication on any port on this LAN is allowed.
+   * or port ranges are provided, communication on any port on this LAN is allowed.
    */
   ports?: Array<number>;
 
@@ -251,6 +272,14 @@ export interface ACLCreateParams {
    * Body param:
    */
   protocols?: Array<AllowedProtocolParam>;
+
+  /**
+   * Body param: The desired traffic direction for this ACL policy. If set to
+   * "false", the policy will allow bidirectional traffic. If set to "true", the
+   * policy will only allow traffic in one direction. If not included in request,
+   * will default to false.
+   */
+  unidirectional?: boolean;
 }
 
 export interface ACLUpdateParams {
@@ -291,6 +320,14 @@ export interface ACLUpdateParams {
    * Body param:
    */
   protocols?: Array<AllowedProtocolParam>;
+
+  /**
+   * Body param: The desired traffic direction for this ACL policy. If set to
+   * "false", the policy will allow bidirectional traffic. If set to "true", the
+   * policy will only allow traffic in one direction. If not included in request,
+   * will default to false.
+   */
+  unidirectional?: boolean;
 }
 
 export interface ACLListParams {
@@ -345,6 +382,14 @@ export interface ACLEditParams {
    * Body param:
    */
   protocols?: Array<AllowedProtocolParam>;
+
+  /**
+   * Body param: The desired traffic direction for this ACL policy. If set to
+   * "false", the policy will allow bidirectional traffic. If set to "true", the
+   * policy will only allow traffic in one direction. If not included in request,
+   * will default to false.
+   */
+  unidirectional?: boolean;
 }
 
 export interface ACLGetParams {

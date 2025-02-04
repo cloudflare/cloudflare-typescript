@@ -36,9 +36,8 @@ export class Targets extends APIResource {
   }
 
   /**
-   * Lists and sorts an account’s targets. Filters are optional and are ORed
-   * together. However, when a timestamp is specified with both its before and after
-   * counterparts, the timestamp filters are ANDed.
+   * Lists and sorts an account’s targets. Filters are optional and are ANDed
+   * together.
    */
   list(
     params: TargetListParams,
@@ -676,6 +675,12 @@ export interface TargetListParams extends V4PagePaginationArrayParams {
   hostname_contains?: string | null;
 
   /**
+   * Query param: Filters for targets whose IP addresses look like the specified
+   * string. Supports `*` as a wildcard character
+   */
+  ip_like?: string | null;
+
+  /**
    * Query param: IPv4 address of the target
    */
   ip_v4?: string | null;
@@ -692,6 +697,30 @@ export interface TargetListParams extends V4PagePaginationArrayParams {
   ips?: Array<string>;
 
   /**
+   * Query param: Defines an IPv4 filter range's ending value (inclusive). Requires
+   * `ipv4_start` to be specified as well.
+   */
+  ipv4_end?: string | null;
+
+  /**
+   * Query param: Defines an IPv4 filter range's starting value (inclusive). Requires
+   * `ipv4_end` to be specified as well.
+   */
+  ipv4_start?: string | null;
+
+  /**
+   * Query param: Defines an IPv6 filter range's ending value (inclusive). Requires
+   * `ipv6_start` to be specified as well.
+   */
+  ipv6_end?: string | null;
+
+  /**
+   * Query param: Defines an IPv6 filter range's starting value (inclusive). Requires
+   * `ipv6_end` to be specified as well.
+   */
+  ipv6_start?: string | null;
+
+  /**
    * Query param: Date and time at which the target was modified after (inclusive)
    */
   modified_after?: string | null;
@@ -705,6 +734,12 @@ export interface TargetListParams extends V4PagePaginationArrayParams {
    * Query param: The field to sort by.
    */
   order?: 'hostname' | 'created_at';
+
+  /**
+   * Query param: Filters for targets that have any of the following UUIDs. Specify
+   * `target_ids` multiple times in query parameter to build list of candidates.
+   */
+  target_ids?: Array<string>;
 
   /**
    * Query param: Private virtual network identifier of the target

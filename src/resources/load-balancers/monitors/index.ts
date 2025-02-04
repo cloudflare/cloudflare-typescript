@@ -13,4 +13,9 @@ export {
   type MonitorGetParams,
 } from './monitors';
 export { Previews, type PreviewCreateResponse, type PreviewCreateParams } from './previews';
-export { References, type ReferenceGetResponse, type ReferenceGetParams } from './references';
+export {
+  ReferenceGetResponsesSinglePage,
+  References,
+  type ReferenceGetResponse,
+  type ReferenceGetParams,
+} from './references';

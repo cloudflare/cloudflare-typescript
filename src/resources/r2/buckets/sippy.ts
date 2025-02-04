@@ -144,12 +144,12 @@ export declare namespace SippyUpdateParams {
     /**
      * Body param: R2 bucket to copy objects to
      */
-    destination?: SippyUpdateParams.R2EnableSippyAws.Destination;
+    destination?: R2EnableSippyAws.Destination;
 
     /**
      * Body param: AWS S3 bucket to copy objects from
      */
-    source?: SippyUpdateParams.R2EnableSippyAws.Source;
+    source?: R2EnableSippyAws.Source;
 
     /**
      * Header param: The bucket jurisdiction
@@ -222,12 +222,12 @@ export declare namespace SippyUpdateParams {
     /**
      * Body param: R2 bucket to copy objects to
      */
-    destination?: SippyUpdateParams.R2EnableSippyGcs.Destination;
+    destination?: R2EnableSippyGcs.Destination;
 
     /**
      * Body param: GCS bucket to copy objects from
      */
-    source?: SippyUpdateParams.R2EnableSippyGcs.Source;
+    source?: R2EnableSippyGcs.Source;
 
     /**
      * Header param: The bucket jurisdiction

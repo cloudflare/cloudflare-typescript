@@ -13,6 +13,7 @@ export {
   type PlanGetParams,
 } from './plans';
 export {
+  CustomNameserverUpdateResponsesSinglePage,
   CustomNameservers,
   type CustomNameserverUpdateResponse,
   type CustomNameserverGetResponse,
@@ -27,7 +28,12 @@ export {
   type HoldEditParams,
   type HoldGetParams,
 } from './holds';
-export { RatePlans, type RatePlanGetResponse, type RatePlanGetParams } from './rate-plans';
+export {
+  RatePlanGetResponsesSinglePage,
+  RatePlans,
+  type RatePlanGetResponse,
+  type RatePlanGetParams,
+} from './rate-plans';
 export {
   Settings,
   type AdvancedDDoS,

@@ -2,7 +2,12 @@
 
 import { APIResource } from '../../../resource';
 import * as IssueTypesAPI from './issue-types';
-import { IssueTypeGetParams, IssueTypeGetResponse, IssueTypes } from './issue-types';
+import {
+  IssueTypeGetParams,
+  IssueTypeGetResponse,
+  IssueTypeGetResponsesSinglePage,
+  IssueTypes,
+} from './issue-types';
 import * as IssuesAPI from './issues';
 import {
   IssueClassParams,
@@ -27,6 +32,7 @@ export class AttackSurfaceReport extends APIResource {
 }
 
 AttackSurfaceReport.IssueTypes = IssueTypes;
+AttackSurfaceReport.IssueTypeGetResponsesSinglePage = IssueTypeGetResponsesSinglePage;
 AttackSurfaceReport.Issues = Issues;
 AttackSurfaceReport.IssueListResponsesV4PagePagination = IssueListResponsesV4PagePagination;
 
@@ -34,6 +40,7 @@ export declare namespace AttackSurfaceReport {
   export {
     IssueTypes as IssueTypes,
     type IssueTypeGetResponse as IssueTypeGetResponse,
+    IssueTypeGetResponsesSinglePage as IssueTypeGetResponsesSinglePage,
     type IssueTypeGetParams as IssueTypeGetParams,
   };
 

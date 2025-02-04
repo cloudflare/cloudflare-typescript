@@ -41,19 +41,15 @@ import * as RulesAPI from './rules';
 import {
   DeletedFilter,
   FirewallRule,
+  FirewallRulesSinglePage,
   FirewallRulesV4PagePaginationArray,
   Product,
   RuleBulkDeleteParams,
-  RuleBulkDeleteResponse,
   RuleBulkEditParams,
-  RuleBulkEditResponse,
   RuleBulkUpdateParams,
-  RuleBulkUpdateResponse,
   RuleCreateParams,
-  RuleCreateResponse,
   RuleDeleteParams,
   RuleEditParams,
-  RuleEditResponse,
   RuleGetParams,
   RuleListParams,
   RuleUpdateParams,
@@ -88,6 +84,7 @@ export class Firewall extends APIResource {
 Firewall.Lockdowns = Lockdowns;
 Firewall.LockdownsV4PagePaginationArray = LockdownsV4PagePaginationArray;
 Firewall.Rules = Rules;
+Firewall.FirewallRulesSinglePage = FirewallRulesSinglePage;
 Firewall.FirewallRulesV4PagePaginationArray = FirewallRulesV4PagePaginationArray;
 Firewall.AccessRules = AccessRules;
 Firewall.AccessRuleListResponsesV4PagePaginationArray = AccessRuleListResponsesV4PagePaginationArray;
@@ -117,11 +114,7 @@ export declare namespace Firewall {
     type DeletedFilter as DeletedFilter,
     type FirewallRule as FirewallRule,
     type Product as Product,
-    type RuleCreateResponse as RuleCreateResponse,
-    type RuleBulkDeleteResponse as RuleBulkDeleteResponse,
-    type RuleBulkEditResponse as RuleBulkEditResponse,
-    type RuleBulkUpdateResponse as RuleBulkUpdateResponse,
-    type RuleEditResponse as RuleEditResponse,
+    FirewallRulesSinglePage as FirewallRulesSinglePage,
     FirewallRulesV4PagePaginationArray as FirewallRulesV4PagePaginationArray,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,

@@ -3,13 +3,14 @@
 export { D1Resource } from './d1';
 export {
   DatabaseListResponsesV4PagePaginationArray,
+  QueryResultsSinglePage,
+  DatabaseRawResponsesSinglePage,
   Database,
   type QueryResult,
   type DatabaseListResponse,
   type DatabaseDeleteResponse,
   type DatabaseExportResponse,
   type DatabaseImportResponse,
-  type DatabaseQueryResponse,
   type DatabaseRawResponse,
   type DatabaseCreateParams,
   type DatabaseListParams,

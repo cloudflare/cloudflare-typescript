@@ -23,7 +23,6 @@ import {
   DHCPServer,
   LAN,
   LANCreateParams,
-  LANCreateResponse,
   LANDeleteParams,
   LANEditParams,
   LANGetParams,
@@ -39,7 +38,6 @@ import * as WANsAPI from './wans';
 import {
   WAN,
   WANCreateParams,
-  WANCreateResponse,
   WANDeleteParams,
   WANEditParams,
   WANGetParams,
@@ -82,8 +80,8 @@ export class Sites extends APIResource {
   }
 
   /**
-   * Lists Sites associated with an account. Use connector_identifier query param to
-   * return sites where connector_identifier matches either site.ConnectorID or
+   * Lists Sites associated with an account. Use connectorid query param to return
+   * sites where connectorid matches either site.ConnectorID or
    * site.SecondaryConnectorID.
    */
   list(params: SiteListParams, options?: Core.RequestOptions): Core.PagePromise<SitesSinglePage, Site> {
@@ -286,7 +284,7 @@ export interface SiteListParams {
   /**
    * Query param: Identifier
    */
-  connector_identifier?: string;
+  connectorid?: string;
 }
 
 export interface SiteDeleteParams {
@@ -386,7 +384,6 @@ export declare namespace Sites {
     type LANStaticAddressing as LANStaticAddressing,
     type Nat as Nat,
     type RoutedSubnet as RoutedSubnet,
-    type LANCreateResponse as LANCreateResponse,
     LANsSinglePage as LANsSinglePage,
     type LANCreateParams as LANCreateParams,
     type LANUpdateParams as LANUpdateParams,
@@ -400,7 +397,6 @@ export declare namespace Sites {
     WANs as WANs,
     type WAN as WAN,
     type WANStaticAddressing as WANStaticAddressing,
-    type WANCreateResponse as WANCreateResponse,
     WANsSinglePage as WANsSinglePage,
     type WANCreateParams as WANCreateParams,
     type WANUpdateParams as WANUpdateParams,

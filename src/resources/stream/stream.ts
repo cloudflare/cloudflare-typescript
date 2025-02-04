@@ -5,12 +5,12 @@ import * as Core from '../../core';
 import * as AudioTracksAPI from './audio-tracks';
 import {
   Audio,
+  AudioSinglePage,
   AudioTrackCopyParams,
   AudioTrackDeleteParams,
   AudioTrackDeleteResponse,
   AudioTrackEditParams,
   AudioTrackGetParams,
-  AudioTrackGetResponse,
   AudioTracks,
 } from './audio-tracks';
 import * as ClipAPI from './clip';
@@ -38,6 +38,7 @@ import {
   KeyDeleteResponse,
   KeyGetParams,
   KeyGetResponse,
+  KeyGetResponsesSinglePage,
   Keys,
 } from './keys';
 import * as TokenAPI from './token';
@@ -66,7 +67,7 @@ import {
   Webhooks,
 } from './webhooks';
 import * as CaptionsAPI from './captions/captions';
-import { Caption, CaptionGetParams, CaptionGetResponse, Captions } from './captions/captions';
+import { Caption, CaptionGetParams, Captions, CaptionsSinglePage } from './captions/captions';
 import * as LiveInputsAPI from './live-inputs/live-inputs';
 import {
   LiveInput,
@@ -535,15 +536,18 @@ export interface StreamGetParams {
 }
 
 Stream.AudioTracks = AudioTracks;
+Stream.AudioSinglePage = AudioSinglePage;
 Stream.Videos = Videos;
 Stream.ClipResource = ClipResource;
 Stream.Copy = Copy;
 Stream.DirectUpload = DirectUpload;
+Stream.KeyGetResponsesSinglePage = KeyGetResponsesSinglePage;
 Stream.LiveInputs = LiveInputs;
 Stream.Watermarks = Watermarks;
 Stream.WatermarksSinglePage = WatermarksSinglePage;
 Stream.Webhooks = Webhooks;
 Stream.Captions = Captions;
+Stream.CaptionsSinglePage = CaptionsSinglePage;
 Stream.Downloads = Downloads;
 Stream.Embed = Embed;
 Stream.Token = Token;
@@ -553,7 +557,7 @@ export declare namespace Stream {
     AudioTracks as AudioTracks,
     type Audio as Audio,
     type AudioTrackDeleteResponse as AudioTrackDeleteResponse,
-    type AudioTrackGetResponse as AudioTrackGetResponse,
+    AudioSinglePage as AudioSinglePage,
     type AudioTrackDeleteParams as AudioTrackDeleteParams,
     type AudioTrackCopyParams as AudioTrackCopyParams,
     type AudioTrackEditParams as AudioTrackEditParams,
@@ -580,6 +584,7 @@ export declare namespace Stream {
     type Keys as Keys,
     type KeyDeleteResponse as KeyDeleteResponse,
     type KeyGetResponse as KeyGetResponse,
+    KeyGetResponsesSinglePage as KeyGetResponsesSinglePage,
     type KeyCreateParams as KeyCreateParams,
     type KeyDeleteParams as KeyDeleteParams,
     type KeyGetParams as KeyGetParams,
@@ -620,7 +625,7 @@ export declare namespace Stream {
   export {
     Captions as Captions,
     type Caption as Caption,
-    type CaptionGetResponse as CaptionGetResponse,
+    CaptionsSinglePage as CaptionsSinglePage,
     type CaptionGetParams as CaptionGetParams,
   };
 

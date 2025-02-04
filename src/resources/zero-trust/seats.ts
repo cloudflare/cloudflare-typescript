@@ -2,22 +2,24 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Seats extends APIResource {
   /**
    * Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat`
    * are set to false.
    */
-  edit(params: SeatEditParams, options?: Core.RequestOptions): Core.APIPromise<SeatEditResponse> {
+  edit(params: SeatEditParams, options?: Core.RequestOptions): Core.PagePromise<SeatsSinglePage, Seat> {
     const { account_id, body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/access/seats`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: SeatEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/access/seats`, SeatsSinglePage, {
+      body: body,
+      method: 'patch',
+      ...options,
+    });
   }
 }
+
+export class SeatsSinglePage extends SinglePage<Seat> {}
 
 export interface Seat {
   /**
@@ -39,8 +41,6 @@ export interface Seat {
 
   updated_at?: string;
 }
-
-export type SeatEditResponse = Array<Seat>;
 
 export interface SeatEditParams {
   /**
@@ -73,10 +73,8 @@ export namespace SeatEditParams {
   }
 }
 
+Seats.SeatsSinglePage = SeatsSinglePage;
+
 export declare namespace Seats {
-  export {
-    type Seat as Seat,
-    type SeatEditResponse as SeatEditResponse,
-    type SeatEditParams as SeatEditParams,
-  };
+  export { type Seat as Seat, SeatsSinglePage as SeatsSinglePage, type SeatEditParams as SeatEditParams };
 }

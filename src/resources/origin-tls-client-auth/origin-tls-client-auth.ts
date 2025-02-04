@@ -16,6 +16,7 @@ import {
   HostnameGetParams,
   HostnameUpdateParams,
   HostnameUpdateResponse,
+  HostnameUpdateResponsesSinglePage,
   Hostnames,
 } from './hostnames/hostnames';
 import { SinglePage } from '../../pagination';
@@ -266,6 +267,7 @@ export interface OriginTLSClientAuthGetParams {
 }
 
 OriginTLSClientAuth.Hostnames = Hostnames;
+OriginTLSClientAuth.HostnameUpdateResponsesSinglePage = HostnameUpdateResponsesSinglePage;
 OriginTLSClientAuth.Settings = Settings;
 
 export declare namespace OriginTLSClientAuth {
@@ -273,6 +275,7 @@ export declare namespace OriginTLSClientAuth {
     Hostnames as Hostnames,
     type AuthenticatedOriginPull as AuthenticatedOriginPull,
     type HostnameUpdateResponse as HostnameUpdateResponse,
+    HostnameUpdateResponsesSinglePage as HostnameUpdateResponsesSinglePage,
     type HostnameUpdateParams as HostnameUpdateParams,
     type HostnameGetParams as HostnameGetParams,
   };

@@ -9,18 +9,24 @@ import {
 } from './timeseries-groups';
 import * as BotsAPI from './bots/bots';
 import { Bots } from './bots/bots';
+import * as InferenceAPI from './inference/inference';
+import { Inference } from './inference/inference';
 
 export class AI extends APIResource {
+  inference: InferenceAPI.Inference = new InferenceAPI.Inference(this._client);
   bots: BotsAPI.Bots = new BotsAPI.Bots(this._client);
   timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
     this._client,
   );
 }
 
+AI.Inference = Inference;
 AI.Bots = Bots;
 AI.TimeseriesGroups = TimeseriesGroups;
 
 export declare namespace AI {
+  export { Inference as Inference };
+
   export { Bots as Bots };
 
   export {

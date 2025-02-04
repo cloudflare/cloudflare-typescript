@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Domains extends APIResource {
   /**
@@ -43,14 +43,13 @@ export class Domains extends APIResource {
   bulkDelete(
     params: DomainBulkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainBulkDeleteResponse> {
+  ): Core.PagePromise<DomainBulkDeleteResponsesSinglePage, DomainBulkDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/email-security/settings/domains`,
-        options,
-      ) as Core.APIPromise<{ result: DomainBulkDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/email-security/settings/domains`,
+      DomainBulkDeleteResponsesSinglePage,
+      { method: 'delete', ...options },
+    );
   }
 
   /**
@@ -90,6 +89,8 @@ export class Domains extends APIResource {
 
 export class DomainListResponsesV4PagePaginationArray extends V4PagePaginationArray<DomainListResponse> {}
 
+export class DomainBulkDeleteResponsesSinglePage extends SinglePage<DomainBulkDeleteResponse> {}
+
 export interface DomainListResponse {
   /**
    * The unique identifier for the domain.
@@ -123,6 +124,10 @@ export interface DomainListResponse {
 
   transport: string;
 
+  authorization?: DomainListResponse.Authorization | null;
+
+  emails_processed?: DomainListResponse.EmailsProcessed | null;
+
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -136,6 +141,24 @@ export interface DomainListResponse {
   require_tls_outbound?: boolean | null;
 }
 
+export namespace DomainListResponse {
+  export interface Authorization {
+    authorized: boolean;
+
+    timestamp: string;
+
+    status_message?: string | null;
+  }
+
+  export interface EmailsProcessed {
+    timestamp: string;
+
+    total_emails_processed: number;
+
+    total_emails_processed_previous: number;
+  }
+}
+
 export interface DomainDeleteResponse {
   /**
    * The unique identifier for the domain.
@@ -143,15 +166,11 @@ export interface DomainDeleteResponse {
   id: number;
 }
 
-export type DomainBulkDeleteResponse = Array<DomainBulkDeleteResponse.DomainBulkDeleteResponseItem>;
-
-export namespace DomainBulkDeleteResponse {
-  export interface DomainBulkDeleteResponseItem {
-    /**
-     * The unique identifier for the domain.
-     */
-    id: number;
-  }
+export interface DomainBulkDeleteResponse {
+  /**
+   * The unique identifier for the domain.
+   */
+  id: number;
 }
 
 export interface DomainEditResponse {
@@ -187,6 +206,10 @@ export interface DomainEditResponse {
 
   transport: string;
 
+  authorization?: DomainEditResponse.Authorization | null;
+
+  emails_processed?: DomainEditResponse.EmailsProcessed | null;
+
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -198,6 +221,24 @@ export interface DomainEditResponse {
   require_tls_inbound?: boolean | null;
 
   require_tls_outbound?: boolean | null;
+}
+
+export namespace DomainEditResponse {
+  export interface Authorization {
+    authorized: boolean;
+
+    timestamp: string;
+
+    status_message?: string | null;
+  }
+
+  export interface EmailsProcessed {
+    timestamp: string;
+
+    total_emails_processed: number;
+
+    total_emails_processed_previous: number;
+  }
 }
 
 export interface DomainGetResponse {
@@ -233,6 +274,10 @@ export interface DomainGetResponse {
 
   transport: string;
 
+  authorization?: DomainGetResponse.Authorization | null;
+
+  emails_processed?: DomainGetResponse.EmailsProcessed | null;
+
   folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
@@ -246,11 +291,35 @@ export interface DomainGetResponse {
   require_tls_outbound?: boolean | null;
 }
 
+export namespace DomainGetResponse {
+  export interface Authorization {
+    authorized: boolean;
+
+    timestamp: string;
+
+    status_message?: string | null;
+  }
+
+  export interface EmailsProcessed {
+    timestamp: string;
+
+    total_emails_processed: number;
+
+    total_emails_processed_previous: number;
+  }
+}
+
 export interface DomainListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: Filters response to domains with the currently active delivery
+   * mode.
+   */
+  active_delivery_mode?: 'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN';
 
   /**
    * Query param: Filters response to domains with the provided delivery mode.
@@ -366,6 +435,7 @@ export interface DomainGetParams {
 }
 
 Domains.DomainListResponsesV4PagePaginationArray = DomainListResponsesV4PagePaginationArray;
+Domains.DomainBulkDeleteResponsesSinglePage = DomainBulkDeleteResponsesSinglePage;
 
 export declare namespace Domains {
   export {
@@ -375,6 +445,7 @@ export declare namespace Domains {
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
+    DomainBulkDeleteResponsesSinglePage as DomainBulkDeleteResponsesSinglePage,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
     type DomainBulkDeleteParams as DomainBulkDeleteParams,

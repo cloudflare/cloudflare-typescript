@@ -5,13 +5,15 @@ import * as RequestsAPI from './requests/requests';
 import {
   Item,
   ListItem,
-  ListItemsV4PagePaginationArray,
+  ListItemsSinglePage,
   Quota,
   RequestConstants,
   RequestCreateParams,
   RequestDeleteResponse,
   RequestListParams,
   RequestTypes,
+  RequestTypesResponse,
+  RequestTypesResponsesSinglePage,
   RequestUpdateParams,
   Requests,
 } from './requests/requests';
@@ -21,7 +23,8 @@ export class CloudforceOne extends APIResource {
 }
 
 CloudforceOne.Requests = Requests;
-CloudforceOne.ListItemsV4PagePaginationArray = ListItemsV4PagePaginationArray;
+CloudforceOne.ListItemsSinglePage = ListItemsSinglePage;
+CloudforceOne.RequestTypesResponsesSinglePage = RequestTypesResponsesSinglePage;
 
 export declare namespace CloudforceOne {
   export {
@@ -32,7 +35,9 @@ export declare namespace CloudforceOne {
     type RequestConstants as RequestConstants,
     type RequestTypes as RequestTypes,
     type RequestDeleteResponse as RequestDeleteResponse,
-    ListItemsV4PagePaginationArray as ListItemsV4PagePaginationArray,
+    type RequestTypesResponse as RequestTypesResponse,
+    ListItemsSinglePage as ListItemsSinglePage,
+    RequestTypesResponsesSinglePage as RequestTypesResponsesSinglePage,
     type RequestCreateParams as RequestCreateParams,
     type RequestUpdateParams as RequestUpdateParams,
     type RequestListParams as RequestListParams,

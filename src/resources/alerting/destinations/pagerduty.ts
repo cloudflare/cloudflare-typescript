@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
+import { SinglePage } from '../../../pagination';
 
 export class PagerdutyResource extends APIResource {
   /**
@@ -35,14 +36,16 @@ export class PagerdutyResource extends APIResource {
   /**
    * Get a list of all configured PagerDuty services.
    */
-  get(params: PagerdutyGetParams, options?: Core.RequestOptions): Core.APIPromise<PagerdutyGetResponse> {
+  get(
+    params: PagerdutyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PagerdutiesSinglePage, Pagerduty> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
-        options,
-      ) as Core.APIPromise<{ result: PagerdutyGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
+      PagerdutiesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -62,6 +65,8 @@ export class PagerdutyResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class PagerdutiesSinglePage extends SinglePage<Pagerduty> {}
 
 export interface Pagerduty {
   /**
@@ -119,8 +124,6 @@ export namespace PagerdutyDeleteResponse {
   }
 }
 
-export type PagerdutyGetResponse = Array<Pagerduty>;
-
 export interface PagerdutyLinkResponse {
   /**
    * UUID
@@ -156,13 +159,15 @@ export interface PagerdutyLinkParams {
   account_id: string;
 }
 
+PagerdutyResource.PagerdutiesSinglePage = PagerdutiesSinglePage;
+
 export declare namespace PagerdutyResource {
   export {
     type Pagerduty as Pagerduty,
     type PagerdutyCreateResponse as PagerdutyCreateResponse,
     type PagerdutyDeleteResponse as PagerdutyDeleteResponse,
-    type PagerdutyGetResponse as PagerdutyGetResponse,
     type PagerdutyLinkResponse as PagerdutyLinkResponse,
+    PagerdutiesSinglePage as PagerdutiesSinglePage,
     type PagerdutyCreateParams as PagerdutyCreateParams,
     type PagerdutyDeleteParams as PagerdutyDeleteParams,
     type PagerdutyGetParams as PagerdutyGetParams,

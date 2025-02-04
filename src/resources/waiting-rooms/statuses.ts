@@ -48,7 +48,7 @@ export interface StatusGetResponse {
 
   max_estimated_time_minutes?: number;
 
-  status?: 'event_prequeueing' | 'not_queueing' | 'queueing';
+  status?: 'event_prequeueing' | 'not_queueing' | 'queueing' | 'suspended';
 }
 
 export interface StatusGetParams {

@@ -651,7 +651,7 @@ export declare namespace CustomCreateParams {
     /**
      * Body param:
      */
-    profiles: Array<CustomCreateParams.Variant0.Profile>;
+    profiles: Array<Variant0.Profile>;
   }
 
   export namespace Variant0 {
@@ -749,10 +749,7 @@ export declare namespace CustomCreateParams {
     /**
      * Body param:
      */
-    entries: Array<
-      | CustomCreateParams.DLPNewCustomProfile.DLPNewCustomEntry
-      | CustomCreateParams.DLPNewCustomProfile.DLPNewWordListEntry
-    >;
+    entries: Array<DLPNewCustomProfile.DLPNewCustomEntry | DLPNewCustomProfile.DLPNewWordListEntry>;
 
     /**
      * Body param:
@@ -791,10 +788,10 @@ export declare namespace CustomCreateParams {
      * or your Microsoft Information Protection profiles).
      */
     shared_entries?: Array<
-      | CustomCreateParams.DLPNewCustomProfile.UnionMember0
-      | CustomCreateParams.DLPNewCustomProfile.UnionMember1
-      | CustomCreateParams.DLPNewCustomProfile.UnionMember2
-      | CustomCreateParams.DLPNewCustomProfile.UnionMember3
+      | DLPNewCustomProfile.UnionMember0
+      | DLPNewCustomProfile.UnionMember1
+      | DLPNewCustomProfile.UnionMember2
+      | DLPNewCustomProfile.UnionMember3
     >;
   }
 

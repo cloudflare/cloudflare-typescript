@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class Connections extends APIResource {
   /**
@@ -31,16 +32,17 @@ export class Connections extends APIResource {
     tunnelId: string,
     params: ConnectionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionGetResponse | null> {
+  ): Core.PagePromise<ClientsSinglePage, Client> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`,
-        options,
-      ) as Core.APIPromise<{ result: ConnectionGetResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`,
+      ClientsSinglePage,
+      options,
+    );
   }
 }
+
+export class ClientsSinglePage extends SinglePage<Client> {}
 
 /**
  * A client (typically cloudflared) that maintains connections to a Cloudflare data
@@ -133,8 +135,6 @@ export namespace Client {
 
 export type ConnectionDeleteResponse = unknown;
 
-export type ConnectionGetResponse = Array<Client>;
-
 export interface ConnectionDeleteParams {
   /**
    * Path param: Cloudflare account ID
@@ -154,11 +154,13 @@ export interface ConnectionGetParams {
   account_id: string;
 }
 
+Connections.ClientsSinglePage = ClientsSinglePage;
+
 export declare namespace Connections {
   export {
     type Client as Client,
     type ConnectionDeleteResponse as ConnectionDeleteResponse,
-    type ConnectionGetResponse as ConnectionGetResponse,
+    ClientsSinglePage as ClientsSinglePage,
     type ConnectionDeleteParams as ConnectionDeleteParams,
     type ConnectionGetParams as ConnectionGetParams,
   };

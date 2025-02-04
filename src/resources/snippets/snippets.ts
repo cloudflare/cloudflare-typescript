@@ -14,6 +14,7 @@ import {
   RuleListResponsesSinglePage,
   RuleUpdateParams,
   RuleUpdateResponse,
+  RuleUpdateResponsesSinglePage,
   Rules,
 } from './rules';
 import { SinglePage } from '../../pagination';
@@ -161,6 +162,7 @@ export interface SnippetGetParams {
 
 Snippets.Content = Content;
 Snippets.Rules = Rules;
+Snippets.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;
 Snippets.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
 
 export declare namespace Snippets {
@@ -171,6 +173,7 @@ export declare namespace Snippets {
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
+    RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
     RuleListResponsesSinglePage as RuleListResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,

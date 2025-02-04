@@ -104,11 +104,11 @@ export {
 } from './locations';
 export { Logging, type LoggingSetting, type LoggingUpdateParams, type LoggingGetParams } from './logging';
 export {
+  ProxyEndpointsSinglePage,
   ProxyEndpoints,
   type GatewayIPs,
   type ProxyEndpoint,
   type ProxyEndpointDeleteResponse,
-  type ProxyEndpointGetResponse,
   type ProxyEndpointCreateParams,
   type ProxyEndpointListParams,
   type ProxyEndpointDeleteParams,

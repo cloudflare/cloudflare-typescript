@@ -14,24 +14,10 @@ export {
   type DefaultEditParams,
   type DefaultGetParams,
 } from './default';
-export {
-  Excludes,
-  type ExcludeUpdateResponse,
-  type ExcludeGetResponse,
-  type ExcludeUpdateParams,
-  type ExcludeGetParams,
-} from './excludes';
+export { Excludes, type ExcludeUpdateParams, type ExcludeGetParams } from './excludes';
 export {
   FallbackDomains,
-  type FallbackDomainUpdateResponse,
-  type FallbackDomainGetResponse,
   type FallbackDomainUpdateParams,
   type FallbackDomainGetParams,
 } from './fallback-domains';
-export {
-  Includes,
-  type IncludeUpdateResponse,
-  type IncludeGetResponse,
-  type IncludeUpdateParams,
-  type IncludeGetParams,
-} from './includes';
+export { Includes, type IncludeUpdateParams, type IncludeGetParams } from './includes';

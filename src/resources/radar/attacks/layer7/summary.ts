@@ -6,25 +6,6 @@ import * as Core from '../../../../core';
 
 export class Summary extends APIResource {
   /**
-   * Percentage distribution of mitigation techniques in Layer 7 attacks.
-   */
-  get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
-  get(
-    query: SummaryGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get({}, query);
-    }
-    return (
-      this._client.get('/radar/attacks/layer7/summary', { query, ...options }) as Core.APIPromise<{
-        result: SummaryGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Percentage distribution of attacks by http method used.
    */
   httpMethod(
@@ -136,74 +117,6 @@ export class Summary extends APIResource {
         ...options,
       }) as Core.APIPromise<{ result: SummaryMitigationProductResponse }>
     )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export interface SummaryGetResponse {
-  meta: SummaryGetResponse.Meta;
-
-  summary_0: SummaryGetResponse.Summary0;
-}
-
-export namespace SummaryGetResponse {
-  export interface Meta {
-    dateRange: Array<Meta.DateRange>;
-
-    confidenceInfo?: Meta.ConfidenceInfo;
-  }
-
-  export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
-    export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
-
-      level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Summary0 {
-    ACCESS_RULES: string;
-
-    API_SHIELD: string;
-
-    BOT_MANAGEMENT: string;
-
-    DATA_LOSS_PREVENTION: string;
-
-    DDOS: string;
-
-    IP_REPUTATION: string;
-
-    WAF: string;
   }
 }
 
@@ -499,56 +412,6 @@ export namespace SummaryMitigationProductResponse {
       }
     }
   }
-}
-
-export interface SummaryGetParams {
-  /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
-   */
-  continent?: Array<string>;
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<string>;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
 }
 
 export interface SummaryHTTPMethodParams {
@@ -1121,13 +984,11 @@ export interface SummaryMitigationProductParams {
 
 export declare namespace Summary {
   export {
-    type SummaryGetResponse as SummaryGetResponse,
     type SummaryHTTPMethodResponse as SummaryHTTPMethodResponse,
     type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
     type SummaryIPVersionResponse as SummaryIPVersionResponse,
     type SummaryManagedRulesResponse as SummaryManagedRulesResponse,
     type SummaryMitigationProductResponse as SummaryMitigationProductResponse,
-    type SummaryGetParams as SummaryGetParams,
     type SummaryHTTPMethodParams as SummaryHTTPMethodParams,
     type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
     type SummaryIPVersionParams as SummaryIPVersionParams,

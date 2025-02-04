@@ -2,7 +2,13 @@
 
 import { APIResource } from '../../resource';
 import * as EdgeAPI from './edge';
-import { Edge, EdgeCreateParams, EdgeGetParams, EdgeGetResponse, InstantLogpushJob } from './edge';
+import {
+  Edge,
+  EdgeCreateParams,
+  EdgeGetParams,
+  InstantLogpushJob,
+  InstantLogpushJobsSinglePage,
+} from './edge';
 import * as JobsAPI from './jobs';
 import {
   JobCreateParams,
@@ -27,6 +33,8 @@ import {
 import * as ValidateAPI from './validate';
 import {
   Validate,
+  ValidateDestinationExistsParams,
+  ValidateDestinationExistsResponse,
   ValidateDestinationParams,
   ValidateDestinationResponse,
   ValidateOriginParams,
@@ -45,6 +53,7 @@ export class Logpush extends APIResource {
 
 Logpush.Datasets = Datasets;
 Logpush.Edge = Edge;
+Logpush.InstantLogpushJobsSinglePage = InstantLogpushJobsSinglePage;
 Logpush.Jobs = Jobs;
 Logpush.LogpushJobsSinglePage = LogpushJobsSinglePage;
 Logpush.Ownership = Ownership;
@@ -56,7 +65,7 @@ export declare namespace Logpush {
   export {
     Edge as Edge,
     type InstantLogpushJob as InstantLogpushJob,
-    type EdgeGetResponse as EdgeGetResponse,
+    InstantLogpushJobsSinglePage as InstantLogpushJobsSinglePage,
     type EdgeCreateParams as EdgeCreateParams,
     type EdgeGetParams as EdgeGetParams,
   };
@@ -85,8 +94,10 @@ export declare namespace Logpush {
   export {
     Validate as Validate,
     type ValidateDestinationResponse as ValidateDestinationResponse,
+    type ValidateDestinationExistsResponse as ValidateDestinationExistsResponse,
     type ValidateOriginResponse as ValidateOriginResponse,
     type ValidateDestinationParams as ValidateDestinationParams,
+    type ValidateDestinationExistsParams as ValidateDestinationExistsParams,
     type ValidateOriginParams as ValidateOriginParams,
   };
 }

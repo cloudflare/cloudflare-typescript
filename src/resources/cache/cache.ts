@@ -228,7 +228,7 @@ export declare namespace CachePurgeParams {
      * refer to
      * [purge by single-file documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-single-file/).
      */
-    files?: Array<CachePurgeParams.CachePurgeSingleFileWithURLAndHeaders.File>;
+    files?: Array<CachePurgeSingleFileWithURLAndHeaders.File>;
   }
 
   export namespace CachePurgeSingleFileWithURLAndHeaders {

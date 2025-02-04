@@ -14,6 +14,7 @@ export {
   type CertificateGetParams,
 } from './certificates';
 export {
+  HostnameUpdateResponsesSinglePage,
   Hostnames,
   type AuthenticatedOriginPull,
   type HostnameUpdateResponse,

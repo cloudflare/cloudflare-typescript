@@ -4,7 +4,7 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as FiltersAPI from '../filters';
 import * as RateLimitsAPI from '../rate-limits';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Rules extends APIResource {
   /**
@@ -15,13 +15,13 @@ export class Rules extends APIResource {
   create(
     params: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleCreateResponse | null> {
+  ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/firewall/rules`, { body, ...options }) as Core.APIPromise<{
-        result: RuleCreateResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesSinglePage, {
+      body,
+      method: 'post',
+      ...options,
+    });
   }
 
   /**
@@ -86,13 +86,12 @@ export class Rules extends APIResource {
   bulkDelete(
     params: RuleBulkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleBulkDeleteResponse | null> {
+  ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/firewall/rules`, options) as Core.APIPromise<{
-        result: RuleBulkDeleteResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesSinglePage, {
+      method: 'delete',
+      ...options,
+    });
   }
 
   /**
@@ -103,13 +102,13 @@ export class Rules extends APIResource {
   bulkEdit(
     params: RuleBulkEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleBulkEditResponse | null> {
+  ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
     const { zone_id, body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/firewall/rules`, { body: body, ...options }) as Core.APIPromise<{
-        result: RuleBulkEditResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesSinglePage, {
+      body: body,
+      method: 'patch',
+      ...options,
+    });
   }
 
   /**
@@ -120,13 +119,13 @@ export class Rules extends APIResource {
   bulkUpdate(
     params: RuleBulkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleBulkUpdateResponse | null> {
+  ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
     const { zone_id, body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/firewall/rules`, { body: body, ...options }) as Core.APIPromise<{
-        result: RuleBulkUpdateResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesSinglePage, {
+      body: body,
+      method: 'put',
+      ...options,
+    });
   }
 
   /**
@@ -138,14 +137,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleEditResponse | null> {
+  ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/firewall/rules/${ruleId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleEditResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/firewall/rules/${ruleId}`, FirewallRulesSinglePage, {
+      body,
+      method: 'patch',
+      ...options,
+    });
   }
 
   /**
@@ -163,6 +161,8 @@ export class Rules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class FirewallRulesSinglePage extends SinglePage<FirewallRule> {}
 
 export class FirewallRulesV4PagePaginationArray extends V4PagePaginationArray<FirewallRule> {}
 
@@ -221,16 +221,6 @@ export interface FirewallRule {
  * A list of products to bypass for a request when using the `bypass` action.
  */
 export type Product = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
-
-export type RuleCreateResponse = Array<FirewallRule>;
-
-export type RuleBulkDeleteResponse = Array<FirewallRule>;
-
-export type RuleBulkEditResponse = Array<FirewallRule>;
-
-export type RuleBulkUpdateResponse = Array<FirewallRule>;
-
-export type RuleEditResponse = Array<FirewallRule>;
 
 export interface RuleCreateParams {
   /**
@@ -462,6 +452,7 @@ export interface RuleGetParams {
   id?: string;
 }
 
+Rules.FirewallRulesSinglePage = FirewallRulesSinglePage;
 Rules.FirewallRulesV4PagePaginationArray = FirewallRulesV4PagePaginationArray;
 
 export declare namespace Rules {
@@ -469,11 +460,7 @@ export declare namespace Rules {
     type DeletedFilter as DeletedFilter,
     type FirewallRule as FirewallRule,
     type Product as Product,
-    type RuleCreateResponse as RuleCreateResponse,
-    type RuleBulkDeleteResponse as RuleBulkDeleteResponse,
-    type RuleBulkEditResponse as RuleBulkEditResponse,
-    type RuleBulkUpdateResponse as RuleBulkUpdateResponse,
-    type RuleEditResponse as RuleEditResponse,
+    FirewallRulesSinglePage as FirewallRulesSinglePage,
     FirewallRulesV4PagePaginationArray as FirewallRulesV4PagePaginationArray,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,

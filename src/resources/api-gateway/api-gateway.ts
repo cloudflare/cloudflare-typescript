@@ -25,6 +25,7 @@ import {
   APIShield,
   OperationBulkCreateParams,
   OperationBulkCreateResponse,
+  OperationBulkCreateResponsesSinglePage,
   OperationBulkDeleteParams,
   OperationBulkDeleteResponse,
   OperationCreateParams,
@@ -71,6 +72,7 @@ APIGateway.Configurations = Configurations;
 APIGateway.Discovery = Discovery;
 APIGateway.Operations = Operations;
 APIGateway.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
+APIGateway.OperationBulkCreateResponsesSinglePage = OperationBulkCreateResponsesSinglePage;
 APIGateway.Schemas = Schemas;
 APIGateway.UserSchemas = UserSchemas;
 APIGateway.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
@@ -102,6 +104,7 @@ export declare namespace APIGateway {
     type OperationBulkDeleteResponse as OperationBulkDeleteResponse,
     type OperationGetResponse as OperationGetResponse,
     OperationListResponsesV4PagePaginationArray as OperationListResponsesV4PagePaginationArray,
+    OperationBulkCreateResponsesSinglePage as OperationBulkCreateResponsesSinglePage,
     type OperationCreateParams as OperationCreateParams,
     type OperationListParams as OperationListParams,
     type OperationDeleteParams as OperationDeleteParams,
