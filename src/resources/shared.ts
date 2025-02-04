@@ -933,8 +933,6 @@ export type TokenValue = string;
 
 export class MembersV4PagePaginationArray extends V4PagePaginationArray<Member> {}
 
-export class RolesSinglePage extends SinglePage<Role> {}
-
 export class SubscriptionsSinglePage extends SinglePage<Subscription> {}
 
 export class TokensV4PagePaginationArray extends V4PagePaginationArray<Token> {}
