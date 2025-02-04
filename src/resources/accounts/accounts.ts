@@ -15,7 +15,7 @@ import {
   Status,
 } from './members';
 import * as RolesAPI from './roles';
-import { RoleGetParams, RoleListParams, RoleListResponse, Roles } from './roles';
+import { RoleGetParams, RoleListParams, Roles } from './roles';
 import * as SubscriptionsAPI from './subscriptions';
 import {
   SubscriptionCreateParams,
@@ -332,12 +332,7 @@ export declare namespace Accounts {
     type MemberGetParams as MemberGetParams,
   };
 
-  export {
-    Roles as Roles,
-    type RoleListResponse as RoleListResponse,
-    type RoleListParams as RoleListParams,
-    type RoleGetParams as RoleGetParams,
-  };
+  export { Roles as Roles, type RoleListParams as RoleListParams, type RoleGetParams as RoleGetParams };
 
   export {
     Subscriptions as Subscriptions,
