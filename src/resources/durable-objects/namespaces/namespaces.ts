@@ -36,8 +36,6 @@ export interface Namespace {
 
   script?: string;
 
-  use_containers?: boolean;
-
   use_sqlite?: boolean;
 }
 
