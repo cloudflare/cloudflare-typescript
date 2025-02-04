@@ -176,14 +176,8 @@ export interface DatabaseListResponse {
    */
   created_at?: string;
 
-  /**
-   * D1 database name.
-   */
   name?: string;
 
-  /**
-   * D1 database identifier (UUID).
-   */
   uuid?: string;
 
   version?: string;
@@ -357,7 +351,7 @@ export interface DatabaseCreateParams {
   account_id: string;
 
   /**
-   * Body param: D1 database name.
+   * Body param:
    */
   name: string;
 
