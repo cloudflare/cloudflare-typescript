@@ -168,10 +168,6 @@ export interface AIGatewayCreateResponse {
 
   rate_limiting_technique: 'fixed' | 'sliding';
 
-  authentication?: boolean;
-
-  log_management?: number | null;
-
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -204,10 +200,6 @@ export interface AIGatewayUpdateResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  authentication?: boolean;
-
-  log_management?: number | null;
 
   logpush?: boolean;
 
@@ -242,10 +234,6 @@ export interface AIGatewayListResponse {
 
   rate_limiting_technique: 'fixed' | 'sliding';
 
-  authentication?: boolean;
-
-  log_management?: number | null;
-
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -279,10 +267,6 @@ export interface AIGatewayDeleteResponse {
 
   rate_limiting_technique: 'fixed' | 'sliding';
 
-  authentication?: boolean;
-
-  log_management?: number | null;
-
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -315,10 +299,6 @@ export interface AIGatewayGetResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  authentication?: boolean;
-
-  log_management?: number | null;
 
   logpush?: boolean;
 
@@ -369,16 +349,6 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
-  authentication?: boolean;
-
-  /**
-   * Body param:
-   */
-  log_management?: number | null;
-
-  /**
-   * Body param:
-   */
   logpush?: boolean;
 
   /**
@@ -422,16 +392,6 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  /**
-   * Body param:
-   */
-  authentication?: boolean;
-
-  /**
-   * Body param:
-   */
-  log_management?: number | null;
 
   /**
    * Body param:
