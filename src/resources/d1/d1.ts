@@ -38,10 +38,16 @@ export interface D1 {
    */
   file_size?: number;
 
+  /**
+   * D1 database name.
+   */
   name?: string;
 
   num_tables?: number;
 
+  /**
+   * D1 database identifier (UUID).
+   */
   uuid?: string;
 
   version?: string;
