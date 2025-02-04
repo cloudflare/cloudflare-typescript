@@ -13,9 +13,9 @@ export class Recipients extends APIResource {
     params: RecipientCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecipientCreateResponse> {
-    const { account_id1, ...body } = params;
+    const { path_account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id1}/shares/${shareId}/recipients`, {
+      this._client.post(`/accounts/${path_account_id}/shares/${shareId}/recipients`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RecipientCreateResponse }>
@@ -210,12 +210,12 @@ export interface RecipientCreateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  path_account_id: string;
 
   /**
    * Body param: Account identifier.
    */
-  account_id?: string;
+  body_account_id?: string;
 
   /**
    * Body param: Organization identifier.
