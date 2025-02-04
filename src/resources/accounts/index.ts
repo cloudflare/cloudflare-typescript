@@ -12,7 +12,7 @@ export {
   type MemberDeleteParams,
   type MemberGetParams,
 } from './members';
-export { Roles, type RoleListResponse, type RoleListParams, type RoleGetParams } from './roles';
+export { Roles, type RoleListParams, type RoleGetParams } from './roles';
 export {
   Subscriptions,
   type SubscriptionCreateResponse,
