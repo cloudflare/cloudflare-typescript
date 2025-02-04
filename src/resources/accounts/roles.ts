@@ -3,18 +3,18 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as Shared from '../shared';
-import { RolesSinglePage } from '../shared';
 
 export class Roles extends APIResource {
   /**
    * Get all available roles for an account.
    */
-  list(
-    params: RoleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RolesSinglePage, Shared.Role> {
+  list(params: RoleListParams, options?: Core.RequestOptions): Core.APIPromise<RoleListResponse | null> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/roles`, RolesSinglePage, options);
+    return (
+      this._client.get(`/accounts/${account_id}/roles`, options) as Core.APIPromise<{
+        result: RoleListResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -29,6 +29,8 @@ export class Roles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type RoleListResponse = Array<Shared.Role>;
 
 export interface RoleListParams {
   /**
@@ -45,7 +47,9 @@ export interface RoleGetParams {
 }
 
 export declare namespace Roles {
-  export { type RoleListParams as RoleListParams, type RoleGetParams as RoleGetParams };
+  export {
+    type RoleListResponse as RoleListResponse,
+    type RoleListParams as RoleListParams,
+    type RoleGetParams as RoleGetParams,
+  };
 }
-
-export { RolesSinglePage };
