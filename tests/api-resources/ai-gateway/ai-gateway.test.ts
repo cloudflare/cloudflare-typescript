@@ -40,6 +40,8 @@ describe('resource aiGateway', () => {
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
       rate_limiting_technique: 'fixed',
+      authentication: true,
+      log_management: 10000,
       logpush: true,
       logpush_public_key: 'xxxxxxxxxxxxxxxx',
     });
@@ -73,6 +75,8 @@ describe('resource aiGateway', () => {
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
       rate_limiting_technique: 'fixed',
+      authentication: true,
+      log_management: 10000,
       logpush: true,
       logpush_public_key: 'xxxxxxxxxxxxxxxx',
     });
