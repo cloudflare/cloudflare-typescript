@@ -187,7 +187,7 @@ export interface Deployment {
   /**
    * Name of the project.
    */
-  project_name?: string;
+  name?: string;
 
   /**
    * Short Id (8 character) of the deployment.
