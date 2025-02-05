@@ -2,9 +2,12 @@
 
 export {
   PermissionGroupListResponsesSinglePage,
+  PermissionGroupGetResponsesSinglePage,
   PermissionGroups,
   type PermissionGroupListResponse,
+  type PermissionGroupGetResponse,
   type PermissionGroupListParams,
+  type PermissionGroupGetParams,
 } from './permission-groups';
 export {
   Tokens,
