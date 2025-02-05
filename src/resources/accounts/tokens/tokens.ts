@@ -6,6 +6,9 @@ import * as Shared from '../../shared';
 import { TokensV4PagePaginationArray } from '../../shared';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
+  PermissionGroupGetParams,
+  PermissionGroupGetResponse,
+  PermissionGroupGetResponsesSinglePage,
   PermissionGroupListParams,
   PermissionGroupListResponse,
   PermissionGroupListResponsesSinglePage,
@@ -373,6 +376,7 @@ export interface TokenVerifyParams {
 
 Tokens.PermissionGroups = PermissionGroups;
 Tokens.PermissionGroupListResponsesSinglePage = PermissionGroupListResponsesSinglePage;
+Tokens.PermissionGroupGetResponsesSinglePage = PermissionGroupGetResponsesSinglePage;
 Tokens.Value = Value;
 
 export declare namespace Tokens {
@@ -391,8 +395,11 @@ export declare namespace Tokens {
   export {
     PermissionGroups as PermissionGroups,
     type PermissionGroupListResponse as PermissionGroupListResponse,
+    type PermissionGroupGetResponse as PermissionGroupGetResponse,
     PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
+    PermissionGroupGetResponsesSinglePage as PermissionGroupGetResponsesSinglePage,
     type PermissionGroupListParams as PermissionGroupListParams,
+    type PermissionGroupGetParams as PermissionGroupGetParams,
   };
 
   export { Value as Value, type ValueUpdateParams as ValueUpdateParams };
