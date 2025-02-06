@@ -28,9 +28,10 @@ export {
   type EvaluationGetParams,
 } from './evaluations';
 export {
+  EvaluationTypeListResponsesV4PagePaginationArray,
   EvaluationTypes,
-  type EvaluationTypeGetResponse,
-  type EvaluationTypeGetParams,
+  type EvaluationTypeListResponse,
+  type EvaluationTypeListParams,
 } from './evaluation-types';
 export {
   LogListResponsesV4PagePaginationArray,

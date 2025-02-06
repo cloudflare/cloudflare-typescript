@@ -11,8 +11,8 @@ const client = new Cloudflare({
 
 describe('resource searches', () => {
   // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
-    const responsePromise = client.loadBalancers.searches.get({
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.loadBalancers.searches.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +25,8 @@ describe('resource searches', () => {
   });
 
   // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
-    const response = await client.loadBalancers.searches.get({
+  test.skip('list: required and optional params', async () => {
+    const response = await client.loadBalancers.searches.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 1,

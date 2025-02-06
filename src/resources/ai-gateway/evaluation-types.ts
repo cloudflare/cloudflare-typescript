@@ -2,48 +2,46 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class EvaluationTypes extends APIResource {
   /**
    * List Evaluators
    */
-  get(
-    params: EvaluationTypeGetParams,
+  list(
+    params: EvaluationTypeListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EvaluationTypeGetResponse> {
+  ): Core.PagePromise<EvaluationTypeListResponsesV4PagePaginationArray, EvaluationTypeListResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/ai-gateway/evaluation-types`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: EvaluationTypeGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/ai-gateway/evaluation-types`,
+      EvaluationTypeListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 }
 
-export type EvaluationTypeGetResponse = Array<EvaluationTypeGetResponse.EvaluationTypeGetResponseItem>;
+export class EvaluationTypeListResponsesV4PagePaginationArray extends V4PagePaginationArray<EvaluationTypeListResponse> {}
 
-export namespace EvaluationTypeGetResponse {
-  export interface EvaluationTypeGetResponseItem {
-    id: string;
+export interface EvaluationTypeListResponse {
+  id: string;
 
-    created_at: string;
+  created_at: string;
 
-    description: string;
+  description: string;
 
-    enable: boolean;
+  enable: boolean;
 
-    mandatory: boolean;
+  mandatory: boolean;
 
-    modified_at: string;
+  modified_at: string;
 
-    name: string;
+  name: string;
 
-    type: string;
-  }
+  type: string;
 }
 
-export interface EvaluationTypeGetParams {
+export interface EvaluationTypeListParams extends V4PagePaginationArrayParams {
   /**
    * Path param:
    */
@@ -58,21 +56,15 @@ export interface EvaluationTypeGetParams {
    * Query param:
    */
   order_by_direction?: 'asc' | 'desc';
-
-  /**
-   * Query param:
-   */
-  page?: number;
-
-  /**
-   * Query param:
-   */
-  per_page?: number;
 }
+
+EvaluationTypes.EvaluationTypeListResponsesV4PagePaginationArray =
+  EvaluationTypeListResponsesV4PagePaginationArray;
 
 export declare namespace EvaluationTypes {
   export {
-    type EvaluationTypeGetResponse as EvaluationTypeGetResponse,
-    type EvaluationTypeGetParams as EvaluationTypeGetParams,
+    type EvaluationTypeListResponse as EvaluationTypeListResponse,
+    EvaluationTypeListResponsesV4PagePaginationArray as EvaluationTypeListResponsesV4PagePaginationArray,
+    type EvaluationTypeListParams as EvaluationTypeListParams,
   };
 }
