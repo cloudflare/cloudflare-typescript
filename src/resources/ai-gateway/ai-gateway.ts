@@ -18,7 +18,12 @@ import {
   Datasets,
 } from './datasets';
 import * as EvaluationTypesAPI from './evaluation-types';
-import { EvaluationTypeGetParams, EvaluationTypeGetResponse, EvaluationTypes } from './evaluation-types';
+import {
+  EvaluationTypeListParams,
+  EvaluationTypeListResponse,
+  EvaluationTypeListResponsesV4PagePaginationArray,
+  EvaluationTypes,
+} from './evaluation-types';
 import * as EvaluationsAPI from './evaluations';
 import {
   EvaluationCreateParams,
@@ -465,6 +470,7 @@ export interface AIGatewayGetParams {
 }
 
 AIGateway.EvaluationTypes = EvaluationTypes;
+AIGateway.EvaluationTypeListResponsesV4PagePaginationArray = EvaluationTypeListResponsesV4PagePaginationArray;
 AIGateway.Logs = Logs;
 AIGateway.LogListResponsesV4PagePaginationArray = LogListResponsesV4PagePaginationArray;
 AIGateway.Datasets = Datasets;
@@ -475,8 +481,9 @@ AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponses
 export declare namespace AIGateway {
   export {
     EvaluationTypes as EvaluationTypes,
-    type EvaluationTypeGetResponse as EvaluationTypeGetResponse,
-    type EvaluationTypeGetParams as EvaluationTypeGetParams,
+    type EvaluationTypeListResponse as EvaluationTypeListResponse,
+    EvaluationTypeListResponsesV4PagePaginationArray as EvaluationTypeListResponsesV4PagePaginationArray,
+    type EvaluationTypeListParams as EvaluationTypeListParams,
   };
 
   export {

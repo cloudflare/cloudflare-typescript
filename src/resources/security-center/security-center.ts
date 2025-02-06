@@ -5,8 +5,9 @@ import * as InsightsAPI from './insights/insights';
 import {
   InsightDismissParams,
   InsightDismissResponse,
-  InsightGetParams,
-  InsightGetResponse,
+  InsightListParams,
+  InsightListResponse,
+  InsightListResponsesV4PagePagination,
   Insights,
 } from './insights/insights';
 
@@ -15,13 +16,15 @@ export class SecurityCenter extends APIResource {
 }
 
 SecurityCenter.Insights = Insights;
+SecurityCenter.InsightListResponsesV4PagePagination = InsightListResponsesV4PagePagination;
 
 export declare namespace SecurityCenter {
   export {
     Insights as Insights,
+    type InsightListResponse as InsightListResponse,
     type InsightDismissResponse as InsightDismissResponse,
-    type InsightGetResponse as InsightGetResponse,
+    InsightListResponsesV4PagePagination as InsightListResponsesV4PagePagination,
+    type InsightListParams as InsightListParams,
     type InsightDismissParams as InsightDismissParams,
-    type InsightGetParams as InsightGetParams,
   };
 }
