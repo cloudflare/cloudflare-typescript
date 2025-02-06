@@ -12,11 +12,53 @@ import * as SeverityAPI from './severity';
 import { Severity, SeverityGetParams, SeverityGetResponse } from './severity';
 import * as TypeAPI from './type';
 import { Type, TypeGetParams, TypeGetResponse } from './type';
+import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class Insights extends APIResource {
   class: ClassAPI.Class = new ClassAPI.Class(this._client);
   severity: SeverityAPI.Severity = new SeverityAPI.Severity(this._client);
   type: TypeAPI.Type = new TypeAPI.Type(this._client);
+
+  /**
+   * Get Security Center Insights
+   */
+  list(
+    params?: InsightListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InsightListResponsesV4PagePagination, InsightListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InsightListResponsesV4PagePagination, InsightListResponse>;
+  list(
+    params: InsightListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InsightListResponsesV4PagePagination, InsightListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id, zone_id, ...query } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/security-center/insights`,
+      InsightListResponsesV4PagePagination,
+      { query, ...options },
+    );
+  }
 
   /**
    * Archive Security Center Insight
@@ -48,63 +90,17 @@ export class Insights extends APIResource {
       { body, ...options },
     );
   }
-
-  /**
-   * Get Security Center Insights
-   */
-  get(params?: InsightGetParams, options?: Core.RequestOptions): Core.APIPromise<InsightGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<InsightGetResponse>;
-  get(
-    params: InsightGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InsightGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id, zone_id, ...query } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/security-center/insights`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: InsightGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
-export interface InsightDismissResponse {
-  errors: Array<Shared.ResponseInfo>;
+export class InsightListResponsesV4PagePagination extends V4PagePagination<InsightListResponse> {}
 
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-}
-
-export interface InsightGetResponse {
+export interface InsightListResponse {
   /**
    * Total number of results
    */
   count?: number;
 
-  issues?: Array<InsightGetResponse.Issue>;
+  issues?: Array<InsightListResponse.Issue>;
 
   /**
    * Current page within paginated list of results
@@ -117,7 +113,7 @@ export interface InsightGetResponse {
   per_page?: number;
 }
 
-export namespace InsightGetResponse {
+export namespace InsightListResponse {
   export interface Issue {
     id?: string;
 
@@ -143,26 +139,18 @@ export namespace InsightGetResponse {
   }
 }
 
-export interface InsightDismissParams {
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id?: string;
+export interface InsightDismissResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
 
   /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
+   * Whether the API call was successful
    */
-  zone_id?: string;
-
-  /**
-   * Body param:
-   */
-  dismiss?: boolean;
+  success: true;
 }
 
-export interface InsightGetParams {
+export interface InsightListParams extends V4PagePaginationParams {
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
@@ -201,16 +189,6 @@ export interface InsightGetParams {
   'issue_type~neq'?: Array<IssuesAPI.IssueTypeParam>;
 
   /**
-   * Query param: Current page within paginated list of results
-   */
-  page?: number;
-
-  /**
-   * Query param: Number of results per page of results
-   */
-  per_page?: number;
-
-  /**
    * Query param:
    */
   product?: Array<string>;
@@ -241,16 +219,37 @@ export interface InsightGetParams {
   'subject~neq'?: Array<string>;
 }
 
+export interface InsightDismissParams {
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
+
+  /**
+   * Body param:
+   */
+  dismiss?: boolean;
+}
+
+Insights.InsightListResponsesV4PagePagination = InsightListResponsesV4PagePagination;
 Insights.Class = Class;
 Insights.Severity = Severity;
 Insights.Type = Type;
 
 export declare namespace Insights {
   export {
+    type InsightListResponse as InsightListResponse,
     type InsightDismissResponse as InsightDismissResponse,
-    type InsightGetResponse as InsightGetResponse,
+    InsightListResponsesV4PagePagination as InsightListResponsesV4PagePagination,
+    type InsightListParams as InsightListParams,
     type InsightDismissParams as InsightDismissParams,
-    type InsightGetParams as InsightGetParams,
   };
 
   export { Class as Class, type ClassGetResponse as ClassGetResponse, type ClassGetParams as ClassGetParams };

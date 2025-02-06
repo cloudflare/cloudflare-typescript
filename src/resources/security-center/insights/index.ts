@@ -2,11 +2,12 @@
 
 export { Class, type ClassGetResponse, type ClassGetParams } from './class';
 export {
+  InsightListResponsesV4PagePagination,
   Insights,
+  type InsightListResponse,
   type InsightDismissResponse,
-  type InsightGetResponse,
+  type InsightListParams,
   type InsightDismissParams,
-  type InsightGetParams,
 } from './insights';
 export { Severity, type SeverityGetResponse, type SeverityGetParams } from './severity';
 export { Type, type TypeGetResponse, type TypeGetParams } from './type';

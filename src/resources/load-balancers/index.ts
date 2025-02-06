@@ -34,4 +34,9 @@ export {
   type RegionListParams,
   type RegionGetParams,
 } from './regions';
-export { Searches, type SearchGetResponse, type SearchGetParams } from './searches';
+export {
+  SearchListResponsesV4PagePagination,
+  Searches,
+  type SearchListResponse,
+  type SearchListParams,
+} from './searches';

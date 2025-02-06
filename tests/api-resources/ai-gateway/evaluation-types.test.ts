@@ -10,8 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource evaluationTypes', () => {
-  test('get: only required params', async () => {
-    const responsePromise = client.aiGateway.evaluationTypes.get({
+  test('list: only required params', async () => {
+    const responsePromise = client.aiGateway.evaluationTypes.list({
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -23,8 +23,8 @@ describe('resource evaluationTypes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
-    const response = await client.aiGateway.evaluationTypes.get({
+  test('list: required and optional params', async () => {
+    const response = await client.aiGateway.evaluationTypes.list({
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       order_by: 'order_by',
       order_by_direction: 'asc',

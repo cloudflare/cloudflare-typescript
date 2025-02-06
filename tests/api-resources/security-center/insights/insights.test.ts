@@ -10,8 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource insights', () => {
-  test('dismiss', async () => {
-    const responsePromise = client.securityCenter.insights.dismiss('issue_id', { account_id: 'account_id' });
+  test('list', async () => {
+    const responsePromise = client.securityCenter.insights.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,8 @@ describe('resource insights', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get', async () => {
-    const responsePromise = client.securityCenter.insights.get({ account_id: 'account_id' });
+  test('dismiss', async () => {
+    const responsePromise = client.securityCenter.insights.dismiss('issue_id', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

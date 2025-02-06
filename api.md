@@ -561,11 +561,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/load-balancers/searches.ts">SearchGetResponse</a></code>
+- <code><a href="./src/resources/load-balancers/searches.ts">SearchListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/load_balancers/search">client.loadBalancers.searches.<a href="./src/resources/load-balancers/searches.ts">get</a>({ ...params }) -> SearchGetResponse</code>
+- <code title="get /accounts/{account_id}/load_balancers/search">client.loadBalancers.searches.<a href="./src/resources/load-balancers/searches.ts">list</a>({ ...params }) -> SearchListResponsesV4PagePagination</code>
 
 # Cache
 
@@ -7135,11 +7135,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ai-gateway/evaluation-types.ts">EvaluationTypeGetResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/evaluation-types.ts">EvaluationTypeListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/ai-gateway/evaluation-types">client.aiGateway.evaluationTypes.<a href="./src/resources/ai-gateway/evaluation-types.ts">get</a>({ ...params }) -> EvaluationTypeGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/evaluation-types">client.aiGateway.evaluationTypes.<a href="./src/resources/ai-gateway/evaluation-types.ts">list</a>({ ...params }) -> EvaluationTypeListResponsesV4PagePaginationArray</code>
 
 ## Logs
 
@@ -7547,13 +7547,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/security-center/insights/insights.ts">InsightListResponse</a></code>
 - <code><a href="./src/resources/security-center/insights/insights.ts">InsightDismissResponse</a></code>
-- <code><a href="./src/resources/security-center/insights/insights.ts">InsightGetResponse</a></code>
 
 Methods:
 
+- <code title="get /{account_or_zone}/{account_or_zone_id}/security-center/insights">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">list</a>({ ...params }) -> InsightListResponsesV4PagePagination</code>
 - <code title="put /{account_or_zone}/{account_or_zone_id}/security-center/insights/{issue_id}/dismiss">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">dismiss</a>(issueId, { ...params }) -> InsightDismissResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/security-center/insights">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">get</a>({ ...params }) -> InsightGetResponse</code>
 
 ### Class
 
