@@ -1,0 +1,780 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../resource';
+import { APIPromise } from '../../../api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+
+export class Summary extends APIResource {
+  /**
+   * Percentage distribution of DNS queries to AS112 by DNSSEC support.
+   */
+  dnssec(
+    query: SummaryDNSSECParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryDNSSECResponse> {
+    return (
+      this._client.get('/radar/as112/summary/dnssec', { query, ...options }) as APIPromise<{
+        result: SummaryDNSSECResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of DNS queries to AS112 by EDNS support.
+   */
+  edns(
+    query: SummaryEdnsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryEdnsResponse> {
+    return (
+      this._client.get('/radar/as112/summary/edns', { query, ...options }) as APIPromise<{
+        result: SummaryEdnsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of DNS queries to AS112 per IP Version.
+   */
+  ipVersion(
+    query: SummaryIPVersionParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryIPVersionResponse> {
+    return (
+      this._client.get('/radar/as112/summary/ip_version', { query, ...options }) as APIPromise<{
+        result: SummaryIPVersionResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of DNS queries to AS112 per protocol.
+   */
+  protocol(
+    query: SummaryProtocolParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryProtocolResponse> {
+    return (
+      this._client.get('/radar/as112/summary/protocol', { query, ...options }) as APIPromise<{
+        result: SummaryProtocolResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of DNS queries to AS112 by query type.
+   */
+  queryType(
+    query: SummaryQueryTypeParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryQueryTypeResponse> {
+    return (
+      this._client.get('/radar/as112/summary/query_type', { query, ...options }) as APIPromise<{
+        result: SummaryQueryTypeResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of AS112 DNS requests classified by response code.
+   */
+  responseCodes(
+    query: SummaryResponseCodesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryResponseCodesResponse> {
+    return (
+      this._client.get('/radar/as112/summary/response_codes', { query, ...options }) as APIPromise<{
+        result: SummaryResponseCodesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface SummaryDNSSECResponse {
+  meta: SummaryDNSSECResponse.Meta;
+
+  summary_0: SummaryDNSSECResponse.Summary0;
+}
+
+export namespace SummaryDNSSECResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Summary0 {
+    NOT_SUPPORTED: string;
+
+    SUPPORTED: string;
+  }
+}
+
+export interface SummaryEdnsResponse {
+  meta: SummaryEdnsResponse.Meta;
+
+  summary_0: SummaryEdnsResponse.Summary0;
+}
+
+export namespace SummaryEdnsResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Summary0 {
+    NOT_SUPPORTED: string;
+
+    SUPPORTED: string;
+  }
+}
+
+export interface SummaryIPVersionResponse {
+  meta: SummaryIPVersionResponse.Meta;
+
+  summary_0: SummaryIPVersionResponse.Summary0;
+}
+
+export namespace SummaryIPVersionResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Summary0 {
+    IPv4: string;
+
+    IPv6: string;
+  }
+}
+
+export interface SummaryProtocolResponse {
+  meta: SummaryProtocolResponse.Meta;
+
+  summary_0: SummaryProtocolResponse.Summary0;
+}
+
+export namespace SummaryProtocolResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Summary0 {
+    tcp: string;
+
+    udp: string;
+  }
+}
+
+export interface SummaryQueryTypeResponse {
+  meta: SummaryQueryTypeResponse.Meta;
+
+  summary_0: Record<string, string>;
+}
+
+export namespace SummaryQueryTypeResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+}
+
+export interface SummaryResponseCodesResponse {
+  meta: SummaryResponseCodesResponse.Meta;
+
+  summary_0: Record<string, string>;
+}
+
+export namespace SummaryResponseCodesResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+}
+
+export interface SummaryDNSSECParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryEdnsParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryIPVersionParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryProtocolParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryQueryTypeParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryResponseCodesParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export declare namespace Summary {
+  export {
+    type SummaryDNSSECResponse as SummaryDNSSECResponse,
+    type SummaryEdnsResponse as SummaryEdnsResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryProtocolResponse as SummaryProtocolResponse,
+    type SummaryQueryTypeResponse as SummaryQueryTypeResponse,
+    type SummaryResponseCodesResponse as SummaryResponseCodesResponse,
+    type SummaryDNSSECParams as SummaryDNSSECParams,
+    type SummaryEdnsParams as SummaryEdnsParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryProtocolParams as SummaryProtocolParams,
+    type SummaryQueryTypeParams as SummaryQueryTypeParams,
+    type SummaryResponseCodesParams as SummaryResponseCodesParams,
+  };
+}

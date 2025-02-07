@@ -1,0 +1,104 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../resource';
+import * as ASNsAPI from './asns';
+import {
+  ASNGetParams,
+  ASNGetResponse,
+  ASNIPParams,
+  ASNIPResponse,
+  ASNListParams,
+  ASNListResponse,
+  ASNRelParams,
+  ASNRelResponse,
+  ASNs,
+} from './asns';
+import * as LocationsAPI from './locations';
+import {
+  LocationGetParams,
+  LocationGetResponse,
+  LocationListParams,
+  LocationListResponse,
+  Locations,
+} from './locations';
+import { APIPromise } from '../../../api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+
+export class Entities extends APIResource {
+  asns: ASNsAPI.ASNs = new ASNsAPI.ASNs(this._client);
+  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
+
+  /**
+   * Get IP address information.
+   */
+  get(query: EntityGetParams, options?: RequestOptions): APIPromise<EntityGetResponse> {
+    return (
+      this._client.get('/radar/entities/ip', { query, ...options }) as APIPromise<{
+        result: EntityGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface EntityGetResponse {
+  ip: EntityGetResponse.IP;
+}
+
+export namespace EntityGetResponse {
+  export interface IP {
+    asn: string;
+
+    asnLocation: string;
+
+    asnName: string;
+
+    asnOrgName: string;
+
+    ip: string;
+
+    ipVersion: string;
+
+    location: string;
+
+    locationName: string;
+  }
+}
+
+export interface EntityGetParams {
+  /**
+   * IP address.
+   */
+  ip: string;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+}
+
+Entities.ASNs = ASNs;
+Entities.Locations = Locations;
+
+export declare namespace Entities {
+  export { type EntityGetResponse as EntityGetResponse, type EntityGetParams as EntityGetParams };
+
+  export {
+    ASNs as ASNs,
+    type ASNListResponse as ASNListResponse,
+    type ASNGetResponse as ASNGetResponse,
+    type ASNIPResponse as ASNIPResponse,
+    type ASNRelResponse as ASNRelResponse,
+    type ASNListParams as ASNListParams,
+    type ASNGetParams as ASNGetParams,
+    type ASNIPParams as ASNIPParams,
+    type ASNRelParams as ASNRelParams,
+  };
+
+  export {
+    Locations as Locations,
+    type LocationListResponse as LocationListResponse,
+    type LocationGetResponse as LocationGetResponse,
+    type LocationListParams as LocationListParams,
+    type LocationGetParams as LocationGetParams,
+  };
+}

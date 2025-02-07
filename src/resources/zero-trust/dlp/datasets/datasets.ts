@@ -1,0 +1,251 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../../resource';
+import * as UploadAPI from './upload';
+import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
+import * as VersionsAPI from './versions/versions';
+import {
+  VersionCreateParams,
+  VersionCreateResponse,
+  VersionCreateResponsesSinglePage,
+  Versions,
+} from './versions/versions';
+import { APIPromise } from '../../../../api-promise';
+import { PagePromise, SinglePage } from '../../../../pagination';
+import { buildHeaders } from '../../../../internal/headers';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
+
+export class Datasets extends APIResource {
+  upload: UploadAPI.Upload = new UploadAPI.Upload(this._client);
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
+
+  /**
+   * Create a new dataset
+   */
+  create(params: DatasetCreateParams, options?: RequestOptions): APIPromise<DatasetCreation> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/dlp/datasets`, { body, ...options }) as APIPromise<{
+        result: DatasetCreation;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Update details about a dataset
+   */
+  update(datasetID: string, params: DatasetUpdateParams, options?: RequestOptions): APIPromise<Dataset> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/dlp/datasets/${datasetID}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: Dataset }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetch all datasets
+   */
+  list(params: DatasetListParams, options?: RequestOptions): PagePromise<DatasetsSinglePage, Dataset> {
+    const { account_id } = params;
+    return this._client.getAPIList(path`/accounts/${account_id}/dlp/datasets`, SinglePage<Dataset>, options);
+  }
+
+  /**
+   * This deletes all versions of the dataset.
+   */
+  delete(datasetID: string, params: DatasetDeleteParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id } = params;
+    return this._client.delete(path`/accounts/${account_id}/dlp/datasets/${datasetID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Fetch a specific dataset
+   */
+  get(datasetID: string, params: DatasetGetParams, options?: RequestOptions): APIPromise<Dataset> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/dlp/datasets/${datasetID}`, options) as APIPromise<{
+        result: Dataset;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type DatasetsSinglePage = SinglePage<Dataset>;
+
+export interface Dataset {
+  id: string;
+
+  columns: Array<Dataset.Column>;
+
+  created_at: string;
+
+  encoding_version: number;
+
+  name: string;
+
+  num_cells: number;
+
+  secret: boolean;
+
+  status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+
+  /**
+   * When the dataset was last updated.
+   *
+   * This includes name or description changes as well as uploads.
+   */
+  updated_at: string;
+
+  uploads: Array<Dataset.Upload>;
+
+  /**
+   * The description of the dataset
+   */
+  description?: string | null;
+}
+
+export namespace Dataset {
+  export interface Column {
+    entry_id: string;
+
+    header_name: string;
+
+    num_cells: number;
+
+    upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+  }
+
+  export interface Upload {
+    num_cells: number;
+
+    status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+
+    version: number;
+  }
+}
+
+export type DatasetArray = Array<Dataset>;
+
+export interface DatasetCreation {
+  dataset: Dataset;
+
+  /**
+   * Encoding version to use for dataset
+   */
+  encoding_version: number;
+
+  max_cells: number;
+
+  /**
+   * The version to use when uploading the dataset.
+   */
+  version: number;
+
+  /**
+   * The secret to use for Exact Data Match datasets. This is not present in Custom
+   * Wordlists.
+   */
+  secret?: string;
+}
+
+export interface DatasetCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  name: string;
+
+  /**
+   * Body param: The description of the dataset
+   */
+  description?: string | null;
+
+  /**
+   * Body param: Dataset encoding version
+   *
+   * Non-secret custom word lists with no header are always version 1. Secret EDM
+   * lists with no header are version 1. Multicolumn CSV with headers are version 2.
+   * Omitting this field provides the default value 0, which is interpreted the same
+   * as 1.
+   */
+  encoding_version?: number;
+
+  /**
+   * Body param: Generate a secret dataset.
+   *
+   * If true, the response will include a secret to use with the EDM encoder. If
+   * false, the response has no secret and the dataset is uploaded in plaintext.
+   */
+  secret?: boolean;
+}
+
+export interface DatasetUpdateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param: The description of the dataset
+   */
+  description?: string | null;
+
+  /**
+   * Body param: The name of the dataset, must be unique
+   */
+  name?: string | null;
+}
+
+export interface DatasetListParams {
+  account_id: string;
+}
+
+export interface DatasetDeleteParams {
+  account_id: string;
+}
+
+export interface DatasetGetParams {
+  account_id: string;
+}
+
+Datasets.Upload = UploadAPIUpload;
+Datasets.Versions = Versions;
+
+export declare namespace Datasets {
+  export {
+    type Dataset as Dataset,
+    type DatasetArray as DatasetArray,
+    type DatasetCreation as DatasetCreation,
+    type DatasetsSinglePage as DatasetsSinglePage,
+    type DatasetCreateParams as DatasetCreateParams,
+    type DatasetUpdateParams as DatasetUpdateParams,
+    type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
+    type DatasetGetParams as DatasetGetParams,
+  };
+
+  export {
+    UploadAPIUpload as Upload,
+    type NewVersion as NewVersion,
+    type UploadCreateParams as UploadCreateParams,
+    type UploadEditParams as UploadEditParams,
+  };
+
+  export {
+    Versions as Versions,
+    type VersionCreateResponse as VersionCreateResponse,
+    type VersionCreateResponsesSinglePage as VersionCreateResponsesSinglePage,
+    type VersionCreateParams as VersionCreateParams,
+  };
+}

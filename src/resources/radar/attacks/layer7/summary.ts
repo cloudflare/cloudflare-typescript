@@ -1,0 +1,955 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../../resource';
+import { APIPromise } from '../../../../api-promise';
+import { RequestOptions } from '../../../../internal/request-options';
+
+export class Summary extends APIResource {
+  /**
+   * Percentage distribution of attacks by http method used.
+   */
+  httpMethod(
+    query: SummaryHTTPMethodParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryHTTPMethodResponse> {
+    return (
+      this._client.get('/radar/attacks/layer7/summary/http_method', { query, ...options }) as APIPromise<{
+        result: SummaryHTTPMethodResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of attacks by http version used.
+   */
+  httpVersion(
+    query: SummaryHTTPVersionParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryHTTPVersionResponse> {
+    return (
+      this._client.get('/radar/attacks/layer7/summary/http_version', { query, ...options }) as APIPromise<{
+        result: SummaryHTTPVersionResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of attacks by ip version used.
+   */
+  ipVersion(
+    query: SummaryIPVersionParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryIPVersionResponse> {
+    return (
+      this._client.get('/radar/attacks/layer7/summary/ip_version', { query, ...options }) as APIPromise<{
+        result: SummaryIPVersionResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of attacks by managed rules used.
+   */
+  managedRules(
+    query: SummaryManagedRulesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryManagedRulesResponse> {
+    return (
+      this._client.get('/radar/attacks/layer7/summary/managed_rules', { query, ...options }) as APIPromise<{
+        result: SummaryManagedRulesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of attacks by mitigation product used.
+   */
+  mitigationProduct(
+    query: SummaryMitigationProductParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryMitigationProductResponse> {
+    return (
+      this._client.get('/radar/attacks/layer7/summary/mitigation_product', {
+        query,
+        ...options,
+      }) as APIPromise<{ result: SummaryMitigationProductResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface SummaryHTTPMethodResponse {
+  meta: SummaryHTTPMethodResponse.Meta;
+
+  summary_0: Record<string, string>;
+}
+
+export namespace SummaryHTTPMethodResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+}
+
+export interface SummaryHTTPVersionResponse {
+  meta: SummaryHTTPVersionResponse.Meta;
+
+  summary_0: SummaryHTTPVersionResponse.Summary0;
+}
+
+export namespace SummaryHTTPVersionResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Summary0 {
+    'HTTP/1.x': string;
+
+    'HTTP/2': string;
+
+    'HTTP/3': string;
+  }
+}
+
+export interface SummaryIPVersionResponse {
+  meta: SummaryIPVersionResponse.Meta;
+
+  summary_0: SummaryIPVersionResponse.Summary0;
+}
+
+export namespace SummaryIPVersionResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Summary0 {
+    IPv4: string;
+
+    IPv6: string;
+  }
+}
+
+export interface SummaryManagedRulesResponse {
+  meta: SummaryManagedRulesResponse.Meta;
+
+  summary_0: Record<string, string>;
+}
+
+export namespace SummaryManagedRulesResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+}
+
+export interface SummaryMitigationProductResponse {
+  meta: SummaryMitigationProductResponse.Meta;
+
+  summary_0: Record<string, string>;
+}
+
+export namespace SummaryMitigationProductResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    normalization: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+}
+
+export interface SummaryHTTPMethodParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryHTTPVersionParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryIPVersionParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryManagedRulesParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export interface SummaryMitigationProductParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
+   * the time range.
+   */
+  limitPerGroup?: number;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+}
+
+export declare namespace Summary {
+  export {
+    type SummaryHTTPMethodResponse as SummaryHTTPMethodResponse,
+    type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryManagedRulesResponse as SummaryManagedRulesResponse,
+    type SummaryMitigationProductResponse as SummaryMitigationProductResponse,
+    type SummaryHTTPMethodParams as SummaryHTTPMethodParams,
+    type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryManagedRulesParams as SummaryManagedRulesParams,
+    type SummaryMitigationProductParams as SummaryMitigationProductParams,
+  };
+}

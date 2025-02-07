@@ -1,0 +1,143 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../resource';
+import * as Shared from '../../shared';
+import { APIPromise } from '../../../api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
+
+export class IPs extends APIResource {
+  /**
+   * Add an IP from a prefix owned by the account to a particular address map.
+   */
+  update(ipAddress: string, params: IPUpdateParams, options?: RequestOptions): APIPromise<IPUpdateResponse> {
+    const { account_id, address_map_id, body } = params;
+    return this._client.put(
+      path`/accounts/${account_id}/addressing/address_maps/${address_map_id}/ips/${ipAddress}`,
+      { body: body, ...options },
+    );
+  }
+
+  /**
+   * Remove an IP from a particular address map.
+   */
+  delete(ipAddress: string, params: IPDeleteParams, options?: RequestOptions): APIPromise<IPDeleteResponse> {
+    const { account_id, address_map_id } = params;
+    return this._client.delete(
+      path`/accounts/${account_id}/addressing/address_maps/${address_map_id}/ips/${ipAddress}`,
+      options,
+    );
+  }
+}
+
+export interface IPUpdateResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: IPUpdateResponse.ResultInfo;
+}
+
+export namespace IPUpdateResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
+
+export interface IPDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: IPDeleteResponse.ResultInfo;
+}
+
+export namespace IPDeleteResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
+
+export interface IPUpdateParams {
+  /**
+   * Path param: Identifier of a Cloudflare account.
+   */
+  account_id: string;
+
+  /**
+   * Path param: Identifier of an Address Map.
+   */
+  address_map_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface IPDeleteParams {
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id: string;
+
+  /**
+   * Identifier of an Address Map.
+   */
+  address_map_id: string;
+}
+
+export declare namespace IPs {
+  export {
+    type IPUpdateResponse as IPUpdateResponse,
+    type IPDeleteResponse as IPDeleteResponse,
+    type IPUpdateParams as IPUpdateParams,
+    type IPDeleteParams as IPDeleteParams,
+  };
+}

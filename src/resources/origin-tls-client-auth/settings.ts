@@ -1,0 +1,78 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../resource';
+import { APIPromise } from '../../api-promise';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+export class Settings extends APIResource {
+  /**
+   * Enable or disable zone-level authenticated origin pulls. 'enabled' should be set
+   * true either before/after the certificate is uploaded to see the certificate in
+   * use.
+   */
+  update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<SettingUpdateResponse> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.put(path`/zones/${zone_id}/origin_tls_client_auth/settings`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: SettingUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get whether zone-level authenticated origin pulls is enabled or not. It is false
+   * by default.
+   */
+  get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
+    const { zone_id } = params;
+    return (
+      this._client.get(path`/zones/${zone_id}/origin_tls_client_auth/settings`, options) as APIPromise<{
+        result: SettingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface SettingUpdateResponse {
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+}
+
+export interface SettingGetResponse {
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+}
+
+export interface SettingUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled: boolean;
+}
+
+export interface SettingGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export declare namespace Settings {
+  export {
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingGetParams as SettingGetParams,
+  };
+}
