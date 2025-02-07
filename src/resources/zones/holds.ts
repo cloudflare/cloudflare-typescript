@@ -1,0 +1,137 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../resource';
+import { APIPromise } from '../../api-promise';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+export class Holds extends APIResource {
+  /**
+   * Enforce a zone hold on the zone, blocking the creation and activation of zones
+   * with this zone's hostname.
+   */
+  create(params: HoldCreateParams, options?: RequestOptions): APIPromise<ZoneHold> {
+    const { zone_id, include_subdomains } = params;
+    return (
+      this._client.post(path`/zones/${zone_id}/hold`, {
+        query: { include_subdomains },
+        ...options,
+      }) as APIPromise<{ result: ZoneHold }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Stop enforcement of a zone hold on the zone, permanently or temporarily,
+   * allowing the creation and activation of zones with this zone's hostname.
+   */
+  delete(params: HoldDeleteParams, options?: RequestOptions): APIPromise<ZoneHold> {
+    const { zone_id, hold_after } = params;
+    return (
+      this._client.delete(path`/zones/${zone_id}/hold`, { query: { hold_after }, ...options }) as APIPromise<{
+        result: ZoneHold;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Update the `hold_after` and/or `include_subdomains` values on an existing zone
+   * hold. The hold is enabled if the `hold_after` date-time value is in the past.
+   */
+  edit(params: HoldEditParams, options?: RequestOptions): APIPromise<ZoneHold> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.patch(path`/zones/${zone_id}/hold`, { body, ...options }) as APIPromise<{
+        result: ZoneHold;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Retrieve whether the zone is subject to a zone hold, and metadata about the
+   * hold.
+   */
+  get(params: HoldGetParams, options?: RequestOptions): APIPromise<ZoneHold> {
+    const { zone_id } = params;
+    return (
+      this._client.get(path`/zones/${zone_id}/hold`, options) as APIPromise<{ result: ZoneHold }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface ZoneHold {
+  hold?: boolean;
+
+  hold_after?: string;
+
+  include_subdomains?: string;
+}
+
+export interface HoldCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: If provided, the zone hold will extend to block any subdomain of
+   * the given zone, as well as SSL4SaaS Custom Hostnames. For example, a zone hold
+   * on a zone with the hostname 'example.com' and include_subdomains=true will block
+   * 'example.com', 'staging.example.com', 'api.staging.example.com', etc.
+   */
+  include_subdomains?: boolean;
+}
+
+export interface HoldDeleteParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: If `hold_after` is provided, the hold will be temporarily disabled,
+   * then automatically re-enabled by the system at the time specified in this
+   * RFC3339-formatted timestamp. Otherwise, the hold will be disabled indefinitely.
+   */
+  hold_after?: string;
+}
+
+export interface HoldEditParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: If `hold_after` is provided and future-dated, the hold will be
+   * temporarily disabled, then automatically re-enabled by the system at the time
+   * specified in this RFC3339-formatted timestamp. A past-dated `hold_after` value
+   * will have no effect on an existing, enabled hold. Providing an empty string will
+   * set its value to the current time.
+   */
+  hold_after?: string;
+
+  /**
+   * Body param: If `true`, the zone hold will extend to block any subdomain of the
+   * given zone, as well as SSL4SaaS Custom Hostnames. For example, a zone hold on a
+   * zone with the hostname 'example.com' and include_subdomains=true will block
+   * 'example.com', 'staging.example.com', 'api.staging.example.com', etc.
+   */
+  include_subdomains?: boolean;
+}
+
+export interface HoldGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export declare namespace Holds {
+  export {
+    type ZoneHold as ZoneHold,
+    type HoldCreateParams as HoldCreateParams,
+    type HoldDeleteParams as HoldDeleteParams,
+    type HoldEditParams as HoldEditParams,
+    type HoldGetParams as HoldGetParams,
+  };
+}

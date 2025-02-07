@@ -1,0 +1,244 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../resource';
+import * as AssociationsAPI from './associations';
+import {
+  AssociationGetParams,
+  Associations,
+  CertificateAsssociation,
+  CertificateAsssociationsSinglePage,
+} from './associations';
+import { APIPromise } from '../../api-promise';
+import { PagePromise, SinglePage } from '../../pagination';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+export class MTLSCertificates extends APIResource {
+  associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
+
+  /**
+   * Upload a certificate that you want to use with mTLS-enabled Cloudflare services.
+   */
+  create(
+    params: MTLSCertificateCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<MTLSCertificateCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/mtls_certificates`, { body, ...options }) as APIPromise<{
+        result: MTLSCertificateCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists all mTLS certificates.
+   */
+  list(
+    params: MTLSCertificateListParams,
+    options?: RequestOptions,
+  ): PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/mtls_certificates`,
+      SinglePage<MTLSCertificate>,
+      options,
+    );
+  }
+
+  /**
+   * Deletes the mTLS certificate unless the certificate is in use by one or more
+   * Cloudflare services.
+   */
+  delete(
+    mtlsCertificateID: string,
+    params: MTLSCertificateDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<MTLSCertificate> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/mtls_certificates/${mtlsCertificateID}`,
+        options,
+      ) as APIPromise<{ result: MTLSCertificate }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches a single mTLS certificate.
+   */
+  get(
+    mtlsCertificateID: string,
+    params: MTLSCertificateGetParams,
+    options?: RequestOptions,
+  ): APIPromise<MTLSCertificate> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/mtls_certificates/${mtlsCertificateID}`,
+        options,
+      ) as APIPromise<{ result: MTLSCertificate }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type MTLSCertificatesSinglePage = SinglePage<MTLSCertificate>;
+
+export interface MTLSCertificate {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Indicates whether the certificate is a CA or leaf certificate.
+   */
+  ca?: boolean;
+
+  /**
+   * The uploaded root CA certificate.
+   */
+  certificates?: string;
+
+  /**
+   * When the certificate expires.
+   */
+  expires_on?: string;
+
+  /**
+   * The certificate authority that issued the certificate.
+   */
+  issuer?: string;
+
+  /**
+   * Optional unique name for the certificate. Only used for human readability.
+   */
+  name?: string;
+
+  /**
+   * The certificate serial number.
+   */
+  serial_number?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * This is the time the certificate was uploaded.
+   */
+  uploaded_on?: string;
+}
+
+export interface MTLSCertificateCreateResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Indicates whether the certificate is a CA or leaf certificate.
+   */
+  ca?: boolean;
+
+  /**
+   * The uploaded root CA certificate.
+   */
+  certificates?: string;
+
+  /**
+   * When the certificate expires.
+   */
+  expires_on?: string;
+
+  /**
+   * The certificate authority that issued the certificate.
+   */
+  issuer?: string;
+
+  /**
+   * Optional unique name for the certificate. Only used for human readability.
+   */
+  name?: string;
+
+  /**
+   * The certificate serial number.
+   */
+  serial_number?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * This is the time the certificate was updated.
+   */
+  updated_at?: string;
+
+  /**
+   * This is the time the certificate was uploaded.
+   */
+  uploaded_on?: string;
+}
+
+export interface MTLSCertificateCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Indicates whether the certificate is a CA or leaf certificate.
+   */
+  ca: boolean;
+
+  /**
+   * Body param: The uploaded root CA certificate.
+   */
+  certificates: string;
+
+  /**
+   * Body param: Optional unique name for the certificate. Only used for human
+   * readability.
+   */
+  name?: string;
+
+  /**
+   * Body param: The private key for the certificate
+   */
+  private_key?: string;
+}
+
+export interface MTLSCertificateListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface MTLSCertificateDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface MTLSCertificateGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+MTLSCertificates.Associations = Associations;
+
+export declare namespace MTLSCertificates {
+  export {
+    Associations as Associations,
+    type CertificateAsssociation as CertificateAsssociation,
+    type CertificateAsssociationsSinglePage as CertificateAsssociationsSinglePage,
+    type AssociationGetParams as AssociationGetParams,
+  };
+}

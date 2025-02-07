@@ -1,0 +1,315 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../resource';
+import * as CatchAllsAPI from './catch-alls';
+import {
+  CatchAllAction,
+  CatchAllGetParams,
+  CatchAllGetResponse,
+  CatchAllMatcher,
+  CatchAllUpdateParams,
+  CatchAllUpdateResponse,
+  CatchAlls,
+} from './catch-alls';
+import { APIPromise } from '../../../api-promise';
+import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
+
+export class Rules extends APIResource {
+  catchAlls: CatchAllsAPI.CatchAlls = new CatchAllsAPI.CatchAlls(this._client);
+
+  /**
+   * Rules consist of a set of criteria for matching emails (such as an email being
+   * sent to a specific custom email address) plus a set of actions to take on the
+   * email (like forwarding it to a specific destination address).
+   */
+  create(params: RuleCreateParams, options?: RequestOptions): APIPromise<EmailRoutingRule> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.post(path`/zones/${zone_id}/email/routing/rules`, { body, ...options }) as APIPromise<{
+        result: EmailRoutingRule;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Update actions and matches, or enable/disable specific routing rules.
+   */
+  update(
+    ruleIdentifier: string,
+    params: RuleUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<EmailRoutingRule> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.put(path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: EmailRoutingRule }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists existing routing rules.
+   */
+  list(
+    params: RuleListParams,
+    options?: RequestOptions,
+  ): PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule> {
+    const { zone_id, ...query } = params;
+    return this._client.getAPIList(
+      path`/zones/${zone_id}/email/routing/rules`,
+      V4PagePaginationArray<EmailRoutingRule>,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Delete a specific routing rule.
+   */
+  delete(
+    ruleIdentifier: string,
+    params: RuleDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<EmailRoutingRule> {
+    const { zone_id } = params;
+    return (
+      this._client.delete(
+        path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`,
+        options,
+      ) as APIPromise<{ result: EmailRoutingRule }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get information for a specific routing rule already created.
+   */
+  get(ruleIdentifier: string, params: RuleGetParams, options?: RequestOptions): APIPromise<EmailRoutingRule> {
+    const { zone_id } = params;
+    return (
+      this._client.get(path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`, options) as APIPromise<{
+        result: EmailRoutingRule;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type EmailRoutingRulesV4PagePaginationArray = V4PagePaginationArray<EmailRoutingRule>;
+
+/**
+ * Actions pattern.
+ */
+export interface Action {
+  /**
+   * Type of supported action.
+   */
+  type: 'drop' | 'forward' | 'worker';
+
+  value: Array<string>;
+}
+
+/**
+ * Actions pattern.
+ */
+export interface ActionParam {
+  /**
+   * Type of supported action.
+   */
+  type: 'drop' | 'forward' | 'worker';
+
+  value: Array<string>;
+}
+
+export interface EmailRoutingRule {
+  /**
+   * Routing rule identifier.
+   */
+  id?: string;
+
+  /**
+   * List actions patterns.
+   */
+  actions?: Array<Action>;
+
+  /**
+   * Routing rule status.
+   */
+  enabled?: true | false;
+
+  /**
+   * Matching patterns to forward to your actions.
+   */
+  matchers?: Array<Matcher>;
+
+  /**
+   * Routing rule name.
+   */
+  name?: string;
+
+  /**
+   * Priority of the routing rule.
+   */
+  priority?: number;
+
+  /**
+   * @deprecated Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   */
+  tag?: string;
+}
+
+/**
+ * Matching pattern to forward your actions.
+ */
+export interface Matcher {
+  /**
+   * Field for type matcher.
+   */
+  field: 'to';
+
+  /**
+   * Type of matcher.
+   */
+  type: 'literal';
+
+  /**
+   * Value for matcher.
+   */
+  value: string;
+}
+
+/**
+ * Matching pattern to forward your actions.
+ */
+export interface MatcherParam {
+  /**
+   * Field for type matcher.
+   */
+  field: 'to';
+
+  /**
+   * Type of matcher.
+   */
+  type: 'literal';
+
+  /**
+   * Value for matcher.
+   */
+  value: string;
+}
+
+export interface RuleCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: List actions patterns.
+   */
+  actions: Array<ActionParam>;
+
+  /**
+   * Body param: Matching patterns to forward to your actions.
+   */
+  matchers: Array<MatcherParam>;
+
+  /**
+   * Body param: Routing rule status.
+   */
+  enabled?: true | false;
+
+  /**
+   * Body param: Routing rule name.
+   */
+  name?: string;
+
+  /**
+   * Body param: Priority of the routing rule.
+   */
+  priority?: number;
+}
+
+export interface RuleUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: List actions patterns.
+   */
+  actions: Array<ActionParam>;
+
+  /**
+   * Body param: Matching patterns to forward to your actions.
+   */
+  matchers: Array<MatcherParam>;
+
+  /**
+   * Body param: Routing rule status.
+   */
+  enabled?: true | false;
+
+  /**
+   * Body param: Routing rule name.
+   */
+  name?: string;
+
+  /**
+   * Body param: Priority of the routing rule.
+   */
+  priority?: number;
+}
+
+export interface RuleListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: Filter by enabled routing rules.
+   */
+  enabled?: true | false;
+}
+
+export interface RuleDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface RuleGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+Rules.CatchAlls = CatchAlls;
+
+export declare namespace Rules {
+  export {
+    type Action as Action,
+    type EmailRoutingRule as EmailRoutingRule,
+    type Matcher as Matcher,
+    type EmailRoutingRulesV4PagePaginationArray as EmailRoutingRulesV4PagePaginationArray,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    CatchAlls as CatchAlls,
+    type CatchAllAction as CatchAllAction,
+    type CatchAllMatcher as CatchAllMatcher,
+    type CatchAllUpdateResponse as CatchAllUpdateResponse,
+    type CatchAllGetResponse as CatchAllGetResponse,
+    type CatchAllUpdateParams as CatchAllUpdateParams,
+    type CatchAllGetParams as CatchAllGetParams,
+  };
+}

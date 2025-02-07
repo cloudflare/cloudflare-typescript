@@ -1,0 +1,506 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../resource';
+import * as MagicTransitAPI from './magic-transit';
+import { APIPromise } from '../../api-promise';
+import { buildHeaders } from '../../internal/headers';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+export class CfInterconnects extends APIResource {
+  /**
+   * Updates a specific interconnect associated with an account. Use
+   * `?validate_only=true` as an optional query parameter to only run validation
+   * without persisting changes.
+   */
+  update(
+    cfInterconnectID: string,
+    params: CfInterconnectUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<CfInterconnectUpdateResponse> {
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectID}`, {
+        body,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xMagicNewHcTarget?.toString() != null ?
+              { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+            : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: CfInterconnectUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists interconnects associated with an account.
+   */
+  list(params: CfInterconnectListParams, options?: RequestOptions): APIPromise<CfInterconnectListResponse> {
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/magic/cf_interconnects`, {
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xMagicNewHcTarget?.toString() != null ?
+              { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+            : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: CfInterconnectListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates multiple interconnects associated with an account. Use
+   * `?validate_only=true` as an optional query parameter to only run validation
+   * without persisting changes.
+   */
+  bulkUpdate(
+    params: CfInterconnectBulkUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<CfInterconnectBulkUpdateResponse> {
+    const { account_id, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/magic/cf_interconnects`, {
+        body: body,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xMagicNewHcTarget?.toString() != null ?
+              { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+            : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: CfInterconnectBulkUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists details for a specific interconnect.
+   */
+  get(
+    cfInterconnectID: string,
+    params: CfInterconnectGetParams,
+    options?: RequestOptions,
+  ): APIPromise<CfInterconnectGetResponse> {
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectID}`, {
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xMagicNewHcTarget?.toString() != null ?
+              { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+            : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: CfInterconnectGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface CfInterconnectUpdateResponse {
+  modified?: boolean;
+
+  modified_interconnect?: CfInterconnectUpdateResponse.ModifiedInterconnect;
+}
+
+export namespace CfInterconnectUpdateResponse {
+  export interface ModifiedInterconnect {
+    /**
+     * Tunnel identifier tag.
+     */
+    id?: string;
+
+    /**
+     * The name of the interconnect. The name cannot share a name with other tunnels.
+     */
+    colo_name?: string;
+
+    /**
+     * The date and time the tunnel was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional description of the interconnect.
+     */
+    description?: string;
+
+    /**
+     * The configuration specific to GRE interconnects.
+     */
+    gre?: ModifiedInterconnect.GRE;
+
+    health_check?: MagicTransitAPI.HealthCheck;
+
+    /**
+     * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
+     * of the tunnel. Select the subnet from the following private IP space:
+     * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+     */
+    interface_address?: string;
+
+    /**
+     * The date and time the tunnel was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The Maximum Transmission Unit (MTU) in bytes for the interconnect. The minimum
+     * value is 576.
+     */
+    mtu?: number;
+
+    /**
+     * The name of the interconnect. The name cannot share a name with other tunnels.
+     */
+    name?: string;
+  }
+
+  export namespace ModifiedInterconnect {
+    /**
+     * The configuration specific to GRE interconnects.
+     */
+    export interface GRE {
+      /**
+       * The IP address assigned to the Cloudflare side of the GRE tunnel created as part
+       * of the Interconnect.
+       */
+      cloudflare_endpoint?: string;
+    }
+  }
+}
+
+export interface CfInterconnectListResponse {
+  interconnects?: Array<CfInterconnectListResponse.Interconnect>;
+}
+
+export namespace CfInterconnectListResponse {
+  export interface Interconnect {
+    /**
+     * Tunnel identifier tag.
+     */
+    id?: string;
+
+    /**
+     * The name of the interconnect. The name cannot share a name with other tunnels.
+     */
+    colo_name?: string;
+
+    /**
+     * The date and time the tunnel was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional description of the interconnect.
+     */
+    description?: string;
+
+    /**
+     * The configuration specific to GRE interconnects.
+     */
+    gre?: Interconnect.GRE;
+
+    health_check?: MagicTransitAPI.HealthCheck;
+
+    /**
+     * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
+     * of the tunnel. Select the subnet from the following private IP space:
+     * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+     */
+    interface_address?: string;
+
+    /**
+     * The date and time the tunnel was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The Maximum Transmission Unit (MTU) in bytes for the interconnect. The minimum
+     * value is 576.
+     */
+    mtu?: number;
+
+    /**
+     * The name of the interconnect. The name cannot share a name with other tunnels.
+     */
+    name?: string;
+  }
+
+  export namespace Interconnect {
+    /**
+     * The configuration specific to GRE interconnects.
+     */
+    export interface GRE {
+      /**
+       * The IP address assigned to the Cloudflare side of the GRE tunnel created as part
+       * of the Interconnect.
+       */
+      cloudflare_endpoint?: string;
+    }
+  }
+}
+
+export interface CfInterconnectBulkUpdateResponse {
+  modified?: boolean;
+
+  modified_interconnects?: Array<CfInterconnectBulkUpdateResponse.ModifiedInterconnect>;
+}
+
+export namespace CfInterconnectBulkUpdateResponse {
+  export interface ModifiedInterconnect {
+    /**
+     * Tunnel identifier tag.
+     */
+    id?: string;
+
+    /**
+     * The name of the interconnect. The name cannot share a name with other tunnels.
+     */
+    colo_name?: string;
+
+    /**
+     * The date and time the tunnel was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional description of the interconnect.
+     */
+    description?: string;
+
+    /**
+     * The configuration specific to GRE interconnects.
+     */
+    gre?: ModifiedInterconnect.GRE;
+
+    health_check?: MagicTransitAPI.HealthCheck;
+
+    /**
+     * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
+     * of the tunnel. Select the subnet from the following private IP space:
+     * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+     */
+    interface_address?: string;
+
+    /**
+     * The date and time the tunnel was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The Maximum Transmission Unit (MTU) in bytes for the interconnect. The minimum
+     * value is 576.
+     */
+    mtu?: number;
+
+    /**
+     * The name of the interconnect. The name cannot share a name with other tunnels.
+     */
+    name?: string;
+  }
+
+  export namespace ModifiedInterconnect {
+    /**
+     * The configuration specific to GRE interconnects.
+     */
+    export interface GRE {
+      /**
+       * The IP address assigned to the Cloudflare side of the GRE tunnel created as part
+       * of the Interconnect.
+       */
+      cloudflare_endpoint?: string;
+    }
+  }
+}
+
+export interface CfInterconnectGetResponse {
+  interconnect?: CfInterconnectGetResponse.Interconnect;
+}
+
+export namespace CfInterconnectGetResponse {
+  export interface Interconnect {
+    /**
+     * Tunnel identifier tag.
+     */
+    id?: string;
+
+    /**
+     * The name of the interconnect. The name cannot share a name with other tunnels.
+     */
+    colo_name?: string;
+
+    /**
+     * The date and time the tunnel was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional description of the interconnect.
+     */
+    description?: string;
+
+    /**
+     * The configuration specific to GRE interconnects.
+     */
+    gre?: Interconnect.GRE;
+
+    health_check?: MagicTransitAPI.HealthCheck;
+
+    /**
+     * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
+     * of the tunnel. Select the subnet from the following private IP space:
+     * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+     */
+    interface_address?: string;
+
+    /**
+     * The date and time the tunnel was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The Maximum Transmission Unit (MTU) in bytes for the interconnect. The minimum
+     * value is 576.
+     */
+    mtu?: number;
+
+    /**
+     * The name of the interconnect. The name cannot share a name with other tunnels.
+     */
+    name?: string;
+  }
+
+  export namespace Interconnect {
+    /**
+     * The configuration specific to GRE interconnects.
+     */
+    export interface GRE {
+      /**
+       * The IP address assigned to the Cloudflare side of the GRE tunnel created as part
+       * of the Interconnect.
+       */
+      cloudflare_endpoint?: string;
+    }
+  }
+}
+
+export interface CfInterconnectUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: An optional description of the interconnect.
+   */
+  description?: string;
+
+  /**
+   * Body param: The configuration specific to GRE interconnects.
+   */
+  gre?: CfInterconnectUpdateParams.GRE;
+
+  /**
+   * Body param:
+   */
+  health_check?: MagicTransitAPI.HealthCheckParam;
+
+  /**
+   * Body param: A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for
+   * each side of the tunnel. Select the subnet from the following private IP space:
+   * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+   */
+  interface_address?: string;
+
+  /**
+   * Body param: The Maximum Transmission Unit (MTU) in bytes for the interconnect.
+   * The minimum value is 576.
+   */
+  mtu?: number;
+
+  /**
+   * Header param: If true, the health check target in the request and response
+   * bodies will be presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
+}
+
+export namespace CfInterconnectUpdateParams {
+  /**
+   * The configuration specific to GRE interconnects.
+   */
+  export interface GRE {
+    /**
+     * The IP address assigned to the Cloudflare side of the GRE tunnel created as part
+     * of the Interconnect.
+     */
+    cloudflare_endpoint?: string;
+  }
+}
+
+export interface CfInterconnectListParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Header param: If true, the health check target in the response body will be
+   * presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
+}
+
+export interface CfInterconnectBulkUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+
+  /**
+   * Header param: If true, the health check target in the request and response
+   * bodies will be presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
+}
+
+export interface CfInterconnectGetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Header param: If true, the health check target in the response body will be
+   * presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
+}
+
+export declare namespace CfInterconnects {
+  export {
+    type CfInterconnectUpdateResponse as CfInterconnectUpdateResponse,
+    type CfInterconnectListResponse as CfInterconnectListResponse,
+    type CfInterconnectBulkUpdateResponse as CfInterconnectBulkUpdateResponse,
+    type CfInterconnectGetResponse as CfInterconnectGetResponse,
+    type CfInterconnectUpdateParams as CfInterconnectUpdateParams,
+    type CfInterconnectListParams as CfInterconnectListParams,
+    type CfInterconnectBulkUpdateParams as CfInterconnectBulkUpdateParams,
+    type CfInterconnectGetParams as CfInterconnectGetParams,
+  };
+}

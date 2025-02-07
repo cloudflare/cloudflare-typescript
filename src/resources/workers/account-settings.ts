@@ -1,0 +1,81 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../resource';
+import { APIPromise } from '../../api-promise';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+export class AccountSettings extends APIResource {
+  /**
+   * Creates Worker account settings for an account.
+   */
+  update(
+    params: AccountSettingUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<AccountSettingUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/workers/account-settings`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: AccountSettingUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches Worker account settings for an account.
+   */
+  get(params: AccountSettingGetParams, options?: RequestOptions): APIPromise<AccountSettingGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/workers/account-settings`, options) as APIPromise<{
+        result: AccountSettingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface AccountSettingUpdateResponse {
+  default_usage_model?: string;
+
+  green_compute?: boolean;
+}
+
+export interface AccountSettingGetResponse {
+  default_usage_model?: string;
+
+  green_compute?: boolean;
+}
+
+export interface AccountSettingUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  default_usage_model?: string;
+
+  /**
+   * Body param:
+   */
+  green_compute?: boolean;
+}
+
+export interface AccountSettingGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export declare namespace AccountSettings {
+  export {
+    type AccountSettingUpdateResponse as AccountSettingUpdateResponse,
+    type AccountSettingGetResponse as AccountSettingGetResponse,
+    type AccountSettingUpdateParams as AccountSettingUpdateParams,
+    type AccountSettingGetParams as AccountSettingGetParams,
+  };
+}

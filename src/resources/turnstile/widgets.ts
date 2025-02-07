@@ -1,0 +1,416 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../resource';
+import { APIPromise } from '../../api-promise';
+import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+export class Widgets extends APIResource {
+  /**
+   * Lists challenge widgets.
+   */
+  create(params: WidgetCreateParams, options?: RequestOptions): APIPromise<Widget> {
+    const { account_id, direction, order, page, per_page, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/challenges/widgets`, {
+        query: { direction, order, page, per_page },
+        body,
+        ...options,
+      }) as APIPromise<{ result: Widget }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Update the configuration of a widget.
+   */
+  update(sitekey: string, params: WidgetUpdateParams, options?: RequestOptions): APIPromise<Widget> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/challenges/widgets/${sitekey}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: Widget }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists all turnstile widgets of an account.
+   */
+  list(
+    params: WidgetListParams,
+    options?: RequestOptions,
+  ): PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/challenges/widgets`,
+      V4PagePaginationArray<WidgetListResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Destroy a Turnstile Widget.
+   */
+  delete(sitekey: string, params: WidgetDeleteParams, options?: RequestOptions): APIPromise<Widget> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/challenges/widgets/${sitekey}`,
+        options,
+      ) as APIPromise<{ result: Widget }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Show a single challenge widget configuration.
+   */
+  get(sitekey: string, params: WidgetGetParams, options?: RequestOptions): APIPromise<Widget> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/challenges/widgets/${sitekey}`, options) as APIPromise<{
+        result: Widget;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Generate a new secret key for this widget. If `invalidate_immediately` is set to
+   * `false`, the previous secret remains valid for 2 hours.
+   *
+   * Note that secrets cannot be rotated again during the grace period.
+   */
+  rotateSecret(
+    sitekey: string,
+    params: WidgetRotateSecretParams,
+    options?: RequestOptions,
+  ): APIPromise<Widget> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/challenges/widgets/${sitekey}/rotate_secret`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: Widget }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type WidgetListResponsesV4PagePaginationArray = V4PagePaginationArray<WidgetListResponse>;
+
+/**
+ * A Turnstile widget's detailed configuration
+ */
+export interface Widget {
+  /**
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode: boolean;
+
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
+
+  domains: Array<WidgetDomain>;
+
+  /**
+   * Return the Ephemeral ID in /siteverify (ENT only).
+   */
+  ephemeral_id: boolean;
+
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
+
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
+
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
+
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
+
+  /**
+   * Secret key for this widget.
+   */
+  secret: string;
+
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
+}
+
+/**
+ * Hosts as a hostname or IPv4/IPv6 address represented by strings. The widget will
+ * only work on these domains, and their subdomains.
+ */
+export type WidgetDomain = string;
+
+/**
+ * Hosts as a hostname or IPv4/IPv6 address represented by strings. The widget will
+ * only work on these domains, and their subdomains.
+ */
+export type WidgetDomainParam = string;
+
+/**
+ * A Turnstile Widgets configuration as it appears in listings
+ */
+export interface WidgetListResponse {
+  /**
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode: boolean;
+
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
+
+  domains: Array<WidgetDomain>;
+
+  /**
+   * Return the Ephemeral ID in /siteverify (ENT only).
+   */
+  ephemeral_id: boolean;
+
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
+
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
+
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
+
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
+
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
+}
+
+export interface WidgetCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  domains: Array<WidgetDomainParam>;
+
+  /**
+   * Body param: Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * Body param: Human readable widget name. Not unique. Cloudflare suggests that you
+   * set this to a meaningful string to make it easier to identify your widget, and
+   * where it is used.
+   */
+  name: string;
+
+  /**
+   * Query param: Direction to order widgets.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Field to order widgets by.
+   */
+  order?: 'id' | 'sitekey' | 'name' | 'created_on' | 'modified_on';
+
+  /**
+   * Query param: Page number of paginated results.
+   */
+  page?: number;
+
+  /**
+   * Query param: Number of items per page.
+   */
+  per_page?: number;
+
+  /**
+   * Body param: If bot_fight_mode is set to `true`, Cloudflare issues
+   * computationally expensive challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode?: boolean;
+
+  /**
+   * Body param: If Turnstile is embedded on a Cloudflare site and the widget should
+   * grant challenge clearance, this setting can determine the clearance level to be
+   * set
+   */
+  clearance_level?: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * Body param: Return the Ephemeral ID in /siteverify (ENT only).
+   */
+  ephemeral_id?: boolean;
+
+  /**
+   * Body param: Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel?: boolean;
+
+  /**
+   * Body param: Region where this widget can be used.
+   */
+  region?: 'world';
+}
+
+export interface WidgetUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  domains: Array<WidgetDomainParam>;
+
+  /**
+   * Body param: Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * Body param: Human readable widget name. Not unique. Cloudflare suggests that you
+   * set this to a meaningful string to make it easier to identify your widget, and
+   * where it is used.
+   */
+  name: string;
+
+  /**
+   * Body param: If bot_fight_mode is set to `true`, Cloudflare issues
+   * computationally expensive challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode?: boolean;
+
+  /**
+   * Body param: If Turnstile is embedded on a Cloudflare site and the widget should
+   * grant challenge clearance, this setting can determine the clearance level to be
+   * set
+   */
+  clearance_level?: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * Body param: Return the Ephemeral ID in /siteverify (ENT only).
+   */
+  ephemeral_id?: boolean;
+
+  /**
+   * Body param: Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel?: boolean;
+}
+
+export interface WidgetListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Direction to order widgets.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Field to order widgets by.
+   */
+  order?: 'id' | 'sitekey' | 'name' | 'created_on' | 'modified_on';
+}
+
+export interface WidgetDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface WidgetGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface WidgetRotateSecretParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: If `invalidate_immediately` is set to `false`, the previous secret
+   * will remain valid for two hours. Otherwise, the secret is immediately
+   * invalidated, and requests using it will be rejected.
+   */
+  invalidate_immediately?: boolean;
+}
+
+export declare namespace Widgets {
+  export {
+    type Widget as Widget,
+    type WidgetDomain as WidgetDomain,
+    type WidgetListResponse as WidgetListResponse,
+    type WidgetListResponsesV4PagePaginationArray as WidgetListResponsesV4PagePaginationArray,
+    type WidgetCreateParams as WidgetCreateParams,
+    type WidgetUpdateParams as WidgetUpdateParams,
+    type WidgetListParams as WidgetListParams,
+    type WidgetDeleteParams as WidgetDeleteParams,
+    type WidgetGetParams as WidgetGetParams,
+    type WidgetRotateSecretParams as WidgetRotateSecretParams,
+  };
+}

@@ -1,0 +1,54 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../resource';
+import { APIPromise } from '../../../api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
+
+export class Eligible extends APIResource {
+  /**
+   * Get a list of all delivery mechanism types for which an account is eligible.
+   */
+  get(params: EligibleGetParams, options?: RequestOptions): APIPromise<EligibleGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/alerting/v3/destinations/eligible`,
+        options,
+      ) as APIPromise<{ result: EligibleGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type EligibleGetResponse = Record<string, Array<EligibleGetResponse.Item>>;
+
+export namespace EligibleGetResponse {
+  export interface Item {
+    /**
+     * Determines whether or not the account is eligible for the delivery mechanism.
+     */
+    eligible?: boolean;
+
+    /**
+     * Beta flag. Users can create a policy with a mechanism that is not ready, but we
+     * cannot guarantee successful delivery of notifications.
+     */
+    ready?: boolean;
+
+    /**
+     * Determines type of delivery mechanism.
+     */
+    type?: 'email' | 'pagerduty' | 'webhook';
+  }
+}
+
+export interface EligibleGetParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
+export declare namespace Eligible {
+  export { type EligibleGetResponse as EligibleGetResponse, type EligibleGetParams as EligibleGetParams };
+}

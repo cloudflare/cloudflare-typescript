@@ -1,0 +1,172 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../resource';
+import * as Shared from '../shared';
+import * as ContentAPI from './content';
+import { Content, ContentGetParams } from './content';
+import * as RulesAPI from './rules';
+import {
+  RuleDeleteParams,
+  RuleDeleteResponse,
+  RuleListParams,
+  RuleListResponse,
+  RuleListResponsesSinglePage,
+  RuleUpdateParams,
+  RuleUpdateResponse,
+  RuleUpdateResponsesSinglePage,
+  Rules,
+} from './rules';
+import { APIPromise } from '../../api-promise';
+import { PagePromise, SinglePage } from '../../pagination';
+import { RequestOptions } from '../../internal/request-options';
+import { multipartFormRequestOptions } from '../../internal/uploads';
+import { path } from '../../internal/utils/path';
+
+export class Snippets extends APIResource {
+  content: ContentAPI.Content = new ContentAPI.Content(this._client);
+  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
+
+  /**
+   * Put Snippet
+   */
+  update(snippetName: string, params: SnippetUpdateParams, options?: RequestOptions): APIPromise<Snippet> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.put(
+        path`/zones/${zone_id}/snippets/${snippetName}`,
+        multipartFormRequestOptions({ body, ...options }, this._client),
+      ) as APIPromise<{ result: Snippet }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * All Snippets
+   */
+  list(params: SnippetListParams, options?: RequestOptions): PagePromise<SnippetsSinglePage, Snippet> {
+    const { zone_id } = params;
+    return this._client.getAPIList(path`/zones/${zone_id}/snippets`, SinglePage<Snippet>, options);
+  }
+
+  /**
+   * Delete Snippet
+   */
+  delete(
+    snippetName: string,
+    params: SnippetDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<SnippetDeleteResponse> {
+    const { zone_id } = params;
+    return this._client.delete(path`/zones/${zone_id}/snippets/${snippetName}`, options);
+  }
+
+  /**
+   * Snippet
+   */
+  get(snippetName: string, params: SnippetGetParams, options?: RequestOptions): APIPromise<Snippet> {
+    const { zone_id } = params;
+    return (
+      this._client.get(path`/zones/${zone_id}/snippets/${snippetName}`, options) as APIPromise<{
+        result: Snippet;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type SnippetsSinglePage = SinglePage<Snippet>;
+
+/**
+ * Snippet Information
+ */
+export interface Snippet {
+  /**
+   * Creation time of the snippet
+   */
+  created_on?: string;
+
+  /**
+   * Modification time of the snippet
+   */
+  modified_on?: string;
+
+  /**
+   * Snippet identifying name
+   */
+  snippet_name?: string;
+}
+
+export interface SnippetDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
+
+export interface SnippetUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Content files of uploaded snippet
+   */
+  files?: string;
+
+  /**
+   * Body param:
+   */
+  metadata?: SnippetUpdateParams.Metadata;
+}
+
+export namespace SnippetUpdateParams {
+  export interface Metadata {
+    /**
+     * Main module name of uploaded snippet
+     */
+    main_module?: string;
+  }
+}
+
+export interface SnippetListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface SnippetDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface SnippetGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+Snippets.Content = Content;
+Snippets.Rules = Rules;
+
+export declare namespace Snippets {
+  export { Content as Content, type ContentGetParams as ContentGetParams };
+
+  export {
+    Rules as Rules,
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleListResponse as RuleListResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
+    type RuleListResponsesSinglePage as RuleListResponsesSinglePage,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+  };
+}

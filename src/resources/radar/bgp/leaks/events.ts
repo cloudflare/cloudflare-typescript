@@ -1,0 +1,127 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../../resource';
+import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
+import { RequestOptions } from '../../../../internal/request-options';
+
+export class Events extends APIResource {
+  /**
+   * Get the BGP route leak events (Beta).
+   */
+  list(
+    query: EventListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<EventListResponsesV4PagePagination, EventListResponse> {
+    return this._client.getAPIList('/radar/bgp/leaks/events', V4PagePagination<EventListResponse>, {
+      query,
+      ...options,
+    });
+  }
+}
+
+export type EventListResponsesV4PagePagination = V4PagePagination<EventListResponse>;
+
+export interface EventListResponse {
+  asn_info: Array<EventListResponse.ASNInfo>;
+
+  events: Array<EventListResponse.Event>;
+}
+
+export namespace EventListResponse {
+  export interface ASNInfo {
+    asn: number;
+
+    country_code: string;
+
+    org_name: string;
+  }
+
+  export interface Event {
+    id: number;
+
+    countries: Array<string>;
+
+    detected_ts: string;
+
+    finished: boolean;
+
+    leak_asn: number;
+
+    leak_count: number;
+
+    leak_seg: Array<number>;
+
+    leak_type: number;
+
+    max_ts: string;
+
+    min_ts: string;
+
+    origin_count: number;
+
+    peer_count: number;
+
+    prefix_count: number;
+  }
+}
+
+export interface EventListParams extends V4PagePaginationParams {
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: string;
+
+  /**
+   * Shorthand date ranges for the last X days - use when you don't need specific
+   * start and end dates.
+   */
+  dateRange?: string;
+
+  /**
+   * Start of the date range (inclusive).
+   */
+  dateStart?: string;
+
+  /**
+   * The unique identifier of a event
+   */
+  eventId?: number;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * ASN that is causing or affected by a route leak event
+   */
+  involvedAsn?: number;
+
+  /**
+   * Country code of a involved ASN in a route leak event
+   */
+  involvedCountry?: string;
+
+  /**
+   * The leaking AS of a route leak event
+   */
+  leakAsn?: number;
+
+  /**
+   * Sort events by field
+   */
+  sortBy?: 'ID' | 'LEAKS' | 'PEERS' | 'PREFIXES' | 'ORIGINS' | 'TIME';
+
+  /**
+   * Sort order
+   */
+  sortOrder?: 'ASC' | 'DESC';
+}
+
+export declare namespace Events {
+  export {
+    type EventListResponse as EventListResponse,
+    type EventListResponsesV4PagePagination as EventListResponsesV4PagePagination,
+    type EventListParams as EventListParams,
+  };
+}

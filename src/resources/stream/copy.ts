@@ -1,0 +1,123 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../resource';
+import * as StreamAPI from './stream';
+import { APIPromise } from '../../api-promise';
+import { buildHeaders } from '../../internal/headers';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+export class Copy extends APIResource {
+  /**
+   * Uploads a video to Stream from a provided URL.
+   */
+  create(params: CopyCreateParams, options?: RequestOptions): APIPromise<StreamAPI.Video> {
+    const {
+      account_id,
+      'Upload-Creator': uploadCreator,
+      'Upload-Metadata': uploadMetadata,
+      ...body
+    } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/stream/copy`, {
+        body,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
+            ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: StreamAPI.Video }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface CopyCreateParams {
+  /**
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: A video's URL. The server must be publicly routable and support
+   * `HTTP HEAD` requests and `HTTP GET` range requests. The server should respond to
+   * `HTTP HEAD` requests with a `content-range` header that includes the size of the
+   * file.
+   */
+  url: string;
+
+  /**
+   * Body param: Lists the origins allowed to display the video. Enter allowed origin
+   * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
+   * video to be viewed on any origin.
+   */
+  allowedOrigins?: Array<StreamAPI.AllowedOriginsParam>;
+
+  /**
+   * Body param: A user-defined identifier for the media creator.
+   */
+  creator?: string;
+
+  /**
+   * Body param: A user modifiable key-value store used to reference other systems of
+   * record for managing videos.
+   */
+  meta?: unknown;
+
+  /**
+   * Body param: Indicates whether the video can be a accessed using the UID. When
+   * set to `true`, a signed token must be generated with a signing key to view the
+   * video.
+   */
+  requireSignedURLs?: boolean;
+
+  /**
+   * Body param: Indicates the date and time at which the video will be deleted. Omit
+   * the field to indicate no change, or include with a `null` value to remove an
+   * existing scheduled deletion. If specified, must be at least 30 days from upload
+   * time.
+   */
+  scheduledDeletion?: string;
+
+  /**
+   * Body param: The timestamp for a thumbnail image calculated as a percentage value
+   * of the video's duration. To convert from a second-wise timestamp to a
+   * percentage, divide the desired timestamp by the total duration of the video. If
+   * this value is not set, the default thumbnail image is taken from 0s of the
+   * video.
+   */
+  thumbnailTimestampPct?: number;
+
+  /**
+   * Body param:
+   */
+  watermark?: CopyCreateParams.Watermark;
+
+  /**
+   * Header param: A user-defined identifier for the media creator.
+   */
+  'Upload-Creator'?: string;
+
+  /**
+   * Header param: Comma-separated key-value pairs following the TUS protocol
+   * specification. Values are Base-64 encoded. Supported keys: `name`,
+   * `requiresignedurls`, `allowedorigins`, `thumbnailtimestamppct`, `watermark`,
+   * `scheduleddeletion`.
+   */
+  'Upload-Metadata'?: string;
+}
+
+export namespace CopyCreateParams {
+  export interface Watermark {
+    /**
+     * The unique identifier for the watermark profile.
+     */
+    uid?: string;
+  }
+}
+
+export declare namespace Copy {
+  export { type CopyCreateParams as CopyCreateParams };
+}
