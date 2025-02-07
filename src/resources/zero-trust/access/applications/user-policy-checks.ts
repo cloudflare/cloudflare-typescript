@@ -3,9 +3,9 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import * as ApplicationsAPI from './applications';
+import { CloudflareError } from '../../../../error';
 
 export class UserPolicyChecks extends APIResource {
   /**

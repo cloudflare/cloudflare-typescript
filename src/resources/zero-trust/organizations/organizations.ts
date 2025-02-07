@@ -3,9 +3,9 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as DOHAPI from './doh';
 import { DOH, DOHGetParams, DOHGetResponse, DOHUpdateParams, DOHUpdateResponse } from './doh';
+import { CloudflareError } from '../../../error';
 
 export class Organizations extends APIResource {
   doh: DOHAPI.DOH = new DOHAPI.DOH(this._client);

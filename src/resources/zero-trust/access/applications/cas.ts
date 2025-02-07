@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from 'cloudflare/error';
+import { CloudflareError } from '../../../../error';
 import { SinglePage } from '../../../../pagination';
 
 export class CAs extends APIResource {
