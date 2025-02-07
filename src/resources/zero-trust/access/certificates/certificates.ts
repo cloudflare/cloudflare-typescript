@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as SettingsAPI from './settings';
 import {
   CertificateSettings,
@@ -12,6 +11,7 @@ import {
   SettingUpdateParams,
   Settings,
 } from './settings';
+import { CloudflareError } from '../../../../error';
 import { SinglePage } from '../../../../pagination';
 
 export class Certificates extends APIResource {

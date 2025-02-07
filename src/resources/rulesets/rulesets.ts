@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from './rules';
 import {
   BlockRule,
@@ -51,6 +50,7 @@ import {
   PhaseUpdateResponse,
   Phases,
 } from './phases/phases';
+import { CloudflareError } from '../../error';
 import { CursorPagination, type CursorPaginationParams } from '../../pagination';
 
 export class Rulesets extends APIResource {

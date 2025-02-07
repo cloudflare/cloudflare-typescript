@@ -3,8 +3,8 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as PoliciesAPI from './applications/policies';
+import { CloudflareError } from '../../../error';
 import { SinglePage } from '../../../pagination';
 
 export class Groups extends APIResource {

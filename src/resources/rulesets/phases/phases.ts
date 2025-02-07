@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
 import * as VersionsAPI from './versions';
@@ -15,6 +14,7 @@ import {
   VersionListResponsesSinglePage,
   Versions,
 } from './versions';
+import { CloudflareError } from '../../../error';
 
 export class Phases extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);

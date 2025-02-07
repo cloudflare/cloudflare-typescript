@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as Shared from '../../shared';
 import * as IssuesAPI from '../../intel/attack-surface-report/issues';
 import * as ClassAPI from './class';
@@ -12,6 +11,7 @@ import * as SeverityAPI from './severity';
 import { Severity, SeverityGetParams, SeverityGetResponse } from './severity';
 import * as TypeAPI from './type';
 import { Type, TypeGetParams, TypeGetResponse } from './type';
+import { CloudflareError } from '../../../error';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class Insights extends APIResource {

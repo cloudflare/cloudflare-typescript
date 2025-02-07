@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as ApplicationsAPI from './applications';
 import * as PoliciesAPI from '../policies';
 import * as CAsAPI from './cas';
@@ -67,6 +66,7 @@ import {
   PolicyTestGetResponse,
   PolicyTests,
 } from './policy-tests/policy-tests';
+import { CloudflareError } from '../../../../error';
 import { SinglePage } from '../../../../pagination';
 
 export class Applications extends APIResource {

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as ViewsAPI from './views';
 import {
   ViewCreateParams,
@@ -19,6 +18,7 @@ import {
   ViewListResponsesV4PagePaginationArray,
   Views,
 } from './views';
+import { CloudflareError } from '../../../error';
 
 export class Settings extends APIResource {
   views: ViewsAPI.Views = new ViewsAPI.Views(this._client);
