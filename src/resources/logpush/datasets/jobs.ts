@@ -3,9 +3,9 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from '../jobs';
 import { LogpushJobsSinglePage } from '../jobs';
+import { CloudflareError } from '../../../error';
 
 export class Jobs extends APIResource {
   /**

@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { CloudflareError } from 'cloudflare/error';
+import { CloudflareError } from '../../error';
 
 export class Validate extends APIResource {
   /**

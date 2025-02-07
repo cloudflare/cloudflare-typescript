@@ -3,8 +3,8 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as IssuesAPI from '../../intel/attack-surface-report/issues';
+import { CloudflareError } from '../../../error';
 
 export class Type extends APIResource {
   /**
