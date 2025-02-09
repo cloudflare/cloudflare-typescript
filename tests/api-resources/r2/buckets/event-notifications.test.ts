@@ -8,10 +8,10 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource queues', () => {
+describe('resource eventNotifications', () => {
   // TODO: investigate auth errors on test suite
   test.skip('update: only required params', async () => {
-    const responsePromise = client.r2.buckets.eventNotifications.configuration.queues.update('queue_id', {
+    const responsePromise = client.r2.buckets.eventNotifications.update('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
     });
@@ -26,7 +26,7 @@ describe('resource queues', () => {
 
   // TODO: investigate auth errors on test suite
   test.skip('update: required and optional params', async () => {
-    const response = await client.r2.buckets.eventNotifications.configuration.queues.update('queue_id', {
+    const response = await client.r2.buckets.eventNotifications.update('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
       rules: [
@@ -43,7 +43,7 @@ describe('resource queues', () => {
 
   // TODO: investigate auth errors on test suite
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.r2.buckets.eventNotifications.configuration.queues.delete('queue_id', {
+    const responsePromise = client.r2.buckets.eventNotifications.delete('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
     });
@@ -58,9 +58,31 @@ describe('resource queues', () => {
 
   // TODO: investigate auth errors on test suite
   test.skip('delete: required and optional params', async () => {
-    const response = await client.r2.buckets.eventNotifications.configuration.queues.delete('queue_id', {
+    const response = await client.r2.buckets.eventNotifications.delete('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
+      jurisdiction: 'default',
+    });
+  });
+
+  // TODO: investigate auth errors on test suite
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.r2.buckets.eventNotifications.get('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate auth errors on test suite
+  test.skip('get: required and optional params', async () => {
+    const response = await client.r2.buckets.eventNotifications.get('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       jurisdiction: 'default',
     });
   });

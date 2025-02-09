@@ -11,6 +11,16 @@ import {
   CORSUpdateParams,
   CORSUpdateResponse,
 } from './cors';
+import * as EventNotificationsAPI from './event-notifications';
+import {
+  EventNotificationDeleteParams,
+  EventNotificationDeleteResponse,
+  EventNotificationGetParams,
+  EventNotificationGetResponse,
+  EventNotificationUpdateParams,
+  EventNotificationUpdateResponse,
+  EventNotifications,
+} from './event-notifications';
 import * as LifecycleAPI from './lifecycle';
 import {
   Lifecycle,
@@ -35,8 +45,6 @@ import {
 } from './sippy';
 import * as DomainsAPI from './domains/domains';
 import { Domains } from './domains/domains';
-import * as EventNotificationsAPI from './event-notifications/event-notifications';
-import { EventNotifications } from './event-notifications/event-notifications';
 import { APIPromise } from '../../../api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -307,7 +315,15 @@ export declare namespace Buckets {
 
   export { Domains as Domains };
 
-  export { EventNotifications as EventNotifications };
+  export {
+    EventNotifications as EventNotifications,
+    type EventNotificationUpdateResponse as EventNotificationUpdateResponse,
+    type EventNotificationDeleteResponse as EventNotificationDeleteResponse,
+    type EventNotificationGetResponse as EventNotificationGetResponse,
+    type EventNotificationUpdateParams as EventNotificationUpdateParams,
+    type EventNotificationDeleteParams as EventNotificationDeleteParams,
+    type EventNotificationGetParams as EventNotificationGetParams,
+  };
 
   export {
     Locks as Locks,
