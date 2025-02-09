@@ -4817,7 +4817,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/logs/scim/scim.ts">AccessRequests</a></code>
+- <code><a href="./src/resources/zero-trust/access/logs/scim/scim.ts">AccessRequest</a></code>
 
 ##### Updates
 
