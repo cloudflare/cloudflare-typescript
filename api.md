@@ -4084,27 +4084,17 @@ Methods:
 
 ### EventNotifications
 
-#### Configuration
-
 Types:
 
-- <code><a href="./src/resources/r2/buckets/event-notifications/configuration/configuration.ts">ConfigurationGetResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/event-notifications.ts">EventNotificationUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/event-notifications.ts">EventNotificationDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/event-notifications.ts">EventNotificationGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration">client.r2.buckets.eventNotifications.configuration.<a href="./src/resources/r2/buckets/event-notifications/configuration/configuration.ts">get</a>(bucketName, { ...params }) -> ConfigurationGetResponse</code>
-
-##### Queues
-
-Types:
-
-- <code><a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">QueueUpdateResponse</a></code>
-- <code><a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">QueueDeleteResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.configuration.queues.<a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">update</a>(bucketName, queueId, { ...params }) -> QueueUpdateResponse</code>
-- <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.configuration.queues.<a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">delete</a>(bucketName, queueId, { ...params }) -> QueueDeleteResponse</code>
+- <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.<a href="./src/resources/r2/buckets/event-notifications.ts">update</a>(bucketName, queueId, { ...params }) -> EventNotificationUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.<a href="./src/resources/r2/buckets/event-notifications.ts">delete</a>(bucketName, queueId, { ...params }) -> EventNotificationDeleteResponse</code>
+- <code title="get /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration">client.r2.buckets.eventNotifications.<a href="./src/resources/r2/buckets/event-notifications.ts">get</a>(bucketName, { ...params }) -> EventNotificationGetResponse</code>
 
 ### Locks
 
