@@ -8,7 +8,7 @@ export class SCIM extends APIResource {
   updates: UpdatesAPI.Updates = new UpdatesAPI.Updates(this._client);
 }
 
-export interface AccessRequests {
+export interface AccessRequest {
   /**
    * The event that occurred, such as a login attempt.
    */
@@ -55,7 +55,7 @@ export interface AccessRequests {
 SCIM.Updates = Updates;
 
 export declare namespace SCIM {
-  export { type AccessRequests as AccessRequests };
+  export { type AccessRequest as AccessRequest };
 
   export {
     Updates as Updates,

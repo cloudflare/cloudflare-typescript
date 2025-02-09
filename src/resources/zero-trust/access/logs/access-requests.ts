@@ -21,7 +21,7 @@ export class AccessRequests extends APIResource {
   }
 }
 
-export type AccessRequestListResponse = Array<SCIMAPI.AccessRequests>;
+export type AccessRequestListResponse = Array<SCIMAPI.AccessRequest>;
 
 export interface AccessRequestListParams {
   /**
