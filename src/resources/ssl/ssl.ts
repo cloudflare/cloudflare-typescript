@@ -4,7 +4,7 @@ import { APIResource } from '../../resource';
 import * as AnalyzeAPI from './analyze';
 import { Analyze, AnalyzeCreateParams, AnalyzeCreateResponse } from './analyze';
 import * as RecommendationsAPI from './recommendations';
-import { Recommendations } from './recommendations';
+import { RecommendationGetParams, RecommendationGetResponse, Recommendations } from './recommendations';
 import * as VerificationAPI from './verification';
 import {
   Verification,
@@ -79,7 +79,11 @@ export declare namespace SSL {
     type CertificatePackGetParams as CertificatePackGetParams,
   };
 
-  export { Recommendations as Recommendations };
+  export {
+    Recommendations as Recommendations,
+    type RecommendationGetResponse as RecommendationGetResponse,
+    type RecommendationGetParams as RecommendationGetParams,
+  };
 
   export { Universal as Universal };
 
