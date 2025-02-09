@@ -4,7 +4,7 @@ import { APIResource } from '../../../../resource';
 import * as AccessRequestsAPI from './access-requests';
 import { AccessRequestListParams, AccessRequestListResponse, AccessRequests } from './access-requests';
 import * as SCIMAPI from './scim/scim';
-import { AccessRequests as ScimapiAccessRequests, SCIM } from './scim/scim';
+import { AccessRequest, SCIM } from './scim/scim';
 
 export class Logs extends APIResource {
   accessRequests: AccessRequestsAPI.AccessRequests = new AccessRequestsAPI.AccessRequests(this._client);
@@ -21,5 +21,5 @@ export declare namespace Logs {
     type AccessRequestListParams as AccessRequestListParams,
   };
 
-  export { SCIM as SCIM, type ScimapiAccessRequests as AccessRequests };
+  export { SCIM as SCIM, type AccessRequest as AccessRequest };
 }
