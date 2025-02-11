@@ -30,6 +30,7 @@ describe('resource predefined', () => {
       {
         account_id: 'account_id',
         entries: [{ id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', enabled: true }],
+        ai_context_enabled: true,
         allowed_match_count: 0,
         confidence_threshold: 'confidence_threshold',
         context_awareness: { enabled: true, skip: { files: true } },
