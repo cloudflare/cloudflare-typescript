@@ -953,7 +953,7 @@ export type TokenValue = string;
 
 export type MembersV4PagePaginationArray = V4PagePaginationArray<Member>;
 
-export type RolesSinglePage = SinglePage<Role>;
+export type RolesV4PagePaginationArray = V4PagePaginationArray<Role>;
 
 export type SubscriptionsSinglePage = SinglePage<Subscription>;
 
