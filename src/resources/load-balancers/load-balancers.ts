@@ -8,7 +8,12 @@ import { PreviewGetParams, PreviewGetResponse, Previews } from './previews';
 import * as RegionsAPI from './regions';
 import { RegionGetParams, RegionGetResponse, RegionListParams, RegionListResponse, Regions } from './regions';
 import * as SearchesAPI from './searches';
-import { SearchGetParams, SearchGetResponse, Searches } from './searches';
+import {
+  SearchListParams,
+  SearchListResponse,
+  SearchListResponsesV4PagePagination,
+  Searches,
+} from './searches';
 import * as MonitorsAPI from './monitors/monitors';
 import {
   Monitor,
@@ -26,7 +31,6 @@ import * as PoolsAPI from './pools/pools';
 import {
   Pool,
   PoolBulkEditParams,
-  PoolBulkEditResponse,
   PoolCreateParams,
   PoolDeleteParams,
   PoolDeleteResponse,
@@ -2096,6 +2100,7 @@ LoadBalancers.PoolsSinglePage = PoolsSinglePage;
 LoadBalancers.Previews = Previews;
 LoadBalancers.Regions = Regions;
 LoadBalancers.Searches = Searches;
+LoadBalancers.SearchListResponsesV4PagePagination = SearchListResponsesV4PagePagination;
 
 export declare namespace LoadBalancers {
   export {
@@ -2115,7 +2120,6 @@ export declare namespace LoadBalancers {
     Pools as Pools,
     type Pool as Pool,
     type PoolDeleteResponse as PoolDeleteResponse,
-    type PoolBulkEditResponse as PoolBulkEditResponse,
     PoolsSinglePage as PoolsSinglePage,
     type PoolCreateParams as PoolCreateParams,
     type PoolUpdateParams as PoolUpdateParams,
@@ -2142,7 +2146,8 @@ export declare namespace LoadBalancers {
 
   export {
     Searches as Searches,
-    type SearchGetResponse as SearchGetResponse,
-    type SearchGetParams as SearchGetParams,
+    type SearchListResponse as SearchListResponse,
+    SearchListResponsesV4PagePagination as SearchListResponsesV4PagePagination,
+    type SearchListParams as SearchListParams,
   };
 }

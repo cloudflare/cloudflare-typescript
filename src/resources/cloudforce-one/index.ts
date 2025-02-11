@@ -2,7 +2,8 @@
 
 export { CloudforceOne } from './cloudforce-one';
 export {
-  ListItemsV4PagePaginationArray,
+  ListItemsSinglePage,
+  RequestTypesResponsesSinglePage,
   Requests,
   type Item,
   type ListItem,
@@ -10,6 +11,7 @@ export {
   type RequestConstants,
   type RequestTypes,
   type RequestDeleteResponse,
+  type RequestTypesResponse,
   type RequestCreateParams,
   type RequestUpdateParams,
   type RequestListParams,

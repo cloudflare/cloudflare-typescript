@@ -23,6 +23,10 @@ export class Management extends APIResource {
   }
 }
 
+/**
+ * The Tunnel Token is used as a mechanism to authenticate the operation of a
+ * tunnel.
+ */
 export type ManagementCreateResponse = string;
 
 export interface ManagementCreateParams {

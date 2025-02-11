@@ -6,8 +6,10 @@ import * as PayloadsAPI from './payloads';
 import {
   PayloadCreateParams,
   PayloadCreateResponse,
+  PayloadCreateResponsesSinglePage,
   PayloadDeleteParams,
   PayloadDeleteResponse,
+  PayloadDeleteResponsesSinglePage,
   PayloadListParams,
   PayloadListResponse,
   PayloadListResponsesSinglePage,
@@ -70,7 +72,9 @@ export interface ContentScanningEnableParams {
 }
 
 ContentScanning.Payloads = Payloads;
+ContentScanning.PayloadCreateResponsesSinglePage = PayloadCreateResponsesSinglePage;
 ContentScanning.PayloadListResponsesSinglePage = PayloadListResponsesSinglePage;
+ContentScanning.PayloadDeleteResponsesSinglePage = PayloadDeleteResponsesSinglePage;
 ContentScanning.Settings = Settings;
 
 export declare namespace ContentScanning {
@@ -79,7 +83,9 @@ export declare namespace ContentScanning {
     type PayloadCreateResponse as PayloadCreateResponse,
     type PayloadListResponse as PayloadListResponse,
     type PayloadDeleteResponse as PayloadDeleteResponse,
+    PayloadCreateResponsesSinglePage as PayloadCreateResponsesSinglePage,
     PayloadListResponsesSinglePage as PayloadListResponsesSinglePage,
+    PayloadDeleteResponsesSinglePage as PayloadDeleteResponsesSinglePage,
     type PayloadCreateParams as PayloadCreateParams,
     type PayloadListParams as PayloadListParams,
     type PayloadDeleteParams as PayloadDeleteParams,

@@ -3,9 +3,7 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as ApplicationsAPI from './applications';
-import * as AccessAPI from '../access';
 import * as PoliciesAPI from '../policies';
 import * as CAsAPI from './cas';
 import {
@@ -20,6 +18,24 @@ import {
 } from './cas';
 import * as ApplicationsPoliciesAPI from './policies';
 import {
+  AccessDevicePostureRule,
+  AccessRule,
+  AnyValidServiceTokenRule,
+  AuthenticationMethodRule,
+  AzureGroupRule,
+  CertificateRule,
+  CountryRule,
+  DomainRule,
+  EmailListRule,
+  EmailRule,
+  EveryoneRule,
+  ExternalEvaluationRule,
+  GSuiteGroupRule,
+  GitHubOrganizationRule,
+  GroupRule,
+  IPListRule,
+  IPRule,
+  OktaGroupRule,
   Policies,
   PolicyCreateParams,
   PolicyCreateResponse,
@@ -32,6 +48,8 @@ import {
   PolicyListResponsesSinglePage,
   PolicyUpdateParams,
   PolicyUpdateResponse,
+  SAMLGroupRule,
+  ServiceTokenRule,
 } from './policies';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import {
@@ -48,6 +66,7 @@ import {
   PolicyTestGetResponse,
   PolicyTests,
 } from './policy-tests/policy-tests';
+import { CloudflareError } from '../../../../error';
 import { SinglePage } from '../../../../pagination';
 
 export class Applications extends APIResource {
@@ -1359,13 +1378,13 @@ export interface ApplicationPolicy {
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.AccessRule>;
+  include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * Require this application to be served in an isolated browser for users matching
@@ -1393,7 +1412,7 @@ export interface ApplicationPolicy {
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
   /**
    * The amount of time that tokens issued for the application will be valid. Must be
@@ -2546,7 +2565,7 @@ export namespace ApplicationCreateResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -3046,7 +3065,7 @@ export namespace ApplicationCreateResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -3368,7 +3387,7 @@ export namespace ApplicationCreateResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -4513,13 +4532,13 @@ export namespace ApplicationCreateResponse {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRule>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include?: Array<AccessAPI.AccessRule>;
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * The name of the Access policy.
@@ -4530,7 +4549,7 @@ export namespace ApplicationCreateResponse {
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRule>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       updated_at?: string;
     }
@@ -4810,7 +4829,7 @@ export namespace ApplicationUpdateResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -5310,7 +5329,7 @@ export namespace ApplicationUpdateResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -5632,7 +5651,7 @@ export namespace ApplicationUpdateResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -6777,13 +6796,13 @@ export namespace ApplicationUpdateResponse {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRule>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include?: Array<AccessAPI.AccessRule>;
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * The name of the Access policy.
@@ -6794,7 +6813,7 @@ export namespace ApplicationUpdateResponse {
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRule>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       updated_at?: string;
     }
@@ -7074,7 +7093,7 @@ export namespace ApplicationListResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -7574,7 +7593,7 @@ export namespace ApplicationListResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -7896,7 +7915,7 @@ export namespace ApplicationListResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -9041,13 +9060,13 @@ export namespace ApplicationListResponse {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRule>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include?: Array<AccessAPI.AccessRule>;
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * The name of the Access policy.
@@ -9058,7 +9077,7 @@ export namespace ApplicationListResponse {
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRule>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       updated_at?: string;
     }
@@ -9345,7 +9364,7 @@ export namespace ApplicationGetResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -9845,7 +9864,7 @@ export namespace ApplicationGetResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -10167,7 +10186,7 @@ export namespace ApplicationGetResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * @deprecated: List of public domains that Access will secure. This field is
+     * @deprecated List of public domains that Access will secure. This field is
      * deprecated in favor of `destinations` and will be supported until **November
      * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
@@ -11312,13 +11331,13 @@ export namespace ApplicationGetResponse {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRule>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include?: Array<AccessAPI.AccessRule>;
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
        * The name of the Access policy.
@@ -11329,7 +11348,7 @@ export namespace ApplicationGetResponse {
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRule>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       updated_at?: string;
     }
@@ -11565,10 +11584,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationCreateParams.SelfHostedApplication.PublicDestination
-      | ApplicationCreateParams.SelfHostedApplication.PrivateDestination
-    >;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -11609,11 +11625,7 @@ export declare namespace ApplicationCreateParams {
      * order of precedence. Items can reference existing policies or create new
      * policies exclusive to the application.
      */
-    policies?: Array<
-      | ApplicationCreateParams.SelfHostedApplication.AccessAppPolicyLink
-      | string
-      | ApplicationCreateParams.SelfHostedApplication.UnionMember2
-    >;
+    policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -11625,7 +11637,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.SelfHostedApplication.SCIMConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * Body param: List of public domains that Access will secure. This field is
@@ -11926,11 +11938,7 @@ export declare namespace ApplicationCreateParams {
      * order of precedence. Items can reference existing policies or create new
      * policies exclusive to the application.
      */
-    policies?: Array<
-      | ApplicationCreateParams.SaaSApplication.AccessAppPolicyLink
-      | string
-      | ApplicationCreateParams.SaaSApplication.UnionMember2
-    >;
+    policies?: Array<SaaSApplication.AccessAppPolicyLink | string | SaaSApplication.UnionMember2>;
 
     /**
      * Body param:
@@ -11941,7 +11949,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.SaaSApplication.SCIMConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -12204,10 +12212,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationCreateParams.BrowserSSHApplication.PublicDestination
-      | ApplicationCreateParams.BrowserSSHApplication.PrivateDestination
-    >;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -12248,11 +12253,7 @@ export declare namespace ApplicationCreateParams {
      * order of precedence. Items can reference existing policies or create new
      * policies exclusive to the application.
      */
-    policies?: Array<
-      | ApplicationCreateParams.BrowserSSHApplication.AccessAppPolicyLink
-      | string
-      | ApplicationCreateParams.BrowserSSHApplication.UnionMember2
-    >;
+    policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -12264,7 +12265,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BrowserSSHApplication.SCIMConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * Body param: List of public domains that Access will secure. This field is
@@ -12598,10 +12599,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationCreateParams.BrowserVNCApplication.PublicDestination
-      | ApplicationCreateParams.BrowserVNCApplication.PrivateDestination
-    >;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -12642,11 +12640,7 @@ export declare namespace ApplicationCreateParams {
      * order of precedence. Items can reference existing policies or create new
      * policies exclusive to the application.
      */
-    policies?: Array<
-      | ApplicationCreateParams.BrowserVNCApplication.AccessAppPolicyLink
-      | string
-      | ApplicationCreateParams.BrowserVNCApplication.UnionMember2
-    >;
+    policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -12658,7 +12652,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BrowserVNCApplication.SCIMConfig;
+    scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
      * Body param: List of public domains that Access will secure. This field is
@@ -12951,7 +12945,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The links in the App Launcher footer.
      */
-    footer_links?: Array<ApplicationCreateParams.AppLauncherApplication.FooterLink>;
+    footer_links?: Array<AppLauncherApplication.FooterLink>;
 
     /**
      * Body param: The background color of the App Launcher header.
@@ -12962,7 +12956,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: The design of the App Launcher landing page shown to users when they
      * log in.
      */
-    landing_page_design?: ApplicationCreateParams.AppLauncherApplication.LandingPageDesign;
+    landing_page_design?: AppLauncherApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that Access applies to the application, in ascending
@@ -12970,16 +12964,14 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<
-      | ApplicationCreateParams.AppLauncherApplication.AccessAppPolicyLink
-      | string
-      | ApplicationCreateParams.AppLauncherApplication.UnionMember2
+      AppLauncherApplication.AccessAppPolicyLink | string | AppLauncherApplication.UnionMember2
     >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.AppLauncherApplication.SCIMConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -13244,7 +13236,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The links in the App Launcher footer.
      */
-    footer_links?: Array<ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.FooterLink>;
+    footer_links?: Array<DeviceEnrollmentPermissionsApplication.FooterLink>;
 
     /**
      * Body param: The background color of the App Launcher header.
@@ -13255,7 +13247,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: The design of the App Launcher landing page shown to users when they
      * log in.
      */
-    landing_page_design?: ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.LandingPageDesign;
+    landing_page_design?: DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that Access applies to the application, in ascending
@@ -13263,16 +13255,16 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<
-      | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
+      | DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
       | string
-      | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.UnionMember2
+      | DeviceEnrollmentPermissionsApplication.UnionMember2
     >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.SCIMConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -13537,7 +13529,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The links in the App Launcher footer.
      */
-    footer_links?: Array<ApplicationCreateParams.BrowserIsolationPermissionsApplication.FooterLink>;
+    footer_links?: Array<BrowserIsolationPermissionsApplication.FooterLink>;
 
     /**
      * Body param: The background color of the App Launcher header.
@@ -13548,7 +13540,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: The design of the App Launcher landing page shown to users when they
      * log in.
      */
-    landing_page_design?: ApplicationCreateParams.BrowserIsolationPermissionsApplication.LandingPageDesign;
+    landing_page_design?: BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that Access applies to the application, in ascending
@@ -13556,16 +13548,16 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<
-      | ApplicationCreateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink
+      | BrowserIsolationPermissionsApplication.AccessAppPolicyLink
       | string
-      | ApplicationCreateParams.BrowserIsolationPermissionsApplication.UnionMember2
+      | BrowserIsolationPermissionsApplication.UnionMember2
     >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BrowserIsolationPermissionsApplication.SCIMConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -13824,7 +13816,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BookmarkApplication.SCIMConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -13943,7 +13935,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    target_criteria: Array<ApplicationCreateParams.InfrastructureApplication.TargetCriterion>;
+    target_criteria: Array<InfrastructureApplication.TargetCriterion>;
 
     /**
      * Body param: The application type.
@@ -13970,7 +13962,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application.
      */
-    policies?: Array<ApplicationCreateParams.InfrastructureApplication.Policy>;
+    policies?: Array<InfrastructureApplication.Policy>;
   }
 
   export namespace InfrastructureApplication {
@@ -14003,7 +13995,7 @@ export declare namespace ApplicationCreateParams {
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include: Array<AccessAPI.AccessRuleParam>;
+      include: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
        * The name of the Access policy.
@@ -14020,13 +14012,13 @@ export declare namespace ApplicationCreateParams {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRuleParam>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
     }
 
     export namespace Policy {
@@ -14159,10 +14151,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationUpdateParams.SelfHostedApplication.PublicDestination
-      | ApplicationUpdateParams.SelfHostedApplication.PrivateDestination
-    >;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14203,11 +14192,7 @@ export declare namespace ApplicationUpdateParams {
      * order of precedence. Items can reference existing policies or create new
      * policies exclusive to the application.
      */
-    policies?: Array<
-      | ApplicationUpdateParams.SelfHostedApplication.AccessAppPolicyLink
-      | string
-      | ApplicationUpdateParams.SelfHostedApplication.UnionMember2
-    >;
+    policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -14219,7 +14204,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.SelfHostedApplication.SCIMConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * Body param: List of public domains that Access will secure. This field is
@@ -14520,11 +14505,7 @@ export declare namespace ApplicationUpdateParams {
      * order of precedence. Items can reference existing policies or create new
      * policies exclusive to the application.
      */
-    policies?: Array<
-      | ApplicationUpdateParams.SaaSApplication.AccessAppPolicyLink
-      | string
-      | ApplicationUpdateParams.SaaSApplication.UnionMember2
-    >;
+    policies?: Array<SaaSApplication.AccessAppPolicyLink | string | SaaSApplication.UnionMember2>;
 
     /**
      * Body param:
@@ -14535,7 +14516,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.SaaSApplication.SCIMConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -14798,10 +14779,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationUpdateParams.BrowserSSHApplication.PublicDestination
-      | ApplicationUpdateParams.BrowserSSHApplication.PrivateDestination
-    >;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14842,11 +14820,7 @@ export declare namespace ApplicationUpdateParams {
      * order of precedence. Items can reference existing policies or create new
      * policies exclusive to the application.
      */
-    policies?: Array<
-      | ApplicationUpdateParams.BrowserSSHApplication.AccessAppPolicyLink
-      | string
-      | ApplicationUpdateParams.BrowserSSHApplication.UnionMember2
-    >;
+    policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -14858,7 +14832,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BrowserSSHApplication.SCIMConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * Body param: List of public domains that Access will secure. This field is
@@ -15192,10 +15166,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | ApplicationUpdateParams.BrowserVNCApplication.PublicDestination
-      | ApplicationUpdateParams.BrowserVNCApplication.PrivateDestination
-    >;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -15236,11 +15207,7 @@ export declare namespace ApplicationUpdateParams {
      * order of precedence. Items can reference existing policies or create new
      * policies exclusive to the application.
      */
-    policies?: Array<
-      | ApplicationUpdateParams.BrowserVNCApplication.AccessAppPolicyLink
-      | string
-      | ApplicationUpdateParams.BrowserVNCApplication.UnionMember2
-    >;
+    policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -15252,7 +15219,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BrowserVNCApplication.SCIMConfig;
+    scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
      * Body param: List of public domains that Access will secure. This field is
@@ -15545,7 +15512,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The links in the App Launcher footer.
      */
-    footer_links?: Array<ApplicationUpdateParams.AppLauncherApplication.FooterLink>;
+    footer_links?: Array<AppLauncherApplication.FooterLink>;
 
     /**
      * Body param: The background color of the App Launcher header.
@@ -15556,7 +15523,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: The design of the App Launcher landing page shown to users when they
      * log in.
      */
-    landing_page_design?: ApplicationUpdateParams.AppLauncherApplication.LandingPageDesign;
+    landing_page_design?: AppLauncherApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that Access applies to the application, in ascending
@@ -15564,16 +15531,14 @@ export declare namespace ApplicationUpdateParams {
      * policies exclusive to the application.
      */
     policies?: Array<
-      | ApplicationUpdateParams.AppLauncherApplication.AccessAppPolicyLink
-      | string
-      | ApplicationUpdateParams.AppLauncherApplication.UnionMember2
+      AppLauncherApplication.AccessAppPolicyLink | string | AppLauncherApplication.UnionMember2
     >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.AppLauncherApplication.SCIMConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -15838,7 +15803,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The links in the App Launcher footer.
      */
-    footer_links?: Array<ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.FooterLink>;
+    footer_links?: Array<DeviceEnrollmentPermissionsApplication.FooterLink>;
 
     /**
      * Body param: The background color of the App Launcher header.
@@ -15849,7 +15814,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: The design of the App Launcher landing page shown to users when they
      * log in.
      */
-    landing_page_design?: ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.LandingPageDesign;
+    landing_page_design?: DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that Access applies to the application, in ascending
@@ -15857,16 +15822,16 @@ export declare namespace ApplicationUpdateParams {
      * policies exclusive to the application.
      */
     policies?: Array<
-      | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
+      | DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
       | string
-      | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.UnionMember2
+      | DeviceEnrollmentPermissionsApplication.UnionMember2
     >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.SCIMConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -16131,7 +16096,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The links in the App Launcher footer.
      */
-    footer_links?: Array<ApplicationUpdateParams.BrowserIsolationPermissionsApplication.FooterLink>;
+    footer_links?: Array<BrowserIsolationPermissionsApplication.FooterLink>;
 
     /**
      * Body param: The background color of the App Launcher header.
@@ -16142,7 +16107,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: The design of the App Launcher landing page shown to users when they
      * log in.
      */
-    landing_page_design?: ApplicationUpdateParams.BrowserIsolationPermissionsApplication.LandingPageDesign;
+    landing_page_design?: BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that Access applies to the application, in ascending
@@ -16150,16 +16115,16 @@ export declare namespace ApplicationUpdateParams {
      * policies exclusive to the application.
      */
     policies?: Array<
-      | ApplicationUpdateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink
+      | BrowserIsolationPermissionsApplication.AccessAppPolicyLink
       | string
-      | ApplicationUpdateParams.BrowserIsolationPermissionsApplication.UnionMember2
+      | BrowserIsolationPermissionsApplication.UnionMember2
     >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BrowserIsolationPermissionsApplication.SCIMConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -16418,7 +16383,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BookmarkApplication.SCIMConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -16537,7 +16502,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    target_criteria: Array<ApplicationUpdateParams.InfrastructureApplication.TargetCriterion>;
+    target_criteria: Array<InfrastructureApplication.TargetCriterion>;
 
     /**
      * Body param: The application type.
@@ -16564,7 +16529,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application.
      */
-    policies?: Array<ApplicationUpdateParams.InfrastructureApplication.Policy>;
+    policies?: Array<InfrastructureApplication.Policy>;
   }
 
   export namespace InfrastructureApplication {
@@ -16597,7 +16562,7 @@ export declare namespace ApplicationUpdateParams {
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
        * the Include rules.
        */
-      include: Array<AccessAPI.AccessRuleParam>;
+      include: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
        * The name of the Access policy.
@@ -16614,13 +16579,13 @@ export declare namespace ApplicationUpdateParams {
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
-      require?: Array<AccessAPI.AccessRuleParam>;
+      require?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
     }
 
     export namespace Policy {
@@ -16791,6 +16756,26 @@ export declare namespace Applications {
 
   export {
     Policies as Policies,
+    type AccessDevicePostureRule as AccessDevicePostureRule,
+    type AccessRule as AccessRule,
+    type AnyValidServiceTokenRule as AnyValidServiceTokenRule,
+    type AuthenticationMethodRule as AuthenticationMethodRule,
+    type AzureGroupRule as AzureGroupRule,
+    type CertificateRule as CertificateRule,
+    type CountryRule as CountryRule,
+    type DomainRule as DomainRule,
+    type EmailListRule as EmailListRule,
+    type EmailRule as EmailRule,
+    type EveryoneRule as EveryoneRule,
+    type ExternalEvaluationRule as ExternalEvaluationRule,
+    type GitHubOrganizationRule as GitHubOrganizationRule,
+    type GroupRule as GroupRule,
+    type GSuiteGroupRule as GSuiteGroupRule,
+    type IPListRule as IPListRule,
+    type IPRule as IPRule,
+    type OktaGroupRule as OktaGroupRule,
+    type SAMLGroupRule as SAMLGroupRule,
+    type ServiceTokenRule as ServiceTokenRule,
     type PolicyCreateResponse as PolicyCreateResponse,
     type PolicyUpdateResponse as PolicyUpdateResponse,
     type PolicyListResponse as PolicyListResponse,

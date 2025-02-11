@@ -11,14 +11,13 @@ export class Payloads extends APIResource {
   create(
     params: PayloadCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PayloadCreateResponse | null> {
+  ): Core.PagePromise<PayloadCreateResponsesSinglePage, PayloadCreateResponse> {
     const { zone_id, body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/content-upload-scan/payloads`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: PayloadCreateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/content-upload-scan/payloads`,
+      PayloadCreateResponsesSinglePage,
+      { body: body, method: 'post', ...options },
+    );
   }
 
   /**
@@ -43,36 +42,35 @@ export class Payloads extends APIResource {
     expressionId: string,
     params: PayloadDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PayloadDeleteResponse | null> {
+  ): Core.PagePromise<PayloadDeleteResponsesSinglePage, PayloadDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(
-        `/zones/${zone_id}/content-upload-scan/payloads/${expressionId}`,
-        options,
-      ) as Core.APIPromise<{ result: PayloadDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/content-upload-scan/payloads/${expressionId}`,
+      PayloadDeleteResponsesSinglePage,
+      { method: 'delete', ...options },
+    );
   }
 }
 
+export class PayloadCreateResponsesSinglePage extends SinglePage<PayloadCreateResponse> {}
+
 export class PayloadListResponsesSinglePage extends SinglePage<PayloadListResponse> {}
 
-export type PayloadCreateResponse = Array<PayloadCreateResponse.PayloadCreateResponseItem>;
+export class PayloadDeleteResponsesSinglePage extends SinglePage<PayloadDeleteResponse> {}
 
-export namespace PayloadCreateResponse {
+/**
+ * A custom scan expression to match Content Scanning on
+ */
+export interface PayloadCreateResponse {
   /**
-   * A custom scan expression to match Content Scanning on
+   * The unique ID for this custom scan expression
    */
-  export interface PayloadCreateResponseItem {
-    /**
-     * The unique ID for this custom scan expression
-     */
-    id?: string;
+  id?: string;
 
-    /**
-     * Ruleset expression to use in matching content objects
-     */
-    payload?: string;
-  }
+  /**
+   * Ruleset expression to use in matching content objects
+   */
+  payload?: string;
 }
 
 /**
@@ -90,23 +88,19 @@ export interface PayloadListResponse {
   payload?: string;
 }
 
-export type PayloadDeleteResponse = Array<PayloadDeleteResponse.PayloadDeleteResponseItem>;
-
-export namespace PayloadDeleteResponse {
+/**
+ * A custom scan expression to match Content Scanning on
+ */
+export interface PayloadDeleteResponse {
   /**
-   * A custom scan expression to match Content Scanning on
+   * The unique ID for this custom scan expression
    */
-  export interface PayloadDeleteResponseItem {
-    /**
-     * The unique ID for this custom scan expression
-     */
-    id?: string;
+  id?: string;
 
-    /**
-     * Ruleset expression to use in matching content objects
-     */
-    payload?: string;
-  }
+  /**
+   * Ruleset expression to use in matching content objects
+   */
+  payload?: string;
 }
 
 export interface PayloadCreateParams {
@@ -144,14 +138,18 @@ export interface PayloadDeleteParams {
   zone_id: string;
 }
 
+Payloads.PayloadCreateResponsesSinglePage = PayloadCreateResponsesSinglePage;
 Payloads.PayloadListResponsesSinglePage = PayloadListResponsesSinglePage;
+Payloads.PayloadDeleteResponsesSinglePage = PayloadDeleteResponsesSinglePage;
 
 export declare namespace Payloads {
   export {
     type PayloadCreateResponse as PayloadCreateResponse,
     type PayloadListResponse as PayloadListResponse,
     type PayloadDeleteResponse as PayloadDeleteResponse,
+    PayloadCreateResponsesSinglePage as PayloadCreateResponsesSinglePage,
     PayloadListResponsesSinglePage as PayloadListResponsesSinglePage,
+    PayloadDeleteResponsesSinglePage as PayloadDeleteResponsesSinglePage,
     type PayloadCreateParams as PayloadCreateParams,
     type PayloadListParams as PayloadListParams,
     type PayloadDeleteParams as PayloadDeleteParams,

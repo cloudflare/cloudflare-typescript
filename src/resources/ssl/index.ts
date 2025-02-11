@@ -19,7 +19,11 @@ export {
   type CertificatePackEditParams,
   type CertificatePackGetParams,
 } from './certificate-packs/index';
-export { Recommendations, type RecommendationGetResponse } from './recommendations';
+export {
+  Recommendations,
+  type RecommendationGetResponse,
+  type RecommendationGetParams,
+} from './recommendations';
 export { SSL } from './ssl';
 export { Universal } from './universal/index';
 export {

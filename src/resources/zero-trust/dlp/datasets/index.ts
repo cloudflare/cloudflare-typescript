@@ -13,4 +13,9 @@ export {
   type DatasetGetParams,
 } from './datasets';
 export { Upload, type NewVersion, type UploadCreateParams, type UploadEditParams } from './upload';
-export { Versions, type VersionCreateResponse, type VersionCreateParams } from './versions/index';
+export {
+  VersionCreateResponsesSinglePage,
+  Versions,
+  type VersionCreateResponse,
+  type VersionCreateParams,
+} from './versions/index';

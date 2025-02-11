@@ -38,11 +38,12 @@ describe('resource scripts', () => {
             config: {
               html_handling: 'auto-trailing-slash',
               not_found_handling: 'none',
+              run_worker_first: false,
               serve_directly: true,
             },
             jwt: 'jwt',
           },
-          bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
+          bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
           body_part: 'worker.js',
           compatibility_date: '2021-01-01',
           compatibility_flags: ['nodejs_compat'],

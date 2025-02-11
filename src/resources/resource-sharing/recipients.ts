@@ -13,10 +13,10 @@ export class Recipients extends APIResource {
     params: RecipientCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecipientCreateResponse> {
-    const { path_account_id, body_account_id, ...body } = params;
+    const { path_account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${path_account_id}/shares/${shareId}/recipients`, {
-        body: { account_id: body_account_id, ...body },
+        body,
         ...options,
       }) as Core.APIPromise<{ result: RecipientCreateResponse }>
     )._thenUnwrap((obj) => obj.result);

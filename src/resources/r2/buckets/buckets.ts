@@ -12,6 +12,16 @@ import {
   CORSUpdateParams,
   CORSUpdateResponse,
 } from './cors';
+import * as EventNotificationsAPI from './event-notifications';
+import {
+  EventNotificationDeleteParams,
+  EventNotificationDeleteResponse,
+  EventNotificationGetParams,
+  EventNotificationGetResponse,
+  EventNotificationUpdateParams,
+  EventNotificationUpdateResponse,
+  EventNotifications,
+} from './event-notifications';
 import * as LifecycleAPI from './lifecycle';
 import {
   Lifecycle,
@@ -20,6 +30,10 @@ import {
   LifecycleUpdateParams,
   LifecycleUpdateResponse,
 } from './lifecycle';
+import * as LocksAPI from './locks';
+import { LockGetParams, LockGetResponse, LockUpdateParams, LockUpdateResponse, Locks } from './locks';
+import * as MetricsAPI from './metrics';
+import { MetricListParams, MetricListResponse, Metrics } from './metrics';
 import * as SippyAPI from './sippy';
 import {
   Provider,
@@ -32,8 +46,6 @@ import {
 } from './sippy';
 import * as DomainsAPI from './domains/domains';
 import { Domains } from './domains/domains';
-import * as EventNotificationsAPI from './event-notifications/event-notifications';
-import { EventNotifications } from './event-notifications/event-notifications';
 
 export class Buckets extends APIResource {
   lifecycle: LifecycleAPI.Lifecycle = new LifecycleAPI.Lifecycle(this._client);
@@ -42,6 +54,8 @@ export class Buckets extends APIResource {
   eventNotifications: EventNotificationsAPI.EventNotifications = new EventNotificationsAPI.EventNotifications(
     this._client,
   );
+  locks: LocksAPI.Locks = new LocksAPI.Locks(this._client);
+  metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
   sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
 
   /**
@@ -255,6 +269,8 @@ Buckets.Lifecycle = Lifecycle;
 Buckets.CORS = CORS;
 Buckets.Domains = Domains;
 Buckets.EventNotifications = EventNotifications;
+Buckets.Locks = Locks;
+Buckets.Metrics = Metrics;
 Buckets.SippyResource = SippyResource;
 
 export declare namespace Buckets {
@@ -288,7 +304,29 @@ export declare namespace Buckets {
 
   export { Domains as Domains };
 
-  export { EventNotifications as EventNotifications };
+  export {
+    EventNotifications as EventNotifications,
+    type EventNotificationUpdateResponse as EventNotificationUpdateResponse,
+    type EventNotificationDeleteResponse as EventNotificationDeleteResponse,
+    type EventNotificationGetResponse as EventNotificationGetResponse,
+    type EventNotificationUpdateParams as EventNotificationUpdateParams,
+    type EventNotificationDeleteParams as EventNotificationDeleteParams,
+    type EventNotificationGetParams as EventNotificationGetParams,
+  };
+
+  export {
+    Locks as Locks,
+    type LockUpdateResponse as LockUpdateResponse,
+    type LockGetResponse as LockGetResponse,
+    type LockUpdateParams as LockUpdateParams,
+    type LockGetParams as LockGetParams,
+  };
+
+  export {
+    Metrics as Metrics,
+    type MetricListResponse as MetricListResponse,
+    type MetricListParams as MetricListParams,
+  };
 
   export {
     SippyResource as SippyResource,

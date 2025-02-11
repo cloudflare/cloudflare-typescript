@@ -3,8 +3,9 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from '../jobs';
+import { LogpushJobsSinglePage } from '../jobs';
+import { CloudflareError } from '../../../error';
 
 export class Jobs extends APIResource {
   /**
@@ -14,13 +15,16 @@ export class Jobs extends APIResource {
     datasetId: string | null,
     params?: JobGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobGetResponse>;
-  get(datasetId: string | null, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse>;
+  ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null>;
+  get(
+    datasetId: string | null,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null>;
   get(
     datasetId: string | null,
     params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobGetResponse> {
+  ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null> {
     if (isRequestOptions(params)) {
       return this.get(datasetId, {}, params);
     }
@@ -41,16 +45,13 @@ export class Jobs extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/jobs`,
-        options,
-      ) as Core.APIPromise<{ result: JobGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/jobs`,
+      LogpushJobsSinglePage,
+      options,
+    );
   }
 }
-
-export type JobGetResponse = Array<JobsAPI.LogpushJob | null>;
 
 export interface JobGetParams {
   /**
@@ -65,5 +66,7 @@ export interface JobGetParams {
 }
 
 export declare namespace Jobs {
-  export { type JobGetResponse as JobGetResponse, type JobGetParams as JobGetParams };
+  export { type JobGetParams as JobGetParams };
 }
+
+export { LogpushJobsSinglePage };

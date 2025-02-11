@@ -76,6 +76,7 @@ import { Logs } from './resources/logs/logs';
 import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/magic-network-monitoring';
 import { MagicTransit } from './resources/magic-transit/magic-transit';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
+import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
@@ -88,6 +89,7 @@ import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
+import { SecurityCenter } from './resources/security-center/security-center';
 import { Snippets } from './resources/snippets/snippets';
 import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
@@ -140,7 +142,7 @@ export interface ClientOptions {
    * Note that request timeouts are retried by default, so in a worst-case scenario you may wait
    * much longer than this timeout before the promise succeeds or fails.
    */
-  timeout?: number;
+  timeout?: number | undefined;
 
   /**
    * An HTTP agent used to manage HTTP(S) connections.
@@ -148,7 +150,7 @@ export interface ClientOptions {
    * If not provided, an agent will be constructed by default in the Node.js environment,
    * otherwise no agent is used.
    */
-  httpAgent?: Agent;
+  httpAgent?: Agent | undefined;
 
   /**
    * Specify a custom `fetch` function implementation.
@@ -164,7 +166,7 @@ export interface ClientOptions {
    *
    * @default 2
    */
-  maxRetries?: number;
+  maxRetries?: number | undefined;
 
   /**
    * Default headers to include with every request to the API.
@@ -172,7 +174,7 @@ export interface ClientOptions {
    * These can be removed in individual requests by explicitly setting the
    * header to `undefined` or `null` in request options.
    */
-  defaultHeaders?: Core.Headers;
+  defaultHeaders?: Core.Headers | undefined;
 
   /**
    * Default query parameters to include with every request to the API.
@@ -180,7 +182,7 @@ export interface ClientOptions {
    * These can be removed in individual requests by explicitly setting the
    * param to `undefined` in request options.
    */
-  defaultQuery?: Core.DefaultQuery;
+  defaultQuery?: Core.DefaultQuery | undefined;
 }
 
 /**
@@ -292,6 +294,7 @@ export class Cloudflare extends Core.APIClient {
   intel: API.Intel = new API.Intel(this);
   magicTransit: API.MagicTransit = new API.MagicTransit(this);
   magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
+  networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
   registrar: API.Registrar = new API.Registrar(this);
@@ -328,6 +331,7 @@ export class Cloudflare extends Core.APIClient {
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
+  securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -504,6 +508,7 @@ Cloudflare.Images = Images;
 Cloudflare.Intel = Intel;
 Cloudflare.MagicTransit = MagicTransit;
 Cloudflare.MagicNetworkMonitoring = MagicNetworkMonitoring;
+Cloudflare.NetworkInterconnects = NetworkInterconnects;
 Cloudflare.MTLSCertificates = MTLSCertificates;
 Cloudflare.Pages = Pages;
 Cloudflare.Registrar = Registrar;
@@ -540,6 +545,7 @@ Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
+Cloudflare.SecurityCenter = SecurityCenter;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -670,6 +676,8 @@ export declare namespace Cloudflare {
 
   export { MagicNetworkMonitoring as MagicNetworkMonitoring };
 
+  export { NetworkInterconnects as NetworkInterconnects };
+
   export { MTLSCertificates as MTLSCertificates };
 
   export { Pages as Pages };
@@ -741,6 +749,8 @@ export declare namespace Cloudflare {
   export { AbuseReports as AbuseReports };
 
   export { AI as AI };
+
+  export { SecurityCenter as SecurityCenter };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

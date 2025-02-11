@@ -20,7 +20,15 @@ export {
   type CORSGetParams,
 } from './cors';
 export { Domains } from './domains/index';
-export { EventNotifications } from './event-notifications/index';
+export {
+  EventNotifications,
+  type EventNotificationUpdateResponse,
+  type EventNotificationDeleteResponse,
+  type EventNotificationGetResponse,
+  type EventNotificationUpdateParams,
+  type EventNotificationDeleteParams,
+  type EventNotificationGetParams,
+} from './event-notifications';
 export {
   Lifecycle,
   type LifecycleUpdateResponse,
@@ -28,6 +36,14 @@ export {
   type LifecycleUpdateParams,
   type LifecycleGetParams,
 } from './lifecycle';
+export {
+  Locks,
+  type LockUpdateResponse,
+  type LockGetResponse,
+  type LockUpdateParams,
+  type LockGetParams,
+} from './locks';
+export { Metrics, type MetricListResponse, type MetricListParams } from './metrics';
 export {
   SippyResource,
   type Provider,

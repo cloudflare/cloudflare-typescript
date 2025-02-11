@@ -1,28 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Access,
-  type AccessDevicePostureRule,
-  type AccessRule,
-  type AnyValidServiceTokenRule,
-  type AuthenticationMethodRule,
-  type AzureGroupRule,
-  type CertificateRule,
-  type CountryRule,
-  type DomainRule,
-  type EmailListRule,
-  type EmailRule,
-  type EveryoneRule,
-  type ExternalEvaluationRule,
-  type GitHubOrganizationRule,
-  type GroupRule,
-  type GSuiteGroupRule,
-  type IPListRule,
-  type IPRule,
-  type OktaGroupRule,
-  type SAMLGroupRule,
-  type ServiceTokenRule,
-} from './access/index';
+export { Access } from './access/index';
 export {
   ConnectivitySettings,
   type ConnectivitySettingEditResponse,
@@ -68,7 +46,7 @@ export {
   type IdentityProviderListParams,
   type IdentityProviderDeleteParams,
   type IdentityProviderGetParams,
-} from './identity-providers';
+} from './identity-providers/index';
 export { Networks } from './networks/index';
 export {
   Organizations,
@@ -87,7 +65,7 @@ export {
   type RiskScoringGetParams,
   type RiskScoringResetParams,
 } from './risk-scoring/index';
-export { Seats, type Seat, type SeatEditResponse, type SeatEditParams } from './seats';
+export { SeatsSinglePage, Seats, type Seat, type SeatEditParams } from './seats';
 export {
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,

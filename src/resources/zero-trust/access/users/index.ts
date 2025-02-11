@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AccessUsersSinglePage, Users, type AccessUser, type UserListParams } from './users';
+export {
+  AccessUsersSinglePage,
+  UserListResponsesSinglePage,
+  Users,
+  type AccessUser,
+  type UserListResponse,
+  type UserListParams,
+} from './users';
 export {
   ActiveSessionListResponsesSinglePage,
   ActiveSessions,

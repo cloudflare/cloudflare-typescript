@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Top extends APIResource {
@@ -8,7 +9,15 @@ export class Top extends APIResource {
    * Get top autonomous systems by DNS queries made to Cloudflare's public DNS
    * resolver.
    */
-  ases(query: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse> {
+  ases(query?: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
+  ases(options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
+  ases(
+    query: TopAsesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopAsesResponse> {
+    if (isRequestOptions(query)) {
+      return this.ases({}, query);
+    }
     return (
       this._client.get('/radar/dns/top/ases', { query, ...options }) as Core.APIPromise<{
         result: TopAsesResponse;
@@ -19,7 +28,15 @@ export class Top extends APIResource {
   /**
    * Get top locations by DNS queries made to Cloudflare's public DNS resolver.
    */
-  locations(query: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse> {
+  locations(query?: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;
+  locations(options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;
+  locations(
+    query: TopLocationsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopLocationsResponse> {
+    if (isRequestOptions(query)) {
+      return this.locations({}, query);
+    }
     return (
       this._client.get('/radar/dns/top/locations', { query, ...options }) as Core.APIPromise<{
         result: TopLocationsResponse;
@@ -150,11 +167,6 @@ export namespace TopLocationsResponse {
 
 export interface TopAsesParams {
   /**
-   * Array of domain names.
-   */
-  domain: Array<string>;
-
-  /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
    * AS3356.
@@ -184,6 +196,11 @@ export interface TopAsesParams {
    * Array of datetimes to filter the start of a series.
    */
   dateStart?: Array<string>;
+
+  /**
+   * Array of domain names.
+   */
+  domain?: Array<string>;
 
   /**
    * Format results are returned in.
@@ -210,11 +227,6 @@ export interface TopAsesParams {
 
 export interface TopLocationsParams {
   /**
-   * Array of domain names.
-   */
-  domain: Array<string>;
-
-  /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
    * AS3356.
@@ -244,6 +256,11 @@ export interface TopLocationsParams {
    * Array of datetimes to filter the start of a series.
    */
   dateStart?: Array<string>;
+
+  /**
+   * Array of domain names.
+   */
+  domain?: Array<string>;
 
   /**
    * Format results are returned in.

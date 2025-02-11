@@ -5,29 +5,11 @@ import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import { SettingsPoliciesSinglePage } from '../policies';
 import * as ExcludesAPI from './excludes';
-import {
-  ExcludeGetParams,
-  ExcludeGetResponse,
-  ExcludeUpdateParams,
-  ExcludeUpdateResponse,
-  Excludes,
-} from './excludes';
+import { ExcludeGetParams, ExcludeUpdateParams, Excludes } from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
-import {
-  FallbackDomainGetParams,
-  FallbackDomainGetResponse,
-  FallbackDomainUpdateParams,
-  FallbackDomainUpdateResponse,
-  FallbackDomains,
-} from './fallback-domains';
+import { FallbackDomainGetParams, FallbackDomainUpdateParams, FallbackDomains } from './fallback-domains';
 import * as IncludesAPI from './includes';
-import {
-  IncludeGetParams,
-  IncludeGetResponse,
-  IncludeUpdateParams,
-  IncludeUpdateResponse,
-  Includes,
-} from './includes';
+import { IncludeGetParams, IncludeUpdateParams, Includes } from './includes';
 
 export class Custom extends APIResource {
   excludes: ExcludesAPI.Excludes = new ExcludesAPI.Excludes(this._client);
@@ -73,13 +55,13 @@ export class Custom extends APIResource {
     policyId: string,
     params: CustomDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomDeleteResponse | null> {
+  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
-        result: CustomDeleteResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/${policyId}`,
+      SettingsPoliciesSinglePage,
+      { method: 'delete', ...options },
+    );
   }
 
   /**
@@ -115,8 +97,6 @@ export class Custom extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type CustomDeleteResponse = Array<PoliciesAPI.SettingsPolicy>;
 
 export interface CustomCreateParams {
   /**
@@ -157,7 +137,7 @@ export interface CustomCreateParams {
   allowed_to_leave?: boolean;
 
   /**
-   * Body param: The amount of time in minutes to reconnect after having been
+   * Body param: The amount of time in seconds to reconnect after having been
    * disabled.
    */
   auto_connect?: number;
@@ -270,7 +250,7 @@ export interface CustomEditParams {
   allowed_to_leave?: boolean;
 
   /**
-   * Body param: The amount of time in minutes to reconnect after having been
+   * Body param: The amount of time in seconds to reconnect after having been
    * disabled.
    */
   auto_connect?: number;
@@ -364,7 +344,6 @@ Custom.FallbackDomains = FallbackDomains;
 
 export declare namespace Custom {
   export {
-    type CustomDeleteResponse as CustomDeleteResponse,
     type CustomCreateParams as CustomCreateParams,
     type CustomListParams as CustomListParams,
     type CustomDeleteParams as CustomDeleteParams,
@@ -374,24 +353,18 @@ export declare namespace Custom {
 
   export {
     Excludes as Excludes,
-    type ExcludeUpdateResponse as ExcludeUpdateResponse,
-    type ExcludeGetResponse as ExcludeGetResponse,
     type ExcludeUpdateParams as ExcludeUpdateParams,
     type ExcludeGetParams as ExcludeGetParams,
   };
 
   export {
     Includes as Includes,
-    type IncludeUpdateResponse as IncludeUpdateResponse,
-    type IncludeGetResponse as IncludeGetResponse,
     type IncludeUpdateParams as IncludeUpdateParams,
     type IncludeGetParams as IncludeGetParams,
   };
 
   export {
     FallbackDomains as FallbackDomains,
-    type FallbackDomainUpdateResponse as FallbackDomainUpdateResponse,
-    type FallbackDomainGetResponse as FallbackDomainGetResponse,
     type FallbackDomainUpdateParams as FallbackDomainUpdateParams,
     type FallbackDomainGetParams as FallbackDomainGetParams,
   };

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class AudioTracks extends APIResource {
   /**
@@ -68,15 +69,17 @@ export class AudioTracks extends APIResource {
     identifier: string,
     params: AudioTrackGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AudioTrackGetResponse> {
+  ): Core.PagePromise<AudioSinglePage, Audio> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/${identifier}/audio`, options) as Core.APIPromise<{
-        result: AudioTrackGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/stream/${identifier}/audio`,
+      AudioSinglePage,
+      options,
+    );
   }
 }
+
+export class AudioSinglePage extends SinglePage<Audio> {}
 
 export interface Audio {
   /**
@@ -102,8 +105,6 @@ export interface Audio {
 }
 
 export type AudioTrackDeleteResponse = string;
-
-export type AudioTrackGetResponse = Array<Audio>;
 
 export interface AudioTrackDeleteParams {
   /**
@@ -159,11 +160,13 @@ export interface AudioTrackGetParams {
   account_id: string;
 }
 
+AudioTracks.AudioSinglePage = AudioSinglePage;
+
 export declare namespace AudioTracks {
   export {
     type Audio as Audio,
     type AudioTrackDeleteResponse as AudioTrackDeleteResponse,
-    type AudioTrackGetResponse as AudioTrackGetResponse,
+    AudioSinglePage as AudioSinglePage,
     type AudioTrackDeleteParams as AudioTrackDeleteParams,
     type AudioTrackCopyParams as AudioTrackCopyParams,
     type AudioTrackEditParams as AudioTrackEditParams,

@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from './rules';
 import {
   BlockRule,
@@ -51,7 +50,8 @@ import {
   PhaseUpdateResponse,
   Phases,
 } from './phases/phases';
-import { SinglePage } from '../../pagination';
+import { CloudflareError } from '../../error';
+import { CursorPagination, type CursorPaginationParams } from '../../pagination';
 
 export class Rulesets extends APIResource {
   phases: PhasesAPI.Phases = new PhasesAPI.Phases(this._client);
@@ -126,16 +126,18 @@ export class Rulesets extends APIResource {
   list(
     params?: RulesetListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse>;
+  ): Core.PagePromise<RulesetListResponsesCursorPagination, RulesetListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RulesetListResponsesCursorPagination, RulesetListResponse>;
   list(
     params: RulesetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse> {
+  ): Core.PagePromise<RulesetListResponsesCursorPagination, RulesetListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -154,8 +156,8 @@ export class Rulesets extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/rulesets`,
-      RulesetListResponsesSinglePage,
-      options,
+      RulesetListResponsesCursorPagination,
+      { query, ...options },
     );
   }
 
@@ -242,7 +244,7 @@ export class Rulesets extends APIResource {
   }
 }
 
-export class RulesetListResponsesSinglePage extends SinglePage<RulesetListResponse> {}
+export class RulesetListResponsesCursorPagination extends CursorPagination<RulesetListResponse> {}
 
 /**
  * The kind of the ruleset.
@@ -1988,14 +1990,16 @@ export namespace RulesetUpdateParams {
   }
 }
 
-export interface RulesetListParams {
+export interface RulesetListParams extends CursorPaginationParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
 }

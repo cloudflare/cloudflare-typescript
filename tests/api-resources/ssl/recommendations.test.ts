@@ -10,8 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource recommendations', () => {
-  test('get', async () => {
-    const responsePromise = client.ssl.recommendations.get('023e105f4ecef8ad9ca31a8372d0c353');
+  test('get: only required params', async () => {
+    const responsePromise = client.ssl.recommendations.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,12 +21,7 @@ describe('resource recommendations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.ssl.recommendations.get('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await client.ssl.recommendations.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

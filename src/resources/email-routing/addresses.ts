@@ -93,7 +93,7 @@ export interface Address {
   modified?: string;
 
   /**
-   * @deprecated: Destination address tag. (Deprecated, replaced by destination
+   * @deprecated Destination address tag. (Deprecated, replaced by destination
    * address identifier)
    */
   tag?: string;

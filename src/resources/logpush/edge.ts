@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Edge extends APIResource {
   /**
@@ -19,15 +20,16 @@ export class Edge extends APIResource {
   /**
    * Lists Instant Logs jobs for a zone.
    */
-  get(params: EdgeGetParams, options?: Core.RequestOptions): Core.APIPromise<EdgeGetResponse> {
+  get(
+    params: EdgeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InstantLogpushJobsSinglePage, InstantLogpushJob | null> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/logpush/edge`, options) as Core.APIPromise<{
-        result: EdgeGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/logpush/edge`, InstantLogpushJobsSinglePage, options);
   }
 }
+
+export class InstantLogpushJobsSinglePage extends SinglePage<InstantLogpushJob | null> {}
 
 export interface InstantLogpushJob {
   /**
@@ -56,8 +58,6 @@ export interface InstantLogpushJob {
    */
   session_id?: string;
 }
-
-export type EdgeGetResponse = Array<InstantLogpushJob | null>;
 
 export interface EdgeCreateParams {
   /**
@@ -89,10 +89,12 @@ export interface EdgeGetParams {
   zone_id: string;
 }
 
+Edge.InstantLogpushJobsSinglePage = InstantLogpushJobsSinglePage;
+
 export declare namespace Edge {
   export {
     type InstantLogpushJob as InstantLogpushJob,
-    type EdgeGetResponse as EdgeGetResponse,
+    InstantLogpushJobsSinglePage as InstantLogpushJobsSinglePage,
     type EdgeCreateParams as EdgeCreateParams,
     type EdgeGetParams as EdgeGetParams,
   };

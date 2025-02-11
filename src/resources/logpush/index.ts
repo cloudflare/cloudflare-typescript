@@ -2,9 +2,9 @@
 
 export { Datasets } from './datasets/index';
 export {
+  InstantLogpushJobsSinglePage,
   Edge,
   type InstantLogpushJob,
-  type EdgeGetResponse,
   type EdgeCreateParams,
   type EdgeGetParams,
 } from './edge';
@@ -31,7 +31,9 @@ export {
 export {
   Validate,
   type ValidateDestinationResponse,
+  type ValidateDestinationExistsResponse,
   type ValidateOriginResponse,
   type ValidateDestinationParams,
+  type ValidateDestinationExistsParams,
   type ValidateOriginParams,
 } from './validate';

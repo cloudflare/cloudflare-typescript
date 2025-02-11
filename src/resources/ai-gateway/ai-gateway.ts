@@ -18,7 +18,12 @@ import {
   Datasets,
 } from './datasets';
 import * as EvaluationTypesAPI from './evaluation-types';
-import { EvaluationTypeGetParams, EvaluationTypeGetResponse, EvaluationTypes } from './evaluation-types';
+import {
+  EvaluationTypeListParams,
+  EvaluationTypeListResponse,
+  EvaluationTypeListResponsesV4PagePaginationArray,
+  EvaluationTypes,
+} from './evaluation-types';
 import * as EvaluationsAPI from './evaluations';
 import {
   EvaluationCreateParams,
@@ -168,6 +173,10 @@ export interface AIGatewayCreateResponse {
 
   rate_limiting_technique: 'fixed' | 'sliding';
 
+  authentication?: boolean;
+
+  log_management?: number | null;
+
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -200,6 +209,10 @@ export interface AIGatewayUpdateResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  authentication?: boolean;
+
+  log_management?: number | null;
 
   logpush?: boolean;
 
@@ -234,6 +247,10 @@ export interface AIGatewayListResponse {
 
   rate_limiting_technique: 'fixed' | 'sliding';
 
+  authentication?: boolean;
+
+  log_management?: number | null;
+
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -267,6 +284,10 @@ export interface AIGatewayDeleteResponse {
 
   rate_limiting_technique: 'fixed' | 'sliding';
 
+  authentication?: boolean;
+
+  log_management?: number | null;
+
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -299,6 +320,10 @@ export interface AIGatewayGetResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  authentication?: boolean;
+
+  log_management?: number | null;
 
   logpush?: boolean;
 
@@ -345,6 +370,16 @@ export interface AIGatewayCreateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  /**
+   * Body param:
+   */
+  authentication?: boolean;
+
+  /**
+   * Body param:
+   */
+  log_management?: number | null;
 
   /**
    * Body param:
@@ -396,6 +431,16 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
+  authentication?: boolean;
+
+  /**
+   * Body param:
+   */
+  log_management?: number | null;
+
+  /**
+   * Body param:
+   */
   logpush?: boolean;
 
   /**
@@ -425,6 +470,7 @@ export interface AIGatewayGetParams {
 }
 
 AIGateway.EvaluationTypes = EvaluationTypes;
+AIGateway.EvaluationTypeListResponsesV4PagePaginationArray = EvaluationTypeListResponsesV4PagePaginationArray;
 AIGateway.Logs = Logs;
 AIGateway.LogListResponsesV4PagePaginationArray = LogListResponsesV4PagePaginationArray;
 AIGateway.Datasets = Datasets;
@@ -435,8 +481,9 @@ AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponses
 export declare namespace AIGateway {
   export {
     EvaluationTypes as EvaluationTypes,
-    type EvaluationTypeGetResponse as EvaluationTypeGetResponse,
-    type EvaluationTypeGetParams as EvaluationTypeGetParams,
+    type EvaluationTypeListResponse as EvaluationTypeListResponse,
+    EvaluationTypeListResponsesV4PagePaginationArray as EvaluationTypeListResponsesV4PagePaginationArray,
+    type EvaluationTypeListParams as EvaluationTypeListParams,
   };
 
   export {

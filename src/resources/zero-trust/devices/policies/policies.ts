@@ -6,7 +6,6 @@ import {
   Custom,
   CustomCreateParams,
   CustomDeleteParams,
-  CustomDeleteResponse,
   CustomEditParams,
   CustomGetParams,
   CustomListParams,
@@ -25,6 +24,12 @@ export class Policies extends APIResource {
   default: DefaultAPI.Default = new DefaultAPI.Default(this._client);
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
 }
+
+export class SplitTunnelExcludesSinglePage extends SinglePage<SplitTunnelExclude> {}
+
+export class SplitTunnelIncludesSinglePage extends SinglePage<SplitTunnelInclude> {}
+
+export class FallbackDomainsSinglePage extends SinglePage<FallbackDomain> {}
 
 export class SettingsPoliciesSinglePage extends SinglePage<SettingsPolicy> {}
 
@@ -90,7 +95,7 @@ export interface SettingsPolicy {
   allowed_to_leave?: boolean;
 
   /**
-   * The amount of time in minutes to reconnect after having been disabled.
+   * The amount of time in seconds to reconnect after having been disabled.
    */
   auto_connect?: number;
 
@@ -314,7 +319,6 @@ export declare namespace Policies {
 
   export {
     Custom as Custom,
-    type CustomDeleteResponse as CustomDeleteResponse,
     type CustomCreateParams as CustomCreateParams,
     type CustomListParams as CustomListParams,
     type CustomDeleteParams as CustomDeleteParams,

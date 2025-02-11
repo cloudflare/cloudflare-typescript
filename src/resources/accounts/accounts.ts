@@ -23,7 +23,6 @@ import {
   SubscriptionDeleteParams,
   SubscriptionDeleteResponse,
   SubscriptionGetParams,
-  SubscriptionGetResponse,
   SubscriptionUpdateParams,
   SubscriptionUpdateResponse,
   Subscriptions,
@@ -154,7 +153,7 @@ export namespace Account {
     abuse_contact_email?: string;
 
     /**
-     * @deprecated: Specifies the default nameservers to be used for new zones added to
+     * @deprecated Specifies the default nameservers to be used for new zones added to
      * this account.
      *
      * - `cloudflare.standard` for Cloudflare-branded nameservers
@@ -177,7 +176,7 @@ export namespace Account {
     enforce_twofactor?: boolean;
 
     /**
-     * @deprecated: Indicates whether new zones should use the account-level custom
+     * @deprecated Indicates whether new zones should use the account-level custom
      * nameservers by default.
      *
      * Deprecated in favor of
@@ -256,7 +255,7 @@ export namespace AccountUpdateParams {
     abuse_contact_email?: string;
 
     /**
-     * @deprecated: Specifies the default nameservers to be used for new zones added to
+     * @deprecated Specifies the default nameservers to be used for new zones added to
      * this account.
      *
      * - `cloudflare.standard` for Cloudflare-branded nameservers
@@ -279,7 +278,7 @@ export namespace AccountUpdateParams {
     enforce_twofactor?: boolean;
 
     /**
-     * @deprecated: Indicates whether new zones should use the account-level custom
+     * @deprecated Indicates whether new zones should use the account-level custom
      * nameservers by default.
      *
      * Deprecated in favor of
@@ -340,7 +339,6 @@ export declare namespace Accounts {
     type SubscriptionCreateResponse as SubscriptionCreateResponse,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionGetResponse as SubscriptionGetResponse,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,

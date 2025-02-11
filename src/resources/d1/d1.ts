@@ -16,10 +16,11 @@ import {
   DatabaseListResponse,
   DatabaseListResponsesV4PagePaginationArray,
   DatabaseQueryParams,
-  DatabaseQueryResponse,
   DatabaseRawParams,
   DatabaseRawResponse,
+  DatabaseRawResponsesSinglePage,
   QueryResult,
+  QueryResultsSinglePage,
 } from './database';
 
 export class D1Resource extends APIResource {
@@ -37,10 +38,16 @@ export interface D1 {
    */
   file_size?: number;
 
+  /**
+   * D1 database name.
+   */
   name?: string;
 
   num_tables?: number;
 
+  /**
+   * D1 database identifier (UUID).
+   */
   uuid?: string;
 
   version?: string;
@@ -48,6 +55,8 @@ export interface D1 {
 
 D1Resource.Database = Database;
 D1Resource.DatabaseListResponsesV4PagePaginationArray = DatabaseListResponsesV4PagePaginationArray;
+D1Resource.QueryResultsSinglePage = QueryResultsSinglePage;
+D1Resource.DatabaseRawResponsesSinglePage = DatabaseRawResponsesSinglePage;
 
 export declare namespace D1Resource {
   export {
@@ -57,9 +66,10 @@ export declare namespace D1Resource {
     type DatabaseDeleteResponse as DatabaseDeleteResponse,
     type DatabaseExportResponse as DatabaseExportResponse,
     type DatabaseImportResponse as DatabaseImportResponse,
-    type DatabaseQueryResponse as DatabaseQueryResponse,
     type DatabaseRawResponse as DatabaseRawResponse,
     DatabaseListResponsesV4PagePaginationArray as DatabaseListResponsesV4PagePaginationArray,
+    QueryResultsSinglePage as QueryResultsSinglePage,
+    DatabaseRawResponsesSinglePage as DatabaseRawResponsesSinglePage,
     type DatabaseCreateParams as DatabaseCreateParams,
     type DatabaseListParams as DatabaseListParams,
     type DatabaseDeleteParams as DatabaseDeleteParams,

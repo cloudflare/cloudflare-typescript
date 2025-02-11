@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as Shared from '../shared';
+import { SubscriptionsSinglePage } from '../shared';
 
 export class Subscriptions extends APIResource {
   /**
@@ -60,13 +61,9 @@ export class Subscriptions extends APIResource {
   get(
     params: SubscriptionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionGetResponse | null> {
+  ): Core.PagePromise<SubscriptionsSinglePage, Shared.Subscription> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/subscriptions`, options) as Core.APIPromise<{
-        result: SubscriptionGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/subscriptions`, SubscriptionsSinglePage, options);
   }
 }
 
@@ -80,8 +77,6 @@ export interface SubscriptionDeleteResponse {
    */
   subscription_id?: string;
 }
-
-export type SubscriptionGetResponse = Array<Shared.Subscription>;
 
 export interface SubscriptionCreateParams {
   /**
@@ -136,10 +131,11 @@ export declare namespace Subscriptions {
     type SubscriptionCreateResponse as SubscriptionCreateResponse,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionGetResponse as SubscriptionGetResponse,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
     type SubscriptionGetParams as SubscriptionGetParams,
   };
 }
+
+export { SubscriptionsSinglePage };

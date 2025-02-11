@@ -8,12 +8,13 @@ export class Recommendations extends APIResource {
    * Retrieve the SSL/TLS Recommender's recommendation for a zone.
    */
   get(
-    zoneIdentifier: string,
+    params: RecommendationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RecommendationGetResponse | null> {
+  ): Core.APIPromise<RecommendationGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/ssl/recommendation`, options) as Core.APIPromise<{
-        result: RecommendationGetResponse | null;
+      this._client.get(`/zones/${zone_id}/ssl/recommendation`, options) as Core.APIPromise<{
+        result: RecommendationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -21,7 +22,7 @@ export class Recommendations extends APIResource {
 
 export interface RecommendationGetResponse {
   /**
-   * Identifier of a recommedation result.
+   * Identifier of a recommendation result.
    */
   id?: string;
 
@@ -30,6 +31,16 @@ export interface RecommendationGetResponse {
   value?: 'flexible' | 'full' | 'strict';
 }
 
+export interface RecommendationGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export declare namespace Recommendations {
-  export { type RecommendationGetResponse as RecommendationGetResponse };
+  export {
+    type RecommendationGetResponse as RecommendationGetResponse,
+    type RecommendationGetParams as RecommendationGetParams,
+  };
 }

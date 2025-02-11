@@ -3,15 +3,15 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from 'cloudflare/error';
-import * as AccessAPI from './access';
+import * as PoliciesAPI from './applications/policies';
+import { CloudflareError } from '../../../error';
 import { SinglePage } from '../../../pagination';
 
 export class Groups extends APIResource {
   /**
    * Creates a new Access group.
    */
-  create(params: GroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup> {
+  create(params: GroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<GroupCreateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -33,7 +33,7 @@ export class Groups extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/groups`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustGroup }>
+      }) as Core.APIPromise<{ result: GroupCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,7 +44,7 @@ export class Groups extends APIResource {
     groupId: string,
     params: GroupUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGroup> {
+  ): Core.APIPromise<GroupUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -66,7 +66,7 @@ export class Groups extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustGroup }>
+      }) as Core.APIPromise<{ result: GroupUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,12 +76,12 @@ export class Groups extends APIResource {
   list(
     params?: GroupListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup>;
+  ): Core.PagePromise<GroupListResponsesSinglePage, GroupListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<GroupListResponsesSinglePage, GroupListResponse>;
   list(
     params: GroupListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup> {
+  ): Core.PagePromise<GroupListResponsesSinglePage, GroupListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -104,7 +104,7 @@ export class Groups extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/groups`,
-      ZeroTrustGroupsSinglePage,
+      GroupListResponsesSinglePage,
       { query, ...options },
     );
   }
@@ -158,13 +158,13 @@ export class Groups extends APIResource {
     groupId: string,
     params?: GroupGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGroup>;
-  get(groupId: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup>;
+  ): Core.APIPromise<GroupGetResponse>;
+  get(groupId: string, options?: Core.RequestOptions): Core.APIPromise<GroupGetResponse>;
   get(
     groupId: string,
     params: GroupGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGroup> {
+  ): Core.APIPromise<GroupGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(groupId, {}, params);
     }
@@ -189,14 +189,60 @@ export class Groups extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`,
         options,
-      ) as Core.APIPromise<{ result: ZeroTrustGroup }>
+      ) as Core.APIPromise<{ result: GroupGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export class GroupListResponsesSinglePage extends SinglePage<GroupListResponse> {}
+
 export class ZeroTrustGroupsSinglePage extends SinglePage<ZeroTrustGroup> {}
 
 export interface ZeroTrustGroup {
+  /**
+   * The unique Cloudflare-generated Id of the SCIM resource.
+   */
+  id?: string;
+
+  /**
+   * The display name of the SCIM Group resource.
+   */
+  displayName?: string;
+
+  /**
+   * The IdP-generated Id of the SCIM resource.
+   */
+  externalId?: string;
+
+  /**
+   * The metadata of the SCIM resource.
+   */
+  meta?: ZeroTrustGroup.Meta;
+
+  /**
+   * The list of URIs which indicate the attributes contained within a SCIM resource.
+   */
+  schemas?: Array<string>;
+}
+
+export namespace ZeroTrustGroup {
+  /**
+   * The metadata of the SCIM resource.
+   */
+  export interface Meta {
+    /**
+     * The timestamp of when the SCIM resource was created.
+     */
+    created?: string;
+
+    /**
+     * The timestamp of when the SCIM resource was last modified.
+     */
+    lastModified?: string;
+  }
+}
+
+export interface GroupCreateResponse {
   /**
    * UUID
    */
@@ -208,19 +254,19 @@ export interface ZeroTrustGroup {
    * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<PoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.AccessRule>;
+  include?: Array<PoliciesAPI.AccessRule>;
 
   /**
    * Rules evaluated with an AND logical operator. To match a policy, a user must
    * meet all of the Require rules.
    */
-  is_default?: Array<AccessAPI.AccessRule>;
+  is_default?: Array<PoliciesAPI.AccessRule>;
 
   /**
    * The name of the Access group.
@@ -231,7 +277,87 @@ export interface ZeroTrustGroup {
    * Rules evaluated with an AND logical operator. To match a policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<PoliciesAPI.AccessRule>;
+
+  updated_at?: string;
+}
+
+export interface GroupUpdateResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+
+  created_at?: string;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match a policy, a user must
+   * meet all of the Require rules.
+   */
+  is_default?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * The name of the Access group.
+   */
+  name?: string;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match a policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<PoliciesAPI.AccessRule>;
+
+  updated_at?: string;
+}
+
+export interface GroupListResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+
+  created_at?: string;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match a policy, a user must
+   * meet all of the Require rules.
+   */
+  is_default?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * The name of the Access group.
+   */
+  name?: string;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match a policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<PoliciesAPI.AccessRule>;
 
   updated_at?: string;
 }
@@ -243,12 +369,52 @@ export interface GroupDeleteResponse {
   id?: string;
 }
 
+export interface GroupGetResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+
+  created_at?: string;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match a policy, a user must
+   * meet all of the Require rules.
+   */
+  is_default?: Array<PoliciesAPI.AccessRule>;
+
+  /**
+   * The name of the Access group.
+   */
+  name?: string;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match a policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<PoliciesAPI.AccessRule>;
+
+  updated_at?: string;
+}
+
 export interface GroupCreateParams {
   /**
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.AccessRuleParam>;
+  include: Array<PoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: The name of the Access group.
@@ -271,7 +437,7 @@ export interface GroupCreateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
+  exclude?: Array<PoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: Whether this is the default group
@@ -282,7 +448,7 @@ export interface GroupCreateParams {
    * Body param: Rules evaluated with an AND logical operator. To match a policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRuleParam>;
+  require?: Array<PoliciesAPI.AccessRuleParam>;
 }
 
 export interface GroupUpdateParams {
@@ -290,7 +456,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.AccessRuleParam>;
+  include: Array<PoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: The name of the Access group.
@@ -313,7 +479,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
+  exclude?: Array<PoliciesAPI.AccessRuleParam>;
 
   /**
    * Body param: Whether this is the default group
@@ -324,7 +490,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with an AND logical operator. To match a policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRuleParam>;
+  require?: Array<PoliciesAPI.AccessRuleParam>;
 }
 
 export interface GroupListParams {
@@ -375,13 +541,17 @@ export interface GroupGetParams {
   zone_id?: string;
 }
 
-Groups.ZeroTrustGroupsSinglePage = ZeroTrustGroupsSinglePage;
+Groups.GroupListResponsesSinglePage = GroupListResponsesSinglePage;
 
 export declare namespace Groups {
   export {
     type ZeroTrustGroup as ZeroTrustGroup,
+    type GroupCreateResponse as GroupCreateResponse,
+    type GroupUpdateResponse as GroupUpdateResponse,
+    type GroupListResponse as GroupListResponse,
     type GroupDeleteResponse as GroupDeleteResponse,
-    ZeroTrustGroupsSinglePage as ZeroTrustGroupsSinglePage,
+    type GroupGetResponse as GroupGetResponse,
+    GroupListResponsesSinglePage as GroupListResponsesSinglePage,
     type GroupCreateParams as GroupCreateParams,
     type GroupUpdateParams as GroupUpdateParams,
     type GroupListParams as GroupListParams,

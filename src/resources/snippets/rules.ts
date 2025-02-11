@@ -9,13 +9,16 @@ export class Rules extends APIResource {
   /**
    * Put Rules
    */
-  update(params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RuleUpdateResponse> {
+  update(
+    params: RuleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/snippets/snippet_rules`, { body, ...options }) as Core.APIPromise<{
-        result: RuleUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/snippets/snippet_rules`,
+      RuleUpdateResponsesSinglePage,
+      { body, method: 'put', ...options },
+    );
   }
 
   /**
@@ -42,26 +45,21 @@ export class Rules extends APIResource {
   }
 }
 
+export class RuleUpdateResponsesSinglePage extends SinglePage<RuleUpdateResponse> {}
+
 export class RuleListResponsesSinglePage extends SinglePage<RuleListResponse> {}
 
-/**
- * List of snippet rules
- */
-export type RuleUpdateResponse = Array<RuleUpdateResponse.RuleUpdateResponseItem>;
+export interface RuleUpdateResponse {
+  description?: string;
 
-export namespace RuleUpdateResponse {
-  export interface RuleUpdateResponseItem {
-    description?: string;
+  enabled?: boolean;
 
-    enabled?: boolean;
+  expression?: string;
 
-    expression?: string;
-
-    /**
-     * Snippet identifying name
-     */
-    snippet_name?: string;
-  }
+  /**
+   * Snippet identifying name
+   */
+  snippet_name?: string;
 }
 
 export interface RuleListResponse {
@@ -129,6 +127,7 @@ export interface RuleDeleteParams {
   zone_id: string;
 }
 
+Rules.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;
 Rules.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
 
 export declare namespace Rules {
@@ -136,6 +135,7 @@ export declare namespace Rules {
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
+    RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
     RuleListResponsesSinglePage as RuleListResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,

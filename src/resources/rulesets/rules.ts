@@ -3,9 +3,9 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from './rules';
 import * as RulesetsAPI from './rulesets';
+import { CloudflareError } from '../../error';
 
 export class Rules extends APIResource {
   /**
@@ -7417,7 +7417,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.BlockRule.ActionParameters;
+    action_parameters?: BlockRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7432,7 +7432,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.BlockRule.ExposedCredentialCheck;
+    exposed_credential_check?: BlockRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -7447,15 +7447,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.BlockRule.BeforePosition
-      | RuleCreateParams.BlockRule.AfterPosition
-      | RuleCreateParams.BlockRule.IndexPosition;
+    position?: BlockRule.BeforePosition | BlockRule.AfterPosition | BlockRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.BlockRule.Ratelimit;
+    ratelimit?: BlockRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -7636,7 +7633,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.ChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: ChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -7651,15 +7648,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.ChallengeRule.BeforePosition
-      | RuleCreateParams.ChallengeRule.AfterPosition
-      | RuleCreateParams.ChallengeRule.IndexPosition;
+    position?: ChallengeRule.BeforePosition | ChallengeRule.AfterPosition | ChallengeRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.ChallengeRule.Ratelimit;
+    ratelimit?: ChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -7793,7 +7787,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.CompressionRule.ActionParameters;
+    action_parameters?: CompressionRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7808,7 +7802,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.CompressionRule.ExposedCredentialCheck;
+    exposed_credential_check?: CompressionRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -7823,15 +7817,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.CompressionRule.BeforePosition
-      | RuleCreateParams.CompressionRule.AfterPosition
-      | RuleCreateParams.CompressionRule.IndexPosition;
+    position?: CompressionRule.BeforePosition | CompressionRule.AfterPosition | CompressionRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.CompressionRule.Ratelimit;
+    ratelimit?: CompressionRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -7987,7 +7978,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.ExecuteRule.ActionParameters;
+    action_parameters?: ExecuteRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -8002,7 +7993,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.ExecuteRule.ExposedCredentialCheck;
+    exposed_credential_check?: ExecuteRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -8017,15 +8008,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.ExecuteRule.BeforePosition
-      | RuleCreateParams.ExecuteRule.AfterPosition
-      | RuleCreateParams.ExecuteRule.IndexPosition;
+    position?: ExecuteRule.BeforePosition | ExecuteRule.AfterPosition | ExecuteRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.ExecuteRule.Ratelimit;
+    ratelimit?: ExecuteRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -8297,7 +8285,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.JavascriptChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: JavascriptChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -8313,14 +8301,14 @@ export declare namespace RuleCreateParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleCreateParams.JavascriptChallengeRule.BeforePosition
-      | RuleCreateParams.JavascriptChallengeRule.AfterPosition
-      | RuleCreateParams.JavascriptChallengeRule.IndexPosition;
+      | JavascriptChallengeRule.BeforePosition
+      | JavascriptChallengeRule.AfterPosition
+      | JavascriptChallengeRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.JavascriptChallengeRule.Ratelimit;
+    ratelimit?: JavascriptChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -8469,7 +8457,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.LogRule.ExposedCredentialCheck;
+    exposed_credential_check?: LogRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -8484,15 +8472,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.LogRule.BeforePosition
-      | RuleCreateParams.LogRule.AfterPosition
-      | RuleCreateParams.LogRule.IndexPosition;
+    position?: LogRule.BeforePosition | LogRule.AfterPosition | LogRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.LogRule.Ratelimit;
+    ratelimit?: LogRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -8641,7 +8626,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.ManagedChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: ManagedChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -8657,14 +8642,14 @@ export declare namespace RuleCreateParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleCreateParams.ManagedChallengeRule.BeforePosition
-      | RuleCreateParams.ManagedChallengeRule.AfterPosition
-      | RuleCreateParams.ManagedChallengeRule.IndexPosition;
+      | ManagedChallengeRule.BeforePosition
+      | ManagedChallengeRule.AfterPosition
+      | ManagedChallengeRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.ManagedChallengeRule.Ratelimit;
+    ratelimit?: ManagedChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -8798,7 +8783,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RedirectRule.ActionParameters;
+    action_parameters?: RedirectRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -8813,7 +8798,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.RedirectRule.ExposedCredentialCheck;
+    exposed_credential_check?: RedirectRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -8828,15 +8813,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.RedirectRule.BeforePosition
-      | RuleCreateParams.RedirectRule.AfterPosition
-      | RuleCreateParams.RedirectRule.IndexPosition;
+    position?: RedirectRule.BeforePosition | RedirectRule.AfterPosition | RedirectRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.RedirectRule.Ratelimit;
+    ratelimit?: RedirectRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -9038,7 +9020,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RewriteRule.ActionParameters;
+    action_parameters?: RewriteRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -9053,7 +9035,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.RewriteRule.ExposedCredentialCheck;
+    exposed_credential_check?: RewriteRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -9068,15 +9050,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.RewriteRule.BeforePosition
-      | RuleCreateParams.RewriteRule.AfterPosition
-      | RuleCreateParams.RewriteRule.IndexPosition;
+    position?: RewriteRule.BeforePosition | RewriteRule.AfterPosition | RewriteRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.RewriteRule.Ratelimit;
+    ratelimit?: RewriteRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -9276,7 +9255,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.OriginRule.ActionParameters;
+    action_parameters?: OriginRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -9291,7 +9270,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.OriginRule.ExposedCredentialCheck;
+    exposed_credential_check?: OriginRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -9306,15 +9285,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.OriginRule.BeforePosition
-      | RuleCreateParams.OriginRule.AfterPosition
-      | RuleCreateParams.OriginRule.IndexPosition;
+    position?: OriginRule.BeforePosition | OriginRule.AfterPosition | OriginRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.OriginRule.Ratelimit;
+    ratelimit?: OriginRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -9495,7 +9471,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.ScoreRule.ActionParameters;
+    action_parameters?: ScoreRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -9510,7 +9486,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.ScoreRule.ExposedCredentialCheck;
+    exposed_credential_check?: ScoreRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -9525,15 +9501,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.ScoreRule.BeforePosition
-      | RuleCreateParams.ScoreRule.AfterPosition
-      | RuleCreateParams.ScoreRule.IndexPosition;
+    position?: ScoreRule.BeforePosition | ScoreRule.AfterPosition | ScoreRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.ScoreRule.Ratelimit;
+    ratelimit?: ScoreRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -9678,7 +9651,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.ServeErrorRule.ActionParameters;
+    action_parameters?: ServeErrorRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -9693,7 +9666,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.ServeErrorRule.ExposedCredentialCheck;
+    exposed_credential_check?: ServeErrorRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -9708,15 +9681,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.ServeErrorRule.BeforePosition
-      | RuleCreateParams.ServeErrorRule.AfterPosition
-      | RuleCreateParams.ServeErrorRule.IndexPosition;
+    position?: ServeErrorRule.BeforePosition | ServeErrorRule.AfterPosition | ServeErrorRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.ServeErrorRule.Ratelimit;
+    ratelimit?: ServeErrorRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -9870,7 +9840,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.SetConfigRule.ActionParameters;
+    action_parameters?: SetConfigRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -9885,7 +9855,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.SetConfigRule.ExposedCredentialCheck;
+    exposed_credential_check?: SetConfigRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -9900,15 +9870,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.SetConfigRule.BeforePosition
-      | RuleCreateParams.SetConfigRule.AfterPosition
-      | RuleCreateParams.SetConfigRule.IndexPosition;
+    position?: SetConfigRule.BeforePosition | SetConfigRule.AfterPosition | SetConfigRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.SetConfigRule.Ratelimit;
+    ratelimit?: SetConfigRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -10154,7 +10121,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.SkipRule.ActionParameters;
+    action_parameters?: SkipRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -10169,7 +10136,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.SkipRule.ExposedCredentialCheck;
+    exposed_credential_check?: SkipRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -10184,15 +10151,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.SkipRule.BeforePosition
-      | RuleCreateParams.SkipRule.AfterPosition
-      | RuleCreateParams.SkipRule.IndexPosition;
+    position?: SkipRule.BeforePosition | SkipRule.AfterPosition | SkipRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.SkipRule.Ratelimit;
+    ratelimit?: SkipRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -10360,7 +10324,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.SetCacheSettingsRule.ActionParameters;
+    action_parameters?: SetCacheSettingsRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -10375,7 +10339,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.SetCacheSettingsRule.ExposedCredentialCheck;
+    exposed_credential_check?: SetCacheSettingsRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -10391,14 +10355,14 @@ export declare namespace RuleCreateParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleCreateParams.SetCacheSettingsRule.BeforePosition
-      | RuleCreateParams.SetCacheSettingsRule.AfterPosition
-      | RuleCreateParams.SetCacheSettingsRule.IndexPosition;
+      | SetCacheSettingsRule.BeforePosition
+      | SetCacheSettingsRule.AfterPosition
+      | SetCacheSettingsRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.SetCacheSettingsRule.Ratelimit;
+    ratelimit?: SetCacheSettingsRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -10928,7 +10892,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.LogCustomFieldRule.ActionParameters;
+    action_parameters?: LogCustomFieldRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -10943,7 +10907,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.LogCustomFieldRule.ExposedCredentialCheck;
+    exposed_credential_check?: LogCustomFieldRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -10959,14 +10923,14 @@ export declare namespace RuleCreateParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleCreateParams.LogCustomFieldRule.BeforePosition
-      | RuleCreateParams.LogCustomFieldRule.AfterPosition
-      | RuleCreateParams.LogCustomFieldRule.IndexPosition;
+      | LogCustomFieldRule.BeforePosition
+      | LogCustomFieldRule.AfterPosition
+      | LogCustomFieldRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.LogCustomFieldRule.Ratelimit;
+    ratelimit?: LogCustomFieldRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -11167,7 +11131,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.DDoSDynamicRule.ExposedCredentialCheck;
+    exposed_credential_check?: DDoSDynamicRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -11182,15 +11146,12 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleCreateParams.DDoSDynamicRule.BeforePosition
-      | RuleCreateParams.DDoSDynamicRule.AfterPosition
-      | RuleCreateParams.DDoSDynamicRule.IndexPosition;
+    position?: DDoSDynamicRule.BeforePosition | DDoSDynamicRule.AfterPosition | DDoSDynamicRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.DDoSDynamicRule.Ratelimit;
+    ratelimit?: DDoSDynamicRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -11339,7 +11300,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleCreateParams.ForceConnectionCloseRule.ExposedCredentialCheck;
+    exposed_credential_check?: ForceConnectionCloseRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -11355,14 +11316,14 @@ export declare namespace RuleCreateParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleCreateParams.ForceConnectionCloseRule.BeforePosition
-      | RuleCreateParams.ForceConnectionCloseRule.AfterPosition
-      | RuleCreateParams.ForceConnectionCloseRule.IndexPosition;
+      | ForceConnectionCloseRule.BeforePosition
+      | ForceConnectionCloseRule.AfterPosition
+      | ForceConnectionCloseRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleCreateParams.ForceConnectionCloseRule.Ratelimit;
+    ratelimit?: ForceConnectionCloseRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -11530,7 +11491,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.BlockRule.ActionParameters;
+    action_parameters?: BlockRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -11545,7 +11506,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.BlockRule.ExposedCredentialCheck;
+    exposed_credential_check?: BlockRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -11560,15 +11521,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.BlockRule.BeforePosition
-      | RuleEditParams.BlockRule.AfterPosition
-      | RuleEditParams.BlockRule.IndexPosition;
+    position?: BlockRule.BeforePosition | BlockRule.AfterPosition | BlockRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.BlockRule.Ratelimit;
+    ratelimit?: BlockRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -11749,7 +11707,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.ChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: ChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -11764,15 +11722,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.ChallengeRule.BeforePosition
-      | RuleEditParams.ChallengeRule.AfterPosition
-      | RuleEditParams.ChallengeRule.IndexPosition;
+    position?: ChallengeRule.BeforePosition | ChallengeRule.AfterPosition | ChallengeRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.ChallengeRule.Ratelimit;
+    ratelimit?: ChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -11906,7 +11861,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.CompressionRule.ActionParameters;
+    action_parameters?: CompressionRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -11921,7 +11876,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.CompressionRule.ExposedCredentialCheck;
+    exposed_credential_check?: CompressionRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -11936,15 +11891,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.CompressionRule.BeforePosition
-      | RuleEditParams.CompressionRule.AfterPosition
-      | RuleEditParams.CompressionRule.IndexPosition;
+    position?: CompressionRule.BeforePosition | CompressionRule.AfterPosition | CompressionRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.CompressionRule.Ratelimit;
+    ratelimit?: CompressionRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -12100,7 +12052,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.ExecuteRule.ActionParameters;
+    action_parameters?: ExecuteRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -12115,7 +12067,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.ExecuteRule.ExposedCredentialCheck;
+    exposed_credential_check?: ExecuteRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -12130,15 +12082,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.ExecuteRule.BeforePosition
-      | RuleEditParams.ExecuteRule.AfterPosition
-      | RuleEditParams.ExecuteRule.IndexPosition;
+    position?: ExecuteRule.BeforePosition | ExecuteRule.AfterPosition | ExecuteRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.ExecuteRule.Ratelimit;
+    ratelimit?: ExecuteRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -12410,7 +12359,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.JavascriptChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: JavascriptChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -12426,14 +12375,14 @@ export declare namespace RuleEditParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleEditParams.JavascriptChallengeRule.BeforePosition
-      | RuleEditParams.JavascriptChallengeRule.AfterPosition
-      | RuleEditParams.JavascriptChallengeRule.IndexPosition;
+      | JavascriptChallengeRule.BeforePosition
+      | JavascriptChallengeRule.AfterPosition
+      | JavascriptChallengeRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.JavascriptChallengeRule.Ratelimit;
+    ratelimit?: JavascriptChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -12582,7 +12531,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.LogRule.ExposedCredentialCheck;
+    exposed_credential_check?: LogRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -12597,15 +12546,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.LogRule.BeforePosition
-      | RuleEditParams.LogRule.AfterPosition
-      | RuleEditParams.LogRule.IndexPosition;
+    position?: LogRule.BeforePosition | LogRule.AfterPosition | LogRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.LogRule.Ratelimit;
+    ratelimit?: LogRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -12754,7 +12700,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.ManagedChallengeRule.ExposedCredentialCheck;
+    exposed_credential_check?: ManagedChallengeRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -12770,14 +12716,14 @@ export declare namespace RuleEditParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleEditParams.ManagedChallengeRule.BeforePosition
-      | RuleEditParams.ManagedChallengeRule.AfterPosition
-      | RuleEditParams.ManagedChallengeRule.IndexPosition;
+      | ManagedChallengeRule.BeforePosition
+      | ManagedChallengeRule.AfterPosition
+      | ManagedChallengeRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.ManagedChallengeRule.Ratelimit;
+    ratelimit?: ManagedChallengeRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -12911,7 +12857,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RedirectRule.ActionParameters;
+    action_parameters?: RedirectRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -12926,7 +12872,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.RedirectRule.ExposedCredentialCheck;
+    exposed_credential_check?: RedirectRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -12941,15 +12887,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.RedirectRule.BeforePosition
-      | RuleEditParams.RedirectRule.AfterPosition
-      | RuleEditParams.RedirectRule.IndexPosition;
+    position?: RedirectRule.BeforePosition | RedirectRule.AfterPosition | RedirectRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.RedirectRule.Ratelimit;
+    ratelimit?: RedirectRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -13151,7 +13094,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RewriteRule.ActionParameters;
+    action_parameters?: RewriteRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -13166,7 +13109,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.RewriteRule.ExposedCredentialCheck;
+    exposed_credential_check?: RewriteRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -13181,15 +13124,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.RewriteRule.BeforePosition
-      | RuleEditParams.RewriteRule.AfterPosition
-      | RuleEditParams.RewriteRule.IndexPosition;
+    position?: RewriteRule.BeforePosition | RewriteRule.AfterPosition | RewriteRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.RewriteRule.Ratelimit;
+    ratelimit?: RewriteRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -13389,7 +13329,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.OriginRule.ActionParameters;
+    action_parameters?: OriginRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -13404,7 +13344,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.OriginRule.ExposedCredentialCheck;
+    exposed_credential_check?: OriginRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -13419,15 +13359,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.OriginRule.BeforePosition
-      | RuleEditParams.OriginRule.AfterPosition
-      | RuleEditParams.OriginRule.IndexPosition;
+    position?: OriginRule.BeforePosition | OriginRule.AfterPosition | OriginRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.OriginRule.Ratelimit;
+    ratelimit?: OriginRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -13608,7 +13545,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.ScoreRule.ActionParameters;
+    action_parameters?: ScoreRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -13623,7 +13560,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.ScoreRule.ExposedCredentialCheck;
+    exposed_credential_check?: ScoreRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -13638,15 +13575,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.ScoreRule.BeforePosition
-      | RuleEditParams.ScoreRule.AfterPosition
-      | RuleEditParams.ScoreRule.IndexPosition;
+    position?: ScoreRule.BeforePosition | ScoreRule.AfterPosition | ScoreRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.ScoreRule.Ratelimit;
+    ratelimit?: ScoreRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -13791,7 +13725,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.ServeErrorRule.ActionParameters;
+    action_parameters?: ServeErrorRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -13806,7 +13740,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.ServeErrorRule.ExposedCredentialCheck;
+    exposed_credential_check?: ServeErrorRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -13821,15 +13755,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.ServeErrorRule.BeforePosition
-      | RuleEditParams.ServeErrorRule.AfterPosition
-      | RuleEditParams.ServeErrorRule.IndexPosition;
+    position?: ServeErrorRule.BeforePosition | ServeErrorRule.AfterPosition | ServeErrorRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.ServeErrorRule.Ratelimit;
+    ratelimit?: ServeErrorRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -13983,7 +13914,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.SetConfigRule.ActionParameters;
+    action_parameters?: SetConfigRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -13998,7 +13929,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.SetConfigRule.ExposedCredentialCheck;
+    exposed_credential_check?: SetConfigRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -14013,15 +13944,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.SetConfigRule.BeforePosition
-      | RuleEditParams.SetConfigRule.AfterPosition
-      | RuleEditParams.SetConfigRule.IndexPosition;
+    position?: SetConfigRule.BeforePosition | SetConfigRule.AfterPosition | SetConfigRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.SetConfigRule.Ratelimit;
+    ratelimit?: SetConfigRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -14267,7 +14195,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.SkipRule.ActionParameters;
+    action_parameters?: SkipRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -14282,7 +14210,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.SkipRule.ExposedCredentialCheck;
+    exposed_credential_check?: SkipRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -14297,15 +14225,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.SkipRule.BeforePosition
-      | RuleEditParams.SkipRule.AfterPosition
-      | RuleEditParams.SkipRule.IndexPosition;
+    position?: SkipRule.BeforePosition | SkipRule.AfterPosition | SkipRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.SkipRule.Ratelimit;
+    ratelimit?: SkipRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -14473,7 +14398,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.SetCacheSettingsRule.ActionParameters;
+    action_parameters?: SetCacheSettingsRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -14488,7 +14413,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.SetCacheSettingsRule.ExposedCredentialCheck;
+    exposed_credential_check?: SetCacheSettingsRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -14504,14 +14429,14 @@ export declare namespace RuleEditParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleEditParams.SetCacheSettingsRule.BeforePosition
-      | RuleEditParams.SetCacheSettingsRule.AfterPosition
-      | RuleEditParams.SetCacheSettingsRule.IndexPosition;
+      | SetCacheSettingsRule.BeforePosition
+      | SetCacheSettingsRule.AfterPosition
+      | SetCacheSettingsRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.SetCacheSettingsRule.Ratelimit;
+    ratelimit?: SetCacheSettingsRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -15041,7 +14966,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.LogCustomFieldRule.ActionParameters;
+    action_parameters?: LogCustomFieldRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -15056,7 +14981,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.LogCustomFieldRule.ExposedCredentialCheck;
+    exposed_credential_check?: LogCustomFieldRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -15072,14 +14997,14 @@ export declare namespace RuleEditParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleEditParams.LogCustomFieldRule.BeforePosition
-      | RuleEditParams.LogCustomFieldRule.AfterPosition
-      | RuleEditParams.LogCustomFieldRule.IndexPosition;
+      | LogCustomFieldRule.BeforePosition
+      | LogCustomFieldRule.AfterPosition
+      | LogCustomFieldRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.LogCustomFieldRule.Ratelimit;
+    ratelimit?: LogCustomFieldRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -15280,7 +15205,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.DDoSDynamicRule.ExposedCredentialCheck;
+    exposed_credential_check?: DDoSDynamicRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -15295,15 +15220,12 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?:
-      | RuleEditParams.DDoSDynamicRule.BeforePosition
-      | RuleEditParams.DDoSDynamicRule.AfterPosition
-      | RuleEditParams.DDoSDynamicRule.IndexPosition;
+    position?: DDoSDynamicRule.BeforePosition | DDoSDynamicRule.AfterPosition | DDoSDynamicRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.DDoSDynamicRule.Ratelimit;
+    ratelimit?: DDoSDynamicRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -15452,7 +15374,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: Configure checks for exposed credentials.
      */
-    exposed_credential_check?: RuleEditParams.ForceConnectionCloseRule.ExposedCredentialCheck;
+    exposed_credential_check?: ForceConnectionCloseRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -15468,14 +15390,14 @@ export declare namespace RuleEditParams {
      * Body param: An object configuring where the rule will be placed.
      */
     position?:
-      | RuleEditParams.ForceConnectionCloseRule.BeforePosition
-      | RuleEditParams.ForceConnectionCloseRule.AfterPosition
-      | RuleEditParams.ForceConnectionCloseRule.IndexPosition;
+      | ForceConnectionCloseRule.BeforePosition
+      | ForceConnectionCloseRule.AfterPosition
+      | ForceConnectionCloseRule.IndexPosition;
 
     /**
      * Body param: An object configuring the rule's ratelimit behavior.
      */
-    ratelimit?: RuleEditParams.ForceConnectionCloseRule.Ratelimit;
+    ratelimit?: ForceConnectionCloseRule.Ratelimit;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).

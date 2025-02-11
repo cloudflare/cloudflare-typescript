@@ -2,30 +2,35 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import { V4PagePagination, type V4PagePaginationParams } from '../../pagination';
 
 export class Searches extends APIResource {
   /**
    * Search for Load Balancing resources.
    */
-  get(params: SearchGetParams, options?: Core.RequestOptions): Core.APIPromise<SearchGetResponse> {
+  list(
+    params: SearchListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SearchListResponsesV4PagePagination, SearchListResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/load_balancers/search`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: SearchGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/load_balancers/search`,
+      SearchListResponsesV4PagePagination,
+      { query, ...options },
+    );
   }
 }
 
-export interface SearchGetResponse {
+export class SearchListResponsesV4PagePagination extends V4PagePagination<SearchListResponse> {}
+
+export interface SearchListResponse {
   /**
    * A list of resources matching the search query.
    */
-  resources?: Array<SearchGetResponse.Resource>;
+  resources?: Array<SearchListResponse.Resource>;
 }
 
-export namespace SearchGetResponse {
+export namespace SearchListResponse {
   /**
    * A reference to a load balancer resource.
    */
@@ -54,7 +59,7 @@ export namespace SearchGetResponse {
   }
 }
 
-export interface SearchGetParams {
+export interface SearchListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier
    */
@@ -63,20 +68,10 @@ export interface SearchGetParams {
   /**
    * Query param:
    */
-  page?: number;
-
-  /**
-   * Query param:
-   */
-  per_page?: number;
-
-  /**
-   * Query param:
-   */
-  search_params?: SearchGetParams.SearchParams;
+  search_params?: SearchListParams.SearchParams;
 }
 
-export namespace SearchGetParams {
+export namespace SearchListParams {
   export interface SearchParams {
     /**
      * Search query term.
@@ -90,6 +85,12 @@ export namespace SearchGetParams {
   }
 }
 
+Searches.SearchListResponsesV4PagePagination = SearchListResponsesV4PagePagination;
+
 export declare namespace Searches {
-  export { type SearchGetResponse as SearchGetResponse, type SearchGetParams as SearchGetParams };
+  export {
+    type SearchListResponse as SearchListResponse,
+    SearchListResponsesV4PagePagination as SearchListResponsesV4PagePagination,
+    type SearchListParams as SearchListParams,
+  };
 }

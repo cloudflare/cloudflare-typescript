@@ -5,9 +5,9 @@ import * as Core from '../../core';
 import * as AssociationsAPI from './associations';
 import {
   AssociationGetParams,
-  AssociationGetResponse,
   Associations,
   CertificateAsssociation,
+  CertificateAsssociationsSinglePage,
 } from './associations';
 import { SinglePage } from '../../pagination';
 
@@ -232,12 +232,13 @@ export interface MTLSCertificateGetParams {
 }
 
 MTLSCertificates.Associations = Associations;
+MTLSCertificates.CertificateAsssociationsSinglePage = CertificateAsssociationsSinglePage;
 
 export declare namespace MTLSCertificates {
   export {
     Associations as Associations,
     type CertificateAsssociation as CertificateAsssociation,
-    type AssociationGetResponse as AssociationGetResponse,
+    CertificateAsssociationsSinglePage as CertificateAsssociationsSinglePage,
     type AssociationGetParams as AssociationGetParams,
   };
 }

@@ -11,9 +11,9 @@ import {
   OwnershipCreateParams,
   OwnershipDeleteParams,
   OwnershipGetParams,
-  OwnershipGetResponse,
   OwnershipResource,
   OwnershipValidateParams,
+  OwnershipsSinglePage,
 } from './ownership';
 import { SinglePage } from '../../../pagination';
 
@@ -500,6 +500,7 @@ export interface PCAPGetParams {
 
 PCAPs.PCAPListResponsesSinglePage = PCAPListResponsesSinglePage;
 PCAPs.OwnershipResource = OwnershipResource;
+PCAPs.OwnershipsSinglePage = OwnershipsSinglePage;
 PCAPs.Download = Download;
 
 export declare namespace PCAPs {
@@ -518,7 +519,7 @@ export declare namespace PCAPs {
   export {
     OwnershipResource as OwnershipResource,
     type Ownership as Ownership,
-    type OwnershipGetResponse as OwnershipGetResponse,
+    OwnershipsSinglePage as OwnershipsSinglePage,
     type OwnershipCreateParams as OwnershipCreateParams,
     type OwnershipDeleteParams as OwnershipDeleteParams,
     type OwnershipGetParams as OwnershipGetParams,

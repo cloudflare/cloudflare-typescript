@@ -5,8 +5,8 @@ import * as Core from '../../core';
 
 export class Responses extends APIResource {
   /**
-   * Returns the raw response of the network request. If HTML, a plain text response
-   * will be returned.
+   * Returns the raw response of the network request. Find the `response_id` in the
+   * `data.requests.response.hash`.
    */
   get(responseId: string, params: ResponseGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { account_id } = params;
