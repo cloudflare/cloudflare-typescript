@@ -71,13 +71,14 @@ Types:
 - <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionCreateResponse</a></code>
 - <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">create</a>({ ...params }) -> SubscriptionCreateResponse</code>
 - <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> SubscriptionUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
-- <code title="get /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">get</a>({ ...params }) -> SubscriptionsSinglePage</code>
+- <code title="get /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">get</a>({ ...params }) -> SubscriptionGetResponsesSinglePage</code>
 
 ## Tokens
 
@@ -1345,25 +1346,30 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/email-routing/email-routing.ts">Settings</a></code>
+- <code><a href="./src/resources/email-routing/email-routing.ts">EmailRoutingDisableResponse</a></code>
+- <code><a href="./src/resources/email-routing/email-routing.ts">EmailRoutingEnableResponse</a></code>
+- <code><a href="./src/resources/email-routing/email-routing.ts">EmailRoutingGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/email/routing/disable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">disable</a>({ ...params }) -> Settings</code>
-- <code title="post /zones/{zone_id}/email/routing/enable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">enable</a>({ ...params }) -> Settings</code>
-- <code title="get /zones/{zone_id}/email/routing">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">get</a>({ ...params }) -> Settings</code>
+- <code title="post /zones/{zone_id}/email/routing/disable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">disable</a>({ ...params }) -> EmailRoutingDisableResponse</code>
+- <code title="post /zones/{zone_id}/email/routing/enable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">enable</a>({ ...params }) -> EmailRoutingEnableResponse</code>
+- <code title="get /zones/{zone_id}/email/routing">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">get</a>({ ...params }) -> EmailRoutingGetResponse</code>
 
 ## DNS
 
 Types:
 
 - <code><a href="./src/resources/email-routing/dns.ts">DNSRecord</a></code>
+- <code><a href="./src/resources/email-routing/dns.ts">DNSCreateResponse</a></code>
+- <code><a href="./src/resources/email-routing/dns.ts">DNSEditResponse</a></code>
 - <code><a href="./src/resources/email-routing/dns.ts">DNSGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">create</a>({ ...params }) -> Settings</code>
+- <code title="post /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">create</a>({ ...params }) -> DNSCreateResponse</code>
 - <code title="delete /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">delete</a>({ ...params }) -> DNSRecordsSinglePage</code>
-- <code title="patch /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">edit</a>({ ...params }) -> Settings</code>
+- <code title="patch /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">edit</a>({ ...params }) -> DNSEditResponse</code>
 - <code title="get /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">get</a>({ ...params }) -> DNSGetResponse</code>
 
 ## Rules
@@ -1373,14 +1379,18 @@ Types:
 - <code><a href="./src/resources/email-routing/rules/rules.ts">Action</a></code>
 - <code><a href="./src/resources/email-routing/rules/rules.ts">EmailRoutingRule</a></code>
 - <code><a href="./src/resources/email-routing/rules/rules.ts">Matcher</a></code>
+- <code><a href="./src/resources/email-routing/rules/rules.ts">RuleCreateResponse</a></code>
+- <code><a href="./src/resources/email-routing/rules/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/email-routing/rules/rules.ts">RuleDeleteResponse</a></code>
+- <code><a href="./src/resources/email-routing/rules/rules.ts">RuleGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">create</a>({ ...params }) -> EmailRoutingRule</code>
-- <code title="put /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">update</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
+- <code title="post /zones/{zone_id}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">create</a>({ ...params }) -> RuleCreateResponse</code>
+- <code title="put /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">update</a>(ruleIdentifier, { ...params }) -> RuleUpdateResponse</code>
 - <code title="get /zones/{zone_id}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">list</a>({ ...params }) -> EmailRoutingRulesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">delete</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
-- <code title="get /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">get</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
+- <code title="delete /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">delete</a>(ruleIdentifier, { ...params }) -> RuleDeleteResponse</code>
+- <code title="get /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">get</a>(ruleIdentifier, { ...params }) -> RuleGetResponse</code>
 
 ### CatchAlls
 
@@ -3627,12 +3637,13 @@ Types:
 
 - <code><a href="./src/resources/registrar/domains.ts">Domain</a></code>
 - <code><a href="./src/resources/registrar/domains.ts">DomainUpdateResponse</a></code>
+- <code><a href="./src/resources/registrar/domains.ts">DomainListResponse</a></code>
 - <code><a href="./src/resources/registrar/domains.ts">DomainGetResponse</a></code>
 
 Methods:
 
 - <code title="put /accounts/{account_id}/registrar/domains/{domain_name}">client.registrar.domains.<a href="./src/resources/registrar/domains.ts">update</a>(domainName, { ...params }) -> DomainUpdateResponse | null</code>
-- <code title="get /accounts/{account_id}/registrar/domains">client.registrar.domains.<a href="./src/resources/registrar/domains.ts">list</a>({ ...params }) -> DomainsSinglePage</code>
+- <code title="get /accounts/{account_id}/registrar/domains">client.registrar.domains.<a href="./src/resources/registrar/domains.ts">list</a>({ ...params }) -> DomainListResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/registrar/domains/{domain_name}">client.registrar.domains.<a href="./src/resources/registrar/domains.ts">get</a>(domainName, { ...params }) -> DomainGetResponse | null</code>
 
 # RequestTracers

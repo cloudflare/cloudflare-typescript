@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource discovery', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.apiGateway.discovery.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.apiGateway.discovery.get({ zone_id: 'zone_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,6 +22,6 @@ describe('resource discovery', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.apiGateway.discovery.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.apiGateway.discovery.get({ zone_id: 'zone_id' });
   });
 });

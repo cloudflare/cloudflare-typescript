@@ -955,8 +955,8 @@ export class MembersV4PagePaginationArray extends V4PagePaginationArray<Member> 
 
 export class RolesV4PagePaginationArray extends V4PagePaginationArray<Role> {}
 
-export class SubscriptionsSinglePage extends SinglePage<Subscription> {}
-
 export class TokensV4PagePaginationArray extends V4PagePaginationArray<Token> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}
+
+export class SubscriptionsSinglePage extends SinglePage<Subscription> {}

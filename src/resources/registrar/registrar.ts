@@ -7,10 +7,11 @@ import {
   DomainGetParams,
   DomainGetResponse,
   DomainListParams,
+  DomainListResponse,
+  DomainListResponsesSinglePage,
   DomainUpdateParams,
   DomainUpdateResponse,
   Domains,
-  DomainsSinglePage,
 } from './domains';
 
 export class Registrar extends APIResource {
@@ -18,15 +19,16 @@ export class Registrar extends APIResource {
 }
 
 Registrar.Domains = Domains;
-Registrar.DomainsSinglePage = DomainsSinglePage;
+Registrar.DomainListResponsesSinglePage = DomainListResponsesSinglePage;
 
 export declare namespace Registrar {
   export {
     Domains as Domains,
     type Domain as Domain,
     type DomainUpdateResponse as DomainUpdateResponse,
+    type DomainListResponse as DomainListResponse,
     type DomainGetResponse as DomainGetResponse,
-    DomainsSinglePage as DomainsSinglePage,
+    DomainListResponsesSinglePage as DomainListResponsesSinglePage,
     type DomainUpdateParams as DomainUpdateParams,
     type DomainListParams as DomainListParams,
     type DomainGetParams as DomainGetParams,

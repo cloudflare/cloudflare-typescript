@@ -90,12 +90,12 @@ export namespace AppCreateResponse {
     /**
      * App identifier.
      */
-    id: string;
+    id: unknown;
 
     /**
      * When the Application was created.
      */
-    created_on: string;
+    created_on: unknown;
 
     /**
      * The name and type of DNS record for the Spectrum application.
@@ -111,7 +111,7 @@ export namespace AppCreateResponse {
     /**
      * When the Application was last modified.
      */
-    modified_on: string;
+    modified_on: unknown;
 
     /**
      * The port configuration at Cloudflare's edge. May specify a single port, for
@@ -211,12 +211,12 @@ export namespace AppUpdateResponse {
     /**
      * App identifier.
      */
-    id: string;
+    id: unknown;
 
     /**
      * When the Application was created.
      */
-    created_on: string;
+    created_on: unknown;
 
     /**
      * The name and type of DNS record for the Spectrum application.
@@ -232,7 +232,7 @@ export namespace AppUpdateResponse {
     /**
      * When the Application was last modified.
      */
-    modified_on: string;
+    modified_on: unknown;
 
     /**
      * The port configuration at Cloudflare's edge. May specify a single port, for
@@ -330,12 +330,12 @@ export namespace AppListResponse {
     /**
      * App identifier.
      */
-    id: string;
+    id: unknown;
 
     /**
      * When the Application was created.
      */
-    created_on: string;
+    created_on: unknown;
 
     /**
      * The name and type of DNS record for the Spectrum application.
@@ -351,7 +351,7 @@ export namespace AppListResponse {
     /**
      * When the Application was last modified.
      */
-    modified_on: string;
+    modified_on: unknown;
 
     /**
      * The port configuration at Cloudflare's edge. May specify a single port, for
@@ -458,12 +458,12 @@ export namespace AppGetResponse {
     /**
      * App identifier.
      */
-    id: string;
+    id: unknown;
 
     /**
      * When the Application was created.
      */
-    created_on: string;
+    created_on: unknown;
 
     /**
      * The name and type of DNS record for the Spectrum application.
@@ -479,7 +479,7 @@ export namespace AppGetResponse {
     /**
      * When the Application was last modified.
      */
-    modified_on: string;
+    modified_on: unknown;
 
     /**
      * The port configuration at Cloudflare's edge. May specify a single port, for
