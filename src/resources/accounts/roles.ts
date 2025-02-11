@@ -3,7 +3,8 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as Shared from '../shared';
-import { RolesSinglePage } from '../shared';
+import { RolesV4PagePaginationArray } from '../shared';
+import { type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Roles extends APIResource {
   /**
@@ -12,9 +13,12 @@ export class Roles extends APIResource {
   list(
     params: RoleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RolesSinglePage, Shared.Role> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/roles`, RolesSinglePage, options);
+  ): Core.PagePromise<RolesV4PagePaginationArray, Shared.Role> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/roles`, RolesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -30,9 +34,9 @@ export class Roles extends APIResource {
   }
 }
 
-export interface RoleListParams {
+export interface RoleListParams extends V4PagePaginationArrayParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 }
@@ -48,4 +52,4 @@ export declare namespace Roles {
   export { type RoleListParams as RoleListParams, type RoleGetParams as RoleGetParams };
 }
 
-export { RolesSinglePage };
+export { RolesV4PagePaginationArray };
