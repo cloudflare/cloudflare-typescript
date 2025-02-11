@@ -138,6 +138,8 @@ export namespace Profile {
      */
     updated_at: string;
 
+    ai_context_enabled?: boolean;
+
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
@@ -181,6 +183,8 @@ export namespace Profile {
 
     export namespace PredefinedEntry {
       export interface Confidence {
+        ai_context_available: boolean;
+
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
          * confidence threshold. Profiles that use an entry with `available` set to true
@@ -264,6 +268,8 @@ export namespace Profile {
 
     type: 'predefined';
 
+    ai_context_enabled?: boolean;
+
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
@@ -315,6 +321,8 @@ export namespace Profile {
 
     export namespace PredefinedEntry {
       export interface Confidence {
+        ai_context_available: boolean;
+
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
          * confidence threshold. Profiles that use an entry with `available` set to true
@@ -435,6 +443,8 @@ export namespace Profile {
 
     export namespace PredefinedEntry {
       export interface Confidence {
+        ai_context_available: boolean;
+
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
          * confidence threshold. Profiles that use an entry with `available` set to true
