@@ -80,7 +80,7 @@ export interface DetectionCreateResponse {
   /**
    * The unique ID for this custom detection
    */
-  id?: string;
+  id?: unknown;
 
   /**
    * The ruleset expression to use in matching the password in a request
@@ -101,7 +101,7 @@ export interface DetectionUpdateResponse {
   /**
    * The unique ID for this custom detection
    */
-  id?: string;
+  id?: unknown;
 
   /**
    * The ruleset expression to use in matching the password in a request
@@ -122,7 +122,7 @@ export interface DetectionListResponse {
   /**
    * The unique ID for this custom detection
    */
-  id?: string;
+  id?: unknown;
 
   /**
    * The ruleset expression to use in matching the password in a request
@@ -144,6 +144,11 @@ export interface DetectionCreateParams {
   zone_id: string;
 
   /**
+   * Body param: The unique ID for this custom detection
+   */
+  id?: unknown;
+
+  /**
    * Body param: The ruleset expression to use in matching the password in a request
    */
   password?: string;
@@ -159,6 +164,11 @@ export interface DetectionUpdateParams {
    * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param: The unique ID for this custom detection
+   */
+  id?: unknown;
 
   /**
    * Body param: The ruleset expression to use in matching the password in a request

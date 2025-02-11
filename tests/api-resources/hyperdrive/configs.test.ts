@@ -45,7 +45,7 @@ describe('resource configs', () => {
         scheme: 'postgres',
         user: 'postgres',
       },
-      caching: { disabled: true },
+      caching: {},
     });
   });
 
@@ -85,7 +85,7 @@ describe('resource configs', () => {
         scheme: 'postgres',
         user: 'postgres',
       },
-      caching: { disabled: true },
+      caching: {},
     });
   });
 
@@ -143,7 +143,7 @@ describe('resource configs', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.hyperdrive.configs.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      caching: { disabled: true },
+      caching: {},
       name: 'example-hyperdrive',
       origin: { database: 'postgres', password: 'password', scheme: 'postgres', user: 'postgres' },
     });

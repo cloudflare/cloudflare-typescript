@@ -4,10 +4,11 @@ export {
   Domains,
   type Domain,
   type DomainUpdateResponse,
+  type DomainListResponse,
   type DomainGetResponse,
   type DomainUpdateParams,
   type DomainListParams,
   type DomainGetParams,
-  type DomainsSinglePage,
+  type DomainListResponsesSinglePage,
 } from './domains';
 export { Registrar } from './registrar';

@@ -66,7 +66,7 @@ export interface PayloadCreateResponse {
   /**
    * The unique ID for this custom scan expression
    */
-  id?: string;
+  id?: unknown;
 
   /**
    * Ruleset expression to use in matching content objects
@@ -81,7 +81,7 @@ export interface PayloadListResponse {
   /**
    * The unique ID for this custom scan expression
    */
-  id?: string;
+  id?: unknown;
 
   /**
    * Ruleset expression to use in matching content objects
@@ -96,7 +96,7 @@ export interface PayloadDeleteResponse {
   /**
    * The unique ID for this custom scan expression
    */
-  id?: string;
+  id?: unknown;
 
   /**
    * Ruleset expression to use in matching content objects

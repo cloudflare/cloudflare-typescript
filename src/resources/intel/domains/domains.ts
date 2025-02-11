@@ -38,7 +38,7 @@ export interface Domain {
 
   domain?: string;
 
-  inherited_content_categories?: Array<Domain.InheritedContentCategory>;
+  inherited_content_categories?: unknown;
 
   /**
    * Domain from which `inherited_content_categories` and `inherited_risk_types` are
@@ -46,7 +46,7 @@ export interface Domain {
    */
   inherited_from?: string;
 
-  inherited_risk_types?: Array<Domain.InheritedRiskType>;
+  inherited_risk_types?: unknown;
 
   /**
    * Global Cloudflare 100k ranking for the last 30 days, if available for the
@@ -66,7 +66,7 @@ export interface Domain {
    */
   risk_score?: number;
 
-  risk_types?: Array<Domain.RiskType>;
+  risk_types?: unknown;
 }
 
 export namespace Domain {
@@ -100,22 +100,6 @@ export namespace Domain {
     super_category_id?: number;
   }
 
-  export interface InheritedContentCategory {
-    id?: number;
-
-    name?: string;
-
-    super_category_id?: number;
-  }
-
-  export interface InheritedRiskType {
-    id?: number;
-
-    name?: string;
-
-    super_category_id?: number;
-  }
-
   export interface ResolvesToRef {
     /**
      * STIX 2.1 identifier:
@@ -127,14 +111,6 @@ export namespace Domain {
      * IP address or domain name.
      */
     value?: string;
-  }
-
-  export interface RiskType {
-    id?: number;
-
-    name?: string;
-
-    super_category_id?: number;
   }
 }
 
