@@ -22,7 +22,11 @@ describe('resource roles', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.accounts.roles.list({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const response = await client.accounts.roles.list({
+      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      page: 1,
+      per_page: 5,
+    });
   });
 
   test('get: only required params', async () => {
