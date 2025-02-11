@@ -141,6 +141,8 @@ export namespace EntryUpdateResponse {
 
   export namespace PredefinedEntry {
     export interface Confidence {
+      ai_context_available: boolean;
+
       /**
        * Indicates whether this entry can be made more or less sensitive by setting a
        * confidence threshold. Profiles that use an entry with `available` set to true
@@ -243,6 +245,8 @@ export namespace EntryListResponse {
 
   export namespace PredefinedEntry {
     export interface Confidence {
+      ai_context_available: boolean;
+
       /**
        * Indicates whether this entry can be made more or less sensitive by setting a
        * confidence threshold. Profiles that use an entry with `available` set to true
@@ -347,6 +351,8 @@ export namespace EntryGetResponse {
 
   export namespace PredefinedEntry {
     export interface Confidence {
+      ai_context_available: boolean;
+
       /**
        * Indicates whether this entry can be made more or less sensitive by setting a
        * confidence threshold. Profiles that use an entry with `available` set to true
