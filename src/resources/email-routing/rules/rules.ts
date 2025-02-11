@@ -24,11 +24,11 @@ export class Rules extends APIResource {
    * sent to a specific custom email address) plus a set of actions to take on the
    * email (like forwarding it to a specific destination address).
    */
-  create(params: RuleCreateParams, options?: RequestOptions): APIPromise<EmailRoutingRule> {
+  create(params: RuleCreateParams, options?: RequestOptions): APIPromise<RuleCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/email/routing/rules`, { body, ...options }) as APIPromise<{
-        result: EmailRoutingRule;
+        result: RuleCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,13 +40,13 @@ export class Rules extends APIResource {
     ruleIdentifier: string,
     params: RuleUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<EmailRoutingRule> {
+  ): APIPromise<RuleUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: EmailRoutingRule }>
+      }) as APIPromise<{ result: RuleUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -72,24 +72,24 @@ export class Rules extends APIResource {
     ruleIdentifier: string,
     params: RuleDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<EmailRoutingRule> {
+  ): APIPromise<RuleDeleteResponse> {
     const { zone_id } = params;
     return (
       this._client.delete(
         path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`,
         options,
-      ) as APIPromise<{ result: EmailRoutingRule }>
+      ) as APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get information for a specific routing rule already created.
    */
-  get(ruleIdentifier: string, params: RuleGetParams, options?: RequestOptions): APIPromise<EmailRoutingRule> {
+  get(ruleIdentifier: string, params: RuleGetParams, options?: RequestOptions): APIPromise<RuleGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`, options) as APIPromise<{
-        result: EmailRoutingRule;
+        result: RuleGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -198,6 +198,14 @@ export interface MatcherParam {
   value: string;
 }
 
+export type RuleCreateResponse = unknown;
+
+export type RuleUpdateResponse = unknown;
+
+export type RuleDeleteResponse = unknown;
+
+export type RuleGetResponse = unknown;
+
 export interface RuleCreateParams {
   /**
    * Path param: Identifier
@@ -295,6 +303,10 @@ export declare namespace Rules {
     type Action as Action,
     type EmailRoutingRule as EmailRoutingRule,
     type Matcher as Matcher,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleGetResponse as RuleGetResponse,
     type EmailRoutingRulesV4PagePaginationArray as EmailRoutingRulesV4PagePaginationArray,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,

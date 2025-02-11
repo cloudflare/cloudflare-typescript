@@ -27,11 +27,14 @@ export class Domains extends APIResource {
   /**
    * List domains handled by Registrar.
    */
-  list(params: DomainListParams, options?: RequestOptions): PagePromise<DomainsSinglePage, Domain> {
+  list(
+    params: DomainListParams,
+    options?: RequestOptions,
+  ): PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
     const { account_id } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/registrar/domains`,
-      SinglePage<Domain>,
+      SinglePage<DomainListResponse>,
       options,
     );
   }
@@ -53,7 +56,7 @@ export class Domains extends APIResource {
   }
 }
 
-export type DomainsSinglePage = SinglePage<Domain>;
+export type DomainListResponsesSinglePage = SinglePage<DomainListResponse>;
 
 export interface Domain {
   /**
@@ -94,7 +97,7 @@ export interface Domain {
   /**
    * Shows contact information for domain registrant.
    */
-  registrant_contact?: Domain.RegistrantContact;
+  registrant_contact?: unknown;
 
   /**
    * A comma-separated list of registry status codes. A full list of status codes can
@@ -122,76 +125,6 @@ export interface Domain {
 }
 
 export namespace Domain {
-  /**
-   * Shows contact information for domain registrant.
-   */
-  export interface RegistrantContact {
-    /**
-     * Address.
-     */
-    address: string;
-
-    /**
-     * City.
-     */
-    city: string;
-
-    /**
-     * The country in which the user lives.
-     */
-    country: string | null;
-
-    /**
-     * User's first name
-     */
-    first_name: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name: string | null;
-
-    /**
-     * Name of organization.
-     */
-    organization: string;
-
-    /**
-     * User's telephone number
-     */
-    phone: string | null;
-
-    /**
-     * State.
-     */
-    state: string;
-
-    /**
-     * The zipcode or postal code where the user lives.
-     */
-    zip: string | null;
-
-    /**
-     * Contact Identifier.
-     */
-    id?: string;
-
-    /**
-     * Optional address line for unit, floor, suite, etc.
-     */
-    address2?: string;
-
-    /**
-     * The contact email address of the user.
-     */
-    email?: string;
-
-    /**
-     * Contact fax number.
-     */
-    fax?: string;
-  }
-
   /**
    * Statuses for domain transfers into Cloudflare Registrar.
    */
@@ -229,6 +162,8 @@ export namespace Domain {
 }
 
 export type DomainUpdateResponse = unknown;
+
+export type DomainListResponse = unknown;
 
 export type DomainGetResponse = unknown;
 
@@ -273,8 +208,9 @@ export declare namespace Domains {
   export {
     type Domain as Domain,
     type DomainUpdateResponse as DomainUpdateResponse,
+    type DomainListResponse as DomainListResponse,
     type DomainGetResponse as DomainGetResponse,
-    type DomainsSinglePage as DomainsSinglePage,
+    type DomainListResponsesSinglePage as DomainListResponsesSinglePage,
     type DomainUpdateParams as DomainUpdateParams,
     type DomainListParams as DomainListParams,
     type DomainGetParams as DomainGetParams,

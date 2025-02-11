@@ -191,9 +191,7 @@ export interface ConfigCreateParams {
   /**
    * Body param:
    */
-  caching?:
-    | ConfigCreateParams.HyperdriveHyperdriveCachingCommon
-    | ConfigCreateParams.HyperdriveHyperdriveCachingEnabled;
+  caching?: unknown | ConfigCreateParams.HyperdriveHyperdriveCachingEnabled;
 }
 
 export namespace ConfigCreateParams {
@@ -269,13 +267,6 @@ export namespace ConfigCreateParams {
     user: string;
   }
 
-  export interface HyperdriveHyperdriveCachingCommon {
-    /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
-     */
-    disabled?: boolean;
-  }
-
   export interface HyperdriveHyperdriveCachingEnabled {
     /**
      * When set to true, disables the caching of SQL responses. (Default: false)
@@ -317,9 +308,7 @@ export interface ConfigUpdateParams {
   /**
    * Body param:
    */
-  caching?:
-    | ConfigUpdateParams.HyperdriveHyperdriveCachingCommon
-    | ConfigUpdateParams.HyperdriveHyperdriveCachingEnabled;
+  caching?: unknown | ConfigUpdateParams.HyperdriveHyperdriveCachingEnabled;
 }
 
 export namespace ConfigUpdateParams {
@@ -395,13 +384,6 @@ export namespace ConfigUpdateParams {
     user: string;
   }
 
-  export interface HyperdriveHyperdriveCachingCommon {
-    /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
-     */
-    disabled?: boolean;
-  }
-
   export interface HyperdriveHyperdriveCachingEnabled {
     /**
      * When set to true, disables the caching of SQL responses. (Default: false)
@@ -445,9 +427,7 @@ export interface ConfigEditParams {
   /**
    * Body param:
    */
-  caching?:
-    | ConfigEditParams.HyperdriveHyperdriveCachingCommon
-    | ConfigEditParams.HyperdriveHyperdriveCachingEnabled;
+  caching?: unknown | ConfigEditParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
    * Body param:
@@ -464,13 +444,6 @@ export interface ConfigEditParams {
 }
 
 export namespace ConfigEditParams {
-  export interface HyperdriveHyperdriveCachingCommon {
-    /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
-     */
-    disabled?: boolean;
-  }
-
   export interface HyperdriveHyperdriveCachingEnabled {
     /**
      * When set to true, disables the caching of SQL responses. (Default: false)

@@ -11,7 +11,7 @@ const client = new Cloudflare({
 describe('resource userSchemas', () => {
   test('create: only required params', async () => {
     const responsePromise = client.apiGateway.userSchemas.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       kind: 'openapi_v3',
     });
@@ -26,7 +26,7 @@ describe('resource userSchemas', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.apiGateway.userSchemas.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       kind: 'openapi_v3',
       name: 'petstore schema',
@@ -35,9 +35,7 @@ describe('resource userSchemas', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.apiGateway.userSchemas.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.apiGateway.userSchemas.list({ zone_id: 'zone_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,7 +47,7 @@ describe('resource userSchemas', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.apiGateway.userSchemas.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       omit_source: true,
       page: 1,
       per_page: 5,
@@ -59,7 +57,7 @@ describe('resource userSchemas', () => {
 
   test('delete: only required params', async () => {
     const responsePromise = client.apiGateway.userSchemas.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -72,13 +70,13 @@ describe('resource userSchemas', () => {
 
   test('delete: required and optional params', async () => {
     const response = await client.apiGateway.userSchemas.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
     });
   });
 
   test('edit: only required params', async () => {
     const responsePromise = client.apiGateway.userSchemas.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -91,14 +89,14 @@ describe('resource userSchemas', () => {
 
   test('edit: required and optional params', async () => {
     const response = await client.apiGateway.userSchemas.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       validation_enabled: true,
     });
   });
 
   test('get: only required params', async () => {
     const responsePromise = client.apiGateway.userSchemas.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -111,7 +109,7 @@ describe('resource userSchemas', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.apiGateway.userSchemas.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       omit_source: true,
     });
   });

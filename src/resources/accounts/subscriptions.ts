@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Shared from '../shared';
-import { SubscriptionsSinglePage } from '../shared';
 import { APIPromise } from '../../api-promise';
 import { PagePromise, SinglePage } from '../../pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -61,15 +60,17 @@ export class Subscriptions extends APIResource {
   get(
     params: SubscriptionGetParams,
     options?: RequestOptions,
-  ): PagePromise<SubscriptionsSinglePage, Shared.Subscription> {
+  ): PagePromise<SubscriptionGetResponsesSinglePage, SubscriptionGetResponse> {
     const { account_id } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/subscriptions`,
-      SinglePage<Shared.Subscription>,
+      SinglePage<SubscriptionGetResponse>,
       options,
     );
   }
 }
+
+export type SubscriptionGetResponsesSinglePage = SinglePage<SubscriptionGetResponse>;
 
 export type SubscriptionCreateResponse = unknown | string | null;
 
@@ -81,6 +82,8 @@ export interface SubscriptionDeleteResponse {
    */
   subscription_id?: string;
 }
+
+export type SubscriptionGetResponse = unknown;
 
 export interface SubscriptionCreateParams {
   /**
@@ -135,11 +138,11 @@ export declare namespace Subscriptions {
     type SubscriptionCreateResponse as SubscriptionCreateResponse,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    type SubscriptionGetResponsesSinglePage as SubscriptionGetResponsesSinglePage,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
     type SubscriptionGetParams as SubscriptionGetParams,
   };
 }
-
-export { type SubscriptionsSinglePage };
