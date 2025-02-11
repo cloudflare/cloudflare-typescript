@@ -153,44 +153,9 @@ describe('resource records', () => {
     const response = await client.dns.records.batch({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deletes: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
-      patches: [
-        {
-          comment: 'Domain verification record',
-          content: '198.51.100.4',
-          name: 'example.com',
-          proxied: true,
-          settings: { ipv4_only: true, ipv6_only: true },
-          tags: ['owner:dns-team'],
-          ttl: 3600,
-          type: 'A',
-          id: '023e105f4ecef8ad9ca31a8372d0c353',
-        },
-      ],
-      posts: [
-        {
-          comment: 'Domain verification record',
-          content: '198.51.100.4',
-          name: 'example.com',
-          proxied: true,
-          settings: { ipv4_only: true, ipv6_only: true },
-          tags: ['owner:dns-team'],
-          ttl: 3600,
-          type: 'A',
-        },
-      ],
-      puts: [
-        {
-          comment: 'Domain verification record',
-          content: '198.51.100.4',
-          name: 'example.com',
-          proxied: true,
-          settings: { ipv4_only: true, ipv6_only: true },
-          tags: ['owner:dns-team'],
-          ttl: 3600,
-          type: 'A',
-          id: '023e105f4ecef8ad9ca31a8372d0c353',
-        },
-      ],
+      patches: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+      posts: [{}],
+      puts: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
     });
   });
 
