@@ -131,7 +131,7 @@ export namespace CfInterconnectUpdateResponse {
      */
     gre?: ModifiedInterconnect.GRE;
 
-    health_check?: MagicTransitAPI.HealthCheck;
+    health_check?: unknown;
 
     /**
      * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
@@ -202,7 +202,7 @@ export namespace CfInterconnectListResponse {
      */
     gre?: Interconnect.GRE;
 
-    health_check?: MagicTransitAPI.HealthCheck;
+    health_check?: unknown;
 
     /**
      * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
@@ -275,7 +275,7 @@ export namespace CfInterconnectBulkUpdateResponse {
      */
     gre?: ModifiedInterconnect.GRE;
 
-    health_check?: MagicTransitAPI.HealthCheck;
+    health_check?: unknown;
 
     /**
      * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
@@ -346,7 +346,7 @@ export namespace CfInterconnectGetResponse {
      */
     gre?: Interconnect.GRE;
 
-    health_check?: MagicTransitAPI.HealthCheck;
+    health_check?: unknown;
 
     /**
      * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side

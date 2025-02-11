@@ -13,7 +13,7 @@ describe('resource operations', () => {
   test('list: only required params', async () => {
     const responsePromise = client.apiGateway.userSchemas.operations.list(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { zone_id: 'zone_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +28,7 @@ describe('resource operations', () => {
     const response = await client.apiGateway.userSchemas.operations.list(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
-        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        zone_id: 'zone_id',
         endpoint: '/api/v1',
         feature: ['thresholds'],
         host: ['api.cloudflare.com'],

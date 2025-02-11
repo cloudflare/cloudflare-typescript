@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource operations', () => {
   test('create: only required params', async () => {
     const responsePromise = client.apiGateway.operations.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       endpoint: '/api/v1/users/{var1}',
       host: 'www.example.com',
       method: 'GET',
@@ -28,7 +28,7 @@ describe('resource operations', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.apiGateway.operations.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       endpoint: '/api/v1/users/{var1}',
       host: 'www.example.com',
       method: 'GET',
@@ -36,9 +36,7 @@ describe('resource operations', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.apiGateway.operations.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.apiGateway.operations.list({ zone_id: 'zone_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,7 +48,7 @@ describe('resource operations', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.apiGateway.operations.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       direction: 'asc',
       endpoint: '/api/v1',
       feature: ['thresholds'],
@@ -64,7 +62,7 @@ describe('resource operations', () => {
 
   test('delete: only required params', async () => {
     const responsePromise = client.apiGateway.operations.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -77,13 +75,13 @@ describe('resource operations', () => {
 
   test('delete: required and optional params', async () => {
     const response = await client.apiGateway.operations.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
     });
   });
 
   test('bulkCreate: only required params', async () => {
     const responsePromise = client.apiGateway.operations.bulkCreate({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       body: [{ endpoint: '/api/v1/users/{var1}', host: 'www.example.com', method: 'GET' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -97,15 +95,13 @@ describe('resource operations', () => {
 
   test('bulkCreate: required and optional params', async () => {
     const response = await client.apiGateway.operations.bulkCreate({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       body: [{ endpoint: '/api/v1/users/{var1}', host: 'www.example.com', method: 'GET' }],
     });
   });
 
   test('bulkDelete: only required params', async () => {
-    const responsePromise = client.apiGateway.operations.bulkDelete({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.apiGateway.operations.bulkDelete({ zone_id: 'zone_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -116,14 +112,12 @@ describe('resource operations', () => {
   });
 
   test('bulkDelete: required and optional params', async () => {
-    const response = await client.apiGateway.operations.bulkDelete({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.apiGateway.operations.bulkDelete({ zone_id: 'zone_id' });
   });
 
   test('get: only required params', async () => {
     const responsePromise = client.apiGateway.operations.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -136,7 +130,7 @@ describe('resource operations', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.apiGateway.operations.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'zone_id',
       feature: ['thresholds'],
     });
   });
