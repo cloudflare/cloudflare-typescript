@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../resource';
 import * as Shared from '../shared';
-import { RolesSinglePage } from '../shared';
+import { RolesV4PagePaginationArray } from '../shared';
 import { APIPromise } from '../../api-promise';
-import { PagePromise, SinglePage } from '../../pagination';
+import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -12,9 +12,15 @@ export class Roles extends APIResource {
   /**
    * Get all available roles for an account.
    */
-  list(params: RoleListParams, options?: RequestOptions): PagePromise<RolesSinglePage, Shared.Role> {
-    const { account_id } = params;
-    return this._client.getAPIList(path`/accounts/${account_id}/roles`, SinglePage<Shared.Role>, options);
+  list(
+    params: RoleListParams,
+    options?: RequestOptions,
+  ): PagePromise<RolesV4PagePaginationArray, Shared.Role> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(path`/accounts/${account_id}/roles`, V4PagePaginationArray<Shared.Role>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -30,9 +36,9 @@ export class Roles extends APIResource {
   }
 }
 
-export interface RoleListParams {
+export interface RoleListParams extends V4PagePaginationArrayParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
 }
@@ -48,4 +54,4 @@ export declare namespace Roles {
   export { type RoleListParams as RoleListParams, type RoleGetParams as RoleGetParams };
 }
 
-export { type RolesSinglePage };
+export { type RolesV4PagePaginationArray };
