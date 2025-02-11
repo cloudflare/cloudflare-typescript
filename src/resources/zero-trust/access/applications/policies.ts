@@ -232,6 +232,7 @@ export type AccessRule =
   | ExternalEvaluationRule
   | GitHubOrganizationRule
   | GSuiteGroupRule
+  | AccessRule.AccessLoginMethodRule
   | IPListRule
   | IPRule
   | OktaGroupRule
@@ -280,6 +281,22 @@ export namespace AccessRule {
       common_name: string;
     }
   }
+
+  /**
+   * Matches a specific identity provider id.
+   */
+  export interface AccessLoginMethodRule {
+    login_method: AccessLoginMethodRule.LoginMethod;
+  }
+
+  export namespace AccessLoginMethodRule {
+    export interface LoginMethod {
+      /**
+       * The ID of an identity provider.
+       */
+      id: string;
+    }
+  }
 }
 
 /**
@@ -302,6 +319,7 @@ export type AccessRuleParam =
   | ExternalEvaluationRuleParam
   | GitHubOrganizationRuleParam
   | GSuiteGroupRuleParam
+  | AccessRuleParam.AccessLoginMethodRule
   | IPListRuleParam
   | IPRuleParam
   | OktaGroupRuleParam
@@ -348,6 +366,22 @@ export namespace AccessRuleParam {
        * The common name to match.
        */
       common_name: string;
+    }
+  }
+
+  /**
+   * Matches a specific identity provider id.
+   */
+  export interface AccessLoginMethodRule {
+    login_method: AccessLoginMethodRule.LoginMethod;
+  }
+
+  export namespace AccessLoginMethodRule {
+    export interface LoginMethod {
+      /**
+       * The ID of an identity provider.
+       */
+      id: string;
     }
   }
 }

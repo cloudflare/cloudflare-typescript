@@ -748,9 +748,23 @@ export namespace Application {
           name?: string;
 
           /**
-           * A mapping from IdP ID to claim name.
+           * A mapping from IdP ID to attribute name.
            */
-          name_by_idp?: Record<string, string>;
+          name_by_idp?: Array<Source.NameByIdP>;
+        }
+
+        export namespace Source {
+          export interface NameByIdP {
+            /**
+             * The UID of the IdP.
+             */
+            idp_id?: string;
+
+            /**
+             * The name of the IdP provided attribute.
+             */
+            source_name?: string;
+          }
         }
       }
 
@@ -1979,7 +1993,21 @@ export namespace SAMLSaaSApp {
       /**
        * A mapping from IdP ID to attribute name.
        */
-      name_by_idp?: Record<string, string>;
+      name_by_idp?: Array<Source.NameByIdP>;
+    }
+
+    export namespace Source {
+      export interface NameByIdP {
+        /**
+         * The UID of the IdP.
+         */
+        idp_id?: string;
+
+        /**
+         * The name of the IdP provided attribute.
+         */
+        source_name?: string;
+      }
     }
   }
 }
@@ -2086,7 +2114,21 @@ export namespace SAMLSaaSAppParam {
       /**
        * A mapping from IdP ID to attribute name.
        */
-      name_by_idp?: Record<string, string>;
+      name_by_idp?: Array<Source.NameByIdP>;
+    }
+
+    export namespace Source {
+      export interface NameByIdP {
+        /**
+         * The UID of the IdP.
+         */
+        idp_id?: string;
+
+        /**
+         * The name of the IdP provided attribute.
+         */
+        source_name?: string;
+      }
     }
   }
 }
