@@ -130,7 +130,7 @@ export namespace BytimeGetResponse {
      * Start of time interval to query, defaults to `until` - 6 hours. Timestamp must
      * be in RFC3339 format and uses UTC unless otherwise specified.
      */
-    since?: string;
+    since?: unknown;
 
     /**
      * The sort order for the result set; sort fields must be included in `metrics` or
@@ -142,7 +142,7 @@ export namespace BytimeGetResponse {
      * End of time interval to query, defaults to current time. Timestamp must be in
      * RFC3339 format and uses UTC unless otherwise specified.
      */
-    until?: string;
+    until?: unknown;
   }
 }
 
