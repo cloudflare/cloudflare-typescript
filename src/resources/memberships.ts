@@ -4,6 +4,7 @@ import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
 import * as Core from '../core';
 import * as Shared from './shared';
+import * as AccountsAPI from './accounts/accounts';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
 export class Memberships extends APIResource {
@@ -71,7 +72,7 @@ export interface Membership {
    */
   id?: string;
 
-  account?: unknown;
+  account?: AccountsAPI.Account;
 
   /**
    * Enterprise only. Indicates whether or not API access is enabled specifically for
@@ -132,7 +133,7 @@ export interface MembershipUpdateResponse {
    */
   id?: string;
 
-  account?: unknown;
+  account?: AccountsAPI.Account;
 
   /**
    * Enterprise only. Indicates whether or not API access is enabled specifically for
@@ -327,7 +328,7 @@ export interface MembershipGetResponse {
    */
   id?: string;
 
-  account?: unknown;
+  account?: AccountsAPI.Account;
 
   /**
    * Enterprise only. Indicates whether or not API access is enabled specifically for

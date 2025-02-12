@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource schemaValidation', () => {
   test('update: only required params', async () => {
     const responsePromise = client.apiGateway.settings.schemaValidation.update({
-      zone_id: 'zone_id',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       validation_default_mitigation_action: 'none',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,14 +26,16 @@ describe('resource schemaValidation', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.apiGateway.settings.schemaValidation.update({
-      zone_id: 'zone_id',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       validation_default_mitigation_action: 'none',
       validation_override_mitigation_action: 'none',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.apiGateway.settings.schemaValidation.edit({ zone_id: 'zone_id' });
+    const responsePromise = client.apiGateway.settings.schemaValidation.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,14 +47,16 @@ describe('resource schemaValidation', () => {
 
   test('edit: required and optional params', async () => {
     const response = await client.apiGateway.settings.schemaValidation.edit({
-      zone_id: 'zone_id',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       validation_default_mitigation_action: 'none',
       validation_override_mitigation_action: 'none',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.apiGateway.settings.schemaValidation.get({ zone_id: 'zone_id' });
+    const responsePromise = client.apiGateway.settings.schemaValidation.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,6 +67,8 @@ describe('resource schemaValidation', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.apiGateway.settings.schemaValidation.get({ zone_id: 'zone_id' });
+    const response = await client.apiGateway.settings.schemaValidation.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

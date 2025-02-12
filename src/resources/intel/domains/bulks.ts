@@ -36,7 +36,7 @@ export namespace BulkGetResponse {
 
     domain?: string;
 
-    inherited_content_categories?: unknown;
+    inherited_content_categories?: Array<BulkGetResponseItem.InheritedContentCategory>;
 
     /**
      * Domain from which `inherited_content_categories` and `inherited_risk_types` are
@@ -44,7 +44,7 @@ export namespace BulkGetResponse {
      */
     inherited_from?: string;
 
-    inherited_risk_types?: unknown;
+    inherited_risk_types?: Array<BulkGetResponseItem.InheritedRiskType>;
 
     /**
      * Global Cloudflare 100k ranking for the last 30 days, if available for the
@@ -58,7 +58,7 @@ export namespace BulkGetResponse {
      */
     risk_score?: number;
 
-    risk_types?: unknown;
+    risk_types?: Array<BulkGetResponseItem.RiskType>;
   }
 
   export namespace BulkGetResponseItem {
@@ -85,6 +85,30 @@ export namespace BulkGetResponse {
      * Current content categories.
      */
     export interface ContentCategory {
+      id?: number;
+
+      name?: string;
+
+      super_category_id?: number;
+    }
+
+    export interface InheritedContentCategory {
+      id?: number;
+
+      name?: string;
+
+      super_category_id?: number;
+    }
+
+    export interface InheritedRiskType {
+      id?: number;
+
+      name?: string;
+
+      super_category_id?: number;
+    }
+
+    export interface RiskType {
       id?: number;
 
       name?: string;
