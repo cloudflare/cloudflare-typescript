@@ -929,6 +929,11 @@ export namespace TokenPolicyParam {
    */
   export interface PermissionGroup {
     /**
+     * Identifier of the group.
+     */
+    id: string;
+
+    /**
      * Attributes associated to the permission group.
      */
     meta?: PermissionGroup.Meta;
