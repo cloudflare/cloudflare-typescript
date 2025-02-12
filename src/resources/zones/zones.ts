@@ -477,7 +477,7 @@ export interface ZoneEditParams {
    * available to Enterprise customers or if it has been explicitly enabled on a
    * zone.
    */
-  type?: 'full' | 'partial' | 'secondary';
+  type?: 'full' | 'partial' | 'secondary' | 'internal';
 
   /**
    * Body param: An array of domains used for custom name servers. This is only
