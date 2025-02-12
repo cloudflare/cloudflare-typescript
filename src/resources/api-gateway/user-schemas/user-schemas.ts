@@ -110,6 +110,9 @@ export interface PublicSchema {
    */
   name: string;
 
+  /**
+   * UUID
+   */
   schema_id: string;
 
   /**
@@ -173,7 +176,7 @@ export interface UserSchemaDeleteResponse {
 
 export interface UserSchemaCreateParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -200,7 +203,7 @@ export interface UserSchemaCreateParams {
 
 export interface UserSchemaListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -216,12 +219,15 @@ export interface UserSchemaListParams extends V4PagePaginationArrayParams {
 }
 
 export interface UserSchemaDeleteParams {
+  /**
+   * Identifier
+   */
   zone_id: string;
 }
 
 export interface UserSchemaEditParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -233,7 +239,7 @@ export interface UserSchemaEditParams {
 
 export interface UserSchemaGetParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 

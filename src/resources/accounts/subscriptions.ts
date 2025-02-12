@@ -3,7 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as Shared from '../shared';
-import { SinglePage } from '../../pagination';
+import { SubscriptionsSinglePage } from '../shared';
 
 export class Subscriptions extends APIResource {
   /**
@@ -61,17 +61,11 @@ export class Subscriptions extends APIResource {
   get(
     params: SubscriptionGetParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SubscriptionGetResponsesSinglePage, SubscriptionGetResponse> {
+  ): Core.PagePromise<SubscriptionsSinglePage, Shared.Subscription> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/subscriptions`,
-      SubscriptionGetResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/subscriptions`, SubscriptionsSinglePage, options);
   }
 }
-
-export class SubscriptionGetResponsesSinglePage extends SinglePage<SubscriptionGetResponse> {}
 
 export type SubscriptionCreateResponse = unknown | string | null;
 
@@ -83,8 +77,6 @@ export interface SubscriptionDeleteResponse {
    */
   subscription_id?: string;
 }
-
-export type SubscriptionGetResponse = unknown;
 
 export interface SubscriptionCreateParams {
   /**
@@ -134,18 +126,16 @@ export interface SubscriptionGetParams {
   account_id: string;
 }
 
-Subscriptions.SubscriptionGetResponsesSinglePage = SubscriptionGetResponsesSinglePage;
-
 export declare namespace Subscriptions {
   export {
     type SubscriptionCreateResponse as SubscriptionCreateResponse,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionGetResponse as SubscriptionGetResponse,
-    SubscriptionGetResponsesSinglePage as SubscriptionGetResponsesSinglePage,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
     type SubscriptionGetParams as SubscriptionGetParams,
   };
 }
+
+export { SubscriptionsSinglePage };

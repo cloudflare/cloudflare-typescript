@@ -51,7 +51,7 @@ describe('resource payloads', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.contentScanning.payloads.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.contentScanning.payloads.delete('a350a054caa840c9becd89c3b4f0195b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -64,7 +64,7 @@ describe('resource payloads', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.contentScanning.payloads.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.contentScanning.payloads.delete('a350a054caa840c9becd89c3b4f0195b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

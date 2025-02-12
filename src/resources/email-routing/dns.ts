@@ -4,17 +4,18 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as DNSAPI from './dns';
 import * as Shared from '../shared';
+import * as EmailRoutingAPI from './email-routing';
 import { SinglePage } from '../../pagination';
 
 export class DNS extends APIResource {
   /**
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
    */
-  create(params: DNSCreateParams, options?: Core.RequestOptions): Core.APIPromise<DNSCreateResponse> {
+  create(params: DNSCreateParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/email/routing/dns`, { body, ...options }) as Core.APIPromise<{
-        result: DNSCreateResponse;
+        result: EmailRoutingAPI.Settings;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,11 +38,11 @@ export class DNS extends APIResource {
   /**
    * Unlock MX Records previously locked by Email Routing.
    */
-  edit(params: DNSEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSEditResponse> {
+  edit(params: DNSEditParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/email/routing/dns`, { body, ...options }) as Core.APIPromise<{
-        result: DNSEditResponse;
+        result: EmailRoutingAPI.Settings;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -106,10 +107,6 @@ export interface DNSRecord {
     | 'TLSA'
     | 'URI';
 }
-
-export type DNSCreateResponse = unknown;
-
-export type DNSEditResponse = unknown;
 
 export type DNSGetResponse =
   | DNSGetResponse.EmailEmailRoutingDNSQueryResponse
@@ -260,8 +257,6 @@ DNS.DNSRecordsSinglePage = DNSRecordsSinglePage;
 export declare namespace DNS {
   export {
     type DNSRecord as DNSRecord,
-    type DNSCreateResponse as DNSCreateResponse,
-    type DNSEditResponse as DNSEditResponse,
     type DNSGetResponse as DNSGetResponse,
     DNSRecordsSinglePage as DNSRecordsSinglePage,
     type DNSCreateParams as DNSCreateParams,
