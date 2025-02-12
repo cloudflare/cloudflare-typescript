@@ -21,7 +21,27 @@ export class PermissionGroups extends APIResource {
 
 export class PermissionGroupListResponsesSinglePage extends SinglePage<PermissionGroupListResponse> {}
 
-export type PermissionGroupListResponse = unknown;
+export interface PermissionGroupListResponse {
+  /**
+   * Public ID.
+   */
+  id?: string;
+
+  /**
+   * Permission Group Name
+   */
+  name?: string;
+
+  /**
+   * Resources to which the Permission Group is scoped
+   */
+  scopes?: Array<
+    | 'com.cloudflare.api.account'
+    | 'com.cloudflare.api.account.zone'
+    | 'com.cloudflare.api.user'
+    | 'com.cloudflare.edge.r2.bucket'
+  >;
+}
 
 PermissionGroups.PermissionGroupListResponsesSinglePage = PermissionGroupListResponsesSinglePage;
 
