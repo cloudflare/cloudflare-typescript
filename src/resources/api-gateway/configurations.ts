@@ -89,7 +89,7 @@ export interface ConfigurationUpdateResponse {
 
 export interface ConfigurationUpdateParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -142,7 +142,7 @@ export namespace ConfigurationUpdateParams {
 
 export interface ConfigurationGetParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 

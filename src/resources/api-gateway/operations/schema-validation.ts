@@ -122,7 +122,7 @@ export interface SchemaValidationGetResponse {
 
 export interface SchemaValidationUpdateParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -141,7 +141,7 @@ export interface SchemaValidationUpdateParams {
 
 export interface SchemaValidationEditParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -152,6 +152,9 @@ export interface SchemaValidationEditParams {
 }
 
 export interface SchemaValidationGetParams {
+  /**
+   * Identifier
+   */
   zone_id: string;
 }
 

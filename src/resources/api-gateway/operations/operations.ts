@@ -171,6 +171,9 @@ export interface OperationCreateResponse {
    */
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
+  /**
+   * UUID
+   */
   operation_id: string;
 
   features?:
@@ -402,6 +405,9 @@ export namespace OperationCreateResponse {
        * Schema active on endpoint.
        */
       export interface ActiveSchema {
+        /**
+         * UUID
+         */
         id?: string;
 
         created_at?: string;
@@ -441,6 +447,9 @@ export interface OperationListResponse {
    */
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
+  /**
+   * UUID
+   */
   operation_id: string;
 
   features?:
@@ -672,6 +681,9 @@ export namespace OperationListResponse {
        * Schema active on endpoint.
        */
       export interface ActiveSchema {
+        /**
+         * UUID
+         */
         id?: string;
 
         created_at?: string;
@@ -722,6 +734,9 @@ export interface OperationBulkCreateResponse {
    */
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
+  /**
+   * UUID
+   */
   operation_id: string;
 
   features?:
@@ -953,6 +968,9 @@ export namespace OperationBulkCreateResponse {
        * Schema active on endpoint.
        */
       export interface ActiveSchema {
+        /**
+         * UUID
+         */
         id?: string;
 
         created_at?: string;
@@ -1003,6 +1021,9 @@ export interface OperationGetResponse {
    */
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
+  /**
+   * UUID
+   */
   operation_id: string;
 
   features?:
@@ -1234,6 +1255,9 @@ export namespace OperationGetResponse {
        * Schema active on endpoint.
        */
       export interface ActiveSchema {
+        /**
+         * UUID
+         */
         id?: string;
 
         created_at?: string;
@@ -1254,7 +1278,7 @@ export namespace OperationGetResponse {
 
 export interface OperationCreateParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -1280,7 +1304,7 @@ export interface OperationCreateParams {
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -1319,12 +1343,15 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
 }
 
 export interface OperationDeleteParams {
+  /**
+   * Identifier
+   */
   zone_id: string;
 }
 
 export interface OperationBulkCreateParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -1357,12 +1384,15 @@ export namespace OperationBulkCreateParams {
 }
 
 export interface OperationBulkDeleteParams {
+  /**
+   * Identifier
+   */
   zone_id: string;
 }
 
 export interface OperationGetParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 

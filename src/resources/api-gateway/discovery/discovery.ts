@@ -35,6 +35,9 @@ export class Discovery extends APIResource {
 export type DiscoveryOperationsV4PagePaginationArray = V4PagePaginationArray<DiscoveryOperation>;
 
 export interface DiscoveryOperation {
+  /**
+   * UUID
+   */
   id: string;
 
   /**
@@ -103,6 +106,9 @@ export interface DiscoveryGetResponse {
 }
 
 export interface DiscoveryGetParams {
+  /**
+   * Identifier
+   */
   zone_id: string;
 }
 

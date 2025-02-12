@@ -27,7 +27,7 @@ export interface SchemaListResponse {
 
 export interface SchemaListParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 

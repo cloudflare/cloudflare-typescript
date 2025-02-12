@@ -54,11 +54,11 @@ export interface ScheduleParam {
 }
 
 export interface ScheduleUpdateResponse {
-  schedules?: Array<unknown>;
+  schedules?: Array<Schedule>;
 }
 
 export interface ScheduleGetResponse {
-  schedules?: Array<unknown>;
+  schedules?: Array<Schedule>;
 }
 
 export interface ScheduleUpdateParams {
