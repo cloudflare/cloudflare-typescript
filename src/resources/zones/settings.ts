@@ -2095,6 +2095,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesCacheRulesOriginMaxHTTPVersion
   | SettingEditResponse.ZonesSchemasPolish
   | PrefetchPreload
+  | SettingEditResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
   | SettingEditResponse.ZonesReplaceInsecureJS
@@ -2649,6 +2650,38 @@ export namespace SettingEditResponse {
   }
 
   /**
+   * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
+   * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
+   * details -
+   * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
+   */
+  export interface ZonesPrivacyPass {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'privacy_pass';
+
+    /**
+     * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
+     * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
+     * details -
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
+     */
+    value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
    * Automatically replace insecure JavaScript libraries with safer and faster
    * alternatives provided under cdnjs and powered by Cloudflare. Currently supports
    * the following libraries: Polyfill under polyfill.io.
@@ -3021,6 +3054,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesCacheRulesOriginMaxHTTPVersion
   | SettingGetResponse.ZonesSchemasPolish
   | PrefetchPreload
+  | SettingGetResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
   | SettingGetResponse.ZonesReplaceInsecureJS
@@ -3575,6 +3609,38 @@ export namespace SettingGetResponse {
   }
 
   /**
+   * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
+   * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
+   * details -
+   * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
+   */
+  export interface ZonesPrivacyPass {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'privacy_pass';
+
+    /**
+     * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
+     * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
+     * details -
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
+     */
+    value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
    * Automatically replace insecure JavaScript libraries with safer and faster
    * alternatives provided under cdnjs and powered by Cloudflare. Currently supports
    * the following libraries: Polyfill under polyfill.io.
@@ -3944,6 +4010,7 @@ export type SettingEditParams =
   | SettingEditParams.ZonesCacheRulesOriginMaxHTTPVersion
   | SettingEditParams.ZonesSchemasPolish
   | SettingEditParams.PrefetchPreload
+  | SettingEditParams.ZonesPrivacyPass
   | SettingEditParams.ProxyReadTimeout
   | SettingEditParams.PseudoIPV4
   | SettingEditParams.ZonesReplaceInsecureJS
@@ -4661,6 +4728,23 @@ export declare namespace SettingEditParams {
      * Body param: ID of the zone setting.
      */
     id: 'prefetch_preload';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface ZonesPrivacyPass {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'privacy_pass';
 
     /**
      * Body param: Current value of the zone setting.
