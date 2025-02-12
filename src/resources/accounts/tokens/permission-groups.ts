@@ -40,9 +40,49 @@ export class PermissionGroupListResponsesSinglePage extends SinglePage<Permissio
 
 export class PermissionGroupGetResponsesSinglePage extends SinglePage<PermissionGroupGetResponse> {}
 
-export type PermissionGroupListResponse = unknown;
+export interface PermissionGroupListResponse {
+  /**
+   * Public ID.
+   */
+  id?: string;
 
-export type PermissionGroupGetResponse = unknown;
+  /**
+   * Permission Group Name
+   */
+  name?: string;
+
+  /**
+   * Resources to which the Permission Group is scoped
+   */
+  scopes?: Array<
+    | 'com.cloudflare.api.account'
+    | 'com.cloudflare.api.account.zone'
+    | 'com.cloudflare.api.user'
+    | 'com.cloudflare.edge.r2.bucket'
+  >;
+}
+
+export interface PermissionGroupGetResponse {
+  /**
+   * Public ID.
+   */
+  id?: string;
+
+  /**
+   * Permission Group Name
+   */
+  name?: string;
+
+  /**
+   * Resources to which the Permission Group is scoped
+   */
+  scopes?: Array<
+    | 'com.cloudflare.api.account'
+    | 'com.cloudflare.api.account.zone'
+    | 'com.cloudflare.api.user'
+    | 'com.cloudflare.edge.r2.bucket'
+  >;
+}
 
 export interface PermissionGroupListParams {
   /**
