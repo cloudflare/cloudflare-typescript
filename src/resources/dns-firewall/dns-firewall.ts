@@ -434,6 +434,16 @@ export interface DNSFirewallCreateParams {
   account_id: string;
 
   /**
+   * Body param: DNS Firewall cluster name
+   */
+  name: string;
+
+  /**
+   * Body param:
+   */
+  upstream_ips: Array<UpstreamIPsParam>;
+
+  /**
    * Body param: Attack mitigation settings
    */
   attack_mitigation?: AttackMitigationParam | null;
@@ -464,11 +474,6 @@ export interface DNSFirewallCreateParams {
   minimum_cache_ttl?: number;
 
   /**
-   * Body param: DNS Firewall cluster name
-   */
-  name?: string;
-
-  /**
    * Body param: Negative DNS cache TTL This setting controls how long DNS Firewall
    * should cache negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
@@ -485,11 +490,6 @@ export interface DNSFirewallCreateParams {
    * nameservers (not counting the initial attempt)
    */
   retries?: number;
-
-  /**
-   * Body param:
-   */
-  upstream_ips?: Array<UpstreamIPsParam>;
 }
 
 export interface DNSFirewallListParams extends V4PagePaginationArrayParams {

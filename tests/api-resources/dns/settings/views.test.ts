@@ -14,6 +14,8 @@ describe('resource views', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.dns.settings.views.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'my view',
+      zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
