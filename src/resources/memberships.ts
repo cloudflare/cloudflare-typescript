@@ -2,6 +2,7 @@
 
 import { APIResource } from '../resource';
 import * as Shared from './shared';
+import * as AccountsAPI from './accounts/accounts';
 import { APIPromise } from '../api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -64,7 +65,7 @@ export interface Membership {
    */
   id?: string;
 
-  account?: unknown;
+  account?: AccountsAPI.Account;
 
   /**
    * Enterprise only. Indicates whether or not API access is enabled specifically for
@@ -125,7 +126,7 @@ export interface MembershipUpdateResponse {
    */
   id?: string;
 
-  account?: unknown;
+  account?: AccountsAPI.Account;
 
   /**
    * Enterprise only. Indicates whether or not API access is enabled specifically for
@@ -320,7 +321,7 @@ export interface MembershipGetResponse {
    */
   id?: string;
 
-  account?: unknown;
+  account?: AccountsAPI.Account;
 
   /**
    * Enterprise only. Indicates whether or not API access is enabled specifically for

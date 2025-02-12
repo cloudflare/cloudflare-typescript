@@ -283,6 +283,21 @@ export interface TokenUpdateParams {
   account_id: string;
 
   /**
+   * Body param: Token name.
+   */
+  name: string;
+
+  /**
+   * Body param: List of access policies assigned to the token.
+   */
+  policies: Array<Shared.TokenPolicyParam>;
+
+  /**
+   * Body param: Status of the token.
+   */
+  status: 'active' | 'disabled' | 'expired';
+
+  /**
    * Body param:
    */
   condition?: TokenUpdateParams.Condition;
@@ -294,24 +309,9 @@ export interface TokenUpdateParams {
   expires_on?: string;
 
   /**
-   * Body param: Token name.
-   */
-  name?: string;
-
-  /**
    * Body param: The time before which the token MUST NOT be accepted for processing.
    */
   not_before?: string;
-
-  /**
-   * Body param: List of access policies assigned to the token.
-   */
-  policies?: Array<Shared.TokenPolicyParam>;
-
-  /**
-   * Body param: Status of the token.
-   */
-  status?: 'active' | 'disabled' | 'expired';
 }
 
 export namespace TokenUpdateParams {

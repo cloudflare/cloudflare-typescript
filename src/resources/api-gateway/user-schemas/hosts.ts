@@ -37,12 +37,15 @@ export interface HostListResponse {
    */
   name: string;
 
+  /**
+   * UUID
+   */
   schema_id: string;
 }
 
 export interface HostListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 }

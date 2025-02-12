@@ -93,7 +93,7 @@ export interface Hyperdrive {
 
   origin: Hyperdrive.PublicDatabase | Hyperdrive.AccessProtectedDatabaseBehindCloudflareTunnel;
 
-  caching?: unknown | Hyperdrive.HyperdriveHyperdriveCachingEnabled;
+  caching?: Hyperdrive.HyperdriveHyperdriveCachingCommon | Hyperdrive.HyperdriveHyperdriveCachingEnabled;
 }
 
 export namespace Hyperdrive {
@@ -149,6 +149,13 @@ export namespace Hyperdrive {
      * The user of your origin database.
      */
     user: string;
+  }
+
+  export interface HyperdriveHyperdriveCachingCommon {
+    /**
+     * When set to true, disables the caching of SQL responses. (Default: false)
+     */
+    disabled?: boolean;
   }
 
   export interface HyperdriveHyperdriveCachingEnabled {

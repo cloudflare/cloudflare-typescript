@@ -34,7 +34,7 @@ export interface FallthroughCreateResponse {
 
 export interface FallthroughCreateParams {
   /**
-   * Path param:
+   * Path param: Identifier
    */
   zone_id: string;
 
