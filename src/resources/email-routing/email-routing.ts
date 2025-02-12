@@ -16,10 +16,8 @@ import * as DNSAPI from './dns';
 import {
   DNS,
   DNSCreateParams,
-  DNSCreateResponse,
   DNSDeleteParams,
   DNSEditParams,
-  DNSEditResponse,
   DNSGetParams,
   DNSGetResponse,
   DNSRecord,
@@ -32,14 +30,10 @@ import {
   EmailRoutingRulesV4PagePaginationArray,
   Matcher,
   RuleCreateParams,
-  RuleCreateResponse,
   RuleDeleteParams,
-  RuleDeleteResponse,
   RuleGetParams,
-  RuleGetResponse,
   RuleListParams,
   RuleUpdateParams,
-  RuleUpdateResponse,
   Rules,
 } from './rules/rules';
 
@@ -52,47 +46,36 @@ export class EmailRouting extends APIResource {
    * Disable your Email Routing zone. Also removes additional MX records previously
    * required for Email Routing to work.
    */
-  disable(
-    params: EmailRoutingDisableParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRoutingDisableResponse> {
+  disable(params: EmailRoutingDisableParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
     const { zone_id, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/email/routing/disable`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: EmailRoutingDisableResponse }>
+      }) as Core.APIPromise<{ result: Settings }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
    */
-  enable(
-    params: EmailRoutingEnableParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRoutingEnableResponse> {
+  enable(params: EmailRoutingEnableParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
     const { zone_id, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/email/routing/enable`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: EmailRoutingEnableResponse }>
+      }) as Core.APIPromise<{ result: Settings }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get information about the settings for your Email Routing zone.
    */
-  get(
-    params: EmailRoutingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRoutingGetResponse> {
+  get(params: EmailRoutingGetParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/email/routing`, options) as Core.APIPromise<{
-        result: EmailRoutingGetResponse;
-      }>
+      this._client.get(`/zones/${zone_id}/email/routing`, options) as Core.APIPromise<{ result: Settings }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -140,12 +123,6 @@ export interface Settings {
   tag?: string;
 }
 
-export type EmailRoutingDisableResponse = unknown;
-
-export type EmailRoutingEnableResponse = unknown;
-
-export type EmailRoutingGetResponse = unknown;
-
 export interface EmailRoutingDisableParams {
   /**
    * Path param: Identifier
@@ -188,8 +165,6 @@ export declare namespace EmailRouting {
   export {
     DNS as DNS,
     type DNSRecord as DNSRecord,
-    type DNSCreateResponse as DNSCreateResponse,
-    type DNSEditResponse as DNSEditResponse,
     type DNSGetResponse as DNSGetResponse,
     DNSRecordsSinglePage as DNSRecordsSinglePage,
     type DNSCreateParams as DNSCreateParams,
@@ -203,10 +178,6 @@ export declare namespace EmailRouting {
     type Action as Action,
     type EmailRoutingRule as EmailRoutingRule,
     type Matcher as Matcher,
-    type RuleCreateResponse as RuleCreateResponse,
-    type RuleUpdateResponse as RuleUpdateResponse,
-    type RuleDeleteResponse as RuleDeleteResponse,
-    type RuleGetResponse as RuleGetResponse,
     EmailRoutingRulesV4PagePaginationArray as EmailRoutingRulesV4PagePaginationArray,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,

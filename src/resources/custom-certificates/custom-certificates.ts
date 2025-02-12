@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as KeylessCertificatesAPI from '../keyless-certificates';
 import * as PrioritizeAPI from './prioritize';
 import { Prioritize, PrioritizeUpdateParams } from './prioritize';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
@@ -170,7 +171,7 @@ export interface CustomCertificate {
    */
   geo_restrictions?: GeoRestrictions;
 
-  keyless_server?: unknown;
+  keyless_server?: KeylessCertificatesAPI.KeylessCertificate;
 
   /**
    * Specify the policy that determines the region where your private key will be

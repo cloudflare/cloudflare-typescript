@@ -90,7 +90,7 @@ export interface DeviceNetwork {
    * The configuration object containing information for the WARP client to detect
    * the managed network.
    */
-  config?: unknown;
+  config?: DeviceNetwork.Config;
 
   /**
    * The name of the device managed network. This name must be unique.
@@ -108,6 +108,27 @@ export interface DeviceNetwork {
   type?: 'tls';
 }
 
+export namespace DeviceNetwork {
+  /**
+   * The configuration object containing information for the WARP client to detect
+   * the managed network.
+   */
+  export interface Config {
+    /**
+     * A network address of the form "host:port" that the WARP client will use to
+     * detect the presence of a TLS host.
+     */
+    tls_sockaddr: string;
+
+    /**
+     * The SHA-256 hash of the TLS certificate presented by the host found at
+     * tls_sockaddr. If absent, regular certificate verification (trusted roots, valid
+     * timestamp, etc) will be used to validate the certificate.
+     */
+    sha256?: string;
+  }
+}
+
 export interface NetworkCreateParams {
   /**
    * Path param:
@@ -115,7 +136,8 @@ export interface NetworkCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The configuration object containing information for the WARP client
+   * to detect the managed network.
    */
   config: NetworkCreateParams.Config;
 
@@ -131,6 +153,10 @@ export interface NetworkCreateParams {
 }
 
 export namespace NetworkCreateParams {
+  /**
+   * The configuration object containing information for the WARP client to detect
+   * the managed network.
+   */
   export interface Config {
     /**
      * A network address of the form "host:port" that the WARP client will use to
@@ -154,7 +180,8 @@ export interface NetworkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The configuration object containing information for the WARP client
+   * to detect the managed network.
    */
   config?: NetworkUpdateParams.Config;
 
@@ -170,6 +197,10 @@ export interface NetworkUpdateParams {
 }
 
 export namespace NetworkUpdateParams {
+  /**
+   * The configuration object containing information for the WARP client to detect
+   * the managed network.
+   */
   export interface Config {
     /**
      * A network address of the form "host:port" that the WARP client will use to

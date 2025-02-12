@@ -23,8 +23,6 @@ import {
   SubscriptionDeleteParams,
   SubscriptionDeleteResponse,
   SubscriptionGetParams,
-  SubscriptionGetResponse,
-  SubscriptionGetResponsesSinglePage,
   SubscriptionUpdateParams,
   SubscriptionUpdateResponse,
   Subscriptions,
@@ -319,7 +317,6 @@ export interface AccountGetParams {
 Accounts.Members = Members;
 Accounts.Roles = Roles;
 Accounts.Subscriptions = Subscriptions;
-Accounts.SubscriptionGetResponsesSinglePage = SubscriptionGetResponsesSinglePage;
 Accounts.Tokens = Tokens;
 Accounts.Logs = Logs;
 
@@ -342,8 +339,6 @@ export declare namespace Accounts {
     type SubscriptionCreateResponse as SubscriptionCreateResponse,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionGetResponse as SubscriptionGetResponse,
-    SubscriptionGetResponsesSinglePage as SubscriptionGetResponsesSinglePage,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,

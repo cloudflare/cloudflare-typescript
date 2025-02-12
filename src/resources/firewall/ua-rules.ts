@@ -90,7 +90,51 @@ export type UARuleCreateResponse = unknown | string | null;
 
 export type UARuleUpdateResponse = unknown | string | null;
 
-export type UARuleListResponse = unknown;
+export interface UARuleListResponse {
+  /**
+   * The unique identifier of the User Agent Blocking rule.
+   */
+  id?: string;
+
+  /**
+   * The configuration object for the current rule.
+   */
+  configuration?: UARuleListResponse.Configuration;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description?: string;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode?: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused?: boolean;
+}
+
+export namespace UARuleListResponse {
+  /**
+   * The configuration object for the current rule.
+   */
+  export interface Configuration {
+    /**
+     * The configuration target for this rule. You must set the target to `ua` for User
+     * Agent Blocking rules.
+     */
+    target?: string;
+
+    /**
+     * The exact user agent string to match. This value will be compared to the
+     * received `User-Agent` HTTP header value.
+     */
+    value?: string;
+  }
+}
 
 export interface UARuleDeleteResponse {
   /**

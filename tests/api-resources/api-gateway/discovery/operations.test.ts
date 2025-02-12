@@ -11,7 +11,9 @@ const client = new Cloudflare({
 
 describe('resource operations', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.apiGateway.discovery.operations.list({ zone_id: 'zone_id' });
+    const responsePromise = client.apiGateway.discovery.operations.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +25,7 @@ describe('resource operations', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.apiGateway.discovery.operations.list({
-      zone_id: 'zone_id',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       diff: true,
       direction: 'asc',
       endpoint: '/api/v1',
@@ -39,7 +41,7 @@ describe('resource operations', () => {
 
   test('bulkEdit: only required params', async () => {
     const responsePromise = client.apiGateway.discovery.operations.bulkEdit({
-      zone_id: 'zone_id',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: { '3818d821-5901-4147-a474-f5f5aec1d54e': {}, 'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': {} },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -53,7 +55,7 @@ describe('resource operations', () => {
 
   test('bulkEdit: required and optional params', async () => {
     const response = await client.apiGateway.discovery.operations.bulkEdit({
-      zone_id: 'zone_id',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {
         '3818d821-5901-4147-a474-f5f5aec1d54e': { state: 'review' },
         'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': { state: 'review' },
@@ -63,8 +65,8 @@ describe('resource operations', () => {
 
   test('edit: only required params', async () => {
     const responsePromise = client.apiGateway.discovery.operations.edit(
-      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-      { zone_id: 'zone_id' },
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -77,8 +79,8 @@ describe('resource operations', () => {
 
   test('edit: required and optional params', async () => {
     const response = await client.apiGateway.discovery.operations.edit(
-      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-      { zone_id: 'zone_id', state: 'review' },
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', state: 'review' },
     );
   });
 });

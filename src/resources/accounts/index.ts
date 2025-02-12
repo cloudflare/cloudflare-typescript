@@ -14,12 +14,10 @@ export {
 } from './members';
 export { Roles, type RoleListParams, type RoleGetParams } from './roles';
 export {
-  SubscriptionGetResponsesSinglePage,
   Subscriptions,
   type SubscriptionCreateResponse,
   type SubscriptionUpdateResponse,
   type SubscriptionDeleteResponse,
-  type SubscriptionGetResponse,
   type SubscriptionCreateParams,
   type SubscriptionUpdateParams,
   type SubscriptionDeleteParams,

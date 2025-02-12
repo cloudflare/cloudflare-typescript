@@ -210,12 +210,12 @@ export interface ViewCreateParams {
   /**
    * Body param: The name of the view.
    */
-  name?: string;
+  name: string;
 
   /**
    * Body param: The list of zones linked to this view.
    */
-  zones?: Array<string>;
+  zones: Array<string>;
 }
 
 export interface ViewListParams extends V4PagePaginationArrayParams {

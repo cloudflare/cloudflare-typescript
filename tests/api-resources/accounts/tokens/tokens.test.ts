@@ -71,6 +71,21 @@ describe('resource tokens', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.accounts.tokens.update('ed17574386854bf78a67040be0a770b0', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      name: 'readonly token',
+      policies: [
+        {
+          effect: 'allow',
+          permission_groups: [
+            { id: 'c8fed203ed3043cba015a93ad1616f1f' },
+            { id: '82e64a83756745bbbb1c9c2701bf816b' },
+          ],
+          resources: {
+            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
+            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
+          },
+        },
+      ],
+      status: 'active',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -85,15 +100,7 @@ describe('resource tokens', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.accounts.tokens.update('ed17574386854bf78a67040be0a770b0', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
-      condition: {
-        request_ip: {
-          in: ['123.123.123.0/24', '2606:4700::/32'],
-          not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
-        },
-      },
-      expires_on: '2020-01-01T00:00:00Z',
       name: 'readonly token',
-      not_before: '2018-07-01T05:20:00Z',
       policies: [
         {
           effect: 'allow',
@@ -108,6 +115,14 @@ describe('resource tokens', () => {
         },
       ],
       status: 'active',
+      condition: {
+        request_ip: {
+          in: ['123.123.123.0/24', '2606:4700::/32'],
+          not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
+        },
+      },
+      expires_on: '2020-01-01T00:00:00Z',
+      not_before: '2018-07-01T05:20:00Z',
     });
   });
 
