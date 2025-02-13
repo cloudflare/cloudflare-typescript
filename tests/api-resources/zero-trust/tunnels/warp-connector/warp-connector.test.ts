@@ -127,25 +127,4 @@ describe('resource warpConnector', () => {
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
-
-  test('token: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.warpConnector.token(
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('token: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.warpConnector.token(
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
-  });
 });
