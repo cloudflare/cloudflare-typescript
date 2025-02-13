@@ -787,8 +787,8 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
   exclude_prefix?: string;
 
   /**
-   * Query param: If provided, include only tunnels that were created (and not
-   * deleted) before this time.
+   * Query param: If provided, include only resources that were created (and not
+   * deleted) before this time. URL encoded.
    */
   existed_at?: string;
 
