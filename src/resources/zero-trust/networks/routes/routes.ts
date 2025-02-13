@@ -248,8 +248,8 @@ export interface RouteListParams extends V4PagePaginationArrayParams {
   comment?: string;
 
   /**
-   * Query param: If provided, include only tunnels that were created (and not
-   * deleted) before this time.
+   * Query param: If provided, include only resources that were created (and not
+   * deleted) before this time. URL encoded.
    */
   existed_at?: string;
 
