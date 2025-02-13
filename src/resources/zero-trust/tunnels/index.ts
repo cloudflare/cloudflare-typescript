@@ -41,11 +41,9 @@ export {
   type WARPConnectorDeleteResponse,
   type WARPConnectorEditResponse,
   type WARPConnectorGetResponse,
-  type WARPConnectorTokenResponse,
   type WARPConnectorCreateParams,
   type WARPConnectorListParams,
   type WARPConnectorDeleteParams,
   type WARPConnectorEditParams,
   type WARPConnectorGetParams,
-  type WARPConnectorTokenParams,
-} from './warp-connector';
+} from './warp-connector/index';

@@ -1,11 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
-import * as Shared from '../../shared';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
+import * as Shared from '../../../shared';
+import * as TokenAPI from './token';
+import { Token, TokenGetParams, TokenGetResponse } from './token';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class WARPConnector extends APIResource {
+  token: TokenAPI.Token = new TokenAPI.Token(this._client);
+
   /**
    * Creates a new Warp Connector Tunnel in an account.
    */
@@ -82,24 +86,6 @@ export class WARPConnector extends APIResource {
       this._client.get(`/accounts/${account_id}/warp_connector/${tunnelId}`, options) as Core.APIPromise<{
         result: WARPConnectorGetResponse;
       }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Gets the token used to associate warp device with a specific Warp Connector
-   * tunnel.
-   */
-  token(
-    tunnelId: string,
-    params: WARPConnectorTokenParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorTokenResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/warp_connector/${tunnelId}/token`,
-        options,
-      ) as Core.APIPromise<{ result: WARPConnectorTokenResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -716,12 +702,6 @@ export namespace WARPConnectorGetResponse {
   }
 }
 
-/**
- * The Tunnel Token is used as a mechanism to authenticate the operation of a
- * tunnel.
- */
-export type WARPConnectorTokenResponse = string;
-
 export interface WARPConnectorCreateParams {
   /**
    * Path param: Cloudflare account ID
@@ -824,15 +804,9 @@ export interface WARPConnectorGetParams {
   account_id: string;
 }
 
-export interface WARPConnectorTokenParams {
-  /**
-   * Cloudflare account ID
-   */
-  account_id: string;
-}
-
 WARPConnector.WARPConnectorListResponsesV4PagePaginationArray =
   WARPConnectorListResponsesV4PagePaginationArray;
+WARPConnector.Token = Token;
 
 export declare namespace WARPConnector {
   export {
@@ -841,13 +815,13 @@ export declare namespace WARPConnector {
     type WARPConnectorDeleteResponse as WARPConnectorDeleteResponse,
     type WARPConnectorEditResponse as WARPConnectorEditResponse,
     type WARPConnectorGetResponse as WARPConnectorGetResponse,
-    type WARPConnectorTokenResponse as WARPConnectorTokenResponse,
     WARPConnectorListResponsesV4PagePaginationArray as WARPConnectorListResponsesV4PagePaginationArray,
     type WARPConnectorCreateParams as WARPConnectorCreateParams,
     type WARPConnectorListParams as WARPConnectorListParams,
     type WARPConnectorDeleteParams as WARPConnectorDeleteParams,
     type WARPConnectorEditParams as WARPConnectorEditParams,
     type WARPConnectorGetParams as WARPConnectorGetParams,
-    type WARPConnectorTokenParams as WARPConnectorTokenParams,
   };
+
+  export { Token as Token, type TokenGetResponse as TokenGetResponse, type TokenGetParams as TokenGetParams };
 }

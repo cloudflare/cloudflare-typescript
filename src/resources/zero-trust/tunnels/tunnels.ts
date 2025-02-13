@@ -26,7 +26,7 @@ import * as ManagementAPI from './management';
 import { Management, ManagementCreateParams, ManagementCreateResponse } from './management';
 import * as TokenAPI from './token';
 import { Token, TokenGetParams, TokenGetResponse } from './token';
-import * as WARPConnectorAPI from './warp-connector';
+import * as WARPConnectorAPI from './warp-connector/warp-connector';
 import {
   WARPConnector,
   WARPConnectorCreateParams,
@@ -40,9 +40,7 @@ import {
   WARPConnectorListParams,
   WARPConnectorListResponse,
   WARPConnectorListResponsesV4PagePaginationArray,
-  WARPConnectorTokenParams,
-  WARPConnectorTokenResponse,
-} from './warp-connector';
+} from './warp-connector/warp-connector';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tunnels extends APIResource {
@@ -900,14 +898,12 @@ export declare namespace Tunnels {
     type WARPConnectorDeleteResponse as WARPConnectorDeleteResponse,
     type WARPConnectorEditResponse as WARPConnectorEditResponse,
     type WARPConnectorGetResponse as WARPConnectorGetResponse,
-    type WARPConnectorTokenResponse as WARPConnectorTokenResponse,
     WARPConnectorListResponsesV4PagePaginationArray as WARPConnectorListResponsesV4PagePaginationArray,
     type WARPConnectorCreateParams as WARPConnectorCreateParams,
     type WARPConnectorListParams as WARPConnectorListParams,
     type WARPConnectorDeleteParams as WARPConnectorDeleteParams,
     type WARPConnectorEditParams as WARPConnectorEditParams,
     type WARPConnectorGetParams as WARPConnectorGetParams,
-    type WARPConnectorTokenParams as WARPConnectorTokenParams,
   };
 
   export {
