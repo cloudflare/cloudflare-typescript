@@ -69,16 +69,8 @@ export { Seats, type Seat, type SeatEditParams, type SeatsSinglePage } from './s
 export {
   Tunnels,
   type Connection,
-  type TunnelCreateResponse,
   type TunnelListResponse,
-  type TunnelDeleteResponse,
-  type TunnelEditResponse,
-  type TunnelGetResponse,
-  type TunnelCreateParams,
   type TunnelListParams,
-  type TunnelDeleteParams,
-  type TunnelEditParams,
-  type TunnelGetParams,
   type TunnelListResponsesV4PagePaginationArray,
 } from './tunnels/index';
 export { ZeroTrust } from './zero-trust';
