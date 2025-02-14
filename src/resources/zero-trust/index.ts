@@ -70,15 +70,7 @@ export {
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
   type Connection,
-  type TunnelCreateResponse,
   type TunnelListResponse,
-  type TunnelDeleteResponse,
-  type TunnelEditResponse,
-  type TunnelGetResponse,
-  type TunnelCreateParams,
   type TunnelListParams,
-  type TunnelDeleteParams,
-  type TunnelEditParams,
-  type TunnelGetParams,
 } from './tunnels/index';
 export { ZeroTrust } from './zero-trust';
