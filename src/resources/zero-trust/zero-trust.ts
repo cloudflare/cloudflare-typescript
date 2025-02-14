@@ -75,14 +75,6 @@ import {
 import * as TunnelsAPI from './tunnels/tunnels';
 import {
   Connection,
-  TunnelCreateParams,
-  TunnelCreateResponse,
-  TunnelDeleteParams,
-  TunnelDeleteResponse,
-  TunnelEditParams,
-  TunnelEditResponse,
-  TunnelGetParams,
-  TunnelGetResponse,
   TunnelListParams,
   TunnelListResponse,
   TunnelListResponsesV4PagePaginationArray,
@@ -182,17 +174,9 @@ export declare namespace ZeroTrust {
   export {
     Tunnels as Tunnels,
     type Connection as Connection,
-    type TunnelCreateResponse as TunnelCreateResponse,
     type TunnelListResponse as TunnelListResponse,
-    type TunnelDeleteResponse as TunnelDeleteResponse,
-    type TunnelEditResponse as TunnelEditResponse,
-    type TunnelGetResponse as TunnelGetResponse,
     TunnelListResponsesV4PagePaginationArray as TunnelListResponsesV4PagePaginationArray,
-    type TunnelCreateParams as TunnelCreateParams,
     type TunnelListParams as TunnelListParams,
-    type TunnelDeleteParams as TunnelDeleteParams,
-    type TunnelEditParams as TunnelEditParams,
-    type TunnelGetParams as TunnelGetParams,
   };
 
   export {
