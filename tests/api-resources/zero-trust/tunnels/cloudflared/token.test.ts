@@ -9,11 +9,10 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource connectors', () => {
+describe('resource token', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.connectors.get(
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.token.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      '1bedc50d-42b3-473c-b108-ff3d10c0d925',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -26,9 +25,8 @@ describe('resource connectors', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.connectors.get(
+    const response = await client.zeroTrust.tunnels.cloudflared.token.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      '1bedc50d-42b3-473c-b108-ff3d10c0d925',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });

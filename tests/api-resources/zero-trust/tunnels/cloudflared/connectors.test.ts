@@ -9,11 +9,12 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource management', () => {
-  test('create: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.management.create(
+describe('resource connectors', () => {
+  test('get: only required params', async () => {
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.connectors.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252', resources: ['logs'] },
+      '1bedc50d-42b3-473c-b108-ff3d10c0d925',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,10 +25,11 @@ describe('resource management', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.management.create(
+  test('get: required and optional params', async () => {
+    const response = await client.zeroTrust.tunnels.cloudflared.connectors.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252', resources: ['logs'] },
+      '1bedc50d-42b3-473c-b108-ff3d10c0d925',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 });

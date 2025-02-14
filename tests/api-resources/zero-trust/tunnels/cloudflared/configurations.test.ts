@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource configurations', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.configurations.update(
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.configurations.update(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -25,7 +25,7 @@ describe('resource configurations', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.configurations.update(
+    const response = await client.zeroTrust.tunnels.cloudflared.configurations.update(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -75,7 +75,7 @@ describe('resource configurations', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.configurations.get(
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.configurations.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -89,7 +89,7 @@ describe('resource configurations', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.configurations.get(
+    const response = await client.zeroTrust.tunnels.cloudflared.configurations.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
