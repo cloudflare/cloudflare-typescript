@@ -67,6 +67,56 @@ main();
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
 
+## File uploads
+
+Request parameters that correspond to file uploads can be passed in many different forms:
+
+- `File` (or an object with the same structure)
+- a `fetch` `Response` (or an object with the same structure)
+- an `fs.ReadStream`
+- the return value of our `toFile` helper
+
+```ts
+import fs from 'fs';
+import fetch from 'node-fetch';
+import Cloudflare, { toFile } from 'cloudflare';
+
+const client = new Cloudflare();
+
+// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
+await client.apiGateway.userSchemas.create({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  file: fs.createReadStream('/path/to/file'),
+  kind: 'openapi_v3',
+});
+
+// Or if you have the web `File` API you can pass a `File` instance:
+await client.apiGateway.userSchemas.create({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  file: new File(['my bytes'], 'file'),
+  kind: 'openapi_v3',
+});
+
+// You can also pass a `fetch` `Response`:
+await client.apiGateway.userSchemas.create({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  file: await fetch('https://somesite/file'),
+  kind: 'openapi_v3',
+});
+
+// Finally, if none of the above are convenient, you can use our `toFile` helper:
+await client.apiGateway.userSchemas.create({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  file: await toFile(Buffer.from('my bytes'), 'file'),
+  kind: 'openapi_v3',
+});
+await client.apiGateway.userSchemas.create({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
+  kind: 'openapi_v3',
+});
+```
+
 ## Handling errors
 
 When the library is unable to connect to the API,
