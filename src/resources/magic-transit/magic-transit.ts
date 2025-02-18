@@ -26,19 +26,6 @@ import {
   CfInterconnectUpdateResponse,
   CfInterconnects,
 } from './cf-interconnects';
-import * as ConnectorsAPI from './connectors';
-import {
-  ConnectorEditParams,
-  ConnectorEditResponse,
-  ConnectorGetParams,
-  ConnectorGetResponse,
-  ConnectorListParams,
-  ConnectorListResponse,
-  ConnectorListResponsesSinglePage,
-  ConnectorUpdateParams,
-  ConnectorUpdateResponse,
-  Connectors,
-} from './connectors';
 import * as GRETunnelsAPI from './gre-tunnels';
 import {
   GRETunnelBulkUpdateParams,
@@ -93,6 +80,19 @@ import {
   Routes,
   Scope,
 } from './routes';
+import * as ConnectorsAPI from './connectors/connectors';
+import {
+  ConnectorEditParams,
+  ConnectorEditResponse,
+  ConnectorGetParams,
+  ConnectorGetResponse,
+  ConnectorListParams,
+  ConnectorListResponse,
+  ConnectorListResponsesSinglePage,
+  ConnectorUpdateParams,
+  ConnectorUpdateResponse,
+  Connectors,
+} from './connectors/connectors';
 import * as PCAPsAPI from './pcaps/pcaps';
 import {
   PCAP,
