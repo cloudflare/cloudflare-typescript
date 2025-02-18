@@ -151,12 +151,11 @@ export class Rules extends APIResource {
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   get(ruleID: string, params: RuleGetParams, options?: RequestOptions): APIPromise<FirewallRule> {
-    const { zone_id, ...query } = params;
+    const { zone_id } = params;
     return (
-      this._client.get(path`/zones/${zone_id}/firewall/rules/${ruleID}`, {
-        query,
-        ...options,
-      }) as APIPromise<{ result: FirewallRule }>
+      this._client.get(path`/zones/${zone_id}/firewall/rules/${ruleID}`, options) as APIPromise<{
+        result: FirewallRule;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -441,14 +440,9 @@ export interface RuleEditParams {
 
 export interface RuleGetParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Query param: The unique identifier of the firewall rule.
-   */
-  id?: string;
 }
 
 export declare namespace Rules {
