@@ -172,6 +172,8 @@ export interface AIGatewayCreateResponse {
 
   log_management?: number | null;
 
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
+
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -208,6 +210,8 @@ export interface AIGatewayUpdateResponse {
   authentication?: boolean;
 
   log_management?: number | null;
+
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
 
   logpush?: boolean;
 
@@ -246,6 +250,8 @@ export interface AIGatewayListResponse {
 
   log_management?: number | null;
 
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
+
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -283,6 +289,8 @@ export interface AIGatewayDeleteResponse {
 
   log_management?: number | null;
 
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
+
   logpush?: boolean;
 
   logpush_public_key?: string | null;
@@ -319,6 +327,8 @@ export interface AIGatewayGetResponse {
   authentication?: boolean;
 
   log_management?: number | null;
+
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
 
   logpush?: boolean;
 
@@ -379,6 +389,11 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
+
+  /**
+   * Body param:
+   */
   logpush?: boolean;
 
   /**
@@ -432,6 +447,11 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   log_management?: number | null;
+
+  /**
+   * Body param:
+   */
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
 
   /**
    * Body param:
