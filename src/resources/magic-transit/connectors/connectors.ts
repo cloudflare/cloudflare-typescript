@@ -1,10 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
-import { SinglePage } from '../../pagination';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
+import * as SnapshotsAPI from './snapshots';
+import {
+  SnapshotGetParams,
+  SnapshotGetResponse,
+  SnapshotListParams,
+  SnapshotListResponse,
+  Snapshots,
+} from './snapshots';
+import * as TelemetryAPI from './telemetry';
+import {
+  Telemetry,
+  TelemetryGetParams,
+  TelemetryGetResponse,
+  TelemetryListParams,
+  TelemetryListResponse,
+} from './telemetry';
+import { SinglePage } from '../../../pagination';
 
 export class Connectors extends APIResource {
+  telemetry: TelemetryAPI.Telemetry = new TelemetryAPI.Telemetry(this._client);
+  snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
+
   /**
    * Replace Connector
    */
@@ -273,6 +292,8 @@ export interface ConnectorGetParams {
 }
 
 Connectors.ConnectorListResponsesSinglePage = ConnectorListResponsesSinglePage;
+Connectors.Telemetry = Telemetry;
+Connectors.Snapshots = Snapshots;
 
 export declare namespace Connectors {
   export {
@@ -285,5 +306,21 @@ export declare namespace Connectors {
     type ConnectorListParams as ConnectorListParams,
     type ConnectorEditParams as ConnectorEditParams,
     type ConnectorGetParams as ConnectorGetParams,
+  };
+
+  export {
+    Telemetry as Telemetry,
+    type TelemetryListResponse as TelemetryListResponse,
+    type TelemetryGetResponse as TelemetryGetResponse,
+    type TelemetryListParams as TelemetryListParams,
+    type TelemetryGetParams as TelemetryGetParams,
+  };
+
+  export {
+    Snapshots as Snapshots,
+    type SnapshotListResponse as SnapshotListResponse,
+    type SnapshotGetResponse as SnapshotGetResponse,
+    type SnapshotListParams as SnapshotListParams,
+    type SnapshotGetParams as SnapshotGetParams,
   };
 }
