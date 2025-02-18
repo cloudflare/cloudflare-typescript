@@ -160,6 +160,13 @@ export interface CustomCreateParams {
   disable_auto_fallback?: boolean;
 
   /**
+   * Body param: Determines how the WARP client sends DNS requests to Cloudflare
+   * Gateway. When `true`, DNS traffic is sent over DoH inside the WARP tunnel. When
+   * `false`, the DoH connection operates outside of the WARP tunnel.
+   */
+  doh_in_tunnel?: boolean;
+
+  /**
    * Body param: Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -182,6 +189,12 @@ export interface CustomCreateParams {
    * field is omitted from the response if null or unset.
    */
   lan_allow_subnet_size?: number;
+
+  /**
+   * Body param: Determines if the operating system will register WARP's local
+   * interface IP with your on-premises DNS server.
+   */
+  register_interface_ip_with_dns?: boolean;
 
   /**
    * Body param:
@@ -273,6 +286,13 @@ export interface CustomEditParams {
   disable_auto_fallback?: boolean;
 
   /**
+   * Body param: Determines how the WARP client sends DNS requests to Cloudflare
+   * Gateway. When `true`, DNS traffic is sent over DoH inside the WARP tunnel. When
+   * `false`, the DoH connection operates outside of the WARP tunnel.
+   */
+  doh_in_tunnel?: boolean;
+
+  /**
    * Body param: Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -297,6 +317,12 @@ export interface CustomEditParams {
    * precedence. Policies will be evaluated in ascending order of this field.
    */
   precedence?: number;
+
+  /**
+   * Body param: Determines if the operating system will register WARP's local
+   * interface IP with your on-premises DNS server.
+   */
+  register_interface_ip_with_dns?: boolean;
 
   /**
    * Body param:
