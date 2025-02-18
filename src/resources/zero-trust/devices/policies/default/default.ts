@@ -92,6 +92,13 @@ export interface DefaultEditResponse {
   disable_auto_fallback?: boolean;
 
   /**
+   * Determines how the WARP client sends DNS requests to Cloudflare Gateway. When
+   * `true`, DNS traffic is sent over DoH inside the WARP tunnel. When `false`, the
+   * DoH connection operates outside of the WARP tunnel.
+   */
+  doh_in_tunnel?: boolean;
+
+  /**
    * Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -108,6 +115,12 @@ export interface DefaultEditResponse {
   gateway_unique_id?: string;
 
   include?: Array<PoliciesAPI.SplitTunnelInclude>;
+
+  /**
+   * Determines if the operating system will register WARP's local interface IP with
+   * your on-premises DNS server.
+   */
+  register_interface_ip_with_dns?: boolean;
 
   service_mode_v2?: DefaultEditResponse.ServiceModeV2;
 
@@ -181,6 +194,13 @@ export interface DefaultGetResponse {
   disable_auto_fallback?: boolean;
 
   /**
+   * Determines how the WARP client sends DNS requests to Cloudflare Gateway. When
+   * `true`, DNS traffic is sent over DoH inside the WARP tunnel. When `false`, the
+   * DoH connection operates outside of the WARP tunnel.
+   */
+  doh_in_tunnel?: boolean;
+
+  /**
    * Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -197,6 +217,12 @@ export interface DefaultGetResponse {
   gateway_unique_id?: string;
 
   include?: Array<PoliciesAPI.SplitTunnelInclude>;
+
+  /**
+   * Determines if the operating system will register WARP's local interface IP with
+   * your on-premises DNS server.
+   */
+  register_interface_ip_with_dns?: boolean;
 
   service_mode_v2?: DefaultGetResponse.ServiceModeV2;
 
@@ -271,9 +297,22 @@ export interface DefaultEditParams {
   disable_auto_fallback?: boolean;
 
   /**
+   * Body param: Determines how the WARP client sends DNS requests to Cloudflare
+   * Gateway. When `true`, DNS traffic is sent over DoH inside the WARP tunnel. When
+   * `false`, the DoH connection operates outside of the WARP tunnel.
+   */
+  doh_in_tunnel?: boolean;
+
+  /**
    * Body param: Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
+
+  /**
+   * Body param: Determines if the operating system will register WARP's local
+   * interface IP with your on-premises DNS server.
+   */
+  register_interface_ip_with_dns?: boolean;
 
   /**
    * Body param:
