@@ -3374,17 +3374,41 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/magic-transit/connectors.ts">ConnectorUpdateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/connectors.ts">ConnectorListResponse</a></code>
-- <code><a href="./src/resources/magic-transit/connectors.ts">ConnectorEditResponse</a></code>
-- <code><a href="./src/resources/magic-transit/connectors.ts">ConnectorGetResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorEditResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors.ts">update</a>(connectorID, { ...params }) -> ConnectorUpdateResponse</code>
-- <code title="get /accounts/{account_id}/magic/connectors">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors.ts">list</a>({ ...params }) -> ConnectorListResponsesSinglePage</code>
-- <code title="patch /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors.ts">edit</a>(connectorID, { ...params }) -> ConnectorEditResponse</code>
-- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors.ts">get</a>(connectorID, { ...params }) -> ConnectorGetResponse</code>
+- <code title="put /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">update</a>(connectorID, { ...params }) -> ConnectorUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">list</a>({ ...params }) -> ConnectorListResponsesSinglePage</code>
+- <code title="patch /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">edit</a>(connectorID, { ...params }) -> ConnectorEditResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">get</a>(connectorID, { ...params }) -> ConnectorGetResponse</code>
+
+### Telemetry
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors/telemetry.ts">TelemetryListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/telemetry.ts">TelemetryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events">client.magicTransit.connectors.telemetry.<a href="./src/resources/magic-transit/connectors/telemetry.ts">list</a>(connectorID, { ...params }) -> TelemetryListResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events/{event_t}.{event_n}">client.magicTransit.connectors.telemetry.<a href="./src/resources/magic-transit/connectors/telemetry.ts">get</a>(eventN, { ...params }) -> TelemetryGetResponse</code>
+
+### Snapshots
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors/snapshots.ts">SnapshotListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/snapshots.ts">SnapshotGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots">client.magicTransit.connectors.snapshots.<a href="./src/resources/magic-transit/connectors/snapshots.ts">list</a>(connectorID, { ...params }) -> SnapshotListResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots/{snapshot_t}">client.magicTransit.connectors.snapshots.<a href="./src/resources/magic-transit/connectors/snapshots.ts">get</a>(snapshotT, { ...params }) -> SnapshotGetResponse</code>
 
 ## PCAPs
 

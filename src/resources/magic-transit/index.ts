@@ -34,7 +34,7 @@ export {
   type ConnectorEditParams,
   type ConnectorGetParams,
   type ConnectorListResponsesSinglePage,
-} from './connectors';
+} from './connectors/index';
 export {
   GRETunnels,
   type GRETunnelCreateResponse,
