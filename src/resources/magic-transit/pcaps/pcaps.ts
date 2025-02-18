@@ -75,6 +75,12 @@ export interface PCAP {
   filter_v1?: PCAPFilter;
 
   /**
+   * The RFC 3339 offset timestamp from which to query backwards for packets. Must be
+   * within the last 24h. When this field is empty, defaults to time of request.
+   */
+  offset_time?: string;
+
+  /**
    * The status of the packet capture request.
    */
   status?:
@@ -428,6 +434,13 @@ export declare namespace PCAPCreateParams {
      * captured.
      */
     filter_v1?: PCAPFilterParam;
+
+    /**
+     * Body param: The RFC 3339 offset timestamp from which to query backwards for
+     * packets. Must be within the last 24h. When this field is empty, defaults to time
+     * of request.
+     */
+    offset_time?: string;
   }
 
   export interface MagicVisibilityPCAPsPCAPsRequestFull {
