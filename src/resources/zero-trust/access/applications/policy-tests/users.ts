@@ -14,11 +14,11 @@ export class Users extends APIResource {
     params: UserListParams,
     options?: RequestOptions,
   ): PagePromise<UserListResponsesSinglePage, UserListResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/policy-tests/${policyTestID}/users`,
       SinglePage<UserListResponse>,
-      options,
+      { query, ...options },
     );
   }
 }
@@ -49,9 +49,14 @@ export interface UserListResponse {
 
 export interface UserListParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: Filter users by their policy evaluation status.
+   */
+  status?: 'success' | 'fail';
 }
 
 export declare namespace Users {
