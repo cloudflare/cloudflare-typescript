@@ -113,11 +113,11 @@ export interface PolicyTestCreateParams {
   /**
    * Body param:
    */
-  policies?: Array<PolicyTestCreateParams.Policy>;
+  policies?: Array<PolicyTestCreateParams.UnionMember0 | string>;
 }
 
 export namespace PolicyTestCreateParams {
-  export interface Policy {
+  export interface UnionMember0 {
     /**
      * The action Access will take if a user matches this policy. Infrastructure
      * application policies can only use the Allow action.
