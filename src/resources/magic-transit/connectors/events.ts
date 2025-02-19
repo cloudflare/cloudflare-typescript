@@ -5,51 +5,47 @@ import { APIPromise } from '../../../api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Telemetry extends APIResource {
+export class Events extends APIResource {
   /**
    * List Events
    */
   list(
     connectorID: string,
-    params: TelemetryListParams,
+    params: EventListParams,
     options?: RequestOptions,
-  ): APIPromise<TelemetryListResponse> {
+  ): APIPromise<EventListResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/magic/connectors/${connectorID}/telemetry/events`, {
         query,
         ...options,
-      }) as APIPromise<{ result: TelemetryListResponse }>
+      }) as APIPromise<{ result: EventListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Event
    */
-  get(
-    eventN: number,
-    params: TelemetryGetParams,
-    options?: RequestOptions,
-  ): APIPromise<TelemetryGetResponse> {
+  get(eventN: number, params: EventGetParams, options?: RequestOptions): APIPromise<EventGetResponse> {
     const { account_id, connector_id, event_t } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/connectors/${connector_id}/telemetry/events/${event_t}.${eventN}`,
         options,
-      ) as APIPromise<{ result: TelemetryGetResponse }>
+      ) as APIPromise<{ result: EventGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TelemetryListResponse {
+export interface EventListResponse {
   count: number;
 
-  items: Array<TelemetryListResponse.Item>;
+  items: Array<EventListResponse.Item>;
 
   cursor?: string;
 }
 
-export namespace TelemetryListResponse {
+export namespace EventListResponse {
   export interface Item {
     /**
      * Time the Event was collected (seconds since the Unix epoch)
@@ -76,21 +72,21 @@ export namespace TelemetryListResponse {
 /**
  * Recorded Event
  */
-export interface TelemetryGetResponse {
+export interface EventGetResponse {
   e:
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.UnionMember8
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K;
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.UnionMember8
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K;
 
   /**
    * Sequence number, used to order events with the same timestamp
@@ -103,7 +99,7 @@ export interface TelemetryGetResponse {
   t: number;
 }
 
-export namespace TelemetryGetResponse {
+export namespace EventGetResponse {
   export interface K {
     /**
      * Initialized process
@@ -201,7 +197,7 @@ export namespace TelemetryGetResponse {
   }
 }
 
-export interface TelemetryListParams {
+export interface EventListParams {
   /**
    * Path param:
    */
@@ -228,7 +224,7 @@ export interface TelemetryListParams {
   limit?: number;
 }
 
-export interface TelemetryGetParams {
+export interface EventGetParams {
   account_id: number;
 
   connector_id: string;
@@ -236,11 +232,11 @@ export interface TelemetryGetParams {
   event_t: number;
 }
 
-export declare namespace Telemetry {
+export declare namespace Events {
   export {
-    type TelemetryListResponse as TelemetryListResponse,
-    type TelemetryGetResponse as TelemetryGetResponse,
-    type TelemetryListParams as TelemetryListParams,
-    type TelemetryGetParams as TelemetryGetParams,
+    type EventListResponse as EventListResponse,
+    type EventGetResponse as EventGetResponse,
+    type EventListParams as EventListParams,
+    type EventGetParams as EventGetParams,
   };
 }

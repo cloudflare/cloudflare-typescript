@@ -3386,17 +3386,17 @@ Methods:
 - <code title="patch /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">edit</a>(connectorID, { ...params }) -> ConnectorEditResponse</code>
 - <code title="get /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">get</a>(connectorID, { ...params }) -> ConnectorGetResponse</code>
 
-### Telemetry
+### Events
 
 Types:
 
-- <code><a href="./src/resources/magic-transit/connectors/telemetry.ts">TelemetryListResponse</a></code>
-- <code><a href="./src/resources/magic-transit/connectors/telemetry.ts">TelemetryGetResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/events.ts">EventListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/events.ts">EventGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events">client.magicTransit.connectors.telemetry.<a href="./src/resources/magic-transit/connectors/telemetry.ts">list</a>(connectorID, { ...params }) -> TelemetryListResponse</code>
-- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events/{event_t}.{event_n}">client.magicTransit.connectors.telemetry.<a href="./src/resources/magic-transit/connectors/telemetry.ts">get</a>(eventN, { ...params }) -> TelemetryGetResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events">client.magicTransit.connectors.events.<a href="./src/resources/magic-transit/connectors/events.ts">list</a>(connectorID, { ...params }) -> EventListResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events/{event_t}.{event_n}">client.magicTransit.connectors.events.<a href="./src/resources/magic-transit/connectors/events.ts">get</a>(eventN, { ...params }) -> EventGetResponse</code>
 
 ### Snapshots
 
