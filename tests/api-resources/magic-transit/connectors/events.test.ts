@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource telemetry', () => {
+describe('resource events', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.magicTransit.connectors.telemetry.list('connector_id', {
+    const responsePromise = client.magicTransit.connectors.events.list('connector_id', {
       account_id: 0,
       from: 0,
       to: 0,
@@ -26,7 +26,7 @@ describe('resource telemetry', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.telemetry.list('connector_id', {
+    const response = await client.magicTransit.connectors.events.list('connector_id', {
       account_id: 0,
       from: 0,
       to: 0,
@@ -36,7 +36,7 @@ describe('resource telemetry', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.magicTransit.connectors.telemetry.get('connector_id', 0, 0, {
+    const responsePromise = client.magicTransit.connectors.events.get('connector_id', 0, 0, {
       account_id: 0,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -49,8 +49,6 @@ describe('resource telemetry', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.telemetry.get('connector_id', 0, 0, {
-      account_id: 0,
-    });
+    const response = await client.magicTransit.connectors.events.get('connector_id', 0, 0, { account_id: 0 });
   });
 });

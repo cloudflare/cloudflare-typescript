@@ -3,21 +3,21 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 
-export class Telemetry extends APIResource {
+export class Events extends APIResource {
   /**
    * List Events
    */
   list(
     connectorId: string,
-    params: TelemetryListParams,
+    params: EventListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TelemetryListResponse> {
+  ): Core.APIPromise<EventListResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/connectors/${connectorId}/telemetry/events`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TelemetryListResponse }>
+      }) as Core.APIPromise<{ result: EventListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -28,28 +28,28 @@ export class Telemetry extends APIResource {
     connectorId: string,
     eventT: number,
     eventN: number,
-    params: TelemetryGetParams,
+    params: EventGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TelemetryGetResponse> {
+  ): Core.APIPromise<EventGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/connectors/${connectorId}/telemetry/events/${eventT}.${eventN}`,
         options,
-      ) as Core.APIPromise<{ result: TelemetryGetResponse }>
+      ) as Core.APIPromise<{ result: EventGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TelemetryListResponse {
+export interface EventListResponse {
   count: number;
 
-  items: Array<TelemetryListResponse.Item>;
+  items: Array<EventListResponse.Item>;
 
   cursor?: string;
 }
 
-export namespace TelemetryListResponse {
+export namespace EventListResponse {
   export interface Item {
     /**
      * Time the Event was collected (seconds since the Unix epoch)
@@ -76,21 +76,21 @@ export namespace TelemetryListResponse {
 /**
  * Recorded Event
  */
-export interface TelemetryGetResponse {
+export interface EventGetResponse {
   e:
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.UnionMember8
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K
-    | TelemetryGetResponse.K;
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.UnionMember8
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K
+    | EventGetResponse.K;
 
   /**
    * Sequence number, used to order events with the same timestamp
@@ -103,7 +103,7 @@ export interface TelemetryGetResponse {
   t: number;
 }
 
-export namespace TelemetryGetResponse {
+export namespace EventGetResponse {
   export interface K {
     /**
      * Initialized process
@@ -201,7 +201,7 @@ export namespace TelemetryGetResponse {
   }
 }
 
-export interface TelemetryListParams {
+export interface EventListParams {
   /**
    * Path param:
    */
@@ -228,15 +228,15 @@ export interface TelemetryListParams {
   limit?: number;
 }
 
-export interface TelemetryGetParams {
+export interface EventGetParams {
   account_id: number;
 }
 
-export declare namespace Telemetry {
+export declare namespace Events {
   export {
-    type TelemetryListResponse as TelemetryListResponse,
-    type TelemetryGetResponse as TelemetryGetResponse,
-    type TelemetryListParams as TelemetryListParams,
-    type TelemetryGetParams as TelemetryGetParams,
+    type EventListResponse as EventListResponse,
+    type EventGetResponse as EventGetResponse,
+    type EventListParams as EventListParams,
+    type EventGetParams as EventGetParams,
   };
 }

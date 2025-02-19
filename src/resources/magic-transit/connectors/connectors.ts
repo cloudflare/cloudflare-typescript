@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as EventsAPI from './events';
+import { EventGetParams, EventGetResponse, EventListParams, EventListResponse, Events } from './events';
 import * as SnapshotsAPI from './snapshots';
 import {
   SnapshotGetParams,
@@ -10,18 +12,10 @@ import {
   SnapshotListResponse,
   Snapshots,
 } from './snapshots';
-import * as TelemetryAPI from './telemetry';
-import {
-  Telemetry,
-  TelemetryGetParams,
-  TelemetryGetResponse,
-  TelemetryListParams,
-  TelemetryListResponse,
-} from './telemetry';
 import { SinglePage } from '../../../pagination';
 
 export class Connectors extends APIResource {
-  telemetry: TelemetryAPI.Telemetry = new TelemetryAPI.Telemetry(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
   snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
 
   /**
@@ -292,7 +286,7 @@ export interface ConnectorGetParams {
 }
 
 Connectors.ConnectorListResponsesSinglePage = ConnectorListResponsesSinglePage;
-Connectors.Telemetry = Telemetry;
+Connectors.Events = Events;
 Connectors.Snapshots = Snapshots;
 
 export declare namespace Connectors {
@@ -309,11 +303,11 @@ export declare namespace Connectors {
   };
 
   export {
-    Telemetry as Telemetry,
-    type TelemetryListResponse as TelemetryListResponse,
-    type TelemetryGetResponse as TelemetryGetResponse,
-    type TelemetryListParams as TelemetryListParams,
-    type TelemetryGetParams as TelemetryGetParams,
+    Events as Events,
+    type EventListResponse as EventListResponse,
+    type EventGetResponse as EventGetResponse,
+    type EventListParams as EventListParams,
+    type EventGetParams as EventGetParams,
   };
 
   export {

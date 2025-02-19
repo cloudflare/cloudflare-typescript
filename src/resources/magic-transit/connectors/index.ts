@@ -13,16 +13,16 @@ export {
   type ConnectorGetParams,
 } from './connectors';
 export {
+  Events,
+  type EventListResponse,
+  type EventGetResponse,
+  type EventListParams,
+  type EventGetParams,
+} from './events';
+export {
   Snapshots,
   type SnapshotListResponse,
   type SnapshotGetResponse,
   type SnapshotListParams,
   type SnapshotGetParams,
 } from './snapshots';
-export {
-  Telemetry,
-  type TelemetryListResponse,
-  type TelemetryGetResponse,
-  type TelemetryListParams,
-  type TelemetryGetParams,
-} from './telemetry';
