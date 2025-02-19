@@ -156,12 +156,14 @@ export namespace CustomProfile {
 
   export namespace PredefinedEntry {
     export interface Confidence {
+      /**
+       * Indicates whether this entry has AI remote service validation
+       */
       ai_context_available: boolean;
 
       /**
-       * Indicates whether this entry can be made more or less sensitive by setting a
-       * confidence threshold. Profiles that use an entry with `available` set to true
-       * can use confidence thresholds
+       * Indicates whether this entry has any form of validation that is not an AI remote
+       * service
        */
       available: boolean;
     }
@@ -332,12 +334,14 @@ export namespace CustomCreateResponse {
 
     export namespace PredefinedEntry {
       export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation
+         */
         ai_context_available: boolean;
 
         /**
-         * Indicates whether this entry can be made more or less sensitive by setting a
-         * confidence threshold. Profiles that use an entry with `available` set to true
-         * can use confidence thresholds
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service
          */
         available: boolean;
       }
@@ -470,12 +474,14 @@ export namespace CustomCreateResponse {
 
     export namespace PredefinedEntry {
       export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation
+         */
         ai_context_available: boolean;
 
         /**
-         * Indicates whether this entry can be made more or less sensitive by setting a
-         * confidence threshold. Profiles that use an entry with `available` set to true
-         * can use confidence thresholds
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service
          */
         available: boolean;
       }
@@ -592,12 +598,14 @@ export namespace CustomCreateResponse {
 
     export namespace PredefinedEntry {
       export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation
+         */
         ai_context_available: boolean;
 
         /**
-         * Indicates whether this entry can be made more or less sensitive by setting a
-         * confidence threshold. Profiles that use an entry with `available` set to true
-         * can use confidence thresholds
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service
          */
         available: boolean;
       }
