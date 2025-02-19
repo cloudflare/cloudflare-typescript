@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import * as EventsAPI from './events';
+import { EventGetParams, EventGetResponse, EventListParams, EventListResponse, Events } from './events';
 import * as SnapshotsAPI from './snapshots';
 import {
   SnapshotGetParams,
@@ -9,21 +11,13 @@ import {
   SnapshotListResponse,
   Snapshots,
 } from './snapshots';
-import * as TelemetryAPI from './telemetry';
-import {
-  Telemetry,
-  TelemetryGetParams,
-  TelemetryGetResponse,
-  TelemetryListParams,
-  TelemetryListResponse,
-} from './telemetry';
 import { APIPromise } from '../../../api-promise';
 import { PagePromise, SinglePage } from '../../../pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Connectors extends APIResource {
-  telemetry: TelemetryAPI.Telemetry = new TelemetryAPI.Telemetry(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
   snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
 
   /**
@@ -292,7 +286,7 @@ export interface ConnectorGetParams {
   account_id: string;
 }
 
-Connectors.Telemetry = Telemetry;
+Connectors.Events = Events;
 Connectors.Snapshots = Snapshots;
 
 export declare namespace Connectors {
@@ -309,11 +303,11 @@ export declare namespace Connectors {
   };
 
   export {
-    Telemetry as Telemetry,
-    type TelemetryListResponse as TelemetryListResponse,
-    type TelemetryGetResponse as TelemetryGetResponse,
-    type TelemetryListParams as TelemetryListParams,
-    type TelemetryGetParams as TelemetryGetParams,
+    Events as Events,
+    type EventListResponse as EventListResponse,
+    type EventGetResponse as EventGetResponse,
+    type EventListParams as EventListParams,
+    type EventGetParams as EventGetParams,
   };
 
   export {
