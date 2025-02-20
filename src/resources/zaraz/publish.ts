@@ -8,7 +8,7 @@ export class Publish extends APIResource {
    * Publish current Zaraz preview configuration for a zone.
    */
   create(params: PublishCreateParams, options?: Core.RequestOptions): Core.APIPromise<PublishCreateResponse> {
-    const { zone_id, body } = params;
+    const { zone_id, body } = params ?? {};
     return (
       this._client.post(`/zones/${zone_id}/settings/zaraz/publish`, {
         body: body,
@@ -29,7 +29,7 @@ export interface PublishCreateParams {
   /**
    * Body param: Zaraz configuration description.
    */
-  body: string;
+  body?: string;
 }
 
 export declare namespace Publish {

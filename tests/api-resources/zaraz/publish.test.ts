@@ -11,10 +11,7 @@ const client = new Cloudflare({
 
 describe('resource publish', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.zaraz.publish.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: 'Config with enabled ecommerce tracking',
-    });
+    const responsePromise = client.zaraz.publish.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
