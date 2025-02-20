@@ -13,7 +13,6 @@ describe('resource rules', () => {
   test('update: only required params', async () => {
     const responsePromise = client.cloudConnector.rules.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      rules: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
