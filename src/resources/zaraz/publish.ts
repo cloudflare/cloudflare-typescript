@@ -31,7 +31,7 @@ export interface PublishCreateParams {
   /**
    * Body param: Zaraz configuration description.
    */
-  body: string;
+  body?: string;
 }
 
 export declare namespace Publish {

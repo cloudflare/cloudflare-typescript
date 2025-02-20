@@ -1289,7 +1289,7 @@ export interface ScanBulkCreateParams {
   /**
    * Body param: List of urls to scan (up to a 100).
    */
-  body: Array<ScanBulkCreateParams.Body>;
+  body?: Array<ScanBulkCreateParams.Body>;
 }
 
 export namespace ScanBulkCreateParams {
