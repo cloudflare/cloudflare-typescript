@@ -114,7 +114,7 @@ export interface RuleUpdateParams {
   /**
    * Body param: List of Cloud Connector rules
    */
-  rules: Array<RuleUpdateParams.Rule>;
+  rules?: Array<RuleUpdateParams.Rule>;
 }
 
 export namespace RuleUpdateParams {
