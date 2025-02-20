@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource warpConnector', () => {
+describe('resource cloudflared', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.warpConnector.create({
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
     });
@@ -25,14 +25,16 @@ describe('resource warpConnector', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.warpConnector.create({
+    const response = await client.zeroTrust.tunnels.cloudflared.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
+      config_src: 'local',
+      tunnel_secret: 'AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg=',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.warpConnector.list({
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,10 +47,10 @@ describe('resource warpConnector', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.warpConnector.list({
+    const response = await client.zeroTrust.tunnels.cloudflared.list({
       account_id: '699d98642c564d2e855e9661899b7252',
       exclude_prefix: 'vpc1-',
-      existed_at: '2019-10-12T07:20:50.52Z',
+      existed_at: '2019-10-12T07%3A20%3A50.52Z',
       include_prefix: 'vpc1-',
       is_deleted: true,
       name: 'blog',
@@ -62,7 +64,7 @@ describe('resource warpConnector', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.warpConnector.delete(
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
@@ -76,14 +78,14 @@ describe('resource warpConnector', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.warpConnector.delete(
+    const response = await client.zeroTrust.tunnels.cloudflared.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.warpConnector.edit(
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.edit(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
@@ -97,21 +99,17 @@ describe('resource warpConnector', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.warpConnector.edit(
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      {
-        account_id: '699d98642c564d2e855e9661899b7252',
-        name: 'blog',
-        tunnel_secret: 'AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg=',
-      },
-    );
+    const response = await client.zeroTrust.tunnels.cloudflared.edit('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      name: 'blog',
+      tunnel_secret: 'AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg=',
+    });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.warpConnector.get(
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const responsePromise = client.zeroTrust.tunnels.cloudflared.get('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -122,30 +120,8 @@ describe('resource warpConnector', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.warpConnector.get(
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
-  });
-
-  test('token: only required params', async () => {
-    const responsePromise = client.zeroTrust.tunnels.warpConnector.token(
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('token: required and optional params', async () => {
-    const response = await client.zeroTrust.tunnels.warpConnector.token(
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const response = await client.zeroTrust.tunnels.cloudflared.get('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

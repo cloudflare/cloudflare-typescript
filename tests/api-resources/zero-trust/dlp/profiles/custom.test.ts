@@ -31,6 +31,7 @@ describe('resource custom', () => {
         {
           entries: [{ enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } }],
           name: 'name',
+          ai_context_enabled: true,
           allowed_match_count: 5,
           confidence_threshold: 'confidence_threshold',
           context_awareness: { enabled: true, skip: { files: true } },
@@ -64,6 +65,7 @@ describe('resource custom', () => {
       {
         account_id: 'account_id',
         name: 'name',
+        ai_context_enabled: true,
         allowed_match_count: 0,
         confidence_threshold: 'confidence_threshold',
         context_awareness: { enabled: true, skip: { files: true } },

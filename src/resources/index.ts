@@ -87,5 +87,6 @@ export { Web3 } from './web3/web3';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
 export { Workflows } from './workflows/workflows';
+export { Zaraz } from './zaraz/zaraz';
 export { ZeroTrust } from './zero-trust/zero-trust';
 export { Zones } from './zones/zones';

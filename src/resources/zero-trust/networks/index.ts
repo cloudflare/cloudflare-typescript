@@ -2,6 +2,12 @@
 
 export { Networks } from './networks';
 export {
+  SubnetListResponsesV4PagePaginationArray,
+  Subnets,
+  type SubnetListResponse,
+  type SubnetListParams,
+} from './subnets/index';
+export {
   TeamnetsV4PagePaginationArray,
   Routes,
   type NetworkRoute,

@@ -1,10 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
-import { SinglePage } from '../../pagination';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
+import * as EventsAPI from './events';
+import { EventGetParams, EventGetResponse, EventListParams, EventListResponse, Events } from './events';
+import * as SnapshotsAPI from './snapshots';
+import {
+  SnapshotGetParams,
+  SnapshotGetResponse,
+  SnapshotListParams,
+  SnapshotListResponse,
+  Snapshots,
+} from './snapshots';
+import { SinglePage } from '../../../pagination';
 
 export class Connectors extends APIResource {
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
+
   /**
    * Replace Connector
    */
@@ -273,6 +286,8 @@ export interface ConnectorGetParams {
 }
 
 Connectors.ConnectorListResponsesSinglePage = ConnectorListResponsesSinglePage;
+Connectors.Events = Events;
+Connectors.Snapshots = Snapshots;
 
 export declare namespace Connectors {
   export {
@@ -285,5 +300,21 @@ export declare namespace Connectors {
     type ConnectorListParams as ConnectorListParams,
     type ConnectorEditParams as ConnectorEditParams,
     type ConnectorGetParams as ConnectorGetParams,
+  };
+
+  export {
+    Events as Events,
+    type EventListResponse as EventListResponse,
+    type EventGetResponse as EventGetResponse,
+    type EventListParams as EventListParams,
+    type EventGetParams as EventGetParams,
+  };
+
+  export {
+    Snapshots as Snapshots,
+    type SnapshotListResponse as SnapshotListResponse,
+    type SnapshotGetResponse as SnapshotGetResponse,
+    type SnapshotListParams as SnapshotListParams,
+    type SnapshotGetParams as SnapshotGetParams,
   };
 }

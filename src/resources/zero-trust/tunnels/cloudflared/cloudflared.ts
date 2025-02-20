@@ -1,119 +1,130 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
-import * as Shared from '../../shared';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
+import * as Shared from '../../../shared';
+import * as ConfigurationsAPI from './configurations';
+import {
+  ConfigurationGetParams,
+  ConfigurationGetResponse,
+  ConfigurationUpdateParams,
+  ConfigurationUpdateResponse,
+  Configurations,
+} from './configurations';
+import * as ConnectionsAPI from './connections';
+import {
+  Client,
+  ClientsSinglePage,
+  ConnectionDeleteParams,
+  ConnectionDeleteResponse,
+  ConnectionGetParams,
+  Connections,
+} from './connections';
+import * as ConnectorsAPI from './connectors';
+import { ConnectorGetParams, Connectors } from './connectors';
+import * as ManagementAPI from './management';
+import { Management, ManagementCreateParams, ManagementCreateResponse } from './management';
+import * as TokenAPI from './token';
+import { Token, TokenGetParams, TokenGetResponse } from './token';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
-export class WARPConnector extends APIResource {
+export class Cloudflared extends APIResource {
+  configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
+  connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
+  token: TokenAPI.Token = new TokenAPI.Token(this._client);
+  connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
+  management: ManagementAPI.Management = new ManagementAPI.Management(this._client);
+
   /**
-   * Creates a new Warp Connector Tunnel in an account.
+   * Creates a new Cloudflare Tunnel in an account.
    */
   create(
-    params: WARPConnectorCreateParams,
+    params: CloudflaredCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorCreateResponse> {
+  ): Core.APIPromise<CloudflaredCreateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/warp_connector`, { body, ...options }) as Core.APIPromise<{
-        result: WARPConnectorCreateResponse;
+      this._client.post(`/accounts/${account_id}/cfd_tunnel`, { body, ...options }) as Core.APIPromise<{
+        result: CloudflaredCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Lists and filters Warp Connector Tunnels in an account.
+   * Lists and filters Cloudflare Tunnels in an account.
    */
   list(
-    params: WARPConnectorListParams,
+    params: CloudflaredListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WARPConnectorListResponsesV4PagePaginationArray, WARPConnectorListResponse> {
+  ): Core.PagePromise<CloudflaredListResponsesV4PagePaginationArray, CloudflaredListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${account_id}/warp_connector`,
-      WARPConnectorListResponsesV4PagePaginationArray,
+      `/accounts/${account_id}/cfd_tunnel`,
+      CloudflaredListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
 
   /**
-   * Deletes a Warp Connector Tunnel from an account.
+   * Deletes a Cloudflare Tunnel from an account.
    */
   delete(
     tunnelId: string,
-    params: WARPConnectorDeleteParams,
+    params: CloudflaredDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorDeleteResponse> {
+  ): Core.APIPromise<CloudflaredDeleteResponse> {
     const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/warp_connector/${tunnelId}`, options) as Core.APIPromise<{
-        result: WARPConnectorDeleteResponse;
+      this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, options) as Core.APIPromise<{
+        result: CloudflaredDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Updates an existing Warp Connector Tunnel.
+   * Updates an existing Cloudflare Tunnel.
    */
   edit(
     tunnelId: string,
-    params: WARPConnectorEditParams,
+    params: CloudflaredEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorEditResponse> {
+  ): Core.APIPromise<CloudflaredEditResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${account_id}/warp_connector/${tunnelId}`, {
+      this._client.patch(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WARPConnectorEditResponse }>
+      }) as Core.APIPromise<{ result: CloudflaredEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Fetches a single Warp Connector Tunnel.
+   * Fetches a single Cloudflare Tunnel.
    */
   get(
     tunnelId: string,
-    params: WARPConnectorGetParams,
+    params: CloudflaredGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorGetResponse> {
+  ): Core.APIPromise<CloudflaredGetResponse> {
     const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/warp_connector/${tunnelId}`, options) as Core.APIPromise<{
-        result: WARPConnectorGetResponse;
+      this._client.get(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, options) as Core.APIPromise<{
+        result: CloudflaredGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Gets the token used to associate warp device with a specific Warp Connector
-   * tunnel.
-   */
-  token(
-    tunnelId: string,
-    params: WARPConnectorTokenParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorTokenResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/warp_connector/${tunnelId}/token`,
-        options,
-      ) as Core.APIPromise<{ result: WARPConnectorTokenResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
-export class WARPConnectorListResponsesV4PagePaginationArray extends V4PagePaginationArray<WARPConnectorListResponse> {}
+export class CloudflaredListResponsesV4PagePaginationArray extends V4PagePaginationArray<CloudflaredListResponse> {}
 
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorCreateResponse =
+export type CloudflaredCreateResponse =
   | Shared.CloudflareTunnel
-  | WARPConnectorCreateResponse.TunnelWARPConnectorTunnel;
+  | CloudflaredCreateResponse.TunnelWARPConnectorTunnel;
 
-export namespace WARPConnectorCreateResponse {
+export namespace CloudflaredCreateResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -231,11 +242,11 @@ export namespace WARPConnectorCreateResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorListResponse =
+export type CloudflaredListResponse =
   | Shared.CloudflareTunnel
-  | WARPConnectorListResponse.TunnelWARPConnectorTunnel;
+  | CloudflaredListResponse.TunnelWARPConnectorTunnel;
 
-export namespace WARPConnectorListResponse {
+export namespace CloudflaredListResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -353,11 +364,11 @@ export namespace WARPConnectorListResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorDeleteResponse =
+export type CloudflaredDeleteResponse =
   | Shared.CloudflareTunnel
-  | WARPConnectorDeleteResponse.TunnelWARPConnectorTunnel;
+  | CloudflaredDeleteResponse.TunnelWARPConnectorTunnel;
 
-export namespace WARPConnectorDeleteResponse {
+export namespace CloudflaredDeleteResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -475,11 +486,11 @@ export namespace WARPConnectorDeleteResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorEditResponse =
+export type CloudflaredEditResponse =
   | Shared.CloudflareTunnel
-  | WARPConnectorEditResponse.TunnelWARPConnectorTunnel;
+  | CloudflaredEditResponse.TunnelWARPConnectorTunnel;
 
-export namespace WARPConnectorEditResponse {
+export namespace CloudflaredEditResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -597,11 +608,11 @@ export namespace WARPConnectorEditResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorGetResponse =
+export type CloudflaredGetResponse =
   | Shared.CloudflareTunnel
-  | WARPConnectorGetResponse.TunnelWARPConnectorTunnel;
+  | CloudflaredGetResponse.TunnelWARPConnectorTunnel;
 
-export namespace WARPConnectorGetResponse {
+export namespace CloudflaredGetResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -716,13 +727,7 @@ export namespace WARPConnectorGetResponse {
   }
 }
 
-/**
- * The Tunnel Token is used as a mechanism to authenticate the operation of a
- * tunnel.
- */
-export type WARPConnectorTokenResponse = string;
-
-export interface WARPConnectorCreateParams {
+export interface CloudflaredCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
@@ -732,9 +737,22 @@ export interface WARPConnectorCreateParams {
    * Body param: A user-friendly name for a tunnel.
    */
   name: string;
+
+  /**
+   * Body param: Indicates if this is a locally or remotely configured tunnel. If
+   * `local`, manage the tunnel using a YAML file on the origin machine. If
+   * `cloudflare`, manage the tunnel on the Zero Trust dashboard.
+   */
+  config_src?: 'local' | 'cloudflare';
+
+  /**
+   * Body param: Sets the password required to run a locally-managed tunnel. Must be
+   * at least 32 bytes and encoded as a base64 string.
+   */
+  tunnel_secret?: string;
 }
 
-export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
+export interface CloudflaredListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
@@ -746,8 +764,8 @@ export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
   exclude_prefix?: string;
 
   /**
-   * Query param: If provided, include only tunnels that were created (and not
-   * deleted) before this time.
+   * Query param: If provided, include only resources that were created (and not
+   * deleted) before this time. URL encoded.
    */
   existed_at?: string;
 
@@ -763,7 +781,7 @@ export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
   is_deleted?: boolean;
 
   /**
-   * Query param: A user-friendly name for the tunnel.
+   * Query param: A user-friendly name for a tunnel.
    */
   name?: string;
 
@@ -792,14 +810,14 @@ export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
   was_inactive_at?: string;
 }
 
-export interface WARPConnectorDeleteParams {
+export interface CloudflaredDeleteParams {
   /**
    * Cloudflare account ID
    */
   account_id: string;
 }
 
-export interface WARPConnectorEditParams {
+export interface CloudflaredEditParams {
   /**
    * Path param: Cloudflare account ID
    */
@@ -817,37 +835,60 @@ export interface WARPConnectorEditParams {
   tunnel_secret?: string;
 }
 
-export interface WARPConnectorGetParams {
+export interface CloudflaredGetParams {
   /**
    * Cloudflare account ID
    */
   account_id: string;
 }
 
-export interface WARPConnectorTokenParams {
-  /**
-   * Cloudflare account ID
-   */
-  account_id: string;
-}
+Cloudflared.CloudflaredListResponsesV4PagePaginationArray = CloudflaredListResponsesV4PagePaginationArray;
+Cloudflared.Configurations = Configurations;
+Cloudflared.Connections = Connections;
+Cloudflared.ClientsSinglePage = ClientsSinglePage;
+Cloudflared.Token = Token;
+Cloudflared.Connectors = Connectors;
+Cloudflared.Management = Management;
 
-WARPConnector.WARPConnectorListResponsesV4PagePaginationArray =
-  WARPConnectorListResponsesV4PagePaginationArray;
-
-export declare namespace WARPConnector {
+export declare namespace Cloudflared {
   export {
-    type WARPConnectorCreateResponse as WARPConnectorCreateResponse,
-    type WARPConnectorListResponse as WARPConnectorListResponse,
-    type WARPConnectorDeleteResponse as WARPConnectorDeleteResponse,
-    type WARPConnectorEditResponse as WARPConnectorEditResponse,
-    type WARPConnectorGetResponse as WARPConnectorGetResponse,
-    type WARPConnectorTokenResponse as WARPConnectorTokenResponse,
-    WARPConnectorListResponsesV4PagePaginationArray as WARPConnectorListResponsesV4PagePaginationArray,
-    type WARPConnectorCreateParams as WARPConnectorCreateParams,
-    type WARPConnectorListParams as WARPConnectorListParams,
-    type WARPConnectorDeleteParams as WARPConnectorDeleteParams,
-    type WARPConnectorEditParams as WARPConnectorEditParams,
-    type WARPConnectorGetParams as WARPConnectorGetParams,
-    type WARPConnectorTokenParams as WARPConnectorTokenParams,
+    type CloudflaredCreateResponse as CloudflaredCreateResponse,
+    type CloudflaredListResponse as CloudflaredListResponse,
+    type CloudflaredDeleteResponse as CloudflaredDeleteResponse,
+    type CloudflaredEditResponse as CloudflaredEditResponse,
+    type CloudflaredGetResponse as CloudflaredGetResponse,
+    CloudflaredListResponsesV4PagePaginationArray as CloudflaredListResponsesV4PagePaginationArray,
+    type CloudflaredCreateParams as CloudflaredCreateParams,
+    type CloudflaredListParams as CloudflaredListParams,
+    type CloudflaredDeleteParams as CloudflaredDeleteParams,
+    type CloudflaredEditParams as CloudflaredEditParams,
+    type CloudflaredGetParams as CloudflaredGetParams,
+  };
+
+  export {
+    Configurations as Configurations,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
+
+  export {
+    Connections as Connections,
+    type Client as Client,
+    type ConnectionDeleteResponse as ConnectionDeleteResponse,
+    ClientsSinglePage as ClientsSinglePage,
+    type ConnectionDeleteParams as ConnectionDeleteParams,
+    type ConnectionGetParams as ConnectionGetParams,
+  };
+
+  export { Token as Token, type TokenGetResponse as TokenGetResponse, type TokenGetParams as TokenGetParams };
+
+  export { Connectors as Connectors, type ConnectorGetParams as ConnectorGetParams };
+
+  export {
+    Management as Management,
+    type ManagementCreateResponse as ManagementCreateResponse,
+    type ManagementCreateParams as ManagementCreateParams,
   };
 }

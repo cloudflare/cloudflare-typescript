@@ -104,6 +104,7 @@ import { Web3 } from './resources/web3/web3';
 import { WorkersForPlatforms } from './resources/workers-for-platforms/workers-for-platforms';
 import { Workers } from './resources/workers/workers';
 import { Workflows } from './resources/workflows/workflows';
+import { Zaraz } from './resources/zaraz/zaraz';
 import { ZeroTrust } from './resources/zero-trust/zero-trust';
 import { Zones } from './resources/zones/zones';
 
@@ -314,6 +315,7 @@ export class Cloudflare extends Core.APIClient {
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
+  zaraz: API.Zaraz = new API.Zaraz(this);
   speed: API.Speed = new API.Speed(this);
   dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
@@ -528,6 +530,7 @@ Cloudflare.URLScanner = URLScanner;
 Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
+Cloudflare.Zaraz = Zaraz;
 Cloudflare.Speed = Speed;
 Cloudflare.DCVDelegation = DCVDelegation;
 Cloudflare.Hostnames = Hostnames;
@@ -715,6 +718,8 @@ export declare namespace Cloudflare {
   export { BotManagement as BotManagement };
 
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
+
+  export { Zaraz as Zaraz };
 
   export { Speed as Speed };
 
