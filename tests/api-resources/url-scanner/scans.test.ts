@@ -52,10 +52,7 @@ describe('resource scans', () => {
   });
 
   test('bulkCreate: only required params', async () => {
-    const responsePromise = client.urlScanner.scans.bulkCreate({
-      account_id: 'account_id',
-      body: [{ url: 'https://www.example.com' }],
-    });
+    const responsePromise = client.urlScanner.scans.bulkCreate({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

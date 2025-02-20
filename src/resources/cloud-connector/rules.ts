@@ -12,7 +12,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse> {
-    const { zone_id, rules } = params;
+    const { zone_id, rules } = params ?? {};
     return this._client.getAPIList(`/zones/${zone_id}/cloud_connector/rules`, RuleUpdateResponsesSinglePage, {
       body: rules,
       method: 'put',
@@ -113,7 +113,7 @@ export interface RuleUpdateParams {
   /**
    * Body param: List of Cloud Connector rules
    */
-  rules: Array<RuleUpdateParams.Rule>;
+  rules?: Array<RuleUpdateParams.Rule>;
 }
 
 export namespace RuleUpdateParams {
