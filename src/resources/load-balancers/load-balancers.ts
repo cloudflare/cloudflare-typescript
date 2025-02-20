@@ -479,6 +479,8 @@ export interface LoadBalancer {
    * balancer. This only applies to gray-clouded (unproxied) load balancers.
    */
   ttl?: number;
+
+  zone_name?: string;
 }
 
 /**
