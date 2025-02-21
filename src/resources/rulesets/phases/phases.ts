@@ -762,30 +762,6 @@ export namespace PhaseGetResponse {
 
 export interface PhaseUpdateParams {
   /**
-   * Body param: The list of rules in the ruleset.
-   */
-  rules: Array<
-    | RulesAPI.BlockRuleParam
-    | PhaseUpdateParams.RulesetsChallengeRule
-    | RulesAPI.CompressResponseRuleParam
-    | RulesAPI.ExecuteRuleParam
-    | PhaseUpdateParams.RulesetsJSChallengeRule
-    | RulesAPI.LogRuleParam
-    | RulesAPI.ManagedChallengeRuleParam
-    | RulesAPI.RedirectRuleParam
-    | RulesAPI.RewriteRuleParam
-    | RulesAPI.RouteRuleParam
-    | RulesAPI.ScoreRuleParam
-    | RulesAPI.ServeErrorRuleParam
-    | RulesAPI.SetConfigRuleParam
-    | RulesAPI.SkipRuleParam
-    | RulesAPI.SetCacheSettingsRuleParam
-    | RulesAPI.LogCustomFieldRuleParam
-    | RulesAPI.DDoSDynamicRuleParam
-    | RulesAPI.ForceConnectionCloseRuleParam
-  >;
-
-  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -806,6 +782,30 @@ export interface PhaseUpdateParams {
    * Body param: The human-readable name of the ruleset.
    */
   name?: string;
+
+  /**
+   * Body param: The list of rules in the ruleset.
+   */
+  rules?: Array<
+    | RulesAPI.BlockRuleParam
+    | PhaseUpdateParams.RulesetsChallengeRule
+    | RulesAPI.CompressResponseRuleParam
+    | RulesAPI.ExecuteRuleParam
+    | PhaseUpdateParams.RulesetsJSChallengeRule
+    | RulesAPI.LogRuleParam
+    | RulesAPI.ManagedChallengeRuleParam
+    | RulesAPI.RedirectRuleParam
+    | RulesAPI.RewriteRuleParam
+    | RulesAPI.RouteRuleParam
+    | RulesAPI.ScoreRuleParam
+    | RulesAPI.ServeErrorRuleParam
+    | RulesAPI.SetConfigRuleParam
+    | RulesAPI.SkipRuleParam
+    | RulesAPI.SetCacheSettingsRuleParam
+    | RulesAPI.LogCustomFieldRuleParam
+    | RulesAPI.DDoSDynamicRuleParam
+    | RulesAPI.ForceConnectionCloseRuleParam
+  >;
 }
 
 export namespace PhaseUpdateParams {
