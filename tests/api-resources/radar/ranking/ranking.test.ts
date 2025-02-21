@@ -28,6 +28,7 @@ describe('resource ranking', () => {
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
+          domainCategory: ['string'],
           domains: ['string'],
           format: 'JSON',
           limit: 5,
@@ -57,6 +58,7 @@ describe('resource ranking', () => {
       client.radar.ranking.top(
         {
           date: ['2019-12-27'],
+          domainCategory: ['string'],
           format: 'JSON',
           limit: 5,
           location: ['string'],
