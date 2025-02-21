@@ -481,8 +481,10 @@ export interface TimeseriesGroupIndustryParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items
+   * within the specified time range. If the limitPerGroup is set, the response will
+   * include that number of items, with the remaining items grouped together under an
+   * "other" category.
    */
   limitPerGroup?: number;
 
@@ -693,8 +695,10 @@ export interface TimeseriesGroupVectorParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items
+   * within the specified time range. If the limitPerGroup is set, the response will
+   * include that number of items, with the remaining items grouped together under an
+   * "other" category.
    */
   limitPerGroup?: number;
 
@@ -771,8 +775,10 @@ export interface TimeseriesGroupVerticalParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items
+   * within the specified time range. If the limitPerGroup is set, the response will
+   * include that number of items, with the remaining items grouped together under an
+   * "other" category.
    */
   limitPerGroup?: number;
 
