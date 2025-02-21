@@ -34,8 +34,6 @@ export async function defaultParseResponse<T>(client: Cloudflare, props: APIResp
     }
 
     const text = await response.text();
-
-    // TODO handle blob, arraybuffer, other content types, etc.
     return text as unknown as T;
   })();
   loggerFor(client).debug(
