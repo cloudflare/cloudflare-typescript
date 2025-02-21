@@ -41,14 +41,14 @@ export namespace DomainGetResponse {
   export interface Details0 {
     categories: Array<Details0.Category>;
 
-    top_locations: Array<Details0.TopLocation>;
-
     /**
      * Only available in POPULAR ranking for the most recent ranking.
      */
     bucket?: string;
 
     rank?: number;
+
+    top_locations?: Array<Details0.TopLocation>;
   }
 
   export namespace Details0 {

@@ -156,6 +156,11 @@ export interface RankingTimeseriesGroupsParams {
   dateStart?: Array<string>;
 
   /**
+   * Filter by domain category.
+   */
+  domainCategory?: Array<string>;
+
+  /**
    * Array of comma separated list of domains names.
    */
   domains?: Array<string>;
@@ -191,6 +196,11 @@ export interface RankingTopParams {
    * Array of dates to filter the ranking.
    */
   date?: Array<string>;
+
+  /**
+   * Filter by domain category.
+   */
+  domainCategory?: Array<string>;
 
   /**
    * Format results are returned in.
