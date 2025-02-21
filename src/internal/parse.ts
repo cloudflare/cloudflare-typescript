@@ -2,40 +2,51 @@
 
 import type { FinalRequestOptions } from './request-options';
 import { type Cloudflare } from '../client';
-import { logger } from './utils/log';
+import { formatRequestDetails, loggerFor } from './utils/log';
 
 export type APIResponseProps = {
   response: Response;
   options: FinalRequestOptions;
   controller: AbortController;
+  requestLogID: string;
+  retryOfRequestLogID: string | undefined;
+  startTime: number;
 };
 
 export async function defaultParseResponse<T>(client: Cloudflare, props: APIResponseProps): Promise<T> {
-  const { response } = props;
+  const { response, requestLogID, retryOfRequestLogID, startTime } = props;
+  const body = await (async () => {
+    // fetch refuses to read the body when the status code is 204.
+    if (response.status === 204) {
+      return null as T;
+    }
 
-  // fetch refuses to read the body when the status code is 204.
-  if (response.status === 204) {
-    return null as T;
-  }
+    if (props.options.__binaryResponse) {
+      return response as unknown as T;
+    }
 
-  if (props.options.__binaryResponse) {
-    return response as unknown as T;
-  }
+    const contentType = response.headers.get('content-type');
+    const isJSON =
+      contentType?.includes('application/json') || contentType?.includes('application/vnd.api+json');
+    if (isJSON) {
+      const json = await response.json();
+      return json as T;
+    }
 
-  const contentType = response.headers.get('content-type');
-  const isJSON =
-    contentType?.includes('application/json') || contentType?.includes('application/vnd.api+json');
-  if (isJSON) {
-    const json = await response.json();
+    const text = await response.text();
 
-    logger(client).debug('response', response.status, response.url, response.headers, json);
-
-    return json as T;
-  }
-
-  const text = await response.text();
-  logger(client).debug('response', response.status, response.url, response.headers, text);
-
-  // TODO handle blob, arraybuffer, other content types, etc.
-  return text as unknown as T;
+    // TODO handle blob, arraybuffer, other content types, etc.
+    return text as unknown as T;
+  })();
+  loggerFor(client).debug(
+    `[${requestLogID}] response parsed`,
+    formatRequestDetails({
+      retryOfRequestLogID,
+      url: response.url,
+      status: response.status,
+      body,
+      durationMs: Date.now() - startTime,
+    }),
+  );
+  return body;
 }
