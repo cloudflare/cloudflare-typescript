@@ -1809,14 +1809,24 @@ export namespace LogCustomFieldRule {
     cookie_fields?: Array<ActionParameters.CookieField>;
 
     /**
-     * The request fields to log.
+     * The raw response fields to log.
+     */
+    raw_response_fields?: Array<ActionParameters.RawResponseField>;
+
+    /**
+     * The raw request fields to log.
      */
     request_fields?: Array<ActionParameters.RequestField>;
 
     /**
-     * The response fields to log.
+     * The transformed response fields to log.
      */
     response_fields?: Array<ActionParameters.ResponseField>;
+
+    /**
+     * The transformed request fields to log.
+     */
+    transformed_request_fields?: Array<ActionParameters.TransformedRequestField>;
   }
 
   export namespace ActionParameters {
@@ -1831,7 +1841,22 @@ export namespace LogCustomFieldRule {
     }
 
     /**
-     * The request field to log.
+     * The raw response field to log.
+     */
+    export interface RawResponseField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+
+      /**
+       * Whether to log duplicate values of the same header.
+       */
+      preserve_duplicates?: boolean;
+    }
+
+    /**
+     * The raw request field to log.
      */
     export interface RequestField {
       /**
@@ -1841,9 +1866,24 @@ export namespace LogCustomFieldRule {
     }
 
     /**
-     * The response field to log.
+     * The transformed response field to log.
      */
     export interface ResponseField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+
+      /**
+       * Whether to log duplicate values of the same header.
+       */
+      preserve_duplicates?: boolean;
+    }
+
+    /**
+     * The transformed request field to log.
+     */
+    export interface TransformedRequestField {
       /**
        * The name of the field.
        */
@@ -1981,14 +2021,24 @@ export namespace LogCustomFieldRuleParam {
     cookie_fields?: Array<ActionParameters.CookieField>;
 
     /**
-     * The request fields to log.
+     * The raw response fields to log.
+     */
+    raw_response_fields?: Array<ActionParameters.RawResponseField>;
+
+    /**
+     * The raw request fields to log.
      */
     request_fields?: Array<ActionParameters.RequestField>;
 
     /**
-     * The response fields to log.
+     * The transformed response fields to log.
      */
     response_fields?: Array<ActionParameters.ResponseField>;
+
+    /**
+     * The transformed request fields to log.
+     */
+    transformed_request_fields?: Array<ActionParameters.TransformedRequestField>;
   }
 
   export namespace ActionParameters {
@@ -2003,7 +2053,22 @@ export namespace LogCustomFieldRuleParam {
     }
 
     /**
-     * The request field to log.
+     * The raw response field to log.
+     */
+    export interface RawResponseField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+
+      /**
+       * Whether to log duplicate values of the same header.
+       */
+      preserve_duplicates?: boolean;
+    }
+
+    /**
+     * The raw request field to log.
      */
     export interface RequestField {
       /**
@@ -2013,9 +2078,24 @@ export namespace LogCustomFieldRuleParam {
     }
 
     /**
-     * The response field to log.
+     * The transformed response field to log.
      */
     export interface ResponseField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+
+      /**
+       * Whether to log duplicate values of the same header.
+       */
+      preserve_duplicates?: boolean;
+    }
+
+    /**
+     * The transformed request field to log.
+     */
+    export interface TransformedRequestField {
       /**
        * The name of the field.
        */
@@ -10926,14 +11006,24 @@ export declare namespace RuleCreateParams {
       cookie_fields?: Array<ActionParameters.CookieField>;
 
       /**
-       * The request fields to log.
+       * The raw response fields to log.
+       */
+      raw_response_fields?: Array<ActionParameters.RawResponseField>;
+
+      /**
+       * The raw request fields to log.
        */
       request_fields?: Array<ActionParameters.RequestField>;
 
       /**
-       * The response fields to log.
+       * The transformed response fields to log.
        */
       response_fields?: Array<ActionParameters.ResponseField>;
+
+      /**
+       * The transformed request fields to log.
+       */
+      transformed_request_fields?: Array<ActionParameters.TransformedRequestField>;
     }
 
     export namespace ActionParameters {
@@ -10948,7 +11038,22 @@ export declare namespace RuleCreateParams {
       }
 
       /**
-       * The request field to log.
+       * The raw response field to log.
+       */
+      export interface RawResponseField {
+        /**
+         * The name of the field.
+         */
+        name: string;
+
+        /**
+         * Whether to log duplicate values of the same header.
+         */
+        preserve_duplicates?: boolean;
+      }
+
+      /**
+       * The raw request field to log.
        */
       export interface RequestField {
         /**
@@ -10958,9 +11063,24 @@ export declare namespace RuleCreateParams {
       }
 
       /**
-       * The response field to log.
+       * The transformed response field to log.
        */
       export interface ResponseField {
+        /**
+         * The name of the field.
+         */
+        name: string;
+
+        /**
+         * Whether to log duplicate values of the same header.
+         */
+        preserve_duplicates?: boolean;
+      }
+
+      /**
+       * The transformed request field to log.
+       */
+      export interface TransformedRequestField {
         /**
          * The name of the field.
          */
@@ -15085,14 +15205,24 @@ export declare namespace RuleEditParams {
       cookie_fields?: Array<ActionParameters.CookieField>;
 
       /**
-       * The request fields to log.
+       * The raw response fields to log.
+       */
+      raw_response_fields?: Array<ActionParameters.RawResponseField>;
+
+      /**
+       * The raw request fields to log.
        */
       request_fields?: Array<ActionParameters.RequestField>;
 
       /**
-       * The response fields to log.
+       * The transformed response fields to log.
        */
       response_fields?: Array<ActionParameters.ResponseField>;
+
+      /**
+       * The transformed request fields to log.
+       */
+      transformed_request_fields?: Array<ActionParameters.TransformedRequestField>;
     }
 
     export namespace ActionParameters {
@@ -15107,7 +15237,22 @@ export declare namespace RuleEditParams {
       }
 
       /**
-       * The request field to log.
+       * The raw response field to log.
+       */
+      export interface RawResponseField {
+        /**
+         * The name of the field.
+         */
+        name: string;
+
+        /**
+         * Whether to log duplicate values of the same header.
+         */
+        preserve_duplicates?: boolean;
+      }
+
+      /**
+       * The raw request field to log.
        */
       export interface RequestField {
         /**
@@ -15117,9 +15262,24 @@ export declare namespace RuleEditParams {
       }
 
       /**
-       * The response field to log.
+       * The transformed response field to log.
        */
       export interface ResponseField {
+        /**
+         * The name of the field.
+         */
+        name: string;
+
+        /**
+         * Whether to log duplicate values of the same header.
+         */
+        preserve_duplicates?: boolean;
+      }
+
+      /**
+       * The transformed request field to log.
+       */
+      export interface TransformedRequestField {
         /**
          * The name of the field.
          */
