@@ -473,6 +473,11 @@ export declare namespace AIRunParams {
     repetition_penalty?: number;
 
     /**
+     * Body param:
+     */
+    response_format?: Prompt.ResponseFormat;
+
+    /**
      * Body param: Random seed for reproducibility of the generation.
      */
     seed?: number;
@@ -502,6 +507,14 @@ export declare namespace AIRunParams {
      * values allow for more varied and creative responses.
      */
     top_p?: number;
+  }
+
+  export namespace Prompt {
+    export interface ResponseFormat {
+      json_schema?: unknown;
+
+      type?: 'json_object' | 'json_schema';
+    }
   }
 
   export interface Messages {
@@ -540,6 +553,11 @@ export declare namespace AIRunParams {
      * Body param: Penalty for repeated tokens; higher values discourage repetition.
      */
     repetition_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    response_format?: Messages.ResponseFormat;
 
     /**
      * Body param: Random seed for reproducibility of the generation.
@@ -594,6 +612,12 @@ export declare namespace AIRunParams {
       code: string;
 
       name: string;
+    }
+
+    export interface ResponseFormat {
+      json_schema?: unknown;
+
+      type?: 'json_object' | 'json_schema';
     }
 
     export interface UnionMember0 {
