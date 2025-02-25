@@ -34,7 +34,7 @@ describe('resource settings', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         settings: {
-          bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
+          bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
           compatibility_date: '2021-01-01',
           compatibility_flags: ['nodejs_compat'],
           limits: { cpu_ms: 50 },
