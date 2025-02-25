@@ -369,22 +369,21 @@ export namespace ScriptUpdateParams {
      * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
      */
     bindings?: Array<
-      | Metadata.WorkersBindingKindAny
       | Metadata.WorkersBindingKindAI
       | Metadata.WorkersBindingKindAnalyticsEngine
       | Metadata.WorkersBindingKindAssets
       | Metadata.WorkersBindingKindBrowserRendering
       | Metadata.WorkersBindingKindD1
       | Metadata.WorkersBindingKindDispatchNamespace
-      | Metadata.WorkersBindingKindDo
+      | Metadata.WorkersBindingKindDurableObjectNamespace
       | Metadata.WorkersBindingKindHyperdrive
       | Metadata.WorkersBindingKindJson
       | Metadata.WorkersBindingKindKVNamespace
-      | Metadata.WorkersBindingKindMTLSCERT
+      | Metadata.WorkersBindingKindMTLSCertificate
       | Metadata.WorkersBindingKindPlainText
       | Metadata.WorkersBindingKindQueue
-      | Metadata.WorkersBindingKindR2
-      | Metadata.WorkersBindingKindSecret
+      | Metadata.WorkersBindingKindR2Bucket
+      | Metadata.WorkersBindingKindSecretText
       | Metadata.WorkersBindingKindService
       | Metadata.WorkersBindingKindTailConsumer
       | Metadata.WorkersBindingKindVectorize
@@ -512,19 +511,6 @@ export namespace ScriptUpdateParams {
       }
     }
 
-    export interface WorkersBindingKindAny {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: string;
-      [k: string]: unknown;
-    }
-
     export interface WorkersBindingKindAI {
       /**
        * A JavaScript variable name for the binding.
@@ -534,12 +520,12 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'ai';
+      type: string;
     }
 
     export interface WorkersBindingKindAnalyticsEngine {
       /**
-       * The dataset name to bind to.
+       * The name of the dataset to bind to.
        */
       dataset: string;
 
@@ -551,7 +537,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'analytics_engine';
+      type: string;
     }
 
     export interface WorkersBindingKindAssets {
@@ -563,7 +549,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'assets';
+      type: string;
     }
 
     export interface WorkersBindingKindBrowserRendering {
@@ -575,7 +561,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'browser_rendering';
+      type: string;
     }
 
     export interface WorkersBindingKindD1 {
@@ -592,7 +578,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'd1';
+      type: string;
     }
 
     export interface WorkersBindingKindDispatchNamespace {
@@ -609,7 +595,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'dispatch_namespace';
+      type: string;
 
       /**
        * Outbound worker.
@@ -652,7 +638,7 @@ export namespace ScriptUpdateParams {
       }
     }
 
-    export interface WorkersBindingKindDo {
+    export interface WorkersBindingKindDurableObjectNamespace {
       /**
        * The exported class name of the Durable Object.
        */
@@ -666,7 +652,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'durable_object_namespace';
+      type: string;
 
       /**
        * The environment of the script_name to bind to.
@@ -699,7 +685,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'hyperdrive';
+      type: string;
     }
 
     export interface WorkersBindingKindJson {
@@ -716,7 +702,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'json';
+      type: string;
     }
 
     export interface WorkersBindingKindKVNamespace {
@@ -733,10 +719,10 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'kv_namespace';
+      type: string;
     }
 
-    export interface WorkersBindingKindMTLSCERT {
+    export interface WorkersBindingKindMTLSCertificate {
       /**
        * Identifier of the certificate to bind to.
        */
@@ -750,7 +736,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'mtls_certificate';
+      type: string;
     }
 
     export interface WorkersBindingKindPlainText {
@@ -767,7 +753,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'plain_text';
+      type: string;
     }
 
     export interface WorkersBindingKindQueue {
@@ -784,10 +770,10 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'queue';
+      type: string;
     }
 
-    export interface WorkersBindingKindR2 {
+    export interface WorkersBindingKindR2Bucket {
       /**
        * R2 bucket to bind to.
        */
@@ -801,10 +787,10 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'r2_bucket';
+      type: string;
     }
 
-    export interface WorkersBindingKindSecret {
+    export interface WorkersBindingKindSecretText {
       /**
        * A JavaScript variable name for the binding.
        */
@@ -818,7 +804,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'secret_text';
+      type: string;
     }
 
     export interface WorkersBindingKindService {
@@ -840,7 +826,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'service';
+      type: string;
     }
 
     export interface WorkersBindingKindTailConsumer {
@@ -857,7 +843,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'tail_consumer';
+      type: string;
     }
 
     export interface WorkersBindingKindVectorize {
@@ -874,7 +860,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'vectorize';
+      type: string;
     }
 
     export interface WorkersBindingKindVersionMetadata {
@@ -886,7 +872,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'version_metadata';
+      type: string;
     }
 
     export interface WorkersMultipleStepMigrations {
