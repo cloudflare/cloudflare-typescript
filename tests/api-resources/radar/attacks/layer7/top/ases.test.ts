@@ -36,7 +36,7 @@ describe('resource ases', () => {
           limit: 5,
           location: ['string'],
           mitigationProduct: ['DDOS'],
-          name: ['string'],
+          name: ['main_series'],
         },
         { path: '/_stainless_unknown_path' },
       ),
