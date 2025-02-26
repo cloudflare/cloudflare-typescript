@@ -7,7 +7,8 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Summary extends APIResource {
   /**
-   * Percentage distribution of emails classified by ARC validation.
+   * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
+   * validation.
    */
   arc(
     query: SummaryARCParams | null | undefined = {},
@@ -21,7 +22,8 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified by DKIM validation.
+   * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
+   * validation.
    */
   dkim(
     query: SummaryDKIMParams | null | undefined = {},
@@ -35,7 +37,8 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified by DMARC validation.
+   * Retrieves the distribution of emails by DMARC (Domain-based Message
+   * Authentication, Reporting and Conformance) validation.
    */
   dmarc(
     query: SummaryDMARCParams | null | undefined = {},
@@ -49,7 +52,8 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails by encryption status.
+   * Retrieves the distribution of emails by encryption status (encrypted vs.
+   * not-encrypted).
    */
   encrypted(
     query: SummaryEncryptedParams | null | undefined = {},
@@ -63,7 +67,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails by IP version.
+   * Retrieves the distribution of emails by IP version.
    */
   ipVersion(
     query: SummaryIPVersionParams | null | undefined = {},
@@ -77,7 +81,8 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified by SPF validation.
+   * Retrieves the distribution of emails by SPF (Sender Policy Framework)
+   * validation.
    */
   spf(
     query: SummarySPFParams | null | undefined = {},
@@ -446,56 +451,57 @@ export interface SummaryARCParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
 export interface SummaryDKIMParams {
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -505,51 +511,52 @@ export interface SummaryDKIMParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
 export interface SummaryDMARCParams {
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -559,51 +566,51 @@ export interface SummaryDMARCParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
 export interface SummaryEncryptedParams {
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -613,51 +620,52 @@ export interface SummaryEncryptedParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
 export interface SummaryIPVersionParams {
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -667,51 +675,52 @@ export interface SummaryIPVersionParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
 export interface SummarySPFParams {
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -721,44 +730,45 @@ export interface SummarySPFParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 }

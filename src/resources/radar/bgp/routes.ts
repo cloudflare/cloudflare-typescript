@@ -6,7 +6,7 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class Routes extends APIResource {
   /**
-   * List all ASes in current global routing tables with routing statistics
+   * Retrieves all ASes in the current global routing tables with routing statistics.
    */
   ases(
     query: RouteAsesParams | null | undefined = {},
@@ -20,7 +20,7 @@ export class Routes extends APIResource {
   }
 
   /**
-   * List all Multi-Origin AS (MOAS) prefixes on the global routing tables.
+   * Retrieves all Multi-Origin AS (MOAS) prefixes in the global routing tables.
    */
   moas(
     query: RouteMoasParams | null | undefined = {},
@@ -34,7 +34,7 @@ export class Routes extends APIResource {
   }
 
   /**
-   * Lookup prefix-to-ASN mapping on global routing tables.
+   * Retrieves the prefix-to-ASN mapping from global routing tables.
    */
   pfx2as(
     query: RoutePfx2asParams | null | undefined = {},
@@ -48,7 +48,7 @@ export class Routes extends APIResource {
   }
 
   /**
-   * Get the BGP routing table stats (Beta).
+   * Retrieves the BGP routing table stats.
    */
   stats(
     query: RouteStatsParams | null | undefined = {},
@@ -250,44 +250,44 @@ export namespace RouteStatsResponse {
 
 export interface RouteAsesParams {
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Location Alpha2 code.
+   * Location alpha-2 code.
    */
   location?: string;
 
   /**
-   * Return order results by given type
+   * Sorts results by the specified field.
    */
   sortBy?: 'cone' | 'pfxs' | 'ipv4' | 'ipv6' | 'rpki_valid' | 'rpki_invalid' | 'rpki_unknown';
 
   /**
-   * Sort by value ascending or descending
+   * Sort order.
    */
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: 'ASC' | 'DESC';
 }
 
 export interface RouteMoasParams {
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Lookup only RPKI invalid MOASes
+   * Lookup only RPKI invalid MOASes.
    */
   invalid_only?: boolean;
 
   /**
-   * Lookup MOASes originated by the given ASN
+   * Lookup MOASes originated by the given ASN.
    */
   origin?: number;
 
@@ -299,7 +299,7 @@ export interface RouteMoasParams {
 
 export interface RoutePfx2asParams {
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
@@ -310,7 +310,7 @@ export interface RoutePfx2asParams {
   longestPrefixMatch?: boolean;
 
   /**
-   * Lookup prefixes originated by the given ASN
+   * Lookup prefixes originated by the given ASN.
    */
   origin?: number;
 
@@ -320,24 +320,24 @@ export interface RoutePfx2asParams {
   prefix?: string;
 
   /**
-   * Return only results with matching rpki status: valid, invalid or unknown
+   * Return only results with matching rpki status: valid, invalid or unknown.
    */
   rpkiStatus?: 'VALID' | 'INVALID' | 'UNKNOWN';
 }
 
 export interface RouteStatsParams {
   /**
-   * Single ASN as integer.
+   * Single Autonomous System Number (ASN) as integer.
    */
   asn?: number;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Location Alpha2 code.
+   * Location alpha-2 code.
    */
   location?: string;
 }

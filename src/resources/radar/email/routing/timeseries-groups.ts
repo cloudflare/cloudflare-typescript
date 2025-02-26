@@ -7,7 +7,8 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Percentage distribution of emails classified by ARC validation over time.
+   * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
+   * validation over time.
    */
   arc(
     query: TimeseriesGroupARCParams | null | undefined = {},
@@ -21,7 +22,8 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified by DKIM validation over time.
+   * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
+   * validation over time.
    */
   dkim(
     query: TimeseriesGroupDKIMParams | null | undefined = {},
@@ -35,7 +37,8 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified by DMARC validation over time.
+   * Retrieves the distribution of emails by DMARC (Domain-based Message
+   * Authentication, Reporting and Conformance) validation over time.
    */
   dmarc(
     query: TimeseriesGroupDMARCParams | null | undefined = {},
@@ -49,7 +52,8 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails by encryption status over time.
+   * Retrieves the distribution of emails by encryption status (encrypted vs.
+   * not-encrypted) over time.
    */
   encrypted(
     query: TimeseriesGroupEncryptedParams | null | undefined = {},
@@ -64,7 +68,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails by IP version over time.
+   * Retrieves the distribution of emails by IP version over time.
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -79,7 +83,8 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified by SPF validation over time.
+   * Retrieves the distribution of emails by SPF (Sender Policy Framework) validation
+   * over time.
    */
   spf(
     query: TimeseriesGroupSPFParams | null | undefined = {},
@@ -159,49 +164,50 @@ export interface TimeseriesGroupARCParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
@@ -215,7 +221,7 @@ export interface TimeseriesGroupDKIMParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -225,44 +231,45 @@ export interface TimeseriesGroupDKIMParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
@@ -276,7 +283,7 @@ export interface TimeseriesGroupDMARCParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -286,44 +293,44 @@ export interface TimeseriesGroupDMARCParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
@@ -337,7 +344,7 @@ export interface TimeseriesGroupEncryptedParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -347,44 +354,45 @@ export interface TimeseriesGroupEncryptedParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
@@ -398,7 +406,7 @@ export interface TimeseriesGroupIPVersionParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -408,44 +416,45 @@ export interface TimeseriesGroupIPVersionParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
@@ -459,7 +468,7 @@ export interface TimeseriesGroupSPFParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -469,44 +478,45 @@ export interface TimeseriesGroupSPFParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for encrypted emails.
+   * Filters results by encryption status (encrypted vs. not-encrypted).
    */
   encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 }

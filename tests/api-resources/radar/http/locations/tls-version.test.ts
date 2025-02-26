@@ -40,7 +40,7 @@ describe('resource tlsVersion', () => {
           ipVersion: ['IPv4'],
           limit: 5,
           location: ['string'],
-          name: ['string'],
+          name: ['main_series'],
           os: ['WINDOWS'],
         },
         { path: '/_stainless_unknown_path' },
