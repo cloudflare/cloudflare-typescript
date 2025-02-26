@@ -172,9 +172,21 @@ export interface SiteInfoUpdateParams {
   auto_install?: boolean;
 
   /**
+   * Body param: Enables or disables RUM. This option can be used only when
+   * auto_install is set to true.
+   */
+  enabled?: boolean;
+
+  /**
    * Body param: The hostname to use for gray-clouded sites.
    */
   host?: string;
+
+  /**
+   * Body param: If enabled, the JavaScript snippet will not be injected for visitors
+   * from the EU.
+   */
+  lite?: boolean;
 
   /**
    * Body param: The zone identifier.
