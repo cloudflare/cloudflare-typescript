@@ -10,9 +10,9 @@ export class TrafficAnomalies extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
 
   /**
-   * Internet traffic anomalies are signals that might point to an outage. These
-   * alerts are automatically detected by Radar and then manually verified by our
-   * team. This endpoint returns the latest alerts.
+   * Retrieves the latest Internet traffic anomalies, which are signals that might
+   * indicate an outage. These alerts are automatically detected by Radar and
+   * manually verified by our team.
    */
   get(
     query?: TrafficAnomalyGetParams,
@@ -84,7 +84,7 @@ export namespace TrafficAnomalyGetResponse {
 
 export interface TrafficAnomalyGetParams {
   /**
-   * Single ASN as integer.
+   * Single Autonomous System Number (ASN) as integer.
    */
   asn?: number;
 
@@ -105,22 +105,22 @@ export interface TrafficAnomalyGetParams {
   dateStart?: string;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Location Alpha2 code.
+   * Location alpha-2 code.
    */
   location?: string;
 
   /**
-   * Number of objects to skip before grabbing results.
+   * Skips the specified number of objects before fetching the results.
    */
   offset?: number;
 

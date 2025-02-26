@@ -38,7 +38,7 @@ describe('resource userAgents', () => {
           domainCategory: ['string'],
           format: 'JSON',
           limit: 5,
-          name: ['string'],
+          name: ['main_series'],
           userAgentCategory: 'AI',
         },
         { path: '/_stainless_unknown_path' },

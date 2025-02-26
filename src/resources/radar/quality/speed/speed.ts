@@ -10,8 +10,8 @@ export class Speed extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
-   * Get an histogram from the previous 90 days of Cloudflare Speed Test data, split
-   * into fixed bandwidth (Mbps), latency (ms) or jitter (ms) buckets.
+   * Retrieves a histogram from the previous 90 days of Cloudflare Speed Test data,
+   * split into fixed bandwidth (Mbps), latency (ms), or jitter (ms) buckets.
    */
   histogram(
     query?: SpeedHistogramParams,
@@ -33,8 +33,8 @@ export class Speed extends APIResource {
   }
 
   /**
-   * Get a summary of bandwidth, latency, jitter and packet loss, from the previous
-   * 90 days of Cloudflare Speed Test data.
+   * Retrieves a summary of bandwidth, latency, jitter, and packet loss, from the
+   * previous 90 days of Cloudflare Speed Test data.
    */
   summary(query?: SpeedSummaryParams, options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse>;
   summary(options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse>;
@@ -143,21 +143,21 @@ export namespace SpeedSummaryResponse {
 
 export interface SpeedHistogramParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * The width for every bucket in the histogram.
+   * Width for every bucket in the histogram.
    */
   bucketSize?: number;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -167,14 +167,14 @@ export interface SpeedHistogramParams {
   dateEnd?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
@@ -184,23 +184,23 @@ export interface SpeedHistogramParams {
   metricGroup?: 'BANDWIDTH' | 'LATENCY' | 'JITTER';
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 }
 
 export interface SpeedSummaryParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -210,19 +210,19 @@ export interface SpeedSummaryParams {
   dateEnd?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 }

@@ -6,8 +6,7 @@ import * as Core from '../../../../core';
 
 export class Ases extends APIResource {
   /**
-   * Get the top autonomous systems (ASes) by BGP updates (announcements only).
-   * Values are a percentage out of the total updates.
+   * Retrieves the top autonomous systems by BGP updates (announcements only).
    */
   get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
@@ -26,9 +25,9 @@ export class Ases extends APIResource {
   }
 
   /**
-   * Get the full list of autonomous systems on the global routing table ordered by
-   * announced prefixes count. The data comes from public BGP MRT data archives and
-   * updates every 2 hours.
+   * Retrieves the full list of autonomous systems on the global routing table
+   * ordered by announced prefixes count. The data comes from public BGP MRT data
+   * archives and updates every 2 hours.
    */
   prefixes(query?: AsePrefixesParams, options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse>;
   prefixes(options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse>;
@@ -113,9 +112,9 @@ export namespace AsePrefixesResponse {
 
 export interface AseGetParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
@@ -125,29 +124,29 @@ export interface AseGetParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
@@ -169,12 +168,12 @@ export interface AsePrefixesParams {
   country?: string;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Maximum number of ASes to return
+   * Maximum number of ASes to return.
    */
   limit?: number;
 }

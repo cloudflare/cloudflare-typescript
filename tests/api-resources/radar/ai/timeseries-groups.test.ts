@@ -42,7 +42,7 @@ describe('resource timeseriesGroups', () => {
           format: 'JSON',
           limitPerGroup: 10,
           location: ['string'],
-          name: ['string'],
+          name: ['main_series'],
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -46,7 +46,7 @@ describe('resource http', () => {
           httpVersion: ['HTTPv1'],
           ipVersion: ['IPv4'],
           location: ['string'],
-          name: ['string'],
+          name: ['main_series'],
           normalization: 'PERCENTAGE_CHANGE',
           os: ['WINDOWS'],
           tlsVersion: ['TLSv1_0'],
