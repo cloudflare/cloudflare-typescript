@@ -41,7 +41,7 @@ describe('resource as112', () => {
           dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           location: ['string'],
-          name: ['string'],
+          name: ['main_series'],
         },
         { path: '/_stainless_unknown_path' },
       ),

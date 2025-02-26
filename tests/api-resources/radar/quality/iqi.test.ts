@@ -31,7 +31,7 @@ describe('resource iqi', () => {
       dateStart: ['2019-12-27T18:11:19.117Z'],
       format: 'JSON',
       location: ['string'],
-      name: ['string'],
+      name: ['main_series'],
     });
   });
 
@@ -58,7 +58,7 @@ describe('resource iqi', () => {
       format: 'JSON',
       interpolation: true,
       location: ['string'],
-      name: ['string'],
+      name: ['main_series'],
     });
   });
 });

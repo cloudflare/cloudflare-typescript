@@ -46,7 +46,7 @@ describe('resource layer7', () => {
           ipVersion: ['IPv4'],
           location: ['string'],
           mitigationProduct: ['DDOS'],
-          name: ['string'],
+          name: ['main_series'],
           normalization: 'PERCENTAGE_CHANGE',
         },
         { path: '/_stainless_unknown_path' },

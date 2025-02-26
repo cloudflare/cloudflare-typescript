@@ -39,7 +39,7 @@ describe('resource asns', () => {
   });
 
   test('get', async () => {
-    const responsePromise = client.radar.entities.asns.get(3);
+    const responsePromise = client.radar.entities.asns.get(174);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,7 +51,7 @@ describe('resource asns', () => {
 
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.entities.asns.get(3, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.entities.asns.get(174, { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -59,7 +59,7 @@ describe('resource asns', () => {
   test('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.entities.asns.get(3, { format: 'JSON' }, { path: '/_stainless_unknown_path' }),
+      client.radar.entities.asns.get(174, { format: 'JSON' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
