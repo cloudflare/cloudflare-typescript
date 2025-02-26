@@ -6,7 +6,7 @@ import * as Core from '../../../core';
 
 export class ASNs extends APIResource {
   /**
-   * Get a list of autonomous systems (ASes).
+   * Retrieves a list of autonomous systems.
    */
   list(query?: ASNListParams, options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
@@ -25,10 +25,10 @@ export class ASNs extends APIResource {
   }
 
   /**
-   * Get the requested autonomous system information. (A confidence level below `5`
-   * indicates a low level of confidence in the traffic data - normally this happens
-   * because Cloudflare has a small amount of traffic from/to this AS). Population
-   * estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
+   * Retrieves the requested autonomous system information. (A confidence level below
+   * `5` indicates a low level of confidence in the traffic data - normally this
+   * happens because Cloudflare has a small amount of traffic from/to this AS).
+   * Population estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
    */
   get(asn: number, query?: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
   get(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
@@ -48,8 +48,8 @@ export class ASNs extends APIResource {
   }
 
   /**
-   * Get the requested autonomous system information based on IP address. Population
-   * estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
+   * Retrieves the requested autonomous system information based on IP address.
+   * Population estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
    */
   ip(query: ASNIPParams, options?: Core.RequestOptions): Core.APIPromise<ASNIPResponse> {
     return (
@@ -60,7 +60,7 @@ export class ASNs extends APIResource {
   }
 
   /**
-   * Get AS-level relationship for given networks.
+   * Retrieves AS-level relationship for given networks.
    */
   rel(asn: number, query?: ASNRelParams, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>;
   rel(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>;
@@ -289,39 +289,39 @@ export namespace ASNRelResponse {
 
 export interface ASNListParams {
   /**
-   * Comma separated list of ASNs.
+   * Comma-separated list of Autonomous System Numbers (ASNs).
    */
   asn?: string;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Location Alpha2 to filter results.
+   * Location alpha-2 code.
    */
   location?: string;
 
   /**
-   * Number of objects to skip before grabbing results.
+   * Skips the specified number of objects before fetching the results.
    */
   offset?: number;
 
   /**
-   * Order asn list.
+   * Metric to order the ASNs by.
    */
   orderBy?: 'ASN' | 'POPULATION';
 }
 
 export interface ASNGetParams {
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 }
@@ -333,19 +333,19 @@ export interface ASNIPParams {
   ip: string;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 }
 
 export interface ASNRelParams {
   /**
-   * Get the AS relationship of ASN2 with respect to the given ASN
+   * Retrieves the AS relationship of ASN2 with respect to the given ASN.
    */
   asn2?: number;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 }

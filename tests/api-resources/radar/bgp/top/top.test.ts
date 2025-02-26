@@ -39,7 +39,7 @@ describe('resource top', () => {
           dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           limit: 5,
-          name: ['string'],
+          name: ['main_series'],
           updateType: ['ANNOUNCEMENT'],
         },
         { path: '/_stainless_unknown_path' },

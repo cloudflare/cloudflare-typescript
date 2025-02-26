@@ -32,9 +32,8 @@ export class BGP extends APIResource {
   ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
 
   /**
-   * Get BGP updates change over time. Raw values are returned. When requesting
-   * updates for an autonomous system (AS), only BGP updates of type announcement are
-   * returned.
+   * Retrieves BGP updates over time. When requesting updates for an autonomous
+   * system, only BGP updates of type announcement are returned.
    */
   timeseries(
     query?: BGPTimeseriesParams,
@@ -127,9 +126,9 @@ export interface BGPTimeseriesParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
@@ -139,24 +138,24 @@ export interface BGPTimeseriesParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 

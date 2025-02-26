@@ -44,7 +44,7 @@ describe('resource layer3', () => {
           ipVersion: ['IPv4'],
           location: ['string'],
           metric: 'BYTES',
-          name: ['string'],
+          name: ['main_series'],
           normalization: 'PERCENTAGE_CHANGE',
           protocol: ['UDP'],
         },

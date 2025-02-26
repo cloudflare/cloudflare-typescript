@@ -7,7 +7,7 @@ import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagin
 
 export class Events extends APIResource {
   /**
-   * Get the BGP hijack events. (Beta)
+   * Retrieves the BGP hijack events.
    */
   list(
     query?: EventListParams,
@@ -114,37 +114,37 @@ export interface EventListParams extends V4PagePaginationParams {
   dateStart?: string;
 
   /**
-   * The unique identifier of a event
+   * The unique identifier of a event.
    */
   eventId?: number;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * The potential hijacker AS of a BGP hijack event
+   * The potential hijacker AS of a BGP hijack event.
    */
   hijackerAsn?: number;
 
   /**
-   * The potential hijacker or victim AS of a BGP hijack event
+   * The potential hijacker or victim AS of a BGP hijack event.
    */
   involvedAsn?: number;
 
   /**
-   * The country code of the potential hijacker or victim AS of a BGP hijack event
+   * The country code of the potential hijacker or victim AS of a BGP hijack event.
    */
   involvedCountry?: string;
 
   /**
-   * The maximum confidence score to filter events (1-4 low, 5-7 mid, 8+ high)
+   * The maximum confidence score to filter events (1-4 low, 5-7 mid, 8+ high).
    */
   maxConfidence?: number;
 
   /**
-   * The minimum confidence score to filter events (1-4 low, 5-7 mid, 8+ high)
+   * The minimum confidence score to filter events (1-4 low, 5-7 mid, 8+ high).
    */
   minConfidence?: number;
 
@@ -154,17 +154,17 @@ export interface EventListParams extends V4PagePaginationParams {
   prefix?: string;
 
   /**
-   * Sort events by field
+   * Sorts results by the specified field.
    */
   sortBy?: 'ID' | 'TIME' | 'CONFIDENCE';
 
   /**
-   * Sort order
+   * Sort order.
    */
   sortOrder?: 'ASC' | 'DESC';
 
   /**
-   * The potential victim AS of a BGP hijack event
+   * The potential victim AS of a BGP hijack event.
    */
   victimAsn?: number;
 }

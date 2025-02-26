@@ -6,7 +6,7 @@ import * as Core from '../../../../../../core';
 
 export class Malicious extends APIResource {
   /**
-   * Get the TLDs by emails classified as malicious or not.
+   * Retrieves the top TLDs by emails classified as malicious or not.
    */
   get(
     malicious: 'MALICIOUS' | 'NOT_MALICIOUS',
@@ -96,7 +96,7 @@ export namespace MaliciousGetResponse {
 
 export interface MaliciousGetParams {
   /**
-   * Filter for arc (Authenticated Received Chain).
+   * Filters results by ARC (Authenticated Received Chain) validation.
    */
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
@@ -106,54 +106,55 @@ export interface MaliciousGetParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Filter for dkim.
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
    */
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for dmarc.
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
    */
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter for spf.
+   * Filters results by SPF (Sender Policy Framework) validation status.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Filter for TLDs by category.
+   * Filters results by TLD category.
    */
   tldCategory?: 'CLASSIC' | 'COUNTRY';
 
   /**
-   * Filter for tls version.
+   * Filters results by TLS version.
    */
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
