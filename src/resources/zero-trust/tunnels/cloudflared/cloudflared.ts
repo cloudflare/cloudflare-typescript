@@ -188,7 +188,7 @@ export namespace CloudflaredCreateResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
@@ -310,7 +310,7 @@ export namespace CloudflaredListResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
@@ -432,7 +432,7 @@ export namespace CloudflaredDeleteResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
@@ -554,7 +554,7 @@ export namespace CloudflaredEditResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
@@ -676,7 +676,7 @@ export namespace CloudflaredGetResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
