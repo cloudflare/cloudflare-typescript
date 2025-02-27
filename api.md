@@ -7706,3 +7706,51 @@ Types:
 Methods:
 
 - <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/type">client.securityCenter.insights.type.<a href="./src/resources/security-center/insights/type.ts">get</a>({ ...params }) -> TypeGetResponse</code>
+
+# BrowsingRendering
+
+## Content
+
+Types:
+
+- <code><a href="./src/resources/browsing-rendering/content.ts">ContentCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/browser-rendering/content">client.browsingRendering.content.<a href="./src/resources/browsing-rendering/content.ts">create</a>(accountId, { ...params }) -> ContentCreateResponse</code>
+
+## Pdf
+
+Methods:
+
+- <code title="post /accounts/{accountId}/browser-rendering/pdf">client.browsingRendering.pdf.<a href="./src/resources/browsing-rendering/pdf.ts">create</a>(accountId, { ...params }) -> Response</code>
+
+## Scrape
+
+Types:
+
+- <code><a href="./src/resources/browsing-rendering/scrape.ts">ScrapeCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/browser-rendering/scrape">client.browsingRendering.scrape.<a href="./src/resources/browsing-rendering/scrape.ts">create</a>(accountId, { ...params }) -> ScrapeCreateResponse</code>
+
+## Screenshot
+
+Types:
+
+- <code><a href="./src/resources/browsing-rendering/screenshot.ts">ScreenshotCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/browser-rendering/screenshot">client.browsingRendering.screenshot.<a href="./src/resources/browsing-rendering/screenshot.ts">create</a>(accountId, { ...params }) -> ScreenshotCreateResponse</code>
+
+## Snapshot
+
+Types:
+
+- <code><a href="./src/resources/browsing-rendering/snapshot.ts">SnapshotCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/browser-rendering/snapshot">client.browsingRendering.snapshot.<a href="./src/resources/browsing-rendering/snapshot.ts">create</a>(accountId, { ...params }) -> SnapshotCreateResponse</code>
