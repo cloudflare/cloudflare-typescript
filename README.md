@@ -6,7 +6,7 @@ This library provides convenient access to the Cloudflare REST API from server-s
 
 The REST API documentation can be found on [developers.cloudflare.com](https://developers.cloudflare.com/api). The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
@@ -15,7 +15,7 @@ npm install git+ssh://git@github.com:stainless-sdks/cloudflare-typescript.git
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://app.stainlessapi.com/docs/guides/publish), this will become: `npm install cloudflare`
+> Once this package is [published to npm](https://app.stainless.com/docs/guides/publish), this will become: `npm install cloudflare`
 
 ## Usage
 
