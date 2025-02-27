@@ -163,7 +163,7 @@ export namespace WARPConnectorCreateResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
@@ -285,7 +285,7 @@ export namespace WARPConnectorListResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
@@ -407,7 +407,7 @@ export namespace WARPConnectorDeleteResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
@@ -529,7 +529,7 @@ export namespace WARPConnectorEditResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
@@ -651,7 +651,7 @@ export namespace WARPConnectorGetResponse {
     /**
      * The type of tunnel.
      */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
   }
 
   export namespace TunnelWARPConnectorTunnel {
