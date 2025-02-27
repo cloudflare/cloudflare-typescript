@@ -4,31 +4,26 @@ import { APIResource } from '../../resource';
 import * as ConfigsAPI from './configs';
 import {
   ConfigCreateParams,
-  ConfigCreateResponse,
   ConfigDeleteParams,
   ConfigDeleteResponse,
   ConfigEditParams,
-  ConfigEditResponse,
   ConfigGetParams,
-  ConfigGetResponse,
   ConfigListParams,
-  ConfigListResponse,
-  ConfigListResponsesSinglePage,
   ConfigUpdateParams,
-  ConfigUpdateResponse,
   Configs,
 } from './configs';
+import { SinglePage } from '../../pagination';
 
 export class HyperdriveResource extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
 }
 
-export type Configuration =
-  | Configuration.HyperdriveHyperdriveInternetOrigin
-  | Configuration.HyperdriveHyperdriveOverAccessOrigin;
+export type HyperdrivesSinglePage = SinglePage<Hyperdrive>;
+
+export type Configuration = Configuration.HyperdriveInternetOrigin | Configuration.HyperdriveOverAccessOrigin;
 
 export namespace Configuration {
-  export interface HyperdriveHyperdriveInternetOrigin {
+  export interface HyperdriveInternetOrigin {
     /**
      * The host (hostname or IP) of your origin database.
      */
@@ -55,7 +50,7 @@ export namespace Configuration {
     user?: string;
   }
 
-  export interface HyperdriveHyperdriveOverAccessOrigin {
+  export interface HyperdriveOverAccessOrigin {
     /**
      * The Client ID of the Access token to use when connecting to the origin database.
      */
@@ -94,6 +89,16 @@ export interface Hyperdrive {
   origin: Hyperdrive.PublicDatabase | Hyperdrive.AccessProtectedDatabaseBehindCloudflareTunnel;
 
   caching?: Hyperdrive.HyperdriveHyperdriveCachingCommon | Hyperdrive.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * When the Hyperdrive configuration was created.
+   */
+  created_on?: string;
+
+  /**
+   * When the Hyperdrive configuration was last modified.
+   */
+  modified_on?: string;
 }
 
 export namespace Hyperdrive {
@@ -183,13 +188,7 @@ HyperdriveResource.Configs = Configs;
 export declare namespace HyperdriveResource {
   export {
     Configs as Configs,
-    type ConfigCreateResponse as ConfigCreateResponse,
-    type ConfigUpdateResponse as ConfigUpdateResponse,
-    type ConfigListResponse as ConfigListResponse,
     type ConfigDeleteResponse as ConfigDeleteResponse,
-    type ConfigEditResponse as ConfigEditResponse,
-    type ConfigGetResponse as ConfigGetResponse,
-    type ConfigListResponsesSinglePage as ConfigListResponsesSinglePage,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigListParams as ConfigListParams,

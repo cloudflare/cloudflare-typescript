@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as HyperdriveAPI from './hyperdrive';
+import { HyperdrivesSinglePage } from './hyperdrive';
 import { APIPromise } from '../../api-promise';
 import { PagePromise, SinglePage } from '../../pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -11,13 +12,13 @@ export class Configs extends APIResource {
   /**
    * Creates and returns a new Hyperdrive configuration.
    */
-  create(params: ConfigCreateParams, options?: RequestOptions): APIPromise<ConfigCreateResponse> {
+  create(params: ConfigCreateParams, options?: RequestOptions): APIPromise<HyperdriveAPI.Hyperdrive> {
     const { account_id, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/hyperdrive/configs`, {
         body,
         ...options,
-      }) as APIPromise<{ result: ConfigCreateResponse }>
+      }) as APIPromise<{ result: HyperdriveAPI.Hyperdrive }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -28,13 +29,13 @@ export class Configs extends APIResource {
     hyperdriveID: string,
     params: ConfigUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ConfigUpdateResponse> {
+  ): APIPromise<HyperdriveAPI.Hyperdrive> {
     const { account_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/hyperdrive/configs/${hyperdriveID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: ConfigUpdateResponse }>
+      }) as APIPromise<{ result: HyperdriveAPI.Hyperdrive }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,11 +45,11 @@ export class Configs extends APIResource {
   list(
     params: ConfigListParams,
     options?: RequestOptions,
-  ): PagePromise<ConfigListResponsesSinglePage, ConfigListResponse> {
+  ): PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive> {
     const { account_id } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/hyperdrive/configs`,
-      SinglePage<ConfigListResponse>,
+      SinglePage<HyperdriveAPI.Hyperdrive>,
       options,
     );
   }
@@ -78,13 +79,13 @@ export class Configs extends APIResource {
     hyperdriveID: string,
     params: ConfigEditParams,
     options?: RequestOptions,
-  ): APIPromise<ConfigEditResponse> {
+  ): APIPromise<HyperdriveAPI.Hyperdrive> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/hyperdrive/configs/${hyperdriveID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: ConfigEditResponse }>
+      }) as APIPromise<{ result: HyperdriveAPI.Hyperdrive }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -95,80 +96,18 @@ export class Configs extends APIResource {
     hyperdriveID: string,
     params: ConfigGetParams,
     options?: RequestOptions,
-  ): APIPromise<ConfigGetResponse> {
+  ): APIPromise<HyperdriveAPI.Hyperdrive> {
     const { account_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/hyperdrive/configs/${hyperdriveID}`,
         options,
-      ) as APIPromise<{ result: ConfigGetResponse }>
+      ) as APIPromise<{ result: HyperdriveAPI.Hyperdrive }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type ConfigListResponsesSinglePage = SinglePage<ConfigListResponse>;
-
-export interface ConfigCreateResponse extends HyperdriveAPI.Hyperdrive {
-  /**
-   * When the Hyperdrive configuration was created.
-   */
-  created_on?: string;
-
-  /**
-   * When the Hyperdrive configuration was last modified.
-   */
-  modified_on?: string;
-}
-
-export interface ConfigUpdateResponse extends HyperdriveAPI.Hyperdrive {
-  /**
-   * When the Hyperdrive configuration was created.
-   */
-  created_on?: string;
-
-  /**
-   * When the Hyperdrive configuration was last modified.
-   */
-  modified_on?: string;
-}
-
-export interface ConfigListResponse extends HyperdriveAPI.Hyperdrive {
-  /**
-   * When the Hyperdrive configuration was created.
-   */
-  created_on?: string;
-
-  /**
-   * When the Hyperdrive configuration was last modified.
-   */
-  modified_on?: string;
-}
-
 export type ConfigDeleteResponse = unknown;
-
-export interface ConfigEditResponse extends HyperdriveAPI.Hyperdrive {
-  /**
-   * When the Hyperdrive configuration was created.
-   */
-  created_on?: string;
-
-  /**
-   * When the Hyperdrive configuration was last modified.
-   */
-  modified_on?: string;
-}
-
-export interface ConfigGetResponse extends HyperdriveAPI.Hyperdrive {
-  /**
-   * When the Hyperdrive configuration was created.
-   */
-  created_on?: string;
-
-  /**
-   * When the Hyperdrive configuration was last modified.
-   */
-  modified_on?: string;
-}
 
 export interface ConfigCreateParams {
   /**
@@ -459,8 +398,8 @@ export interface ConfigEditParams {
    */
   origin?:
     | ConfigEditParams.HyperdriveHyperdriveDatabase
-    | ConfigEditParams.HyperdriveHyperdriveInternetOrigin
-    | ConfigEditParams.HyperdriveHyperdriveOverAccessOrigin;
+    | ConfigEditParams.HyperdriveInternetOrigin
+    | ConfigEditParams.HyperdriveOverAccessOrigin;
 }
 
 export namespace ConfigEditParams {
@@ -513,7 +452,7 @@ export namespace ConfigEditParams {
     user?: string;
   }
 
-  export interface HyperdriveHyperdriveInternetOrigin {
+  export interface HyperdriveInternetOrigin {
     /**
      * The host (hostname or IP) of your origin database.
      */
@@ -525,7 +464,7 @@ export namespace ConfigEditParams {
     port: number;
   }
 
-  export interface HyperdriveHyperdriveOverAccessOrigin {
+  export interface HyperdriveOverAccessOrigin {
     /**
      * The Client ID of the Access token to use when connecting to the origin database.
      */
@@ -553,13 +492,7 @@ export interface ConfigGetParams {
 
 export declare namespace Configs {
   export {
-    type ConfigCreateResponse as ConfigCreateResponse,
-    type ConfigUpdateResponse as ConfigUpdateResponse,
-    type ConfigListResponse as ConfigListResponse,
     type ConfigDeleteResponse as ConfigDeleteResponse,
-    type ConfigEditResponse as ConfigEditResponse,
-    type ConfigGetResponse as ConfigGetResponse,
-    type ConfigListResponsesSinglePage as ConfigListResponsesSinglePage,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigListParams as ConfigListParams,
@@ -568,3 +501,5 @@ export declare namespace Configs {
     type ConfigGetParams as ConfigGetParams,
   };
 }
+
+export { type HyperdrivesSinglePage };
