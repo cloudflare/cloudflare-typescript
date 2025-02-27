@@ -1,12 +1,10 @@
-# Cloudflare Node API Library
+# Cloudflare Typescript API Library
 
 [![NPM version](https://img.shields.io/npm/v/cloudflare.svg)](https://npmjs.org/package/cloudflare) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/cloudflare)
 
 This library provides convenient access to the Cloudflare REST API from server-side TypeScript or JavaScript.
 
 The REST API documentation can be found on [developers.cloudflare.com](https://developers.cloudflare.com/api). The full API of this library can be found in [api.md](api.md).
-
-It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
@@ -365,12 +363,8 @@ await client.zones.delete(
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
-2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
-3. Changes that we do not expect to impact the vast majority of users in practice.
-
-We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
-
-We are keen for your feedback; please open an [issue](https://www.github.com/cloudflare/cloudflare-typescript/issues) with questions, bugs, or suggestions.
+1. Changes to library internals which are technically public but not intended or documented for external use.
+1. Changes that we do not expect to impact the vast majority of users in practice.
 
 ## Requirements
 
