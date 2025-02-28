@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource content', () => {
+describe('resource snapshot', () => {
   test('create', async () => {
-    const responsePromise = client.browsingRendering.content.create('accountId');
+    const responsePromise = client.browserRendering.snapshot.create('accountId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,14 +24,14 @@ describe('resource content', () => {
   test('create: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.browsingRendering.content.create('accountId', { path: '/_stainless_unknown_path' }),
+      client.browserRendering.snapshot.create('accountId', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.browsingRendering.content.create(
+      client.browserRendering.snapshot.create(
         'accountId',
         {
           cacheTTL: 86400,
