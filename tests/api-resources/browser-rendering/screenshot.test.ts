@@ -10,7 +10,7 @@ const client = new Cloudflare({
 
 describe('resource screenshot', () => {
   test('create', async () => {
-    const responsePromise = client.browsingRendering.screenshot.create('accountId');
+    const responsePromise = client.browserRendering.screenshot.create('accountId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource screenshot', () => {
   test('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.browsingRendering.screenshot.create(
+      client.browserRendering.screenshot.create(
         'accountId',
         {
           cacheTTL: 86400,

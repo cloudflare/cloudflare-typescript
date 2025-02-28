@@ -63,7 +63,7 @@ import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
 import { Billing } from './resources/billing/billing';
 import { BotnetFeed } from './resources/botnet-feed/botnet-feed';
-import { BrowsingRendering } from './resources/browsing-rendering/browsing-rendering';
+import { BrowserRendering } from './resources/browser-rendering/browser-rendering';
 import { Cache } from './resources/cache/cache';
 import { Calls } from './resources/calls/calls';
 import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
@@ -1014,7 +1014,7 @@ export class Cloudflare {
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
-  browsingRendering: API.BrowsingRendering = new API.BrowsingRendering(this);
+  browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
 }
 Cloudflare.Accounts = Accounts;
 Cloudflare.OriginCACertificates = OriginCACertificates;
@@ -1105,7 +1105,7 @@ Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
 Cloudflare.SecurityCenter = SecurityCenter;
-Cloudflare.BrowsingRendering = BrowsingRendering;
+Cloudflare.BrowserRendering = BrowserRendering;
 export declare namespace Cloudflare {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -1314,7 +1314,7 @@ export declare namespace Cloudflare {
 
   export { SecurityCenter as SecurityCenter };
 
-  export { BrowsingRendering as BrowsingRendering };
+  export { BrowserRendering as BrowserRendering };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;
