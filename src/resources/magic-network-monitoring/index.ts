@@ -21,4 +21,4 @@ export {
   type RuleGetParams,
   type MagicNetworkMonitoringRulesSinglePage,
 } from './rules/index';
-export { VpcFlows } from './vpc-flows/index';
+export { VPCFlows } from './vpc-flows/index';
