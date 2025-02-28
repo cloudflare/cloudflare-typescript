@@ -3447,6 +3447,18 @@ Methods:
 
 # MagicNetworkMonitoring
 
+## VpcFlows
+
+### Tokens
+
+Types:
+
+- <code><a href="./src/resources/magic-network-monitoring/vpc-flows/tokens.ts">TokenCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/mnm/vpc-flows/token">client.magicNetworkMonitoring.vpcFlows.tokens.<a href="./src/resources/magic-network-monitoring/vpc-flows/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
+
 ## Configs
 
 Types:
