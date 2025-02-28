@@ -3,8 +3,8 @@
 import { APIResource } from '../../resource';
 import * as ContentAPI from './content';
 import { Content, ContentCreateParams, ContentCreateResponse } from './content';
-import * as PdfAPI from './pdf';
-import { Pdf, PdfCreateParams } from './pdf';
+import * as PDFAPI from './pdf';
+import { PDF, PDFCreateParams } from './pdf';
 import * as ScrapeAPI from './scrape';
 import { Scrape, ScrapeCreateParams, ScrapeCreateResponse } from './scrape';
 import * as ScreenshotAPI from './screenshot';
@@ -14,14 +14,14 @@ import { Snapshot, SnapshotCreateParams, SnapshotCreateResponse } from './snapsh
 
 export class BrowsingRendering extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
-  pdf: PdfAPI.Pdf = new PdfAPI.Pdf(this._client);
+  pdf: PDFAPI.PDF = new PDFAPI.PDF(this._client);
   scrape: ScrapeAPI.Scrape = new ScrapeAPI.Scrape(this._client);
   screenshot: ScreenshotAPI.Screenshot = new ScreenshotAPI.Screenshot(this._client);
   snapshot: SnapshotAPI.Snapshot = new SnapshotAPI.Snapshot(this._client);
 }
 
 BrowsingRendering.Content = Content;
-BrowsingRendering.Pdf = Pdf;
+BrowsingRendering.PDF = PDF;
 BrowsingRendering.Scrape = Scrape;
 BrowsingRendering.Screenshot = Screenshot;
 BrowsingRendering.Snapshot = Snapshot;
@@ -33,7 +33,7 @@ export declare namespace BrowsingRendering {
     type ContentCreateParams as ContentCreateParams,
   };
 
-  export { Pdf as Pdf, type PdfCreateParams as PdfCreateParams };
+  export { PDF as PDF, type PDFCreateParams as PDFCreateParams };
 
   export {
     Scrape as Scrape,

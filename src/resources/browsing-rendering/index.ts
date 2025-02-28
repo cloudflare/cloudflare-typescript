@@ -2,7 +2,7 @@
 
 export { BrowsingRendering } from './browsing-rendering';
 export { Content, type ContentCreateResponse, type ContentCreateParams } from './content';
-export { Pdf, type PdfCreateParams } from './pdf';
+export { PDF, type PDFCreateParams } from './pdf';
 export { Scrape, type ScrapeCreateResponse, type ScrapeCreateParams } from './scrape';
 export { Screenshot, type ScreenshotCreateResponse, type ScreenshotCreateParams } from './screenshot';
 export { Snapshot, type SnapshotCreateResponse, type SnapshotCreateParams } from './snapshot';
