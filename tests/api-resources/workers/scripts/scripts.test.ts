@@ -39,7 +39,7 @@ describe('resource scripts', () => {
           },
           jwt: 'jwt',
         },
-        bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
+        bindings: [{ name: 'MY_ENV_VAR', type: 'ai' }],
         body_part: 'worker.js',
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
