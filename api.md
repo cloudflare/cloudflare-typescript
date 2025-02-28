@@ -3447,7 +3447,7 @@ Methods:
 
 # MagicNetworkMonitoring
 
-## VpcFlows
+## VPCFlows
 
 ### Tokens
 
@@ -7731,7 +7731,7 @@ Methods:
 
 - <code title="post /accounts/{accountId}/browser-rendering/content">client.browsingRendering.content.<a href="./src/resources/browsing-rendering/content.ts">create</a>(accountId, { ...params }) -> ContentCreateResponse</code>
 
-## Pdf
+## PDF
 
 Methods:
 

@@ -5,20 +5,20 @@ import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { type Response } from '../../_shims/index';
 
-export class Pdf extends APIResource {
+export class PDF extends APIResource {
   /**
    * Fetches rendered PDF from provided URL or HTML. Check available options like
    * `goToOptions` and `waitFor*` to control page load behaviour.
    */
   create(
     accountId: string,
-    params?: PdfCreateParams,
+    params?: PDFCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response>;
   create(accountId: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
   create(
     accountId: string,
-    params: PdfCreateParams | Core.RequestOptions = {},
+    params: PDFCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
     if (isRequestOptions(params)) {
@@ -35,7 +35,7 @@ export class Pdf extends APIResource {
   }
 }
 
-export interface PdfCreateParams {
+export interface PDFCreateParams {
   /**
    * Query param: Cache TTL default is 5s. Set to 0 to disable.
    */
@@ -44,13 +44,13 @@ export interface PdfCreateParams {
   /**
    * Body param: Adds a `<script>` tag into the page with the desired URL or content.
    */
-  addScriptTag?: Array<PdfCreateParams.AddScriptTag>;
+  addScriptTag?: Array<PDFCreateParams.AddScriptTag>;
 
   /**
    * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
    * URL or a `<style type="text/css">` tag with the content.
    */
-  addStyleTag?: Array<PdfCreateParams.AddStyleTag>;
+  addStyleTag?: Array<PDFCreateParams.AddStyleTag>;
 
   /**
    * Body param: Only allow requests that match the provided regex patterns, eg.
@@ -86,7 +86,7 @@ export interface PdfCreateParams {
   /**
    * Body param: Provide credentials for HTTP authentication.
    */
-  authenticate?: PdfCreateParams.Authenticate;
+  authenticate?: PDFCreateParams.Authenticate;
 
   /**
    * Body param: Attempt to proceed when 'awaited' events fail or timeout.
@@ -96,7 +96,7 @@ export interface PdfCreateParams {
   /**
    * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
    */
-  cookies?: Array<PdfCreateParams.Cookie>;
+  cookies?: Array<PDFCreateParams.Cookie>;
 
   /**
    * Body param:
@@ -106,7 +106,7 @@ export interface PdfCreateParams {
   /**
    * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
    */
-  gotoOptions?: PdfCreateParams.GotoOptions;
+  gotoOptions?: PDFCreateParams.GotoOptions;
 
   /**
    * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -168,13 +168,13 @@ export interface PdfCreateParams {
   /**
    * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
    */
-  viewport?: PdfCreateParams.Viewport;
+  viewport?: PDFCreateParams.Viewport;
 
   /**
    * Body param: Wait for the selector to appear in page. Check
    * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
    */
-  waitForSelector?: PdfCreateParams.WaitForSelector;
+  waitForSelector?: PDFCreateParams.WaitForSelector;
 
   /**
    * Body param: Waits for a specified timeout before continuing.
@@ -182,7 +182,7 @@ export interface PdfCreateParams {
   waitForTimeout?: number;
 }
 
-export namespace PdfCreateParams {
+export namespace PDFCreateParams {
   export interface AddScriptTag {
     id?: string;
 
@@ -288,6 +288,6 @@ export namespace PdfCreateParams {
   }
 }
 
-export declare namespace Pdf {
-  export { type PdfCreateParams as PdfCreateParams };
+export declare namespace PDF {
+  export { type PDFCreateParams as PDFCreateParams };
 }
