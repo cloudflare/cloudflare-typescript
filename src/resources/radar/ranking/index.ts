@@ -3,8 +3,10 @@
 export { Domain, type DomainGetResponse, type DomainGetParams } from './domain';
 export {
   InternetServices,
+  type InternetServiceCategoriesResponse,
   type InternetServiceTimeseriesGroupsResponse,
   type InternetServiceTopResponse,
+  type InternetServiceCategoriesParams,
   type InternetServiceTimeseriesGroupsParams,
   type InternetServiceTopParams,
 } from './internet-services';
