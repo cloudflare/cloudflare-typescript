@@ -12,7 +12,7 @@ import { Screenshot, ScreenshotCreateParams, ScreenshotCreateResponse } from './
 import * as SnapshotAPI from './snapshot';
 import { Snapshot, SnapshotCreateParams, SnapshotCreateResponse } from './snapshot';
 
-export class BrowsingRendering extends APIResource {
+export class BrowserRendering extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
   pdf: PDFAPI.PDF = new PDFAPI.PDF(this._client);
   scrape: ScrapeAPI.Scrape = new ScrapeAPI.Scrape(this._client);
@@ -20,13 +20,13 @@ export class BrowsingRendering extends APIResource {
   snapshot: SnapshotAPI.Snapshot = new SnapshotAPI.Snapshot(this._client);
 }
 
-BrowsingRendering.Content = Content;
-BrowsingRendering.PDF = PDF;
-BrowsingRendering.Scrape = Scrape;
-BrowsingRendering.Screenshot = Screenshot;
-BrowsingRendering.Snapshot = Snapshot;
+BrowserRendering.Content = Content;
+BrowserRendering.PDF = PDF;
+BrowserRendering.Scrape = Scrape;
+BrowserRendering.Screenshot = Screenshot;
+BrowserRendering.Snapshot = Snapshot;
 
-export declare namespace BrowsingRendering {
+export declare namespace BrowserRendering {
   export {
     Content as Content,
     type ContentCreateResponse as ContentCreateResponse,
