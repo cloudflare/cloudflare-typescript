@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import Cloudflare from 'cloudflare';
-import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -9,29 +8,18 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource screenshot', () => {
-  test('create', async () => {
-    const responsePromise = client.browsingRendering.screenshot.create('accountId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
+describe('resource pdf', () => {
   test('create: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.browsingRendering.screenshot.create('accountId', { path: '/_stainless_unknown_path' }),
+      client.browserRendering.pdf.create('accountId', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.browsingRendering.screenshot.create(
+      client.browserRendering.pdf.create(
         'accountId',
         {
           cacheTTL: 86400,
@@ -69,19 +57,6 @@ describe('resource screenshot', () => {
           html: 'x',
           rejectRequestPattern: ['string'],
           rejectResourceTypes: ['document'],
-          screenshotOptions: {
-            captureBeyondViewport: true,
-            clip: { height: 0, width: 0, x: 0, y: 0, scale: 0 },
-            encoding: 'binary',
-            fromSurface: true,
-            fullPage: true,
-            omitBackground: true,
-            optimizeForSpeed: true,
-            quality: 0,
-            type: 'png',
-          },
-          scrollPage: true,
-          selector: 'selector',
           setExtraHTTPHeaders: { foo: 'string' },
           setJavaScriptEnabled: true,
           url: 'https://example.com',

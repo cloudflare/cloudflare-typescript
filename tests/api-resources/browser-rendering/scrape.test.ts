@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource scrape', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.browsingRendering.scrape.create('accountId', {
+    const responsePromise = client.browserRendering.scrape.create('accountId', {
       elements: [{ selector: 'selector' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource scrape', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.browsingRendering.scrape.create('accountId', {
+    const response = await client.browserRendering.scrape.create('accountId', {
       elements: [{ selector: 'selector' }],
       cacheTTL: 86400,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
