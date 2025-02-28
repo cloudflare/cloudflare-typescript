@@ -21,3 +21,4 @@ export {
   type RuleEditParams,
   type RuleGetParams,
 } from './rules/index';
+export { VpcFlows } from './vpc-flows/index';
