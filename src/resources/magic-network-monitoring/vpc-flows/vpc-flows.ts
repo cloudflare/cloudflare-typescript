@@ -4,13 +4,13 @@ import { APIResource } from '../../../resource';
 import * as TokensAPI from './tokens';
 import { TokenCreateParams, TokenCreateResponse, Tokens } from './tokens';
 
-export class VpcFlows extends APIResource {
+export class VPCFlows extends APIResource {
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 }
 
-VpcFlows.Tokens = Tokens;
+VPCFlows.Tokens = Tokens;
 
-export declare namespace VpcFlows {
+export declare namespace VPCFlows {
   export {
     Tokens as Tokens,
     type TokenCreateResponse as TokenCreateResponse,
