@@ -5,6 +5,8 @@ import * as DomainAPI from './domain';
 import { Domain, DomainGetParams, DomainGetResponse } from './domain';
 import * as InternetServicesAPI from './internet-services';
 import {
+  InternetServiceCategoriesParams,
+  InternetServiceCategoriesResponse,
   InternetServiceTimeseriesGroupsParams,
   InternetServiceTimeseriesGroupsResponse,
   InternetServiceTopParams,
@@ -234,8 +236,10 @@ export declare namespace Ranking {
 
   export {
     InternetServices as InternetServices,
+    type InternetServiceCategoriesResponse as InternetServiceCategoriesResponse,
     type InternetServiceTimeseriesGroupsResponse as InternetServiceTimeseriesGroupsResponse,
     type InternetServiceTopResponse as InternetServiceTopResponse,
+    type InternetServiceCategoriesParams as InternetServiceCategoriesParams,
     type InternetServiceTimeseriesGroupsParams as InternetServiceTimeseriesGroupsParams,
     type InternetServiceTopParams as InternetServiceTopParams,
   };
