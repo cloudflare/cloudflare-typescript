@@ -23,17 +23,23 @@ import {
   RuleUpdateParams,
   Rules,
 } from './rules/rules';
+import * as VpcFlowsAPI from './vpc-flows/vpc-flows';
+import { VpcFlows } from './vpc-flows/vpc-flows';
 
 export class MagicNetworkMonitoring extends APIResource {
+  vpcFlows: VpcFlowsAPI.VpcFlows = new VpcFlowsAPI.VpcFlows(this._client);
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 }
 
+MagicNetworkMonitoring.VpcFlows = VpcFlows;
 MagicNetworkMonitoring.Configs = Configs;
 MagicNetworkMonitoring.Rules = Rules;
 MagicNetworkMonitoring.MagicNetworkMonitoringRulesSinglePage = MagicNetworkMonitoringRulesSinglePage;
 
 export declare namespace MagicNetworkMonitoring {
+  export { VpcFlows as VpcFlows };
+
   export {
     Configs as Configs,
     type Configuration as Configuration,
