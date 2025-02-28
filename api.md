@@ -6061,6 +6061,14 @@ Methods:
 
 ## DNS
 
+Types:
+
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/timeseries">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">timeseries</a>({ ...params }) -> DNSTimeseriesResponse</code>
+
 ### Top
 
 Types:
@@ -6072,6 +6080,62 @@ Methods:
 
 - <code title="get /radar/dns/top/ases">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
 - <code title="get /radar/dns/top/locations">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryCacheHitResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECAwareResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECE2EResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryMatchingAnswerResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseCodeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseTTLResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/summary/cache_hit">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">cacheHit</a>({ ...params }) -> SummaryCacheHitResponse</code>
+- <code title="get /radar/dns/summary/dnssec">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssec</a>({ ...params }) -> SummaryDNSSECResponse</code>
+- <code title="get /radar/dns/summary/dnssec_aware">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssecAware</a>({ ...params }) -> SummaryDNSSECAwareResponse</code>
+- <code title="get /radar/dns/summary/dnssec_e2e">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssecE2E</a>({ ...params }) -> SummaryDNSSECE2EResponse</code>
+- <code title="get /radar/dns/summary/ip_version">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/dns/summary/matching_answer">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">matchingAnswer</a>({ ...params }) -> SummaryMatchingAnswerResponse</code>
+- <code title="get /radar/dns/summary/protocol">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
+- <code title="get /radar/dns/summary/query_type">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">queryType</a>({ ...params }) -> SummaryQueryTypeResponse</code>
+- <code title="get /radar/dns/summary/response_code">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseCode</a>({ ...params }) -> SummaryResponseCodeResponse</code>
+- <code title="get /radar/dns/summary/response_ttl">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseTTL</a>({ ...params }) -> SummaryResponseTTLResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupCacheHitResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECAwareResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECE2EResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupMatchingAnswerResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupResponseCodeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupResponseTTLResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/timeseries_groups/cache_hit">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">cacheHit</a>({ ...params }) -> TimeseriesGroupCacheHitResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssec</a>({ ...params }) -> TimeseriesGroupDNSSECResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec_aware">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssecAware</a>({ ...params }) -> TimeseriesGroupDNSSECAwareResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec_e2e">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssecE2E</a>({ ...params }) -> TimeseriesGroupDNSSECE2EResponse</code>
+- <code title="get /radar/dns/timeseries_groups/ip_version">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/dns/timeseries_groups/matching_answer">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">matchingAnswer</a>({ ...params }) -> TimeseriesGroupMatchingAnswerResponse</code>
+- <code title="get /radar/dns/timeseries_groups/protocol">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">protocol</a>({ ...params }) -> TimeseriesGroupProtocolResponse</code>
+- <code title="get /radar/dns/timeseries_groups/query_type">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">queryType</a>({ ...params }) -> TimeseriesGroupQueryTypeResponse</code>
+- <code title="get /radar/dns/timeseries_groups/response_code">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">responseCode</a>({ ...params }) -> TimeseriesGroupResponseCodeResponse</code>
+- <code title="get /radar/dns/timeseries_groups/response_ttl">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">responseTTL</a>({ ...params }) -> TimeseriesGroupResponseTTLResponse</code>
 
 ## Netflows
 
@@ -6852,11 +6916,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/ranking/internet-services.ts">InternetServiceCategoriesResponse</a></code>
 - <code><a href="./src/resources/radar/ranking/internet-services.ts">InternetServiceTimeseriesGroupsResponse</a></code>
 - <code><a href="./src/resources/radar/ranking/internet-services.ts">InternetServiceTopResponse</a></code>
 
 Methods:
 
+- <code title="get /radar/ranking/internet_services/categories">client.radar.ranking.internetServices.<a href="./src/resources/radar/ranking/internet-services.ts">categories</a>({ ...params }) -> InternetServiceCategoriesResponse</code>
 - <code title="get /radar/ranking/internet_services/timeseries_groups">client.radar.ranking.internetServices.<a href="./src/resources/radar/ranking/internet-services.ts">timeseriesGroups</a>({ ...params }) -> InternetServiceTimeseriesGroupsResponse</code>
 - <code title="get /radar/ranking/internet_services/top">client.radar.ranking.internetServices.<a href="./src/resources/radar/ranking/internet-services.ts">top</a>({ ...params }) -> InternetServiceTopResponse</code>
 
