@@ -6,6 +6,20 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class InternetServices extends APIResource {
   /**
+   * Retrieves the list of Internet services categories.
+   */
+  categories(
+    query: InternetServiceCategoriesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InternetServiceCategoriesResponse> {
+    return (
+      this._client.get('/radar/ranking/internet_services/categories', { query, ...options }) as APIPromise<{
+        result: InternetServiceCategoriesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Retrieves Internet Services rank update changes over time.
    */
   timeseriesGroups(
@@ -32,6 +46,16 @@ export class InternetServices extends APIResource {
         result: InternetServiceTopResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface InternetServiceCategoriesResponse {
+  categories_0: Array<InternetServiceCategoriesResponse.Categories0>;
+}
+
+export namespace InternetServiceCategoriesResponse {
+  export interface Categories0 {
+    name: string;
   }
 }
 
@@ -90,6 +114,28 @@ export namespace InternetServiceTopResponse {
 
     service: string;
   }
+}
+
+export interface InternetServiceCategoriesParams {
+  /**
+   * Array of dates to filter the ranking.
+   */
+  date?: Array<string>;
+
+  /**
+   * Format in which results will be returned.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Limits the number of objects returned in the response.
+   */
+  limit?: number;
+
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: Array<string>;
 }
 
 export interface InternetServiceTimeseriesGroupsParams {
@@ -160,8 +206,10 @@ export interface InternetServiceTopParams {
 
 export declare namespace InternetServices {
   export {
+    type InternetServiceCategoriesResponse as InternetServiceCategoriesResponse,
     type InternetServiceTimeseriesGroupsResponse as InternetServiceTimeseriesGroupsResponse,
     type InternetServiceTopResponse as InternetServiceTopResponse,
+    type InternetServiceCategoriesParams as InternetServiceCategoriesParams,
     type InternetServiceTimeseriesGroupsParams as InternetServiceTimeseriesGroupsParams,
     type InternetServiceTopParams as InternetServiceTopParams,
   };
