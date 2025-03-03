@@ -1,6 +1,7 @@
 import fs from 'fs';
 import type { ResponseLike } from 'cloudflare/internal/to-file';
 import { toFile } from 'cloudflare/uploads';
+import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
