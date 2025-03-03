@@ -7787,48 +7787,17 @@ Methods:
 
 # BrowserRendering
 
-## Content
-
 Types:
 
-- <code><a href="./src/resources/browser-rendering/content.ts">ContentCreateResponse</a></code>
+- <code><a href="./src/resources/browser-rendering.ts">BrowserRenderingContentResponse</a></code>
+- <code><a href="./src/resources/browser-rendering.ts">BrowserRenderingScrapeResponse</a></code>
+- <code><a href="./src/resources/browser-rendering.ts">BrowserRenderingScreenshotResponse</a></code>
+- <code><a href="./src/resources/browser-rendering.ts">BrowserRenderingSnapshotResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{accountId}/browser-rendering/content">client.browserRendering.content.<a href="./src/resources/browser-rendering/content.ts">create</a>(accountID, { ...params }) -> ContentCreateResponse</code>
-
-## PDF
-
-Methods:
-
-- <code title="post /accounts/{accountId}/browser-rendering/pdf">client.browserRendering.pdf.<a href="./src/resources/browser-rendering/pdf.ts">create</a>(accountID, { ...params }) -> Response</code>
-
-## Scrape
-
-Types:
-
-- <code><a href="./src/resources/browser-rendering/scrape.ts">ScrapeCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{accountId}/browser-rendering/scrape">client.browserRendering.scrape.<a href="./src/resources/browser-rendering/scrape.ts">create</a>(accountID, { ...params }) -> ScrapeCreateResponse</code>
-
-## Screenshot
-
-Types:
-
-- <code><a href="./src/resources/browser-rendering/screenshot.ts">ScreenshotCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{accountId}/browser-rendering/screenshot">client.browserRendering.screenshot.<a href="./src/resources/browser-rendering/screenshot.ts">create</a>(accountID, { ...params }) -> ScreenshotCreateResponse</code>
-
-## Snapshot
-
-Types:
-
-- <code><a href="./src/resources/browser-rendering/snapshot.ts">SnapshotCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{accountId}/browser-rendering/snapshot">client.browserRendering.snapshot.<a href="./src/resources/browser-rendering/snapshot.ts">create</a>(accountID, { ...params }) -> SnapshotCreateResponse</code>
+- <code title="post /accounts/{accountId}/browser-rendering/content">client.browserRendering.<a href="./src/resources/browser-rendering.ts">content</a>(accountID, { ...params }) -> BrowserRenderingContentResponse</code>
+- <code title="post /accounts/{accountId}/browser-rendering/pdf">client.browserRendering.<a href="./src/resources/browser-rendering.ts">pdf</a>(accountID, { ...params }) -> Response</code>
+- <code title="post /accounts/{accountId}/browser-rendering/scrape">client.browserRendering.<a href="./src/resources/browser-rendering.ts">scrape</a>(accountID, { ...params }) -> BrowserRenderingScrapeResponse</code>
+- <code title="post /accounts/{accountId}/browser-rendering/screenshot">client.browserRendering.<a href="./src/resources/browser-rendering.ts">screenshot</a>(accountID, { ...params }) -> BrowserRenderingScreenshotResponse</code>
+- <code title="post /accounts/{accountId}/browser-rendering/snapshot">client.browserRendering.<a href="./src/resources/browser-rendering.ts">snapshot</a>(accountID, { ...params }) -> BrowserRenderingSnapshotResponse</code>
