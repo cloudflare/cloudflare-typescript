@@ -7,6 +7,9 @@ import { PagePromise, SinglePage } from '../../pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * @deprecated Use DNS settings API instead.
+ */
 export class CustomNameservers extends APIResource {
   /**
    * Set metadata for account-level custom nameservers on a zone.
