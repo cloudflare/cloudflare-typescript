@@ -92,13 +92,6 @@ export interface DefaultEditResponse {
   disable_auto_fallback?: boolean;
 
   /**
-   * Determines how the WARP client sends DNS requests to Cloudflare Gateway. When
-   * `true`, DNS traffic is sent over DoH inside the WARP tunnel. When `false`, the
-   * DoH connection operates outside of the WARP tunnel.
-   */
-  doh_in_tunnel?: boolean;
-
-  /**
    * Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -192,13 +185,6 @@ export interface DefaultGetResponse {
    * option is set to `true`.
    */
   disable_auto_fallback?: boolean;
-
-  /**
-   * Determines how the WARP client sends DNS requests to Cloudflare Gateway. When
-   * `true`, DNS traffic is sent over DoH inside the WARP tunnel. When `false`, the
-   * DoH connection operates outside of the WARP tunnel.
-   */
-  doh_in_tunnel?: boolean;
 
   /**
    * Whether the policy will be applied to matching devices.
@@ -295,13 +281,6 @@ export interface DefaultEditParams {
    * this policy option is set to `true`.
    */
   disable_auto_fallback?: boolean;
-
-  /**
-   * Body param: Determines how the WARP client sends DNS requests to Cloudflare
-   * Gateway. When `true`, DNS traffic is sent over DoH inside the WARP tunnel. When
-   * `false`, the DoH connection operates outside of the WARP tunnel.
-   */
-  doh_in_tunnel?: boolean;
 
   /**
    * Body param: Whether to add Microsoft IPs to Split Tunnel exclusions.

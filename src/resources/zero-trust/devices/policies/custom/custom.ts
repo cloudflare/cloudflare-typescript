@@ -160,13 +160,6 @@ export interface CustomCreateParams {
   disable_auto_fallback?: boolean;
 
   /**
-   * Body param: Determines how the WARP client sends DNS requests to Cloudflare
-   * Gateway. When `true`, DNS traffic is sent over DoH inside the WARP tunnel. When
-   * `false`, the DoH connection operates outside of the WARP tunnel.
-   */
-  doh_in_tunnel?: boolean;
-
-  /**
    * Body param: Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -284,13 +277,6 @@ export interface CustomEditParams {
    * this policy option is set to `true`.
    */
   disable_auto_fallback?: boolean;
-
-  /**
-   * Body param: Determines how the WARP client sends DNS requests to Cloudflare
-   * Gateway. When `true`, DNS traffic is sent over DoH inside the WARP tunnel. When
-   * `false`, the DoH connection operates outside of the WARP tunnel.
-   */
-  doh_in_tunnel?: boolean;
 
   /**
    * Body param: Whether the policy will be applied to matching devices.
