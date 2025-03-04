@@ -5,6 +5,9 @@ import * as Core from '../core';
 import * as RateLimitsAPI from './rate-limits';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
+/**
+ * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
+ */
 export class RateLimits extends APIResource {
   /**
    * Creates a new rate limit for a zone. Refer to the object definition for a list
