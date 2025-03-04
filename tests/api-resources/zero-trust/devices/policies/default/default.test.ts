@@ -32,7 +32,6 @@ describe('resource default', () => {
       auto_connect: 0,
       captive_portal: 180,
       disable_auto_fallback: true,
-      doh_in_tunnel: true,
       exclude_office_ips: true,
       register_interface_ip_with_dns: true,
       service_mode_v2: { mode: 'proxy', port: 3000 },
