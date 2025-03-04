@@ -4,6 +4,9 @@ import { APIResource } from '../resource';
 import * as Core from '../core';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
+/**
+ * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+ */
 export class Filters extends APIResource {
   /**
    * Creates one or more filters.
