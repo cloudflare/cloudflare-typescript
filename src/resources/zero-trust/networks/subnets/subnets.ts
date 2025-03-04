@@ -132,7 +132,7 @@ export interface SubnetListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: If set, the types of subnets to include, separated by comma.
    */
-  subnet_types?: 'cloudflare_source';
+  subnet_types?: 'cloudflare_source' | 'warp';
 }
 
 Subnets.SubnetListResponsesV4PagePaginationArray = SubnetListResponsesV4PagePaginationArray;
