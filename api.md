@@ -7832,3 +7832,29 @@ Types:
 Methods:
 
 - <code title="post /accounts/{accountId}/browser-rendering/snapshot">client.browserRendering.snapshot.<a href="./src/resources/browser-rendering/snapshot.ts">create</a>(accountId, { ...params }) -> SnapshotCreateResponse</code>
+
+# PortScans
+
+## Config
+
+Types:
+
+- <code><a href="./src/resources/port-scans/config.ts">ConfigCreateResponse</a></code>
+- <code><a href="./src/resources/port-scans/config.ts">ConfigDeleteResponse</a></code>
+- <code><a href="./src/resources/port-scans/config.ts">ConfigGetResponse</a></code>
+
+Methods:
+
+- <code title="post /{account_id}/scans/config">client.portScans.config.<a href="./src/resources/port-scans/config.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
+- <code title="delete /{account_id}/scans/config">client.portScans.config.<a href="./src/resources/port-scans/config.ts">delete</a>({ ...params }) -> ConfigDeleteResponse</code>
+- <code title="get /{account_id}/scans/config">client.portScans.config.<a href="./src/resources/port-scans/config.ts">get</a>({ ...params }) -> ConfigGetResponse</code>
+
+## Results
+
+Types:
+
+- <code><a href="./src/resources/port-scans/results.ts">ResultListResponse</a></code>
+
+Methods:
+
+- <code title="get /{account_id}/scans/results">client.portScans.results.<a href="./src/resources/port-scans/results.ts">list</a>({ ...params }) -> ResultListResponse</code>
