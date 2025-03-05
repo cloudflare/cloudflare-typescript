@@ -98,6 +98,7 @@ import { NetworkInterconnects } from './resources/network-interconnects/network-
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
+import { PortScans } from './resources/port-scans/port-scans';
 import { Queues } from './resources/queues/queues';
 import { R2 } from './resources/r2/r2';
 import { Radar } from './resources/radar/radar';
@@ -1017,6 +1018,7 @@ export class Cloudflare {
   ai: API.AI = new API.AI(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
+  portScans: API.PortScans = new API.PortScans(this);
 }
 Cloudflare.Accounts = Accounts;
 Cloudflare.OriginCACertificates = OriginCACertificates;
@@ -1108,6 +1110,7 @@ Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
+Cloudflare.PortScans = PortScans;
 export declare namespace Cloudflare {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -1317,6 +1320,8 @@ export declare namespace Cloudflare {
   export { SecurityCenter as SecurityCenter };
 
   export { BrowserRendering as BrowserRendering };
+
+  export { PortScans as PortScans };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;
