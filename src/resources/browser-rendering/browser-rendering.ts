@@ -2,15 +2,15 @@
 
 import { APIResource } from '../../resource';
 import * as ContentAPI from './content';
-import { Content, ContentCreateParams, ContentCreateResponse } from './content';
+import { Content } from './content';
 import * as PDFAPI from './pdf';
-import { PDF, PDFCreateParams } from './pdf';
+import { PDF } from './pdf';
 import * as ScrapeAPI from './scrape';
-import { Scrape, ScrapeCreateParams, ScrapeCreateResponse } from './scrape';
+import { Scrape } from './scrape';
 import * as ScreenshotAPI from './screenshot';
-import { Screenshot, ScreenshotCreateParams, ScreenshotCreateResponse } from './screenshot';
+import { Screenshot } from './screenshot';
 import * as SnapshotAPI from './snapshot';
-import { Snapshot, SnapshotCreateParams, SnapshotCreateResponse } from './snapshot';
+import { Snapshot } from './snapshot';
 
 export class BrowserRendering extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
@@ -27,29 +27,13 @@ BrowserRendering.Screenshot = Screenshot;
 BrowserRendering.Snapshot = Snapshot;
 
 export declare namespace BrowserRendering {
-  export {
-    Content as Content,
-    type ContentCreateResponse as ContentCreateResponse,
-    type ContentCreateParams as ContentCreateParams,
-  };
+  export { Content as Content };
 
-  export { PDF as PDF, type PDFCreateParams as PDFCreateParams };
+  export { PDF as PDF };
 
-  export {
-    Scrape as Scrape,
-    type ScrapeCreateResponse as ScrapeCreateResponse,
-    type ScrapeCreateParams as ScrapeCreateParams,
-  };
+  export { Scrape as Scrape };
 
-  export {
-    Screenshot as Screenshot,
-    type ScreenshotCreateResponse as ScreenshotCreateResponse,
-    type ScreenshotCreateParams as ScreenshotCreateParams,
-  };
+  export { Screenshot as Screenshot };
 
-  export {
-    Snapshot as Snapshot,
-    type SnapshotCreateResponse as SnapshotCreateResponse,
-    type SnapshotCreateParams as SnapshotCreateParams,
-  };
+  export { Snapshot as Snapshot };
 }
