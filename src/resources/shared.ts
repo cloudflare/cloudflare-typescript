@@ -248,7 +248,17 @@ export namespace CloudflareTunnel {
 export interface ErrorData {
   code?: number;
 
+  documentation_url?: string;
+
   message?: string;
+
+  source?: ErrorData.Source;
+}
+
+export namespace ErrorData {
+  export interface Source {
+    pointer?: string;
+  }
 }
 
 export interface Identifier {
