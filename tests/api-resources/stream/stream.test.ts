@@ -34,6 +34,7 @@ describe('resource stream', () => {
       body: {},
       'Tus-Resumable': '1.0.0',
       'Upload-Length': 0,
+      direct_user: true,
       'Upload-Creator': 'creator-id_abcde12345',
       'Upload-Metadata':
         'name aGVsbG8gd29ybGQ=, requiresignedurls, allowedorigins ZXhhbXBsZS5jb20sdGVzdC5jb20=',

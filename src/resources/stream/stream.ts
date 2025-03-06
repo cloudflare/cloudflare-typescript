@@ -108,10 +108,12 @@ export class Stream extends APIResource {
       body,
       'Tus-Resumable': tusResumable,
       'Upload-Length': uploadLength,
+      direct_user,
       'Upload-Creator': uploadCreator,
       'Upload-Metadata': uploadMetadata,
     } = params;
     return this._client.post(`/accounts/${account_id}/stream`, {
+      query: { direct_user },
       body: body,
       ...options,
       headers: {
@@ -394,6 +396,12 @@ export interface StreamCreateParams {
    * be a non-negative integer.
    */
   'Upload-Length': number;
+
+  /**
+   * Query param: Provisions a URL to let your end users upload videos directly to
+   * Cloudflare Stream without exposing your API token to clients.
+   */
+  direct_user?: boolean;
 
   /**
    * Header param: A user-defined identifier for the media creator.
