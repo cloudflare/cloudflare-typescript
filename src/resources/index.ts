@@ -61,7 +61,6 @@ export { OriginTLSClientAuth } from './origin-tls-client-auth/origin-tls-client-
 export { PageRules } from './page-rules';
 export { PageShield } from './page-shield/page-shield';
 export { Pages } from './pages/pages';
-export { PortScans } from './port-scans/port-scans';
 export { Queues } from './queues/queues';
 export { R2 } from './r2/r2';
 export { RUM } from './rum/rum';
