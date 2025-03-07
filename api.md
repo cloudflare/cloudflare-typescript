@@ -7243,6 +7243,32 @@ Methods:
 
 # CloudforceOne
 
+## Scans
+
+### Results
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ResultListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/scans/results">client.cloudforceOne.scans.results.<a href="./src/resources/cloudforce-one/scans/results.ts">list</a>({ ...params }) -> ResultListResponse</code>
+
+### Config
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">list</a>({ ...params }) -> ConfigListResponse</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">delete</a>({ ...params }) -> ConfigDeleteResponse</code>
+
 ## Requests
 
 Types:
@@ -7789,10 +7815,46 @@ Methods:
 
 ## Content
 
+Types:
+
+- <code><a href="./src/resources/browser-rendering/content.ts">ContentCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/content">client.browserRendering.content.<a href="./src/resources/browser-rendering/content.ts">create</a>({ ...params }) -> ContentCreateResponse</code>
+
 ## PDF
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/pdf">client.browserRendering.pdf.<a href="./src/resources/browser-rendering/pdf.ts">create</a>({ ...params }) -> Response</code>
 
 ## Scrape
 
+Types:
+
+- <code><a href="./src/resources/browser-rendering/scrape.ts">ScrapeCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/scrape">client.browserRendering.scrape.<a href="./src/resources/browser-rendering/scrape.ts">create</a>({ ...params }) -> ScrapeCreateResponse</code>
+
 ## Screenshot
 
+Types:
+
+- <code><a href="./src/resources/browser-rendering/screenshot.ts">ScreenshotCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/screenshot">client.browserRendering.screenshot.<a href="./src/resources/browser-rendering/screenshot.ts">create</a>({ ...params }) -> ScreenshotCreateResponse</code>
+
 ## Snapshot
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/snapshot.ts">SnapshotCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/snapshot">client.browserRendering.snapshot.<a href="./src/resources/browser-rendering/snapshot.ts">create</a>({ ...params }) -> SnapshotCreateResponse</code>
