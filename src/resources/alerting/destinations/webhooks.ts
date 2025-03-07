@@ -112,13 +112,6 @@ export interface Webhooks {
   name?: string;
 
   /**
-   * Optional secret that will be passed in the `cf-webhook-auth` header when
-   * dispatching generic webhook notifications or formatted for supported
-   * destinations. Secrets are not returned in any API response body.
-   */
-  secret?: string;
-
-  /**
    * Type of webhook endpoint.
    */
   type?: 'slack' | 'generic' | 'gchat';
