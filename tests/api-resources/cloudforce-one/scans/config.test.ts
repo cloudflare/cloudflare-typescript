@@ -12,7 +12,7 @@ describe('resource config', () => {
   test('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.scans.config.create({
       account_id: 'account_id',
-      frequency: 1,
+      frequency: 7,
       ips: ['1.1.1.1'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,7 +27,7 @@ describe('resource config', () => {
   test('create: required and optional params', async () => {
     const response = await client.cloudforceOne.scans.config.create({
       account_id: 'account_id',
-      frequency: 1,
+      frequency: 7,
       ips: ['1.1.1.1'],
     });
   });
