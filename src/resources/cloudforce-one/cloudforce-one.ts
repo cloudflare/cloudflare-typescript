@@ -17,16 +17,22 @@ import {
   RequestUpdateParams,
   Requests,
 } from './requests/requests';
+import * as ScansAPI from './scans/scans';
+import { Scans } from './scans/scans';
 
 export class CloudforceOne extends APIResource {
+  scans: ScansAPI.Scans = new ScansAPI.Scans(this._client);
   requests: RequestsAPI.Requests = new RequestsAPI.Requests(this._client);
 }
 
+CloudforceOne.Scans = Scans;
 CloudforceOne.Requests = Requests;
 CloudforceOne.ListItemsSinglePage = ListItemsSinglePage;
 CloudforceOne.RequestTypesResponsesSinglePage = RequestTypesResponsesSinglePage;
 
 export declare namespace CloudforceOne {
+  export { Scans as Scans };
+
   export {
     Requests as Requests,
     type Item as Item,
