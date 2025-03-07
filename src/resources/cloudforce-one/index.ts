@@ -18,3 +18,4 @@ export {
   type ListItemsSinglePage,
   type RequestTypesResponsesSinglePage,
 } from './requests/index';
+export { Scans } from './scans/index';
