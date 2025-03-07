@@ -174,6 +174,17 @@ export interface SnapshotGetResponse {
   disks?: Array<SnapshotGetResponse.Disk>;
 
   /**
+   * Name of high availability state
+   */
+  ha_state?: string;
+
+  /**
+   * Numeric value associated with high availability state (0 = unknown, 1 = active,
+   * 2 = standby, 3 = disabled, 4 = fault)
+   */
+  ha_value?: number;
+
+  /**
    * Percentage of time over a 10 second window that all tasks were stalled
    */
   io_pressure_full_10s?: number;
