@@ -67,12 +67,13 @@ export interface ConfigCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The number of days between each scan (0 = no recurring scans)
    */
   frequency: number;
 
   /**
-   * Body param:
+   * Body param: A list of IP addresses or CIDR blocks to scan. The maximum number of
+   * total IP addresses allowed is 5000.
    */
   ips: Array<string>;
 }
