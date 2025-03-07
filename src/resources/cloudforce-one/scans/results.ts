@@ -23,11 +23,11 @@ export interface ResultListResponse {
 
 export namespace ResultListResponse {
   export interface _1_1_1_1 {
-    number: number;
+    number?: number;
 
-    proto: string;
+    proto?: string;
 
-    status: string;
+    status?: string;
   }
 }
 
