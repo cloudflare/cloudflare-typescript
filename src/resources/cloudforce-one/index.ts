@@ -16,3 +16,4 @@ export {
   type RequestUpdateParams,
   type RequestListParams,
 } from './requests/index';
+export { Scans } from './scans/index';
