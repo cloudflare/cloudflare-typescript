@@ -40,36 +40,6 @@ describe('resource custom', () => {
   });
 
   // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.r2.buckets.domains.custom.update(
-      'example-bucket',
-      'example-domain/custom-domain.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
-    const response = await client.r2.buckets.domains.custom.update(
-      'example-bucket',
-      'example-domain/custom-domain.com',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        enabled: true,
-        minTLS: '1.0',
-        jurisdiction: 'default',
-      },
-    );
-  });
-
-  // TODO: investigate broken test
   test.skip('list: only required params', async () => {
     const responsePromise = client.r2.buckets.domains.custom.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -89,55 +59,5 @@ describe('resource custom', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       jurisdiction: 'default',
     });
-  });
-
-  // TODO: investigate broken test
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.r2.buckets.domains.custom.delete(
-      'example-bucket',
-      'example-domain/custom-domain.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.r2.buckets.domains.custom.delete(
-      'example-bucket',
-      'example-domain/custom-domain.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', jurisdiction: 'default' },
-    );
-  });
-
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
-    const responsePromise = client.r2.buckets.domains.custom.get(
-      'example-bucket',
-      'example-domain/custom-domain.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
-    const response = await client.r2.buckets.domains.custom.get(
-      'example-bucket',
-      'example-domain/custom-domain.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', jurisdiction: 'default' },
-    );
   });
 });

@@ -4101,18 +4101,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomCreateResponse</a></code>
-- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomUpdateResponse</a></code>
 - <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomListResponse</a></code>
-- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomDeleteResponse</a></code>
-- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">create</a>(bucketName, { ...params }) -> CustomCreateResponse</code>
-- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">update</a>(bucketName, domainName, { ...params }) -> CustomUpdateResponse</code>
 - <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">list</a>(bucketName, { ...params }) -> CustomListResponse</code>
-- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">delete</a>(bucketName, domainName, { ...params }) -> CustomDeleteResponse</code>
-- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">get</a>(bucketName, domainName, { ...params }) -> CustomGetResponse</code>
 
 #### Managed
 
