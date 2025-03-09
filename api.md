@@ -7243,6 +7243,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ScanResult</a></code>
 - <code><a href="./src/resources/cloudforce-one/scans/results.ts">ResultListResponse</a></code>
 
 Methods:

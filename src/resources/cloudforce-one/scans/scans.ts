@@ -12,7 +12,7 @@ import {
   ConfigListResponse,
 } from './config';
 import * as ResultsAPI from './results';
-import { ResultListParams, ResultListResponse, Results } from './results';
+import { ResultListParams, ResultListResponse, Results, ScanResult } from './results';
 
 export class Scans extends APIResource {
   results: ResultsAPI.Results = new ResultsAPI.Results(this._client);
@@ -25,6 +25,7 @@ Scans.Config = Config;
 export declare namespace Scans {
   export {
     Results as Results,
+    type ScanResult as ScanResult,
     type ResultListResponse as ResultListResponse,
     type ResultListParams as ResultListParams,
   };
