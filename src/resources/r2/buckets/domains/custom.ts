@@ -33,6 +33,31 @@ export class Custom extends APIResource {
   }
 
   /**
+   * Edit the configuration for a custom domain on an existing R2 bucket.
+   */
+  update(
+    domain: string,
+    params: CustomUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<CustomUpdateResponse> {
+    const { account_id, bucket_name, jurisdiction, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/r2/buckets/${bucket_name}/domains/custom/${domain}`, {
+        body,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: CustomUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets a list of all custom domains registered with an existing R2 bucket.
    */
   list(
@@ -55,6 +80,50 @@ export class Custom extends APIResource {
       }) as APIPromise<{ result: CustomListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Remove custom domain registration from an existing R2 bucket
+   */
+  delete(
+    domain: string,
+    params: CustomDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<CustomDeleteResponse> {
+    const { account_id, bucket_name, jurisdiction } = params;
+    return (
+      this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucket_name}/domains/custom/${domain}`, {
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: CustomDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get the configuration for a custom domain on an existing R2 bucket.
+   */
+  get(domain: string, params: CustomGetParams, options?: RequestOptions): APIPromise<CustomGetResponse> {
+    const { account_id, bucket_name, jurisdiction } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/r2/buckets/${bucket_name}/domains/custom/${domain}`, {
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: CustomGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface CustomCreateResponse {
@@ -67,6 +136,24 @@ export interface CustomCreateResponse {
    * Whether this bucket is publicly accessible at the specified custom domain
    */
   enabled: boolean;
+
+  /**
+   * Minimum TLS Version the custom domain will accept for incoming connections. If
+   * not set, defaults to 1.0.
+   */
+  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+}
+
+export interface CustomUpdateResponse {
+  /**
+   * Domain name of the affected custom domain
+   */
+  domain: string;
+
+  /**
+   * Whether this bucket is publicly accessible at the specified custom domain
+   */
+  enabled?: boolean;
 
   /**
    * Minimum TLS Version the custom domain will accept for incoming connections. If
@@ -125,6 +212,57 @@ export namespace CustomListResponse {
   }
 }
 
+export interface CustomDeleteResponse {
+  /**
+   * Name of the removed custom domain
+   */
+  domain: string;
+}
+
+export interface CustomGetResponse {
+  /**
+   * Domain name of the custom domain to be added
+   */
+  domain: string;
+
+  /**
+   * Whether this bucket is publicly accessible at the specified custom domain
+   */
+  enabled: boolean;
+
+  status: CustomGetResponse.Status;
+
+  /**
+   * Minimum TLS Version the custom domain will accept for incoming connections. If
+   * not set, defaults to 1.0.
+   */
+  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+
+  /**
+   * Zone ID of the custom domain resides in
+   */
+  zoneId?: string;
+
+  /**
+   * Zone that the custom domain resides in
+   */
+  zoneName?: string;
+}
+
+export namespace CustomGetResponse {
+  export interface Status {
+    /**
+     * Ownership status of the domain
+     */
+    ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
+
+    /**
+     * SSL certificate status
+     */
+    ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
+  }
+}
+
 export interface CustomCreateParams {
   /**
    * Path param: Account ID
@@ -159,6 +297,35 @@ export interface CustomCreateParams {
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
+export interface CustomUpdateParams {
+  /**
+   * Path param: Account ID
+   */
+  account_id: string;
+
+  /**
+   * Path param: Name of the bucket
+   */
+  bucket_name: string;
+
+  /**
+   * Body param: Whether to enable public bucket access at the specified custom
+   * domain
+   */
+  enabled?: boolean;
+
+  /**
+   * Body param: Minimum TLS Version the custom domain will accept for incoming
+   * connections. If not set, defaults to previous value.
+   */
+  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
+}
+
 export interface CustomListParams {
   /**
    * Path param: Account ID
@@ -171,11 +338,51 @@ export interface CustomListParams {
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
+export interface CustomDeleteParams {
+  /**
+   * Path param: Account ID
+   */
+  account_id: string;
+
+  /**
+   * Path param: Name of the bucket
+   */
+  bucket_name: string;
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
+}
+
+export interface CustomGetParams {
+  /**
+   * Path param: Account ID
+   */
+  account_id: string;
+
+  /**
+   * Path param: Name of the bucket
+   */
+  bucket_name: string;
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
+}
+
 export declare namespace Custom {
   export {
     type CustomCreateResponse as CustomCreateResponse,
+    type CustomUpdateResponse as CustomUpdateResponse,
     type CustomListResponse as CustomListResponse,
+    type CustomDeleteResponse as CustomDeleteResponse,
+    type CustomGetResponse as CustomGetResponse,
     type CustomCreateParams as CustomCreateParams,
+    type CustomUpdateParams as CustomUpdateParams,
     type CustomListParams as CustomListParams,
+    type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
   };
 }
