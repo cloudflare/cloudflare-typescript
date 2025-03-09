@@ -17,18 +17,16 @@ export class Results extends APIResource {
   }
 }
 
-export interface ResultListResponse {
-  '1.1.1.1': Array<ResultListResponse._1_1_1_1>;
+export interface ScanResult {
+  number?: number;
+
+  proto?: string;
+
+  status?: string;
 }
 
-export namespace ResultListResponse {
-  export interface _1_1_1_1 {
-    number?: number;
-
-    proto?: string;
-
-    status?: string;
-  }
+export interface ResultListResponse {
+  '1.1.1.1': Array<ScanResult>;
 }
 
 export interface ResultListParams {
@@ -39,5 +37,9 @@ export interface ResultListParams {
 }
 
 export declare namespace Results {
-  export { type ResultListResponse as ResultListResponse, type ResultListParams as ResultListParams };
+  export {
+    type ScanResult as ScanResult,
+    type ResultListResponse as ResultListResponse,
+    type ResultListParams as ResultListParams,
+  };
 }
