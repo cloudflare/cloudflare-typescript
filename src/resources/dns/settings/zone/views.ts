@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Views extends APIResource {
   /**

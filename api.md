@@ -998,31 +998,26 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/dns/settings/settings.ts">DNSSetting</a></code>
-- <code><a href="./src/resources/dns/settings/settings.ts">SettingEditResponse</a></code>
-- <code><a href="./src/resources/dns/settings/settings.ts">SettingGetResponse</a></code>
 
-Methods:
+### Zone
 
-- <code title="patch /{accounts_or_zones}/{account_or_zone_id}/dns_settings">client.dns.settings.<a href="./src/resources/dns/settings/settings.ts">edit</a>({ ...params }) -> SettingEditResponse</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/dns_settings">client.dns.settings.<a href="./src/resources/dns/settings/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
-
-### Views
+#### Views
 
 Types:
 
-- <code><a href="./src/resources/dns/settings/views.ts">ViewCreateResponse</a></code>
-- <code><a href="./src/resources/dns/settings/views.ts">ViewListResponse</a></code>
-- <code><a href="./src/resources/dns/settings/views.ts">ViewDeleteResponse</a></code>
-- <code><a href="./src/resources/dns/settings/views.ts">ViewEditResponse</a></code>
-- <code><a href="./src/resources/dns/settings/views.ts">ViewGetResponse</a></code>
+- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewCreateResponse</a></code>
+- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewListResponse</a></code>
+- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/dns_settings/views">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">create</a>({ ...params }) -> ViewCreateResponse</code>
-- <code title="get /accounts/{account_id}/dns_settings/views">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">list</a>({ ...params }) -> ViewListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">delete</a>(viewId, { ...params }) -> ViewDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">edit</a>(viewId, { ...params }) -> ViewEditResponse</code>
-- <code title="get /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">get</a>(viewId, { ...params }) -> ViewGetResponse</code>
+- <code title="post /accounts/{account_id}/dns_settings/views">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">create</a>({ ...params }) -> ViewCreateResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/views">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">list</a>({ ...params }) -> ViewListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">delete</a>(viewId, { ...params }) -> ViewDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">edit</a>(viewId, { ...params }) -> ViewEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">get</a>(viewId, { ...params }) -> ViewGetResponse</code>
 
 ## Analytics
 
