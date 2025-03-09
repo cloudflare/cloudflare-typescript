@@ -9,5 +9,5 @@ export {
   type ConfigListParams,
   type ConfigDeleteParams,
 } from './config';
-export { Results, type ResultListResponse, type ResultListParams } from './results';
+export { Results, type ScanResult, type ResultListResponse, type ResultListParams } from './results';
 export { Scans } from './scans';
