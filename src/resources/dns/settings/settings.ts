@@ -1,11 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as ZoneAPI from './zone/zone';
-import { Zone } from './zone/zone';
+import * as AccountAPI from './account';
+import { Account } from './account';
+import * as SubresourcesAPI from './subresources';
+import { Subresources } from './subresources';
+import * as ZoneAPI from './zone';
+import { Zone } from './zone';
 
 export class Settings extends APIResource {
   zone: ZoneAPI.Zone = new ZoneAPI.Zone(this._client);
+  account: AccountAPI.Account = new AccountAPI.Account(this._client);
+  subresources: SubresourcesAPI.Subresources = new SubresourcesAPI.Subresources(this._client);
 }
 
 export interface DNSSetting {
@@ -111,9 +117,15 @@ export namespace DNSSetting {
 }
 
 Settings.Zone = Zone;
+Settings.Account = Account;
+Settings.Subresources = Subresources;
 
 export declare namespace Settings {
   export { type DNSSetting as DNSSetting };
 
   export { Zone as Zone };
+
+  export { Account as Account };
+
+  export { Subresources as Subresources };
 }
