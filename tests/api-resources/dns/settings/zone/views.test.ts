@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource views', () => {
   // generated params are incorrect
   test.skip('create: only required params', async () => {
-    const responsePromise = client.dns.settings.views.create({
+    const responsePromise = client.dns.settings.zone.views.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my view',
       zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
@@ -28,7 +28,7 @@ describe('resource views', () => {
 
   // generated params are incorrect
   test.skip('create: required and optional params', async () => {
-    const response = await client.dns.settings.views.create({
+    const response = await client.dns.settings.zone.views.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my view',
       zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
@@ -36,7 +36,7 @@ describe('resource views', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.dns.settings.views.list({
+    const responsePromise = client.dns.settings.zone.views.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource views', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.dns.settings.views.list({
+    const response = await client.dns.settings.zone.views.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
       match: 'any',
@@ -63,7 +63,7 @@ describe('resource views', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.dns.settings.views.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dns.settings.zone.views.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -76,13 +76,13 @@ describe('resource views', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.dns.settings.views.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dns.settings.zone.views.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.dns.settings.views.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dns.settings.zone.views.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -95,7 +95,7 @@ describe('resource views', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.dns.settings.views.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dns.settings.zone.views.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my view',
       zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
@@ -103,7 +103,7 @@ describe('resource views', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.dns.settings.views.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dns.settings.zone.views.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -116,7 +116,7 @@ describe('resource views', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.dns.settings.views.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dns.settings.zone.views.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
