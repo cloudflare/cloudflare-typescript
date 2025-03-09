@@ -6,8 +6,14 @@ import {
   Custom,
   CustomCreateParams,
   CustomCreateResponse,
+  CustomDeleteParams,
+  CustomDeleteResponse,
+  CustomGetParams,
+  CustomGetResponse,
   CustomListParams,
   CustomListResponse,
+  CustomUpdateParams,
+  CustomUpdateResponse,
 } from './custom';
 import * as ManagedAPI from './managed';
 import {
@@ -30,9 +36,15 @@ export declare namespace Domains {
   export {
     Custom as Custom,
     type CustomCreateResponse as CustomCreateResponse,
+    type CustomUpdateResponse as CustomUpdateResponse,
     type CustomListResponse as CustomListResponse,
+    type CustomDeleteResponse as CustomDeleteResponse,
+    type CustomGetResponse as CustomGetResponse,
     type CustomCreateParams as CustomCreateParams,
+    type CustomUpdateParams as CustomUpdateParams,
     type CustomListParams as CustomListParams,
+    type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
   };
 
   export {
