@@ -1001,23 +1001,9 @@ Types:
 
 ### Zone
 
-#### Views
+### Account
 
-Types:
-
-- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewCreateResponse</a></code>
-- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewListResponse</a></code>
-- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewDeleteResponse</a></code>
-- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewEditResponse</a></code>
-- <code><a href="./src/resources/dns/settings/zone/views.ts">ViewGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/dns_settings/views">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">create</a>({ ...params }) -> ViewCreateResponse</code>
-- <code title="get /accounts/{account_id}/dns_settings/views">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">list</a>({ ...params }) -> ViewListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">delete</a>(viewId, { ...params }) -> ViewDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">edit</a>(viewId, { ...params }) -> ViewEditResponse</code>
-- <code title="get /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.zone.views.<a href="./src/resources/dns/settings/zone/views.ts">get</a>(viewId, { ...params }) -> ViewGetResponse</code>
+### Subresources
 
 ## Analytics
 
