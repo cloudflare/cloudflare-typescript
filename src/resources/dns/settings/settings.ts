@@ -2,11 +2,17 @@
 
 import { APIResource } from '../../../resource';
 import * as AccountAPI from './account';
-import { Account } from './account';
+import {
+  Account,
+  AccountEditParams,
+  AccountEditResponse,
+  AccountGetParams,
+  AccountGetResponse,
+} from './account';
 import * as SubresourcesAPI from './subresources';
 import { Subresources } from './subresources';
 import * as ZoneAPI from './zone';
-import { Zone } from './zone';
+import { Zone, ZoneEditParams, ZoneEditResponse, ZoneGetParams, ZoneGetResponse } from './zone';
 
 export class Settings extends APIResource {
   zone: ZoneAPI.Zone = new ZoneAPI.Zone(this._client);
@@ -123,9 +129,21 @@ Settings.Subresources = Subresources;
 export declare namespace Settings {
   export { type DNSSetting as DNSSetting };
 
-  export { Zone as Zone };
+  export {
+    Zone as Zone,
+    type ZoneEditResponse as ZoneEditResponse,
+    type ZoneGetResponse as ZoneGetResponse,
+    type ZoneEditParams as ZoneEditParams,
+    type ZoneGetParams as ZoneGetParams,
+  };
 
-  export { Account as Account };
+  export {
+    Account as Account,
+    type AccountEditResponse as AccountEditResponse,
+    type AccountGetResponse as AccountGetResponse,
+    type AccountEditParams as AccountEditParams,
+    type AccountGetParams as AccountGetParams,
+  };
 
   export { Subresources as Subresources };
 }

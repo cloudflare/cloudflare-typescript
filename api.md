@@ -1001,7 +1001,27 @@ Types:
 
 ### Zone
 
+Types:
+
+- <code><a href="./src/resources/dns/settings/zone.ts">ZoneEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/zone.ts">ZoneGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/dns_settings">client.dns.settings.zone.<a href="./src/resources/dns/settings/zone.ts">edit</a>({ ...params }) -> ZoneEditResponse</code>
+- <code title="get /zones/{zone_id}/dns_settings">client.dns.settings.zone.<a href="./src/resources/dns/settings/zone.ts">get</a>({ ...params }) -> ZoneGetResponse</code>
+
 ### Account
+
+Types:
+
+- <code><a href="./src/resources/dns/settings/account.ts">AccountEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account.ts">AccountGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account.ts">edit</a>({ ...params }) -> AccountEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account.ts">get</a>({ ...params }) -> AccountGetResponse</code>
 
 ### Subresources
 
