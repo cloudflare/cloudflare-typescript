@@ -1015,15 +1015,31 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/dns/settings/account.ts">AccountEditResponse</a></code>
-- <code><a href="./src/resources/dns/settings/account.ts">AccountGetResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/account.ts">AccountEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/account.ts">AccountGetResponse</a></code>
 
 Methods:
 
-- <code title="patch /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account.ts">edit</a>({ ...params }) -> AccountEditResponse</code>
-- <code title="get /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account.ts">get</a>({ ...params }) -> AccountGetResponse</code>
+- <code title="patch /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account/account.ts">edit</a>({ ...params }) -> AccountEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account/account.ts">get</a>({ ...params }) -> AccountGetResponse</code>
 
-### Subresources
+#### Views
+
+Types:
+
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewCreateResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewListResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dns_settings/views">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">create</a>({ ...params }) -> ViewCreateResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/views">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">list</a>({ ...params }) -> ViewListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">delete</a>(viewId, { ...params }) -> ViewDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">edit</a>(viewId, { ...params }) -> ViewEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">get</a>(viewId, { ...params }) -> ViewGetResponse</code>
 
 ## Analytics
 

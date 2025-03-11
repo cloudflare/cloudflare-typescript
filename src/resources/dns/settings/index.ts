@@ -6,9 +6,8 @@ export {
   type AccountGetResponse,
   type AccountEditParams,
   type AccountGetParams,
-} from './account';
+} from './account/index';
 export { Settings, type DNSSetting } from './settings';
-export { Subresources } from './subresources';
 export {
   Zone,
   type ZoneEditResponse,
