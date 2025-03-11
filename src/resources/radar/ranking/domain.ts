@@ -92,7 +92,7 @@ export namespace DomainGetResponse {
 
 export interface DomainGetParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 

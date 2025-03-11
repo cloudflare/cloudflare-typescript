@@ -154,19 +154,6 @@ export interface Layer7TimeseriesParams {
   asn?: Array<string>;
 
   /**
-   * This field is deprecated, please use the new `mitigationProduct`.
-   */
-  attack?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.

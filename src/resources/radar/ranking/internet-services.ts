@@ -143,7 +143,7 @@ export namespace InternetServiceTopResponse {
 
 export interface InternetServiceCategoriesParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 
@@ -204,7 +204,7 @@ export interface InternetServiceTimeseriesGroupsParams {
 
 export interface InternetServiceTopParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 

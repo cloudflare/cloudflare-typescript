@@ -105,7 +105,7 @@ export namespace UserAgentDirectiveResponse {
 
 export interface UserAgentDirectiveParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 
