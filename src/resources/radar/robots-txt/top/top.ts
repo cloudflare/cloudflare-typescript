@@ -104,7 +104,7 @@ export namespace TopDomainCategoriesResponse {
 
 export interface TopDomainCategoriesParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 

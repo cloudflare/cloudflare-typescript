@@ -35,7 +35,6 @@ describe('resource layer7', () => {
         {
           aggInterval: '15m',
           asn: ['string'],
-          attack: ['DDOS'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],

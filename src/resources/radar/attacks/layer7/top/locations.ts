@@ -338,68 +338,6 @@ export interface LocationTargetParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filters results by HTTP method.
-   */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
-
-  /**
-   * Filters results by HTTP version.
-   */
-  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
-
-  /**
-   * Filters results by IP version (Ipv4 vs. IPv6).
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
    * Limits the number of objects returned in the response.
    */
   limit?: number;

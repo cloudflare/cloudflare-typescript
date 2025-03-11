@@ -195,7 +195,7 @@ export interface RankingTimeseriesGroupsParams {
 
 export interface RankingTopParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 
