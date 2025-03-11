@@ -17,3 +17,14 @@ export {
   type RequestListParams,
 } from './requests/index';
 export { Scans } from './scans/index';
+export {
+  ThreatEvents,
+  type ThreatEventCreateResponse,
+  type ThreatEventUpdateResponse,
+  type ThreatEventDeleteResponse,
+  type ThreatEventBulkCreateResponse,
+  type ThreatEventGetResponse,
+  type ThreatEventCreateParams,
+  type ThreatEventUpdateParams,
+  type ThreatEventBulkCreateParams,
+} from './threat-events/index';
