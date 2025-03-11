@@ -176,6 +176,11 @@ export interface HTTPTimeseriesParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.

@@ -93,6 +93,11 @@ export interface DatasetListParams {
   datasetType?: 'RANKING_BUCKET' | 'REPORT';
 
   /**
+   * Filters results by the specified date.
+   */
+  date?: string;
+
+  /**
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';

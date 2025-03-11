@@ -412,6 +412,11 @@ export interface TimeseriesGroupBotClassParams {
   asn?: Array<string>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -503,6 +508,11 @@ export interface TimeseriesGroupBrowserParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -707,6 +717,11 @@ export interface TimeseriesGroupDeviceTypeParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -793,6 +808,11 @@ export interface TimeseriesGroupHTTPProtocolParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -883,6 +903,11 @@ export interface TimeseriesGroupHTTPVersionParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -969,6 +994,11 @@ export interface TimeseriesGroupIPVersionParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -1059,6 +1089,11 @@ export interface TimeseriesGroupOSParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -1145,6 +1180,11 @@ export interface TimeseriesGroupPostQuantumParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -1238,6 +1278,11 @@ export interface TimeseriesGroupTLSVersionParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to

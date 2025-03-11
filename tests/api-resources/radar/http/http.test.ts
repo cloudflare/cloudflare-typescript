@@ -36,6 +36,7 @@ describe('resource http', () => {
           aggInterval: '15m',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
+          browserFamily: ['CHROME'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
