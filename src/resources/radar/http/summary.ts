@@ -638,6 +638,11 @@ export interface SummaryBotClassParams {
   asn?: Array<string>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -724,6 +729,11 @@ export interface SummaryDeviceTypeParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -803,6 +813,11 @@ export interface SummaryHTTPProtocolParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -886,6 +901,11 @@ export interface SummaryHTTPVersionParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -965,6 +985,11 @@ export interface SummaryIPVersionParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -1048,6 +1073,11 @@ export interface SummaryOSParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -1127,6 +1157,11 @@ export interface SummaryPostQuantumParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -1213,6 +1248,11 @@ export interface SummaryTLSVersionParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
