@@ -41,7 +41,6 @@ import {
   EventsV4PagePaginationArray,
 } from './events/events';
 import { APIPromise } from '../../api-promise';
-import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -79,21 +78,6 @@ export class WaitingRooms extends APIResource {
         ...options,
       }) as APIPromise<{ result: WaitingRoom }>
     )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists waiting rooms.
-   */
-  list(
-    params: WaitingRoomListParams,
-    options?: RequestOptions,
-  ): PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom> {
-    const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      path`/zones/${zone_id}/waiting_rooms`,
-      V4PagePaginationArray<WaitingRoom>,
-      { query, ...options },
-    );
   }
 
   /**
@@ -145,8 +129,6 @@ export class WaitingRooms extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type WaitingRoomsV4PagePaginationArray = V4PagePaginationArray<WaitingRoom>;
 
 export interface AdditionalRoutes {
   /**
@@ -1752,13 +1734,6 @@ export interface WaitingRoomUpdateParams {
    * requires Advanced Waiting Room.
    */
   turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
-}
-
-export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
 }
 
 export interface WaitingRoomDeleteParams {
