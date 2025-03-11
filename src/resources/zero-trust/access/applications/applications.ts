@@ -1418,12 +1418,12 @@ export interface ApplicationSCIMConfig {
    */
   authentication?:
     | SCIMConfigAuthenticationHTTPBasic
-    | SCIMConfigAuthenticationOAuthBearerToken
+    | ApplicationSCIMConfig.AccessSchemasSCIMConfigAuthenticationOAuthBearerToken
     | SCIMConfigAuthenticationOauth2
     | ApplicationSCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
     | Array<
         | SCIMConfigAuthenticationHTTPBasic
-        | SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationSCIMConfig.AccessSchemasSCIMConfigAuthenticationOAuthBearerToken
         | SCIMConfigAuthenticationOauth2
         | ApplicationSCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
       >;
@@ -1449,6 +1449,22 @@ export interface ApplicationSCIMConfig {
 
 export namespace ApplicationSCIMConfig {
   /**
+   * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+   * provisioning to an application.
+   */
+  export interface AccessSchemasSCIMConfigAuthenticationOAuthBearerToken {
+    /**
+     * Token used to authenticate with the remote SCIM service.
+     */
+    token: string;
+
+    /**
+     * The authentication scheme to use when making SCIM requests to this application.
+     */
+    scheme: 'oauthbearertoken';
+  }
+
+  /**
    * Attributes for configuring Access Service Token authentication scheme for SCIM
    * provisioning to an application.
    */
@@ -1469,6 +1485,22 @@ export namespace ApplicationSCIMConfig {
      * The authentication scheme to use when making SCIM requests to this application.
      */
     scheme: 'access_service_token';
+  }
+
+  /**
+   * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+   * provisioning to an application.
+   */
+  export interface AccessSchemasSCIMConfigAuthenticationOAuthBearerToken {
+    /**
+     * Token used to authenticate with the remote SCIM service.
+     */
+    token: string;
+
+    /**
+     * The authentication scheme to use when making SCIM requests to this application.
+     */
+    scheme: 'oauthbearertoken';
   }
 
   /**
