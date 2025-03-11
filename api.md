@@ -7341,6 +7341,166 @@ Methods:
 - <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset/{asset_identifer}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">delete</a>(assetIdentifer, { ...params }) -> AssetDeleteResponse</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset/{asset_identifer}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">get</a>(assetIdentifer, { ...params }) -> AssetGetResponsesSinglePage</code>
 
+## ThreatEvents
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventBulkCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/cloudforce-one/events/create">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">create</a>(accountID, { ...params }) -> ThreatEventCreateResponse</code>
+- <code title="post /accounts/{accountId}/cloudforce-one/events/{eventId}">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">update</a>(eventID, { ...params }) -> ThreatEventUpdateResponse</code>
+- <code title="delete /accounts/{accountId}/cloudforce-one/events/{eventId}">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">delete</a>(eventID, { ...params }) -> ThreatEventDeleteResponse</code>
+- <code title="post /accounts/{accountId}/cloudforce-one/events/create/bulk">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">bulkCreate</a>(accountID, { ...params }) -> ThreatEventBulkCreateResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/{eventId}">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">get</a>(eventID, { ...params }) -> ThreatEventGetResponse</code>
+
+### Attackers
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/attackers.ts">AttackerListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountId}/cloudforce-one/events/attackers">client.cloudforceOne.threatEvents.attackers.<a href="./src/resources/cloudforce-one/threat-events/attackers.ts">list</a>(accountID) -> AttackerListResponse</code>
+
+### Categories
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/cloudforce-one/events/categories/create">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">create</a>(accountID, { ...params }) -> CategoryCreateResponse</code>
+- <code title="post /accounts/{accountId}/cloudforce-one/events/categories/{categoryId}">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">update</a>(categoryID, { ...params }) -> CategoryUpdateResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/categories">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">list</a>(accountID) -> CategoryListResponse</code>
+- <code title="delete /accounts/{accountId}/cloudforce-one/events/categories/{categoryId}">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">delete</a>(categoryID, { ...params }) -> CategoryDeleteResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/categories/{categoryId}">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">get</a>(categoryID, { ...params }) -> CategoryGetResponse</code>
+
+### Countries
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/countries.ts">CountryListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountId}/cloudforce-one/events/countries">client.cloudforceOne.threatEvents.countries.<a href="./src/resources/cloudforce-one/threat-events/countries.ts">list</a>(accountID) -> CountryListResponse</code>
+
+### Cron
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/cron.ts">CronCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/cron.ts">CronListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/cloudforce-one/events/cron">client.cloudforceOne.threatEvents.cron.<a href="./src/resources/cloudforce-one/threat-events/cron.ts">create</a>(accountID) -> CronCreateResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/cron">client.cloudforceOne.threatEvents.cron.<a href="./src/resources/cloudforce-one/threat-events/cron.ts">list</a>(accountID) -> CronListResponse</code>
+
+### Dataset
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/dataset.ts">DatasetCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/dataset.ts">DatasetUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/dataset.ts">DatasetListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/dataset.ts">DatasetGetResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/dataset.ts">DatasetRawResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/cloudforce-one/events/dataset/create">client.cloudforceOne.threatEvents.dataset.<a href="./src/resources/cloudforce-one/threat-events/dataset.ts">create</a>(accountID, { ...params }) -> DatasetCreateResponse</code>
+- <code title="post /accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}">client.cloudforceOne.threatEvents.dataset.<a href="./src/resources/cloudforce-one/threat-events/dataset.ts">update</a>(datasetID, { ...params }) -> DatasetUpdateResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/dataset">client.cloudforceOne.threatEvents.dataset.<a href="./src/resources/cloudforce-one/threat-events/dataset.ts">list</a>(accountID) -> DatasetListResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}">client.cloudforceOne.threatEvents.dataset.<a href="./src/resources/cloudforce-one/threat-events/dataset.ts">get</a>(datasetID, { ...params }) -> DatasetGetResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/raw/{datasetId}/{eventId}">client.cloudforceOne.threatEvents.dataset.<a href="./src/resources/cloudforce-one/threat-events/dataset.ts">raw</a>(eventID, { ...params }) -> DatasetRawResponse</code>
+
+### IndicatorTypes
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/indicator-types.ts">IndicatorTypeListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountId}/cloudforce-one/events/indicatorTypes">client.cloudforceOne.threatEvents.indicatorTypes.<a href="./src/resources/cloudforce-one/threat-events/indicator-types.ts">list</a>(accountID) -> IndicatorTypeListResponse</code>
+
+### Raw
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/raw.ts">RawUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/raw.ts">RawGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}">client.cloudforceOne.threatEvents.raw.<a href="./src/resources/cloudforce-one/threat-events/raw.ts">update</a>(rawID, { ...params }) -> RawUpdateResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}">client.cloudforceOne.threatEvents.raw.<a href="./src/resources/cloudforce-one/threat-events/raw.ts">get</a>(rawID, { ...params }) -> RawGetResponse</code>
+
+### Relate
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/relate.ts">RelateUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/relate.ts">RelateDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/cloudforce-one/events/relate/{eventId}">client.cloudforceOne.threatEvents.relate.<a href="./src/resources/cloudforce-one/threat-events/relate.ts">update</a>(eventID, { ...params }) -> RelateUpdateResponse</code>
+- <code title="delete /accounts/{accountId}/cloudforce-one/events/relate/{eventId}">client.cloudforceOne.threatEvents.relate.<a href="./src/resources/cloudforce-one/threat-events/relate.ts">delete</a>(eventID, { ...params }) -> RelateDeleteResponse</code>
+
+### Tags
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/tags.ts">TagCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/tags.ts">TagUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/tags.ts">TagDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/cloudforce-one/events/tags/create">client.cloudforceOne.threatEvents.tags.<a href="./src/resources/cloudforce-one/threat-events/tags.ts">create</a>(accountID, { ...params }) -> TagCreateResponse</code>
+- <code title="post /accounts/{accountId}/cloudforce-one/events/tag/{eventId}">client.cloudforceOne.threatEvents.tags.<a href="./src/resources/cloudforce-one/threat-events/tags.ts">update</a>(eventID, { ...params }) -> TagUpdateResponse</code>
+- <code title="delete /accounts/{accountId}/cloudforce-one/events/tag/{eventId}">client.cloudforceOne.threatEvents.tags.<a href="./src/resources/cloudforce-one/threat-events/tags.ts">delete</a>(eventID, { ...params }) -> TagDeleteResponse</code>
+
+### TargetIndustries
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/target-industries.ts">TargetIndustryListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountId}/cloudforce-one/events/targetIndustries">client.cloudforceOne.threatEvents.targetIndustries.<a href="./src/resources/cloudforce-one/threat-events/target-industries.ts">list</a>(accountID) -> TargetIndustryListResponse</code>
+
+### Insight
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/insight.ts">InsightUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/insight.ts">InsightDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/insight.ts">InsightCreatResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/insight.ts">InsightGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}">client.cloudforceOne.threatEvents.insight.<a href="./src/resources/cloudforce-one/threat-events/insight.ts">update</a>(insightID, { ...params }) -> InsightUpdateResponse</code>
+- <code title="delete /accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}">client.cloudforceOne.threatEvents.insight.<a href="./src/resources/cloudforce-one/threat-events/insight.ts">delete</a>(insightID, { ...params }) -> InsightDeleteResponse</code>
+- <code title="post /accounts/{accountId}/cloudforce-one/events/{eventId}/insight/create">client.cloudforceOne.threatEvents.insight.<a href="./src/resources/cloudforce-one/threat-events/insight.ts">creat</a>(eventID, { ...params }) -> InsightCreatResponse</code>
+- <code title="get /accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}">client.cloudforceOne.threatEvents.insight.<a href="./src/resources/cloudforce-one/threat-events/insight.ts">get</a>(insightID, { ...params }) -> InsightGetResponse</code>
+
 # AIGateway
 
 Types:
