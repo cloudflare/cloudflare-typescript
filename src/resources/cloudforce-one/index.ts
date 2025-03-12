@@ -19,4 +19,16 @@ export {
   type RequestTypesResponsesSinglePage,
 } from './requests/index';
 export { Scans } from './scans/index';
-export { ThreatEvents } from './threat-events/index';
+export {
+  ThreatEvents,
+  type ThreatEventCreateResponse,
+  type ThreatEventDeleteResponse,
+  type ThreatEventBulkCreateResponse,
+  type ThreatEventEditResponse,
+  type ThreatEventGetResponse,
+  type ThreatEventCreateParams,
+  type ThreatEventDeleteParams,
+  type ThreatEventBulkCreateParams,
+  type ThreatEventEditParams,
+  type ThreatEventGetParams,
+} from './threat-events/index';
