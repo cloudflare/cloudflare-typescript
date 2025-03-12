@@ -41,6 +41,8 @@ import {
   EventsV4PagePaginationArray,
 } from './events/events';
 import { APIPromise } from '../../api-promise';
+import { CloudflareError } from '../../error';
+import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -78,6 +80,37 @@ export class WaitingRooms extends APIResource {
         ...options,
       }) as APIPromise<{ result: WaitingRoom }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists waiting rooms for account or zone.
+   */
+  list(
+    params: WaitingRoomListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom> {
+    const { account_id, zone_id, ...query } = params ?? {};
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      path`/${accountOrZone}/${accountOrZoneId}/waiting_rooms`,
+      V4PagePaginationArray<WaitingRoom>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -129,6 +162,8 @@ export class WaitingRooms extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type WaitingRoomsV4PagePaginationArray = V4PagePaginationArray<WaitingRoom>;
 
 export interface AdditionalRoutes {
   /**
@@ -1734,6 +1769,20 @@ export interface WaitingRoomUpdateParams {
    * requires Advanced Waiting Room.
    */
   turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
+}
+
+export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 }
 
 export interface WaitingRoomDeleteParams {
