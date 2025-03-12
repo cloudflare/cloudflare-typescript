@@ -5,36 +5,39 @@ import { APIPromise } from '../../../api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Relate extends APIResource {
+export class EventTags extends APIResource {
   /**
-   * Removes an event reference
+   * Removes a tag from an event
    */
   delete(
     eventID: string,
-    params: RelateDeleteParams,
+    params: EventTagDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<RelateDeleteResponse> {
+  ): APIPromise<EventTagDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
-        path`/accounts/${account_id}/cloudforce-one/events/relate/${eventID}`,
+        path`/accounts/${account_id}/cloudforce-one/events/event_tag/${eventID}`,
         options,
-      ) as APIPromise<{ result: RelateDeleteResponse }>
+      ) as APIPromise<{ result: EventTagDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface RelateDeleteResponse {
+export interface EventTagDeleteResponse {
   success: boolean;
 }
 
-export interface RelateDeleteParams {
+export interface EventTagDeleteParams {
   /**
    * Account ID
    */
   account_id: number;
 }
 
-export declare namespace Relate {
-  export { type RelateDeleteResponse as RelateDeleteResponse, type RelateDeleteParams as RelateDeleteParams };
+export declare namespace EventTags {
+  export {
+    type EventTagDeleteResponse as EventTagDeleteResponse,
+    type EventTagDeleteParams as EventTagDeleteParams,
+  };
 }
