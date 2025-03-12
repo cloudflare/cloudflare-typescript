@@ -68,7 +68,10 @@ export interface Configuration {
    * alpha-numeric ID and value is the variable configuration. Values of variables of
    * type secret are not included.
    */
-  variables: Record<string, Configuration.UnionMember0 | Configuration.UnionMember1>;
+  variables: Record<
+    string,
+    Configuration.ZarazStringVariable | Configuration.ZarazSecretVariable | Configuration.ZarazWorkerVariable
+  >;
 
   /**
    * Zaraz internal version of the config.
@@ -598,23 +601,31 @@ export namespace Configuration {
     }
   }
 
-  export interface UnionMember0 {
+  export interface ZarazStringVariable {
     name: string;
 
-    type: 'string' | 'secret';
+    type: 'string';
 
     value: string;
   }
 
-  export interface UnionMember1 {
+  export interface ZarazSecretVariable {
+    name: string;
+
+    type: 'secret';
+
+    value: string;
+  }
+
+  export interface ZarazWorkerVariable {
     name: string;
 
     type: 'worker';
 
-    value: UnionMember1.Value;
+    value: ZarazWorkerVariable.Value;
   }
 
-  export namespace UnionMember1 {
+  export namespace ZarazWorkerVariable {
     export interface Value {
       escapedWorkerName: string;
 
@@ -747,7 +758,12 @@ export interface ConfigUpdateParams {
    * variable alpha-numeric ID and value is the variable configuration. Values of
    * variables of type secret are not included.
    */
-  variables: Record<string, ConfigUpdateParams.UnionMember0 | ConfigUpdateParams.UnionMember1>;
+  variables: Record<
+    string,
+    | ConfigUpdateParams.ZarazStringVariable
+    | ConfigUpdateParams.ZarazSecretVariable
+    | ConfigUpdateParams.ZarazWorkerVariable
+  >;
 
   /**
    * Body param: Zaraz internal version of the config.
@@ -1277,23 +1293,31 @@ export namespace ConfigUpdateParams {
     }
   }
 
-  export interface UnionMember0 {
+  export interface ZarazStringVariable {
     name: string;
 
-    type: 'string' | 'secret';
+    type: 'string';
 
     value: string;
   }
 
-  export interface UnionMember1 {
+  export interface ZarazSecretVariable {
+    name: string;
+
+    type: 'secret';
+
+    value: string;
+  }
+
+  export interface ZarazWorkerVariable {
     name: string;
 
     type: 'worker';
 
-    value: UnionMember1.Value;
+    value: ZarazWorkerVariable.Value;
   }
 
-  export namespace UnionMember1 {
+  export namespace ZarazWorkerVariable {
     export interface Value {
       escapedWorkerName: string;
 
