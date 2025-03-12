@@ -20,17 +20,7 @@ import {
 import * as ScansAPI from './scans/scans';
 import { Scans } from './scans/scans';
 import * as ThreatEventsAPI from './threat-events/threat-events';
-import {
-  ThreatEventBulkCreateParams,
-  ThreatEventBulkCreateResponse,
-  ThreatEventCreateParams,
-  ThreatEventCreateResponse,
-  ThreatEventDeleteResponse,
-  ThreatEventGetResponse,
-  ThreatEventUpdateParams,
-  ThreatEventUpdateResponse,
-  ThreatEvents,
-} from './threat-events/threat-events';
+import { ThreatEvents } from './threat-events/threat-events';
 
 export class CloudforceOne extends APIResource {
   scans: ScansAPI.Scans = new ScansAPI.Scans(this._client);
@@ -63,15 +53,5 @@ export declare namespace CloudforceOne {
     type RequestListParams as RequestListParams,
   };
 
-  export {
-    ThreatEvents as ThreatEvents,
-    type ThreatEventCreateResponse as ThreatEventCreateResponse,
-    type ThreatEventUpdateResponse as ThreatEventUpdateResponse,
-    type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
-    type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
-    type ThreatEventGetResponse as ThreatEventGetResponse,
-    type ThreatEventCreateParams as ThreatEventCreateParams,
-    type ThreatEventUpdateParams as ThreatEventUpdateParams,
-    type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
-  };
+  export { ThreatEvents as ThreatEvents };
 }
