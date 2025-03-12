@@ -20,7 +20,19 @@ import {
 import * as ScansAPI from './scans/scans';
 import { Scans } from './scans/scans';
 import * as ThreatEventsAPI from './threat-events/threat-events';
-import { ThreatEvents } from './threat-events/threat-events';
+import {
+  ThreatEventBulkCreateParams,
+  ThreatEventBulkCreateResponse,
+  ThreatEventCreateParams,
+  ThreatEventCreateResponse,
+  ThreatEventDeleteParams,
+  ThreatEventDeleteResponse,
+  ThreatEventEditParams,
+  ThreatEventEditResponse,
+  ThreatEventGetParams,
+  ThreatEventGetResponse,
+  ThreatEvents,
+} from './threat-events/threat-events';
 
 export class CloudforceOne extends APIResource {
   scans: ScansAPI.Scans = new ScansAPI.Scans(this._client);
@@ -53,5 +65,17 @@ export declare namespace CloudforceOne {
     type RequestListParams as RequestListParams,
   };
 
-  export { ThreatEvents as ThreatEvents };
+  export {
+    ThreatEvents as ThreatEvents,
+    type ThreatEventCreateResponse as ThreatEventCreateResponse,
+    type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
+    type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
+    type ThreatEventEditResponse as ThreatEventEditResponse,
+    type ThreatEventGetResponse as ThreatEventGetResponse,
+    type ThreatEventCreateParams as ThreatEventCreateParams,
+    type ThreatEventDeleteParams as ThreatEventDeleteParams,
+    type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
+    type ThreatEventEditParams as ThreatEventEditParams,
+    type ThreatEventGetParams as ThreatEventGetParams,
+  };
 }
