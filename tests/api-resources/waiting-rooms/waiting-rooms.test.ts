@@ -100,6 +100,17 @@ describe('resource waitingRooms', () => {
     });
   });
 
+  test('list', async () => {
+    const responsePromise = client.waitingRooms.list({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
   test('delete: only required params', async () => {
     const responsePromise = client.waitingRooms.delete('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
