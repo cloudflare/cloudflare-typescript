@@ -5,6 +5,23 @@ import * as Core from '../../../core';
 
 export class EventTags extends APIResource {
   /**
+   * Adds a tag to an event
+   */
+  create(
+    eventId: string,
+    params: EventTagCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventTagCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/cloudforce-one/events/event_tag/${eventId}/create`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: EventTagCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Removes a tag from an event
    */
   delete(
@@ -22,8 +39,24 @@ export class EventTags extends APIResource {
   }
 }
 
+export interface EventTagCreateResponse {
+  success: boolean;
+}
+
 export interface EventTagDeleteResponse {
   success: boolean;
+}
+
+export interface EventTagCreateParams {
+  /**
+   * Path param: Account ID
+   */
+  account_id: number;
+
+  /**
+   * Body param:
+   */
+  tags: Array<string>;
 }
 
 export interface EventTagDeleteParams {
@@ -35,7 +68,9 @@ export interface EventTagDeleteParams {
 
 export declare namespace EventTags {
   export {
+    type EventTagCreateResponse as EventTagCreateResponse,
     type EventTagDeleteResponse as EventTagDeleteResponse,
+    type EventTagCreateParams as EventTagCreateParams,
     type EventTagDeleteParams as EventTagDeleteParams,
   };
 }

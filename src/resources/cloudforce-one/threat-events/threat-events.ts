@@ -37,7 +37,13 @@ import {
   Datasets,
 } from './datasets';
 import * as EventTagsAPI from './event-tags';
-import { EventTagDeleteParams, EventTagDeleteResponse, EventTags } from './event-tags';
+import {
+  EventTagCreateParams,
+  EventTagCreateResponse,
+  EventTagDeleteParams,
+  EventTagDeleteResponse,
+  EventTags,
+} from './event-tags';
 import * as IndicatorTypesAPI from './indicator-types';
 import { IndicatorTypeListParams, IndicatorTypeListResponse, IndicatorTypes } from './indicator-types';
 import * as InsightsAPI from './insights';
@@ -56,6 +62,8 @@ import * as RawAPI from './raw';
 import { Raw as RawAPIRaw, RawEditParams, RawEditResponse, RawGetParams, RawGetResponse } from './raw';
 import * as RelateAPI from './relate';
 import { Relate, RelateDeleteParams, RelateDeleteResponse } from './relate';
+import * as TagsAPI from './tags';
+import { TagCreateParams, TagCreateResponse, Tags } from './tags';
 import * as TargetIndustriesAPI from './target-industries';
 import { TargetIndustries, TargetIndustryListParams, TargetIndustryListResponse } from './target-industries';
 
@@ -69,6 +77,7 @@ export class ThreatEvents extends APIResource {
   raw: RawAPI.Raw = new RawAPI.Raw(this._client);
   relate: RelateAPI.Relate = new RelateAPI.Relate(this._client);
   eventTags: EventTagsAPI.EventTags = new EventTagsAPI.EventTags(this._client);
+  tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
   targetIndustries: TargetIndustriesAPI.TargetIndustries = new TargetIndustriesAPI.TargetIndustries(
     this._client,
   );
@@ -562,6 +571,7 @@ ThreatEvents.IndicatorTypes = IndicatorTypes;
 ThreatEvents.Raw = RawAPIRaw;
 ThreatEvents.Relate = Relate;
 ThreatEvents.EventTags = EventTags;
+ThreatEvents.Tags = Tags;
 ThreatEvents.TargetIndustries = TargetIndustries;
 ThreatEvents.Insights = Insights;
 
@@ -649,8 +659,16 @@ export declare namespace ThreatEvents {
 
   export {
     EventTags as EventTags,
+    type EventTagCreateResponse as EventTagCreateResponse,
     type EventTagDeleteResponse as EventTagDeleteResponse,
+    type EventTagCreateParams as EventTagCreateParams,
     type EventTagDeleteParams as EventTagDeleteParams,
+  };
+
+  export {
+    Tags as Tags,
+    type TagCreateResponse as TagCreateResponse,
+    type TagCreateParams as TagCreateParams,
   };
 
   export {
