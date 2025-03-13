@@ -35,7 +35,13 @@ export {
   type DatasetGetParams,
   type DatasetRawParams,
 } from './datasets';
-export { EventTags, type EventTagDeleteResponse, type EventTagDeleteParams } from './event-tags';
+export {
+  EventTags,
+  type EventTagCreateResponse,
+  type EventTagDeleteResponse,
+  type EventTagCreateParams,
+  type EventTagDeleteParams,
+} from './event-tags';
 export {
   IndicatorTypes,
   type IndicatorTypeListResponse,
@@ -54,6 +60,7 @@ export {
 } from './insights';
 export { Raw, type RawEditResponse, type RawGetResponse, type RawEditParams, type RawGetParams } from './raw';
 export { Relate, type RelateDeleteResponse, type RelateDeleteParams } from './relate';
+export { Tags, type TagCreateResponse, type TagCreateParams } from './tags';
 export {
   TargetIndustries,
   type TargetIndustryListResponse,
