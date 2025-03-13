@@ -63,4 +63,3 @@ jobs:
 
       - name: Run tests
         run: ./scripts/test
-
