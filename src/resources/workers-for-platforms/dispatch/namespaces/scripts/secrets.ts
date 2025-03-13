@@ -6,7 +6,7 @@ import { SinglePage } from '../../../../../pagination';
 
 export class Secrets extends APIResource {
   /**
-   * Add a secret to a script uploaded to a Workers for Platforms namespace.
+   * Put secrets to a script uploaded to a Workers for Platforms namespace.
    */
   update(
     dispatchNamespace: string,
@@ -24,7 +24,7 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * List secrets bound to a script uploaded to a Workers for Platforms namespace.
+   * List secrets from a script uploaded to a Workers for Platforms namespace.
    */
   list(
     dispatchNamespace: string,
@@ -41,8 +41,7 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * Get a given secret binding (value omitted) on a script uploaded to a Workers for
-   * Platforms namespace.
+   * Get secret from a script uploaded to a Workers for Platforms namespace.
    */
   get(
     dispatchNamespace: string,
@@ -69,6 +68,11 @@ export interface WorkersSecretModel {
    * Worker.
    */
   name?: string;
+
+  /**
+   * The value of the secret.
+   */
+  text?: string;
 
   /**
    * The type of secret to put.
