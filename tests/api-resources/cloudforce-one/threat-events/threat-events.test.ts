@@ -11,7 +11,17 @@ const client = new Cloudflare({
 
 describe('resource threatEvents', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.create({ account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.create({
+      account_id: 0,
+      attacker: 'Flying Yeti',
+      attackerCountry: 'CN',
+      category: 'Domain Resolution',
+      date: '2022-04-01T00:00:00Z',
+      event: 'An attacker registered the domain domain.com',
+      indicatorType: 'domain',
+      raw: {},
+      tlp: 'amber',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,12 +34,20 @@ describe('resource threatEvents', () => {
   test('create: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.create({
       account_id: 0,
-      datasetId: ['7632a037-fdef-4899-9b12-148470aae772'],
-      order: 'asc',
-      orderBy: 'created',
-      page: 1,
-      pageSize: 100,
-      search: [{ field: 'attackerCountry', op: 'equals', value: 'usa' }],
+      attacker: 'Flying Yeti',
+      attackerCountry: 'CN',
+      category: 'Domain Resolution',
+      date: '2022-04-01T00:00:00Z',
+      event: 'An attacker registered the domain domain.com',
+      indicatorType: 'domain',
+      raw: { data: {}, source: 'example.com', tlp: 'amber' },
+      tlp: 'amber',
+      accountId: 123456,
+      datasetId: 'durableObjectName',
+      indicator: 'domain.com',
+      tags: ['malware'],
+      targetCountry: 'US',
+      targetIndustry: 'Agriculture',
     });
   });
 
