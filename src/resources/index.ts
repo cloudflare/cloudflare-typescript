@@ -26,6 +26,7 @@ export { ContentScanning } from './content-scanning/content-scanning';
 export { CustomCertificates } from './custom-certificates/custom-certificates';
 export { CustomHostnames } from './custom-hostnames/custom-hostnames';
 export { CustomNameservers } from './custom-nameservers';
+export { CustomPages } from './custom-pages';
 export { D1Resource } from './d1/d1';
 export { DCVDelegation } from './dcv-delegation';
 export { DNS } from './dns/dns';
