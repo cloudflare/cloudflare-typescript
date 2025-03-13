@@ -274,7 +274,7 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: The dispositions the search filters by.
    */
-  final_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK';
+  final_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
    * Query param: The message actions the search filters by.
