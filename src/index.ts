@@ -24,6 +24,7 @@ import { BotManagement } from './resources/bot-management';
 import { BrandProtection } from './resources/brand-protection';
 import { ClientCertificates } from './resources/client-certificates';
 import { CustomNameservers } from './resources/custom-nameservers';
+import { CustomPages } from './resources/custom-pages';
 import { DCVDelegation } from './resources/dcv-delegation';
 import { Filters } from './resources/filters';
 import { IPs } from './resources/ips';
@@ -336,6 +337,7 @@ export class Cloudflare extends Core.APIClient {
   ai: API.AI = new API.AI(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
+  customPages: API.CustomPages = new API.CustomPages(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -552,6 +554,7 @@ Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
+Cloudflare.CustomPages = CustomPages;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -761,6 +764,8 @@ export declare namespace Cloudflare {
   export { SecurityCenter as SecurityCenter };
 
   export { BrowserRendering as BrowserRendering };
+
+  export { CustomPages as CustomPages };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;
