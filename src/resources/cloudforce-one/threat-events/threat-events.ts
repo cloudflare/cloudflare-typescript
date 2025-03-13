@@ -84,14 +84,14 @@ export class ThreatEvents extends APIResource {
   insights: InsightsAPI.Insights = new InsightsAPI.Insights(this._client);
 
   /**
-   * Filter and list events
+   * Creates a new event
    */
   create(
     params: ThreatEventCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventCreateResponse> {
     const { account_id, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/cloudforce-one/events`, { body, ...options });
+    return this._client.post(`/accounts/${account_id}/cloudforce-one/events/create`, { body, ...options });
   }
 
   /**
@@ -148,64 +148,60 @@ export class ThreatEvents extends APIResource {
   }
 }
 
-export type ThreatEventCreateResponse = Array<ThreatEventCreateResponse.ThreatEventCreateResponseItem>;
+export interface ThreatEventCreateResponse {
+  id: number;
 
-export namespace ThreatEventCreateResponse {
-  export interface ThreatEventCreateResponseItem {
-    id: number;
+  accountId: number;
 
-    accountId: number;
+  attacker: string;
 
-    attacker: string;
+  attackerCountry: string;
 
-    attackerCountry: string;
+  category: string;
 
-    category: string;
+  categoryId: number;
 
-    categoryId: number;
+  date: string;
 
-    date: string;
+  event: string;
 
-    event: string;
+  indicator: string;
 
-    indicator: string;
+  indicatorType: string;
 
-    indicatorType: string;
+  indicatorTypeId: number;
 
-    indicatorTypeId: number;
+  killChain: number;
 
-    killChain: number;
+  mitreAttack: Array<string>;
 
-    mitreAttack: Array<string>;
+  numReferenced: number;
 
-    numReferenced: number;
+  numReferences: number;
 
-    numReferences: number;
+  rawId: string;
 
-    rawId: string;
+  referenced: Array<string>;
 
-    referenced: Array<string>;
+  referencedIds: Array<number>;
 
-    referencedIds: Array<number>;
+  references: Array<string>;
 
-    references: Array<string>;
+  referencesIds: Array<number>;
 
-    referencesIds: Array<number>;
+  tags: Array<string>;
 
-    tags: Array<string>;
+  targetCountry: string;
 
-    targetCountry: string;
+  targetIndustry: string;
 
-    targetIndustry: string;
+  tlp: string;
 
-    tlp: string;
+  uuid: string;
 
-    uuid: string;
+  insight?: string;
 
-    insight?: string;
-
-    releasabilityId?: string;
-  }
+  releasabilityId?: string;
 }
 
 export interface ThreatEventDeleteResponse {
@@ -394,41 +390,81 @@ export interface ThreatEventCreateParams {
   /**
    * Body param:
    */
-  datasetId?: Array<string>;
+  attacker: string;
 
   /**
    * Body param:
    */
-  order?: 'asc' | 'desc';
+  attackerCountry: string;
 
   /**
    * Body param:
    */
-  orderBy?: string;
+  category: string;
 
   /**
    * Body param:
    */
-  page?: number;
+  date: string;
 
   /**
    * Body param:
    */
-  pageSize?: number;
+  event: string;
 
   /**
    * Body param:
    */
-  search?: Array<ThreatEventCreateParams.Search>;
+  indicatorType: string;
+
+  /**
+   * Body param:
+   */
+  raw: ThreatEventCreateParams.Raw;
+
+  /**
+   * Body param:
+   */
+  tlp: string;
+
+  /**
+   * Body param:
+   */
+  accountId?: number;
+
+  /**
+   * Body param:
+   */
+  datasetId?: string;
+
+  /**
+   * Body param:
+   */
+  indicator?: string;
+
+  /**
+   * Body param:
+   */
+  tags?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  targetCountry?: string;
+
+  /**
+   * Body param:
+   */
+  targetIndustry?: string;
 }
 
 export namespace ThreatEventCreateParams {
-  export interface Search {
-    field?: string;
+  export interface Raw {
+    data?: unknown;
 
-    op?: string;
+    source?: string;
 
-    value?: string | number | Array<string | number>;
+    tlp?: string;
   }
 }
 
