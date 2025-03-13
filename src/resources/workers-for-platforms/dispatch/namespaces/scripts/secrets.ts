@@ -8,7 +8,7 @@ import { path } from '../../../../../internal/utils/path';
 
 export class Secrets extends APIResource {
   /**
-   * Put secrets to a script uploaded to a Workers for Platforms namespace.
+   * Add a secret to a script uploaded to a Workers for Platforms namespace.
    */
   update(
     scriptName: string,
@@ -25,7 +25,7 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * List secrets from a script uploaded to a Workers for Platforms namespace.
+   * List secrets bound to a script uploaded to a Workers for Platforms namespace.
    */
   list(
     scriptName: string,
@@ -41,7 +41,8 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * Get secret from a script uploaded to a Workers for Platforms namespace.
+   * Get a given secret binding (value omitted) on a script uploaded to a Workers for
+   * Platforms namespace.
    */
   get(secretName: string, params: SecretGetParams, options?: RequestOptions): APIPromise<SecretGetResponse> {
     const { account_id, dispatch_namespace, script_name } = params;
@@ -62,11 +63,6 @@ export interface WorkersSecretModel {
    * Worker.
    */
   name?: string;
-
-  /**
-   * The value of the secret.
-   */
-  text?: string;
 
   /**
    * The type of secret to put.
