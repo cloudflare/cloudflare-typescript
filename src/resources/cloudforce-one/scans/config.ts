@@ -19,7 +19,7 @@ export class Config extends APIResource {
   }
 
   /**
-   * Get the Scan Config for An Account
+   * List Scan Configs
    */
   list(
     params: ConfigListParams,
