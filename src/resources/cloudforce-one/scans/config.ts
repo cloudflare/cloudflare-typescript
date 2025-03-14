@@ -34,6 +34,23 @@ export class Config extends APIResource {
       options,
     );
   }
+
+  /**
+   * Delete a Scan Config
+   */
+  delete(
+    configID: string,
+    params: ConfigDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<ConfigDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/cloudforce-one/scans/config/${configID}`,
+        options,
+      ) as APIPromise<{ result: ConfigDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type ConfigListResponsesSinglePage = SinglePage<ConfigListResponse>;
@@ -61,6 +78,8 @@ export interface ConfigListResponse {
 
   ports: Array<string>;
 }
+
+export type ConfigDeleteResponse = unknown;
 
 export interface ConfigCreateParams {
   /**
@@ -94,12 +113,21 @@ export interface ConfigListParams {
   account_id: string;
 }
 
+export interface ConfigDeleteParams {
+  /**
+   * Account ID
+   */
+  account_id: string;
+}
+
 export declare namespace Config {
   export {
     type ConfigCreateResponse as ConfigCreateResponse,
     type ConfigListResponse as ConfigListResponse,
+    type ConfigDeleteResponse as ConfigDeleteResponse,
     type ConfigListResponsesSinglePage as ConfigListResponsesSinglePage,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigListParams as ConfigListParams,
+    type ConfigDeleteParams as ConfigDeleteParams,
   };
 }
