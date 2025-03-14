@@ -4,10 +4,9 @@ export {
   Config,
   type ConfigCreateResponse,
   type ConfigListResponse,
-  type ConfigDeleteResponse,
   type ConfigCreateParams,
   type ConfigListParams,
-  type ConfigDeleteParams,
+  type ConfigListResponsesSinglePage,
 } from './config';
-export { Results, type ScanResult, type ResultListResponse, type ResultListParams } from './results';
+export { Results } from './results';
 export { Scans } from './scans';

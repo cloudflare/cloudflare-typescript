@@ -7264,28 +7264,17 @@ Methods:
 
 ### Results
 
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ScanResult</a></code>
-- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ResultListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/cloudforce-one/scans/results">client.cloudforceOne.scans.results.<a href="./src/resources/cloudforce-one/scans/results.ts">list</a>({ ...params }) -> ResultListResponse</code>
-
 ### Config
 
 Types:
 
 - <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigCreateResponse</a></code>
 - <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigListResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
-- <code title="get /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">list</a>({ ...params }) -> ConfigListResponse</code>
-- <code title="delete /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">delete</a>({ ...params }) -> ConfigDeleteResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">list</a>({ ...params }) -> ConfigListResponsesSinglePage</code>
 
 ## Requests
 
