@@ -47,4 +47,23 @@ describe('resource config', () => {
   test('list: required and optional params', async () => {
     const response = await client.cloudforceOne.scans.config.list({ account_id: 'account_id' });
   });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.cloudforceOne.scans.config.delete('config_id', {
+      account_id: 'account_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.cloudforceOne.scans.config.delete('config_id', {
+      account_id: 'account_id',
+    });
+  });
 });
