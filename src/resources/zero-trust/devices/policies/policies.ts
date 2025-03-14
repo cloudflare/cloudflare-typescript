@@ -126,6 +126,9 @@ export interface SettingsPolicy {
    */
   enabled?: boolean;
 
+  /**
+   * List of routes excluded in the WARP client's tunnel.
+   */
   exclude?: Array<SplitTunnelExclude>;
 
   /**
@@ -137,6 +140,9 @@ export interface SettingsPolicy {
 
   gateway_unique_id?: string;
 
+  /**
+   * List of routes included in the WARP client's tunnel.
+   */
   include?: Array<SplitTunnelInclude>;
 
   /**

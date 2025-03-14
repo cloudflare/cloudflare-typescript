@@ -95,6 +95,9 @@ export interface DefaultEditResponse {
    */
   enabled?: boolean;
 
+  /**
+   * List of routes excluded in the WARP client's tunnel.
+   */
   exclude?: Array<PoliciesAPI.SplitTunnelExclude>;
 
   /**
@@ -106,6 +109,9 @@ export interface DefaultEditResponse {
 
   gateway_unique_id?: string;
 
+  /**
+   * List of routes included in the WARP client's tunnel.
+   */
   include?: Array<PoliciesAPI.SplitTunnelInclude>;
 
   /**
@@ -190,6 +196,9 @@ export interface DefaultGetResponse {
    */
   enabled?: boolean;
 
+  /**
+   * List of routes excluded in the WARP client's tunnel.
+   */
   exclude?: Array<PoliciesAPI.SplitTunnelExclude>;
 
   /**
@@ -201,6 +210,9 @@ export interface DefaultGetResponse {
 
   gateway_unique_id?: string;
 
+  /**
+   * List of routes included in the WARP client's tunnel.
+   */
   include?: Array<PoliciesAPI.SplitTunnelInclude>;
 
   /**
@@ -282,9 +294,21 @@ export interface DefaultEditParams {
   disable_auto_fallback?: boolean;
 
   /**
+   * Body param: List of routes excluded in the WARP client's tunnel. Both 'exclude'
+   * and 'include' cannot be set in the same request.
+   */
+  exclude?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+
+  /**
    * Body param: Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
+
+  /**
+   * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
+   * and 'include' cannot be set in the same request.
+   */
+  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
 
   /**
    * Body param: Determines if the operating system will register WARP's local
