@@ -25,7 +25,7 @@ export class OriginCACertificates extends APIResource {
    * ([see above](#requests)).
    */
   list(
-    query: OriginCACertificateListParams | null | undefined = {},
+    query: OriginCACertificateListParams,
     options?: RequestOptions,
   ): PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
     return this._client.getAPIList('/certificates', SinglePage<OriginCACertificate>, { query, ...options });
@@ -139,5 +139,5 @@ export interface OriginCACertificateListParams {
   /**
    * Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 }
