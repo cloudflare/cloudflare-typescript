@@ -32,7 +32,21 @@ describe('resource default', () => {
       auto_connect: 0,
       captive_portal: 180,
       disable_auto_fallback: true,
+      exclude: [
+        {
+          address: '192.0.2.0/24',
+          description: 'Exclude testing domains from the tunnel',
+          host: '*.example.com',
+        },
+      ],
       exclude_office_ips: true,
+      include: [
+        {
+          address: '192.0.2.0/24',
+          description: 'Exclude testing domains from the tunnel',
+          host: '*.example.com',
+        },
+      ],
       register_interface_ip_with_dns: true,
       service_mode_v2: { mode: 'proxy', port: 3000 },
       support_url: 'https://1.1.1.1/help',
