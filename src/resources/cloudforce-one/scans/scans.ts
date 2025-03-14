@@ -8,6 +8,8 @@ import {
   ConfigCreateResponse,
   ConfigDeleteParams,
   ConfigDeleteResponse,
+  ConfigEditParams,
+  ConfigEditResponse,
   ConfigListParams,
   ConfigListResponse,
   ConfigListResponsesSinglePage,
@@ -36,9 +38,11 @@ export declare namespace Scans {
     type ConfigCreateResponse as ConfigCreateResponse,
     type ConfigListResponse as ConfigListResponse,
     type ConfigDeleteResponse as ConfigDeleteResponse,
+    type ConfigEditResponse as ConfigEditResponse,
     ConfigListResponsesSinglePage as ConfigListResponsesSinglePage,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigListParams as ConfigListParams,
     type ConfigDeleteParams as ConfigDeleteParams,
+    type ConfigEditParams as ConfigEditParams,
   };
 }

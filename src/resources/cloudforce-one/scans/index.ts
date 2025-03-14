@@ -6,9 +6,11 @@ export {
   type ConfigCreateResponse,
   type ConfigListResponse,
   type ConfigDeleteResponse,
+  type ConfigEditResponse,
   type ConfigCreateParams,
   type ConfigListParams,
   type ConfigDeleteParams,
+  type ConfigEditParams,
 } from './config';
 export { Results, type ResultGetResponse, type ResultGetParams } from './results';
 export { Scans } from './scans';
