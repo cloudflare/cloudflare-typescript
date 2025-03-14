@@ -71,40 +71,85 @@ export class Config extends APIResource {
 export class ConfigListResponsesSinglePage extends SinglePage<ConfigListResponse> {}
 
 export interface ConfigCreateResponse {
+  /**
+   * Config ID
+   */
   id: string;
 
   account_id: string;
 
+  /**
+   * The number of days between each scan (0 = no recurring scans).
+   */
   frequency: number;
 
+  /**
+   * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP
+   * addresses allowed is 5000.
+   */
   ips: Array<string>;
 
+  /**
+   * A list of ports to scan. Allowed values:"default", "all", or a comma-separated
+   * list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the
+   * 100 most commonly open ports.
+   */
   ports: Array<string>;
 }
 
 export interface ConfigListResponse {
+  /**
+   * Config ID
+   */
   id: string;
 
   account_id: string;
 
+  /**
+   * The number of days between each scan (0 = no recurring scans).
+   */
   frequency: number;
 
+  /**
+   * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP
+   * addresses allowed is 5000.
+   */
   ips: Array<string>;
 
+  /**
+   * A list of ports to scan. Allowed values:"default", "all", or a comma-separated
+   * list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the
+   * 100 most commonly open ports.
+   */
   ports: Array<string>;
 }
 
 export type ConfigDeleteResponse = unknown;
 
 export interface ConfigEditResponse {
+  /**
+   * Config ID
+   */
   id: string;
 
   account_id: string;
 
+  /**
+   * The number of days between each scan (0 = no recurring scans).
+   */
   frequency: number;
 
+  /**
+   * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP
+   * addresses allowed is 5000.
+   */
   ips: Array<string>;
 
+  /**
+   * A list of ports to scan. Allowed values:"default", "all", or a comma-separated
+   * list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the
+   * 100 most commonly open ports.
+   */
   ports: Array<string>;
 }
 
