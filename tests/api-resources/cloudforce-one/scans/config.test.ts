@@ -13,7 +13,7 @@ describe('resource config', () => {
   test('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.scans.config.create({
       account_id: 'account_id',
-      ips: ['1.1.1.1'],
+      ips: ['1.1.1.1', '2606:4700:4700::1111'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource config', () => {
   test('create: required and optional params', async () => {
     const response = await client.cloudforceOne.scans.config.create({
       account_id: 'account_id',
-      ips: ['1.1.1.1'],
+      ips: ['1.1.1.1', '2606:4700:4700::1111'],
       frequency: 7,
       ports: ['default'],
     });
@@ -82,7 +82,7 @@ describe('resource config', () => {
     const response = await client.cloudforceOne.scans.config.edit('config_id', {
       account_id: 'account_id',
       frequency: 7,
-      ips: ['1.1.1.1'],
+      ips: ['1.1.1.1', '2606:4700:4700::1111'],
       ports: ['default'],
     });
   });
