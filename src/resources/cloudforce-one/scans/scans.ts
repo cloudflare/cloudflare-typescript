@@ -6,12 +6,14 @@ import {
   Config,
   ConfigCreateParams,
   ConfigCreateResponse,
+  ConfigDeleteParams,
+  ConfigDeleteResponse,
   ConfigListParams,
   ConfigListResponse,
   ConfigListResponsesSinglePage,
 } from './config';
 import * as ResultsAPI from './results';
-import { Results } from './results';
+import { ResultGetParams, ResultGetResponse, Results } from './results';
 
 export class Scans extends APIResource {
   results: ResultsAPI.Results = new ResultsAPI.Results(this._client);
@@ -22,14 +24,20 @@ Scans.Results = Results;
 Scans.Config = Config;
 
 export declare namespace Scans {
-  export { Results as Results };
+  export {
+    Results as Results,
+    type ResultGetResponse as ResultGetResponse,
+    type ResultGetParams as ResultGetParams,
+  };
 
   export {
     Config as Config,
     type ConfigCreateResponse as ConfigCreateResponse,
     type ConfigListResponse as ConfigListResponse,
+    type ConfigDeleteResponse as ConfigDeleteResponse,
     type ConfigListResponsesSinglePage as ConfigListResponsesSinglePage,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigListParams as ConfigListParams,
+    type ConfigDeleteParams as ConfigDeleteParams,
   };
 }
