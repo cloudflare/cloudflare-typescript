@@ -13,7 +13,6 @@ describe('resource config', () => {
   test('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.scans.config.create({
       account_id: 'account_id',
-      frequency: 7,
       ips: ['1.1.1.1'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,8 +27,9 @@ describe('resource config', () => {
   test('create: required and optional params', async () => {
     const response = await client.cloudforceOne.scans.config.create({
       account_id: 'account_id',
-      frequency: 7,
       ips: ['1.1.1.1'],
+      frequency: 7,
+      ports: ['default'],
     });
   });
 
@@ -46,20 +46,5 @@ describe('resource config', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.cloudforceOne.scans.config.list({ account_id: 'account_id' });
-  });
-
-  test('delete: only required params', async () => {
-    const responsePromise = client.cloudforceOne.scans.config.delete({ account_id: 'account_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('delete: required and optional params', async () => {
-    const response = await client.cloudforceOne.scans.config.delete({ account_id: 'account_id' });
   });
 });
