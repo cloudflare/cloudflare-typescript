@@ -5,9 +5,11 @@ export {
   type ConfigCreateResponse,
   type ConfigListResponse,
   type ConfigDeleteResponse,
+  type ConfigEditResponse,
   type ConfigCreateParams,
   type ConfigListParams,
   type ConfigDeleteParams,
+  type ConfigEditParams,
   type ConfigListResponsesSinglePage,
 } from './config';
 export { Results, type ResultGetResponse, type ResultGetParams } from './results';
