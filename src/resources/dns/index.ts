@@ -55,12 +55,5 @@ export {
   type RecordImportParams,
   type RecordScanParams,
 } from './records';
-export {
-  Settings,
-  type DNSSetting,
-  type SettingEditResponse,
-  type SettingGetResponse,
-  type SettingEditParams,
-  type SettingGetParams,
-} from './settings/index';
+export { Settings, type DNSSetting } from './settings/index';
 export { ZoneTransfers } from './zone-transfers/index';

@@ -188,7 +188,7 @@ export class CursorPagination<Item> extends AbstractPage<Item> implements Cursor
 
     return {
       params: {
-        cursor: cursor,
+        cursor,
       },
     };
   }
@@ -258,7 +258,7 @@ export class CursorLimitPagination<Item>
 
     return {
       params: {
-        cursor: cursor,
+        cursor,
       },
     };
   }

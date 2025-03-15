@@ -326,7 +326,7 @@ export interface OutputOptions {
    * If set to true, will cause all occurrences of `${` in the generated files to be
    * replaced with `x{`.
    */
-  'CVE-2021-4428'?: boolean | null;
+  'CVE-2021-44228'?: boolean | null;
 
   /**
    * String to join fields. This field be ignored when `record_template` is set.
@@ -402,7 +402,7 @@ export interface OutputOptionsParam {
    * If set to true, will cause all occurrences of `${` in the generated files to be
    * replaced with `x{`.
    */
-  'CVE-2021-4428'?: boolean | null;
+  'CVE-2021-44228'?: boolean | null;
 
   /**
    * String to join fields. This field be ignored when `record_template` is set.

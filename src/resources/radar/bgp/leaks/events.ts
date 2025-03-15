@@ -7,7 +7,7 @@ import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagin
 
 export class Events extends APIResource {
   /**
-   * Get the BGP route leak events (Beta).
+   * Retrieves the BGP route leak events.
    */
   list(
     query?: EventListParams,
@@ -94,37 +94,37 @@ export interface EventListParams extends V4PagePaginationParams {
   dateStart?: string;
 
   /**
-   * The unique identifier of a event
+   * The unique identifier of a event.
    */
   eventId?: number;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * ASN that is causing or affected by a route leak event
+   * ASN that is causing or affected by a route leak event.
    */
   involvedAsn?: number;
 
   /**
-   * Country code of a involved ASN in a route leak event
+   * Country code of a involved ASN in a route leak event.
    */
   involvedCountry?: string;
 
   /**
-   * The leaking AS of a route leak event
+   * The leaking AS of a route leak event.
    */
   leakAsn?: number;
 
   /**
-   * Sort events by field
+   * Sorts results by the specified field.
    */
   sortBy?: 'ID' | 'LEAKS' | 'PEERS' | 'PREFIXES' | 'ORIGINS' | 'TIME';
 
   /**
-   * Sort order
+   * Sort order.
    */
   sortOrder?: 'ASC' | 'DESC';
 }

@@ -26,6 +26,14 @@ export interface IPGetParams {
   account_id: string;
 
   /**
+   * Query param: When the virtual_network_id parameter is not provided the request
+   * filter will default search routes that are in the default virtual network for
+   * the account. If this parameter is set to false, the search will include routes
+   * that do not have a virtual network.
+   */
+  default_virtual_network_fallback?: boolean;
+
+  /**
    * Query param: UUID of the virtual network.
    */
   virtual_network_id?: string;

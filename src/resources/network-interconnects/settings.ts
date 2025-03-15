@@ -22,11 +22,11 @@ export class Settings extends APIResource {
 }
 
 export interface SettingUpdateResponse {
-  default_asn?: number | null;
+  default_asn: number;
 }
 
 export interface SettingGetResponse {
-  default_asn?: number | null;
+  default_asn: number;
 }
 
 export interface SettingUpdateParams {

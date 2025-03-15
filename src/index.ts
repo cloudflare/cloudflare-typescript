@@ -24,6 +24,7 @@ import { BotManagement } from './resources/bot-management';
 import { BrandProtection } from './resources/brand-protection';
 import { ClientCertificates } from './resources/client-certificates';
 import { CustomNameservers } from './resources/custom-nameservers';
+import { CustomPages } from './resources/custom-pages';
 import { DCVDelegation } from './resources/dcv-delegation';
 import { Filters } from './resources/filters';
 import { IPs } from './resources/ips';
@@ -46,6 +47,7 @@ import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
 import { Billing } from './resources/billing/billing';
 import { BotnetFeed } from './resources/botnet-feed/botnet-feed';
+import { BrowserRendering } from './resources/browser-rendering/browser-rendering';
 import { Cache } from './resources/cache/cache';
 import { Calls } from './resources/calls/calls';
 import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
@@ -104,6 +106,7 @@ import { Web3 } from './resources/web3/web3';
 import { WorkersForPlatforms } from './resources/workers-for-platforms/workers-for-platforms';
 import { Workers } from './resources/workers/workers';
 import { Workflows } from './resources/workflows/workflows';
+import { Zaraz } from './resources/zaraz/zaraz';
 import { ZeroTrust } from './resources/zero-trust/zero-trust';
 import { Zones } from './resources/zones/zones';
 
@@ -314,6 +317,7 @@ export class Cloudflare extends Core.APIClient {
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
+  zaraz: API.Zaraz = new API.Zaraz(this);
   speed: API.Speed = new API.Speed(this);
   dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
@@ -332,6 +336,8 @@ export class Cloudflare extends Core.APIClient {
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
+  browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
+  customPages: API.CustomPages = new API.CustomPages(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -528,6 +534,7 @@ Cloudflare.URLScanner = URLScanner;
 Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
+Cloudflare.Zaraz = Zaraz;
 Cloudflare.Speed = Speed;
 Cloudflare.DCVDelegation = DCVDelegation;
 Cloudflare.Hostnames = Hostnames;
@@ -546,6 +553,8 @@ Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
 Cloudflare.SecurityCenter = SecurityCenter;
+Cloudflare.BrowserRendering = BrowserRendering;
+Cloudflare.CustomPages = CustomPages;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -716,6 +725,8 @@ export declare namespace Cloudflare {
 
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
 
+  export { Zaraz as Zaraz };
+
   export { Speed as Speed };
 
   export { DCVDelegation as DCVDelegation };
@@ -751,6 +762,10 @@ export declare namespace Cloudflare {
   export { AI as AI };
 
   export { SecurityCenter as SecurityCenter };
+
+  export { BrowserRendering as BrowserRendering };
+
+  export { CustomPages as CustomPages };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

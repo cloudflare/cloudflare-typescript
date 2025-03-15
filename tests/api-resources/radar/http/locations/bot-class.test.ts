@@ -47,7 +47,7 @@ describe('resource botClass', () => {
           ipVersion: ['IPv4'],
           limit: 5,
           location: ['string'],
-          name: ['string'],
+          name: ['main_series'],
           os: ['WINDOWS'],
           tlsVersion: ['TLSv1_0'],
         },

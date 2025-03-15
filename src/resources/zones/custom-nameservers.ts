@@ -5,6 +5,9 @@ import * as Core from '../../core';
 import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
+/**
+ * @deprecated Use DNS settings API instead.
+ */
 export class CustomNameservers extends APIResource {
   /**
    * Set metadata for account-level custom nameservers on a zone.

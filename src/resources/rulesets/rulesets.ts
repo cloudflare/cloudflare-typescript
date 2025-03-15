@@ -1407,9 +1407,26 @@ export interface RulesetCreateParams {
   phase: PhaseParam;
 
   /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
+
+  /**
+   * Body param: An informative description of the ruleset.
+   */
+  description?: string;
+
+  /**
    * Body param: The list of rules in the ruleset.
    */
-  rules: Array<
+  rules?: Array<
     | RulesAPI.BlockRuleParam
     | RulesetCreateParams.RulesetsChallengeRule
     | RulesAPI.CompressResponseRuleParam
@@ -1429,23 +1446,6 @@ export interface RulesetCreateParams {
     | RulesAPI.DDoSDynamicRuleParam
     | RulesAPI.ForceConnectionCloseRuleParam
   >;
-
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id?: string;
-
-  /**
-   * Body param: An informative description of the ruleset.
-   */
-  description?: string;
 }
 
 export namespace RulesetCreateParams {
@@ -1692,30 +1692,6 @@ export namespace RulesetCreateParams {
 
 export interface RulesetUpdateParams {
   /**
-   * Body param: The list of rules in the ruleset.
-   */
-  rules: Array<
-    | RulesAPI.BlockRuleParam
-    | RulesetUpdateParams.RulesetsChallengeRule
-    | RulesAPI.CompressResponseRuleParam
-    | RulesAPI.ExecuteRuleParam
-    | RulesetUpdateParams.RulesetsJSChallengeRule
-    | RulesAPI.LogRuleParam
-    | RulesAPI.ManagedChallengeRuleParam
-    | RulesAPI.RedirectRuleParam
-    | RulesAPI.RewriteRuleParam
-    | RulesAPI.RouteRuleParam
-    | RulesAPI.ScoreRuleParam
-    | RulesAPI.ServeErrorRuleParam
-    | RulesAPI.SetConfigRuleParam
-    | RulesAPI.SkipRuleParam
-    | RulesAPI.SetCacheSettingsRuleParam
-    | RulesAPI.LogCustomFieldRuleParam
-    | RulesAPI.DDoSDynamicRuleParam
-    | RulesAPI.ForceConnectionCloseRuleParam
-  >;
-
-  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -1746,6 +1722,30 @@ export interface RulesetUpdateParams {
    * Body param: The phase of the ruleset.
    */
   phase?: PhaseParam;
+
+  /**
+   * Body param: The list of rules in the ruleset.
+   */
+  rules?: Array<
+    | RulesAPI.BlockRuleParam
+    | RulesetUpdateParams.RulesetsChallengeRule
+    | RulesAPI.CompressResponseRuleParam
+    | RulesAPI.ExecuteRuleParam
+    | RulesetUpdateParams.RulesetsJSChallengeRule
+    | RulesAPI.LogRuleParam
+    | RulesAPI.ManagedChallengeRuleParam
+    | RulesAPI.RedirectRuleParam
+    | RulesAPI.RewriteRuleParam
+    | RulesAPI.RouteRuleParam
+    | RulesAPI.ScoreRuleParam
+    | RulesAPI.ServeErrorRuleParam
+    | RulesAPI.SetConfigRuleParam
+    | RulesAPI.SkipRuleParam
+    | RulesAPI.SetCacheSettingsRuleParam
+    | RulesAPI.LogCustomFieldRuleParam
+    | RulesAPI.DDoSDynamicRuleParam
+    | RulesAPI.ForceConnectionCloseRuleParam
+  >;
 }
 
 export namespace RulesetUpdateParams {

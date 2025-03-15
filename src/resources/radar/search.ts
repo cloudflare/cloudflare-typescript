@@ -5,7 +5,7 @@ import * as Core from '../../core';
 
 export class Search extends APIResource {
   /**
-   * Lets you search for locations, autonomous systems (ASes), and reports.
+   * Searches for locations, autonomous systems, and reports.
    */
   global(query: SearchGlobalParams, options?: Core.RequestOptions): Core.APIPromise<SearchGlobalResponse> {
     return (
@@ -32,7 +32,7 @@ export namespace SearchGlobalResponse {
 
 export interface SearchGlobalParams {
   /**
-   * Search for locations, AS and reports.
+   * Search for locations, autonomous systems and reports.
    */
   query: string;
 
@@ -42,7 +42,7 @@ export interface SearchGlobalParams {
   exclude?: Array<'SPECIAL_EVENTS' | 'NOTEBOOKS' | 'LOCATIONS' | 'ASNS'>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
@@ -52,7 +52,7 @@ export interface SearchGlobalParams {
   include?: Array<'SPECIAL_EVENTS' | 'NOTEBOOKS' | 'LOCATIONS' | 'ASNS'>;
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 

@@ -165,9 +165,21 @@ export interface CustomCreateParams {
   enabled?: boolean;
 
   /**
+   * Body param: List of routes excluded in the WARP client's tunnel. Both 'exclude'
+   * and 'include' cannot be set in the same request.
+   */
+  exclude?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+
+  /**
    * Body param: Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
+
+  /**
+   * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
+   * and 'include' cannot be set in the same request.
+   */
+  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
 
   /**
    * Body param: The amount of time in minutes a user is allowed access to their LAN.
@@ -182,6 +194,12 @@ export interface CustomCreateParams {
    * field is omitted from the response if null or unset.
    */
   lan_allow_subnet_size?: number;
+
+  /**
+   * Body param: Determines if the operating system will register WARP's local
+   * interface IP with your on-premises DNS server.
+   */
+  register_interface_ip_with_dns?: boolean;
 
   /**
    * Body param:
@@ -278,9 +296,21 @@ export interface CustomEditParams {
   enabled?: boolean;
 
   /**
+   * Body param: List of routes excluded in the WARP client's tunnel. Both 'exclude'
+   * and 'include' cannot be set in the same request.
+   */
+  exclude?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+
+  /**
    * Body param: Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
+
+  /**
+   * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
+   * and 'include' cannot be set in the same request.
+   */
+  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
 
   /**
    * Body param: The wirefilter expression to match devices.
@@ -297,6 +327,12 @@ export interface CustomEditParams {
    * precedence. Policies will be evaluated in ascending order of this field.
    */
   precedence?: number;
+
+  /**
+   * Body param: Determines if the operating system will register WARP's local
+   * interface IP with your on-premises DNS server.
+   */
+  register_interface_ip_with_dns?: boolean;
 
   /**
    * Body param:

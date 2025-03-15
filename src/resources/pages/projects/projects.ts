@@ -155,14 +155,14 @@ export interface Deployment {
   deployment_trigger?: Deployment.DeploymentTrigger;
 
   /**
-   * A dict of env variables to build this deploy.
+   * Environment variables used for builds and Pages Functions.
    */
-  env_vars?: Record<string, Deployment.EnvVars | null>;
+  env_vars?: Record<string, Deployment.PagesPlainTextEnvVar | null | Deployment.PagesSecretTextEnvVar | null>;
 
   /**
    * Type of deploy.
    */
-  environment?: string;
+  environment?: 'preview' | 'production';
 
   /**
    * If the deployment has been skipped.
@@ -255,7 +255,7 @@ export namespace Deployment {
     /**
      * What caused the deployment.
      */
-    type?: string;
+    type?: 'push' | 'ad_hoc';
   }
 
   export namespace DeploymentTrigger {
@@ -281,18 +281,27 @@ export namespace Deployment {
   }
 
   /**
-   * Environment variable.
+   * A plaintext environment variable.
    */
-  export interface EnvVars {
+  export interface PagesPlainTextEnvVar {
+    type: 'plain_text';
+
     /**
      * Environment variable value.
      */
     value: string;
+  }
+
+  /**
+   * An encrypted environment variable.
+   */
+  export interface PagesSecretTextEnvVar {
+    type: 'secret_text';
 
     /**
-     * The type of environment variable.
+     * Secret value.
      */
-    type?: string;
+    value: string;
   }
 
   export interface Source {
@@ -469,14 +478,14 @@ export namespace Project {
       d1_databases?: Record<string, Preview.D1Databases | null> | null;
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durable Object namespaces used for Pages Functions.
        */
       durable_object_namespaces?: Record<string, Preview.DurableObjectNamespaces | null> | null;
 
       /**
-       * Environment variables for build configs.
+       * Environment variables used for builds and Pages Functions.
        */
-      env_vars?: Record<string, Preview.EnvVars | null> | null;
+      env_vars?: Record<string, Preview.PagesPlainTextEnvVar | null | Preview.PagesSecretTextEnvVar | null>;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -553,28 +562,37 @@ export namespace Project {
       }
 
       /**
-       * Durabble Object binding.
+       * Durable Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * ID of the Durabble Object namespace.
+         * ID of the Durable Object namespace.
          */
         namespace_id?: string;
       }
 
       /**
-       * Environment variable.
+       * A plaintext environment variable.
        */
-      export interface EnvVars {
+      export interface PagesPlainTextEnvVar {
+        type: 'plain_text';
+
         /**
          * Environment variable value.
          */
         value: string;
+      }
+
+      /**
+       * An encrypted environment variable.
+       */
+      export interface PagesSecretTextEnvVar {
+        type: 'secret_text';
 
         /**
-         * The type of environment variable.
+         * Secret value.
          */
-        type?: 'plain_text' | 'secret_text';
+        value: string;
       }
 
       /**
@@ -699,14 +717,17 @@ export namespace Project {
       d1_databases?: Record<string, Production.D1Databases | null> | null;
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durable Object namespaces used for Pages Functions.
        */
       durable_object_namespaces?: Record<string, Production.DurableObjectNamespaces | null> | null;
 
       /**
-       * Environment variables for build configs.
+       * Environment variables used for builds and Pages Functions.
        */
-      env_vars?: Record<string, Production.EnvVars | null> | null;
+      env_vars?: Record<
+        string,
+        Production.PagesPlainTextEnvVar | null | Production.PagesSecretTextEnvVar | null
+      >;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -783,28 +804,37 @@ export namespace Project {
       }
 
       /**
-       * Durabble Object binding.
+       * Durable Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * ID of the Durabble Object namespace.
+         * ID of the Durable Object namespace.
          */
         namespace_id?: string;
       }
 
       /**
-       * Environment variable.
+       * A plaintext environment variable.
        */
-      export interface EnvVars {
+      export interface PagesPlainTextEnvVar {
+        type: 'plain_text';
+
         /**
          * Environment variable value.
          */
         value: string;
+      }
+
+      /**
+       * An encrypted environment variable.
+       */
+      export interface PagesSecretTextEnvVar {
+        type: 'secret_text';
 
         /**
-         * The type of environment variable.
+         * Secret value.
          */
-        type?: 'plain_text' | 'secret_text';
+        value: string;
       }
 
       /**
@@ -940,7 +970,7 @@ export interface Stage {
   /**
    * The current build stage.
    */
-  name?: string;
+  name?: 'queued' | 'initialize' | 'clone_repo' | 'build' | 'deploy';
 
   /**
    * When the stage started.
@@ -950,7 +980,7 @@ export interface Stage {
   /**
    * State of the current stage.
    */
-  status?: string;
+  status?: 'success' | 'idle' | 'active' | 'failure' | 'canceled';
 }
 
 export type ProjectDeleteResponse = unknown;
@@ -1072,14 +1102,14 @@ export namespace ProjectCreateParams {
       d1_databases?: Record<string, Preview.D1Databases | null> | null;
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durable Object namespaces used for Pages Functions.
        */
       durable_object_namespaces?: Record<string, Preview.DurableObjectNamespaces | null> | null;
 
       /**
-       * Environment variables for build configs.
+       * Environment variables used for builds and Pages Functions.
        */
-      env_vars?: Record<string, Preview.EnvVars | null> | null;
+      env_vars?: Record<string, Preview.PagesPlainTextEnvVar | null | Preview.PagesSecretTextEnvVar | null>;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -1156,28 +1186,37 @@ export namespace ProjectCreateParams {
       }
 
       /**
-       * Durabble Object binding.
+       * Durable Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * ID of the Durabble Object namespace.
+         * ID of the Durable Object namespace.
          */
         namespace_id?: string;
       }
 
       /**
-       * Environment variable.
+       * A plaintext environment variable.
        */
-      export interface EnvVars {
+      export interface PagesPlainTextEnvVar {
+        type: 'plain_text';
+
         /**
          * Environment variable value.
          */
         value: string;
+      }
+
+      /**
+       * An encrypted environment variable.
+       */
+      export interface PagesSecretTextEnvVar {
+        type: 'secret_text';
 
         /**
-         * The type of environment variable.
+         * Secret value.
          */
-        type?: 'plain_text' | 'secret_text';
+        value: string;
       }
 
       /**
@@ -1302,14 +1341,17 @@ export namespace ProjectCreateParams {
       d1_databases?: Record<string, Production.D1Databases | null> | null;
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durable Object namespaces used for Pages Functions.
        */
       durable_object_namespaces?: Record<string, Production.DurableObjectNamespaces | null> | null;
 
       /**
-       * Environment variables for build configs.
+       * Environment variables used for builds and Pages Functions.
        */
-      env_vars?: Record<string, Production.EnvVars | null> | null;
+      env_vars?: Record<
+        string,
+        Production.PagesPlainTextEnvVar | null | Production.PagesSecretTextEnvVar | null
+      >;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -1386,28 +1428,37 @@ export namespace ProjectCreateParams {
       }
 
       /**
-       * Durabble Object binding.
+       * Durable Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * ID of the Durabble Object namespace.
+         * ID of the Durable Object namespace.
          */
         namespace_id?: string;
       }
 
       /**
-       * Environment variable.
+       * A plaintext environment variable.
        */
-      export interface EnvVars {
+      export interface PagesPlainTextEnvVar {
+        type: 'plain_text';
+
         /**
          * Environment variable value.
          */
         value: string;
+      }
+
+      /**
+       * An encrypted environment variable.
+       */
+      export interface PagesSecretTextEnvVar {
+        type: 'secret_text';
 
         /**
-         * The type of environment variable.
+         * Secret value.
          */
-        type?: 'plain_text' | 'secret_text';
+        value: string;
       }
 
       /**
@@ -1628,14 +1679,14 @@ export namespace ProjectEditParams {
       d1_databases?: Record<string, Preview.D1Databases | null> | null;
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durable Object namespaces used for Pages Functions.
        */
       durable_object_namespaces?: Record<string, Preview.DurableObjectNamespaces | null> | null;
 
       /**
-       * Environment variables for build configs.
+       * Environment variables used for builds and Pages Functions.
        */
-      env_vars?: Record<string, Preview.EnvVars | null> | null;
+      env_vars?: Record<string, Preview.PagesPlainTextEnvVar | null | Preview.PagesSecretTextEnvVar | null>;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -1712,28 +1763,37 @@ export namespace ProjectEditParams {
       }
 
       /**
-       * Durabble Object binding.
+       * Durable Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * ID of the Durabble Object namespace.
+         * ID of the Durable Object namespace.
          */
         namespace_id?: string;
       }
 
       /**
-       * Environment variable.
+       * A plaintext environment variable.
        */
-      export interface EnvVars {
+      export interface PagesPlainTextEnvVar {
+        type: 'plain_text';
+
         /**
          * Environment variable value.
          */
         value: string;
+      }
+
+      /**
+       * An encrypted environment variable.
+       */
+      export interface PagesSecretTextEnvVar {
+        type: 'secret_text';
 
         /**
-         * The type of environment variable.
+         * Secret value.
          */
-        type?: 'plain_text' | 'secret_text';
+        value: string;
       }
 
       /**
@@ -1858,14 +1918,17 @@ export namespace ProjectEditParams {
       d1_databases?: Record<string, Production.D1Databases | null> | null;
 
       /**
-       * Durabble Object namespaces used for Pages Functions.
+       * Durable Object namespaces used for Pages Functions.
        */
       durable_object_namespaces?: Record<string, Production.DurableObjectNamespaces | null> | null;
 
       /**
-       * Environment variables for build configs.
+       * Environment variables used for builds and Pages Functions.
        */
-      env_vars?: Record<string, Production.EnvVars | null> | null;
+      env_vars?: Record<
+        string,
+        Production.PagesPlainTextEnvVar | null | Production.PagesSecretTextEnvVar | null
+      >;
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -1942,28 +2005,37 @@ export namespace ProjectEditParams {
       }
 
       /**
-       * Durabble Object binding.
+       * Durable Object binding.
        */
       export interface DurableObjectNamespaces {
         /**
-         * ID of the Durabble Object namespace.
+         * ID of the Durable Object namespace.
          */
         namespace_id?: string;
       }
 
       /**
-       * Environment variable.
+       * A plaintext environment variable.
        */
-      export interface EnvVars {
+      export interface PagesPlainTextEnvVar {
+        type: 'plain_text';
+
         /**
          * Environment variable value.
          */
         value: string;
+      }
+
+      /**
+       * An encrypted environment variable.
+       */
+      export interface PagesSecretTextEnvVar {
+        type: 'secret_text';
 
         /**
-         * The type of environment variable.
+         * Secret value.
          */
-        type?: 'plain_text' | 'secret_text';
+        value: string;
       }
 
       /**

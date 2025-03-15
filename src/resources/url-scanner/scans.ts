@@ -44,7 +44,7 @@ export class Scans extends APIResource {
     params: ScanBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanBulkCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id, body } = params ?? {};
     return this._client.post(`/accounts/${account_id}/urlscanner/v2/bulk`, { body: body, ...options });
   }
 
@@ -1302,7 +1302,7 @@ export interface ScanBulkCreateParams {
   /**
    * Body param: List of urls to scan (up to a 100).
    */
-  body: Array<ScanBulkCreateParams.Body>;
+  body?: Array<ScanBulkCreateParams.Body>;
 }
 
 export namespace ScanBulkCreateParams {

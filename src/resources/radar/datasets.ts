@@ -6,7 +6,7 @@ import * as Core from '../../core';
 
 export class Datasets extends APIResource {
   /**
-   * Get a list of datasets.
+   * Retrieves a list of datasets.
    */
   list(query?: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
@@ -25,7 +25,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Get a URL to download a single dataset.
+   * Retrieves an URL to download a single dataset.
    */
   download(
     params: DatasetDownloadParams,
@@ -42,9 +42,9 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Get the CSV content of a given dataset by alias or ID. When getting the content
-   * by alias the latest dataset is returned, optionally filtered by the latest
-   * available at a given date.
+   * Retrieves the CSV content of a given dataset by alias or ID. When getting the
+   * content by alias the latest dataset is returned, optionally filtered by the
+   * latest available at a given date.
    */
   get(alias: string, options?: Core.RequestOptions): Core.APIPromise<string> {
     return this._client.get(`/radar/datasets/${alias}`, {
@@ -88,22 +88,27 @@ export type DatasetGetResponse = string;
 
 export interface DatasetListParams {
   /**
-   * Dataset type.
+   * Filters results by dataset type.
    */
   datasetType?: 'RANKING_BUCKET' | 'REPORT';
 
   /**
-   * Format results are returned in.
+   * Filters results by the specified date.
+   */
+  date?: string;
+
+  /**
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Number of objects to skip before grabbing results.
+   * Skips the specified number of objects before fetching the results.
    */
   offset?: number;
 }
@@ -115,7 +120,7 @@ export interface DatasetDownloadParams {
   datasetId: number;
 
   /**
-   * Query param: Format results are returned in.
+   * Query param: Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 }

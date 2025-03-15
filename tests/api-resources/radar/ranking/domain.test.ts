@@ -38,7 +38,7 @@ describe('resource domain', () => {
           format: 'JSON',
           includeTopLocations: true,
           limit: 5,
-          name: ['string'],
+          name: ['main_series'],
           rankingType: 'POPULAR',
         },
         { path: '/_stainless_unknown_path' },

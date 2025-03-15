@@ -41,7 +41,7 @@ describe('resource tlds', () => {
           dmarc: ['PASS'],
           format: 'JSON',
           limit: 5,
-          name: ['string'],
+          name: ['main_series'],
           spf: ['PASS'],
           tldCategory: 'CLASSIC',
           tlsVersion: ['TLSv1_0'],

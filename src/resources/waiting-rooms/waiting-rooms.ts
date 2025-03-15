@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as PageAPI from './page';
 import { Page, PagePreviewParams, PagePreviewResponse } from './page';
@@ -41,6 +42,7 @@ import {
   Events,
   EventsV4PagePaginationArray,
 } from './events/events';
+import { CloudflareError } from '../../error';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class WaitingRooms extends APIResource {
@@ -80,17 +82,42 @@ export class WaitingRooms extends APIResource {
   }
 
   /**
-   * Lists waiting rooms.
+   * Lists waiting rooms for account or zone.
    */
   list(
-    params: WaitingRoomListParams,
+    params?: WaitingRoomListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom>;
+  list(options?: Core.RequestOptions): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom>;
+  list(
+    params: WaitingRoomListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom> {
-    const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id, zone_id, ...query } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/waiting_rooms`,
+      WaitingRoomsV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -1753,9 +1780,16 @@ export interface WaitingRoomUpdateParams {
 
 export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
-  zone_id: string;
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 }
 
 export interface WaitingRoomDeleteParams {

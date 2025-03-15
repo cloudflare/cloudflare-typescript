@@ -149,7 +149,7 @@ export interface Bucket {
   /**
    * Location of the bucket
    */
-  location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
+  location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
   /**
    * Name of the bucket
@@ -182,7 +182,7 @@ export interface BucketCreateParams {
   /**
    * Body param: Location of the bucket
    */
-  locationHint?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
+  locationHint?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
   /**
    * Body param: Storage class for newly uploaded objects, unless specified

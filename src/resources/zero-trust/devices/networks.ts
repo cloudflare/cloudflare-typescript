@@ -136,7 +136,8 @@ export interface NetworkCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The configuration object containing information for the WARP client
+   * to detect the managed network.
    */
   config: NetworkCreateParams.Config;
 
@@ -152,6 +153,10 @@ export interface NetworkCreateParams {
 }
 
 export namespace NetworkCreateParams {
+  /**
+   * The configuration object containing information for the WARP client to detect
+   * the managed network.
+   */
   export interface Config {
     /**
      * A network address of the form "host:port" that the WARP client will use to
@@ -175,7 +180,8 @@ export interface NetworkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The configuration object containing information for the WARP client
+   * to detect the managed network.
    */
   config?: NetworkUpdateParams.Config;
 
@@ -191,6 +197,10 @@ export interface NetworkUpdateParams {
 }
 
 export namespace NetworkUpdateParams {
+  /**
+   * The configuration object containing information for the WARP client to detect
+   * the managed network.
+   */
   export interface Config {
     /**
      * A network address of the form "host:port" that the WARP client will use to

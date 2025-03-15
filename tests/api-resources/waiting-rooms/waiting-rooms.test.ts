@@ -100,8 +100,8 @@ describe('resource waitingRooms', () => {
     });
   });
 
-  test('list: only required params', async () => {
-    const responsePromise = client.waitingRooms.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  test('list', async () => {
+    const responsePromise = client.waitingRooms.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -109,14 +109,6 @@ describe('resource waitingRooms', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('list: required and optional params', async () => {
-    const response = await client.waitingRooms.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      page: 1,
-      per_page: 5,
-    });
   });
 
   test('delete: only required params', async () => {

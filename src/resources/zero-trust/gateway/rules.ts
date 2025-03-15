@@ -197,12 +197,12 @@ export interface DNSResolverSettingsV6Param {
 /**
  * The protocol or layer to use.
  */
-export type GatewayFilter = 'http' | 'dns' | 'l4' | 'egress';
+export type GatewayFilter = 'http' | 'dns' | 'l4' | 'egress' | 'dns_resolver';
 
 /**
  * The protocol or layer to use.
  */
-export type GatewayFilterParam = 'http' | 'dns' | 'l4' | 'egress';
+export type GatewayFilterParam = 'http' | 'dns' | 'l4' | 'egress' | 'dns_resolver';
 
 export interface GatewayRule {
   /**

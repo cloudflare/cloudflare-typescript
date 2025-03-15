@@ -96,7 +96,7 @@ export interface NetworkDeleteParams {
   /**
    * Query param: The type of tunnel.
    */
-  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
 
   /**
    * Query param: UUID of the tunnel.

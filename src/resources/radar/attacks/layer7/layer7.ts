@@ -54,8 +54,7 @@ export class Layer7 extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
-   * Get a timeseries of Layer 7 attacks. Values represent HTTP requests and are
-   * normalized using min-max by default.
+   * Retrieves layer 7 attacks over time.
    */
   timeseries(
     query?: Layer7TimeseriesParams,
@@ -148,29 +147,16 @@ export interface Layer7TimeseriesParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * This field is deprecated, please use the new `mitigationProduct`.
-   */
-  attack?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
-
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -180,24 +166,24 @@ export interface Layer7TimeseriesParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for http method.
+   * Filters results by HTTP method.
    */
   httpMethod?: Array<
     | 'GET'
@@ -249,19 +235,19 @@ export interface Layer7TimeseriesParams {
   >;
 
   /**
-   * Filter for http version.
+   * Filters results by HTTP version.
    */
   httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
 
   /**
-   * Filter for ip version.
+   * Filters results by IP version (Ipv4 vs. IPv6).
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
@@ -279,7 +265,7 @@ export interface Layer7TimeseriesParams {
   >;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 

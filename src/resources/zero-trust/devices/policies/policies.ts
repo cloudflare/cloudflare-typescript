@@ -126,6 +126,9 @@ export interface SettingsPolicy {
    */
   enabled?: boolean;
 
+  /**
+   * List of routes excluded in the WARP client's tunnel.
+   */
   exclude?: Array<SplitTunnelExclude>;
 
   /**
@@ -137,6 +140,9 @@ export interface SettingsPolicy {
 
   gateway_unique_id?: string;
 
+  /**
+   * List of routes included in the WARP client's tunnel.
+   */
   include?: Array<SplitTunnelInclude>;
 
   /**
@@ -173,6 +179,12 @@ export interface SettingsPolicy {
    * will be evaluated in ascending order of this field.
    */
   precedence?: number;
+
+  /**
+   * Determines if the operating system will register WARP's local interface IP with
+   * your on-premises DNS server.
+   */
+  register_interface_ip_with_dns?: boolean;
 
   service_mode_v2?: SettingsPolicy.ServiceModeV2;
 

@@ -48,7 +48,7 @@ describe('resource os', () => {
           ipVersion: ['IPv4'],
           limit: 5,
           location: ['string'],
-          name: ['string'],
+          name: ['main_series'],
           tlsVersion: ['TLSv1_0'],
         },
         { path: '/_stainless_unknown_path' },

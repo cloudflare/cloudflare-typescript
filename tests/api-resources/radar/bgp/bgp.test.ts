@@ -39,7 +39,7 @@ describe('resource bgp', () => {
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          name: ['string'],
+          name: ['main_series'],
           prefix: ['1.1.1.0/24'],
           updateType: ['ANNOUNCEMENT'],
         },

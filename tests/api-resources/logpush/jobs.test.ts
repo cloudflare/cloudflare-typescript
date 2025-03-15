@@ -42,7 +42,7 @@ describe('resource jobs', () => {
       output_options: {
         batch_prefix: 'batch_prefix',
         batch_suffix: 'batch_suffix',
-        'CVE-2021-4428': true,
+        'CVE-2021-44228': true,
         field_delimiter: 'field_delimiter',
         field_names: ['ClientIP', 'EdgeStartTimestamp', 'RayID'],
         output_type: 'ndjson',

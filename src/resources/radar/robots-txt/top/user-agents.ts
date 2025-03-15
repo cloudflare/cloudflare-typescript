@@ -6,7 +6,7 @@ import * as Core from '../../../../core';
 
 export class UserAgents extends APIResource {
   /**
-   * Get the top user agents on robots.txt files by directive.
+   * Retrieves the top user agents on robots.txt files.
    */
   directive(
     query?: UserAgentDirectiveParams,
@@ -105,37 +105,37 @@ export namespace UserAgentDirectiveResponse {
 
 export interface UserAgentDirectiveParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 
   /**
-   * Filter by directive.
+   * Filters results by robots.txt directive.
    */
   directive?: 'ALLOW' | 'DISALLOW';
 
   /**
-   * Filter by domain category.
+   * Filters results by domain category.
    */
   domainCategory?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter by user agent category.
+   * Filters results by user agent category.
    */
   userAgentCategory?: 'AI';
 }

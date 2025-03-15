@@ -478,107 +478,107 @@ export namespace AAAARecordParam {
 }
 
 export type BatchPatch =
-  | BatchPatch.ARecord
-  | BatchPatch.AAAARecord
-  | BatchPatch.CAARecord
-  | BatchPatch.CERTRecord
-  | BatchPatch.CNAMERecord
-  | BatchPatch.DNSKEYRecord
-  | BatchPatch.DSRecord
-  | BatchPatch.HTTPSRecord
-  | BatchPatch.LOCRecord
-  | BatchPatch.MXRecord
-  | BatchPatch.NAPTRRecord
-  | BatchPatch.NSRecord
+  | BatchPatch.A
+  | BatchPatch.AAAA
+  | BatchPatch.CAA
+  | BatchPatch.CERT
+  | BatchPatch.CNAME
+  | BatchPatch.DNSKEY
+  | BatchPatch.DS
+  | BatchPatch.HTTPS
+  | BatchPatch.LOC
+  | BatchPatch.MX
+  | BatchPatch.NAPTR
+  | BatchPatch.NS
   | BatchPatch.Openpgpkey
-  | BatchPatch.PTRRecord
-  | BatchPatch.SMIMEARecord
-  | BatchPatch.SRVRecord
-  | BatchPatch.SSHFPRecord
-  | BatchPatch.SVCBRecord
-  | BatchPatch.TLSARecord
-  | BatchPatch.TXTRecord
-  | BatchPatch.URIRecord;
+  | BatchPatch.PTR
+  | BatchPatch.SMIMEA
+  | BatchPatch.SRV
+  | BatchPatch.SSHFP
+  | BatchPatch.SVCB
+  | BatchPatch.TLSA
+  | BatchPatch.TXT
+  | BatchPatch.URI;
 
 export namespace BatchPatch {
-  export interface ARecord extends RecordsAPI.ARecord {
+  export interface A extends RecordsAPI.ARecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
+  export interface AAAA extends RecordsAPI.AAAARecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface CAARecord extends RecordsAPI.CAARecord {
+  export interface CAA extends RecordsAPI.CAARecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
+  export interface CERT extends RecordsAPI.CERTRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+  export interface CNAME extends RecordsAPI.CNAMERecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+  export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface DSRecord extends RecordsAPI.DSRecord {
+  export interface DS extends RecordsAPI.DSRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+  export interface HTTPS extends RecordsAPI.HTTPSRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
+  export interface LOC extends RecordsAPI.LOCRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface MXRecord extends RecordsAPI.MXRecord {
+  export interface MX extends RecordsAPI.MXRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+  export interface NAPTR extends RecordsAPI.NAPTRRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface NSRecord extends RecordsAPI.NSRecord {
+  export interface NS extends RecordsAPI.NSRecord {
     /**
      * Identifier
      */
@@ -659,56 +659,56 @@ export namespace BatchPatch {
     }
   }
 
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
+  export interface PTR extends RecordsAPI.PTRRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+  export interface SMIMEA extends RecordsAPI.SMIMEARecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
+  export interface SRV extends RecordsAPI.SRVRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+  export interface SSHFP extends RecordsAPI.SSHFPRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+  export interface SVCB extends RecordsAPI.SVCBRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
+  export interface TLSA extends RecordsAPI.TLSARecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
+  export interface TXT extends RecordsAPI.TXTRecord {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface URIRecord extends RecordsAPI.URIRecord {
+  export interface URI extends RecordsAPI.URIRecord {
     /**
      * Identifier
      */
@@ -717,107 +717,107 @@ export namespace BatchPatch {
 }
 
 export type BatchPatchParam =
-  | BatchPatchParam.ARecord
-  | BatchPatchParam.AAAARecord
-  | BatchPatchParam.CAARecord
-  | BatchPatchParam.CERTRecord
-  | BatchPatchParam.CNAMERecord
-  | BatchPatchParam.DNSKEYRecord
-  | BatchPatchParam.DSRecord
-  | BatchPatchParam.HTTPSRecord
-  | BatchPatchParam.LOCRecord
-  | BatchPatchParam.MXRecord
-  | BatchPatchParam.NAPTRRecord
-  | BatchPatchParam.NSRecord
+  | BatchPatchParam.A
+  | BatchPatchParam.AAAA
+  | BatchPatchParam.CAA
+  | BatchPatchParam.CERT
+  | BatchPatchParam.CNAME
+  | BatchPatchParam.DNSKEY
+  | BatchPatchParam.DS
+  | BatchPatchParam.HTTPS
+  | BatchPatchParam.LOC
+  | BatchPatchParam.MX
+  | BatchPatchParam.NAPTR
+  | BatchPatchParam.NS
   | BatchPatchParam.Openpgpkey
-  | BatchPatchParam.PTRRecord
-  | BatchPatchParam.SMIMEARecord
-  | BatchPatchParam.SRVRecord
-  | BatchPatchParam.SSHFPRecord
-  | BatchPatchParam.SVCBRecord
-  | BatchPatchParam.TLSARecord
-  | BatchPatchParam.TXTRecord
-  | BatchPatchParam.URIRecord;
+  | BatchPatchParam.PTR
+  | BatchPatchParam.SMIMEA
+  | BatchPatchParam.SRV
+  | BatchPatchParam.SSHFP
+  | BatchPatchParam.SVCB
+  | BatchPatchParam.TLSA
+  | BatchPatchParam.TXT
+  | BatchPatchParam.URI;
 
 export namespace BatchPatchParam {
-  export interface ARecord extends RecordsAPI.ARecordParam {
+  export interface A extends RecordsAPI.ARecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface AAAARecord extends RecordsAPI.AAAARecordParam {
+  export interface AAAA extends RecordsAPI.AAAARecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface CAARecord extends RecordsAPI.CAARecordParam {
+  export interface CAA extends RecordsAPI.CAARecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface CERTRecord extends RecordsAPI.CERTRecordParam {
+  export interface CERT extends RecordsAPI.CERTRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface CNAMERecord extends RecordsAPI.CNAMERecordParam {
+  export interface CNAME extends RecordsAPI.CNAMERecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecordParam {
+  export interface DNSKEY extends RecordsAPI.DNSKEYRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface DSRecord extends RecordsAPI.DSRecordParam {
+  export interface DS extends RecordsAPI.DSRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecordParam {
+  export interface HTTPS extends RecordsAPI.HTTPSRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface LOCRecord extends RecordsAPI.LOCRecordParam {
+  export interface LOC extends RecordsAPI.LOCRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface MXRecord extends RecordsAPI.MXRecordParam {
+  export interface MX extends RecordsAPI.MXRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecordParam {
+  export interface NAPTR extends RecordsAPI.NAPTRRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface NSRecord extends RecordsAPI.NSRecordParam {
+  export interface NS extends RecordsAPI.NSRecordParam {
     /**
      * Identifier
      */
@@ -898,56 +898,56 @@ export namespace BatchPatchParam {
     }
   }
 
-  export interface PTRRecord extends RecordsAPI.PTRRecordParam {
+  export interface PTR extends RecordsAPI.PTRRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecordParam {
+  export interface SMIMEA extends RecordsAPI.SMIMEARecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface SRVRecord extends RecordsAPI.SRVRecordParam {
+  export interface SRV extends RecordsAPI.SRVRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecordParam {
+  export interface SSHFP extends RecordsAPI.SSHFPRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface SVCBRecord extends RecordsAPI.SVCBRecordParam {
+  export interface SVCB extends RecordsAPI.SVCBRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface TLSARecord extends RecordsAPI.TLSARecordParam {
+  export interface TLSA extends RecordsAPI.TLSARecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface TXTRecord extends RecordsAPI.TXTRecordParam {
+  export interface TXT extends RecordsAPI.TXTRecordParam {
     /**
      * Identifier
      */
     id: string;
   }
 
-  export interface URIRecord extends RecordsAPI.URIRecordParam {
+  export interface URI extends RecordsAPI.URIRecordParam {
     /**
      * Identifier
      */
@@ -956,107 +956,107 @@ export namespace BatchPatchParam {
 }
 
 export type BatchPut =
-  | BatchPut.ARecord
-  | BatchPut.AAAARecord
-  | BatchPut.CAARecord
-  | BatchPut.CERTRecord
-  | BatchPut.CNAMERecord
-  | BatchPut.DNSKEYRecord
-  | BatchPut.DSRecord
-  | BatchPut.HTTPSRecord
-  | BatchPut.LOCRecord
-  | BatchPut.MXRecord
-  | BatchPut.NAPTRRecord
-  | BatchPut.NSRecord
+  | BatchPut.A
+  | BatchPut.AAAA
+  | BatchPut.CAA
+  | BatchPut.CERT
+  | BatchPut.CNAME
+  | BatchPut.DNSKEY
+  | BatchPut.DS
+  | BatchPut.HTTPS
+  | BatchPut.LOC
+  | BatchPut.MX
+  | BatchPut.NAPTR
+  | BatchPut.NS
   | BatchPut.Openpgpkey
-  | BatchPut.PTRRecord
-  | BatchPut.SMIMEARecord
-  | BatchPut.SRVRecord
-  | BatchPut.SSHFPRecord
-  | BatchPut.SVCBRecord
-  | BatchPut.TLSARecord
-  | BatchPut.TXTRecord
-  | BatchPut.URIRecord;
+  | BatchPut.PTR
+  | BatchPut.SMIMEA
+  | BatchPut.SRV
+  | BatchPut.SSHFP
+  | BatchPut.SVCB
+  | BatchPut.TLSA
+  | BatchPut.TXT
+  | BatchPut.URI;
 
 export namespace BatchPut {
-  export interface ARecord extends RecordsAPI.ARecord {
+  export interface A extends RecordsAPI.ARecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
+  export interface AAAA extends RecordsAPI.AAAARecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface CAARecord extends RecordsAPI.CAARecord {
+  export interface CAA extends RecordsAPI.CAARecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
+  export interface CERT extends RecordsAPI.CERTRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+  export interface CNAME extends RecordsAPI.CNAMERecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+  export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface DSRecord extends RecordsAPI.DSRecord {
+  export interface DS extends RecordsAPI.DSRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+  export interface HTTPS extends RecordsAPI.HTTPSRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
+  export interface LOC extends RecordsAPI.LOCRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface MXRecord extends RecordsAPI.MXRecord {
+  export interface MX extends RecordsAPI.MXRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+  export interface NAPTR extends RecordsAPI.NAPTRRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface NSRecord extends RecordsAPI.NSRecord {
+  export interface NS extends RecordsAPI.NSRecord {
     /**
      * Identifier
      */
@@ -1137,56 +1137,56 @@ export namespace BatchPut {
     }
   }
 
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
+  export interface PTR extends RecordsAPI.PTRRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+  export interface SMIMEA extends RecordsAPI.SMIMEARecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
+  export interface SRV extends RecordsAPI.SRVRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+  export interface SSHFP extends RecordsAPI.SSHFPRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+  export interface SVCB extends RecordsAPI.SVCBRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
+  export interface TLSA extends RecordsAPI.TLSARecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
+  export interface TXT extends RecordsAPI.TXTRecord {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface URIRecord extends RecordsAPI.URIRecord {
+  export interface URI extends RecordsAPI.URIRecord {
     /**
      * Identifier
      */
@@ -1195,107 +1195,107 @@ export namespace BatchPut {
 }
 
 export type BatchPutParam =
-  | BatchPutParam.ARecord
-  | BatchPutParam.AAAARecord
-  | BatchPutParam.CAARecord
-  | BatchPutParam.CERTRecord
-  | BatchPutParam.CNAMERecord
-  | BatchPutParam.DNSKEYRecord
-  | BatchPutParam.DSRecord
-  | BatchPutParam.HTTPSRecord
-  | BatchPutParam.LOCRecord
-  | BatchPutParam.MXRecord
-  | BatchPutParam.NAPTRRecord
-  | BatchPutParam.NSRecord
+  | BatchPutParam.A
+  | BatchPutParam.AAAA
+  | BatchPutParam.CAA
+  | BatchPutParam.CERT
+  | BatchPutParam.CNAME
+  | BatchPutParam.DNSKEY
+  | BatchPutParam.DS
+  | BatchPutParam.HTTPS
+  | BatchPutParam.LOC
+  | BatchPutParam.MX
+  | BatchPutParam.NAPTR
+  | BatchPutParam.NS
   | BatchPutParam.Openpgpkey
-  | BatchPutParam.PTRRecord
-  | BatchPutParam.SMIMEARecord
-  | BatchPutParam.SRVRecord
-  | BatchPutParam.SSHFPRecord
-  | BatchPutParam.SVCBRecord
-  | BatchPutParam.TLSARecord
-  | BatchPutParam.TXTRecord
-  | BatchPutParam.URIRecord;
+  | BatchPutParam.PTR
+  | BatchPutParam.SMIMEA
+  | BatchPutParam.SRV
+  | BatchPutParam.SSHFP
+  | BatchPutParam.SVCB
+  | BatchPutParam.TLSA
+  | BatchPutParam.TXT
+  | BatchPutParam.URI;
 
 export namespace BatchPutParam {
-  export interface ARecord extends RecordsAPI.ARecordParam {
+  export interface A extends RecordsAPI.ARecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface AAAARecord extends RecordsAPI.AAAARecordParam {
+  export interface AAAA extends RecordsAPI.AAAARecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface CAARecord extends RecordsAPI.CAARecordParam {
+  export interface CAA extends RecordsAPI.CAARecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface CERTRecord extends RecordsAPI.CERTRecordParam {
+  export interface CERT extends RecordsAPI.CERTRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface CNAMERecord extends RecordsAPI.CNAMERecordParam {
+  export interface CNAME extends RecordsAPI.CNAMERecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecordParam {
+  export interface DNSKEY extends RecordsAPI.DNSKEYRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface DSRecord extends RecordsAPI.DSRecordParam {
+  export interface DS extends RecordsAPI.DSRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecordParam {
+  export interface HTTPS extends RecordsAPI.HTTPSRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface LOCRecord extends RecordsAPI.LOCRecordParam {
+  export interface LOC extends RecordsAPI.LOCRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface MXRecord extends RecordsAPI.MXRecordParam {
+  export interface MX extends RecordsAPI.MXRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecordParam {
+  export interface NAPTR extends RecordsAPI.NAPTRRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface NSRecord extends RecordsAPI.NSRecordParam {
+  export interface NS extends RecordsAPI.NSRecordParam {
     /**
      * Identifier
      */
@@ -1376,56 +1376,56 @@ export namespace BatchPutParam {
     }
   }
 
-  export interface PTRRecord extends RecordsAPI.PTRRecordParam {
+  export interface PTR extends RecordsAPI.PTRRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecordParam {
+  export interface SMIMEA extends RecordsAPI.SMIMEARecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface SRVRecord extends RecordsAPI.SRVRecordParam {
+  export interface SRV extends RecordsAPI.SRVRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecordParam {
+  export interface SSHFP extends RecordsAPI.SSHFPRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface SVCBRecord extends RecordsAPI.SVCBRecordParam {
+  export interface SVCB extends RecordsAPI.SVCBRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface TLSARecord extends RecordsAPI.TLSARecordParam {
+  export interface TLSA extends RecordsAPI.TLSARecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface TXTRecord extends RecordsAPI.TXTRecordParam {
+  export interface TXT extends RecordsAPI.TXTRecordParam {
     /**
      * Identifier
      */
     id?: string;
   }
 
-  export interface URIRecord extends RecordsAPI.URIRecordParam {
+  export interface URI extends RecordsAPI.URIRecordParam {
     /**
      * Identifier
      */
@@ -3633,30 +3633,30 @@ export namespace RecordParam {
 }
 
 export type RecordResponse =
-  | RecordResponse.ARecord
-  | RecordResponse.AAAARecord
-  | RecordResponse.CAARecord
-  | RecordResponse.CERTRecord
-  | RecordResponse.CNAMERecord
-  | RecordResponse.DNSKEYRecord
-  | RecordResponse.DSRecord
-  | RecordResponse.HTTPSRecord
-  | RecordResponse.LOCRecord
-  | RecordResponse.MXRecord
-  | RecordResponse.NAPTRRecord
-  | RecordResponse.NSRecord
+  | RecordResponse.A
+  | RecordResponse.AAAA
+  | RecordResponse.CAA
+  | RecordResponse.CERT
+  | RecordResponse.CNAME
+  | RecordResponse.DNSKEY
+  | RecordResponse.DS
+  | RecordResponse.HTTPS
+  | RecordResponse.LOC
+  | RecordResponse.MX
+  | RecordResponse.NAPTR
+  | RecordResponse.NS
   | RecordResponse.Openpgpkey
-  | RecordResponse.PTRRecord
-  | RecordResponse.SMIMEARecord
-  | RecordResponse.SRVRecord
-  | RecordResponse.SSHFPRecord
-  | RecordResponse.SVCBRecord
-  | RecordResponse.TLSARecord
-  | RecordResponse.TXTRecord
-  | RecordResponse.URIRecord;
+  | RecordResponse.PTR
+  | RecordResponse.SMIMEA
+  | RecordResponse.SRV
+  | RecordResponse.SSHFP
+  | RecordResponse.SVCB
+  | RecordResponse.TLSA
+  | RecordResponse.TXT
+  | RecordResponse.URI;
 
 export namespace RecordResponse {
-  export interface ARecord extends RecordsAPI.ARecord {
+  export interface A extends RecordsAPI.ARecord {
     /**
      * Identifier
      */
@@ -3693,7 +3693,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface AAAARecord extends RecordsAPI.AAAARecord {
+  export interface AAAA extends RecordsAPI.AAAARecord {
     /**
      * Identifier
      */
@@ -3730,7 +3730,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CAARecord extends RecordsAPI.CAARecord {
+  export interface CAA extends RecordsAPI.CAARecord {
     /**
      * Identifier
      */
@@ -3767,7 +3767,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CERTRecord extends RecordsAPI.CERTRecord {
+  export interface CERT extends RecordsAPI.CERTRecord {
     /**
      * Identifier
      */
@@ -3804,7 +3804,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+  export interface CNAME extends RecordsAPI.CNAMERecord {
     /**
      * Identifier
      */
@@ -3841,7 +3841,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+  export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
     /**
      * Identifier
      */
@@ -3878,7 +3878,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface DSRecord extends RecordsAPI.DSRecord {
+  export interface DS extends RecordsAPI.DSRecord {
     /**
      * Identifier
      */
@@ -3915,7 +3915,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+  export interface HTTPS extends RecordsAPI.HTTPSRecord {
     /**
      * Identifier
      */
@@ -3952,7 +3952,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface LOCRecord extends RecordsAPI.LOCRecord {
+  export interface LOC extends RecordsAPI.LOCRecord {
     /**
      * Identifier
      */
@@ -3989,7 +3989,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface MXRecord extends RecordsAPI.MXRecord {
+  export interface MX extends RecordsAPI.MXRecord {
     /**
      * Identifier
      */
@@ -4026,7 +4026,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+  export interface NAPTR extends RecordsAPI.NAPTRRecord {
     /**
      * Identifier
      */
@@ -4063,7 +4063,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface NSRecord extends RecordsAPI.NSRecord {
+  export interface NS extends RecordsAPI.NSRecord {
     /**
      * Identifier
      */
@@ -4204,7 +4204,7 @@ export namespace RecordResponse {
     }
   }
 
-  export interface PTRRecord extends RecordsAPI.PTRRecord {
+  export interface PTR extends RecordsAPI.PTRRecord {
     /**
      * Identifier
      */
@@ -4241,7 +4241,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+  export interface SMIMEA extends RecordsAPI.SMIMEARecord {
     /**
      * Identifier
      */
@@ -4278,7 +4278,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SRVRecord extends RecordsAPI.SRVRecord {
+  export interface SRV extends RecordsAPI.SRVRecord {
     /**
      * Identifier
      */
@@ -4315,7 +4315,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+  export interface SSHFP extends RecordsAPI.SSHFPRecord {
     /**
      * Identifier
      */
@@ -4352,7 +4352,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+  export interface SVCB extends RecordsAPI.SVCBRecord {
     /**
      * Identifier
      */
@@ -4389,7 +4389,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface TLSARecord extends RecordsAPI.TLSARecord {
+  export interface TLSA extends RecordsAPI.TLSARecord {
     /**
      * Identifier
      */
@@ -4426,7 +4426,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface TXTRecord extends RecordsAPI.TXTRecord {
+  export interface TXT extends RecordsAPI.TXTRecord {
     /**
      * Identifier
      */
@@ -4463,7 +4463,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface URIRecord extends RecordsAPI.URIRecord {
+  export interface URI extends RecordsAPI.URIRecord {
     /**
      * Identifier
      */

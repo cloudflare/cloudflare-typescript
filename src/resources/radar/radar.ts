@@ -31,7 +31,7 @@ import { Attacks } from './attacks/attacks';
 import * as BGPAPI from './bgp/bgp';
 import { BGP, BGPTimeseriesParams, BGPTimeseriesResponse } from './bgp/bgp';
 import * as DNSAPI from './dns/dns';
-import { DNS } from './dns/dns';
+import { DNS, DNSTimeseriesParams, DNSTimeseriesResponse } from './dns/dns';
 import * as EmailAPI from './email/email';
 import { Email, RadarEmailSeries, RadarEmailSummary } from './email/email';
 import * as EntitiesAPI from './entities/entities';
@@ -135,7 +135,11 @@ export declare namespace Radar {
     type DatasetDownloadParams as DatasetDownloadParams,
   };
 
-  export { DNS as DNS };
+  export {
+    DNS as DNS,
+    type DNSTimeseriesResponse as DNSTimeseriesResponse,
+    type DNSTimeseriesParams as DNSTimeseriesParams,
+  };
 
   export {
     Netflows as Netflows,

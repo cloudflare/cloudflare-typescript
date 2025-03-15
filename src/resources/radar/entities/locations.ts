@@ -6,7 +6,7 @@ import * as Core from '../../../core';
 
 export class Locations extends APIResource {
   /**
-   * Get a list of locations.
+   * Retrieves a list of locations.
    */
   list(query?: LocationListParams, options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>;
@@ -25,9 +25,9 @@ export class Locations extends APIResource {
   }
 
   /**
-   * Get the requested location information. (A confidence level below `5` indicates
-   * a low level of confidence in the traffic data - normally this happens because
-   * Cloudflare has a small amount of traffic from/to this location).
+   * Retrieves the requested location information. (A confidence level below `5`
+   * indicates a low level of confidence in the traffic data - normally this happens
+   * because Cloudflare has a small amount of traffic from/to this location).
    */
   get(
     location: string,
@@ -91,29 +91,29 @@ export namespace LocationGetResponse {
 
 export interface LocationListParams {
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Comma separated list of locations.
+   * Comma-separated list of locations (alpha-2 location codes).
    */
   location?: string;
 
   /**
-   * Number of objects to skip before grabbing results.
+   * Skips the specified number of objects before fetching the results.
    */
   offset?: number;
 }
 
 export interface LocationGetParams {
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 }

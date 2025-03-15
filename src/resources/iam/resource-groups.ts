@@ -197,7 +197,71 @@ export namespace ResourceGroupUpdateResponse {
   }
 }
 
-export type ResourceGroupListResponse = unknown;
+/**
+ * A group of scoped resources.
+ */
+export interface ResourceGroupListResponse {
+  /**
+   * Identifier of the group.
+   */
+  id: string;
+
+  /**
+   * The scope associated to the resource group
+   */
+  scope: Array<ResourceGroupListResponse.Scope>;
+
+  /**
+   * Attributes associated to the resource group.
+   */
+  meta?: ResourceGroupListResponse.Meta;
+
+  /**
+   * Name of the resource group.
+   */
+  name?: string;
+}
+
+export namespace ResourceGroupListResponse {
+  /**
+   * A scope is a combination of scope objects which provides additional context.
+   */
+  export interface Scope {
+    /**
+     * This is a combination of pre-defined resource name and identifier (like Account
+     * ID etc.)
+     */
+    key: string;
+
+    /**
+     * A list of scope objects for additional context.
+     */
+    objects: Array<Scope.Object>;
+  }
+
+  export namespace Scope {
+    /**
+     * A scope object represents any resource that can have actions applied against
+     * invite.
+     */
+    export interface Object {
+      /**
+       * This is a combination of pre-defined resource name and identifier (like Zone ID
+       * etc.)
+       */
+      key: string;
+    }
+  }
+
+  /**
+   * Attributes associated to the resource group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
+  }
+}
 
 export interface ResourceGroupDeleteResponse {
   /**
