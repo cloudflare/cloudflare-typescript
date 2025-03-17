@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource targetIndustries', () => {
-  test('list: only required params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('list: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.targetIndustries.list({ account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +22,8 @@ describe('resource targetIndustries', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.targetIndustries.list({ account_id: 0 });
   });
 });
