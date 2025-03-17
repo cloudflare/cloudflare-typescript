@@ -18,7 +18,6 @@ export {
 } from './scripts';
 export {
   Secrets,
-  type WorkersSecretModel,
   type SecretUpdateResponse,
   type SecretListResponse,
   type SecretDeleteResponse,

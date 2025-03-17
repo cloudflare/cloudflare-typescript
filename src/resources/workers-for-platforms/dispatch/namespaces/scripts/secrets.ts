@@ -74,19 +74,6 @@ export class Secrets extends APIResource {
 
 export type SecretListResponsesSinglePage = SinglePage<SecretListResponse>;
 
-export interface WorkersSecretModel {
-  /**
-   * The name of this secret, this is what will be used to access it inside the
-   * Worker.
-   */
-  name?: string;
-
-  /**
-   * The type of secret to put.
-   */
-  type?: 'secret_text';
-}
-
 export interface SecretUpdateResponse {
   /**
    * The name of this secret, this is what will be used to access it inside the
@@ -204,7 +191,6 @@ export interface SecretGetParams {
 
 export declare namespace Secrets {
   export {
-    type WorkersSecretModel as WorkersSecretModel,
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
