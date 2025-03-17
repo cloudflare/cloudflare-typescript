@@ -5,6 +5,23 @@ import * as Core from '../../../core';
 
 export class Insights extends APIResource {
   /**
+   * Adds an insight to an event
+   */
+  create(
+    eventId: string,
+    params: InsightCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InsightCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/cloudforce-one/events/${eventId}/insight/create`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: InsightCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Deletes an event insight
    */
   delete(
@@ -19,23 +36,6 @@ export class Insights extends APIResource {
         `/accounts/${account_id}/cloudforce-one/events/${eventId}/insight/${insightId}`,
         options,
       ) as Core.APIPromise<{ result: InsightDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Adds an insight to an event
-   */
-  creat(
-    eventId: string,
-    params: InsightCreatParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InsightCreatResponse> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/cloudforce-one/events/${eventId}/insight/create`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: InsightCreatResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,14 +76,14 @@ export class Insights extends APIResource {
   }
 }
 
-export interface InsightDeleteResponse {
-  success: boolean;
-}
-
-export interface InsightCreatResponse {
+export interface InsightCreateResponse {
   content: string;
 
   uuid: string;
+}
+
+export interface InsightDeleteResponse {
+  success: boolean;
 }
 
 export interface InsightEditResponse {
@@ -98,14 +98,7 @@ export interface InsightGetResponse {
   uuid: string;
 }
 
-export interface InsightDeleteParams {
-  /**
-   * Account ID
-   */
-  account_id: number;
-}
-
-export interface InsightCreatParams {
+export interface InsightCreateParams {
   /**
    * Path param: Account ID
    */
@@ -115,6 +108,13 @@ export interface InsightCreatParams {
    * Body param:
    */
   content: string;
+}
+
+export interface InsightDeleteParams {
+  /**
+   * Account ID
+   */
+  account_id: number;
 }
 
 export interface InsightEditParams {
@@ -138,12 +138,12 @@ export interface InsightGetParams {
 
 export declare namespace Insights {
   export {
+    type InsightCreateResponse as InsightCreateResponse,
     type InsightDeleteResponse as InsightDeleteResponse,
-    type InsightCreatResponse as InsightCreatResponse,
     type InsightEditResponse as InsightEditResponse,
     type InsightGetResponse as InsightGetResponse,
+    type InsightCreateParams as InsightCreateParams,
     type InsightDeleteParams as InsightDeleteParams,
-    type InsightCreatParams as InsightCreatParams,
     type InsightEditParams as InsightEditParams,
     type InsightGetParams as InsightGetParams,
   };
