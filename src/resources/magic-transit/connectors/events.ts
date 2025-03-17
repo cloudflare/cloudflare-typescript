@@ -78,19 +78,19 @@ export namespace EventListResponse {
  */
 export interface EventGetResponse {
   e:
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.UnionMember8
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.K
-    | EventGetResponse.K;
+    | EventGetResponse.Init
+    | EventGetResponse.Leave
+    | EventGetResponse.StartAttestation
+    | EventGetResponse.FinishAttestationSuccess
+    | EventGetResponse.FinishAttestationFailure
+    | EventGetResponse.StartRotateCryptKey
+    | EventGetResponse.FinishRotateCryptKeySuccess
+    | EventGetResponse.FinishRotateCryptKeyFailure
+    | EventGetResponse.StartUpgrade
+    | EventGetResponse.FinishUpgradeSuccess
+    | EventGetResponse.FinishUpgradeFailure
+    | EventGetResponse.Reconcile
+    | EventGetResponse.ConfigureCloudflaredTunnel;
 
   /**
    * Sequence number, used to order events with the same timestamp
@@ -104,63 +104,63 @@ export interface EventGetResponse {
 }
 
 export namespace EventGetResponse {
-  export interface K {
+  export interface Init {
     /**
      * Initialized process
      */
     k: 'Init';
   }
 
-  export interface K {
+  export interface Leave {
     /**
      * Stopped process
      */
     k: 'Leave';
   }
 
-  export interface K {
+  export interface StartAttestation {
     /**
      * Started attestation
      */
     k: 'StartAttestation';
   }
 
-  export interface K {
+  export interface FinishAttestationSuccess {
     /**
      * Finished attestation
      */
     k: 'FinishAttestationSuccess';
   }
 
-  export interface K {
+  export interface FinishAttestationFailure {
     /**
      * Failed attestation
      */
     k: 'FinishAttestationFailure';
   }
 
-  export interface K {
+  export interface StartRotateCryptKey {
     /**
      * Started crypt key rotation
      */
     k: 'StartRotateCryptKey';
   }
 
-  export interface K {
+  export interface FinishRotateCryptKeySuccess {
     /**
      * Finished crypt key rotation
      */
     k: 'FinishRotateCryptKeySuccess';
   }
 
-  export interface K {
+  export interface FinishRotateCryptKeyFailure {
     /**
      * Failed crypt key rotation
      */
     k: 'FinishRotateCryptKeyFailure';
   }
 
-  export interface UnionMember8 {
+  export interface StartUpgrade {
     /**
      * Started upgrade
      */
@@ -172,28 +172,28 @@ export namespace EventGetResponse {
     url: string;
   }
 
-  export interface K {
+  export interface FinishUpgradeSuccess {
     /**
      * Finished upgrade
      */
     k: 'FinishUpgradeSuccess';
   }
 
-  export interface K {
+  export interface FinishUpgradeFailure {
     /**
      * Failed upgrade
      */
     k: 'FinishUpgradeFailure';
   }
 
-  export interface K {
+  export interface Reconcile {
     /**
      * Reconciled
      */
     k: 'Reconcile';
   }
 
-  export interface K {
+  export interface ConfigureCloudflaredTunnel {
     /**
      * Configured Cloudflared tunnel
      */
