@@ -7266,6 +7266,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ScanResult</a></code>
 - <code><a href="./src/resources/cloudforce-one/scans/results.ts">ResultGetResponse</a></code>
 
 Methods:
@@ -7476,6 +7477,16 @@ Methods:
 
 - <code title="delete /accounts/{account_id}/cloudforce-one/events/relate/{event_id}">client.cloudforceOne.threatEvents.relate.<a href="./src/resources/cloudforce-one/threat-events/relate.ts">delete</a>(eventId, { ...params }) -> RelateDeleteResponse</code>
 
+### Tags
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/tags.ts">TagCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/events/tags/create">client.cloudforceOne.threatEvents.tags.<a href="./src/resources/cloudforce-one/threat-events/tags.ts">create</a>({ ...params }) -> TagCreateResponse</code>
+
 ### EventTags
 
 Types:
@@ -7487,16 +7498,6 @@ Methods:
 
 - <code title="post /accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}/create">client.cloudforceOne.threatEvents.eventTags.<a href="./src/resources/cloudforce-one/threat-events/event-tags.ts">create</a>(eventId, { ...params }) -> EventTagCreateResponse</code>
 - <code title="delete /accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}">client.cloudforceOne.threatEvents.eventTags.<a href="./src/resources/cloudforce-one/threat-events/event-tags.ts">delete</a>(eventId, { ...params }) -> EventTagDeleteResponse</code>
-
-### Tags
-
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/threat-events/tags.ts">TagCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/cloudforce-one/events/tags/create">client.cloudforceOne.threatEvents.tags.<a href="./src/resources/cloudforce-one/threat-events/tags.ts">create</a>({ ...params }) -> TagCreateResponse</code>
 
 ### TargetIndustries
 
@@ -7512,15 +7513,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightCreateResponse</a></code>
 - <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightDeleteResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightCreatResponse</a></code>
 - <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightEditResponse</a></code>
 - <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightGetResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/create">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">create</a>(eventId, { ...params }) -> InsightCreateResponse</code>
 - <code title="delete /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">delete</a>(eventId, insightId, { ...params }) -> InsightDeleteResponse</code>
-- <code title="post /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/create">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">creat</a>(eventId, { ...params }) -> InsightCreatResponse</code>
 - <code title="patch /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">edit</a>(eventId, insightId, { ...params }) -> InsightEditResponse</code>
 - <code title="get /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">get</a>(eventId, insightId, { ...params }) -> InsightGetResponse</code>
 

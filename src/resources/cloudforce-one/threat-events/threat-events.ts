@@ -48,8 +48,8 @@ import * as IndicatorTypesAPI from './indicator-types';
 import { IndicatorTypeListParams, IndicatorTypeListResponse, IndicatorTypes } from './indicator-types';
 import * as InsightsAPI from './insights';
 import {
-  InsightCreatParams,
-  InsightCreatResponse,
+  InsightCreateParams,
+  InsightCreateResponse,
   InsightDeleteParams,
   InsightDeleteResponse,
   InsightEditParams,
@@ -76,8 +76,8 @@ export class ThreatEvents extends APIResource {
   indicatorTypes: IndicatorTypesAPI.IndicatorTypes = new IndicatorTypesAPI.IndicatorTypes(this._client);
   raw: RawAPI.Raw = new RawAPI.Raw(this._client);
   relate: RelateAPI.Relate = new RelateAPI.Relate(this._client);
-  eventTags: EventTagsAPI.EventTags = new EventTagsAPI.EventTags(this._client);
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
+  eventTags: EventTagsAPI.EventTags = new EventTagsAPI.EventTags(this._client);
   targetIndustries: TargetIndustriesAPI.TargetIndustries = new TargetIndustriesAPI.TargetIndustries(
     this._client,
   );
@@ -606,8 +606,8 @@ ThreatEvents.Datasets = Datasets;
 ThreatEvents.IndicatorTypes = IndicatorTypes;
 ThreatEvents.Raw = RawAPIRaw;
 ThreatEvents.Relate = Relate;
-ThreatEvents.EventTags = EventTags;
 ThreatEvents.Tags = Tags;
+ThreatEvents.EventTags = EventTags;
 ThreatEvents.TargetIndustries = TargetIndustries;
 ThreatEvents.Insights = Insights;
 
@@ -694,17 +694,17 @@ export declare namespace ThreatEvents {
   };
 
   export {
+    Tags as Tags,
+    type TagCreateResponse as TagCreateResponse,
+    type TagCreateParams as TagCreateParams,
+  };
+
+  export {
     EventTags as EventTags,
     type EventTagCreateResponse as EventTagCreateResponse,
     type EventTagDeleteResponse as EventTagDeleteResponse,
     type EventTagCreateParams as EventTagCreateParams,
     type EventTagDeleteParams as EventTagDeleteParams,
-  };
-
-  export {
-    Tags as Tags,
-    type TagCreateResponse as TagCreateResponse,
-    type TagCreateParams as TagCreateParams,
   };
 
   export {
@@ -715,12 +715,12 @@ export declare namespace ThreatEvents {
 
   export {
     Insights as Insights,
+    type InsightCreateResponse as InsightCreateResponse,
     type InsightDeleteResponse as InsightDeleteResponse,
-    type InsightCreatResponse as InsightCreatResponse,
     type InsightEditResponse as InsightEditResponse,
     type InsightGetResponse as InsightGetResponse,
+    type InsightCreateParams as InsightCreateParams,
     type InsightDeleteParams as InsightDeleteParams,
-    type InsightCreatParams as InsightCreatParams,
     type InsightEditParams as InsightEditParams,
     type InsightGetParams as InsightGetParams,
   };
