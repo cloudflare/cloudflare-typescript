@@ -23,6 +23,19 @@ import {
   ScheduleUpdateResponse,
   Schedules,
 } from './schedules';
+import * as SecretsAPI from './secrets';
+import {
+  SecretDeleteParams,
+  SecretDeleteResponse,
+  SecretGetParams,
+  SecretGetResponse,
+  SecretListParams,
+  SecretListResponse,
+  SecretListResponsesSinglePage,
+  SecretUpdateParams,
+  SecretUpdateResponse,
+  Secrets,
+} from './secrets';
 import * as SettingsAPI from './settings';
 import { SettingEditParams, SettingGetParams, Settings } from './settings';
 import * as SubdomainAPI from './subdomain';
@@ -68,6 +81,7 @@ export class Scripts extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
+  secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
 
   /**
    * Upload a worker module. You can find more about the multipart metadata on our
@@ -1322,6 +1336,8 @@ Scripts.Settings = Settings;
 Scripts.Deployments = Deployments;
 Scripts.Versions = Versions;
 Scripts.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
+Scripts.Secrets = Secrets;
+Scripts.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
 
 export declare namespace Scripts {
   export {
@@ -1396,5 +1412,18 @@ export declare namespace Scripts {
     type VersionCreateParams as VersionCreateParams,
     type VersionListParams as VersionListParams,
     type VersionGetParams as VersionGetParams,
+  };
+
+  export {
+    Secrets as Secrets,
+    type SecretUpdateResponse as SecretUpdateResponse,
+    type SecretListResponse as SecretListResponse,
+    type SecretDeleteResponse as SecretDeleteResponse,
+    type SecretGetResponse as SecretGetResponse,
+    SecretListResponsesSinglePage as SecretListResponsesSinglePage,
+    type SecretUpdateParams as SecretUpdateParams,
+    type SecretListParams as SecretListParams,
+    type SecretDeleteParams as SecretDeleteParams,
+    type SecretGetParams as SecretGetParams,
   };
 }

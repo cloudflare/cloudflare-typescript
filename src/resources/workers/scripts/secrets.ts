@@ -1,50 +1,47 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../resource';
-import * as Core from '../../../../../core';
-import { SinglePage } from '../../../../../pagination';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class Secrets extends APIResource {
   /**
-   * Add a secret to a script uploaded to a Workers for Platforms namespace.
+   * Add a secret to a script.
    */
   update(
-    dispatchNamespace: string,
     scriptName: string,
     params: SecretUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretUpdateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.put(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: SecretUpdateResponse }>
+      this._client.put(`/accounts/${account_id}/workers/scripts/${scriptName}/secrets`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SecretUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * List secrets bound to a script uploaded to a Workers for Platforms namespace.
+   * List secrets bound to a script.
    */
   list(
-    dispatchNamespace: string,
     scriptName: string,
     params: SecretListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SecretListResponsesSinglePage, SecretListResponse> {
     const { account_id } = params;
     return this._client.getAPIList(
-      `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets`,
+      `/accounts/${account_id}/workers/scripts/${scriptName}/secrets`,
       SecretListResponsesSinglePage,
       options,
     );
   }
 
   /**
-   * Remove a secret from a script uploaded to a Workers for Platforms namespace.
+   * Remove a secret from a script.
    */
   delete(
-    dispatchNamespace: string,
     scriptName: string,
     secretName: string,
     params: SecretDeleteParams,
@@ -53,18 +50,16 @@ export class Secrets extends APIResource {
     const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets/${secretName}`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/secrets/${secretName}`,
         options,
       ) as Core.APIPromise<{ result: SecretDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Get a given secret binding (value omitted) on a script uploaded to a Workers for
-   * Platforms namespace.
+   * Get a given secret binding (value omitted) on a script.
    */
   get(
-    dispatchNamespace: string,
     scriptName: string,
     secretName: string,
     params: SecretGetParams,
@@ -73,7 +68,7 @@ export class Secrets extends APIResource {
     const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets/${secretName}`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/secrets/${secretName}`,
         options,
       ) as Core.APIPromise<{ result: SecretGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -81,19 +76,6 @@ export class Secrets extends APIResource {
 }
 
 export class SecretListResponsesSinglePage extends SinglePage<SecretListResponse> {}
-
-export interface WorkersSecretModel {
-  /**
-   * The name of this secret, this is what will be used to access it inside the
-   * Worker.
-   */
-  name?: string;
-
-  /**
-   * The type of secret to put.
-   */
-  type?: 'secret_text';
-}
 
 export interface SecretUpdateResponse {
   /**
@@ -184,7 +166,6 @@ Secrets.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
 
 export declare namespace Secrets {
   export {
-    type WorkersSecretModel as WorkersSecretModel,
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,

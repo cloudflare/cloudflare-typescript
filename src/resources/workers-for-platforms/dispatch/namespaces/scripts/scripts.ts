@@ -13,6 +13,8 @@ import * as ContentAPI from './content';
 import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as SecretsAPI from './secrets';
 import {
+  SecretDeleteParams,
+  SecretDeleteResponse,
   SecretGetParams,
   SecretGetResponse,
   SecretListParams,
@@ -1238,10 +1240,12 @@ export declare namespace Scripts {
     type WorkersSecretModel as WorkersSecretModel,
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
+    type SecretDeleteResponse as SecretDeleteResponse,
     type SecretGetResponse as SecretGetResponse,
     SecretListResponsesSinglePage as SecretListResponsesSinglePage,
     type SecretUpdateParams as SecretUpdateParams,
     type SecretListParams as SecretListParams,
+    type SecretDeleteParams as SecretDeleteParams,
     type SecretGetParams as SecretGetParams,
   };
 

@@ -22,9 +22,11 @@ export {
   type WorkersSecretModel,
   type SecretUpdateResponse,
   type SecretListResponse,
+  type SecretDeleteResponse,
   type SecretGetResponse,
   type SecretUpdateParams,
   type SecretListParams,
+  type SecretDeleteParams,
   type SecretGetParams,
 } from './secrets';
 export {
