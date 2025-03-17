@@ -22,7 +22,6 @@ import {
   SecretUpdateParams,
   SecretUpdateResponse,
   Secrets,
-  WorkersSecretModel,
 } from './secrets';
 import * as SettingsAPI from './settings';
 import {
@@ -1244,7 +1243,6 @@ export declare namespace Scripts {
 
   export {
     Secrets as Secrets,
-    type WorkersSecretModel as WorkersSecretModel,
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
