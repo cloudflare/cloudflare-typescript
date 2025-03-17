@@ -54,6 +54,8 @@ import {
   LogResponseResponse,
   Logs,
 } from './logs';
+import * as URLsAPI from './urls';
+import { URLGetParams, URLGetResponse, URLs } from './urls';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AIGateway extends APIResource {
@@ -61,6 +63,7 @@ export class AIGateway extends APIResource {
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
+  urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
 
   /**
    * Create a new Gateway
@@ -497,6 +500,7 @@ AIGateway.Datasets = Datasets;
 AIGateway.DatasetListResponsesV4PagePaginationArray = DatasetListResponsesV4PagePaginationArray;
 AIGateway.Evaluations = Evaluations;
 AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponsesV4PagePaginationArray;
+AIGateway.URLs = URLs;
 
 export declare namespace AIGateway {
   export {
@@ -550,4 +554,6 @@ export declare namespace AIGateway {
     type EvaluationDeleteParams as EvaluationDeleteParams,
     type EvaluationGetParams as EvaluationGetParams,
   };
+
+  export { URLs as URLs, type URLGetResponse as URLGetResponse, type URLGetParams as URLGetParams };
 }

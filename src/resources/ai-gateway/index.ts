@@ -49,3 +49,4 @@ export {
   type LogRequestParams,
   type LogResponseParams,
 } from './logs';
+export { URLs, type URLGetResponse, type URLGetParams } from './urls';
