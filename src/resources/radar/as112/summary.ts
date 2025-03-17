@@ -376,9 +376,13 @@ export namespace SummaryProtocolResponse {
   }
 
   export interface Summary0 {
-    tcp: string;
+    HTTPS: string;
 
-    udp: string;
+    TCP: string;
+
+    TLS: string;
+
+    UDP: string;
   }
 }
 
@@ -542,6 +546,129 @@ export interface SummaryDNSSECParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryEdnsParams {
@@ -592,6 +719,129 @@ export interface SummaryEdnsParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryIPVersionParams {
@@ -642,6 +892,129 @@ export interface SummaryIPVersionParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryProtocolParams {
@@ -692,6 +1065,124 @@ export interface SummaryProtocolParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryQueryTypeParams {
@@ -750,6 +1241,35 @@ export interface SummaryQueryTypeParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryResponseCodesParams {
@@ -808,6 +1328,105 @@ export interface SummaryResponseCodesParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
 }
 
 export declare namespace Summary {
