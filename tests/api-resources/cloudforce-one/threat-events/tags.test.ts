@@ -9,7 +9,8 @@ const client = new Cloudflare({
 });
 
 describe('resource tags', () => {
-  test('create: only required params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.tags.create({ account_id: 0, name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -20,7 +21,8 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.tags.create({ account_id: 0, name: 'name' });
   });
 });
