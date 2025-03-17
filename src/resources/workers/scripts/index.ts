@@ -30,6 +30,18 @@ export {
   type ScriptGetParams,
   type ScriptsSinglePage,
 } from './scripts';
+export {
+  Secrets,
+  type SecretUpdateResponse,
+  type SecretListResponse,
+  type SecretDeleteResponse,
+  type SecretGetResponse,
+  type SecretUpdateParams,
+  type SecretListParams,
+  type SecretDeleteParams,
+  type SecretGetParams,
+  type SecretListResponsesSinglePage,
+} from './secrets';
 export { Settings, type SettingEditParams, type SettingGetParams } from './settings';
 export {
   Subdomain,
