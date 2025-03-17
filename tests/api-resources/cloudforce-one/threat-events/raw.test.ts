@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource raw', () => {
-  test('edit: only required params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('edit: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.raw.edit('event_id', 'raw_id', {
       account_id: 0,
     });
@@ -23,7 +24,8 @@ describe('resource raw', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('edit: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.raw.edit('event_id', 'raw_id', {
       account_id: 0,
       data: {},
@@ -32,7 +34,8 @@ describe('resource raw', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('get: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.raw.get('event_id', 'raw_id', {
       account_id: 0,
     });
@@ -45,7 +48,8 @@ describe('resource raw', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('get: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.raw.get('event_id', 'raw_id', { account_id: 0 });
   });
 });
