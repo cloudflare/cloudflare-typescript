@@ -263,15 +263,8 @@ export interface TimeseriesGroupQueryTypeResponse {
 
 export namespace TimeseriesGroupQueryTypeResponse {
   export interface Serie0 {
-    A: Array<string>;
-
-    AAAA: Array<string>;
-
-    HTTPS: Array<string>;
-
-    NS: Array<string>;
-
-    PTR: Array<string>;
+    timestamps: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -283,15 +276,8 @@ export interface TimeseriesGroupResponseCodeResponse {
 
 export namespace TimeseriesGroupResponseCodeResponse {
   export interface Serie0 {
-    NOERROR: Array<string>;
-
-    NOTIMP: Array<string>;
-
-    NXDOMAIN: Array<string>;
-
-    REFUSED: Array<string>;
-
-    SERVFAIL: Array<string>;
+    timestamps: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
