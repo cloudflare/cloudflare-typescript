@@ -12,5 +12,5 @@ export {
   type ConfigEditParams,
   type ConfigListResponsesSinglePage,
 } from './config';
-export { Results, type ResultGetResponse, type ResultGetParams } from './results';
+export { Results, type ScanResult, type ResultGetResponse, type ResultGetParams } from './results';
 export { Scans } from './scans';

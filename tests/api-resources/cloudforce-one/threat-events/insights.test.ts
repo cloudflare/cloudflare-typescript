@@ -9,6 +9,27 @@ const client = new Cloudflare({
 });
 
 describe('resource insights', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.cloudforceOne.threatEvents.insights.create('event_id', {
+      account_id: 0,
+      content: 'Here is some additional context _in markdown_',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.cloudforceOne.threatEvents.insights.create('event_id', {
+      account_id: 0,
+      content: 'Here is some additional context _in markdown_',
+    });
+  });
+
   test('delete: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.insights.delete('insight_id', {
       account_id: 0,
@@ -27,27 +48,6 @@ describe('resource insights', () => {
     const response = await client.cloudforceOne.threatEvents.insights.delete('insight_id', {
       account_id: 0,
       event_id: 'event_id',
-    });
-  });
-
-  test('creat: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.insights.creat('event_id', {
-      account_id: 0,
-      content: 'Here is some additional context _in markdown_',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('creat: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.insights.creat('event_id', {
-      account_id: 0,
-      content: 'Here is some additional context _in markdown_',
     });
   });
 

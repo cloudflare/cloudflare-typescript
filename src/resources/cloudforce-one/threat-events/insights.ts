@@ -7,6 +7,23 @@ import { path } from '../../../internal/utils/path';
 
 export class Insights extends APIResource {
   /**
+   * Adds an insight to an event
+   */
+  create(
+    eventID: string,
+    params: InsightCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<InsightCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/cloudforce-one/events/${eventID}/insight/create`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: InsightCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Deletes an event insight
    */
   delete(
@@ -20,23 +37,6 @@ export class Insights extends APIResource {
         path`/accounts/${account_id}/cloudforce-one/events/${event_id}/insight/${insightID}`,
         options,
       ) as APIPromise<{ result: InsightDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Adds an insight to an event
-   */
-  creat(
-    eventID: string,
-    params: InsightCreatParams,
-    options?: RequestOptions,
-  ): APIPromise<InsightCreatResponse> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(path`/accounts/${account_id}/cloudforce-one/events/${eventID}/insight/create`, {
-        body,
-        ...options,
-      }) as APIPromise<{ result: InsightCreatResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -71,14 +71,14 @@ export class Insights extends APIResource {
   }
 }
 
-export interface InsightDeleteResponse {
-  success: boolean;
-}
-
-export interface InsightCreatResponse {
+export interface InsightCreateResponse {
   content: string;
 
   uuid: string;
+}
+
+export interface InsightDeleteResponse {
+  success: boolean;
 }
 
 export interface InsightEditResponse {
@@ -93,6 +93,18 @@ export interface InsightGetResponse {
   uuid: string;
 }
 
+export interface InsightCreateParams {
+  /**
+   * Path param: Account ID
+   */
+  account_id: number;
+
+  /**
+   * Body param:
+   */
+  content: string;
+}
+
 export interface InsightDeleteParams {
   /**
    * Account ID
@@ -103,18 +115,6 @@ export interface InsightDeleteParams {
    * Event UUID
    */
   event_id: string;
-}
-
-export interface InsightCreatParams {
-  /**
-   * Path param: Account ID
-   */
-  account_id: number;
-
-  /**
-   * Body param:
-   */
-  content: string;
 }
 
 export interface InsightEditParams {
@@ -148,12 +148,12 @@ export interface InsightGetParams {
 
 export declare namespace Insights {
   export {
+    type InsightCreateResponse as InsightCreateResponse,
     type InsightDeleteResponse as InsightDeleteResponse,
-    type InsightCreatResponse as InsightCreatResponse,
     type InsightEditResponse as InsightEditResponse,
     type InsightGetResponse as InsightGetResponse,
+    type InsightCreateParams as InsightCreateParams,
     type InsightDeleteParams as InsightDeleteParams,
-    type InsightCreatParams as InsightCreatParams,
     type InsightEditParams as InsightEditParams,
     type InsightGetParams as InsightGetParams,
   };

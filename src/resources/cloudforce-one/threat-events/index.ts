@@ -49,12 +49,12 @@ export {
 } from './indicator-types';
 export {
   Insights,
+  type InsightCreateResponse,
   type InsightDeleteResponse,
-  type InsightCreatResponse,
   type InsightEditResponse,
   type InsightGetResponse,
+  type InsightCreateParams,
   type InsightDeleteParams,
-  type InsightCreatParams,
   type InsightEditParams,
   type InsightGetParams,
 } from './insights';
