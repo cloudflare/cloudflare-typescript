@@ -10,10 +10,9 @@ const client = new Cloudflare({
 
 describe('resource secrets', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.secrets.update(
-      'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', dispatch_namespace: 'my-dispatch-namespace' },
-    );
+    const responsePromise = client.workers.scripts.secrets.update('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,23 +23,18 @@ describe('resource secrets', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.update(
-      'this-is_my_script-01',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        dispatch_namespace: 'my-dispatch-namespace',
-        name: 'MY_SECRET',
-        text: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
-        type: 'secret_text',
-      },
-    );
+    const response = await client.workers.scripts.secrets.update('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'MY_SECRET',
+      text: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+      type: 'secret_text',
+    });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.secrets.list(
-      'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', dispatch_namespace: 'my-dispatch-namespace' },
-    );
+    const responsePromise = client.workers.scripts.secrets.list('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,21 +45,16 @@ describe('resource secrets', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.list(
-      'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', dispatch_namespace: 'my-dispatch-namespace' },
-    );
+    const response = await client.workers.scripts.secrets.list('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.secrets.delete(
-      'mySecret',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        dispatch_namespace: 'my-dispatch-namespace',
-        script_name: 'this-is_my_script-01',
-      },
-    );
+    const responsePromise = client.workers.scripts.secrets.delete('mySecret', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      script_name: 'this-is_my_script-01',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -76,17 +65,15 @@ describe('resource secrets', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.delete('mySecret', {
+    const response = await client.workers.scripts.secrets.delete('mySecret', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      dispatch_namespace: 'my-dispatch-namespace',
       script_name: 'this-is_my_script-01',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.secrets.get('mySecret', {
+    const responsePromise = client.workers.scripts.secrets.get('mySecret', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      dispatch_namespace: 'my-dispatch-namespace',
       script_name: 'this-is_my_script-01',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -99,9 +86,8 @@ describe('resource secrets', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.get('mySecret', {
+    const response = await client.workers.scripts.secrets.get('mySecret', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      dispatch_namespace: 'my-dispatch-namespace',
       script_name: 'this-is_my_script-01',
     });
   });
