@@ -12,6 +12,9 @@ import {
 } from './versions';
 import * as InstancesAPI from './instances/instances';
 import {
+  InstanceBulkParams,
+  InstanceBulkResponse,
+  InstanceBulkResponsesSinglePage,
   InstanceCreateParams,
   InstanceCreateResponse,
   InstanceGetParams,
@@ -215,10 +218,13 @@ export declare namespace Workflows {
     InstancesAPIInstances as Instances,
     type InstanceCreateResponse as InstanceCreateResponse,
     type InstanceListResponse as InstanceListResponse,
+    type InstanceBulkResponse as InstanceBulkResponse,
     type InstanceGetResponse as InstanceGetResponse,
     type InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
+    type InstanceBulkResponsesSinglePage as InstanceBulkResponsesSinglePage,
     type InstanceCreateParams as InstanceCreateParams,
     type InstanceListParams as InstanceListParams,
+    type InstanceBulkParams as InstanceBulkParams,
     type InstanceGetParams as InstanceGetParams,
   };
 
