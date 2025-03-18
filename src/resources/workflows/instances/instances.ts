@@ -4,7 +4,12 @@ import { APIResource } from '../../../resource';
 import * as StatusAPI from './status';
 import { Status, StatusEditParams, StatusEditResponse } from './status';
 import { APIPromise } from '../../../api-promise';
-import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import {
+  PagePromise,
+  SinglePage,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -45,6 +50,22 @@ export class Instances extends APIResource {
   }
 
   /**
+   * Batch create new Workflow instances
+   */
+  bulk(
+    workflowName: string,
+    params: InstanceBulkParams,
+    options?: RequestOptions,
+  ): PagePromise<InstanceBulkResponsesSinglePage, InstanceBulkResponse> {
+    const { account_id, body } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/workflows/${workflowName}/instances/batch`,
+      SinglePage<InstanceBulkResponse>,
+      { body: body, method: 'post', ...options },
+    );
+  }
+
+  /**
    * Get logs and status from instance
    */
   get(
@@ -63,6 +84,8 @@ export class Instances extends APIResource {
 }
 
 export type InstanceListResponsesV4PagePaginationArray = V4PagePaginationArray<InstanceListResponse>;
+
+export type InstanceBulkResponsesSinglePage = SinglePage<InstanceBulkResponse>;
 
 export interface InstanceCreateResponse {
   id: string;
@@ -93,6 +116,25 @@ export interface InstanceListResponse {
   modified_on: string;
 
   started_on: string | null;
+
+  status:
+    | 'queued'
+    | 'running'
+    | 'paused'
+    | 'errored'
+    | 'terminated'
+    | 'complete'
+    | 'waitingForPause'
+    | 'waiting'
+    | 'unknown';
+
+  version_id: string;
+
+  workflow_id: string;
+}
+
+export interface InstanceBulkResponse {
+  id: string;
 
   status:
     | 'queued'
@@ -293,6 +335,26 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
     | 'unknown';
 }
 
+export interface InstanceBulkParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body?: Array<InstanceBulkParams.Body>;
+}
+
+export namespace InstanceBulkParams {
+  export interface Body {
+    instance_id?: string;
+
+    params?: unknown;
+  }
+}
+
 export interface InstanceGetParams {
   account_id: string;
 
@@ -305,10 +367,13 @@ export declare namespace Instances {
   export {
     type InstanceCreateResponse as InstanceCreateResponse,
     type InstanceListResponse as InstanceListResponse,
+    type InstanceBulkResponse as InstanceBulkResponse,
     type InstanceGetResponse as InstanceGetResponse,
     type InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
+    type InstanceBulkResponsesSinglePage as InstanceBulkResponsesSinglePage,
     type InstanceCreateParams as InstanceCreateParams,
     type InstanceListParams as InstanceListParams,
+    type InstanceBulkParams as InstanceBulkParams,
     type InstanceGetParams as InstanceGetParams,
   };
 
