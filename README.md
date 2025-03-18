@@ -20,10 +20,17 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Cloudflare from 'cloudflare';
 
+// Using API Key and Email (default)
 const client = new Cloudflare({
   apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
+
+// Using API Tokens
+const client = new Cloudflare({
+  apiToken: process.env['CLOUDFLARE_API_TOKEN'] // Ensure CLOUDFLARE_EMAIL and CLOUDFLARE_API_KEY are not set in env
+});
+
 
 async function main() {
   const zone = await client.zones.create({
