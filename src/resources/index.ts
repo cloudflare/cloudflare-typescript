@@ -51,6 +51,7 @@ export { LoadBalancers } from './load-balancers/load-balancers';
 export { Logpush } from './logpush/logpush';
 export { Logs } from './logs/logs';
 export { MTLSCertificates } from './mtls-certificates/mtls-certificates';
+export { MagicCloudNetworking } from './magic-cloud-networking/magic-cloud-networking';
 export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network-monitoring';
 export { MagicTransit } from './magic-transit/magic-transit';
 export { ManagedTransforms } from './managed-transforms';
