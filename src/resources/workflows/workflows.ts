@@ -13,6 +13,9 @@ import {
 } from './versions';
 import * as InstancesAPI from './instances/instances';
 import {
+  InstanceBulkParams,
+  InstanceBulkResponse,
+  InstanceBulkResponsesSinglePage,
   InstanceCreateParams,
   InstanceCreateResponse,
   InstanceGetParams,
@@ -207,6 +210,7 @@ export interface WorkflowGetParams {
 
 Workflows.Instances = InstancesAPIInstances;
 Workflows.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
+Workflows.InstanceBulkResponsesSinglePage = InstanceBulkResponsesSinglePage;
 Workflows.Versions = Versions;
 Workflows.VersionListResponsesV4PagePaginationArray = VersionListResponsesV4PagePaginationArray;
 
@@ -215,10 +219,13 @@ export declare namespace Workflows {
     InstancesAPIInstances as Instances,
     type InstanceCreateResponse as InstanceCreateResponse,
     type InstanceListResponse as InstanceListResponse,
+    type InstanceBulkResponse as InstanceBulkResponse,
     type InstanceGetResponse as InstanceGetResponse,
     InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
+    InstanceBulkResponsesSinglePage as InstanceBulkResponsesSinglePage,
     type InstanceCreateParams as InstanceCreateParams,
     type InstanceListParams as InstanceListParams,
+    type InstanceBulkParams as InstanceBulkParams,
     type InstanceGetParams as InstanceGetParams,
   };
 

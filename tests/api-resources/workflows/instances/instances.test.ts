@@ -51,6 +51,24 @@ describe('resource instances', () => {
     });
   });
 
+  test('bulk: only required params', async () => {
+    const responsePromise = client.workflows.instances.bulk('x', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulk: required and optional params', async () => {
+    const response = await client.workflows.instances.bulk('x', {
+      account_id: 'account_id',
+      body: [{ instance_id: 'instance_id', params: {} }],
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.workflows.instances.get('x', 'x', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
