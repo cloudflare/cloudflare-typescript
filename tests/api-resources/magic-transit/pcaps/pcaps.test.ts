@@ -41,6 +41,7 @@ describe('resource pcaps', () => {
         source_address: '1.2.3.4',
         source_port: 123,
       },
+      offset_time: '2020-01-01T08:00:00Z',
     });
   });
 

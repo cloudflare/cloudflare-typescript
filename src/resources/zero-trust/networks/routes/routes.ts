@@ -185,7 +185,7 @@ export interface Teamnet {
   /**
    * The type of tunnel.
    */
-  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
 
   /**
    * UUID of the tunnel.
@@ -248,8 +248,8 @@ export interface RouteListParams extends V4PagePaginationArrayParams {
   comment?: string;
 
   /**
-   * Query param: If provided, include only tunnels that were created (and not
-   * deleted) before this time.
+   * Query param: If provided, include only resources that were created (and not
+   * deleted) before this time. URL encoded.
    */
   existed_at?: string;
 
@@ -275,9 +275,9 @@ export interface RouteListParams extends V4PagePaginationArrayParams {
   route_id?: string;
 
   /**
-   * Query param: The types of tunnels to filter separated by a comma.
+   * Query param: The types of tunnels to filter by, separated by commas.
    */
-  tun_types?: string;
+  tun_types?: Array<'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni'>;
 
   /**
    * Query param: UUID of the tunnel.

@@ -41,6 +41,8 @@ export interface SubmissionListResponse {
     | 'NONE'
     | null;
 
+  original_edf_hash?: string | null;
+
   outcome?: string | null;
 
   outcome_disposition?:

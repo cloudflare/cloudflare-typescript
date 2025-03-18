@@ -6,7 +6,7 @@ import * as Core from '../../../core';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Percentage distribution of traffic per AI user agent over time.
+   * Retrieves the distribution of traffic by AI user agent over time.
    */
   userAgent(
     query?: TimeseriesGroupUserAgentParams,
@@ -51,16 +51,16 @@ export interface TimeseriesGroupUserAgentParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -70,37 +70,39 @@ export interface TimeseriesGroupUserAgentParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
+   * Limits the number of objects per group to the top items within the specified
+   * time range. If there are more items than the limit, the response will include
+   * the count of items, with any remaining items grouped together under an "other"
+   * category.
    */
   limitPerGroup?: number;
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 }

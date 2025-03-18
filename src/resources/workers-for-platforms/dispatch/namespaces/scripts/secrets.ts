@@ -6,7 +6,7 @@ import { SinglePage } from '../../../../../pagination';
 
 export class Secrets extends APIResource {
   /**
-   * Put secrets to a script uploaded to a Workers for Platforms namespace.
+   * Add a secret to a script uploaded to a Workers for Platforms namespace.
    */
   update(
     dispatchNamespace: string,
@@ -24,7 +24,7 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * List secrets from a script uploaded to a Workers for Platforms namespace.
+   * List secrets bound to a script uploaded to a Workers for Platforms namespace.
    */
   list(
     dispatchNamespace: string,
@@ -41,7 +41,27 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * Get secret from a script uploaded to a Workers for Platforms namespace.
+   * Remove a secret from a script uploaded to a Workers for Platforms namespace.
+   */
+  delete(
+    dispatchNamespace: string,
+    scriptName: string,
+    secretName: string,
+    params: SecretDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecretDeleteResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets/${secretName}`,
+        options,
+      ) as Core.APIPromise<{ result: SecretDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a given secret binding (value omitted) on a script uploaded to a Workers for
+   * Platforms namespace.
    */
   get(
     dispatchNamespace: string,
@@ -61,24 +81,6 @@ export class Secrets extends APIResource {
 }
 
 export class SecretListResponsesSinglePage extends SinglePage<SecretListResponse> {}
-
-export interface WorkersSecretModel {
-  /**
-   * The name of this secret, this is what will be used to access it inside the
-   * Worker.
-   */
-  name?: string;
-
-  /**
-   * The value of the secret.
-   */
-  text?: string;
-
-  /**
-   * The type of secret to put.
-   */
-  type?: 'secret_text';
-}
 
 export interface SecretUpdateResponse {
   /**
@@ -105,6 +107,8 @@ export interface SecretListResponse {
    */
   type?: 'secret_text';
 }
+
+export type SecretDeleteResponse = unknown;
 
 export interface SecretGetResponse {
   /**
@@ -149,6 +153,13 @@ export interface SecretListParams {
   account_id: string;
 }
 
+export interface SecretDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface SecretGetParams {
   /**
    * Identifier
@@ -160,13 +171,14 @@ Secrets.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
 
 export declare namespace Secrets {
   export {
-    type WorkersSecretModel as WorkersSecretModel,
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
+    type SecretDeleteResponse as SecretDeleteResponse,
     type SecretGetResponse as SecretGetResponse,
     SecretListResponsesSinglePage as SecretListResponsesSinglePage,
     type SecretUpdateParams as SecretUpdateParams,
     type SecretListParams as SecretListParams,
+    type SecretDeleteParams as SecretDeleteParams,
     type SecretGetParams as SecretGetParams,
   };
 }

@@ -214,7 +214,8 @@ export interface BytimeGetParams {
   >;
 
   /**
-   * Query param:
+   * Query param: Start of time interval to query, defaults to `until` - 6 hours.
+   * Timestamp must be in RFC3339 format and uses UTC unless otherwise specified.
    */
   since?: string;
 
@@ -225,7 +226,8 @@ export interface BytimeGetParams {
   sort?: Array<string>;
 
   /**
-   * Query param:
+   * Query param: End of time interval to query, defaults to current time. Timestamp
+   * must be in RFC3339 format and uses UTC unless otherwise specified.
    */
   until?: string;
 }

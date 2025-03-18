@@ -1,5 +1,105 @@
 # Changelog
 
+## 4.2.0 (2025-03-18)
+
+Full Changelog: [v4.1.0...v4.2.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.1.0...v4.2.0)
+
+### Features
+
+* add SKIP_BREW env var to ./scripts/bootstrap ([#2480](https://github.com/cloudflare/cloudflare-typescript/issues/2480)) ([9cf8f0a](https://github.com/cloudflare/cloudflare-typescript/commit/9cf8f0ab7504e873ad337bcd866760114e8b499c))
+* **ai_gateway:** add urls support ([#2517](https://github.com/cloudflare/cloudflare-typescript/issues/2517)) ([a2624e6](https://github.com/cloudflare/cloudflare-typescript/commit/a2624e6159639863c9da66ee6243bddbcb529243))
+* **api:** api update ([#2436](https://github.com/cloudflare/cloudflare-typescript/issues/2436)) ([e6f6e17](https://github.com/cloudflare/cloudflare-typescript/commit/e6f6e179b0feeeaf76dc57967cca4cb6755450ef))
+* **api:** api update ([#2439](https://github.com/cloudflare/cloudflare-typescript/issues/2439)) ([c03fa42](https://github.com/cloudflare/cloudflare-typescript/commit/c03fa42f1cb74d3634981452d5d642db4ebafade))
+* **api:** api update ([#2441](https://github.com/cloudflare/cloudflare-typescript/issues/2441)) ([9c819a8](https://github.com/cloudflare/cloudflare-typescript/commit/9c819a8bc4c680a6ae32e075a64638c13e769e5d))
+* **api:** api update ([#2444](https://github.com/cloudflare/cloudflare-typescript/issues/2444)) ([cd03eaa](https://github.com/cloudflare/cloudflare-typescript/commit/cd03eaa3cd3f12e3c948d6a740ec4ea0f07ebb70))
+* **api:** api update ([#2445](https://github.com/cloudflare/cloudflare-typescript/issues/2445)) ([eb4e5b2](https://github.com/cloudflare/cloudflare-typescript/commit/eb4e5b2907df1d38761e6a9bd9859fd5c691cd84))
+* **api:** api update ([#2453](https://github.com/cloudflare/cloudflare-typescript/issues/2453)) ([4c8540b](https://github.com/cloudflare/cloudflare-typescript/commit/4c8540b873dc28750cf32d4877e83112b40b829c))
+* **api:** api update ([#2457](https://github.com/cloudflare/cloudflare-typescript/issues/2457)) ([7f00303](https://github.com/cloudflare/cloudflare-typescript/commit/7f00303615633fd3b56666f22bc90cfd2a4fbf18))
+* **api:** api update ([#2458](https://github.com/cloudflare/cloudflare-typescript/issues/2458)) ([5eafe54](https://github.com/cloudflare/cloudflare-typescript/commit/5eafe54447365ff0fd57b6cb5a0e85f856d3291b))
+* **api:** api update ([#2459](https://github.com/cloudflare/cloudflare-typescript/issues/2459)) ([27e4048](https://github.com/cloudflare/cloudflare-typescript/commit/27e404887a844a366b79c1c5d594c1d60082b7a5))
+* **api:** api update ([#2460](https://github.com/cloudflare/cloudflare-typescript/issues/2460)) ([cc704ac](https://github.com/cloudflare/cloudflare-typescript/commit/cc704ac315f4488091331590e00e6989e10aa832))
+* **api:** api update ([#2463](https://github.com/cloudflare/cloudflare-typescript/issues/2463)) ([3fb110d](https://github.com/cloudflare/cloudflare-typescript/commit/3fb110d400eece17cc8396165869b735d825fd81))
+* **api:** api update ([#2465](https://github.com/cloudflare/cloudflare-typescript/issues/2465)) ([c09dcf8](https://github.com/cloudflare/cloudflare-typescript/commit/c09dcf866c2d99078df0c2b980d07a44f60f74c1))
+* **api:** api update ([#2468](https://github.com/cloudflare/cloudflare-typescript/issues/2468)) ([eb196c4](https://github.com/cloudflare/cloudflare-typescript/commit/eb196c4fc24a25a779f667aba540e148971bd6da))
+* **api:** api update ([#2469](https://github.com/cloudflare/cloudflare-typescript/issues/2469)) ([50486e4](https://github.com/cloudflare/cloudflare-typescript/commit/50486e47cefef228ade31172409b1d485565935d))
+* **api:** api update ([#2471](https://github.com/cloudflare/cloudflare-typescript/issues/2471)) ([33322e9](https://github.com/cloudflare/cloudflare-typescript/commit/33322e909a584ac62e5f0f6902e23caaf7c14c66))
+* **api:** api update ([#2473](https://github.com/cloudflare/cloudflare-typescript/issues/2473)) ([8e3df71](https://github.com/cloudflare/cloudflare-typescript/commit/8e3df714c501ba08d2c2af94486371c8f5de1b23))
+* **api:** api update ([#2474](https://github.com/cloudflare/cloudflare-typescript/issues/2474)) ([87c659a](https://github.com/cloudflare/cloudflare-typescript/commit/87c659ae7ce5d4bcda157fbc3443082d38ad7ff4))
+* **api:** api update ([#2475](https://github.com/cloudflare/cloudflare-typescript/issues/2475)) ([6e65552](https://github.com/cloudflare/cloudflare-typescript/commit/6e65552a866127bf642de3c9f8a1f09ae4e0a20c))
+* **api:** api update ([#2476](https://github.com/cloudflare/cloudflare-typescript/issues/2476)) ([49a48d8](https://github.com/cloudflare/cloudflare-typescript/commit/49a48d840cdacdab8bf7387717c442e8d40690f4))
+* **api:** api update ([#2478](https://github.com/cloudflare/cloudflare-typescript/issues/2478)) ([9402eb1](https://github.com/cloudflare/cloudflare-typescript/commit/9402eb1ad45133726350c321f67aadd7579ff542))
+* **api:** api update ([#2479](https://github.com/cloudflare/cloudflare-typescript/issues/2479)) ([e78893a](https://github.com/cloudflare/cloudflare-typescript/commit/e78893a6dc24cdd25a88a4c724098bf42ab230bc))
+* **api:** api update ([#2491](https://github.com/cloudflare/cloudflare-typescript/issues/2491)) ([95331f0](https://github.com/cloudflare/cloudflare-typescript/commit/95331f08397882bb0901e2a4a5a719d595c3c94f))
+* **api:** api update ([#2492](https://github.com/cloudflare/cloudflare-typescript/issues/2492)) ([9c3ef42](https://github.com/cloudflare/cloudflare-typescript/commit/9c3ef42cba2e269e3130fa866fe29bec3459993d))
+* **api:** api update ([#2493](https://github.com/cloudflare/cloudflare-typescript/issues/2493)) ([0b006c6](https://github.com/cloudflare/cloudflare-typescript/commit/0b006c69ad812ead1e5de5ffe7aaa71a8d07bc58))
+* **api:** api update ([#2494](https://github.com/cloudflare/cloudflare-typescript/issues/2494)) ([91e7a25](https://github.com/cloudflare/cloudflare-typescript/commit/91e7a25722f862073f0ceb49b4f4bf1fafcf77c5))
+* **api:** api update ([#2495](https://github.com/cloudflare/cloudflare-typescript/issues/2495)) ([57c7f54](https://github.com/cloudflare/cloudflare-typescript/commit/57c7f54abe12cb9d4bd45a6de0048bf8ecf851cb))
+* **api:** api update ([#2497](https://github.com/cloudflare/cloudflare-typescript/issues/2497)) ([aefc773](https://github.com/cloudflare/cloudflare-typescript/commit/aefc773875f32aedc0aa53b8efd90aabb4bd905c))
+* **api:** api update ([#2498](https://github.com/cloudflare/cloudflare-typescript/issues/2498)) ([253dc00](https://github.com/cloudflare/cloudflare-typescript/commit/253dc00bcd0ab6053b0f75d9afdd7dccbc83a6f3))
+* **api:** api update ([#2503](https://github.com/cloudflare/cloudflare-typescript/issues/2503)) ([e74872e](https://github.com/cloudflare/cloudflare-typescript/commit/e74872e4494756be241bdc2f489f3f160336a139))
+* **api:** api update ([#2504](https://github.com/cloudflare/cloudflare-typescript/issues/2504)) ([179b4dd](https://github.com/cloudflare/cloudflare-typescript/commit/179b4dda539edf9500592d0b5c90761395773f68))
+* **api:** api update ([#2505](https://github.com/cloudflare/cloudflare-typescript/issues/2505)) ([723a06b](https://github.com/cloudflare/cloudflare-typescript/commit/723a06b66327dcece0708c1f999918d0324753b2))
+* **api:** api update ([#2507](https://github.com/cloudflare/cloudflare-typescript/issues/2507)) ([35e4991](https://github.com/cloudflare/cloudflare-typescript/commit/35e49911548aed2515862e3e846ae7baaa3abe24))
+* **api:** api update ([#2509](https://github.com/cloudflare/cloudflare-typescript/issues/2509)) ([1eda18e](https://github.com/cloudflare/cloudflare-typescript/commit/1eda18e2fc710fa51bda1d26dbab990b4edd2a8b))
+* **api:** api update ([#2510](https://github.com/cloudflare/cloudflare-typescript/issues/2510)) ([699f14f](https://github.com/cloudflare/cloudflare-typescript/commit/699f14f83ddd43765b4da35ec5bf5c0a7b3eeebb))
+* **api:** api update ([#2511](https://github.com/cloudflare/cloudflare-typescript/issues/2511)) ([ebe6695](https://github.com/cloudflare/cloudflare-typescript/commit/ebe669581430fa6b135c884e75957f0608378217))
+* **api:** api update ([#2513](https://github.com/cloudflare/cloudflare-typescript/issues/2513)) ([a5b6b5f](https://github.com/cloudflare/cloudflare-typescript/commit/a5b6b5f59dfc582caca2daa17afe8c4a7c3f6b32))
+* **api:** api update ([#2514](https://github.com/cloudflare/cloudflare-typescript/issues/2514)) ([240e90c](https://github.com/cloudflare/cloudflare-typescript/commit/240e90c47cfd1cfd08e997d6e5677fc75da880f8))
+* **api:** api update ([#2515](https://github.com/cloudflare/cloudflare-typescript/issues/2515)) ([9196753](https://github.com/cloudflare/cloudflare-typescript/commit/9196753afbf77d0ff954e5459a3a952171ce3e2b))
+* **api:** api update ([#2521](https://github.com/cloudflare/cloudflare-typescript/issues/2521)) ([b8f3091](https://github.com/cloudflare/cloudflare-typescript/commit/b8f3091987476ac90d50e3929825df26b5ecceaa))
+* **api:** api update ([#2522](https://github.com/cloudflare/cloudflare-typescript/issues/2522)) ([cb257d1](https://github.com/cloudflare/cloudflare-typescript/commit/cb257d16a0bfb59dff7d0f427cf116b2b9ad1b67))
+* **api:** api update ([#2524](https://github.com/cloudflare/cloudflare-typescript/issues/2524)) ([50f80fb](https://github.com/cloudflare/cloudflare-typescript/commit/50f80fb51c708e54df2e87a8da09337925f56d75))
+* **api:** cloudforce one port scan APIs ([#2464](https://github.com/cloudflare/cloudflare-typescript/issues/2464)) ([f346c6c](https://github.com/cloudflare/cloudflare-typescript/commit/f346c6c966b9f379e2b8db41c0da3ff45b393557))
+* **api:** manual updates ([#2456](https://github.com/cloudflare/cloudflare-typescript/issues/2456)) ([b2d54a0](https://github.com/cloudflare/cloudflare-typescript/commit/b2d54a062e328113b0568b373da1f6fe54ffcb00))
+* **api:** manual updates ([#2487](https://github.com/cloudflare/cloudflare-typescript/issues/2487)) ([e31950a](https://github.com/cloudflare/cloudflare-typescript/commit/e31950a672e7ffabdb41e33b4c760cc05a27252a))
+* **api:** manual updates ([#2501](https://github.com/cloudflare/cloudflare-typescript/issues/2501)) ([e372a1d](https://github.com/cloudflare/cloudflare-typescript/commit/e372a1d0329661963ff69e595875c1a210c2649c))
+* **api:** manual updates ([#2502](https://github.com/cloudflare/cloudflare-typescript/issues/2502)) ([ba01d4d](https://github.com/cloudflare/cloudflare-typescript/commit/ba01d4d3f59f2c710706129cd20d14ae4430a660))
+* **api:** rename browsing_rendering to browser_rendering ([#2452](https://github.com/cloudflare/cloudflare-typescript/issues/2452)) ([3aca731](https://github.com/cloudflare/cloudflare-typescript/commit/3aca731fd0b13f7a0e32ba81be4dea85666b1039))
+* **api:** Update scans and scan results routes ([#2512](https://github.com/cloudflare/cloudflare-typescript/issues/2512)) ([190dd24](https://github.com/cloudflare/cloudflare-typescript/commit/190dd24e45c6933f1d1b58fdbded044962b0f346))
+* **browser_rendering:** move methods to top level ([#2455](https://github.com/cloudflare/cloudflare-typescript/issues/2455)) ([84c530e](https://github.com/cloudflare/cloudflare-typescript/commit/84c530e9b3fef1f99e907302995abd2ebc847961))
+* **browsing_rendering:** add support for subresources ([#2448](https://github.com/cloudflare/cloudflare-typescript/issues/2448)) ([f2c0ffc](https://github.com/cloudflare/cloudflare-typescript/commit/f2c0ffcfc3b35b09cd135cfaa22625777bf40c19))
+* **client:** accept RFC6838 JSON content types ([#2490](https://github.com/cloudflare/cloudflare-typescript/issues/2490)) ([7dd7294](https://github.com/cloudflare/cloudflare-typescript/commit/7dd7294987e3e968eecc711185363711f3ec9a84))
+* **cloudforce_one:** add support for `config` and `scans` ([#2472](https://github.com/cloudflare/cloudflare-typescript/issues/2472)) ([0bb375e](https://github.com/cloudflare/cloudflare-typescript/commit/0bb375ea6746f8f0e64652d7d6f99019655f4214))
+* **cloudforce_one:** fix scans model ([#2481](https://github.com/cloudflare/cloudflare-typescript/issues/2481)) ([34b088c](https://github.com/cloudflare/cloudflare-typescript/commit/34b088caeb1006bcde87aa795479a5331de15caa))
+* **dns_settings:** fix hierarchy ([#2488](https://github.com/cloudflare/cloudflare-typescript/issues/2488)) ([e0a3e08](https://github.com/cloudflare/cloudflare-typescript/commit/e0a3e089df9f35beb8951fbed3d73ce491bb54f6))
+* **dns:** split account and zone DNS settings ([#2483](https://github.com/cloudflare/cloudflare-typescript/issues/2483)) ([f28ac46](https://github.com/cloudflare/cloudflare-typescript/commit/f28ac463a899793cb9212e251cd54f86c9385863))
+* **internal:** group browser rendering ([#2484](https://github.com/cloudflare/cloudflare-typescript/issues/2484)) ([7161eee](https://github.com/cloudflare/cloudflare-typescript/commit/7161eeeb72f5e911988c4cf44b46d1eec29df859))
+* **internal:** support `documentation_url` and `source.pointer` in error responses ([#2466](https://github.com/cloudflare/cloudflare-typescript/issues/2466)) ([98646d8](https://github.com/cloudflare/cloudflare-typescript/commit/98646d85c114226076d286edec2e623d27c9b711))
+* **magic_cloud_networking:** add endpoint mappings ([#2525](https://github.com/cloudflare/cloudflare-typescript/issues/2525)) ([1dc6add](https://github.com/cloudflare/cloudflare-typescript/commit/1dc6add4244c7913c8541a4c0df6f305a6990fae))
+* **radar:** add compromised credential endpoints ([#2527](https://github.com/cloudflare/cloudflare-typescript/issues/2527)) ([231c959](https://github.com/cloudflare/cloudflare-typescript/commit/231c959a2720033d02f907eb619c473ed2bce3b6))
+* **radar:** add DNS endpoint ([#2451](https://github.com/cloudflare/cloudflare-typescript/issues/2451)) ([e3be640](https://github.com/cloudflare/cloudflare-typescript/commit/e3be6407634d707f287ed50d0ec4d64690a15dff))
+* **threat_events:** fix create endpoint ([#2506](https://github.com/cloudflare/cloudflare-typescript/issues/2506)) ([4ca4c2c](https://github.com/cloudflare/cloudflare-typescript/commit/4ca4c2c946f3aa40763a204d695e8b93678c0444))
+* **threat_events:** shuffle endpoints from POST =&gt; PATCH ([#2500](https://github.com/cloudflare/cloudflare-typescript/issues/2500)) ([967ae2d](https://github.com/cloudflare/cloudflare-typescript/commit/967ae2dde0bb1429096bc54ec3e7858ecb557c04))
+* **vpc_flows:** add token support ([#2449](https://github.com/cloudflare/cloudflare-typescript/issues/2449)) ([7b27715](https://github.com/cloudflare/cloudflare-typescript/commit/7b277153296df46a4eeaf351207464b6056b706a))
+* **waiting_rooms:** add account level list API ([#2499](https://github.com/cloudflare/cloudflare-typescript/issues/2499)) ([efc07f1](https://github.com/cloudflare/cloudflare-typescript/commit/efc07f1db0b197021ace2aadd9ebf9be807dbedc))
+* **workers:** add in secrets endpoints ([#2518](https://github.com/cloudflare/cloudflare-typescript/issues/2518)) ([467558f](https://github.com/cloudflare/cloudflare-typescript/commit/467558f733c8da99d74c025e0e8eca6018fddb3b))
+* **workflows:** add `bulk` support ([#2526](https://github.com/cloudflare/cloudflare-typescript/issues/2526)) ([07e8813](https://github.com/cloudflare/cloudflare-typescript/commit/07e8813596908e63de8862a913ac8b955e6cd080))
+
+
+### Bug Fixes
+
+* **api:** missing union discriminator naming ([#2523](https://github.com/cloudflare/cloudflare-typescript/issues/2523)) ([74cb5e8](https://github.com/cloudflare/cloudflare-typescript/commit/74cb5e8a3cb96bc62bb47a28eeae37523aae2fa7))
+* **exports:** ensure resource imports don't require /index ([#2508](https://github.com/cloudflare/cloudflare-typescript/issues/2508)) ([096c3c7](https://github.com/cloudflare/cloudflare-typescript/commit/096c3c765423241480b91df4d4b568bd283afc0b))
+* **internal:** remove port scans pending path fixes ([#2467](https://github.com/cloudflare/cloudflare-typescript/issues/2467)) ([0567d83](https://github.com/cloudflare/cloudflare-typescript/commit/0567d83635e03cff24d6c1d73d50deec24140f92))
+* **r2_custom_domain:** update path placeholders to de-duplicate internal values ([#2482](https://github.com/cloudflare/cloudflare-typescript/issues/2482)) ([18312d8](https://github.com/cloudflare/cloudflare-typescript/commit/18312d8168a3867f5b4438d7bfa6462d8ccb171f))
+* **workers_for_platforms:** remove cyclic import due to model ([#2519](https://github.com/cloudflare/cloudflare-typescript/issues/2519)) ([9f79e97](https://github.com/cloudflare/cloudflare-typescript/commit/9f79e972bb6858ac87e0eadc246dc76e0ef9e61e))
+
+
+### Chores
+
+* **api:** deprecate resources ([#2462](https://github.com/cloudflare/cloudflare-typescript/issues/2462)) ([df6a965](https://github.com/cloudflare/cloudflare-typescript/commit/df6a965a4aece6cb792feef6a60572899482ba8a))
+* **internal:** codegen related update ([#2440](https://github.com/cloudflare/cloudflare-typescript/issues/2440)) ([a76c8c2](https://github.com/cloudflare/cloudflare-typescript/commit/a76c8c29d7363fdd571389e4259dd6a38bf1c5f0))
+* **internal:** codegen related update ([#2470](https://github.com/cloudflare/cloudflare-typescript/issues/2470)) ([b74f3d1](https://github.com/cloudflare/cloudflare-typescript/commit/b74f3d17fc0a75e7f310670e42543e61dc0dbbd7))
+* **internal:** codegen related update ([#2477](https://github.com/cloudflare/cloudflare-typescript/issues/2477)) ([7c4cae5](https://github.com/cloudflare/cloudflare-typescript/commit/7c4cae5f7e0826e4ed214c72dead50f95799bc81))
+* **internal:** codegen related update ([#2485](https://github.com/cloudflare/cloudflare-typescript/issues/2485)) ([267750e](https://github.com/cloudflare/cloudflare-typescript/commit/267750e280495428e92dc65023cc5ce985a8b3ca))
+* **internal:** codegen related update ([#2486](https://github.com/cloudflare/cloudflare-typescript/issues/2486)) ([c398a7d](https://github.com/cloudflare/cloudflare-typescript/commit/c398a7d81f0310e8459efeb62e00fc425f718fb9))
+* **internal:** mark VPC and PDF as initialisms ([#2450](https://github.com/cloudflare/cloudflare-typescript/issues/2450)) ([4ad8f8c](https://github.com/cloudflare/cloudflare-typescript/commit/4ad8f8c8bd07b4318c86ffe680b64ca5d58e21b0))
+
+
+### Documentation
+
+* update URLs from stainlessapi.com to stainless.com ([#2446](https://github.com/cloudflare/cloudflare-typescript/issues/2446)) ([fe99c42](https://github.com/cloudflare/cloudflare-typescript/commit/fe99c42e49264d5e1e1fdbdcc5004bae83ad23b7))
+
 ## 4.1.0 (2025-02-11)
 
 Full Changelog: [v4.0.0...v4.1.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.0.0...v4.1.0)

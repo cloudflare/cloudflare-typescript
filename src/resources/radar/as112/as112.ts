@@ -56,7 +56,7 @@ export class AS112 extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
-   * Get AS112 queries change over time.
+   * Retrieves the AS112 DNS queries over time.
    */
   timeseries(
     query?: AS112TimeseriesParams,
@@ -149,16 +149,16 @@ export interface AS112TimeseriesParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -168,33 +168,156 @@ export interface AS112TimeseriesParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 AS112.Summary = Summary;

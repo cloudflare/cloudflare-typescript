@@ -47,7 +47,9 @@ describe('resource siteInfo', () => {
     const response = await client.rum.siteInfo.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       auto_install: true,
+      enabled: true,
       host: 'example.com',
+      lite: true,
       zone_tag: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

@@ -1,24 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Settings,
-  type DNSSetting,
-  type SettingEditResponse,
-  type SettingGetResponse,
-  type SettingEditParams,
-  type SettingGetParams,
-} from './settings';
+  Account,
+  type AccountEditResponse,
+  type AccountGetResponse,
+  type AccountEditParams,
+  type AccountGetParams,
+} from './account/index';
+export { Settings, type DNSSetting } from './settings';
 export {
-  ViewListResponsesV4PagePaginationArray,
-  Views,
-  type ViewCreateResponse,
-  type ViewListResponse,
-  type ViewDeleteResponse,
-  type ViewEditResponse,
-  type ViewGetResponse,
-  type ViewCreateParams,
-  type ViewListParams,
-  type ViewDeleteParams,
-  type ViewEditParams,
-  type ViewGetParams,
-} from './views';
+  Zone,
+  type ZoneEditResponse,
+  type ZoneGetResponse,
+  type ZoneEditParams,
+  type ZoneGetParams,
+} from './zone';

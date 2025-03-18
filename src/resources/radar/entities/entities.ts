@@ -28,7 +28,7 @@ export class Entities extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
 
   /**
-   * Get IP address information.
+   * Retrieves IP address information.
    */
   get(query: EntityGetParams, options?: Core.RequestOptions): Core.APIPromise<EntityGetResponse> {
     return (
@@ -70,7 +70,7 @@ export interface EntityGetParams {
   ip: string;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 }

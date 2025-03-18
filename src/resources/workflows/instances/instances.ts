@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as StatusAPI from './status';
 import { Status, StatusEditParams, StatusEditResponse } from './status';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Instances extends APIResource {
   status: StatusAPI.Status = new StatusAPI.Status(this._client);
@@ -43,6 +43,22 @@ export class Instances extends APIResource {
   }
 
   /**
+   * Batch create new Workflow instances
+   */
+  bulk(
+    workflowName: string,
+    params: InstanceBulkParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InstanceBulkResponsesSinglePage, InstanceBulkResponse> {
+    const { account_id, body } = params ?? {};
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workflows/${workflowName}/instances/batch`,
+      InstanceBulkResponsesSinglePage,
+      { body: body, method: 'post', ...options },
+    );
+  }
+
+  /**
    * Get logs and status from instance
    */
   get(
@@ -62,6 +78,8 @@ export class Instances extends APIResource {
 }
 
 export class InstanceListResponsesV4PagePaginationArray extends V4PagePaginationArray<InstanceListResponse> {}
+
+export class InstanceBulkResponsesSinglePage extends SinglePage<InstanceBulkResponse> {}
 
 export interface InstanceCreateResponse {
   id: string;
@@ -92,6 +110,25 @@ export interface InstanceListResponse {
   modified_on: string;
 
   started_on: string | null;
+
+  status:
+    | 'queued'
+    | 'running'
+    | 'paused'
+    | 'errored'
+    | 'terminated'
+    | 'complete'
+    | 'waitingForPause'
+    | 'waiting'
+    | 'unknown';
+
+  version_id: string;
+
+  workflow_id: string;
+}
+
+export interface InstanceBulkResponse {
+  id: string;
 
   status:
     | 'queued'
@@ -292,21 +329,45 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
     | 'unknown';
 }
 
+export interface InstanceBulkParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body?: Array<InstanceBulkParams.Body>;
+}
+
+export namespace InstanceBulkParams {
+  export interface Body {
+    instance_id?: string;
+
+    params?: unknown;
+  }
+}
+
 export interface InstanceGetParams {
   account_id: string;
 }
 
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
+Instances.InstanceBulkResponsesSinglePage = InstanceBulkResponsesSinglePage;
 Instances.Status = Status;
 
 export declare namespace Instances {
   export {
     type InstanceCreateResponse as InstanceCreateResponse,
     type InstanceListResponse as InstanceListResponse,
+    type InstanceBulkResponse as InstanceBulkResponse,
     type InstanceGetResponse as InstanceGetResponse,
     InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
+    InstanceBulkResponsesSinglePage as InstanceBulkResponsesSinglePage,
     type InstanceCreateParams as InstanceCreateParams,
     type InstanceListParams as InstanceListParams,
+    type InstanceBulkParams as InstanceBulkParams,
     type InstanceGetParams as InstanceGetParams,
   };
 

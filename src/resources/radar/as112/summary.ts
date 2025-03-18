@@ -6,7 +6,8 @@ import * as Core from '../../../core';
 
 export class Summary extends APIResource {
   /**
-   * Percentage distribution of DNS queries to AS112 by DNSSEC support.
+   * Retrieves the distribution of DNS queries to AS112 by DNSSEC (DNS Security
+   * Extensions) support.
    */
   dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
   dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
@@ -25,7 +26,8 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of DNS queries to AS112 by EDNS support.
+   * Retrieves the distribution of DNS queries to AS112 by EDNS (Extension Mechanisms
+   * for DNS) support.
    */
   edns(query?: SummaryEdnsParams, options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
   edns(options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
@@ -44,7 +46,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of DNS queries to AS112 per IP Version.
+   * Retrieves the distribution of DNS queries to AS112 by IP version.
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -66,7 +68,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of DNS queries to AS112 per protocol.
+   * Retrieves the distribution of DNS queries to AS112 by protocol.
    */
   protocol(
     query?: SummaryProtocolParams,
@@ -88,7 +90,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of DNS queries to AS112 by query type.
+   * Retrieves the distribution of DNS queries to AS112 by type.
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -110,7 +112,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 DNS requests classified by response code.
+   * Retrieves the distribution of AS112 DNS requests classified by response code.
    */
   responseCodes(
     query?: SummaryResponseCodesParams,
@@ -374,9 +376,13 @@ export namespace SummaryProtocolResponse {
   }
 
   export interface Summary0 {
-    tcp: string;
+    HTTPS: string;
 
-    udp: string;
+    TCP: string;
+
+    TLS: string;
+
+    UDP: string;
   }
 }
 
@@ -494,16 +500,16 @@ export namespace SummaryResponseCodesResponse {
 
 export interface SummaryDNSSECParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -513,47 +519,170 @@ export interface SummaryDNSSECParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryEdnsParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -563,47 +692,170 @@ export interface SummaryEdnsParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryIPVersionParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -613,47 +865,170 @@ export interface SummaryIPVersionParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryProtocolParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -663,47 +1038,165 @@ export interface SummaryProtocolParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryQueryTypeParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -713,53 +1206,84 @@ export interface SummaryQueryTypeParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
+   * Limits the number of objects per group to the top items within the specified
+   * time range. If there are more items than the limit, the response will include
+   * the count of items, with any remaining items grouped together under an "other"
+   * category.
    */
   limitPerGroup?: number;
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface SummaryResponseCodesParams {
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
+   * exclude ASNs from results. For example, `-174, 3356` excludes results from
+   * AS174, but includes results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
+   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
+   * but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -769,39 +1293,140 @@ export interface SummaryResponseCodesParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
+   * Limits the number of objects per group to the top items within the specified
+   * time range. If there are more items than the limit, the response will include
+   * the count of items, with any remaining items grouped together under an "other"
+   * category.
    */
   limitPerGroup?: number;
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
+   * locations from results. For example, `-US,PT` excludes results from the US, but
+   * includes results from PT.
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
 }
 
 export declare namespace Summary {

@@ -6,6 +6,9 @@ import * as FiltersAPI from '../filters';
 import * as RateLimitsAPI from '../rate-limits';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
+/**
+ * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+ */
 export class Rules extends APIResource {
   /**
    * Create one or more firewall rules.
@@ -152,12 +155,11 @@ export class Rules extends APIResource {
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<FirewallRule> {
-    const { zone_id, ...query } = params;
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/firewall/rules/${ruleId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: FirewallRule }>
+      this._client.get(`/zones/${zone_id}/firewall/rules/${ruleId}`, options) as Core.APIPromise<{
+        result: FirewallRule;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -442,14 +444,9 @@ export interface RuleEditParams {
 
 export interface RuleGetParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Query param: The unique identifier of the firewall rule.
-   */
-  id?: string;
 }
 
 Rules.FirewallRulesSinglePage = FirewallRulesSinglePage;

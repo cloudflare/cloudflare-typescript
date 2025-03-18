@@ -32,13 +32,13 @@ export class Custom extends APIResource {
    */
   update(
     bucketName: string,
-    domainName: string,
+    domain: string,
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomUpdateResponse> {
     const { account_id, jurisdiction, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
+      this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domain}`, {
         body,
         ...options,
         headers: {
@@ -78,13 +78,13 @@ export class Custom extends APIResource {
    */
   delete(
     bucketName: string,
-    domainName: string,
+    domain: string,
     params: CustomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomDeleteResponse> {
     const { account_id, jurisdiction } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
+      this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domain}`, {
         ...options,
         headers: {
           ...(jurisdiction?.toString() != null ?
@@ -101,13 +101,13 @@ export class Custom extends APIResource {
    */
   get(
     bucketName: string,
-    domainName: string,
+    domain: string,
     params: CustomGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomGetResponse> {
     const { account_id, jurisdiction } = params;
     return (
-      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domain}`, {
         ...options,
         headers: {
           ...(jurisdiction?.toString() != null ?

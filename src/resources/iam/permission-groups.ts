@@ -35,7 +35,37 @@ export class PermissionGroups extends APIResource {
 
 export class PermissionGroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<PermissionGroupListResponse> {}
 
-export type PermissionGroupListResponse = unknown;
+/**
+ * A named group of permissions that map to a group of operations against
+ * resources.
+ */
+export interface PermissionGroupListResponse {
+  /**
+   * Identifier of the group.
+   */
+  id: string;
+
+  /**
+   * Attributes associated to the permission group.
+   */
+  meta?: PermissionGroupListResponse.Meta;
+
+  /**
+   * Name of the group.
+   */
+  name?: string;
+}
+
+export namespace PermissionGroupListResponse {
+  /**
+   * Attributes associated to the permission group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
+  }
+}
 
 /**
  * A named group of permissions that map to a group of operations against

@@ -43,14 +43,14 @@ export interface ReverseDNSEditResponse {
   /**
    * Map of cluster IP addresses to PTR record contents
    */
-  ptr?: Record<string, string>;
+  ptr: Record<string, string>;
 }
 
 export interface ReverseDNSGetResponse {
   /**
    * Map of cluster IP addresses to PTR record contents
    */
-  ptr?: Record<string, string>;
+  ptr: Record<string, string>;
 }
 
 export interface ReverseDNSEditParams {

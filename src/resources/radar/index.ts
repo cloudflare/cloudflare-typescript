@@ -5,7 +5,7 @@ export { AS112, type AS112TimeseriesResponse, type AS112TimeseriesParams } from 
 export { Annotations, type AnnotationListResponse, type AnnotationListParams } from './annotations/index';
 export { Attacks } from './attacks/index';
 export { BGP, type BGPTimeseriesResponse, type BGPTimeseriesParams } from './bgp/index';
-export { DNS } from './dns/index';
+export { DNS, type DNSTimeseriesResponse, type DNSTimeseriesParams } from './dns/index';
 export {
   Datasets,
   type DatasetListResponse,
@@ -17,6 +17,7 @@ export {
 export { Email, type RadarEmailSeries, type RadarEmailSummary } from './email/index';
 export { Entities, type EntityGetResponse, type EntityGetParams } from './entities/index';
 export { HTTP, type HTTPTimeseriesResponse, type HTTPTimeseriesParams } from './http/index';
+export { LeakedCredentials } from './leaked-credentials/index';
 export {
   Netflows,
   type NetflowSummaryResponse,

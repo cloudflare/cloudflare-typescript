@@ -175,10 +175,13 @@ export namespace AppCreateResponse {
 
   export interface SpectrumConfigPaygoAppConfig {
     /**
-     * Identifier
+     * App identifier.
      */
     id: string;
 
+    /**
+     * When the Application was created.
+     */
     created_on: string;
 
     /**
@@ -186,6 +189,9 @@ export namespace AppCreateResponse {
      */
     dns: SpectrumAPI.DNS;
 
+    /**
+     * When the Application was last modified.
+     */
     modified_on: string;
 
     /**
@@ -296,10 +302,13 @@ export namespace AppUpdateResponse {
 
   export interface SpectrumConfigPaygoAppConfig {
     /**
-     * Identifier
+     * App identifier.
      */
     id: string;
 
+    /**
+     * When the Application was created.
+     */
     created_on: string;
 
     /**
@@ -307,6 +316,9 @@ export namespace AppUpdateResponse {
      */
     dns: SpectrumAPI.DNS;
 
+    /**
+     * When the Application was last modified.
+     */
     modified_on: string;
 
     /**
@@ -415,10 +427,13 @@ export namespace AppListResponse {
 
   export interface UnionMember1 {
     /**
-     * Identifier
+     * App identifier.
      */
     id: string;
 
+    /**
+     * When the Application was created.
+     */
     created_on: string;
 
     /**
@@ -426,6 +441,9 @@ export namespace AppListResponse {
      */
     dns: SpectrumAPI.DNS;
 
+    /**
+     * When the Application was last modified.
+     */
     modified_on: string;
 
     /**
@@ -543,10 +561,13 @@ export namespace AppGetResponse {
 
   export interface SpectrumConfigPaygoAppConfig {
     /**
-     * Identifier
+     * App identifier.
      */
     id: string;
 
+    /**
+     * When the Application was created.
+     */
     created_on: string;
 
     /**
@@ -554,6 +575,9 @@ export namespace AppGetResponse {
      */
     dns: SpectrumAPI.DNS;
 
+    /**
+     * When the Application was last modified.
+     */
     modified_on: string;
 
     /**
@@ -577,7 +601,7 @@ export type AppCreateParams =
 export declare namespace AppCreateParams {
   export interface SpectrumConfigAppConfig {
     /**
-     * Path param: Identifier
+     * Path param: Zone identifier.
      */
     zone_id: string;
 
@@ -656,14 +680,9 @@ export declare namespace AppCreateParams {
 
   export interface SpectrumConfigPaygoAppConfig {
     /**
-     * Path param: Identifier
+     * Path param: Zone identifier.
      */
     zone_id: string;
-
-    /**
-     * Body param: Identifier
-     */
-    id: string;
 
     /**
      * Body param: The name and type of DNS record for the Spectrum application.
@@ -692,7 +711,7 @@ export type AppUpdateParams =
 export declare namespace AppUpdateParams {
   export interface SpectrumConfigAppConfig {
     /**
-     * Path param: Identifier
+     * Path param: Zone identifier.
      */
     zone_id: string;
 
@@ -771,14 +790,9 @@ export declare namespace AppUpdateParams {
 
   export interface SpectrumConfigPaygoAppConfig {
     /**
-     * Path param: Identifier
+     * Path param: Zone identifier.
      */
     zone_id: string;
-
-    /**
-     * Body param: Identifier
-     */
-    id: string;
 
     /**
      * Body param: The name and type of DNS record for the Spectrum application.
@@ -802,7 +816,7 @@ export declare namespace AppUpdateParams {
 
 export interface AppListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Zone identifier.
    */
   zone_id: string;
 
@@ -819,14 +833,14 @@ export interface AppListParams extends V4PagePaginationArrayParams {
 
 export interface AppDeleteParams {
   /**
-   * Identifier
+   * Zone identifier.
    */
   zone_id: string;
 }
 
 export interface AppGetParams {
   /**
-   * Identifier
+   * Zone identifier.
    */
   zone_id: string;
 }

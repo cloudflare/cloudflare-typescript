@@ -7,6 +7,8 @@ import * as DomainAPI from './domain';
 import { Domain, DomainGetParams, DomainGetResponse } from './domain';
 import * as InternetServicesAPI from './internet-services';
 import {
+  InternetServiceCategoriesParams,
+  InternetServiceCategoriesResponse,
   InternetServiceTimeseriesGroupsParams,
   InternetServiceTimeseriesGroupsResponse,
   InternetServiceTopParams,
@@ -21,7 +23,7 @@ export class Ranking extends APIResource {
   );
 
   /**
-   * Gets Domains Rank updates change over time. Raw values are returned.
+   * Retrieves domains rank over time.
    */
   timeseriesGroups(
     query?: RankingTimeseriesGroupsParams,
@@ -43,10 +45,10 @@ export class Ranking extends APIResource {
   }
 
   /**
-   * Get top or trending domains based on their rank. Popular domains are domains of
-   * broad appeal based on how people use the Internet. Trending domains are domains
-   * that are generating a surge in interest. For more information on top domains,
-   * see https://blog.cloudflare.com/radar-domain-rankings/.
+   * Retrieves the top or trending domains based on their rank. Popular domains are
+   * domains of broad appeal based on how people use the Internet. Trending domains
+   * are domains that are generating a surge in interest. For more information on top
+   * domains, see https://blog.cloudflare.com/radar-domain-rankings/.
    */
   top(query?: RankingTopParams, options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse>;
   top(options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse>;
@@ -144,76 +146,86 @@ export interface RankingTimeseriesGroupsParams {
   dateEnd?: Array<string>;
 
   /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
+   * Filters results by the specified date range. For example, use `7d` and
+   * `7dcontrol` to compare this week with the previous week. Use this parameter or
+   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Array of datetimes to filter the start of a series.
+   * Start of the date range.
    */
   dateStart?: Array<string>;
 
   /**
-   * Array of comma separated list of domains names.
+   * Filters results by domain category.
+   */
+  domainCategory?: Array<string>;
+
+  /**
+   * Comma-separated list of domain names.
    */
   domains?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Array of locations (alpha-2 country codes).
+   * Comma-separated list of locations (alpha-2 codes).
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * The ranking type.
+   * Ranking type.
    */
   rankingType?: 'POPULAR' | 'TRENDING_RISE' | 'TRENDING_STEADY';
 }
 
 export interface RankingTopParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Filters results by domain category.
+   */
+  domainCategory?: Array<string>;
+
+  /**
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Array of locations (alpha-2 country codes).
+   * Comma-separated list of locations (alpha-2 codes).
    */
   location?: Array<string>;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * The ranking type.
+   * Ranking type.
    */
   rankingType?: 'POPULAR' | 'TRENDING_RISE' | 'TRENDING_STEADY';
 }
@@ -237,8 +249,10 @@ export declare namespace Ranking {
 
   export {
     InternetServices as InternetServices,
+    type InternetServiceCategoriesResponse as InternetServiceCategoriesResponse,
     type InternetServiceTimeseriesGroupsResponse as InternetServiceTimeseriesGroupsResponse,
     type InternetServiceTopResponse as InternetServiceTopResponse,
+    type InternetServiceCategoriesParams as InternetServiceCategoriesParams,
     type InternetServiceTimeseriesGroupsParams as InternetServiceTimeseriesGroupsParams,
     type InternetServiceTopParams as InternetServiceTopParams,
   };

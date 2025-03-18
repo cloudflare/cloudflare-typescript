@@ -233,7 +233,7 @@ export declare namespace CachePurgeParams {
 
   export namespace CachePurgeSingleFileWithURLAndHeaders {
     export interface File {
-      headers?: unknown;
+      headers?: Record<string, string>;
 
       url?: string;
     }

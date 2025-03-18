@@ -195,7 +195,7 @@ export interface CloudflareTunnel {
   /**
    * The type of tunnel.
    */
-  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
 }
 
 export namespace CloudflareTunnel {
@@ -248,7 +248,17 @@ export namespace CloudflareTunnel {
 export interface ErrorData {
   code?: number;
 
+  documentation_url?: string;
+
   message?: string;
+
+  source?: ErrorData.Source;
+}
+
+export namespace ErrorData {
+  export interface Source {
+    pointer?: string;
+  }
 }
 
 export interface Identifier {
@@ -928,6 +938,11 @@ export namespace TokenPolicyParam {
    * resources.
    */
   export interface PermissionGroup {
+    /**
+     * Identifier of the group.
+     */
+    id: string;
+
     /**
      * Attributes associated to the permission group.
      */

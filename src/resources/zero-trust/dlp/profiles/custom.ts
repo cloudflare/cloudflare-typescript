@@ -113,6 +113,8 @@ export interface CustomProfile {
    */
   updated_at: string;
 
+  ai_context_enabled?: boolean;
+
   confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
   /**
@@ -157,9 +159,13 @@ export namespace CustomProfile {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry can be made more or less sensitive by setting a
-       * confidence threshold. Profiles that use an entry with `available` set to true
-       * can use confidence thresholds
+       * Indicates whether this entry has AI remote service validation
+       */
+      ai_context_available: boolean;
+
+      /**
+       * Indicates whether this entry has any form of validation that is not an AI remote
+       * service
        */
       available: boolean;
     }
@@ -219,12 +225,18 @@ export namespace CustomProfile {
 export interface Pattern {
   regex: string;
 
+  /**
+   * @deprecated
+   */
   validation?: 'luhn';
 }
 
 export interface PatternParam {
   regex: string;
 
+  /**
+   * @deprecated
+   */
   validation?: 'luhn';
 }
 
@@ -279,6 +291,8 @@ export namespace CustomCreateResponse {
      */
     updated_at: string;
 
+    ai_context_enabled?: boolean;
+
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
@@ -323,9 +337,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry can be made more or less sensitive by setting a
-         * confidence threshold. Profiles that use an entry with `available` set to true
-         * can use confidence thresholds
+         * Indicates whether this entry has AI remote service validation
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service
          */
         available: boolean;
       }
@@ -405,6 +423,8 @@ export namespace CustomCreateResponse {
 
     type: 'predefined';
 
+    ai_context_enabled?: boolean;
+
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
@@ -457,9 +477,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry can be made more or less sensitive by setting a
-         * confidence threshold. Profiles that use an entry with `available` set to true
-         * can use confidence thresholds
+         * Indicates whether this entry has AI remote service validation
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service
          */
         available: boolean;
       }
@@ -577,9 +601,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry can be made more or less sensitive by setting a
-         * confidence threshold. Profiles that use an entry with `available` set to true
-         * can use confidence thresholds
+         * Indicates whether this entry has AI remote service validation
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service
          */
         available: boolean;
       }
@@ -659,6 +687,8 @@ export declare namespace CustomCreateParams {
       entries: Array<Profile.DLPNewCustomEntry | Profile.DLPNewWordListEntry>;
 
       name: string;
+
+      ai_context_enabled?: boolean;
 
       /**
        * Related DLP policies will trigger when the match count exceeds the number set.
@@ -755,6 +785,11 @@ export declare namespace CustomCreateParams {
      * Body param:
      */
     name: string;
+
+    /**
+     * Body param:
+     */
+    ai_context_enabled?: boolean;
 
     /**
      * Body param: Related DLP policies will trigger when the match count exceeds the
@@ -856,6 +891,11 @@ export interface CustomUpdateParams {
    * Body param:
    */
   name: string;
+
+  /**
+   * Body param:
+   */
+  ai_context_enabled?: boolean;
 
   /**
    * Body param:

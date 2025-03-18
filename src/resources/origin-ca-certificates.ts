@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
 import * as Core from '../core';
 import * as Shared from './shared';
 import * as CertificatePacksAPI from './ssl/certificate-packs/certificate-packs';
@@ -29,17 +28,9 @@ export class OriginCACertificates extends APIResource {
    * ([see above](#requests)).
    */
   list(
-    query?: OriginCACertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate>;
-  list(options?: Core.RequestOptions): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate>;
-  list(
-    query: OriginCACertificateListParams | Core.RequestOptions = {},
+    query: OriginCACertificateListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
-    if (isRequestOptions(query)) {
-      return this.list({}, query);
-    }
     return this._client.getAPIList('/certificates', OriginCACertificatesSinglePage, { query, ...options });
   }
 
@@ -154,5 +145,5 @@ export interface OriginCACertificateListParams {
   /**
    * Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 }

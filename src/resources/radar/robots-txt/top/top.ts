@@ -10,7 +10,7 @@ export class Top extends APIResource {
   userAgents: UserAgentsAPI.UserAgents = new UserAgentsAPI.UserAgents(this._client);
 
   /**
-   * Get the top domain categories by the number of robots.txt files parsed.
+   * Retrieves the top domain categories by the number of robots.txt files parsed.
    */
   domainCategories(
     query?: TopDomainCategoriesParams,
@@ -104,27 +104,27 @@ export namespace TopDomainCategoriesResponse {
 
 export interface TopDomainCategoriesParams {
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    */
   date?: Array<string>;
 
   /**
-   * Format results are returned in.
+   * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
 
   /**
-   * Limit the number of objects in the response.
+   * Limits the number of objects returned in the response.
    */
   limit?: number;
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Array of names used to label the series in the response.
    */
   name?: Array<string>;
 
   /**
-   * Filter by user agent category.
+   * Filters results by user agent category.
    */
   userAgentCategory?: 'AI';
 }

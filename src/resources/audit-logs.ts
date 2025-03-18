@@ -48,7 +48,7 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
    * Query param: Limits the returned results to logs older than the specified date.
    * A `full-date` that conforms to RFC3339.
    */
-  before?: string | string;
+  before?: (string & {}) | (string & {});
 
   /**
    * Query param: Changes the direction of the chronological sorting.
@@ -69,7 +69,7 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
    * Query param: Limits the returned results to logs newer than the specified date.
    * A `full-date` that conforms to RFC3339.
    */
-  since?: string | string;
+  since?: (string & {}) | (string & {});
 
   /**
    * Query param:
