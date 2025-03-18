@@ -75,6 +75,7 @@ import { LeakedCredentialChecks } from './resources/leaked-credential-checks/lea
 import { LoadBalancers } from './resources/load-balancers/load-balancers';
 import { Logpush } from './resources/logpush/logpush';
 import { Logs } from './resources/logs/logs';
+import { MagicCloudNetworking } from './resources/magic-cloud-networking/magic-cloud-networking';
 import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/magic-network-monitoring';
 import { MagicTransit } from './resources/magic-transit/magic-transit';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
@@ -297,6 +298,7 @@ export class Cloudflare extends Core.APIClient {
   intel: API.Intel = new API.Intel(this);
   magicTransit: API.MagicTransit = new API.MagicTransit(this);
   magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
+  magicCloudNetworking: API.MagicCloudNetworking = new API.MagicCloudNetworking(this);
   networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
@@ -514,6 +516,7 @@ Cloudflare.Images = Images;
 Cloudflare.Intel = Intel;
 Cloudflare.MagicTransit = MagicTransit;
 Cloudflare.MagicNetworkMonitoring = MagicNetworkMonitoring;
+Cloudflare.MagicCloudNetworking = MagicCloudNetworking;
 Cloudflare.NetworkInterconnects = NetworkInterconnects;
 Cloudflare.MTLSCertificates = MTLSCertificates;
 Cloudflare.Pages = Pages;
@@ -684,6 +687,8 @@ export declare namespace Cloudflare {
   export { MagicTransit as MagicTransit };
 
   export { MagicNetworkMonitoring as MagicNetworkMonitoring };
+
+  export { MagicCloudNetworking as MagicCloudNetworking };
 
   export { NetworkInterconnects as NetworkInterconnects };
 
