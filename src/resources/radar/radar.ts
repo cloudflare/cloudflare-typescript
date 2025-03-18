@@ -38,6 +38,8 @@ import * as EntitiesAPI from './entities/entities';
 import { Entities, EntityGetParams, EntityGetResponse } from './entities/entities';
 import * as HTTPAPI from './http/http';
 import { HTTP, HTTPTimeseriesParams, HTTPTimeseriesResponse } from './http/http';
+import * as LeakedCredentialsAPI from './leaked-credentials/leaked-credentials';
+import { LeakedCredentials } from './leaked-credentials/leaked-credentials';
 import * as NetflowsAPI from './netflows/netflows';
 import {
   NetflowSummaryParams,
@@ -90,6 +92,9 @@ export class Radar extends APIResource {
     this._client,
   );
   robotsTXT: RobotsTXTAPI.RobotsTXT = new RobotsTXTAPI.RobotsTXT(this._client);
+  leakedCredentials: LeakedCredentialsAPI.LeakedCredentials = new LeakedCredentialsAPI.LeakedCredentials(
+    this._client,
+  );
 }
 
 Radar.AI = AI;
@@ -110,6 +115,7 @@ Radar.Ranking = Ranking;
 Radar.TrafficAnomalies = TrafficAnomalies;
 Radar.TCPResetsTimeouts = TCPResetsTimeouts;
 Radar.RobotsTXT = RobotsTXT;
+Radar.LeakedCredentials = LeakedCredentials;
 
 export declare namespace Radar {
   export { AI as AI };
@@ -208,4 +214,6 @@ export declare namespace Radar {
   };
 
   export { RobotsTXT as RobotsTXT };
+
+  export { LeakedCredentials as LeakedCredentials };
 }

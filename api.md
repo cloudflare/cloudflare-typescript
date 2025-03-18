@@ -7128,6 +7128,32 @@ Methods:
 
 - <code title="get /radar/robots_txt/top/user_agents/directive">client.radar.robotsTXT.top.userAgents.<a href="./src/resources/radar/robots-txt/top/user-agents.ts">directive</a>({ ...params }) -> UserAgentDirectiveResponse</code>
 
+## LeakedCredentials
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/leaked-credentials/summary.ts">SummaryBotClassResponse</a></code>
+- <code><a href="./src/resources/radar/leaked-credentials/summary.ts">SummaryCompromisedResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/leaked_credential_checks/summary/bot_class">client.radar.leakedCredentials.summary.<a href="./src/resources/radar/leaked-credentials/summary.ts">botClass</a>({ ...params }) -> SummaryBotClassResponse</code>
+- <code title="get /radar/leaked_credential_checks/summary/compromised">client.radar.leakedCredentials.summary.<a href="./src/resources/radar/leaked-credentials/summary.ts">compromised</a>({ ...params }) -> SummaryCompromisedResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/leaked-credentials/timeseries-groups.ts">TimeseriesGroupBotClassResponse</a></code>
+- <code><a href="./src/resources/radar/leaked-credentials/timeseries-groups.ts">TimeseriesGroupCompromisedResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/leaked_credential_checks/timeseries_groups/bot_class">client.radar.leakedCredentials.timeseriesGroups.<a href="./src/resources/radar/leaked-credentials/timeseries-groups.ts">botClass</a>({ ...params }) -> TimeseriesGroupBotClassResponse</code>
+- <code title="get /radar/leaked_credential_checks/timeseries_groups/compromised">client.radar.leakedCredentials.timeseriesGroups.<a href="./src/resources/radar/leaked-credentials/timeseries-groups.ts">compromised</a>({ ...params }) -> TimeseriesGroupCompromisedResponse</code>
+
 # BotManagement
 
 Types:
