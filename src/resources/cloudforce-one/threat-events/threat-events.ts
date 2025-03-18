@@ -86,7 +86,10 @@ export class ThreatEvents extends APIResource {
   insights: InsightsAPI.Insights = new InsightsAPI.Insights(this._client);
 
   /**
-   * Creates a new event
+   * Events must be created in a client-specific dataset, which means the `datasetId`
+   * parameter must be defined. To create a dataset, see the
+   * [`Create Dataset`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/create/)
+   * endpoint.
    */
   create(params: ThreatEventCreateParams, options?: RequestOptions): APIPromise<ThreatEventCreateResponse> {
     const { account_id, ...body } = params;
@@ -97,7 +100,10 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
-   * Deletes an event
+   * The `datasetId` parameter must be defined. To list existing datasets (and their
+   * IDs) in your account, use the
+   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list)
+   * endpoint.
    */
   delete(
     eventID: string,
@@ -109,7 +115,10 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
-   * Creates bulk events
+   * The `datasetId` parameter must be defined. To list existing datasets (and their
+   * IDs) in your account, use the
+   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list)
+   * endpoint.
    */
   bulkCreate(
     params: ThreatEventBulkCreateParams,
