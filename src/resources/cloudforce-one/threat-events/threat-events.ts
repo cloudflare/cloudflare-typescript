@@ -100,7 +100,7 @@ export class ThreatEvents extends APIResource {
   /**
    * The `datasetId` parameter must be defined. To list existing datasets (and their
    * IDs) in your account, use the
-   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
+   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list)
    * endpoint.
    */
   delete(
@@ -115,7 +115,7 @@ export class ThreatEvents extends APIResource {
   /**
    * The `datasetId` parameter must be defined. To list existing datasets (and their
    * IDs) in your account, use the
-   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
+   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list)
    * endpoint.
    */
   bulkCreate(
