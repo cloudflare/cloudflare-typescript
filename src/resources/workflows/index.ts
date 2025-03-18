@@ -2,12 +2,15 @@
 
 export {
   InstanceListResponsesV4PagePaginationArray,
+  InstanceBulkResponsesSinglePage,
   Instances,
   type InstanceCreateResponse,
   type InstanceListResponse,
+  type InstanceBulkResponse,
   type InstanceGetResponse,
   type InstanceCreateParams,
   type InstanceListParams,
+  type InstanceBulkParams,
   type InstanceGetParams,
 } from './instances/index';
 export {
