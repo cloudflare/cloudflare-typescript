@@ -7856,12 +7856,14 @@ Types:
 
 - <code><a href="./src/resources/workflows/instances/instances.ts">InstanceCreateResponse</a></code>
 - <code><a href="./src/resources/workflows/instances/instances.ts">InstanceListResponse</a></code>
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceBulkResponse</a></code>
 - <code><a href="./src/resources/workflows/instances/instances.ts">InstanceGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/workflows/{workflow_name}/instances">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">create</a>(workflowName, { ...params }) -> InstanceCreateResponse</code>
 - <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">list</a>(workflowName, { ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/workflows/{workflow_name}/instances/batch">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">bulk</a>(workflowName, [ ...body ]) -> InstanceBulkResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">get</a>(workflowName, instanceId, { ...params }) -> InstanceGetResponse</code>
 
 ### Status
