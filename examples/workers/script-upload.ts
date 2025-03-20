@@ -1,14 +1,21 @@
 #!/usr/bin/env -S npm run tsn -T
 
-import Cloudflare from 'cloudflare';
-
 /*
+ * Generate an API token: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+ * (Not Global API Key!)
+ *
+ * Find your account id: https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/
+ *
  * Set these environment variables:
- * - CLOUDFLARE_EMAIL
- * - CLOUDFLARE_API_KEY
+ * - CLOUDFLARE_API_TOKEN
  * - CLOUDFLARE_ACCOUNT_ID
  */
-const client = new Cloudflare();
+
+import Cloudflare from 'cloudflare';
+
+const client = new Cloudflare({
+  apiToken: process.env['CLOUDFLARE_API_TOKEN'] ?? '',
+});
 const accountID = process.env['CLOUDFLARE_ACCOUNT_ID'] ?? '';
 
 async function main() {
@@ -17,7 +24,7 @@ async function main() {
   const scriptContent = `
     export default {
       async fetch(request, env, ctx) {
-        return new Response("Hello World!", { status: 200 });
+        return new Response(env.MESSAGE, { status: 200 });
       }
     };
   `;
@@ -38,7 +45,13 @@ async function main() {
         [
           JSON.stringify({
             // https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/
-            bindings: [],
+            bindings: [
+              {
+                type: 'plain_text',
+                name: 'MESSAGE',
+                text: 'Hello World!',
+              },
+            ],
             main_module: scriptFileName,
           }),
         ],
