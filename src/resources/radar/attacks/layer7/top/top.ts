@@ -37,7 +37,8 @@ export class Top extends APIResource {
   }
 
   /**
-   * Retrieves the industries targeted by layer 7 attacks.
+   * This endpoint is deprecated. To continue getting this data, switch to the
+   * summary by industry endpoint.
    */
   industry(
     query: TopIndustryParams | null | undefined = {},
@@ -51,7 +52,8 @@ export class Top extends APIResource {
   }
 
   /**
-   * Retrieves the verticals targeted by layer 7 attacks.
+   * This endpoint is deprecated. To continue getting this data, switch to the
+   * summary by vertical endpoint.
    */
   vertical(
     query: TopVerticalParams | null | undefined = {},
