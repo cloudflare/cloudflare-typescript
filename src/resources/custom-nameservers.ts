@@ -36,21 +36,6 @@ export class CustomNameservers extends APIResource {
   }
 
   /**
-   * Get Eligible Zones for Account Custom Nameservers
-   */
-  availabilty(
-    params: CustomNameserverAvailabiltyParams,
-    options?: RequestOptions,
-  ): PagePromise<CustomNameserverAvailabiltyResponsesSinglePage, CustomNameserverAvailabiltyResponse> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/custom_ns/availability`,
-      SinglePage<CustomNameserverAvailabiltyResponse>,
-      options,
-    );
-  }
-
-  /**
    * List an account's custom nameservers.
    */
   get(
@@ -67,8 +52,6 @@ export class CustomNameservers extends APIResource {
 }
 
 export type CustomNameserverDeleteResponsesSinglePage = SinglePage<CustomNameserverDeleteResponse>;
-
-export type CustomNameserverAvailabiltyResponsesSinglePage = SinglePage<CustomNameserverAvailabiltyResponse>;
 
 export type CustomNameserversSinglePage = SinglePage<CustomNameserver>;
 
@@ -121,13 +104,6 @@ export namespace CustomNameserver {
  */
 export type CustomNameserverDeleteResponse = string;
 
-/**
- * Name of zone based on which account custom nameservers can be created. For
- * example, if example.com is returned, then ns1.example.com can be used as an
- * account custom nameserver.
- */
-export type CustomNameserverAvailabiltyResponse = string;
-
 export interface CustomNameserverCreateParams {
   /**
    * Path param: Account identifier tag.
@@ -146,13 +122,6 @@ export interface CustomNameserverCreateParams {
 }
 
 export interface CustomNameserverDeleteParams {
-  /**
-   * Account identifier tag.
-   */
-  account_id: string;
-}
-
-export interface CustomNameserverAvailabiltyParams {
   /**
    * Account identifier tag.
    */
