@@ -108,7 +108,9 @@ client.parents.children.create('p_123', 'c_456');
 client.example.create('c_456', { parent_id: 'p_123' });
 ```
 
-This affects the following methods:
+<details>
+
+<summary>This affects the following methods</summary>
 
 - `client.accounts.members.update()`
 - `client.accounts.members.delete()`
@@ -933,6 +935,8 @@ This affects the following methods:
 - `client.customPages.list()`
 - `client.customPages.get()`
 
+</details>
+
 ### URI encoded path parameters
 
 Path params are now properly encoded by default. If you were manually encoding path parameters before giving them to the SDK, you must now stop doing that and pass the
@@ -994,7 +998,9 @@ client.example.list(undefined, { headers: { ... } });
 + client.example.list({}, { headers: { ... } });
 ```
 
-This affects the following methods:
+<details>
+
+<summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
 - `client.ips.list()`
@@ -1252,6 +1258,8 @@ This affects the following methods:
 - `client.customPages.list()`
 - `client.customPages.get()`
 
+</details>
+
 ### Pagination changes
 
 Note that the `for await` syntax is _not_ affected. This still works as-is:
@@ -1348,7 +1356,9 @@ client.example.create([{ name: 'name' }, { name: 'name' }]);
 client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 ```
 
-This affects the following methods:
+<details>
+
+<summary>This affects the following methods</summary>
 
 - `client.accounts.tokens.value.update()`
 - `client.user.tokens.value.update()`
@@ -1418,6 +1428,8 @@ This affects the following methods:
 - `client.cloudConnector.rules.update()`
 - `client.workflows.instances.bulk()`
 - `client.contentScanning.payloads.create()`
+
+</details>
 
 ### Headers
 
