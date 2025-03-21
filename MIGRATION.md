@@ -108,7 +108,9 @@ client.parents.children.create('p_123', 'c_456');
 client.example.create('c_456', { parent_id: 'p_123' });
 ```
 
-This affects the following methods:
+<details>
+
+<summary>This affects the following methods</summary>
 
 - `client.accounts.members.update()`
 - `client.accounts.members.delete()`
@@ -933,6 +935,8 @@ This affects the following methods:
 - `client.customPages.list()`
 - `client.customPages.get()`
 
+</details>
+
 ### URI encoded path parameters
 
 Path params are now properly encoded by default. If you were manually encoding path parameters before giving them to the SDK, you must now stop doing that and pass the
@@ -994,7 +998,9 @@ client.example.list(undefined, { headers: { ... } });
 + client.example.list({}, { headers: { ... } });
 ```
 
-This affects the following methods:
+<details>
+
+<summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
 - `client.ips.list()`
@@ -1252,6 +1258,98 @@ This affects the following methods:
 - `client.customPages.list()`
 - `client.customPages.get()`
 
+</details>
+
+### Method params must be an object
+
+When making requests to endpoints that expect something other than a JSON object, you must now pass the body as a property instead
+of an individual argument.
+
+For example, an endpoint that takes an array:
+
+```typescript
+// Before
+client.example.create([{ name: 'name' }, { name: 'name' }]);
+
+// After
+client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
+```
+
+<details>
+
+<summary>This affects the following methods</summary>
+
+- `client.accounts.tokens.value.update()`
+- `client.user.tokens.value.update()`
+- `client.cache.cacheReserve.clear()`
+- `client.dns.records.scan()`
+- `client.dns.zoneTransfers.forceAXFR.create()`
+- `client.dns.zoneTransfers.outgoing.disable()`
+- `client.dns.zoneTransfers.outgoing.enable()`
+- `client.dns.zoneTransfers.outgoing.forceNotify()`
+- `client.emailSecurity.investigate.release.bulk()`
+- `client.emailRouting.disable()`
+- `client.emailRouting.enable()`
+- `client.filters.update()`
+- `client.firewall.rules.bulkEdit()`
+- `client.firewall.rules.bulkUpdate()`
+- `client.waitingRooms.rules.create()`
+- `client.waitingRooms.rules.update()`
+- `client.workers.scripts.schedules.update()`
+- `client.workers.scripts.tail.create()`
+- `client.kv.namespaces.bulkDelete()`
+- `client.kv.namespaces.bulkUpdate()`
+- `client.apiGateway.discovery.operations.bulkEdit()`
+- `client.apiGateway.operations.bulkCreate()`
+- `client.apiGateway.operations.schemaValidation.edit()`
+- `client.addressing.addressMaps.accounts.update()`
+- `client.addressing.addressMaps.ips.update()`
+- `client.addressing.addressMaps.zones.update()`
+- `client.magicTransit.cfInterconnects.bulkUpdate()`
+- `client.magicTransit.greTunnels.create()`
+- `client.magicTransit.greTunnels.bulkUpdate()`
+- `client.magicTransit.ipsecTunnels.bulkUpdate()`
+- `client.magicTransit.ipsecTunnels.pskGenerate()`
+- `client.magicTransit.routes.create()`
+- `client.magicNetworkMonitoring.rules.advertisements.edit()`
+- `client.pages.projects.deployments.retry()`
+- `client.pages.projects.deployments.rollback()`
+- `client.pages.projects.domains.edit()`
+- `client.rules.lists.items.create()`
+- `client.rules.lists.items.update()`
+- `client.stream.create()`
+- `client.stream.keys.create()`
+- `client.stream.downloads.create()`
+- `client.workersForPlatforms.dispatch.namespaces.scripts.tags.update()`
+- `client.zeroTrust.devices.policies.default.excludes.update()`
+- `client.zeroTrust.devices.policies.default.includes.update()`
+- `client.zeroTrust.devices.policies.default.fallbackDomains.update()`
+- `client.zeroTrust.devices.policies.custom.excludes.update()`
+- `client.zeroTrust.devices.policies.custom.includes.update()`
+- `client.zeroTrust.devices.policies.custom.fallbackDomains.update()`
+- `client.zeroTrust.devices.revoke.create()`
+- `client.zeroTrust.devices.unrevoke.create()`
+- `client.zeroTrust.seats.edit()`
+- `client.zeroTrust.access.infrastructure.targets.bulkUpdate()`
+- `client.zeroTrust.access.bookmarks.create()`
+- `client.zeroTrust.access.bookmarks.update()`
+- `client.zeroTrust.dlp.datasets.upload.edit()`
+- `client.zeroTrust.dlp.datasets.versions.create()`
+- `client.zeroTrust.dlp.datasets.versions.entries.create()`
+- `client.zeroTrust.gateway.certificates.activate()`
+- `client.zeroTrust.gateway.certificates.deactivate()`
+- `client.vectorize.indexes.insert()`
+- `client.vectorize.indexes.upsert()`
+- `client.urlScanner.scans.bulkCreate()`
+- `client.zaraz.update()`
+- `client.zaraz.history.update()`
+- `client.zaraz.publish.create()`
+- `client.cloudConnector.rules.update()`
+- `client.workflows.instances.bulk()`
+- `client.contentScanning.payloads.create()`
+
+</details>
+
 ### Pagination changes
 
 Note that the `for await` syntax is _not_ affected. This still works as-is:
@@ -1332,92 +1430,6 @@ import Cloudflare from 'cloudflare/src';
 // After
 import Cloudflare from 'cloudflare';
 ```
-
-### Method params must be an object
-
-When making requests to endpoints that expect something other than a JSON object, you must now pass the body as a property instead
-of an individual argument.
-
-For example, an endpoint that takes an array:
-
-```typescript
-// Before
-client.example.create([{ name: 'name' }, { name: 'name' }]);
-
-// After
-client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
-```
-
-This affects the following methods:
-
-- `client.accounts.tokens.value.update()`
-- `client.user.tokens.value.update()`
-- `client.cache.cacheReserve.clear()`
-- `client.dns.records.scan()`
-- `client.dns.zoneTransfers.forceAXFR.create()`
-- `client.dns.zoneTransfers.outgoing.disable()`
-- `client.dns.zoneTransfers.outgoing.enable()`
-- `client.dns.zoneTransfers.outgoing.forceNotify()`
-- `client.emailSecurity.investigate.release.bulk()`
-- `client.emailRouting.disable()`
-- `client.emailRouting.enable()`
-- `client.filters.update()`
-- `client.firewall.rules.bulkEdit()`
-- `client.firewall.rules.bulkUpdate()`
-- `client.waitingRooms.rules.create()`
-- `client.waitingRooms.rules.update()`
-- `client.workers.scripts.schedules.update()`
-- `client.workers.scripts.tail.create()`
-- `client.kv.namespaces.bulkDelete()`
-- `client.kv.namespaces.bulkUpdate()`
-- `client.apiGateway.discovery.operations.bulkEdit()`
-- `client.apiGateway.operations.bulkCreate()`
-- `client.apiGateway.operations.schemaValidation.edit()`
-- `client.addressing.addressMaps.accounts.update()`
-- `client.addressing.addressMaps.ips.update()`
-- `client.addressing.addressMaps.zones.update()`
-- `client.magicTransit.cfInterconnects.bulkUpdate()`
-- `client.magicTransit.greTunnels.create()`
-- `client.magicTransit.greTunnels.bulkUpdate()`
-- `client.magicTransit.ipsecTunnels.bulkUpdate()`
-- `client.magicTransit.ipsecTunnels.pskGenerate()`
-- `client.magicTransit.routes.create()`
-- `client.magicNetworkMonitoring.rules.advertisements.edit()`
-- `client.pages.projects.deployments.retry()`
-- `client.pages.projects.deployments.rollback()`
-- `client.pages.projects.domains.edit()`
-- `client.rules.lists.items.create()`
-- `client.rules.lists.items.update()`
-- `client.stream.create()`
-- `client.stream.keys.create()`
-- `client.stream.downloads.create()`
-- `client.workersForPlatforms.dispatch.namespaces.scripts.tags.update()`
-- `client.zeroTrust.devices.policies.default.excludes.update()`
-- `client.zeroTrust.devices.policies.default.includes.update()`
-- `client.zeroTrust.devices.policies.default.fallbackDomains.update()`
-- `client.zeroTrust.devices.policies.custom.excludes.update()`
-- `client.zeroTrust.devices.policies.custom.includes.update()`
-- `client.zeroTrust.devices.policies.custom.fallbackDomains.update()`
-- `client.zeroTrust.devices.revoke.create()`
-- `client.zeroTrust.devices.unrevoke.create()`
-- `client.zeroTrust.seats.edit()`
-- `client.zeroTrust.access.infrastructure.targets.bulkUpdate()`
-- `client.zeroTrust.access.bookmarks.create()`
-- `client.zeroTrust.access.bookmarks.update()`
-- `client.zeroTrust.dlp.datasets.upload.edit()`
-- `client.zeroTrust.dlp.datasets.versions.create()`
-- `client.zeroTrust.dlp.datasets.versions.entries.create()`
-- `client.zeroTrust.gateway.certificates.activate()`
-- `client.zeroTrust.gateway.certificates.deactivate()`
-- `client.vectorize.indexes.insert()`
-- `client.vectorize.indexes.upsert()`
-- `client.urlScanner.scans.bulkCreate()`
-- `client.zaraz.update()`
-- `client.zaraz.history.update()`
-- `client.zaraz.publish.create()`
-- `client.cloudConnector.rules.update()`
-- `client.workflows.instances.bulk()`
-- `client.contentScanning.payloads.create()`
 
 ### Headers
 
