@@ -500,6 +500,18 @@ export namespace ScriptUpdateParams {
        */
       export interface Config {
         /**
+         * The contents of a \_headers file (used to attach custom headers on asset
+         * responses)
+         */
+        _headers?: string;
+
+        /**
+         * The contents of a \_redirects file (used to apply redirects or proxy paths ahead
+         * of asset serving)
+         */
+        _redirects?: string;
+
+        /**
          * Determines the redirects and rewrites of requests for HTML content.
          */
         html_handling?: 'auto-trailing-slash' | 'force-trailing-slash' | 'drop-trailing-slash' | 'none';
