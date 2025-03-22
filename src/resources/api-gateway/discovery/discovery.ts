@@ -61,7 +61,7 @@ export interface DiscoveryOperation {
   /**
    * API discovery engine(s) that discovered this operation
    */
-  origin: Array<'ML' | 'SessionIdentifier'>;
+  origin: Array<'ML' | 'SessionIdentifier' | 'LabelDiscovery'>;
 
   /**
    * State of operation in API Discovery

@@ -229,7 +229,8 @@ export interface GatewayRule {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   created_at?: string;
 
@@ -457,6 +458,11 @@ export interface RuleSetting {
    * Settings that apply to quarantine rules
    */
   quarantine?: RuleSetting.Quarantine;
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  redirect?: RuleSetting.Redirect;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
@@ -687,6 +693,22 @@ export namespace RuleSetting {
   }
 
   /**
+   * Settings that apply to redirect rules
+   */
+  export interface Redirect {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, the path and query parameters from the original request will be
+     * appended to target_uri
+     */
+    preserve_path_and_query?: boolean;
+  }
+
+  /**
    * Configure to forward the query to the internal DNS service, passing the
    * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
    * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
@@ -833,6 +855,11 @@ export interface RuleSettingParam {
    * Settings that apply to quarantine rules
    */
   quarantine?: RuleSettingParam.Quarantine;
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  redirect?: RuleSettingParam.Redirect;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
@@ -1063,6 +1090,22 @@ export namespace RuleSettingParam {
   }
 
   /**
+   * Settings that apply to redirect rules
+   */
+  export interface Redirect {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, the path and query parameters from the original request will be
+     * appended to target_uri
+     */
+    preserve_path_and_query?: boolean;
+  }
+
+  /**
    * Configure to forward the query to the internal DNS service, passing the
    * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
    * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
@@ -1253,7 +1296,8 @@ export interface RuleCreateParams {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   /**
    * Body param: The name of the rule.
@@ -1377,7 +1421,8 @@ export interface RuleUpdateParams {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   /**
    * Body param: The name of the rule.

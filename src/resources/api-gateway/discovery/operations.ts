@@ -129,7 +129,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
    * - `SessionIdentifier` - Discovered operations that were sourced using Session
    *   Identifier API Discovery
    */
-  origin?: 'ML' | 'SessionIdentifier';
+  origin?: 'ML' | 'SessionIdentifier' | 'LabelDiscovery';
 
   /**
    * Query param: Filter results to only include discovery results in a particular
