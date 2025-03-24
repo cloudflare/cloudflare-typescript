@@ -2226,16 +2226,6 @@ Methods:
 
 ### Analytics
 
-Types:
-
-- <code><a href="./src/resources/kv/namespaces/analytics.ts">Components</a></code>
-- <code><a href="./src/resources/kv/namespaces/analytics.ts">Schema</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/storage/analytics">client.kv.namespaces.analytics.<a href="./src/resources/kv/namespaces/analytics.ts">list</a>({ ...params }) -> Schema</code>
-- <code title="get /accounts/{account_id}/storage/analytics/stored">client.kv.namespaces.analytics.<a href="./src/resources/kv/namespaces/analytics.ts">stored</a>({ ...params }) -> Components</code>
-
 ### Keys
 
 Types:
