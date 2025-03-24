@@ -12,10 +12,14 @@ import {
   SummaryDurationResponse,
   SummaryIPVersionParams,
   SummaryIPVersionResponse,
+  SummaryIndustryParams,
+  SummaryIndustryResponse,
   SummaryProtocolParams,
   SummaryProtocolResponse,
   SummaryVectorParams,
   SummaryVectorResponse,
+  SummaryVerticalParams,
+  SummaryVerticalResponse,
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
@@ -188,14 +192,18 @@ export declare namespace Layer3 {
     Summary as Summary,
     type SummaryBitrateResponse as SummaryBitrateResponse,
     type SummaryDurationResponse as SummaryDurationResponse,
+    type SummaryIndustryResponse as SummaryIndustryResponse,
     type SummaryIPVersionResponse as SummaryIPVersionResponse,
     type SummaryProtocolResponse as SummaryProtocolResponse,
     type SummaryVectorResponse as SummaryVectorResponse,
+    type SummaryVerticalResponse as SummaryVerticalResponse,
     type SummaryBitrateParams as SummaryBitrateParams,
     type SummaryDurationParams as SummaryDurationParams,
+    type SummaryIndustryParams as SummaryIndustryParams,
     type SummaryIPVersionParams as SummaryIPVersionParams,
     type SummaryProtocolParams as SummaryProtocolParams,
     type SummaryVectorParams as SummaryVectorParams,
+    type SummaryVerticalParams as SummaryVerticalParams,
   };
 
   export {
