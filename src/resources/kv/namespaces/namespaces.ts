@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as AnalyticsAPI from './analytics';
-import { Analytics, AnalyticsListParams, AnalyticsStoredParams, Components, Schema } from './analytics';
+import { Analytics } from './analytics';
 import * as KeysAPI from './keys';
 import { Key, KeyListParams, Keys, KeysCursorLimitPagination } from './keys';
 import * as MetadataAPI from './metadata';
@@ -338,13 +338,7 @@ export declare namespace Namespaces {
     type NamespaceGetParams as NamespaceGetParams,
   };
 
-  export {
-    Analytics as Analytics,
-    type Components as Components,
-    type Schema as Schema,
-    type AnalyticsListParams as AnalyticsListParams,
-    type AnalyticsStoredParams as AnalyticsStoredParams,
-  };
+  export { Analytics as Analytics };
 
   export {
     Keys as Keys,
