@@ -5,14 +5,18 @@ export {
   Summary,
   type SummaryHTTPMethodResponse,
   type SummaryHTTPVersionResponse,
+  type SummaryIndustryResponse,
   type SummaryIPVersionResponse,
   type SummaryManagedRulesResponse,
   type SummaryMitigationProductResponse,
+  type SummaryVerticalResponse,
   type SummaryHTTPMethodParams,
   type SummaryHTTPVersionParams,
+  type SummaryIndustryParams,
   type SummaryIPVersionParams,
   type SummaryManagedRulesParams,
   type SummaryMitigationProductParams,
+  type SummaryVerticalParams,
 } from './summary';
 export {
   TimeseriesGroups,

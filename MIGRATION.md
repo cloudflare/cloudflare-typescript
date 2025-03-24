@@ -1067,6 +1067,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.bgp.routes.ases()`
 - `client.radar.bgp.routes.moas()`
 - `client.radar.bgp.routes.pfx2as()`
+- `client.radar.bgp.routes.realtime()`
 - `client.radar.bgp.routes.stats()`
 - `client.radar.bgp.ips.timeseries()`
 - `client.radar.datasets.list()`
@@ -1153,9 +1154,11 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.attacks.layer3.timeseries()`
 - `client.radar.attacks.layer3.summary.bitrate()`
 - `client.radar.attacks.layer3.summary.duration()`
+- `client.radar.attacks.layer3.summary.industry()`
 - `client.radar.attacks.layer3.summary.ipVersion()`
 - `client.radar.attacks.layer3.summary.protocol()`
 - `client.radar.attacks.layer3.summary.vector()`
+- `client.radar.attacks.layer3.summary.vertical()`
 - `client.radar.attacks.layer3.timeseriesGroups.bitrate()`
 - `client.radar.attacks.layer3.timeseriesGroups.duration()`
 - `client.radar.attacks.layer3.timeseriesGroups.industry()`
@@ -1171,9 +1174,11 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.attacks.layer7.timeseries()`
 - `client.radar.attacks.layer7.summary.httpMethod()`
 - `client.radar.attacks.layer7.summary.httpVersion()`
+- `client.radar.attacks.layer7.summary.industry()`
 - `client.radar.attacks.layer7.summary.ipVersion()`
 - `client.radar.attacks.layer7.summary.managedRules()`
 - `client.radar.attacks.layer7.summary.mitigationProduct()`
+- `client.radar.attacks.layer7.summary.vertical()`
 - `client.radar.attacks.layer7.timeseriesGroups.httpMethod()`
 - `client.radar.attacks.layer7.timeseriesGroups.httpVersion()`
 - `client.radar.attacks.layer7.timeseriesGroups.industry()`
@@ -1341,6 +1346,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.vectorize.indexes.insert()`
 - `client.vectorize.indexes.upsert()`
 - `client.urlScanner.scans.bulkCreate()`
+- `client.radar.ai.toMarkdown.create()`
 - `client.zaraz.update()`
 - `client.zaraz.history.update()`
 - `client.zaraz.publish.create()`
