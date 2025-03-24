@@ -63,6 +63,29 @@ export class Routes extends APIResource {
   }
 
   /**
+   * Retrieves realtime routes for prefixes using public realtime data collectors
+   * (RouteViews and RIPE RIS).
+   */
+  realtime(
+    query?: RouteRealtimeParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteRealtimeResponse>;
+  realtime(options?: Core.RequestOptions): Core.APIPromise<RouteRealtimeResponse>;
+  realtime(
+    query: RouteRealtimeParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteRealtimeResponse> {
+    if (isRequestOptions(query)) {
+      return this.realtime({}, query);
+    }
+    return (
+      this._client.get('/radar/bgp/routes/realtime', { query, ...options }) as Core.APIPromise<{
+        result: RouteRealtimeResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Retrieves the BGP routing table stats.
    */
   stats(query?: RouteStatsParams, options?: Core.RequestOptions): Core.APIPromise<RouteStatsResponse>;
@@ -214,6 +237,69 @@ export namespace RoutePfx2asResponse {
   }
 }
 
+export interface RouteRealtimeResponse {
+  meta: RouteRealtimeResponse.Meta;
+
+  routes: Array<RouteRealtimeResponse.Route>;
+}
+
+export namespace RouteRealtimeResponse {
+  export interface Meta {
+    collectors: Array<Meta.Collector>;
+  }
+
+  export namespace Meta {
+    export interface Collector {
+      /**
+       * public route collector ID
+       */
+      collector: string;
+
+      /**
+       * latest realtime stream timestamp for this collector
+       */
+      latest_realtime_ts: string;
+
+      /**
+       * latest RIB dump MRT file timestamp for this collector
+       */
+      latest_rib_ts: string;
+
+      /**
+       * latest BGP updates MRT file timestamp for this collector
+       */
+      latest_updates_ts: string;
+    }
+  }
+
+  export interface Route {
+    /**
+     * AS-level path for this route, from collector to origin
+     */
+    as_path: Array<number>;
+
+    /**
+     * public collector ID for this route
+     */
+    collector: string;
+
+    /**
+     * BGP community values
+     */
+    communities: Array<string>;
+
+    /**
+     * IP prefix of this query
+     */
+    prefix: string;
+
+    /**
+     * latest timestamp of change for this route
+     */
+    timestamp: string;
+  }
+}
+
 export interface RouteStatsResponse {
   meta: RouteStatsResponse.Meta;
 
@@ -345,6 +431,18 @@ export interface RoutePfx2asParams {
   rpkiStatus?: 'VALID' | 'INVALID' | 'UNKNOWN';
 }
 
+export interface RouteRealtimeParams {
+  /**
+   * Format in which results will be returned.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Network prefix, IPv4 or IPv6.
+   */
+  prefix?: string;
+}
+
 export interface RouteStatsParams {
   /**
    * Single Autonomous System Number (ASN) as integer.
@@ -367,10 +465,12 @@ export declare namespace Routes {
     type RouteAsesResponse as RouteAsesResponse,
     type RouteMoasResponse as RouteMoasResponse,
     type RoutePfx2asResponse as RoutePfx2asResponse,
+    type RouteRealtimeResponse as RouteRealtimeResponse,
     type RouteStatsResponse as RouteStatsResponse,
     type RouteAsesParams as RouteAsesParams,
     type RouteMoasParams as RouteMoasParams,
     type RoutePfx2asParams as RoutePfx2asParams,
+    type RouteRealtimeParams as RouteRealtimeParams,
     type RouteStatsParams as RouteStatsParams,
   };
 }
