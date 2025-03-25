@@ -246,3 +246,13 @@ export namespace ManagedTransformEditParams {
     enabled: boolean;
   }
 }
+
+export declare namespace ManagedTransforms {
+  export {
+    type ManagedTransformListResponse as ManagedTransformListResponse,
+    type ManagedTransformEditResponse as ManagedTransformEditResponse,
+    type ManagedTransformListParams as ManagedTransformListParams,
+    type ManagedTransformDeleteParams as ManagedTransformDeleteParams,
+    type ManagedTransformEditParams as ManagedTransformEditParams,
+  };
+}

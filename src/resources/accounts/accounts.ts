@@ -314,6 +314,7 @@ export interface AccountGetParams {
   account_id: string;
 }
 
+Accounts.AccountsV4PagePaginationArray = AccountsV4PagePaginationArray;
 Accounts.Members = Members;
 Accounts.Roles = Roles;
 Accounts.Subscriptions = Subscriptions;
@@ -321,6 +322,17 @@ Accounts.Tokens = Tokens;
 Accounts.Logs = Logs;
 
 export declare namespace Accounts {
+  export {
+    type Account as Account,
+    type AccountDeleteResponse as AccountDeleteResponse,
+    AccountsV4PagePaginationArray as AccountsV4PagePaginationArray,
+    type AccountCreateParams as AccountCreateParams,
+    type AccountUpdateParams as AccountUpdateParams,
+    type AccountListParams as AccountListParams,
+    type AccountDeleteParams as AccountDeleteParams,
+    type AccountGetParams as AccountGetParams,
+  };
+
   export {
     Members as Members,
     type Status as Status,

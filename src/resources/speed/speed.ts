@@ -191,6 +191,12 @@ Speed.PageListResponsesSinglePage = PageListResponsesSinglePage;
 
 export declare namespace Speed {
   export {
+    type LabeledRegion as LabeledRegion,
+    type LighthouseReport as LighthouseReport,
+    type Trend as Trend,
+  };
+
+  export {
     ScheduleResource as ScheduleResource,
     type Schedule as Schedule,
     type ScheduleCreateResponse as ScheduleCreateResponse,
