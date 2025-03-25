@@ -56,6 +56,8 @@ export interface D1 {
 D1Resource.Database = Database;
 
 export declare namespace D1Resource {
+  export { type D1 as D1 };
+
   export {
     Database as Database,
     type QueryResult as QueryResult,

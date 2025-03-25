@@ -542,3 +542,15 @@ export namespace MembershipListParams {
     name?: string;
   }
 }
+
+export declare namespace Memberships {
+  export {
+    type Membership as Membership,
+    type MembershipUpdateResponse as MembershipUpdateResponse,
+    type MembershipDeleteResponse as MembershipDeleteResponse,
+    type MembershipGetResponse as MembershipGetResponse,
+    type MembershipsV4PagePaginationArray as MembershipsV4PagePaginationArray,
+    type MembershipUpdateParams as MembershipUpdateParams,
+    type MembershipListParams as MembershipListParams,
+  };
+}

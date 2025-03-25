@@ -495,6 +495,20 @@ AIGateway.URLs = URLs;
 
 export declare namespace AIGateway {
   export {
+    type AIGatewayCreateResponse as AIGatewayCreateResponse,
+    type AIGatewayUpdateResponse as AIGatewayUpdateResponse,
+    type AIGatewayListResponse as AIGatewayListResponse,
+    type AIGatewayDeleteResponse as AIGatewayDeleteResponse,
+    type AIGatewayGetResponse as AIGatewayGetResponse,
+    type AIGatewayListResponsesV4PagePaginationArray as AIGatewayListResponsesV4PagePaginationArray,
+    type AIGatewayCreateParams as AIGatewayCreateParams,
+    type AIGatewayUpdateParams as AIGatewayUpdateParams,
+    type AIGatewayListParams as AIGatewayListParams,
+    type AIGatewayDeleteParams as AIGatewayDeleteParams,
+    type AIGatewayGetParams as AIGatewayGetParams,
+  };
+
+  export {
     EvaluationTypes as EvaluationTypes,
     type EvaluationTypeListResponse as EvaluationTypeListResponse,
     type EvaluationTypeListResponsesV4PagePaginationArray as EvaluationTypeListResponsesV4PagePaginationArray,

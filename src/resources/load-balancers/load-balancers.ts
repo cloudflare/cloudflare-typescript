@@ -2105,6 +2105,34 @@ LoadBalancers.Searches = Searches;
 
 export declare namespace LoadBalancers {
   export {
+    type AdaptiveRouting as AdaptiveRouting,
+    type CheckRegion as CheckRegion,
+    type DefaultPools as DefaultPools,
+    type FilterOptions as FilterOptions,
+    type Header as Header,
+    type Host as Host,
+    type LoadBalancer as LoadBalancer,
+    type LoadShedding as LoadShedding,
+    type LocationStrategy as LocationStrategy,
+    type NotificationFilter as NotificationFilter,
+    type Origin as Origin,
+    type OriginSteering as OriginSteering,
+    type RandomSteering as RandomSteering,
+    type Rules as Rules,
+    type SessionAffinity as SessionAffinity,
+    type SessionAffinityAttributes as SessionAffinityAttributes,
+    type SteeringPolicy as SteeringPolicy,
+    type LoadBalancerDeleteResponse as LoadBalancerDeleteResponse,
+    type LoadBalancersSinglePage as LoadBalancersSinglePage,
+    type LoadBalancerCreateParams as LoadBalancerCreateParams,
+    type LoadBalancerUpdateParams as LoadBalancerUpdateParams,
+    type LoadBalancerListParams as LoadBalancerListParams,
+    type LoadBalancerDeleteParams as LoadBalancerDeleteParams,
+    type LoadBalancerEditParams as LoadBalancerEditParams,
+    type LoadBalancerGetParams as LoadBalancerGetParams,
+  };
+
+  export {
     Monitors as Monitors,
     type Monitor as Monitor,
     type MonitorDeleteResponse as MonitorDeleteResponse,

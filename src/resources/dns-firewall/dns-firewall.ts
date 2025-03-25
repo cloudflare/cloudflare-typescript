@@ -581,6 +581,23 @@ DNSFirewall.Analytics = Analytics;
 DNSFirewall.ReverseDNS = ReverseDNS;
 
 export declare namespace DNSFirewall {
+  export {
+    type AttackMitigation as AttackMitigation,
+    type FirewallIPs as FirewallIPs,
+    type UpstreamIPs as UpstreamIPs,
+    type DNSFirewallCreateResponse as DNSFirewallCreateResponse,
+    type DNSFirewallListResponse as DNSFirewallListResponse,
+    type DNSFirewallDeleteResponse as DNSFirewallDeleteResponse,
+    type DNSFirewallEditResponse as DNSFirewallEditResponse,
+    type DNSFirewallGetResponse as DNSFirewallGetResponse,
+    type DNSFirewallListResponsesV4PagePaginationArray as DNSFirewallListResponsesV4PagePaginationArray,
+    type DNSFirewallCreateParams as DNSFirewallCreateParams,
+    type DNSFirewallListParams as DNSFirewallListParams,
+    type DNSFirewallDeleteParams as DNSFirewallDeleteParams,
+    type DNSFirewallEditParams as DNSFirewallEditParams,
+    type DNSFirewallGetParams as DNSFirewallGetParams,
+  };
+
   export { Analytics as Analytics };
 
   export {

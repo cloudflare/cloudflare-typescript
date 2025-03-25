@@ -134,3 +134,15 @@ export interface CustomNameserverGetParams {
    */
   account_id: string;
 }
+
+export declare namespace CustomNameservers {
+  export {
+    type CustomNameserver as CustomNameserver,
+    type CustomNameserverDeleteResponse as CustomNameserverDeleteResponse,
+    type CustomNameserverDeleteResponsesSinglePage as CustomNameserverDeleteResponsesSinglePage,
+    type CustomNameserversSinglePage as CustomNameserversSinglePage,
+    type CustomNameserverCreateParams as CustomNameserverCreateParams,
+    type CustomNameserverDeleteParams as CustomNameserverDeleteParams,
+    type CustomNameserverGetParams as CustomNameserverGetParams,
+  };
+}

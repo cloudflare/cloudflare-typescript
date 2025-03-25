@@ -2008,6 +2008,22 @@ Rulesets.Versions = Versions;
 
 export declare namespace Rulesets {
   export {
+    type Kind as Kind,
+    type Phase as Phase,
+    type Ruleset as Ruleset,
+    type RulesetCreateResponse as RulesetCreateResponse,
+    type RulesetUpdateResponse as RulesetUpdateResponse,
+    type RulesetListResponse as RulesetListResponse,
+    type RulesetGetResponse as RulesetGetResponse,
+    type RulesetListResponsesCursorPagination as RulesetListResponsesCursorPagination,
+    type RulesetCreateParams as RulesetCreateParams,
+    type RulesetUpdateParams as RulesetUpdateParams,
+    type RulesetListParams as RulesetListParams,
+    type RulesetDeleteParams as RulesetDeleteParams,
+    type RulesetGetParams as RulesetGetParams,
+  };
+
+  export {
     Phases as Phases,
     type PhaseUpdateResponse as PhaseUpdateResponse,
     type PhaseGetResponse as PhaseGetResponse,

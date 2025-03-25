@@ -186,6 +186,8 @@ export namespace Hyperdrive {
 HyperdriveResource.Configs = Configs;
 
 export declare namespace HyperdriveResource {
+  export { type Configuration as Configuration, type Hyperdrive as Hyperdrive };
+
   export {
     Configs as Configs,
     type ConfigDeleteResponse as ConfigDeleteResponse,

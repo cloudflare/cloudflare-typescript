@@ -368,5 +368,18 @@ export interface CustomCertificateGetParams {
 CustomCertificates.Prioritize = Prioritize;
 
 export declare namespace CustomCertificates {
+  export {
+    type CustomCertificate as CustomCertificate,
+    type GeoRestrictions as GeoRestrictions,
+    type Status as Status,
+    type CustomCertificateDeleteResponse as CustomCertificateDeleteResponse,
+    type CustomCertificatesV4PagePaginationArray as CustomCertificatesV4PagePaginationArray,
+    type CustomCertificateCreateParams as CustomCertificateCreateParams,
+    type CustomCertificateListParams as CustomCertificateListParams,
+    type CustomCertificateDeleteParams as CustomCertificateDeleteParams,
+    type CustomCertificateEditParams as CustomCertificateEditParams,
+    type CustomCertificateGetParams as CustomCertificateGetParams,
+  };
+
   export { Prioritize as Prioritize, type PrioritizeUpdateParams as PrioritizeUpdateParams };
 }

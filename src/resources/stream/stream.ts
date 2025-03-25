@@ -562,6 +562,17 @@ Stream.Token = Token;
 
 export declare namespace Stream {
   export {
+    type AllowedOrigins as AllowedOrigins,
+    type Video as Video,
+    type VideosSinglePage as VideosSinglePage,
+    type StreamCreateParams as StreamCreateParams,
+    type StreamListParams as StreamListParams,
+    type StreamDeleteParams as StreamDeleteParams,
+    type StreamEditParams as StreamEditParams,
+    type StreamGetParams as StreamGetParams,
+  };
+
+  export {
     AudioTracks as AudioTracks,
     type Audio as Audio,
     type AudioTrackDeleteResponse as AudioTrackDeleteResponse,

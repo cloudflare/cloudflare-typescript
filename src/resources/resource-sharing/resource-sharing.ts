@@ -461,6 +461,20 @@ ResourceSharing.Resources = Resources;
 
 export declare namespace ResourceSharing {
   export {
+    type ResourceSharingCreateResponse as ResourceSharingCreateResponse,
+    type ResourceSharingUpdateResponse as ResourceSharingUpdateResponse,
+    type ResourceSharingListResponse as ResourceSharingListResponse,
+    type ResourceSharingDeleteResponse as ResourceSharingDeleteResponse,
+    type ResourceSharingGetResponse as ResourceSharingGetResponse,
+    type ResourceSharingListResponsesV4PagePaginationArray as ResourceSharingListResponsesV4PagePaginationArray,
+    type ResourceSharingCreateParams as ResourceSharingCreateParams,
+    type ResourceSharingUpdateParams as ResourceSharingUpdateParams,
+    type ResourceSharingListParams as ResourceSharingListParams,
+    type ResourceSharingDeleteParams as ResourceSharingDeleteParams,
+    type ResourceSharingGetParams as ResourceSharingGetParams,
+  };
+
+  export {
     Recipients as Recipients,
     type RecipientCreateResponse as RecipientCreateResponse,
     type RecipientListResponse as RecipientListResponse,

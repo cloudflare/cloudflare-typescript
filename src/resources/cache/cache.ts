@@ -248,6 +248,8 @@ Cache.Variants = Variants;
 Cache.RegionalTieredCacheResource = RegionalTieredCacheResource;
 
 export declare namespace Cache {
+  export { type CachePurgeResponse as CachePurgeResponse, type CachePurgeParams as CachePurgeParams };
+
   export {
     CacheReserveResource as CacheReserveResource,
     type CacheReserve as CacheReserve,

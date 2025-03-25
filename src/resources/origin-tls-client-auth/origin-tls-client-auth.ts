@@ -273,6 +273,19 @@ OriginTLSClientAuth.Settings = Settings;
 
 export declare namespace OriginTLSClientAuth {
   export {
+    type ZoneAuthenticatedOriginPull as ZoneAuthenticatedOriginPull,
+    type OriginTLSClientAuthCreateResponse as OriginTLSClientAuthCreateResponse,
+    type OriginTLSClientAuthListResponse as OriginTLSClientAuthListResponse,
+    type OriginTLSClientAuthDeleteResponse as OriginTLSClientAuthDeleteResponse,
+    type OriginTLSClientAuthGetResponse as OriginTLSClientAuthGetResponse,
+    type OriginTLSClientAuthListResponsesSinglePage as OriginTLSClientAuthListResponsesSinglePage,
+    type OriginTLSClientAuthCreateParams as OriginTLSClientAuthCreateParams,
+    type OriginTLSClientAuthListParams as OriginTLSClientAuthListParams,
+    type OriginTLSClientAuthDeleteParams as OriginTLSClientAuthDeleteParams,
+    type OriginTLSClientAuthGetParams as OriginTLSClientAuthGetParams,
+  };
+
+  export {
     Hostnames as Hostnames,
     type AuthenticatedOriginPull as AuthenticatedOriginPull,
     type HostnameUpdateResponse as HostnameUpdateResponse,
