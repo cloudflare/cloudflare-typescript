@@ -156,6 +156,16 @@ Snippets.Content = Content;
 Snippets.Rules = Rules;
 
 export declare namespace Snippets {
+  export {
+    type Snippet as Snippet,
+    type SnippetDeleteResponse as SnippetDeleteResponse,
+    type SnippetsSinglePage as SnippetsSinglePage,
+    type SnippetUpdateParams as SnippetUpdateParams,
+    type SnippetListParams as SnippetListParams,
+    type SnippetDeleteParams as SnippetDeleteParams,
+    type SnippetGetParams as SnippetGetParams,
+  };
+
   export { Content as Content, type ContentGetParams as ContentGetParams };
 
   export {

@@ -141,3 +141,13 @@ export interface OriginCACertificateListParams {
    */
   zone_id: string;
 }
+
+export declare namespace OriginCACertificates {
+  export {
+    type OriginCACertificate as OriginCACertificate,
+    type OriginCACertificateDeleteResponse as OriginCACertificateDeleteResponse,
+    type OriginCACertificatesSinglePage as OriginCACertificatesSinglePage,
+    type OriginCACertificateCreateParams as OriginCACertificateCreateParams,
+    type OriginCACertificateListParams as OriginCACertificateListParams,
+  };
+}

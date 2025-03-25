@@ -1608,3 +1608,10 @@ export declare namespace AbuseReportCreateParams {
     urls?: string;
   }
 }
+
+export declare namespace AbuseReports {
+  export {
+    type AbuseReportCreateResponse as AbuseReportCreateResponse,
+    type AbuseReportCreateParams as AbuseReportCreateParams,
+  };
+}

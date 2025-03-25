@@ -106,3 +106,13 @@ export interface URLNormalizationGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace URLNormalization {
+  export {
+    type URLNormalizationUpdateResponse as URLNormalizationUpdateResponse,
+    type URLNormalizationGetResponse as URLNormalizationGetResponse,
+    type URLNormalizationUpdateParams as URLNormalizationUpdateParams,
+    type URLNormalizationDeleteParams as URLNormalizationDeleteParams,
+    type URLNormalizationGetParams as URLNormalizationGetParams,
+  };
+}

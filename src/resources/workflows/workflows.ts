@@ -215,6 +215,16 @@ Workflows.Versions = Versions;
 
 export declare namespace Workflows {
   export {
+    type WorkflowUpdateResponse as WorkflowUpdateResponse,
+    type WorkflowListResponse as WorkflowListResponse,
+    type WorkflowGetResponse as WorkflowGetResponse,
+    type WorkflowListResponsesV4PagePaginationArray as WorkflowListResponsesV4PagePaginationArray,
+    type WorkflowUpdateParams as WorkflowUpdateParams,
+    type WorkflowListParams as WorkflowListParams,
+    type WorkflowGetParams as WorkflowGetParams,
+  };
+
+  export {
     InstancesAPIInstances as Instances,
     type InstanceCreateResponse as InstanceCreateResponse,
     type InstanceListResponse as InstanceListResponse,

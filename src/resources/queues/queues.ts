@@ -218,6 +218,17 @@ Queues.Messages = Messages;
 
 export declare namespace Queues {
   export {
+    type Queue as Queue,
+    type QueueDeleteResponse as QueueDeleteResponse,
+    type QueuesSinglePage as QueuesSinglePage,
+    type QueueCreateParams as QueueCreateParams,
+    type QueueUpdateParams as QueueUpdateParams,
+    type QueueListParams as QueueListParams,
+    type QueueDeleteParams as QueueDeleteParams,
+    type QueueGetParams as QueueGetParams,
+  };
+
+  export {
     Consumers as Consumers,
     type Consumer as Consumer,
     type ConsumerDeleteResponse as ConsumerDeleteResponse,

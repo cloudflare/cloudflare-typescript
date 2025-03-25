@@ -266,3 +266,18 @@ export interface FilterGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace Filters {
+  export {
+    type FirewallFilter as FirewallFilter,
+    type FirewallFiltersSinglePage as FirewallFiltersSinglePage,
+    type FirewallFiltersV4PagePaginationArray as FirewallFiltersV4PagePaginationArray,
+    type FilterCreateParams as FilterCreateParams,
+    type FilterUpdateParams as FilterUpdateParams,
+    type FilterListParams as FilterListParams,
+    type FilterDeleteParams as FilterDeleteParams,
+    type FilterBulkDeleteParams as FilterBulkDeleteParams,
+    type FilterBulkUpdateParams as FilterBulkUpdateParams,
+    type FilterGetParams as FilterGetParams,
+  };
+}

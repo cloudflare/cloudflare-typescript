@@ -190,6 +190,13 @@ Spectrum.Analytics = Analytics;
 Spectrum.Apps = Apps;
 
 export declare namespace Spectrum {
+  export {
+    type DNS as DNS,
+    type EdgeIPs as EdgeIPs,
+    type OriginDNS as OriginDNS,
+    type OriginPort as OriginPort,
+  };
+
   export { Analytics as Analytics };
 
   export {

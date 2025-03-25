@@ -236,6 +236,16 @@ MTLSCertificates.Associations = Associations;
 
 export declare namespace MTLSCertificates {
   export {
+    type MTLSCertificate as MTLSCertificate,
+    type MTLSCertificateCreateResponse as MTLSCertificateCreateResponse,
+    type MTLSCertificatesSinglePage as MTLSCertificatesSinglePage,
+    type MTLSCertificateCreateParams as MTLSCertificateCreateParams,
+    type MTLSCertificateListParams as MTLSCertificateListParams,
+    type MTLSCertificateDeleteParams as MTLSCertificateDeleteParams,
+    type MTLSCertificateGetParams as MTLSCertificateGetParams,
+  };
+
+  export {
     Associations as Associations,
     type CertificateAsssociation as CertificateAsssociation,
     type CertificateAsssociationsSinglePage as CertificateAsssociationsSinglePage,

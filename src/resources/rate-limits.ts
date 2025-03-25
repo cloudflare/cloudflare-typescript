@@ -795,3 +795,18 @@ export interface RateLimitGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace RateLimits {
+  export {
+    type Action as Action,
+    type Methods as Methods,
+    type RateLimit as RateLimit,
+    type RateLimitDeleteResponse as RateLimitDeleteResponse,
+    type RateLimitsV4PagePaginationArray as RateLimitsV4PagePaginationArray,
+    type RateLimitCreateParams as RateLimitCreateParams,
+    type RateLimitListParams as RateLimitListParams,
+    type RateLimitDeleteParams as RateLimitDeleteParams,
+    type RateLimitEditParams as RateLimitEditParams,
+    type RateLimitGetParams as RateLimitGetParams,
+  };
+}

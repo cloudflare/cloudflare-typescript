@@ -256,3 +256,15 @@ export interface ClientCertificateGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace ClientCertificates {
+  export {
+    type ClientCertificate as ClientCertificate,
+    type ClientCertificatesV4PagePaginationArray as ClientCertificatesV4PagePaginationArray,
+    type ClientCertificateCreateParams as ClientCertificateCreateParams,
+    type ClientCertificateListParams as ClientCertificateListParams,
+    type ClientCertificateDeleteParams as ClientCertificateDeleteParams,
+    type ClientCertificateEditParams as ClientCertificateEditParams,
+    type ClientCertificateGetParams as ClientCertificateGetParams,
+  };
+}
