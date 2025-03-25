@@ -31,3 +31,10 @@ export interface DCVDelegationGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace DCVDelegation {
+  export {
+    type DCVDelegationUUID as DCVDelegationUUID,
+    type DCVDelegationGetParams as DCVDelegationGetParams,
+  };
+}

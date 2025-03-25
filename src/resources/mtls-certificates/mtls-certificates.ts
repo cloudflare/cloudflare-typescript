@@ -231,10 +231,21 @@ export interface MTLSCertificateGetParams {
   account_id: string;
 }
 
+MTLSCertificates.MTLSCertificatesSinglePage = MTLSCertificatesSinglePage;
 MTLSCertificates.Associations = Associations;
 MTLSCertificates.CertificateAsssociationsSinglePage = CertificateAsssociationsSinglePage;
 
 export declare namespace MTLSCertificates {
+  export {
+    type MTLSCertificate as MTLSCertificate,
+    type MTLSCertificateCreateResponse as MTLSCertificateCreateResponse,
+    MTLSCertificatesSinglePage as MTLSCertificatesSinglePage,
+    type MTLSCertificateCreateParams as MTLSCertificateCreateParams,
+    type MTLSCertificateListParams as MTLSCertificateListParams,
+    type MTLSCertificateDeleteParams as MTLSCertificateDeleteParams,
+    type MTLSCertificateGetParams as MTLSCertificateGetParams,
+  };
+
   export {
     Associations as Associations,
     type CertificateAsssociation as CertificateAsssociation,

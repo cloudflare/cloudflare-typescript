@@ -147,3 +147,14 @@ export interface SecurityTXTGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace SecurityTXT {
+  export {
+    type SecurityTXTUpdateResponse as SecurityTXTUpdateResponse,
+    type SecurityTXTDeleteResponse as SecurityTXTDeleteResponse,
+    type SecurityTXTGetResponse as SecurityTXTGetResponse,
+    type SecurityTXTUpdateParams as SecurityTXTUpdateParams,
+    type SecurityTXTDeleteParams as SecurityTXTDeleteParams,
+    type SecurityTXTGetParams as SecurityTXTGetParams,
+  };
+}

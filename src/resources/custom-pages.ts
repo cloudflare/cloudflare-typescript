@@ -179,3 +179,17 @@ export interface CustomPageGetParams {
    */
   zone_id?: string;
 }
+
+CustomPages.CustomPageListResponsesSinglePage = CustomPageListResponsesSinglePage;
+
+export declare namespace CustomPages {
+  export {
+    type CustomPageUpdateResponse as CustomPageUpdateResponse,
+    type CustomPageListResponse as CustomPageListResponse,
+    type CustomPageGetResponse as CustomPageGetResponse,
+    CustomPageListResponsesSinglePage as CustomPageListResponsesSinglePage,
+    type CustomPageUpdateParams as CustomPageUpdateParams,
+    type CustomPageListParams as CustomPageListParams,
+    type CustomPageGetParams as CustomPageGetParams,
+  };
+}
