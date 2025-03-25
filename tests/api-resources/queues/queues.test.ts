@@ -48,7 +48,7 @@ describe('resource queues', () => {
     const response = await client.queues.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       queue_name: 'example-queue',
-      settings: { delivery_delay: 5, message_retention_period: 345600 },
+      settings: { delivery_delay: 5, delivery_paused: true, message_retention_period: 345600 },
     });
   });
 
