@@ -211,12 +211,24 @@ export interface QueueGetParams {
   account_id: string;
 }
 
+Queues.QueuesSinglePage = QueuesSinglePage;
 Queues.Consumers = Consumers;
 Queues.ConsumersSinglePage = ConsumersSinglePage;
 Queues.Messages = Messages;
 Queues.MessagePullResponsesSinglePage = MessagePullResponsesSinglePage;
 
 export declare namespace Queues {
+  export {
+    type Queue as Queue,
+    type QueueDeleteResponse as QueueDeleteResponse,
+    QueuesSinglePage as QueuesSinglePage,
+    type QueueCreateParams as QueueCreateParams,
+    type QueueUpdateParams as QueueUpdateParams,
+    type QueueListParams as QueueListParams,
+    type QueueDeleteParams as QueueDeleteParams,
+    type QueueGetParams as QueueGetParams,
+  };
+
   export {
     Consumers as Consumers,
     type Consumer as Consumer,

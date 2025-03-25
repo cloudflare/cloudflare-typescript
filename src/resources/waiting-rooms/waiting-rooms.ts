@@ -2187,6 +2187,7 @@ export interface WaitingRoomGetParams {
   zone_id: string;
 }
 
+WaitingRooms.WaitingRoomsV4PagePaginationArray = WaitingRoomsV4PagePaginationArray;
 WaitingRooms.Page = Page;
 WaitingRooms.Events = Events;
 WaitingRooms.EventsV4PagePaginationArray = EventsV4PagePaginationArray;
@@ -2196,6 +2197,21 @@ WaitingRooms.Statuses = Statuses;
 WaitingRooms.Settings = Settings;
 
 export declare namespace WaitingRooms {
+  export {
+    type AdditionalRoutes as AdditionalRoutes,
+    type CookieAttributes as CookieAttributes,
+    type Query as Query,
+    type WaitingRoom as WaitingRoom,
+    type WaitingRoomDeleteResponse as WaitingRoomDeleteResponse,
+    WaitingRoomsV4PagePaginationArray as WaitingRoomsV4PagePaginationArray,
+    type WaitingRoomCreateParams as WaitingRoomCreateParams,
+    type WaitingRoomUpdateParams as WaitingRoomUpdateParams,
+    type WaitingRoomListParams as WaitingRoomListParams,
+    type WaitingRoomDeleteParams as WaitingRoomDeleteParams,
+    type WaitingRoomEditParams as WaitingRoomEditParams,
+    type WaitingRoomGetParams as WaitingRoomGetParams,
+  };
+
   export {
     Page as Page,
     type PagePreviewResponse as PagePreviewResponse,

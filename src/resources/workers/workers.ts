@@ -319,6 +319,12 @@ Workers.Subdomains = Subdomains;
 
 export declare namespace Workers {
   export {
+    type MigrationStep as MigrationStep,
+    type SingleStepMigration as SingleStepMigration,
+    type WorkerMetadata as WorkerMetadata,
+  };
+
+  export {
     Routes as Routes,
     type RouteCreateResponse as RouteCreateResponse,
     type RouteUpdateResponse as RouteUpdateResponse,

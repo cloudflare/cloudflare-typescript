@@ -1854,3 +1854,18 @@ export interface PageRuleGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace PageRules {
+  export {
+    type PageRule as PageRule,
+    type Target as Target,
+    type PageRuleListResponse as PageRuleListResponse,
+    type PageRuleDeleteResponse as PageRuleDeleteResponse,
+    type PageRuleCreateParams as PageRuleCreateParams,
+    type PageRuleUpdateParams as PageRuleUpdateParams,
+    type PageRuleListParams as PageRuleListParams,
+    type PageRuleDeleteParams as PageRuleDeleteParams,
+    type PageRuleEditParams as PageRuleEditParams,
+    type PageRuleGetParams as PageRuleGetParams,
+  };
+}

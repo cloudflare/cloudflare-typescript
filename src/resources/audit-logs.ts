@@ -106,4 +106,8 @@ export namespace AuditLogListParams {
   }
 }
 
+export declare namespace AuditLogs {
+  export { type AuditLogListParams as AuditLogListParams };
+}
+
 export { AuditLogsV4PagePaginationArray };

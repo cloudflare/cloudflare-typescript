@@ -492,6 +492,7 @@ export interface AIGatewayGetParams {
   account_id: string;
 }
 
+AIGateway.AIGatewayListResponsesV4PagePaginationArray = AIGatewayListResponsesV4PagePaginationArray;
 AIGateway.EvaluationTypes = EvaluationTypes;
 AIGateway.EvaluationTypeListResponsesV4PagePaginationArray = EvaluationTypeListResponsesV4PagePaginationArray;
 AIGateway.Logs = Logs;
@@ -503,6 +504,20 @@ AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponses
 AIGateway.URLs = URLs;
 
 export declare namespace AIGateway {
+  export {
+    type AIGatewayCreateResponse as AIGatewayCreateResponse,
+    type AIGatewayUpdateResponse as AIGatewayUpdateResponse,
+    type AIGatewayListResponse as AIGatewayListResponse,
+    type AIGatewayDeleteResponse as AIGatewayDeleteResponse,
+    type AIGatewayGetResponse as AIGatewayGetResponse,
+    AIGatewayListResponsesV4PagePaginationArray as AIGatewayListResponsesV4PagePaginationArray,
+    type AIGatewayCreateParams as AIGatewayCreateParams,
+    type AIGatewayUpdateParams as AIGatewayUpdateParams,
+    type AIGatewayListParams as AIGatewayListParams,
+    type AIGatewayDeleteParams as AIGatewayDeleteParams,
+    type AIGatewayGetParams as AIGatewayGetParams,
+  };
+
   export {
     EvaluationTypes as EvaluationTypes,
     type EvaluationTypeListResponse as EvaluationTypeListResponse,

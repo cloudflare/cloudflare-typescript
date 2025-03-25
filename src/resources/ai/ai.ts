@@ -1031,6 +1031,8 @@ AI.Models = Models;
 AI.ModelListResponsesV4PagePaginationArray = ModelListResponsesV4PagePaginationArray;
 
 export declare namespace AI {
+  export { type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
+
   export {
     Finetunes as Finetunes,
     type FinetuneCreateResponse as FinetuneCreateResponse,

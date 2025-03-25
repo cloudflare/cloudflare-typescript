@@ -453,12 +453,28 @@ export interface ResourceSharingGetParams {
   account_id: string;
 }
 
+ResourceSharing.ResourceSharingListResponsesV4PagePaginationArray =
+  ResourceSharingListResponsesV4PagePaginationArray;
 ResourceSharing.Recipients = Recipients;
 ResourceSharing.RecipientListResponsesV4PagePaginationArray = RecipientListResponsesV4PagePaginationArray;
 ResourceSharing.Resources = Resources;
 ResourceSharing.ResourceListResponsesV4PagePaginationArray = ResourceListResponsesV4PagePaginationArray;
 
 export declare namespace ResourceSharing {
+  export {
+    type ResourceSharingCreateResponse as ResourceSharingCreateResponse,
+    type ResourceSharingUpdateResponse as ResourceSharingUpdateResponse,
+    type ResourceSharingListResponse as ResourceSharingListResponse,
+    type ResourceSharingDeleteResponse as ResourceSharingDeleteResponse,
+    type ResourceSharingGetResponse as ResourceSharingGetResponse,
+    ResourceSharingListResponsesV4PagePaginationArray as ResourceSharingListResponsesV4PagePaginationArray,
+    type ResourceSharingCreateParams as ResourceSharingCreateParams,
+    type ResourceSharingUpdateParams as ResourceSharingUpdateParams,
+    type ResourceSharingListParams as ResourceSharingListParams,
+    type ResourceSharingDeleteParams as ResourceSharingDeleteParams,
+    type ResourceSharingGetParams as ResourceSharingGetParams,
+  };
+
   export {
     Recipients as Recipients,
     type RecipientCreateResponse as RecipientCreateResponse,

@@ -276,3 +276,19 @@ export interface KeylessCertificateGetParams {
    */
   zone_id: string;
 }
+
+KeylessCertificates.KeylessCertificatesSinglePage = KeylessCertificatesSinglePage;
+
+export declare namespace KeylessCertificates {
+  export {
+    type KeylessCertificate as KeylessCertificate,
+    type Tunnel as Tunnel,
+    type KeylessCertificateDeleteResponse as KeylessCertificateDeleteResponse,
+    KeylessCertificatesSinglePage as KeylessCertificatesSinglePage,
+    type KeylessCertificateCreateParams as KeylessCertificateCreateParams,
+    type KeylessCertificateListParams as KeylessCertificateListParams,
+    type KeylessCertificateDeleteParams as KeylessCertificateDeleteParams,
+    type KeylessCertificateEditParams as KeylessCertificateEditParams,
+    type KeylessCertificateGetParams as KeylessCertificateGetParams,
+  };
+}

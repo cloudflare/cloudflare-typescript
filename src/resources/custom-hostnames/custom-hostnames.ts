@@ -1984,10 +1984,30 @@ export interface CustomHostnameGetParams {
   zone_id: string;
 }
 
+CustomHostnames.CustomHostnameListResponsesV4PagePaginationArray =
+  CustomHostnameListResponsesV4PagePaginationArray;
 CustomHostnames.FallbackOrigin = FallbackOrigin;
 CustomHostnames.CertificatePack = CertificatePack;
 
 export declare namespace CustomHostnames {
+  export {
+    type BundleMethod as BundleMethod,
+    type CustomHostname as CustomHostname,
+    type DCVMethod as DCVMethod,
+    type DomainValidationType as DomainValidationType,
+    type CustomHostnameCreateResponse as CustomHostnameCreateResponse,
+    type CustomHostnameListResponse as CustomHostnameListResponse,
+    type CustomHostnameDeleteResponse as CustomHostnameDeleteResponse,
+    type CustomHostnameEditResponse as CustomHostnameEditResponse,
+    type CustomHostnameGetResponse as CustomHostnameGetResponse,
+    CustomHostnameListResponsesV4PagePaginationArray as CustomHostnameListResponsesV4PagePaginationArray,
+    type CustomHostnameCreateParams as CustomHostnameCreateParams,
+    type CustomHostnameListParams as CustomHostnameListParams,
+    type CustomHostnameDeleteParams as CustomHostnameDeleteParams,
+    type CustomHostnameEditParams as CustomHostnameEditParams,
+    type CustomHostnameGetParams as CustomHostnameGetParams,
+  };
+
   export {
     FallbackOrigin as FallbackOrigin,
     type FallbackOriginUpdateResponse as FallbackOriginUpdateResponse,

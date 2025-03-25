@@ -131,3 +131,18 @@ export interface CustomNameserverGetParams {
    */
   account_id: string;
 }
+
+CustomNameservers.CustomNameserverDeleteResponsesSinglePage = CustomNameserverDeleteResponsesSinglePage;
+CustomNameservers.CustomNameserversSinglePage = CustomNameserversSinglePage;
+
+export declare namespace CustomNameservers {
+  export {
+    type CustomNameserver as CustomNameserver,
+    type CustomNameserverDeleteResponse as CustomNameserverDeleteResponse,
+    CustomNameserverDeleteResponsesSinglePage as CustomNameserverDeleteResponsesSinglePage,
+    CustomNameserversSinglePage as CustomNameserversSinglePage,
+    type CustomNameserverCreateParams as CustomNameserverCreateParams,
+    type CustomNameserverDeleteParams as CustomNameserverDeleteParams,
+    type CustomNameserverGetParams as CustomNameserverGetParams,
+  };
+}

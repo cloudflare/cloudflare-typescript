@@ -163,6 +163,13 @@ EmailRouting.AddressesV4PagePaginationArray = AddressesV4PagePaginationArray;
 
 export declare namespace EmailRouting {
   export {
+    type Settings as Settings,
+    type EmailRoutingDisableParams as EmailRoutingDisableParams,
+    type EmailRoutingEnableParams as EmailRoutingEnableParams,
+    type EmailRoutingGetParams as EmailRoutingGetParams,
+  };
+
+  export {
     DNS as DNS,
     type DNSRecord as DNSRecord,
     type DNSGetResponse as DNSGetResponse,
