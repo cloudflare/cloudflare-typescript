@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as AnalyticsAPI from './analytics';
-import { Analytics } from './analytics';
 import * as KeysAPI from './keys';
 import { Key, KeyListParams, Keys, KeysCursorLimitPagination } from './keys';
 import * as MetadataAPI from './metadata';
@@ -14,7 +12,7 @@ import {
   ValueGetParams,
   ValueUpdateParams,
   ValueUpdateResponse,
-  Values,
+  Values as ValuesAPIValues,
 } from './values';
 import { APIPromise } from '../../../api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -22,7 +20,6 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Namespaces extends APIResource {
-  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
   metadata: MetadataAPI.Metadata = new MetadataAPI.Metadata(this._client);
   values: ValuesAPI.Values = new ValuesAPI.Values(this._client);
@@ -110,6 +107,26 @@ export class Namespaces extends APIResource {
   }
 
   /**
+   * Get multiple KV pairs from the namespace. Body should contain keys to retrieve
+   * at most 100. Keys must contain text-based values. If value is json, it can be
+   * requested to return in JSON, instead of string. Metadata can be return if
+   * withMetadata is true.
+   */
+  bulkGet(
+    namespaceID: string,
+    params: NamespaceBulkGetParams,
+    options?: RequestOptions,
+  ): APIPromise<NamespaceBulkGetResponse | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/storage/kv/namespaces/${namespaceID}/bulk/get`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: NamespaceBulkGetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Write multiple keys and values at once. Body should be an array of up to 10,000
    * key-value pairs to be stored, along with optional expiration information.
    * Existing values and expirations will be overwritten. If neither `expiration` nor
@@ -186,6 +203,46 @@ export interface NamespaceBulkDeleteResponse {
   unsuccessful_keys?: Array<string>;
 }
 
+export type NamespaceBulkGetResponse =
+  | NamespaceBulkGetResponse.WorkersKVBulkGetResult
+  | NamespaceBulkGetResponse.WorkersKVBulkGetResultWithMetadata;
+
+export namespace NamespaceBulkGetResponse {
+  export interface WorkersKVBulkGetResult {
+    /**
+     * Requested keys are paired with their values in an object
+     */
+    values?: Record<string, string | number | boolean | Record<string, unknown>>;
+  }
+
+  export interface WorkersKVBulkGetResultWithMetadata {
+    /**
+     * Requested keys are paired with their values and metadata in an object
+     */
+    values?: Record<string, WorkersKVBulkGetResultWithMetadata.Values | null>;
+  }
+
+  export namespace WorkersKVBulkGetResultWithMetadata {
+    export interface Values {
+      /**
+       * The metadata associated with the key
+       */
+      metadata: Record<string, unknown> | null;
+
+      /**
+       * The value associated with the key
+       */
+      value: string | number | boolean | Record<string, unknown>;
+
+      /**
+       * The time, measured in number of seconds since the UNIX epoch, at which the key
+       * should expire.
+       */
+      expiration?: number;
+    }
+  }
+}
+
 export interface NamespaceBulkUpdateResponse {
   /**
    * Number of keys successfully updated
@@ -258,6 +315,28 @@ export interface NamespaceBulkDeleteParams {
   body: Array<string>;
 }
 
+export interface NamespaceBulkGetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Array of keys to retrieve (maximum 100)
+   */
+  keys: Array<string>;
+
+  /**
+   * Body param: Whether to parse JSON values in the response
+   */
+  type?: 'text' | 'json';
+
+  /**
+   * Body param: Whether to include metadata in the response
+   */
+  withMetadata?: boolean;
+}
+
 export interface NamespaceBulkUpdateParams {
   /**
    * Path param: Identifier
@@ -316,10 +395,9 @@ export interface NamespaceGetParams {
   account_id: string;
 }
 
-Namespaces.Analytics = Analytics;
 Namespaces.Keys = Keys;
 Namespaces.Metadata = Metadata;
-Namespaces.Values = Values;
+Namespaces.Values = ValuesAPIValues;
 
 export declare namespace Namespaces {
   export {
@@ -327,6 +405,7 @@ export declare namespace Namespaces {
     type NamespaceUpdateResponse as NamespaceUpdateResponse,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
     type NamespaceBulkDeleteResponse as NamespaceBulkDeleteResponse,
+    type NamespaceBulkGetResponse as NamespaceBulkGetResponse,
     type NamespaceBulkUpdateResponse as NamespaceBulkUpdateResponse,
     type NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
     type NamespaceCreateParams as NamespaceCreateParams,
@@ -334,11 +413,10 @@ export declare namespace Namespaces {
     type NamespaceListParams as NamespaceListParams,
     type NamespaceDeleteParams as NamespaceDeleteParams,
     type NamespaceBulkDeleteParams as NamespaceBulkDeleteParams,
+    type NamespaceBulkGetParams as NamespaceBulkGetParams,
     type NamespaceBulkUpdateParams as NamespaceBulkUpdateParams,
     type NamespaceGetParams as NamespaceGetParams,
   };
-
-  export { Analytics as Analytics };
 
   export {
     Keys as Keys,
@@ -354,7 +432,7 @@ export declare namespace Namespaces {
   };
 
   export {
-    Values as Values,
+    ValuesAPIValues as Values,
     type ValueUpdateResponse as ValueUpdateResponse,
     type ValueDeleteResponse as ValueDeleteResponse,
     type ValueUpdateParams as ValueUpdateParams,

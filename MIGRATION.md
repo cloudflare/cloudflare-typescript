@@ -332,6 +332,7 @@ client.example.create('c_456', { parent_id: 'p_123' });
 - `client.kv.namespaces.update()`
 - `client.kv.namespaces.delete()`
 - `client.kv.namespaces.bulkDelete()`
+- `client.kv.namespaces.bulkGet()`
 - `client.kv.namespaces.bulkUpdate()`
 - `client.kv.namespaces.get()`
 - `client.kv.namespaces.keys.list()`
