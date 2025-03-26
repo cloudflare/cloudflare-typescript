@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as ASNsAPI from './asns';
 import {
   ASNGetParams,
@@ -21,7 +21,7 @@ import {
   LocationListResponse,
   Locations,
 } from './locations';
-import { APIPromise } from '../../../api-promise';
+import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 export class Entities extends APIResource {

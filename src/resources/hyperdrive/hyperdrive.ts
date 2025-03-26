@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as ConfigsAPI from './configs';
 import {
   ConfigCreateParams,
@@ -12,7 +12,7 @@ import {
   ConfigUpdateParams,
   Configs,
 } from './configs';
-import { SinglePage } from '../../pagination';
+import { SinglePage } from '../../core/pagination';
 
 export class HyperdriveResource extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);

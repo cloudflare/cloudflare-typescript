@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
   Summary,
@@ -57,7 +57,7 @@ import * as AsesAPI from './ases/ases';
 import { AseGetParams, AseGetResponse, Ases } from './ases/ases';
 import * as LocationsAPI from './locations/locations';
 import { LocationGetParams, LocationGetResponse, Locations } from './locations/locations';
-import { APIPromise } from '../../../api-promise';
+import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 export class HTTP extends APIResource {

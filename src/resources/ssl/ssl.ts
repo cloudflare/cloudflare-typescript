@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as AnalyzeAPI from './analyze';
 import { Analyze, AnalyzeCreateParams, AnalyzeCreateResponse } from './analyze';
 import * as RecommendationsAPI from './recommendations';

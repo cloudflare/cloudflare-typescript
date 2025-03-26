@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as KeylessCertificatesAPI from '../keyless-certificates';
 import * as PrioritizeAPI from './prioritize';
 import { Prioritize, PrioritizeUpdateParams } from './prioritize';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
-import { APIPromise } from '../../api-promise';
+import { APIPromise } from '../../core/api-promise';
 import {
   PagePromise,
   SinglePage,
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
-} from '../../pagination';
+} from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 

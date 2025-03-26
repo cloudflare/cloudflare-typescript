@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as AvailabilitiesAPI from './availabilities';
 import { Availabilities, Availability, AvailabilityListParams } from './availabilities';
 import * as ScheduleAPI from './schedule';

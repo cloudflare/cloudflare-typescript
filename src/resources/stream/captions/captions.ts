@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as LanguageAPI from './language/language';
 import {
   Language,
@@ -10,7 +10,7 @@ import {
   LanguageGetParams,
   LanguageUpdateParams,
 } from './language/language';
-import { PagePromise, SinglePage } from '../../../pagination';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as DNSAPI from './dns';
 import { DNS, DNSListParams, DNSV4PagePagination } from './dns';
 import * as DomainHistoryAPI from './domain-history';

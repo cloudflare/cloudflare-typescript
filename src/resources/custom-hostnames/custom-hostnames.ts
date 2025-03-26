@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as CustomHostnamesAPI from './custom-hostnames';
 import * as Shared from '../shared';
 import * as FallbackOriginAPI from './fallback-origin';
@@ -15,8 +15,8 @@ import {
 } from './fallback-origin';
 import * as CertificatePackAPI from './certificate-pack/certificate-pack';
 import { CertificatePack } from './certificate-pack/certificate-pack';
-import { APIPromise } from '../../api-promise';
-import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { APIPromise } from '../../core/api-promise';
+import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 

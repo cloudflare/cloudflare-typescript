@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as ConfigAPI from './config';
 import { Config, ConfigGetParams, ConfigUpdateParams, Configuration } from './config';
 import * as DefaultAPI from './default';
@@ -19,7 +19,7 @@ import {
   HistoryListResponsesSinglePage,
   HistoryUpdateParams,
 } from './history/history';
-import { APIPromise } from '../../api-promise';
+import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 

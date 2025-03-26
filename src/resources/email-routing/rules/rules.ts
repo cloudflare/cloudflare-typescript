@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as CatchAllsAPI from './catch-alls';
 import {
   CatchAllAction,
@@ -11,8 +11,12 @@ import {
   CatchAllUpdateResponse,
   CatchAlls,
 } from './catch-alls';
-import { APIPromise } from '../../../api-promise';
-import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { APIPromise } from '../../../core/api-promise';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 

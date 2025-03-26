@@ -1447,49 +1447,46 @@ The `headers` property on `APIError` objects is now an instance of the Web [Head
 
 ### Removed exports
 
-#### `Response`
-
-```typescript
-// Before
-import { Response } from 'cloudflare';
-
-// After
-// `Response` must now come from the builtin types
-```
-
 #### Resource classes
 
-If you were importing resource classes from the root package then you must now import them from the file they are defined in:
+If you were importing resource classes from the root package then you must now import them from the file they are defined in.
+This was never valid at the type level and only worked in CommonJS files.
 
 ```typescript
 // Before
-import { Accounts } from 'cloudflare';
+const { Accounts } = require('cloudflare');
 
 // After
-import { Accounts } from 'cloudflare/resources/accounts/accounts';
+const { Cloudflare } = require('cloudflare');
+Cloudflare.Accounts; // or import directly from cloudflare/resources/accounts/accounts
 ```
 
-#### `cloudflare/core`
+#### Refactor of `cloudflare/core`, `error`, `pagination`, `resource` and `uploads`
 
-The `cloudflare/core` file was intended to be internal-only but it was publicly accessible, as such it has been refactored and split up into internal files.
+Much of the `cloudflare/core` file was intended to be internal-only but it was publicly accessible, as such it has been refactored and split up into internal and public files, with public-facing code moved to a new `core` folder and internal code moving to the private `internal` folder.
+
+At the same time, we moved some public-facing files which were previously at the top level into `core` to make the file structure cleaner and more clear:
+
+```typescript
+// Before
+import 'cloudflare/error';
+import 'cloudflare/pagination';
+import 'cloudflare/resource';
+import 'cloudflare/uploads';
+
+// After
+import 'cloudflare/core/error';
+import 'cloudflare/core/pagination';
+import 'cloudflare/core/resource';
+import 'cloudflare/core/uploads';
+```
 
 If you were relying on anything that was only exported from `cloudflare/core` and is also not accessible anywhere else, please open an issue and we'll consider adding it to the public API.
 
-#### `APIClient`
+#### Cleaned up `uploads` exports
 
-The `APIClient` base client class has been removed as it is no longer needed. If you were importing this class then you must now import the main client class:
-
-```typescript
-// Before
-import { APIClient } from 'cloudflare/core';
-
-// After
-import { Cloudflare } from 'cloudflare';
-```
-
-#### Cleaned up `cloudflare/uploads` exports
-
-The following exports have been removed from `cloudflare/uploads` as they were not intended to be a part of the public API:
+As part of the `core` refactor, `cloudflare/uploads` was moved to `cloudflare/core/uploads`
+and the following exports were removed, as they were not intended to be a part of the public API:
 
 - `fileFromPath`
 - `BlobPart`
@@ -1508,5 +1505,17 @@ The following exports have been removed from `cloudflare/uploads` as they were n
 Note that `Uploadable` & `toFile` **are** still exported:
 
 ```typescript
-import { type Uploadable, toFile } from 'cloudflare/uploads';
+import { type Uploadable, toFile } from 'cloudflare/core/uploads';
+```
+
+#### `APIClient`
+
+The `APIClient` base client class has been removed as it is no longer needed. If you were importing this class then you must now import the main client class:
+
+```typescript
+// Before
+import { APIClient } from 'cloudflare/core';
+
+// After
+import { Cloudflare } from 'cloudflare';
 ```

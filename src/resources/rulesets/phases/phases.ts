@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
 import * as VersionsAPI from './versions';
@@ -12,8 +12,8 @@ import {
   VersionListResponsesSinglePage,
   Versions,
 } from './versions';
-import { APIPromise } from '../../../api-promise';
-import { CloudflareError } from '../../../error';
+import { APIPromise } from '../../../core/api-promise';
+import { CloudflareError } from '../../../core/error';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as PCAPsAPI from './pcaps';
 import * as DownloadAPI from './download';
 import { Download, DownloadGetParams } from './download';
@@ -14,8 +14,8 @@ import {
   OwnershipValidateParams,
   OwnershipsSinglePage,
 } from './ownership';
-import { APIPromise } from '../../../api-promise';
-import { PagePromise, SinglePage } from '../../../pagination';
+import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 

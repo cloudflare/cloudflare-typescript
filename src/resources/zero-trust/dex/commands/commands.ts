@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../resource';
+import { APIResource } from '../../../../core/resource';
 import * as DevicesAPI from './devices';
 import {
   DeviceListParams,
@@ -12,8 +12,8 @@ import * as DownloadsAPI from './downloads';
 import { DownloadGetParams, Downloads } from './downloads';
 import * as QuotaAPI from './quota';
 import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
-import { APIPromise } from '../../../../api-promise';
-import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
+import { APIPromise } from '../../../../core/api-promise';
+import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 

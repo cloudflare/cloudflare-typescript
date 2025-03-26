@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CloudflaredAPI from './cloudflared/cloudflared';
 import {
@@ -32,7 +32,11 @@ import {
   WARPConnectorListResponse,
   WARPConnectorListResponsesV4PagePaginationArray,
 } from './warp-connector/warp-connector';
-import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
