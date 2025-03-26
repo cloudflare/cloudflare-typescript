@@ -18,4 +18,5 @@ export {
   type MessageAckParams,
   type MessagePullParams,
 } from './messages';
+export { Purge, type PurgeStatusResponse, type PurgeStartParams, type PurgeStatusParams } from './purge';
 export { Queues } from './queues';

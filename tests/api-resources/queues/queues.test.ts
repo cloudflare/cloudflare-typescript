@@ -86,6 +86,27 @@ describe('resource queues', () => {
     });
   });
 
+  test('edit: only required params', async () => {
+    const responsePromise = client.queues.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.queues.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      queue_name: 'example-queue',
+      settings: { delivery_delay: 5, delivery_paused: true, message_retention_period: 345600 },
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.queues.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
