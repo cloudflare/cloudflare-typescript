@@ -342,6 +342,7 @@ client.example.create('c_456', { parent_id: 'p_123' });
 - `client.durableObjects.namespaces.objects.list()`
 - `client.queues.update()`
 - `client.queues.delete()`
+- `client.queues.edit()`
 - `client.queues.get()`
 - `client.queues.consumers.create()`
 - `client.queues.consumers.update()`
@@ -349,6 +350,8 @@ client.example.create('c_456', { parent_id: 'p_123' });
 - `client.queues.consumers.get()`
 - `client.queues.messages.ack()`
 - `client.queues.messages.pull()`
+- `client.queues.purge.start()`
+- `client.queues.purge.status()`
 - `client.apiGateway.discovery.operations.edit()`
 - `client.apiGateway.operations.delete()`
 - `client.apiGateway.operations.get()`
