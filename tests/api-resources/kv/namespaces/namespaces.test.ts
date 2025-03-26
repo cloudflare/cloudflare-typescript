@@ -113,6 +113,29 @@ describe('resource namespaces', () => {
     });
   });
 
+  test('bulkGet: only required params', async () => {
+    const responsePromise = client.kv.namespaces.bulkGet('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      keys: ['My-Key'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkGet: required and optional params', async () => {
+    const response = await client.kv.namespaces.bulkGet('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      keys: ['My-Key'],
+      type: 'text',
+      withMetadata: true,
+    });
+  });
+
   test('bulkUpdate: only required params', async () => {
     const responsePromise = client.kv.namespaces.bulkUpdate('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
