@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../../resource';
+import { APIResource } from '../../../../../../core/resource';
 import * as MaliciousAPI from './malicious';
 import { Malicious, MaliciousGetParams, MaliciousGetResponse } from './malicious';
 import * as SpamAPI from './spam';
 import { Spam, SpamGetParams, SpamGetResponse } from './spam';
 import * as SpoofAPI from './spoof';
 import { Spoof, SpoofGetParams, SpoofGetResponse } from './spoof';
-import { APIPromise } from '../../../../../../api-promise';
+import { APIPromise } from '../../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../../internal/request-options';
 
 export class Tlds extends APIResource {

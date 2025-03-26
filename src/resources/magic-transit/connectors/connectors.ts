@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as EventsAPI from './events';
 import { EventGetParams, EventGetResponse, EventListParams, EventListResponse, Events } from './events';
 import * as SnapshotsAPI from './snapshots';
@@ -11,8 +11,8 @@ import {
   SnapshotListResponse,
   Snapshots,
 } from './snapshots';
-import { APIPromise } from '../../../api-promise';
-import { PagePromise, SinglePage } from '../../../pagination';
+import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 

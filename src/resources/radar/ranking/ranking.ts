@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as DomainAPI from './domain';
 import { Domain, DomainGetParams, DomainGetResponse } from './domain';
 import * as InternetServicesAPI from './internet-services';
@@ -13,7 +13,7 @@ import {
   InternetServiceTopResponse,
   InternetServices,
 } from './internet-services';
-import { APIPromise } from '../../../api-promise';
+import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 export class Ranking extends APIResource {

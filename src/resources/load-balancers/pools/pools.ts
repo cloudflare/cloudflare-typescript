@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as LoadBalancersAPI from '../load-balancers';
 import * as HealthAPI from './health';
 import {
@@ -17,8 +17,8 @@ import {
   ReferenceGetResponsesSinglePage,
   References,
 } from './references';
-import { APIPromise } from '../../../api-promise';
-import { PagePromise, SinglePage } from '../../../pagination';
+import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 

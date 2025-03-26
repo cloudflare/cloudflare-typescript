@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as MetadataIndexAPI from './metadata-index';
 import {
   MetadataIndex,
@@ -11,8 +11,8 @@ import {
   MetadataIndexListParams,
   MetadataIndexListResponse,
 } from './metadata-index';
-import { APIPromise } from '../../../api-promise';
-import { PagePromise, SinglePage } from '../../../pagination';
+import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';

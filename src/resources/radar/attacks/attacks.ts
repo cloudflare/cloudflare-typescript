@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as Layer3API from './layer3/layer3';
 import { Layer3, Layer3TimeseriesParams, Layer3TimeseriesResponse } from './layer3/layer3';
 import * as Layer7API from './layer7/layer7';

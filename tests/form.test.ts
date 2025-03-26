@@ -1,5 +1,5 @@
 import { multipartFormRequestOptions, createForm } from 'cloudflare/internal/uploads';
-import { toFile } from 'cloudflare/uploads';
+import { toFile } from 'cloudflare/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

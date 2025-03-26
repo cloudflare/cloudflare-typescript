@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
@@ -11,9 +11,13 @@ import {
   OperationListResponsesV4PagePaginationArray,
   Operations,
 } from './operations';
-import { APIPromise } from '../../../api-promise';
-import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
-import { type Uploadable } from '../../../uploads';
+import { APIPromise } from '../../../core/api-promise';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
+import { type Uploadable } from '../../../core/uploads';
 import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';

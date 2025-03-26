@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as V1API from '../v1/v1';
 import * as DirectUploadsAPI from './direct-uploads';
 import { DirectUploadCreateParams, DirectUploadCreateResponse, DirectUploads } from './direct-uploads';
-import { APIPromise } from '../../../api-promise';
+import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 

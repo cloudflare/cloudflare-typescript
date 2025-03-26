@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../resource';
+import { APIResource } from '../../../../core/resource';
 import * as BotClassAPI from './bot-class';
 import { BotClass, BotClassGetParams, BotClassGetResponse } from './bot-class';
 import * as BrowserFamilyAPI from './browser-family';
@@ -17,7 +17,7 @@ import * as OSAPI from './os';
 import { OS, OSGetParams, OSGetResponse } from './os';
 import * as TLSVersionAPI from './tls-version';
 import { TLSVersion, TLSVersionGetParams, TLSVersionGetResponse } from './tls-version';
-import { APIPromise } from '../../../../api-promise';
+import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
 export class Ases extends APIResource {

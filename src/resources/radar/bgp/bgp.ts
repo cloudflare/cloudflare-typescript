@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as IPsAPI from './ips';
 import { IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips';
 import * as RoutesAPI from './routes';
@@ -23,7 +23,7 @@ import * as LeaksAPI from './leaks/leaks';
 import { Leaks } from './leaks/leaks';
 import * as TopAPI from './top/top';
 import { Top, TopPrefixesParams, TopPrefixesResponse } from './top/top';
-import { APIPromise } from '../../../api-promise';
+import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 export class BGP extends APIResource {

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as CustomCertificatesAPI from './custom-certificates';
 import { CustomCertificatesSinglePage } from './custom-certificates';
-import { PagePromise, SinglePage } from '../../pagination';
+import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 

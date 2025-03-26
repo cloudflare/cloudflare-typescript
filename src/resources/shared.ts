@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
-import { SinglePage, V4PagePaginationArray } from '../pagination';
+import { SinglePage, V4PagePaginationArray } from '../core/pagination';
 
 export type ASN = number;
 

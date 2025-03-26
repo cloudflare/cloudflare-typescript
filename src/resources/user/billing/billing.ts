@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as HistoryAPI from './history';
 import { BillingHistoriesV4PagePaginationArray, BillingHistory, History, HistoryListParams } from './history';
 import * as ProfileAPI from './profile';

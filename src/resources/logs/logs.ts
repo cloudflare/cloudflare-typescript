@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
+import { APIResource } from '../../core/resource';
 import * as RayIDAPI from './rayid';
 import { RayID, RayIDGetParams, RayIDGetResponse } from './rayid';
 import * as ControlAPI from './control/control';

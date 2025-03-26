@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
+import { APIResource } from '../../../core/resource';
 import * as WorkersAPI from '../workers';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams, ContentUpdateParams } from './content';
@@ -69,8 +69,8 @@ import {
 } from './versions';
 import * as AssetsAPI from './assets/assets';
 import { Assets as AssetsAPIAssets } from './assets/assets';
-import { APIPromise } from '../../../api-promise';
-import { PagePromise, SinglePage } from '../../../pagination';
+import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { maybeMultipartFormRequestOptions } from '../../../internal/uploads';
