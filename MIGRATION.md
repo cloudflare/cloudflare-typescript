@@ -331,11 +331,11 @@ client.example.create('c_456', { parent_id: 'p_123' });
 - `client.workers.domains.get()`
 - `client.kv.namespaces.update()`
 - `client.kv.namespaces.delete()`
-- `client.kv.namespaces.bulkDelete()`
-- `client.kv.namespaces.bulkGet()`
-- `client.kv.namespaces.bulkUpdate()`
 - `client.kv.namespaces.get()`
 - `client.kv.namespaces.keys.list()`
+- `client.kv.namespaces.keys.bulkDelete()`
+- `client.kv.namespaces.keys.bulkGet()`
+- `client.kv.namespaces.keys.bulkUpdate()`
 - `client.kv.namespaces.metadata.get()`
 - `client.kv.namespaces.values.update()`
 - `client.kv.namespaces.values.delete()`
@@ -1306,8 +1306,8 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.waitingRooms.rules.update()`
 - `client.workers.scripts.schedules.update()`
 - `client.workers.scripts.tail.create()`
-- `client.kv.namespaces.bulkDelete()`
-- `client.kv.namespaces.bulkUpdate()`
+- `client.kv.namespaces.keys.bulkDelete()`
+- `client.kv.namespaces.keys.bulkUpdate()`
 - `client.apiGateway.discovery.operations.bulkEdit()`
 - `client.apiGateway.operations.bulkCreate()`
 - `client.apiGateway.operations.schemaValidation.edit()`
