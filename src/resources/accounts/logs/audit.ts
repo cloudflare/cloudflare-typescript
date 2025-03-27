@@ -140,7 +140,7 @@ export namespace AuditListResponse {
     /**
      * The type of actor.
      */
-    type?: 'user' | 'account' | 'cloudflare-admin';
+    type?: 'account' | 'cloudflare_admin' | 'system' | 'user';
   }
 
   /**
