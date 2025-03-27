@@ -4,12 +4,6 @@ import { APIResource } from '../../resource';
 import * as NamespacesAPI from './namespaces/namespaces';
 import {
   Namespace,
-  NamespaceBulkDeleteParams,
-  NamespaceBulkDeleteResponse,
-  NamespaceBulkGetParams,
-  NamespaceBulkGetResponse,
-  NamespaceBulkUpdateParams,
-  NamespaceBulkUpdateResponse,
   NamespaceCreateParams,
   NamespaceDeleteParams,
   NamespaceDeleteResponse,
@@ -34,17 +28,11 @@ export declare namespace KV {
     type Namespace as Namespace,
     type NamespaceUpdateResponse as NamespaceUpdateResponse,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
-    type NamespaceBulkDeleteResponse as NamespaceBulkDeleteResponse,
-    type NamespaceBulkGetResponse as NamespaceBulkGetResponse,
-    type NamespaceBulkUpdateResponse as NamespaceBulkUpdateResponse,
     NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
     type NamespaceCreateParams as NamespaceCreateParams,
     type NamespaceUpdateParams as NamespaceUpdateParams,
     type NamespaceListParams as NamespaceListParams,
     type NamespaceDeleteParams as NamespaceDeleteParams,
-    type NamespaceBulkDeleteParams as NamespaceBulkDeleteParams,
-    type NamespaceBulkGetParams as NamespaceBulkGetParams,
-    type NamespaceBulkUpdateParams as NamespaceBulkUpdateParams,
     type NamespaceGetParams as NamespaceGetParams,
   };
 }
