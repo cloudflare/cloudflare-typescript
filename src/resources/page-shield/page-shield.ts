@@ -166,6 +166,13 @@ PageShield.CookieListResponsesSinglePage = CookieListResponsesSinglePage;
 
 export declare namespace PageShield {
   export {
+    type Setting as Setting,
+    type PageShieldUpdateResponse as PageShieldUpdateResponse,
+    type PageShieldUpdateParams as PageShieldUpdateParams,
+    type PageShieldGetParams as PageShieldGetParams,
+  };
+
+  export {
     Policies as Policies,
     type Policy as Policy,
     type PolicyCreateResponse as PolicyCreateResponse,

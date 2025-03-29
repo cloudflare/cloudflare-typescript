@@ -59,6 +59,8 @@ D1Resource.QueryResultsSinglePage = QueryResultsSinglePage;
 D1Resource.DatabaseRawResponsesSinglePage = DatabaseRawResponsesSinglePage;
 
 export declare namespace D1Resource {
+  export { type D1 as D1 };
+
   export {
     Database as Database,
     type QueryResult as QueryResult,

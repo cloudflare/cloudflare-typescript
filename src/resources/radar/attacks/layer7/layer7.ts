@@ -12,10 +12,14 @@ import {
   SummaryHTTPVersionResponse,
   SummaryIPVersionParams,
   SummaryIPVersionResponse,
+  SummaryIndustryParams,
+  SummaryIndustryResponse,
   SummaryManagedRulesParams,
   SummaryManagedRulesResponse,
   SummaryMitigationProductParams,
   SummaryMitigationProductResponse,
+  SummaryVerticalParams,
+  SummaryVerticalResponse,
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
@@ -290,14 +294,18 @@ export declare namespace Layer7 {
     Summary as Summary,
     type SummaryHTTPMethodResponse as SummaryHTTPMethodResponse,
     type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
+    type SummaryIndustryResponse as SummaryIndustryResponse,
     type SummaryIPVersionResponse as SummaryIPVersionResponse,
     type SummaryManagedRulesResponse as SummaryManagedRulesResponse,
     type SummaryMitigationProductResponse as SummaryMitigationProductResponse,
+    type SummaryVerticalResponse as SummaryVerticalResponse,
     type SummaryHTTPMethodParams as SummaryHTTPMethodParams,
     type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
+    type SummaryIndustryParams as SummaryIndustryParams,
     type SummaryIPVersionParams as SummaryIPVersionParams,
     type SummaryManagedRulesParams as SummaryManagedRulesParams,
     type SummaryMitigationProductParams as SummaryMitigationProductParams,
+    type SummaryVerticalParams as SummaryVerticalParams,
   };
 
   export {

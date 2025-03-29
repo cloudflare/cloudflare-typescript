@@ -134,9 +134,19 @@ export namespace MechanismParam {
     id?: string;
   }
 
-  export interface Pagerduty {}
+  export interface Pagerduty {
+    /**
+     * UUID
+     */
+    id?: string;
+  }
 
-  export interface Webhook {}
+  export interface Webhook {
+    /**
+     * UUID
+     */
+    id?: string;
+  }
 }
 
 export interface Policy {

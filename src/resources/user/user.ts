@@ -103,6 +103,12 @@ User.Subscriptions = Subscriptions;
 User.Tokens = Tokens;
 
 export declare namespace User {
+  export {
+    type UserEditResponse as UserEditResponse,
+    type UserGetResponse as UserGetResponse,
+    type UserEditParams as UserEditParams,
+  };
+
   export { AuditLogs as AuditLogs, type AuditLogListParams as AuditLogListParams };
 
   export { Billing as Billing };

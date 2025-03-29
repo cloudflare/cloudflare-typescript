@@ -139,7 +139,7 @@ export interface AntiVirusSettingsParam {
  */
 export interface BlockPageSettings {
   /**
-   * Block page background color in #rrggbb format.
+   * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
 
@@ -149,39 +149,58 @@ export interface BlockPageSettings {
   enabled?: boolean;
 
   /**
-   * Block page footer text.
+   * If mode is customized_block_page: block page footer text.
    */
   footer_text?: string;
 
   /**
-   * Block page header text.
+   * If mode is customized_block_page: block page header text.
    */
   header_text?: string;
 
   /**
-   * Full URL to the logo file.
+   * If mode is redirect_uri: when enabled, context will be appended to target_uri as
+   * query parameters.
+   */
+  include_context?: boolean;
+
+  /**
+   * If mode is customized_block_page: full URL to the logo file.
    */
   logo_path?: string;
 
   /**
-   * Admin email for users to contact.
+   * If mode is customized_block_page: admin email for users to contact.
    */
   mailto_address?: string;
 
   /**
-   * Subject line for emails created from block page.
+   * If mode is customized_block_page: subject line for emails created from block
+   * page.
    */
   mailto_subject?: string;
 
   /**
-   * Block page title.
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode?: 'customized_block_page' | 'redirect_uri';
+
+  /**
+   * If mode is customized_block_page: block page title.
    */
   name?: string;
 
   /**
-   * Suppress detailed info at the bottom of the block page.
+   * If mode is customized_block_page: suppress detailed info at the bottom of the
+   * block page.
    */
   suppress_footer?: boolean;
+
+  /**
+   * If mode is redirect_uri: URI to which the user should be redirected.
+   */
+  target_uri?: string;
 }
 
 /**
@@ -189,7 +208,7 @@ export interface BlockPageSettings {
  */
 export interface BlockPageSettingsParam {
   /**
-   * Block page background color in #rrggbb format.
+   * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
 
@@ -199,39 +218,58 @@ export interface BlockPageSettingsParam {
   enabled?: boolean;
 
   /**
-   * Block page footer text.
+   * If mode is customized_block_page: block page footer text.
    */
   footer_text?: string;
 
   /**
-   * Block page header text.
+   * If mode is customized_block_page: block page header text.
    */
   header_text?: string;
 
   /**
-   * Full URL to the logo file.
+   * If mode is redirect_uri: when enabled, context will be appended to target_uri as
+   * query parameters.
+   */
+  include_context?: boolean;
+
+  /**
+   * If mode is customized_block_page: full URL to the logo file.
    */
   logo_path?: string;
 
   /**
-   * Admin email for users to contact.
+   * If mode is customized_block_page: admin email for users to contact.
    */
   mailto_address?: string;
 
   /**
-   * Subject line for emails created from block page.
+   * If mode is customized_block_page: subject line for emails created from block
+   * page.
    */
   mailto_subject?: string;
 
   /**
-   * Block page title.
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode?: 'customized_block_page' | 'redirect_uri';
+
+  /**
+   * If mode is customized_block_page: block page title.
    */
   name?: string;
 
   /**
-   * Suppress detailed info at the bottom of the block page.
+   * If mode is customized_block_page: suppress detailed info at the bottom of the
+   * block page.
    */
   suppress_footer?: boolean;
+
+  /**
+   * If mode is redirect_uri: URI to which the user should be redirected.
+   */
+  target_uri?: string;
 }
 
 /**

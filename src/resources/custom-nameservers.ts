@@ -37,21 +37,6 @@ export class CustomNameservers extends APIResource {
   }
 
   /**
-   * Get Eligible Zones for Account Custom Nameservers
-   */
-  availabilty(
-    params: CustomNameserverAvailabiltyParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CustomNameserverAvailabiltyResponsesSinglePage, CustomNameserverAvailabiltyResponse> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/custom_ns/availability`,
-      CustomNameserverAvailabiltyResponsesSinglePage,
-      options,
-    );
-  }
-
-  /**
    * List an account's custom nameservers.
    */
   get(
@@ -64,8 +49,6 @@ export class CustomNameservers extends APIResource {
 }
 
 export class CustomNameserverDeleteResponsesSinglePage extends SinglePage<CustomNameserverDeleteResponse> {}
-
-export class CustomNameserverAvailabiltyResponsesSinglePage extends SinglePage<CustomNameserverAvailabiltyResponse> {}
 
 export class CustomNameserversSinglePage extends SinglePage<CustomNameserver> {}
 
@@ -118,13 +101,6 @@ export namespace CustomNameserver {
  */
 export type CustomNameserverDeleteResponse = string;
 
-/**
- * Name of zone based on which account custom nameservers can be created. For
- * example, if example.com is returned, then ns1.example.com can be used as an
- * account custom nameserver.
- */
-export type CustomNameserverAvailabiltyResponse = string;
-
 export interface CustomNameserverCreateParams {
   /**
    * Path param: Account identifier tag.
@@ -149,16 +125,24 @@ export interface CustomNameserverDeleteParams {
   account_id: string;
 }
 
-export interface CustomNameserverAvailabiltyParams {
+export interface CustomNameserverGetParams {
   /**
    * Account identifier tag.
    */
   account_id: string;
 }
 
-export interface CustomNameserverGetParams {
-  /**
-   * Account identifier tag.
-   */
-  account_id: string;
+CustomNameservers.CustomNameserverDeleteResponsesSinglePage = CustomNameserverDeleteResponsesSinglePage;
+CustomNameservers.CustomNameserversSinglePage = CustomNameserversSinglePage;
+
+export declare namespace CustomNameservers {
+  export {
+    type CustomNameserver as CustomNameserver,
+    type CustomNameserverDeleteResponse as CustomNameserverDeleteResponse,
+    CustomNameserverDeleteResponsesSinglePage as CustomNameserverDeleteResponsesSinglePage,
+    CustomNameserversSinglePage as CustomNameserversSinglePage,
+    type CustomNameserverCreateParams as CustomNameserverCreateParams,
+    type CustomNameserverDeleteParams as CustomNameserverDeleteParams,
+    type CustomNameserverGetParams as CustomNameserverGetParams,
+  };
 }

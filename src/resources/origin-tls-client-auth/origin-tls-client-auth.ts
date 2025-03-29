@@ -266,11 +266,25 @@ export interface OriginTLSClientAuthGetParams {
   zone_id: string;
 }
 
+OriginTLSClientAuth.OriginTLSClientAuthListResponsesSinglePage = OriginTLSClientAuthListResponsesSinglePage;
 OriginTLSClientAuth.Hostnames = Hostnames;
 OriginTLSClientAuth.HostnameUpdateResponsesSinglePage = HostnameUpdateResponsesSinglePage;
 OriginTLSClientAuth.Settings = Settings;
 
 export declare namespace OriginTLSClientAuth {
+  export {
+    type ZoneAuthenticatedOriginPull as ZoneAuthenticatedOriginPull,
+    type OriginTLSClientAuthCreateResponse as OriginTLSClientAuthCreateResponse,
+    type OriginTLSClientAuthListResponse as OriginTLSClientAuthListResponse,
+    type OriginTLSClientAuthDeleteResponse as OriginTLSClientAuthDeleteResponse,
+    type OriginTLSClientAuthGetResponse as OriginTLSClientAuthGetResponse,
+    OriginTLSClientAuthListResponsesSinglePage as OriginTLSClientAuthListResponsesSinglePage,
+    type OriginTLSClientAuthCreateParams as OriginTLSClientAuthCreateParams,
+    type OriginTLSClientAuthListParams as OriginTLSClientAuthListParams,
+    type OriginTLSClientAuthDeleteParams as OriginTLSClientAuthDeleteParams,
+    type OriginTLSClientAuthGetParams as OriginTLSClientAuthGetParams,
+  };
+
   export {
     Hostnames as Hostnames,
     type AuthenticatedOriginPull as AuthenticatedOriginPull,
