@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as DNSAPI from './dns';
+import * as Shared from '../shared';
 import * as EmailRoutingAPI from './email-routing';
 import { SinglePage } from '../../pagination';
 
@@ -113,9 +114,9 @@ export type DNSGetResponse =
 
 export namespace DNSGetResponse {
   export interface EmailEmailRoutingDNSQueryResponse {
-    errors: Array<unknown>;
+    errors: Array<Shared.ResponseInfo>;
 
-    messages: Array<unknown>;
+    messages: Array<Shared.ResponseInfo>;
 
     /**
      * Whether the API call was successful
@@ -169,9 +170,9 @@ export namespace DNSGetResponse {
   }
 
   export interface EmailDNSSettingsResponseCollection {
-    errors: Array<unknown>;
+    errors: Array<Shared.ResponseInfo>;
 
-    messages: Array<unknown>;
+    messages: Array<Shared.ResponseInfo>;
 
     /**
      * Whether the API call was successful

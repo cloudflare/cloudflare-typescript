@@ -137,7 +137,10 @@ export interface HealthCheck {
    */
   enabled?: boolean;
 
-  rate?: unknown;
+  /**
+   * How frequent the health check is run. The default value is `mid`.
+   */
+  rate?: HealthCheckRate;
 
   /**
    * The destination address in a request type health check. After the healthcheck is
@@ -150,7 +153,10 @@ export interface HealthCheck {
    */
   target?: HealthCheck.MagicHealthCheckTarget | string;
 
-  type?: unknown;
+  /**
+   * The type of healthcheck to run, reply or request. The default value is `reply`.
+   */
+  type?: HealthCheckType;
 }
 
 export namespace HealthCheck {
@@ -183,7 +189,10 @@ export interface HealthCheckParam {
    */
   enabled?: boolean;
 
-  rate?: unknown;
+  /**
+   * How frequent the health check is run. The default value is `mid`.
+   */
+  rate?: HealthCheckRateParam;
 
   /**
    * The destination address in a request type health check. After the healthcheck is
@@ -196,7 +205,10 @@ export interface HealthCheckParam {
    */
   target?: HealthCheckParam.MagicHealthCheckTarget | string;
 
-  type?: unknown;
+  /**
+   * The type of healthcheck to run, reply or request. The default value is `reply`.
+   */
+  type?: HealthCheckTypeParam;
 }
 
 export namespace HealthCheckParam {
@@ -216,9 +228,25 @@ export namespace HealthCheckParam {
   }
 }
 
-export type HealthCheckRate = unknown;
+/**
+ * How frequent the health check is run. The default value is `mid`.
+ */
+export type HealthCheckRate = 'low' | 'mid' | 'high';
 
-export type HealthCheckType = unknown;
+/**
+ * How frequent the health check is run. The default value is `mid`.
+ */
+export type HealthCheckRateParam = 'low' | 'mid' | 'high';
+
+/**
+ * The type of healthcheck to run, reply or request. The default value is `reply`.
+ */
+export type HealthCheckType = 'reply' | 'request';
+
+/**
+ * The type of healthcheck to run, reply or request. The default value is `reply`.
+ */
+export type HealthCheckTypeParam = 'reply' | 'request';
 
 MagicTransit.Apps = Apps;
 MagicTransit.AppListResponsesSinglePage = AppListResponsesSinglePage;

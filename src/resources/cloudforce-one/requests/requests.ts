@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 import * as AssetsAPI from './assets';
 import {
   AssetCreateParams,
@@ -313,9 +314,9 @@ export interface RequestConstants {
 export type RequestTypes = Array<RequestTypesResponse>;
 
 export interface RequestDeleteResponse {
-  errors: Array<unknown>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<unknown>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful

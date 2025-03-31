@@ -87,7 +87,64 @@ export class DEXTests extends APIResource {
 
 export class SchemaHTTPSSinglePage extends SinglePage<SchemaHTTP> {}
 
-export type DEXTest = unknown;
+export interface DEXTest {
+  /**
+   * The configuration object which contains the details for the WARP client to
+   * conduct the test.
+   */
+  data: SchemaData;
+
+  /**
+   * Determines whether or not the test is active.
+   */
+  enabled: boolean;
+
+  /**
+   * How often the test will run.
+   */
+  interval: string;
+
+  /**
+   * The name of the DEX test. Must be unique.
+   */
+  name: string;
+
+  /**
+   * Additional details about the test.
+   */
+  description?: string;
+
+  /**
+   * Device settings profiles targeted by this test
+   */
+  target_policies?: Array<DEXTest.TargetPolicy>;
+
+  targeted?: boolean;
+
+  /**
+   * The unique identifier for the test.
+   */
+  test_id?: string;
+}
+
+export namespace DEXTest {
+  export interface TargetPolicy {
+    /**
+     * The id of the device settings profile
+     */
+    id?: string;
+
+    /**
+     * Whether the profile is the account default
+     */
+    default?: boolean;
+
+    /**
+     * The name of the device settings profile
+     */
+    name?: string;
+  }
+}
 
 /**
  * The configuration object which contains the details for the WARP client to

@@ -119,9 +119,44 @@ export type DisableTransfer = string;
  */
 export type EnableTransfer = string;
 
-export type Outgoing = unknown;
+export interface Outgoing {
+  id?: string;
 
-export type OutgoingStatus = unknown;
+  /**
+   * The time for a specific event.
+   */
+  checked_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  created_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  last_transferred_time?: string;
+
+  /**
+   * Zone name.
+   */
+  name?: string;
+
+  /**
+   * A list of peer tags.
+   */
+  peers?: Array<string>;
+
+  /**
+   * The serial number of the SOA for the given zone.
+   */
+  soa_serial?: number;
+}
+
+/**
+ * The zone transfer status of a primary zone
+ */
+export type OutgoingStatus = string | null;
 
 export interface OutgoingCreateResponse {
   id?: string;

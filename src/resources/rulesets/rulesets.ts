@@ -458,7 +458,10 @@ export namespace RulesetCreateResponse {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -590,7 +593,10 @@ export namespace RulesetCreateResponse {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -788,7 +794,10 @@ export namespace RulesetUpdateResponse {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -920,7 +929,10 @@ export namespace RulesetUpdateResponse {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -1158,7 +1170,10 @@ export namespace RulesetGetResponse {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -1290,7 +1305,10 @@ export namespace RulesetGetResponse {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -1467,7 +1485,10 @@ export namespace RulesetCreateParams {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -1584,7 +1605,10 @@ export namespace RulesetCreateParams {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -1761,7 +1785,10 @@ export namespace RulesetUpdateParams {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -1878,7 +1905,10 @@ export namespace RulesetUpdateParams {
      */
     expression?: string;
 
-    logging?: unknown;
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
 
     /**
      * An object configuring the rule's ratelimit behavior.

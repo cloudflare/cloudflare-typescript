@@ -11,9 +11,21 @@ export class Email extends APIResource {
   security: SecurityAPI.Security = new SecurityAPI.Security(this._client);
 }
 
-export type RadarEmailSeries = unknown;
+export interface RadarEmailSeries {
+  FAIL: Array<string>;
 
-export type RadarEmailSummary = unknown;
+  NONE: Array<string>;
+
+  PASS: Array<string>;
+}
+
+export interface RadarEmailSummary {
+  FAIL: string;
+
+  NONE: string;
+
+  PASS: string;
+}
 
 Email.Routing = Routing;
 Email.Security = Security;

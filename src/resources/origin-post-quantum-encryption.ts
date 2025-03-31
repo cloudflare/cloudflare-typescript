@@ -46,9 +46,49 @@ export class OriginPostQuantumEncryption extends APIResource {
   }
 }
 
-export type OriginPostQuantumEncryptionUpdateResponse = unknown;
+export interface OriginPostQuantumEncryptionUpdateResponse {
+  /**
+   * Value of the zone setting.
+   */
+  id: 'origin_pqe';
 
-export type OriginPostQuantumEncryptionGetResponse = unknown;
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * The value of the feature
+   */
+  value: 'preferred' | 'supported' | 'off';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+export interface OriginPostQuantumEncryptionGetResponse {
+  /**
+   * Value of the zone setting.
+   */
+  id: 'origin_pqe';
+
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * The value of the feature
+   */
+  value: 'preferred' | 'supported' | 'off';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
 
 export interface OriginPostQuantumEncryptionUpdateParams {
   /**
