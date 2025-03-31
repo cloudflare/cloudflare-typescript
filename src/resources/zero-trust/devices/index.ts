@@ -74,6 +74,7 @@ export {
   type PostureGetParams,
   type DevicePostureRulesSinglePage,
 } from './posture/index';
+export { Resilience } from './resilience/index';
 export { Revoke, type RevokeCreateResponse, type RevokeCreateParams } from './revoke';
 export {
   Settings,
