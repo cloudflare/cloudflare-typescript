@@ -1847,7 +1847,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/rate-limits.ts">Action</a></code>
-- <code><a href="./src/resources/rate-limits.ts">Methods</a></code>
 - <code><a href="./src/resources/rate-limits.ts">RateLimit</a></code>
 - <code><a href="./src/resources/rate-limits.ts">RateLimitDeleteResponse</a></code>
 
