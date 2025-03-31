@@ -63,10 +63,7 @@ export class Variants extends APIResource {
  * be indicated with BYPASS cache status in the response headers.
  */
 export interface CacheVariant {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'variants';
+  id: unknown;
 
   /**
    * Last time this setting was modified.
@@ -75,10 +72,7 @@ export interface CacheVariant {
 }
 
 export interface VariantDeleteResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'variants';
+  id: unknown;
 
   /**
    * Whether the setting is editable
@@ -92,10 +86,7 @@ export interface VariantDeleteResponse {
 }
 
 export interface VariantEditResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'variants';
+  id: unknown;
 
   /**
    * Whether the setting is editable
@@ -114,10 +105,7 @@ export interface VariantEditResponse {
 }
 
 export interface VariantGetResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'variants';
+  id: unknown;
 
   /**
    * Whether the setting is editable

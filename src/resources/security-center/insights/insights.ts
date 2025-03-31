@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as Shared from '../../shared';
 import * as IssuesAPI from '../../intel/attack-surface-report/issues';
 import * as ClassAPI from './class';
 import { Class, ClassGetParams, ClassGetResponse } from './class';
@@ -131,9 +130,9 @@ export namespace InsightListResponse {
 }
 
 export interface InsightDismissResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<unknown>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<unknown>;
 
   /**
    * Whether the API call was successful

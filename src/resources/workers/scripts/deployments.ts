@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as DeploymentsAPI from './deployments';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -47,19 +46,7 @@ export class Deployments extends APIResource {
   }
 }
 
-export interface Deployment {
-  /**
-   * Human-readable message about the deployment. Truncated to 100 bytes.
-   */
-  'workers/message'?: string;
-}
-
-export interface DeploymentParam {
-  /**
-   * Human-readable message about the deployment. Truncated to 100 bytes.
-   */
-  'workers/message'?: string;
-}
+export type Deployment = unknown;
 
 export interface DeploymentCreateResponse {
   strategy: 'percentage';
@@ -68,7 +55,7 @@ export interface DeploymentCreateResponse {
 
   id?: string;
 
-  annotations?: Deployment;
+  annotations?: unknown;
 
   author_email?: string;
 
@@ -97,7 +84,7 @@ export namespace DeploymentGetResponse {
 
     id?: string;
 
-    annotations?: DeploymentsAPI.Deployment;
+    annotations?: unknown;
 
     author_email?: string;
 
@@ -141,7 +128,7 @@ export interface DeploymentCreateParams {
   /**
    * Body param:
    */
-  annotations?: DeploymentParam;
+  annotations?: unknown;
 }
 
 export namespace DeploymentCreateParams {

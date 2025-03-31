@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as SippyAPI from './sippy';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -74,9 +73,7 @@ export class SippyResource extends APIResource {
   }
 }
 
-export type Provider = 'r2';
-
-export type ProviderParam = 'r2';
+export type Provider = unknown;
 
 export interface Sippy {
   /**
@@ -112,7 +109,7 @@ export namespace Sippy {
      */
     bucket?: string;
 
-    provider?: SippyAPI.Provider;
+    provider?: unknown;
   }
 
   /**
@@ -177,7 +174,7 @@ export declare namespace SippyUpdateParams {
        */
       accessKeyId?: string;
 
-      provider?: SippyAPI.ProviderParam;
+      provider?: unknown;
 
       /**
        * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"
@@ -255,7 +252,7 @@ export declare namespace SippyUpdateParams {
        */
       accessKeyId?: string;
 
-      provider?: SippyAPI.ProviderParam;
+      provider?: unknown;
 
       /**
        * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"

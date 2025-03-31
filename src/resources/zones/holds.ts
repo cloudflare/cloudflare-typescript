@@ -10,13 +10,13 @@ export class Holds extends APIResource {
    * Enforce a zone hold on the zone, blocking the creation and activation of zones
    * with this zone's hostname.
    */
-  create(params: HoldCreateParams, options?: RequestOptions): APIPromise<ZoneHold> {
+  create(params: HoldCreateParams, options?: RequestOptions): APIPromise<HoldCreateResponse> {
     const { zone_id, include_subdomains } = params;
     return (
       this._client.post(path`/zones/${zone_id}/hold`, {
         query: { include_subdomains },
         ...options,
-      }) as APIPromise<{ result: ZoneHold }>
+      }) as APIPromise<{ result: HoldCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -24,11 +24,11 @@ export class Holds extends APIResource {
    * Stop enforcement of a zone hold on the zone, permanently or temporarily,
    * allowing the creation and activation of zones with this zone's hostname.
    */
-  delete(params: HoldDeleteParams, options?: RequestOptions): APIPromise<ZoneHold> {
+  delete(params: HoldDeleteParams, options?: RequestOptions): APIPromise<HoldDeleteResponse> {
     const { zone_id, hold_after } = params;
     return (
       this._client.delete(path`/zones/${zone_id}/hold`, { query: { hold_after }, ...options }) as APIPromise<{
-        result: ZoneHold;
+        result: HoldDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,11 +37,11 @@ export class Holds extends APIResource {
    * Update the `hold_after` and/or `include_subdomains` values on an existing zone
    * hold. The hold is enabled if the `hold_after` date-time value is in the past.
    */
-  edit(params: HoldEditParams, options?: RequestOptions): APIPromise<ZoneHold> {
+  edit(params: HoldEditParams, options?: RequestOptions): APIPromise<HoldEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/hold`, { body, ...options }) as APIPromise<{
-        result: ZoneHold;
+        result: HoldEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -50,21 +50,23 @@ export class Holds extends APIResource {
    * Retrieve whether the zone is subject to a zone hold, and metadata about the
    * hold.
    */
-  get(params: HoldGetParams, options?: RequestOptions): APIPromise<ZoneHold> {
+  get(params: HoldGetParams, options?: RequestOptions): APIPromise<HoldGetResponse> {
     const { zone_id } = params;
     return (
-      this._client.get(path`/zones/${zone_id}/hold`, options) as APIPromise<{ result: ZoneHold }>
+      this._client.get(path`/zones/${zone_id}/hold`, options) as APIPromise<{ result: HoldGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ZoneHold {
-  hold?: boolean;
+export type ZoneHold = unknown;
 
-  hold_after?: string;
+export type HoldCreateResponse = unknown;
 
-  include_subdomains?: string;
-}
+export type HoldDeleteResponse = unknown;
+
+export type HoldEditResponse = unknown;
+
+export type HoldGetResponse = unknown;
 
 export interface HoldCreateParams {
   /**
@@ -129,6 +131,10 @@ export interface HoldGetParams {
 export declare namespace Holds {
   export {
     type ZoneHold as ZoneHold,
+    type HoldCreateResponse as HoldCreateResponse,
+    type HoldDeleteResponse as HoldDeleteResponse,
+    type HoldEditResponse as HoldEditResponse,
+    type HoldGetResponse as HoldGetResponse,
     type HoldCreateParams as HoldCreateParams,
     type HoldDeleteParams as HoldDeleteParams,
     type HoldEditParams as HoldEditParams,

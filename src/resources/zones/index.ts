@@ -16,6 +16,10 @@ export {
 export {
   Holds,
   type ZoneHold,
+  type HoldCreateResponse,
+  type HoldDeleteResponse,
+  type HoldEditResponse,
+  type HoldGetResponse,
   type HoldCreateParams,
   type HoldDeleteParams,
   type HoldEditParams,
