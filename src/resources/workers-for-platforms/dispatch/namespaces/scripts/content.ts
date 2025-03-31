@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../core/resource';
+import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import { APIPromise } from '../../../../../core/api-promise';
 import { buildHeaders } from '../../../../../internal/headers';
@@ -72,9 +73,10 @@ export interface ContentUpdateParams {
   dispatch_namespace: string;
 
   /**
-   * Body param:
+   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * configuration.
    */
-  metadata: unknown;
+  metadata: WorkersAPI.WorkerMetadataParam;
 
   /**
    * Header param: The multipart name of a script upload part containing script

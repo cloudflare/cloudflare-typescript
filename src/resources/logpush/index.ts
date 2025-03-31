@@ -25,7 +25,6 @@ export {
   Ownership,
   type OwnershipValidation,
   type OwnershipCreateResponse,
-  type OwnershipValidateResponse,
   type OwnershipCreateParams,
   type OwnershipValidateParams,
 } from './ownership';

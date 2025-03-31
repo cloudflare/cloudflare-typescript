@@ -73,12 +73,12 @@ export class Top extends APIResource {
 export interface TopDNSSECResponse {
   meta: TopDNSSECResponse.Meta;
 
-  top_0: Array<unknown>;
+  top_0: Array<TopDNSSECResponse.Top0>;
 }
 
 export namespace TopDNSSECResponse {
   export interface Meta {
-    dateRange: Array<unknown>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -86,23 +86,61 @@ export namespace TopDNSSECResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<unknown>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Top0 {
+    clientCountryAlpha2: string;
+
+    clientCountryName: string;
+
+    value: string;
   }
 }
 
 export interface TopEdnsResponse {
   meta: TopEdnsResponse.Meta;
 
-  top_0: Array<unknown>;
+  top_0: Array<TopEdnsResponse.Top0>;
 }
 
 export namespace TopEdnsResponse {
   export interface Meta {
-    dateRange: Array<unknown>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -110,23 +148,61 @@ export namespace TopEdnsResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<unknown>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Top0 {
+    clientCountryAlpha2: string;
+
+    clientCountryName: string;
+
+    value: string;
   }
 }
 
 export interface TopIPVersionResponse {
   meta: TopIPVersionResponse.Meta;
 
-  top_0: Array<unknown>;
+  top_0: Array<TopIPVersionResponse.Top0>;
 }
 
 export namespace TopIPVersionResponse {
   export interface Meta {
-    dateRange: Array<unknown>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -134,23 +210,61 @@ export namespace TopIPVersionResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<unknown>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Top0 {
+    clientCountryAlpha2: string;
+
+    clientCountryName: string;
+
+    value: string;
   }
 }
 
 export interface TopLocationsResponse {
   meta: TopLocationsResponse.Meta;
 
-  top_0: Array<unknown>;
+  top_0: Array<TopLocationsResponse.Top0>;
 }
 
 export namespace TopLocationsResponse {
   export interface Meta {
-    dateRange: Array<unknown>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -158,11 +272,49 @@ export namespace TopLocationsResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<unknown>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Top0 {
+    clientCountryAlpha2: string;
+
+    clientCountryName: string;
+
+    value: string;
   }
 }
 

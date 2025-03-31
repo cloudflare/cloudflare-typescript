@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import * as RegionsAPI from './regions';
 import { RegionListParams, RegionListResponse, RegionListResponsesSinglePage, Regions } from './regions';
 import { APIPromise } from '../../../core/api-promise';
@@ -132,9 +133,9 @@ export interface RegionalHostnameListResponse {
 }
 
 export interface RegionalHostnameDeleteResponse {
-  errors: Array<unknown>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<unknown>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful

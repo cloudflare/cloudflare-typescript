@@ -28,7 +28,6 @@ import {
   OwnershipCreateParams,
   OwnershipCreateResponse,
   OwnershipValidateParams,
-  OwnershipValidateResponse,
   OwnershipValidation,
 } from './ownership';
 import * as ValidateAPI from './validate';
@@ -86,7 +85,6 @@ export declare namespace Logpush {
     Ownership as Ownership,
     type OwnershipValidation as OwnershipValidation,
     type OwnershipCreateResponse as OwnershipCreateResponse,
-    type OwnershipValidateResponse as OwnershipValidateResponse,
     type OwnershipCreateParams as OwnershipCreateParams,
     type OwnershipValidateParams as OwnershipValidateParams,
   };

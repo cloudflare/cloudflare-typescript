@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import * as AssetsAPI from './assets';
 import {
   AssetCreateParams,
@@ -310,9 +311,9 @@ export interface RequestConstants {
 export type RequestTypes = Array<RequestTypesResponse>;
 
 export interface RequestDeleteResponse {
-  errors: Array<unknown>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<unknown>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful

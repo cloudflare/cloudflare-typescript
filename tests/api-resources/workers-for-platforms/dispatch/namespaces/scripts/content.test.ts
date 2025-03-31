@@ -35,7 +35,7 @@ describe('resource content', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         dispatch_namespace: 'my-dispatch-namespace',
-        metadata: {},
+        metadata: { body_part: 'worker.js', main_module: 'worker.js' },
         'CF-WORKER-BODY-PART': 'CF-WORKER-BODY-PART',
         'CF-WORKER-MAIN-MODULE-PART': 'CF-WORKER-MAIN-MODULE-PART',
       },

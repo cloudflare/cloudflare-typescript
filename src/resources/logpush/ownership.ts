@@ -42,7 +42,10 @@ export class Ownership extends APIResource {
   /**
    * Validates ownership challenge of the destination.
    */
-  validate(params: OwnershipValidateParams, options?: RequestOptions): APIPromise<OwnershipValidateResponse> {
+  validate(
+    params: OwnershipValidateParams,
+    options?: RequestOptions,
+  ): APIPromise<OwnershipValidation | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -64,12 +67,14 @@ export class Ownership extends APIResource {
       this._client.post(path`/${accountOrZone}/${accountOrZoneId}/logpush/ownership/validate`, {
         body,
         ...options,
-      }) as APIPromise<{ result: OwnershipValidateResponse }>
+      }) as APIPromise<{ result: OwnershipValidation | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type OwnershipValidation = unknown;
+export interface OwnershipValidation {
+  valid?: boolean;
+}
 
 export interface OwnershipCreateResponse {
   filename?: string;
@@ -78,8 +83,6 @@ export interface OwnershipCreateResponse {
 
   valid?: boolean;
 }
-
-export type OwnershipValidateResponse = unknown;
 
 export interface OwnershipCreateParams {
   /**
@@ -132,7 +135,6 @@ export declare namespace Ownership {
   export {
     type OwnershipValidation as OwnershipValidation,
     type OwnershipCreateResponse as OwnershipCreateResponse,
-    type OwnershipValidateResponse as OwnershipValidateResponse,
     type OwnershipCreateParams as OwnershipCreateParams,
     type OwnershipValidateParams as OwnershipValidateParams,
   };
