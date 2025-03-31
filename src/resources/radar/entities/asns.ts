@@ -256,20 +256,12 @@ export namespace ASNIPResponse {
 }
 
 export interface ASNRelResponse {
-  meta: ASNRelResponse.Meta;
+  meta: unknown;
 
   rels: Array<ASNRelResponse.Rel>;
 }
 
 export namespace ASNRelResponse {
-  export interface Meta {
-    data_time: string;
-
-    query_time: string;
-
-    total_peers: number;
-  }
-
   export interface Rel {
     asn1: number;
 

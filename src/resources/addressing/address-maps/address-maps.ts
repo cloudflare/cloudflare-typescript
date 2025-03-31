@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as AddressMapsAPI from './address-maps';
-import * as Shared from '../../shared';
 import * as AccountsAPI from './accounts';
 import {
   AccountDeleteParams,
@@ -244,9 +243,9 @@ export namespace AddressMapCreateResponse {
 }
 
 export interface AddressMapDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<unknown>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<unknown>;
 
   /**
    * Whether the API call was successful

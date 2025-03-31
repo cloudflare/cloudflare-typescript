@@ -38,12 +38,12 @@ export class HTTPProtocol extends APIResource {
 export interface HTTPProtocolGetResponse {
   meta: HTTPProtocolGetResponse.Meta;
 
-  top_0: Array<HTTPProtocolGetResponse.Top0>;
+  top_0: Array<unknown>;
 }
 
 export namespace HTTPProtocolGetResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -51,49 +51,11 @@ export namespace HTTPProtocolGetResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
     }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Top0 {
-    clientASN: number;
-
-    clientASName: string;
-
-    value: string;
   }
 }
 

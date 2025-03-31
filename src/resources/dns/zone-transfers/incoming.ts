@@ -62,45 +62,7 @@ export class IncomingResource extends APIResource {
   }
 }
 
-export interface Incoming {
-  id?: string;
-
-  /**
-   * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
-   * applicable for primary zones.
-   */
-  auto_refresh_seconds?: number;
-
-  /**
-   * The time for a specific event.
-   */
-  checked_time?: string;
-
-  /**
-   * The time for a specific event.
-   */
-  created_time?: string;
-
-  /**
-   * The time for a specific event.
-   */
-  modified_time?: string;
-
-  /**
-   * Zone name.
-   */
-  name?: string;
-
-  /**
-   * A list of peer tags.
-   */
-  peers?: Array<string>;
-
-  /**
-   * The serial number of the SOA for the given zone.
-   */
-  soa_serial?: number;
-}
+export type Incoming = unknown;
 
 export interface IncomingCreateResponse {
   id?: string;

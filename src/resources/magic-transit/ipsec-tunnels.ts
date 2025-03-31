@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
-import * as MagicTransitAPI from './magic-transit';
 
 export class IPSECTunnels extends APIResource {
   /**
@@ -262,10 +261,7 @@ export namespace IPSECTunnelCreateResponse {
        */
       enabled?: boolean;
 
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.HealthCheckRate;
+      rate?: unknown;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -278,10 +274,7 @@ export namespace IPSECTunnelCreateResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: unknown;
     }
 
     export namespace HealthCheck {
@@ -396,10 +389,7 @@ export namespace IPSECTunnelUpdateResponse {
        */
       enabled?: boolean;
 
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.HealthCheckRate;
+      rate?: unknown;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -412,10 +402,7 @@ export namespace IPSECTunnelUpdateResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: unknown;
     }
 
     export namespace HealthCheck {
@@ -528,10 +515,7 @@ export namespace IPSECTunnelListResponse {
        */
       enabled?: boolean;
 
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.HealthCheckRate;
+      rate?: unknown;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -544,10 +528,7 @@ export namespace IPSECTunnelListResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: unknown;
     }
 
     export namespace HealthCheck {
@@ -662,10 +643,7 @@ export namespace IPSECTunnelDeleteResponse {
        */
       enabled?: boolean;
 
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.HealthCheckRate;
+      rate?: unknown;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -678,10 +656,7 @@ export namespace IPSECTunnelDeleteResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: unknown;
     }
 
     export namespace HealthCheck {
@@ -796,10 +771,7 @@ export namespace IPSECTunnelBulkUpdateResponse {
        */
       enabled?: boolean;
 
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.HealthCheckRate;
+      rate?: unknown;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -812,10 +784,7 @@ export namespace IPSECTunnelBulkUpdateResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: unknown;
     }
 
     export namespace HealthCheck {
@@ -928,10 +897,7 @@ export namespace IPSECTunnelGetResponse {
        */
       enabled?: boolean;
 
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.HealthCheckRate;
+      rate?: unknown;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -944,10 +910,7 @@ export namespace IPSECTunnelGetResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: unknown;
     }
 
     export namespace HealthCheck {
@@ -1066,10 +1029,7 @@ export namespace IPSECTunnelCreateParams {
      */
     enabled?: boolean;
 
-    /**
-     * How frequent the health check is run. The default value is `mid`.
-     */
-    rate?: MagicTransitAPI.HealthCheckRateParam;
+    rate?: unknown;
 
     /**
      * The destination address in a request type health check. After the healthcheck is
@@ -1082,10 +1042,7 @@ export namespace IPSECTunnelCreateParams {
      */
     target?: HealthCheck.MagicHealthCheckTarget | string;
 
-    /**
-     * The type of healthcheck to run, reply or request. The default value is `reply`.
-     */
-    type?: MagicTransitAPI.HealthCheckTypeParam;
+    type?: unknown;
   }
 
   export namespace HealthCheck {
@@ -1179,10 +1136,7 @@ export namespace IPSECTunnelUpdateParams {
      */
     enabled?: boolean;
 
-    /**
-     * How frequent the health check is run. The default value is `mid`.
-     */
-    rate?: MagicTransitAPI.HealthCheckRateParam;
+    rate?: unknown;
 
     /**
      * The destination address in a request type health check. After the healthcheck is
@@ -1195,10 +1149,7 @@ export namespace IPSECTunnelUpdateParams {
      */
     target?: HealthCheck.MagicHealthCheckTarget | string;
 
-    /**
-     * The type of healthcheck to run, reply or request. The default value is `reply`.
-     */
-    type?: MagicTransitAPI.HealthCheckTypeParam;
+    type?: unknown;
   }
 
   export namespace HealthCheck {

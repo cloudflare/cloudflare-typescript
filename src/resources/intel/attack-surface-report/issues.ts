@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as IssuesAPI from './issues';
-import * as Shared from '../../shared';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class Issues extends APIResource {
@@ -156,9 +155,9 @@ export namespace IssueClassResponse {
 }
 
 export interface IssueDismissResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<unknown>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<unknown>;
 
   /**
    * Whether the API call was successful

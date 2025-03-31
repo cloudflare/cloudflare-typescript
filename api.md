@@ -385,13 +385,17 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zones/holds.ts">ZoneHold</a></code>
+- <code><a href="./src/resources/zones/holds.ts">HoldCreateResponse</a></code>
+- <code><a href="./src/resources/zones/holds.ts">HoldDeleteResponse</a></code>
+- <code><a href="./src/resources/zones/holds.ts">HoldEditResponse</a></code>
+- <code><a href="./src/resources/zones/holds.ts">HoldGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">create</a>({ ...params }) -> ZoneHold</code>
-- <code title="delete /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">delete</a>({ ...params }) -> ZoneHold</code>
-- <code title="patch /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">edit</a>({ ...params }) -> ZoneHold</code>
-- <code title="get /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">get</a>({ ...params }) -> ZoneHold</code>
+- <code title="post /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">create</a>({ ...params }) -> HoldCreateResponse</code>
+- <code title="delete /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">delete</a>({ ...params }) -> HoldDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">edit</a>({ ...params }) -> HoldEditResponse</code>
+- <code title="get /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">get</a>({ ...params }) -> HoldGetResponse</code>
 
 ## Subscriptions
 
@@ -1685,11 +1689,12 @@ Types:
 
 - <code><a href="./src/resources/logpush/ownership.ts">OwnershipValidation</a></code>
 - <code><a href="./src/resources/logpush/ownership.ts">OwnershipCreateResponse</a></code>
+- <code><a href="./src/resources/logpush/ownership.ts">OwnershipValidateResponse</a></code>
 
 Methods:
 
 - <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/ownership">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">create</a>({ ...params }) -> OwnershipCreateResponse | null</code>
-- <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/ownership/validate">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">validate</a>({ ...params }) -> OwnershipValidation | null</code>
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/ownership/validate">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">validate</a>({ ...params }) -> OwnershipValidateResponse</code>
 
 ## Validate
 

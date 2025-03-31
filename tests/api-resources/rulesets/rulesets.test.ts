@@ -53,7 +53,7 @@ describe('resource rulesets', () => {
             username_expression: 'url_decode(http.request.body.form[\\"username\\"][0])',
           },
           expression: 'ip.src ne 1.1.1.1',
-          logging: { enabled: true },
+          logging: {},
           ratelimit: {
             characteristics: ['ip.src'],
             period: 10,

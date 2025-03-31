@@ -49,27 +49,13 @@ export class Summary extends APIResource {
 export interface SummaryModelResponse {
   meta: unknown;
 
-  serie_0: SummaryModelResponse.Serie0;
-}
-
-export namespace SummaryModelResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface SummaryTaskResponse {
   meta: unknown;
 
-  serie_0: SummaryTaskResponse.Serie0;
-}
-
-export namespace SummaryTaskResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface SummaryModelParams {

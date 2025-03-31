@@ -254,27 +254,13 @@ export namespace TimeseriesGroupBotClassResponse {
 export interface TimeseriesGroupBrowserResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupBrowserResponse.Serie0;
-}
-
-export namespace TimeseriesGroupBrowserResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupBrowserFamilyResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupBrowserFamilyResponse.Serie0;
-}
-
-export namespace TimeseriesGroupBrowserFamilyResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupDeviceTypeResponse {
@@ -332,30 +318,13 @@ export namespace TimeseriesGroupHTTPVersionResponse {
 export interface TimeseriesGroupIPVersionResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupIPVersionResponse.Serie0;
-}
-
-export namespace TimeseriesGroupIPVersionResponse {
-  export interface Serie0 {
-    IPv4: Array<string>;
-
-    IPv6: Array<string>;
-
-    timestamps: Array<string>;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupOSResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupOSResponse.Serie0;
-}
-
-export namespace TimeseriesGroupOSResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupPostQuantumResponse {

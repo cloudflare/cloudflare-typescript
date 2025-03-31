@@ -261,21 +261,9 @@ export namespace ErrorData {
   }
 }
 
-export interface Identifier {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
+export type Identifier = unknown;
 
-export interface LoadBalancerPreview {
-  /**
-   * Monitored pool IDs mapped to their respective names.
-   */
-  pools?: Record<string, string>;
-
-  preview_id?: string;
-}
+export type LoadBalancerPreview = unknown;
 
 export interface Member {
   /**
@@ -595,36 +583,9 @@ export interface RatePlanParam {
   sets?: Array<string>;
 }
 
-export interface ResponseInfo {
-  code: number;
+export type ResponseInfo = unknown;
 
-  message: string;
-}
-
-export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;
-
-export namespace Result {
-  export interface UnionMember0 {
-    errors?: Array<Shared.ResponseInfo>;
-
-    messages?: Array<Shared.ResponseInfo>;
-
-    result?: Array<Shared.AuditLog>;
-
-    success?: boolean;
-  }
-
-  export interface AaaAPIResponseCommon {
-    errors: Array<Shared.ResponseInfo>;
-
-    messages: Array<Shared.ResponseInfo>;
-
-    /**
-     * Whether the API call was successful
-     */
-    success: true;
-  }
-}
+export type Result = unknown;
 
 export interface Role {
   /**

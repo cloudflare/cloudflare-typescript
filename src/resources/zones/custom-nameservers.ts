@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 /**
@@ -58,9 +57,9 @@ export class CustomNameserverUpdateResponsesSinglePage extends SinglePage<Custom
 export type CustomNameserverUpdateResponse = string;
 
 export interface CustomNameserverGetResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<unknown>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<unknown>;
 
   /**
    * Whether the API call was successful

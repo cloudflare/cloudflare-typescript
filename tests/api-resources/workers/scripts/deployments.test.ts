@@ -31,7 +31,7 @@ describe('resource deployments', () => {
       strategy: 'percentage',
       versions: [{ percentage: 100, version_id: 'bcf48806-b317-4351-9ee7-36e7d557d4de' }],
       force: true,
-      annotations: { 'workers/message': 'Deploy bug fix.' },
+      annotations: {},
     });
   });
 

@@ -54,21 +54,7 @@ export interface AseGetResponse {
 
 export namespace AseGetResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
-  }
-
-  export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
+    dateRange: Array<unknown>;
   }
 
   export interface Top0 {
@@ -87,7 +73,7 @@ export namespace AseGetResponse {
 export interface AsePrefixesResponse {
   asns: Array<AsePrefixesResponse.ASN>;
 
-  meta: AsePrefixesResponse.Meta;
+  meta: unknown;
 }
 
 export namespace AsePrefixesResponse {
@@ -99,14 +85,6 @@ export namespace AsePrefixesResponse {
     name: string;
 
     pfxs_count: number;
-  }
-
-  export interface Meta {
-    data_time: string;
-
-    query_time: string;
-
-    total_peers: number;
   }
 }
 

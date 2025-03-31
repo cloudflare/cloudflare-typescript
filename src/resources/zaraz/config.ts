@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ZarazAPI from './zaraz';
 
 export class Config extends APIResource {
   /**
@@ -222,7 +221,7 @@ export namespace Configuration {
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazAPI.NeoEvent>;
+    actions?: unknown;
 
     /**
      * Default consent purpose ID
@@ -233,7 +232,7 @@ export namespace Configuration {
      * DEPRECATED - List of actions configured on a tool. Either this or actions field
      * is required. If both are present, actions field will take precedence.
      */
-    neoEvents?: Array<ZarazAPI.NeoEvent>;
+    neoEvents?: Array<unknown>;
 
     /**
      * Vendor name for TCF compliant consent modal, required for Custom Managed
@@ -294,7 +293,7 @@ export namespace Configuration {
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazAPI.NeoEvent>;
+    actions?: unknown;
 
     /**
      * Default consent purpose ID
@@ -305,7 +304,7 @@ export namespace Configuration {
      * DEPRECATED - List of actions configured on a tool. Either this or actions field
      * is required. If both are present, actions field will take precedence.
      */
-    neoEvents?: Array<ZarazAPI.NeoEvent>;
+    neoEvents?: Array<unknown>;
 
     /**
      * Vendor name for TCF compliant consent modal, required for Custom Managed
@@ -659,7 +658,7 @@ export namespace Configuration {
   export interface Consent {
     enabled: boolean;
 
-    buttonTextTranslations?: ZarazAPI.ButtonTextTranslation;
+    buttonTextTranslations?: unknown;
 
     companyEmail?: string;
 
@@ -914,7 +913,7 @@ export namespace ConfigUpdateParams {
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazAPI.NeoEventParam>;
+    actions?: unknown;
 
     /**
      * Default consent purpose ID
@@ -925,7 +924,7 @@ export namespace ConfigUpdateParams {
      * DEPRECATED - List of actions configured on a tool. Either this or actions field
      * is required. If both are present, actions field will take precedence.
      */
-    neoEvents?: Array<ZarazAPI.NeoEventParam>;
+    neoEvents?: Array<unknown>;
 
     /**
      * Vendor name for TCF compliant consent modal, required for Custom Managed
@@ -986,7 +985,7 @@ export namespace ConfigUpdateParams {
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazAPI.NeoEventParam>;
+    actions?: unknown;
 
     /**
      * Default consent purpose ID
@@ -997,7 +996,7 @@ export namespace ConfigUpdateParams {
      * DEPRECATED - List of actions configured on a tool. Either this or actions field
      * is required. If both are present, actions field will take precedence.
      */
-    neoEvents?: Array<ZarazAPI.NeoEventParam>;
+    neoEvents?: Array<unknown>;
 
     /**
      * Vendor name for TCF compliant consent modal, required for Custom Managed
@@ -1351,7 +1350,7 @@ export namespace ConfigUpdateParams {
   export interface Consent {
     enabled: boolean;
 
-    buttonTextTranslations?: ZarazAPI.ButtonTextTranslationParam;
+    buttonTextTranslations?: unknown;
 
     companyEmail?: string;
 
