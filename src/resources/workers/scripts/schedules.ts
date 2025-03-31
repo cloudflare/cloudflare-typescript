@@ -49,12 +49,16 @@ export interface Schedule {
   modified_on?: string;
 }
 
+export interface ScheduleParam {
+  cron?: string;
+}
+
 export interface ScheduleUpdateResponse {
-  schedules?: Array<unknown>;
+  schedules?: Array<Schedule>;
 }
 
 export interface ScheduleGetResponse {
-  schedules?: Array<unknown>;
+  schedules?: Array<Schedule>;
 }
 
 export interface ScheduleUpdateParams {
@@ -66,7 +70,7 @@ export interface ScheduleUpdateParams {
   /**
    * Body param:
    */
-  body: Array<unknown>;
+  body: Array<ScheduleParam>;
 }
 
 export interface ScheduleGetParams {

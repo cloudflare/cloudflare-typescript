@@ -76,7 +76,7 @@ export interface Traceroute {
    */
   name: string;
 
-  target_policies?: Array<unknown> | null;
+  target_policies?: Array<DEXAPI.DigitalExperienceMonitor> | null;
 
   targeted?: boolean;
 

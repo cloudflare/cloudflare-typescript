@@ -239,12 +239,20 @@ export namespace ASNIPResponse {
 }
 
 export interface ASNRelResponse {
-  meta: unknown;
+  meta: ASNRelResponse.Meta;
 
   rels: Array<ASNRelResponse.Rel>;
 }
 
 export namespace ASNRelResponse {
+  export interface Meta {
+    data_time: string;
+
+    query_time: string;
+
+    total_peers: number;
+  }
+
   export interface Rel {
     asn1: number;
 

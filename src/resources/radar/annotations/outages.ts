@@ -52,7 +52,7 @@ export namespace OutageGetResponse {
 
     locations: Array<string>;
 
-    locationsDetails: Array<unknown>;
+    locationsDetails: Array<Annotation.LocationsDetail>;
 
     outage: Annotation.Outage;
 
@@ -73,7 +73,21 @@ export namespace OutageGetResponse {
 
       name: string;
 
-      locations?: unknown;
+      locations?: ASNsDetail.Locations;
+    }
+
+    export namespace ASNsDetail {
+      export interface Locations {
+        code: string;
+
+        name: string;
+      }
+    }
+
+    export interface LocationsDetail {
+      code: string;
+
+      name: string;
     }
 
     export interface Outage {
@@ -85,7 +99,17 @@ export namespace OutageGetResponse {
 }
 
 export interface OutageLocationsResponse {
-  annotations: Array<unknown>;
+  annotations: Array<OutageLocationsResponse.Annotation>;
+}
+
+export namespace OutageLocationsResponse {
+  export interface Annotation {
+    clientCountryAlpha2: string;
+
+    clientCountryName: string;
+
+    value: string;
+  }
 }
 
 export interface OutageGetParams {

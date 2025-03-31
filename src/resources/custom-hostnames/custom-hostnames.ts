@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as CustomHostnamesAPI from './custom-hostnames';
 import * as Shared from '../shared';
 import * as FallbackOriginAPI from './fallback-origin';
 import {
@@ -117,13 +118,344 @@ export class CustomHostnames extends APIResource {
 export type CustomHostnameListResponsesV4PagePaginationArray =
   V4PagePaginationArray<CustomHostnameListResponse>;
 
-export type BundleMethod = unknown;
+/**
+ * A ubiquitous bundle has the highest probability of being verified everywhere,
+ * even by clients using outdated or unusual trust stores. An optimal bundle uses
+ * the shortest chain and newest intermediates. And the force bundle verifies the
+ * chain, but does not otherwise modify it.
+ */
+export type BundleMethod = 'ubiquitous' | 'optimal' | 'force';
 
-export type CustomHostname = unknown;
+/**
+ * A ubiquitous bundle has the highest probability of being verified everywhere,
+ * even by clients using outdated or unusual trust stores. An optimal bundle uses
+ * the shortest chain and newest intermediates. And the force bundle verifies the
+ * chain, but does not otherwise modify it.
+ */
+export type BundleMethodParam = 'ubiquitous' | 'optimal' | 'force';
 
-export type DCVMethod = unknown;
+export interface CustomHostname {
+  /**
+   * Identifier
+   */
+  id: string;
 
-export type DomainValidationType = unknown;
+  /**
+   * The custom hostname that will point to your hostname via CNAME.
+   */
+  hostname: string;
+
+  ssl: CustomHostname.SSL;
+
+  /**
+   * This is the time the hostname was created.
+   */
+  created_at?: string;
+
+  /**
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
+   */
+  custom_metadata?: Record<string, string>;
+
+  /**
+   * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
+   * record.
+   */
+  custom_origin_server?: string;
+
+  /**
+   * A hostname that will be sent to your custom origin server as SNI for TLS
+   * handshake. This can be a valid subdomain of the zone or custom origin server
+   * name or the string ':request_host_header:' which will cause the host header in
+   * the request to be used as SNI. Not configurable with default/fallback origin
+   * server.
+   */
+  custom_origin_sni?: string;
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  ownership_verification?: CustomHostname.OwnershipVerification;
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  ownership_verification_http?: CustomHostname.OwnershipVerificationHTTP;
+
+  /**
+   * Status of the hostname's activation.
+   */
+  status?:
+    | 'active'
+    | 'pending'
+    | 'active_redeploying'
+    | 'moved'
+    | 'pending_deletion'
+    | 'deleted'
+    | 'pending_blocked'
+    | 'pending_migration'
+    | 'pending_provisioned'
+    | 'test_pending'
+    | 'test_active'
+    | 'test_active_apex'
+    | 'test_blocked'
+    | 'test_failed'
+    | 'provisioned'
+    | 'blocked';
+
+  /**
+   * These are errors that were encountered while trying to activate a hostname.
+   */
+  verification_errors?: Array<string>;
+}
+
+export namespace CustomHostname {
+  export interface SSL {
+    /**
+     * Custom hostname SSL identifier tag.
+     */
+    id?: string;
+
+    /**
+     * A ubiquitous bundle has the highest probability of being verified everywhere,
+     * even by clients using outdated or unusual trust stores. An optimal bundle uses
+     * the shortest chain and newest intermediates. And the force bundle verifies the
+     * chain, but does not otherwise modify it.
+     */
+    bundle_method?: CustomHostnamesAPI.BundleMethod;
+
+    /**
+     * The Certificate Authority that will issue the certificate
+     */
+    certificate_authority?: Shared.CertificateCA;
+
+    /**
+     * If a custom uploaded certificate is used.
+     */
+    custom_certificate?: string;
+
+    /**
+     * The identifier for the Custom CSR that was used.
+     */
+    custom_csr_id?: string;
+
+    /**
+     * The key for a custom uploaded certificate.
+     */
+    custom_key?: string;
+
+    /**
+     * The time the custom certificate expires on.
+     */
+    expires_on?: string;
+
+    /**
+     * A list of Hostnames on a custom uploaded certificate.
+     */
+    hosts?: Array<string>;
+
+    /**
+     * The issuer on a custom uploaded certificate.
+     */
+    issuer?: string;
+
+    /**
+     * Domain control validation (DCV) method used for this hostname.
+     */
+    method?: CustomHostnamesAPI.DCVMethod;
+
+    /**
+     * The serial number on a custom uploaded certificate.
+     */
+    serial_number?: string;
+
+    settings?: SSL.Settings;
+
+    /**
+     * The signature on a custom uploaded certificate.
+     */
+    signature?: string;
+
+    /**
+     * Status of the hostname's SSL certificates.
+     */
+    status?:
+      | 'initializing'
+      | 'pending_validation'
+      | 'deleted'
+      | 'pending_issuance'
+      | 'pending_deployment'
+      | 'pending_deletion'
+      | 'pending_expiration'
+      | 'expired'
+      | 'active'
+      | 'initializing_timed_out'
+      | 'validation_timed_out'
+      | 'issuance_timed_out'
+      | 'deployment_timed_out'
+      | 'deletion_timed_out'
+      | 'pending_cleanup'
+      | 'staging_deployment'
+      | 'staging_active'
+      | 'deactivating'
+      | 'inactive'
+      | 'backup_issued'
+      | 'holding_deployment';
+
+    /**
+     * Level of validation to be used for this hostname. Domain validation (dv) must be
+     * used.
+     */
+    type?: CustomHostnamesAPI.DomainValidationType;
+
+    /**
+     * The time the custom certificate was uploaded.
+     */
+    uploaded_on?: string;
+
+    /**
+     * Domain validation errors that have been received by the certificate authority
+     * (CA).
+     */
+    validation_errors?: Array<SSL.ValidationError>;
+
+    validation_records?: Array<SSL.ValidationRecord>;
+
+    /**
+     * Indicates whether the certificate covers a wildcard.
+     */
+    wildcard?: boolean;
+  }
+
+  export namespace SSL {
+    export interface Settings {
+      /**
+       * An allowlist of ciphers for TLS termination. These ciphers must be in the
+       * BoringSSL format.
+       */
+      ciphers?: Array<string>;
+
+      /**
+       * Whether or not Early Hints is enabled.
+       */
+      early_hints?: 'on' | 'off';
+
+      /**
+       * Whether or not HTTP2 is enabled.
+       */
+      http2?: 'on' | 'off';
+
+      /**
+       * The minimum TLS version supported.
+       */
+      min_tls_version?: '1.0' | '1.1' | '1.2' | '1.3';
+
+      /**
+       * Whether or not TLS 1.3 is enabled.
+       */
+      tls_1_3?: 'on' | 'off';
+    }
+
+    export interface ValidationError {
+      /**
+       * A domain validation error.
+       */
+      message?: string;
+    }
+
+    export interface ValidationRecord {
+      /**
+       * The set of email addresses that the certificate authority (CA) will use to
+       * complete domain validation.
+       */
+      emails?: Array<string>;
+
+      /**
+       * The content that the certificate authority (CA) will expect to find at the
+       * http_url during the domain validation.
+       */
+      http_body?: string;
+
+      /**
+       * The url that will be checked during domain validation.
+       */
+      http_url?: string;
+
+      /**
+       * The hostname that the certificate authority (CA) will check for a TXT record
+       * during domain validation .
+       */
+      txt_name?: string;
+
+      /**
+       * The TXT record that the certificate authority (CA) will check during domain
+       * validation.
+       */
+      txt_value?: string;
+    }
+  }
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
+}
+
+/**
+ * Domain control validation (DCV) method used for this hostname.
+ */
+export type DCVMethod = 'http' | 'txt' | 'email';
+
+/**
+ * Domain control validation (DCV) method used for this hostname.
+ */
+export type DCVMethodParam = 'http' | 'txt' | 'email';
+
+/**
+ * Level of validation to be used for this hostname. Domain validation (dv) must be
+ * used.
+ */
+export type DomainValidationType = 'dv';
+
+/**
+ * Level of validation to be used for this hostname. Domain validation (dv) must be
+ * used.
+ */
+export type DomainValidationTypeParam = 'dv';
 
 export interface CustomHostnameCreateResponse {
   /**
@@ -209,7 +541,13 @@ export namespace CustomHostnameCreateResponse {
      */
     id?: string;
 
-    bundle_method?: unknown;
+    /**
+     * A ubiquitous bundle has the highest probability of being verified everywhere,
+     * even by clients using outdated or unusual trust stores. An optimal bundle uses
+     * the shortest chain and newest intermediates. And the force bundle verifies the
+     * chain, but does not otherwise modify it.
+     */
+    bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
      * The Certificate Authority that will issue the certificate
@@ -246,7 +584,10 @@ export namespace CustomHostnameCreateResponse {
      */
     issuer?: string;
 
-    method?: unknown;
+    /**
+     * Domain control validation (DCV) method used for this hostname.
+     */
+    method?: CustomHostnamesAPI.DCVMethod;
 
     /**
      * The serial number on a custom uploaded certificate.
@@ -286,7 +627,11 @@ export namespace CustomHostnameCreateResponse {
       | 'backup_issued'
       | 'holding_deployment';
 
-    type?: unknown;
+    /**
+     * Level of validation to be used for this hostname. Domain validation (dv) must be
+     * used.
+     */
+    type?: CustomHostnamesAPI.DomainValidationType;
 
     /**
      * The time the custom certificate was uploaded.
@@ -497,7 +842,13 @@ export namespace CustomHostnameListResponse {
      */
     id?: string;
 
-    bundle_method?: unknown;
+    /**
+     * A ubiquitous bundle has the highest probability of being verified everywhere,
+     * even by clients using outdated or unusual trust stores. An optimal bundle uses
+     * the shortest chain and newest intermediates. And the force bundle verifies the
+     * chain, but does not otherwise modify it.
+     */
+    bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
      * The Certificate Authority that will issue the certificate
@@ -534,7 +885,10 @@ export namespace CustomHostnameListResponse {
      */
     issuer?: string;
 
-    method?: unknown;
+    /**
+     * Domain control validation (DCV) method used for this hostname.
+     */
+    method?: CustomHostnamesAPI.DCVMethod;
 
     /**
      * The serial number on a custom uploaded certificate.
@@ -574,7 +928,11 @@ export namespace CustomHostnameListResponse {
       | 'backup_issued'
       | 'holding_deployment';
 
-    type?: unknown;
+    /**
+     * Level of validation to be used for this hostname. Domain validation (dv) must be
+     * used.
+     */
+    type?: CustomHostnamesAPI.DomainValidationType;
 
     /**
      * The time the custom certificate was uploaded.
@@ -792,7 +1150,13 @@ export namespace CustomHostnameEditResponse {
      */
     id?: string;
 
-    bundle_method?: unknown;
+    /**
+     * A ubiquitous bundle has the highest probability of being verified everywhere,
+     * even by clients using outdated or unusual trust stores. An optimal bundle uses
+     * the shortest chain and newest intermediates. And the force bundle verifies the
+     * chain, but does not otherwise modify it.
+     */
+    bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
      * The Certificate Authority that will issue the certificate
@@ -829,7 +1193,10 @@ export namespace CustomHostnameEditResponse {
      */
     issuer?: string;
 
-    method?: unknown;
+    /**
+     * Domain control validation (DCV) method used for this hostname.
+     */
+    method?: CustomHostnamesAPI.DCVMethod;
 
     /**
      * The serial number on a custom uploaded certificate.
@@ -869,7 +1236,11 @@ export namespace CustomHostnameEditResponse {
       | 'backup_issued'
       | 'holding_deployment';
 
-    type?: unknown;
+    /**
+     * Level of validation to be used for this hostname. Domain validation (dv) must be
+     * used.
+     */
+    type?: CustomHostnamesAPI.DomainValidationType;
 
     /**
      * The time the custom certificate was uploaded.
@@ -1080,7 +1451,13 @@ export namespace CustomHostnameGetResponse {
      */
     id?: string;
 
-    bundle_method?: unknown;
+    /**
+     * A ubiquitous bundle has the highest probability of being verified everywhere,
+     * even by clients using outdated or unusual trust stores. An optimal bundle uses
+     * the shortest chain and newest intermediates. And the force bundle verifies the
+     * chain, but does not otherwise modify it.
+     */
+    bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
      * The Certificate Authority that will issue the certificate
@@ -1117,7 +1494,10 @@ export namespace CustomHostnameGetResponse {
      */
     issuer?: string;
 
-    method?: unknown;
+    /**
+     * Domain control validation (DCV) method used for this hostname.
+     */
+    method?: CustomHostnamesAPI.DCVMethod;
 
     /**
      * The serial number on a custom uploaded certificate.
@@ -1157,7 +1537,11 @@ export namespace CustomHostnameGetResponse {
       | 'backup_issued'
       | 'holding_deployment';
 
-    type?: unknown;
+    /**
+     * Level of validation to be used for this hostname. Domain validation (dv) must be
+     * used.
+     */
+    type?: CustomHostnamesAPI.DomainValidationType;
 
     /**
      * The time the custom certificate was uploaded.
@@ -1312,7 +1696,13 @@ export namespace CustomHostnameCreateParams {
    * SSL properties used when creating the custom hostname.
    */
   export interface SSL {
-    bundle_method?: unknown;
+    /**
+     * A ubiquitous bundle has the highest probability of being verified everywhere,
+     * even by clients using outdated or unusual trust stores. An optimal bundle uses
+     * the shortest chain and newest intermediates. And the force bundle verifies the
+     * chain, but does not otherwise modify it.
+     */
+    bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
     /**
      * The Certificate Authority that will issue the certificate
@@ -1340,14 +1730,21 @@ export namespace CustomHostnameCreateParams {
      */
     custom_key?: string;
 
-    method?: unknown;
+    /**
+     * Domain control validation (DCV) method used for this hostname.
+     */
+    method?: CustomHostnamesAPI.DCVMethodParam;
 
     /**
      * SSL specific settings.
      */
     settings?: SSL.Settings;
 
-    type?: unknown;
+    /**
+     * Level of validation to be used for this hostname. Domain validation (dv) must be
+     * used.
+     */
+    type?: CustomHostnamesAPI.DomainValidationTypeParam;
 
     /**
      * Indicates whether the certificate covers a wildcard.
@@ -1481,7 +1878,13 @@ export namespace CustomHostnameEditParams {
    * SSL properties used when creating the custom hostname.
    */
   export interface SSL {
-    bundle_method?: unknown;
+    /**
+     * A ubiquitous bundle has the highest probability of being verified everywhere,
+     * even by clients using outdated or unusual trust stores. An optimal bundle uses
+     * the shortest chain and newest intermediates. And the force bundle verifies the
+     * chain, but does not otherwise modify it.
+     */
+    bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
     /**
      * The Certificate Authority that will issue the certificate
@@ -1509,14 +1912,21 @@ export namespace CustomHostnameEditParams {
      */
     custom_key?: string;
 
-    method?: unknown;
+    /**
+     * Domain control validation (DCV) method used for this hostname.
+     */
+    method?: CustomHostnamesAPI.DCVMethodParam;
 
     /**
      * SSL specific settings.
      */
     settings?: SSL.Settings;
 
-    type?: unknown;
+    /**
+     * Level of validation to be used for this hostname. Domain validation (dv) must be
+     * used.
+     */
+    type?: CustomHostnamesAPI.DomainValidationTypeParam;
 
     /**
      * Indicates whether the certificate covers a wildcard.

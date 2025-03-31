@@ -47,7 +47,16 @@ export class DEX extends APIResource {
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
 }
 
-export type DigitalExperienceMonitor = unknown;
+export interface DigitalExperienceMonitor {
+  id: string;
+
+  /**
+   * Whether the policy is the default for the account
+   */
+  default: boolean;
+
+  name: string;
+}
 
 export interface NetworkPath {
   slots: Array<NetworkPath.Slot>;

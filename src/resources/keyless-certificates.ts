@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as CustomHostnamesAPI from './custom-hostnames/custom-hostnames';
 import { APIPromise } from '../core/api-promise';
 import { PagePromise, SinglePage } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -203,9 +204,12 @@ export interface KeylessCertificateCreateParams {
   port: number;
 
   /**
-   * Body param:
+   * Body param: A ubiquitous bundle has the highest probability of being verified
+   * everywhere, even by clients using outdated or unusual trust stores. An optimal
+   * bundle uses the shortest chain and newest intermediates. And the force bundle
+   * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: unknown;
+  bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
    * Body param: The keyless SSL name.

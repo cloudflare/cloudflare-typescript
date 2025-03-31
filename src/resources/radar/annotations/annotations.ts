@@ -48,7 +48,7 @@ export namespace AnnotationListResponse {
 
     locations: Array<string>;
 
-    locationsDetails: Array<unknown>;
+    locationsDetails: Array<Annotation.LocationsDetail>;
 
     outage: Annotation.Outage;
 
@@ -69,7 +69,21 @@ export namespace AnnotationListResponse {
 
       name: string;
 
-      locations?: unknown;
+      locations?: ASNsDetail.Locations;
+    }
+
+    export namespace ASNsDetail {
+      export interface Locations {
+        code: string;
+
+        name: string;
+      }
+    }
+
+    export interface LocationsDetail {
+      code: string;
+
+      name: string;
     }
 
     export interface Outage {

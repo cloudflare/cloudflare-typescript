@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as MagicTransitAPI from './magic-transit';
 import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
@@ -228,7 +229,10 @@ export namespace GRETunnelCreateResponse {
        */
       enabled?: boolean;
 
-      rate?: unknown;
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -241,7 +245,10 @@ export namespace GRETunnelCreateResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      type?: unknown;
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -350,7 +357,10 @@ export namespace GRETunnelUpdateResponse {
        */
       enabled?: boolean;
 
-      rate?: unknown;
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -363,7 +373,10 @@ export namespace GRETunnelUpdateResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      type?: unknown;
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -470,7 +483,10 @@ export namespace GRETunnelListResponse {
        */
       enabled?: boolean;
 
-      rate?: unknown;
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -483,7 +499,10 @@ export namespace GRETunnelListResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      type?: unknown;
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -592,7 +611,10 @@ export namespace GRETunnelDeleteResponse {
        */
       enabled?: boolean;
 
-      rate?: unknown;
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -605,7 +627,10 @@ export namespace GRETunnelDeleteResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      type?: unknown;
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -714,7 +739,10 @@ export namespace GRETunnelBulkUpdateResponse {
        */
       enabled?: boolean;
 
-      rate?: unknown;
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -727,7 +755,10 @@ export namespace GRETunnelBulkUpdateResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      type?: unknown;
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -834,7 +865,10 @@ export namespace GRETunnelGetResponse {
        */
       enabled?: boolean;
 
-      rate?: unknown;
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -847,7 +881,10 @@ export namespace GRETunnelGetResponse {
        */
       target?: HealthCheck.MagicHealthCheckTarget | string;
 
-      type?: unknown;
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -967,7 +1004,10 @@ export namespace GRETunnelUpdateParams {
      */
     enabled?: boolean;
 
-    rate?: unknown;
+    /**
+     * How frequent the health check is run. The default value is `mid`.
+     */
+    rate?: MagicTransitAPI.HealthCheckRateParam;
 
     /**
      * The destination address in a request type health check. After the healthcheck is
@@ -980,7 +1020,10 @@ export namespace GRETunnelUpdateParams {
      */
     target?: HealthCheck.MagicHealthCheckTarget | string;
 
-    type?: unknown;
+    /**
+     * The type of healthcheck to run, reply or request. The default value is `reply`.
+     */
+    type?: MagicTransitAPI.HealthCheckTypeParam;
   }
 
   export namespace HealthCheck {

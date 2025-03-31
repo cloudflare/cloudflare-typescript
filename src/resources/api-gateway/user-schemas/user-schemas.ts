@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
 import * as OperationsAPI from './operations';
@@ -94,7 +95,7 @@ export class UserSchemas extends APIResource {
 
 export type PublicSchemasV4PagePaginationArray = V4PagePaginationArray<PublicSchema>;
 
-export type Message = Array<unknown>;
+export type Message = Array<Shared.ResponseInfo>;
 
 export interface PublicSchema {
   created_at: string;
