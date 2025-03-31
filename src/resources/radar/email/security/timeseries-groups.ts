@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as EmailAPI from '../email';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
@@ -145,19 +144,19 @@ export class TimeseriesGroups extends APIResource {
 export interface TimeseriesGroupARCResponse {
   meta: unknown;
 
-  serie_0: EmailAPI.RadarEmailSeries;
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupDKIMResponse {
   meta: unknown;
 
-  serie_0: EmailAPI.RadarEmailSeries;
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupDMARCResponse {
   meta: unknown;
 
-  serie_0: EmailAPI.RadarEmailSeries;
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupMaliciousResponse {
@@ -191,7 +190,7 @@ export namespace TimeseriesGroupSpamResponse {
 export interface TimeseriesGroupSPFResponse {
   meta: unknown;
 
-  serie_0: EmailAPI.RadarEmailSeries;
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupSpoofResponse {

@@ -14,7 +14,7 @@ describe('resource identityProviders', () => {
     const responsePromise = client.zeroTrust.identityProviders.create({
       config: {},
       name: 'Widget Corps IDP',
-      type: 'onetimepin',
+      type: {},
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -40,14 +40,9 @@ describe('resource identityProviders', () => {
         support_groups: true,
       },
       name: 'Widget Corps IDP',
-      type: 'onetimepin',
+      type: {},
       account_id: 'account_id',
-      scim_config: {
-        enabled: true,
-        identity_update_behavior: 'automatic',
-        seat_deprovision: true,
-        user_deprovision: true,
-      },
+      scim_config: {},
     });
   });
 
@@ -55,7 +50,7 @@ describe('resource identityProviders', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.zeroTrust.identityProviders.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { config: {}, name: 'Widget Corps IDP', type: 'onetimepin', account_id: 'account_id' },
+      { config: {}, name: 'Widget Corps IDP', type: {}, account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -80,14 +75,9 @@ describe('resource identityProviders', () => {
         support_groups: true,
       },
       name: 'Widget Corps IDP',
-      type: 'onetimepin',
+      type: {},
       account_id: 'account_id',
-      scim_config: {
-        enabled: true,
-        identity_update_behavior: 'automatic',
-        seat_deprovision: true,
-        user_deprovision: true,
-      },
+      scim_config: {},
     });
   });
 

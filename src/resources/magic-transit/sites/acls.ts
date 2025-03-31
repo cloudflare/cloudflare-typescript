@@ -118,7 +118,7 @@ export interface ACL {
    */
   name?: string;
 
-  protocols?: Array<AllowedProtocol>;
+  protocols?: Array<unknown>;
 
   /**
    * The desired traffic direction for this ACL policy. If set to "false", the policy
@@ -190,17 +190,7 @@ export interface ACLConfigurationParam {
   subnets?: Array<SubnetParam>;
 }
 
-/**
- * Array of allowed communication protocols between configured LANs. If no
- * protocols are provided, all protocols are allowed.
- */
-export type AllowedProtocol = 'tcp' | 'udp' | 'icmp';
-
-/**
- * Array of allowed communication protocols between configured LANs. If no
- * protocols are provided, all protocols are allowed.
- */
-export type AllowedProtocolParam = 'tcp' | 'udp' | 'icmp';
+export type AllowedProtocol = unknown;
 
 /**
  * A valid IPv4 address.
@@ -249,7 +239,7 @@ export interface ACLCreateParams {
   /**
    * Body param:
    */
-  protocols?: Array<AllowedProtocolParam>;
+  protocols?: Array<unknown>;
 
   /**
    * Body param: The desired traffic direction for this ACL policy. If set to
@@ -302,7 +292,7 @@ export interface ACLUpdateParams {
   /**
    * Body param:
    */
-  protocols?: Array<AllowedProtocolParam>;
+  protocols?: Array<unknown>;
 
   /**
    * Body param: The desired traffic direction for this ACL policy. If set to
@@ -374,7 +364,7 @@ export interface ACLEditParams {
   /**
    * Body param:
    */
-  protocols?: Array<AllowedProtocolParam>;
+  protocols?: Array<unknown>;
 
   /**
    * Body param: The desired traffic direction for this ACL policy. If set to

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as DNSAPI from '../../dns';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -49,7 +48,7 @@ export interface ByTime {
    */
   min: unknown;
 
-  query: DNSAPI.DNSAnalyticsQuery;
+  query: unknown;
 
   /**
    * Total number of rows in the result.
@@ -81,7 +80,7 @@ export namespace ByTime {
      * Array with one item per requested metric. Each item is an array of values,
      * broken down by time interval.
      */
-    metrics: Array<DNSAPI.DNSAnalyticsNominalMetric>;
+    metrics: Array<unknown>;
   }
 }
 

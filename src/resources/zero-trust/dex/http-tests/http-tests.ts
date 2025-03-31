@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as DEXAPI from '../dex';
 import * as PercentilesAPI from './percentiles';
 import { HTTPDetailsPercentiles, PercentileGetParams, Percentiles, TestStatOverTime } from './percentiles';
 import { APIPromise } from '../../../../core/api-promise';
@@ -53,7 +52,7 @@ export interface HTTPDetails {
    */
   name?: string;
 
-  target_policies?: Array<DEXAPI.DigitalExperienceMonitor> | null;
+  target_policies?: Array<unknown> | null;
 
   targeted?: boolean;
 }

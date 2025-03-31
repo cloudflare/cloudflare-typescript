@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 import { APIPromise } from '../../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -93,7 +92,7 @@ export interface ActiveSessionGetResponse {
 
   email?: string;
 
-  geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
+  geo?: unknown;
 
   iat?: number;
 
