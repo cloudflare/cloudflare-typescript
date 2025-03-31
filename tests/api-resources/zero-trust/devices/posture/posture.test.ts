@@ -33,7 +33,7 @@ describe('resource posture', () => {
       description: 'The rule for admin serial numbers',
       expiration: '1h',
       input: {
-        operating_system: {},
+        operating_system: 'windows',
         path: '/bin/cat',
         exists: true,
         sha256: 'https://api.us-2.crowdstrike.com',
@@ -67,7 +67,7 @@ describe('resource posture', () => {
       description: 'The rule for admin serial numbers',
       expiration: '1h',
       input: {
-        operating_system: {},
+        operating_system: 'windows',
         path: '/bin/cat',
         exists: true,
         sha256: 'https://api.us-2.crowdstrike.com',

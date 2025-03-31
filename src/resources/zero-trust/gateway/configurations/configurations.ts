@@ -73,6 +73,16 @@ export interface ActivityLogSettings {
 }
 
 /**
+ * Activity log settings.
+ */
+export interface ActivityLogSettingsParam {
+  /**
+   * Enable activity logging.
+   */
+  enabled?: boolean;
+}
+
+/**
  * Anti-virus settings.
  */
 export interface AntiVirusSettings {
@@ -99,9 +109,104 @@ export interface AntiVirusSettings {
 }
 
 /**
+ * Anti-virus settings.
+ */
+export interface AntiVirusSettingsParam {
+  /**
+   * Enable anti-virus scanning on downloads.
+   */
+  enabled_download_phase?: boolean;
+
+  /**
+   * Enable anti-virus scanning on uploads.
+   */
+  enabled_upload_phase?: boolean;
+
+  /**
+   * Block requests for files that cannot be scanned.
+   */
+  fail_closed?: boolean;
+
+  /**
+   * Configure a message to display on the user's device when an antivirus search is
+   * performed.
+   */
+  notification_settings?: NotificationSettingsParam;
+}
+
+/**
  * Block page layout settings.
  */
 export interface BlockPageSettings {
+  /**
+   * If mode is customized_block_page: block page background color in #rrggbb format.
+   */
+  background_color?: string;
+
+  /**
+   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   */
+  enabled?: boolean;
+
+  /**
+   * If mode is customized_block_page: block page footer text.
+   */
+  footer_text?: string;
+
+  /**
+   * If mode is customized_block_page: block page header text.
+   */
+  header_text?: string;
+
+  /**
+   * If mode is redirect_uri: when enabled, context will be appended to target_uri as
+   * query parameters.
+   */
+  include_context?: boolean;
+
+  /**
+   * If mode is customized_block_page: full URL to the logo file.
+   */
+  logo_path?: string;
+
+  /**
+   * If mode is customized_block_page: admin email for users to contact.
+   */
+  mailto_address?: string;
+
+  /**
+   * If mode is customized_block_page: subject line for emails created from block
+   * page.
+   */
+  mailto_subject?: string;
+
+  /**
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode?: 'customized_block_page' | 'redirect_uri';
+
+  /**
+   * If mode is customized_block_page: block page title.
+   */
+  name?: string;
+
+  /**
+   * If mode is customized_block_page: suppress detailed info at the bottom of the
+   * block page.
+   */
+  suppress_footer?: boolean;
+
+  /**
+   * If mode is redirect_uri: URI to which the user should be redirected.
+   */
+  target_uri?: string;
+}
+
+/**
+ * Block page layout settings.
+ */
+export interface BlockPageSettingsParam {
   /**
    * If mode is customized_block_page: block page background color in #rrggbb format.
    */
@@ -178,9 +283,34 @@ export interface BodyScanningSettings {
 }
 
 /**
+ * DLP body scanning settings.
+ */
+export interface BodyScanningSettingsParam {
+  /**
+   * Set the inspection mode to either `deep` or `shallow`.
+   */
+  inspection_mode?: string;
+}
+
+/**
  * Browser isolation settings.
  */
 export interface BrowserIsolationSettings {
+  /**
+   * Enable non-identity onramp support for Browser Isolation.
+   */
+  non_identity_enabled?: boolean;
+
+  /**
+   * Enable Clientless Browser Isolation.
+   */
+  url_browser_isolation_enabled?: boolean;
+}
+
+/**
+ * Browser isolation settings.
+ */
+export interface BrowserIsolationSettingsParam {
   /**
    * Enable non-identity onramp support for Browser Isolation.
    */
@@ -216,9 +346,36 @@ export interface CustomCertificateSettings {
 }
 
 /**
+ * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
+ * `certificate`)
+ */
+export interface CustomCertificateSettingsParam {
+  /**
+   * Enable use of custom certificate authority for signing Gateway traffic.
+   */
+  enabled: boolean;
+
+  /**
+   * UUID of certificate (ID from MTLS certificate store).
+   */
+  id?: string;
+}
+
+/**
  * Extended e-mail matching settings.
  */
 export interface ExtendedEmailMatching {
+  /**
+   * Enable matching all variants of user emails (with + or . modifiers) used as
+   * criteria in Firewall policies.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * Extended e-mail matching settings.
+ */
+export interface ExtendedEmailMatchingParam {
   /**
    * Enable matching all variants of user emails (with + or . modifiers) used as
    * criteria in Firewall policies.
@@ -236,13 +393,237 @@ export interface FipsSettings {
   tls?: boolean;
 }
 
-export type GatewayConfigurationSettings = unknown;
+/**
+ * FIPS settings.
+ */
+export interface FipsSettingsParam {
+  /**
+   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   */
+  tls?: boolean;
+}
+
+/**
+ * Account settings
+ */
+export interface GatewayConfigurationSettings {
+  /**
+   * Activity log settings.
+   */
+  activity_log?: ActivityLogSettings;
+
+  /**
+   * Anti-virus settings.
+   */
+  antivirus?: AntiVirusSettings;
+
+  /**
+   * Block page layout settings.
+   */
+  block_page?: BlockPageSettings;
+
+  /**
+   * DLP body scanning settings.
+   */
+  body_scanning?: BodyScanningSettings;
+
+  /**
+   * Browser isolation settings.
+   */
+  browser_isolation?: BrowserIsolationSettings;
+
+  /**
+   * Certificate settings for Gateway TLS interception. If not specified, the
+   * Cloudflare Root CA will be used.
+   */
+  certificate?: GatewayConfigurationSettings.Certificate;
+
+  /**
+   * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
+   * `certificate`)
+   */
+  custom_certificate?: CustomCertificateSettings;
+
+  /**
+   * Extended e-mail matching settings.
+   */
+  extended_email_matching?: ExtendedEmailMatching;
+
+  /**
+   * FIPS settings.
+   */
+  fips?: FipsSettings;
+
+  /**
+   * Protocol Detection settings.
+   */
+  protocol_detection?: ProtocolDetection;
+
+  /**
+   * Sandbox settings.
+   */
+  sandbox?: GatewayConfigurationSettings.Sandbox;
+
+  /**
+   * TLS interception settings.
+   */
+  tls_decrypt?: TLSSettings;
+}
+
+export namespace GatewayConfigurationSettings {
+  /**
+   * Certificate settings for Gateway TLS interception. If not specified, the
+   * Cloudflare Root CA will be used.
+   */
+  export interface Certificate {
+    /**
+     * UUID of certificate to be used for interception. Certificate must be available
+     * (previously called 'active') on the edge. A nil UUID will indicate the
+     * Cloudflare Root CA should be used.
+     */
+    id: string;
+  }
+
+  /**
+   * Sandbox settings.
+   */
+  export interface Sandbox {
+    /**
+     * Enable sandbox.
+     */
+    enabled?: boolean;
+
+    /**
+     * Action to take when the file cannot be scanned.
+     */
+    fallback_action?: 'allow' | 'block';
+  }
+}
+
+/**
+ * Account settings
+ */
+export interface GatewayConfigurationSettingsParam {
+  /**
+   * Activity log settings.
+   */
+  activity_log?: ActivityLogSettingsParam;
+
+  /**
+   * Anti-virus settings.
+   */
+  antivirus?: AntiVirusSettingsParam;
+
+  /**
+   * Block page layout settings.
+   */
+  block_page?: BlockPageSettingsParam;
+
+  /**
+   * DLP body scanning settings.
+   */
+  body_scanning?: BodyScanningSettingsParam;
+
+  /**
+   * Browser isolation settings.
+   */
+  browser_isolation?: BrowserIsolationSettingsParam;
+
+  /**
+   * Certificate settings for Gateway TLS interception. If not specified, the
+   * Cloudflare Root CA will be used.
+   */
+  certificate?: GatewayConfigurationSettingsParam.Certificate;
+
+  /**
+   * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
+   * `certificate`)
+   */
+  custom_certificate?: CustomCertificateSettingsParam;
+
+  /**
+   * Extended e-mail matching settings.
+   */
+  extended_email_matching?: ExtendedEmailMatchingParam;
+
+  /**
+   * FIPS settings.
+   */
+  fips?: FipsSettingsParam;
+
+  /**
+   * Protocol Detection settings.
+   */
+  protocol_detection?: ProtocolDetectionParam;
+
+  /**
+   * Sandbox settings.
+   */
+  sandbox?: GatewayConfigurationSettingsParam.Sandbox;
+
+  /**
+   * TLS interception settings.
+   */
+  tls_decrypt?: TLSSettingsParam;
+}
+
+export namespace GatewayConfigurationSettingsParam {
+  /**
+   * Certificate settings for Gateway TLS interception. If not specified, the
+   * Cloudflare Root CA will be used.
+   */
+  export interface Certificate {
+    /**
+     * UUID of certificate to be used for interception. Certificate must be available
+     * (previously called 'active') on the edge. A nil UUID will indicate the
+     * Cloudflare Root CA should be used.
+     */
+    id: string;
+  }
+
+  /**
+   * Sandbox settings.
+   */
+  export interface Sandbox {
+    /**
+     * Enable sandbox.
+     */
+    enabled?: boolean;
+
+    /**
+     * Action to take when the file cannot be scanned.
+     */
+    fallback_action?: 'allow' | 'block';
+  }
+}
 
 /**
  * Configure a message to display on the user's device when an antivirus search is
  * performed.
  */
 export interface NotificationSettings {
+  /**
+   * Set notification on
+   */
+  enabled?: boolean;
+
+  /**
+   * Customize the message shown in the notification.
+   */
+  msg?: string;
+
+  /**
+   * Optional URL to direct users to additional information. If not set, the
+   * notification will open a block page.
+   */
+  support_url?: string;
+}
+
+/**
+ * Configure a message to display on the user's device when an antivirus search is
+ * performed.
+ */
+export interface NotificationSettingsParam {
   /**
    * Set notification on
    */
@@ -271,9 +652,29 @@ export interface ProtocolDetection {
 }
 
 /**
+ * Protocol Detection settings.
+ */
+export interface ProtocolDetectionParam {
+  /**
+   * Enable detecting protocol on initial bytes of client traffic.
+   */
+  enabled?: boolean;
+}
+
+/**
  * TLS interception settings.
  */
 export interface TLSSettings {
+  /**
+   * Enable inspecting encrypted HTTP traffic.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * TLS interception settings.
+ */
+export interface TLSSettingsParam {
   /**
    * Enable inspecting encrypted HTTP traffic.
    */
@@ -286,7 +687,10 @@ export interface TLSSettings {
 export interface ConfigurationUpdateResponse {
   created_at?: string;
 
-  settings?: unknown;
+  /**
+   * Account settings
+   */
+  settings?: GatewayConfigurationSettings;
 
   updated_at?: string;
 }
@@ -297,7 +701,10 @@ export interface ConfigurationUpdateResponse {
 export interface ConfigurationEditResponse {
   created_at?: string;
 
-  settings?: unknown;
+  /**
+   * Account settings
+   */
+  settings?: GatewayConfigurationSettings;
 
   updated_at?: string;
 }
@@ -308,7 +715,10 @@ export interface ConfigurationEditResponse {
 export interface ConfigurationGetResponse {
   created_at?: string;
 
-  settings?: unknown;
+  /**
+   * Account settings
+   */
+  settings?: GatewayConfigurationSettings;
 
   updated_at?: string;
 }
@@ -320,9 +730,9 @@ export interface ConfigurationUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Account settings
    */
-  settings?: unknown;
+  settings?: GatewayConfigurationSettingsParam;
 }
 
 export interface ConfigurationEditParams {
@@ -332,9 +742,9 @@ export interface ConfigurationEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Account settings
    */
-  settings?: unknown;
+  settings?: GatewayConfigurationSettingsParam;
 }
 
 export interface ConfigurationGetParams {

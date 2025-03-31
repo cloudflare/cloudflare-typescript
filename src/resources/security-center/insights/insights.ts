@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 import * as IssuesAPI from '../../intel/attack-surface-report/issues';
 import * as ClassAPI from './class';
 import { Class, ClassGetParams, ClassGetResponse } from './class';
@@ -139,9 +140,9 @@ export namespace InsightListResponse {
 }
 
 export interface InsightDismissResponse {
-  errors: Array<unknown>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<unknown>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful

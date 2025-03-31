@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as TestsAPI from './tests';
+import * as DEXAPI from '../dex';
 import * as UniqueDevicesAPI from './unique-devices';
 import { UniqueDeviceListParams, UniqueDevices } from './unique-devices';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
@@ -110,7 +111,7 @@ export namespace Tests {
      */
     method?: string;
 
-    target_policies?: Array<unknown> | null;
+    target_policies?: Array<DEXAPI.DigitalExperienceMonitor> | null;
 
     targeted?: boolean;
 

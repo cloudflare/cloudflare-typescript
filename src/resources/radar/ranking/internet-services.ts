@@ -92,7 +92,21 @@ export interface InternetServiceTimeseriesGroupsResponse {
 
 export namespace InternetServiceTimeseriesGroupsResponse {
   export interface Meta {
-    dateRange: Array<unknown>;
+    dateRange: Array<Meta.DateRange>;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
   }
 
   export interface Serie0 {

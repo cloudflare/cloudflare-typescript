@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as WorkersAPI from '../workers';
 import * as ScriptsAPI from './scripts';
 import { type Response } from '../../../_shims/index';
 
@@ -62,9 +63,10 @@ export interface ContentUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * configuration.
    */
-  metadata: unknown;
+  metadata: WorkersAPI.WorkerMetadataParam;
 
   /**
    * Header param: The multipart name of a script upload part containing script

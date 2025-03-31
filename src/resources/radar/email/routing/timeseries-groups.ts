@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
+import * as EmailAPI from '../email';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -152,19 +153,19 @@ export class TimeseriesGroups extends APIResource {
 export interface TimeseriesGroupARCResponse {
   meta: unknown;
 
-  serie_0: unknown;
+  serie_0: EmailAPI.RadarEmailSeries;
 }
 
 export interface TimeseriesGroupDKIMResponse {
   meta: unknown;
 
-  serie_0: unknown;
+  serie_0: EmailAPI.RadarEmailSeries;
 }
 
 export interface TimeseriesGroupDMARCResponse {
   meta: unknown;
 
-  serie_0: unknown;
+  serie_0: EmailAPI.RadarEmailSeries;
 }
 
 export interface TimeseriesGroupEncryptedResponse {
@@ -198,7 +199,7 @@ export namespace TimeseriesGroupIPVersionResponse {
 export interface TimeseriesGroupSPFResponse {
   meta: unknown;
 
-  serie_0: unknown;
+  serie_0: EmailAPI.RadarEmailSeries;
 }
 
 export interface TimeseriesGroupARCParams {
