@@ -48,6 +48,7 @@ export {
 } from './devices';
 export { FleetStatus, type FleetStatusGetResponse, type FleetStatusGetParams } from './fleet-status';
 export { OverrideCodes, type OverrideCodeListResponse, type OverrideCodeListParams } from './override-codes';
+export { Resilience } from './resilience/index';
 export { Revoke, type RevokeCreateResponse, type RevokeCreateParams } from './revoke';
 export {
   SchemaHTTPSSinglePage,
