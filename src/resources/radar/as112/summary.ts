@@ -142,7 +142,7 @@ export interface SummaryDNSSECResponse {
 
 export namespace SummaryDNSSECResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -152,40 +152,10 @@ export namespace SummaryDNSSECResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -204,7 +174,7 @@ export interface SummaryEdnsResponse {
 
 export namespace SummaryEdnsResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -214,40 +184,10 @@ export namespace SummaryEdnsResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -261,12 +201,12 @@ export namespace SummaryEdnsResponse {
 export interface SummaryIPVersionResponse {
   meta: SummaryIPVersionResponse.Meta;
 
-  summary_0: SummaryIPVersionResponse.Summary0;
+  summary_0: unknown;
 }
 
 export namespace SummaryIPVersionResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -276,47 +216,11 @@ export namespace SummaryIPVersionResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
     }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Summary0 {
-    IPv4: string;
-
-    IPv6: string;
   }
 }
 
@@ -328,7 +232,7 @@ export interface SummaryProtocolResponse {
 
 export namespace SummaryProtocolResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -338,40 +242,10 @@ export namespace SummaryProtocolResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -394,7 +268,7 @@ export interface SummaryQueryTypeResponse {
 
 export namespace SummaryQueryTypeResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -404,40 +278,10 @@ export namespace SummaryQueryTypeResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 }
@@ -450,7 +294,7 @@ export interface SummaryResponseCodesResponse {
 
 export namespace SummaryResponseCodesResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -460,40 +304,10 @@ export namespace SummaryResponseCodesResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 }

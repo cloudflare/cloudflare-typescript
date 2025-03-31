@@ -82,15 +82,9 @@ export class CacheReserveResource extends APIResource {
   }
 }
 
-/**
- * ID of the zone setting.
- */
-export type CacheReserve = 'cache_reserve';
+export type CacheReserve = unknown;
 
-/**
- * ID of the zone setting.
- */
-export type CacheReserveClear = 'cache_reserve_clear';
+export type CacheReserveClear = unknown;
 
 /**
  * The current state of the Cache Reserve Clear operation.
@@ -104,10 +98,7 @@ export type State = 'In-progress' | 'Completed';
  * that you cannot undo or cancel this operation.
  */
 export interface CacheReserveClearResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: CacheReserveClear;
+  id: unknown;
 
   /**
    * The time that the latest Cache Reserve Clear operation started.
@@ -131,10 +122,7 @@ export interface CacheReserveClearResponse {
 }
 
 export interface CacheReserveEditResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: CacheReserve;
+  id: unknown;
 
   /**
    * Whether the setting is editable
@@ -153,10 +141,7 @@ export interface CacheReserveEditResponse {
 }
 
 export interface CacheReserveGetResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: CacheReserve;
+  id: unknown;
 
   /**
    * Whether the setting is editable
@@ -181,10 +166,7 @@ export interface CacheReserveGetResponse {
  * that you cannot undo or cancel this operation.
  */
 export interface CacheReserveStatusResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: CacheReserveClear;
+  id: unknown;
 
   /**
    * The time that the latest Cache Reserve Clear operation started.

@@ -25,10 +25,7 @@ export class BulkOperations extends APIResource {
   }
 }
 
-/**
- * The current status of the asynchronous operation.
- */
-export type OperationStatus = 'pending' | 'running' | 'completed' | 'failed';
+export type OperationStatus = unknown;
 
 export interface BulkOperationGetResponse {
   /**
@@ -36,10 +33,7 @@ export interface BulkOperationGetResponse {
    */
   id: string;
 
-  /**
-   * The current status of the asynchronous operation.
-   */
-  status: OperationStatus;
+  status: unknown;
 
   /**
    * The RFC 3339 timestamp of when the operation was completed.

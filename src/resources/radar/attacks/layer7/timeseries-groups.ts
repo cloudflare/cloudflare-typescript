@@ -170,14 +170,7 @@ export class TimeseriesGroups extends APIResource {
 export interface TimeseriesGroupHTTPMethodResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupHTTPMethodResponse.Serie0;
-}
-
-export namespace TimeseriesGroupHTTPMethodResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupHTTPVersionResponse {
@@ -201,69 +194,31 @@ export namespace TimeseriesGroupHTTPVersionResponse {
 export interface TimeseriesGroupIndustryResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupIndustryResponse.Serie0;
-}
-
-export namespace TimeseriesGroupIndustryResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupIPVersionResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupIPVersionResponse.Serie0;
-}
-
-export namespace TimeseriesGroupIPVersionResponse {
-  export interface Serie0 {
-    IPv4: Array<string>;
-
-    IPv6: Array<string>;
-
-    timestamps: Array<string>;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupManagedRulesResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupManagedRulesResponse.Serie0;
-}
-
-export namespace TimeseriesGroupManagedRulesResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupMitigationProductResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupMitigationProductResponse.Serie0;
-}
-
-export namespace TimeseriesGroupMitigationProductResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupVerticalResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupVerticalResponse.Serie0;
-}
-
-export namespace TimeseriesGroupVerticalResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupHTTPMethodParams {

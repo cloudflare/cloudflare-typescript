@@ -95,14 +95,14 @@ export class HTTP extends APIResource {
 export interface HTTPTimeseriesResponse {
   meta: HTTPTimeseriesResponse.Meta;
 
-  serie_0: HTTPTimeseriesResponse.Serie0;
+  serie_0: unknown;
 }
 
 export namespace HTTPTimeseriesResponse {
   export interface Meta {
     aggInterval: string;
 
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -110,47 +110,11 @@ export namespace HTTPTimeseriesResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
     }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Serie0 {
-    timestamps: Array<string>;
-
-    values: Array<string>;
   }
 }
 

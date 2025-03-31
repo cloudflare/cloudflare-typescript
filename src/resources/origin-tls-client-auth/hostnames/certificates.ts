@@ -75,54 +75,7 @@ export class Certificates extends APIResource {
 
 export class CertificateListResponsesSinglePage extends SinglePage<CertificateListResponse> {}
 
-export interface Certificate {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * The hostname certificate.
-   */
-  certificate?: string;
-
-  /**
-   * The date when the certificate expires.
-   */
-  expires_on?: string;
-
-  /**
-   * The certificate authority that issued the certificate.
-   */
-  issuer?: string;
-
-  /**
-   * The serial number on the uploaded certificate.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the certificate.
-   */
-  signature?: string;
-
-  /**
-   * Status of the certificate or the association.
-   */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
-
-  /**
-   * The time when the certificate was uploaded.
-   */
-  uploaded_on?: string;
-}
+export type Certificate = unknown;
 
 export interface CertificateCreateResponse {
   /**

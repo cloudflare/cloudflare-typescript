@@ -140,10 +140,7 @@ export interface CrowdstrikeInput {
    */
   last_seen?: string;
 
-  /**
-   * operator
-   */
-  operator?: '<' | '<=' | '>' | '>=' | '==';
+  operator?: unknown;
 
   /**
    * Os Version
@@ -187,10 +184,7 @@ export interface CrowdstrikeInputParam {
    */
   last_seen?: string;
 
-  /**
-   * operator
-   */
-  operator?: '<' | '<=' | '>' | '>=' | '==';
+  operator?: unknown;
 
   /**
    * Os Version
@@ -248,10 +242,7 @@ export type DeviceInput =
 
 export namespace DeviceInput {
   export interface TeamsDevicesCarbonblackInputRequest {
-    /**
-     * Operating system
-     */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: unknown;
 
     /**
      * File path.
@@ -270,10 +261,7 @@ export namespace DeviceInput {
   }
 
   export interface TeamsDevicesApplicationInputRequest {
-    /**
-     * Operating system
-     */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: unknown;
 
     /**
      * Path for the application.
@@ -303,10 +291,7 @@ export namespace DeviceInput {
      */
     check_private_key: boolean;
 
-    /**
-     * Operating system
-     */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: unknown;
 
     /**
      * Common Name that is protected by the client certificate. This may include one or
@@ -344,10 +329,7 @@ export namespace DeviceInput {
      */
     connection_id: string;
 
-    /**
-     * operator
-     */
-    operator: '<' | '<=' | '>' | '>=' | '==';
+    operator: unknown;
 
     /**
      * A value between 0-100 assigned to devices set by the 3rd party posture provider.
@@ -381,10 +363,7 @@ export type DeviceInputParam =
 
 export namespace DeviceInputParam {
   export interface TeamsDevicesCarbonblackInputRequest {
-    /**
-     * Operating system
-     */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: unknown;
 
     /**
      * File path.
@@ -403,10 +382,7 @@ export namespace DeviceInputParam {
   }
 
   export interface TeamsDevicesApplicationInputRequest {
-    /**
-     * Operating system
-     */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: unknown;
 
     /**
      * Path for the application.
@@ -436,10 +412,7 @@ export namespace DeviceInputParam {
      */
     check_private_key: boolean;
 
-    /**
-     * Operating system
-     */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: unknown;
 
     /**
      * Common Name that is protected by the client certificate. This may include one or
@@ -477,10 +450,7 @@ export namespace DeviceInputParam {
      */
     connection_id: string;
 
-    /**
-     * operator
-     */
-    operator: '<' | '<=' | '>' | '>=' | '==';
+    operator: unknown;
 
     /**
      * A value between 0-100 assigned to devices set by the 3rd party posture provider.
@@ -611,10 +581,7 @@ export interface DomainJoinedInputParam {
 }
 
 export interface FileInput {
-  /**
-   * Operating system
-   */
-  operating_system: 'windows' | 'linux' | 'mac';
+  operating_system: unknown;
 
   /**
    * File path.
@@ -638,10 +605,7 @@ export interface FileInput {
 }
 
 export interface FileInputParam {
-  /**
-   * Operating system
-   */
-  operating_system: 'windows' | 'linux' | 'mac';
+  operating_system: unknown;
 
   /**
    * File path.
@@ -752,10 +716,7 @@ export interface OSVersionInput {
    */
   operating_system: 'windows';
 
-  /**
-   * operator
-   */
-  operator: '<' | '<=' | '>' | '>=' | '==';
+  operator: unknown;
 
   /**
    * Version of OS
@@ -785,10 +746,7 @@ export interface OSVersionInputParam {
    */
   operating_system: 'windows';
 
-  /**
-   * operator
-   */
-  operator: '<' | '<=' | '>' | '>=' | '==';
+  operator: unknown;
 
   /**
    * Version of OS
@@ -813,10 +771,7 @@ export interface OSVersionInputParam {
 }
 
 export interface SentineloneInput {
-  /**
-   * Operating system
-   */
-  operating_system: 'windows' | 'linux' | 'mac';
+  operating_system: unknown;
 
   /**
    * File path.
@@ -835,10 +790,7 @@ export interface SentineloneInput {
 }
 
 export interface SentineloneInputParam {
-  /**
-   * Operating system
-   */
-  operating_system: 'windows' | 'linux' | 'mac';
+  operating_system: unknown;
 
   /**
    * File path.
@@ -894,10 +846,7 @@ export interface SentineloneS2sInput {
     | 'disabled_error'
     | 'db_corruption';
 
-  /**
-   * operator
-   */
-  operator?: '<' | '<=' | '>' | '>=' | '==';
+  operator?: unknown;
 }
 
 export interface SentineloneS2sInputParam {
@@ -938,10 +887,7 @@ export interface SentineloneS2sInputParam {
     | 'disabled_error'
     | 'db_corruption';
 
-  /**
-   * operator
-   */
-  operator?: '<' | '<=' | '>' | '>=' | '==';
+  operator?: unknown;
 }
 
 export interface TaniumInput {

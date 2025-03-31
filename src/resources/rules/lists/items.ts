@@ -105,18 +105,9 @@ export class Items extends APIResource {
 
 export class ItemListResponsesCursorPagination extends CursorPagination<ItemListResponse> {}
 
-export interface ListCursor {
-  after?: string;
+export type ListCursor = unknown;
 
-  before?: string;
-}
-
-export interface ListItem {
-  /**
-   * The unique operation ID of the asynchronous action.
-   */
-  operation_id?: string;
-}
+export type ListItem = unknown;
 
 export interface ItemCreateResponse {
   /**
