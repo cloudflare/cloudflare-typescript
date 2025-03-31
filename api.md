@@ -4449,6 +4449,20 @@ Methods:
 - <code title="get /accounts/{account_id}/devices">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">list</a>({ ...params }) -> DevicesSinglePage</code>
 - <code title="get /accounts/{account_id}/devices/{device_id}">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">get</a>(deviceId, { ...params }) -> DeviceGetResponse | null</code>
 
+### Resilience
+
+#### GlobalWARPOverride
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">GlobalWARPOverrideCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">GlobalWARPOverrideGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/resilience/disconnect">client.zeroTrust.devices.resilience.globalWARPOverride.<a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">create</a>({ ...params }) -> GlobalWARPOverrideCreateResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/resilience/disconnect">client.zeroTrust.devices.resilience.globalWARPOverride.<a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">get</a>({ ...params }) -> GlobalWARPOverrideGetResponse | null</code>
+
 ### DEXTests
 
 Types:
