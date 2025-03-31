@@ -29,7 +29,7 @@ export interface Report {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<unknown>;
+  data: Array<Report.Data>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -64,6 +64,19 @@ export interface Report {
 }
 
 export namespace Report {
+  export interface Data {
+    /**
+     * Array of dimension values, representing the combination of dimension values
+     * corresponding to this row.
+     */
+    dimensions: Array<string>;
+
+    /**
+     * Array with one item per requested metric. Each item is a single value.
+     */
+    metrics: Array<number>;
+  }
+
   export interface Query {
     /**
      * Array of dimension names.

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 import * as RequestsAPI from './requests';
 
 export class PriorityResource extends APIResource {
@@ -145,9 +146,9 @@ export interface PriorityEdit {
 }
 
 export interface PriorityDeleteResponse {
-  errors: Array<unknown>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<unknown>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful

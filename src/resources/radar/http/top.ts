@@ -55,7 +55,7 @@ export interface TopBrowserResponse {
 
 export namespace TopBrowserResponse {
   export interface Meta {
-    dateRange: Array<unknown>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -63,10 +63,40 @@ export namespace TopBrowserResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<unknown>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
     }
   }
 
@@ -85,7 +115,7 @@ export interface TopBrowserFamilyResponse {
 
 export namespace TopBrowserFamilyResponse {
   export interface Meta {
-    dateRange: Array<unknown>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -93,10 +123,40 @@ export namespace TopBrowserFamilyResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<unknown>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: boolean;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
     }
   }
 

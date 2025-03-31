@@ -342,13 +342,27 @@ export namespace TimeseriesGroupProtocolResponse {
 export interface TimeseriesGroupQueryTypeResponse {
   meta: unknown;
 
-  serie_0: unknown;
+  serie_0: TimeseriesGroupQueryTypeResponse.Serie0;
+}
+
+export namespace TimeseriesGroupQueryTypeResponse {
+  export interface Serie0 {
+    timestamps: Array<string>;
+    [k: string]: Array<string> | undefined;
+  }
 }
 
 export interface TimeseriesGroupResponseCodeResponse {
   meta: unknown;
 
-  serie_0: unknown;
+  serie_0: TimeseriesGroupResponseCodeResponse.Serie0;
+}
+
+export namespace TimeseriesGroupResponseCodeResponse {
+  export interface Serie0 {
+    timestamps: Array<string>;
+    [k: string]: Array<string> | undefined;
+  }
 }
 
 export interface TimeseriesGroupResponseTTLResponse {

@@ -1265,7 +1265,27 @@ export interface OriginErrorPagePassThruParam {
   value?: 'on' | 'off';
 }
 
-export type OriginMaxHTTPVersion = unknown;
+export interface OriginMaxHTTPVersion {
+  /**
+   * Value of the zone setting.
+   */
+  id: 'origin_max_http_version';
+
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * The value of the feature
+   */
+  value: '2' | '1';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
 
 export interface Polish {
   /**

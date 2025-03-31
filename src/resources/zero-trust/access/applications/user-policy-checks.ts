@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
+import * as UserPolicyChecksAPI from './user-policy-checks';
 import * as ApplicationsAPI from './applications';
 import { CloudflareError } from '../../../../error';
 
@@ -53,7 +54,9 @@ export class UserPolicyChecks extends APIResource {
   }
 }
 
-export type UserPolicyCheckGeo = unknown;
+export interface UserPolicyCheckGeo {
+  country?: string;
+}
 
 export interface UserPolicyCheckListResponse {
   app_state?: UserPolicyCheckListResponse.AppState;
@@ -88,7 +91,7 @@ export namespace UserPolicyCheckListResponse {
 
     email?: string;
 
-    geo?: unknown;
+    geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
 
     iat?: number;
 

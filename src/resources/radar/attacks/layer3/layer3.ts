@@ -83,7 +83,15 @@ export class Layer3 extends APIResource {
 export interface Layer3TimeseriesResponse {
   meta: unknown;
 
-  serie_0: unknown;
+  serie_0: Layer3TimeseriesResponse.Serie0;
+}
+
+export namespace Layer3TimeseriesResponse {
+  export interface Serie0 {
+    timestamps: Array<string>;
+
+    values: Array<string>;
+  }
 }
 
 export interface Layer3TimeseriesParams {

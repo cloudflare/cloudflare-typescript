@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
+import * as DNSAPI from '../../dns';
 
 export class Bytimes extends APIResource {
   /**
@@ -46,7 +47,7 @@ export interface ByTime {
    */
   min: unknown;
 
-  query: unknown;
+  query: DNSAPI.DNSAnalyticsQuery;
 
   /**
    * Total number of rows in the result.
@@ -78,7 +79,7 @@ export namespace ByTime {
      * Array with one item per requested metric. Each item is an array of values,
      * broken down by time interval.
      */
-    metrics: Array<unknown>;
+    metrics: Array<DNSAPI.DNSAnalyticsNominalMetric>;
   }
 }
 

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Consumers extends APIResource {
@@ -176,7 +177,7 @@ export namespace Consumer {
 }
 
 export interface ConsumerDeleteResponse {
-  errors?: Array<unknown>;
+  errors?: Array<Shared.ResponseInfo>;
 
   messages?: Array<string>;
 

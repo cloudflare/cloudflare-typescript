@@ -26,9 +26,41 @@ export class URLScanner extends APIResource {
   scans: ScansAPI.Scans = new ScansAPI.Scans(this._client);
 }
 
-export type URLScannerDomain = unknown;
+export interface URLScannerDomain {
+  id: number;
 
-export type URLScannerTask = unknown;
+  name: string;
+
+  super_category_id?: number;
+}
+
+export interface URLScannerTask {
+  effectiveUrl: string;
+
+  errors: Array<URLScannerTask.Error>;
+
+  location: string;
+
+  region: string;
+
+  status: string;
+
+  success: boolean;
+
+  time: string;
+
+  url: string;
+
+  uuid: string;
+
+  visibility: string;
+}
+
+export namespace URLScannerTask {
+  export interface Error {
+    message: string;
+  }
+}
 
 URLScanner.Responses = Responses;
 URLScanner.Scans = Scans;

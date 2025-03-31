@@ -36,7 +36,32 @@ export interface LoggingSetting {
    */
   redact_pii?: boolean;
 
-  settings_by_rule_type?: unknown;
+  /**
+   * Logging settings by rule type.
+   */
+  settings_by_rule_type?: LoggingSetting.SettingsByRuleType;
+}
+
+export namespace LoggingSetting {
+  /**
+   * Logging settings by rule type.
+   */
+  export interface SettingsByRuleType {
+    /**
+     * Logging settings for DNS firewall.
+     */
+    dns?: unknown;
+
+    /**
+     * Logging settings for HTTP/HTTPS firewall.
+     */
+    http?: unknown;
+
+    /**
+     * Logging settings for Network firewall.
+     */
+    l4?: unknown;
+  }
 }
 
 export interface LoggingUpdateParams {
@@ -53,9 +78,31 @@ export interface LoggingUpdateParams {
   redact_pii?: boolean;
 
   /**
-   * Body param:
+   * Body param: Logging settings by rule type.
    */
-  settings_by_rule_type?: unknown;
+  settings_by_rule_type?: LoggingUpdateParams.SettingsByRuleType;
+}
+
+export namespace LoggingUpdateParams {
+  /**
+   * Logging settings by rule type.
+   */
+  export interface SettingsByRuleType {
+    /**
+     * Logging settings for DNS firewall.
+     */
+    dns?: unknown;
+
+    /**
+     * Logging settings for HTTP/HTTPS firewall.
+     */
+    http?: unknown;
+
+    /**
+     * Logging settings for Network firewall.
+     */
+    l4?: unknown;
+  }
 }
 
 export interface LoggingGetParams {

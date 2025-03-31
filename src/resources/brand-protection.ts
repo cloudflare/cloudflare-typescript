@@ -35,20 +35,23 @@ export interface Info {
   /**
    * List of categorizations applied to this submission.
    */
-  categorizations?: Array<unknown>;
+  categorizations?: Array<Info.Categorization>;
 
   /**
    * List of model results for completed scans.
    */
-  model_results?: Array<unknown>;
+  model_results?: Array<URLInfoModelResults>;
 
   /**
    * List of signatures that matched against site content found when crawling the
    * URL.
    */
-  rule_matches?: Array<unknown>;
+  rule_matches?: Array<RuleMatch>;
 
-  scan_status?: unknown;
+  /**
+   * Status of the most recent scan found.
+   */
+  scan_status?: ScanStatus;
 
   /**
    * For internal use.
@@ -66,29 +69,129 @@ export interface Info {
   url?: string;
 }
 
-export type RuleMatch = unknown;
+export namespace Info {
+  export interface Categorization {
+    /**
+     * Name of the category applied.
+     */
+    category?: string;
 
-export type ScanStatus = unknown;
+    /**
+     * Result of human review for this categorization.
+     */
+    verification_status?: string;
+  }
+}
+
+export interface RuleMatch {
+  /**
+   * For internal use.
+   */
+  banning?: boolean;
+
+  /**
+   * For internal use.
+   */
+  blocking?: boolean;
+
+  /**
+   * Description of the signature that matched.
+   */
+  description?: string;
+
+  /**
+   * Name of the signature that matched.
+   */
+  name?: string;
+}
+
+/**
+ * Status of the most recent scan found.
+ */
+export interface ScanStatus {
+  /**
+   * Timestamp of when the submission was processed.
+   */
+  last_processed?: string;
+
+  /**
+   * For internal use.
+   */
+  scan_complete?: boolean;
+
+  /**
+   * Status code that the crawler received when loading the submitted URL.
+   */
+  status_code?: number;
+
+  /**
+   * ID of the most recent submission.
+   */
+  submission_id?: number;
+}
 
 export interface Submit {
   /**
    * URLs that were excluded from scanning because their domain is in our no-scan
    * list.
    */
-  excluded_urls?: Array<unknown>;
+  excluded_urls?: Array<Submit.ExcludedURL>;
 
   /**
    * URLs that were skipped because the same URL is currently being scanned
    */
-  skipped_urls?: Array<unknown>;
+  skipped_urls?: Array<Submit.SkippedURL>;
 
   /**
    * URLs that were successfully submitted for scanning.
    */
-  submitted_urls?: Array<unknown>;
+  submitted_urls?: Array<Submit.SubmittedURL>;
 }
 
-export type URLInfoModelResults = unknown;
+export namespace Submit {
+  export interface ExcludedURL {
+    /**
+     * URL that was excluded.
+     */
+    url?: string;
+  }
+
+  export interface SkippedURL {
+    /**
+     * URL that was skipped.
+     */
+    url?: string;
+
+    /**
+     * ID of the submission of that URL that is currently scanning.
+     */
+    url_id?: number;
+  }
+
+  export interface SubmittedURL {
+    /**
+     * URL that was submitted.
+     */
+    url?: string;
+
+    /**
+     * ID assigned to this URL submission. Used to retrieve scanning results.
+     */
+    url_id?: number;
+  }
+}
+
+export interface URLInfoModelResults {
+  /**
+   * Name of the model.
+   */
+  model_name?: string;
+
+  /**
+   * Score output by the model for this submission.
+   */
+  model_score?: number;
+}
 
 export interface BrandProtectionSubmitParams {
   /**

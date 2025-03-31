@@ -5,6 +5,7 @@ import * as Core from '../../core';
 import * as KeylessCertificatesAPI from '../keyless-certificates';
 import * as PrioritizeAPI from './prioritize';
 import { Prioritize, PrioritizeUpdateParams } from './prioritize';
+import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class CustomCertificates extends APIResource {
@@ -106,7 +107,13 @@ export interface CustomCertificate {
    */
   id: string;
 
-  bundle_method: unknown;
+  /**
+   * A ubiquitous bundle has the highest probability of being verified everywhere,
+   * even by clients using outdated or unusual trust stores. An optimal bundle uses
+   * the shortest chain and newest intermediates. And the force bundle verifies the
+   * chain, but does not otherwise modify it.
+   */
+  bundle_method: CustomHostnamesAPI.BundleMethod;
 
   /**
    * When the certificate from the authority expires.
@@ -236,9 +243,12 @@ export interface CustomCertificateCreateParams {
   private_key: string;
 
   /**
-   * Body param:
+   * Body param: A ubiquitous bundle has the highest probability of being verified
+   * everywhere, even by clients using outdated or unusual trust stores. An optimal
+   * bundle uses the shortest chain and newest intermediates. And the force bundle
+   * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: unknown;
+  bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
    * Body param: Specify the region where your private key can be held locally for
@@ -302,9 +312,12 @@ export interface CustomCertificateEditParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param: A ubiquitous bundle has the highest probability of being verified
+   * everywhere, even by clients using outdated or unusual trust stores. An optimal
+   * bundle uses the shortest chain and newest intermediates. And the force bundle
+   * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: unknown;
+  bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
