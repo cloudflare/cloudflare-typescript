@@ -81,12 +81,15 @@ import {
   UniqueClientIDInput,
   WorkspaceOneInput,
 } from './posture/posture';
+import * as ResilienceAPI from './resilience/resilience';
+import { Resilience } from './resilience/resilience';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Devices extends APIResource {
+  resilience: ResilienceAPI.Resilience = new ResilienceAPI.Resilience(this._client);
   dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
@@ -371,6 +374,7 @@ export interface DeviceGetParams {
   account_id: string;
 }
 
+Devices.Resilience = Resilience;
 Devices.DEXTests = DEXTests;
 Devices.Networks = Networks;
 Devices.FleetStatus = FleetStatus;
@@ -389,6 +393,8 @@ export declare namespace Devices {
     type DeviceListParams as DeviceListParams,
     type DeviceGetParams as DeviceGetParams,
   };
+
+  export { Resilience as Resilience };
 
   export {
     DEXTests as DEXTests,
