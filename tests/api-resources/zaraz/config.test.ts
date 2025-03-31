@@ -78,18 +78,9 @@ describe('resource config', () => {
           permissions: ['string'],
           settings: { foo: 'string' },
           type: 'component',
-          actions: {
-            foo: {
-              actionType: 'actionType',
-              blockingTriggers: ['string'],
-              data: {},
-              firingTriggers: ['string'],
-            },
-          },
+          actions: {},
           defaultPurpose: 'defaultPurpose',
-          neoEvents: [
-            { actionType: 'actionType', blockingTriggers: ['string'], data: {}, firingTriggers: ['string'] },
-          ],
+          neoEvents: [{}],
           vendorName: 'vendorName',
           vendorPolicyUrl: 'vendorPolicyUrl',
         },
@@ -108,11 +99,7 @@ describe('resource config', () => {
       analytics: { defaultPurpose: 'defaultPurpose', enabled: true, sessionExpTime: 60 },
       consent: {
         enabled: true,
-        buttonTextTranslations: {
-          accept_all: { foo: 'string' },
-          confirm_my_choices: { foo: 'string' },
-          reject_all: { foo: 'string' },
-        },
+        buttonTextTranslations: {},
         companyEmail: 'companyEmail',
         companyName: 'companyName',
         companyStreetAddress: 'companyStreetAddress',

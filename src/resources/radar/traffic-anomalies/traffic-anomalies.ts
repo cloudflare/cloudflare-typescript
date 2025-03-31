@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as LocationsAPI from './locations';
-import { LocationGetParams, LocationGetResponse, Locations as LocationsAPILocations } from './locations';
+import { LocationGetParams, LocationGetResponse, Locations } from './locations';
 
 export class TrafficAnomalies extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
@@ -52,7 +52,7 @@ export namespace TrafficAnomalyGetResponse {
 
     endDate?: string;
 
-    locationDetails?: TrafficAnomaly.LocationDetails;
+    locationDetails?: unknown;
 
     visibleInDataSources?: Array<string>;
   }
@@ -63,21 +63,7 @@ export namespace TrafficAnomalyGetResponse {
 
       name: string;
 
-      locations?: ASNDetails.Locations;
-    }
-
-    export namespace ASNDetails {
-      export interface Locations {
-        code: string;
-
-        name: string;
-      }
-    }
-
-    export interface LocationDetails {
-      code: string;
-
-      name: string;
+      locations?: unknown;
     }
   }
 }
@@ -127,7 +113,7 @@ export interface TrafficAnomalyGetParams {
   status?: 'VERIFIED' | 'UNVERIFIED';
 }
 
-TrafficAnomalies.Locations = LocationsAPILocations;
+TrafficAnomalies.Locations = Locations;
 
 export declare namespace TrafficAnomalies {
   export {
@@ -136,7 +122,7 @@ export declare namespace TrafficAnomalies {
   };
 
   export {
-    LocationsAPILocations as Locations,
+    Locations as Locations,
     type LocationGetResponse as LocationGetResponse,
     type LocationGetParams as LocationGetParams,
   };

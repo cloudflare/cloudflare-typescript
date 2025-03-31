@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams } from './content';
 import * as RulesAPI from './rules';
@@ -103,9 +102,9 @@ export interface Snippet {
 }
 
 export interface SnippetDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<unknown>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<unknown>;
 
   /**
    * Whether the API call was successful

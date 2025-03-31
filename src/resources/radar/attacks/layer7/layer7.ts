@@ -83,14 +83,14 @@ export class Layer7 extends APIResource {
 export interface Layer7TimeseriesResponse {
   meta: Layer7TimeseriesResponse.Meta;
 
-  serie_0: Layer7TimeseriesResponse.Serie0;
+  serie_0: unknown;
 }
 
 export namespace Layer7TimeseriesResponse {
   export interface Meta {
     aggInterval: string;
 
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -98,47 +98,11 @@ export namespace Layer7TimeseriesResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
     }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Serie0 {
-    timestamps: Array<string>;
-
-    values: Array<string>;
   }
 }
 

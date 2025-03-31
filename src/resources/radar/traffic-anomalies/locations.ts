@@ -28,17 +28,7 @@ export class Locations extends APIResource {
 }
 
 export interface LocationGetResponse {
-  trafficAnomalies: Array<LocationGetResponse.TrafficAnomaly>;
-}
-
-export namespace LocationGetResponse {
-  export interface TrafficAnomaly {
-    clientCountryAlpha2: string;
-
-    clientCountryName: string;
-
-    value: string;
-  }
+  trafficAnomalies: Array<unknown>;
 }
 
 export interface LocationGetParams {

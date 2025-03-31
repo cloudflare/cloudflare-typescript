@@ -60,14 +60,14 @@ export class BGP extends APIResource {
 export interface BGPTimeseriesResponse {
   meta: BGPTimeseriesResponse.Meta;
 
-  serie_0: BGPTimeseriesResponse.Serie0;
+  serie_0: unknown;
 }
 
 export namespace BGPTimeseriesResponse {
   export interface Meta {
     aggInterval: string;
 
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -75,47 +75,11 @@ export namespace BGPTimeseriesResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
     }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Serie0 {
-    timestamps: Array<string>;
-
-    values: Array<string>;
   }
 }
 

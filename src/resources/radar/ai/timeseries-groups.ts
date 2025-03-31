@@ -32,14 +32,7 @@ export class TimeseriesGroups extends APIResource {
 export interface TimeseriesGroupUserAgentResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupUserAgentResponse.Serie0;
-}
-
-export namespace TimeseriesGroupUserAgentResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupUserAgentParams {

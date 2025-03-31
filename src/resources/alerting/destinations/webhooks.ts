@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class Webhooks extends APIResource {
@@ -137,9 +136,9 @@ export interface WebhookUpdateResponse {
 }
 
 export interface WebhookDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<unknown>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<unknown>;
 
   /**
    * Whether the API call was successful

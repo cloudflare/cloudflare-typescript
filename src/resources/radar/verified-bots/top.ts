@@ -56,46 +56,16 @@ export interface TopBotsResponse {
 
 export namespace TopBotsResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     confidenceInfo?: Meta.ConfidenceInfo;
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -118,46 +88,16 @@ export interface TopCategoriesResponse {
 
 export namespace TopCategoriesResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     confidenceInfo?: Meta.ConfidenceInfo;
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 

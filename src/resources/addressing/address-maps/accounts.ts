@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 
 export class Accounts extends APIResource {
   /**
@@ -37,9 +36,9 @@ export class Accounts extends APIResource {
 }
 
 export interface AccountUpdateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<unknown>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<unknown>;
 
   /**
    * Whether the API call was successful
@@ -74,9 +73,9 @@ export namespace AccountUpdateResponse {
 }
 
 export interface AccountDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<unknown>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<unknown>;
 
   /**
    * Whether the API call was successful
