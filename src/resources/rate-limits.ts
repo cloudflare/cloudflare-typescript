@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as RateLimitsAPI from './rate-limits';
 import { APIPromise } from '../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -104,16 +103,6 @@ export type Action =
   | 'allow'
   | 'log'
   | 'bypass';
-
-/**
- * An HTTP method or `_ALL_` to indicate all methods.
- */
-export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_';
-
-/**
- * An HTTP method or `_ALL_` to indicate all methods.
- */
-export type MethodsParam = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_';
 
 export interface RateLimit {
   /**
@@ -261,7 +250,7 @@ export namespace RateLimit {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<RateLimitsAPI.Methods>;
+      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
@@ -438,7 +427,7 @@ export namespace RateLimitDeleteResponse {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<RateLimitsAPI.Methods>;
+      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
@@ -591,7 +580,7 @@ export namespace RateLimitCreateParams {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<RateLimitsAPI.MethodsParam>;
+      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
@@ -758,7 +747,7 @@ export namespace RateLimitEditParams {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<RateLimitsAPI.MethodsParam>;
+      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
@@ -799,7 +788,6 @@ export interface RateLimitGetParams {
 export declare namespace RateLimits {
   export {
     type Action as Action,
-    type Methods as Methods,
     type RateLimit as RateLimit,
     type RateLimitDeleteResponse as RateLimitDeleteResponse,
     type RateLimitsV4PagePaginationArray as RateLimitsV4PagePaginationArray,
