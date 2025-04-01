@@ -198,6 +198,18 @@ export interface Event {
    * the event's `new_users_per_minute` property is also set.
    */
   total_active_users?: number | null;
+
+  /**
+   * If set, the event will override the waiting room's `turnstile_action` property
+   * while it is active. If null, the event will inherit it.
+   */
+  turnstile_action?: 'log' | 'infinite_queue' | null;
+
+  /**
+   * If set, the event will override the waiting room's `turnstile_mode` property
+   * while it is active. If null, the event will inherit it.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed' | null;
 }
 
 export interface EventDeleteResponse {
@@ -298,6 +310,19 @@ export interface EventCreateParams {
    * is also set.
    */
   total_active_users?: number | null;
+
+  /**
+   * Body param: If set, the event will override the waiting room's
+   * `turnstile_action` property while it is active. If null, the event will inherit
+   * it.
+   */
+  turnstile_action?: 'log' | 'infinite_queue' | null;
+
+  /**
+   * Body param: If set, the event will override the waiting room's `turnstile_mode`
+   * property while it is active. If null, the event will inherit it.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed' | null;
 }
 
 export interface EventUpdateParams {
@@ -399,6 +424,19 @@ export interface EventUpdateParams {
    * is also set.
    */
   total_active_users?: number | null;
+
+  /**
+   * Body param: If set, the event will override the waiting room's
+   * `turnstile_action` property while it is active. If null, the event will inherit
+   * it.
+   */
+  turnstile_action?: 'log' | 'infinite_queue' | null;
+
+  /**
+   * Body param: If set, the event will override the waiting room's `turnstile_mode`
+   * property while it is active. If null, the event will inherit it.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed' | null;
 }
 
 export interface EventListParams extends V4PagePaginationArrayParams {
@@ -516,6 +554,19 @@ export interface EventEditParams {
    * is also set.
    */
   total_active_users?: number | null;
+
+  /**
+   * Body param: If set, the event will override the waiting room's
+   * `turnstile_action` property while it is active. If null, the event will inherit
+   * it.
+   */
+  turnstile_action?: 'log' | 'infinite_queue' | null;
+
+  /**
+   * Body param: If set, the event will override the waiting room's `turnstile_mode`
+   * property while it is active. If null, the event will inherit it.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed' | null;
 }
 
 export interface EventGetParams {
