@@ -27,7 +27,11 @@ describe('resource logging', () => {
     const response = await client.zeroTrust.gateway.logging.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       redact_pii: true,
-      settings_by_rule_type: { dns: {}, http: {}, l4: {} },
+      settings_by_rule_type: {
+        dns: { log_all: false, log_blocks: true },
+        http: { log_all: false, log_blocks: true },
+        l4: { log_all: false, log_blocks: true },
+      },
     });
   });
 
