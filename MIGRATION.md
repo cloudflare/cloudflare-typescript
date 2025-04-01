@@ -602,6 +602,12 @@ client.example.create('c_456', { parent_id: 'p_123' });
 - `client.r2.buckets.sippy.update()`
 - `client.r2.buckets.sippy.delete()`
 - `client.r2.buckets.sippy.get()`
+- `client.r2.superSlurper.jobs.abort()`
+- `client.r2.superSlurper.jobs.get()`
+- `client.r2.superSlurper.jobs.pause()`
+- `client.r2.superSlurper.jobs.progress()`
+- `client.r2.superSlurper.jobs.resume()`
+- `client.r2.superSlurper.jobs.logs.list()`
 - `client.workersForPlatforms.dispatch.namespaces.delete()`
 - `client.workersForPlatforms.dispatch.namespaces.get()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.update()`

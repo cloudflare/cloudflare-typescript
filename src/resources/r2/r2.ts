@@ -19,15 +19,19 @@ import {
   BucketListResponse,
   Buckets,
 } from './buckets/buckets';
+import * as SuperSlurperAPI from './super-slurper/super-slurper';
+import { SuperSlurper } from './super-slurper/super-slurper';
 
 export class R2 extends APIResource {
   buckets: BucketsAPI.Buckets = new BucketsAPI.Buckets(this._client);
   temporaryCredentials: TemporaryCredentialsAPI.TemporaryCredentials =
     new TemporaryCredentialsAPI.TemporaryCredentials(this._client);
+  superSlurper: SuperSlurperAPI.SuperSlurper = new SuperSlurperAPI.SuperSlurper(this._client);
 }
 
 R2.Buckets = Buckets;
 R2.TemporaryCredentials = TemporaryCredentials;
+R2.SuperSlurper = SuperSlurper;
 
 export declare namespace R2 {
   export {
@@ -47,4 +51,6 @@ export declare namespace R2 {
     type TemporaryCredentialCreateResponse as TemporaryCredentialCreateResponse,
     type TemporaryCredentialCreateParams as TemporaryCredentialCreateParams,
   };
+
+  export { SuperSlurper as SuperSlurper };
 }
