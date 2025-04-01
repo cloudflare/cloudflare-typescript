@@ -42,6 +42,8 @@ describe('resource events', () => {
       shuffle_at_event_start: true,
       suspended: true,
       total_active_users: 200,
+      turnstile_action: 'log',
+      turnstile_mode: 'off',
     });
   });
 
@@ -80,6 +82,8 @@ describe('resource events', () => {
       shuffle_at_event_start: true,
       suspended: true,
       total_active_users: 200,
+      turnstile_action: 'log',
+      turnstile_mode: 'off',
     });
   });
 
@@ -160,6 +164,8 @@ describe('resource events', () => {
       shuffle_at_event_start: true,
       suspended: true,
       total_active_users: 200,
+      turnstile_action: 'log',
+      turnstile_mode: 'off',
     });
   });
 
