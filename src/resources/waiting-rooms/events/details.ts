@@ -108,6 +108,18 @@ export interface EventQuery {
    * the event's `new_users_per_minute` property is also set.
    */
   total_active_users?: number | null;
+
+  /**
+   * If set, the event will override the waiting room's `turnstile_action` property
+   * while it is active. If null, the event will inherit it.
+   */
+  turnstile_action?: 'log' | 'infinite_queue' | null;
+
+  /**
+   * If set, the event will override the waiting room's `turnstile_mode` property
+   * while it is active. If null, the event will inherit it.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed' | null;
 }
 
 export interface DetailGetResponse {
