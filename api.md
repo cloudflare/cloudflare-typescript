@@ -8295,6 +8295,36 @@ Methods:
 
 - <code title="post /accounts/{account_id}/browser-rendering/snapshot">client.browserRendering.snapshot.<a href="./src/resources/browser-rendering/snapshot.ts">create</a>({ ...params }) -> SnapshotCreateResponse</code>
 
+## Json
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/json.ts">JsonCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/json">client.browserRendering.json.<a href="./src/resources/browser-rendering/json.ts">create</a>({ ...params }) -> JsonCreateResponse</code>
+
+## Links
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/links.ts">LinkCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/links">client.browserRendering.links.<a href="./src/resources/browser-rendering/links.ts">create</a>({ ...params }) -> LinkCreateResponse</code>
+
+## Markdown
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/markdown.ts">MarkdownCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/markdown">client.browserRendering.markdown.<a href="./src/resources/browser-rendering/markdown.ts">create</a>({ ...params }) -> MarkdownCreateResponse</code>
+
 # CustomPages
 
 Types:
