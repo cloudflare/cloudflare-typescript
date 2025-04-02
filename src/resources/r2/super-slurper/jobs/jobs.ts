@@ -4,7 +4,7 @@ import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as SippyAPI from '../../buckets/sippy';
 import * as LogsAPI from './logs';
-import { Logs } from './logs';
+import { LogListParams, LogListResponse, LogListResponsesSinglePage, Logs } from './logs';
 import { SinglePage } from '../../../../pagination';
 
 export class Jobs extends APIResource {
@@ -37,6 +37,22 @@ export class Jobs extends APIResource {
   }
 
   /**
+   * Abort a job
+   */
+  abort(
+    jobId: string,
+    params: JobAbortParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobAbortResponse> {
+    const { account_id } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/slurper/jobs/${jobId}/abort`, options) as Core.APIPromise<{
+        result: JobAbortResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Abort all jobs
    */
   abortAll(params: JobAbortAllParams, options?: Core.RequestOptions): Core.APIPromise<JobAbortAllResponse> {
@@ -47,12 +63,72 @@ export class Jobs extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get job details
+   */
+  get(jobId: string, params: JobGetParams, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/slurper/jobs/${jobId}`, options) as Core.APIPromise<{
+        result: JobGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Pause a job
+   */
+  pause(
+    jobId: string,
+    params: JobPauseParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobPauseResponse> {
+    const { account_id } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/slurper/jobs/${jobId}/pause`, options) as Core.APIPromise<{
+        result: JobPauseResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get job progress
+   */
+  progress(
+    jobId: string,
+    params: JobProgressParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobProgressResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/slurper/jobs/${jobId}/progress`, options) as Core.APIPromise<{
+        result: JobProgressResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Resume a job
+   */
+  resume(
+    jobId: string,
+    params: JobResumeParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobResumeResponse> {
+    const { account_id } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/slurper/jobs/${jobId}/resume`, options) as Core.APIPromise<{
+        result: JobResumeResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class JobListResponsesSinglePage extends SinglePage<JobListResponse> {}
 
 export interface JobCreateResponse {
-  id?: string;
+  jobId?: string;
 }
 
 export interface JobListResponse {
@@ -112,7 +188,86 @@ export namespace JobListResponse {
   }
 }
 
+export type JobAbortResponse = string;
+
 export type JobAbortAllResponse = string;
+
+export interface JobGetResponse {
+  id?: string;
+
+  createdAt?: string;
+
+  finishedAt?: string | null;
+
+  overwrite?: boolean;
+
+  source?:
+    | JobGetResponse.S3SourceResponseSchema
+    | JobGetResponse.GcsSourceResponseSchema
+    | JobGetResponse.R2SourceResponseSchema;
+
+  status?: 'running' | 'paused' | 'aborted' | 'completed';
+
+  target?: JobGetResponse.Target;
+}
+
+export namespace JobGetResponse {
+  export interface S3SourceResponseSchema {
+    bucket?: string;
+
+    endpoint?: string | null;
+
+    pathPrefix?: string | null;
+
+    vendor?: 's3';
+  }
+
+  export interface GcsSourceResponseSchema {
+    bucket?: string;
+
+    pathPrefix?: string | null;
+
+    vendor?: 'gcs';
+  }
+
+  export interface R2SourceResponseSchema {
+    bucket?: string;
+
+    jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    pathPrefix?: string | null;
+
+    vendor?: SippyAPI.Provider;
+  }
+
+  export interface Target {
+    bucket?: string;
+
+    jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    vendor?: SippyAPI.Provider;
+  }
+}
+
+export type JobPauseResponse = string;
+
+export interface JobProgressResponse {
+  id?: string;
+
+  createdAt?: string;
+
+  failedObjects?: number;
+
+  objects?: number;
+
+  skippedObjects?: number;
+
+  status?: 'running' | 'paused' | 'aborted' | 'completed';
+
+  transferredObjects?: number;
+}
+
+export type JobResumeResponse = string;
 
 export interface JobCreateParams {
   /**
@@ -228,23 +383,59 @@ export interface JobListParams {
   offset?: number;
 }
 
+export interface JobAbortParams {
+  account_id: string;
+}
+
 export interface JobAbortAllParams {
+  account_id: string;
+}
+
+export interface JobGetParams {
+  account_id: string;
+}
+
+export interface JobPauseParams {
+  account_id: string;
+}
+
+export interface JobProgressParams {
+  account_id: string;
+}
+
+export interface JobResumeParams {
   account_id: string;
 }
 
 Jobs.JobListResponsesSinglePage = JobListResponsesSinglePage;
 Jobs.Logs = Logs;
+Jobs.LogListResponsesSinglePage = LogListResponsesSinglePage;
 
 export declare namespace Jobs {
   export {
     type JobCreateResponse as JobCreateResponse,
     type JobListResponse as JobListResponse,
+    type JobAbortResponse as JobAbortResponse,
     type JobAbortAllResponse as JobAbortAllResponse,
+    type JobGetResponse as JobGetResponse,
+    type JobPauseResponse as JobPauseResponse,
+    type JobProgressResponse as JobProgressResponse,
+    type JobResumeResponse as JobResumeResponse,
     JobListResponsesSinglePage as JobListResponsesSinglePage,
     type JobCreateParams as JobCreateParams,
     type JobListParams as JobListParams,
+    type JobAbortParams as JobAbortParams,
     type JobAbortAllParams as JobAbortAllParams,
+    type JobGetParams as JobGetParams,
+    type JobPauseParams as JobPauseParams,
+    type JobProgressParams as JobProgressParams,
+    type JobResumeParams as JobResumeParams,
   };
 
-  export { Logs as Logs };
+  export {
+    Logs as Logs,
+    type LogListResponse as LogListResponse,
+    LogListResponsesSinglePage as LogListResponsesSinglePage,
+    type LogListParams as LogListParams,
+  };
 }
