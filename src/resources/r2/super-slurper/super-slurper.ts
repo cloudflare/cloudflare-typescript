@@ -13,11 +13,21 @@ import * as JobsAPI from './jobs/jobs';
 import {
   JobAbortAllParams,
   JobAbortAllResponse,
+  JobAbortParams,
+  JobAbortResponse,
   JobCreateParams,
   JobCreateResponse,
+  JobGetParams,
+  JobGetResponse,
   JobListParams,
   JobListResponse,
   JobListResponsesSinglePage,
+  JobPauseParams,
+  JobPauseResponse,
+  JobProgressParams,
+  JobProgressResponse,
+  JobResumeParams,
+  JobResumeResponse,
   Jobs,
 } from './jobs/jobs';
 
@@ -36,11 +46,21 @@ export declare namespace SuperSlurper {
     Jobs as Jobs,
     type JobCreateResponse as JobCreateResponse,
     type JobListResponse as JobListResponse,
+    type JobAbortResponse as JobAbortResponse,
     type JobAbortAllResponse as JobAbortAllResponse,
+    type JobGetResponse as JobGetResponse,
+    type JobPauseResponse as JobPauseResponse,
+    type JobProgressResponse as JobProgressResponse,
+    type JobResumeResponse as JobResumeResponse,
     JobListResponsesSinglePage as JobListResponsesSinglePage,
     type JobCreateParams as JobCreateParams,
     type JobListParams as JobListParams,
+    type JobAbortParams as JobAbortParams,
     type JobAbortAllParams as JobAbortAllParams,
+    type JobGetParams as JobGetParams,
+    type JobPauseParams as JobPauseParams,
+    type JobProgressParams as JobProgressParams,
+    type JobResumeParams as JobResumeParams,
   };
 
   export {
