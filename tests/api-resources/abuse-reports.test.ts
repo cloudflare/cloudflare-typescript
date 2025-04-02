@@ -59,6 +59,8 @@ describe('resource abuseReports', () => {
       ncmec_notification: 'send',
       ncsei_subject_representation: true,
       ports_protocols: 'ports_protocols',
+      reported_country: 'xx',
+      reported_user_agent: 'x',
       source_ips: 'source_ips',
       tele: 'x',
       title: 'x',
