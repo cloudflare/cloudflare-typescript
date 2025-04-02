@@ -59,6 +59,21 @@ describe('resource jobs', () => {
     });
   });
 
+  test('abort: only required params', async () => {
+    const responsePromise = client.r2.superSlurper.jobs.abort('jobId', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('abort: required and optional params', async () => {
+    const response = await client.r2.superSlurper.jobs.abort('jobId', { account_id: 'account_id' });
+  });
+
   test('abortAll: only required params', async () => {
     const responsePromise = client.r2.superSlurper.jobs.abortAll({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -72,5 +87,65 @@ describe('resource jobs', () => {
 
   test('abortAll: required and optional params', async () => {
     const response = await client.r2.superSlurper.jobs.abortAll({ account_id: 'account_id' });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.r2.superSlurper.jobs.get('jobId', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.r2.superSlurper.jobs.get('jobId', { account_id: 'account_id' });
+  });
+
+  test('pause: only required params', async () => {
+    const responsePromise = client.r2.superSlurper.jobs.pause('jobId', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('pause: required and optional params', async () => {
+    const response = await client.r2.superSlurper.jobs.pause('jobId', { account_id: 'account_id' });
+  });
+
+  test('progress: only required params', async () => {
+    const responsePromise = client.r2.superSlurper.jobs.progress('jobId', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('progress: required and optional params', async () => {
+    const response = await client.r2.superSlurper.jobs.progress('jobId', { account_id: 'account_id' });
+  });
+
+  test('resume: only required params', async () => {
+    const responsePromise = client.r2.superSlurper.jobs.resume('jobId', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('resume: required and optional params', async () => {
+    const response = await client.r2.superSlurper.jobs.resume('jobId', { account_id: 'account_id' });
   });
 });
