@@ -201,6 +201,16 @@ export declare namespace AbuseReportCreateParams {
     ports_protocols?: string;
 
     /**
+     * Body param: Text containing 2 characters
+     */
+    reported_country?: string;
+
+    /**
+     * Body param: Text not exceeding 255 characters
+     */
+    reported_user_agent?: string;
+
+    /**
      * Body param: A list of IP addresses separated by ‘ ’ (new line character). The
      * list of source IPs should not exceed 30 IP addresses. Each one of the IP
      * addresses ought to be unique
@@ -397,6 +407,16 @@ export declare namespace AbuseReportCreateParams {
     ports_protocols?: string;
 
     /**
+     * Body param: Text containing 2 characters
+     */
+    reported_country?: string;
+
+    /**
+     * Body param: Text not exceeding 255 characters
+     */
+    reported_user_agent?: string;
+
+    /**
      * Body param: Required for DMCA reports, should be same as Name. An affirmation
      * that all information in the report is true and accurate while agreeing to the
      * policies of Cloudflare's abuse reports
@@ -575,6 +595,16 @@ export declare namespace AbuseReportCreateParams {
      * than 30 unique ports and protocols.
      */
     ports_protocols?: string;
+
+    /**
+     * Body param: Text containing 2 characters
+     */
+    reported_country?: string;
+
+    /**
+     * Body param: Text not exceeding 255 characters
+     */
+    reported_user_agent?: string;
 
     /**
      * Body param: Required for DMCA reports, should be same as Name. An affirmation
@@ -772,6 +802,16 @@ export declare namespace AbuseReportCreateParams {
     ports_protocols?: string;
 
     /**
+     * Body param: Text containing 2 characters
+     */
+    reported_country?: string;
+
+    /**
+     * Body param: Text not exceeding 255 characters
+     */
+    reported_user_agent?: string;
+
+    /**
      * Body param: Required for DMCA reports, should be same as Name. An affirmation
      * that all information in the report is true and accurate while agreeing to the
      * policies of Cloudflare's abuse reports
@@ -965,6 +1005,16 @@ export declare namespace AbuseReportCreateParams {
      * than 30 unique ports and protocols.
      */
     ports_protocols?: string;
+
+    /**
+     * Body param: Text containing 2 characters
+     */
+    reported_country?: string;
+
+    /**
+     * Body param: Text not exceeding 255 characters
+     */
+    reported_user_agent?: string;
 
     /**
      * Body param: Required for DMCA reports, should be same as Name. An affirmation
@@ -1162,6 +1212,16 @@ export declare namespace AbuseReportCreateParams {
     ports_protocols?: string;
 
     /**
+     * Body param: Text containing 2 characters
+     */
+    reported_country?: string;
+
+    /**
+     * Body param: Text not exceeding 255 characters
+     */
+    reported_user_agent?: string;
+
+    /**
      * Body param: Required for DMCA reports, should be same as Name. An affirmation
      * that all information in the report is true and accurate while agreeing to the
      * policies of Cloudflare's abuse reports
@@ -1357,6 +1417,16 @@ export declare namespace AbuseReportCreateParams {
     ports_protocols?: string;
 
     /**
+     * Body param: Text containing 2 characters
+     */
+    reported_country?: string;
+
+    /**
+     * Body param: Text not exceeding 255 characters
+     */
+    reported_user_agent?: string;
+
+    /**
      * Body param: Required for DMCA reports, should be same as Name. An affirmation
      * that all information in the report is true and accurate while agreeing to the
      * policies of Cloudflare's abuse reports
@@ -1550,6 +1620,16 @@ export declare namespace AbuseReportCreateParams {
      * than 30 unique ports and protocols.
      */
     ports_protocols?: string;
+
+    /**
+     * Body param: Text containing 2 characters
+     */
+    reported_country?: string;
+
+    /**
+     * Body param: Text not exceeding 255 characters
+     */
+    reported_user_agent?: string;
 
     /**
      * Body param: Required for DMCA reports, should be same as Name. An affirmation
