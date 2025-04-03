@@ -112,7 +112,7 @@ export interface DefaultEditResponse {
   /**
    * List of routes included in the WARP client's tunnel.
    */
-  include?: Array<PoliciesAPI.SplitTunnelInclude>;
+  include?: Array<PoliciesAPI.SplitTunnelExclude>;
 
   /**
    * Determines if the operating system will register WARP's local interface IP with
@@ -213,7 +213,7 @@ export interface DefaultGetResponse {
   /**
    * List of routes included in the WARP client's tunnel.
    */
-  include?: Array<PoliciesAPI.SplitTunnelInclude>;
+  include?: Array<PoliciesAPI.SplitTunnelExclude>;
 
   /**
    * Determines if the operating system will register WARP's local interface IP with
