@@ -102,10 +102,10 @@ For example, for a method that would call an endpoint at `/v1/parents/{parent_id
 
 ```ts
 // Before
-client.parents.children.create('p_123', 'c_456');
+client.parents.children.retrieve('p_123', 'c_456');
 
 // After
-client.example.create('c_456', { parent_id: 'p_123' });
+client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 ```
 
 <details>
@@ -958,44 +958,101 @@ For example:
 
 ```diff
 - client.example.retrieve(encodeURIComponent('string/with/slash'))
-+ client.example.retrieve('string/with/slash') // renders example/string%2Fwith%2Fslash
++ client.example.retrieve('string/with/slash') // retrieves /example/string%2Fwith%2Fslash
 ```
 
 Previously without the `encodeURIComponent()` call we would have used the path `/example/string/with/slash`; now we'll use `/example/string%2Fwith%2Fslash`.
 
-### Removed `httpAgent` in favor of `fetchOptions`
+### Method params must be an object
 
-The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://github.com/stainless-sdks/cloudflare-typescript#fetch-options).
-This change was made as `httpAgent` relied on `node:http` agents which are not supported by any runtime's builtin fetch implementation.
+When making requests to endpoints that expect something other than a JSON object, you must now pass the body as a property instead
+of an individual argument.
 
-If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://github.com/stainless-sdks/cloudflare-typescript#configuring-proxies).
+For example, an endpoint that takes an array:
 
-Before:
+```typescript
+// Before
+client.example.create([{ name: 'name' }, { name: 'name' }]);
 
-```ts
-import Cloudflare from 'cloudflare';
-import http from 'http';
-import { HttpsProxyAgent } from 'https-proxy-agent';
-
-// Configure the default for all requests:
-const client = new Cloudflare({
-  httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
-});
+// After
+client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 ```
 
-After:
+<details>
 
-```ts
-import Cloudflare from 'cloudflare';
-import * as undici from 'undici';
+<summary>This affects the following methods</summary>
 
-const proxyAgent = new undici.ProxyAgent(process.env.PROXY_URL);
-const client = new Cloudflare({
-  fetchOptions: {
-    dispatcher: proxyAgent,
-  },
-});
-```
+- `client.accounts.tokens.value.update()`
+- `client.user.tokens.value.update()`
+- `client.cache.cacheReserve.clear()`
+- `client.dns.records.scan()`
+- `client.dns.zoneTransfers.forceAXFR.create()`
+- `client.dns.zoneTransfers.outgoing.disable()`
+- `client.dns.zoneTransfers.outgoing.enable()`
+- `client.dns.zoneTransfers.outgoing.forceNotify()`
+- `client.emailSecurity.investigate.release.bulk()`
+- `client.emailRouting.disable()`
+- `client.emailRouting.enable()`
+- `client.filters.update()`
+- `client.firewall.rules.bulkEdit()`
+- `client.firewall.rules.bulkUpdate()`
+- `client.waitingRooms.rules.create()`
+- `client.waitingRooms.rules.update()`
+- `client.workers.scripts.schedules.update()`
+- `client.workers.scripts.tail.create()`
+- `client.kv.namespaces.keys.bulkDelete()`
+- `client.kv.namespaces.keys.bulkUpdate()`
+- `client.apiGateway.discovery.operations.bulkEdit()`
+- `client.apiGateway.operations.bulkCreate()`
+- `client.apiGateway.operations.schemaValidation.edit()`
+- `client.addressing.addressMaps.accounts.update()`
+- `client.addressing.addressMaps.ips.update()`
+- `client.addressing.addressMaps.zones.update()`
+- `client.magicTransit.cfInterconnects.bulkUpdate()`
+- `client.magicTransit.greTunnels.create()`
+- `client.magicTransit.greTunnels.bulkUpdate()`
+- `client.magicTransit.ipsecTunnels.bulkUpdate()`
+- `client.magicTransit.ipsecTunnels.pskGenerate()`
+- `client.magicTransit.routes.create()`
+- `client.magicNetworkMonitoring.rules.advertisements.edit()`
+- `client.pages.projects.deployments.retry()`
+- `client.pages.projects.deployments.rollback()`
+- `client.pages.projects.domains.edit()`
+- `client.rules.lists.items.create()`
+- `client.rules.lists.items.update()`
+- `client.stream.create()`
+- `client.stream.keys.create()`
+- `client.stream.downloads.create()`
+- `client.workersForPlatforms.dispatch.namespaces.scripts.tags.update()`
+- `client.zeroTrust.devices.policies.default.excludes.update()`
+- `client.zeroTrust.devices.policies.default.includes.update()`
+- `client.zeroTrust.devices.policies.default.fallbackDomains.update()`
+- `client.zeroTrust.devices.policies.custom.excludes.update()`
+- `client.zeroTrust.devices.policies.custom.includes.update()`
+- `client.zeroTrust.devices.policies.custom.fallbackDomains.update()`
+- `client.zeroTrust.devices.revoke.create()`
+- `client.zeroTrust.devices.unrevoke.create()`
+- `client.zeroTrust.seats.edit()`
+- `client.zeroTrust.access.infrastructure.targets.bulkUpdate()`
+- `client.zeroTrust.access.bookmarks.create()`
+- `client.zeroTrust.access.bookmarks.update()`
+- `client.zeroTrust.dlp.datasets.upload.edit()`
+- `client.zeroTrust.dlp.datasets.versions.create()`
+- `client.zeroTrust.dlp.datasets.versions.entries.create()`
+- `client.zeroTrust.gateway.certificates.activate()`
+- `client.zeroTrust.gateway.certificates.deactivate()`
+- `client.vectorize.indexes.insert()`
+- `client.vectorize.indexes.upsert()`
+- `client.urlScanner.scans.bulkCreate()`
+- `client.radar.ai.toMarkdown.create()`
+- `client.zaraz.update()`
+- `client.zaraz.history.update()`
+- `client.zaraz.publish.create()`
+- `client.cloudConnector.rules.update()`
+- `client.workflows.instances.bulk()`
+- `client.contentScanning.payloads.create()`
+
+</details>
 
 ### Removed request options overloads
 
@@ -1277,197 +1334,41 @@ client.example.list(undefined, { headers: { ... } });
 
 </details>
 
-### Method params must be an object
+### Removed `httpAgent` in favor of `fetchOptions`
 
-When making requests to endpoints that expect something other than a JSON object, you must now pass the body as a property instead
-of an individual argument.
+The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://github.com/stainless-sdks/cloudflare-typescript#fetch-options).
+This change was made as `httpAgent` relied on `node:http` agents which are not supported by any runtime's builtin fetch implementation.
 
-For example, an endpoint that takes an array:
+If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://github.com/stainless-sdks/cloudflare-typescript#configuring-proxies).
 
-```typescript
-// Before
-client.example.create([{ name: 'name' }, { name: 'name' }]);
-
-// After
-client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
-```
-
-<details>
-
-<summary>This affects the following methods</summary>
-
-- `client.accounts.tokens.value.update()`
-- `client.user.tokens.value.update()`
-- `client.cache.cacheReserve.clear()`
-- `client.dns.records.scan()`
-- `client.dns.zoneTransfers.forceAXFR.create()`
-- `client.dns.zoneTransfers.outgoing.disable()`
-- `client.dns.zoneTransfers.outgoing.enable()`
-- `client.dns.zoneTransfers.outgoing.forceNotify()`
-- `client.emailSecurity.investigate.release.bulk()`
-- `client.emailRouting.disable()`
-- `client.emailRouting.enable()`
-- `client.filters.update()`
-- `client.firewall.rules.bulkEdit()`
-- `client.firewall.rules.bulkUpdate()`
-- `client.waitingRooms.rules.create()`
-- `client.waitingRooms.rules.update()`
-- `client.workers.scripts.schedules.update()`
-- `client.workers.scripts.tail.create()`
-- `client.kv.namespaces.keys.bulkDelete()`
-- `client.kv.namespaces.keys.bulkUpdate()`
-- `client.apiGateway.discovery.operations.bulkEdit()`
-- `client.apiGateway.operations.bulkCreate()`
-- `client.apiGateway.operations.schemaValidation.edit()`
-- `client.addressing.addressMaps.accounts.update()`
-- `client.addressing.addressMaps.ips.update()`
-- `client.addressing.addressMaps.zones.update()`
-- `client.magicTransit.cfInterconnects.bulkUpdate()`
-- `client.magicTransit.greTunnels.create()`
-- `client.magicTransit.greTunnels.bulkUpdate()`
-- `client.magicTransit.ipsecTunnels.bulkUpdate()`
-- `client.magicTransit.ipsecTunnels.pskGenerate()`
-- `client.magicTransit.routes.create()`
-- `client.magicNetworkMonitoring.rules.advertisements.edit()`
-- `client.pages.projects.deployments.retry()`
-- `client.pages.projects.deployments.rollback()`
-- `client.pages.projects.domains.edit()`
-- `client.rules.lists.items.create()`
-- `client.rules.lists.items.update()`
-- `client.stream.create()`
-- `client.stream.keys.create()`
-- `client.stream.downloads.create()`
-- `client.workersForPlatforms.dispatch.namespaces.scripts.tags.update()`
-- `client.zeroTrust.devices.policies.default.excludes.update()`
-- `client.zeroTrust.devices.policies.default.includes.update()`
-- `client.zeroTrust.devices.policies.default.fallbackDomains.update()`
-- `client.zeroTrust.devices.policies.custom.excludes.update()`
-- `client.zeroTrust.devices.policies.custom.includes.update()`
-- `client.zeroTrust.devices.policies.custom.fallbackDomains.update()`
-- `client.zeroTrust.devices.revoke.create()`
-- `client.zeroTrust.devices.unrevoke.create()`
-- `client.zeroTrust.seats.edit()`
-- `client.zeroTrust.access.infrastructure.targets.bulkUpdate()`
-- `client.zeroTrust.access.bookmarks.create()`
-- `client.zeroTrust.access.bookmarks.update()`
-- `client.zeroTrust.dlp.datasets.upload.edit()`
-- `client.zeroTrust.dlp.datasets.versions.create()`
-- `client.zeroTrust.dlp.datasets.versions.entries.create()`
-- `client.zeroTrust.gateway.certificates.activate()`
-- `client.zeroTrust.gateway.certificates.deactivate()`
-- `client.vectorize.indexes.insert()`
-- `client.vectorize.indexes.upsert()`
-- `client.urlScanner.scans.bulkCreate()`
-- `client.radar.ai.toMarkdown.create()`
-- `client.zaraz.update()`
-- `client.zaraz.history.update()`
-- `client.zaraz.publish.create()`
-- `client.cloudConnector.rules.update()`
-- `client.workflows.instances.bulk()`
-- `client.contentScanning.payloads.create()`
-
-</details>
-
-### Pagination changes
-
-Note that the `for await` syntax is _not_ affected. This still works as-is:
+Before:
 
 ```ts
-// Automatically fetches more pages as needed.
-for await (const account of client.accounts.list()) {
-  console.log(account);
-}
-```
-
-#### Simplified interface
-
-The pagination interface has been simplified:
-
-```ts
-// Before
-page.nextPageParams();
-page.nextPageInfo();
-// Required manually handling { url } | { params } type
-
-// After
-page.nextPageRequestOptions();
-```
-
-#### Removed unnecessary classes
-
-Page classes for individual methods are now type aliases:
-
-```ts
-// Before
-export class AccountsV4PagePaginationArray extends V4PagePaginationArray<Account> {}
-
-// After
-export type AccountsV4PagePaginationArray = V4PagePaginationArray<Account>;
-```
-
-If you were importing these classes at runtime, you'll need to switch to importing the base class or only import them at the type-level.
-
-### File handling
-
-The deprecated `fileFromPath` helper has been removed in favor of native Node.js streams:
-
-```ts
-// Before
-Cloudflare.fileFromPath('path/to/file');
-
-// After
-import fs from 'fs';
-fs.createReadStream('path/to/file');
-```
-
-Note that this function previously only worked on Node.js. If you're using Bun, you can use [`Bun.file`](https://bun.sh/docs/api/file-io) instead.
-
-### Shims removal
-
-Previously you could configure the types that the SDK used like this:
-
-```ts
-// Tell TypeScript and the package to use the global Web fetch instead of node-fetch.
-import 'cloudflare/shims/web';
 import Cloudflare from 'cloudflare';
+import http from 'http';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+
+// Configure the default for all requests:
+const client = new Cloudflare({
+  httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
+});
 ```
 
-The `cloudflare/shims` imports have been removed. Your global types must now be [correctly configured](#minimum-types-requirements).
-
-### `cloudflare/src` directory removed
-
-Previously IDEs may have auto-completed imports from the `cloudflare/src` directory, however this
-directory was only included for an improved go-to-definition experience and should not have been used at runtime.
-
-If you have any `cloudflare/src` imports, you must replace it with `cloudflare`.
+After:
 
 ```ts
-// Before
-import Cloudflare from 'cloudflare/src';
-
-// After
 import Cloudflare from 'cloudflare';
+import * as undici from 'undici';
+
+const proxyAgent = new undici.ProxyAgent(process.env.PROXY_URL);
+const client = new Cloudflare({
+  fetchOptions: {
+    dispatcher: proxyAgent,
+  },
+});
 ```
 
-### Headers
-
-The `headers` property on `APIError` objects is now an instance of the Web [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) class. It was previously just `Record<string, string | null | undefined>`.
-
-### Removed exports
-
-#### Resource classes
-
-If you were importing resource classes from the root package then you must now import them from the file they are defined in.
-This was never valid at the type level and only worked in CommonJS files.
-
-```typescript
-// Before
-const { Accounts } = require('cloudflare');
-
-// After
-const { Cloudflare } = require('cloudflare');
-Cloudflare.Accounts; // or import directly from cloudflare/resources/accounts/accounts
-```
+### Changed exports
 
 #### Refactor of `cloudflare/core`, `error`, `pagination`, `resource` and `uploads`
 
@@ -1490,6 +1391,20 @@ import 'cloudflare/core/uploads';
 ```
 
 If you were relying on anything that was only exported from `cloudflare/core` and is also not accessible anywhere else, please open an issue and we'll consider adding it to the public API.
+
+#### Resource classes
+
+Previously under certain circumstances it was possible to import resource classes like `Accounts` directly from the root of the package. This was never valid at the type level and only worked in CommonJS files.
+Now you must always either reference them as static class properties or import them directly from the files in which they are defined.
+
+```typescript
+// Before
+const { Accounts } = require('cloudflare');
+
+// After
+const { Cloudflare } = require('cloudflare');
+Cloudflare.Accounts; // or import directly from cloudflare/resources/accounts/accounts
+```
 
 #### Cleaned up `uploads` exports
 
@@ -1527,3 +1442,86 @@ import { APIClient } from 'cloudflare/core';
 // After
 import { Cloudflare } from 'cloudflare';
 ```
+
+### File handling
+
+The deprecated `fileFromPath` helper has been removed in favor of native Node.js streams:
+
+```ts
+// Before
+Cloudflare.fileFromPath('path/to/file');
+
+// After
+import fs from 'fs';
+fs.createReadStream('path/to/file');
+```
+
+Note that this function previously only worked on Node.js. If you're using Bun, you can use [`Bun.file`](https://bun.sh/docs/api/file-io) instead.
+
+### Shims removal
+
+Previously you could configure the types that the SDK used like this:
+
+```ts
+// Tell TypeScript and the package to use the global Web fetch instead of node-fetch.
+import 'cloudflare/shims/web';
+import Cloudflare from 'cloudflare';
+```
+
+The `cloudflare/shims` imports have been removed. Your global types must now be [correctly configured](#minimum-types-requirements).
+
+### Pagination changes
+
+The `for await` syntax **is not affected**. This still works as-is:
+
+```ts
+// Automatically fetches more pages as needed.
+for await (const account of client.accounts.list()) {
+  console.log(account);
+}
+```
+
+The interface for manually paginating through list results has been simplified:
+
+```ts
+// Before
+page.nextPageParams();
+page.nextPageInfo();
+// Required manually handling { url } | { params } type
+
+// After
+page.nextPageRequestOptions();
+```
+
+#### Removed unnecessary classes
+
+Page classes for individual methods are now type aliases:
+
+```ts
+// Before
+export class AccountsV4PagePaginationArray extends V4PagePaginationArray<Account> {}
+
+// After
+export type AccountsV4PagePaginationArray = V4PagePaginationArray<Account>;
+```
+
+If you were importing these classes at runtime, you'll need to switch to importing the base class or only import them at the type-level.
+
+### `cloudflare/src` directory removed
+
+Previously IDEs may have auto-completed imports from the `cloudflare/src` directory, however this
+directory was only included for an improved go-to-definition experience and should not have been used at runtime.
+
+If you have any `cloudflare/src/*` imports, you will need to replace them with `cloudflare/*`.
+
+```ts
+// Before
+import Cloudflare from 'cloudflare/src';
+
+// After
+import Cloudflare from 'cloudflare';
+```
+
+### Headers
+
+The `headers` property on `APIError` objects is now an instance of the Web [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) class. It was previously just `Record<string, string | null | undefined>`.
