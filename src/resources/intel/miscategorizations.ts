@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 
 export class Miscategorizations extends APIResource {
   /**
@@ -18,14 +17,28 @@ export class Miscategorizations extends APIResource {
 }
 
 export interface MiscategorizationCreateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<MiscategorizationCreateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<MiscategorizationCreateResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace MiscategorizationCreateResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 export interface MiscategorizationCreateParams {

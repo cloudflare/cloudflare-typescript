@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Policies extends APIResource {
@@ -719,9 +718,9 @@ export interface PolicyUpdateResponse {
 }
 
 export interface PolicyDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<PolicyDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<PolicyDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
@@ -732,6 +731,18 @@ export interface PolicyDeleteResponse {
 }
 
 export namespace PolicyDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
+
   export interface ResultInfo {
     /**
      * Total number of results for the requested service

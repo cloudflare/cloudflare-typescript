@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import * as AssetsAPI from './assets';
 import {
   AssetCreateParams,
@@ -17,7 +16,7 @@ import {
 } from './assets';
 import * as MessageAPI from './message';
 import {
-  Message,
+  Message as MessageAPIMessage,
   MessageCreateParams,
   MessageDeleteResponse,
   MessageGetParams,
@@ -314,14 +313,28 @@ export interface RequestConstants {
 export type RequestTypes = Array<RequestTypesResponse>;
 
 export interface RequestDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RequestDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RequestDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace RequestDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 /**
@@ -462,7 +475,7 @@ export declare namespace Requests {
 
   export {
     MessageResource as MessageResource,
-    type Message as Message,
+    type MessageAPIMessage as Message,
     type MessageDeleteResponse as MessageDeleteResponse,
     MessagesSinglePage as MessagesSinglePage,
     type MessageCreateParams as MessageCreateParams,

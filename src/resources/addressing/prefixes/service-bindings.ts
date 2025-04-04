@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class ServiceBindings extends APIResource {
@@ -127,14 +126,28 @@ export namespace ServiceBinding {
 }
 
 export interface ServiceBindingDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<ServiceBindingDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<ServiceBindingDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace ServiceBindingDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 export interface ServiceBindingCreateParams {
