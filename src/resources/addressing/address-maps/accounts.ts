@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -39,9 +38,9 @@ export class Accounts extends APIResource {
 }
 
 export interface AccountUpdateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<AccountUpdateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<AccountUpdateResponse.Message>;
 
   /**
    * Whether the API call was successful
@@ -52,6 +51,18 @@ export interface AccountUpdateResponse {
 }
 
 export namespace AccountUpdateResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
+
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
@@ -76,9 +87,9 @@ export namespace AccountUpdateResponse {
 }
 
 export interface AccountDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<AccountDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<AccountDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
@@ -89,6 +100,18 @@ export interface AccountDeleteResponse {
 }
 
 export namespace AccountDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
+
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
