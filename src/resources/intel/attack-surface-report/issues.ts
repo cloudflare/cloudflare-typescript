@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as IssuesAPI from './issues';
-import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -155,14 +154,28 @@ export namespace IssueClassResponse {
 }
 
 export interface IssueDismissResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<IssueDismissResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<IssueDismissResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace IssueDismissResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 export type IssueSeverityResponse = Array<IssueSeverityResponse.IssueSeverityResponseItem>;

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -76,14 +75,28 @@ export class Routes extends APIResource {
 export type RouteListResponsesSinglePage = SinglePage<RouteListResponse>;
 
 export interface RouteCreateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RouteCreateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RouteCreateResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace RouteCreateResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 export interface RouteUpdateResponse {
@@ -115,14 +128,28 @@ export interface RouteListResponse {
 }
 
 export interface RouteDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RouteDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RouteDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace RouteDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 export interface RouteGetResponse {
