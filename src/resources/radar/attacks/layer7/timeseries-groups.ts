@@ -120,6 +120,7 @@ export interface TimeseriesGroupHTTPMethodResponse {
 export namespace TimeseriesGroupHTTPMethodResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -151,6 +152,7 @@ export interface TimeseriesGroupIndustryResponse {
 export namespace TimeseriesGroupIndustryResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -180,6 +182,7 @@ export interface TimeseriesGroupManagedRulesResponse {
 export namespace TimeseriesGroupManagedRulesResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -193,6 +196,7 @@ export interface TimeseriesGroupMitigationProductResponse {
 export namespace TimeseriesGroupMitigationProductResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -206,6 +210,7 @@ export interface TimeseriesGroupVerticalResponse {
 export namespace TimeseriesGroupVerticalResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }

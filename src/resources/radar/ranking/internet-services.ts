@@ -86,6 +86,7 @@ export namespace InternetServiceTimeseriesGroupsResponse {
 
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string | number> | Array<string> | undefined;
   }
 }

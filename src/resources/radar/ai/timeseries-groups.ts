@@ -29,6 +29,7 @@ export interface TimeseriesGroupUserAgentResponse {
 export namespace TimeseriesGroupUserAgentResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
