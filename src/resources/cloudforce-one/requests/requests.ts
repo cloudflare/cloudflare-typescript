@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import * as AssetsAPI from './assets';
 import {
   AssetCreateParams,
@@ -17,7 +18,7 @@ import {
 } from './assets';
 import * as MessageAPI from './message';
 import {
-  Message as MessageAPIMessage,
+  Message,
   MessageCreateParams,
   MessageDeleteParams,
   MessageDeleteResponse,
@@ -310,28 +311,14 @@ export interface RequestConstants {
 export type RequestTypes = Array<RequestTypesResponse>;
 
 export interface RequestDeleteResponse {
-  errors: Array<RequestDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<RequestDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
-}
-
-export namespace RequestDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
 }
 
 /**
@@ -488,7 +475,7 @@ export declare namespace Requests {
 
   export {
     MessageResource as MessageResource,
-    type MessageAPIMessage as Message,
+    type Message as Message,
     type MessageDeleteResponse as MessageDeleteResponse,
     type MessagesSinglePage as MessagesSinglePage,
     type MessageCreateParams as MessageCreateParams,

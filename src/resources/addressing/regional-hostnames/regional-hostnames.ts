@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import * as RegionsAPI from './regions';
 import { RegionListParams, RegionListResponse, RegionListResponsesSinglePage, Regions } from './regions';
 import { APIPromise } from '../../../core/api-promise';
@@ -132,28 +133,14 @@ export interface RegionalHostnameListResponse {
 }
 
 export interface RegionalHostnameDeleteResponse {
-  errors: Array<RegionalHostnameDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<RegionalHostnameDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
-}
-
-export namespace RegionalHostnameDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
 }
 
 export interface RegionalHostnameEditResponse {

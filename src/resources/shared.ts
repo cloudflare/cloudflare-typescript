@@ -599,68 +599,30 @@ export interface ResponseInfo {
   code: number;
 
   message: string;
-
-  documentation_url?: string;
-
-  source?: ResponseInfo.Source;
-}
-
-export namespace ResponseInfo {
-  export interface Source {
-    pointer?: string;
-  }
 }
 
 export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;
 
 export namespace Result {
   export interface UnionMember0 {
-    errors?: Array<UnionMember0.Error>;
+    errors?: Array<Shared.ResponseInfo>;
 
-    messages?: Array<UnionMember0.Message>;
+    messages?: Array<Shared.ResponseInfo>;
 
     result?: Array<Shared.AuditLog>;
 
     success?: boolean;
   }
 
-  export namespace UnionMember0 {
-    export interface Error {
-      code: number;
-
-      message: string;
-    }
-
-    export interface Message {
-      code: number;
-
-      message: string;
-    }
-  }
-
   export interface AaaAPIResponseCommon {
-    errors: Array<AaaAPIResponseCommon.Error>;
+    errors: Array<Shared.ResponseInfo>;
 
-    messages: Array<AaaAPIResponseCommon.Message>;
+    messages: Array<Shared.ResponseInfo>;
 
     /**
      * Whether the API call was successful
      */
     success: true;
-  }
-
-  export namespace AaaAPIResponseCommon {
-    export interface Error {
-      code: number;
-
-      message: string;
-    }
-
-    export interface Message {
-      code: number;
-
-      message: string;
-    }
   }
 }
 

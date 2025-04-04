@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as Shared from '../../../shared';
 import * as GroupsAPI from './groups';
 import {
   Group,
@@ -76,9 +77,9 @@ export type PackageGetResponse = PackageGetResponse.FirewallAPIResponseSingle | 
 
 export namespace PackageGetResponse {
   export interface FirewallAPIResponseSingle {
-    errors: Array<FirewallAPIResponseSingle.Error>;
+    errors: Array<Shared.ResponseInfo>;
 
-    messages: Array<FirewallAPIResponseSingle.Message>;
+    messages: Array<Shared.ResponseInfo>;
 
     result: unknown | string | null;
 
@@ -86,20 +87,6 @@ export namespace PackageGetResponse {
      * Whether the API call was successful
      */
     success: true;
-  }
-
-  export namespace FirewallAPIResponseSingle {
-    export interface Error {
-      code: number;
-
-      message: string;
-    }
-
-    export interface Message {
-      code: number;
-
-      message: string;
-    }
   }
 
   export interface Result {
