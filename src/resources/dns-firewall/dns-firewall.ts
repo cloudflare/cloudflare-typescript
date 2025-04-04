@@ -150,7 +150,7 @@ export type UpstreamIPsParam = string;
 
 export interface DNSFirewallCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -218,7 +218,7 @@ export interface DNSFirewallCreateResponse {
 
 export interface DNSFirewallListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -286,14 +286,14 @@ export interface DNSFirewallListResponse {
 
 export interface DNSFirewallDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface DNSFirewallEditResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -361,7 +361,7 @@ export interface DNSFirewallEditResponse {
 
 export interface DNSFirewallGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -429,7 +429,7 @@ export interface DNSFirewallGetResponse {
 
 export interface DNSFirewallCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -494,21 +494,21 @@ export interface DNSFirewallCreateParams {
 
 export interface DNSFirewallListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 }
 
 export interface DNSFirewallDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface DNSFirewallEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -573,7 +573,7 @@ export interface DNSFirewallEditParams {
 
 export interface DNSFirewallGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
