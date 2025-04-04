@@ -51,7 +51,7 @@ export interface RetentionGetResponse {
 
 export interface RetentionCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -63,7 +63,7 @@ export interface RetentionCreateParams {
 
 export interface RetentionGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
