@@ -55,6 +55,7 @@ export interface SummaryModelResponse {
 export namespace SummaryModelResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -68,6 +69,7 @@ export interface SummaryTaskResponse {
 export namespace SummaryTaskResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
