@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams } from './content';
 import * as RulesAPI from './rules';
@@ -94,28 +95,14 @@ export interface Snippet {
 }
 
 export interface SnippetDeleteResponse {
-  errors: Array<SnippetDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<SnippetDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
-}
-
-export namespace SnippetDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
 }
 
 export interface SnippetUpdateParams {

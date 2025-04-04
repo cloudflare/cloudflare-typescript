@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -171,7 +172,7 @@ export namespace Consumer {
 }
 
 export interface ConsumerDeleteResponse {
-  errors?: Array<ConsumerDeleteResponse.Error>;
+  errors?: Array<Shared.ResponseInfo>;
 
   messages?: Array<string>;
 
@@ -179,14 +180,6 @@ export interface ConsumerDeleteResponse {
    * Indicates if the API call was successful or not.
    */
   success?: true;
-}
-
-export namespace ConsumerDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
 }
 
 export type ConsumerCreateParams =

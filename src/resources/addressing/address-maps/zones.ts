@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -38,9 +39,9 @@ export class Zones extends APIResource {
 }
 
 export interface ZoneUpdateResponse {
-  errors: Array<ZoneUpdateResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<ZoneUpdateResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -51,18 +52,6 @@ export interface ZoneUpdateResponse {
 }
 
 export namespace ZoneUpdateResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
@@ -87,9 +76,9 @@ export namespace ZoneUpdateResponse {
 }
 
 export interface ZoneDeleteResponse {
-  errors: Array<ZoneDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<ZoneDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -100,18 +89,6 @@ export interface ZoneDeleteResponse {
 }
 
 export namespace ZoneDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
