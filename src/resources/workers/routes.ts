@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Routes extends APIResource {
@@ -74,19 +73,53 @@ export class Routes extends APIResource {
 export class RouteListResponsesSinglePage extends SinglePage<RouteListResponse> {}
 
 export interface RouteCreateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RouteCreateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RouteCreateResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
+export namespace RouteCreateResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
 export interface RouteUpdateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -100,7 +133,7 @@ export interface RouteUpdateResponse {
 
 export interface RouteListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -113,19 +146,53 @@ export interface RouteListResponse {
 }
 
 export interface RouteDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RouteDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RouteDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
+export namespace RouteDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
 export interface RouteGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -139,7 +206,7 @@ export interface RouteGetResponse {
 
 export interface RouteCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -156,7 +223,7 @@ export interface RouteCreateParams {
 
 export interface RouteUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -173,21 +240,21 @@ export interface RouteUpdateParams {
 
 export interface RouteListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RouteDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RouteGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

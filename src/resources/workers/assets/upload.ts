@@ -29,7 +29,7 @@ export interface UploadCreateResponse {
 
 export interface UploadCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

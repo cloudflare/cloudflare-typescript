@@ -93,7 +93,7 @@ export interface VersionGetResponse {
 
 export interface VersionCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -911,7 +911,7 @@ export namespace VersionCreateParams {
 
 export interface VersionListParams extends V4PagePaginationParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -924,7 +924,7 @@ export interface VersionListParams extends V4PagePaginationParams {
 
 export interface VersionGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
