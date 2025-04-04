@@ -40,7 +40,7 @@ export interface AssetUploadCreateResponse {
 
 export interface AssetUploadCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

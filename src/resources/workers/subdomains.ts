@@ -41,7 +41,7 @@ export interface SubdomainGetResponse {
 
 export interface SubdomainUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -53,7 +53,7 @@ export interface SubdomainUpdateParams {
 
 export interface SubdomainGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

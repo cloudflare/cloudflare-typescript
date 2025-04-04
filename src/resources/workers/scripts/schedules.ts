@@ -63,7 +63,7 @@ export interface ScheduleGetResponse {
 
 export interface ScheduleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -75,7 +75,7 @@ export interface ScheduleUpdateParams {
 
 export interface ScheduleGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
