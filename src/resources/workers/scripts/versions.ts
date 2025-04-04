@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
+import { type Uploadable } from '../../../core/uploads';
 import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
@@ -100,6 +101,8 @@ export interface VersionCreateParams {
    * configuration.
    */
   metadata: VersionCreateParams.Metadata;
+
+  [k: string]: Array<Uploadable> | string | VersionCreateParams.Metadata | undefined;
 }
 
 export namespace VersionCreateParams {

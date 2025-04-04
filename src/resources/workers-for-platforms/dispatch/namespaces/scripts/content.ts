@@ -4,6 +4,7 @@ import { APIResource } from '../../../../../core/resource';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import { APIPromise } from '../../../../../core/api-promise';
+import { type Uploadable } from '../../../../../core/uploads';
 import { buildHeaders } from '../../../../../internal/headers';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../../../internal/uploads';
@@ -89,6 +90,8 @@ export interface ContentUpdateParams {
    * content in es module format. Alternative to including in a metadata part.
    */
   'CF-WORKER-MAIN-MODULE-PART'?: string;
+
+  [k: string]: Array<Uploadable> | string | WorkersAPI.WorkerMetadataParam | undefined;
 }
 
 export interface ContentGetParams {
