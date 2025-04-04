@@ -49,7 +49,7 @@ export interface AccountSettingGetResponse {
 
 export interface AccountSettingUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -66,7 +66,7 @@ export interface AccountSettingUpdateParams {
 
 export interface AccountSettingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

@@ -43,7 +43,7 @@ export interface DurableObject {
 
 export interface ObjectListParams extends CursorLimitPaginationParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 }
