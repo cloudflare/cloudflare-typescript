@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Consumers extends APIResource {
@@ -176,7 +177,7 @@ export namespace Consumer {
 }
 
 export interface ConsumerDeleteResponse {
-  errors?: Array<ConsumerDeleteResponse.Error>;
+  errors?: Array<Shared.ResponseInfo>;
 
   messages?: Array<string>;
 
@@ -184,14 +185,6 @@ export interface ConsumerDeleteResponse {
    * Indicates if the API call was successful or not.
    */
   success?: true;
-}
-
-export namespace ConsumerDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
 }
 
 export type ConsumerCreateParams =
