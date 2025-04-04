@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Routes extends APIResource {
@@ -74,14 +73,28 @@ export class Routes extends APIResource {
 export class RouteListResponsesSinglePage extends SinglePage<RouteListResponse> {}
 
 export interface RouteCreateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RouteCreateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RouteCreateResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace RouteCreateResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 export interface RouteUpdateResponse {
@@ -113,14 +126,28 @@ export interface RouteListResponse {
 }
 
 export interface RouteDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RouteDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RouteDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace RouteDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 export interface RouteGetResponse {
