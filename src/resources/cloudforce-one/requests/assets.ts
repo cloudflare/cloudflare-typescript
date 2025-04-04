@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class Assets extends APIResource {
@@ -131,14 +130,28 @@ export interface AssetUpdateResponse {
 }
 
 export interface AssetDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<AssetDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<AssetDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+}
+
+export namespace AssetDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
 }
 
 export interface AssetGetResponse {
