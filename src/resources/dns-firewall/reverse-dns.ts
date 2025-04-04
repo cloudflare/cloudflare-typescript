@@ -57,7 +57,7 @@ export interface ReverseDNSGetResponse {
 
 export interface ReverseDNSEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -69,7 +69,7 @@ export interface ReverseDNSEditParams {
 
 export interface ReverseDNSGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
