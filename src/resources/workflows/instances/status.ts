@@ -56,7 +56,7 @@ export interface StatusEditParams {
   /**
    * Body param: Possible actions to apply to instance
    */
-  status: 'resume' | 'pause' | 'terminate';
+  status: 'resume' | 'pause' | 'terminate' | 'restart';
 }
 
 export declare namespace Status {
