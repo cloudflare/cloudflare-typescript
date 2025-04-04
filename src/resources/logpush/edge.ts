@@ -67,7 +67,7 @@ export interface InstantLogpushJob {
 
 export interface EdgeCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -90,7 +90,7 @@ export interface EdgeCreateParams {
 
 export interface EdgeGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
