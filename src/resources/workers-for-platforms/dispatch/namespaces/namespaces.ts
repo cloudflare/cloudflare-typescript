@@ -86,7 +86,7 @@ export class NamespaceListResponsesSinglePage extends SinglePage<NamespaceListRe
 
 export interface NamespaceCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   created_by?: string;
 
@@ -96,7 +96,7 @@ export interface NamespaceCreateResponse {
   created_on?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   modified_by?: string;
 
@@ -123,7 +123,7 @@ export interface NamespaceCreateResponse {
 
 export interface NamespaceListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   created_by?: string;
 
@@ -133,7 +133,7 @@ export interface NamespaceListResponse {
   created_on?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   modified_by?: string;
 
@@ -162,7 +162,7 @@ export type NamespaceDeleteResponse = unknown;
 
 export interface NamespaceGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   created_by?: string;
 
@@ -172,7 +172,7 @@ export interface NamespaceGetResponse {
   created_on?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   modified_by?: string;
 
@@ -199,7 +199,7 @@ export interface NamespaceGetResponse {
 
 export interface NamespaceCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -211,21 +211,21 @@ export interface NamespaceCreateParams {
 
 export interface NamespaceListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface NamespaceDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface NamespaceGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
