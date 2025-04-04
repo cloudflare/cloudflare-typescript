@@ -102,6 +102,8 @@ export interface VersionCreateParams {
    * configuration.
    */
   metadata: VersionCreateParams.Metadata;
+
+  [k: string]: Array<Core.Uploadable> | string | VersionCreateParams.Metadata | undefined;
 }
 
 export namespace VersionCreateParams {
