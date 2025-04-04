@@ -55,7 +55,7 @@ export type ConfigDeleteResponse = unknown;
 
 export interface ConfigCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -67,14 +67,14 @@ export interface ConfigCreateParams {
 
 export interface ConfigDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ConfigGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
