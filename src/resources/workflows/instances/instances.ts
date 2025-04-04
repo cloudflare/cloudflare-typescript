@@ -2,12 +2,15 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as EventsAPI from './events';
+import { EventCreateParams, EventCreateResponse, Events } from './events';
 import * as StatusAPI from './status';
 import { Status, StatusEditParams, StatusEditResponse } from './status';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Instances extends APIResource {
   status: StatusAPI.Status = new StatusAPI.Status(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
 
   /**
    * Create a new workflow instance
@@ -356,6 +359,7 @@ export interface InstanceGetParams {
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
 Instances.InstanceBulkResponsesSinglePage = InstanceBulkResponsesSinglePage;
 Instances.Status = Status;
+Instances.Events = Events;
 
 export declare namespace Instances {
   export {
@@ -375,5 +379,11 @@ export declare namespace Instances {
     Status as Status,
     type StatusEditResponse as StatusEditResponse,
     type StatusEditParams as StatusEditParams,
+  };
+
+  export {
+    Events as Events,
+    type EventCreateResponse as EventCreateResponse,
+    type EventCreateParams as EventCreateParams,
   };
 }
