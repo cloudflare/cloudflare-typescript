@@ -166,6 +166,7 @@ export interface TimeseriesGroupIndustryResponse {
 export namespace TimeseriesGroupIndustryResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -215,6 +216,7 @@ export interface TimeseriesGroupVectorResponse {
 export namespace TimeseriesGroupVectorResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -228,6 +230,7 @@ export interface TimeseriesGroupVerticalResponse {
 export namespace TimeseriesGroupVerticalResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }

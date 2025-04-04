@@ -264,6 +264,7 @@ export interface TimeseriesGroupQueryTypeResponse {
 export namespace TimeseriesGroupQueryTypeResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -277,6 +278,7 @@ export interface TimeseriesGroupResponseCodeResponse {
 export namespace TimeseriesGroupResponseCodeResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
