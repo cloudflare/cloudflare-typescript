@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as EventsAPI from './events';
+import { EventCreateParams, EventCreateResponse, Events } from './events';
 import * as StatusAPI from './status';
 import { Status, StatusEditParams, StatusEditResponse } from './status';
 import { APIPromise } from '../../../core/api-promise';
@@ -15,6 +17,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Instances extends APIResource {
   status: StatusAPI.Status = new StatusAPI.Status(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
 
   /**
    * Create a new workflow instance
@@ -362,6 +365,7 @@ export interface InstanceGetParams {
 }
 
 Instances.Status = Status;
+Instances.Events = Events;
 
 export declare namespace Instances {
   export {
@@ -381,5 +385,11 @@ export declare namespace Instances {
     Status as Status,
     type StatusEditResponse as StatusEditResponse,
     type StatusEditParams as StatusEditParams,
+  };
+
+  export {
+    Events as Events,
+    type EventCreateResponse as EventCreateResponse,
+    type EventCreateParams as EventCreateParams,
   };
 }
