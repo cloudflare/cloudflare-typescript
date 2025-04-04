@@ -125,7 +125,7 @@ export interface SecretGetResponse {
 
 export interface SecretUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -148,21 +148,21 @@ export interface SecretUpdateParams {
 
 export interface SecretListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface SecretDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface SecretGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

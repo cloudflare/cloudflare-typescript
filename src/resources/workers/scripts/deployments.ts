@@ -115,7 +115,7 @@ export namespace DeploymentGetResponse {
 
 export interface DeploymentCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -152,7 +152,7 @@ export namespace DeploymentCreateParams {
 
 export interface DeploymentGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
