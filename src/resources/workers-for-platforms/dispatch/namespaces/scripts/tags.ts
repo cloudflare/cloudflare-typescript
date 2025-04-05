@@ -77,7 +77,7 @@ export type TagDeleteResponse = unknown;
 
 export interface TagUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -89,14 +89,14 @@ export interface TagUpdateParams {
 
 export interface TagListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface TagDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

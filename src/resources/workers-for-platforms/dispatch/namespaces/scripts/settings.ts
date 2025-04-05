@@ -1777,7 +1777,7 @@ export namespace SettingGetResponse {
 
 export interface SettingEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -2657,7 +2657,7 @@ export namespace SettingEditParams {
 
 export interface SettingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

@@ -412,7 +412,7 @@ export interface StreamCreateParams {
    * Header param: Comma-separated key-value pairs following the TUS protocol
    * specification. Values are Base-64 encoded. Supported keys: `name`,
    * `requiresignedurls`, `allowedorigins`, `thumbnailtimestamppct`, `watermark`,
-   * `scheduleddeletion`.
+   * `scheduleddeletion`, `maxdurationseconds`.
    */
   'Upload-Metadata'?: string;
 }
@@ -543,6 +543,7 @@ export interface StreamGetParams {
   account_id: string;
 }
 
+Stream.VideosSinglePage = VideosSinglePage;
 Stream.AudioTracks = AudioTracks;
 Stream.AudioSinglePage = AudioSinglePage;
 Stream.Videos = Videos;
@@ -561,6 +562,17 @@ Stream.Embed = Embed;
 Stream.Token = Token;
 
 export declare namespace Stream {
+  export {
+    type AllowedOrigins as AllowedOrigins,
+    type Video as Video,
+    VideosSinglePage as VideosSinglePage,
+    type StreamCreateParams as StreamCreateParams,
+    type StreamListParams as StreamListParams,
+    type StreamDeleteParams as StreamDeleteParams,
+    type StreamEditParams as StreamEditParams,
+    type StreamGetParams as StreamGetParams,
+  };
+
   export {
     AudioTracks as AudioTracks,
     type Audio as Audio,

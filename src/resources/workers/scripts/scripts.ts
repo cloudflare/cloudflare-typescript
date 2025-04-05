@@ -23,6 +23,14 @@ import {
   ScheduleUpdateResponse,
   Schedules,
 } from './schedules';
+import * as ScriptAndVersionSettingsAPI from './script-and-version-settings';
+import {
+  ScriptAndVersionSettingEditParams,
+  ScriptAndVersionSettingEditResponse,
+  ScriptAndVersionSettingGetParams,
+  ScriptAndVersionSettingGetResponse,
+  ScriptAndVersionSettings,
+} from './script-and-version-settings';
 import * as SecretsAPI from './secrets';
 import {
   SecretDeleteParams,
@@ -82,6 +90,8 @@ export class Scripts extends APIResource {
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
   secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
+  scriptAndVersionSettings: ScriptAndVersionSettingsAPI.ScriptAndVersionSettings =
+    new ScriptAndVersionSettingsAPI.ScriptAndVersionSettings(this._client);
 
   /**
    * Upload a worker module. You can find more about the multipart metadata on our
@@ -356,7 +366,7 @@ export type ScriptGetResponse = string;
 
 export interface ScriptUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -365,6 +375,8 @@ export interface ScriptUpdateParams {
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
+
+  [k: string]: Array<Core.Uploadable> | string | ScriptUpdateParams.Metadata | undefined;
 }
 
 export namespace ScriptUpdateParams {
@@ -499,6 +511,18 @@ export namespace ScriptUpdateParams {
        * Configuration for assets within a Worker.
        */
       export interface Config {
+        /**
+         * The contents of a \_headers file (used to attach custom headers on asset
+         * responses)
+         */
+        _headers?: string;
+
+        /**
+         * The contents of a \_redirects file (used to apply redirects or proxy paths ahead
+         * of asset serving)
+         */
+        _redirects?: string;
+
         /**
          * Determines the redirects and rewrites of requests for HTML content.
          */
@@ -1300,14 +1324,14 @@ export namespace ScriptUpdateParams {
 
 export interface ScriptListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ScriptDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -1321,7 +1345,7 @@ export interface ScriptDeleteParams {
 
 export interface ScriptGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
@@ -1338,6 +1362,7 @@ Scripts.Versions = Versions;
 Scripts.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
 Scripts.Secrets = Secrets;
 Scripts.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
+Scripts.ScriptAndVersionSettings = ScriptAndVersionSettings;
 
 export declare namespace Scripts {
   export {
@@ -1425,5 +1450,13 @@ export declare namespace Scripts {
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
     type SecretGetParams as SecretGetParams,
+  };
+
+  export {
+    ScriptAndVersionSettings as ScriptAndVersionSettings,
+    type ScriptAndVersionSettingEditResponse as ScriptAndVersionSettingEditResponse,
+    type ScriptAndVersionSettingGetResponse as ScriptAndVersionSettingGetResponse,
+    type ScriptAndVersionSettingEditParams as ScriptAndVersionSettingEditParams,
+    type ScriptAndVersionSettingGetParams as ScriptAndVersionSettingGetParams,
   };
 }

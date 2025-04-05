@@ -138,6 +138,11 @@ DNS.ZoneTransfers = ZoneTransfers;
 
 export declare namespace DNS {
   export {
+    type DNSAnalyticsNominalMetric as DNSAnalyticsNominalMetric,
+    type DNSAnalyticsQuery as DNSAnalyticsQuery,
+  };
+
+  export {
     DNSSECResource as DNSSECResource,
     type DNSSEC as DNSSEC,
     type DNSSECDeleteResponse as DNSSECDeleteResponse,

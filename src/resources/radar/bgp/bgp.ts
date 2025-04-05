@@ -13,6 +13,8 @@ import {
   RouteMoasResponse,
   RoutePfx2asParams,
   RoutePfx2asResponse,
+  RouteRealtimeParams,
+  RouteRealtimeResponse,
   RouteStatsParams,
   RouteStatsResponse,
   Routes,
@@ -197,10 +199,12 @@ export declare namespace BGP {
     type RouteAsesResponse as RouteAsesResponse,
     type RouteMoasResponse as RouteMoasResponse,
     type RoutePfx2asResponse as RoutePfx2asResponse,
+    type RouteRealtimeResponse as RouteRealtimeResponse,
     type RouteStatsResponse as RouteStatsResponse,
     type RouteAsesParams as RouteAsesParams,
     type RouteMoasParams as RouteMoasParams,
     type RoutePfx2asParams as RoutePfx2asParams,
+    type RouteRealtimeParams as RouteRealtimeParams,
     type RouteStatsParams as RouteStatsParams,
   };
 

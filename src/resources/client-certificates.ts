@@ -257,3 +257,17 @@ export interface ClientCertificateGetParams {
    */
   zone_id: string;
 }
+
+ClientCertificates.ClientCertificatesV4PagePaginationArray = ClientCertificatesV4PagePaginationArray;
+
+export declare namespace ClientCertificates {
+  export {
+    type ClientCertificate as ClientCertificate,
+    ClientCertificatesV4PagePaginationArray as ClientCertificatesV4PagePaginationArray,
+    type ClientCertificateCreateParams as ClientCertificateCreateParams,
+    type ClientCertificateListParams as ClientCertificateListParams,
+    type ClientCertificateDeleteParams as ClientCertificateDeleteParams,
+    type ClientCertificateEditParams as ClientCertificateEditParams,
+    type ClientCertificateGetParams as ClientCertificateGetParams,
+  };
+}

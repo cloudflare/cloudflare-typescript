@@ -224,7 +224,7 @@ export namespace ScriptUpdateResponse {
 
 export interface ScriptUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -233,6 +233,8 @@ export interface ScriptUpdateParams {
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
+
+  [k: string]: Array<Core.Uploadable> | string | ScriptUpdateParams.Metadata | undefined;
 }
 
 export namespace ScriptUpdateParams {
@@ -367,6 +369,18 @@ export namespace ScriptUpdateParams {
        * Configuration for assets within a Worker.
        */
       export interface Config {
+        /**
+         * The contents of a \_headers file (used to attach custom headers on asset
+         * responses)
+         */
+        _headers?: string;
+
+        /**
+         * The contents of a \_redirects file (used to apply redirects or proxy paths ahead
+         * of asset serving)
+         */
+        _redirects?: string;
+
         /**
          * Determines the redirects and rewrites of requests for HTML content.
          */
@@ -1168,7 +1182,7 @@ export namespace ScriptUpdateParams {
 
 export interface ScriptDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -1182,7 +1196,7 @@ export interface ScriptDeleteParams {
 
 export interface ScriptGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

@@ -779,7 +779,7 @@ export namespace BindingGetResponse {
 
 export interface BindingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

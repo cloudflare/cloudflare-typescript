@@ -32,6 +32,8 @@ describe('resource scripts', () => {
       metadata: {
         assets: {
           config: {
+            _headers: '/dashboard/*\nX-Frame-Options: DENY\n\n/static/*\nAccess-Control-Allow-Origin: *',
+            _redirects: '/foo /bar 301\n/news/* /blog/:splat',
             html_handling: 'auto-trailing-slash',
             not_found_handling: 'none',
             run_worker_first: false,

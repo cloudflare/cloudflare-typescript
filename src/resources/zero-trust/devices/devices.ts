@@ -82,9 +82,12 @@ import {
   UniqueClientIDInput,
   WorkspaceOneInput,
 } from './posture/posture';
+import * as ResilienceAPI from './resilience/resilience';
+import { Resilience } from './resilience/resilience';
 import { SinglePage } from '../../../pagination';
 
 export class Devices extends APIResource {
+  resilience: ResilienceAPI.Resilience = new ResilienceAPI.Resilience(this._client);
   dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
@@ -370,6 +373,7 @@ export interface DeviceGetParams {
 }
 
 Devices.DevicesSinglePage = DevicesSinglePage;
+Devices.Resilience = Resilience;
 Devices.DEXTests = DEXTests;
 Devices.SchemaHTTPSSinglePage = SchemaHTTPSSinglePage;
 Devices.Networks = Networks;
@@ -391,6 +395,8 @@ export declare namespace Devices {
     type DeviceListParams as DeviceListParams,
     type DeviceGetParams as DeviceGetParams,
   };
+
+  export { Resilience as Resilience };
 
   export {
     DEXTests as DEXTests,

@@ -58,7 +58,7 @@ export class Content extends APIResource {
 
 export interface ContentUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -79,11 +79,13 @@ export interface ContentUpdateParams {
    * content in es module format. Alternative to including in a metadata part.
    */
   'CF-WORKER-MAIN-MODULE-PART'?: string;
+
+  [k: string]: Array<Core.Uploadable> | string | WorkersAPI.WorkerMetadataParam | undefined;
 }
 
 export interface ContentGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
