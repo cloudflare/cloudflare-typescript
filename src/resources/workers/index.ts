@@ -17,6 +17,7 @@ export {
   type DomainGetParams,
   type DomainsSinglePage,
 } from './domains';
+export { Observability } from './observability/index';
 export {
   Routes,
   type RouteCreateResponse,
