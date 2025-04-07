@@ -7,7 +7,10 @@ import { path } from '../../../internal/utils/path';
 
 export class Unrevoke extends APIResource {
   /**
-   * Unrevokes a list of devices.
+   * Unrevokes a list of registrations.
+   *
+   * **Deprecated**: please use POST
+   * /accounts/{account_id}/devices/registrations/unrevoke instead.
    */
   create(params: UnrevokeCreateParams, options?: RequestOptions): APIPromise<UnrevokeCreateResponse | null> {
     const { account_id, body } = params;
@@ -29,7 +32,7 @@ export interface UnrevokeCreateParams {
   account_id: string;
 
   /**
-   * Body param: A list of device ids to unrevoke.
+   * Body param: A list of Registration IDs to unrevoke.
    */
   body: Array<string>;
 }

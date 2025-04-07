@@ -112,7 +112,7 @@ export interface DefaultEditResponse {
   /**
    * List of routes included in the WARP client's tunnel.
    */
-  include?: Array<PoliciesAPI.SplitTunnelExclude>;
+  include?: Array<PoliciesAPI.SplitTunnelInclude>;
 
   /**
    * Determines if the operating system will register WARP's local interface IP with
@@ -213,7 +213,7 @@ export interface DefaultGetResponse {
   /**
    * List of routes included in the WARP client's tunnel.
    */
-  include?: Array<PoliciesAPI.SplitTunnelExclude>;
+  include?: Array<PoliciesAPI.SplitTunnelInclude>;
 
   /**
    * Determines if the operating system will register WARP's local interface IP with
@@ -308,7 +308,7 @@ export interface DefaultEditParams {
    * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
    * and 'include' cannot be set in the same request.
    */
-  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+  include?: Array<PoliciesAPI.SplitTunnelIncludeParam>;
 
   /**
    * Body param: Determines if the operating system will register WARP's local
