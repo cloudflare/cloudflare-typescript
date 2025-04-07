@@ -32,7 +32,7 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
-import { HeadersLike, NullableHeaders, buildHeaders, isEmptyHeaders } from './internal/headers';
+import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import { AbuseReports } from './resources/abuse-reports';
 import { AuditLogs } from './resources/audit-logs';
@@ -332,57 +332,41 @@ export class Cloudflare {
     );
   }
 
-  protected authHeaders(opts: FinalRequestOptions): Headers | undefined {
-    const apiEmailAuth = this.apiEmailAuth(opts);
-    const apiKeyAuth = this.apiKeyAuth(opts);
-    const apiTokenAuth = this.apiTokenAuth(opts);
-    const userServiceKeyAuth = this.userServiceKeyAuth(opts);
-
-    if (
-      apiEmailAuth != null &&
-      !isEmptyHeaders(apiEmailAuth) &&
-      apiKeyAuth != null &&
-      !isEmptyHeaders(apiKeyAuth)
-    ) {
-      return { ...apiEmailAuth, ...apiKeyAuth };
-    }
-
-    if (apiTokenAuth != null && !isEmptyHeaders(apiTokenAuth)) {
-      return apiTokenAuth;
-    }
-
-    if (userServiceKeyAuth != null && !isEmptyHeaders(userServiceKeyAuth)) {
-      return userServiceKeyAuth;
-    }
-    return undefined;
+  protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
+    return buildHeaders([
+      this.apiEmailAuth(opts),
+      this.apiKeyAuth(opts),
+      this.apiTokenAuth(opts),
+      this.userServiceKeyAuth(opts),
+    ]);
   }
 
-  protected apiEmailAuth(opts: FinalRequestOptions): Headers | undefined {
+  protected apiEmailAuth(opts: FinalRequestOptions): NullableHeaders | undefined {
     if (this.apiEmail == null) {
       return undefined;
     }
-    return new Headers({ 'X-Auth-Email': this.apiEmail });
+    return buildHeaders([{ 'X-Auth-Email': this.apiEmail }]);
   }
 
-  protected apiKeyAuth(opts: FinalRequestOptions): Headers | undefined {
+  protected apiKeyAuth(opts: FinalRequestOptions): NullableHeaders | undefined {
     if (this.apiKey == null) {
       return undefined;
     }
-    return new Headers({ 'X-Auth-Key': this.apiKey });
+    return buildHeaders([{ 'X-Auth-Key': this.apiKey }]);
   }
 
-  protected apiTokenAuth(opts: FinalRequestOptions): Headers | undefined {
+  protected apiTokenAuth(opts: FinalRequestOptions): NullableHeaders | undefined {
     if (this.apiToken == null) {
       return undefined;
     }
-    return new Headers({ Authorization: `Bearer ${this.apiToken}` });
+    return buildHeaders([{ Authorization: `Bearer ${this.apiToken}` }]);
   }
 
-  protected userServiceKeyAuth(opts: FinalRequestOptions): Headers | undefined {
+  protected userServiceKeyAuth(opts: FinalRequestOptions): NullableHeaders | undefined {
     if (this.userServiceKey == null) {
       return undefined;
     }
-    return new Headers({ 'X-Auth-User-Service-Key': this.userServiceKey });
+    return buildHeaders([{ 'X-Auth-User-Service-Key': this.userServiceKey }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
