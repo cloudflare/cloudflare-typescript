@@ -86,7 +86,7 @@ export type LanguageDeleteResponse = string;
 
 export interface LanguageCreateParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 
@@ -98,7 +98,7 @@ export interface LanguageCreateParams {
 
 export interface LanguageUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -115,7 +115,7 @@ export interface LanguageUpdateParams {
 
 export interface LanguageDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 
@@ -127,7 +127,7 @@ export interface LanguageDeleteParams {
 
 export interface LanguageGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 
