@@ -5,8 +5,12 @@ import * as Core from '../../../core';
 
 export class OverrideCodes extends APIResource {
   /**
-   * Fetches a one-time use admin override code for a device. This relies on the
-   * **Admin Override** setting being enabled in your device configuration.
+   * Fetches a one-time use admin override code for a registration. This relies on
+   * the **Admin Override** setting being enabled in your device configuration.
+   *
+   * **Deprecated:** please use GET
+   * /accounts/{account_id}/devices/registrations/{registration_id}/override_codes
+   * instead.
    */
   list(
     deviceId: string,
