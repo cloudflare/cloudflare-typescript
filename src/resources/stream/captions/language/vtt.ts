@@ -23,7 +23,7 @@ export type VttGetResponse = string;
 
 export interface VttGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 

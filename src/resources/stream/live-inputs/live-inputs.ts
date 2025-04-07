@@ -367,7 +367,7 @@ export namespace LiveInputListResponse {
 
 export interface LiveInputCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -444,7 +444,7 @@ export namespace LiveInputCreateParams {
 
 export interface LiveInputUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -521,7 +521,7 @@ export namespace LiveInputUpdateParams {
 
 export interface LiveInputListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -534,14 +534,14 @@ export interface LiveInputListParams {
 
 export interface LiveInputDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface LiveInputGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
