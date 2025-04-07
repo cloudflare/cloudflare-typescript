@@ -500,91 +500,91 @@ export type BatchPatch =
 export namespace BatchPatch {
   export interface A extends RecordsAPI.ARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface AAAA extends RecordsAPI.AAAARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface CAA extends RecordsAPI.CAARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface CERT extends RecordsAPI.CERTRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface CNAME extends RecordsAPI.CNAMERecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface DS extends RecordsAPI.DSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface HTTPS extends RecordsAPI.HTTPSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface LOC extends RecordsAPI.LOCRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface MX extends RecordsAPI.MXRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface NAPTR extends RecordsAPI.NAPTRRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface NS extends RecordsAPI.NSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface Openpgpkey {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -658,56 +658,56 @@ export namespace BatchPatch {
 
   export interface PTR extends RecordsAPI.PTRRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface SMIMEA extends RecordsAPI.SMIMEARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface SRV extends RecordsAPI.SRVRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface SSHFP extends RecordsAPI.SSHFPRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface SVCB extends RecordsAPI.SVCBRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface TLSA extends RecordsAPI.TLSARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface TXT extends RecordsAPI.TXTRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface URI extends RecordsAPI.URIRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
@@ -739,91 +739,91 @@ export type BatchPatchParam =
 export namespace BatchPatchParam {
   export interface A extends RecordsAPI.ARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface AAAA extends RecordsAPI.AAAARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface CAA extends RecordsAPI.CAARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface CERT extends RecordsAPI.CERTRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface CNAME extends RecordsAPI.CNAMERecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface DNSKEY extends RecordsAPI.DNSKEYRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface DS extends RecordsAPI.DSRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface HTTPS extends RecordsAPI.HTTPSRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface LOC extends RecordsAPI.LOCRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface MX extends RecordsAPI.MXRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface NAPTR extends RecordsAPI.NAPTRRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface NS extends RecordsAPI.NSRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface Openpgpkey {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -897,56 +897,56 @@ export namespace BatchPatchParam {
 
   export interface PTR extends RecordsAPI.PTRRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface SMIMEA extends RecordsAPI.SMIMEARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface SRV extends RecordsAPI.SRVRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface SSHFP extends RecordsAPI.SSHFPRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface SVCB extends RecordsAPI.SVCBRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface TLSA extends RecordsAPI.TLSARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface TXT extends RecordsAPI.TXTRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
 
   export interface URI extends RecordsAPI.URIRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
@@ -978,84 +978,84 @@ export type BatchPut =
 export namespace BatchPut {
   export interface A extends RecordsAPI.ARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface AAAA extends RecordsAPI.AAAARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface CAA extends RecordsAPI.CAARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface CERT extends RecordsAPI.CERTRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface CNAME extends RecordsAPI.CNAMERecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface DS extends RecordsAPI.DSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface HTTPS extends RecordsAPI.HTTPSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface LOC extends RecordsAPI.LOCRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface MX extends RecordsAPI.MXRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface NAPTR extends RecordsAPI.NAPTRRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface NS extends RecordsAPI.NSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
@@ -1077,7 +1077,7 @@ export namespace BatchPut {
     type: 'OPENPGPKEY';
 
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
 
@@ -1136,56 +1136,56 @@ export namespace BatchPut {
 
   export interface PTR extends RecordsAPI.PTRRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface SMIMEA extends RecordsAPI.SMIMEARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface SRV extends RecordsAPI.SRVRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface SSHFP extends RecordsAPI.SSHFPRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface SVCB extends RecordsAPI.SVCBRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface TLSA extends RecordsAPI.TLSARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface TXT extends RecordsAPI.TXTRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface URI extends RecordsAPI.URIRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
@@ -1217,84 +1217,84 @@ export type BatchPutParam =
 export namespace BatchPutParam {
   export interface A extends RecordsAPI.ARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface AAAA extends RecordsAPI.AAAARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface CAA extends RecordsAPI.CAARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface CERT extends RecordsAPI.CERTRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface CNAME extends RecordsAPI.CNAMERecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface DNSKEY extends RecordsAPI.DNSKEYRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface DS extends RecordsAPI.DSRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface HTTPS extends RecordsAPI.HTTPSRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface LOC extends RecordsAPI.LOCRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface MX extends RecordsAPI.MXRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface NAPTR extends RecordsAPI.NAPTRRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface NS extends RecordsAPI.NSRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
@@ -1316,7 +1316,7 @@ export namespace BatchPutParam {
     type: 'OPENPGPKEY';
 
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
 
@@ -1375,56 +1375,56 @@ export namespace BatchPutParam {
 
   export interface PTR extends RecordsAPI.PTRRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface SMIMEA extends RecordsAPI.SMIMEARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface SRV extends RecordsAPI.SRVRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface SSHFP extends RecordsAPI.SSHFPRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface SVCB extends RecordsAPI.SVCBRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface TLSA extends RecordsAPI.TLSARecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface TXT extends RecordsAPI.TXTRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
 
   export interface URI extends RecordsAPI.URIRecordParam {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
   }
@@ -3655,7 +3655,7 @@ export type RecordResponse =
 export namespace RecordResponse {
   export interface A extends RecordsAPI.ARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3692,7 +3692,7 @@ export namespace RecordResponse {
 
   export interface AAAA extends RecordsAPI.AAAARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3729,7 +3729,7 @@ export namespace RecordResponse {
 
   export interface CAA extends RecordsAPI.CAARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3766,7 +3766,7 @@ export namespace RecordResponse {
 
   export interface CERT extends RecordsAPI.CERTRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3803,7 +3803,7 @@ export namespace RecordResponse {
 
   export interface CNAME extends RecordsAPI.CNAMERecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3840,7 +3840,7 @@ export namespace RecordResponse {
 
   export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3877,7 +3877,7 @@ export namespace RecordResponse {
 
   export interface DS extends RecordsAPI.DSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3914,7 +3914,7 @@ export namespace RecordResponse {
 
   export interface HTTPS extends RecordsAPI.HTTPSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3951,7 +3951,7 @@ export namespace RecordResponse {
 
   export interface LOC extends RecordsAPI.LOCRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -3988,7 +3988,7 @@ export namespace RecordResponse {
 
   export interface MX extends RecordsAPI.MXRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4025,7 +4025,7 @@ export namespace RecordResponse {
 
   export interface NAPTR extends RecordsAPI.NAPTRRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4062,7 +4062,7 @@ export namespace RecordResponse {
 
   export interface NS extends RecordsAPI.NSRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4099,7 +4099,7 @@ export namespace RecordResponse {
 
   export interface Openpgpkey {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4203,7 +4203,7 @@ export namespace RecordResponse {
 
   export interface PTR extends RecordsAPI.PTRRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4240,7 +4240,7 @@ export namespace RecordResponse {
 
   export interface SMIMEA extends RecordsAPI.SMIMEARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4277,7 +4277,7 @@ export namespace RecordResponse {
 
   export interface SRV extends RecordsAPI.SRVRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4314,7 +4314,7 @@ export namespace RecordResponse {
 
   export interface SSHFP extends RecordsAPI.SSHFPRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4351,7 +4351,7 @@ export namespace RecordResponse {
 
   export interface SVCB extends RecordsAPI.SVCBRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4388,7 +4388,7 @@ export namespace RecordResponse {
 
   export interface TLSA extends RecordsAPI.TLSARecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4425,7 +4425,7 @@ export namespace RecordResponse {
 
   export interface TXT extends RecordsAPI.TXTRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -4462,7 +4462,7 @@ export namespace RecordResponse {
 
   export interface URI extends RecordsAPI.URIRecord {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
 
@@ -5807,7 +5807,7 @@ export namespace URIRecordParam {
 
 export interface RecordDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
@@ -5877,7 +5877,7 @@ export type RecordCreateParams =
 export declare namespace RecordCreateParams {
   export interface ARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -5952,7 +5952,7 @@ export declare namespace RecordCreateParams {
 
   export interface AAAARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6027,7 +6027,7 @@ export declare namespace RecordCreateParams {
 
   export interface CAARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6122,7 +6122,7 @@ export declare namespace RecordCreateParams {
 
   export interface CERTRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6222,7 +6222,7 @@ export declare namespace RecordCreateParams {
 
   export interface CNAMERecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6305,7 +6305,7 @@ export declare namespace RecordCreateParams {
 
   export interface DNSKEYRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6405,7 +6405,7 @@ export declare namespace RecordCreateParams {
 
   export interface DSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6505,7 +6505,7 @@ export declare namespace RecordCreateParams {
 
   export interface HTTPSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6600,7 +6600,7 @@ export declare namespace RecordCreateParams {
 
   export interface LOCRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6740,7 +6740,7 @@ export declare namespace RecordCreateParams {
 
   export interface MXRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6821,7 +6821,7 @@ export declare namespace RecordCreateParams {
 
   export interface NAPTRRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -6931,7 +6931,7 @@ export declare namespace RecordCreateParams {
 
   export interface NSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7006,7 +7006,7 @@ export declare namespace RecordCreateParams {
 
   export interface DNSRecordsOpenpgpkeyRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7082,7 +7082,7 @@ export declare namespace RecordCreateParams {
 
   export interface PTRRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7157,7 +7157,7 @@ export declare namespace RecordCreateParams {
 
   export interface SMIMEARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7257,7 +7257,7 @@ export declare namespace RecordCreateParams {
 
   export interface SRVRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7358,7 +7358,7 @@ export declare namespace RecordCreateParams {
 
   export interface SSHFPRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7453,7 +7453,7 @@ export declare namespace RecordCreateParams {
 
   export interface SVCBRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7548,7 +7548,7 @@ export declare namespace RecordCreateParams {
 
   export interface TLSARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7648,7 +7648,7 @@ export declare namespace RecordCreateParams {
 
   export interface TXTRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7728,7 +7728,7 @@ export declare namespace RecordCreateParams {
 
   export interface URIRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7849,7 +7849,7 @@ export type RecordUpdateParams =
 export declare namespace RecordUpdateParams {
   export interface ARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7924,7 +7924,7 @@ export declare namespace RecordUpdateParams {
 
   export interface AAAARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -7999,7 +7999,7 @@ export declare namespace RecordUpdateParams {
 
   export interface CAARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8094,7 +8094,7 @@ export declare namespace RecordUpdateParams {
 
   export interface CERTRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8194,7 +8194,7 @@ export declare namespace RecordUpdateParams {
 
   export interface CNAMERecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8277,7 +8277,7 @@ export declare namespace RecordUpdateParams {
 
   export interface DNSKEYRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8377,7 +8377,7 @@ export declare namespace RecordUpdateParams {
 
   export interface DSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8477,7 +8477,7 @@ export declare namespace RecordUpdateParams {
 
   export interface HTTPSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8572,7 +8572,7 @@ export declare namespace RecordUpdateParams {
 
   export interface LOCRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8712,7 +8712,7 @@ export declare namespace RecordUpdateParams {
 
   export interface MXRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8793,7 +8793,7 @@ export declare namespace RecordUpdateParams {
 
   export interface NAPTRRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8903,7 +8903,7 @@ export declare namespace RecordUpdateParams {
 
   export interface NSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -8978,7 +8978,7 @@ export declare namespace RecordUpdateParams {
 
   export interface DNSRecordsOpenpgpkeyRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9054,7 +9054,7 @@ export declare namespace RecordUpdateParams {
 
   export interface PTRRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9129,7 +9129,7 @@ export declare namespace RecordUpdateParams {
 
   export interface SMIMEARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9229,7 +9229,7 @@ export declare namespace RecordUpdateParams {
 
   export interface SRVRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9330,7 +9330,7 @@ export declare namespace RecordUpdateParams {
 
   export interface SSHFPRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9425,7 +9425,7 @@ export declare namespace RecordUpdateParams {
 
   export interface SVCBRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9520,7 +9520,7 @@ export declare namespace RecordUpdateParams {
 
   export interface TLSARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9620,7 +9620,7 @@ export declare namespace RecordUpdateParams {
 
   export interface TXTRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9700,7 +9700,7 @@ export declare namespace RecordUpdateParams {
 
   export interface URIRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -9797,7 +9797,7 @@ export declare namespace RecordUpdateParams {
 
 export interface RecordListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -10012,14 +10012,14 @@ export namespace RecordListParams {
 
 export interface RecordDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RecordBatchParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -10047,7 +10047,7 @@ export interface RecordBatchParams {
 export namespace RecordBatchParams {
   export interface Delete {
     /**
-     * Identifier
+     * Identifier.
      */
     id: string;
   }
@@ -10079,7 +10079,7 @@ export type RecordEditParams =
 export declare namespace RecordEditParams {
   export interface ARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10154,7 +10154,7 @@ export declare namespace RecordEditParams {
 
   export interface AAAARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10229,7 +10229,7 @@ export declare namespace RecordEditParams {
 
   export interface CAARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10324,7 +10324,7 @@ export declare namespace RecordEditParams {
 
   export interface CERTRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10424,7 +10424,7 @@ export declare namespace RecordEditParams {
 
   export interface CNAMERecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10507,7 +10507,7 @@ export declare namespace RecordEditParams {
 
   export interface DNSKEYRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10607,7 +10607,7 @@ export declare namespace RecordEditParams {
 
   export interface DSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10707,7 +10707,7 @@ export declare namespace RecordEditParams {
 
   export interface HTTPSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10802,7 +10802,7 @@ export declare namespace RecordEditParams {
 
   export interface LOCRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -10942,7 +10942,7 @@ export declare namespace RecordEditParams {
 
   export interface MXRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11023,7 +11023,7 @@ export declare namespace RecordEditParams {
 
   export interface NAPTRRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11133,7 +11133,7 @@ export declare namespace RecordEditParams {
 
   export interface NSRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11208,7 +11208,7 @@ export declare namespace RecordEditParams {
 
   export interface DNSRecordsOpenpgpkeyRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11284,7 +11284,7 @@ export declare namespace RecordEditParams {
 
   export interface PTRRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11359,7 +11359,7 @@ export declare namespace RecordEditParams {
 
   export interface SMIMEARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11459,7 +11459,7 @@ export declare namespace RecordEditParams {
 
   export interface SRVRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11560,7 +11560,7 @@ export declare namespace RecordEditParams {
 
   export interface SSHFPRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11655,7 +11655,7 @@ export declare namespace RecordEditParams {
 
   export interface SVCBRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11750,7 +11750,7 @@ export declare namespace RecordEditParams {
 
   export interface TLSARecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11850,7 +11850,7 @@ export declare namespace RecordEditParams {
 
   export interface TXTRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -11930,7 +11930,7 @@ export declare namespace RecordEditParams {
 
   export interface URIRecord {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -12027,21 +12027,21 @@ export declare namespace RecordEditParams {
 
 export interface RecordExportParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RecordGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RecordImportParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -12064,7 +12064,7 @@ export interface RecordImportParams {
 
 export interface RecordScanParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
