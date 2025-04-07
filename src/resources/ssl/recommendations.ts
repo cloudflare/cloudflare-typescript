@@ -32,7 +32,7 @@ export interface RecommendationGetResponse {
 
 export interface RecommendationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
