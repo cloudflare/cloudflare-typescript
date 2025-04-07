@@ -180,7 +180,10 @@ export interface InstanceGetResponse {
     | 'unknown';
 
   steps: Array<
-    InstanceGetResponse.UnionMember0 | InstanceGetResponse.UnionMember1 | InstanceGetResponse.UnionMember2
+    | InstanceGetResponse.UnionMember0
+    | InstanceGetResponse.UnionMember1
+    | InstanceGetResponse.UnionMember2
+    | InstanceGetResponse.UnionMember3
   >;
 
   success: boolean | null;
@@ -282,6 +285,30 @@ export namespace InstanceGetResponse {
   export namespace UnionMember2 {
     export interface Trigger {
       source: string;
+    }
+  }
+
+  export interface UnionMember3 {
+    end: string;
+
+    error: UnionMember3.Error | null;
+
+    finished: boolean;
+
+    name: string;
+
+    output: unknown | string | number | boolean;
+
+    start: string;
+
+    type: 'waitForEvent';
+  }
+
+  export namespace UnionMember3 {
+    export interface Error {
+      message: string;
+
+      name: string;
     }
   }
 
