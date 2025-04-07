@@ -122,6 +122,7 @@ export class Scripts extends APIResource {
         Core.maybeMultipartFormRequestOptions({
           body: { ...body, ...files },
           ...options,
+          __multipartSyntax: 'json',
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
         }),
       ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
