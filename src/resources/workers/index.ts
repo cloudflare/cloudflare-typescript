@@ -17,6 +17,7 @@ export {
   type DomainDeleteParams,
   type DomainGetParams,
 } from './domains';
+export { Observability } from './observability/index';
 export {
   RouteListResponsesSinglePage,
   Routes,
