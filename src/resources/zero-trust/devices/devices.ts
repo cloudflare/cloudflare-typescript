@@ -101,7 +101,12 @@ export class Devices extends APIResource {
   overrideCodes: OverrideCodesAPI.OverrideCodes = new OverrideCodesAPI.OverrideCodes(this._client);
 
   /**
-   * Fetches a list of enrolled devices.
+   * List WARP registrations.
+   *
+   * **Deprecated**: please use one of the following endpoints instead:
+   *
+   * - GET /accounts/{account_id}/devices/physical-devices
+   * - GET /accounts/{account_id}/devices/registrations
    */
   list(params: DeviceListParams, options?: RequestOptions): PagePromise<DevicesSinglePage, Device> {
     const { account_id } = params;
@@ -109,7 +114,12 @@ export class Devices extends APIResource {
   }
 
   /**
-   * Fetches details for a single device.
+   * Fetches a single WARP registration.
+   *
+   * **Deprecated**: please use one of the following endpoints instead:
+   *
+   * - GET /accounts/{account_id}/devices/physical-devices/{device_id}
+   * - GET /accounts/{account_id}/devices/registrations/{registration_id}
    */
   get(
     deviceID: string,
@@ -129,7 +139,8 @@ export type DevicesSinglePage = SinglePage<Device>;
 
 export interface Device {
   /**
-   * Device ID.
+   * Registration ID. Equal to Device ID except for accounts which enabled
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
    */
   id?: string;
 
@@ -244,7 +255,8 @@ export namespace Device {
 
 export interface DeviceGetResponse {
   /**
-   * Device ID.
+   * Registration ID. Equal to Device ID except for accounts which enabled
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
    */
   id?: string;
 

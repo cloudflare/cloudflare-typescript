@@ -143,7 +143,7 @@ export interface SettingsPolicy {
   /**
    * List of routes included in the WARP client's tunnel.
    */
-  include?: Array<SplitTunnelExclude>;
+  include?: Array<SplitTunnelInclude>;
 
   /**
    * The amount of time in minutes a user is allowed access to their LAN. A value of
@@ -169,9 +169,6 @@ export interface SettingsPolicy {
    */
   name?: string;
 
-  /**
-   * Device ID.
-   */
   policy_id?: string;
 
   /**
