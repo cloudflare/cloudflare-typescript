@@ -14,7 +14,6 @@ describe('resource lans', () => {
     const responsePromise = client.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
-      vlan_tag: 0,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +28,6 @@ describe('resource lans', () => {
     const response = await client.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
-      vlan_tag: 0,
       ha_link: true,
       name: 'name',
       nat: { static_prefix: '192.0.2.0/24' },
@@ -49,6 +47,7 @@ describe('resource lans', () => {
         secondary_address: '192.0.2.0/24',
         virtual_address: '192.0.2.0/24',
       },
+      vlan_tag: 42,
     });
   });
 
@@ -92,7 +91,7 @@ describe('resource lans', () => {
           secondary_address: '192.0.2.0/24',
           virtual_address: '192.0.2.0/24',
         },
-        vlan_tag: 0,
+        vlan_tag: 42,
       },
     );
   });
@@ -179,7 +178,7 @@ describe('resource lans', () => {
           secondary_address: '192.0.2.0/24',
           virtual_address: '192.0.2.0/24',
         },
-        vlan_tag: 0,
+        vlan_tag: 42,
       },
     );
   });
