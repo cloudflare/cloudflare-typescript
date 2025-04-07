@@ -5,7 +5,10 @@ import * as Core from '../../../core';
 
 export class Revoke extends APIResource {
   /**
-   * Revokes a list of devices.
+   * Revokes a list of registrations.
+   *
+   * **Deprecated**: please use POST
+   * /accounts/{account_id}/devices/registrations/revoke instead.
    */
   create(
     params: RevokeCreateParams,
@@ -30,7 +33,7 @@ export interface RevokeCreateParams {
   account_id: string;
 
   /**
-   * Body param: A list of device ids to revoke.
+   * Body param: A list of Registration IDs to revoke.
    */
   body: Array<string>;
 }
