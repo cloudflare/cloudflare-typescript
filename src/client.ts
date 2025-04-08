@@ -111,6 +111,7 @@ import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
+import { SecretsStore } from './resources/secrets-store/secrets-store';
 import { SecurityCenter } from './resources/security-center/security-center';
 import { Snippets } from './resources/snippets/snippets';
 import { Spectrum } from './resources/spectrum/spectrum';
@@ -963,6 +964,7 @@ export class Cloudflare {
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
   customPages: API.CustomPages = new API.CustomPages(this);
+  secretsStore: API.SecretsStore = new API.SecretsStore(this);
 }
 Cloudflare.Accounts = Accounts;
 Cloudflare.OriginCACertificates = OriginCACertificates;
@@ -1056,6 +1058,7 @@ Cloudflare.AI = AI;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
 Cloudflare.CustomPages = CustomPages;
+Cloudflare.SecretsStore = SecretsStore;
 export declare namespace Cloudflare {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -1269,6 +1272,8 @@ export declare namespace Cloudflare {
   export { BrowserRendering as BrowserRendering };
 
   export { CustomPages as CustomPages };
+
+  export { SecretsStore as SecretsStore };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

@@ -950,6 +950,15 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.customPages.update()`
 - `client.customPages.list()`
 - `client.customPages.get()`
+- `client.secretsStore.stores.delete()`
+- `client.secretsStore.stores.secrets.create()`
+- `client.secretsStore.stores.secrets.list()`
+- `client.secretsStore.stores.secrets.delete()`
+- `client.secretsStore.stores.secrets.bulkDelete()`
+- `client.secretsStore.stores.secrets.bulkdEdit()`
+- `client.secretsStore.stores.secrets.duplicate()`
+- `client.secretsStore.stores.secrets.edit()`
+- `client.secretsStore.stores.secrets.get()`
 
 </details>
 
@@ -1056,6 +1065,9 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.workflows.instances.bulk()`
 - `client.workflows.instances.events.create()`
 - `client.contentScanning.payloads.create()`
+- `client.secretsStore.stores.create()`
+- `client.secretsStore.stores.secrets.create()`
+- `client.secretsStore.stores.secrets.bulkdEdit()`
 
 </details>
 
