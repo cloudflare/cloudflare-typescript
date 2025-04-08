@@ -1,4 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Observability } from './observability';
-export { Telemetry } from './telemetry/index';
+export {
+  Telemetry,
+  type TelemetryKeysResponse,
+  type TelemetryQueryResponse,
+  type TelemetryValuesResponse,
+  type TelemetryKeysParams,
+  type TelemetryQueryParams,
+  type TelemetryValuesParams,
+  type TelemetryKeysResponsesSinglePage,
+  type TelemetryValuesResponsesSinglePage,
+} from './telemetry';
