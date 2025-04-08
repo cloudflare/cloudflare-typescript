@@ -73,14 +73,14 @@ export interface PageListResponse {
 
 export interface PageListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface PageTrendParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
