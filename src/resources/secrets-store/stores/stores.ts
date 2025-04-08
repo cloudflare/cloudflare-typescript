@@ -7,9 +7,6 @@ import {
   SecretBulkDeleteParams,
   SecretBulkDeleteResponse,
   SecretBulkDeleteResponsesSinglePage,
-  SecretBulkdEditParams,
-  SecretBulkdEditResponse,
-  SecretBulkdEditResponsesSinglePage,
   SecretCreateParams,
   SecretCreateResponse,
   SecretCreateResponsesSinglePage,
@@ -200,7 +197,6 @@ Stores.Secrets = Secrets;
 Stores.SecretCreateResponsesSinglePage = SecretCreateResponsesSinglePage;
 Stores.SecretListResponsesV4PagePaginationArray = SecretListResponsesV4PagePaginationArray;
 Stores.SecretBulkDeleteResponsesSinglePage = SecretBulkDeleteResponsesSinglePage;
-Stores.SecretBulkdEditResponsesSinglePage = SecretBulkdEditResponsesSinglePage;
 
 export declare namespace Stores {
   export {
@@ -220,19 +216,16 @@ export declare namespace Stores {
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
     type SecretBulkDeleteResponse as SecretBulkDeleteResponse,
-    type SecretBulkdEditResponse as SecretBulkdEditResponse,
     type SecretDuplicateResponse as SecretDuplicateResponse,
     type SecretEditResponse as SecretEditResponse,
     type SecretGetResponse as SecretGetResponse,
     SecretCreateResponsesSinglePage as SecretCreateResponsesSinglePage,
     SecretListResponsesV4PagePaginationArray as SecretListResponsesV4PagePaginationArray,
     SecretBulkDeleteResponsesSinglePage as SecretBulkDeleteResponsesSinglePage,
-    SecretBulkdEditResponsesSinglePage as SecretBulkdEditResponsesSinglePage,
     type SecretCreateParams as SecretCreateParams,
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
     type SecretBulkDeleteParams as SecretBulkDeleteParams,
-    type SecretBulkdEditParams as SecretBulkdEditParams,
     type SecretDuplicateParams as SecretDuplicateParams,
     type SecretEditParams as SecretEditParams,
     type SecretGetParams as SecretGetParams,
