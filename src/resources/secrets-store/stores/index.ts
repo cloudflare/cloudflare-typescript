@@ -6,7 +6,6 @@ export {
   type SecretListResponse,
   type SecretDeleteResponse,
   type SecretBulkDeleteResponse,
-  type SecretBulkdEditResponse,
   type SecretDuplicateResponse,
   type SecretEditResponse,
   type SecretGetResponse,
@@ -14,14 +13,12 @@ export {
   type SecretListParams,
   type SecretDeleteParams,
   type SecretBulkDeleteParams,
-  type SecretBulkdEditParams,
   type SecretDuplicateParams,
   type SecretEditParams,
   type SecretGetParams,
   type SecretCreateResponsesSinglePage,
   type SecretListResponsesV4PagePaginationArray,
   type SecretBulkDeleteResponsesSinglePage,
-  type SecretBulkdEditResponsesSinglePage,
 } from './secrets';
 export {
   Stores,

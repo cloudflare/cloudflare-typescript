@@ -955,7 +955,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.secretsStore.stores.secrets.list()`
 - `client.secretsStore.stores.secrets.delete()`
 - `client.secretsStore.stores.secrets.bulkDelete()`
-- `client.secretsStore.stores.secrets.bulkdEdit()`
 - `client.secretsStore.stores.secrets.duplicate()`
 - `client.secretsStore.stores.secrets.edit()`
 - `client.secretsStore.stores.secrets.get()`
@@ -1067,7 +1066,6 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.contentScanning.payloads.create()`
 - `client.secretsStore.stores.create()`
 - `client.secretsStore.stores.secrets.create()`
-- `client.secretsStore.stores.secrets.bulkdEdit()`
 
 </details>
 
