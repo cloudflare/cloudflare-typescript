@@ -702,6 +702,11 @@ export namespace RuleSetting {
     target_uri: string;
 
     /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
      * If true, the path and query parameters from the original request will be
      * appended to target_uri
      */
@@ -1097,6 +1102,11 @@ export namespace RuleSettingParam {
      * URI to which the user will be redirected
      */
     target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
 
     /**
      * If true, the path and query parameters from the original request will be
