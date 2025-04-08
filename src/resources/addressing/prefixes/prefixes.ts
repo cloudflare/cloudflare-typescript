@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 import * as AdvertisementStatusAPI from './advertisement-status';
 import {
   AdvertisementStatus,
@@ -184,9 +185,9 @@ export interface Prefix {
 }
 
 export interface PrefixDeleteResponse {
-  errors: Array<PrefixDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<PrefixDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -197,18 +198,6 @@ export interface PrefixDeleteResponse {
 }
 
 export namespace PrefixDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class PagerdutyResource extends APIResource {
@@ -87,9 +88,9 @@ export interface PagerdutyCreateResponse {
 }
 
 export interface PagerdutyDeleteResponse {
-  errors: Array<PagerdutyDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<PagerdutyDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -100,18 +101,6 @@ export interface PagerdutyDeleteResponse {
 }
 
 export namespace PagerdutyDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service

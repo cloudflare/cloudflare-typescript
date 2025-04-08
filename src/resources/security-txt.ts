@@ -2,6 +2,7 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
+import * as Shared from './shared';
 
 export class SecurityTXT extends APIResource {
   /**
@@ -40,53 +41,25 @@ export class SecurityTXT extends APIResource {
 }
 
 export interface SecurityTXTUpdateResponse {
-  errors: Array<SecurityTXTUpdateResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<SecurityTXTUpdateResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
-}
-
-export namespace SecurityTXTUpdateResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
 }
 
 export interface SecurityTXTDeleteResponse {
-  errors: Array<SecurityTXTDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<SecurityTXTDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
-}
-
-export namespace SecurityTXTDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
 }
 
 export interface SecurityTXTGetResponse {
