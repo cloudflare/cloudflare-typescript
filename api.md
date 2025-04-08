@@ -4557,6 +4557,26 @@ Methods:
 - <code title="post /accounts/{account_id}/devices/resilience/disconnect">client.zeroTrust.devices.resilience.globalWARPOverride.<a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">create</a>({ ...params }) -> GlobalWARPOverrideCreateResponse | null</code>
 - <code title="get /accounts/{account_id}/devices/resilience/disconnect">client.zeroTrust.devices.resilience.globalWARPOverride.<a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">get</a>({ ...params }) -> GlobalWARPOverrideGetResponse | null</code>
 
+### Registrations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationRevokeResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationUnrevokeResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/devices/registrations">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">list</a>({ ...params }) -> RegistrationListResponsesCursorPagination</code>
+- <code title="delete /accounts/{account_id}/devices/registrations/{registration_id}">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">delete</a>(registrationId, { ...params }) -> RegistrationDeleteResponse | null</code>
+- <code title="delete /accounts/{account_id}/devices/registrations">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">bulkDelete</a>({ ...params }) -> RegistrationBulkDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/registrations/{registration_id}">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">get</a>(registrationId, { ...params }) -> RegistrationGetResponse</code>
+- <code title="post /accounts/{account_id}/devices/registrations/revoke">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">revoke</a>({ ...params }) -> RegistrationRevokeResponse | null</code>
+- <code title="post /accounts/{account_id}/devices/registrations/unrevoke">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">unrevoke</a>({ ...params }) -> RegistrationUnrevokeResponse | null</code>
+
 ### DEXTests
 
 Types:
@@ -4769,10 +4789,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/devices/override-codes.ts">OverrideCodeListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/override-codes.ts">OverrideCodeGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/devices/{device_id}/override_codes">client.zeroTrust.devices.overrideCodes.<a href="./src/resources/zero-trust/devices/override-codes.ts">list</a>(deviceId, { ...params }) -> OverrideCodeListResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/registrations/{registration_id}/override_codes">client.zeroTrust.devices.overrideCodes.<a href="./src/resources/zero-trust/devices/override-codes.ts">get</a>(registrationId, { ...params }) -> OverrideCodeGetResponse</code>
 
 ## IdentityProviders
 
