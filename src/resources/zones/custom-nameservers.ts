@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -56,9 +57,9 @@ export type CustomNameserverUpdateResponsesSinglePage = SinglePage<CustomNameser
 export type CustomNameserverUpdateResponse = string;
 
 export interface CustomNameserverGetResponse {
-  errors: Array<CustomNameserverGetResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<CustomNameserverGetResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -79,18 +80,6 @@ export interface CustomNameserverGetResponse {
 }
 
 export namespace CustomNameserverGetResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service

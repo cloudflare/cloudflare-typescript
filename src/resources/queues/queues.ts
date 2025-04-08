@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import * as ConsumersAPI from './consumers';
 import {
   Consumer,
@@ -159,7 +160,7 @@ export namespace Queue {
 }
 
 export interface QueueDeleteResponse {
-  errors?: Array<QueueDeleteResponse.Error>;
+  errors?: Array<Shared.ResponseInfo>;
 
   messages?: Array<string>;
 
@@ -167,14 +168,6 @@ export interface QueueDeleteResponse {
    * Indicates if the API call was successful or not.
    */
   success?: true;
-}
-
-export namespace QueueDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
 }
 
 export interface QueueCreateParams {

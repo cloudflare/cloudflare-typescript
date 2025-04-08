@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -30,9 +31,9 @@ export class IPs extends APIResource {
 }
 
 export interface IPUpdateResponse {
-  errors: Array<IPUpdateResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<IPUpdateResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -43,18 +44,6 @@ export interface IPUpdateResponse {
 }
 
 export namespace IPUpdateResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
@@ -79,9 +68,9 @@ export namespace IPUpdateResponse {
 }
 
 export interface IPDeleteResponse {
-  errors: Array<IPDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<IPDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -92,18 +81,6 @@ export interface IPDeleteResponse {
 }
 
 export namespace IPDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
