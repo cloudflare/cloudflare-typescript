@@ -390,6 +390,11 @@ export namespace SecretCreateParams {
     name: string;
 
     /**
+     * The list of services that can use this secret.
+     */
+    scopes: Array<string>;
+
+    /**
      * The value of the secret. Note that this is 'write only' - no API reponse will
      * provide this value, it is only used to create/modify secrets.
      */
@@ -456,6 +461,11 @@ export interface SecretEditParams {
    * Body param: The name of the secret
    */
   name: string;
+
+  /**
+   * Body param: The list of services that can use this secret.
+   */
+  scopes?: Array<string>;
 
   /**
    * Body param: The value of the secret. Note that this is 'write only' - no API
