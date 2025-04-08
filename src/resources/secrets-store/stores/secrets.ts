@@ -78,22 +78,6 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * Updates one or more secrets
-   */
-  bulkdEdit(
-    storeID: string,
-    params: SecretBulkdEditParams,
-    options?: RequestOptions,
-  ): PagePromise<SecretBulkdEditResponsesSinglePage, SecretBulkdEditResponse> {
-    const { account_id, body } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/secrets_store/stores/${storeID}/secrets`,
-      SinglePage<SecretBulkdEditResponse>,
-      { body: body, method: 'patch', ...options },
-    );
-  }
-
-  /**
    * Duplicates the secret, keeping the value
    */
   duplicate(
@@ -142,8 +126,6 @@ export type SecretCreateResponsesSinglePage = SinglePage<SecretCreateResponse>;
 export type SecretListResponsesV4PagePaginationArray = V4PagePaginationArray<SecretListResponse>;
 
 export type SecretBulkDeleteResponsesSinglePage = SinglePage<SecretBulkDeleteResponse>;
-
-export type SecretBulkdEditResponsesSinglePage = SinglePage<SecretBulkdEditResponse>;
 
 export interface SecretCreateResponse {
   /**
@@ -248,40 +230,6 @@ export interface SecretDeleteResponse {
 }
 
 export interface SecretBulkDeleteResponse {
-  /**
-   * Secret identifier tag.
-   */
-  id: string;
-
-  /**
-   * Whenthe secret was created.
-   */
-  created: string;
-
-  /**
-   * When the secret was modified.
-   */
-  modified: string;
-
-  /**
-   * The name of the secret
-   */
-  name: string;
-
-  status: 'pending' | 'active' | 'deleted';
-
-  /**
-   * Store Identifier
-   */
-  store_id: string;
-
-  /**
-   * Freeform text describing the secret
-   */
-  comment?: string;
-}
-
-export interface SecretBulkdEditResponse {
   /**
    * Secret identifier tag.
    */
@@ -486,33 +434,6 @@ export interface SecretBulkDeleteParams {
   account_id: string;
 }
 
-export interface SecretBulkdEditParams {
-  /**
-   * Path param: Account Identifier
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: Array<SecretBulkdEditParams.Body>;
-}
-
-export namespace SecretBulkdEditParams {
-  export interface Body {
-    /**
-     * The name of the secret
-     */
-    name: string;
-
-    /**
-     * The value of the secret. Note that this is 'write only' - no API reponse will
-     * provide this value, it is only used to create/modify secrets.
-     */
-    value?: string;
-  }
-}
-
 export interface SecretDuplicateParams {
   /**
    * Path param: Account Identifier
@@ -571,19 +492,16 @@ export declare namespace Secrets {
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
     type SecretBulkDeleteResponse as SecretBulkDeleteResponse,
-    type SecretBulkdEditResponse as SecretBulkdEditResponse,
     type SecretDuplicateResponse as SecretDuplicateResponse,
     type SecretEditResponse as SecretEditResponse,
     type SecretGetResponse as SecretGetResponse,
     type SecretCreateResponsesSinglePage as SecretCreateResponsesSinglePage,
     type SecretListResponsesV4PagePaginationArray as SecretListResponsesV4PagePaginationArray,
     type SecretBulkDeleteResponsesSinglePage as SecretBulkDeleteResponsesSinglePage,
-    type SecretBulkdEditResponsesSinglePage as SecretBulkdEditResponsesSinglePage,
     type SecretCreateParams as SecretCreateParams,
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
     type SecretBulkDeleteParams as SecretBulkDeleteParams,
-    type SecretBulkdEditParams as SecretBulkdEditParams,
     type SecretDuplicateParams as SecretDuplicateParams,
     type SecretEditParams as SecretEditParams,
     type SecretGetParams as SecretGetParams,
