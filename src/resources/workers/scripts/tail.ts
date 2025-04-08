@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 
 export class Tail extends APIResource {
   /**
@@ -101,48 +102,14 @@ export interface TailCreateResponse {
 }
 
 export interface TailDeleteResponse {
-  errors: Array<TailDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<TailDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful.
    */
   success: true;
-}
-
-export namespace TailDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-
-    documentation_url?: string;
-
-    source?: Error.Source;
-  }
-
-  export namespace Error {
-    export interface Source {
-      pointer?: string;
-    }
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-
-    documentation_url?: string;
-
-    source?: Message.Source;
-  }
-
-  export namespace Message {
-    export interface Source {
-      pointer?: string;
-    }
-  }
 }
 
 export interface TailGetResponse {
