@@ -32,7 +32,7 @@ export interface FailedLoginListResponse {
 
 export interface FailedLoginListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

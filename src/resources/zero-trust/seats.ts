@@ -44,7 +44,7 @@ export interface Seat {
 
 export interface SeatEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

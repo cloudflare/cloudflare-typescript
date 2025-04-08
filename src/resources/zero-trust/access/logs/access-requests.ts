@@ -26,7 +26,7 @@ export type AccessRequestListResponse = Array<SCIMAPI.AccessRequest>;
 
 export interface AccessRequestListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
