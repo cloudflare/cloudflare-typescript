@@ -32,7 +32,13 @@ export {
   type NetworkGetParams,
   type DeviceNetworksSinglePage,
 } from './networks';
-export { OverrideCodes, type OverrideCodeListResponse, type OverrideCodeListParams } from './override-codes';
+export {
+  OverrideCodes,
+  type OverrideCodeListResponse,
+  type OverrideCodeGetResponse,
+  type OverrideCodeListParams,
+  type OverrideCodeGetParams,
+} from './override-codes';
 export {
   Policies,
   type DevicePolicyCertificates,
@@ -74,6 +80,22 @@ export {
   type PostureGetParams,
   type DevicePostureRulesSinglePage,
 } from './posture/index';
+export {
+  Registrations,
+  type RegistrationListResponse,
+  type RegistrationDeleteResponse,
+  type RegistrationBulkDeleteResponse,
+  type RegistrationGetResponse,
+  type RegistrationRevokeResponse,
+  type RegistrationUnrevokeResponse,
+  type RegistrationListParams,
+  type RegistrationDeleteParams,
+  type RegistrationBulkDeleteParams,
+  type RegistrationGetParams,
+  type RegistrationRevokeParams,
+  type RegistrationUnrevokeParams,
+  type RegistrationListResponsesCursorPagination,
+} from './registrations';
 export { Resilience } from './resilience/index';
 export { Revoke, type RevokeCreateResponse, type RevokeCreateParams } from './revoke';
 export {

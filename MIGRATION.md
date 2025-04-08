@@ -629,6 +629,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workersForPlatforms.dispatch.namespaces.scripts.tags.list()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete()`
 - `client.zeroTrust.devices.get()`
+- `client.zeroTrust.devices.registrations.delete()`
+- `client.zeroTrust.devices.registrations.get()`
 - `client.zeroTrust.devices.dexTests.update()`
 - `client.zeroTrust.devices.dexTests.delete()`
 - `client.zeroTrust.devices.dexTests.get()`
@@ -652,6 +654,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.devices.posture.integrations.edit()`
 - `client.zeroTrust.devices.posture.integrations.get()`
 - `client.zeroTrust.devices.overrideCodes.list()`
+- `client.zeroTrust.devices.overrideCodes.get()`
 - `client.zeroTrust.identityProviders.create()`
 - `client.zeroTrust.identityProviders.update()`
 - `client.zeroTrust.identityProviders.list()`
