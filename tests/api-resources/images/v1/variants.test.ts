@@ -13,7 +13,7 @@ describe('resource variants', () => {
     const responsePromise = client.images.v1.variants.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'hero',
-      options: { fit: 'scale-down', height: 768, metadata: 'keep', width: 1366 },
+      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +28,7 @@ describe('resource variants', () => {
     const response = await client.images.v1.variants.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'hero',
-      options: { fit: 'scale-down', height: 768, metadata: 'keep', width: 1366 },
+      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
       neverRequireSignedURLs: true,
     });
   });
@@ -72,7 +72,7 @@ describe('resource variants', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.images.v1.variants.edit('hero', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      options: { fit: 'scale-down', height: 768, metadata: 'keep', width: 1366 },
+      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -86,7 +86,7 @@ describe('resource variants', () => {
   test('edit: required and optional params', async () => {
     const response = await client.images.v1.variants.edit('hero', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      options: { fit: 'scale-down', height: 768, metadata: 'keep', width: 1366 },
+      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
       neverRequireSignedURLs: true,
     });
   });

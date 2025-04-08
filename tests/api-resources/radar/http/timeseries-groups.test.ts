@@ -25,7 +25,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.botClass(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           browserFamily: ['CHROME'],
           continent: ['string'],
@@ -63,7 +63,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.browser(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -103,7 +103,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.browserFamily(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],
@@ -142,7 +142,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.deviceType(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -180,7 +180,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.httpProtocol(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -218,7 +218,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.httpVersion(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -256,7 +256,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.ipVersion(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -294,7 +294,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.os(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -332,7 +332,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.postQuantum(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -371,7 +371,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.tlsVersion(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],

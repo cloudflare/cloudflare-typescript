@@ -25,7 +25,7 @@ describe('resource dns', () => {
     await expect(
       client.radar.dns.timeseries(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],

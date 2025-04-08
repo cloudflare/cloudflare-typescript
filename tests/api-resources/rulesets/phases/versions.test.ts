@@ -11,7 +11,9 @@ const client = new Cloudflare({
 describe('resource versions', () => {
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = client.rulesets.phases.versions.list('ddos_l4', { account_id: 'account_id' });
+    const responsePromise = client.rulesets.phases.versions.list('http_request_firewall_custom', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +26,7 @@ describe('resource versions', () => {
   // TODO: investigate broken test
   test.skip('get: only required params', async () => {
     const responsePromise = client.rulesets.phases.versions.get('1', {
-      ruleset_phase: 'ddos_l4',
+      ruleset_phase: 'http_request_firewall_custom',
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -39,7 +41,7 @@ describe('resource versions', () => {
   // TODO: investigate broken test
   test.skip('get: required and optional params', async () => {
     const response = await client.rulesets.phases.versions.get('1', {
-      ruleset_phase: 'ddos_l4',
+      ruleset_phase: 'http_request_firewall_custom',
       account_id: 'account_id',
     });
   });

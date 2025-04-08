@@ -12,9 +12,9 @@ describe('resource rulesets', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.rulesets.create({
-      kind: 'managed',
+      kind: 'root',
       name: 'My ruleset',
-      phase: 'ddos_l4',
+      phase: 'http_request_firewall_custom',
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,9 +29,9 @@ describe('resource rulesets', () => {
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await client.rulesets.create({
-      kind: 'managed',
+      kind: 'root',
       name: 'My ruleset',
-      phase: 'ddos_l4',
+      phase: 'http_request_firewall_custom',
       account_id: 'account_id',
       description: 'My ruleset to execute managed rulesets',
       rules: [
@@ -55,7 +55,7 @@ describe('resource rulesets', () => {
           logging: { enabled: true },
           ratelimit: {
             characteristics: ['ip.src'],
-            period: 10,
+            period: 60,
             counting_expression: 'http.request.body.raw eq "abcd"',
             mitigation_timeout: 600,
             requests_per_period: 1000,

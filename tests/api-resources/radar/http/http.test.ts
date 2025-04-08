@@ -25,7 +25,7 @@ describe('resource http', () => {
     await expect(
       client.radar.http.timeseries(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -40,7 +40,7 @@ describe('resource http', () => {
           ipVersion: ['IPv4'],
           location: ['string'],
           name: ['main_series'],
-          normalization: 'PERCENTAGE_CHANGE',
+          normalization: 'MIN0_MAX',
           os: ['WINDOWS'],
           tlsVersion: ['TLSv1_0'],
         },

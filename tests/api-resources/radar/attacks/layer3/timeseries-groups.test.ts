@@ -25,7 +25,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.bitrate(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -59,7 +59,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.duration(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -93,7 +93,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.industry(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -128,7 +128,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.ipVersion(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -161,7 +161,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.protocol(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -194,7 +194,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.vector(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -229,7 +229,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.vertical(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
