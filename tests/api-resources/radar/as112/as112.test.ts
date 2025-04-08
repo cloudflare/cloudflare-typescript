@@ -33,7 +33,7 @@ describe('resource as112', () => {
     await expect(
       client.radar.as112.timeseries(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],

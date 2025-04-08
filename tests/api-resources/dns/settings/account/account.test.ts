@@ -45,7 +45,7 @@ describe('resource account', () => {
           rname: 'admin.example.com',
           ttl: 3600,
         },
-        zone_mode: 'standard',
+        zone_mode: 'dns_only',
       },
     });
   });

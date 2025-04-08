@@ -51,7 +51,7 @@ describe('resource operations', () => {
   test('list: required and optional params', async () => {
     const response = await client.apiGateway.operations.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      direction: 'asc',
+      direction: 'desc',
       endpoint: '/api/v1',
       feature: ['thresholds'],
       host: ['api.cloudflare.com'],

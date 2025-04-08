@@ -46,7 +46,7 @@ describe('resource events', () => {
           page: 0,
           per_page: 0,
           prefix: '1.1.1.0/24',
-          sortBy: 'ID',
+          sortBy: 'TIME',
           sortOrder: 'ASC',
           victimAsn: 0,
         },

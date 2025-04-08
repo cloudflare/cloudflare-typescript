@@ -28,7 +28,7 @@ describe('resource packages', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.firewall.waf.packages.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      direction: 'asc',
+      direction: 'desc',
       match: 'any',
       name: 'USER',
       order: 'name',

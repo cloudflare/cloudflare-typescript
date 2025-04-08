@@ -13,7 +13,7 @@ describe('resource rules', () => {
   test('create: only required params', async () => {
     const responsePromise = client.emailRouting.rules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{ type: 'drop', value: ['destinationaddress@example.net'] }],
+      actions: [{ type: 'forward', value: ['destinationaddress@example.net'] }],
       matchers: [{ field: 'to', type: 'literal', value: 'test@example.com' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +28,7 @@ describe('resource rules', () => {
   test('create: required and optional params', async () => {
     const response = await client.emailRouting.rules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{ type: 'drop', value: ['destinationaddress@example.net'] }],
+      actions: [{ type: 'forward', value: ['destinationaddress@example.net'] }],
       matchers: [{ field: 'to', type: 'literal', value: 'test@example.com' }],
       enabled: true,
       name: 'Send to user@example.net rule.',
@@ -39,7 +39,7 @@ describe('resource rules', () => {
   test('update: only required params', async () => {
     const responsePromise = client.emailRouting.rules.update('a7e6fb77503c41d8a7f3113c6918f10c', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{ type: 'drop', value: ['destinationaddress@example.net'] }],
+      actions: [{ type: 'forward', value: ['destinationaddress@example.net'] }],
       matchers: [{ field: 'to', type: 'literal', value: 'test@example.com' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -54,7 +54,7 @@ describe('resource rules', () => {
   test('update: required and optional params', async () => {
     const response = await client.emailRouting.rules.update('a7e6fb77503c41d8a7f3113c6918f10c', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{ type: 'drop', value: ['destinationaddress@example.net'] }],
+      actions: [{ type: 'forward', value: ['destinationaddress@example.net'] }],
       matchers: [{ field: 'to', type: 'literal', value: 'test@example.com' }],
       enabled: true,
       name: 'Send to user@example.net rule.',

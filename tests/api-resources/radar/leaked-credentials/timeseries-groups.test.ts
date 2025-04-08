@@ -33,7 +33,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.leakedCredentials.timeseriesGroups.botClass(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           compromised: ['CLEAN'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -69,7 +69,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.leakedCredentials.timeseriesGroups.compromised(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           botClass: ['LIKELY_AUTOMATED'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],

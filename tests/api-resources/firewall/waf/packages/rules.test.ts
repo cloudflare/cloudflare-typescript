@@ -27,10 +27,10 @@ describe('resource rules', () => {
     const response = await client.firewall.waf.packages.rules.list('a25a9a7e9c00afc1fb2e0245519d725b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       description: 'SQL injection prevention for SELECT statements',
-      direction: 'asc',
+      direction: 'desc',
       group_id: 'de677e5818985db1285d0e80225f06e5',
       match: 'any',
-      mode: 'DIS',
+      mode: 'CHL',
       order: 'priority',
       page: 1,
       per_page: 5,
@@ -57,7 +57,7 @@ describe('resource rules', () => {
     const response = await client.firewall.waf.packages.rules.edit(
       'a25a9a7e9c00afc1fb2e0245519d725b',
       'a25a9a7e9c00afc1fb2e0245519d725b',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', mode: 'default' },
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', mode: 'on' },
     );
   });
 
