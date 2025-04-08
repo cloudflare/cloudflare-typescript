@@ -28,7 +28,7 @@ describe('resource cloudflared', () => {
     const response = await client.zeroTrust.tunnels.cloudflared.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
-      config_src: 'local',
+      config_src: 'cloudflare',
       tunnel_secret: 'AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg=',
     });
   });
@@ -56,7 +56,7 @@ describe('resource cloudflared', () => {
       name: 'blog',
       page: 1,
       per_page: 1,
-      status: 'inactive',
+      status: 'healthy',
       uuid: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       was_active_at: '2009-11-10T23:00:00Z',
       was_inactive_at: '2009-11-10T23:00:00Z',

@@ -42,7 +42,7 @@ describe('resource zone', () => {
         rname: 'admin.example.com',
         ttl: 3600,
       },
-      zone_mode: 'standard',
+      zone_mode: 'dns_only',
     });
   });
 

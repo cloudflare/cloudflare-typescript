@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource abuseReports', () => {
   // TODO: investigate unauthorized HTTP response
   test.skip('create: only required params', async () => {
-    const responsePromise = client.abuseReports.create('abuse_dmca', {
+    const responsePromise = client.abuseReports.create('abuse_general', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       address1: 'x',
       agent_name: 'x',
@@ -36,7 +36,7 @@ describe('resource abuseReports', () => {
 
   // TODO: investigate unauthorized HTTP response
   test.skip('create: required and optional params', async () => {
-    const response = await client.abuseReports.create('abuse_dmca', {
+    const response = await client.abuseReports.create('abuse_general', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       address1: 'x',
       agent_name: 'x',
@@ -48,7 +48,7 @@ describe('resource abuseReports', () => {
       owner_notification: 'send',
       signature: 'signature',
       state: 'x',
-      act: 'abuse_dmca',
+      act: 'abuse_general',
       comments: 'x',
       company: 'x',
       destination_ips: 'destination_ips',
