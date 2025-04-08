@@ -112,7 +112,7 @@ export interface ScheduleDeleteResponse {
 
 export interface ScheduleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -145,7 +145,7 @@ export interface ScheduleCreateParams {
 
 export interface ScheduleDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -178,7 +178,7 @@ export interface ScheduleDeleteParams {
 
 export interface ScheduleGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
