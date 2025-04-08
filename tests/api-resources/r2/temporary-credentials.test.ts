@@ -15,7 +15,7 @@ describe('resource temporaryCredentials', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket: 'example-bucket',
       parentAccessKeyId: 'example-access-key-id',
-      permission: 'admin-read-write',
+      permission: 'object-read-write',
       ttlSeconds: 3600,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -33,7 +33,7 @@ describe('resource temporaryCredentials', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket: 'example-bucket',
       parentAccessKeyId: 'example-access-key-id',
-      permission: 'admin-read-write',
+      permission: 'object-read-write',
       ttlSeconds: 3600,
       objects: ['example-object'],
       prefixes: ['example-prefix/'],

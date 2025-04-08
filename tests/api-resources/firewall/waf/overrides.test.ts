@@ -38,7 +38,7 @@ describe('resource overrides', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       rewrite_action: {},
-      rules: { '100015': 'challenge' },
+      rules: { '100015': 'disable' },
       urls: ['shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -62,7 +62,7 @@ describe('resource overrides', () => {
         disable: 'challenge',
         simulate: 'challenge',
       },
-      rules: { '100015': 'challenge' },
+      rules: { '100015': 'disable' },
       urls: ['shop.example.com/*'],
     });
   });

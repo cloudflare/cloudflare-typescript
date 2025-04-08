@@ -25,7 +25,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.routing.timeseriesGroups.arc(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
@@ -58,7 +58,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.routing.timeseriesGroups.dkim(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           arc: ['PASS'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -91,7 +91,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.routing.timeseriesGroups.dmarc(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           arc: ['PASS'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -124,7 +124,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.routing.timeseriesGroups.encrypted(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           arc: ['PASS'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -157,7 +157,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.routing.timeseriesGroups.ipVersion(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           arc: ['PASS'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -190,7 +190,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.routing.timeseriesGroups.spf(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           arc: ['PASS'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],

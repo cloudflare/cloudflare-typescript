@@ -86,7 +86,7 @@ describe('resource rules', () => {
       position: { before: 'da5e8e506c8e7877fe06cdf4c41add54' },
       ratelimit: {
         characteristics: ['ip.src'],
-        period: 10,
+        period: 60,
         counting_expression: 'http.request.body.raw eq "abcd"',
         mitigation_timeout: 600,
         requests_per_period: 1000,

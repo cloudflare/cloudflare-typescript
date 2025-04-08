@@ -12,7 +12,7 @@ describe('resource rules', () => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.rules.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'on',
+      action: 'allow',
       name: 'block bad websites',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,7 +27,7 @@ describe('resource rules', () => {
   test('create: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.rules.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'on',
+      action: 'allow',
       name: 'block bad websites',
       description: 'Block bad websites based on their host name.',
       device_posture: 'any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})',
@@ -41,7 +41,7 @@ describe('resource rules', () => {
         allow_child_bypass: false,
         audit_ssh: { command_logging: false },
         biso_admin_controls: {
-          copy: 'enabled',
+          copy: 'remote_only',
           dcp: false,
           dd: false,
           dk: false,
@@ -90,7 +90,7 @@ describe('resource rules', () => {
         redirect: { target_uri: 'https://example.com', preserve_path_and_query: true },
         resolve_dns_internally: { fallback: 'none', view_id: 'view_id' },
         resolve_dns_through_cloudflare: true,
-        untrusted_cert: { action: 'pass_through' },
+        untrusted_cert: { action: 'error' },
       },
       schedule: {
         fri: '08:00-12:30,13:30-17:00',
@@ -110,7 +110,7 @@ describe('resource rules', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.rules.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'on',
+      action: 'allow',
       name: 'block bad websites',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -125,7 +125,7 @@ describe('resource rules', () => {
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.rules.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'on',
+      action: 'allow',
       name: 'block bad websites',
       description: 'Block bad websites based on their host name.',
       device_posture: 'any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})',
@@ -139,7 +139,7 @@ describe('resource rules', () => {
         allow_child_bypass: false,
         audit_ssh: { command_logging: false },
         biso_admin_controls: {
-          copy: 'enabled',
+          copy: 'remote_only',
           dcp: false,
           dd: false,
           dk: false,
@@ -188,7 +188,7 @@ describe('resource rules', () => {
         redirect: { target_uri: 'https://example.com', preserve_path_and_query: true },
         resolve_dns_internally: { fallback: 'none', view_id: 'view_id' },
         resolve_dns_through_cloudflare: true,
-        untrusted_cert: { action: 'pass_through' },
+        untrusted_cert: { action: 'error' },
       },
       schedule: {
         fri: '08:00-12:30,13:30-17:00',

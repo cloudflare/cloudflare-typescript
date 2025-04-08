@@ -30,7 +30,7 @@ describe('resource customHostnames', () => {
       hostname: 'app.example.com',
       ssl: {
         bundle_method: 'ubiquitous',
-        certificate_authority: 'digicert',
+        certificate_authority: 'google',
         cloudflare_branding: false,
         custom_cert_bundle: [
           {
@@ -49,7 +49,7 @@ describe('resource customHostnames', () => {
           ciphers: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-SHA'],
           early_hints: 'on',
           http2: 'on',
-          min_tls_version: '1.0',
+          min_tls_version: '1.2',
           tls_1_3: 'on',
         },
         type: 'dv',
@@ -74,7 +74,7 @@ describe('resource customHostnames', () => {
     const response = await client.customHostnames.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
-      direction: 'asc',
+      direction: 'desc',
       hostname: 'app.example.com',
       order: 'ssl',
       page: 1,
@@ -123,7 +123,7 @@ describe('resource customHostnames', () => {
       custom_origin_sni: 'sni.example.com',
       ssl: {
         bundle_method: 'ubiquitous',
-        certificate_authority: 'digicert',
+        certificate_authority: 'google',
         cloudflare_branding: false,
         custom_cert_bundle: [
           {
@@ -142,7 +142,7 @@ describe('resource customHostnames', () => {
           ciphers: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-SHA'],
           early_hints: 'on',
           http2: 'on',
-          min_tls_version: '1.0',
+          min_tls_version: '1.2',
           tls_1_3: 'on',
         },
         type: 'dv',

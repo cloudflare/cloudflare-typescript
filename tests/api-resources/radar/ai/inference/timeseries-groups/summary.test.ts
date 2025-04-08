@@ -25,7 +25,7 @@ describe('resource summary', () => {
     await expect(
       client.radar.ai.inference.timeseriesGroups.summary.model(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
@@ -54,7 +54,7 @@ describe('resource summary', () => {
     await expect(
       client.radar.ai.inference.timeseriesGroups.summary.task(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],

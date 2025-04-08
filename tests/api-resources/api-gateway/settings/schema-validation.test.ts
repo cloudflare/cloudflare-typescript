@@ -12,7 +12,7 @@ describe('resource schemaValidation', () => {
   test('update: only required params', async () => {
     const responsePromise = client.apiGateway.settings.schemaValidation.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      validation_default_mitigation_action: 'none',
+      validation_default_mitigation_action: 'block',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,7 +26,7 @@ describe('resource schemaValidation', () => {
   test('update: required and optional params', async () => {
     const response = await client.apiGateway.settings.schemaValidation.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      validation_default_mitigation_action: 'none',
+      validation_default_mitigation_action: 'block',
       validation_override_mitigation_action: 'none',
     });
   });
@@ -47,7 +47,7 @@ describe('resource schemaValidation', () => {
   test('edit: required and optional params', async () => {
     const response = await client.apiGateway.settings.schemaValidation.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      validation_default_mitigation_action: 'none',
+      validation_default_mitigation_action: 'block',
       validation_override_mitigation_action: 'none',
     });
   });
