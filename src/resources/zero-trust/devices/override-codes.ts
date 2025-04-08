@@ -27,6 +27,24 @@ export class OverrideCodes extends APIResource {
       ) as APIPromise<{ result: OverrideCodeListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Fetches one-time use admin override codes for a registration. This relies on the
+   * **Admin Override** setting being enabled in your device configuration.
+   */
+  get(
+    registrationID: string,
+    params: OverrideCodeGetParams,
+    options?: RequestOptions,
+  ): APIPromise<OverrideCodeGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/devices/registrations/${registrationID}/override_codes`,
+        options,
+      ) as APIPromise<{ result: OverrideCodeGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface OverrideCodeListResponse {
@@ -62,13 +80,23 @@ export namespace OverrideCodeListResponse {
   }
 }
 
+export interface OverrideCodeGetResponse {
+  disable_for_time?: Record<string, string>;
+}
+
 export interface OverrideCodeListParams {
+  account_id: string;
+}
+
+export interface OverrideCodeGetParams {
   account_id: string;
 }
 
 export declare namespace OverrideCodes {
   export {
     type OverrideCodeListResponse as OverrideCodeListResponse,
+    type OverrideCodeGetResponse as OverrideCodeGetResponse,
     type OverrideCodeListParams as OverrideCodeListParams,
+    type OverrideCodeGetParams as OverrideCodeGetParams,
   };
 }
