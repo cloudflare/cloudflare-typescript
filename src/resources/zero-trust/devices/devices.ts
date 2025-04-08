@@ -30,7 +30,30 @@ import {
   Networks,
 } from './networks';
 import * as OverrideCodesAPI from './override-codes';
-import { OverrideCodeListParams, OverrideCodeListResponse, OverrideCodes } from './override-codes';
+import {
+  OverrideCodeGetParams,
+  OverrideCodeGetResponse,
+  OverrideCodeListParams,
+  OverrideCodeListResponse,
+  OverrideCodes,
+} from './override-codes';
+import * as RegistrationsAPI from './registrations';
+import {
+  RegistrationBulkDeleteParams,
+  RegistrationBulkDeleteResponse,
+  RegistrationDeleteParams,
+  RegistrationDeleteResponse,
+  RegistrationGetParams,
+  RegistrationGetResponse,
+  RegistrationListParams,
+  RegistrationListResponse,
+  RegistrationListResponsesCursorPagination,
+  RegistrationRevokeParams,
+  RegistrationRevokeResponse,
+  RegistrationUnrevokeParams,
+  RegistrationUnrevokeResponse,
+  Registrations,
+} from './registrations';
 import * as RevokeAPI from './revoke';
 import { Revoke, RevokeCreateParams, RevokeCreateResponse } from './revoke';
 import * as SettingsAPI from './settings';
@@ -88,6 +111,7 @@ import { SinglePage } from '../../../pagination';
 
 export class Devices extends APIResource {
   resilience: ResilienceAPI.Resilience = new ResilienceAPI.Resilience(this._client);
+  registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
   dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
@@ -386,6 +410,8 @@ export interface DeviceGetParams {
 
 Devices.DevicesSinglePage = DevicesSinglePage;
 Devices.Resilience = Resilience;
+Devices.Registrations = Registrations;
+Devices.RegistrationListResponsesCursorPagination = RegistrationListResponsesCursorPagination;
 Devices.DEXTests = DEXTests;
 Devices.SchemaHTTPSSinglePage = SchemaHTTPSSinglePage;
 Devices.Networks = Networks;
@@ -409,6 +435,23 @@ export declare namespace Devices {
   };
 
   export { Resilience as Resilience };
+
+  export {
+    Registrations as Registrations,
+    type RegistrationListResponse as RegistrationListResponse,
+    type RegistrationDeleteResponse as RegistrationDeleteResponse,
+    type RegistrationBulkDeleteResponse as RegistrationBulkDeleteResponse,
+    type RegistrationGetResponse as RegistrationGetResponse,
+    type RegistrationRevokeResponse as RegistrationRevokeResponse,
+    type RegistrationUnrevokeResponse as RegistrationUnrevokeResponse,
+    RegistrationListResponsesCursorPagination as RegistrationListResponsesCursorPagination,
+    type RegistrationListParams as RegistrationListParams,
+    type RegistrationDeleteParams as RegistrationDeleteParams,
+    type RegistrationBulkDeleteParams as RegistrationBulkDeleteParams,
+    type RegistrationGetParams as RegistrationGetParams,
+    type RegistrationRevokeParams as RegistrationRevokeParams,
+    type RegistrationUnrevokeParams as RegistrationUnrevokeParams,
+  };
 
   export {
     DEXTests as DEXTests,
@@ -503,6 +546,8 @@ export declare namespace Devices {
   export {
     OverrideCodes as OverrideCodes,
     type OverrideCodeListResponse as OverrideCodeListResponse,
+    type OverrideCodeGetResponse as OverrideCodeGetResponse,
     type OverrideCodeListParams as OverrideCodeListParams,
+    type OverrideCodeGetParams as OverrideCodeGetParams,
   };
 }
