@@ -95,7 +95,7 @@ export interface TagDeleteResponse {
 
 export interface TagCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -107,7 +107,7 @@ export interface TagCreateParams {
 
 export interface TagUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -119,21 +119,21 @@ export interface TagUpdateParams {
 
 export interface TagListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface TagDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface TagGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

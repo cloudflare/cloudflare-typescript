@@ -113,7 +113,7 @@ export namespace Identity {
 
 export interface LastSeenIdentityGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

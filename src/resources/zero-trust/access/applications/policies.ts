@@ -1068,7 +1068,7 @@ export interface PolicyListResponse extends ApplicationsAPI.ApplicationPolicy {
 
 export interface PolicyDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }
@@ -1140,7 +1140,7 @@ export interface PolicyCreateParams {
 
 export interface PolicyUpdateParams {
   /**
-   * Path param: UUID
+   * Path param: UUID.
    */
   app_id: string;
 
@@ -1214,7 +1214,7 @@ export interface PolicyListParams {
 
 export interface PolicyDeleteParams {
   /**
-   * UUID
+   * UUID.
    */
   app_id: string;
 
@@ -1231,7 +1231,7 @@ export interface PolicyDeleteParams {
 
 export interface PolicyGetParams {
   /**
-   * UUID
+   * UUID.
    */
   app_id: string;
 

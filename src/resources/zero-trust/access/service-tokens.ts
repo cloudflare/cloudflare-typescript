@@ -411,14 +411,14 @@ export interface ServiceTokenGetParams {
 
 export interface ServiceTokenRefreshParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ServiceTokenRotateParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

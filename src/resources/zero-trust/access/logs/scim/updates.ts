@@ -83,7 +83,7 @@ export interface UpdateListResponse {
 
 export interface UpdateListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
