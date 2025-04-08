@@ -33,7 +33,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.cacheHit(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -76,7 +76,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.dnssec(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -119,7 +119,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.dnssecAware(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -162,7 +162,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.dnssecE2E(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -205,7 +205,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.ipVersion(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -248,7 +248,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.matchingAnswer(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -291,7 +291,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.protocol(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -333,7 +333,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.queryType(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -376,7 +376,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.responseCode(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -419,7 +419,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.responseTTL(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],

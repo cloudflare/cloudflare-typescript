@@ -33,12 +33,12 @@ describe('resource rateLimits', () => {
     const response = await client.rateLimits.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       action: {
-        mode: 'simulate',
+        mode: 'challenge',
         response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
         timeout: 86400,
       },
       match: {
-        headers: [{ name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' }],
+        headers: [{ name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' }],
         request: { methods: ['GET', 'POST'], schemes: ['HTTP', 'HTTPS'], url: '*.example.org/path*' },
         response: { origin_traffic: true },
       },
@@ -108,12 +108,12 @@ describe('resource rateLimits', () => {
     const response = await client.rateLimits.edit('372e67954025e0ba6aaa6d586b9e0b59', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       action: {
-        mode: 'simulate',
+        mode: 'challenge',
         response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
         timeout: 86400,
       },
       match: {
-        headers: [{ name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' }],
+        headers: [{ name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' }],
         request: { methods: ['GET', 'POST'], schemes: ['HTTP', 'HTTPS'], url: '*.example.org/path*' },
         response: { origin_traffic: true },
       },
