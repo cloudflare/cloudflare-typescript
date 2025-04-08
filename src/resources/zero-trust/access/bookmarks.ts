@@ -119,7 +119,7 @@ export interface Bookmark {
 
 export interface BookmarkDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }

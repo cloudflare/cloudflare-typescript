@@ -26,7 +26,7 @@ export class Users extends APIResource {
 
 export interface UserListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
