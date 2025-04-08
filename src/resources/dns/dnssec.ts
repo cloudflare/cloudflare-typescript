@@ -125,14 +125,14 @@ export type DNSSECDeleteResponse = string;
 
 export interface DNSSECDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface DNSSECEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -168,7 +168,7 @@ export interface DNSSECEditParams {
 
 export interface DNSSECGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
