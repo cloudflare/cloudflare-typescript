@@ -196,7 +196,7 @@ export interface AzureAD {
   type: IdentityProviderType;
 
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 
@@ -408,7 +408,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -479,7 +479,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -511,7 +511,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -543,7 +543,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -604,7 +604,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -670,7 +670,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -702,7 +702,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -788,7 +788,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -859,7 +859,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -925,7 +925,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -991,7 +991,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1084,7 +1084,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1116,7 +1116,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2002,7 +2002,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2073,7 +2073,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2105,7 +2105,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2137,7 +2137,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2198,7 +2198,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2264,7 +2264,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2296,7 +2296,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2382,7 +2382,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2453,7 +2453,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2519,7 +2519,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2585,7 +2585,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2678,7 +2678,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2692,7 +2692,7 @@ export namespace IdentityProviderListResponse {
 
 export interface IdentityProviderDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }

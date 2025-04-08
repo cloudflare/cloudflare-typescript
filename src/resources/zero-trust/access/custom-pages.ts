@@ -109,7 +109,7 @@ export interface CustomPage {
   created_at?: string;
 
   /**
-   * UUID
+   * UUID.
    */
   uid?: string;
 
@@ -135,7 +135,7 @@ export interface CustomPageWithoutHTML {
   created_at?: string;
 
   /**
-   * UUID
+   * UUID.
    */
   uid?: string;
 
@@ -144,14 +144,14 @@ export interface CustomPageWithoutHTML {
 
 export interface CustomPageDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }
 
 export interface CustomPageCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -178,7 +178,7 @@ export interface CustomPageCreateParams {
 
 export interface CustomPageUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -205,21 +205,21 @@ export interface CustomPageUpdateParams {
 
 export interface CustomPageListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface CustomPageDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface CustomPageGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

@@ -96,7 +96,7 @@ export interface KeyRotateResponse {
 
 export interface KeyUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -108,14 +108,14 @@ export interface KeyUpdateParams {
 
 export interface KeyGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface KeyRotateParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

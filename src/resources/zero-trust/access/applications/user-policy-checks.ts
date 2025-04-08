@@ -56,7 +56,7 @@ export interface UserPolicyCheckListResponse {
 export namespace UserPolicyCheckListResponse {
   export interface AppState {
     /**
-     * UUID
+     * UUID.
      */
     app_uid?: string;
 
@@ -91,7 +91,7 @@ export namespace UserPolicyCheckListResponse {
     name?: string;
 
     /**
-     * UUID
+     * UUID.
      */
     user_uuid?: string;
 

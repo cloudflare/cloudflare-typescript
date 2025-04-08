@@ -115,7 +115,7 @@ export interface DOHGetResponse {
 
 export interface DOHUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -135,7 +135,7 @@ export interface DOHUpdateParams {
 
 export interface DOHGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

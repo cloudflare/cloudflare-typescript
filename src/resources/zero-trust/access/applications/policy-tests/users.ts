@@ -27,7 +27,7 @@ export type UserListResponsesSinglePage = SinglePage<UserListResponse>;
 
 export interface UserListResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 
@@ -49,7 +49,7 @@ export interface UserListResponse {
 
 export interface UserListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
