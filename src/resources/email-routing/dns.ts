@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import * as DNSAPI from './dns';
-import * as Shared from '../shared';
 import * as EmailRoutingAPI from './email-routing';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
@@ -113,9 +112,9 @@ export type DNSGetResponse =
 
 export namespace DNSGetResponse {
   export interface EmailEmailRoutingDNSQueryResponse {
-    errors: Array<Shared.ResponseInfo>;
+    errors: Array<EmailEmailRoutingDNSQueryResponse.Error>;
 
-    messages: Array<Shared.ResponseInfo>;
+    messages: Array<EmailEmailRoutingDNSQueryResponse.Message>;
 
     /**
      * Whether the API call was successful
@@ -128,6 +127,18 @@ export namespace DNSGetResponse {
   }
 
   export namespace EmailEmailRoutingDNSQueryResponse {
+    export interface Error {
+      code: number;
+
+      message: string;
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+    }
+
     export interface Result {
       errors?: Array<Result.Error>;
 
@@ -169,9 +180,9 @@ export namespace DNSGetResponse {
   }
 
   export interface EmailDNSSettingsResponseCollection {
-    errors: Array<Shared.ResponseInfo>;
+    errors: Array<EmailDNSSettingsResponseCollection.Error>;
 
-    messages: Array<Shared.ResponseInfo>;
+    messages: Array<EmailDNSSettingsResponseCollection.Message>;
 
     /**
      * Whether the API call was successful
@@ -184,6 +195,18 @@ export namespace DNSGetResponse {
   }
 
   export namespace EmailDNSSettingsResponseCollection {
+    export interface Error {
+      code: number;
+
+      message: string;
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+    }
+
     export interface ResultInfo {
       /**
        * Total number of results for the requested service
