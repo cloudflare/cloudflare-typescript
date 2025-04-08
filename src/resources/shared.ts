@@ -599,30 +599,68 @@ export interface ResponseInfo {
   code: number;
 
   message: string;
+
+  documentation_url?: string;
+
+  source?: ResponseInfo.Source;
+}
+
+export namespace ResponseInfo {
+  export interface Source {
+    pointer?: string;
+  }
 }
 
 export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;
 
 export namespace Result {
   export interface UnionMember0 {
-    errors?: Array<Shared.ResponseInfo>;
+    errors?: Array<UnionMember0.Error>;
 
-    messages?: Array<Shared.ResponseInfo>;
+    messages?: Array<UnionMember0.Message>;
 
     result?: Array<Shared.AuditLog>;
 
     success?: boolean;
   }
 
-  export interface AaaAPIResponseCommon {
-    errors: Array<Shared.ResponseInfo>;
+  export namespace UnionMember0 {
+    export interface Error {
+      code: number;
 
-    messages: Array<Shared.ResponseInfo>;
+      message: string;
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+    }
+  }
+
+  export interface AaaAPIResponseCommon {
+    errors: Array<AaaAPIResponseCommon.Error>;
+
+    messages: Array<AaaAPIResponseCommon.Message>;
 
     /**
      * Whether the API call was successful
      */
     success: true;
+  }
+
+  export namespace AaaAPIResponseCommon {
+    export interface Error {
+      code: number;
+
+      message: string;
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+    }
   }
 }
 

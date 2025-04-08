@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -136,9 +135,9 @@ export interface WebhookUpdateResponse {
 }
 
 export interface WebhookDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<WebhookDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<WebhookDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
@@ -149,6 +148,18 @@ export interface WebhookDeleteResponse {
 }
 
 export namespace WebhookDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
+
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
