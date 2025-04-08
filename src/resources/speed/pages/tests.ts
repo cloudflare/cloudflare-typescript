@@ -73,7 +73,7 @@ export type TestsV4PagePaginationArray = V4PagePaginationArray<Test>;
 
 export interface Test {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 
@@ -114,7 +114,7 @@ export interface TestDeleteResponse {
 
 export interface TestCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -147,7 +147,7 @@ export interface TestCreateParams {
 
 export interface TestListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -180,7 +180,7 @@ export interface TestListParams extends V4PagePaginationArrayParams {
 
 export interface TestDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -213,7 +213,7 @@ export interface TestDeleteParams {
 
 export interface TestGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 
