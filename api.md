@@ -2217,35 +2217,17 @@ Methods:
 
 ### Telemetry
 
-#### Keys
-
 Types:
 
-- <code><a href="./src/resources/workers/observability/telemetry/keys.ts">KeyCreateResponse</a></code>
+- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryKeysResponse</a></code>
+- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryQueryResponse</a></code>
+- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryValuesResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/workers/observability/telemetry/keys">client.workers.observability.telemetry.keys.<a href="./src/resources/workers/observability/telemetry/keys.ts">create</a>({ ...params }) -> KeyCreateResponsesSinglePage</code>
-
-#### Query
-
-Types:
-
-- <code><a href="./src/resources/workers/observability/telemetry/query.ts">QueryCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/workers/observability/telemetry/query">client.workers.observability.telemetry.query.<a href="./src/resources/workers/observability/telemetry/query.ts">create</a>({ ...params }) -> QueryCreateResponse</code>
-
-#### Values
-
-Types:
-
-- <code><a href="./src/resources/workers/observability/telemetry/values.ts">ValueCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/workers/observability/telemetry/values">client.workers.observability.telemetry.values.<a href="./src/resources/workers/observability/telemetry/values.ts">create</a>({ ...params }) -> ValueCreateResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/keys">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">keys</a>({ ...params }) -> TelemetryKeysResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/query">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">query</a>({ ...params }) -> TelemetryQueryResponse</code>
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/values">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">values</a>({ ...params }) -> TelemetryValuesResponsesSinglePage</code>
 
 # KV
 
