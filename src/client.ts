@@ -50,6 +50,7 @@ import { Memberships } from './resources/memberships';
 import { OriginCACertificates } from './resources/origin-ca-certificates';
 import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption';
 import { PageRules } from './resources/page-rules';
+import { Pipelines } from './resources/pipelines';
 import { RateLimits } from './resources/rate-limits';
 import { SecurityTXT } from './resources/security-txt';
 import { URLNormalization } from './resources/url-normalization';
@@ -965,6 +966,7 @@ export class Cloudflare {
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
   customPages: API.CustomPages = new API.CustomPages(this);
   secretsStore: API.SecretsStore = new API.SecretsStore(this);
+  pipelines: API.Pipelines = new API.Pipelines(this);
 }
 Cloudflare.Accounts = Accounts;
 Cloudflare.OriginCACertificates = OriginCACertificates;
@@ -1059,6 +1061,7 @@ Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
 Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
+Cloudflare.Pipelines = Pipelines;
 export declare namespace Cloudflare {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -1274,6 +1277,8 @@ export declare namespace Cloudflare {
   export { CustomPages as CustomPages };
 
   export { SecretsStore as SecretsStore };
+
+  export { Pipelines as Pipelines };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

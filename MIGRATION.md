@@ -958,6 +958,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.secretsStore.stores.secrets.duplicate()`
 - `client.secretsStore.stores.secrets.edit()`
 - `client.secretsStore.stores.secrets.get()`
+- `client.pipelines.update()`
+- `client.pipelines.delete()`
+- `client.pipelines.get()`
 
 </details>
 
