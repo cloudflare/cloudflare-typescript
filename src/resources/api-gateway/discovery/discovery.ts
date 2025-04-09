@@ -34,7 +34,7 @@ export class DiscoveryOperationsV4PagePaginationArray extends V4PagePaginationAr
 
 export interface DiscoveryOperation {
   /**
-   * UUID
+   * UUID.
    */
   id: string;
 
@@ -105,7 +105,7 @@ export interface DiscoveryGetResponse {
 
 export interface DiscoveryGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
