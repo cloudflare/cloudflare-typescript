@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_pipelines',
-  description: 'Delete a Pipeline.',
+  description: 'Delete a pipeline.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -22,7 +22,7 @@ export const tool: Tool = {
       },
       pipeline_name: {
         type: 'string',
-        description: 'Defines the name of Pipeline.',
+        description: 'Defines the name of the pipeline.',
       },
     },
   },

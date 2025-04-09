@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_pipelines',
-  description: 'Create a new Pipeline.',
+  description: 'Create a new pipeline.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -107,7 +107,7 @@ export const tool: Tool = {
       },
       name: {
         type: 'string',
-        description: 'Defines the name of Pipeline.',
+        description: 'Defines the name of the pipeline.',
       },
       source: {
         type: 'array',
@@ -126,7 +126,8 @@ export const tool: Tool = {
                 },
                 authentication: {
                   type: 'boolean',
-                  description: 'Specifies authentication is required to send to this Pipeline.',
+                  description:
+                    'Specifies whether authentication is required to send to this pipeline via HTTP.',
                 },
                 cors: {
                   type: 'object',

@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class Pipelines extends APIResource {
   /**
-   * Create a new Pipeline.
+   * Create a new pipeline.
    */
   create(params: PipelineCreateParams, options?: RequestOptions): APIPromise<PipelineCreateResponse> {
     const { account_id, ...body } = params;
@@ -20,7 +20,7 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * Update an existing Pipeline.
+   * Update an existing pipeline.
    */
   update(
     pipelineName: string,
@@ -37,7 +37,7 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * List, filter, and paginate Pipelines in an account.
+   * List, filter, and paginate pipelines in an account.
    */
   list(params: PipelineListParams, options?: RequestOptions): APIPromise<PipelineListResponse> {
     const { account_id, ...query } = params;
@@ -45,7 +45,7 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * Delete a Pipeline.
+   * Delete a pipeline.
    */
   delete(pipelineName: string, params: PipelineDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -56,7 +56,7 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * Get configuration details of a Pipeline.
+   * Get configuration of a pipeline.
    */
   get(
     pipelineName: string,
@@ -73,11 +73,11 @@ export class Pipelines extends APIResource {
 }
 
 /**
- * Describes the configuration of a Pipeline.
+ * Describes the configuration of a pipeline.
  */
 export interface PipelineCreateResponse {
   /**
-   * Specifies the Pipeline identifier.
+   * Specifies the pipeline identifier.
    */
   id: string;
 
@@ -89,13 +89,13 @@ export interface PipelineCreateResponse {
   endpoint: string;
 
   /**
-   * Defines the name of Pipeline.
+   * Defines the name of the pipeline.
    */
   name: string;
 
   source: Array<
-    | PipelineCreateResponse.WorkersPipelinesWorkersPipelinesHTTPSource
-    | PipelineCreateResponse.WorkersPipelinesWorkersPipelinesBindingSource
+    | PipelineCreateResponse.CloudflarePipelinesWorkersPipelinesHTTPSource
+    | PipelineCreateResponse.CloudflarePipelinesWorkersPipelinesBindingSource
   >;
 
   /**
@@ -171,7 +171,7 @@ export namespace PipelineCreateResponse {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesHTTPSource {
+  export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
      */
@@ -180,14 +180,14 @@ export namespace PipelineCreateResponse {
     type: string;
 
     /**
-     * Specifies authentication is required to send to this Pipeline.
+     * Specifies whether authentication is required to send to this pipeline via HTTP.
      */
     authentication?: boolean;
 
-    cors?: WorkersPipelinesWorkersPipelinesHTTPSource.CORS;
+    cors?: CloudflarePipelinesWorkersPipelinesHTTPSource.CORS;
   }
 
-  export namespace WorkersPipelinesWorkersPipelinesHTTPSource {
+  export namespace CloudflarePipelinesWorkersPipelinesHTTPSource {
     export interface CORS {
       /**
        * Specifies allowed origins to allow Cross Origin HTTP Requests.
@@ -196,7 +196,7 @@ export namespace PipelineCreateResponse {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesBindingSource {
+  export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
      */
@@ -207,11 +207,11 @@ export namespace PipelineCreateResponse {
 }
 
 /**
- * Describes the configuration of a Pipeline.
+ * Describes the configuration of a pipeline.
  */
 export interface PipelineUpdateResponse {
   /**
-   * Specifies the Pipeline identifier.
+   * Specifies the pipeline identifier.
    */
   id: string;
 
@@ -223,13 +223,13 @@ export interface PipelineUpdateResponse {
   endpoint: string;
 
   /**
-   * Defines the name of Pipeline.
+   * Defines the name of the pipeline.
    */
   name: string;
 
   source: Array<
-    | PipelineUpdateResponse.WorkersPipelinesWorkersPipelinesHTTPSource
-    | PipelineUpdateResponse.WorkersPipelinesWorkersPipelinesBindingSource
+    | PipelineUpdateResponse.CloudflarePipelinesWorkersPipelinesHTTPSource
+    | PipelineUpdateResponse.CloudflarePipelinesWorkersPipelinesBindingSource
   >;
 
   /**
@@ -305,7 +305,7 @@ export namespace PipelineUpdateResponse {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesHTTPSource {
+  export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
      */
@@ -314,14 +314,14 @@ export namespace PipelineUpdateResponse {
     type: string;
 
     /**
-     * Specifies authentication is required to send to this Pipeline.
+     * Specifies whether authentication is required to send to this pipeline via HTTP.
      */
     authentication?: boolean;
 
-    cors?: WorkersPipelinesWorkersPipelinesHTTPSource.CORS;
+    cors?: CloudflarePipelinesWorkersPipelinesHTTPSource.CORS;
   }
 
-  export namespace WorkersPipelinesWorkersPipelinesHTTPSource {
+  export namespace CloudflarePipelinesWorkersPipelinesHTTPSource {
     export interface CORS {
       /**
        * Specifies allowed origins to allow Cross Origin HTTP Requests.
@@ -330,7 +330,7 @@ export namespace PipelineUpdateResponse {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesBindingSource {
+  export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
      */
@@ -375,11 +375,11 @@ export namespace PipelineListResponse {
   }
 
   /**
-   * Describes the configuration of a Pipeline.
+   * Describes the configuration of a pipeline.
    */
   export interface Result {
     /**
-     * Specifies the Pipeline identifier.
+     * Specifies the pipeline identifier.
      */
     id: string;
 
@@ -391,12 +391,13 @@ export namespace PipelineListResponse {
     endpoint: string;
 
     /**
-     * Defines the name of Pipeline.
+     * Defines the name of the pipeline.
      */
     name: string;
 
     source: Array<
-      Result.WorkersPipelinesWorkersPipelinesHTTPSource | Result.WorkersPipelinesWorkersPipelinesBindingSource
+      | Result.CloudflarePipelinesWorkersPipelinesHTTPSource
+      | Result.CloudflarePipelinesWorkersPipelinesBindingSource
     >;
 
     /**
@@ -472,7 +473,7 @@ export namespace PipelineListResponse {
       }
     }
 
-    export interface WorkersPipelinesWorkersPipelinesHTTPSource {
+    export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
       /**
        * Specifies the format of source data.
        */
@@ -481,14 +482,14 @@ export namespace PipelineListResponse {
       type: string;
 
       /**
-       * Specifies authentication is required to send to this Pipeline.
+       * Specifies whether authentication is required to send to this pipeline via HTTP.
        */
       authentication?: boolean;
 
-      cors?: WorkersPipelinesWorkersPipelinesHTTPSource.CORS;
+      cors?: CloudflarePipelinesWorkersPipelinesHTTPSource.CORS;
     }
 
-    export namespace WorkersPipelinesWorkersPipelinesHTTPSource {
+    export namespace CloudflarePipelinesWorkersPipelinesHTTPSource {
       export interface CORS {
         /**
          * Specifies allowed origins to allow Cross Origin HTTP Requests.
@@ -497,7 +498,7 @@ export namespace PipelineListResponse {
       }
     }
 
-    export interface WorkersPipelinesWorkersPipelinesBindingSource {
+    export interface CloudflarePipelinesWorkersPipelinesBindingSource {
       /**
        * Specifies the format of source data.
        */
@@ -509,11 +510,11 @@ export namespace PipelineListResponse {
 }
 
 /**
- * Describes the configuration of a Pipeline.
+ * Describes the configuration of a pipeline.
  */
 export interface PipelineGetResponse {
   /**
-   * Specifies the Pipeline identifier.
+   * Specifies the pipeline identifier.
    */
   id: string;
 
@@ -525,13 +526,13 @@ export interface PipelineGetResponse {
   endpoint: string;
 
   /**
-   * Defines the name of Pipeline.
+   * Defines the name of the pipeline.
    */
   name: string;
 
   source: Array<
-    | PipelineGetResponse.WorkersPipelinesWorkersPipelinesHTTPSource
-    | PipelineGetResponse.WorkersPipelinesWorkersPipelinesBindingSource
+    | PipelineGetResponse.CloudflarePipelinesWorkersPipelinesHTTPSource
+    | PipelineGetResponse.CloudflarePipelinesWorkersPipelinesBindingSource
   >;
 
   /**
@@ -607,7 +608,7 @@ export namespace PipelineGetResponse {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesHTTPSource {
+  export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
      */
@@ -616,14 +617,14 @@ export namespace PipelineGetResponse {
     type: string;
 
     /**
-     * Specifies authentication is required to send to this Pipeline.
+     * Specifies whether authentication is required to send to this pipeline via HTTP.
      */
     authentication?: boolean;
 
-    cors?: WorkersPipelinesWorkersPipelinesHTTPSource.CORS;
+    cors?: CloudflarePipelinesWorkersPipelinesHTTPSource.CORS;
   }
 
-  export namespace WorkersPipelinesWorkersPipelinesHTTPSource {
+  export namespace CloudflarePipelinesWorkersPipelinesHTTPSource {
     export interface CORS {
       /**
        * Specifies allowed origins to allow Cross Origin HTTP Requests.
@@ -632,7 +633,7 @@ export namespace PipelineGetResponse {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesBindingSource {
+  export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
      */
@@ -654,7 +655,7 @@ export interface PipelineCreateParams {
   destination: PipelineCreateParams.Destination;
 
   /**
-   * Body param: Defines the name of Pipeline.
+   * Body param: Defines the name of the pipeline.
    */
   name: string;
 
@@ -662,8 +663,8 @@ export interface PipelineCreateParams {
    * Body param:
    */
   source: Array<
-    | PipelineCreateParams.WorkersPipelinesWorkersPipelinesHTTPSource
-    | PipelineCreateParams.WorkersPipelinesWorkersPipelinesBindingSource
+    | PipelineCreateParams.CloudflarePipelinesWorkersPipelinesHTTPSource
+    | PipelineCreateParams.CloudflarePipelinesWorkersPipelinesBindingSource
   >;
 }
 
@@ -753,7 +754,7 @@ export namespace PipelineCreateParams {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesHTTPSource {
+  export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
      */
@@ -762,14 +763,14 @@ export namespace PipelineCreateParams {
     type: string;
 
     /**
-     * Specifies authentication is required to send to this Pipeline.
+     * Specifies whether authentication is required to send to this pipeline via HTTP.
      */
     authentication?: boolean;
 
-    cors?: WorkersPipelinesWorkersPipelinesHTTPSource.CORS;
+    cors?: CloudflarePipelinesWorkersPipelinesHTTPSource.CORS;
   }
 
-  export namespace WorkersPipelinesWorkersPipelinesHTTPSource {
+  export namespace CloudflarePipelinesWorkersPipelinesHTTPSource {
     export interface CORS {
       /**
        * Specifies allowed origins to allow Cross Origin HTTP Requests.
@@ -778,7 +779,7 @@ export namespace PipelineCreateParams {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesBindingSource {
+  export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
      */
@@ -800,7 +801,7 @@ export interface PipelineUpdateParams {
   destination: PipelineUpdateParams.Destination;
 
   /**
-   * Body param: Defines the name of Pipeline.
+   * Body param: Defines the name of the pipeline.
    */
   name: string;
 
@@ -808,8 +809,8 @@ export interface PipelineUpdateParams {
    * Body param:
    */
   source: Array<
-    | PipelineUpdateParams.WorkersPipelinesWorkersPipelinesHTTPSource
-    | PipelineUpdateParams.WorkersPipelinesWorkersPipelinesBindingSource
+    | PipelineUpdateParams.CloudflarePipelinesWorkersPipelinesHTTPSource
+    | PipelineUpdateParams.CloudflarePipelinesWorkersPipelinesBindingSource
   >;
 }
 
@@ -899,7 +900,7 @@ export namespace PipelineUpdateParams {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesHTTPSource {
+  export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
      */
@@ -908,14 +909,14 @@ export namespace PipelineUpdateParams {
     type: string;
 
     /**
-     * Specifies authentication is required to send to this Pipeline.
+     * Specifies whether authentication is required to send to this pipeline via HTTP.
      */
     authentication?: boolean;
 
-    cors?: WorkersPipelinesWorkersPipelinesHTTPSource.CORS;
+    cors?: CloudflarePipelinesWorkersPipelinesHTTPSource.CORS;
   }
 
-  export namespace WorkersPipelinesWorkersPipelinesHTTPSource {
+  export namespace CloudflarePipelinesWorkersPipelinesHTTPSource {
     export interface CORS {
       /**
        * Specifies allowed origins to allow Cross Origin HTTP Requests.
@@ -924,7 +925,7 @@ export namespace PipelineUpdateParams {
     }
   }
 
-  export interface WorkersPipelinesWorkersPipelinesBindingSource {
+  export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
      */
@@ -946,12 +947,12 @@ export interface PipelineListParams {
   page?: string;
 
   /**
-   * Query param: Specifies the number of Pipelines per page.
+   * Query param: Specifies the number of pipelines per page.
    */
   per_page?: string;
 
   /**
-   * Query param: Specifies the prefix of Pipeline name to search.
+   * Query param: Specifies the prefix of pipeline name to search.
    */
   search?: string;
 }
