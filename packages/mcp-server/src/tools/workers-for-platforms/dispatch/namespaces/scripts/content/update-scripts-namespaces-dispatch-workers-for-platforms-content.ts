@@ -1,0 +1,63 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import type { Metadata } from '../../../../../';
+import Cloudflare from 'cloudflare';
+
+export const metadata: Metadata = {
+  resource: 'workers_for_platforms.dispatch.namespaces.scripts.content',
+  operation: 'write',
+  tags: [],
+};
+
+export const tool: Tool = {
+  name: 'update_scripts_namespaces_dispatch_workers_for_platforms_content',
+  description: 'Put script content for a script uploaded to a Workers for Platforms namespace.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      account_id: {
+        type: 'string',
+        description: 'Identifier.',
+      },
+      dispatch_namespace: {
+        type: 'string',
+        description: 'Name of the Workers for Platforms dispatch namespace.',
+      },
+      script_name: {
+        type: 'string',
+        description: 'Name of the script, used in URLs and route configuration.',
+      },
+      metadata: {
+        type: 'object',
+        description: 'JSON encoded metadata about the uploaded parts and Worker configuration.',
+        properties: {
+          body_part: {
+            type: 'string',
+            description:
+              'Name of the part in the multipart request that contains the script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.',
+          },
+          main_module: {
+            type: 'string',
+            description:
+              'Name of the part in the multipart request that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.',
+          },
+        },
+        required: [],
+      },
+      'CF-WORKER-BODY-PART': {
+        type: 'string',
+      },
+      'CF-WORKER-MAIN-MODULE-PART': {
+        type: 'string',
+      },
+    },
+  },
+};
+
+export const handler = (client: Cloudflare, args: any) => {
+  const { script_name, ...body } = args;
+  return client.workersForPlatforms.dispatch.namespaces.scripts.content.update(script_name, body);
+};
+
+export default { metadata, tool, handler };
