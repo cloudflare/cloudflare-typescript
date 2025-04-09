@@ -27,6 +27,9 @@ export class D1Resource extends APIResource {
   database: DatabaseAPI.Database = new DatabaseAPI.Database(this._client);
 }
 
+/**
+ * The details of the D1 database.
+ */
 export interface D1 {
   /**
    * Specifies the timestamp the resource was created as an ISO8601 string.
@@ -46,11 +49,30 @@ export interface D1 {
   num_tables?: number;
 
   /**
+   * Configuration for D1 read replication.
+   */
+  read_replication?: D1.ReadReplication;
+
+  /**
    * D1 database identifier (UUID).
    */
   uuid?: string;
 
   version?: string;
+}
+
+export namespace D1 {
+  /**
+   * Configuration for D1 read replication.
+   */
+  export interface ReadReplication {
+    /**
+     * The read replication mode for the database. Use 'auto' to create replicas and
+     * allow D1 automatically place them around the world, or 'disabled' to not use any
+     * database replicas (it can take a few hours for all replicas to be deleted).
+     */
+    mode: 'auto' | 'disabled';
+  }
 }
 
 D1Resource.Database = Database;
