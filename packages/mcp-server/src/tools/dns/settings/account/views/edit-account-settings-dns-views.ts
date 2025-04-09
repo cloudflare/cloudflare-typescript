@@ -18,11 +18,11 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       view_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       name: {
         type: 'string',

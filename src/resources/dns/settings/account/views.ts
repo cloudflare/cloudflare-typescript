@@ -81,7 +81,7 @@ export type ViewListResponsesV4PagePaginationArray = V4PagePaginationArray<ViewL
 
 export interface ViewCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -108,7 +108,7 @@ export interface ViewCreateResponse {
 
 export interface ViewListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -135,14 +135,14 @@ export interface ViewListResponse {
 
 export interface ViewDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface ViewEditResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -169,7 +169,7 @@ export interface ViewEditResponse {
 
 export interface ViewGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -196,7 +196,7 @@ export interface ViewGetResponse {
 
 export interface ViewCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -213,7 +213,7 @@ export interface ViewCreateParams {
 
 export interface ViewListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -276,14 +276,14 @@ export namespace ViewListParams {
 
 export interface ViewDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ViewEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -300,7 +300,7 @@ export interface ViewEditParams {
 
 export interface ViewGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
