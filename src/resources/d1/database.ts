@@ -19,6 +19,23 @@ export class Database extends APIResource {
   }
 
   /**
+   * Updates the specified D1 database.
+   */
+  update(
+    databaseId: string,
+    params: DatabaseUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<D1API.D1> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/d1/database/${databaseId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: D1API.D1 }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns a list of D1 databases.
    */
   list(
@@ -46,6 +63,23 @@ export class Database extends APIResource {
       this._client.delete(`/accounts/${account_id}/d1/database/${databaseId}`, options) as Core.APIPromise<{
         result: DatabaseDeleteResponse | null;
       }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates partially the specified D1 database.
+   */
+  edit(
+    databaseId: string,
+    params: DatabaseEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<D1API.D1> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/d1/database/${databaseId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: D1API.D1 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -528,6 +562,32 @@ export interface DatabaseCreateParams {
   primary_location_hint?: 'wnam' | 'enam' | 'weur' | 'eeur' | 'apac' | 'oc';
 }
 
+export interface DatabaseUpdateParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Configuration for D1 read replication.
+   */
+  read_replication: DatabaseUpdateParams.ReadReplication;
+}
+
+export namespace DatabaseUpdateParams {
+  /**
+   * Configuration for D1 read replication.
+   */
+  export interface ReadReplication {
+    /**
+     * The read replication mode for the database. Use 'auto' to create replicas and
+     * allow D1 automatically place them around the world, or 'disabled' to not use any
+     * database replicas (it can take a few hours for all replicas to be deleted).
+     */
+    mode: 'auto' | 'disabled';
+  }
+}
+
 export interface DatabaseListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
@@ -545,6 +605,32 @@ export interface DatabaseDeleteParams {
    * Account identifier tag.
    */
   account_id: string;
+}
+
+export interface DatabaseEditParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Configuration for D1 read replication.
+   */
+  read_replication?: DatabaseEditParams.ReadReplication;
+}
+
+export namespace DatabaseEditParams {
+  /**
+   * Configuration for D1 read replication.
+   */
+  export interface ReadReplication {
+    /**
+     * The read replication mode for the database. Use 'auto' to create replicas and
+     * allow D1 automatically place them around the world, or 'disabled' to not use any
+     * database replicas (it can take a few hours for all replicas to be deleted).
+     */
+    mode: 'auto' | 'disabled';
+  }
 }
 
 export interface DatabaseExportParams {
@@ -718,8 +804,10 @@ export declare namespace Database {
     QueryResultsSinglePage as QueryResultsSinglePage,
     DatabaseRawResponsesSinglePage as DatabaseRawResponsesSinglePage,
     type DatabaseCreateParams as DatabaseCreateParams,
+    type DatabaseUpdateParams as DatabaseUpdateParams,
     type DatabaseListParams as DatabaseListParams,
     type DatabaseDeleteParams as DatabaseDeleteParams,
+    type DatabaseEditParams as DatabaseEditParams,
     type DatabaseExportParams as DatabaseExportParams,
     type DatabaseGetParams as DatabaseGetParams,
     type DatabaseImportParams as DatabaseImportParams,
