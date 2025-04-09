@@ -2081,8 +2081,10 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `d1.database`:
 
 - `create_d1_database` (`write`): Returns the created D1 database.
+- `update_d1_database` (`write`): Updates the specified D1 database.
 - `list_d1_database` (`read`): Returns a list of D1 databases.
 - `delete_d1_database` (`write`): Deletes the specified D1 database.
+- `edit_d1_database` (`write`): Updates partially the specified D1 database.
 - `export_d1_database` (`write`): Returns a URL where the SQL contents of your D1 can be downloaded. Note: this process may take
   some time for larger DBs, during which your D1 will be unavailable to serve queries. To avoid
   blocking your DB unnecessarily, an in-progress export must be continually polled or will automatically cancel.
