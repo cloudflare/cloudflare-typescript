@@ -576,7 +576,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.alerting.policies.update()`
 - `client.alerting.policies.delete()`
 - `client.alerting.policies.get()`
+- `client.d1.database.update()`
 - `client.d1.database.delete()`
+- `client.d1.database.edit()`
 - `client.d1.database.export()`
 - `client.d1.database.get()`
 - `client.d1.database.import()`

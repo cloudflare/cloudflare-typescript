@@ -62,7 +62,7 @@ export interface ASNFullReportResponse {
 
 export interface ASNDayReportParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -74,7 +74,7 @@ export interface ASNDayReportParams {
 
 export interface ASNFullReportParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
