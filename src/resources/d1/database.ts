@@ -154,19 +154,72 @@ export interface QueryResult {
 
 export namespace QueryResult {
   export interface Meta {
+    /**
+     * Denotes if the database has been altered in some way, like deleting rows.
+     */
     changed_db?: boolean;
 
+    /**
+     * Rough indication of how many rows were modified by the query, as provided by
+     * SQLite's `sqlite3_total_changes()`.
+     */
     changes?: number;
 
+    /**
+     * The duration of the SQL query execution inside the database. Does not include
+     * any network communication.
+     */
     duration?: number;
 
+    /**
+     * The row ID of the last inserted row in a table with an `INTEGER PRIMARY KEY` as
+     * provided by SQLite. Tables created with `WITHOUT ROWID` do not populate this.
+     */
     last_row_id?: number;
 
+    /**
+     * Number of rows read during the SQL query execution, including indices (not all
+     * rows are necessarily returned).
+     */
     rows_read?: number;
 
+    /**
+     * Number of rows written during the SQL query execution, including indices.
+     */
     rows_written?: number;
 
+    /**
+     * Denotes if the query has been handled by the database primary instance.
+     */
+    served_by_primary?: boolean;
+
+    /**
+     * Region location hint of the database instance that handled the query.
+     */
+    served_by_region?: 'WNAM' | 'ENAM' | 'WEUR' | 'EEUR' | 'APAC' | 'OC';
+
+    /**
+     * Size of the database after the query committed, in bytes.
+     */
     size_after?: number;
+
+    /**
+     * Various durations for the query.
+     */
+    timings?: Meta.Timings;
+  }
+
+  export namespace Meta {
+    /**
+     * Various durations for the query.
+     */
+    export interface Timings {
+      /**
+       * The duration of the SQL query execution inside the database. Does not include
+       * any network communication.
+       */
+      sql_duration_ms?: number;
+    }
   }
 }
 
@@ -301,19 +354,72 @@ export namespace DatabaseImportResponse {
 
   export namespace Result {
     export interface Meta {
+      /**
+       * Denotes if the database has been altered in some way, like deleting rows.
+       */
       changed_db?: boolean;
 
+      /**
+       * Rough indication of how many rows were modified by the query, as provided by
+       * SQLite's `sqlite3_total_changes()`.
+       */
       changes?: number;
 
+      /**
+       * The duration of the SQL query execution inside the database. Does not include
+       * any network communication.
+       */
       duration?: number;
 
+      /**
+       * The row ID of the last inserted row in a table with an `INTEGER PRIMARY KEY` as
+       * provided by SQLite. Tables created with `WITHOUT ROWID` do not populate this.
+       */
       last_row_id?: number;
 
+      /**
+       * Number of rows read during the SQL query execution, including indices (not all
+       * rows are necessarily returned).
+       */
       rows_read?: number;
 
+      /**
+       * Number of rows written during the SQL query execution, including indices.
+       */
       rows_written?: number;
 
+      /**
+       * Denotes if the query has been handled by the database primary instance.
+       */
+      served_by_primary?: boolean;
+
+      /**
+       * Region location hint of the database instance that handled the query.
+       */
+      served_by_region?: 'WNAM' | 'ENAM' | 'WEUR' | 'EEUR' | 'APAC' | 'OC';
+
+      /**
+       * Size of the database after the query committed, in bytes.
+       */
       size_after?: number;
+
+      /**
+       * Various durations for the query.
+       */
+      timings?: Meta.Timings;
+    }
+
+    export namespace Meta {
+      /**
+       * Various durations for the query.
+       */
+      export interface Timings {
+        /**
+         * The duration of the SQL query execution inside the database. Does not include
+         * any network communication.
+         */
+        sql_duration_ms?: number;
+      }
     }
   }
 }
@@ -328,19 +434,72 @@ export interface DatabaseRawResponse {
 
 export namespace DatabaseRawResponse {
   export interface Meta {
+    /**
+     * Denotes if the database has been altered in some way, like deleting rows.
+     */
     changed_db?: boolean;
 
+    /**
+     * Rough indication of how many rows were modified by the query, as provided by
+     * SQLite's `sqlite3_total_changes()`.
+     */
     changes?: number;
 
+    /**
+     * The duration of the SQL query execution inside the database. Does not include
+     * any network communication.
+     */
     duration?: number;
 
+    /**
+     * The row ID of the last inserted row in a table with an `INTEGER PRIMARY KEY` as
+     * provided by SQLite. Tables created with `WITHOUT ROWID` do not populate this.
+     */
     last_row_id?: number;
 
+    /**
+     * Number of rows read during the SQL query execution, including indices (not all
+     * rows are necessarily returned).
+     */
     rows_read?: number;
 
+    /**
+     * Number of rows written during the SQL query execution, including indices.
+     */
     rows_written?: number;
 
+    /**
+     * Denotes if the query has been handled by the database primary instance.
+     */
+    served_by_primary?: boolean;
+
+    /**
+     * Region location hint of the database instance that handled the query.
+     */
+    served_by_region?: 'WNAM' | 'ENAM' | 'WEUR' | 'EEUR' | 'APAC' | 'OC';
+
+    /**
+     * Size of the database after the query committed, in bytes.
+     */
     size_after?: number;
+
+    /**
+     * Various durations for the query.
+     */
+    timings?: Meta.Timings;
+  }
+
+  export namespace Meta {
+    /**
+     * Various durations for the query.
+     */
+    export interface Timings {
+      /**
+       * The duration of the SQL query execution inside the database. Does not include
+       * any network communication.
+       */
+      sql_duration_ms?: number;
+    }
   }
 
   export interface Results {
