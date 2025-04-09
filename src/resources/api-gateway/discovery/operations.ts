@@ -89,7 +89,7 @@ export interface OperationEditResponse {
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -149,7 +149,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
 
 export interface OperationBulkEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -176,7 +176,7 @@ export namespace OperationBulkEditParams {
 
 export interface OperationEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
