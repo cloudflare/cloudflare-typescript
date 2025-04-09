@@ -145,7 +145,7 @@ export interface APIShield {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 }
@@ -172,7 +172,7 @@ export interface OperationCreateResponse {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 
@@ -406,7 +406,7 @@ export namespace OperationCreateResponse {
        */
       export interface ActiveSchema {
         /**
-         * UUID
+         * UUID.
          */
         id?: string;
 
@@ -448,7 +448,7 @@ export interface OperationListResponse {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 
@@ -682,7 +682,7 @@ export namespace OperationListResponse {
        */
       export interface ActiveSchema {
         /**
-         * UUID
+         * UUID.
          */
         id?: string;
 
@@ -708,7 +708,7 @@ export interface OperationDeleteResponse {
   messages: UserSchemasAPI.Message;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
@@ -735,7 +735,7 @@ export interface OperationBulkCreateResponse {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 
@@ -969,7 +969,7 @@ export namespace OperationBulkCreateResponse {
        */
       export interface ActiveSchema {
         /**
-         * UUID
+         * UUID.
          */
         id?: string;
 
@@ -995,7 +995,7 @@ export interface OperationBulkDeleteResponse {
   messages: UserSchemasAPI.Message;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
@@ -1022,7 +1022,7 @@ export interface OperationGetResponse {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 
@@ -1256,7 +1256,7 @@ export namespace OperationGetResponse {
        */
       export interface ActiveSchema {
         /**
-         * UUID
+         * UUID.
          */
         id?: string;
 
@@ -1278,7 +1278,7 @@ export namespace OperationGetResponse {
 
 export interface OperationCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1304,7 +1304,7 @@ export interface OperationCreateParams {
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1344,14 +1344,14 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
 
 export interface OperationDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface OperationBulkCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1385,14 +1385,14 @@ export namespace OperationBulkCreateParams {
 
 export interface OperationBulkDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface OperationGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

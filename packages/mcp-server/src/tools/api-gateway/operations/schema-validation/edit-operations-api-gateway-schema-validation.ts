@@ -18,7 +18,7 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       settings_multiple_request: {
         type: 'object',

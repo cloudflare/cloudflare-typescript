@@ -18,11 +18,11 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       operation_id: {
         type: 'string',
-        description: 'UUID',
+        description: 'UUID.',
       },
       feature: {
         type: 'array',
