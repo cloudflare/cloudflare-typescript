@@ -1,0 +1,150 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import type { Metadata } from '../';
+import Cloudflare from 'cloudflare';
+
+export const metadata: Metadata = {
+  resource: 'custom_hostnames',
+  operation: 'write',
+  tags: [],
+};
+
+export const tool: Tool = {
+  name: 'edit_custom_hostnames',
+  description:
+    "Modify SSL configuration for a custom hostname. When sent with SSL config that matches existing config, used to indicate that hostname should pass domain control validation (DCV). Can also be used to change validation type, e.g., from 'http' to 'email'. Bundle an existing certificate with another certificate by using the \"custom_cert_bundle\" field. The bundling process supports combining certificates as long as the following condition is met. One certificate must use the RSA algorithm, and the other must use the ECDSA algorithm.",
+  inputSchema: {
+    type: 'object',
+    properties: {
+      zone_id: {
+        type: 'string',
+        description: 'Identifier',
+      },
+      custom_hostname_id: {
+        type: 'string',
+        description: 'Identifier',
+      },
+      custom_metadata: {
+        type: 'object',
+        description:
+          'Unique key/value metadata for this hostname. These are per-hostname (customer) settings.',
+      },
+      custom_origin_server: {
+        type: 'string',
+        description: 'a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME record.',
+      },
+      custom_origin_sni: {
+        type: 'string',
+        description:
+          "A hostname that will be sent to your custom origin server as SNI for TLS handshake. This can be a valid subdomain of the zone or custom origin server name or the string ':request_host_header:' which will cause the host header in the request to be used as SNI. Not configurable with default/fallback origin server.",
+      },
+      ssl: {
+        type: 'object',
+        description: 'SSL properties used when creating the custom hostname.',
+        properties: {
+          bundle_method: {
+            type: 'string',
+            description:
+              'A ubiquitous bundle has the highest probability of being verified everywhere, even by clients using outdated or unusual trust stores. An optimal bundle uses the shortest chain and newest intermediates. And the force bundle verifies the chain, but does not otherwise modify it.',
+            enum: ['ubiquitous', 'optimal', 'force'],
+          },
+          certificate_authority: {
+            type: 'string',
+            description: 'The Certificate Authority that will issue the certificate',
+            enum: ['digicert', 'google', 'lets_encrypt', 'ssl_com'],
+          },
+          cloudflare_branding: {
+            type: 'boolean',
+            description:
+              'Whether or not to add Cloudflare Branding for the order.  This will add a subdomain of sni.cloudflaressl.com as the Common Name if set to true',
+          },
+          custom_cert_bundle: {
+            type: 'array',
+            description: 'Array of custom certificate and key pairs (1 or 2 pairs allowed)',
+            items: {
+              type: 'object',
+              properties: {
+                custom_certificate: {
+                  type: 'string',
+                  description: 'If a custom uploaded certificate is used.',
+                },
+                custom_key: {
+                  type: 'string',
+                  description: 'The key for a custom uploaded certificate.',
+                },
+              },
+              required: ['custom_certificate', 'custom_key'],
+            },
+          },
+          custom_certificate: {
+            type: 'string',
+            description: 'If a custom uploaded certificate is used.',
+          },
+          custom_key: {
+            type: 'string',
+            description: 'The key for a custom uploaded certificate.',
+          },
+          method: {
+            type: 'string',
+            description: 'Domain control validation (DCV) method used for this hostname.',
+            enum: ['http', 'txt', 'email'],
+          },
+          settings: {
+            type: 'object',
+            description: 'SSL specific settings.',
+            properties: {
+              ciphers: {
+                type: 'array',
+                description:
+                  'An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.',
+                items: {
+                  type: 'string',
+                },
+              },
+              early_hints: {
+                type: 'string',
+                description: 'Whether or not Early Hints is enabled.',
+                enum: ['on', 'off'],
+              },
+              http2: {
+                type: 'string',
+                description: 'Whether or not HTTP2 is enabled.',
+                enum: ['on', 'off'],
+              },
+              min_tls_version: {
+                type: 'string',
+                description: 'The minimum TLS version supported.',
+                enum: ['1.0', '1.1', '1.2', '1.3'],
+              },
+              tls_1_3: {
+                type: 'string',
+                description: 'Whether or not TLS 1.3 is enabled.',
+                enum: ['on', 'off'],
+              },
+            },
+            required: [],
+          },
+          type: {
+            type: 'string',
+            description:
+              'Level of validation to be used for this hostname. Domain validation (dv) must be used.',
+            enum: ['dv'],
+          },
+          wildcard: {
+            type: 'boolean',
+            description: 'Indicates whether the certificate covers a wildcard.',
+          },
+        },
+        required: [],
+      },
+    },
+  },
+};
+
+export const handler = (client: Cloudflare, args: any) => {
+  const { custom_hostname_id, ...body } = args;
+  return client.customHostnames.edit(custom_hostname_id, body);
+};
+
+export default { metadata, tool, handler };
