@@ -81,6 +81,7 @@ export const readEnv = (env: string): string | undefined => {
   } else if (typeof (globalThis as any).Deno !== 'undefined') {
     return (globalThis as any).Deno.env?.get?.(env)?.trim();
   }
+  return;
 };
 
 export const readEnvOrError = (env: string): string => {
