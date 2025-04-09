@@ -1260,87 +1260,6 @@ client.example.list(undefined, { headers: { ... } });
 
 </details>
 
-### Pagination changes
-
-Note that the `for await` syntax is _not_ affected. This still works as-is:
-
-```ts
-// Automatically fetches more pages as needed.
-for await (const account of client.accounts.list()) {
-  console.log(account);
-}
-```
-
-#### Simplified interface
-
-The pagination interface has been simplified:
-
-```ts
-// Before
-page.nextPageParams();
-page.nextPageInfo();
-// Required manually handling { url } | { params } type
-
-// After
-page.nextPageRequestOptions();
-```
-
-#### Removed unnecessary classes
-
-Page classes for individual methods are now type aliases:
-
-```ts
-// Before
-export class AccountsV4PagePaginationArray extends V4PagePaginationArray<Account> {}
-
-// After
-export type AccountsV4PagePaginationArray = V4PagePaginationArray<Account>;
-```
-
-If you were importing these classes at runtime, you'll need to switch to importing the base class or only import them at the type-level.
-
-### File handling
-
-The deprecated `fileFromPath` helper has been removed in favor of native Node.js streams:
-
-```ts
-// Before
-Cloudflare.fileFromPath('path/to/file');
-
-// After
-import fs from 'fs';
-fs.createReadStream('path/to/file');
-```
-
-Note that this function previously only worked on Node.js. If you're using Bun, you can use [`Bun.file`](https://bun.sh/docs/api/file-io) instead.
-
-### Shims removal
-
-Previously you could configure the types that the SDK used like this:
-
-```ts
-// Tell TypeScript and the package to use the global Web fetch instead of node-fetch.
-import 'cloudflare/shims/web';
-import Cloudflare from 'cloudflare';
-```
-
-The `cloudflare/shims` imports have been removed. Your global types must now be [correctly configured](#minimum-types-requirements).
-
-### `cloudflare/src` directory removed
-
-Previously IDEs may have auto-completed imports from the `cloudflare/src` directory, however this
-directory was only included for an improved go-to-definition experience and should not have been used at runtime.
-
-If you have any `cloudflare/src` imports, you must replace it with `cloudflare`.
-
-```ts
-// Before
-import Cloudflare from 'cloudflare/src';
-
-// After
-import Cloudflare from 'cloudflare';
-```
-
 ### Method params must be an object
 
 When making requests to endpoints that expect something other than a JSON object, you must now pass the body as a property instead
@@ -1430,6 +1349,87 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.contentScanning.payloads.create()`
 
 </details>
+
+### Pagination changes
+
+Note that the `for await` syntax is _not_ affected. This still works as-is:
+
+```ts
+// Automatically fetches more pages as needed.
+for await (const account of client.accounts.list()) {
+  console.log(account);
+}
+```
+
+#### Simplified interface
+
+The pagination interface has been simplified:
+
+```ts
+// Before
+page.nextPageParams();
+page.nextPageInfo();
+// Required manually handling { url } | { params } type
+
+// After
+page.nextPageRequestOptions();
+```
+
+#### Removed unnecessary classes
+
+Page classes for individual methods are now type aliases:
+
+```ts
+// Before
+export class AccountsV4PagePaginationArray extends V4PagePaginationArray<Account> {}
+
+// After
+export type AccountsV4PagePaginationArray = V4PagePaginationArray<Account>;
+```
+
+If you were importing these classes at runtime, you'll need to switch to importing the base class or only import them at the type-level.
+
+### File handling
+
+The deprecated `fileFromPath` helper has been removed in favor of native Node.js streams:
+
+```ts
+// Before
+Cloudflare.fileFromPath('path/to/file');
+
+// After
+import fs from 'fs';
+fs.createReadStream('path/to/file');
+```
+
+Note that this function previously only worked on Node.js. If you're using Bun, you can use [`Bun.file`](https://bun.sh/docs/api/file-io) instead.
+
+### Shims removal
+
+Previously you could configure the types that the SDK used like this:
+
+```ts
+// Tell TypeScript and the package to use the global Web fetch instead of node-fetch.
+import 'cloudflare/shims/web';
+import Cloudflare from 'cloudflare';
+```
+
+The `cloudflare/shims` imports have been removed. Your global types must now be [correctly configured](#minimum-types-requirements).
+
+### `cloudflare/src` directory removed
+
+Previously IDEs may have auto-completed imports from the `cloudflare/src` directory, however this
+directory was only included for an improved go-to-definition experience and should not have been used at runtime.
+
+If you have any `cloudflare/src` imports, you must replace it with `cloudflare`.
+
+```ts
+// Before
+import Cloudflare from 'cloudflare/src';
+
+// After
+import Cloudflare from 'cloudflare';
+```
 
 ### Headers
 
