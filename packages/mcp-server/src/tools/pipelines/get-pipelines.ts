@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_pipelines',
-  description: 'Get configuration details of a Pipeline.',
+  description: 'Get configuration of a pipeline.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -22,7 +22,7 @@ export const tool: Tool = {
       },
       pipeline_name: {
         type: 'string',
-        description: 'Defines the name of Pipeline.',
+        description: 'Defines the name of the pipeline.',
       },
     },
   },

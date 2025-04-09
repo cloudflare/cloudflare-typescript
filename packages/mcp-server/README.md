@@ -3952,8 +3952,8 @@ Model specific inputs available in [Cloudflare Docs](https://developers.cloudfla
 
 ### Resource `pipelines`:
 
-- `create_pipelines` (`write`): Create a new Pipeline.
-- `update_pipelines` (`write`): Update an existing Pipeline.
-- `list_pipelines` (`read`): List, filter, and paginate Pipelines in an account.
-- `delete_pipelines` (`write`): Delete a Pipeline.
-- `get_pipelines` (`read`): Get configuration details of a Pipeline.
+- `create_pipelines` (`write`): Create a new pipeline.
+- `update_pipelines` (`write`): Update an existing pipeline.
+- `list_pipelines` (`read`): List, filter, and paginate pipelines in an account.
+- `delete_pipelines` (`write`): Delete a pipeline.
+- `get_pipelines` (`read`): Get configuration of a pipeline.

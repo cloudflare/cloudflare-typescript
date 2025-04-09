@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_pipelines',
-  description: 'List, filter, and paginate Pipelines in an account.',
+  description: 'List, filter, and paginate pipelines in an account.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -26,11 +26,11 @@ export const tool: Tool = {
       },
       per_page: {
         type: 'string',
-        description: 'Specifies the number of Pipelines per page.',
+        description: 'Specifies the number of pipelines per page.',
       },
       search: {
         type: 'string',
-        description: 'Specifies the prefix of Pipeline name to search.',
+        description: 'Specifies the prefix of pipeline name to search.',
       },
     },
   },
