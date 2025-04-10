@@ -461,7 +461,7 @@ export namespace AppListResponse {
 
 export interface AppDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 }
