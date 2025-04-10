@@ -15,29 +15,94 @@ export const tool: Tool = {
   description: 'Add a secret to a script.',
   inputSchema: {
     type: 'object',
-    properties: {
-      account_id: {
-        type: 'string',
-        description: 'Identifier.',
+    anyOf: [
+      {
+        type: 'object',
+        properties: {
+          account_id: {
+            type: 'string',
+            description: 'Identifier.',
+          },
+          script_name: {
+            type: 'string',
+            description: 'Name of the script, used in URLs and route configuration.',
+          },
+          name: {
+            type: 'string',
+            description: 'A JavaScript variable name for the binding.',
+          },
+          text: {
+            type: 'string',
+            description: 'The secret value to use.',
+          },
+          type: {
+            type: 'string',
+            description: 'The kind of resource that the binding provides.',
+            enum: ['secret_text'],
+          },
+        },
       },
-      script_name: {
-        type: 'string',
-        description: 'Name of the script, used in URLs and route configuration.',
+      {
+        type: 'object',
+        properties: {
+          account_id: {
+            type: 'string',
+            description: 'Identifier.',
+          },
+          script_name: {
+            type: 'string',
+            description: 'Name of the script, used in URLs and route configuration.',
+          },
+          algorithm: {
+            type: 'object',
+            description:
+              'Algorithm-specific key parameters ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).',
+          },
+          format: {
+            type: 'string',
+            description:
+              'Data format of the key ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).',
+            enum: ['raw', 'pkcs8', 'spki', 'jwk'],
+          },
+          name: {
+            type: 'string',
+            description: 'A JavaScript variable name for the binding.',
+          },
+          type: {
+            type: 'string',
+            description: 'The kind of resource that the binding provides.',
+            enum: ['secret_key'],
+          },
+          usages: {
+            type: 'array',
+            description:
+              'Allowed operations with the key ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).',
+            items: {
+              type: 'string',
+              enum: [
+                'encrypt',
+                'decrypt',
+                'sign',
+                'verify',
+                'deriveKey',
+                'deriveBits',
+                'wrapKey',
+                'unwrapKey',
+              ],
+            },
+          },
+          key_base64: {
+            type: 'string',
+            description: 'Base64-encoded key data. Required if `format` is "raw", "pkcs8", or "spki".',
+          },
+          key_jwk: {
+            type: 'object',
+            description:
+              'Key data in [JSON Web Key](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#json_web_key) format. Required if `format` is "jwk".',
+          },
+        },
       },
-      name: {
-        type: 'string',
-        description: 'The name of this secret, this is what will be used to access it inside the Worker.',
-      },
-      text: {
-        type: 'string',
-        description: 'The value of the secret.',
-      },
-      type: {
-        type: 'string',
-        description: 'The type of secret to put.',
-        enum: ['secret_text'],
-      },
-    },
+    ],
   },
 };
 
