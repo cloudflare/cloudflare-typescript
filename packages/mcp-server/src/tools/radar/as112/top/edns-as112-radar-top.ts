@@ -22,14 +22,6 @@ export const tool: Tool = {
         description: 'EDNS (Extension Mechanisms for DNS) status.',
         enum: ['SUPPORTED', 'NOT_SUPPORTED'],
       },
-      asn: {
-        type: 'array',
-        description:
-          'Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.',
-        items: {
-          type: 'string',
-        },
-      },
       continent: {
         type: 'array',
         description:

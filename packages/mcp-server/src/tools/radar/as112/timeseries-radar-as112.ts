@@ -22,14 +22,6 @@ export const tool: Tool = {
           'Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).',
         enum: ['15m', '1h', '1d', '1w'],
       },
-      asn: {
-        type: 'array',
-        description:
-          'Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.',
-        items: {
-          type: 'string',
-        },
-      },
       continent: {
         type: 'array',
         description:

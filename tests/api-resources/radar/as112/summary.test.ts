@@ -25,7 +25,6 @@ describe('resource summary', () => {
     await expect(
       client.radar.as112.summary.dnssec(
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -58,7 +57,6 @@ describe('resource summary', () => {
     await expect(
       client.radar.as112.summary.edns(
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -91,7 +89,6 @@ describe('resource summary', () => {
     await expect(
       client.radar.as112.summary.ipVersion(
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -124,7 +121,6 @@ describe('resource summary', () => {
     await expect(
       client.radar.as112.summary.protocol(
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -156,7 +152,6 @@ describe('resource summary', () => {
     await expect(
       client.radar.as112.summary.queryType(
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -189,7 +184,6 @@ describe('resource summary', () => {
     await expect(
       client.radar.as112.summary.responseCodes(
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],

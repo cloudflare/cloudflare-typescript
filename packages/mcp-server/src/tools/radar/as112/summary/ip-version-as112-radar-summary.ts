@@ -16,14 +16,6 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      asn: {
-        type: 'array',
-        description:
-          'Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.',
-        items: {
-          type: 'string',
-        },
-      },
       continent: {
         type: 'array',
         description:
