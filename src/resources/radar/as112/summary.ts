@@ -500,13 +500,6 @@ export namespace SummaryResponseCodesResponse {
 
 export interface SummaryDNSSECParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -672,13 +665,6 @@ export interface SummaryDNSSECParams {
 }
 
 export interface SummaryEdnsParams {
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
@@ -846,13 +832,6 @@ export interface SummaryEdnsParams {
 
 export interface SummaryIPVersionParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -1019,13 +998,6 @@ export interface SummaryIPVersionParams {
 
 export interface SummaryProtocolParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -1187,13 +1159,6 @@ export interface SummaryProtocolParams {
 
 export interface SummaryQueryTypeParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -1273,13 +1238,6 @@ export interface SummaryQueryTypeParams {
 }
 
 export interface SummaryResponseCodesParams {
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,

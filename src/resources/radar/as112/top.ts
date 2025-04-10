@@ -354,13 +354,6 @@ export namespace TopLocationsResponse {
 
 export interface TopDNSSECParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -408,13 +401,6 @@ export interface TopDNSSECParams {
 }
 
 export interface TopEdnsParams {
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
@@ -464,13 +450,6 @@ export interface TopEdnsParams {
 
 export interface TopIPVersionParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -518,13 +497,6 @@ export interface TopIPVersionParams {
 }
 
 export interface TopLocationsParams {
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
