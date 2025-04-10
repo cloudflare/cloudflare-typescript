@@ -34,7 +34,6 @@ describe('resource as112', () => {
       client.radar.as112.timeseries(
         {
           aggInterval: '1h',
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
