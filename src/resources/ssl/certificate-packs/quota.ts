@@ -39,7 +39,7 @@ export namespace QuotaGetResponse {
 
 export interface QuotaGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

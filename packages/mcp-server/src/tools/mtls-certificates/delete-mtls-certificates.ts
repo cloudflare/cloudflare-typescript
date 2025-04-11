@@ -19,11 +19,11 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       mtls_certificate_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
     },
   },

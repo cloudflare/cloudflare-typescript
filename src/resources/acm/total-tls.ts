@@ -79,7 +79,7 @@ export interface TotalTLSGetResponse {
 
 export interface TotalTLSCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -98,7 +98,7 @@ export interface TotalTLSCreateParams {
 
 export interface TotalTLSGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

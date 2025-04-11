@@ -76,7 +76,7 @@ export type CertificateListResponsesSinglePage = SinglePage<CertificateListRespo
 
 export interface Certificate {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -125,7 +125,7 @@ export interface Certificate {
 
 export interface CertificateCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -174,12 +174,12 @@ export interface CertificateCreateResponse {
 
 export interface CertificateListResponse extends HostnamesAPI.AuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   cert_id?: string;
 
@@ -208,7 +208,7 @@ export interface CertificateListResponse extends HostnamesAPI.AuthenticatedOrigi
 
 export interface CertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -257,7 +257,7 @@ export interface CertificateDeleteResponse {
 
 export interface CertificateGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -306,7 +306,7 @@ export interface CertificateGetResponse {
 
 export interface CertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -323,21 +323,21 @@ export interface CertificateCreateParams {
 
 export interface CertificateListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

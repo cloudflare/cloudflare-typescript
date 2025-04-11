@@ -100,7 +100,7 @@ export type OriginTLSClientAuthListResponsesSinglePage = SinglePage<OriginTLSCli
 
 export interface ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -144,7 +144,7 @@ export interface ZoneAuthenticatedOriginPull {
 
 export interface OriginTLSClientAuthCreateResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -166,7 +166,7 @@ export interface OriginTLSClientAuthCreateResponse extends ZoneAuthenticatedOrig
 
 export interface OriginTLSClientAuthListResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -188,7 +188,7 @@ export interface OriginTLSClientAuthListResponse extends ZoneAuthenticatedOrigin
 
 export interface OriginTLSClientAuthDeleteResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -210,7 +210,7 @@ export interface OriginTLSClientAuthDeleteResponse extends ZoneAuthenticatedOrig
 
 export interface OriginTLSClientAuthGetResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -232,7 +232,7 @@ export interface OriginTLSClientAuthGetResponse extends ZoneAuthenticatedOriginP
 
 export interface OriginTLSClientAuthCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -249,21 +249,21 @@ export interface OriginTLSClientAuthCreateParams {
 
 export interface OriginTLSClientAuthListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface OriginTLSClientAuthDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface OriginTLSClientAuthGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

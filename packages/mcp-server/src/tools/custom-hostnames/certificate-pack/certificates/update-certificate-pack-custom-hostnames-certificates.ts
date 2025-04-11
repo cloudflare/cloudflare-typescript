@@ -19,19 +19,19 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       custom_hostname_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       certificate_pack_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       certificate_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       custom_certificate: {
         type: 'string',

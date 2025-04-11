@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       certificates: {
         type: 'array',
@@ -29,7 +29,7 @@ export const tool: Tool = {
           properties: {
             id: {
               type: 'string',
-              description: 'Identifier',
+              description: 'Identifier.',
             },
             priority: {
               type: 'number',

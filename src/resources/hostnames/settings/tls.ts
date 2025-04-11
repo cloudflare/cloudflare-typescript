@@ -145,7 +145,7 @@ export interface TLSGetResponse {
 
 export interface TLSUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -162,7 +162,7 @@ export interface TLSUpdateParams {
 
 export interface TLSDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 
@@ -174,7 +174,7 @@ export interface TLSDeleteParams {
 
 export interface TLSGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

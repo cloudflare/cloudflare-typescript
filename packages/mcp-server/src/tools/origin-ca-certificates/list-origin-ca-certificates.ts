@@ -19,7 +19,23 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
+      },
+      limit: {
+        type: 'integer',
+        description: 'Limit to the number of records returned.',
+      },
+      offset: {
+        type: 'integer',
+        description: 'Offset the results',
+      },
+      page: {
+        type: 'number',
+        description: 'Page number of paginated results.',
+      },
+      per_page: {
+        type: 'number',
+        description: 'Number of records per page.',
       },
     },
   },

@@ -263,7 +263,7 @@ export namespace ErrorData {
 
 export interface Identifier {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
