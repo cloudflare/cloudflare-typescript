@@ -60,6 +60,10 @@ export const tool: Tool = {
                     type: 'boolean',
                     description: 'Set notification on',
                   },
+                  include_context: {
+                    type: 'boolean',
+                    description: 'If true, context information will be passed as query parameters',
+                  },
                   msg: {
                     type: 'string',
                     description: 'Customize the message shown in the notification.',
