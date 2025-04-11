@@ -364,6 +364,12 @@ export interface RuleSetting {
   biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  block_page?: RuleSetting.BlockPage;
+
+  /**
    * Enable the custom block page.
    */
   block_page_enabled?: boolean;
@@ -566,6 +572,22 @@ export namespace RuleSetting {
   }
 
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  export interface BlockPage {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+  }
+
+  /**
    * Configure how session check behaves.
    */
   export interface CheckSession {
@@ -640,6 +662,11 @@ export namespace RuleSetting {
      * Set notification on
      */
     enabled?: boolean;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
 
     /**
      * Customize the message shown in the notification.
@@ -764,6 +791,12 @@ export interface RuleSettingParam {
    * Configure how browser isolation behaves.
    */
   biso_admin_controls?: RuleSettingParam.BISOAdminControls;
+
+  /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  block_page?: RuleSettingParam.BlockPage;
 
   /**
    * Enable the custom block page.
@@ -968,6 +1001,22 @@ export namespace RuleSettingParam {
   }
 
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  export interface BlockPage {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+  }
+
+  /**
    * Configure how session check behaves.
    */
   export interface CheckSession {
@@ -1042,6 +1091,11 @@ export namespace RuleSettingParam {
      * Set notification on
      */
     enabled?: boolean;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
 
     /**
      * Customize the message shown in the notification.

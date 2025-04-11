@@ -196,6 +196,22 @@ export const tool: Tool = {
             },
             required: [],
           },
+          block_page: {
+            type: 'object',
+            description:
+              'Custom block page settings. If missing/null, blocking will use the the account settings.',
+            properties: {
+              target_uri: {
+                type: 'string',
+                description: 'URI to which the user will be redirected',
+              },
+              include_context: {
+                type: 'boolean',
+                description: 'If true, context information will be passed as query parameters',
+              },
+            },
+            required: ['target_uri'],
+          },
           block_page_enabled: {
             type: 'boolean',
             description: 'Enable the custom block page.',
@@ -351,6 +367,10 @@ export const tool: Tool = {
               enabled: {
                 type: 'boolean',
                 description: 'Set notification on',
+              },
+              include_context: {
+                type: 'boolean',
+                description: 'If true, context information will be passed as query parameters',
               },
               msg: {
                 type: 'string',
