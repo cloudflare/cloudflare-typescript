@@ -1,6 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  DeviceListResponsesCursorPagination,
+  Devices,
+  type DeviceListResponse,
+  type DeviceDeleteResponse,
+  type DeviceGetResponse,
+  type DeviceRevokeResponse,
+  type DeviceListParams,
+  type DeviceDeleteParams,
+  type DeviceGetParams,
+  type DeviceRevokeParams,
+} from './devices';
+export {
   DeviceNetworksSinglePage,
   Networks,
   type DeviceNetwork,
