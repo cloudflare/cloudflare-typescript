@@ -32,7 +32,12 @@ describe('resource configurations', () => {
           enabled_download_phase: false,
           enabled_upload_phase: false,
           fail_closed: false,
-          notification_settings: { enabled: true, msg: 'msg', support_url: 'support_url' },
+          notification_settings: {
+            enabled: true,
+            include_context: true,
+            msg: 'msg',
+            support_url: 'support_url',
+          },
         },
         block_page: {
           background_color: 'background_color',
@@ -83,7 +88,12 @@ describe('resource configurations', () => {
           enabled_download_phase: false,
           enabled_upload_phase: false,
           fail_closed: false,
-          notification_settings: { enabled: true, msg: 'msg', support_url: 'support_url' },
+          notification_settings: {
+            enabled: true,
+            include_context: true,
+            msg: 'msg',
+            support_url: 'support_url',
+          },
         },
         block_page: {
           background_color: 'background_color',

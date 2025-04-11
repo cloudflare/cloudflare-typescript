@@ -608,6 +608,11 @@ export interface NotificationSettings {
   enabled?: boolean;
 
   /**
+   * If true, context information will be passed as query parameters
+   */
+  include_context?: boolean;
+
+  /**
    * Customize the message shown in the notification.
    */
   msg?: string;
@@ -628,6 +633,11 @@ export interface NotificationSettingsParam {
    * Set notification on
    */
   enabled?: boolean;
+
+  /**
+   * If true, context information will be passed as query parameters
+   */
+  include_context?: boolean;
 
   /**
    * Customize the message shown in the notification.
