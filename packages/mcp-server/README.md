@@ -2943,10 +2943,6 @@ Note that secrets cannot be rotated again during the grace period.
 - `har_url_scanner_scans` (`read`): Get a URL scan's HAR file. See HAR spec at http://www.softwareishard.com/blog/har-12-spec/.
 - `screenshot_url_scanner_scans` (`read`): Get scan's screenshot by resolution (desktop/mobile/tablet).
 
-### Resource `radar.ai.to_markdown`:
-
-- `create_ai_radar_to_markdown` (`write`): Convert Files into Markdown
-
 ### Resource `radar.ai.inference.summary`:
 
 - `model_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by model.
@@ -3949,7 +3945,6 @@ Model specific inputs available in [Cloudflare Docs](https://developers.cloudfla
 - `list_stores_secrets_store_secrets` (`read`): Lists all store secrets
 - `delete_stores_secrets_store_secrets` (`write`): Deletes a single secret
 - `bulk_delete_stores_secrets_store_secrets` (`write`): Deletes one or more secrets
-- `duplicate_stores_secrets_store_secrets` (`write`): Duplicates the secret, keeping the value
 - `edit_stores_secrets_store_secrets` (`write`): Updates a single secret
 - `get_stores_secrets_store_secrets` (`read`): Returns details of a single secret
 
