@@ -44,7 +44,7 @@ export class Configurations extends APIResource {
  */
 export interface ConfigurationUpdateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id?: string;
 
@@ -361,7 +361,7 @@ export namespace ConfigurationUpdateResponse {
  */
 export interface ConfigurationGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id?: string;
 
@@ -675,7 +675,7 @@ export namespace ConfigurationGetResponse {
 
 export interface ConfigurationUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -956,7 +956,7 @@ export namespace ConfigurationUpdateParams {
 
 export interface ConfigurationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

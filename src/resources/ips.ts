@@ -73,3 +73,12 @@ export interface IPListParams {
    */
   networks?: string;
 }
+
+export declare namespace IPs {
+  export {
+    type IPs as IPs,
+    type JDCloudIPs as JDCloudIPs,
+    type IPListResponse as IPListResponse,
+    type IPListParams as IPListParams,
+  };
+}

@@ -47,20 +47,49 @@ export namespace LoggingSetting {
    * Logging settings by rule type.
    */
   export interface SettingsByRuleType {
-    /**
-     * Logging settings for DNS firewall.
-     */
-    dns?: unknown;
+    dns?: SettingsByRuleType.DNS;
 
-    /**
-     * Logging settings for HTTP/HTTPS firewall.
-     */
-    http?: unknown;
+    http?: SettingsByRuleType.HTTP;
 
-    /**
-     * Logging settings for Network firewall.
-     */
-    l4?: unknown;
+    l4?: SettingsByRuleType.L4;
+  }
+
+  export namespace SettingsByRuleType {
+    export interface DNS {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
+
+    export interface HTTP {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
+
+    export interface L4 {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
   }
 }
 
@@ -88,20 +117,49 @@ export namespace LoggingUpdateParams {
    * Logging settings by rule type.
    */
   export interface SettingsByRuleType {
-    /**
-     * Logging settings for DNS firewall.
-     */
-    dns?: unknown;
+    dns?: SettingsByRuleType.DNS;
 
-    /**
-     * Logging settings for HTTP/HTTPS firewall.
-     */
-    http?: unknown;
+    http?: SettingsByRuleType.HTTP;
 
-    /**
-     * Logging settings for Network firewall.
-     */
-    l4?: unknown;
+    l4?: SettingsByRuleType.L4;
+  }
+
+  export namespace SettingsByRuleType {
+    export interface DNS {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
+
+    export interface HTTP {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
+
+    export interface L4 {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
   }
 }
 

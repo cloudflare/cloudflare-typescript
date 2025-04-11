@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Events, type EventCreateResponse, type EventCreateParams } from './events';
 export {
   InstanceListResponsesV4PagePaginationArray,
   InstanceBulkResponsesSinglePage,

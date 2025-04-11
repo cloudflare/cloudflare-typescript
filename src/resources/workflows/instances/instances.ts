@@ -2,12 +2,15 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as EventsAPI from './events';
+import { EventCreateParams, EventCreateResponse, Events } from './events';
 import * as StatusAPI from './status';
 import { Status, StatusEditParams, StatusEditResponse } from './status';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Instances extends APIResource {
   status: StatusAPI.Status = new StatusAPI.Status(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
 
   /**
    * Create a new workflow instance
@@ -171,7 +174,10 @@ export interface InstanceGetResponse {
     | 'unknown';
 
   steps: Array<
-    InstanceGetResponse.UnionMember0 | InstanceGetResponse.UnionMember1 | InstanceGetResponse.UnionMember2
+    | InstanceGetResponse.UnionMember0
+    | InstanceGetResponse.UnionMember1
+    | InstanceGetResponse.UnionMember2
+    | InstanceGetResponse.UnionMember3
   >;
 
   success: boolean | null;
@@ -276,6 +282,30 @@ export namespace InstanceGetResponse {
     }
   }
 
+  export interface UnionMember3 {
+    end: string;
+
+    error: UnionMember3.Error | null;
+
+    finished: boolean;
+
+    name: string;
+
+    output: unknown | string | number | boolean;
+
+    start: string;
+
+    type: 'waitForEvent';
+  }
+
+  export namespace UnionMember3 {
+    export interface Error {
+      message: string;
+
+      name: string;
+    }
+  }
+
   export interface Trigger {
     source: 'unknown' | 'api' | 'binding' | 'event' | 'cron';
   }
@@ -356,6 +386,7 @@ export interface InstanceGetParams {
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
 Instances.InstanceBulkResponsesSinglePage = InstanceBulkResponsesSinglePage;
 Instances.Status = Status;
+Instances.Events = Events;
 
 export declare namespace Instances {
   export {
@@ -375,5 +406,11 @@ export declare namespace Instances {
     Status as Status,
     type StatusEditResponse as StatusEditResponse,
     type StatusEditParams as StatusEditParams,
+  };
+
+  export {
+    Events as Events,
+    type EventCreateResponse as EventCreateResponse,
+    type EventCreateParams as EventCreateParams,
   };
 }

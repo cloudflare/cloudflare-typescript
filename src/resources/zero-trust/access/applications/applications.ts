@@ -356,12 +356,12 @@ export type AllowedOrigins = string;
 export type AllowedOriginsParam = string;
 
 /**
- * Identifier
+ * Identifier.
  */
 export type AppID = string;
 
 /**
- * Identifier
+ * Identifier.
  */
 export type AppIDParam = string;
 
@@ -388,7 +388,7 @@ export namespace Application {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -537,7 +537,7 @@ export namespace Application {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -844,7 +844,7 @@ export namespace Application {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1003,7 +1003,7 @@ export namespace Application {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1157,7 +1157,7 @@ export namespace Application {
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1213,7 +1213,7 @@ export namespace Application {
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1269,7 +1269,7 @@ export namespace Application {
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1330,7 +1330,7 @@ export namespace Application {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2525,7 +2525,7 @@ export namespace ApplicationCreateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2628,6 +2628,17 @@ export namespace ApplicationCreateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<SelfHostedApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -2836,7 +2847,7 @@ export namespace ApplicationCreateResponse {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -3025,7 +3036,7 @@ export namespace ApplicationCreateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -3128,6 +3139,17 @@ export namespace ApplicationCreateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserSSHApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -3347,7 +3369,7 @@ export namespace ApplicationCreateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -3450,6 +3472,17 @@ export namespace ApplicationCreateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserVNCApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -3663,7 +3696,7 @@ export namespace ApplicationCreateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -3903,7 +3936,7 @@ export namespace ApplicationCreateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4143,7 +4176,7 @@ export namespace ApplicationCreateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4378,7 +4411,7 @@ export namespace ApplicationCreateResponse {
 
   export interface BookmarkApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4539,7 +4572,7 @@ export namespace ApplicationCreateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4778,7 +4811,7 @@ export namespace ApplicationCreateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4881,6 +4914,17 @@ export namespace ApplicationCreateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserRdpApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -5132,7 +5176,7 @@ export namespace ApplicationUpdateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -5235,6 +5279,17 @@ export namespace ApplicationUpdateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<SelfHostedApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -5443,7 +5498,7 @@ export namespace ApplicationUpdateResponse {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -5632,7 +5687,7 @@ export namespace ApplicationUpdateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -5735,6 +5790,17 @@ export namespace ApplicationUpdateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserSSHApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -5954,7 +6020,7 @@ export namespace ApplicationUpdateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -6057,6 +6123,17 @@ export namespace ApplicationUpdateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserVNCApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -6270,7 +6347,7 @@ export namespace ApplicationUpdateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -6510,7 +6587,7 @@ export namespace ApplicationUpdateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -6750,7 +6827,7 @@ export namespace ApplicationUpdateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -6985,7 +7062,7 @@ export namespace ApplicationUpdateResponse {
 
   export interface BookmarkApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -7146,7 +7223,7 @@ export namespace ApplicationUpdateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -7385,7 +7462,7 @@ export namespace ApplicationUpdateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -7488,6 +7565,17 @@ export namespace ApplicationUpdateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserRdpApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -7739,7 +7827,7 @@ export namespace ApplicationListResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -7842,6 +7930,17 @@ export namespace ApplicationListResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<SelfHostedApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -8050,7 +8149,7 @@ export namespace ApplicationListResponse {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -8239,7 +8338,7 @@ export namespace ApplicationListResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -8342,6 +8441,17 @@ export namespace ApplicationListResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserSSHApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -8561,7 +8671,7 @@ export namespace ApplicationListResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -8664,6 +8774,17 @@ export namespace ApplicationListResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserVNCApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -8877,7 +8998,7 @@ export namespace ApplicationListResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9117,7 +9238,7 @@ export namespace ApplicationListResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9357,7 +9478,7 @@ export namespace ApplicationListResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9592,7 +9713,7 @@ export namespace ApplicationListResponse {
 
   export interface BookmarkApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9753,7 +9874,7 @@ export namespace ApplicationListResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9992,7 +10113,7 @@ export namespace ApplicationListResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -10095,6 +10216,17 @@ export namespace ApplicationListResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserRdpApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -10322,7 +10454,7 @@ export namespace ApplicationListResponse {
 
 export interface ApplicationDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }
@@ -10353,7 +10485,7 @@ export namespace ApplicationGetResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -10456,6 +10588,17 @@ export namespace ApplicationGetResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<SelfHostedApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -10664,7 +10807,7 @@ export namespace ApplicationGetResponse {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -10853,7 +10996,7 @@ export namespace ApplicationGetResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -10956,6 +11099,17 @@ export namespace ApplicationGetResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserSSHApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -11175,7 +11329,7 @@ export namespace ApplicationGetResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -11278,6 +11432,17 @@ export namespace ApplicationGetResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserVNCApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -11491,7 +11656,7 @@ export namespace ApplicationGetResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -11731,7 +11896,7 @@ export namespace ApplicationGetResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -11971,7 +12136,7 @@ export namespace ApplicationGetResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -12206,7 +12371,7 @@ export namespace ApplicationGetResponse {
 
   export interface BookmarkApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -12367,7 +12532,7 @@ export namespace ApplicationGetResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -12606,7 +12771,7 @@ export namespace ApplicationGetResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -12709,6 +12874,17 @@ export namespace ApplicationGetResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserRdpApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -13075,6 +13251,17 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -13705,6 +13892,17 @@ export declare namespace ApplicationCreateParams {
     policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
     /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
      * against CSRF attacks.
      */
@@ -14090,6 +14288,17 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -15634,6 +15843,17 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<BrowserRdpApplication.AccessAppPolicyLink | string | BrowserRdpApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -16055,6 +16275,17 @@ export declare namespace ApplicationUpdateParams {
     policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
 
     /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
      * against CSRF attacks.
      */
@@ -16683,6 +16914,17 @@ export declare namespace ApplicationUpdateParams {
     policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
     /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
      * against CSRF attacks.
      */
@@ -17068,6 +17310,17 @@ export declare namespace ApplicationUpdateParams {
      * policies exclusive to the application.
      */
     policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -18612,6 +18865,17 @@ export declare namespace ApplicationUpdateParams {
      * policies exclusive to the application.
      */
     policies?: Array<BrowserRdpApplication.AccessAppPolicyLink | string | BrowserRdpApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security

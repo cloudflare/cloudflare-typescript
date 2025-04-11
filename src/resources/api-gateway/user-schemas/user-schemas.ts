@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
 import * as OperationsAPI from './operations';
@@ -95,7 +94,25 @@ export class UserSchemas extends APIResource {
 
 export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
 
-export type Message = Array<Shared.ResponseInfo>;
+export type Message = Array<Message.MessageItem>;
+
+export namespace Message {
+  export interface MessageItem {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: MessageItem.Source;
+  }
+
+  export namespace MessageItem {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
 
 export interface PublicSchema {
   created_at: string;
@@ -111,7 +128,7 @@ export interface PublicSchema {
   name: string;
 
   /**
-   * UUID
+   * UUID.
    */
   schema_id: string;
 
@@ -169,14 +186,14 @@ export interface UserSchemaDeleteResponse {
   messages: Message;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
 export interface UserSchemaCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -203,7 +220,7 @@ export interface UserSchemaCreateParams {
 
 export interface UserSchemaListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -220,14 +237,14 @@ export interface UserSchemaListParams extends V4PagePaginationArrayParams {
 
 export interface UserSchemaDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface UserSchemaEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -239,7 +256,7 @@ export interface UserSchemaEditParams {
 
 export interface UserSchemaGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

@@ -42,7 +42,8 @@ export class Top extends APIResource {
   }
 
   /**
-   * Retrieves the industries targeted by layer 7 attacks.
+   * This endpoint is deprecated. To continue getting this data, switch to the
+   * summary by industry endpoint.
    */
   industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
   industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
@@ -61,7 +62,8 @@ export class Top extends APIResource {
   }
 
   /**
-   * Retrieves the verticals targeted by layer 7 attacks.
+   * This endpoint is deprecated. To continue getting this data, switch to the
+   * summary by vertical endpoint.
    */
   vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
   vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;

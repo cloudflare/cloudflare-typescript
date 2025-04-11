@@ -171,6 +171,8 @@ export interface SnapshotGetResponse {
    */
   cpu_time_user_ms?: number;
 
+  dhcp_leases?: Array<SnapshotGetResponse.DHCPLease>;
+
   disks?: Array<SnapshotGetResponse.Disk>;
 
   /**
@@ -183,6 +185,8 @@ export interface SnapshotGetResponse {
    * 2 = standby, 3 = disabled, 4 = fault)
    */
   ha_value?: number;
+
+  interfaces?: Array<SnapshotGetResponse.Interface>;
 
   /**
    * Percentage of time over a 10 second window that all tasks were stalled
@@ -882,6 +886,8 @@ export interface SnapshotGetResponse {
 
   thermals?: Array<SnapshotGetResponse.Thermal>;
 
+  tunnels?: Array<SnapshotGetResponse.Tunnel>;
+
   /**
    * Sum of how much time each core has spent idle
    */
@@ -894,6 +900,46 @@ export interface SnapshotGetResponse {
 }
 
 export namespace SnapshotGetResponse {
+  /**
+   * Snapshot DHCP lease
+   */
+  export interface DHCPLease {
+    /**
+     * Client ID of the device the IP Address was leased to
+     */
+    client_id: string;
+
+    /**
+     * Expiry time of the DHCP lease (seconds since the Unix epoch)
+     */
+    expiry_time: number;
+
+    /**
+     * Hostname of the device the IP Address was leased to
+     */
+    hostname: string;
+
+    /**
+     * Name of the network interface
+     */
+    interface_name: string;
+
+    /**
+     * IP Address that was leased
+     */
+    ip_address: string;
+
+    /**
+     * MAC Address of the device the IP Address was leased to
+     */
+    mac_address: string;
+
+    /**
+     * Connector identifier
+     */
+    connector_id?: string;
+  }
+
   /**
    * Snapshot Disk
    */
@@ -1002,6 +1048,55 @@ export namespace SnapshotGetResponse {
      * Time spent flushing (milliseconds)
      */
     time_flushing_ms?: number;
+  }
+
+  /**
+   * Snapshot Interface
+   */
+  export interface Interface {
+    /**
+     * Name of the network interface
+     */
+    name: string;
+
+    /**
+     * UP/DOWN state of the network interface
+     */
+    operstate: string;
+
+    /**
+     * Connector identifier
+     */
+    connector_id?: string;
+
+    ip_addresses?: Array<Interface.IPAddress>;
+
+    /**
+     * Speed of the network interface (bits per second)
+     */
+    speed?: number;
+  }
+
+  export namespace Interface {
+    /**
+     * Snapshot Interface Address
+     */
+    export interface IPAddress {
+      /**
+       * Name of the network interface
+       */
+      interface_name: string;
+
+      /**
+       * IP address of the network interface
+       */
+      ip_address: string;
+
+      /**
+       * Connector identifier
+       */
+      connector_id?: string;
+    }
   }
 
   /**
@@ -1177,6 +1272,37 @@ export namespace SnapshotGetResponse {
      * Maximum temperature of the component (degrees Celsius)
      */
     max_celcius?: number;
+  }
+
+  /**
+   * Snapshot Tunnels
+   */
+  export interface Tunnel {
+    /**
+     * Name of tunnel health state (unknown, healthy, degraded, down)
+     */
+    health_state: string;
+
+    /**
+     * Numeric value associated with tunnel state (0 = unknown, 1 = healthy, 2 =
+     * degraded, 3 = down)
+     */
+    health_value: number;
+
+    /**
+     * The tunnel interface name (i.e. xfrm1, xfrm3.99, etc.)
+     */
+    interface_name: string;
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+
+    /**
+     * Connector identifier
+     */
+    connector_id?: string;
   }
 }
 

@@ -185,13 +185,13 @@ export class ZonesV4PagePaginationArray extends V4PagePaginationArray<Zone> {}
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
  * typically a partner-hosted zone or a CNAME setup.
  */
-export type Type = 'full' | 'partial' | 'secondary';
+export type Type = 'full' | 'partial' | 'secondary' | 'internal';
 
 /**
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
  * typically a partner-hosted zone or a CNAME setup.
  */
-export type TypeParam = 'full' | 'partial' | 'secondary';
+export type TypeParam = 'full' | 'partial' | 'secondary' | 'internal';
 
 export interface Zone {
   /**
@@ -493,6 +493,7 @@ export interface ZoneGetParams {
   zone_id: string;
 }
 
+Zones.ZonesV4PagePaginationArray = ZonesV4PagePaginationArray;
 Zones.ActivationCheck = ActivationCheck;
 Zones.Settings = Settings;
 Zones.CustomNameservers = CustomNameservers;
@@ -505,6 +506,18 @@ Zones.RatePlans = RatePlans;
 Zones.RatePlanGetResponsesSinglePage = RatePlanGetResponsesSinglePage;
 
 export declare namespace Zones {
+  export {
+    type Type as Type,
+    type Zone as Zone,
+    type ZoneDeleteResponse as ZoneDeleteResponse,
+    ZonesV4PagePaginationArray as ZonesV4PagePaginationArray,
+    type ZoneCreateParams as ZoneCreateParams,
+    type ZoneListParams as ZoneListParams,
+    type ZoneDeleteParams as ZoneDeleteParams,
+    type ZoneEditParams as ZoneEditParams,
+    type ZoneGetParams as ZoneGetParams,
+  };
+
   export {
     ActivationCheck as ActivationCheck,
     type ActivationCheckTriggerResponse as ActivationCheckTriggerResponse,

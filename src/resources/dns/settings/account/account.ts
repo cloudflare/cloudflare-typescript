@@ -294,7 +294,7 @@ export namespace AccountGetResponse {
 
 export interface AccountEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -425,7 +425,7 @@ export namespace AccountEditParams {
 
 export interface AccountGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

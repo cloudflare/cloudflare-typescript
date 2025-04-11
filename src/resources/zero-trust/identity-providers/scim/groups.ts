@@ -26,7 +26,7 @@ export class Groups extends APIResource {
 
 export interface GroupListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

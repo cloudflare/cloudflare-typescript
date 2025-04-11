@@ -105,7 +105,7 @@ export interface Output {
 
 export interface OutputCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -131,7 +131,7 @@ export interface OutputCreateParams {
 
 export interface OutputUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -147,14 +147,14 @@ export interface OutputUpdateParams {
 
 export interface OutputListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface OutputDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

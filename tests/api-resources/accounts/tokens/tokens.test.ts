@@ -142,7 +142,7 @@ describe('resource tokens', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.accounts.tokens.list({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
-      direction: 'asc',
+      direction: 'desc',
       page: 1,
       per_page: 5,
     });

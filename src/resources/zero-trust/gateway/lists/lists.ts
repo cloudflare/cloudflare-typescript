@@ -142,6 +142,11 @@ export interface GatewayList {
   description?: string;
 
   /**
+   * The items in the list.
+   */
+  items?: Array<GatewayItem>;
+
+  /**
    * The name of the list.
    */
   name?: string;

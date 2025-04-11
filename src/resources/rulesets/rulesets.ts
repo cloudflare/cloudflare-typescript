@@ -2028,12 +2028,29 @@ export interface RulesetGetParams {
   zone_id?: string;
 }
 
+Rulesets.RulesetListResponsesCursorPagination = RulesetListResponsesCursorPagination;
 Rulesets.Phases = Phases;
 Rulesets.Rules = Rules;
 Rulesets.Versions = Versions;
 Rulesets.VersionListResponsesSinglePage = VersionListResponsesSinglePage;
 
 export declare namespace Rulesets {
+  export {
+    type Kind as Kind,
+    type Phase as Phase,
+    type Ruleset as Ruleset,
+    type RulesetCreateResponse as RulesetCreateResponse,
+    type RulesetUpdateResponse as RulesetUpdateResponse,
+    type RulesetListResponse as RulesetListResponse,
+    type RulesetGetResponse as RulesetGetResponse,
+    RulesetListResponsesCursorPagination as RulesetListResponsesCursorPagination,
+    type RulesetCreateParams as RulesetCreateParams,
+    type RulesetUpdateParams as RulesetUpdateParams,
+    type RulesetListParams as RulesetListParams,
+    type RulesetDeleteParams as RulesetDeleteParams,
+    type RulesetGetParams as RulesetGetParams,
+  };
+
   export {
     Phases as Phases,
     type PhaseUpdateResponse as PhaseUpdateResponse,

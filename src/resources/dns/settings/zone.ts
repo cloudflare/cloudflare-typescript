@@ -275,7 +275,7 @@ export namespace ZoneGetResponse {
 
 export interface ZoneEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -403,7 +403,7 @@ export namespace ZoneEditParams {
 
 export interface ZoneGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

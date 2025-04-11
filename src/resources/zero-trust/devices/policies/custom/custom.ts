@@ -179,7 +179,7 @@ export interface CustomCreateParams {
    * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
    * and 'include' cannot be set in the same request.
    */
-  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+  include?: Array<PoliciesAPI.SplitTunnelIncludeParam>;
 
   /**
    * Body param: The amount of time in minutes a user is allowed access to their LAN.
@@ -310,7 +310,7 @@ export interface CustomEditParams {
    * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
    * and 'include' cannot be set in the same request.
    */
-  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+  include?: Array<PoliciesAPI.SplitTunnelIncludeParam>;
 
   /**
    * Body param: The wirefilter expression to match devices.

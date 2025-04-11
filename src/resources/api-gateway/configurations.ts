@@ -80,14 +80,14 @@ export interface ConfigurationUpdateResponse {
   messages: UserSchemasAPI.Message;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
 export interface ConfigurationUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -140,7 +140,7 @@ export namespace ConfigurationUpdateParams {
 
 export interface ConfigurationGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

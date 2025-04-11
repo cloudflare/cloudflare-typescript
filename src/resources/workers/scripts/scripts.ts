@@ -23,6 +23,14 @@ import {
   ScheduleUpdateResponse,
   Schedules,
 } from './schedules';
+import * as ScriptAndVersionSettingsAPI from './script-and-version-settings';
+import {
+  ScriptAndVersionSettingEditParams,
+  ScriptAndVersionSettingEditResponse,
+  ScriptAndVersionSettingGetParams,
+  ScriptAndVersionSettingGetResponse,
+  ScriptAndVersionSettings,
+} from './script-and-version-settings';
 import * as SecretsAPI from './secrets';
 import {
   SecretDeleteParams,
@@ -82,6 +90,8 @@ export class Scripts extends APIResource {
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
   secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
+  scriptAndVersionSettings: ScriptAndVersionSettingsAPI.ScriptAndVersionSettings =
+    new ScriptAndVersionSettingsAPI.ScriptAndVersionSettings(this._client);
 
   /**
    * Upload a worker module. You can find more about the multipart metadata on our
@@ -217,6 +227,12 @@ export namespace Script {
    */
   export interface Placement {
     /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
      * Enables
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
@@ -339,6 +355,12 @@ export namespace ScriptUpdateResponse {
    */
   export interface Placement {
     /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
      * Enables
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
@@ -356,7 +378,7 @@ export type ScriptGetResponse = string;
 
 export interface ScriptUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -365,6 +387,8 @@ export interface ScriptUpdateParams {
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
+
+  [k: string]: Array<Core.Uploadable> | string | ScriptUpdateParams.Metadata | undefined;
 }
 
 export namespace ScriptUpdateParams {
@@ -402,6 +426,8 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindTailConsumer
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
+      | Metadata.WorkersBindingKindSecretsStoreSecret
+      | Metadata.WorkersBindingKindSecretKey
     >;
 
     /**
@@ -500,6 +526,18 @@ export namespace ScriptUpdateParams {
        */
       export interface Config {
         /**
+         * The contents of a \_headers file (used to attach custom headers on asset
+         * responses)
+         */
+        _headers?: string;
+
+        /**
+         * The contents of a \_redirects file (used to apply redirects or proxy paths ahead
+         * of asset serving)
+         */
+        _redirects?: string;
+
+        /**
          * Determines the redirects and rewrites of requests for HTML content.
          */
         html_handling?: 'auto-trailing-slash' | 'force-trailing-slash' | 'drop-trailing-slash' | 'none';
@@ -534,26 +572,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'ai';
     }
 
     export interface WorkersBindingKindAnalyticsEngine {
@@ -570,26 +589,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'analytics_engine';
     }
 
     export interface WorkersBindingKindAssets {
@@ -601,26 +601,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'assets';
     }
 
     export interface WorkersBindingKindBrowserRendering {
@@ -632,26 +613,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'browser_rendering';
     }
 
     export interface WorkersBindingKindD1 {
@@ -668,26 +630,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'd1';
     }
 
     export interface WorkersBindingKindDispatchNamespace {
@@ -704,26 +647,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'dispatch_namespace';
 
       /**
        * Outbound worker.
@@ -780,26 +704,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'durable_object_namespace';
 
       /**
        * The environment of the script_name to bind to.
@@ -832,26 +737,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'hyperdrive';
     }
 
     export interface WorkersBindingKindJson {
@@ -868,26 +754,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'json';
     }
 
     export interface WorkersBindingKindKVNamespace {
@@ -904,26 +771,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'kv_namespace';
     }
 
     export interface WorkersBindingKindMTLSCertificate {
@@ -940,26 +788,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'mtls_certificate';
     }
 
     export interface WorkersBindingKindPlainText {
@@ -976,26 +805,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'plain_text';
     }
 
     export interface WorkersBindingKindQueue {
@@ -1012,26 +822,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'queue';
     }
 
     export interface WorkersBindingKindR2Bucket {
@@ -1048,26 +839,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'r2_bucket';
     }
 
     export interface WorkersBindingKindSecretText {
@@ -1084,26 +856,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'secret_text';
     }
 
     export interface WorkersBindingKindService {
@@ -1125,26 +878,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'service';
     }
 
     export interface WorkersBindingKindTailConsumer {
@@ -1161,26 +895,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'tail_consumer';
     }
 
     export interface WorkersBindingKindVectorize {
@@ -1197,26 +912,7 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'vectorize';
     }
 
     export interface WorkersBindingKindVersionMetadata {
@@ -1228,26 +924,73 @@ export namespace ScriptUpdateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type:
-        | 'ai'
-        | 'analytics_engine'
-        | 'assets'
-        | 'browser_rendering'
-        | 'd1'
-        | 'dispatch_namespace'
-        | 'durable_object_namespace'
-        | 'hyperdrive'
-        | 'json'
-        | 'kv_namespace'
-        | 'mtls_certificate'
-        | 'plain_text'
-        | 'queue'
-        | 'r2_bucket'
-        | 'secret_text'
-        | 'service'
-        | 'tail_consumer'
-        | 'vectorize'
-        | 'version_metadata';
+      type: 'version_metadata';
+    }
+
+    export interface WorkersBindingKindSecretsStoreSecret {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the secret in the store.
+       */
+      secret_name: string;
+
+      /**
+       * ID of the store containing the secret.
+       */
+      store_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindSecretKey {
+      /**
+       * Algorithm-specific key parameters
+       * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+       */
+      algorithm: unknown;
+
+      /**
+       * Data format of the key
+       * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+       */
+      format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secret_key';
+
+      /**
+       * Allowed operations with the key
+       * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+       */
+      usages: Array<
+        'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
+      >;
+
+      /**
+       * Base64-encoded key data. Required if `format` is "raw", "pkcs8", or "spki".
+       */
+      key_base64?: string;
+
+      /**
+       * Key data in
+       * [JSON Web Key](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#json_web_key)
+       * format. Required if `format` is "jwk".
+       */
+      key_jwk?: unknown;
     }
 
     export interface WorkersMultipleStepMigrations {
@@ -1300,14 +1043,14 @@ export namespace ScriptUpdateParams {
 
 export interface ScriptListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ScriptDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -1321,7 +1064,7 @@ export interface ScriptDeleteParams {
 
 export interface ScriptGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
@@ -1338,6 +1081,7 @@ Scripts.Versions = Versions;
 Scripts.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
 Scripts.Secrets = Secrets;
 Scripts.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
+Scripts.ScriptAndVersionSettings = ScriptAndVersionSettings;
 
 export declare namespace Scripts {
   export {
@@ -1425,5 +1169,13 @@ export declare namespace Scripts {
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
     type SecretGetParams as SecretGetParams,
+  };
+
+  export {
+    ScriptAndVersionSettings as ScriptAndVersionSettings,
+    type ScriptAndVersionSettingEditResponse as ScriptAndVersionSettingEditResponse,
+    type ScriptAndVersionSettingGetResponse as ScriptAndVersionSettingGetResponse,
+    type ScriptAndVersionSettingEditParams as ScriptAndVersionSettingEditParams,
+    type ScriptAndVersionSettingGetParams as ScriptAndVersionSettingGetParams,
   };
 }

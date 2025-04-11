@@ -103,7 +103,7 @@ export class CustomCertificatesSinglePage extends SinglePage<CustomCertificate> 
 
 export interface CustomCertificate {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -156,7 +156,7 @@ export interface CustomCertificate {
   uploaded_on: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 
@@ -221,14 +221,14 @@ export type Status = 'active' | 'pending_reactivation' | 'pending_revocation' | 
 
 export interface CustomCertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface CustomCertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -283,7 +283,7 @@ export interface CustomCertificateCreateParams {
 
 export interface CustomCertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -300,14 +300,14 @@ export interface CustomCertificateListParams extends V4PagePaginationArrayParams
 
 export interface CustomCertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CustomCertificateEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -356,13 +356,27 @@ export interface CustomCertificateEditParams {
 
 export interface CustomCertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
+CustomCertificates.CustomCertificatesV4PagePaginationArray = CustomCertificatesV4PagePaginationArray;
 CustomCertificates.Prioritize = Prioritize;
 
 export declare namespace CustomCertificates {
+  export {
+    type CustomCertificate as CustomCertificate,
+    type GeoRestrictions as GeoRestrictions,
+    type Status as Status,
+    type CustomCertificateDeleteResponse as CustomCertificateDeleteResponse,
+    CustomCertificatesV4PagePaginationArray as CustomCertificatesV4PagePaginationArray,
+    type CustomCertificateCreateParams as CustomCertificateCreateParams,
+    type CustomCertificateListParams as CustomCertificateListParams,
+    type CustomCertificateDeleteParams as CustomCertificateDeleteParams,
+    type CustomCertificateEditParams as CustomCertificateEditParams,
+    type CustomCertificateGetParams as CustomCertificateGetParams,
+  };
+
   export { Prioritize as Prioritize, type PrioritizeUpdateParams as PrioritizeUpdateParams };
 }

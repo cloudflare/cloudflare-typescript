@@ -26,7 +26,7 @@ export class Prioritize extends APIResource {
 
 export interface PrioritizeUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -39,7 +39,7 @@ export interface PrioritizeUpdateParams {
 export namespace PrioritizeUpdateParams {
   export interface Certificate {
     /**
-     * Identifier
+     * Identifier.
      */
     id?: string;
 

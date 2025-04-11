@@ -1110,7 +1110,7 @@ export interface PolicyListResponse extends ApplicationsAPI.ApplicationPolicy {
 
 export interface PolicyDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }

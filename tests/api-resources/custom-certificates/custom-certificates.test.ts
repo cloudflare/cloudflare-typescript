@@ -37,7 +37,7 @@ describe('resource customCertificates', () => {
       bundle_method: 'ubiquitous',
       geo_restrictions: { label: 'us' },
       policy: '(country: US) or (region: EU)',
-      type: 'legacy_custom',
+      type: 'sni_custom',
     });
   });
 

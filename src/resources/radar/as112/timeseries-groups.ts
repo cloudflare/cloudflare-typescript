@@ -214,6 +214,7 @@ export interface TimeseriesGroupQueryTypeResponse {
 export namespace TimeseriesGroupQueryTypeResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -227,6 +228,7 @@ export interface TimeseriesGroupResponseCodesResponse {
 export namespace TimeseriesGroupResponseCodesResponse {
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string> | undefined;
   }
 }
@@ -238,13 +240,6 @@ export interface TimeseriesGroupDNSSECParams {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -420,13 +415,6 @@ export interface TimeseriesGroupEdnsParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -598,13 +586,6 @@ export interface TimeseriesGroupIPVersionParams {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
@@ -780,13 +761,6 @@ export interface TimeseriesGroupProtocolParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -955,13 +929,6 @@ export interface TimeseriesGroupQueryTypeParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
    * exclude continents from results. For example, `-EU,NA` excludes results from EU,
    * but includes results from NA.
@@ -1047,13 +1014,6 @@ export interface TimeseriesGroupResponseCodesParams {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
-   */
-  asn?: Array<string>;
 
   /**
    * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to

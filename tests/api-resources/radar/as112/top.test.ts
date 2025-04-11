@@ -34,7 +34,6 @@ describe('resource top', () => {
       client.radar.as112.top.dnssec(
         'SUPPORTED',
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -73,7 +72,6 @@ describe('resource top', () => {
       client.radar.as112.top.edns(
         'SUPPORTED',
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -112,7 +110,6 @@ describe('resource top', () => {
       client.radar.as112.top.ipVersion(
         'IPv4',
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
@@ -150,7 +147,6 @@ describe('resource top', () => {
     await expect(
       client.radar.as112.top.locations(
         {
-          asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],

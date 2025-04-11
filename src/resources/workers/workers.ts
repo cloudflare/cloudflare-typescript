@@ -44,6 +44,8 @@ import {
 } from './subdomains';
 import * as AssetsAPI from './assets/assets';
 import { Assets } from './assets/assets';
+import * as ObservabilityAPI from './observability/observability';
+import { Observability } from './observability/observability';
 import * as ScriptsAPI from './scripts/scripts';
 import {
   Script,
@@ -65,6 +67,7 @@ export class Workers extends APIResource {
   accountSettings: AccountSettingsAPI.AccountSettings = new AccountSettingsAPI.AccountSettings(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   subdomains: SubdomainsAPI.Subdomains = new SubdomainsAPI.Subdomains(this._client);
+  observability: ObservabilityAPI.Observability = new ObservabilityAPI.Observability(this._client);
 }
 
 export interface MigrationStep {
@@ -316,8 +319,15 @@ Workers.AccountSettings = AccountSettings;
 Workers.Domains = Domains;
 Workers.DomainsSinglePage = DomainsSinglePage;
 Workers.Subdomains = Subdomains;
+Workers.Observability = Observability;
 
 export declare namespace Workers {
+  export {
+    type MigrationStep as MigrationStep,
+    type SingleStepMigration as SingleStepMigration,
+    type WorkerMetadata as WorkerMetadata,
+  };
+
   export {
     Routes as Routes,
     type RouteCreateResponse as RouteCreateResponse,
@@ -373,4 +383,6 @@ export declare namespace Workers {
     type SubdomainUpdateParams as SubdomainUpdateParams,
     type SubdomainGetParams as SubdomainGetParams,
   };
+
+  export { Observability as Observability };
 }

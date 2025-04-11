@@ -150,7 +150,7 @@ export type UpstreamIPsParam = string;
 
 export interface DNSFirewallCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -218,7 +218,7 @@ export interface DNSFirewallCreateResponse {
 
 export interface DNSFirewallListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -286,14 +286,14 @@ export interface DNSFirewallListResponse {
 
 export interface DNSFirewallDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface DNSFirewallEditResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -361,7 +361,7 @@ export interface DNSFirewallEditResponse {
 
 export interface DNSFirewallGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -429,7 +429,7 @@ export interface DNSFirewallGetResponse {
 
 export interface DNSFirewallCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -494,21 +494,21 @@ export interface DNSFirewallCreateParams {
 
 export interface DNSFirewallListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 }
 
 export interface DNSFirewallDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface DNSFirewallEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -573,15 +573,33 @@ export interface DNSFirewallEditParams {
 
 export interface DNSFirewallGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
+DNSFirewall.DNSFirewallListResponsesV4PagePaginationArray = DNSFirewallListResponsesV4PagePaginationArray;
 DNSFirewall.Analytics = Analytics;
 DNSFirewall.ReverseDNS = ReverseDNS;
 
 export declare namespace DNSFirewall {
+  export {
+    type AttackMitigation as AttackMitigation,
+    type FirewallIPs as FirewallIPs,
+    type UpstreamIPs as UpstreamIPs,
+    type DNSFirewallCreateResponse as DNSFirewallCreateResponse,
+    type DNSFirewallListResponse as DNSFirewallListResponse,
+    type DNSFirewallDeleteResponse as DNSFirewallDeleteResponse,
+    type DNSFirewallEditResponse as DNSFirewallEditResponse,
+    type DNSFirewallGetResponse as DNSFirewallGetResponse,
+    DNSFirewallListResponsesV4PagePaginationArray as DNSFirewallListResponsesV4PagePaginationArray,
+    type DNSFirewallCreateParams as DNSFirewallCreateParams,
+    type DNSFirewallListParams as DNSFirewallListParams,
+    type DNSFirewallDeleteParams as DNSFirewallDeleteParams,
+    type DNSFirewallEditParams as DNSFirewallEditParams,
+    type DNSFirewallGetParams as DNSFirewallGetParams,
+  };
+
   export { Analytics as Analytics };
 
   export {

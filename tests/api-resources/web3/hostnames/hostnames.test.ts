@@ -14,7 +14,7 @@ describe('resource hostnames', () => {
     const responsePromise = client.web3.hostnames.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'gateway.example.com',
-      target: 'ethereum',
+      target: 'ipfs',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource hostnames', () => {
     const response = await client.web3.hostnames.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'gateway.example.com',
-      target: 'ethereum',
+      target: 'ipfs',
       description: 'This is my IPFS gateway.',
       dnslink: '/ipns/onboarding.ipfs.cloudflare.com',
     });

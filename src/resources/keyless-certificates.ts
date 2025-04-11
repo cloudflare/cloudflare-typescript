@@ -177,14 +177,14 @@ export interface TunnelParam {
 
 export interface KeylessCertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface KeylessCertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -225,21 +225,21 @@ export interface KeylessCertificateCreateParams {
 
 export interface KeylessCertificateListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface KeylessCertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface KeylessCertificateEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -272,7 +272,23 @@ export interface KeylessCertificateEditParams {
 
 export interface KeylessCertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
+}
+
+KeylessCertificates.KeylessCertificatesSinglePage = KeylessCertificatesSinglePage;
+
+export declare namespace KeylessCertificates {
+  export {
+    type KeylessCertificate as KeylessCertificate,
+    type Tunnel as Tunnel,
+    type KeylessCertificateDeleteResponse as KeylessCertificateDeleteResponse,
+    KeylessCertificatesSinglePage as KeylessCertificatesSinglePage,
+    type KeylessCertificateCreateParams as KeylessCertificateCreateParams,
+    type KeylessCertificateListParams as KeylessCertificateListParams,
+    type KeylessCertificateDeleteParams as KeylessCertificateDeleteParams,
+    type KeylessCertificateEditParams as KeylessCertificateEditParams,
+    type KeylessCertificateGetParams as KeylessCertificateGetParams,
+  };
 }

@@ -85,7 +85,7 @@ export class MTLSCertificatesSinglePage extends SinglePage<MTLSCertificate> {}
 
 export interface MTLSCertificate {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -132,7 +132,7 @@ export interface MTLSCertificate {
 
 export interface MTLSCertificateCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -184,7 +184,7 @@ export interface MTLSCertificateCreateResponse {
 
 export interface MTLSCertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -212,29 +212,40 @@ export interface MTLSCertificateCreateParams {
 
 export interface MTLSCertificateListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface MTLSCertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface MTLSCertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
+MTLSCertificates.MTLSCertificatesSinglePage = MTLSCertificatesSinglePage;
 MTLSCertificates.Associations = Associations;
 MTLSCertificates.CertificateAsssociationsSinglePage = CertificateAsssociationsSinglePage;
 
 export declare namespace MTLSCertificates {
+  export {
+    type MTLSCertificate as MTLSCertificate,
+    type MTLSCertificateCreateResponse as MTLSCertificateCreateResponse,
+    MTLSCertificatesSinglePage as MTLSCertificatesSinglePage,
+    type MTLSCertificateCreateParams as MTLSCertificateCreateParams,
+    type MTLSCertificateListParams as MTLSCertificateListParams,
+    type MTLSCertificateDeleteParams as MTLSCertificateDeleteParams,
+    type MTLSCertificateGetParams as MTLSCertificateGetParams,
+  };
+
   export {
     Associations as Associations,
     type CertificateAsssociation as CertificateAsssociation,

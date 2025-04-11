@@ -86,7 +86,7 @@ export interface OperationEditResponse {
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -129,7 +129,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
    * - `SessionIdentifier` - Discovered operations that were sourced using Session
    *   Identifier API Discovery
    */
-  origin?: 'ML' | 'SessionIdentifier';
+  origin?: 'ML' | 'SessionIdentifier' | 'LabelDiscovery';
 
   /**
    * Query param: Filter results to only include discovery results in a particular
@@ -146,7 +146,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
 
 export interface OperationBulkEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -173,7 +173,7 @@ export namespace OperationBulkEditParams {
 
 export interface OperationEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

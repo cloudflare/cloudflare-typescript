@@ -52,7 +52,7 @@ export namespace OperationListResponse {
     method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
     /**
-     * UUID
+     * UUID.
      */
     operation_id: string;
 
@@ -286,7 +286,7 @@ export namespace OperationListResponse {
          */
         export interface ActiveSchema {
           /**
-           * UUID
+           * UUID.
            */
           id?: string;
 
@@ -329,7 +329,7 @@ export namespace OperationListResponse {
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

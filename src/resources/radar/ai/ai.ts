@@ -7,12 +7,15 @@ import {
   TimeseriesGroupUserAgentResponse,
   TimeseriesGroups,
 } from './timeseries-groups';
+import * as ToMarkdownAPI from './to-markdown';
+import { ToMarkdown } from './to-markdown';
 import * as BotsAPI from './bots/bots';
 import { Bots } from './bots/bots';
 import * as InferenceAPI from './inference/inference';
 import { Inference } from './inference/inference';
 
 export class AI extends APIResource {
+  toMarkdown: ToMarkdownAPI.ToMarkdown = new ToMarkdownAPI.ToMarkdown(this._client);
   inference: InferenceAPI.Inference = new InferenceAPI.Inference(this._client);
   bots: BotsAPI.Bots = new BotsAPI.Bots(this._client);
   timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
@@ -20,11 +23,14 @@ export class AI extends APIResource {
   );
 }
 
+AI.ToMarkdown = ToMarkdown;
 AI.Inference = Inference;
 AI.Bots = Bots;
 AI.TimeseriesGroups = TimeseriesGroups;
 
 export declare namespace AI {
+  export { ToMarkdown as ToMarkdown };
+
   export { Inference as Inference };
 
   export { Bots as Bots };

@@ -245,7 +245,7 @@ export interface Certificate {
 
 export interface CertificateDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }

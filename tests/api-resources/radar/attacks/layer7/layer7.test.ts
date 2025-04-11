@@ -33,7 +33,7 @@ describe('resource layer7', () => {
     await expect(
       client.radar.attacks.layer7.timeseries(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -46,7 +46,7 @@ describe('resource layer7', () => {
           location: ['string'],
           mitigationProduct: ['DDOS'],
           name: ['main_series'],
-          normalization: 'PERCENTAGE_CHANGE',
+          normalization: 'MIN0_MAX',
         },
         { path: '/_stainless_unknown_path' },
       ),

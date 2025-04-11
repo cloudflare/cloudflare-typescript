@@ -145,7 +145,7 @@ export interface WAN {
   static_addressing?: WANStaticAddressing;
 
   /**
-   * VLAN port number.
+   * VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }
@@ -204,11 +204,6 @@ export interface WANCreateParams {
   physport: number;
 
   /**
-   * Body param: VLAN port number.
-   */
-  vlan_tag: number;
-
-  /**
    * Body param:
    */
   name?: string;
@@ -223,6 +218,11 @@ export interface WANCreateParams {
    * is in high availability mode.
    */
   static_addressing?: WANStaticAddressingParam;
+
+  /**
+   * Body param: VLAN ID. Use zero for untagged.
+   */
+  vlan_tag?: number;
 }
 
 export interface WANUpdateParams {
@@ -253,7 +253,7 @@ export interface WANUpdateParams {
   static_addressing?: WANStaticAddressingParam;
 
   /**
-   * Body param: VLAN port number.
+   * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }
@@ -300,7 +300,7 @@ export interface WANEditParams {
   static_addressing?: WANStaticAddressingParam;
 
   /**
-   * Body param: VLAN port number.
+   * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }

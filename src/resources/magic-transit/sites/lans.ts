@@ -208,7 +208,7 @@ export interface LAN {
   static_addressing?: LANStaticAddressing;
 
   /**
-   * VLAN port number.
+   * VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }
@@ -319,11 +319,6 @@ export interface LANCreateParams {
   physport: number;
 
   /**
-   * Body param: VLAN port number.
-   */
-  vlan_tag: number;
-
-  /**
    * Body param: mark true to use this LAN for HA probing. only works for site with
    * HA turned on. only one LAN can be set as the ha_link.
    */
@@ -351,6 +346,11 @@ export interface LANCreateParams {
    * address.
    */
   static_addressing?: LANStaticAddressingParam;
+
+  /**
+   * Body param: VLAN ID. Use zero for untagged.
+   */
+  vlan_tag?: number;
 }
 
 export interface LANUpdateParams {
@@ -388,7 +388,7 @@ export interface LANUpdateParams {
   static_addressing?: LANStaticAddressingParam;
 
   /**
-   * Body param: VLAN port number.
+   * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }
@@ -442,7 +442,7 @@ export interface LANEditParams {
   static_addressing?: LANStaticAddressingParam;
 
   /**
-   * Body param: VLAN port number.
+   * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }
