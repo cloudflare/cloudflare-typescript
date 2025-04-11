@@ -85,7 +85,7 @@ export class MTLSCertificatesSinglePage extends SinglePage<MTLSCertificate> {}
 
 export interface MTLSCertificate {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -132,7 +132,7 @@ export interface MTLSCertificate {
 
 export interface MTLSCertificateCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -184,7 +184,7 @@ export interface MTLSCertificateCreateResponse {
 
 export interface MTLSCertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -212,21 +212,21 @@ export interface MTLSCertificateCreateParams {
 
 export interface MTLSCertificateListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface MTLSCertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface MTLSCertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
