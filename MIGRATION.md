@@ -960,7 +960,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.secretsStore.stores.secrets.list()`
 - `client.secretsStore.stores.secrets.delete()`
 - `client.secretsStore.stores.secrets.bulkDelete()`
-- `client.secretsStore.stores.secrets.duplicate()`
 - `client.secretsStore.stores.secrets.edit()`
 - `client.secretsStore.stores.secrets.get()`
 - `client.pipelines.update()`
@@ -1064,7 +1063,6 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.vectorize.indexes.insert()`
 - `client.vectorize.indexes.upsert()`
 - `client.urlScanner.scans.bulkCreate()`
-- `client.radar.ai.toMarkdown.create()`
 - `client.zaraz.update()`
 - `client.zaraz.history.update()`
 - `client.zaraz.publish.create()`
