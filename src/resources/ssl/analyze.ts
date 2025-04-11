@@ -23,7 +23,7 @@ export type AnalyzeCreateResponse = unknown;
 
 export interface AnalyzeCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

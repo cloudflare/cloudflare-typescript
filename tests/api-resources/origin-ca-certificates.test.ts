@@ -36,7 +36,13 @@ describe('resource originCACertificates', () => {
 
   // TODO: investigate auth errors on test suite
   test.skip('list: required and optional params', async () => {
-    const response = await client.originCACertificates.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.originCACertificates.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      limit: 10,
+      offset: 10,
+      page: 1,
+      per_page: 5,
+    });
   });
 
   // TODO: investigate auth errors on test suite

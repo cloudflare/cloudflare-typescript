@@ -62,7 +62,7 @@ export class HostnameUpdateResponsesSinglePage extends SinglePage<HostnameUpdate
 
 export interface AuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   cert_id?: string;
 
@@ -150,12 +150,12 @@ export interface AuthenticatedOriginPull {
 
 export interface HostnameUpdateResponse extends AuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   cert_id?: string;
 
@@ -184,7 +184,7 @@ export interface HostnameUpdateResponse extends AuthenticatedOriginPull {
 
 export interface HostnameUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -217,7 +217,7 @@ export namespace HostnameUpdateParams {
 
 export interface HostnameGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
