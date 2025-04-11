@@ -2230,6 +2230,13 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - GET /accounts/{account_id}/devices/physical-devices/{device_id}
 - GET /accounts/{account_id}/devices/registrations/{registration_id}
 
+### Resource `zero_trust.devices.devices`:
+
+- `list_devices_zero_trust_devices` (`read`): Lists WARP devices.
+- `delete_devices_zero_trust_devices` (`write`): Deletes a WARP device.
+- `get_devices_zero_trust_devices` (`read`): Fetches a single WARP device.
+- `revoke_devices_zero_trust_devices` (`write`): Revokes all registrations associated with the specified device.
+
 ### Resource `zero_trust.devices.resilience.global_warp_override`:
 
 - `create_resilience_devices_zero_trust_global_warp_override` (`write`): Sets the Global WARP override state.

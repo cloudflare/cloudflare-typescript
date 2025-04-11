@@ -631,6 +631,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workersForPlatforms.dispatch.namespaces.scripts.tags.list()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete()`
 - `client.zeroTrust.devices.get()`
+- `client.zeroTrust.devices.devices.delete()`
+- `client.zeroTrust.devices.devices.get()`
+- `client.zeroTrust.devices.devices.revoke()`
 - `client.zeroTrust.devices.registrations.delete()`
 - `client.zeroTrust.devices.registrations.get()`
 - `client.zeroTrust.devices.dexTests.update()`
