@@ -4,7 +4,7 @@ import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import * as CertificatePacksAPI from './ssl/certificate-packs/certificate-packs';
 import { APIPromise } from '../core/api-promise';
-import { PagePromise, SinglePage } from '../core/pagination';
+import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -27,8 +27,11 @@ export class OriginCACertificates extends APIResource {
   list(
     query: OriginCACertificateListParams,
     options?: RequestOptions,
-  ): PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
-    return this._client.getAPIList('/certificates', SinglePage<OriginCACertificate>, { query, ...options });
+  ): PagePromise<OriginCACertificatesV4PagePaginationArray, OriginCACertificate> {
+    return this._client.getAPIList('/certificates', V4PagePaginationArray<OriginCACertificate>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -58,7 +61,7 @@ export class OriginCACertificates extends APIResource {
   }
 }
 
-export type OriginCACertificatesSinglePage = SinglePage<OriginCACertificate>;
+export type OriginCACertificatesV4PagePaginationArray = V4PagePaginationArray<OriginCACertificate>;
 
 export interface OriginCACertificate {
   /**
@@ -84,7 +87,7 @@ export interface OriginCACertificate {
   requested_validity: CertificatePacksAPI.RequestValidity;
 
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -101,7 +104,7 @@ export interface OriginCACertificate {
 
 export interface OriginCACertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -135,18 +138,28 @@ export interface OriginCACertificateCreateParams {
   requested_validity?: CertificatePacksAPI.RequestValidityParam;
 }
 
-export interface OriginCACertificateListParams {
+export interface OriginCACertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
+
+  /**
+   * Limit to the number of records returned.
+   */
+  limit?: number;
+
+  /**
+   * Offset the results
+   */
+  offset?: number;
 }
 
 export declare namespace OriginCACertificates {
   export {
     type OriginCACertificate as OriginCACertificate,
     type OriginCACertificateDeleteResponse as OriginCACertificateDeleteResponse,
-    type OriginCACertificatesSinglePage as OriginCACertificatesSinglePage,
+    type OriginCACertificatesV4PagePaginationArray as OriginCACertificatesV4PagePaginationArray,
     type OriginCACertificateCreateParams as OriginCACertificateCreateParams,
     type OriginCACertificateListParams as OriginCACertificateListParams,
   };

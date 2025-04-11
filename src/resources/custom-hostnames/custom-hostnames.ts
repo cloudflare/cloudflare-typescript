@@ -136,7 +136,7 @@ export type BundleMethodParam = 'ubiquitous' | 'optimal' | 'force';
 
 export interface CustomHostname {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -459,7 +459,7 @@ export type DomainValidationTypeParam = 'dv';
 
 export interface CustomHostnameCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -760,7 +760,7 @@ export namespace CustomHostnameCreateResponse {
 
 export interface CustomHostnameListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -1061,14 +1061,14 @@ export namespace CustomHostnameListResponse {
 
 export interface CustomHostnameDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface CustomHostnameEditResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -1369,7 +1369,7 @@ export namespace CustomHostnameEditResponse {
 
 export interface CustomHostnameGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -1670,7 +1670,7 @@ export namespace CustomHostnameGetResponse {
 
 export interface CustomHostnameCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1800,7 +1800,7 @@ export namespace CustomHostnameCreateParams {
 
 export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1835,14 +1835,14 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
 
 export interface CustomHostnameDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CustomHostnameEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1982,7 +1982,7 @@ export namespace CustomHostnameEditParams {
 
 export interface CustomHostnameGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

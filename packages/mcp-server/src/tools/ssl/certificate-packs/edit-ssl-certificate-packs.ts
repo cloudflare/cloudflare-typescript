@@ -19,11 +19,11 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       certificate_pack_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       cloudflare_branding: {
         type: 'boolean',

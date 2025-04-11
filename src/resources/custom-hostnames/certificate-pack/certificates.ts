@@ -49,7 +49,7 @@ export class Certificates extends APIResource {
 
 export interface CertificateUpdateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -350,24 +350,24 @@ export namespace CertificateUpdateResponse {
 
 export interface CertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface CertificateUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   custom_hostname_id: string;
 
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   certificate_pack_id: string;
 
@@ -384,17 +384,17 @@ export interface CertificateUpdateParams {
 
 export interface CertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   custom_hostname_id: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   certificate_pack_id: string;
 }

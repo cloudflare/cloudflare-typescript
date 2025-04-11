@@ -39,7 +39,7 @@ export interface CertificateAsssociation {
 
 export interface AssociationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

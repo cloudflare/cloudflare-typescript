@@ -19,11 +19,11 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       custom_hostname_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       custom_metadata: {
         type: 'object',

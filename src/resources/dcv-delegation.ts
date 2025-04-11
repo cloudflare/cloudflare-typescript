@@ -29,7 +29,7 @@ export interface DCVDelegationUUID {
 
 export interface DCVDelegationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

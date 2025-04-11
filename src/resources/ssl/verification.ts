@@ -123,7 +123,7 @@ export type VerificationGetResponse = Array<Verification>;
 
 export interface VerificationEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -135,7 +135,7 @@ export interface VerificationEditParams {
 
 export interface VerificationGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
