@@ -21,6 +21,18 @@ export {
   type DeviceGetParams,
   type DevicesSinglePage,
 } from './devices';
+export {
+  Devices,
+  type DeviceListResponse,
+  type DeviceDeleteResponse,
+  type DeviceGetResponse,
+  type DeviceRevokeResponse,
+  type DeviceListParams,
+  type DeviceDeleteParams,
+  type DeviceGetParams,
+  type DeviceRevokeParams,
+  type DeviceListResponsesCursorPagination,
+} from './devices';
 export { FleetStatus, type FleetStatusGetResponse, type FleetStatusGetParams } from './fleet-status';
 export {
   Networks,

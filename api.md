@@ -4527,6 +4527,22 @@ Methods:
 - <code title="get /accounts/{account_id}/devices">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">list</a>({ ...params }) -> DevicesSinglePage</code>
 - <code title="get /accounts/{account_id}/devices/{device_id}">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">get</a>(deviceID, { ...params }) -> DeviceGetResponse | null</code>
 
+### Devices
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/devices.ts">DeviceListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/devices.ts">DeviceDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/devices.ts">DeviceGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/devices.ts">DeviceRevokeResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/devices/physical-devices">client.zeroTrust.devices.devices.<a href="./src/resources/zero-trust/devices/devices.ts">list</a>({ ...params }) -> DeviceListResponsesCursorPagination</code>
+- <code title="delete /accounts/{account_id}/devices/physical-devices/{device_id}">client.zeroTrust.devices.devices.<a href="./src/resources/zero-trust/devices/devices.ts">delete</a>(deviceID, { ...params }) -> DeviceDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/physical-devices/{device_id}">client.zeroTrust.devices.devices.<a href="./src/resources/zero-trust/devices/devices.ts">get</a>(deviceID, { ...params }) -> DeviceGetResponse</code>
+- <code title="post /accounts/{account_id}/devices/physical-devices/{device_id}/revoke">client.zeroTrust.devices.devices.<a href="./src/resources/zero-trust/devices/devices.ts">revoke</a>(deviceID, { ...params }) -> DeviceRevokeResponse | null</code>
+
 ### Resilience
 
 #### GlobalWARPOverride
