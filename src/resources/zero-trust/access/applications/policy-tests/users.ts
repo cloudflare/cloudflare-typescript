@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../core/resource';
-import { PagePromise, SinglePage } from '../../../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
@@ -13,17 +17,17 @@ export class Users extends APIResource {
     policyTestID: string,
     params: UserListParams,
     options?: RequestOptions,
-  ): PagePromise<UserListResponsesSinglePage, UserListResponse> {
+  ): PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/policy-tests/${policyTestID}/users`,
-      SinglePage<UserListResponse>,
+      V4PagePaginationArray<UserListResponse>,
       { query, ...options },
     );
   }
 }
 
-export type UserListResponsesSinglePage = SinglePage<UserListResponse>;
+export type UserListResponsesV4PagePaginationArray = V4PagePaginationArray<UserListResponse>;
 
 export interface UserListResponse {
   /**
@@ -44,10 +48,10 @@ export interface UserListResponse {
   /**
    * Policy evaluation result for an individual user.
    */
-  status?: 'approved' | 'blocked';
+  status?: 'approved' | 'blocked' | 'error';
 }
 
-export interface UserListParams {
+export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
@@ -56,13 +60,13 @@ export interface UserListParams {
   /**
    * Query param: Filter users by their policy evaluation status.
    */
-  status?: 'success' | 'fail';
+  status?: 'success' | 'fail' | 'error';
 }
 
 export declare namespace Users {
   export {
     type UserListResponse as UserListResponse,
-    type UserListResponsesSinglePage as UserListResponsesSinglePage,
+    type UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
     type UserListParams as UserListParams,
   };
 }

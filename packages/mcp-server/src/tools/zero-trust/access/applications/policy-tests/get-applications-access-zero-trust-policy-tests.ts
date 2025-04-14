@@ -24,9 +24,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'The UUID of the policy test.',
       },
-      page: {
-        type: 'integer',
-      },
     },
   },
 };
