@@ -362,8 +362,6 @@ To purge files with custom cache keys, include the headers used to compute the c
 
 **NB:** When including the Origin header, be sure to include the **scheme** and **hostname**. The port number can be omitted if it is the default port (80 for http, 443 for https), but must be included otherwise.
 
-**NB:** For Zones on Free/Pro/Business plan, you may purge up to 30 URLs in one API call. For Zones on Enterprise plan, you may purge up to 500 URLs in one API call.
-
 Single file purge example with files:
 
 ```
@@ -378,9 +376,7 @@ Single file purge example with url and header pairs:
 
 ### Purge Cached Content by Tag, Host or Prefix
 
-Granularly removes one or more files from Cloudflare's cache either by specifying the host, the associated Cache-Tag, or a Prefix. Only Enterprise customers are permitted to purge by Tag, Host or Prefix.
-
-**NB:** Cache-Tag, host, and prefix purging each have a rate limit of 30,000 purge API calls in every 24 hour period. You may purge up to 30 tags, hosts, or prefixes in one API call. This rate limit can be raised for customers who need to purge at higher volume.
+Granularly removes one or more files from Cloudflare's cache either by specifying the host, the associated Cache-Tag, or a Prefix.
 
 Flex purge with tags:
 
@@ -399,6 +395,10 @@ Flex purge with prefixes:
 ```
 {"prefixes": ["www.example.com/foo", "images.example.com/bar/baz"]}
 ```
+
+### Availability and limits
+
+please refer to [purge cache availability and limits documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/#availability-and-limits).
 
 ### Resource `cache.cache_reserve`:
 
