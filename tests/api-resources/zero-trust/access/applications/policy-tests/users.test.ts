@@ -27,7 +27,7 @@ describe('resource users', () => {
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.access.applications.policyTests.users.list(
       'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', status: 'success' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', page: 0, per_page: 0, status: 'success' },
     );
   });
 });
