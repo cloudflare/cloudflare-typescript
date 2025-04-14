@@ -105,6 +105,8 @@ export interface Dataset {
 
   uploads: Array<Dataset.Upload>;
 
+  case_sensitive?: boolean;
+
   /**
    * The description of the dataset
    */
@@ -167,6 +169,13 @@ export interface DatasetCreateParams {
   name: string;
 
   /**
+   * Body param: Only applies to custom word lists. Determines if the words should be
+   * matched in a case-sensitive manner Cannot be set to false if `secret` is true or
+   * undefined
+   */
+  case_sensitive?: boolean;
+
+  /**
    * Body param: The description of the dataset
    */
   description?: string | null;
@@ -195,6 +204,14 @@ export interface DatasetUpdateParams {
    * Path param:
    */
   account_id: string;
+
+  /**
+   * Body param: Determines if the words should be matched in a case-sensitive
+   * manner.
+   *
+   * Only required for custom word lists.
+   */
+  case_sensitive?: boolean;
 
   /**
    * Body param: The description of the dataset

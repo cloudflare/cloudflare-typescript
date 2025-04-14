@@ -214,6 +214,12 @@ export namespace Profile {
     export interface ExactDataEntry {
       id: string;
 
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
+
       created_at: string;
 
       enabled: boolean;
@@ -354,6 +360,12 @@ export namespace Profile {
     export interface ExactDataEntry {
       id: string;
 
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
+
       created_at: string;
 
       enabled: boolean;
@@ -477,6 +489,12 @@ export namespace Profile {
 
     export interface ExactDataEntry {
       id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
 
       created_at: string;
 

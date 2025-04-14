@@ -22,6 +22,11 @@ export const tool: Tool = {
       dataset_id: {
         type: 'string',
       },
+      case_sensitive: {
+        type: 'boolean',
+        description:
+          'Determines if the words should be matched in a case-sensitive manner.\n\nOnly required for custom word lists.',
+      },
       description: {
         type: 'string',
         description: 'The description of the dataset',
