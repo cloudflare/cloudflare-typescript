@@ -24,10 +24,16 @@ export const tool: Tool = {
         type: 'string',
         description: 'The UUID of the policy test.',
       },
+      page: {
+        type: 'integer',
+      },
+      per_page: {
+        type: 'integer',
+      },
       status: {
         type: 'string',
         description: 'Filter users by their policy evaluation status.',
-        enum: ['success', 'fail'],
+        enum: ['success', 'fail', 'error'],
       },
     },
   },

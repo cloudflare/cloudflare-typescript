@@ -5,7 +5,7 @@ import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
 import * as ApplicationsPoliciesAPI from '../policies';
 import * as UsersAPI from './users';
-import { UserListParams, UserListResponse, UserListResponsesSinglePage, Users } from './users';
+import { UserListParams, UserListResponse, UserListResponsesV4PagePaginationArray, Users } from './users';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
@@ -34,12 +34,12 @@ export class PolicyTests extends APIResource {
     params: PolicyTestGetParams,
     options?: RequestOptions,
   ): APIPromise<PolicyTestGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id } = params;
     return (
-      this._client.get(path`/accounts/${account_id}/access/policy-tests/${policyTestID}`, {
-        query,
-        ...options,
-      }) as APIPromise<{ result: PolicyTestGetResponse }>
+      this._client.get(
+        path`/accounts/${account_id}/access/policy-tests/${policyTestID}`,
+        options,
+      ) as APIPromise<{ result: PolicyTestGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -63,11 +63,6 @@ export interface PolicyTestGetResponse {
   id?: string;
 
   /**
-   * The number of pages of (processed) users.
-   */
-  pages_processed?: number;
-
-  /**
    * The percentage of (processed) users approved based on policy evaluation results.
    */
   percent_approved?: number;
@@ -78,6 +73,11 @@ export interface PolicyTestGetResponse {
   percent_blocked?: number;
 
   /**
+   * The percentage of (processed) users errored based on policy evaluation results.
+   */
+  percent_errored?: number;
+
+  /**
    * The percentage of users processed so far (of the entire user base).
    */
   percent_users_processed?: number;
@@ -85,7 +85,7 @@ export interface PolicyTestGetResponse {
   /**
    * The status of the policy test.
    */
-  status?: 'blocked' | 'processing' | 'complete';
+  status?: 'blocked' | 'processing' | 'exceeded time' | 'complete';
 
   /**
    * The total number of users in the user base.
@@ -101,6 +101,11 @@ export interface PolicyTestGetResponse {
    * The number of (processed) users blocked based on policy evaluation results.
    */
   users_blocked?: number;
+
+  /**
+   * The number of (processed) users errored based on policy evaluation results.
+   */
+  users_errored?: number;
 }
 
 export interface PolicyTestCreateParams {
@@ -185,14 +190,9 @@ export namespace PolicyTestCreateParams {
 
 export interface PolicyTestGetParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   account_id: string;
-
-  /**
-   * Query param:
-   */
-  page?: number;
 }
 
 PolicyTests.Users = Users;
@@ -208,7 +208,7 @@ export declare namespace PolicyTests {
   export {
     Users as Users,
     type UserListResponse as UserListResponse,
-    type UserListResponsesSinglePage as UserListResponsesSinglePage,
+    type UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
     type UserListParams as UserListParams,
   };
 }
