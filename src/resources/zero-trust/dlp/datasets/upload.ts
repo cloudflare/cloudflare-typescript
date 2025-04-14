@@ -54,6 +54,8 @@ export interface NewVersion {
 
   version: number;
 
+  case_sensitive?: boolean;
+
   columns?: Array<NewVersion.Column>;
 
   secret?: string;

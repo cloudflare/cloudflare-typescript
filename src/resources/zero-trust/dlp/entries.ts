@@ -175,6 +175,12 @@ export namespace EntryUpdateResponse {
   export interface ExactDataEntry {
     id: string;
 
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
+
     created_at: string;
 
     enabled: boolean;
@@ -280,6 +286,12 @@ export namespace EntryListResponse {
 
   export interface ExactDataEntry {
     id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
 
     created_at: string;
 
@@ -388,6 +400,12 @@ export namespace EntryGetResponse {
 
   export interface ExactDataEntry {
     id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
 
     created_at: string;
 
