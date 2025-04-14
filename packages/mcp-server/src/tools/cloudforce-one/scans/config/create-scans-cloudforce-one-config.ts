@@ -18,33 +18,33 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Defines the Account ID.',
       },
       ips: {
         type: 'array',
         title: 'IP List',
         description:
-          'A list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.',
+          'Defines a list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.',
         items: {
           type: 'string',
           description:
-            'A list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.',
+            'Defines a list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.',
         },
       },
       frequency: {
         type: 'number',
         title: 'Frequency',
-        description: 'The number of days between each scan (0 = no recurring scans).',
+        description: 'Defines the number of days between each scan (0 = One-off scan).',
       },
       ports: {
         type: 'array',
         title: 'Port List',
         description:
-          'A list of ports to scan. Allowed values:"default", "all", or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the 100 most commonly open ports.',
+          'Defines a list of ports to scan. Valid values are:"default", "all", or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). "default" scans the 100 most commonly open ports.',
         items: {
           type: 'string',
           description:
-            'A list of ports to scan. Allowed values:"default", "all", or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the 100 most commonly open ports.',
+            'Defines a list of ports to scan. Valid values are:"default", "all", or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). "default" scans the 100 most commonly open ports.',
         },
       },
     },
