@@ -72,54 +72,54 @@ export class ConfigListResponsesSinglePage extends SinglePage<ConfigListResponse
 
 export interface ConfigCreateResponse {
   /**
-   * Config ID
+   * Defines the Config ID.
    */
   id: string;
 
   account_id: string;
 
   /**
-   * The number of days between each scan (0 = no recurring scans).
+   * Defines the number of days between each scan (0 = One-off scan).
    */
   frequency: number;
 
   /**
-   * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP
-   * addresses allowed is 5000.
+   * Defines a list of IP addresses or CIDR blocks to scan. The maximum number of
+   * total IP addresses allowed is 5000.
    */
   ips: Array<string>;
 
   /**
-   * A list of ports to scan. Allowed values:"default", "all", or a comma-separated
-   * list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the
-   * 100 most commonly open ports.
+   * Defines a list of ports to scan. Valid values are:"default", "all", or a
+   * comma-separated list of ports or range of ports (e.g. ["1-80", "443"]).
+   * "default" scans the 100 most commonly open ports.
    */
   ports: Array<string>;
 }
 
 export interface ConfigListResponse {
   /**
-   * Config ID
+   * Defines the Config ID.
    */
   id: string;
 
   account_id: string;
 
   /**
-   * The number of days between each scan (0 = no recurring scans).
+   * Defines the number of days between each scan (0 = One-off scan).
    */
   frequency: number;
 
   /**
-   * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP
-   * addresses allowed is 5000.
+   * Defines a list of IP addresses or CIDR blocks to scan. The maximum number of
+   * total IP addresses allowed is 5000.
    */
   ips: Array<string>;
 
   /**
-   * A list of ports to scan. Allowed values:"default", "all", or a comma-separated
-   * list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the
-   * 100 most commonly open ports.
+   * Defines a list of ports to scan. Valid values are:"default", "all", or a
+   * comma-separated list of ports or range of ports (e.g. ["1-80", "443"]).
+   * "default" scans the 100 most commonly open ports.
    */
   ports: Array<string>;
 }
@@ -128,91 +128,91 @@ export type ConfigDeleteResponse = unknown;
 
 export interface ConfigEditResponse {
   /**
-   * Config ID
+   * Defines the Config ID.
    */
   id: string;
 
   account_id: string;
 
   /**
-   * The number of days between each scan (0 = no recurring scans).
+   * Defines the number of days between each scan (0 = One-off scan).
    */
   frequency: number;
 
   /**
-   * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP
-   * addresses allowed is 5000.
+   * Defines a list of IP addresses or CIDR blocks to scan. The maximum number of
+   * total IP addresses allowed is 5000.
    */
   ips: Array<string>;
 
   /**
-   * A list of ports to scan. Allowed values:"default", "all", or a comma-separated
-   * list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the
-   * 100 most commonly open ports.
+   * Defines a list of ports to scan. Valid values are:"default", "all", or a
+   * comma-separated list of ports or range of ports (e.g. ["1-80", "443"]).
+   * "default" scans the 100 most commonly open ports.
    */
   ports: Array<string>;
 }
 
 export interface ConfigCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Defines the Account ID.
    */
   account_id: string;
 
   /**
-   * Body param: A list of IP addresses or CIDR blocks to scan. The maximum number of
-   * total IP addresses allowed is 5000.
+   * Body param: Defines a list of IP addresses or CIDR blocks to scan. The maximum
+   * number of total IP addresses allowed is 5000.
    */
   ips: Array<string>;
 
   /**
-   * Body param: The number of days between each scan (0 = no recurring scans).
+   * Body param: Defines the number of days between each scan (0 = One-off scan).
    */
   frequency?: number;
 
   /**
-   * Body param: A list of ports to scan. Allowed values:"default", "all", or a
-   * comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). Default
-   * will scan the 100 most commonly open ports.
+   * Body param: Defines a list of ports to scan. Valid values are:"default", "all",
+   * or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]).
+   * "default" scans the 100 most commonly open ports.
    */
   ports?: Array<string>;
 }
 
 export interface ConfigListParams {
   /**
-   * Account ID
+   * Defines the Account ID.
    */
   account_id: string;
 }
 
 export interface ConfigDeleteParams {
   /**
-   * Account ID
+   * Defines the Account ID.
    */
   account_id: string;
 }
 
 export interface ConfigEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Defines the Account ID.
    */
   account_id: string;
 
   /**
-   * Body param: The number of days between each scan (0 = no recurring scans).
+   * Body param: Defines the number of days between each scan (0 = One-off scan).
    */
   frequency?: number;
 
   /**
-   * Body param: A list of IP addresses or CIDR blocks to scan. The maximum number of
-   * total IP addresses allowed is 5000.
+   * Body param: Defines a list of IP addresses or CIDR blocks to scan. The maximum
+   * number of total IP addresses allowed is 5000.
    */
   ips?: Array<string>;
 
   /**
-   * Body param: A list of ports to scan. Allowed values:"default", "all", or a
-   * comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). Default
-   * will scan the 100 most commonly open ports.
+   * Body param: Defines a list of ports to scan. Valid values are:"default", "all",
+   * or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]).
+   * "default" scans the 100 most commonly open ports.
    */
   ports?: Array<string>;
 }
