@@ -138,7 +138,7 @@ export interface SiteInfoDeleteResponse {
 
 export interface SiteInfoCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -161,7 +161,7 @@ export interface SiteInfoCreateParams {
 
 export interface SiteInfoUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -196,7 +196,7 @@ export interface SiteInfoUpdateParams {
 
 export interface SiteInfoListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -208,14 +208,14 @@ export interface SiteInfoListParams extends V4PagePaginationArrayParams {
 
 export interface SiteInfoDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface SiteInfoGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

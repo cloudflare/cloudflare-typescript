@@ -175,7 +175,7 @@ export namespace RuleBulkCreateResponse {
 
 export interface RuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -202,7 +202,7 @@ export interface RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -234,14 +234,14 @@ export interface RuleUpdateParams {
 
 export interface RuleListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface RuleDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 
@@ -253,7 +253,7 @@ export interface RuleDeleteParams {
 
 export interface RuleBulkCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
