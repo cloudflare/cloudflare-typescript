@@ -2331,7 +2331,9 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Whether or not cname flattening is on.
+   * @deprecated This zone setting is deprecated; please use the DNS Settings route
+   * instead. More information at
+   * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
    */
   export interface ZonesCNAMEFlattening {
     /**
@@ -2340,7 +2342,9 @@ export namespace SettingEditResponse {
     id: 'cname_flattening';
 
     /**
-     * Current value of the zone setting.
+     * @deprecated This zone setting is deprecated; please use the DNS Settings route
+     * instead. More information at
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
      */
     value: 'flatten_at_root' | 'flatten_all';
 
@@ -3290,7 +3294,9 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Whether or not cname flattening is on.
+   * @deprecated This zone setting is deprecated; please use the DNS Settings route
+   * instead. More information at
+   * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
    */
   export interface ZonesCNAMEFlattening {
     /**
@@ -3299,7 +3305,9 @@ export namespace SettingGetResponse {
     id: 'cname_flattening';
 
     /**
-     * Current value of the zone setting.
+     * @deprecated This zone setting is deprecated; please use the DNS Settings route
+     * instead. More information at
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
      */
     value: 'flatten_at_root' | 'flatten_all';
 

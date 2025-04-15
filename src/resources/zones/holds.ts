@@ -68,7 +68,7 @@ export interface ZoneHold {
 
 export interface HoldCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -83,7 +83,7 @@ export interface HoldCreateParams {
 
 export interface HoldDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -97,7 +97,7 @@ export interface HoldDeleteParams {
 
 export interface HoldEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -121,7 +121,7 @@ export interface HoldEditParams {
 
 export interface HoldGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
