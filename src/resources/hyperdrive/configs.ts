@@ -133,6 +133,11 @@ export interface ConfigCreateParams {
   caching?:
     | ConfigCreateParams.HyperdriveHyperdriveCachingCommon
     | ConfigCreateParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigCreateParams.MTLS;
 }
 
 export namespace ConfigCreateParams {
@@ -161,7 +166,7 @@ export namespace ConfigCreateParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -200,7 +205,7 @@ export namespace ConfigCreateParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -233,6 +238,24 @@ export namespace ConfigCreateParams {
      */
     stale_while_revalidate?: number;
   }
+
+  export interface MTLS {
+    /**
+     * CA certificate ID
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * mTLS certificate ID
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * SSL mode used for CA verification. Must be 'require', 'verify-ca', or
+     * 'verify-full'
+     */
+    sslmode?: string;
+  }
 }
 
 export interface ConfigUpdateParams {
@@ -259,6 +282,11 @@ export interface ConfigUpdateParams {
   caching?:
     | ConfigUpdateParams.HyperdriveHyperdriveCachingCommon
     | ConfigUpdateParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigUpdateParams.MTLS;
 }
 
 export namespace ConfigUpdateParams {
@@ -287,7 +315,7 @@ export namespace ConfigUpdateParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -326,7 +354,7 @@ export namespace ConfigUpdateParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -358,6 +386,24 @@ export namespace ConfigUpdateParams {
      * it becomes stale. Not returned if set to default. (Default: 15)
      */
     stale_while_revalidate?: number;
+  }
+
+  export interface MTLS {
+    /**
+     * CA certificate ID
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * mTLS certificate ID
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * SSL mode used for CA verification. Must be 'require', 'verify-ca', or
+     * 'verify-full'
+     */
+    sslmode?: string;
   }
 }
 
@@ -387,6 +433,11 @@ export interface ConfigEditParams {
   caching?:
     | ConfigEditParams.HyperdriveHyperdriveCachingCommon
     | ConfigEditParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigEditParams.MTLS;
 
   /**
    * Body param:
@@ -429,6 +480,24 @@ export namespace ConfigEditParams {
     stale_while_revalidate?: number;
   }
 
+  export interface MTLS {
+    /**
+     * CA certificate ID
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * mTLS certificate ID
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * SSL mode used for CA verification. Must be 'require', 'verify-ca', or
+     * 'verify-full'
+     */
+    sslmode?: string;
+  }
+
   export interface HyperdriveHyperdriveDatabase {
     /**
      * The name of your origin database.
@@ -444,7 +513,7 @@ export namespace ConfigEditParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme?: 'postgres' | 'postgresql';
+    scheme?: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
