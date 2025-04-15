@@ -59,6 +59,26 @@ export const tool: Tool = {
           },
         ],
       },
+      mtls: {
+        type: 'object',
+        title: 'mTLS',
+        properties: {
+          ca_certificate_id: {
+            type: 'string',
+            description: 'CA certificate ID',
+          },
+          mtls_certificate_id: {
+            type: 'string',
+            description: 'mTLS certificate ID',
+          },
+          sslmode: {
+            type: 'string',
+            description:
+              "SSL mode used for CA verification. Must be 'require', 'verify-ca', or 'verify-full'",
+          },
+        },
+        required: [],
+      },
       name: {
         type: 'string',
       },
@@ -80,7 +100,7 @@ export const tool: Tool = {
               scheme: {
                 type: 'string',
                 description: 'Specifies the URL scheme used to connect to your origin database.',
-                enum: ['postgres', 'postgresql'],
+                enum: ['postgres', 'postgresql', 'mysql'],
               },
               user: {
                 type: 'string',
