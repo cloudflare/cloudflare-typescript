@@ -42,7 +42,7 @@ export namespace Configuration {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme?: 'postgres' | 'postgresql';
+    scheme?: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -69,7 +69,7 @@ export namespace Configuration {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme?: 'postgres' | 'postgresql';
+    scheme?: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -99,6 +99,8 @@ export interface Hyperdrive {
    * When the Hyperdrive configuration was last modified.
    */
   modified_on?: string;
+
+  mtls?: Hyperdrive.MTLS;
 }
 
 export namespace Hyperdrive {
@@ -121,7 +123,7 @@ export namespace Hyperdrive {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -148,7 +150,7 @@ export namespace Hyperdrive {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -180,6 +182,24 @@ export namespace Hyperdrive {
      * it becomes stale. Not returned if set to default. (Default: 15)
      */
     stale_while_revalidate?: number;
+  }
+
+  export interface MTLS {
+    /**
+     * CA certificate ID
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * mTLS certificate ID
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * SSL mode used for CA verification. Must be 'require', 'verify-ca', or
+     * 'verify-full'
+     */
+    sslmode?: string;
   }
 }
 
