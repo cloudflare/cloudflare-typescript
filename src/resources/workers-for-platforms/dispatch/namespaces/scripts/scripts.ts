@@ -44,7 +44,6 @@ import {
   Tags,
 } from './tags';
 import { APIPromise } from '../../../../../core/api-promise';
-import { type Uploadable } from '../../../../../core/uploads';
 import { buildHeaders } from '../../../../../internal/headers';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { maybeMultipartFormRequestOptions } from '../../../../../internal/uploads';
@@ -241,8 +240,6 @@ export interface ScriptUpdateParams {
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
-
-  [k: string]: Array<Uploadable> | string | ScriptUpdateParams.Metadata | undefined;
 }
 
 export namespace ScriptUpdateParams {

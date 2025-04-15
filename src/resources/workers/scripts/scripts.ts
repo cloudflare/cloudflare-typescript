@@ -79,7 +79,6 @@ import * as AssetsAPI from './assets/assets';
 import { Assets as AssetsAPIAssets } from './assets/assets';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
-import { type Uploadable } from '../../../core/uploads';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { maybeMultipartFormRequestOptions } from '../../../internal/uploads';
@@ -395,8 +394,6 @@ export interface ScriptUpdateParams {
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
-
-  [k: string]: Array<Uploadable> | string | ScriptUpdateParams.Metadata | undefined;
 }
 
 export namespace ScriptUpdateParams {
