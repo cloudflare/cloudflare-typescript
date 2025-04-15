@@ -67,7 +67,7 @@ export class Entries extends APIResource {
   }
 
   /**
-   * Fetches a DLP entry by ID
+   * Fetches a DLP entry by ID.
    */
   get(
     entryId: string,
@@ -144,13 +144,13 @@ export namespace EntryUpdateResponse {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
@@ -256,13 +256,13 @@ export namespace EntryListResponse {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
@@ -370,13 +370,13 @@ export namespace EntryGetResponse {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }

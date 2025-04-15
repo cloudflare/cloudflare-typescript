@@ -43,7 +43,7 @@ export class Predefined extends APIResource {
 
 export interface PredefinedProfile {
   /**
-   * The id of the predefined profile (uuid)
+   * The id of the predefined profile (uuid).
    */
   id: string;
 
@@ -58,7 +58,7 @@ export interface PredefinedProfile {
   >;
 
   /**
-   * The name of the predefined profile
+   * The name of the predefined profile.
    */
   name: string;
 
@@ -75,7 +75,7 @@ export interface PredefinedProfile {
   ocr_enabled?: boolean;
 
   /**
-   * Whether this profile can be accessed by anyone
+   * Whether this profile can be accessed by anyone.
    */
   open_access?: boolean;
 }
@@ -116,13 +116,13 @@ export namespace PredefinedProfile {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
