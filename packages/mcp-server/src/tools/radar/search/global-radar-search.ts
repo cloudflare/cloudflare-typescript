@@ -22,7 +22,7 @@ export const tool: Tool = {
       },
       exclude: {
         type: 'array',
-        description: 'Search types to be excluded from results.',
+        description: 'Search types excluded from results.',
         items: {
           type: 'string',
           enum: ['SPECIAL_EVENTS', 'NOTEBOOKS', 'LOCATIONS', 'ASNS'],
@@ -35,7 +35,7 @@ export const tool: Tool = {
       },
       include: {
         type: 'array',
-        description: 'Search types to be included in results.',
+        description: 'Search types included in results.',
         items: {
           type: 'string',
           enum: ['SPECIAL_EVENTS', 'NOTEBOOKS', 'LOCATIONS', 'ASNS'],
@@ -47,7 +47,7 @@ export const tool: Tool = {
       },
       limitPerGroup: {
         type: 'number',
-        description: 'Limit the number of objects per search category.',
+        description: 'Limits the number of objects per search category.',
       },
     },
   },

@@ -27,7 +27,7 @@ export const tool: Tool = {
       dateRange: {
         type: 'array',
         description:
-          'Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).',
+          'Filters results by date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).',
         items: {
           type: 'string',
         },
@@ -49,7 +49,7 @@ export const tool: Tool = {
       },
       domains: {
         type: 'array',
-        description: 'Comma-separated list of domain names.',
+        description: 'Filters results by domain name. Specify a comma-separated list of domain names.',
         items: {
           type: 'string',
         },
@@ -65,7 +65,7 @@ export const tool: Tool = {
       },
       location: {
         type: 'array',
-        description: 'Comma-separated list of locations (alpha-2 codes).',
+        description: 'Filters results by location. Specify a comma-separated list of alpha-2 location codes.',
         items: {
           type: 'string',
         },
@@ -79,7 +79,7 @@ export const tool: Tool = {
       },
       rankingType: {
         type: 'string',
-        description: 'Ranking type.',
+        description: 'The ranking type.',
         enum: ['POPULAR', 'TRENDING_RISE', 'TRENDING_STEADY'],
       },
     },

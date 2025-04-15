@@ -18,7 +18,8 @@ export const tool: Tool = {
     properties: {
       asn: {
         type: 'integer',
-        description: 'Single Autonomous System Number (ASN) as integer.',
+        description:
+          'Filters results by Autonomous System. Specify a single Autonomous System Number (ASN) as integer.',
       },
       format: {
         type: 'string',
@@ -27,7 +28,7 @@ export const tool: Tool = {
       },
       location: {
         type: 'string',
-        description: 'Location alpha-2 code.',
+        description: 'Filters results by location. Specify an alpha-2 location code.',
       },
     },
   },

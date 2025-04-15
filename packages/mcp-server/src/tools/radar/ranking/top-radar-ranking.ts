@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       date: {
         type: 'array',
-        description: 'Array of dates to filter the results.',
+        description: 'Filters results by the specified array of dates.',
         items: {
           type: 'string',
           format: 'date',
@@ -43,7 +43,7 @@ export const tool: Tool = {
       },
       location: {
         type: 'array',
-        description: 'Comma-separated list of locations (alpha-2 codes).',
+        description: 'Filters results by location. Specify a comma-separated list of alpha-2 location codes.',
         items: {
           type: 'string',
         },
@@ -57,7 +57,7 @@ export const tool: Tool = {
       },
       rankingType: {
         type: 'string',
-        description: 'Ranking type.',
+        description: 'The ranking type.',
         enum: ['POPULAR', 'TRENDING_RISE', 'TRENDING_STEADY'],
       },
     },

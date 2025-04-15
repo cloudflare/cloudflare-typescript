@@ -113,7 +113,7 @@ export namespace ASNGetResponse {
     related: Array<ASN.Related>;
 
     /**
-     * Regional Internet Registry
+     * Regional Internet Registry.
      */
     source: string;
 
@@ -132,7 +132,7 @@ export namespace ASNGetResponse {
       locations: Array<EstimatedUsers.Location>;
 
       /**
-       * Total estimated users
+       * Total estimated users.
        */
       estimatedUsers?: number;
     }
@@ -144,7 +144,7 @@ export namespace ASNGetResponse {
         locationName: string;
 
         /**
-         * Estimated users per location
+         * Estimated users per location.
          */
         estimatedUsers?: number;
       }
@@ -158,7 +158,7 @@ export namespace ASNGetResponse {
       aka?: string;
 
       /**
-       * Total estimated users
+       * Total estimated users.
        */
       estimatedUsers?: number;
     }
@@ -186,7 +186,7 @@ export namespace ASNIPResponse {
     related: Array<ASN.Related>;
 
     /**
-     * Regional Internet Registry
+     * Regional Internet Registry.
      */
     source: string;
 
@@ -205,7 +205,7 @@ export namespace ASNIPResponse {
       locations: Array<EstimatedUsers.Location>;
 
       /**
-       * Total estimated users
+       * Total estimated users.
        */
       estimatedUsers?: number;
     }
@@ -217,7 +217,7 @@ export namespace ASNIPResponse {
         locationName: string;
 
         /**
-         * Estimated users per location
+         * Estimated users per location.
          */
         estimatedUsers?: number;
       }
@@ -231,7 +231,7 @@ export namespace ASNIPResponse {
       aka?: string;
 
       /**
-       * Total estimated users
+       * Total estimated users.
        */
       estimatedUsers?: number;
     }
@@ -272,7 +272,8 @@ export namespace ASNRelResponse {
 
 export interface ASNListParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs).
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list.
    */
   asn?: string;
 
@@ -287,7 +288,7 @@ export interface ASNListParams {
   limit?: number;
 
   /**
-   * Location alpha-2 code.
+   * Filters results by location. Specify an alpha-2 location code.
    */
   location?: string;
 
@@ -297,7 +298,7 @@ export interface ASNListParams {
   offset?: number;
 
   /**
-   * Metric to order the ASNs by.
+   * Specifies the metric to order the ASNs by.
    */
   orderBy?: 'ASN' | 'POPULATION';
 }

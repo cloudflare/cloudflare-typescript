@@ -23,8 +23,7 @@ export const tool: Tool = {
       },
       dateRange: {
         type: 'string',
-        description:
-          "Shorthand date ranges for the last X days - use when you don't need specific start and end dates.",
+        description: 'Filters results by date range.',
       },
       dateStart: {
         type: 'string',
@@ -54,11 +53,11 @@ export const tool: Tool = {
       },
       maxConfidence: {
         type: 'integer',
-        description: 'The maximum confidence score to filter events (1-4 low, 5-7 mid, 8+ high).',
+        description: 'Filters events by maximum confidence score (1-4 low, 5-7 mid, 8+ high).',
       },
       minConfidence: {
         type: 'integer',
-        description: 'The minimum confidence score to filter events (1-4 low, 5-7 mid, 8+ high).',
+        description: 'Filters events by minimum confidence score (1-4 low, 5-7 mid, 8+ high).',
       },
       page: {
         type: 'integer',

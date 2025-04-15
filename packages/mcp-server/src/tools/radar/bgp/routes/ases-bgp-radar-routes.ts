@@ -27,7 +27,7 @@ export const tool: Tool = {
       },
       location: {
         type: 'string',
-        description: 'Location alpha-2 code.',
+        description: 'Filters results by location. Specify an alpha-2 location code.',
       },
       sortBy: {
         type: 'string',

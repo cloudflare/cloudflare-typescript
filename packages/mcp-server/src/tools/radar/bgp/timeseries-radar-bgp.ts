@@ -20,13 +20,13 @@ export const tool: Tool = {
       aggInterval: {
         type: 'string',
         description:
-          'Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).',
+          'Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).',
         enum: ['15m', '1h', '1d', '1w'],
       },
       asn: {
         type: 'array',
         description:
-          'Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.',
+          'Filters results by Autonomous System. Specify one or more Autonomous System Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.',
         items: {
           type: 'string',
         },
@@ -42,7 +42,7 @@ export const tool: Tool = {
       dateRange: {
         type: 'array',
         description:
-          'Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).',
+          'Filters results by date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).',
         items: {
           type: 'string',
         },
@@ -69,7 +69,7 @@ export const tool: Tool = {
       },
       prefix: {
         type: 'array',
-        description: 'Array of BGP network prefixes.',
+        description: 'Filters results by BGP network prefix.',
         items: {
           type: 'string',
           description: 'Network prefix, IPv4 or IPv6.',
@@ -77,7 +77,7 @@ export const tool: Tool = {
       },
       updateType: {
         type: 'array',
-        description: 'Array of BGP update types.',
+        description: 'Filters results by BGP update type.',
         items: {
           type: 'string',
           enum: ['ANNOUNCEMENT', 'WITHDRAWAL'],

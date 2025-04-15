@@ -18,7 +18,7 @@ export const tool: Tool = {
     properties: {
       date: {
         type: 'array',
-        description: 'Array of dates to filter the results.',
+        description: 'Filters results by the specified array of dates.',
         items: {
           type: 'string',
           format: 'date',
