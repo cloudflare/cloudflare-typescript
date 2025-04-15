@@ -38,7 +38,7 @@ export interface RegionListResponse {
 
 export interface RegionListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
