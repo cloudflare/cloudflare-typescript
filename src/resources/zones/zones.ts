@@ -416,7 +416,7 @@ export interface ZoneListParams extends V4PagePaginationArrayParams {
   /**
    * Field to order zones by.
    */
-  order?: 'name' | 'status' | 'account.id' | 'account.name';
+  order?: 'name' | 'status' | 'account.id' | 'account.name' | 'plan.id';
 
   /**
    * A zone status

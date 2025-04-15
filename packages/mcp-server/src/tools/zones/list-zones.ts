@@ -50,7 +50,7 @@ export const tool: Tool = {
       order: {
         type: 'string',
         description: 'Field to order zones by.',
-        enum: ['name', 'status', 'account.id', 'account.name'],
+        enum: ['name', 'status', 'account.id', 'account.name', 'plan.id'],
       },
       page: {
         type: 'number',
