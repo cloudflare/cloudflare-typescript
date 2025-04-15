@@ -25,7 +25,8 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * Overwrite the reference_id, tenant_url, and active values with the ones provided
+   * Overwrite the reference_id, tenant_url, and active values with the ones
+   * provided.
    */
   update(
     integrationID: string,
@@ -124,14 +125,14 @@ export interface IntegrationCreateResponse {
   reference_id: string;
 
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
   /**
    * The URL for the Shared Signals Framework configuration, e.g.
    * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 }
@@ -167,14 +168,14 @@ export interface IntegrationUpdateResponse {
   reference_id: string;
 
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
   /**
    * The URL for the Shared Signals Framework configuration, e.g.
    * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 }
@@ -210,14 +211,14 @@ export interface IntegrationListResponse {
   reference_id: string;
 
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
   /**
    * The URL for the Shared Signals Framework configuration, e.g.
    * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 }
@@ -255,14 +256,14 @@ export interface IntegrationGetResponse {
   reference_id: string;
 
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
   /**
    * The URL for the Shared Signals Framework configuration, e.g.
    * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 }
@@ -279,7 +280,7 @@ export interface IntegrationCreateParams {
   integration_type: 'Okta';
 
   /**
-   * Body param: The base url of the tenant, e.g. "https://tenant.okta.com"
+   * Body param: The base url of the tenant, e.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
@@ -304,7 +305,7 @@ export interface IntegrationUpdateParams {
   active: boolean;
 
   /**
-   * Body param: The base url of the tenant, e.g. "https://tenant.okta.com"
+   * Body param: The base url of the tenant, e.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 

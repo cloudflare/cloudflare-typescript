@@ -118,7 +118,7 @@ export const tool: Tool = {
                 },
                 description: {
                   type: 'string',
-                  description: 'The description of the profile',
+                  description: 'The description of the profile.',
                 },
                 ocr_enabled: {
                   type: 'boolean',
@@ -266,7 +266,7 @@ export const tool: Tool = {
           },
           description: {
             type: 'string',
-            description: 'The description of the profile',
+            description: 'The description of the profile.',
           },
           ocr_enabled: {
             type: 'boolean',

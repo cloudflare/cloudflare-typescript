@@ -29,7 +29,7 @@ export interface PatternValidateResponse {
 
 export interface PatternValidateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 

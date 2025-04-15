@@ -71,7 +71,7 @@ export class Custom extends APIResource {
 
 export interface CustomProfile {
   /**
-   * The id of the profile (uuid)
+   * The id of the profile (uuid).
    */
   id: string;
 
@@ -87,7 +87,7 @@ export interface CustomProfile {
   context_awareness: ProfilesAPI.ContextAwareness;
 
   /**
-   * When the profile was created
+   * When the profile was created.
    */
   created_at: string;
 
@@ -100,14 +100,14 @@ export interface CustomProfile {
   >;
 
   /**
-   * The name of the profile
+   * The name of the profile.
    */
   name: string;
 
   ocr_enabled: boolean;
 
   /**
-   * When the profile was lasted updated
+   * When the profile was lasted updated.
    */
   updated_at: string;
 
@@ -116,7 +116,7 @@ export interface CustomProfile {
   confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
   /**
-   * The description of the profile
+   * The description of the profile.
    */
   description?: string | null;
 }
@@ -157,13 +157,13 @@ export namespace CustomProfile {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
@@ -253,7 +253,7 @@ export type CustomCreateResponse =
 export namespace CustomCreateResponse {
   export interface CustomProfile {
     /**
-     * The id of the profile (uuid)
+     * The id of the profile (uuid).
      */
     id: string;
 
@@ -269,7 +269,7 @@ export namespace CustomCreateResponse {
     context_awareness: ProfilesAPI.ContextAwareness;
 
     /**
-     * When the profile was created
+     * When the profile was created.
      */
     created_at: string;
 
@@ -282,7 +282,7 @@ export namespace CustomCreateResponse {
     >;
 
     /**
-     * The name of the profile
+     * The name of the profile.
      */
     name: string;
 
@@ -291,7 +291,7 @@ export namespace CustomCreateResponse {
     type: 'custom';
 
     /**
-     * When the profile was lasted updated
+     * When the profile was lasted updated.
      */
     updated_at: string;
 
@@ -300,7 +300,7 @@ export namespace CustomCreateResponse {
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
-     * The description of the profile
+     * The description of the profile.
      */
     description?: string | null;
   }
@@ -341,13 +341,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }
@@ -412,7 +412,7 @@ export namespace CustomCreateResponse {
 
   export interface PredefinedProfile {
     /**
-     * The id of the predefined profile (uuid)
+     * The id of the predefined profile (uuid).
      */
     id: string;
 
@@ -427,7 +427,7 @@ export namespace CustomCreateResponse {
     >;
 
     /**
-     * The name of the predefined profile
+     * The name of the predefined profile.
      */
     name: string;
 
@@ -446,7 +446,7 @@ export namespace CustomCreateResponse {
     ocr_enabled?: boolean;
 
     /**
-     * Whether this profile can be accessed by anyone
+     * Whether this profile can be accessed by anyone.
      */
     open_access?: boolean;
   }
@@ -487,13 +487,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }
@@ -576,7 +576,7 @@ export namespace CustomCreateResponse {
     updated_at: string;
 
     /**
-     * The description of the profile
+     * The description of the profile.
      */
     description?: string | null;
   }
@@ -617,13 +617,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }
@@ -726,7 +726,7 @@ export declare namespace CustomCreateParams {
       context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
       /**
-       * The description of the profile
+       * The description of the profile.
        */
       description?: string | null;
 
@@ -831,7 +831,7 @@ export declare namespace CustomCreateParams {
     context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
     /**
-     * Body param: The description of the profile
+     * Body param: The description of the profile.
      */
     description?: string | null;
 
@@ -936,7 +936,7 @@ export interface CustomUpdateParams {
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
   /**
-   * Body param: The description of the profile
+   * Body param: The description of the profile.
    */
   description?: string | null;
 

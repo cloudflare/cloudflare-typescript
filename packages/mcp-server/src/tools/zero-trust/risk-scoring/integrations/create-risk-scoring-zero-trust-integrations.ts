@@ -25,7 +25,7 @@ export const tool: Tool = {
       },
       tenant_url: {
         type: 'string',
-        description: 'The base url of the tenant, e.g. "https://tenant.okta.com"',
+        description: 'The base url of the tenant, e.g. "https://tenant.okta.com".',
       },
       reference_id: {
         type: 'string',

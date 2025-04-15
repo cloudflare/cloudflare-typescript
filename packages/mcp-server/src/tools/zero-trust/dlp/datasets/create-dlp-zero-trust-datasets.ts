@@ -29,7 +29,7 @@ export const tool: Tool = {
       },
       description: {
         type: 'string',
-        description: 'The description of the dataset',
+        description: 'The description of the dataset.',
       },
       encoding_version: {
         type: 'integer',

@@ -2704,7 +2704,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `zero_trust.dlp.profiles`:
 
 - `list_dlp_zero_trust_profiles` (`read`): Lists all DLP profiles in an account.
-- `get_dlp_zero_trust_profiles` (`read`): Fetches a DLP profile by ID
+- `get_dlp_zero_trust_profiles` (`read`): Fetches a DLP profile by ID.
 
 ### Resource `zero_trust.dlp.profiles.custom`:
 
@@ -2728,7 +2728,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `update_dlp_zero_trust_entries` (`write`): Updates a DLP entry.
 - `list_dlp_zero_trust_entries` (`read`): Lists all DLP entries in an account.
 - `delete_dlp_zero_trust_entries` (`write`): Deletes a DLP custom entry.
-- `get_dlp_zero_trust_entries` (`read`): Fetches a DLP entry by ID
+- `get_dlp_zero_trust_entries` (`read`): Fetches a DLP entry by ID.
 
 ### Resource `zero_trust.gateway`:
 
@@ -2864,7 +2864,7 @@ The Zero Trust Gateway Rule must have values for both `expiration.expires_at` an
 ### Resource `zero_trust.risk_scoring.integrations`:
 
 - `create_risk_scoring_zero_trust_integrations` (`write`): Create new risk score integration.
-- `update_risk_scoring_zero_trust_integrations` (`write`): Overwrite the reference_id, tenant_url, and active values with the ones provided
+- `update_risk_scoring_zero_trust_integrations` (`write`): Overwrite the reference_id, tenant_url, and active values with the ones provided.
 - `list_risk_scoring_zero_trust_integrations` (`read`): List all risk score integrations for the account.
 - `delete_risk_scoring_zero_trust_integrations` (`write`): Delete a risk score integration.
 - `get_risk_scoring_zero_trust_integrations` (`read`): Get risk score integration by id.
