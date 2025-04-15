@@ -37,7 +37,7 @@ export interface SearchGlobalParams {
   query: string;
 
   /**
-   * Search types to be excluded from results.
+   * Search types excluded from results.
    */
   exclude?: Array<'SPECIAL_EVENTS' | 'NOTEBOOKS' | 'LOCATIONS' | 'ASNS'>;
 
@@ -47,7 +47,7 @@ export interface SearchGlobalParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Search types to be included in results.
+   * Search types included in results.
    */
   include?: Array<'SPECIAL_EVENTS' | 'NOTEBOOKS' | 'LOCATIONS' | 'ASNS'>;
 
@@ -57,7 +57,7 @@ export interface SearchGlobalParams {
   limit?: number;
 
   /**
-   * Limit the number of objects per search category.
+   * Limits the number of objects per search category.
    */
   limitPerGroup?: number;
 }
