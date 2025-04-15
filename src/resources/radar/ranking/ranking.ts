@@ -147,9 +147,9 @@ export interface RankingTimeseriesGroupsParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -164,7 +164,7 @@ export interface RankingTimeseriesGroupsParams {
   domainCategory?: Array<string>;
 
   /**
-   * Comma-separated list of domain names.
+   * Filters results by domain name. Specify a comma-separated list of domain names.
    */
   domains?: Array<string>;
 
@@ -179,7 +179,8 @@ export interface RankingTimeseriesGroupsParams {
   limit?: number;
 
   /**
-   * Comma-separated list of locations (alpha-2 codes).
+   * Filters results by location. Specify a comma-separated list of alpha-2 location
+   * codes.
    */
   location?: Array<string>;
 
@@ -189,14 +190,14 @@ export interface RankingTimeseriesGroupsParams {
   name?: Array<string>;
 
   /**
-   * Ranking type.
+   * The ranking type.
    */
   rankingType?: 'POPULAR' | 'TRENDING_RISE' | 'TRENDING_STEADY';
 }
 
 export interface RankingTopParams {
   /**
-   * Array of dates to filter the results.
+   * Filters results by the specified array of dates.
    */
   date?: Array<string>;
 
@@ -216,7 +217,8 @@ export interface RankingTopParams {
   limit?: number;
 
   /**
-   * Comma-separated list of locations (alpha-2 codes).
+   * Filters results by location. Specify a comma-separated list of alpha-2 location
+   * codes.
    */
   location?: Array<string>;
 
@@ -226,7 +228,7 @@ export interface RankingTopParams {
   name?: Array<string>;
 
   /**
-   * Ranking type.
+   * The ranking type.
    */
   rankingType?: 'POPULAR' | 'TRENDING_RISE' | 'TRENDING_STEADY';
 }
