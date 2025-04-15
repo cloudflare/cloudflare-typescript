@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       hostname: {
         type: 'string',
@@ -29,6 +29,10 @@ export const tool: Tool = {
       region_key: {
         type: 'string',
         description: 'Identifying key for the region',
+      },
+      routing: {
+        type: 'string',
+        description: 'Configure which routing method to use for the regional hostname',
       },
     },
   },
