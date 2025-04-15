@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_radar_entities',
-  description: 'Retrieves IP address information. ',
+  description: 'Retrieves IP address information.',
   inputSchema: {
     type: 'object',
     properties: {

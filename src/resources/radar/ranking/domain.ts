@@ -84,7 +84,7 @@ export namespace DomainGetResponse {
 
 export interface DomainGetParams {
   /**
-   * Array of dates to filter the results.
+   * Filters results by the specified array of dates.
    */
   date?: Array<string>;
 
@@ -109,7 +109,7 @@ export interface DomainGetParams {
   name?: Array<string>;
 
   /**
-   * Ranking type.
+   * The ranking type.
    */
   rankingType?: 'POPULAR' | 'TRENDING_RISE' | 'TRENDING_STEADY';
 }

@@ -27,7 +27,7 @@ export const tool: Tool = {
       },
       location: {
         type: 'string',
-        description: 'Comma-separated list of locations (alpha-2 location codes).',
+        description: 'Filters results by location. Specify a comma-separated list of alpha-2 location codes.',
       },
       offset: {
         type: 'integer',

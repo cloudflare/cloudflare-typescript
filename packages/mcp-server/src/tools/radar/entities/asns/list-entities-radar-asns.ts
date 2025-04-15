@@ -18,7 +18,8 @@ export const tool: Tool = {
     properties: {
       asn: {
         type: 'string',
-        description: 'Comma-separated list of Autonomous System Numbers (ASNs).',
+        description:
+          'Filters results by Autonomous System. Specify one or more Autonomous System Numbers (ASNs) as a comma-separated list.',
       },
       format: {
         type: 'string',
@@ -31,7 +32,7 @@ export const tool: Tool = {
       },
       location: {
         type: 'string',
-        description: 'Location alpha-2 code.',
+        description: 'Filters results by location. Specify an alpha-2 location code.',
       },
       offset: {
         type: 'integer',
@@ -39,7 +40,7 @@ export const tool: Tool = {
       },
       orderBy: {
         type: 'string',
-        description: 'Metric to order the ASNs by.',
+        description: 'Specifies the metric to order the ASNs by.',
         enum: ['ASN', 'POPULATION'],
       },
     },

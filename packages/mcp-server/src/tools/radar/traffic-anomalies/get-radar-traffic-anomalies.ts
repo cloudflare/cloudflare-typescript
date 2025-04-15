@@ -19,7 +19,8 @@ export const tool: Tool = {
     properties: {
       asn: {
         type: 'integer',
-        description: 'Single Autonomous System Number (ASN) as integer.',
+        description:
+          'Filters results by Autonomous System. Specify a single Autonomous System Number (ASN) as integer.',
       },
       dateEnd: {
         type: 'string',
@@ -28,8 +29,7 @@ export const tool: Tool = {
       },
       dateRange: {
         type: 'string',
-        description:
-          "Shorthand date ranges for the last X days - use when you don't need specific start and end dates.",
+        description: 'Filters results by date range.',
       },
       dateStart: {
         type: 'string',
@@ -47,7 +47,7 @@ export const tool: Tool = {
       },
       location: {
         type: 'string',
-        description: 'Location alpha-2 code.',
+        description: 'Filters results by location. Specify an alpha-2 location code.',
       },
       offset: {
         type: 'integer',

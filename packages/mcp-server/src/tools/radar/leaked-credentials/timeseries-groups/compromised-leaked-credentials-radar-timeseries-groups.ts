@@ -20,7 +20,7 @@ export const tool: Tool = {
       aggInterval: {
         type: 'string',
         description:
-          'Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).',
+          'Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).',
         enum: ['15m', '1h', '1d', '1w'],
       },
       botClass: {
@@ -43,7 +43,7 @@ export const tool: Tool = {
       dateRange: {
         type: 'array',
         description:
-          'Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).',
+          'Filters results by date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).',
         items: {
           type: 'string',
         },

@@ -114,7 +114,8 @@ export namespace OutageLocationsResponse {
 
 export interface OutageGetParams {
   /**
-   * Single Autonomous System Number (ASN) as integer.
+   * Filters results by Autonomous System. Specify a single Autonomous System Number
+   * (ASN) as integer.
    */
   asn?: number;
 
@@ -124,8 +125,7 @@ export interface OutageGetParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 
@@ -145,7 +145,7 @@ export interface OutageGetParams {
   limit?: number;
 
   /**
-   * Location alpha-2 code.
+   * Filters results by location. Specify an alpha-2 location code.
    */
   location?: string;
 
@@ -162,8 +162,7 @@ export interface OutageLocationsParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 

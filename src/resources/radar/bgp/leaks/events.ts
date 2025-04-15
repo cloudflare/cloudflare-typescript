@@ -72,8 +72,7 @@ export interface EventListParams extends V4PagePaginationParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 

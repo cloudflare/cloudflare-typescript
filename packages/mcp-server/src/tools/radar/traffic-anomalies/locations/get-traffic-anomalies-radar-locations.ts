@@ -24,8 +24,7 @@ export const tool: Tool = {
       },
       dateRange: {
         type: 'string',
-        description:
-          "Shorthand date ranges for the last X days - use when you don't need specific start and end dates.",
+        description: 'Filters results by date range.',
       },
       dateStart: {
         type: 'string',
