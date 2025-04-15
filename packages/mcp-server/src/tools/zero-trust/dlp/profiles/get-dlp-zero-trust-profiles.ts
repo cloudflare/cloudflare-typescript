@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_dlp_zero_trust_profiles',
-  description: 'Fetches a DLP profile by ID',
+  description: 'Fetches a DLP profile by ID.',
   inputSchema: {
     type: 'object',
     properties: {

@@ -90,7 +90,7 @@ export interface RuleCreateResponse {
   action: RuleCreateResponse.Action;
 
   /**
-   * Rule is triggered if all conditions match
+   * Rule is triggered if all conditions match.
    */
   conditions: Array<RuleCreateResponse.Condition>;
 
@@ -129,7 +129,7 @@ export interface RuleUpdateResponse {
   action: RuleUpdateResponse.Action;
 
   /**
-   * Rule is triggered if all conditions match
+   * Rule is triggered if all conditions match.
    */
   conditions: Array<RuleUpdateResponse.Condition>;
 
@@ -168,7 +168,7 @@ export interface RuleListResponse {
   action: RuleListResponse.Action;
 
   /**
-   * Rule is triggered if all conditions match
+   * Rule is triggered if all conditions match.
    */
   conditions: Array<RuleListResponse.Condition>;
 
@@ -207,7 +207,7 @@ export interface RuleDeleteResponse {
   action: RuleDeleteResponse.Action;
 
   /**
-   * Rule is triggered if all conditions match
+   * Rule is triggered if all conditions match.
    */
   conditions: Array<RuleDeleteResponse.Condition>;
 
@@ -246,7 +246,7 @@ export interface RuleBulkEditResponse {
   action: RuleBulkEditResponse.Action;
 
   /**
-   * Rule is triggered if all conditions match
+   * Rule is triggered if all conditions match.
    */
   conditions: Array<RuleBulkEditResponse.Condition>;
 
@@ -285,7 +285,7 @@ export interface RuleGetResponse {
   action: RuleGetResponse.Action;
 
   /**
-   * Rule is triggered if all conditions match
+   * Rule is triggered if all conditions match.
    */
   conditions: Array<RuleGetResponse.Condition>;
 
@@ -332,7 +332,7 @@ export interface RuleCreateParams {
   action: RuleCreateParams.Action;
 
   /**
-   * Body param: Rule is triggered if all conditions match
+   * Body param: Rule is triggered if all conditions match.
    */
   conditions: Array<RuleCreateParams.Condition>;
 
@@ -380,7 +380,7 @@ export interface RuleUpdateParams {
   action: RuleUpdateParams.Action;
 
   /**
-   * Body param: Rule is triggered if all conditions match
+   * Body param: Rule is triggered if all conditions match.
    */
   conditions: Array<RuleUpdateParams.Condition>;
 

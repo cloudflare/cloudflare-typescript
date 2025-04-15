@@ -29,11 +29,11 @@ export const tool: Tool = {
       },
       description: {
         type: 'string',
-        description: 'The description of the dataset',
+        description: 'The description of the dataset.',
       },
       name: {
         type: 'string',
-        description: 'The name of the dataset, must be unique',
+        description: 'The name of the dataset, must be unique.',
       },
     },
   },

@@ -42,7 +42,7 @@ export class Profiles extends APIResource {
   }
 
   /**
-   * Fetches a DLP profile by ID
+   * Fetches a DLP profile by ID.
    */
   get(profileID: string, params: ProfileGetParams, options?: RequestOptions): APIPromise<Profile> {
     const { account_id } = params;
@@ -95,7 +95,7 @@ export type Profile = Profile.CustomProfile | Profile.PredefinedProfile | Profil
 export namespace Profile {
   export interface CustomProfile {
     /**
-     * The id of the profile (uuid)
+     * The id of the profile (uuid).
      */
     id: string;
 
@@ -111,7 +111,7 @@ export namespace Profile {
     context_awareness: ProfilesAPI.ContextAwareness;
 
     /**
-     * When the profile was created
+     * When the profile was created.
      */
     created_at: string;
 
@@ -124,7 +124,7 @@ export namespace Profile {
     >;
 
     /**
-     * The name of the profile
+     * The name of the profile.
      */
     name: string;
 
@@ -133,7 +133,7 @@ export namespace Profile {
     type: 'custom';
 
     /**
-     * When the profile was lasted updated
+     * When the profile was lasted updated.
      */
     updated_at: string;
 
@@ -142,7 +142,7 @@ export namespace Profile {
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
-     * The description of the profile
+     * The description of the profile.
      */
     description?: string | null;
   }
@@ -183,13 +183,13 @@ export namespace Profile {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }
@@ -254,7 +254,7 @@ export namespace Profile {
 
   export interface PredefinedProfile {
     /**
-     * The id of the predefined profile (uuid)
+     * The id of the predefined profile (uuid).
      */
     id: string;
 
@@ -269,7 +269,7 @@ export namespace Profile {
     >;
 
     /**
-     * The name of the predefined profile
+     * The name of the predefined profile.
      */
     name: string;
 
@@ -288,7 +288,7 @@ export namespace Profile {
     ocr_enabled?: boolean;
 
     /**
-     * Whether this profile can be accessed by anyone
+     * Whether this profile can be accessed by anyone.
      */
     open_access?: boolean;
   }
@@ -329,13 +329,13 @@ export namespace Profile {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }
@@ -418,7 +418,7 @@ export namespace Profile {
     updated_at: string;
 
     /**
-     * The description of the profile
+     * The description of the profile.
      */
     description?: string | null;
   }
@@ -459,13 +459,13 @@ export namespace Profile {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }

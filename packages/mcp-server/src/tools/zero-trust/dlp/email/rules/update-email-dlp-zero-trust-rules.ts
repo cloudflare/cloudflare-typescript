@@ -37,7 +37,7 @@ export const tool: Tool = {
       },
       conditions: {
         type: 'array',
-        description: 'Rule is triggered if all conditions match',
+        description: 'Rule is triggered if all conditions match.',
         items: {
           type: 'object',
           properties: {

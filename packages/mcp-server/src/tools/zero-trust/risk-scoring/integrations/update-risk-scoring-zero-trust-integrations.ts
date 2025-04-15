@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_risk_scoring_zero_trust_integrations',
-  description: 'Overwrite the reference_id, tenant_url, and active values with the ones provided',
+  description: 'Overwrite the reference_id, tenant_url, and active values with the ones provided.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -29,7 +29,7 @@ export const tool: Tool = {
       },
       tenant_url: {
         type: 'string',
-        description: 'The base url of the tenant, e.g. "https://tenant.okta.com"',
+        description: 'The base url of the tenant, e.g. "https://tenant.okta.com".',
       },
       reference_id: {
         type: 'string',
