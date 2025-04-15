@@ -111,6 +111,7 @@ export class Scripts extends APIResource {
           body,
           ...options,
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
+          __binaryRequest: true,
         }),
       ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -387,8 +388,6 @@ export interface ScriptUpdateParams {
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
-
-  [k: string]: Array<Core.Uploadable> | string | ScriptUpdateParams.Metadata | undefined;
 }
 
 export namespace ScriptUpdateParams {
