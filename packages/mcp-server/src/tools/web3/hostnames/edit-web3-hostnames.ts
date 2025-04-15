@@ -18,19 +18,19 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       identifier: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       description: {
         type: 'string',
-        description: 'An optional description of the hostname.',
+        description: 'Specify an optional description of the hostname.',
       },
       dnslink: {
         type: 'string',
-        description: 'DNSLink value used if the target is ipfs.',
+        description: 'Specify the DNSLink value used if the target is ipfs.',
       },
     },
   },

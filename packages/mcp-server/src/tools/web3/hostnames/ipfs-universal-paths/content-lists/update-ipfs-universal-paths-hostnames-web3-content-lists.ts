@@ -18,11 +18,11 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       identifier: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       action: {
         type: 'string',
@@ -31,18 +31,18 @@ export const tool: Tool = {
       },
       entries: {
         type: 'array',
-        description: 'Content list entries.',
+        description: 'Provides content list entries.',
         items: {
           type: 'object',
-          description: 'Content list entry to be blocked.',
+          description: 'Specify a content list entry to block.',
           properties: {
             id: {
               type: 'string',
-              description: 'Identifier',
+              description: 'Specify the identifier of the hostname.',
             },
             content: {
               type: 'string',
-              description: 'CID or content path of content to block.',
+              description: 'Specify the CID or content path of content to block.',
             },
             created_on: {
               type: 'string',
@@ -50,7 +50,7 @@ export const tool: Tool = {
             },
             description: {
               type: 'string',
-              description: 'An optional description of the content list entry.',
+              description: 'Specify an optional description of the content list entry.',
             },
             modified_on: {
               type: 'string',
@@ -58,7 +58,7 @@ export const tool: Tool = {
             },
             type: {
               type: 'string',
-              description: 'Type of content list entry to block.',
+              description: 'Specify the type of content list entry to block.',
               enum: ['cid', 'content_path'],
             },
           },
