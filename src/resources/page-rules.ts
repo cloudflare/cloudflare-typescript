@@ -98,7 +98,7 @@ export class PageRules extends APIResource {
 
 export interface PageRule {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -584,14 +584,14 @@ export type PageRuleListResponse = Array<PageRule>;
 
 export interface PageRuleDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 }
 
 export interface PageRuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -999,7 +999,7 @@ export namespace PageRuleCreateParams {
 
 export interface PageRuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1407,7 +1407,7 @@ export namespace PageRuleUpdateParams {
 
 export interface PageRuleListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1435,14 +1435,14 @@ export interface PageRuleListParams {
 
 export interface PageRuleDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface PageRuleEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1850,7 +1850,7 @@ export namespace PageRuleEditParams {
 
 export interface PageRuleGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
