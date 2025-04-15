@@ -79,6 +79,7 @@ import * as AssetsAPI from './assets/assets';
 import { Assets as AssetsAPIAssets } from './assets/assets';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
+import { type Uploadable } from '../../../core/uploads';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { maybeMultipartFormRequestOptions } from '../../../internal/uploads';
@@ -107,13 +108,13 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ScriptUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, files, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/workers/scripts/${scriptName}`,
         maybeMultipartFormRequestOptions(
           {
-            body,
+            body: { ...body, ...files },
             ...options,
             headers: buildHeaders([{ 'Content-Type': 'application/javascript' }, options?.headers]),
           },
@@ -394,6 +395,8 @@ export interface ScriptUpdateParams {
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
+
+  files?: Record<string, Uploadable>;
 }
 
 export namespace ScriptUpdateParams {
