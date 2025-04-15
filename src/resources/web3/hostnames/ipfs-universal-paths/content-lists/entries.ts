@@ -94,96 +94,96 @@ export class Entries extends APIResource {
 }
 
 /**
- * Content list entry to be blocked.
+ * Specify a content list entry to block.
  */
 export interface EntryCreateResponse {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   id?: string;
 
   /**
-   * CID or content path of content to block.
+   * Specify the CID or content path of content to block.
    */
   content?: string;
 
   created_on?: string;
 
   /**
-   * An optional description of the content list entry.
+   * Specify an optional description of the content list entry.
    */
   description?: string;
 
   modified_on?: string;
 
   /**
-   * Type of content list entry to block.
+   * Specify the type of content list entry to block.
    */
   type?: 'cid' | 'content_path';
 }
 
 /**
- * Content list entry to be blocked.
+ * Specify a content list entry to block.
  */
 export interface EntryUpdateResponse {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   id?: string;
 
   /**
-   * CID or content path of content to block.
+   * Specify the CID or content path of content to block.
    */
   content?: string;
 
   created_on?: string;
 
   /**
-   * An optional description of the content list entry.
+   * Specify an optional description of the content list entry.
    */
   description?: string;
 
   modified_on?: string;
 
   /**
-   * Type of content list entry to block.
+   * Specify the type of content list entry to block.
    */
   type?: 'cid' | 'content_path';
 }
 
 export interface EntryListResponse {
   /**
-   * Content list entries.
+   * Provides content list entries.
    */
   entries?: Array<EntryListResponse.Entry>;
 }
 
 export namespace EntryListResponse {
   /**
-   * Content list entry to be blocked.
+   * Specify a content list entry to block.
    */
   export interface Entry {
     /**
-     * Identifier
+     * Specify the identifier of the hostname.
      */
     id?: string;
 
     /**
-     * CID or content path of content to block.
+     * Specify the CID or content path of content to block.
      */
     content?: string;
 
     created_on?: string;
 
     /**
-     * An optional description of the content list entry.
+     * Specify an optional description of the content list entry.
      */
     description?: string;
 
     modified_on?: string;
 
     /**
-     * Type of content list entry to block.
+     * Specify the type of content list entry to block.
      */
     type?: 'cid' | 'content_path';
   }
@@ -191,101 +191,101 @@ export namespace EntryListResponse {
 
 export interface EntryDeleteResponse {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   id: string;
 }
 
 /**
- * Content list entry to be blocked.
+ * Specify a content list entry to block.
  */
 export interface EntryGetResponse {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   id?: string;
 
   /**
-   * CID or content path of content to block.
+   * Specify the CID or content path of content to block.
    */
   content?: string;
 
   created_on?: string;
 
   /**
-   * An optional description of the content list entry.
+   * Specify an optional description of the content list entry.
    */
   description?: string;
 
   modified_on?: string;
 
   /**
-   * Type of content list entry to block.
+   * Specify the type of content list entry to block.
    */
   type?: 'cid' | 'content_path';
 }
 
 export interface EntryCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Specify the identifier of the hostname.
    */
   zone_id: string;
 
   /**
-   * Body param: CID or content path of content to block.
+   * Body param: Specify the CID or content path of content to block.
    */
   content: string;
 
   /**
-   * Body param: Type of content list entry to block.
+   * Body param: Specify the type of content list entry to block.
    */
   type: 'cid' | 'content_path';
 
   /**
-   * Body param: An optional description of the content list entry.
+   * Body param: Specify an optional description of the content list entry.
    */
   description?: string;
 }
 
 export interface EntryUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Specify the identifier of the hostname.
    */
   zone_id: string;
 
   /**
-   * Body param: CID or content path of content to block.
+   * Body param: Specify the CID or content path of content to block.
    */
   content: string;
 
   /**
-   * Body param: Type of content list entry to block.
+   * Body param: Specify the type of content list entry to block.
    */
   type: 'cid' | 'content_path';
 
   /**
-   * Body param: An optional description of the content list entry.
+   * Body param: Specify an optional description of the content list entry.
    */
   description?: string;
 }
 
 export interface EntryListParams {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   zone_id: string;
 }
 
 export interface EntryDeleteParams {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   zone_id: string;
 }
 
 export interface EntryGetParams {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   zone_id: string;
 }
