@@ -18,24 +18,24 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       name: {
         type: 'string',
-        description: 'The hostname that will point to the target gateway via CNAME.',
+        description: 'Specify the hostname that points to the target gateway via CNAME.',
       },
       target: {
         type: 'string',
-        description: 'Target gateway of the hostname.',
+        description: 'Specify the target gateway of the hostname.',
         enum: ['ethereum', 'ipfs', 'ipfs_universal_path'],
       },
       description: {
         type: 'string',
-        description: 'An optional description of the hostname.',
+        description: 'Specify an optional description of the hostname.',
       },
       dnslink: {
         type: 'string',
-        description: 'DNSLink value used if the target is ipfs.',
+        description: 'Specify the DNSLink value used if the target is ipfs.',
       },
     },
   },

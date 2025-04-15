@@ -18,15 +18,15 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       identifier: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       content_list_entry_identifier: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
     },
   },

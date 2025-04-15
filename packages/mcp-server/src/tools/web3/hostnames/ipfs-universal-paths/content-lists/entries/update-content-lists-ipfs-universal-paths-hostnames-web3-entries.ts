@@ -18,28 +18,28 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       identifier: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       content_list_entry_identifier: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Specify the identifier of the hostname.',
       },
       content: {
         type: 'string',
-        description: 'CID or content path of content to block.',
+        description: 'Specify the CID or content path of content to block.',
       },
       type: {
         type: 'string',
-        description: 'Type of content list entry to block.',
+        description: 'Specify the type of content list entry to block.',
         enum: ['cid', 'content_path'],
       },
       description: {
         type: 'string',
-        description: 'An optional description of the content list entry.',
+        description: 'Specify an optional description of the content list entry.',
       },
     },
   },
