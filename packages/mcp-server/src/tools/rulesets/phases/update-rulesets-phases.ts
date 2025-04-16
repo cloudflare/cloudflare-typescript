@@ -2450,7 +2450,7 @@ export const tool: Tool = {
                       type: 'array',
                       title: 'Phases',
                       description:
-                        'A list of phases to skip the execution of. This option is incompatible with the rulesets options.',
+                        'A list of phases to skip the execution of. This option is incompatible with the ruleset and rulesets options.',
                       items: {
                         $ref: '#/properties/ruleset_phase',
                       },
@@ -2476,7 +2476,7 @@ export const tool: Tool = {
                       type: 'string',
                       title: 'Ruleset',
                       description:
-                        'A ruleset to skip the execution of. This option is incompatible with the rulesets, rules. It can be incompatible with phases options base on the phase of the ruleset.',
+                        'A ruleset to skip the execution of. This option is incompatible with the rulesets, rules and phases options.',
                       enum: ['current'],
                     },
                     rulesets: {

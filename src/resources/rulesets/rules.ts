@@ -6170,7 +6170,7 @@ export namespace SkipRule {
   export interface ActionParameters {
     /**
      * A list of phases to skip the execution of. This option is incompatible with the
-     * rulesets options.
+     * ruleset and rulesets options.
      */
     phases?: Array<RulesetsAPI.Phase>;
 
@@ -6187,8 +6187,7 @@ export namespace SkipRule {
 
     /**
      * A ruleset to skip the execution of. This option is incompatible with the
-     * rulesets, rules. It can be incompatible with phases options base on the phase of
-     * the ruleset.
+     * rulesets, rules and phases options.
      */
     ruleset?: 'current';
 
@@ -6325,7 +6324,7 @@ export namespace SkipRuleParam {
   export interface ActionParameters {
     /**
      * A list of phases to skip the execution of. This option is incompatible with the
-     * rulesets options.
+     * ruleset and rulesets options.
      */
     phases?: Array<RulesetsAPI.PhaseParam>;
 
@@ -6342,8 +6341,7 @@ export namespace SkipRuleParam {
 
     /**
      * A ruleset to skip the execution of. This option is incompatible with the
-     * rulesets, rules. It can be incompatible with phases options base on the phase of
-     * the ruleset.
+     * rulesets, rules and phases options.
      */
     ruleset?: 'current';
 
@@ -10230,7 +10228,7 @@ export declare namespace RuleCreateParams {
     export interface ActionParameters {
       /**
        * A list of phases to skip the execution of. This option is incompatible with the
-       * rulesets options.
+       * ruleset and rulesets options.
        */
       phases?: Array<RulesetsAPI.PhaseParam>;
 
@@ -10247,8 +10245,7 @@ export declare namespace RuleCreateParams {
 
       /**
        * A ruleset to skip the execution of. This option is incompatible with the
-       * rulesets, rules. It can be incompatible with phases options base on the phase of
-       * the ruleset.
+       * rulesets, rules and phases options.
        */
       ruleset?: 'current';
 
@@ -14420,7 +14417,7 @@ export declare namespace RuleEditParams {
     export interface ActionParameters {
       /**
        * A list of phases to skip the execution of. This option is incompatible with the
-       * rulesets options.
+       * ruleset and rulesets options.
        */
       phases?: Array<RulesetsAPI.PhaseParam>;
 
@@ -14437,8 +14434,7 @@ export declare namespace RuleEditParams {
 
       /**
        * A ruleset to skip the execution of. This option is incompatible with the
-       * rulesets, rules. It can be incompatible with phases options base on the phase of
-       * the ruleset.
+       * rulesets, rules and phases options.
        */
       ruleset?: 'current';
 
