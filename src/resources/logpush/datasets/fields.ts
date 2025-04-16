@@ -12,7 +12,32 @@ export class Fields extends APIResource {
    * key-value pairs, where keys are field names, and values are descriptions.
    */
   get(
-    datasetID: string | null,
+    datasetID:
+      | 'access_requests'
+      | 'audit_logs'
+      | 'biso_user_actions'
+      | 'casb_findings'
+      | 'device_posture_results'
+      | 'dlp_forensic_copies'
+      | 'dns_firewall_logs'
+      | 'dns_logs'
+      | 'email_security_alerts'
+      | 'firewall_events'
+      | 'gateway_dns'
+      | 'gateway_http'
+      | 'gateway_network'
+      | 'http_requests'
+      | 'magic_ids_detections'
+      | 'nel_reports'
+      | 'network_analytics_logs'
+      | 'page_shield_events'
+      | 'sinkhole_http_logs'
+      | 'spectrum_events'
+      | 'ssh_logs'
+      | 'workers_trace_events'
+      | 'zaraz_events'
+      | 'zero_trust_network_sessions'
+      | null,
     params: FieldGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FieldGetResponse> {
