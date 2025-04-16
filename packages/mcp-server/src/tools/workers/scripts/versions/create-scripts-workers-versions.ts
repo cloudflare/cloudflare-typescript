@@ -320,6 +320,25 @@ export const tool: Tool = {
                       type: 'string',
                       description: 'A JavaScript variable name for the binding.',
                     },
+                    pipeline: {
+                      type: 'string',
+                      description: 'Name of the Pipeline to bind to.',
+                    },
+                    type: {
+                      type: 'string',
+                      description: 'The kind of resource that the binding provides.',
+                      enum: ['pipelines'],
+                    },
+                  },
+                  required: ['name', 'pipeline', 'type'],
+                },
+                {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                      description: 'A JavaScript variable name for the binding.',
+                    },
                     queue_name: {
                       type: 'string',
                       description: 'Name of the Queue to bind to.',

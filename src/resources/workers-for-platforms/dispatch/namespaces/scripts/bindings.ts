@@ -42,6 +42,7 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindKVNamespace
   | BindingGetResponse.WorkersBindingKindMTLSCertificate
   | BindingGetResponse.WorkersBindingKindPlainText
+  | BindingGetResponse.WorkersBindingKindPipelines
   | BindingGetResponse.WorkersBindingKindQueue
   | BindingGetResponse.WorkersBindingKindR2Bucket
   | BindingGetResponse.WorkersBindingKindSecretText
@@ -296,6 +297,23 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'plain_text';
+  }
+
+  export interface WorkersBindingKindPipelines {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Name of the Pipeline to bind to.
+     */
+    pipeline: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'pipelines';
   }
 
   export interface WorkersBindingKindQueue {
