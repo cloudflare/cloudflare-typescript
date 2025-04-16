@@ -248,7 +248,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
                   required: [],
@@ -304,7 +304,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                     purpose_justification_prompt: {
                       type: 'string',
@@ -676,7 +676,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
                   required: [],
@@ -712,7 +712,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                     purpose_justification_prompt: {
                       type: 'string',
@@ -1320,7 +1320,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
                   required: [],
@@ -1356,7 +1356,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                     purpose_justification_prompt: {
                       type: 'string',
@@ -1722,7 +1722,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
                   required: [],
@@ -1758,7 +1758,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                     purpose_justification_prompt: {
                       type: 'string',
@@ -2059,7 +2059,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
                   required: [],
@@ -2095,7 +2095,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                     purpose_justification_prompt: {
                       type: 'string',
@@ -2351,7 +2351,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
                   required: [],
@@ -2387,7 +2387,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                     purpose_justification_prompt: {
                       type: 'string',
@@ -2643,7 +2643,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
                   required: [],
@@ -2679,7 +2679,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                     purpose_justification_prompt: {
                       type: 'string',
@@ -3752,7 +3752,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
                   required: [],
@@ -3788,7 +3788,7 @@ export const tool: Tool = {
                     precedence: {
                       type: 'integer',
                       description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.',
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                     purpose_justification_prompt: {
                       type: 'string',
