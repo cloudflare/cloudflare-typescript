@@ -2251,14 +2251,6 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `revoke_devices_zero_trust_registrations` (`write`): Revokes a list of WARP registrations.
 - `unrevoke_devices_zero_trust_registrations` (`write`): Unrevokes a list of WARP registrations.
 
-### Resource `zero_trust.devices.dex_tests`:
-
-- `create_devices_zero_trust_dex_tests` (`write`): Create a DEX test.
-- `update_devices_zero_trust_dex_tests` (`write`): Update a DEX test.
-- `list_devices_zero_trust_dex_tests` (`read`): Fetch all DEX tests.
-- `delete_devices_zero_trust_dex_tests` (`write`): Delete a Device DEX test. Returns the remaining device dex tests for the account.
-- `get_devices_zero_trust_dex_tests` (`read`): Fetch a single DEX test.
-
 ### Resource `zero_trust.devices.networks`:
 
 - `create_devices_zero_trust_networks` (`write`): Creates a new device managed network.

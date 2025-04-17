@@ -1,18 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  DEXTests,
-  type DEXTest,
-  type SchemaData,
-  type SchemaHTTP,
-  type DEXTestDeleteResponse,
-  type DEXTestCreateParams,
-  type DEXTestUpdateParams,
-  type DEXTestListParams,
-  type DEXTestDeleteParams,
-  type DEXTestGetParams,
-  type SchemaHTTPSSinglePage,
-} from './dex-tests';
+export { DEXTests, type SchemaData, type SchemaHTTP } from './dex-tests';
 export {
   Devices,
   type Device,
