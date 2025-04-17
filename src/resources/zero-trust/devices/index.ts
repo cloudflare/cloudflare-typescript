@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { DEXTests, type SchemaData, type SchemaHTTP } from './dex-tests';
 export {
   DeviceListResponsesCursorPagination,
   Devices,
@@ -84,19 +85,6 @@ export {
 } from './registrations';
 export { Resilience } from './resilience/index';
 export { Revoke, type RevokeCreateResponse, type RevokeCreateParams } from './revoke';
-export {
-  SchemaHTTPSSinglePage,
-  DEXTests,
-  type DEXTest,
-  type SchemaData,
-  type SchemaHTTP,
-  type DEXTestDeleteResponse,
-  type DEXTestCreateParams,
-  type DEXTestUpdateParams,
-  type DEXTestListParams,
-  type DEXTestDeleteParams,
-  type DEXTestGetParams,
-} from './dex-tests';
 export {
   Settings,
   type DeviceSettings,
