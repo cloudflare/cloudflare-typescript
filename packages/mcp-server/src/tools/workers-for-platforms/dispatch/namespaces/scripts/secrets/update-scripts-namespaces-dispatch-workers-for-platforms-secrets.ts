@@ -64,12 +64,12 @@ export const tool: Tool = {
           algorithm: {
             type: 'object',
             description:
-              'Algorithm-specific key parameters ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).',
+              'Algorithm-specific key parameters. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).',
           },
           format: {
             type: 'string',
             description:
-              'Data format of the key ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).',
+              'Data format of the key. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).',
             enum: ['raw', 'pkcs8', 'spki', 'jwk'],
           },
           name: {
@@ -84,7 +84,7 @@ export const tool: Tool = {
           usages: {
             type: 'array',
             description:
-              'Allowed operations with the key ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).',
+              'Allowed operations with the key. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).',
             items: {
               type: 'string',
               enum: [
