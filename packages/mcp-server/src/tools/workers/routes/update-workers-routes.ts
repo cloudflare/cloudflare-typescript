@@ -24,13 +24,18 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
+      id: {
+        type: 'string',
+        description: 'Identifier.',
+      },
       pattern: {
         type: 'string',
-        title: 'Route pattern',
+        description:
+          'Pattern to match incoming requests against. [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).',
       },
       script: {
         type: 'string',
-        description: 'Name of the script, used in URLs and route configuration.',
+        description: 'Name of the script to run if the route matches.',
       },
     },
   },
