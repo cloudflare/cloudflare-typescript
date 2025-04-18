@@ -10,7 +10,11 @@ export class Routes extends APIResource {
    */
   create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
     const { zone_id, ...body } = params;
-    return this._client.post(`/zones/${zone_id}/workers/routes`, { body, ...options });
+    return (
+      this._client.post(`/zones/${zone_id}/workers/routes`, { body, ...options }) as Core.APIPromise<{
+        result: RouteCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -50,7 +54,11 @@ export class Routes extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
     const { zone_id } = params;
-    return this._client.delete(`/zones/${zone_id}/workers/routes/${routeId}`, options);
+    return (
+      this._client.delete(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
+        result: RouteDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -73,48 +81,21 @@ export class Routes extends APIResource {
 export class RouteListResponsesSinglePage extends SinglePage<RouteListResponse> {}
 
 export interface RouteCreateResponse {
-  errors: Array<RouteCreateResponse.Error>;
-
-  messages: Array<RouteCreateResponse.Message>;
+  /**
+   * Identifier.
+   */
+  id: string;
 
   /**
-   * Whether the API call was successful.
+   * Pattern to match incoming requests against.
+   * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
    */
-  success: true;
-}
+  pattern: string;
 
-export namespace RouteCreateResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-
-    documentation_url?: string;
-
-    source?: Error.Source;
-  }
-
-  export namespace Error {
-    export interface Source {
-      pointer?: string;
-    }
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-
-    documentation_url?: string;
-
-    source?: Message.Source;
-  }
-
-  export namespace Message {
-    export interface Source {
-      pointer?: string;
-    }
-  }
+  /**
+   * Name of the script to run if the route matches.
+   */
+  script: string;
 }
 
 export interface RouteUpdateResponse {
@@ -123,10 +104,14 @@ export interface RouteUpdateResponse {
    */
   id: string;
 
+  /**
+   * Pattern to match incoming requests against.
+   * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
+   */
   pattern: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Name of the script to run if the route matches.
    */
   script: string;
 }
@@ -137,57 +122,34 @@ export interface RouteListResponse {
    */
   id: string;
 
+  /**
+   * Pattern to match incoming requests against.
+   * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
+   */
   pattern: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Name of the script to run if the route matches.
    */
   script: string;
 }
 
 export interface RouteDeleteResponse {
-  errors: Array<RouteDeleteResponse.Error>;
-
-  messages: Array<RouteDeleteResponse.Message>;
+  /**
+   * Identifier.
+   */
+  id: string;
 
   /**
-   * Whether the API call was successful.
+   * Pattern to match incoming requests against.
+   * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
    */
-  success: true;
-}
+  pattern: string;
 
-export namespace RouteDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-
-    documentation_url?: string;
-
-    source?: Error.Source;
-  }
-
-  export namespace Error {
-    export interface Source {
-      pointer?: string;
-    }
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-
-    documentation_url?: string;
-
-    source?: Message.Source;
-  }
-
-  export namespace Message {
-    export interface Source {
-      pointer?: string;
-    }
-  }
+  /**
+   * Name of the script to run if the route matches.
+   */
+  script: string;
 }
 
 export interface RouteGetResponse {
@@ -196,10 +158,14 @@ export interface RouteGetResponse {
    */
   id: string;
 
+  /**
+   * Pattern to match incoming requests against.
+   * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
+   */
   pattern: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Name of the script to run if the route matches.
    */
   script: string;
 }
@@ -211,14 +177,20 @@ export interface RouteCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param: Identifier.
+   */
+  id: string;
+
+  /**
+   * Body param: Pattern to match incoming requests against.
+   * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
    */
   pattern: string;
 
   /**
-   * Body param: Name of the script, used in URLs and route configuration.
+   * Body param: Name of the script to run if the route matches.
    */
-  script?: string;
+  script: string;
 }
 
 export interface RouteUpdateParams {
@@ -228,14 +200,20 @@ export interface RouteUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param: Identifier.
+   */
+  id: string;
+
+  /**
+   * Body param: Pattern to match incoming requests against.
+   * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
    */
   pattern: string;
 
   /**
-   * Body param: Name of the script, used in URLs and route configuration.
+   * Body param: Name of the script to run if the route matches.
    */
-  script?: string;
+  script: string;
 }
 
 export interface RouteListParams {

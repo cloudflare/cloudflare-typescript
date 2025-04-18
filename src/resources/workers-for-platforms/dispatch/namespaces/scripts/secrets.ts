@@ -104,14 +104,14 @@ export namespace SecretUpdateResponse {
 
   export interface WorkersBindingKindSecretKey {
     /**
-     * Algorithm-specific key parameters
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+     * Algorithm-specific key parameters.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
      */
     algorithm: unknown;
 
     /**
-     * Data format of the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+     * Data format of the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
      */
     format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
 
@@ -126,8 +126,8 @@ export namespace SecretUpdateResponse {
     type: 'secret_key';
 
     /**
-     * Allowed operations with the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+     * Allowed operations with the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
      */
     usages: Array<
       'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
@@ -157,14 +157,14 @@ export namespace SecretListResponse {
 
   export interface WorkersBindingKindSecretKey {
     /**
-     * Algorithm-specific key parameters
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+     * Algorithm-specific key parameters.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
      */
     algorithm: unknown;
 
     /**
-     * Data format of the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+     * Data format of the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
      */
     format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
 
@@ -179,8 +179,8 @@ export namespace SecretListResponse {
     type: 'secret_key';
 
     /**
-     * Allowed operations with the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+     * Allowed operations with the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
      */
     usages: Array<
       'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
@@ -212,14 +212,14 @@ export namespace SecretGetResponse {
 
   export interface WorkersBindingKindSecretKey {
     /**
-     * Algorithm-specific key parameters
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+     * Algorithm-specific key parameters.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
      */
     algorithm: unknown;
 
     /**
-     * Data format of the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+     * Data format of the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
      */
     format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
 
@@ -234,8 +234,8 @@ export namespace SecretGetResponse {
     type: 'secret_key';
 
     /**
-     * Allowed operations with the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+     * Allowed operations with the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
      */
     usages: Array<
       'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
@@ -277,14 +277,14 @@ export declare namespace SecretUpdateParams {
     account_id: string;
 
     /**
-     * Body param: Algorithm-specific key parameters
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+     * Body param: Algorithm-specific key parameters.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
      */
     algorithm: unknown;
 
     /**
-     * Body param: Data format of the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+     * Body param: Data format of the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
      */
     format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
 
@@ -299,8 +299,8 @@ export declare namespace SecretUpdateParams {
     type: 'secret_key';
 
     /**
-     * Body param: Allowed operations with the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+     * Body param: Allowed operations with the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
      */
     usages: Array<
       'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
