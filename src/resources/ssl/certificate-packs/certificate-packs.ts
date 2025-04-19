@@ -143,7 +143,7 @@ export type ValidationMethod = 'http' | 'cname' | 'txt';
 
 export interface CertificatePackCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -191,14 +191,14 @@ export type CertificatePackListResponse = unknown;
 
 export interface CertificatePackDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface CertificatePackEditResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -246,7 +246,7 @@ export type CertificatePackGetResponse = unknown;
 
 export interface CertificatePackCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -288,7 +288,7 @@ export interface CertificatePackCreateParams {
 
 export interface CertificatePackListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -300,14 +300,14 @@ export interface CertificatePackListParams {
 
 export interface CertificatePackDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CertificatePackEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -320,7 +320,7 @@ export interface CertificatePackEditParams {
 
 export interface CertificatePackGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

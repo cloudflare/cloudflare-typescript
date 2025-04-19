@@ -63,7 +63,7 @@ export interface UniversalSSLSettings {
 
 export interface SettingEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -99,7 +99,7 @@ export interface SettingEditParams {
 
 export interface SettingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

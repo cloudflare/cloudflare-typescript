@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as AddressMapsAPI from './address-maps';
-import * as Shared from '../../shared';
 import * as AccountsAPI from './accounts';
 import {
   AccountDeleteParams,
@@ -244,12 +243,12 @@ export namespace AddressMapCreateResponse {
 }
 
 export interface AddressMapDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<AddressMapDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<AddressMapDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 
@@ -257,24 +256,56 @@ export interface AddressMapDeleteResponse {
 }
 
 export namespace AddressMapDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
   export interface ResultInfo {
     /**
-     * Total number of results for the requested service
+     * Total number of results for the requested service.
      */
     count?: number;
 
     /**
-     * Current page within paginated list of results
+     * Current page within paginated list of results.
      */
     page?: number;
 
     /**
-     * Number of results per page of results
+     * Number of results per page of results.
      */
     per_page?: number;
 
     /**
-     * Total results available without any search parameters
+     * Total results available without any search parameters.
      */
     total_count?: number;
   }

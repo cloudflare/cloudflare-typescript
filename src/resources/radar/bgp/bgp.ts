@@ -13,6 +13,8 @@ import {
   RouteMoasResponse,
   RoutePfx2asParams,
   RoutePfx2asResponse,
+  RouteRealtimeParams,
+  RouteRealtimeResponse,
   RouteStatsParams,
   RouteStatsResponse,
   Routes,
@@ -119,16 +121,17 @@ export namespace BGPTimeseriesResponse {
 
 export interface BGPTimeseriesParams {
   /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
+   * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+   * Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
@@ -138,9 +141,9 @@ export interface BGPTimeseriesParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -160,12 +163,12 @@ export interface BGPTimeseriesParams {
   name?: Array<string>;
 
   /**
-   * Array of BGP network prefixes.
+   * Filters results by BGP network prefix.
    */
   prefix?: Array<string>;
 
   /**
-   * Array of BGP update types.
+   * Filters results by BGP update type.
    */
   updateType?: Array<'ANNOUNCEMENT' | 'WITHDRAWAL'>;
 }
@@ -197,10 +200,12 @@ export declare namespace BGP {
     type RouteAsesResponse as RouteAsesResponse,
     type RouteMoasResponse as RouteMoasResponse,
     type RoutePfx2asResponse as RoutePfx2asResponse,
+    type RouteRealtimeResponse as RouteRealtimeResponse,
     type RouteStatsResponse as RouteStatsResponse,
     type RouteAsesParams as RouteAsesParams,
     type RouteMoasParams as RouteMoasParams,
     type RoutePfx2asParams as RoutePfx2asParams,
+    type RouteRealtimeParams as RouteRealtimeParams,
     type RouteStatsParams as RouteStatsParams,
   };
 

@@ -171,14 +171,14 @@ export namespace ActiveSessionGetResponse {
 
 export interface ActiveSessionListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ActiveSessionGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

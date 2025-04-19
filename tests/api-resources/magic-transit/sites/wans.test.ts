@@ -14,7 +14,6 @@ describe('resource wans', () => {
     const responsePromise = client.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
-      vlan_tag: 0,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +28,6 @@ describe('resource wans', () => {
     const response = await client.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
-      vlan_tag: 0,
       name: 'name',
       priority: 0,
       static_addressing: {
@@ -37,6 +35,7 @@ describe('resource wans', () => {
         gateway_address: '192.0.2.1',
         secondary_address: '192.0.2.0/24',
       },
+      vlan_tag: 42,
     });
   });
 
@@ -69,7 +68,7 @@ describe('resource wans', () => {
           gateway_address: '192.0.2.1',
           secondary_address: '192.0.2.0/24',
         },
-        vlan_tag: 0,
+        vlan_tag: 42,
       },
     );
   });
@@ -145,7 +144,7 @@ describe('resource wans', () => {
           gateway_address: '192.0.2.1',
           secondary_address: '192.0.2.0/24',
         },
-        vlan_tag: 0,
+        vlan_tag: 42,
       },
     );
   });

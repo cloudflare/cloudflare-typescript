@@ -51,25 +51,6 @@ describe('resource customNameservers', () => {
     });
   });
 
-  test('availabilty: only required params', async () => {
-    const responsePromise = client.customNameservers.availabilty({
-      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('availabilty: required and optional params', async () => {
-    const response = await client.customNameservers.availabilty({
-      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
-    });
-  });
-
   test('get: only required params', async () => {
     const responsePromise = client.customNameservers.get({ account_id: '372e67954025e0ba6aaa6d586b9e0b59' });
     const rawResponse = await responsePromise.asResponse();

@@ -101,7 +101,8 @@ export interface LocationListParams {
   limit?: number;
 
   /**
-   * Comma-separated list of locations (alpha-2 location codes).
+   * Filters results by location. Specify a comma-separated list of alpha-2 location
+   * codes.
    */
   location?: string;
 

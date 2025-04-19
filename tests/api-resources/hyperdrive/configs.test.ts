@@ -47,6 +47,11 @@ describe('resource configs', () => {
         user: 'postgres',
       },
       caching: { disabled: true },
+      mtls: {
+        ca_certificate_id: '00000000-0000-0000-0000-0000000000',
+        mtls_certificate_id: '00000000-0000-0000-0000-0000000000',
+        sslmode: 'verify-full',
+      },
     });
   });
 
@@ -87,6 +92,11 @@ describe('resource configs', () => {
         user: 'postgres',
       },
       caching: { disabled: true },
+      mtls: {
+        ca_certificate_id: '00000000-0000-0000-0000-0000000000',
+        mtls_certificate_id: '00000000-0000-0000-0000-0000000000',
+        sslmode: 'verify-full',
+      },
     });
   });
 
@@ -145,6 +155,11 @@ describe('resource configs', () => {
     const response = await client.hyperdrive.configs.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       caching: { disabled: true },
+      mtls: {
+        ca_certificate_id: '00000000-0000-0000-0000-0000000000',
+        mtls_certificate_id: '00000000-0000-0000-0000-0000000000',
+        sslmode: 'verify-full',
+      },
       name: 'example-hyperdrive',
       origin: { database: 'postgres', password: 'password', scheme: 'postgres', user: 'postgres' },
     });

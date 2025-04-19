@@ -62,7 +62,7 @@ export interface HostnameAssociationGetResponse {
 
 export interface HostnameAssociationUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -81,7 +81,7 @@ export interface HostnameAssociationUpdateParams {
 
 export interface HostnameAssociationGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

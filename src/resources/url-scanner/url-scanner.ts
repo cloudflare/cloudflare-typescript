@@ -66,6 +66,8 @@ URLScanner.Responses = Responses;
 URLScanner.Scans = Scans;
 
 export declare namespace URLScanner {
+  export { type URLScannerDomain as URLScannerDomain, type URLScannerTask as URLScannerTask };
+
   export {
     Responses as Responses,
     type ResponseGetResponse as ResponseGetResponse,

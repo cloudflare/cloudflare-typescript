@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import * as RegionsAPI from './regions';
 import { RegionListParams, RegionListResponse, RegionListResponsesSinglePage, Regions } from './regions';
 import { SinglePage } from '../../../pagination';
@@ -110,6 +109,11 @@ export interface RegionalHostnameCreateResponse {
    * Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameListResponse {
@@ -128,17 +132,56 @@ export interface RegionalHostnameListResponse {
    * Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RegionalHostnameDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RegionalHostnameDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
+}
+
+export namespace RegionalHostnameDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export interface RegionalHostnameEditResponse {
@@ -157,6 +200,11 @@ export interface RegionalHostnameEditResponse {
    * Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameGetResponse {
@@ -175,11 +223,16 @@ export interface RegionalHostnameGetResponse {
    * Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -193,25 +246,30 @@ export interface RegionalHostnameCreateParams {
    * Body param: Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Body param: Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RegionalHostnameDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RegionalHostnameEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -223,7 +281,7 @@ export interface RegionalHostnameEditParams {
 
 export interface RegionalHostnameGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

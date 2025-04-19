@@ -36,7 +36,7 @@ export interface ResultGetResponse {
 
 export interface ResultGetParams {
   /**
-   * Account ID
+   * Defines the Account ID.
    */
   account_id: string;
 }

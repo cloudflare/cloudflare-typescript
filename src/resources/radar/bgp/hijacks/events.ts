@@ -103,8 +103,7 @@ export interface EventListParams extends V4PagePaginationParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 
@@ -139,12 +138,12 @@ export interface EventListParams extends V4PagePaginationParams {
   involvedCountry?: string;
 
   /**
-   * The maximum confidence score to filter events (1-4 low, 5-7 mid, 8+ high).
+   * Filters events by maximum confidence score (1-4 low, 5-7 mid, 8+ high).
    */
   maxConfidence?: number;
 
   /**
-   * The minimum confidence score to filter events (1-4 low, 5-7 mid, 8+ high).
+   * Filters events by minimum confidence score (1-4 low, 5-7 mid, 8+ high).
    */
   minConfidence?: number;
 

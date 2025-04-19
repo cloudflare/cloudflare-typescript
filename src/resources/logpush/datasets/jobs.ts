@@ -12,16 +12,91 @@ export class Jobs extends APIResource {
    * Lists Logpush jobs for an account or zone for a dataset.
    */
   get(
-    datasetId: string | null,
+    datasetId:
+      | 'access_requests'
+      | 'audit_logs'
+      | 'biso_user_actions'
+      | 'casb_findings'
+      | 'device_posture_results'
+      | 'dlp_forensic_copies'
+      | 'dns_firewall_logs'
+      | 'dns_logs'
+      | 'email_security_alerts'
+      | 'firewall_events'
+      | 'gateway_dns'
+      | 'gateway_http'
+      | 'gateway_network'
+      | 'http_requests'
+      | 'magic_ids_detections'
+      | 'nel_reports'
+      | 'network_analytics_logs'
+      | 'page_shield_events'
+      | 'sinkhole_http_logs'
+      | 'spectrum_events'
+      | 'ssh_logs'
+      | 'workers_trace_events'
+      | 'zaraz_events'
+      | 'zero_trust_network_sessions'
+      | null,
     params?: JobGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null>;
   get(
-    datasetId: string | null,
+    datasetId:
+      | 'access_requests'
+      | 'audit_logs'
+      | 'biso_user_actions'
+      | 'casb_findings'
+      | 'device_posture_results'
+      | 'dlp_forensic_copies'
+      | 'dns_firewall_logs'
+      | 'dns_logs'
+      | 'email_security_alerts'
+      | 'firewall_events'
+      | 'gateway_dns'
+      | 'gateway_http'
+      | 'gateway_network'
+      | 'http_requests'
+      | 'magic_ids_detections'
+      | 'nel_reports'
+      | 'network_analytics_logs'
+      | 'page_shield_events'
+      | 'sinkhole_http_logs'
+      | 'spectrum_events'
+      | 'ssh_logs'
+      | 'workers_trace_events'
+      | 'zaraz_events'
+      | 'zero_trust_network_sessions'
+      | null,
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null>;
   get(
-    datasetId: string | null,
+    datasetId:
+      | 'access_requests'
+      | 'audit_logs'
+      | 'biso_user_actions'
+      | 'casb_findings'
+      | 'device_posture_results'
+      | 'dlp_forensic_copies'
+      | 'dns_firewall_logs'
+      | 'dns_logs'
+      | 'email_security_alerts'
+      | 'firewall_events'
+      | 'gateway_dns'
+      | 'gateway_http'
+      | 'gateway_network'
+      | 'http_requests'
+      | 'magic_ids_detections'
+      | 'nel_reports'
+      | 'network_analytics_logs'
+      | 'page_shield_events'
+      | 'sinkhole_http_logs'
+      | 'spectrum_events'
+      | 'ssh_logs'
+      | 'workers_trace_events'
+      | 'zaraz_events'
+      | 'zero_trust_network_sessions'
+      | null,
     params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null> {

@@ -125,7 +125,7 @@ export namespace Availability {
 
 export interface AvailabilityListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

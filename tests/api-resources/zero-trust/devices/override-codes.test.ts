@@ -30,4 +30,23 @@ describe('resource overrideCodes', () => {
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.zeroTrust.devices.overrideCodes.get('registration_id', {
+      account_id: 'account_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.zeroTrust.devices.overrideCodes.get('registration_id', {
+      account_id: 'account_id',
+    });
+  });
 });

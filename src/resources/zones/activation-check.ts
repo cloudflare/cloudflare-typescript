@@ -23,14 +23,14 @@ export class ActivationCheck extends APIResource {
 
 export interface ActivationCheckTriggerResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface ActivationCheckTriggerParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

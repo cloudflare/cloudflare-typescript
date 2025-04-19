@@ -72,8 +72,8 @@ describe('resource members', () => {
   test('list: required and optional params', async () => {
     const response = await client.accounts.members.list({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
-      direction: 'asc',
-      order: 'user.first_name',
+      direction: 'desc',
+      order: 'status',
       page: 1,
       per_page: 5,
       status: 'accepted',

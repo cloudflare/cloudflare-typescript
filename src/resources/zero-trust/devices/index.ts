@@ -1,5 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { DEXTests, type SchemaData, type SchemaHTTP } from './dex-tests';
+export {
+  DeviceListResponsesCursorPagination,
+  Devices,
+  type DeviceListResponse,
+  type DeviceDeleteResponse,
+  type DeviceGetResponse,
+  type DeviceRevokeResponse,
+  type DeviceListParams,
+  type DeviceDeleteParams,
+  type DeviceGetParams,
+  type DeviceRevokeParams,
+} from './devices';
 export {
   DeviceNetworksSinglePage,
   Networks,
@@ -47,21 +60,31 @@ export {
   type DeviceGetParams,
 } from './devices';
 export { FleetStatus, type FleetStatusGetResponse, type FleetStatusGetParams } from './fleet-status';
-export { OverrideCodes, type OverrideCodeListResponse, type OverrideCodeListParams } from './override-codes';
-export { Revoke, type RevokeCreateResponse, type RevokeCreateParams } from './revoke';
 export {
-  SchemaHTTPSSinglePage,
-  DEXTests,
-  type DEXTest,
-  type SchemaData,
-  type SchemaHTTP,
-  type DEXTestDeleteResponse,
-  type DEXTestCreateParams,
-  type DEXTestUpdateParams,
-  type DEXTestListParams,
-  type DEXTestDeleteParams,
-  type DEXTestGetParams,
-} from './dex-tests';
+  OverrideCodes,
+  type OverrideCodeListResponse,
+  type OverrideCodeGetResponse,
+  type OverrideCodeListParams,
+  type OverrideCodeGetParams,
+} from './override-codes';
+export {
+  RegistrationListResponsesCursorPagination,
+  Registrations,
+  type RegistrationListResponse,
+  type RegistrationDeleteResponse,
+  type RegistrationBulkDeleteResponse,
+  type RegistrationGetResponse,
+  type RegistrationRevokeResponse,
+  type RegistrationUnrevokeResponse,
+  type RegistrationListParams,
+  type RegistrationDeleteParams,
+  type RegistrationBulkDeleteParams,
+  type RegistrationGetParams,
+  type RegistrationRevokeParams,
+  type RegistrationUnrevokeParams,
+} from './registrations';
+export { Resilience } from './resilience/index';
+export { Revoke, type RevokeCreateResponse, type RevokeCreateParams } from './revoke';
 export {
   Settings,
   type DeviceSettings,

@@ -95,7 +95,7 @@ export class ClientCertificatesV4PagePaginationArray extends V4PagePaginationArr
 
 export interface ClientCertificate {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -199,7 +199,7 @@ export namespace ClientCertificate {
 
 export interface ClientCertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -217,7 +217,7 @@ export interface ClientCertificateCreateParams {
 
 export interface ClientCertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -239,21 +239,35 @@ export interface ClientCertificateListParams extends V4PagePaginationArrayParams
 
 export interface ClientCertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface ClientCertificateEditParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface ClientCertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
+}
+
+ClientCertificates.ClientCertificatesV4PagePaginationArray = ClientCertificatesV4PagePaginationArray;
+
+export declare namespace ClientCertificates {
+  export {
+    type ClientCertificate as ClientCertificate,
+    ClientCertificatesV4PagePaginationArray as ClientCertificatesV4PagePaginationArray,
+    type ClientCertificateCreateParams as ClientCertificateCreateParams,
+    type ClientCertificateListParams as ClientCertificateListParams,
+    type ClientCertificateDeleteParams as ClientCertificateDeleteParams,
+    type ClientCertificateEditParams as ClientCertificateEditParams,
+    type ClientCertificateGetParams as ClientCertificateGetParams,
+  };
 }

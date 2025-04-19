@@ -356,12 +356,12 @@ export type AllowedOrigins = string;
 export type AllowedOriginsParam = string;
 
 /**
- * Identifier
+ * Identifier.
  */
 export type AppID = string;
 
 /**
- * Identifier
+ * Identifier.
  */
 export type AppIDParam = string;
 
@@ -388,7 +388,7 @@ export namespace Application {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -537,7 +537,7 @@ export namespace Application {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -844,7 +844,7 @@ export namespace Application {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1003,7 +1003,7 @@ export namespace Application {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1157,7 +1157,7 @@ export namespace Application {
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1213,7 +1213,7 @@ export namespace Application {
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1269,7 +1269,7 @@ export namespace Application {
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1330,7 +1330,7 @@ export namespace Application {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2525,7 +2525,7 @@ export namespace ApplicationCreateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2630,6 +2630,17 @@ export namespace ApplicationCreateResponse {
     policies?: Array<SelfHostedApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -2726,12 +2737,85 @@ export namespace ApplicationCreateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -2836,7 +2920,7 @@ export namespace ApplicationCreateResponse {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2904,12 +2988,85 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SaaSApplication {
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -3025,7 +3182,7 @@ export namespace ApplicationCreateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -3130,6 +3287,17 @@ export namespace ApplicationCreateResponse {
     policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -3226,12 +3394,85 @@ export namespace ApplicationCreateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -3347,7 +3588,7 @@ export namespace ApplicationCreateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -3452,6 +3693,17 @@ export namespace ApplicationCreateResponse {
     policies?: Array<BrowserVNCApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -3548,12 +3800,85 @@ export namespace ApplicationCreateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -3663,7 +3988,7 @@ export namespace ApplicationCreateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -3788,12 +4113,85 @@ export namespace ApplicationCreateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -3903,7 +4301,7 @@ export namespace ApplicationCreateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4028,12 +4426,85 @@ export namespace ApplicationCreateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -4143,7 +4614,7 @@ export namespace ApplicationCreateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4268,12 +4739,85 @@ export namespace ApplicationCreateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -4378,7 +4922,7 @@ export namespace ApplicationCreateResponse {
 
   export interface BookmarkApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4539,7 +5083,7 @@ export namespace ApplicationCreateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4778,7 +5322,7 @@ export namespace ApplicationCreateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -4881,6 +5425,17 @@ export namespace ApplicationCreateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserRdpApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -4997,12 +5552,85 @@ export namespace ApplicationCreateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -5132,7 +5760,7 @@ export namespace ApplicationUpdateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -5237,6 +5865,17 @@ export namespace ApplicationUpdateResponse {
     policies?: Array<SelfHostedApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -5333,12 +5972,85 @@ export namespace ApplicationUpdateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -5443,7 +6155,7 @@ export namespace ApplicationUpdateResponse {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -5511,12 +6223,85 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SaaSApplication {
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -5632,7 +6417,7 @@ export namespace ApplicationUpdateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -5737,6 +6522,17 @@ export namespace ApplicationUpdateResponse {
     policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -5833,12 +6629,85 @@ export namespace ApplicationUpdateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -5954,7 +6823,7 @@ export namespace ApplicationUpdateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -6059,6 +6928,17 @@ export namespace ApplicationUpdateResponse {
     policies?: Array<BrowserVNCApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -6155,12 +7035,85 @@ export namespace ApplicationUpdateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -6270,7 +7223,7 @@ export namespace ApplicationUpdateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -6395,12 +7348,85 @@ export namespace ApplicationUpdateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -6510,7 +7536,7 @@ export namespace ApplicationUpdateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -6635,12 +7661,85 @@ export namespace ApplicationUpdateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -6750,7 +7849,7 @@ export namespace ApplicationUpdateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -6875,12 +7974,85 @@ export namespace ApplicationUpdateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -6985,7 +8157,7 @@ export namespace ApplicationUpdateResponse {
 
   export interface BookmarkApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -7146,7 +8318,7 @@ export namespace ApplicationUpdateResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -7385,7 +8557,7 @@ export namespace ApplicationUpdateResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -7488,6 +8660,17 @@ export namespace ApplicationUpdateResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserRdpApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -7604,12 +8787,85 @@ export namespace ApplicationUpdateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -7739,7 +8995,7 @@ export namespace ApplicationListResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -7844,6 +9100,17 @@ export namespace ApplicationListResponse {
     policies?: Array<SelfHostedApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -7940,12 +9207,85 @@ export namespace ApplicationListResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -8050,7 +9390,7 @@ export namespace ApplicationListResponse {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -8118,12 +9458,85 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SaaSApplication {
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -8239,7 +9652,7 @@ export namespace ApplicationListResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -8344,6 +9757,17 @@ export namespace ApplicationListResponse {
     policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -8440,12 +9864,85 @@ export namespace ApplicationListResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -8561,7 +10058,7 @@ export namespace ApplicationListResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -8666,6 +10163,17 @@ export namespace ApplicationListResponse {
     policies?: Array<BrowserVNCApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -8762,12 +10270,85 @@ export namespace ApplicationListResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -8877,7 +10458,7 @@ export namespace ApplicationListResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9002,12 +10583,85 @@ export namespace ApplicationListResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -9117,7 +10771,7 @@ export namespace ApplicationListResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9242,12 +10896,85 @@ export namespace ApplicationListResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -9357,7 +11084,7 @@ export namespace ApplicationListResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9482,12 +11209,85 @@ export namespace ApplicationListResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -9592,7 +11392,7 @@ export namespace ApplicationListResponse {
 
   export interface BookmarkApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9753,7 +11553,7 @@ export namespace ApplicationListResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -9992,7 +11792,7 @@ export namespace ApplicationListResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -10095,6 +11895,17 @@ export namespace ApplicationListResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserRdpApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -10211,12 +12022,85 @@ export namespace ApplicationListResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -10322,7 +12206,7 @@ export namespace ApplicationListResponse {
 
 export interface ApplicationDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }
@@ -10353,7 +12237,7 @@ export namespace ApplicationGetResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -10458,6 +12342,17 @@ export namespace ApplicationGetResponse {
     policies?: Array<SelfHostedApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -10554,12 +12449,85 @@ export namespace ApplicationGetResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -10664,7 +12632,7 @@ export namespace ApplicationGetResponse {
 
   export interface SaaSApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -10732,12 +12700,85 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SaaSApplication {
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -10853,7 +12894,7 @@ export namespace ApplicationGetResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -10958,6 +12999,17 @@ export namespace ApplicationGetResponse {
     policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -11054,12 +13106,85 @@ export namespace ApplicationGetResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -11175,7 +13300,7 @@ export namespace ApplicationGetResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -11280,6 +13405,17 @@ export namespace ApplicationGetResponse {
     policies?: Array<BrowserVNCApplication.Policy>;
 
     /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
      * attacks.
      */
@@ -11376,12 +13512,85 @@ export namespace ApplicationGetResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -11491,7 +13700,7 @@ export namespace ApplicationGetResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -11616,12 +13825,85 @@ export namespace ApplicationGetResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -11731,7 +14013,7 @@ export namespace ApplicationGetResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -11856,12 +14138,85 @@ export namespace ApplicationGetResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -11971,7 +14326,7 @@ export namespace ApplicationGetResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -12096,12 +14451,85 @@ export namespace ApplicationGetResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -12206,7 +14634,7 @@ export namespace ApplicationGetResponse {
 
   export interface BookmarkApplication {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -12367,7 +14795,7 @@ export namespace ApplicationGetResponse {
     type: ApplicationsAPI.ApplicationType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -12606,7 +15034,7 @@ export namespace ApplicationGetResponse {
     type: string;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -12709,6 +15137,17 @@ export namespace ApplicationGetResponse {
     path_cookie_attribute?: boolean;
 
     policies?: Array<BrowserRdpApplication.Policy>;
+
+    /**
+     * Allows matching Access Service Tokens passed HTTP in a single header with this
+     * name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -12825,12 +15264,85 @@ export namespace ApplicationGetResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -13075,6 +15587,17 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -13705,6 +16228,17 @@ export declare namespace ApplicationCreateParams {
     policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
     /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
      * against CSRF attacks.
      */
@@ -14090,6 +16624,17 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -15634,6 +18179,17 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application.
      */
     policies?: Array<BrowserRdpApplication.AccessAppPolicyLink | string | BrowserRdpApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -16055,6 +18611,17 @@ export declare namespace ApplicationUpdateParams {
     policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
 
     /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
      * against CSRF attacks.
      */
@@ -16683,6 +19250,17 @@ export declare namespace ApplicationUpdateParams {
     policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
     /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
+
+    /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
      * against CSRF attacks.
      */
@@ -17068,6 +19646,17 @@ export declare namespace ApplicationUpdateParams {
      * policies exclusive to the application.
      */
     policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -18612,6 +21201,17 @@ export declare namespace ApplicationUpdateParams {
      * policies exclusive to the application.
      */
     policies?: Array<BrowserRdpApplication.AccessAppPolicyLink | string | BrowserRdpApplication.UnionMember2>;
+
+    /**
+     * Body param: Allows matching Access Service Tokens passed HTTP in a single header
+     * with this name. This works as an alternative to the (CF-Access-Client-Id,
+     * CF-Access-Client-Secret) pair of headers. The header value will be interpreted
+     * as a json object similar to: { "cf-access-client-id":
+     * "88bf3b6d86161464f6509f7219099e57.access.example.com",
+     * "cf-access-client-secret":
+     * "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5" }
+     */
+    read_service_tokens_from_header?: string;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security

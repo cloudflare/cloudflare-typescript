@@ -108,3 +108,12 @@ export interface OriginPostQuantumEncryptionGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace OriginPostQuantumEncryption {
+  export {
+    type OriginPostQuantumEncryptionUpdateResponse as OriginPostQuantumEncryptionUpdateResponse,
+    type OriginPostQuantumEncryptionGetResponse as OriginPostQuantumEncryptionGetResponse,
+    type OriginPostQuantumEncryptionUpdateParams as OriginPostQuantumEncryptionUpdateParams,
+    type OriginPostQuantumEncryptionGetParams as OriginPostQuantumEncryptionGetParams,
+  };
+}

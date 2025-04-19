@@ -229,7 +229,8 @@ export interface GatewayRule {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   created_at?: string;
 
@@ -368,6 +369,12 @@ export interface RuleSetting {
   biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  block_page?: RuleSetting.BlockPage;
+
+  /**
    * Enable the custom block page.
    */
   block_page_enabled?: boolean;
@@ -457,6 +464,11 @@ export interface RuleSetting {
    * Settings that apply to quarantine rules
    */
   quarantine?: RuleSetting.Quarantine;
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  redirect?: RuleSetting.Redirect;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
@@ -565,6 +577,22 @@ export namespace RuleSetting {
   }
 
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  export interface BlockPage {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+  }
+
+  /**
    * Configure how session check behaves.
    */
   export interface CheckSession {
@@ -641,6 +669,11 @@ export namespace RuleSetting {
     enabled?: boolean;
 
     /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
      * Customize the message shown in the notification.
      */
     msg?: string;
@@ -684,6 +717,27 @@ export namespace RuleSetting {
       | 'zip'
       | 'rar'
     >;
+  }
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  export interface Redirect {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
+     * If true, the path and query parameters from the original request will be
+     * appended to target_uri
+     */
+    preserve_path_and_query?: boolean;
   }
 
   /**
@@ -742,6 +796,12 @@ export interface RuleSettingParam {
    * Configure how browser isolation behaves.
    */
   biso_admin_controls?: RuleSettingParam.BISOAdminControls;
+
+  /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  block_page?: RuleSettingParam.BlockPage;
 
   /**
    * Enable the custom block page.
@@ -833,6 +893,11 @@ export interface RuleSettingParam {
    * Settings that apply to quarantine rules
    */
   quarantine?: RuleSettingParam.Quarantine;
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  redirect?: RuleSettingParam.Redirect;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
@@ -941,6 +1006,22 @@ export namespace RuleSettingParam {
   }
 
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  export interface BlockPage {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+  }
+
+  /**
    * Configure how session check behaves.
    */
   export interface CheckSession {
@@ -1017,6 +1098,11 @@ export namespace RuleSettingParam {
     enabled?: boolean;
 
     /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
      * Customize the message shown in the notification.
      */
     msg?: string;
@@ -1060,6 +1146,27 @@ export namespace RuleSettingParam {
       | 'zip'
       | 'rar'
     >;
+  }
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  export interface Redirect {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
+     * If true, the path and query parameters from the original request will be
+     * appended to target_uri
+     */
+    preserve_path_and_query?: boolean;
   }
 
   /**
@@ -1253,7 +1360,8 @@ export interface RuleCreateParams {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   /**
    * Body param: The name of the rule.
@@ -1377,7 +1485,8 @@ export interface RuleUpdateParams {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   /**
    * Body param: The name of the rule.

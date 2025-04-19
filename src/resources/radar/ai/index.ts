@@ -8,3 +8,4 @@ export {
   type TimeseriesGroupUserAgentResponse,
   type TimeseriesGroupUserAgentParams,
 } from './timeseries-groups';
+export { ToMarkdown } from './to-markdown';

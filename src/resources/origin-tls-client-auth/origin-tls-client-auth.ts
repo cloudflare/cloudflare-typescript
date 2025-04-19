@@ -98,7 +98,7 @@ export class OriginTLSClientAuthListResponsesSinglePage extends SinglePage<Origi
 
 export interface ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -142,7 +142,7 @@ export interface ZoneAuthenticatedOriginPull {
 
 export interface OriginTLSClientAuthCreateResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -164,7 +164,7 @@ export interface OriginTLSClientAuthCreateResponse extends ZoneAuthenticatedOrig
 
 export interface OriginTLSClientAuthListResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -186,7 +186,7 @@ export interface OriginTLSClientAuthListResponse extends ZoneAuthenticatedOrigin
 
 export interface OriginTLSClientAuthDeleteResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -208,7 +208,7 @@ export interface OriginTLSClientAuthDeleteResponse extends ZoneAuthenticatedOrig
 
 export interface OriginTLSClientAuthGetResponse extends ZoneAuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -230,7 +230,7 @@ export interface OriginTLSClientAuthGetResponse extends ZoneAuthenticatedOriginP
 
 export interface OriginTLSClientAuthCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -247,30 +247,44 @@ export interface OriginTLSClientAuthCreateParams {
 
 export interface OriginTLSClientAuthListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface OriginTLSClientAuthDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface OriginTLSClientAuthGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
+OriginTLSClientAuth.OriginTLSClientAuthListResponsesSinglePage = OriginTLSClientAuthListResponsesSinglePage;
 OriginTLSClientAuth.Hostnames = Hostnames;
 OriginTLSClientAuth.HostnameUpdateResponsesSinglePage = HostnameUpdateResponsesSinglePage;
 OriginTLSClientAuth.Settings = Settings;
 
 export declare namespace OriginTLSClientAuth {
+  export {
+    type ZoneAuthenticatedOriginPull as ZoneAuthenticatedOriginPull,
+    type OriginTLSClientAuthCreateResponse as OriginTLSClientAuthCreateResponse,
+    type OriginTLSClientAuthListResponse as OriginTLSClientAuthListResponse,
+    type OriginTLSClientAuthDeleteResponse as OriginTLSClientAuthDeleteResponse,
+    type OriginTLSClientAuthGetResponse as OriginTLSClientAuthGetResponse,
+    OriginTLSClientAuthListResponsesSinglePage as OriginTLSClientAuthListResponsesSinglePage,
+    type OriginTLSClientAuthCreateParams as OriginTLSClientAuthCreateParams,
+    type OriginTLSClientAuthListParams as OriginTLSClientAuthListParams,
+    type OriginTLSClientAuthDeleteParams as OriginTLSClientAuthDeleteParams,
+    type OriginTLSClientAuthGetParams as OriginTLSClientAuthGetParams,
+  };
+
   export {
     Hostnames as Hostnames,
     type AuthenticatedOriginPull as AuthenticatedOriginPull,

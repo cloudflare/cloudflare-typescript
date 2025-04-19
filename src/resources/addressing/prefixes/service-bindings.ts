@@ -2,15 +2,15 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class ServiceBindings extends APIResource {
   /**
    * Creates a new Service Binding, routing traffic to IPs within the given CIDR to a
    * service running on Cloudflare's network. **Note:** This API may only be used on
-   * prefixes currently configured with a Magic Transit service binding, and only
-   * allows creating service bindings for the Cloudflare CDN or Cloudflare Spectrum.
+   * prefixes currently configured with a Magic Transit/Cloudflare CDN/Cloudflare
+   * Spectrum service binding, and only allows creating upgrade service bindings for
+   * the Cloudflare CDN or Cloudflare Spectrum.
    */
   create(
     prefixId: string,
@@ -126,14 +126,48 @@ export namespace ServiceBinding {
 }
 
 export interface ServiceBindingDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<ServiceBindingDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<ServiceBindingDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
+}
+
+export namespace ServiceBindingDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export interface ServiceBindingCreateParams {

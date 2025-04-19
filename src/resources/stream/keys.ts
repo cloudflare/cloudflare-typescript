@@ -52,7 +52,7 @@ export class KeyGetResponsesSinglePage extends SinglePage<KeyGetResponse> {}
 
 export interface Keys {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -76,7 +76,7 @@ export type KeyDeleteResponse = string;
 
 export interface KeyGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -88,7 +88,7 @@ export interface KeyGetResponse {
 
 export interface KeyCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -100,14 +100,14 @@ export interface KeyCreateParams {
 
 export interface KeyDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface KeyGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

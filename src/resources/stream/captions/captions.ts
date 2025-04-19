@@ -59,7 +59,7 @@ export interface Caption {
 
 export interface CaptionGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

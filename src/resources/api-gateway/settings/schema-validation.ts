@@ -44,7 +44,7 @@ export class SchemaValidation extends APIResource {
 
 export interface SchemaValidationUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -76,7 +76,7 @@ export interface SchemaValidationUpdateParams {
 
 export interface SchemaValidationEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -109,7 +109,7 @@ export interface SchemaValidationEditParams {
 
 export interface SchemaValidationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

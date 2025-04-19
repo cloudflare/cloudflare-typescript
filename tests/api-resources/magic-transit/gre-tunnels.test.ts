@@ -62,11 +62,11 @@ describe('resource greTunnels', () => {
       name: 'GRE_1',
       description: 'Tunnel for ISP X',
       health_check: {
-        direction: 'unidirectional',
+        direction: 'bidirectional',
         enabled: true,
         rate: 'low',
         target: { saved: '203.0.113.1' },
-        type: 'reply',
+        type: 'request',
       },
       mtu: 0,
       ttl: 0,

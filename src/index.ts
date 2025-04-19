@@ -34,6 +34,7 @@ import { Memberships } from './resources/memberships';
 import { OriginCACertificates } from './resources/origin-ca-certificates';
 import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption';
 import { PageRules } from './resources/page-rules';
+import { Pipelines } from './resources/pipelines';
 import { RateLimits } from './resources/rate-limits';
 import { SecurityTXT } from './resources/security-txt';
 import { URLNormalization } from './resources/url-normalization';
@@ -92,6 +93,7 @@ import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
+import { SecretsStore } from './resources/secrets-store/secrets-store';
 import { SecurityCenter } from './resources/security-center/security-center';
 import { Snippets } from './resources/snippets/snippets';
 import { Spectrum } from './resources/spectrum/spectrum';
@@ -138,6 +140,11 @@ export interface ClientOptions {
    * Defaults to process.env['CLOUDFLARE_BASE_URL'].
    */
   baseURL?: string | null | undefined;
+
+  /**
+   * Define the API version to target for the requests, e.g., "2025-01-01"
+   */
+  apiVersion?: string | null;
 
   /**
    * The maximum amount of time (in milliseconds) that the client should wait for a response
@@ -208,6 +215,7 @@ export class Cloudflare extends Core.APIClient {
    * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
    * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
+   * @param {string | null} [opts.apiVersion] - Define the version to target for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -217,6 +225,7 @@ export class Cloudflare extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('CLOUDFLARE_BASE_URL'),
+    apiVersion = null,
     apiToken = Core.readEnv('CLOUDFLARE_API_TOKEN') ?? null,
     apiKey = Core.readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = Core.readEnv('CLOUDFLARE_EMAIL') ?? null,
@@ -230,10 +239,12 @@ export class Cloudflare extends Core.APIClient {
       userServiceKey,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
+      apiVersion: apiVersion || new Date().toISOString().slice(0, 10),
     };
 
     super({
       baseURL: options.baseURL!,
+      apiVersion: options.apiVersion!,
       timeout: options.timeout ?? 60000 /* 1 minute */,
       httpAgent: options.httpAgent,
       maxRetries: options.maxRetries,
@@ -340,6 +351,8 @@ export class Cloudflare extends Core.APIClient {
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
   customPages: API.CustomPages = new API.CustomPages(this);
+  secretsStore: API.SecretsStore = new API.SecretsStore(this);
+  pipelines: API.Pipelines = new API.Pipelines(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -558,6 +571,8 @@ Cloudflare.AI = AI;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
 Cloudflare.CustomPages = CustomPages;
+Cloudflare.SecretsStore = SecretsStore;
+Cloudflare.Pipelines = Pipelines;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -771,6 +786,10 @@ export declare namespace Cloudflare {
   export { BrowserRendering as BrowserRendering };
 
   export { CustomPages as CustomPages };
+
+  export { SecretsStore as SecretsStore };
+
+  export { Pipelines as Pipelines };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

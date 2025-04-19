@@ -244,7 +244,7 @@ export namespace ZeroTrustGroup {
 
 export interface GroupCreateResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 
@@ -284,7 +284,7 @@ export interface GroupCreateResponse {
 
 export interface GroupUpdateResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 
@@ -324,7 +324,7 @@ export interface GroupUpdateResponse {
 
 export interface GroupListResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 
@@ -364,14 +364,14 @@ export interface GroupListResponse {
 
 export interface GroupDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }
 
 export interface GroupGetResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 

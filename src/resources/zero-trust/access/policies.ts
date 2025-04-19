@@ -128,7 +128,7 @@ export interface ApprovalGroupParam {
 
 export interface Policy {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 
@@ -556,7 +556,7 @@ export interface PolicyGetResponse {
 
 export interface PolicyCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -629,7 +629,7 @@ export interface PolicyCreateParams {
 
 export interface PolicyUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -702,21 +702,21 @@ export interface PolicyUpdateParams {
 
 export interface PolicyListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface PolicyDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface PolicyGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

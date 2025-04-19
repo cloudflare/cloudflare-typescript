@@ -79,6 +79,13 @@ ContentScanning.Settings = Settings;
 
 export declare namespace ContentScanning {
   export {
+    type ContentScanningDisableResponse as ContentScanningDisableResponse,
+    type ContentScanningEnableResponse as ContentScanningEnableResponse,
+    type ContentScanningDisableParams as ContentScanningDisableParams,
+    type ContentScanningEnableParams as ContentScanningEnableParams,
+  };
+
+  export {
     Payloads as Payloads,
     type PayloadCreateResponse as PayloadCreateResponse,
     type PayloadListResponse as PayloadListResponse,

@@ -19,6 +19,13 @@ export {
   type ScheduleGetParams,
 } from './schedules';
 export {
+  ScriptAndVersionSettings,
+  type ScriptAndVersionSettingEditResponse,
+  type ScriptAndVersionSettingGetResponse,
+  type ScriptAndVersionSettingEditParams,
+  type ScriptAndVersionSettingGetParams,
+} from './script-and-version-settings';
+export {
   ScriptsSinglePage,
   Scripts,
   type Script,

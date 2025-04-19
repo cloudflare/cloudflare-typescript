@@ -28,6 +28,7 @@ describe('resource scans', () => {
     const response = await client.urlScanner.scans.create({
       account_id: 'account_id',
       url: 'https://www.example.com',
+      country: 'AF',
       customagent: 'customagent',
       customHeaders: { foo: 'string' },
       referer: 'referer',

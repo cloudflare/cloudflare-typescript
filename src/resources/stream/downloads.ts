@@ -63,7 +63,7 @@ export type DownloadGetResponse = unknown;
 
 export interface DownloadCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -75,14 +75,14 @@ export interface DownloadCreateParams {
 
 export interface DownloadDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface DownloadGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
