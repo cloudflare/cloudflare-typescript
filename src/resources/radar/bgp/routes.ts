@@ -221,9 +221,17 @@ export namespace RouteRealtimeResponse {
 
     collectors: Array<Meta.Collector>;
 
-    rpki: Array<Meta.RPKI>;
+    /**
+     * The most recent data timestamp for from the real-time sources.
+     */
+    data_time: string;
 
-    visibility: Meta.Visibility;
+    prefix_origins: Array<Meta.PrefixOrigin>;
+
+    /**
+     * The timestamp of this query.
+     */
+    query_time: string;
   }
 
   export namespace Meta {
@@ -291,19 +299,22 @@ export namespace RouteRealtimeResponse {
       peers_v6_count: number;
     }
 
-    export interface RPKI {
+    export interface PrefixOrigin {
       /**
        * Origin ASN.
        */
       origin: number;
 
       /**
-       * Validation status: valid, invalid, or unknown.
+       * IP prefix of this query.
+       */
+      prefix: string;
+
+      /**
+       * Prefix-origin RPKI validation: valid, invalid, unknown.
        */
       rpki_validation: string;
-    }
 
-    export interface Visibility {
       /**
        * Total number of peers.
        */
