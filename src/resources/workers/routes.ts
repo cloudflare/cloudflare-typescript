@@ -138,18 +138,7 @@ export interface RouteDeleteResponse {
   /**
    * Identifier.
    */
-  id: string;
-
-  /**
-   * Pattern to match incoming requests against.
-   * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
-   */
-  pattern: string;
-
-  /**
-   * Name of the script to run if the route matches.
-   */
-  script: string;
+  id?: string;
 }
 
 export interface RouteGetResponse {
