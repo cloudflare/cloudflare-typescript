@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_magic_transit_ipsec_tunnels',
   description:
-    'Creates new IPsec tunnels associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.',
+    'Creates a new IPsec tunnel associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.',
   inputSchema: {
     type: 'object',
     properties: {
