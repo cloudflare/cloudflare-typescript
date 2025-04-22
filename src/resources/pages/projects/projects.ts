@@ -1013,6 +1013,11 @@ export interface ProjectCreateParams {
    * deployments.
    */
   production_branch?: string;
+
+  /**
+   * Body param:
+   */
+  source?: ProjectCreateParams.Source;
 }
 
 export namespace ProjectCreateParams {
@@ -1548,6 +1553,38 @@ export namespace ProjectCreateParams {
       }
     }
   }
+
+  export interface Source {
+    config?: Source.Config;
+
+    type?: string;
+  }
+
+  export namespace Source {
+    export interface Config {
+      deployments_enabled?: boolean;
+
+      owner?: string;
+
+      path_excludes?: Array<string>;
+
+      path_includes?: Array<string>;
+
+      pr_comments_enabled?: boolean;
+
+      preview_branch_excludes?: Array<string>;
+
+      preview_branch_includes?: Array<string>;
+
+      preview_deployment_setting?: 'all' | 'none' | 'custom';
+
+      production_branch?: string;
+
+      production_deployments_enabled?: boolean;
+
+      repo_name?: string;
+    }
+  }
 }
 
 export interface ProjectListParams {
@@ -1590,6 +1627,11 @@ export interface ProjectEditParams {
    * deployments.
    */
   production_branch?: string;
+
+  /**
+   * Body param:
+   */
+  source?: ProjectEditParams.Source;
 }
 
 export namespace ProjectEditParams {
@@ -2123,6 +2165,38 @@ export namespace ProjectEditParams {
       export interface VectorizeBindings {
         index_name?: string;
       }
+    }
+  }
+
+  export interface Source {
+    config?: Source.Config;
+
+    type?: string;
+  }
+
+  export namespace Source {
+    export interface Config {
+      deployments_enabled?: boolean;
+
+      owner?: string;
+
+      path_excludes?: Array<string>;
+
+      path_includes?: Array<string>;
+
+      pr_comments_enabled?: boolean;
+
+      preview_branch_excludes?: Array<string>;
+
+      preview_branch_includes?: Array<string>;
+
+      preview_deployment_setting?: 'all' | 'none' | 'custom';
+
+      production_branch?: string;
+
+      production_deployments_enabled?: boolean;
+
+      repo_name?: string;
     }
   }
 }
