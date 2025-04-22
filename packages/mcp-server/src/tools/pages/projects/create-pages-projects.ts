@@ -228,6 +228,67 @@ export const tool: Tool = {
         type: 'string',
         description: 'Production branch of the project. Used to identify production deployments.',
       },
+      source: {
+        type: 'object',
+        properties: {
+          config: {
+            type: 'object',
+            properties: {
+              deployments_enabled: {
+                type: 'boolean',
+              },
+              owner: {
+                type: 'string',
+              },
+              path_excludes: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+              },
+              path_includes: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+              },
+              pr_comments_enabled: {
+                type: 'boolean',
+              },
+              preview_branch_excludes: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+              },
+              preview_branch_includes: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+              },
+              preview_deployment_setting: {
+                type: 'string',
+                enum: ['all', 'none', 'custom'],
+              },
+              production_branch: {
+                type: 'string',
+              },
+              production_deployments_enabled: {
+                type: 'boolean',
+              },
+              repo_name: {
+                type: 'string',
+              },
+            },
+            required: [],
+          },
+          type: {
+            type: 'string',
+          },
+        },
+        required: [],
+      },
     },
   },
 };
