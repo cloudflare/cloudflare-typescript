@@ -669,6 +669,12 @@ export interface Origin {
   name?: string;
 
   /**
+   * The port for upstream connections. A value of 0 means the default port for the
+   * protocol will be used.
+   */
+  port?: number;
+
+  /**
    * The virtual network subnet ID the origin belongs in. Virtual network must also
    * belong to the account.
    */
@@ -713,6 +719,12 @@ export interface OriginParam {
    * A human-identifiable name for the origin.
    */
   name?: string;
+
+  /**
+   * The port for upstream connections. A value of 0 means the default port for the
+   * protocol will be used.
+   */
+  port?: number;
 
   /**
    * The virtual network subnet ID the origin belongs in. Virtual network must also
