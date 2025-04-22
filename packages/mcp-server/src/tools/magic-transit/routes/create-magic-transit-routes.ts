@@ -21,8 +21,48 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier',
       },
-      body: {
+      nexthop: {
+        type: 'string',
+        description: 'The next-hop IP Address for the static route.',
+      },
+      prefix: {
+        type: 'string',
+        description: 'IP Prefix in Classless Inter-Domain Routing format.',
+      },
+      priority: {
+        type: 'integer',
+        description: 'Priority of the static route.',
+      },
+      description: {
+        type: 'string',
+        description: 'An optional human provided description of the static route.',
+      },
+      scope: {
         type: 'object',
+        description: 'Used only for ECMP routes.',
+        properties: {
+          colo_names: {
+            type: 'array',
+            description: 'List of colo names for the ECMP scope.',
+            items: {
+              type: 'string',
+              description: 'Scope colo name.',
+            },
+          },
+          colo_regions: {
+            type: 'array',
+            description: 'List of colo regions for the ECMP scope.',
+            items: {
+              type: 'string',
+              description: 'Scope colo region.',
+            },
+          },
+        },
+        required: [],
+      },
+      weight: {
+        type: 'integer',
+        description: 'Optional weight of the ECMP scope - if provided.',
       },
     },
   },

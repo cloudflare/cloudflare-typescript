@@ -1663,7 +1663,7 @@ subnets of an IP prefix.
 
 ### Resource `magic_transit.gre_tunnels`:
 
-- `create_magic_transit_gre_tunnels` (`write`): Creates new GRE tunnels. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+- `create_magic_transit_gre_tunnels` (`write`): Creates a new GRE tunnel. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
 - `update_magic_transit_gre_tunnels` (`write`): Updates a specific GRE tunnel. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
 - `list_magic_transit_gre_tunnels` (`read`): Lists GRE tunnels associated with an account.
 - `delete_magic_transit_gre_tunnels` (`write`): Disables and removes a specific static GRE tunnel. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
@@ -1672,7 +1672,7 @@ subnets of an IP prefix.
 
 ### Resource `magic_transit.ipsec_tunnels`:
 
-- `create_magic_transit_ipsec_tunnels` (`write`): Creates new IPsec tunnels associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+- `create_magic_transit_ipsec_tunnels` (`write`): Creates a new IPsec tunnel associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
 - `update_magic_transit_ipsec_tunnels` (`write`): Updates a specific IPsec tunnel associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
 - `list_magic_transit_ipsec_tunnels` (`read`): Lists IPsec tunnels associated with an account.
 - `delete_magic_transit_ipsec_tunnels` (`write`): Disables and removes a specific static IPsec Tunnel associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
