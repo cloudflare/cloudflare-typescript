@@ -68,6 +68,11 @@ export const tool: Tool = {
               type: 'string',
               description: 'A human-identifiable name for the origin.',
             },
+            port: {
+              type: 'integer',
+              description:
+                'The port for upstream connections. A value of 0 means the default port for the protocol will be used.',
+            },
             virtual_network_id: {
               type: 'string',
               description:
