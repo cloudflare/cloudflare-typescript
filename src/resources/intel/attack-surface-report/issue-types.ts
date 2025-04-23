@@ -27,7 +27,7 @@ export type IssueTypeGetResponse = string;
 
 export interface IssueTypeGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

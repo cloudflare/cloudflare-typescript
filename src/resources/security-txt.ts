@@ -2,7 +2,6 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
-import * as Shared from './shared';
 
 export class SecurityTXT extends APIResource {
   /**
@@ -41,25 +40,93 @@ export class SecurityTXT extends APIResource {
 }
 
 export interface SecurityTXTUpdateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<SecurityTXTUpdateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<SecurityTXTUpdateResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
-export interface SecurityTXTDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+export namespace SecurityTXTUpdateResponse {
+  export interface Error {
+    code: number;
 
-  messages: Array<Shared.ResponseInfo>;
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
+export interface SecurityTXTDeleteResponse {
+  errors: Array<SecurityTXTDeleteResponse.Error>;
+
+  messages: Array<SecurityTXTDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
+}
+
+export namespace SecurityTXTDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export interface SecurityTXTGetResponse {
@@ -84,7 +151,7 @@ export interface SecurityTXTGetResponse {
 
 export interface SecurityTXTUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -136,14 +203,14 @@ export interface SecurityTXTUpdateParams {
 
 export interface SecurityTXTDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface SecurityTXTGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
