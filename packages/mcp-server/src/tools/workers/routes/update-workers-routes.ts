@@ -24,10 +24,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
-      id: {
-        type: 'string',
-        description: 'Identifier.',
-      },
       pattern: {
         type: 'string',
         description:

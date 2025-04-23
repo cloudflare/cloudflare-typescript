@@ -168,11 +168,6 @@ export interface RouteCreateParams {
   zone_id: string;
 
   /**
-   * Body param: Identifier.
-   */
-  id: string;
-
-  /**
    * Body param: Pattern to match incoming requests against.
    * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
    */
@@ -189,11 +184,6 @@ export interface RouteUpdateParams {
    * Path param: Identifier.
    */
   zone_id: string;
-
-  /**
-   * Body param: Identifier.
-   */
-  id: string;
 
   /**
    * Body param: Pattern to match incoming requests against.
