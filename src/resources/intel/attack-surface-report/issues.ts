@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as IssuesAPI from './issues';
-import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -155,14 +154,48 @@ export namespace IssueClassResponse {
 }
 
 export interface IssueDismissResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<IssueDismissResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<IssueDismissResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
+}
+
+export namespace IssueDismissResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export type IssueSeverityResponse = Array<IssueSeverityResponse.IssueSeverityResponseItem>;
@@ -187,7 +220,7 @@ export namespace IssueTypeResponse {
 
 export interface IssueListParams extends V4PagePaginationParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -249,7 +282,7 @@ export interface IssueListParams extends V4PagePaginationParams {
 
 export interface IssueClassParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -311,7 +344,7 @@ export interface IssueClassParams {
 
 export interface IssueDismissParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -323,7 +356,7 @@ export interface IssueDismissParams {
 
 export interface IssueSeverityParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -385,7 +418,7 @@ export interface IssueSeverityParams {
 
 export interface IssueTypeParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
