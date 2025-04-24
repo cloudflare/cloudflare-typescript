@@ -20,7 +20,7 @@ export class LeakedCredentialChecks extends APIResource {
   detections: DetectionsAPI.Detections = new DetectionsAPI.Detections(this._client);
 
   /**
-   * Updates the current status of Leaked Credential Checks
+   * Updates the current status of Leaked Credential Checks.
    */
   create(
     params: LeakedCredentialCheckCreateParams,
@@ -36,7 +36,7 @@ export class LeakedCredentialChecks extends APIResource {
   }
 
   /**
-   * Retrieves the current status of Leaked Credential Checks
+   * Retrieves the current status of Leaked Credential Checks.
    */
   get(
     params: LeakedCredentialCheckGetParams,
@@ -52,40 +52,40 @@ export class LeakedCredentialChecks extends APIResource {
 }
 
 /**
- * The overall status for Leaked Credential Checks
+ * Defines the overall status for Leaked Credential Checks.
  */
 export interface LeakedCredentialCheckCreateResponse {
   /**
-   * Whether or not Leaked Credential Checks are enabled
+   * Determines whether or not Leaked Credential Checks are enabled.
    */
   enabled?: boolean;
 }
 
 /**
- * The overall status for Leaked Credential Checks
+ * Defines the overall status for Leaked Credential Checks.
  */
 export interface LeakedCredentialCheckGetResponse {
   /**
-   * Whether or not Leaked Credential Checks are enabled
+   * Determines whether or not Leaked Credential Checks are enabled.
    */
   enabled?: boolean;
 }
 
 export interface LeakedCredentialCheckCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
   /**
-   * Body param: Whether or not Leaked Credential Checks are enabled
+   * Body param: Determines whether or not Leaked Credential Checks are enabled.
    */
   enabled?: boolean;
 }
 
 export interface LeakedCredentialCheckGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

@@ -6,7 +6,7 @@ import { SinglePage } from '../../pagination';
 
 export class Detections extends APIResource {
   /**
-   * Create user-defined detection pattern for Leaked Credential Checks
+   * Create user-defined detection pattern for Leaked Credential Checks.
    */
   create(
     params: DetectionCreateParams,
@@ -22,7 +22,7 @@ export class Detections extends APIResource {
   }
 
   /**
-   * Update user-defined detection pattern for Leaked Credential Checks
+   * Update user-defined detection pattern for Leaked Credential Checks.
    */
   update(
     detectionId: string,
@@ -39,7 +39,7 @@ export class Detections extends APIResource {
   }
 
   /**
-   * List user-defined detection patterns for Leaked Credential Checks
+   * List user-defined detection patterns for Leaked Credential Checks.
    */
   list(
     params: DetectionListParams,
@@ -54,7 +54,7 @@ export class Detections extends APIResource {
   }
 
   /**
-   * Remove user-defined detection pattern for Leaked Credential Checks
+   * Remove user-defined detection pattern for Leaked Credential Checks.
    */
   delete(
     detectionId: string,
@@ -74,64 +74,64 @@ export class Detections extends APIResource {
 export class DetectionListResponsesSinglePage extends SinglePage<DetectionListResponse> {}
 
 /**
- * A custom set of username/password expressions to match Leaked Credential Checks
- * on
+ * Defines a custom set of username/password expressions to match Leaked Credential
+ * Checks on.
  */
 export interface DetectionCreateResponse {
   /**
-   * The unique ID for this custom detection
+   * Defines the unique ID for this custom detection.
    */
   id?: string;
 
   /**
-   * The ruleset expression to use in matching the password in a request
+   * Defines ehe ruleset expression to use in matching the password in a request.
    */
   password?: string;
 
   /**
-   * The ruleset expression to use in matching the username in a request
+   * Defines the ruleset expression to use in matching the username in a request.
    */
   username?: string;
 }
 
 /**
- * A custom set of username/password expressions to match Leaked Credential Checks
- * on
+ * Defines a custom set of username/password expressions to match Leaked Credential
+ * Checks on.
  */
 export interface DetectionUpdateResponse {
   /**
-   * The unique ID for this custom detection
+   * Defines the unique ID for this custom detection.
    */
   id?: string;
 
   /**
-   * The ruleset expression to use in matching the password in a request
+   * Defines ehe ruleset expression to use in matching the password in a request.
    */
   password?: string;
 
   /**
-   * The ruleset expression to use in matching the username in a request
+   * Defines the ruleset expression to use in matching the username in a request.
    */
   username?: string;
 }
 
 /**
- * A custom set of username/password expressions to match Leaked Credential Checks
- * on
+ * Defines a custom set of username/password expressions to match Leaked Credential
+ * Checks on.
  */
 export interface DetectionListResponse {
   /**
-   * The unique ID for this custom detection
+   * Defines the unique ID for this custom detection.
    */
   id?: string;
 
   /**
-   * The ruleset expression to use in matching the password in a request
+   * Defines ehe ruleset expression to use in matching the password in a request.
    */
   password?: string;
 
   /**
-   * The ruleset expression to use in matching the username in a request
+   * Defines the ruleset expression to use in matching the username in a request.
    */
   username?: string;
 }
@@ -140,48 +140,52 @@ export type DetectionDeleteResponse = unknown;
 
 export interface DetectionCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
   /**
-   * Body param: The ruleset expression to use in matching the password in a request
+   * Body param: Defines ehe ruleset expression to use in matching the password in a
+   * request.
    */
   password?: string;
 
   /**
-   * Body param: The ruleset expression to use in matching the username in a request
+   * Body param: Defines the ruleset expression to use in matching the username in a
+   * request.
    */
   username?: string;
 }
 
 export interface DetectionUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
   /**
-   * Body param: The ruleset expression to use in matching the password in a request
+   * Body param: Defines ehe ruleset expression to use in matching the password in a
+   * request.
    */
   password?: string;
 
   /**
-   * Body param: The ruleset expression to use in matching the username in a request
+   * Body param: Defines the ruleset expression to use in matching the username in a
+   * request.
    */
   username?: string;
 }
 
 export interface DetectionListParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface DetectionDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
