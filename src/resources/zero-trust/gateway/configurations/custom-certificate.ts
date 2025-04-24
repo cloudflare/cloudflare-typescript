@@ -11,7 +11,7 @@ export class CustomCertificate extends APIResource {
   get(
     params: CustomCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationsAPI.CustomCertificateSettings> {
+  ): Core.APIPromise<ConfigurationsAPI.CustomCertificateSettings | null> {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/gateway/configuration/custom_certificate`, options);
   }
