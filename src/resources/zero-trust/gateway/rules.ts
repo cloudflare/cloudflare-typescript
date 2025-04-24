@@ -1447,11 +1447,6 @@ export namespace RuleCreateParams {
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
-
-    /**
-     * Whether the policy has expired.
-     */
-    expired?: boolean;
   }
 }
 
@@ -1572,11 +1567,6 @@ export namespace RuleUpdateParams {
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
-
-    /**
-     * Whether the policy has expired.
-     */
-    expired?: boolean;
   }
 }
 
