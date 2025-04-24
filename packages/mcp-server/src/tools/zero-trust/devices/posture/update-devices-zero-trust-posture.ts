@@ -546,7 +546,7 @@ export const tool: Tool = {
           properties: {
             platform: {
               type: 'string',
-              enum: ['windows', 'mac', 'linux', 'android', 'ios'],
+              enum: ['windows', 'mac', 'linux', 'android', 'ios', 'chromeos'],
             },
           },
           required: [],
