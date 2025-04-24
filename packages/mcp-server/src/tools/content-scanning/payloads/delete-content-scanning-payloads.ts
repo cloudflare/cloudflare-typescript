@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_content_scanning_payloads',
-  description: 'Delete a Content Scan Custom Expression',
+  description: 'Delete a Content Scan Custom Expression.',
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       expression_id: {
         type: 'string',
-        description: 'The unique ID for this custom scan expression',
+        description: 'defines the unique ID for this custom scan expression.',
       },
     },
   },

@@ -12,25 +12,25 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_leaked_credential_checks_detections',
-  description: 'Update user-defined detection pattern for Leaked Credential Checks',
+  description: 'Update user-defined detection pattern for Leaked Credential Checks.',
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       detection_id: {
         type: 'string',
-        description: 'The unique ID for this custom detection',
+        description: 'Defines the unique ID for this custom detection.',
       },
       password: {
         type: 'string',
-        description: 'The ruleset expression to use in matching the password in a request',
+        description: 'Defines ehe ruleset expression to use in matching the password in a request.',
       },
       username: {
         type: 'string',
-        description: 'The ruleset expression to use in matching the username in a request',
+        description: 'Defines the ruleset expression to use in matching the username in a request.',
       },
     },
   },

@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_leaked_credential_checks_detections',
-  description: 'Remove user-defined detection pattern for Leaked Credential Checks',
+  description: 'Remove user-defined detection pattern for Leaked Credential Checks.',
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       detection_id: {
         type: 'string',
-        description: 'The unique ID for this custom detection',
+        description: 'Defines the unique ID for this custom detection.',
       },
     },
   },
