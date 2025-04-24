@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       overrides_id: {
         type: 'string',

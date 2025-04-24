@@ -369,7 +369,7 @@ export namespace AccessRuleCreateResponse {
    */
   export interface Scope {
     /**
-     * Identifier
+     * Defines an identifier.
      */
     id?: string;
 
@@ -379,7 +379,7 @@ export namespace AccessRuleCreateResponse {
     email?: string;
 
     /**
-     * The scope of the rule.
+     * Defines the scope of the rule.
      */
     type?: 'user' | 'organization';
   }
@@ -438,7 +438,7 @@ export namespace AccessRuleListResponse {
    */
   export interface Scope {
     /**
-     * Identifier
+     * Defines an identifier.
      */
     id?: string;
 
@@ -448,7 +448,7 @@ export namespace AccessRuleListResponse {
     email?: string;
 
     /**
-     * The scope of the rule.
+     * Defines the scope of the rule.
      */
     type?: 'user' | 'organization';
   }
@@ -456,7 +456,7 @@ export namespace AccessRuleListResponse {
 
 export interface AccessRuleDeleteResponse {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   id: string;
 }
@@ -514,7 +514,7 @@ export namespace AccessRuleEditResponse {
    */
   export interface Scope {
     /**
-     * Identifier
+     * Defines an identifier.
      */
     id?: string;
 
@@ -524,7 +524,7 @@ export namespace AccessRuleEditResponse {
     email?: string;
 
     /**
-     * The scope of the rule.
+     * Defines the scope of the rule.
      */
     type?: 'user' | 'organization';
   }
@@ -583,7 +583,7 @@ export namespace AccessRuleGetResponse {
    */
   export interface Scope {
     /**
-     * Identifier
+     * Defines an identifier.
      */
     id?: string;
 
@@ -593,7 +593,7 @@ export namespace AccessRuleGetResponse {
     email?: string;
 
     /**
-     * The scope of the rule.
+     * Defines the scope of the rule.
      */
     type?: 'user' | 'organization';
   }
@@ -653,13 +653,14 @@ export interface AccessRuleListParams extends V4PagePaginationArrayParams {
   configuration?: AccessRuleListParams.Configuration;
 
   /**
-   * Query param: The direction used to sort returned rules.
+   * Query param: Defines the direction used to sort returned rules.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: When set to `all`, all the search requirements must match. When set
-   * to `any`, only one of the search requirements has to match.
+   * Query param: Defines the search requirements. When set to `all`, all the search
+   * requirements must match. When set to `any`, only one of the search requirements
+   * has to match.
    */
   match?: 'any' | 'all';
 
@@ -669,14 +670,14 @@ export interface AccessRuleListParams extends V4PagePaginationArrayParams {
   mode?: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
 
   /**
-   * Query param: The string to search for in the notes of existing IP Access rules.
-   * Notes: For example, the string 'attack' would match IP Access rules with notes
-   * 'Attack 26/02' and 'Attack 27/02'. The search is case insensitive.
+   * Query param: Defines the string to search for in the notes of existing IP Access
+   * rules. Notes: For example, the string 'attack' would match IP Access rules with
+   * notes 'Attack 26/02' and 'Attack 27/02'. The search is case insensitive.
    */
   notes?: string;
 
   /**
-   * Query param: The field used to sort returned rules.
+   * Query param: Defines the field used to sort returned rules.
    */
   order?: 'configuration.target' | 'configuration.value' | 'mode';
 }
@@ -684,15 +685,16 @@ export interface AccessRuleListParams extends V4PagePaginationArrayParams {
 export namespace AccessRuleListParams {
   export interface Configuration {
     /**
-     * The target to search in existing rules.
+     * Defines the target to search in existing rules.
      */
     target?: 'ip' | 'ip_range' | 'asn' | 'country';
 
     /**
-     * The target value to search for in existing rules: an IP address, an IP address
-     * range, or a country code, depending on the provided `configuration.target`.
-     * Notes: You can search for a single IPv4 address, an IP address range with a
-     * subnet of '/16' or '/24', or a two-letter ISO-3166-1 alpha-2 country code.
+     * Defines the target value to search for in existing rules: an IP address, an IP
+     * address range, or a country code, depending on the provided
+     * `configuration.target`. Notes: You can search for a single IPv4 address, an IP
+     * address range with a subnet of '/16' or '/24', or a two-letter ISO-3166-1
+     * alpha-2 country code.
      */
     value?: string;
   }

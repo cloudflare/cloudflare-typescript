@@ -18,11 +18,11 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       rate_limit_id: {
         type: 'string',
-        description: 'The unique identifier of the rate limit.',
+        description: 'Defines the unique identifier of the rate limit.',
       },
       action: {
         type: 'object',

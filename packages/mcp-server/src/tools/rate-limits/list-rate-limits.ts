@@ -18,16 +18,16 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       page: {
         type: 'number',
-        description: 'The page number of paginated results.',
+        description: 'Defines the page number of paginated results.',
       },
       per_page: {
         type: 'number',
         description:
-          'The maximum number of results per page. You can only set the value to `1` or to a multiple of 5 such as `5`, `10`, `15`, or `20`.',
+          'Defines the maximum number of results per page. You can only set the value to `1` or to a multiple of 5 such as `5`, `10`, `15`, or `20`.',
       },
     },
   },
