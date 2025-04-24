@@ -234,12 +234,12 @@ export namespace InstanceGetResponse {
     export interface Config {
       retries: Config.Retries;
 
-      timeout: string | number;
+      timeout: unknown | number;
     }
 
     export namespace Config {
       export interface Retries {
-        delay: string | number;
+        delay: unknown | number;
 
         limit: number;
 
