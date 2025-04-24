@@ -25,7 +25,7 @@ export class ContentScanning extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 
   /**
-   * Disable Content Scanning
+   * Disable Content Scanning.
    */
   disable(
     params: ContentScanningDisableParams,
@@ -40,7 +40,7 @@ export class ContentScanning extends APIResource {
   }
 
   /**
-   * Enable Content Scanning
+   * Enable Content Scanning.
    */
   enable(
     params: ContentScanningEnableParams,
@@ -61,14 +61,14 @@ export type ContentScanningEnableResponse = unknown;
 
 export interface ContentScanningDisableParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface ContentScanningEnableParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

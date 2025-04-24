@@ -7,7 +7,7 @@ import { path } from '../../internal/utils/path';
 
 export class Payloads extends APIResource {
   /**
-   * Add custom scan expressions for Content Scanning
+   * Add custom scan expressions for Content Scanning.
    */
   create(
     params: PayloadCreateParams,
@@ -22,7 +22,7 @@ export class Payloads extends APIResource {
   }
 
   /**
-   * Get a list of existing custom scan expressions for Content Scanning
+   * Get a list of existing custom scan expressions for Content Scanning.
    */
   list(
     params: PayloadListParams,
@@ -37,7 +37,7 @@ export class Payloads extends APIResource {
   }
 
   /**
-   * Delete a Content Scan Custom Expression
+   * Delete a Content Scan Custom Expression.
    */
   delete(
     expressionID: string,
@@ -60,53 +60,53 @@ export type PayloadListResponsesSinglePage = SinglePage<PayloadListResponse>;
 export type PayloadDeleteResponsesSinglePage = SinglePage<PayloadDeleteResponse>;
 
 /**
- * A custom scan expression to match Content Scanning on
+ * Defines a custom scan expression to match Content Scanning on.
  */
 export interface PayloadCreateResponse {
   /**
-   * The unique ID for this custom scan expression
+   * defines the unique ID for this custom scan expression.
    */
   id?: string;
 
   /**
-   * Ruleset expression to use in matching content objects
+   * Defines the ruleset expression to use in matching content objects.
    */
   payload?: string;
 }
 
 /**
- * A custom scan expression to match Content Scanning on
+ * Defines a custom scan expression to match Content Scanning on.
  */
 export interface PayloadListResponse {
   /**
-   * The unique ID for this custom scan expression
+   * defines the unique ID for this custom scan expression.
    */
   id?: string;
 
   /**
-   * Ruleset expression to use in matching content objects
+   * Defines the ruleset expression to use in matching content objects.
    */
   payload?: string;
 }
 
 /**
- * A custom scan expression to match Content Scanning on
+ * Defines a custom scan expression to match Content Scanning on.
  */
 export interface PayloadDeleteResponse {
   /**
-   * The unique ID for this custom scan expression
+   * defines the unique ID for this custom scan expression.
    */
   id?: string;
 
   /**
-   * Ruleset expression to use in matching content objects
+   * Defines the ruleset expression to use in matching content objects.
    */
   payload?: string;
 }
 
 export interface PayloadCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -119,7 +119,7 @@ export interface PayloadCreateParams {
 export namespace PayloadCreateParams {
   export interface Body {
     /**
-     * Ruleset expression to use in matching content objects
+     * Defines the ruleset expression to use in matching content objects.
      */
     payload: string;
   }
@@ -127,14 +127,14 @@ export namespace PayloadCreateParams {
 
 export interface PayloadListParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface PayloadDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

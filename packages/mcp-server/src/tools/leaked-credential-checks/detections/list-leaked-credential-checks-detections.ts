@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_leaked_credential_checks_detections',
-  description: 'List user-defined detection patterns for Leaked Credential Checks',
+  description: 'List user-defined detection patterns for Leaked Credential Checks.',
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
     },
   },

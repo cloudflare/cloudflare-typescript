@@ -3803,30 +3803,30 @@ It is strongly recommended that you ensure you have [custom rules](https://devel
 
 ### Resource `leaked_credential_checks`:
 
-- `create_leaked_credential_checks` (`write`): Updates the current status of Leaked Credential Checks
-- `get_leaked_credential_checks` (`read`): Retrieves the current status of Leaked Credential Checks
+- `create_leaked_credential_checks` (`write`): Updates the current status of Leaked Credential Checks.
+- `get_leaked_credential_checks` (`read`): Retrieves the current status of Leaked Credential Checks.
 
 ### Resource `leaked_credential_checks.detections`:
 
-- `create_leaked_credential_checks_detections` (`write`): Create user-defined detection pattern for Leaked Credential Checks
-- `update_leaked_credential_checks_detections` (`write`): Update user-defined detection pattern for Leaked Credential Checks
-- `list_leaked_credential_checks_detections` (`read`): List user-defined detection patterns for Leaked Credential Checks
-- `delete_leaked_credential_checks_detections` (`write`): Remove user-defined detection pattern for Leaked Credential Checks
+- `create_leaked_credential_checks_detections` (`write`): Create user-defined detection pattern for Leaked Credential Checks.
+- `update_leaked_credential_checks_detections` (`write`): Update user-defined detection pattern for Leaked Credential Checks.
+- `list_leaked_credential_checks_detections` (`read`): List user-defined detection patterns for Leaked Credential Checks.
+- `delete_leaked_credential_checks_detections` (`write`): Remove user-defined detection pattern for Leaked Credential Checks.
 
 ### Resource `content_scanning`:
 
-- `disable_content_scanning` (`write`): Disable Content Scanning
-- `enable_content_scanning` (`write`): Enable Content Scanning
+- `disable_content_scanning` (`write`): Disable Content Scanning.
+- `enable_content_scanning` (`write`): Enable Content Scanning.
 
 ### Resource `content_scanning.payloads`:
 
-- `create_content_scanning_payloads` (`write`): Add custom scan expressions for Content Scanning
-- `list_content_scanning_payloads` (`read`): Get a list of existing custom scan expressions for Content Scanning
-- `delete_content_scanning_payloads` (`write`): Delete a Content Scan Custom Expression
+- `create_content_scanning_payloads` (`write`): Add custom scan expressions for Content Scanning.
+- `list_content_scanning_payloads` (`read`): Get a list of existing custom scan expressions for Content Scanning.
+- `delete_content_scanning_payloads` (`write`): Delete a Content Scan Custom Expression.
 
 ### Resource `content_scanning.settings`:
 
-- `get_content_scanning_settings` (`read`): Retrieve the current status of Content Scanning
+- `get_content_scanning_settings` (`read`): Retrieve the current status of Content Scanning.
 
 ### Resource `abuse_reports`:
 

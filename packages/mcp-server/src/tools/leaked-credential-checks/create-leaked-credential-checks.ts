@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_leaked_credential_checks',
-  description: 'Updates the current status of Leaked Credential Checks',
+  description: 'Updates the current status of Leaked Credential Checks.',
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       enabled: {
         type: 'boolean',
-        description: 'Whether or not Leaked Credential Checks are enabled',
+        description: 'Determines whether or not Leaked Credential Checks are enabled.',
       },
     },
   },

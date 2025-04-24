@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_content_scanning_settings',
-  description: 'Retrieve the current status of Content Scanning',
+  description: 'Retrieve the current status of Content Scanning.',
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
     },
   },

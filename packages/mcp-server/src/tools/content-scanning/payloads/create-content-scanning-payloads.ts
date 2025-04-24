@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_content_scanning_payloads',
-  description: 'Add custom scan expressions for Content Scanning',
+  description: 'Add custom scan expressions for Content Scanning.',
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       body: {
         type: 'array',
@@ -27,7 +27,7 @@ export const tool: Tool = {
           properties: {
             payload: {
               type: 'string',
-              description: 'Ruleset expression to use in matching content objects',
+              description: 'Defines the ruleset expression to use in matching content objects.',
             },
           },
           required: ['payload'],
