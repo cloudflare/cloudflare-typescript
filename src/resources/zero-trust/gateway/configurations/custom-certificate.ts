@@ -13,7 +13,7 @@ export class CustomCertificate extends APIResource {
   get(
     params: CustomCertificateGetParams,
     options?: RequestOptions,
-  ): APIPromise<ConfigurationsAPI.CustomCertificateSettings> {
+  ): APIPromise<ConfigurationsAPI.CustomCertificateSettings | null> {
     const { account_id } = params;
     return this._client.get(path`/accounts/${account_id}/gateway/configuration/custom_certificate`, options);
   }
