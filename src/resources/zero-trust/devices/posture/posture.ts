@@ -490,11 +490,11 @@ export namespace DeviceInputParam {
 }
 
 export interface DeviceMatch {
-  platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
+  platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios' | 'chromeos';
 }
 
 export interface DeviceMatchParam {
-  platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
+  platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios' | 'chromeos';
 }
 
 export interface DevicePostureRule {

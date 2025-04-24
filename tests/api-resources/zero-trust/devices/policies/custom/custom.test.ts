@@ -127,6 +127,8 @@ describe('resource custom', () => {
         exclude: [{ address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' }],
         exclude_office_ips: true,
         include: [{ address: '192.0.2.0/24', description: 'Include testing domains in the tunnel' }],
+        lan_allow_minutes: 30,
+        lan_allow_subnet_size: 24,
         match: 'identity.email == "test@cloudflare.com"',
         name: 'Allow Developers',
         precedence: 100,
