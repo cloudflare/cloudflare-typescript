@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       rule_id: {
         type: 'string',
-        description: 'Unique identifier for a rule',
+        description: 'Unique identifier for a rule.',
       },
       account_id: {
         type: 'string',

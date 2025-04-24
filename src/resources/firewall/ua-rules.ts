@@ -145,7 +145,7 @@ export type UARuleGetResponse = unknown | string | null;
 
 export interface UARuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -167,7 +167,7 @@ export interface UARuleCreateParams {
 
 export interface UARuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -189,7 +189,7 @@ export interface UARuleUpdateParams {
 
 export interface UARuleListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -211,14 +211,14 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
 
 export interface UARuleDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface UARuleGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

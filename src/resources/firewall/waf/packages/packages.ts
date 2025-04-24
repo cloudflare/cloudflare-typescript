@@ -84,7 +84,7 @@ export namespace PackageGetResponse {
     result: unknown | string | null;
 
     /**
-     * Whether the API call was successful
+     * Defines whether the API call was successful.
      */
     success: true;
   }
@@ -96,7 +96,7 @@ export namespace PackageGetResponse {
 
 export interface PackageListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -124,7 +124,7 @@ export interface PackageListParams extends V4PagePaginationArrayParams {
 
 export interface PackageGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
