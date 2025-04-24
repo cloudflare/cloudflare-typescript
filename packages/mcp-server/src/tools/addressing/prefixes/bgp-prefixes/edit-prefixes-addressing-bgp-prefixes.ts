@@ -29,6 +29,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier of BGP Prefix.',
       },
+      asn_prepend_count: {
+        type: 'integer',
+        description: 'Number of times to prepend the Cloudflare ASN to the BGP AS-Path attribute',
+      },
       on_demand: {
         type: 'object',
         properties: {
@@ -37,6 +41,11 @@ export const tool: Tool = {
           },
         },
         required: [],
+      },
+      withdraw_if_no_route: {
+        type: 'boolean',
+        description:
+          'Controls whether the BGP prefix is automatically withdrawn when prefix is withdrawn from Magic routing table (for Magic Transit customers using Direct CNI)',
       },
     },
   },
