@@ -249,7 +249,7 @@ export interface OverrideDeleteResponse {
 
 export interface OverrideCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -263,12 +263,12 @@ export interface OverrideCreateParams {
 
 export interface OverrideUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
   /**
-   * Body param: Identifier
+   * Body param: Defines an identifier.
    */
   id: string;
 
@@ -297,21 +297,21 @@ export interface OverrideUpdateParams {
 
 export interface OverrideListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface OverrideDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface OverrideGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

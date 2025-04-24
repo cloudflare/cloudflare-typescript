@@ -466,7 +466,7 @@ export namespace RateLimitDeleteResponse {
 
 export interface RateLimitCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -619,21 +619,21 @@ export namespace RateLimitCreateParams {
 
 export interface RateLimitListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface RateLimitDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface RateLimitEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -786,7 +786,7 @@ export namespace RateLimitEditParams {
 
 export interface RateLimitGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

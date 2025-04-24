@@ -188,7 +188,7 @@ export interface FirewallFilterParam {
 
 export interface FilterCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -201,7 +201,7 @@ export interface FilterCreateParams {
 
 export interface FilterUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -213,7 +213,7 @@ export interface FilterUpdateParams {
 
 export interface FilterListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -246,28 +246,28 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
 
 export interface FilterDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface FilterBulkDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface FilterBulkUpdateParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface FilterGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
