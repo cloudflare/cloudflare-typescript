@@ -356,7 +356,7 @@ export interface RuleSetting {
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    */
-  allow_child_bypass?: boolean | null;
+  allow_child_bypass?: boolean;
 
   /**
    * Settings for the Audit SSH action.
@@ -388,7 +388,7 @@ export interface RuleSetting {
   /**
    * Set by children MSP accounts to bypass their parent's rules.
    */
-  bypass_parent_rule?: boolean | null;
+  bypass_parent_rule?: boolean;
 
   /**
    * Configure how session check behaves.
@@ -785,7 +785,7 @@ export interface RuleSettingParam {
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    */
-  allow_child_bypass?: boolean | null;
+  allow_child_bypass?: boolean;
 
   /**
    * Settings for the Audit SSH action.
@@ -817,7 +817,7 @@ export interface RuleSettingParam {
   /**
    * Set by children MSP accounts to bypass their parent's rules.
    */
-  bypass_parent_rule?: boolean | null;
+  bypass_parent_rule?: boolean;
 
   /**
    * Configure how session check behaves.
