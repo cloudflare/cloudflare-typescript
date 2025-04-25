@@ -12,7 +12,11 @@ describe('resource assetUpload', () => {
   test('create: only required params', async () => {
     const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.assetUpload.create(
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', dispatch_namespace: 'my-dispatch-namespace' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        dispatch_namespace: 'my-dispatch-namespace',
+        manifest: { foo: { hash: 'hash', size: 0 } },
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
