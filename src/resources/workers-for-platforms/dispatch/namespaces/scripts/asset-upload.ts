@@ -47,7 +47,7 @@ export interface AssetUploadCreateParams {
    * Body param: A manifest ([path]: {hash, size}) map of files to upload. As an
    * example, `/blog/hello-world.html` would be a valid path key.
    */
-  manifest?: Record<string, AssetUploadCreateParams.Manifest>;
+  manifest: Record<string, AssetUploadCreateParams.Manifest>;
 }
 
 export namespace AssetUploadCreateParams {
@@ -55,12 +55,12 @@ export namespace AssetUploadCreateParams {
     /**
      * The hash of the file.
      */
-    hash?: string;
+    hash: string;
 
     /**
      * The size of the file in bytes.
      */
-    size?: number;
+    size: number;
   }
 }
 
