@@ -18,15 +18,15 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       locationHint: {
         type: 'string',
-        description: 'Location of the bucket',
+        description: 'Location of the bucket.',
         enum: ['apac', 'eeur', 'enam', 'weur', 'wnam', 'oc'],
       },
       storageClass: {
@@ -36,7 +36,7 @@ export const tool: Tool = {
       },
       jurisdiction: {
         type: 'string',
-        description: 'Creates the bucket in the provided jurisdiction',
+        description: 'Creates the bucket in the provided jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

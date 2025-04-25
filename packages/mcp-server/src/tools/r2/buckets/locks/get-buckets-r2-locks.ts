@@ -12,21 +12,21 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_buckets_r2_locks',
-  description: 'Get lock rules for a bucket',
+  description: 'Get lock rules for a bucket.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

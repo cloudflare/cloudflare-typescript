@@ -12,21 +12,21 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_buckets_r2_sippy',
-  description: 'Disables Sippy on this bucket',
+  description: 'Disables Sippy on this bucket.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_buckets_r2_lifecycle',
-  description: 'Set the object lifecycle rules for a bucket',
+  description: 'Set the object lifecycle rules for a bucket.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       rules: {
         type: 'array',
@@ -31,32 +31,32 @@ export const tool: Tool = {
           properties: {
             id: {
               type: 'string',
-              description: 'Unique identifier for this rule',
+              description: 'Unique identifier for this rule.',
             },
             conditions: {
               type: 'object',
-              description: 'Conditions that apply to all transitions of this rule',
+              description: 'Conditions that apply to all transitions of this rule.',
               properties: {
                 prefix: {
                   type: 'string',
                   description:
-                    'Transitions will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads',
+                    'Transitions will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads.',
                 },
               },
               required: ['prefix'],
             },
             enabled: {
               type: 'boolean',
-              description: 'Whether or not this rule is in effect',
+              description: 'Whether or not this rule is in effect.',
             },
             abortMultipartUploadsTransition: {
               type: 'object',
-              description: 'Transition to abort ongoing multipart uploads',
+              description: 'Transition to abort ongoing multipart uploads.',
               properties: {
                 condition: {
                   type: 'object',
                   description:
-                    'Condition for lifecycle transitions to apply after an object reaches an age in seconds',
+                    'Condition for lifecycle transitions to apply after an object reaches an age in seconds.',
                   properties: {
                     maxAge: {
                       type: 'integer',
@@ -73,14 +73,14 @@ export const tool: Tool = {
             },
             deleteObjectsTransition: {
               type: 'object',
-              description: 'Transition to delete objects',
+              description: 'Transition to delete objects.',
               properties: {
                 condition: {
                   anyOf: [
                     {
                       type: 'object',
                       description:
-                        'Condition for lifecycle transitions to apply after an object reaches an age in seconds',
+                        'Condition for lifecycle transitions to apply after an object reaches an age in seconds.',
                       properties: {
                         maxAge: {
                           type: 'integer',
@@ -94,7 +94,7 @@ export const tool: Tool = {
                     },
                     {
                       type: 'object',
-                      description: 'Condition for lifecycle transitions to apply on a specific date',
+                      description: 'Condition for lifecycle transitions to apply on a specific date.',
                       properties: {
                         date: {
                           type: 'string',
@@ -109,14 +109,14 @@ export const tool: Tool = {
                     },
                   ],
                   description:
-                    'Condition for lifecycle transitions to apply after an object reaches an age in seconds',
+                    'Condition for lifecycle transitions to apply after an object reaches an age in seconds.',
                 },
               },
               required: [],
             },
             storageClassTransitions: {
               type: 'array',
-              description: 'Transitions to change the storage class of objects',
+              description: 'Transitions to change the storage class of objects.',
               items: {
                 type: 'object',
                 properties: {
@@ -125,7 +125,7 @@ export const tool: Tool = {
                       {
                         type: 'object',
                         description:
-                          'Condition for lifecycle transitions to apply after an object reaches an age in seconds',
+                          'Condition for lifecycle transitions to apply after an object reaches an age in seconds.',
                         properties: {
                           maxAge: {
                             type: 'integer',
@@ -139,7 +139,7 @@ export const tool: Tool = {
                       },
                       {
                         type: 'object',
-                        description: 'Condition for lifecycle transitions to apply on a specific date',
+                        description: 'Condition for lifecycle transitions to apply on a specific date.',
                         properties: {
                           date: {
                             type: 'string',
@@ -154,7 +154,7 @@ export const tool: Tool = {
                       },
                     ],
                     description:
-                      'Condition for lifecycle transitions to apply after an object reaches an age in seconds',
+                      'Condition for lifecycle transitions to apply after an object reaches an age in seconds.',
                   },
                   storageClass: {
                     type: 'string',
@@ -170,7 +170,7 @@ export const tool: Tool = {
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

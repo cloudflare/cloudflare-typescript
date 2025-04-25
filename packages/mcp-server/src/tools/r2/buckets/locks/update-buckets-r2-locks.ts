@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_buckets_r2_locks',
-  description: 'Set lock rules for a bucket',
+  description: 'Set lock rules for a bucket.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       rules: {
         type: 'array',
@@ -31,13 +31,13 @@ export const tool: Tool = {
           properties: {
             id: {
               type: 'string',
-              description: 'Unique identifier for this rule',
+              description: 'Unique identifier for this rule.',
             },
             condition: {
               anyOf: [
                 {
                   type: 'object',
-                  description: 'Condition to apply a lock rule to an object for how long in seconds',
+                  description: 'Condition to apply a lock rule to an object for how long in seconds.',
                   properties: {
                     maxAgeSeconds: {
                       type: 'integer',
@@ -51,7 +51,7 @@ export const tool: Tool = {
                 },
                 {
                   type: 'object',
-                  description: 'Condition to apply a lock rule to an object until a specific date',
+                  description: 'Condition to apply a lock rule to an object until a specific date.',
                   properties: {
                     date: {
                       type: 'string',
@@ -66,7 +66,7 @@ export const tool: Tool = {
                 },
                 {
                   type: 'object',
-                  description: 'Condition to apply a lock rule indefinitely',
+                  description: 'Condition to apply a lock rule indefinitely.',
                   properties: {
                     type: {
                       type: 'string',
@@ -76,16 +76,16 @@ export const tool: Tool = {
                   required: ['type'],
                 },
               ],
-              description: 'Condition to apply a lock rule to an object for how long in seconds',
+              description: 'Condition to apply a lock rule to an object for how long in seconds.',
             },
             enabled: {
               type: 'boolean',
-              description: 'Whether or not this rule is in effect',
+              description: 'Whether or not this rule is in effect.',
             },
             prefix: {
               type: 'string',
               description:
-                'Rule will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads',
+                'Rule will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads.',
             },
           },
           required: ['id', 'condition', 'enabled'],
@@ -93,7 +93,7 @@ export const tool: Tool = {
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

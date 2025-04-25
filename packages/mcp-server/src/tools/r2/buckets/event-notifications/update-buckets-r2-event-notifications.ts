@@ -18,25 +18,25 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       queue_id: {
         type: 'string',
-        description: 'Queue ID',
+        description: 'Queue ID.',
       },
       rules: {
         type: 'array',
-        description: 'Array of rules to drive notifications',
+        description: 'Array of rules to drive notifications.',
         items: {
           type: 'object',
           properties: {
             actions: {
               type: 'array',
-              description: 'Array of R2 object actions that will trigger notifications',
+              description: 'Array of R2 object actions that will trigger notifications.',
               items: {
                 type: 'string',
                 enum: [
@@ -51,15 +51,15 @@ export const tool: Tool = {
             description: {
               type: 'string',
               description:
-                'A description that can be used to identify the event notification rule after creation',
+                'A description that can be used to identify the event notification rule after creation.',
             },
             prefix: {
               type: 'string',
-              description: 'Notifications will be sent only for objects with this prefix',
+              description: 'Notifications will be sent only for objects with this prefix.',
             },
             suffix: {
               type: 'string',
-              description: 'Notifications will be sent only for objects with this suffix',
+              description: 'Notifications will be sent only for objects with this suffix.',
             },
           },
           required: ['actions'],
@@ -67,7 +67,7 @@ export const tool: Tool = {
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

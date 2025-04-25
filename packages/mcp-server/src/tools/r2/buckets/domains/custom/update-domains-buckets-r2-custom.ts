@@ -18,19 +18,19 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       domain: {
         type: 'string',
-        description: 'Name of the custom domain',
+        description: 'Name of the custom domain.',
       },
       enabled: {
         type: 'boolean',
-        description: 'Whether to enable public bucket access at the specified custom domain',
+        description: 'Whether to enable public bucket access at the specified custom domain.',
       },
       minTLS: {
         type: 'string',
@@ -40,7 +40,7 @@ export const tool: Tool = {
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },
