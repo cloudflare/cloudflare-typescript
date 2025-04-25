@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class CORS extends APIResource {
   /**
-   * Set the CORS policy for a bucket
+   * Set the CORS policy for a bucket.
    */
   update(
     bucketName: string,
@@ -28,7 +28,7 @@ export class CORS extends APIResource {
   }
 
   /**
-   * Delete the CORS policy for a bucket
+   * Delete the CORS policy for a bucket.
    */
   delete(
     bucketName: string,
@@ -50,7 +50,7 @@ export class CORS extends APIResource {
   }
 
   /**
-   * Get the CORS policy for a bucket
+   * Get the CORS policy for a bucket.
    */
   get(
     bucketName: string,
@@ -88,7 +88,7 @@ export namespace CORSGetResponse {
     allowed: Rule.Allowed;
 
     /**
-     * Identifier for this rule
+     * Identifier for this rule.
      */
     id?: string;
 
@@ -138,7 +138,7 @@ export namespace CORSGetResponse {
 
 export interface CORSUpdateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
@@ -148,7 +148,7 @@ export interface CORSUpdateParams {
   rules?: Array<CORSUpdateParams.Rule>;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -161,7 +161,7 @@ export namespace CORSUpdateParams {
     allowed: Rule.Allowed;
 
     /**
-     * Identifier for this rule
+     * Identifier for this rule.
      */
     id?: string;
 
@@ -211,24 +211,24 @@ export namespace CORSUpdateParams {
 
 export interface CORSDeleteParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CORSGetParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

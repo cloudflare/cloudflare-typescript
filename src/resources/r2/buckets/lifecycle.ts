@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class Lifecycle extends APIResource {
   /**
-   * Set the object lifecycle rules for a bucket
+   * Set the object lifecycle rules for a bucket.
    */
   update(
     bucketName: string,
@@ -28,7 +28,7 @@ export class Lifecycle extends APIResource {
   }
 
   /**
-   * Get object lifecycle rules for a bucket
+   * Get object lifecycle rules for a bucket.
    */
   get(
     bucketName: string,
@@ -59,56 +59,56 @@ export interface LifecycleGetResponse {
 export namespace LifecycleGetResponse {
   export interface Rule {
     /**
-     * Unique identifier for this rule
+     * Unique identifier for this rule.
      */
     id: string;
 
     /**
-     * Conditions that apply to all transitions of this rule
+     * Conditions that apply to all transitions of this rule.
      */
     conditions: Rule.Conditions;
 
     /**
-     * Whether or not this rule is in effect
+     * Whether or not this rule is in effect.
      */
     enabled: boolean;
 
     /**
-     * Transition to abort ongoing multipart uploads
+     * Transition to abort ongoing multipart uploads.
      */
     abortMultipartUploadsTransition?: Rule.AbortMultipartUploadsTransition;
 
     /**
-     * Transition to delete objects
+     * Transition to delete objects.
      */
     deleteObjectsTransition?: Rule.DeleteObjectsTransition;
 
     /**
-     * Transitions to change the storage class of objects
+     * Transitions to change the storage class of objects.
      */
     storageClassTransitions?: Array<Rule.StorageClassTransition>;
   }
 
   export namespace Rule {
     /**
-     * Conditions that apply to all transitions of this rule
+     * Conditions that apply to all transitions of this rule.
      */
     export interface Conditions {
       /**
        * Transitions will only apply to objects/uploads in the bucket that start with the
        * given prefix, an empty prefix can be provided to scope rule to all
-       * objects/uploads
+       * objects/uploads.
        */
       prefix: string;
     }
 
     /**
-     * Transition to abort ongoing multipart uploads
+     * Transition to abort ongoing multipart uploads.
      */
     export interface AbortMultipartUploadsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       condition?: AbortMultipartUploadsTransition.Condition;
     }
@@ -116,7 +116,7 @@ export namespace LifecycleGetResponse {
     export namespace AbortMultipartUploadsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       export interface Condition {
         maxAge: number;
@@ -126,12 +126,12 @@ export namespace LifecycleGetResponse {
     }
 
     /**
-     * Transition to delete objects
+     * Transition to delete objects.
      */
     export interface DeleteObjectsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       condition?:
         | DeleteObjectsTransition.R2LifecycleAgeCondition
@@ -141,7 +141,7 @@ export namespace LifecycleGetResponse {
     export namespace DeleteObjectsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       export interface R2LifecycleAgeCondition {
         maxAge: number;
@@ -150,7 +150,7 @@ export namespace LifecycleGetResponse {
       }
 
       /**
-       * Condition for lifecycle transitions to apply on a specific date
+       * Condition for lifecycle transitions to apply on a specific date.
        */
       export interface R2LifecycleDateCondition {
         date: string;
@@ -162,7 +162,7 @@ export namespace LifecycleGetResponse {
     export interface StorageClassTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       condition:
         | StorageClassTransition.R2LifecycleAgeCondition
@@ -174,7 +174,7 @@ export namespace LifecycleGetResponse {
     export namespace StorageClassTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       export interface R2LifecycleAgeCondition {
         maxAge: number;
@@ -183,7 +183,7 @@ export namespace LifecycleGetResponse {
       }
 
       /**
-       * Condition for lifecycle transitions to apply on a specific date
+       * Condition for lifecycle transitions to apply on a specific date.
        */
       export interface R2LifecycleDateCondition {
         date: string;
@@ -196,7 +196,7 @@ export namespace LifecycleGetResponse {
 
 export interface LifecycleUpdateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
@@ -206,7 +206,7 @@ export interface LifecycleUpdateParams {
   rules?: Array<LifecycleUpdateParams.Rule>;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -214,56 +214,56 @@ export interface LifecycleUpdateParams {
 export namespace LifecycleUpdateParams {
   export interface Rule {
     /**
-     * Unique identifier for this rule
+     * Unique identifier for this rule.
      */
     id: string;
 
     /**
-     * Conditions that apply to all transitions of this rule
+     * Conditions that apply to all transitions of this rule.
      */
     conditions: Rule.Conditions;
 
     /**
-     * Whether or not this rule is in effect
+     * Whether or not this rule is in effect.
      */
     enabled: boolean;
 
     /**
-     * Transition to abort ongoing multipart uploads
+     * Transition to abort ongoing multipart uploads.
      */
     abortMultipartUploadsTransition?: Rule.AbortMultipartUploadsTransition;
 
     /**
-     * Transition to delete objects
+     * Transition to delete objects.
      */
     deleteObjectsTransition?: Rule.DeleteObjectsTransition;
 
     /**
-     * Transitions to change the storage class of objects
+     * Transitions to change the storage class of objects.
      */
     storageClassTransitions?: Array<Rule.StorageClassTransition>;
   }
 
   export namespace Rule {
     /**
-     * Conditions that apply to all transitions of this rule
+     * Conditions that apply to all transitions of this rule.
      */
     export interface Conditions {
       /**
        * Transitions will only apply to objects/uploads in the bucket that start with the
        * given prefix, an empty prefix can be provided to scope rule to all
-       * objects/uploads
+       * objects/uploads.
        */
       prefix: string;
     }
 
     /**
-     * Transition to abort ongoing multipart uploads
+     * Transition to abort ongoing multipart uploads.
      */
     export interface AbortMultipartUploadsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       condition?: AbortMultipartUploadsTransition.Condition;
     }
@@ -271,7 +271,7 @@ export namespace LifecycleUpdateParams {
     export namespace AbortMultipartUploadsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       export interface Condition {
         maxAge: number;
@@ -281,12 +281,12 @@ export namespace LifecycleUpdateParams {
     }
 
     /**
-     * Transition to delete objects
+     * Transition to delete objects.
      */
     export interface DeleteObjectsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       condition?:
         | DeleteObjectsTransition.R2LifecycleAgeCondition
@@ -296,7 +296,7 @@ export namespace LifecycleUpdateParams {
     export namespace DeleteObjectsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       export interface R2LifecycleAgeCondition {
         maxAge: number;
@@ -305,7 +305,7 @@ export namespace LifecycleUpdateParams {
       }
 
       /**
-       * Condition for lifecycle transitions to apply on a specific date
+       * Condition for lifecycle transitions to apply on a specific date.
        */
       export interface R2LifecycleDateCondition {
         date: string;
@@ -317,7 +317,7 @@ export namespace LifecycleUpdateParams {
     export interface StorageClassTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       condition:
         | StorageClassTransition.R2LifecycleAgeCondition
@@ -329,7 +329,7 @@ export namespace LifecycleUpdateParams {
     export namespace StorageClassTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * seconds
+       * seconds.
        */
       export interface R2LifecycleAgeCondition {
         maxAge: number;
@@ -338,7 +338,7 @@ export namespace LifecycleUpdateParams {
       }
 
       /**
-       * Condition for lifecycle transitions to apply on a specific date
+       * Condition for lifecycle transitions to apply on a specific date.
        */
       export interface R2LifecycleDateCondition {
         date: string;
@@ -351,12 +351,12 @@ export namespace LifecycleUpdateParams {
 
 export interface LifecycleGetParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
