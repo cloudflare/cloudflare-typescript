@@ -82,7 +82,7 @@ export class Custom extends APIResource {
   }
 
   /**
-   * Remove custom domain registration from an existing R2 bucket
+   * Remove custom domain registration from an existing R2 bucket.
    */
   delete(
     domain: string,
@@ -128,12 +128,12 @@ export class Custom extends APIResource {
 
 export interface CustomCreateResponse {
   /**
-   * Domain name of the affected custom domain
+   * Domain name of the affected custom domain.
    */
   domain: string;
 
   /**
-   * Whether this bucket is publicly accessible at the specified custom domain
+   * Whether this bucket is publicly accessible at the specified custom domain.
    */
   enabled: boolean;
 
@@ -146,12 +146,12 @@ export interface CustomCreateResponse {
 
 export interface CustomUpdateResponse {
   /**
-   * Domain name of the affected custom domain
+   * Domain name of the affected custom domain.
    */
   domain: string;
 
   /**
-   * Whether this bucket is publicly accessible at the specified custom domain
+   * Whether this bucket is publicly accessible at the specified custom domain.
    */
   enabled?: boolean;
 
@@ -169,12 +169,12 @@ export interface CustomListResponse {
 export namespace CustomListResponse {
   export interface Domain {
     /**
-     * Domain name of the custom domain to be added
+     * Domain name of the custom domain to be added.
      */
     domain: string;
 
     /**
-     * Whether this bucket is publicly accessible at the specified custom domain
+     * Whether this bucket is publicly accessible at the specified custom domain.
      */
     enabled: boolean;
 
@@ -187,12 +187,12 @@ export namespace CustomListResponse {
     minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 
     /**
-     * Zone ID of the custom domain resides in
+     * Zone ID of the custom domain resides in.
      */
     zoneId?: string;
 
     /**
-     * Zone that the custom domain resides in
+     * Zone that the custom domain resides in.
      */
     zoneName?: string;
   }
@@ -200,12 +200,12 @@ export namespace CustomListResponse {
   export namespace Domain {
     export interface Status {
       /**
-       * Ownership status of the domain
+       * Ownership status of the domain.
        */
       ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
 
       /**
-       * SSL certificate status
+       * SSL certificate status.
        */
       ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
     }
@@ -214,19 +214,19 @@ export namespace CustomListResponse {
 
 export interface CustomDeleteResponse {
   /**
-   * Name of the removed custom domain
+   * Name of the removed custom domain.
    */
   domain: string;
 }
 
 export interface CustomGetResponse {
   /**
-   * Domain name of the custom domain to be added
+   * Domain name of the custom domain to be added.
    */
   domain: string;
 
   /**
-   * Whether this bucket is publicly accessible at the specified custom domain
+   * Whether this bucket is publicly accessible at the specified custom domain.
    */
   enabled: boolean;
 
@@ -239,12 +239,12 @@ export interface CustomGetResponse {
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 
   /**
-   * Zone ID of the custom domain resides in
+   * Zone ID of the custom domain resides in.
    */
   zoneId?: string;
 
   /**
-   * Zone that the custom domain resides in
+   * Zone that the custom domain resides in.
    */
   zoneName?: string;
 }
@@ -252,12 +252,12 @@ export interface CustomGetResponse {
 export namespace CustomGetResponse {
   export interface Status {
     /**
-     * Ownership status of the domain
+     * Ownership status of the domain.
      */
     ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
 
     /**
-     * SSL certificate status
+     * SSL certificate status.
      */
     ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
   }
@@ -265,12 +265,12 @@ export namespace CustomGetResponse {
 
 export interface CustomCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Body param: Name of the custom domain to be added
+   * Body param: Name of the custom domain to be added.
    */
   domain: string;
 
@@ -281,7 +281,7 @@ export interface CustomCreateParams {
   enabled: boolean;
 
   /**
-   * Body param: Zone ID of the custom domain
+   * Body param: Zone ID of the custom domain.
    */
   zoneId: string;
 
@@ -292,25 +292,25 @@ export interface CustomCreateParams {
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomUpdateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Path param: Name of the bucket
+   * Path param: Name of the bucket.
    */
   bucket_name: string;
 
   /**
    * Body param: Whether to enable public bucket access at the specified custom
-   * domain
+   * domain.
    */
   enabled?: boolean;
 
@@ -321,53 +321,53 @@ export interface CustomUpdateParams {
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomListParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomDeleteParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Path param: Name of the bucket
+   * Path param: Name of the bucket.
    */
   bucket_name: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomGetParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Path param: Name of the bucket
+   * Path param: Name of the bucket.
    */
   bucket_name: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

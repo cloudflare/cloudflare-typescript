@@ -12,25 +12,25 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_domains_buckets_r2_custom',
-  description: 'Remove custom domain registration from an existing R2 bucket',
+  description: 'Remove custom domain registration from an existing R2 bucket.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       domain: {
         type: 'string',
-        description: 'Name of the custom domain',
+        description: 'Name of the custom domain.',
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

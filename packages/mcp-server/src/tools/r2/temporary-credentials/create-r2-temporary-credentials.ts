@@ -19,35 +19,35 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket: {
         type: 'string',
-        description: 'Name of the R2 bucket',
+        description: 'Name of the R2 bucket.',
       },
       parentAccessKeyId: {
         type: 'string',
-        description: 'The parent access key id to use for signing',
+        description: 'The parent access key id to use for signing.',
       },
       permission: {
         type: 'string',
-        description: 'Permissions allowed on the credentials',
+        description: 'Permissions allowed on the credentials.',
         enum: ['admin-read-write', 'admin-read-only', 'object-read-write', 'object-read-only'],
       },
       ttlSeconds: {
         type: 'number',
-        description: 'How long the credentials will live for in seconds',
+        description: 'How long the credentials will live for in seconds.',
       },
       objects: {
         type: 'array',
-        description: 'Optional object paths to scope the credentials to',
+        description: 'Optional object paths to scope the credentials to.',
         items: {
           type: 'string',
         },
       },
       prefixes: {
         type: 'array',
-        description: 'Optional prefix paths to scope the credentials to',
+        description: 'Optional prefix paths to scope the credentials to.',
         items: {
           type: 'string',
         },

@@ -2097,27 +2097,27 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `r2.buckets`:
 
 - `create_r2_buckets` (`write`): Creates a new R2 bucket.
-- `list_r2_buckets` (`read`): Lists all R2 buckets on your account
+- `list_r2_buckets` (`read`): Lists all R2 buckets on your account.
 - `delete_r2_buckets` (`write`): Deletes an existing R2 bucket.
-- `get_r2_buckets` (`read`): Gets metadata for an existing R2 bucket.
+- `get_r2_buckets` (`read`): Gets properties of an existing R2 bucket.
 
 ### Resource `r2.buckets.lifecycle`:
 
-- `update_buckets_r2_lifecycle` (`write`): Set the object lifecycle rules for a bucket
-- `get_buckets_r2_lifecycle` (`read`): Get object lifecycle rules for a bucket
+- `update_buckets_r2_lifecycle` (`write`): Set the object lifecycle rules for a bucket.
+- `get_buckets_r2_lifecycle` (`read`): Get object lifecycle rules for a bucket.
 
 ### Resource `r2.buckets.cors`:
 
-- `update_buckets_r2_cors` (`write`): Set the CORS policy for a bucket
-- `delete_buckets_r2_cors` (`write`): Delete the CORS policy for a bucket
-- `get_buckets_r2_cors` (`read`): Get the CORS policy for a bucket
+- `update_buckets_r2_cors` (`write`): Set the CORS policy for a bucket.
+- `delete_buckets_r2_cors` (`write`): Delete the CORS policy for a bucket.
+- `get_buckets_r2_cors` (`read`): Get the CORS policy for a bucket.
 
 ### Resource `r2.buckets.domains.custom`:
 
 - `create_domains_buckets_r2_custom` (`write`): Register a new custom domain for an existing R2 bucket.
 - `update_domains_buckets_r2_custom` (`write`): Edit the configuration for a custom domain on an existing R2 bucket.
 - `list_domains_buckets_r2_custom` (`read`): Gets a list of all custom domains registered with an existing R2 bucket.
-- `delete_domains_buckets_r2_custom` (`write`): Remove custom domain registration from an existing R2 bucket
+- `delete_domains_buckets_r2_custom` (`write`): Remove custom domain registration from an existing R2 bucket.
 - `get_domains_buckets_r2_custom` (`read`): Get the configuration for a custom domain on an existing R2 bucket.
 
 ### Resource `r2.buckets.domains.managed`:
@@ -2133,8 +2133,8 @@ This operation is asynchronous. To get current the operation status, invoke the 
 
 ### Resource `r2.buckets.locks`:
 
-- `update_buckets_r2_locks` (`write`): Set lock rules for a bucket
-- `get_buckets_r2_locks` (`read`): Get lock rules for a bucket
+- `update_buckets_r2_locks` (`write`): Set lock rules for a bucket.
+- `get_buckets_r2_locks` (`read`): Get lock rules for a bucket.
 
 ### Resource `r2.buckets.metrics`:
 
@@ -2143,7 +2143,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `r2.buckets.sippy`:
 
 - `update_buckets_r2_sippy` (`write`): Sets configuration for Sippy for an existing R2 bucket.
-- `delete_buckets_r2_sippy` (`write`): Disables Sippy on this bucket
+- `delete_buckets_r2_sippy` (`write`): Disables Sippy on this bucket.
 - `get_buckets_r2_sippy` (`read`): Gets configuration for Sippy for an existing R2 bucket.
 
 ### Resource `r2.temporary_credentials`:

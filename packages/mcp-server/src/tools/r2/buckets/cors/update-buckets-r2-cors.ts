@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_buckets_r2_cors',
-  description: 'Set the CORS policy for a bucket',
+  description: 'Set the CORS policy for a bucket.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       rules: {
         type: 'array',
@@ -63,7 +63,7 @@ export const tool: Tool = {
             },
             id: {
               type: 'string',
-              description: 'Identifier for this rule',
+              description: 'Identifier for this rule.',
             },
             exposeHeaders: {
               type: 'array',
@@ -84,7 +84,7 @@ export const tool: Tool = {
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

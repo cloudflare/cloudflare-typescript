@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_r2_buckets',
-  description: 'Lists all R2 buckets on your account',
+  description: 'Lists all R2 buckets on your account.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       cursor: {
         type: 'string',
@@ -27,7 +27,7 @@ export const tool: Tool = {
       },
       direction: {
         type: 'string',
-        description: 'Direction to order buckets',
+        description: 'Direction to order buckets.',
         enum: ['asc', 'desc'],
       },
       name_contains: {
@@ -37,12 +37,12 @@ export const tool: Tool = {
       },
       order: {
         type: 'string',
-        description: 'Field to order buckets by',
+        description: 'Field to order buckets by.',
         enum: ['name'],
       },
       per_page: {
         type: 'number',
-        description: 'Maximum number of buckets to return in a single call',
+        description: 'Maximum number of buckets to return in a single call.',
       },
       start_after: {
         type: 'string',
@@ -50,7 +50,7 @@ export const tool: Tool = {
       },
       jurisdiction: {
         type: 'string',
-        description: 'Lists buckets in the provided jurisdiction',
+        description: 'Lists buckets in the provided jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

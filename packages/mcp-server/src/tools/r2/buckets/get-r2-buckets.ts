@@ -12,21 +12,21 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_r2_buckets',
-  description: 'Gets metadata for an existing R2 bucket.',
+  description: 'Gets properties of an existing R2 bucket.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       bucket_name: {
         type: 'string',
-        description: 'Name of the bucket',
+        description: 'Name of the bucket.',
       },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction',
+        description: 'The bucket jurisdiction.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },
