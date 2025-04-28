@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as ListsAPI from './lists';
-import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
 
 export class Items extends APIResource {
   /**
@@ -56,13 +55,14 @@ export class Items extends APIResource {
     listId: string,
     params: ItemListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ItemListResponsesCursorPagination, ItemListResponse> {
+  ): Core.APIPromise<ItemListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/rules/lists/${listId}/items`,
-      ItemListResponsesCursorPagination,
-      { query, ...options },
-    );
+    return (
+      this._client.get(`/accounts/${account_id}/rules/lists/${listId}/items`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: ItemListResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -84,26 +84,7 @@ export class Items extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Fetches a list item in the list.
-   */
-  get(
-    accountIdentifier: string,
-    listId: string,
-    itemId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemGetResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/rules/lists/${listId}/items/${itemId}`,
-        options,
-      ) as Core.APIPromise<{ result: ItemGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
-
-export class ItemListResponsesCursorPagination extends CursorPagination<ItemListResponse> {}
 
 export interface ListCursor {
   after?: string;
@@ -111,125 +92,83 @@ export interface ListCursor {
   before?: string;
 }
 
-export interface ListItem {
-  /**
-   * The unique operation ID of the asynchronous action.
-   */
-  operation_id?: string;
+export type ListItem = ListItem.OperationID | ListItem.OperationID;
+
+export namespace ListItem {
+  export interface OperationID {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    operation_id?: string;
+  }
+
+  export interface OperationID {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    operation_id?: string;
+  }
 }
 
-export interface ItemCreateResponse {
-  /**
-   * The unique operation ID of the asynchronous action.
-   */
-  operation_id?: string;
+export type ItemCreateResponse = ItemCreateResponse.OperationID | ItemCreateResponse.OperationID;
+
+export namespace ItemCreateResponse {
+  export interface OperationID {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    operation_id?: string;
+  }
+
+  export interface OperationID {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    operation_id?: string;
+  }
 }
 
-export interface ItemUpdateResponse {
-  /**
-   * The unique operation ID of the asynchronous action.
-   */
-  operation_id?: string;
+export type ItemUpdateResponse = ItemUpdateResponse.OperationID | ItemUpdateResponse.OperationID;
+
+export namespace ItemUpdateResponse {
+  export interface OperationID {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    operation_id?: string;
+  }
+
+  export interface OperationID {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    operation_id?: string;
+  }
 }
 
-export interface ItemListResponse {
-  /**
-   * The unique ID of the list.
-   */
-  id?: string;
+export type ItemListResponse = unknown | Array<unknown>;
 
-  /**
-   * A non-negative 32 bit integer
-   */
-  asn?: number;
+export type ItemDeleteResponse = ItemDeleteResponse.OperationID | ItemDeleteResponse.OperationID;
 
-  /**
-   * An informative summary of the list item.
-   */
-  comment?: string;
+export namespace ItemDeleteResponse {
+  export interface OperationID {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    operation_id?: string;
+  }
 
-  /**
-   * The RFC 3339 timestamp of when the item was created.
-   */
-  created_on?: string;
-
-  /**
-   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-   * 0 to 9, wildcards (\*), and the hyphen (-).
-   */
-  hostname?: ListsAPI.Hostname;
-
-  /**
-   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-   * maximum of /64.
-   */
-  ip?: string;
-
-  /**
-   * The RFC 3339 timestamp of when the item was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * The definition of the redirect.
-   */
-  redirect?: ListsAPI.Redirect;
-}
-
-export interface ItemDeleteResponse {
-  /**
-   * The unique operation ID of the asynchronous action.
-   */
-  operation_id?: string;
-}
-
-export interface ItemGetResponse {
-  /**
-   * The unique ID of the list.
-   */
-  id?: string;
-
-  /**
-   * A non-negative 32 bit integer
-   */
-  asn?: number;
-
-  /**
-   * An informative summary of the list item.
-   */
-  comment?: string;
-
-  /**
-   * The RFC 3339 timestamp of when the item was created.
-   */
-  created_on?: string;
-
-  /**
-   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-   * 0 to 9, wildcards (\*), and the hyphen (-).
-   */
-  hostname?: ListsAPI.Hostname;
-
-  /**
-   * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-   * maximum of /64.
-   */
-  ip?: string;
-
-  /**
-   * The RFC 3339 timestamp of when the item was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * The definition of the redirect.
-   */
-  redirect?: ListsAPI.Redirect;
+  export interface OperationID {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    operation_id?: string;
+  }
 }
 
 export interface ItemCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   account_id: string;
 
@@ -242,12 +181,12 @@ export interface ItemCreateParams {
 export namespace ItemCreateParams {
   export interface Body {
     /**
-     * A non-negative 32 bit integer
+     * Defines a non-negative 32 bit integer.
      */
     asn?: number;
 
     /**
-     * An informative summary of the list item.
+     * Defines an informative summary of the list item.
      */
     comment?: string;
 
@@ -272,7 +211,7 @@ export namespace ItemCreateParams {
 
 export interface ItemUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   account_id: string;
 
@@ -285,12 +224,12 @@ export interface ItemUpdateParams {
 export namespace ItemUpdateParams {
   export interface Body {
     /**
-     * A non-negative 32 bit integer
+     * Defines a non-negative 32 bit integer.
      */
     asn?: number;
 
     /**
-     * An informative summary of the list item.
+     * Defines an informative summary of the list item.
      */
     comment?: string;
 
@@ -313,11 +252,25 @@ export namespace ItemUpdateParams {
   }
 }
 
-export interface ItemListParams extends CursorPaginationParams {
+export interface ItemListParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: The pagination cursor. An opaque string token indicating the
+   * position from which to continue when requesting the next/previous set of
+   * records. Cursor values are provided under `result_info.cursors` in the response.
+   * You should make no assumptions about a cursor's content or length.
+   */
+  cursor?: string;
+
+  /**
+   * Query param: Amount of results to include in each paginated response. A
+   * non-negative 32 bit integer.
+   */
+  per_page?: number;
 
   /**
    * Query param: A search query to filter returned items. Its meaning depends on the
@@ -329,12 +282,10 @@ export interface ItemListParams extends CursorPaginationParams {
 
 export interface ItemDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   account_id: string;
 }
-
-Items.ItemListResponsesCursorPagination = ItemListResponsesCursorPagination;
 
 export declare namespace Items {
   export {
@@ -344,8 +295,6 @@ export declare namespace Items {
     type ItemUpdateResponse as ItemUpdateResponse,
     type ItemListResponse as ItemListResponse,
     type ItemDeleteResponse as ItemDeleteResponse,
-    type ItemGetResponse as ItemGetResponse,
-    ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
     type ItemCreateParams as ItemCreateParams,
     type ItemUpdateParams as ItemUpdateParams,
     type ItemListParams as ItemListParams,
