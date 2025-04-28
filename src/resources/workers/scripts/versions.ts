@@ -128,7 +128,7 @@ export namespace VersionCreateParams {
       | Metadata.WorkersBindingKindAI
       | Metadata.WorkersBindingKindAnalyticsEngine
       | Metadata.WorkersBindingKindAssets
-      | Metadata.WorkersBindingKindBrowserRendering
+      | Metadata.WorkersBindingKindBrowser
       | Metadata.WorkersBindingKindD1
       | Metadata.WorkersBindingKindDispatchNamespace
       | Metadata.WorkersBindingKindDurableObjectNamespace
@@ -227,7 +227,7 @@ export namespace VersionCreateParams {
       type: 'assets';
     }
 
-    export interface WorkersBindingKindBrowserRendering {
+    export interface WorkersBindingKindBrowser {
       /**
        * A JavaScript variable name for the binding.
        */
@@ -236,7 +236,7 @@ export namespace VersionCreateParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'browser_rendering';
+      type: 'browser';
     }
 
     export interface WorkersBindingKindD1 {
