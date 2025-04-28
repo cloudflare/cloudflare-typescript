@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier.',
       },
       list_id: {
         type: 'string',
@@ -32,11 +32,11 @@ export const tool: Tool = {
           properties: {
             asn: {
               type: 'integer',
-              description: 'A non-negative 32 bit integer',
+              description: 'Defines a non-negative 32 bit integer.',
             },
             comment: {
               type: 'string',
-              description: 'An informative summary of the list item.',
+              description: 'Defines an informative summary of the list item.',
             },
             hostname: {
               type: 'object',

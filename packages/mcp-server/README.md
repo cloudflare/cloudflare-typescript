@@ -1926,12 +1926,6 @@ subnets of an IP prefix.
 - `delete_rules_lists` (`write`): Deletes a specific list and all its items.
 - `get_rules_lists` (`read`): Fetches the details of a list.
 
-### Resource `rules.lists.bulk_operations`:
-
-- `get_lists_rules_bulk_operations` (`read`): Gets the current status of an asynchronous operation on a list.
-
-The `status` property can have one of the following values: `pending`, `running`, `completed`, or `failed`. If the status is `failed`, the `error` property will contain a message describing the error.
-
 ### Resource `rules.lists.items`:
 
 - `create_lists_rules_items` (`write`): Appends new items to the list.
@@ -1946,8 +1940,6 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `delete_lists_rules_items` (`write`): Removes one or more items from a list.
 
 This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
-
-- `get_lists_rules_items` (`read`): Fetches a list item in the list.
 
 ### Resource `stream`:
 
