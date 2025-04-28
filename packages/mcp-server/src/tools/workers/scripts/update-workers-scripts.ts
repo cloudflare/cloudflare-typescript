@@ -143,7 +143,7 @@ export const tool: Tool = {
                     type: {
                       type: 'string',
                       description: 'The kind of resource that the binding provides.',
-                      enum: ['browser_rendering'],
+                      enum: ['browser'],
                     },
                   },
                   required: ['name', 'type'],
