@@ -33,7 +33,7 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindAI
   | BindingGetResponse.WorkersBindingKindAnalyticsEngine
   | BindingGetResponse.WorkersBindingKindAssets
-  | BindingGetResponse.WorkersBindingKindBrowserRendering
+  | BindingGetResponse.WorkersBindingKindBrowser
   | BindingGetResponse.WorkersBindingKindD1
   | BindingGetResponse.WorkersBindingKindDispatchNamespace
   | BindingGetResponse.WorkersBindingKindDurableObjectNamespace
@@ -95,7 +95,7 @@ export namespace BindingGetResponse {
     type: 'assets';
   }
 
-  export interface WorkersBindingKindBrowserRendering {
+  export interface WorkersBindingKindBrowser {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -104,7 +104,7 @@ export namespace BindingGetResponse {
     /**
      * The kind of resource that the binding provides.
      */
-    type: 'browser_rendering';
+    type: 'browser';
   }
 
   export interface WorkersBindingKindD1 {
