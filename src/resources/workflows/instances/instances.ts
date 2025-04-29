@@ -95,8 +95,7 @@ export interface InstanceCreateResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   version_id: string;
 
@@ -122,8 +121,7 @@ export interface InstanceListResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   version_id: string;
 
@@ -141,8 +139,7 @@ export interface InstanceBulkResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   version_id: string;
 
@@ -170,8 +167,7 @@ export interface InstanceGetResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   steps: Array<
     | InstanceGetResponse.UnionMember0
@@ -355,8 +351,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 }
 
 export interface InstanceBulkParams {

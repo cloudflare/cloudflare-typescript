@@ -89,11 +89,15 @@ export interface WorkflowUpdateResponse {
 
   created_on: string;
 
+  is_deleted: number;
+
   modified_on: string;
 
   name: string;
 
   script_name: string;
+
+  terminator_running: number;
 
   triggered_on: string | null;
 
@@ -132,8 +136,6 @@ export namespace WorkflowListResponse {
 
     terminated?: number;
 
-    unknown?: number;
-
     waiting?: number;
 
     waitingForPause?: number;
@@ -171,8 +173,6 @@ export namespace WorkflowGetResponse {
     running?: number;
 
     terminated?: number;
-
-    unknown?: number;
 
     waiting?: number;
 
