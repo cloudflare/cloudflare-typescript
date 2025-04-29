@@ -49,7 +49,6 @@ export const tool: Tool = {
           'complete',
           'waitingForPause',
           'waiting',
-          'unknown',
         ],
       },
     },
