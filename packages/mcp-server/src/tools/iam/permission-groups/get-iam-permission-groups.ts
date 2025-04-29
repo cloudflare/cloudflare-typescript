@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { permission_group_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { permission_group_id, ...body } = args as any;
   return client.iam.permissionGroups.get(permission_group_id, body);
 };
 

@@ -21,14 +21,19 @@ export const tool: Tool = {
         description: 'Identifier.',
       },
       settings_multiple_request: {
+        $ref: '#/$defs/settings_multiple_request',
+      },
+    },
+    $defs: {
+      settings_multiple_request: {
         type: 'object',
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.apiGateway.operations.schemaValidation.edit(body);
 };
 

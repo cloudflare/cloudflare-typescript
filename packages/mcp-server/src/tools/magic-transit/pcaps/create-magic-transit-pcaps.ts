@@ -43,31 +43,7 @@ export const tool: Tool = {
             enum: ['simple', 'full'],
           },
           filter_v1: {
-            type: 'object',
-            description: 'The packet capture filter. When this field is empty, all packets are captured.',
-            properties: {
-              destination_address: {
-                type: 'string',
-                description: 'The destination IP address of the packet.',
-              },
-              destination_port: {
-                type: 'number',
-                description: 'The destination port of the packet.',
-              },
-              protocol: {
-                type: 'number',
-                description: 'The protocol number of the packet.',
-              },
-              source_address: {
-                type: 'string',
-                description: 'The source IP address of the packet.',
-              },
-              source_port: {
-                type: 'number',
-                description: 'The source port of the packet.',
-              },
-            },
-            required: [],
+            $ref: '#/$defs/pcap_filter',
           },
           offset_time: {
             type: 'string',
@@ -114,7 +90,7 @@ export const tool: Tool = {
               'The maximum number of bytes to capture. This field only applies to `full` packet captures.',
           },
           filter_v1: {
-            $ref: '#/anyOf/0/properties/filter_v1',
+            $ref: '#/$defs/pcap_filter',
           },
           packet_limit: {
             type: 'number',
@@ -123,11 +99,40 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      pcap_filter: {
+        type: 'object',
+        description: 'The packet capture filter. When this field is empty, all packets are captured.',
+        properties: {
+          destination_address: {
+            type: 'string',
+            description: 'The destination IP address of the packet.',
+          },
+          destination_port: {
+            type: 'number',
+            description: 'The destination port of the packet.',
+          },
+          protocol: {
+            type: 'number',
+            description: 'The protocol number of the packet.',
+          },
+          source_address: {
+            type: 'string',
+            description: 'The source IP address of the packet.',
+          },
+          source_port: {
+            type: 'number',
+            description: 'The source port of the packet.',
+          },
+        },
+        required: [],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.magicTransit.pcaps.create(body);
 };
 

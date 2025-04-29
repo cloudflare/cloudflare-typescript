@@ -29,7 +29,7 @@ export const tool: Tool = {
         title: 'Labels',
         description: 'List of labels',
         items: {
-          type: 'string',
+          $ref: '#/$defs/label',
         },
       },
       priority: {
@@ -47,11 +47,16 @@ export const tool: Tool = {
         enum: ['clear', 'amber', 'amber-strict', 'green', 'red'],
       },
     },
+    $defs: {
+      label: {
+        type: 'string',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { priority_identifer, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { priority_identifer, ...body } = args as any;
   return client.cloudforceOne.requests.priority.update(priority_identifer, body);
 };
 

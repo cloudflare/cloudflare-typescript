@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { schema_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { schema_id, ...body } = args as any;
   return client.apiGateway.userSchemas.edit(schema_id, body);
 };
 

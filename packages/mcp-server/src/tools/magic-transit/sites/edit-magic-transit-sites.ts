@@ -32,6 +32,19 @@ export const tool: Tool = {
         type: 'string',
       },
       location: {
+        $ref: '#/$defs/site_location',
+      },
+      name: {
+        type: 'string',
+        description: 'The name of the site.',
+      },
+      secondary_connector_id: {
+        type: 'string',
+        description: 'Magic Connector identifier tag. Used when high availability mode is on.',
+      },
+    },
+    $defs: {
+      site_location: {
         type: 'object',
         description: 'Location of site in latitude and longitude.',
         properties: {
@@ -46,20 +59,12 @@ export const tool: Tool = {
         },
         required: [],
       },
-      name: {
-        type: 'string',
-        description: 'The name of the site.',
-      },
-      secondary_connector_id: {
-        type: 'string',
-        description: 'Magic Connector identifier tag. Used when high availability mode is on.',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { site_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { site_id, ...body } = args as any;
   return client.magicTransit.sites.edit(site_id, body);
 };
 

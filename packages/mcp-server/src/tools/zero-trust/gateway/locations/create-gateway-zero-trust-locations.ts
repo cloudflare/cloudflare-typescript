@@ -37,95 +37,7 @@ export const tool: Tool = {
         description: 'True if the location needs to resolve EDNS queries.',
       },
       endpoints: {
-        type: 'object',
-        description:
-          'The destination endpoints configured for this location. When updating a location, if this field is absent or set with null, the endpoints configuration remains unchanged.',
-        properties: {
-          doh: {
-            type: 'object',
-            properties: {
-              enabled: {
-                type: 'boolean',
-                description: 'True if the endpoint is enabled for this location.',
-              },
-              networks: {
-                type: 'array',
-                description:
-                  'A list of allowed source IP network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.',
-                items: {
-                  type: 'object',
-                  properties: {
-                    network: {
-                      type: 'string',
-                      description: 'The IP address or IP CIDR.',
-                    },
-                  },
-                  required: ['network'],
-                },
-              },
-              require_token: {
-                type: 'boolean',
-                description:
-                  'True if the endpoint requires [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user) authentication.',
-              },
-            },
-            required: [],
-          },
-          dot: {
-            type: 'object',
-            properties: {
-              enabled: {
-                type: 'boolean',
-                description: 'True if the endpoint is enabled for this location.',
-              },
-              networks: {
-                type: 'array',
-                description:
-                  'A list of allowed source IP network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.',
-                items: {
-                  $ref: '#/properties/endpoints/doh/networks/items',
-                },
-              },
-            },
-            required: [],
-          },
-          ipv4: {
-            type: 'object',
-            properties: {
-              enabled: {
-                type: 'boolean',
-                description: 'True if the endpoint is enabled for this location.',
-              },
-            },
-            required: [],
-          },
-          ipv6: {
-            type: 'object',
-            properties: {
-              enabled: {
-                type: 'boolean',
-                description: 'True if the endpoint is enabled for this location.',
-              },
-              networks: {
-                type: 'array',
-                description:
-                  'A list of allowed source IPv6 network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.',
-                items: {
-                  type: 'object',
-                  properties: {
-                    network: {
-                      type: 'string',
-                      description: 'The IPv6 address or IPv6 CIDR.',
-                    },
-                  },
-                  required: ['network'],
-                },
-              },
-            },
-            required: [],
-          },
-        },
-        required: [],
+        $ref: '#/$defs/endpoint',
       },
       networks: {
         type: 'array',
@@ -143,11 +55,122 @@ export const tool: Tool = {
         },
       },
     },
+    $defs: {
+      ip_network: {
+        type: 'object',
+        properties: {
+          network: {
+            type: 'string',
+            description: 'The IP address or IP CIDR.',
+          },
+        },
+        required: ['network'],
+      },
+      doh_endpoint: {
+        type: 'object',
+        properties: {
+          enabled: {
+            type: 'boolean',
+            description: 'True if the endpoint is enabled for this location.',
+          },
+          networks: {
+            type: 'array',
+            description:
+              'A list of allowed source IP network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.',
+            items: {
+              $ref: '#/$defs/ip_network',
+            },
+          },
+          require_token: {
+            type: 'boolean',
+            description:
+              'True if the endpoint requires [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user) authentication.',
+          },
+        },
+        required: [],
+      },
+      dot_endpoint: {
+        type: 'object',
+        properties: {
+          enabled: {
+            type: 'boolean',
+            description: 'True if the endpoint is enabled for this location.',
+          },
+          networks: {
+            type: 'array',
+            description:
+              'A list of allowed source IP network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.',
+            items: {
+              $ref: '#/$defs/ip_network',
+            },
+          },
+        },
+        required: [],
+      },
+      ipv4_endpoint: {
+        type: 'object',
+        properties: {
+          enabled: {
+            type: 'boolean',
+            description: 'True if the endpoint is enabled for this location.',
+          },
+        },
+        required: [],
+      },
+      ipv6_network: {
+        type: 'object',
+        properties: {
+          network: {
+            type: 'string',
+            description: 'The IPv6 address or IPv6 CIDR.',
+          },
+        },
+        required: ['network'],
+      },
+      ipv6_endpoint: {
+        type: 'object',
+        properties: {
+          enabled: {
+            type: 'boolean',
+            description: 'True if the endpoint is enabled for this location.',
+          },
+          networks: {
+            type: 'array',
+            description:
+              'A list of allowed source IPv6 network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.',
+            items: {
+              $ref: '#/$defs/ipv6_network',
+            },
+          },
+        },
+        required: [],
+      },
+      endpoint: {
+        type: 'object',
+        description:
+          'The destination endpoints configured for this location. When updating a location, if this field is absent or set with null, the endpoints configuration remains unchanged.',
+        properties: {
+          doh: {
+            $ref: '#/$defs/doh_endpoint',
+          },
+          dot: {
+            $ref: '#/$defs/dot_endpoint',
+          },
+          ipv4: {
+            $ref: '#/$defs/ipv4_endpoint',
+          },
+          ipv6: {
+            $ref: '#/$defs/ipv6_endpoint',
+          },
+        },
+        required: [],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.zeroTrust.gateway.locations.create(body);
 };
 

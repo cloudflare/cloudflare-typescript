@@ -25,8 +25,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { alias } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { alias, ...body } = args as any;
   return client.radar.datasets.get(alias);
 };
 

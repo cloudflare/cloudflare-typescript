@@ -27,9 +27,7 @@ export const tool: Tool = {
       domains: {
         type: 'array',
         items: {
-          type: 'string',
-          description:
-            'Hosts as a hostname or IPv4/IPv6 address represented by strings. The\nwidget will only work on these domains, and their subdomains.\n',
+          $ref: '#/$defs/widget_domain',
         },
       },
       mode: {
@@ -62,11 +60,18 @@ export const tool: Tool = {
         description: 'Do not show any Cloudflare branding on the widget (ENT only).\n',
       },
     },
+    $defs: {
+      widget_domain: {
+        type: 'string',
+        description:
+          'Hosts as a hostname or IPv4/IPv6 address represented by strings. The\nwidget will only work on these domains, and their subdomains.\n',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { sitekey, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { sitekey, ...body } = args as any;
   return client.turnstile.widgets.update(sitekey, body);
 };
 

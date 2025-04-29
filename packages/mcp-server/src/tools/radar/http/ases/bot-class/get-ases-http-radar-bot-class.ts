@@ -146,8 +146,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { bot_class, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { bot_class, ...body } = args as any;
   return client.radar.http.ases.botClass.get(bot_class, body);
 };
 

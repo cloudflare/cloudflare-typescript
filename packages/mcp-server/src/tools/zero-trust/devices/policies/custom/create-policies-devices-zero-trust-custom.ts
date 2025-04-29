@@ -71,38 +71,7 @@ export const tool: Tool = {
         description:
           "List of routes excluded in the WARP client's tunnel. Both 'exclude' and 'include' cannot be set in the same request.",
         items: {
-          anyOf: [
-            {
-              type: 'object',
-              properties: {
-                address: {
-                  type: 'string',
-                  description:
-                    'The address in CIDR format to exclude from the tunnel. If `address` is present, `host` must not be present.',
-                },
-                description: {
-                  type: 'string',
-                  description: 'A description of the Split Tunnel item, displayed in the client UI.',
-                },
-              },
-              required: ['address'],
-            },
-            {
-              type: 'object',
-              properties: {
-                host: {
-                  type: 'string',
-                  description:
-                    'The domain name to exclude from the tunnel. If `host` is present, `address` must not be present.',
-                },
-                description: {
-                  type: 'string',
-                  description: 'A description of the Split Tunnel item, displayed in the client UI.',
-                },
-              },
-              required: ['host'],
-            },
-          ],
+          $ref: '#/$defs/split_tunnel_exclude',
         },
       },
       exclude_office_ips: {
@@ -114,38 +83,7 @@ export const tool: Tool = {
         description:
           "List of routes included in the WARP client's tunnel. Both 'exclude' and 'include' cannot be set in the same request.",
         items: {
-          anyOf: [
-            {
-              type: 'object',
-              properties: {
-                address: {
-                  type: 'string',
-                  description:
-                    'The address in CIDR format to include in the tunnel. If `address` is present, `host` must not be present.',
-                },
-                description: {
-                  type: 'string',
-                  description: 'A description of the Split Tunnel item, displayed in the client UI.',
-                },
-              },
-              required: ['address'],
-            },
-            {
-              type: 'object',
-              properties: {
-                host: {
-                  type: 'string',
-                  description:
-                    'The domain name to include in the tunnel. If `host` is present, `address` must not be present.',
-                },
-                description: {
-                  type: 'string',
-                  description: 'A description of the Split Tunnel item, displayed in the client UI.',
-                },
-              },
-              required: ['host'],
-            },
-          ],
+          $ref: '#/$defs/split_tunnel_include',
         },
       },
       lan_allow_minutes: {
@@ -190,11 +128,81 @@ export const tool: Tool = {
         description: 'Determines which tunnel protocol to use.',
       },
     },
+    $defs: {
+      split_tunnel_exclude: {
+        anyOf: [
+          {
+            type: 'object',
+            properties: {
+              address: {
+                type: 'string',
+                description:
+                  'The address in CIDR format to exclude from the tunnel. If `address` is present, `host` must not be present.',
+              },
+              description: {
+                type: 'string',
+                description: 'A description of the Split Tunnel item, displayed in the client UI.',
+              },
+            },
+            required: ['address'],
+          },
+          {
+            type: 'object',
+            properties: {
+              host: {
+                type: 'string',
+                description:
+                  'The domain name to exclude from the tunnel. If `host` is present, `address` must not be present.',
+              },
+              description: {
+                type: 'string',
+                description: 'A description of the Split Tunnel item, displayed in the client UI.',
+              },
+            },
+            required: ['host'],
+          },
+        ],
+      },
+      split_tunnel_include: {
+        anyOf: [
+          {
+            type: 'object',
+            properties: {
+              address: {
+                type: 'string',
+                description:
+                  'The address in CIDR format to include in the tunnel. If `address` is present, `host` must not be present.',
+              },
+              description: {
+                type: 'string',
+                description: 'A description of the Split Tunnel item, displayed in the client UI.',
+              },
+            },
+            required: ['address'],
+          },
+          {
+            type: 'object',
+            properties: {
+              host: {
+                type: 'string',
+                description:
+                  'The domain name to include in the tunnel. If `host` is present, `address` must not be present.',
+              },
+              description: {
+                type: 'string',
+                description: 'A description of the Split Tunnel item, displayed in the client UI.',
+              },
+            },
+            required: ['host'],
+          },
+        ],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.zeroTrust.devices.policies.custom.create(body);
 };
 

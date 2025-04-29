@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { lock_downs_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { lock_downs_id, ...body } = args as any;
   return client.firewall.lockdowns.get(lock_downs_id, body);
 };
 

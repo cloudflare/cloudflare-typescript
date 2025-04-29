@@ -26,8 +26,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { entry_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { entry_id, ...body } = args as any;
   return client.zeroTrust.dlp.entries.get(entry_id, body);
 };
 

@@ -33,26 +33,7 @@ export const tool: Tool = {
         type: 'array',
         description: 'Administrators who can approve a temporary authentication request.',
         items: {
-          type: 'object',
-          description: 'A group of email addresses that can approve a temporary authentication request.',
-          properties: {
-            approvals_needed: {
-              type: 'number',
-              description: 'The number of approvals needed to obtain access.',
-            },
-            email_addresses: {
-              type: 'array',
-              description: 'A list of emails that can approve the access request.',
-              items: {
-                type: 'string',
-              },
-            },
-            email_list_uuid: {
-              type: 'string',
-              description: 'The UUID of an re-usable email list.',
-            },
-          },
-          required: ['approvals_needed'],
+          $ref: '#/$defs/approval_group',
         },
       },
       approval_required: {
@@ -84,11 +65,35 @@ export const tool: Tool = {
           'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
       },
     },
+    $defs: {
+      approval_group: {
+        type: 'object',
+        description: 'A group of email addresses that can approve a temporary authentication request.',
+        properties: {
+          approvals_needed: {
+            type: 'number',
+            description: 'The number of approvals needed to obtain access.',
+          },
+          email_addresses: {
+            type: 'array',
+            description: 'A list of emails that can approve the access request.',
+            items: {
+              type: 'string',
+            },
+          },
+          email_list_uuid: {
+            type: 'string',
+            description: 'The UUID of an re-usable email list.',
+          },
+        },
+        required: ['approvals_needed'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { app_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { app_id, ...body } = args as any;
   return client.zeroTrust.access.applications.policies.create(app_id, body);
 };
 

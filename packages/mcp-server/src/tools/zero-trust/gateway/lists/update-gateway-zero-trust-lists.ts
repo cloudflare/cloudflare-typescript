@@ -36,30 +36,35 @@ export const tool: Tool = {
         type: 'array',
         description: 'The items in the list.',
         items: {
-          type: 'object',
-          properties: {
-            created_at: {
-              type: 'string',
-              format: 'date-time',
-            },
-            description: {
-              type: 'string',
-              description: 'The description of the list item, if present',
-            },
-            value: {
-              type: 'string',
-              description: 'The value of the item in a list.',
-            },
-          },
-          required: [],
+          $ref: '#/$defs/gateway_item',
         },
+      },
+    },
+    $defs: {
+      gateway_item: {
+        type: 'object',
+        properties: {
+          created_at: {
+            type: 'string',
+            format: 'date-time',
+          },
+          description: {
+            type: 'string',
+            description: 'The description of the list item, if present',
+          },
+          value: {
+            type: 'string',
+            description: 'The value of the item in a list.',
+          },
+        },
+        required: [],
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { list_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { list_id, ...body } = args as any;
   return client.zeroTrust.gateway.lists.update(list_id, body);
 };
 

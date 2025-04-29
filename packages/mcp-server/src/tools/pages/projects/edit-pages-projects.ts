@@ -298,8 +298,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { project_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { project_name, ...body } = args as any;
   return client.pages.projects.edit(project_name, body);
 };
 

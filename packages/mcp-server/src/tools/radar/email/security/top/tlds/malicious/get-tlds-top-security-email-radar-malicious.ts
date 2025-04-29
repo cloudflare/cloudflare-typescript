@@ -111,8 +111,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { malicious, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { malicious, ...body } = args as any;
   return client.radar.email.security.top.tlds.malicious.get(malicious, body);
 };
 

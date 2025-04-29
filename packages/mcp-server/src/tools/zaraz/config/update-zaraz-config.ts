@@ -146,22 +146,7 @@ export const tool: Tool = {
             type: 'boolean',
           },
           buttonTextTranslations: {
-            type: 'object',
-            properties: {
-              accept_all: {
-                type: 'object',
-                description: 'Object where keys are language codes',
-              },
-              confirm_my_choices: {
-                type: 'object',
-                description: 'Object where keys are language codes',
-              },
-              reject_all: {
-                type: 'object',
-                description: 'Object where keys are language codes',
-              },
-            },
-            required: ['accept_all', 'confirm_my_choices', 'reject_all'],
+            $ref: '#/$defs/button_text_translation',
           },
           companyEmail: {
             type: 'string',
@@ -213,11 +198,31 @@ export const tool: Tool = {
         description: 'Single Page Application support enabled.',
       },
     },
+    $defs: {
+      button_text_translation: {
+        type: 'object',
+        properties: {
+          accept_all: {
+            type: 'object',
+            description: 'Object where keys are language codes',
+          },
+          confirm_my_choices: {
+            type: 'object',
+            description: 'Object where keys are language codes',
+          },
+          reject_all: {
+            type: 'object',
+            description: 'Object where keys are language codes',
+          },
+        },
+        required: ['accept_all', 'confirm_my_choices', 'reject_all'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.zaraz.config.update(body);
 };
 

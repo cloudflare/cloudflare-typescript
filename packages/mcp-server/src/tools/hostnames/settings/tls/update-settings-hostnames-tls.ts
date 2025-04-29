@@ -30,6 +30,11 @@ export const tool: Tool = {
         description: 'The hostname for which the tls settings are set.',
       },
       value: {
+        $ref: '#/$defs/setting_value',
+      },
+    },
+    $defs: {
+      setting_value: {
         anyOf: [
           {
             type: 'number',
@@ -50,8 +55,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { hostname, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { hostname, ...body } = args as any;
   return client.hostnames.settings.tls.update(hostname, body);
 };
 

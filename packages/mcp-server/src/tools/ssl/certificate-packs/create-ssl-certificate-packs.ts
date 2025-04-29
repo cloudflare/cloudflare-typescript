@@ -31,7 +31,7 @@ export const tool: Tool = {
         description:
           'Comma separated list of valid host names for the certificate packs. Must contain the zone apex, may not contain more than 50 hosts, and may not be empty.',
         items: {
-          type: 'string',
+          $ref: '#/$defs/host',
         },
       },
       type: {
@@ -55,11 +55,16 @@ export const tool: Tool = {
           'Whether or not to add Cloudflare Branding for the order.  This will add a subdomain of sni.cloudflaressl.com as the Common Name if set to true.',
       },
     },
+    $defs: {
+      host: {
+        type: 'string',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.ssl.certificatePacks.create(body);
 };
 

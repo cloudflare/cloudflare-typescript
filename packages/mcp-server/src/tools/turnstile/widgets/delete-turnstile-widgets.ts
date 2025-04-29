@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { sitekey, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { sitekey, ...body } = args as any;
   return client.turnstile.widgets.delete(sitekey, body);
 };
 

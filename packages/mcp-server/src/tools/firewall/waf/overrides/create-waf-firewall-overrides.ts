@@ -26,15 +26,20 @@ export const tool: Tool = {
         description:
           'The URLs to include in the current WAF override. You can use wildcards. Each entered URL will be escaped before use, which means you can only use simple wildcard patterns.',
         items: {
-          type: 'string',
+          $ref: '#/$defs/override_url',
         },
+      },
+    },
+    $defs: {
+      override_url: {
+        type: 'string',
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.firewall.waf.overrides.create(body);
 };
 

@@ -32,57 +32,7 @@ export const tool: Tool = {
         type: 'array',
         description: 'List of access policies assigned to the token.',
         items: {
-          type: 'object',
-          title: 'Policy with Permission Groups and Resources',
-          properties: {
-            id: {
-              type: 'string',
-              description: 'Policy identifier.',
-            },
-            effect: {
-              type: 'string',
-              description: 'Allow or deny operations against the resources.',
-              enum: ['allow', 'deny'],
-            },
-            permission_groups: {
-              type: 'array',
-              description: 'A set of permission groups that are specified to the policy.',
-              items: {
-                type: 'object',
-                description:
-                  'A named group of permissions that map to a group of operations against resources.',
-                properties: {
-                  id: {
-                    type: 'string',
-                    description: 'Identifier of the group.',
-                  },
-                  meta: {
-                    type: 'object',
-                    description: 'Attributes associated to the permission group.',
-                    properties: {
-                      key: {
-                        type: 'string',
-                      },
-                      value: {
-                        type: 'string',
-                      },
-                    },
-                    required: [],
-                  },
-                  name: {
-                    type: 'string',
-                    description: 'Name of the group.',
-                  },
-                },
-                required: ['id'],
-              },
-            },
-            resources: {
-              type: 'object',
-              description: 'A list of resource names that the policy applies to.',
-            },
-          },
-          required: ['id', 'effect', 'permission_groups', 'resources'],
+          $ref: '#/$defs/token_policy',
         },
       },
       status: {
@@ -101,15 +51,14 @@ export const tool: Tool = {
                 type: 'array',
                 description: 'List of IPv4/IPv6 CIDR addresses.',
                 items: {
-                  type: 'string',
-                  description: 'IPv4/IPv6 CIDR.',
+                  $ref: '#/$defs/token_condition_cidr_list',
                 },
               },
               not_in: {
                 type: 'array',
                 description: 'List of IPv4/IPv6 CIDR addresses.',
                 items: {
-                  $ref: '#/properties/condition/request_ip/in/items',
+                  $ref: '#/$defs/token_condition_cidr_list',
                 },
               },
             },
@@ -129,11 +78,70 @@ export const tool: Tool = {
         format: 'date-time',
       },
     },
+    $defs: {
+      token_policy: {
+        type: 'object',
+        title: 'Policy with Permission Groups and Resources',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Policy identifier.',
+          },
+          effect: {
+            type: 'string',
+            description: 'Allow or deny operations against the resources.',
+            enum: ['allow', 'deny'],
+          },
+          permission_groups: {
+            type: 'array',
+            description: 'A set of permission groups that are specified to the policy.',
+            items: {
+              type: 'object',
+              description:
+                'A named group of permissions that map to a group of operations against resources.',
+              properties: {
+                id: {
+                  type: 'string',
+                  description: 'Identifier of the group.',
+                },
+                meta: {
+                  type: 'object',
+                  description: 'Attributes associated to the permission group.',
+                  properties: {
+                    key: {
+                      type: 'string',
+                    },
+                    value: {
+                      type: 'string',
+                    },
+                  },
+                  required: [],
+                },
+                name: {
+                  type: 'string',
+                  description: 'Name of the group.',
+                },
+              },
+              required: ['id'],
+            },
+          },
+          resources: {
+            type: 'object',
+            description: 'A list of resource names that the policy applies to.',
+          },
+        },
+        required: ['id', 'effect', 'permission_groups', 'resources'],
+      },
+      token_condition_cidr_list: {
+        type: 'string',
+        description: 'IPv4/IPv6 CIDR.',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { token_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { token_id, ...body } = args as any;
   return client.accounts.tokens.update(token_id, body);
 };
 

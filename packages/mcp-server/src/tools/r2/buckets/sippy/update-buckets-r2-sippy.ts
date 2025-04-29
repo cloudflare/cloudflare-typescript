@@ -37,8 +37,7 @@ export const tool: Tool = {
                   'ID of a Cloudflare API token.\nThis is the value labelled "Access Key ID" when creating an API.\ntoken from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).\n\nSippy will use this token when writing objects to R2, so it is\nbest to scope this token to the bucket you\'re enabling Sippy for.\n',
               },
               provider: {
-                type: 'string',
-                enum: ['r2'],
+                $ref: '#/$defs/provider',
               },
               secretAccessKey: {
                 type: 'string',
@@ -103,7 +102,7 @@ export const tool: Tool = {
                   'ID of a Cloudflare API token.\nThis is the value labelled "Access Key ID" when creating an API.\ntoken from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).\n\nSippy will use this token when writing objects to R2, so it is\nbest to scope this token to the bucket you\'re enabling Sippy for.\n',
               },
               provider: {
-                $ref: '#/anyOf/0/properties/destination/provider',
+                $ref: '#/$defs/provider',
               },
               secretAccessKey: {
                 type: 'string',
@@ -144,11 +143,17 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      provider: {
+        type: 'string',
+        enum: ['r2'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { bucket_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { bucket_name, ...body } = args as any;
   return client.r2.buckets.sippy.update(bucket_name, body);
 };
 

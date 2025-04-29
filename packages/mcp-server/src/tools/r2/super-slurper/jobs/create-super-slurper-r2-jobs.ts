@@ -100,8 +100,7 @@ export const tool: Tool = {
                 required: [],
               },
               vendor: {
-                type: 'string',
-                enum: ['r2'],
+                $ref: '#/$defs/provider',
               },
             },
             required: [],
@@ -131,17 +130,23 @@ export const tool: Tool = {
             required: [],
           },
           vendor: {
-            $ref: '#/properties/source/anyOf/2/vendor',
+            $ref: '#/$defs/provider',
           },
         },
         required: [],
       },
     },
+    $defs: {
+      provider: {
+        type: 'string',
+        enum: ['r2'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.r2.superSlurper.jobs.create(body);
 };
 

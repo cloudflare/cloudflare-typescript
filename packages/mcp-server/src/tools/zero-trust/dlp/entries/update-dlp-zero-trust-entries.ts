@@ -29,17 +29,7 @@ export const tool: Tool = {
             type: 'string',
           },
           pattern: {
-            type: 'object',
-            properties: {
-              regex: {
-                type: 'string',
-              },
-              validation: {
-                type: 'string',
-                enum: ['luhn'],
-              },
-            },
-            required: ['regex'],
+            $ref: '#/$defs/pattern',
           },
           type: {
             type: 'string',
@@ -87,11 +77,26 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      pattern: {
+        type: 'object',
+        properties: {
+          regex: {
+            type: 'string',
+          },
+          validation: {
+            type: 'string',
+            enum: ['luhn'],
+          },
+        },
+        required: ['regex'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { entry_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { entry_id, ...body } = args as any;
   return client.zeroTrust.dlp.entries.update(entry_id, body);
 };
 

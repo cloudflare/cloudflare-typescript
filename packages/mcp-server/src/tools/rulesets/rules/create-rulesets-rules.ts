@@ -109,17 +109,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            type: 'object',
-            title: 'Logging',
-            description: "An object configuring the rule's logging behavior.",
-            properties: {
-              enabled: {
-                type: 'boolean',
-                title: 'Enabled',
-                description: 'Whether to generate a log when the rule matches.',
-              },
-            },
-            required: ['enabled'],
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -299,7 +289,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -501,7 +491,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -803,7 +793,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -983,7 +973,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -1163,7 +1153,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -1343,7 +1333,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -1591,7 +1581,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -1748,33 +1738,10 @@ export const tool: Tool = {
                 description: 'URI to rewrite the request to.',
                 properties: {
                   path: {
-                    anyOf: [
-                      {
-                        type: 'object',
-                        title: 'Static value',
-                        properties: {
-                          value: {
-                            type: 'string',
-                            description: 'Predefined replacement value.',
-                          },
-                        },
-                        required: ['value'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Dynamic value',
-                        properties: {
-                          expression: {
-                            type: 'string',
-                            description: 'Expression to evaluate for the replacement value.',
-                          },
-                        },
-                        required: ['expression'],
-                      },
-                    ],
+                    $ref: '#/$defs/rewrite_uri_part',
                   },
                   query: {
-                    $ref: '#/anyOf/8/properties/action_parameters/uri/path',
+                    $ref: '#/$defs/rewrite_uri_part',
                   },
                 },
                 required: [],
@@ -1816,7 +1783,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -2035,7 +2002,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -2224,7 +2191,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -2423,7 +2390,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -2715,7 +2682,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -2867,34 +2834,7 @@ export const tool: Tool = {
                 description:
                   'A list of phases to skip the execution of. This option is incompatible with the rulesets options.',
                 items: {
-                  type: 'string',
-                  title: 'Phase',
-                  description: 'The phase of the ruleset.',
-                  enum: [
-                    'ddos_l4',
-                    'ddos_l7',
-                    'http_config_settings',
-                    'http_custom_errors',
-                    'http_log_custom_fields',
-                    'http_ratelimit',
-                    'http_request_cache_settings',
-                    'http_request_dynamic_redirect',
-                    'http_request_firewall_custom',
-                    'http_request_firewall_managed',
-                    'http_request_late_transform',
-                    'http_request_origin',
-                    'http_request_redirect',
-                    'http_request_sanitize',
-                    'http_request_sbfm',
-                    'http_request_transform',
-                    'http_response_compression',
-                    'http_response_firewall_managed',
-                    'http_response_headers_transform',
-                    'magic_transit',
-                    'magic_transit_ids_managed',
-                    'magic_transit_managed',
-                    'magic_transit_ratelimit',
-                  ],
+                  $ref: '#/$defs/phase',
                 },
               },
               products: {
@@ -2969,7 +2909,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -3553,7 +3493,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -3836,7 +3776,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -4016,7 +3956,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -4196,7 +4136,7 @@ export const tool: Tool = {
             description: 'The expression defining which traffic will match the rule.',
           },
           logging: {
-            $ref: '#/anyOf/0/properties/logging',
+            $ref: '#/$defs/logging',
           },
           position: {
             anyOf: [
@@ -4311,11 +4251,82 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      logging: {
+        type: 'object',
+        title: 'Logging',
+        description: "An object configuring the rule's logging behavior.",
+        properties: {
+          enabled: {
+            type: 'boolean',
+            title: 'Enabled',
+            description: 'Whether to generate a log when the rule matches.',
+          },
+        },
+        required: ['enabled'],
+      },
+      rewrite_uri_part: {
+        anyOf: [
+          {
+            type: 'object',
+            title: 'Static value',
+            properties: {
+              value: {
+                type: 'string',
+                description: 'Predefined replacement value.',
+              },
+            },
+            required: ['value'],
+          },
+          {
+            type: 'object',
+            title: 'Dynamic value',
+            properties: {
+              expression: {
+                type: 'string',
+                description: 'Expression to evaluate for the replacement value.',
+              },
+            },
+            required: ['expression'],
+          },
+        ],
+      },
+      phase: {
+        type: 'string',
+        title: 'Phase',
+        description: 'The phase of the ruleset.',
+        enum: [
+          'ddos_l4',
+          'ddos_l7',
+          'http_config_settings',
+          'http_custom_errors',
+          'http_log_custom_fields',
+          'http_ratelimit',
+          'http_request_cache_settings',
+          'http_request_dynamic_redirect',
+          'http_request_firewall_custom',
+          'http_request_firewall_managed',
+          'http_request_late_transform',
+          'http_request_origin',
+          'http_request_redirect',
+          'http_request_sanitize',
+          'http_request_sbfm',
+          'http_request_transform',
+          'http_response_compression',
+          'http_response_firewall_managed',
+          'http_response_headers_transform',
+          'magic_transit',
+          'magic_transit_ids_managed',
+          'magic_transit_managed',
+          'magic_transit_ratelimit',
+        ],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ruleset_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { ruleset_id, ...body } = args as any;
   return client.rulesets.rules.create(ruleset_id, body);
 };
 

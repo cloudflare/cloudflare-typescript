@@ -37,6 +37,15 @@ export const tool: Tool = {
           'Site high availability mode. If set to true, the site can have two connectors and runs in high availability mode.',
       },
       location: {
+        $ref: '#/$defs/site_location',
+      },
+      secondary_connector_id: {
+        type: 'string',
+        description: 'Magic Connector identifier tag. Used when high availability mode is on.',
+      },
+    },
+    $defs: {
+      site_location: {
         type: 'object',
         description: 'Location of site in latitude and longitude.',
         properties: {
@@ -51,16 +60,12 @@ export const tool: Tool = {
         },
         required: [],
       },
-      secondary_connector_id: {
-        type: 'string',
-        description: 'Magic Connector identifier tag. Used when high availability mode is on.',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.magicTransit.sites.create(body);
 };
 

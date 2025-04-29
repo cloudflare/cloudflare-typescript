@@ -40,8 +40,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { integration_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { integration_id, ...body } = args as any;
   return client.zeroTrust.riskScoring.integrations.update(integration_id, body);
 };
 

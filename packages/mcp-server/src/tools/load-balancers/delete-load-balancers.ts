@@ -26,8 +26,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { load_balancer_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { load_balancer_id, ...body } = args as any;
   return client.loadBalancers.delete(load_balancer_id, body);
 };
 

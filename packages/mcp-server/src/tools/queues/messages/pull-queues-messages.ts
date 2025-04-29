@@ -37,8 +37,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { queue_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { queue_id, ...body } = args as any;
   return client.queues.messages.pull(queue_id, body);
 };
 

@@ -6,7 +6,12 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/cloudflare-typescript",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stainless-sdks/cloudflare-typescript.git",
+    "directory": "packages/mcp-server"
+  },
+  "homepage": "https://github.com/stainless-sdks/cloudflare-typescript/tree/main/packages/mcp-server#readme",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "private": false,
@@ -24,7 +29,8 @@
   "dependencies": {
     "cloudflare": "file:../../dist/",
     "@modelcontextprotocol/sdk": "^1.6.1",
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.2",
+    "ajv": "^8.17.1"
   },
   "bin": {
     "mcp-server": "dist/index.js"

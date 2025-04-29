@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { secret_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { secret_id, ...body } = args as any;
   return client.secretsStore.stores.secrets.delete(secret_id, body);
 };
 

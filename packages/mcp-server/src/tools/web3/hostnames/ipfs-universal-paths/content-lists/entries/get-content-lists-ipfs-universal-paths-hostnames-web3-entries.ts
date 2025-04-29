@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { content_list_entry_identifier, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { content_list_entry_identifier, ...body } = args as any;
   return client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.get(
     content_list_entry_identifier,
     body,

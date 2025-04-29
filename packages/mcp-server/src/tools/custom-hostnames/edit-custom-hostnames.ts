@@ -44,15 +44,10 @@ export const tool: Tool = {
         description: 'SSL properties used when creating the custom hostname.',
         properties: {
           bundle_method: {
-            type: 'string',
-            description:
-              'A ubiquitous bundle has the highest probability of being verified everywhere, even by clients using outdated or unusual trust stores. An optimal bundle uses the shortest chain and newest intermediates. And the force bundle verifies the chain, but does not otherwise modify it.',
-            enum: ['ubiquitous', 'optimal', 'force'],
+            $ref: '#/$defs/bundle_method',
           },
           certificate_authority: {
-            type: 'string',
-            description: 'The Certificate Authority that will issue the certificate',
-            enum: ['digicert', 'google', 'lets_encrypt', 'ssl_com'],
+            $ref: '#/$defs/certificate_ca',
           },
           cloudflare_branding: {
             type: 'boolean',
@@ -86,9 +81,7 @@ export const tool: Tool = {
             description: 'The key for a custom uploaded certificate.',
           },
           method: {
-            type: 'string',
-            description: 'Domain control validation (DCV) method used for this hostname.',
-            enum: ['http', 'txt', 'email'],
+            $ref: '#/$defs/dcv_method',
           },
           settings: {
             type: 'object',
@@ -126,10 +119,7 @@ export const tool: Tool = {
             required: [],
           },
           type: {
-            type: 'string',
-            description:
-              'Level of validation to be used for this hostname. Domain validation (dv) must be used.',
-            enum: ['dv'],
+            $ref: '#/$defs/domain_validation_type',
           },
           wildcard: {
             type: 'boolean',
@@ -139,11 +129,34 @@ export const tool: Tool = {
         required: [],
       },
     },
+    $defs: {
+      bundle_method: {
+        type: 'string',
+        description:
+          'A ubiquitous bundle has the highest probability of being verified everywhere, even by clients using outdated or unusual trust stores. An optimal bundle uses the shortest chain and newest intermediates. And the force bundle verifies the chain, but does not otherwise modify it.',
+        enum: ['ubiquitous', 'optimal', 'force'],
+      },
+      certificate_ca: {
+        type: 'string',
+        description: 'The Certificate Authority that will issue the certificate',
+        enum: ['digicert', 'google', 'lets_encrypt', 'ssl_com'],
+      },
+      dcv_method: {
+        type: 'string',
+        description: 'Domain control validation (DCV) method used for this hostname.',
+        enum: ['http', 'txt', 'email'],
+      },
+      domain_validation_type: {
+        type: 'string',
+        description: 'Level of validation to be used for this hostname. Domain validation (dv) must be used.',
+        enum: ['dv'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { custom_hostname_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { custom_hostname_id, ...body } = args as any;
   return client.customHostnames.edit(custom_hostname_id, body);
 };
 

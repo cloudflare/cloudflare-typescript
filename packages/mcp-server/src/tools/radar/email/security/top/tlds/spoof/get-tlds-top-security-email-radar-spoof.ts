@@ -111,8 +111,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { spoof, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { spoof, ...body } = args as any;
   return client.radar.email.security.top.tlds.spoof.get(spoof, body);
 };
 

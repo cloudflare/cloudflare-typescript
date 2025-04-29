@@ -25,6 +25,17 @@ export const tool: Tool = {
         description: 'Name of the script, used in URLs and route configuration.',
       },
       metadata: {
+        $ref: '#/$defs/worker_metadata',
+      },
+      'CF-WORKER-BODY-PART': {
+        type: 'string',
+      },
+      'CF-WORKER-MAIN-MODULE-PART': {
+        type: 'string',
+      },
+    },
+    $defs: {
+      worker_metadata: {
         type: 'object',
         description: 'JSON encoded metadata about the uploaded parts and Worker configuration.',
         properties: {
@@ -41,18 +52,12 @@ export const tool: Tool = {
         },
         required: [],
       },
-      'CF-WORKER-BODY-PART': {
-        type: 'string',
-      },
-      'CF-WORKER-MAIN-MODULE-PART': {
-        type: 'string',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { script_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { script_name, ...body } = args as any;
   return client.workers.scripts.content.update(script_name, body);
 };
 

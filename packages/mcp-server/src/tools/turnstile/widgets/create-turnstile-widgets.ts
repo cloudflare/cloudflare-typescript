@@ -23,9 +23,7 @@ export const tool: Tool = {
       domains: {
         type: 'array',
         items: {
-          type: 'string',
-          description:
-            'Hosts as a hostname or IPv4/IPv6 address represented by strings. The\nwidget will only work on these domains, and their subdomains.\n',
+          $ref: '#/$defs/widget_domain',
         },
       },
       mode: {
@@ -81,11 +79,18 @@ export const tool: Tool = {
         enum: ['world'],
       },
     },
+    $defs: {
+      widget_domain: {
+        type: 'string',
+        description:
+          'Hosts as a hostname or IPv4/IPv6 address represented by strings. The\nwidget will only work on these domains, and their subdomains.\n',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.turnstile.widgets.create(body);
 };
 

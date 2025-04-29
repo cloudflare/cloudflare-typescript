@@ -76,8 +76,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { url, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { url, ...body } = args as any;
   return client.speed.pages.trend(url, body);
 };
 

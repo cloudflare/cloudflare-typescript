@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ua_rule_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { ua_rule_id, ...body } = args as any;
   return client.firewall.uaRules.delete(ua_rule_id, body);
 };
 

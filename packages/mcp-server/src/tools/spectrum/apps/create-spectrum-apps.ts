@@ -24,20 +24,7 @@ export const tool: Tool = {
             description: 'Zone identifier.',
           },
           dns: {
-            type: 'object',
-            description: 'The name and type of DNS record for the Spectrum application.',
-            properties: {
-              name: {
-                type: 'string',
-                description: 'The name of the DNS record associated with the application.',
-              },
-              type: {
-                type: 'string',
-                description: 'The type of DNS record associated with the application.',
-                enum: ['CNAME', 'ADDRESS'],
-              },
-            },
-            required: [],
+            $ref: '#/$defs/dns',
           },
           ip_firewall: {
             type: 'boolean',
@@ -72,47 +59,7 @@ export const tool: Tool = {
               'Enables Argo Smart Routing for this application.\nNotes: Only available for TCP applications with traffic_type set to "direct".',
           },
           edge_ips: {
-            anyOf: [
-              {
-                type: 'object',
-                properties: {
-                  connectivity: {
-                    type: 'string',
-                    description: 'The IP versions supported for inbound connections on Spectrum anycast IPs.',
-                    enum: ['all', 'ipv4', 'ipv6'],
-                  },
-                  type: {
-                    type: 'string',
-                    description:
-                      'The type of edge IP configuration specified. Dynamically allocated edge IPs use Spectrum anycast IPs in accordance with the connectivity you specify. Only valid with CNAME DNS names.',
-                    enum: ['dynamic'],
-                  },
-                },
-                required: [],
-              },
-              {
-                type: 'object',
-                properties: {
-                  ips: {
-                    type: 'array',
-                    description:
-                      'The array of customer owned IPs we broadcast via anycast for this hostname and application.',
-                    items: {
-                      type: 'string',
-                      description: 'Edge anycast IPs.',
-                    },
-                  },
-                  type: {
-                    type: 'string',
-                    description:
-                      'The type of edge IP configuration specified. Statically allocated edge IPs use customer IPs in accordance with the ips array you specify. Only valid with ADDRESS DNS names.',
-                    enum: ['static'],
-                  },
-                },
-                required: [],
-              },
-            ],
-            description: 'The anycast edge IP configuration for the hostname of this application.',
+            $ref: '#/$defs/edge_ips',
           },
           origin_direct: {
             type: 'array',
@@ -123,37 +70,10 @@ export const tool: Tool = {
             },
           },
           origin_dns: {
-            type: 'object',
-            description: 'The name and type of DNS record for the Spectrum application.',
-            properties: {
-              name: {
-                type: 'string',
-                description: 'The name of the DNS record associated with the origin.',
-              },
-              ttl: {
-                type: 'integer',
-                description: 'The TTL of our resolution of your DNS record in seconds.',
-              },
-              type: {
-                type: 'string',
-                description:
-                  'The type of DNS record associated with the origin. "" is used to specify a combination of A/AAAA records.',
-                enum: ['', 'A', 'AAAA', 'SRV'],
-              },
-            },
-            required: [],
+            $ref: '#/$defs/origin_dns',
           },
           origin_port: {
-            anyOf: [
-              {
-                type: 'integer',
-              },
-              {
-                type: 'string',
-              },
-            ],
-            description:
-              'The destination port at the origin. Only specified in conjunction with origin_dns. May use an integer to specify a single origin port, for example `1000`, or a string to specify a range of origin ports, for example `"1000-2000"`.\nNotes: If specifying a port range, the number of ports in the range must match the number of ports specified in the "protocol" field.',
+            $ref: '#/$defs/origin_port',
           },
         },
       },
@@ -165,7 +85,7 @@ export const tool: Tool = {
             description: 'Zone identifier.',
           },
           dns: {
-            $ref: '#/anyOf/0/properties/dns',
+            $ref: '#/$defs/dns',
           },
           protocol: {
             type: 'string',
@@ -183,11 +103,105 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      dns: {
+        type: 'object',
+        description: 'The name and type of DNS record for the Spectrum application.',
+        properties: {
+          name: {
+            type: 'string',
+            description: 'The name of the DNS record associated with the application.',
+          },
+          type: {
+            type: 'string',
+            description: 'The type of DNS record associated with the application.',
+            enum: ['CNAME', 'ADDRESS'],
+          },
+        },
+        required: [],
+      },
+      edge_ips: {
+        anyOf: [
+          {
+            type: 'object',
+            properties: {
+              connectivity: {
+                type: 'string',
+                description: 'The IP versions supported for inbound connections on Spectrum anycast IPs.',
+                enum: ['all', 'ipv4', 'ipv6'],
+              },
+              type: {
+                type: 'string',
+                description:
+                  'The type of edge IP configuration specified. Dynamically allocated edge IPs use Spectrum anycast IPs in accordance with the connectivity you specify. Only valid with CNAME DNS names.',
+                enum: ['dynamic'],
+              },
+            },
+            required: [],
+          },
+          {
+            type: 'object',
+            properties: {
+              ips: {
+                type: 'array',
+                description:
+                  'The array of customer owned IPs we broadcast via anycast for this hostname and application.',
+                items: {
+                  type: 'string',
+                  description: 'Edge anycast IPs.',
+                },
+              },
+              type: {
+                type: 'string',
+                description:
+                  'The type of edge IP configuration specified. Statically allocated edge IPs use customer IPs in accordance with the ips array you specify. Only valid with ADDRESS DNS names.',
+                enum: ['static'],
+              },
+            },
+            required: [],
+          },
+        ],
+        description: 'The anycast edge IP configuration for the hostname of this application.',
+      },
+      origin_dns: {
+        type: 'object',
+        description: 'The name and type of DNS record for the Spectrum application.',
+        properties: {
+          name: {
+            type: 'string',
+            description: 'The name of the DNS record associated with the origin.',
+          },
+          ttl: {
+            type: 'integer',
+            description: 'The TTL of our resolution of your DNS record in seconds.',
+          },
+          type: {
+            type: 'string',
+            description:
+              'The type of DNS record associated with the origin. "" is used to specify a combination of A/AAAA records.',
+            enum: ['', 'A', 'AAAA', 'SRV'],
+          },
+        },
+        required: [],
+      },
+      origin_port: {
+        anyOf: [
+          {
+            type: 'integer',
+          },
+          {
+            type: 'string',
+          },
+        ],
+        description:
+          'The destination port at the origin. Only specified in conjunction with origin_dns. May use an integer to specify a single origin port, for example `1000`, or a string to specify a range of origin ports, for example `"1000-2000"`.\nNotes: If specifying a port range, the number of ports in the range must match the number of ports specified in the "protocol" field.',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.spectrum.apps.create(body);
 };
 

@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { insight_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { insight_id, ...body } = args as any;
   return client.cloudforceOne.threatEvents.insights.get(insight_id, body);
 };
 

@@ -23,7 +23,7 @@ export const tool: Tool = {
       hostnames: {
         type: 'array',
         items: {
-          type: 'string',
+          $ref: '#/$defs/hostname_association',
         },
       },
       mtls_certificate_id: {
@@ -32,11 +32,16 @@ export const tool: Tool = {
           'The UUID for a certificate that was uploaded to the mTLS Certificate Management endpoint. If no mtls_certificate_id is given, the hostnames will be associated to your active Cloudflare Managed CA.',
       },
     },
+    $defs: {
+      hostname_association: {
+        type: 'string',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.certificateAuthorities.hostnameAssociations.update(body);
 };
 

@@ -147,8 +147,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { tls_version, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { tls_version, ...body } = args as any;
   return client.radar.http.ases.tlsVersion.get(tls_version, body);
 };
 

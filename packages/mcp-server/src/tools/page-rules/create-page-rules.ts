@@ -27,69 +27,16 @@ export const tool: Tool = {
         items: {
           anyOf: [
             {
-              type: 'object',
-              title: 'Always Use HTTPS',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'If enabled, any `http://`` URL is converted to `https://` through a\n301 redirect.',
-                  enum: ['always_use_https'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/always_use_https',
             },
             {
-              type: 'object',
-              title: 'Automatic HTTPS Rewrites',
-              properties: {
-                id: {
-                  type: 'string',
-                  description: 'Turn on or off Automatic HTTPS Rewrites.',
-                  enum: ['automatic_https_rewrites'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Automatic HTTPS Rewrites.',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/automatic_https_rewrites',
             },
             {
-              type: 'object',
-              title: 'Browser Cache TTL',
-              properties: {
-                id: {
-                  type: 'string',
-                  description: 'Control how long resources cached by client browsers remain valid.',
-                  enum: ['browser_cache_ttl'],
-                },
-                value: {
-                  type: 'integer',
-                  description:
-                    'The number of seconds to cache resources for. The API prohibits\nsetting this to 0 for non-Enterprise domains.\n',
-                },
-              },
-              required: [],
+              $ref: '#/$defs/browser_cache_ttl',
             },
             {
-              type: 'object',
-              title: 'Browser Integrity Check',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    "Inspect the visitor's browser for headers commonly associated with\nspammers and certain bots.",
-                  enum: ['browser_check'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Browser Integrity Check.',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/browser_check',
             },
             {
               type: 'object',
@@ -292,22 +239,7 @@ export const tool: Tool = {
               required: [],
             },
             {
-              type: 'object',
-              title: 'Cache Level',
-              properties: {
-                id: {
-                  type: 'string',
-                  description: 'Apply custom caching based on the option selected.',
-                  enum: ['cache_level'],
-                },
-                value: {
-                  type: 'string',
-                  description:
-                    '* `bypass`: Cloudflare does not cache.\n* `basic`: Delivers resources from cache when there is no query\n  string.\n* `simplified`: Delivers the same resource to everyone independent\n  of the query string.\n* `aggressive`: Caches all static content that has a query string.\n* `cache_everything`: Treats all content as static and caches all\n  file types beyond the [Cloudflare default cached\n  content](https://developers.cloudflare.com/cache/concepts/default-cache-behavior/#default-cached-file-extensions).',
-                  enum: ['bypass', 'basic', 'simplified', 'aggressive', 'cache_everything'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/cache_level',
             },
             {
               type: 'object',
@@ -412,21 +344,7 @@ export const tool: Tool = {
               required: [],
             },
             {
-              type: 'object',
-              title: 'Email Obfuscation',
-              properties: {
-                id: {
-                  type: 'string',
-                  description: 'Turn on or off **Email Obfuscation**.',
-                  enum: ['email_obfuscation'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Email Obfuscation.',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/email_obfuscation',
             },
             {
               type: 'object',
@@ -493,93 +411,19 @@ export const tool: Tool = {
               required: [],
             },
             {
-              type: 'object',
-              title: 'IP Geolocation Header',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Cloudflare adds a CF-IPCountry HTTP header containing the country code that corresponds to the visitor.',
-                  enum: ['ip_geolocation'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of adding the IP Geolocation Header.',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/ip_geolocation',
             },
             {
-              type: 'object',
-              title: 'Mirage',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Cloudflare Mirage reduces bandwidth used by images in mobile browsers.\nIt can accelerate loading of image-heavy websites on very slow mobile connections and HTTP/1.',
-                  enum: ['mirage'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Mirage.',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/mirage',
             },
             {
-              type: 'object',
-              title: 'Opportunistic Encryption',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    "Opportunistic Encryption allows browsers to access HTTP URIs over an encrypted TLS channel.\nIt's not a substitute for HTTPS, but provides additional security for otherwise vulnerable requests.",
-                  enum: ['opportunistic_encryption'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Opportunistic Encryption.',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/opportunistic_encryption',
             },
             {
-              type: 'object',
-              title: 'Origin Error Page Passthru',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Turn on or off Cloudflare error pages generated from issues sent from the origin server. If enabled, this setting triggers error pages issued by the origin.',
-                  enum: ['origin_error_page_pass_thru'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Origin Error Page Passthru.',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/origin_error_page_pass_thru',
             },
             {
-              type: 'object',
-              title: 'Polish',
-              properties: {
-                id: {
-                  type: 'string',
-                  description: 'Apply options from the Polish feature of the Cloudflare Speed app.',
-                  enum: ['polish'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The level of Polish you want applied to your origin.',
-                  enum: ['off', 'lossless', 'lossy'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/polish',
             },
             {
               type: 'object',
@@ -616,128 +460,25 @@ export const tool: Tool = {
               required: [],
             },
             {
-              type: 'object',
-              title: 'Response Buffering',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Turn on or off whether Cloudflare should wait for an entire file\nfrom the origin server before forwarding it to the site visitor. By\ndefault, Cloudflare sends packets to the client as they arrive from\nthe origin server.',
-                  enum: ['response_buffering'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Response Buffering',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/response_buffering',
             },
             {
-              type: 'object',
-              title: 'Rocket Loader',
-              properties: {
-                id: {
-                  type: 'string',
-                  description: 'Turn on or off Rocket Loader in the Cloudflare Speed app.',
-                  enum: ['rocket_loader'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Rocket Loader',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/rocket_loader',
             },
             {
-              type: 'object',
-              title: 'Security Level',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Control options for the **Security Level** feature from the **Security** app.',
-                  enum: ['security_level'],
-                },
-                value: {
-                  type: 'string',
-                  enum: ['off', 'essentially_off', 'low', 'medium', 'high', 'under_attack'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/security_level',
             },
             {
-              type: 'object',
-              title: 'Query String Sort',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Turn on or off the reordering of query strings. When query strings have the same structure, caching improves.',
-                  enum: ['sort_query_string_for_cache'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of Query String Sort',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/sort_query_string_for_cache',
             },
             {
-              type: 'object',
-              title: 'SSL',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Control options for the SSL feature of the Edge Certificates tab in the Cloudflare SSL/TLS app.',
-                  enum: ['ssl'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The encryption mode that Cloudflare uses to connect to your origin server.',
-                  enum: ['off', 'flexible', 'full', 'strict', 'origin_pull'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/ssl',
             },
             {
-              type: 'object',
-              title: 'True Client IP Header',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Turn on or off the True-Client-IP Header feature of the Cloudflare Network app.',
-                  enum: ['true_client_ip_header'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of True Client IP Header.',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/true_client_ip_header',
             },
             {
-              type: 'object',
-              title: 'WAF',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    'Turn on or off [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).\nYou cannot enable or disable individual WAF managed rules via Page Rules.',
-                  enum: ['waf'],
-                },
-                value: {
-                  type: 'string',
-                  description: 'The status of WAF managed rules (previous version).',
-                  enum: ['on', 'off'],
-                },
-              },
-              required: [],
+              $ref: '#/$defs/waf',
             },
           ],
         },
@@ -746,34 +487,7 @@ export const tool: Tool = {
         type: 'array',
         description: 'The rule targets to evaluate on each request.',
         items: {
-          type: 'object',
-          description: 'URL target.',
-          properties: {
-            constraint: {
-              type: 'object',
-              description: 'String constraint.',
-              properties: {
-                operator: {
-                  type: 'string',
-                  description:
-                    "The matches operator can use asterisks and pipes as wildcard and 'or' operators.",
-                  enum: ['matches', 'contains', 'equals', 'not_equal', 'not_contain'],
-                },
-                value: {
-                  type: 'string',
-                  description:
-                    "The URL pattern to match against the current request. The pattern may contain up to four asterisks ('*') as placeholders.",
-                },
-              },
-              required: ['operator', 'value'],
-            },
-            target: {
-              type: 'string',
-              description: 'A target based on the URL of the request.',
-              enum: ['url'],
-            },
-          },
-          required: [],
+          $ref: '#/$defs/target',
         },
       },
       priority: {
@@ -787,11 +501,353 @@ export const tool: Tool = {
         enum: ['active', 'disabled'],
       },
     },
+    $defs: {
+      always_use_https: {
+        type: 'object',
+        title: 'Always Use HTTPS',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'If enabled, any `http://`` URL is converted to `https://` through a\n301 redirect.',
+            enum: ['always_use_https'],
+          },
+        },
+        required: [],
+      },
+      automatic_https_rewrites: {
+        type: 'object',
+        title: 'Automatic HTTPS Rewrites',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Turn on or off Automatic HTTPS Rewrites.',
+            enum: ['automatic_https_rewrites'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Automatic HTTPS Rewrites.',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      browser_cache_ttl: {
+        type: 'object',
+        title: 'Browser Cache TTL',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Control how long resources cached by client browsers remain valid.',
+            enum: ['browser_cache_ttl'],
+          },
+          value: {
+            type: 'integer',
+            description:
+              'The number of seconds to cache resources for. The API prohibits\nsetting this to 0 for non-Enterprise domains.\n',
+          },
+        },
+        required: [],
+      },
+      browser_check: {
+        type: 'object',
+        title: 'Browser Integrity Check',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              "Inspect the visitor's browser for headers commonly associated with\nspammers and certain bots.",
+            enum: ['browser_check'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Browser Integrity Check.',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      cache_level: {
+        type: 'object',
+        title: 'Cache Level',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Apply custom caching based on the option selected.',
+            enum: ['cache_level'],
+          },
+          value: {
+            type: 'string',
+            description:
+              '* `bypass`: Cloudflare does not cache.\n* `basic`: Delivers resources from cache when there is no query\n  string.\n* `simplified`: Delivers the same resource to everyone independent\n  of the query string.\n* `aggressive`: Caches all static content that has a query string.\n* `cache_everything`: Treats all content as static and caches all\n  file types beyond the [Cloudflare default cached\n  content](https://developers.cloudflare.com/cache/concepts/default-cache-behavior/#default-cached-file-extensions).',
+            enum: ['bypass', 'basic', 'simplified', 'aggressive', 'cache_everything'],
+          },
+        },
+        required: [],
+      },
+      email_obfuscation: {
+        type: 'object',
+        title: 'Email Obfuscation',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Turn on or off **Email Obfuscation**.',
+            enum: ['email_obfuscation'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Email Obfuscation.',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      ip_geolocation: {
+        type: 'object',
+        title: 'IP Geolocation Header',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              'Cloudflare adds a CF-IPCountry HTTP header containing the country code that corresponds to the visitor.',
+            enum: ['ip_geolocation'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of adding the IP Geolocation Header.',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      mirage: {
+        type: 'object',
+        title: 'Mirage',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              'Cloudflare Mirage reduces bandwidth used by images in mobile browsers.\nIt can accelerate loading of image-heavy websites on very slow mobile connections and HTTP/1.',
+            enum: ['mirage'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Mirage.',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      opportunistic_encryption: {
+        type: 'object',
+        title: 'Opportunistic Encryption',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              "Opportunistic Encryption allows browsers to access HTTP URIs over an encrypted TLS channel.\nIt's not a substitute for HTTPS, but provides additional security for otherwise vulnerable requests.",
+            enum: ['opportunistic_encryption'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Opportunistic Encryption.',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      origin_error_page_pass_thru: {
+        type: 'object',
+        title: 'Origin Error Page Passthru',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              'Turn on or off Cloudflare error pages generated from issues sent from the origin server. If enabled, this setting triggers error pages issued by the origin.',
+            enum: ['origin_error_page_pass_thru'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Origin Error Page Passthru.',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      polish: {
+        type: 'object',
+        title: 'Polish',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Apply options from the Polish feature of the Cloudflare Speed app.',
+            enum: ['polish'],
+          },
+          value: {
+            type: 'string',
+            description: 'The level of Polish you want applied to your origin.',
+            enum: ['off', 'lossless', 'lossy'],
+          },
+        },
+        required: [],
+      },
+      response_buffering: {
+        type: 'object',
+        title: 'Response Buffering',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              'Turn on or off whether Cloudflare should wait for an entire file\nfrom the origin server before forwarding it to the site visitor. By\ndefault, Cloudflare sends packets to the client as they arrive from\nthe origin server.',
+            enum: ['response_buffering'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Response Buffering',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      rocket_loader: {
+        type: 'object',
+        title: 'Rocket Loader',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Turn on or off Rocket Loader in the Cloudflare Speed app.',
+            enum: ['rocket_loader'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Rocket Loader',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      security_level: {
+        type: 'object',
+        title: 'Security Level',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Control options for the **Security Level** feature from the **Security** app.',
+            enum: ['security_level'],
+          },
+          value: {
+            type: 'string',
+            enum: ['off', 'essentially_off', 'low', 'medium', 'high', 'under_attack'],
+          },
+        },
+        required: [],
+      },
+      sort_query_string_for_cache: {
+        type: 'object',
+        title: 'Query String Sort',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              'Turn on or off the reordering of query strings. When query strings have the same structure, caching improves.',
+            enum: ['sort_query_string_for_cache'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of Query String Sort',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      ssl: {
+        type: 'object',
+        title: 'SSL',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              'Control options for the SSL feature of the Edge Certificates tab in the Cloudflare SSL/TLS app.',
+            enum: ['ssl'],
+          },
+          value: {
+            type: 'string',
+            description: 'The encryption mode that Cloudflare uses to connect to your origin server.',
+            enum: ['off', 'flexible', 'full', 'strict', 'origin_pull'],
+          },
+        },
+        required: [],
+      },
+      true_client_ip_header: {
+        type: 'object',
+        title: 'True Client IP Header',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Turn on or off the True-Client-IP Header feature of the Cloudflare Network app.',
+            enum: ['true_client_ip_header'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of True Client IP Header.',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      waf: {
+        type: 'object',
+        title: 'WAF',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              'Turn on or off [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).\nYou cannot enable or disable individual WAF managed rules via Page Rules.',
+            enum: ['waf'],
+          },
+          value: {
+            type: 'string',
+            description: 'The status of WAF managed rules (previous version).',
+            enum: ['on', 'off'],
+          },
+        },
+        required: [],
+      },
+      target: {
+        type: 'object',
+        description: 'URL target.',
+        properties: {
+          constraint: {
+            type: 'object',
+            description: 'String constraint.',
+            properties: {
+              operator: {
+                type: 'string',
+                description:
+                  "The matches operator can use asterisks and pipes as wildcard and 'or' operators.",
+                enum: ['matches', 'contains', 'equals', 'not_equal', 'not_contain'],
+              },
+              value: {
+                type: 'string',
+                description:
+                  "The URL pattern to match against the current request. The pattern may contain up to four asterisks ('*') as placeholders.",
+              },
+            },
+            required: ['operator', 'value'],
+          },
+          target: {
+            type: 'string',
+            description: 'A target based on the URL of the request.',
+            enum: ['url'],
+          },
+        },
+        required: [],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.pageRules.create(body);
 };
 

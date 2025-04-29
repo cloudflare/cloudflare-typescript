@@ -26,6 +26,11 @@ export const tool: Tool = {
           'If enabled, Total TLS will order a hostname specific TLS certificate for any proxied A, AAAA, or CNAME record in your zone.',
       },
       certificate_authority: {
+        $ref: '#/$defs/certificate_authority',
+      },
+    },
+    $defs: {
+      certificate_authority: {
         type: 'string',
         description: 'The Certificate Authority that Total TLS certificates will be issued through.',
         enum: ['google', 'lets_encrypt', 'ssl_com'],
@@ -34,8 +39,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.acm.totalTLS.create(body);
 };
 

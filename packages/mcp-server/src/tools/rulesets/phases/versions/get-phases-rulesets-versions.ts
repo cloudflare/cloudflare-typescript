@@ -17,6 +17,24 @@ export const tool: Tool = {
     type: 'object',
     properties: {
       ruleset_phase: {
+        $ref: '#/$defs/phase',
+      },
+      ruleset_version: {
+        type: 'string',
+        title: 'Version',
+        description: 'The version of the ruleset.',
+      },
+      account_id: {
+        type: 'string',
+        description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
+      },
+      zone_id: {
+        type: 'string',
+        description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
+      },
+    },
+    $defs: {
+      phase: {
         type: 'string',
         title: 'Phase',
         description: 'The phase of the ruleset.',
@@ -46,25 +64,12 @@ export const tool: Tool = {
           'magic_transit_ratelimit',
         ],
       },
-      ruleset_version: {
-        type: 'string',
-        title: 'Version',
-        description: 'The version of the ruleset.',
-      },
-      account_id: {
-        type: 'string',
-        description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
-      },
-      zone_id: {
-        type: 'string',
-        description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ruleset_version, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { ruleset_version, ...body } = args as any;
   return client.rulesets.phases.versions.get(ruleset_version, body);
 };
 

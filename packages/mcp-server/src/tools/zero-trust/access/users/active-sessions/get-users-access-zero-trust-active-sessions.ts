@@ -31,8 +31,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { nonce, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { nonce, ...body } = args as any;
   return client.zeroTrust.access.users.activeSessions.get(nonce, body);
 };
 

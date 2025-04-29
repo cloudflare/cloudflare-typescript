@@ -30,8 +30,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { filename, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { filename, ...body } = args as any;
   return client.zeroTrust.dex.commands.downloads.get(filename, body);
 };
 

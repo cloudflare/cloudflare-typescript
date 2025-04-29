@@ -146,8 +146,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { browser_family, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { browser_family, ...body } = args as any;
   return client.radar.http.ases.browserFamily.get(browser_family, body);
 };
 

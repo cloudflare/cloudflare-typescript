@@ -28,25 +28,7 @@ export const tool: Tool = {
         description:
           'A list of regions from which to run health checks. Null means every Cloudflare data center.',
         items: {
-          type: 'string',
-          description:
-            'WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe, EEU: Eastern Europe, NSAM: Northern South America, SSAM: Southern South America, OC: Oceania, ME: Middle East, NAF: North Africa, SAF: South Africa, SAS: Southern Asia, SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all regions (ENTERPRISE customers only).',
-          enum: [
-            'WNAM',
-            'ENAM',
-            'WEU',
-            'EEU',
-            'NSAM',
-            'SSAM',
-            'OC',
-            'ME',
-            'NAF',
-            'SAF',
-            'SAS',
-            'SEAS',
-            'NEAS',
-            'ALL_REGIONS',
-          ],
+          $ref: '#/$defs/check_region',
         },
       },
       description: {
@@ -62,6 +44,70 @@ export const tool: Tool = {
         type: 'number',
         description:
           'The latitude of the data center containing the origins used in this pool in decimal degrees. If this is set, longitude must also be set.',
+      },
+      load_shedding: {
+        $ref: '#/$defs/load_shedding',
+      },
+      longitude: {
+        type: 'number',
+        description:
+          'The longitude of the data center containing the origins used in this pool in decimal degrees. If this is set, latitude must also be set.',
+      },
+      minimum_origins: {
+        type: 'integer',
+        description:
+          'The minimum number of origins that must be healthy for this pool to serve traffic. If the number of healthy origins falls below this number, the pool will be marked unhealthy and will failover to the next available pool.',
+      },
+      monitor: {
+        type: 'string',
+        description: 'The ID of the Monitor to use for checking the health of origins within this pool.',
+      },
+      name: {
+        type: 'string',
+        description:
+          'A short name (tag) for the pool. Only alphanumeric characters, hyphens, and underscores are allowed.',
+      },
+      notification_email: {
+        type: 'string',
+        description:
+          "This field is now deprecated. It has been moved to Cloudflare's Centralized Notification service https://developers.cloudflare.com/fundamentals/notifications/. The email address to send health status notifications to. This can be an individual mailbox or a mailing list. Multiple emails can be supplied as a comma delimited list.",
+      },
+      notification_filter: {
+        $ref: '#/$defs/notification_filter',
+      },
+      origin_steering: {
+        $ref: '#/$defs/origin_steering',
+      },
+      origins: {
+        type: 'array',
+        description:
+          'The list of origins within this pool. Traffic directed at this pool is balanced across all currently healthy origins, provided the pool itself is healthy.',
+        items: {
+          $ref: '#/$defs/origin',
+        },
+      },
+    },
+    $defs: {
+      check_region: {
+        type: 'string',
+        description:
+          'WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe, EEU: Eastern Europe, NSAM: Northern South America, SSAM: Southern South America, OC: Oceania, ME: Middle East, NAF: North Africa, SAF: South Africa, SAS: Southern Asia, SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all regions (ENTERPRISE customers only).',
+        enum: [
+          'WNAM',
+          'ENAM',
+          'WEU',
+          'EEU',
+          'NSAM',
+          'SSAM',
+          'OC',
+          'ME',
+          'NAF',
+          'SAF',
+          'SAS',
+          'SEAS',
+          'NEAS',
+          'ALL_REGIONS',
+        ],
       },
       load_shedding: {
         type: 'object',
@@ -92,29 +138,21 @@ export const tool: Tool = {
         },
         required: [],
       },
-      longitude: {
-        type: 'number',
-        description:
-          'The longitude of the data center containing the origins used in this pool in decimal degrees. If this is set, latitude must also be set.',
-      },
-      minimum_origins: {
-        type: 'integer',
-        description:
-          'The minimum number of origins that must be healthy for this pool to serve traffic. If the number of healthy origins falls below this number, the pool will be marked unhealthy and will failover to the next available pool.',
-      },
-      monitor: {
-        type: 'string',
-        description: 'The ID of the Monitor to use for checking the health of origins within this pool.',
-      },
-      name: {
-        type: 'string',
-        description:
-          'A short name (tag) for the pool. Only alphanumeric characters, hyphens, and underscores are allowed.',
-      },
-      notification_email: {
-        type: 'string',
-        description:
-          "This field is now deprecated. It has been moved to Cloudflare's Centralized Notification service https://developers.cloudflare.com/fundamentals/notifications/. The email address to send health status notifications to. This can be an individual mailbox or a mailing list. Multiple emails can be supplied as a comma delimited list.",
+      filter_options: {
+        type: 'object',
+        description: 'Filter options for a particular resource type (pool or origin). Use null to reset.',
+        properties: {
+          disable: {
+            type: 'boolean',
+            description: 'If set true, disable notifications for this type of resource (pool or origin).',
+          },
+          healthy: {
+            type: 'boolean',
+            description:
+              'If present, send notifications only for this health status (e.g. false for only DOWN events). Use null to reset (all events).',
+          },
+        },
+        required: [],
       },
       notification_filter: {
         type: 'object',
@@ -122,23 +160,10 @@ export const tool: Tool = {
           'Filter pool and origin health notifications by resource type or health status. Use null to reset.',
         properties: {
           origin: {
-            type: 'object',
-            description: 'Filter options for a particular resource type (pool or origin). Use null to reset.',
-            properties: {
-              disable: {
-                type: 'boolean',
-                description: 'If set true, disable notifications for this type of resource (pool or origin).',
-              },
-              healthy: {
-                type: 'boolean',
-                description:
-                  'If present, send notifications only for this health status (e.g. false for only DOWN events). Use null to reset (all events).',
-              },
-            },
-            required: [],
+            $ref: '#/$defs/filter_options',
           },
           pool: {
-            $ref: '#/properties/notification_filter/origin',
+            $ref: '#/$defs/filter_options',
           },
         },
         required: [],
@@ -157,74 +182,75 @@ export const tool: Tool = {
         },
         required: [],
       },
-      origins: {
-        type: 'array',
+      host: {
+        type: 'string',
+      },
+      header: {
+        type: 'object',
         description:
-          'The list of origins within this pool. Traffic directed at this pool is balanced across all currently healthy origins, provided the pool itself is healthy.',
-        items: {
-          type: 'object',
-          properties: {
-            address: {
-              type: 'string',
-              description:
-                'The IP address (IPv4 or IPv6) of the origin, or its publicly addressable hostname. Hostnames entered here should resolve directly to the origin, and not be a hostname proxied by Cloudflare. To set an internal/reserved address, virtual_network_id must also be set.',
-            },
-            disabled_at: {
-              type: 'string',
-              description:
-                'This field shows up only if the origin is disabled. This field is set with the time the origin was disabled.',
-              format: 'date-time',
-            },
-            enabled: {
-              type: 'boolean',
-              description:
-                'Whether to enable (the default) this origin within the pool. Disabled origins will not receive traffic and are excluded from health checks. The origin will only be disabled for the current pool.',
-            },
-            header: {
-              type: 'object',
-              description:
-                "The request header is used to pass additional information with an HTTP request. Currently supported header is 'Host'.",
-              properties: {
-                Host: {
-                  type: 'array',
-                  description:
-                    "The 'Host' header allows to override the hostname set in the HTTP request. Current support is 1 'Host' header override per origin.",
-                  items: {
-                    type: 'string',
-                  },
-                },
-              },
-              required: [],
-            },
-            name: {
-              type: 'string',
-              description: 'A human-identifiable name for the origin.',
-            },
-            port: {
-              type: 'integer',
-              description:
-                'The port for upstream connections. A value of 0 means the default port for the protocol will be used.',
-            },
-            virtual_network_id: {
-              type: 'string',
-              description:
-                'The virtual network subnet ID the origin belongs in. Virtual network must also belong to the account.',
-            },
-            weight: {
-              type: 'number',
-              description:
-                'The weight of this origin relative to other origins in the pool. Based on the configured weight the total traffic is distributed among origins within the pool.\n- `origin_steering.policy="least_outstanding_requests"`: Use weight to scale the origin\'s outstanding requests.\n- `origin_steering.policy="least_connections"`: Use weight to scale the origin\'s open connections.',
+          "The request header is used to pass additional information with an HTTP request. Currently supported header is 'Host'.",
+        properties: {
+          Host: {
+            type: 'array',
+            description:
+              "The 'Host' header allows to override the hostname set in the HTTP request. Current support is 1 'Host' header override per origin.",
+            items: {
+              $ref: '#/$defs/host',
             },
           },
-          required: [],
         },
+        required: [],
+      },
+      origin: {
+        type: 'object',
+        properties: {
+          address: {
+            type: 'string',
+            description:
+              'The IP address (IPv4 or IPv6) of the origin, or its publicly addressable hostname. Hostnames entered here should resolve directly to the origin, and not be a hostname proxied by Cloudflare. To set an internal/reserved address, virtual_network_id must also be set.',
+          },
+          disabled_at: {
+            type: 'string',
+            description:
+              'This field shows up only if the origin is disabled. This field is set with the time the origin was disabled.',
+            format: 'date-time',
+          },
+          enabled: {
+            type: 'boolean',
+            description:
+              'Whether to enable (the default) this origin within the pool. Disabled origins will not receive traffic and are excluded from health checks. The origin will only be disabled for the current pool.',
+          },
+          header: {
+            $ref: '#/$defs/header',
+          },
+          name: {
+            type: 'string',
+            description: 'A human-identifiable name for the origin.',
+          },
+          port: {
+            type: 'integer',
+            description:
+              'The port for upstream connections. A value of 0 means the default port for the protocol will be used.',
+          },
+          virtual_network_id: {
+            type: 'string',
+            description:
+              'The virtual network subnet ID the origin belongs in. Virtual network must also belong to the account.',
+          },
+          weight: {
+            type: 'number',
+            description:
+              'The weight of this origin relative to other origins in the pool. Based on the configured weight the total traffic is distributed among origins within the pool.\n- `origin_steering.policy="least_outstanding_requests"`: Use weight to scale the origin\'s outstanding requests.\n- `origin_steering.policy="least_connections"`: Use weight to scale the origin\'s open connections.',
+          },
+        },
+        required: [],
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { pool_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { pool_id, ...body } = args as any;
   return client.loadBalancers.pools.edit(pool_id, body);
 };
 

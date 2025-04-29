@@ -37,8 +37,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { index_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { index_name, ...body } = args as any;
   return client.vectorize.indexes.insert(index_name, body);
 };
 

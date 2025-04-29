@@ -728,8 +728,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { model_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { model_name, ...body } = args as any;
   return client.ai.run(model_name, body);
 };
 

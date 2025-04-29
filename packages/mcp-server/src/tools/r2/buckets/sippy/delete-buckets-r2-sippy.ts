@@ -33,8 +33,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { bucket_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { bucket_name, ...body } = args as any;
   return client.r2.buckets.sippy.delete(bucket_name, body);
 };
 

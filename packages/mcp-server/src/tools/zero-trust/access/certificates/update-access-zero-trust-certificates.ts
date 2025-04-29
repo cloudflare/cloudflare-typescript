@@ -24,8 +24,7 @@ export const tool: Tool = {
         type: 'array',
         description: 'The hostnames of the applications that will use this certificate.',
         items: {
-          type: 'string',
-          description: 'A fully-qualified domain name (FQDN).',
+          $ref: '#/$defs/associated_hostnames',
         },
       },
       account_id: {
@@ -41,11 +40,17 @@ export const tool: Tool = {
         description: 'The name of the certificate.',
       },
     },
+    $defs: {
+      associated_hostnames: {
+        type: 'string',
+        description: 'A fully-qualified domain name (FQDN).',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { certificate_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { certificate_id, ...body } = args as any;
   return client.zeroTrust.access.certificates.update(certificate_id, body);
 };
 

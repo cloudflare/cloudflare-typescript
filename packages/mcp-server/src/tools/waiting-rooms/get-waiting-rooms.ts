@@ -27,8 +27,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { waiting_room_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { waiting_room_id, ...body } = args as any;
   return client.waitingRooms.get(waiting_room_id, body);
 };
 

@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ipsec_tunnel_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { ipsec_tunnel_id, ...body } = args as any;
   return client.magicTransit.ipsecTunnels.delete(ipsec_tunnel_id, body);
 };
 

@@ -34,14 +34,22 @@ export const tool: Tool = {
           "The keyless SSL port used to communicate between Cloudflare and the client's Keyless SSL server.",
       },
       bundle_method: {
-        type: 'string',
-        description:
-          'A ubiquitous bundle has the highest probability of being verified everywhere, even by clients using outdated or unusual trust stores. An optimal bundle uses the shortest chain and newest intermediates. And the force bundle verifies the chain, but does not otherwise modify it.',
-        enum: ['ubiquitous', 'optimal', 'force'],
+        $ref: '#/$defs/bundle_method',
       },
       name: {
         type: 'string',
         description: 'The keyless SSL name.',
+      },
+      tunnel: {
+        $ref: '#/$defs/tunnel',
+      },
+    },
+    $defs: {
+      bundle_method: {
+        type: 'string',
+        description:
+          'A ubiquitous bundle has the highest probability of being verified everywhere, even by clients using outdated or unusual trust stores. An optimal bundle uses the shortest chain and newest intermediates. And the force bundle verifies the chain, but does not otherwise modify it.',
+        enum: ['ubiquitous', 'optimal', 'force'],
       },
       tunnel: {
         type: 'object',
@@ -62,8 +70,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.keylessCertificates.create(body);
 };
 

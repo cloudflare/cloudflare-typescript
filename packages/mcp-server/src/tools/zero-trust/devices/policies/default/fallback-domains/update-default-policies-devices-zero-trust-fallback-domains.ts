@@ -23,34 +23,39 @@ export const tool: Tool = {
       domains: {
         type: 'array',
         items: {
-          type: 'object',
-          properties: {
-            suffix: {
+          $ref: '#/$defs/fallback_domain',
+        },
+      },
+    },
+    $defs: {
+      fallback_domain: {
+        type: 'object',
+        properties: {
+          suffix: {
+            type: 'string',
+            description: 'The domain suffix to match when resolving locally.',
+          },
+          description: {
+            type: 'string',
+            description: 'A description of the fallback domain, displayed in the client UI.',
+          },
+          dns_server: {
+            type: 'array',
+            description: 'A list of IP addresses to handle domain resolution.',
+            items: {
               type: 'string',
-              description: 'The domain suffix to match when resolving locally.',
-            },
-            description: {
-              type: 'string',
-              description: 'A description of the fallback domain, displayed in the client UI.',
-            },
-            dns_server: {
-              type: 'array',
-              description: 'A list of IP addresses to handle domain resolution.',
-              items: {
-                type: 'string',
-                description: 'IPv4 or IPv6 address.',
-              },
+              description: 'IPv4 or IPv6 address.',
             },
           },
-          required: ['suffix'],
         },
+        required: ['suffix'],
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.zeroTrust.devices.policies.default.fallbackDomains.update(body);
 };
 

@@ -75,8 +75,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { domain_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { domain_id, ...body } = args as any;
   return client.emailSecurity.settings.domains.edit(domain_id, body);
 };
 

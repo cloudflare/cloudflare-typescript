@@ -35,8 +35,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { event_type, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { event_type, ...body } = args as any;
   return client.workflows.instances.events.create(event_type, body);
 };
 

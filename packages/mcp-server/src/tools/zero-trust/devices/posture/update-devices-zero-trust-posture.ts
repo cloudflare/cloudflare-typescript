@@ -64,140 +64,389 @@ export const tool: Tool = {
           'Sets the expiration time for a posture check result. If empty, the result remains valid until it is overwritten by new data from the WARP client.',
       },
       input: {
+        $ref: '#/$defs/device_input',
+      },
+      match: {
+        type: 'array',
+        description: 'The conditions that the client must match to run the rule.',
+        items: {
+          $ref: '#/$defs/device_match',
+        },
+      },
+      schedule: {
+        type: 'string',
+        description:
+          'Polling frequency for the WARP client posture check. Default: `5m` (poll every five minutes). Minimum: `1m`.',
+      },
+    },
+    $defs: {
+      file_input: {
+        type: 'object',
+        title: 'File Check',
+        properties: {
+          operating_system: {
+            type: 'string',
+            description: 'Operating system',
+            enum: ['windows', 'linux', 'mac'],
+          },
+          path: {
+            type: 'string',
+            description: 'File path.',
+          },
+          exists: {
+            type: 'boolean',
+            description: 'Whether or not file exists',
+          },
+          sha256: {
+            type: 'string',
+            description: 'SHA-256.',
+          },
+          thumbprint: {
+            type: 'string',
+            description: 'Signing certificate thumbprint.',
+          },
+        },
+        required: ['operating_system', 'path'],
+      },
+      unique_client_id_input: {
+        type: 'object',
+        title: 'Unique Client ID',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'List ID.',
+          },
+          operating_system: {
+            type: 'string',
+            description: 'Operating System',
+            enum: ['android', 'ios', 'chromeos'],
+          },
+        },
+        required: ['id', 'operating_system'],
+      },
+      domain_joined_input: {
+        type: 'object',
+        title: 'Domain Joined',
+        properties: {
+          operating_system: {
+            type: 'string',
+            description: 'Operating System',
+            enum: ['windows'],
+          },
+          domain: {
+            type: 'string',
+            description: 'Domain',
+          },
+        },
+        required: ['operating_system'],
+      },
+      os_version_input: {
+        type: 'object',
+        title: 'OS Version',
+        properties: {
+          operating_system: {
+            type: 'string',
+            description: 'Operating System',
+            enum: ['windows'],
+          },
+          operator: {
+            type: 'string',
+            description: 'operator',
+            enum: ['<', '<=', '>', '>=', '=='],
+          },
+          version: {
+            type: 'string',
+            description: 'Version of OS',
+          },
+          os_distro_name: {
+            type: 'string',
+            description: 'Operating System Distribution Name (linux only)',
+          },
+          os_distro_revision: {
+            type: 'string',
+            description: 'Version of OS Distribution (linux only)',
+          },
+          os_version_extra: {
+            type: 'string',
+            description:
+              'Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the kernel release version. (Mac, iOS, and Linux only)',
+          },
+        },
+        required: ['operating_system', 'operator', 'version'],
+      },
+      firewall_input: {
+        type: 'object',
+        title: 'Firewall',
+        properties: {
+          enabled: {
+            type: 'boolean',
+            description: 'Enabled',
+          },
+          operating_system: {
+            type: 'string',
+            description: 'Operating System',
+            enum: ['windows', 'mac'],
+          },
+        },
+        required: ['enabled', 'operating_system'],
+      },
+      sentinelone_input: {
+        type: 'object',
+        title: 'Sentinelone',
+        properties: {
+          operating_system: {
+            type: 'string',
+            description: 'Operating system',
+            enum: ['windows', 'linux', 'mac'],
+          },
+          path: {
+            type: 'string',
+            description: 'File path.',
+          },
+          sha256: {
+            type: 'string',
+            description: 'SHA-256.',
+          },
+          thumbprint: {
+            type: 'string',
+            description: 'Signing certificate thumbprint.',
+          },
+        },
+        required: ['operating_system', 'path'],
+      },
+      carbonblack_input: {
+        type: 'string',
+      },
+      disk_encryption_input: {
+        type: 'object',
+        title: 'Disk Encryption',
+        properties: {
+          checkDisks: {
+            type: 'array',
+            description: 'List of volume names to be checked for encryption.',
+            items: {
+              $ref: '#/$defs/carbonblack_input',
+            },
+          },
+          requireAll: {
+            type: 'boolean',
+            description: 'Whether to check all disks for encryption.',
+          },
+        },
+        required: [],
+      },
+      client_certificate_input: {
+        type: 'object',
+        title: 'Client Certificate',
+        properties: {
+          certificate_id: {
+            type: 'string',
+            description: 'UUID of Cloudflare managed certificate.',
+          },
+          cn: {
+            type: 'string',
+            description: 'Common Name that is protected by the certificate',
+          },
+        },
+        required: ['certificate_id', 'cn'],
+      },
+      workspace_one_input: {
+        type: 'object',
+        title: 'Workspace One S2S Input',
+        properties: {
+          compliance_status: {
+            type: 'string',
+            description: 'Compliance Status',
+            enum: ['compliant', 'noncompliant', 'unknown'],
+          },
+          connection_id: {
+            type: 'string',
+            description: 'Posture Integration ID.',
+          },
+        },
+        required: ['compliance_status', 'connection_id'],
+      },
+      crowdstrike_input: {
+        type: 'object',
+        title: 'Crowdstrike S2S Input',
+        properties: {
+          connection_id: {
+            type: 'string',
+            description: 'Posture Integration ID.',
+          },
+          last_seen: {
+            type: 'string',
+            description: 'For more details on last seen, please refer to the Crowdstrike documentation.',
+          },
+          operator: {
+            type: 'string',
+            description: 'operator',
+            enum: ['<', '<=', '>', '>=', '=='],
+          },
+          os: {
+            type: 'string',
+            description: 'Os Version',
+          },
+          overall: {
+            type: 'string',
+            description: 'overall',
+          },
+          sensor_config: {
+            type: 'string',
+            description: 'SensorConfig',
+          },
+          state: {
+            type: 'string',
+            description: 'For more details on state, please refer to the Crowdstrike documentation.',
+            enum: ['online', 'offline', 'unknown'],
+          },
+          version: {
+            type: 'string',
+            description: 'Version',
+          },
+          versionOperator: {
+            type: 'string',
+            description: 'Version Operator',
+            enum: ['<', '<=', '>', '>=', '=='],
+          },
+        },
+        required: ['connection_id'],
+      },
+      intune_input: {
+        type: 'object',
+        title: 'Intune S2S Input',
+        properties: {
+          compliance_status: {
+            type: 'string',
+            description: 'Compliance Status',
+            enum: ['compliant', 'noncompliant', 'unknown', 'notapplicable', 'ingraceperiod', 'error'],
+          },
+          connection_id: {
+            type: 'string',
+            description: 'Posture Integration ID.',
+          },
+        },
+        required: ['compliance_status', 'connection_id'],
+      },
+      kolide_input: {
+        type: 'object',
+        title: 'Kolide S2S Input',
+        properties: {
+          connection_id: {
+            type: 'string',
+            description: 'Posture Integration ID.',
+          },
+          countOperator: {
+            type: 'string',
+            description: 'Count Operator',
+            enum: ['<', '<=', '>', '>=', '=='],
+          },
+          issue_count: {
+            type: 'string',
+            description: 'The Number of Issues.',
+          },
+        },
+        required: ['connection_id', 'countOperator', 'issue_count'],
+      },
+      tanium_input: {
+        type: 'object',
+        title: 'Tanium S2S Input',
+        properties: {
+          connection_id: {
+            type: 'string',
+            description: 'Posture Integration ID.',
+          },
+          eid_last_seen: {
+            type: 'string',
+            description: 'For more details on eid last seen, refer to the Tanium documentation.',
+          },
+          operator: {
+            type: 'string',
+            description: 'Operator to evaluate risk_level or eid_last_seen.',
+            enum: ['<', '<=', '>', '>=', '=='],
+          },
+          risk_level: {
+            type: 'string',
+            description: 'For more details on risk level, refer to the Tanium documentation.',
+            enum: ['low', 'medium', 'high', 'critical'],
+          },
+          scoreOperator: {
+            type: 'string',
+            description: 'Score Operator',
+            enum: ['<', '<=', '>', '>=', '=='],
+          },
+          total_score: {
+            type: 'number',
+            description: 'For more details on total score, refer to the Tanium documentation.',
+          },
+        },
+        required: ['connection_id'],
+      },
+      sentinelone_s2s_input: {
+        type: 'object',
+        title: 'SentinelOne S2S Input',
+        properties: {
+          connection_id: {
+            type: 'string',
+            description: 'Posture Integration ID.',
+          },
+          active_threats: {
+            type: 'number',
+            description: 'The Number of active threats.',
+          },
+          infected: {
+            type: 'boolean',
+            description: 'Whether device is infected.',
+          },
+          is_active: {
+            type: 'boolean',
+            description: 'Whether device is active.',
+          },
+          network_status: {
+            type: 'string',
+            description: 'Network status of device.',
+            enum: ['connected', 'disconnected', 'disconnecting', 'connecting'],
+          },
+          operational_state: {
+            type: 'string',
+            description: 'Agent operational state.',
+            enum: [
+              'na',
+              'partially_disabled',
+              'auto_fully_disabled',
+              'fully_disabled',
+              'auto_partially_disabled',
+              'disabled_error',
+              'db_corruption',
+            ],
+          },
+          operator: {
+            type: 'string',
+            description: 'operator',
+            enum: ['<', '<=', '>', '>=', '=='],
+          },
+        },
+        required: ['connection_id'],
+      },
+      device_input: {
         anyOf: [
           {
-            type: 'object',
-            title: 'File Check',
-            properties: {
-              operating_system: {
-                type: 'string',
-                description: 'Operating system',
-                enum: ['windows', 'linux', 'mac'],
-              },
-              path: {
-                type: 'string',
-                description: 'File path.',
-              },
-              exists: {
-                type: 'boolean',
-                description: 'Whether or not file exists',
-              },
-              sha256: {
-                type: 'string',
-                description: 'SHA-256.',
-              },
-              thumbprint: {
-                type: 'string',
-                description: 'Signing certificate thumbprint.',
-              },
-            },
-            required: ['operating_system', 'path'],
+            $ref: '#/$defs/file_input',
           },
           {
-            type: 'object',
-            title: 'Unique Client ID',
-            properties: {
-              id: {
-                type: 'string',
-                description: 'List ID.',
-              },
-              operating_system: {
-                type: 'string',
-                description: 'Operating System',
-                enum: ['android', 'ios', 'chromeos'],
-              },
-            },
-            required: ['id', 'operating_system'],
+            $ref: '#/$defs/unique_client_id_input',
           },
           {
-            type: 'object',
-            title: 'Domain Joined',
-            properties: {
-              operating_system: {
-                type: 'string',
-                description: 'Operating System',
-                enum: ['windows'],
-              },
-              domain: {
-                type: 'string',
-                description: 'Domain',
-              },
-            },
-            required: ['operating_system'],
+            $ref: '#/$defs/domain_joined_input',
           },
           {
-            type: 'object',
-            title: 'OS Version',
-            properties: {
-              operating_system: {
-                type: 'string',
-                description: 'Operating System',
-                enum: ['windows'],
-              },
-              operator: {
-                type: 'string',
-                description: 'operator',
-                enum: ['<', '<=', '>', '>=', '=='],
-              },
-              version: {
-                type: 'string',
-                description: 'Version of OS',
-              },
-              os_distro_name: {
-                type: 'string',
-                description: 'Operating System Distribution Name (linux only)',
-              },
-              os_distro_revision: {
-                type: 'string',
-                description: 'Version of OS Distribution (linux only)',
-              },
-              os_version_extra: {
-                type: 'string',
-                description:
-                  'Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the kernel release version. (Mac, iOS, and Linux only)',
-              },
-            },
-            required: ['operating_system', 'operator', 'version'],
+            $ref: '#/$defs/os_version_input',
           },
           {
-            type: 'object',
-            title: 'Firewall',
-            properties: {
-              enabled: {
-                type: 'boolean',
-                description: 'Enabled',
-              },
-              operating_system: {
-                type: 'string',
-                description: 'Operating System',
-                enum: ['windows', 'mac'],
-              },
-            },
-            required: ['enabled', 'operating_system'],
+            $ref: '#/$defs/firewall_input',
           },
           {
-            type: 'object',
-            title: 'Sentinelone',
-            properties: {
-              operating_system: {
-                type: 'string',
-                description: 'Operating system',
-                enum: ['windows', 'linux', 'mac'],
-              },
-              path: {
-                type: 'string',
-                description: 'File path.',
-              },
-              sha256: {
-                type: 'string',
-                description: 'SHA-256.',
-              },
-              thumbprint: {
-                type: 'string',
-                description: 'Signing certificate thumbprint.',
-              },
-            },
-            required: ['operating_system', 'path'],
+            $ref: '#/$defs/sentinelone_input',
           },
           {
             type: 'object',
@@ -224,22 +473,7 @@ export const tool: Tool = {
             required: ['operating_system', 'path'],
           },
           {
-            type: 'object',
-            title: 'Disk Encryption',
-            properties: {
-              checkDisks: {
-                type: 'array',
-                description: 'List of volume names to be checked for encryption.',
-                items: {
-                  type: 'string',
-                },
-              },
-              requireAll: {
-                type: 'boolean',
-                description: 'Whether to check all disks for encryption.',
-              },
-            },
-            required: [],
+            $ref: '#/$defs/disk_encryption_input',
           },
           {
             type: 'object',
@@ -266,19 +500,7 @@ export const tool: Tool = {
             required: ['operating_system', 'path'],
           },
           {
-            type: 'object',
-            title: 'Client Certificate',
-            properties: {
-              certificate_id: {
-                type: 'string',
-                description: 'UUID of Cloudflare managed certificate.',
-              },
-              cn: {
-                type: 'string',
-                description: 'Common Name that is protected by the certificate',
-              },
-            },
-            required: ['certificate_id', 'cn'],
+            $ref: '#/$defs/client_certificate_input',
           },
           {
             type: 'object',
@@ -337,182 +559,22 @@ export const tool: Tool = {
             required: ['certificate_id', 'check_private_key', 'operating_system'],
           },
           {
-            type: 'object',
-            title: 'Workspace One S2S Input',
-            properties: {
-              compliance_status: {
-                type: 'string',
-                description: 'Compliance Status',
-                enum: ['compliant', 'noncompliant', 'unknown'],
-              },
-              connection_id: {
-                type: 'string',
-                description: 'Posture Integration ID.',
-              },
-            },
-            required: ['compliance_status', 'connection_id'],
+            $ref: '#/$defs/workspace_one_input',
           },
           {
-            type: 'object',
-            title: 'Crowdstrike S2S Input',
-            properties: {
-              connection_id: {
-                type: 'string',
-                description: 'Posture Integration ID.',
-              },
-              last_seen: {
-                type: 'string',
-                description: 'For more details on last seen, please refer to the Crowdstrike documentation.',
-              },
-              operator: {
-                type: 'string',
-                description: 'operator',
-                enum: ['<', '<=', '>', '>=', '=='],
-              },
-              os: {
-                type: 'string',
-                description: 'Os Version',
-              },
-              overall: {
-                type: 'string',
-                description: 'overall',
-              },
-              sensor_config: {
-                type: 'string',
-                description: 'SensorConfig',
-              },
-              state: {
-                type: 'string',
-                description: 'For more details on state, please refer to the Crowdstrike documentation.',
-                enum: ['online', 'offline', 'unknown'],
-              },
-              version: {
-                type: 'string',
-                description: 'Version',
-              },
-              versionOperator: {
-                type: 'string',
-                description: 'Version Operator',
-                enum: ['<', '<=', '>', '>=', '=='],
-              },
-            },
-            required: ['connection_id'],
+            $ref: '#/$defs/crowdstrike_input',
           },
           {
-            type: 'object',
-            title: 'Intune S2S Input',
-            properties: {
-              compliance_status: {
-                type: 'string',
-                description: 'Compliance Status',
-                enum: ['compliant', 'noncompliant', 'unknown', 'notapplicable', 'ingraceperiod', 'error'],
-              },
-              connection_id: {
-                type: 'string',
-                description: 'Posture Integration ID.',
-              },
-            },
-            required: ['compliance_status', 'connection_id'],
+            $ref: '#/$defs/intune_input',
           },
           {
-            type: 'object',
-            title: 'Kolide S2S Input',
-            properties: {
-              connection_id: {
-                type: 'string',
-                description: 'Posture Integration ID.',
-              },
-              countOperator: {
-                type: 'string',
-                description: 'Count Operator',
-                enum: ['<', '<=', '>', '>=', '=='],
-              },
-              issue_count: {
-                type: 'string',
-                description: 'The Number of Issues.',
-              },
-            },
-            required: ['connection_id', 'countOperator', 'issue_count'],
+            $ref: '#/$defs/kolide_input',
           },
           {
-            type: 'object',
-            title: 'Tanium S2S Input',
-            properties: {
-              connection_id: {
-                type: 'string',
-                description: 'Posture Integration ID.',
-              },
-              eid_last_seen: {
-                type: 'string',
-                description: 'For more details on eid last seen, refer to the Tanium documentation.',
-              },
-              operator: {
-                type: 'string',
-                description: 'Operator to evaluate risk_level or eid_last_seen.',
-                enum: ['<', '<=', '>', '>=', '=='],
-              },
-              risk_level: {
-                type: 'string',
-                description: 'For more details on risk level, refer to the Tanium documentation.',
-                enum: ['low', 'medium', 'high', 'critical'],
-              },
-              scoreOperator: {
-                type: 'string',
-                description: 'Score Operator',
-                enum: ['<', '<=', '>', '>=', '=='],
-              },
-              total_score: {
-                type: 'number',
-                description: 'For more details on total score, refer to the Tanium documentation.',
-              },
-            },
-            required: ['connection_id'],
+            $ref: '#/$defs/tanium_input',
           },
           {
-            type: 'object',
-            title: 'SentinelOne S2S Input',
-            properties: {
-              connection_id: {
-                type: 'string',
-                description: 'Posture Integration ID.',
-              },
-              active_threats: {
-                type: 'number',
-                description: 'The Number of active threats.',
-              },
-              infected: {
-                type: 'boolean',
-                description: 'Whether device is infected.',
-              },
-              is_active: {
-                type: 'boolean',
-                description: 'Whether device is active.',
-              },
-              network_status: {
-                type: 'string',
-                description: 'Network status of device.',
-                enum: ['connected', 'disconnected', 'disconnecting', 'connecting'],
-              },
-              operational_state: {
-                type: 'string',
-                description: 'Agent operational state.',
-                enum: [
-                  'na',
-                  'partially_disabled',
-                  'auto_fully_disabled',
-                  'fully_disabled',
-                  'auto_partially_disabled',
-                  'disabled_error',
-                  'db_corruption',
-                ],
-              },
-              operator: {
-                type: 'string',
-                description: 'operator',
-                enum: ['<', '<=', '>', '>=', '=='],
-              },
-            },
-            required: ['connection_id'],
+            $ref: '#/$defs/sentinelone_s2s_input',
           },
           {
             type: 'object',
@@ -538,31 +600,22 @@ export const tool: Tool = {
         ],
         description: 'The value to be checked against.',
       },
-      match: {
-        type: 'array',
-        description: 'The conditions that the client must match to run the rule.',
-        items: {
-          type: 'object',
-          properties: {
-            platform: {
-              type: 'string',
-              enum: ['windows', 'mac', 'linux', 'android', 'ios', 'chromeos'],
-            },
+      device_match: {
+        type: 'object',
+        properties: {
+          platform: {
+            type: 'string',
+            enum: ['windows', 'mac', 'linux', 'android', 'ios', 'chromeos'],
           },
-          required: [],
         },
-      },
-      schedule: {
-        type: 'string',
-        description:
-          'Polling frequency for the WARP client posture check. Default: `5m` (poll every five minutes). Minimum: `1m`.',
+        required: [],
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { rule_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { rule_id, ...body } = args as any;
   return client.zeroTrust.devices.posture.update(rule_id, body);
 };
 

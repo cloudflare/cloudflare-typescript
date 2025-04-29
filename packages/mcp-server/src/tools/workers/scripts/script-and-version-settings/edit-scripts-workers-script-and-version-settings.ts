@@ -557,77 +557,7 @@ export const tool: Tool = {
           migrations: {
             anyOf: [
               {
-                type: 'object',
-                description: 'A single set of migrations to apply.',
-                properties: {
-                  deleted_classes: {
-                    type: 'array',
-                    description: 'A list of classes to delete Durable Object namespaces from.',
-                    items: {
-                      type: 'string',
-                    },
-                  },
-                  new_classes: {
-                    type: 'array',
-                    description: 'A list of classes to create Durable Object namespaces from.',
-                    items: {
-                      type: 'string',
-                    },
-                  },
-                  new_sqlite_classes: {
-                    type: 'array',
-                    description: 'A list of classes to create Durable Object namespaces with SQLite from.',
-                    items: {
-                      type: 'string',
-                    },
-                  },
-                  new_tag: {
-                    type: 'string',
-                    description: 'Tag to set as the latest migration tag.',
-                  },
-                  old_tag: {
-                    type: 'string',
-                    description:
-                      "Tag used to verify against the latest migration tag for this Worker. If they don't match, the upload is rejected.",
-                  },
-                  renamed_classes: {
-                    type: 'array',
-                    description: 'A list of classes with Durable Object namespaces that were renamed.',
-                    items: {
-                      type: 'object',
-                      properties: {
-                        from: {
-                          type: 'string',
-                        },
-                        to: {
-                          type: 'string',
-                        },
-                      },
-                      required: [],
-                    },
-                  },
-                  transferred_classes: {
-                    type: 'array',
-                    description:
-                      'A list of transfers for Durable Object namespaces from a different Worker and class to a class defined in this Worker.',
-                    items: {
-                      type: 'object',
-                      properties: {
-                        from: {
-                          type: 'string',
-                        },
-                        from_script: {
-                          type: 'string',
-                        },
-                        to: {
-                          type: 'string',
-                        },
-                      },
-                      required: [],
-                    },
-                  },
-                },
-                required: [],
+                $ref: '#/$defs/single_step_migration',
               },
               {
                 type: 'object',
@@ -645,68 +575,7 @@ export const tool: Tool = {
                     type: 'array',
                     description: 'Migrations to apply in order.',
                     items: {
-                      type: 'object',
-                      properties: {
-                        deleted_classes: {
-                          type: 'array',
-                          description: 'A list of classes to delete Durable Object namespaces from.',
-                          items: {
-                            type: 'string',
-                          },
-                        },
-                        new_classes: {
-                          type: 'array',
-                          description: 'A list of classes to create Durable Object namespaces from.',
-                          items: {
-                            type: 'string',
-                          },
-                        },
-                        new_sqlite_classes: {
-                          type: 'array',
-                          description:
-                            'A list of classes to create Durable Object namespaces with SQLite from.',
-                          items: {
-                            type: 'string',
-                          },
-                        },
-                        renamed_classes: {
-                          type: 'array',
-                          description: 'A list of classes with Durable Object namespaces that were renamed.',
-                          items: {
-                            type: 'object',
-                            properties: {
-                              from: {
-                                type: 'string',
-                              },
-                              to: {
-                                type: 'string',
-                              },
-                            },
-                            required: [],
-                          },
-                        },
-                        transferred_classes: {
-                          type: 'array',
-                          description:
-                            'A list of transfers for Durable Object namespaces from a different Worker and class to a class defined in this Worker.',
-                          items: {
-                            type: 'object',
-                            properties: {
-                              from: {
-                                type: 'string',
-                              },
-                              from_script: {
-                                type: 'string',
-                              },
-                              to: {
-                                type: 'string',
-                              },
-                            },
-                            required: [],
-                          },
-                        },
-                      },
-                      required: [],
+                      $ref: '#/$defs/migration_step',
                     },
                   },
                 },
@@ -757,23 +626,7 @@ export const tool: Tool = {
             type: 'array',
             description: 'List of Workers that will consume logs from the attached Worker.',
             items: {
-              type: 'object',
-              description: 'A reference to a script that will consume logs from the attached Worker.',
-              properties: {
-                service: {
-                  type: 'string',
-                  description: 'Name of Worker that is to be the consumer.',
-                },
-                environment: {
-                  type: 'string',
-                  description: 'Optional environment if the Worker utilizes one.',
-                },
-                namespace: {
-                  type: 'string',
-                  description: 'Optional dispatch namespace the script belongs to.',
-                },
-              },
-              required: ['service'],
+              $ref: '#/$defs/consumer_script',
             },
           },
           usage_model: {
@@ -785,11 +638,168 @@ export const tool: Tool = {
         required: [],
       },
     },
+    $defs: {
+      single_step_migration: {
+        type: 'object',
+        description: 'A single set of migrations to apply.',
+        properties: {
+          deleted_classes: {
+            type: 'array',
+            description: 'A list of classes to delete Durable Object namespaces from.',
+            items: {
+              type: 'string',
+            },
+          },
+          new_classes: {
+            type: 'array',
+            description: 'A list of classes to create Durable Object namespaces from.',
+            items: {
+              type: 'string',
+            },
+          },
+          new_sqlite_classes: {
+            type: 'array',
+            description: 'A list of classes to create Durable Object namespaces with SQLite from.',
+            items: {
+              type: 'string',
+            },
+          },
+          new_tag: {
+            type: 'string',
+            description: 'Tag to set as the latest migration tag.',
+          },
+          old_tag: {
+            type: 'string',
+            description:
+              "Tag used to verify against the latest migration tag for this Worker. If they don't match, the upload is rejected.",
+          },
+          renamed_classes: {
+            type: 'array',
+            description: 'A list of classes with Durable Object namespaces that were renamed.',
+            items: {
+              type: 'object',
+              properties: {
+                from: {
+                  type: 'string',
+                },
+                to: {
+                  type: 'string',
+                },
+              },
+              required: [],
+            },
+          },
+          transferred_classes: {
+            type: 'array',
+            description:
+              'A list of transfers for Durable Object namespaces from a different Worker and class to a class defined in this Worker.',
+            items: {
+              type: 'object',
+              properties: {
+                from: {
+                  type: 'string',
+                },
+                from_script: {
+                  type: 'string',
+                },
+                to: {
+                  type: 'string',
+                },
+              },
+              required: [],
+            },
+          },
+        },
+        required: [],
+      },
+      migration_step: {
+        type: 'object',
+        properties: {
+          deleted_classes: {
+            type: 'array',
+            description: 'A list of classes to delete Durable Object namespaces from.',
+            items: {
+              type: 'string',
+            },
+          },
+          new_classes: {
+            type: 'array',
+            description: 'A list of classes to create Durable Object namespaces from.',
+            items: {
+              type: 'string',
+            },
+          },
+          new_sqlite_classes: {
+            type: 'array',
+            description: 'A list of classes to create Durable Object namespaces with SQLite from.',
+            items: {
+              type: 'string',
+            },
+          },
+          renamed_classes: {
+            type: 'array',
+            description: 'A list of classes with Durable Object namespaces that were renamed.',
+            items: {
+              type: 'object',
+              properties: {
+                from: {
+                  type: 'string',
+                },
+                to: {
+                  type: 'string',
+                },
+              },
+              required: [],
+            },
+          },
+          transferred_classes: {
+            type: 'array',
+            description:
+              'A list of transfers for Durable Object namespaces from a different Worker and class to a class defined in this Worker.',
+            items: {
+              type: 'object',
+              properties: {
+                from: {
+                  type: 'string',
+                },
+                from_script: {
+                  type: 'string',
+                },
+                to: {
+                  type: 'string',
+                },
+              },
+              required: [],
+            },
+          },
+        },
+        required: [],
+      },
+      consumer_script: {
+        type: 'object',
+        description: 'A reference to a script that will consume logs from the attached Worker.',
+        properties: {
+          service: {
+            type: 'string',
+            description: 'Name of Worker that is to be the consumer.',
+          },
+          environment: {
+            type: 'string',
+            description: 'Optional environment if the Worker utilizes one.',
+          },
+          namespace: {
+            type: 'string',
+            description: 'Optional dispatch namespace the script belongs to.',
+          },
+        },
+        required: ['service'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { script_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { script_name, ...body } = args as any;
   return client.workers.scripts.scriptAndVersionSettings.edit(script_name, body);
 };
 

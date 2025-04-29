@@ -146,8 +146,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { http_protocol, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { http_protocol, ...body } = args as any;
   return client.radar.http.locations.httpProtocol.get(http_protocol, body);
 };
 

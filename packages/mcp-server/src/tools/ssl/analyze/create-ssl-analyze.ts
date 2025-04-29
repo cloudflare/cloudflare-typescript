@@ -22,21 +22,26 @@ export const tool: Tool = {
         description: 'Identifier.',
       },
       bundle_method: {
-        type: 'string',
-        description:
-          'A ubiquitous bundle has the highest probability of being verified everywhere, even by clients using outdated or unusual trust stores. An optimal bundle uses the shortest chain and newest intermediates. And the force bundle verifies the chain, but does not otherwise modify it.',
-        enum: ['ubiquitous', 'optimal', 'force'],
+        $ref: '#/$defs/bundle_method',
       },
       certificate: {
         type: 'string',
         description: "The zone's SSL certificate or certificate and the intermediate(s).",
       },
     },
+    $defs: {
+      bundle_method: {
+        type: 'string',
+        description:
+          'A ubiquitous bundle has the highest probability of being verified everywhere, even by clients using outdated or unusual trust stores. An optimal bundle uses the shortest chain and newest intermediates. And the force bundle verifies the chain, but does not otherwise modify it.',
+        enum: ['ubiquitous', 'optimal', 'force'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.ssl.analyze.create(body);
 };
 

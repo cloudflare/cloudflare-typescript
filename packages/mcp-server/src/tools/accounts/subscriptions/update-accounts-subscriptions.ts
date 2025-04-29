@@ -30,6 +30,11 @@ export const tool: Tool = {
         enum: ['weekly', 'monthly', 'quarterly', 'yearly'],
       },
       rate_plan: {
+        $ref: '#/$defs/rate_plan',
+      },
+    },
+    $defs: {
+      rate_plan: {
         type: 'object',
         description: 'The rate plan applied to the subscription.',
         properties: {
@@ -83,8 +88,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { subscription_identifier, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { subscription_identifier, ...body } = args as any;
   return client.accounts.subscriptions.update(subscription_identifier, body);
 };
 
