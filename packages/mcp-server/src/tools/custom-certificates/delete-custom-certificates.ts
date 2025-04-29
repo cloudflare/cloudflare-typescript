@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { custom_certificate_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { custom_certificate_id, ...body } = args as any;
   return client.customCertificates.delete(custom_certificate_id, body);
 };
 

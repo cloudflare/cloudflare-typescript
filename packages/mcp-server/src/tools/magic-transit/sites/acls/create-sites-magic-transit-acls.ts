@@ -25,6 +25,42 @@ export const tool: Tool = {
         description: 'Identifier',
       },
       lan_1: {
+        $ref: '#/$defs/acl_configuration',
+      },
+      lan_2: {
+        $ref: '#/$defs/acl_configuration',
+      },
+      name: {
+        type: 'string',
+        description: 'The name of the ACL.',
+      },
+      description: {
+        type: 'string',
+        description: 'Description for the ACL.',
+      },
+      forward_locally: {
+        type: 'boolean',
+        description:
+          'The desired forwarding action for this ACL policy. If set to "false", the policy will forward traffic to Cloudflare. If set to "true", the policy will forward traffic locally on the Magic Connector. If not included in request, will default to false.',
+      },
+      protocols: {
+        type: 'array',
+        items: {
+          $ref: '#/$defs/allowed_protocol',
+        },
+      },
+      unidirectional: {
+        type: 'boolean',
+        description:
+          'The desired traffic direction for this ACL policy. If set to "false", the policy will allow bidirectional traffic. If set to "true", the policy will only allow traffic in one direction. If not included in request, will default to false.',
+      },
+    },
+    $defs: {
+      subnet: {
+        type: 'string',
+        description: 'A valid IPv4 address.',
+      },
+      acl_configuration: {
         type: 'object',
         properties: {
           lan_id: {
@@ -57,49 +93,24 @@ export const tool: Tool = {
             description:
               'Array of subnet IPs within the LAN that will be included in the ACL. If no subnets are provided, communication on any subnets on this LAN are allowed.',
             items: {
-              type: 'string',
-              description: 'A valid IPv4 address.',
+              $ref: '#/$defs/subnet',
             },
           },
         },
         required: ['lan_id'],
       },
-      lan_2: {
-        $ref: '#/properties/lan_1',
-      },
-      name: {
+      allowed_protocol: {
         type: 'string',
-        description: 'The name of the ACL.',
-      },
-      description: {
-        type: 'string',
-        description: 'Description for the ACL.',
-      },
-      forward_locally: {
-        type: 'boolean',
         description:
-          'The desired forwarding action for this ACL policy. If set to "false", the policy will forward traffic to Cloudflare. If set to "true", the policy will forward traffic locally on the Magic Connector. If not included in request, will default to false.',
-      },
-      protocols: {
-        type: 'array',
-        items: {
-          type: 'string',
-          description:
-            'Array of allowed communication protocols between configured LANs. If no protocols are provided, all protocols are allowed.',
-          enum: ['tcp', 'udp', 'icmp'],
-        },
-      },
-      unidirectional: {
-        type: 'boolean',
-        description:
-          'The desired traffic direction for this ACL policy. If set to "false", the policy will allow bidirectional traffic. If set to "true", the policy will only allow traffic in one direction. If not included in request, will default to false.',
+          'Array of allowed communication protocols between configured LANs. If no protocols are provided, all protocols are allowed.',
+        enum: ['tcp', 'udp', 'icmp'],
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { site_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { site_id, ...body } = args as any;
   return client.magicTransit.sites.acls.create(site_id, body);
 };
 

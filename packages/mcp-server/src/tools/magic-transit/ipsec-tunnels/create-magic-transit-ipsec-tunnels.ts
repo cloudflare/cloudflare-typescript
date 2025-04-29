@@ -57,9 +57,7 @@ export const tool: Tool = {
             description: 'Determines whether to run healthchecks for a tunnel.',
           },
           rate: {
-            type: 'string',
-            description: 'How frequent the health check is run. The default value is `mid`.',
-            enum: ['low', 'mid', 'high'],
+            $ref: '#/$defs/health_check_rate',
           },
           target: {
             anyOf: [
@@ -89,9 +87,7 @@ export const tool: Tool = {
               'The destination address in a request type health check. After the healthcheck is decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded to this address. This field defaults to `customer_gre_endpoint address`. This field is ignored for bidirectional healthchecks as the interface_address (not assigned to the Cloudflare side of the tunnel) is used as the target. Must be in object form if the x-magic-new-hc-target header is set to true and string form if x-magic-new-hc-target is absent or set to false.',
           },
           type: {
-            type: 'string',
-            description: 'The type of healthcheck to run, reply or request. The default value is `reply`.',
-            enum: ['reply', 'request'],
+            $ref: '#/$defs/health_check_type',
           },
         },
         required: [],
@@ -109,11 +105,23 @@ export const tool: Tool = {
         type: 'boolean',
       },
     },
+    $defs: {
+      health_check_rate: {
+        type: 'string',
+        description: 'How frequent the health check is run. The default value is `mid`.',
+        enum: ['low', 'mid', 'high'],
+      },
+      health_check_type: {
+        type: 'string',
+        description: 'The type of healthcheck to run, reply or request. The default value is `reply`.',
+        enum: ['reply', 'request'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.magicTransit.ipsecTunnels.create(body);
 };
 

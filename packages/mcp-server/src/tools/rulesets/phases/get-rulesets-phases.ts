@@ -17,6 +17,19 @@ export const tool: Tool = {
     type: 'object',
     properties: {
       ruleset_phase: {
+        $ref: '#/$defs/phase',
+      },
+      account_id: {
+        type: 'string',
+        description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
+      },
+      zone_id: {
+        type: 'string',
+        description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
+      },
+    },
+    $defs: {
+      phase: {
         type: 'string',
         title: 'Phase',
         description: 'The phase of the ruleset.',
@@ -46,20 +59,12 @@ export const tool: Tool = {
           'magic_transit_ratelimit',
         ],
       },
-      account_id: {
-        type: 'string',
-        description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
-      },
-      zone_id: {
-        type: 'string',
-        description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ruleset_phase, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { ruleset_phase, ...body } = args as any;
   return client.rulesets.phases.get(ruleset_phase, body);
 };
 

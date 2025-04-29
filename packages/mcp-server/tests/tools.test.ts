@@ -196,7 +196,6 @@ describe('Endpoint filtering', () => {
 
   tests.forEach((test) => {
     it(`filters by ${test.name}`, () => {
-      console.log(`Running test: ${test.name}`);
       const filtered = query(test.filters, endpoints);
       expect(filtered.map((e) => e.tool.name)).toEqual(test.expected);
     });

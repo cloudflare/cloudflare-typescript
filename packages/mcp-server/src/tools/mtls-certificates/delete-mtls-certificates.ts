@@ -29,8 +29,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { mtls_certificate_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { mtls_certificate_id, ...body } = args as any;
   return client.mtlsCertificates.delete(mtls_certificate_id, body);
 };
 

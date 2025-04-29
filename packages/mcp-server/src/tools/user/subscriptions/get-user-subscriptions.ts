@@ -19,8 +19,7 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const {} = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   return client.user.subscriptions.get();
 };
 

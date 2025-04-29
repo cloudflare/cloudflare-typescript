@@ -23,19 +23,7 @@ export const tool: Tool = {
       config: {
         anyOf: [
           {
-            type: 'object',
-            properties: {
-              dimensions: {
-                type: 'integer',
-                description: 'Specifies the number of dimensions for the index',
-              },
-              metric: {
-                type: 'string',
-                description: 'Specifies the type of metric to use calculating distance.',
-                enum: ['cosine', 'euclidean', 'dot-product'],
-              },
-            },
-            required: ['dimensions', 'metric'],
+            $ref: '#/$defs/index_dimension_configuration',
           },
           {
             type: 'object',
@@ -65,11 +53,28 @@ export const tool: Tool = {
         description: 'Specifies the description of the index.',
       },
     },
+    $defs: {
+      index_dimension_configuration: {
+        type: 'object',
+        properties: {
+          dimensions: {
+            type: 'integer',
+            description: 'Specifies the number of dimensions for the index',
+          },
+          metric: {
+            type: 'string',
+            description: 'Specifies the type of metric to use calculating distance.',
+            enum: ['cosine', 'euclidean', 'dot-product'],
+          },
+        },
+        required: ['dimensions', 'metric'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.vectorize.indexes.create(body);
 };
 

@@ -20,8 +20,7 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            type: 'string',
-            description: 'Identifier.',
+            $ref: '#/$defs/app_id',
           },
           domain: {
             type: 'string',
@@ -50,8 +49,7 @@ export const tool: Tool = {
             description:
               'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
             items: {
-              type: 'string',
-              description: 'The identity providers selected for application.',
+              $ref: '#/$defs/allowed_idps',
             },
           },
           app_launcher_visible: {
@@ -64,54 +62,7 @@ export const tool: Tool = {
               'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
           },
           cors_headers: {
-            type: 'object',
-            properties: {
-              allow_all_headers: {
-                type: 'boolean',
-                description: 'Allows all HTTP request headers.',
-              },
-              allow_all_methods: {
-                type: 'boolean',
-                description: 'Allows all HTTP request methods.',
-              },
-              allow_all_origins: {
-                type: 'boolean',
-                description: 'Allows all origins.',
-              },
-              allow_credentials: {
-                type: 'boolean',
-                description:
-                  'When set to `true`, includes credentials (cookies, authorization headers, or TLS client certificates) with requests.',
-              },
-              allowed_headers: {
-                type: 'array',
-                description: 'Allowed HTTP request headers.',
-                items: {
-                  type: 'string',
-                },
-              },
-              allowed_methods: {
-                type: 'array',
-                description: 'Allowed HTTP request methods.',
-                items: {
-                  type: 'string',
-                  enum: ['GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'],
-                },
-              },
-              allowed_origins: {
-                type: 'array',
-                description: 'Allowed origins.',
-                items: {
-                  type: 'string',
-                },
-              },
-              max_age: {
-                type: 'number',
-                description:
-                  'The maximum number of seconds the results of a preflight request can be cached.',
-              },
-            },
-            required: [],
+            $ref: '#/$defs/cors_headers',
           },
           custom_deny_message: {
             type: 'string',
@@ -268,27 +219,7 @@ export const tool: Tool = {
                       type: 'array',
                       description: 'Administrators who can approve a temporary authentication request.',
                       items: {
-                        type: 'object',
-                        description:
-                          'A group of email addresses that can approve a temporary authentication request.',
-                        properties: {
-                          approvals_needed: {
-                            type: 'number',
-                            description: 'The number of approvals needed to obtain access.',
-                          },
-                          email_addresses: {
-                            type: 'array',
-                            description: 'A list of emails that can approve the access request.',
-                            items: {
-                              type: 'string',
-                            },
-                          },
-                          email_list_uuid: {
-                            type: 'string',
-                            description: 'The UUID of an re-usable email list.',
-                          },
-                        },
-                        required: ['approvals_needed'],
+                        $ref: '#/$defs/approval_group',
                       },
                     },
                     approval_required: {
@@ -354,88 +285,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    type: 'object',
-                    title: 'HTTP Basic',
-                    description:
-                      'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      password: {
-                        type: 'string',
-                        description: 'Password used to authenticate with the remote SCIM service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['httpbasic'],
-                      },
-                      user: {
-                        type: 'string',
-                        description: 'User name used to authenticate with the remote SCIM service.',
-                      },
-                    },
-                    required: ['password', 'scheme', 'user'],
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    type: 'object',
-                    title: 'OAuth Bearer Token',
-                    description:
-                      'Attributes for configuring OAuth Bearer Token authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      token: {
-                        type: 'string',
-                        description: 'Token used to authenticate with the remote SCIM service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['oauthbearertoken'],
-                      },
-                    },
-                    required: ['token', 'scheme'],
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    type: 'object',
-                    title: 'OAuth 2',
-                    description:
-                      'Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      authorization_url: {
-                        type: 'string',
-                        description: 'URL used to generate the auth code used during token generation.',
-                      },
-                      client_id: {
-                        type: 'string',
-                        description:
-                          'Client ID used to authenticate when generating a token for authenticating with the remote SCIM service.',
-                      },
-                      client_secret: {
-                        type: 'string',
-                        description:
-                          'Secret used to authenticate when generating a token for authenticating with the remove SCIM service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['oauth2'],
-                      },
-                      token_url: {
-                        type: 'string',
-                        description:
-                          'URL used to generate the token used to authenticate with the remote SCIM service.',
-                      },
-                      scopes: {
-                        type: 'array',
-                        description:
-                          'The authorization scopes to request when generating the token used to authenticate with the remove SCIM service.',
-                        items: {
-                          type: 'string',
-                        },
-                      },
-                    },
-                    required: ['authorization_url', 'client_id', 'client_secret', 'scheme', 'token_url'],
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -468,13 +324,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -524,56 +380,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  type: 'object',
-                  description:
-                    'Transformations and filters applied to resources before they are provisioned in the remote SCIM service.',
-                  properties: {
-                    schema: {
-                      type: 'string',
-                      description: 'Which SCIM resource type this mapping applies to.',
-                    },
-                    enabled: {
-                      type: 'boolean',
-                      description: 'Whether or not this mapping is enabled.',
-                    },
-                    filter: {
-                      type: 'string',
-                      description:
-                        'A [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2) that matches resources that should be provisioned to this application.',
-                    },
-                    operations: {
-                      type: 'object',
-                      description: 'Whether or not this mapping applies to creates, updates, or deletes.',
-                      properties: {
-                        create: {
-                          type: 'boolean',
-                          description: 'Whether or not this mapping applies to create (POST) operations.',
-                        },
-                        delete: {
-                          type: 'boolean',
-                          description: 'Whether or not this mapping applies to DELETE operations.',
-                        },
-                        update: {
-                          type: 'boolean',
-                          description:
-                            'Whether or not this mapping applies to update (PATCH/PUT) operations.',
-                        },
-                      },
-                      required: [],
-                    },
-                    strictness: {
-                      type: 'string',
-                      description:
-                        'The level of adherence to outbound resource schemas when provisioning to this mapping. ‘Strict’ removes unknown values, while ‘passthrough’ passes unknown values to the target.',
-                      enum: ['strict', 'passthrough'],
-                    },
-                    transform_jsonata: {
-                      type: 'string',
-                      description:
-                        'A [JSONata](https://jsonata.org/) expression that transforms the resource before provisioning it in the application.',
-                    },
-                  },
-                  required: ['schema'],
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -584,8 +391,7 @@ export const tool: Tool = {
             description:
               'List of public domains that Access will secure. This field is deprecated in favor of `destinations` and will be supported until **November 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
             items: {
-              type: 'string',
-              description: 'A domain that Access will secure.',
+              $ref: '#/$defs/self_hosted_domains',
             },
           },
           service_auth_401_redirect: {
@@ -616,7 +422,7 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           account_id: {
             type: 'string',
@@ -631,7 +437,7 @@ export const tool: Tool = {
             description:
               'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
             items: {
-              $ref: '#/anyOf/0/properties/allowed_idps/items',
+              $ref: '#/$defs/allowed_idps',
             },
           },
           app_launcher_visible: {
@@ -696,7 +502,7 @@ export const tool: Tool = {
                       type: 'array',
                       description: 'Administrators who can approve a temporary authentication request.',
                       items: {
-                        $ref: '#/anyOf/0/properties/policies/items/anyOf/2/approval_groups/items',
+                        $ref: '#/$defs/approval_group',
                       },
                     },
                     approval_required: {
@@ -738,269 +544,10 @@ export const tool: Tool = {
           saas_app: {
             anyOf: [
               {
-                type: 'object',
-                title: 'SAML SaaS App',
-                properties: {
-                  auth_type: {
-                    type: 'string',
-                    description:
-                      'Optional identifier indicating the authentication protocol used for the saas app. Required for OIDC. Default if unset is "saml"',
-                    enum: ['saml', 'oidc'],
-                  },
-                  consumer_service_url: {
-                    type: 'string',
-                    description:
-                      "The service provider's endpoint that is responsible for receiving and parsing a SAML assertion.",
-                  },
-                  created_at: {
-                    type: 'string',
-                    format: 'date-time',
-                  },
-                  custom_attributes: {
-                    type: 'array',
-                    items: {
-                      type: 'object',
-                      properties: {
-                        friendly_name: {
-                          type: 'string',
-                          description: 'The SAML FriendlyName of the attribute.',
-                        },
-                        name: {
-                          type: 'string',
-                          description: 'The name of the attribute.',
-                        },
-                        name_format: {
-                          type: 'string',
-                          description: 'A globally unique name for an identity or service provider.',
-                          enum: [
-                            'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified',
-                            'urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
-                            'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
-                          ],
-                        },
-                        required: {
-                          type: 'boolean',
-                          description: 'If the attribute is required when building a SAML assertion.',
-                        },
-                        source: {
-                          type: 'object',
-                          properties: {
-                            name: {
-                              type: 'string',
-                              description: 'The name of the IdP attribute.',
-                            },
-                            name_by_idp: {
-                              type: 'array',
-                              description: 'A mapping from IdP ID to attribute name.',
-                              items: {
-                                type: 'object',
-                                properties: {
-                                  idp_id: {
-                                    type: 'string',
-                                    description: 'The UID of the IdP.',
-                                  },
-                                  source_name: {
-                                    type: 'string',
-                                    description: 'The name of the IdP provided attribute.',
-                                  },
-                                },
-                                required: [],
-                              },
-                            },
-                          },
-                          required: [],
-                        },
-                      },
-                      required: [],
-                    },
-                  },
-                  default_relay_state: {
-                    type: 'string',
-                    description:
-                      'The URL that the user will be redirected to after a successful login for IDP initiated logins.',
-                  },
-                  idp_entity_id: {
-                    type: 'string',
-                    description: 'The unique identifier for your SaaS application.',
-                  },
-                  name_id_format: {
-                    type: 'string',
-                    description: 'The format of the name identifier sent to the SaaS application.',
-                    enum: ['id', 'email'],
-                  },
-                  name_id_transform_jsonata: {
-                    type: 'string',
-                    description:
-                      "A [JSONata](https://jsonata.org/) expression that transforms an application's user identities into a NameID value for its SAML assertion. This expression should evaluate to a singular string. The output of this expression can override the `name_id_format` setting.\n",
-                  },
-                  public_key: {
-                    type: 'string',
-                    description: 'The Access public certificate that will be used to verify your identity.',
-                  },
-                  saml_attribute_transform_jsonata: {
-                    type: 'string',
-                    description:
-                      "A [JSONata] (https://jsonata.org/) expression that transforms an application's user identities into attribute assertions in the SAML response. The expression can transform id, email, name, and groups values. It can also transform fields listed in the saml_attributes or oidc_fields of the identity provider used to authenticate. The output of this expression must be a JSON object.\n",
-                  },
-                  sp_entity_id: {
-                    type: 'string',
-                    description: 'A globally unique name for an identity or service provider.',
-                  },
-                  sso_endpoint: {
-                    type: 'string',
-                    description: 'The endpoint where your SaaS application will send login requests.',
-                  },
-                  updated_at: {
-                    type: 'string',
-                    format: 'date-time',
-                  },
-                },
-                required: [],
+                $ref: '#/$defs/saml_saas_app',
               },
               {
-                type: 'object',
-                title: 'OIDC SaaS App',
-                properties: {
-                  access_token_lifetime: {
-                    type: 'string',
-                    description:
-                      'The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must be greater than or equal to 1m and less than or equal to 24h.',
-                  },
-                  allow_pkce_without_client_secret: {
-                    type: 'boolean',
-                    description:
-                      'If client secret should be required on the token endpoint when authorization_code_with_pkce grant is used.',
-                  },
-                  app_launcher_url: {
-                    type: 'string',
-                    description: 'The URL where this applications tile redirects users',
-                  },
-                  auth_type: {
-                    type: 'string',
-                    description:
-                      'Identifier of the authentication protocol used for the saas app. Required for OIDC.',
-                    enum: ['saml', 'oidc'],
-                  },
-                  client_id: {
-                    type: 'string',
-                    description: 'The application client id',
-                  },
-                  client_secret: {
-                    type: 'string',
-                    description: 'The application client secret, only returned on POST request.',
-                  },
-                  created_at: {
-                    type: 'string',
-                    format: 'date-time',
-                  },
-                  custom_claims: {
-                    type: 'array',
-                    items: {
-                      type: 'object',
-                      properties: {
-                        name: {
-                          type: 'string',
-                          description: 'The name of the claim.',
-                        },
-                        required: {
-                          type: 'boolean',
-                          description: 'If the claim is required when building an OIDC token.',
-                        },
-                        scope: {
-                          type: 'string',
-                          description: 'The scope of the claim.',
-                          enum: ['groups', 'profile', 'email', 'openid'],
-                        },
-                        source: {
-                          type: 'object',
-                          properties: {
-                            name: {
-                              type: 'string',
-                              description: 'The name of the IdP claim.',
-                            },
-                            name_by_idp: {
-                              type: 'object',
-                              description: 'A mapping from IdP ID to claim name.',
-                            },
-                          },
-                          required: [],
-                        },
-                      },
-                      required: [],
-                    },
-                  },
-                  grant_types: {
-                    type: 'array',
-                    description: 'The OIDC flows supported by this application',
-                    items: {
-                      type: 'string',
-                      enum: [
-                        'authorization_code',
-                        'authorization_code_with_pkce',
-                        'refresh_tokens',
-                        'hybrid',
-                        'implicit',
-                      ],
-                    },
-                  },
-                  group_filter_regex: {
-                    type: 'string',
-                    description:
-                      'A regex to filter Cloudflare groups returned in ID token and userinfo endpoint',
-                  },
-                  hybrid_and_implicit_options: {
-                    type: 'object',
-                    properties: {
-                      return_access_token_from_authorization_endpoint: {
-                        type: 'boolean',
-                        description:
-                          'If an Access Token should be returned from the OIDC Authorization endpoint',
-                      },
-                      return_id_token_from_authorization_endpoint: {
-                        type: 'boolean',
-                        description: 'If an ID Token should be returned from the OIDC Authorization endpoint',
-                      },
-                    },
-                    required: [],
-                  },
-                  public_key: {
-                    type: 'string',
-                    description: 'The Access public certificate that will be used to verify your identity.',
-                  },
-                  redirect_uris: {
-                    type: 'array',
-                    description:
-                      "The permitted URL's for Cloudflare to return Authorization codes and Access/ID tokens",
-                    items: {
-                      type: 'string',
-                    },
-                  },
-                  refresh_token_options: {
-                    type: 'object',
-                    properties: {
-                      lifetime: {
-                        type: 'string',
-                        description:
-                          'How long a refresh token will be valid for after creation. Valid units are m,h,d. Must be longer than 1m.',
-                      },
-                    },
-                    required: [],
-                  },
-                  scopes: {
-                    type: 'array',
-                    description:
-                      'Define the user information shared with access, "offline_access" scope will be automatically enabled if refresh tokens are enabled',
-                    items: {
-                      type: 'string',
-                      enum: ['openid', 'groups', 'email', 'profile'],
-                    },
-                  },
-                  updated_at: {
-                    type: 'string',
-                    format: 'date-time',
-                  },
-                },
-                required: [],
+                $ref: '#/$defs/oidc_saas_app',
               },
             ],
           },
@@ -1021,13 +568,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -1060,13 +607,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -1116,7 +663,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  $ref: '#/anyOf/0/properties/scim_config/mappings/items',
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -1141,7 +688,7 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           domain: {
             type: 'string',
@@ -1170,7 +717,7 @@ export const tool: Tool = {
             description:
               'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
             items: {
-              $ref: '#/anyOf/0/properties/allowed_idps/items',
+              $ref: '#/$defs/allowed_idps',
             },
           },
           app_launcher_visible: {
@@ -1183,7 +730,7 @@ export const tool: Tool = {
               'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
           },
           cors_headers: {
-            $ref: '#/anyOf/0/properties/cors_headers',
+            $ref: '#/$defs/cors_headers',
           },
           custom_deny_message: {
             type: 'string',
@@ -1340,7 +887,7 @@ export const tool: Tool = {
                       type: 'array',
                       description: 'Administrators who can approve a temporary authentication request.',
                       items: {
-                        $ref: '#/anyOf/0/properties/policies/items/anyOf/2/approval_groups/items',
+                        $ref: '#/$defs/approval_group',
                       },
                     },
                     approval_required: {
@@ -1406,13 +953,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -1445,13 +992,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -1501,7 +1048,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  $ref: '#/anyOf/0/properties/scim_config/mappings/items',
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -1512,7 +1059,7 @@ export const tool: Tool = {
             description:
               'List of public domains that Access will secure. This field is deprecated in favor of `destinations` and will be supported until **November 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
             items: {
-              $ref: '#/anyOf/0/properties/self_hosted_domains/items',
+              $ref: '#/$defs/self_hosted_domains',
             },
           },
           service_auth_401_redirect: {
@@ -1543,7 +1090,7 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           domain: {
             type: 'string',
@@ -1572,7 +1119,7 @@ export const tool: Tool = {
             description:
               'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
             items: {
-              $ref: '#/anyOf/0/properties/allowed_idps/items',
+              $ref: '#/$defs/allowed_idps',
             },
           },
           app_launcher_visible: {
@@ -1585,7 +1132,7 @@ export const tool: Tool = {
               'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
           },
           cors_headers: {
-            $ref: '#/anyOf/0/properties/cors_headers',
+            $ref: '#/$defs/cors_headers',
           },
           custom_deny_message: {
             type: 'string',
@@ -1742,7 +1289,7 @@ export const tool: Tool = {
                       type: 'array',
                       description: 'Administrators who can approve a temporary authentication request.',
                       items: {
-                        $ref: '#/anyOf/0/properties/policies/items/anyOf/2/approval_groups/items',
+                        $ref: '#/$defs/approval_group',
                       },
                     },
                     approval_required: {
@@ -1808,13 +1355,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -1847,13 +1394,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -1903,7 +1450,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  $ref: '#/anyOf/0/properties/scim_config/mappings/items',
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -1914,7 +1461,7 @@ export const tool: Tool = {
             description:
               'List of public domains that Access will secure. This field is deprecated in favor of `destinations` and will be supported until **November 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
             items: {
-              $ref: '#/anyOf/0/properties/self_hosted_domains/items',
+              $ref: '#/$defs/self_hosted_domains',
             },
           },
           service_auth_401_redirect: {
@@ -1945,24 +1492,10 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           type: {
-            type: 'string',
-            description: 'The application type.',
-            enum: [
-              'self_hosted',
-              'saas',
-              'ssh',
-              'vnc',
-              'app_launcher',
-              'warp',
-              'biso',
-              'bookmark',
-              'dash_sso',
-              'infrastructure',
-              'rdp',
-            ],
+            $ref: '#/$defs/application_type',
           },
           account_id: {
             type: 'string',
@@ -1977,7 +1510,7 @@ export const tool: Tool = {
             description:
               'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
             items: {
-              $ref: '#/anyOf/0/properties/allowed_idps/items',
+              $ref: '#/$defs/allowed_idps',
             },
           },
           app_launcher_logo_url: {
@@ -2079,7 +1612,7 @@ export const tool: Tool = {
                       type: 'array',
                       description: 'Administrators who can approve a temporary authentication request.',
                       items: {
-                        $ref: '#/anyOf/0/properties/policies/items/anyOf/2/approval_groups/items',
+                        $ref: '#/$defs/approval_group',
                       },
                     },
                     approval_required: {
@@ -2135,13 +1668,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -2174,13 +1707,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -2230,7 +1763,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  $ref: '#/anyOf/0/properties/scim_config/mappings/items',
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -2251,10 +1784,10 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           type: {
-            $ref: '#/anyOf/4/properties/type',
+            $ref: '#/$defs/application_type',
           },
           account_id: {
             type: 'string',
@@ -2269,7 +1802,7 @@ export const tool: Tool = {
             description:
               'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
             items: {
-              $ref: '#/anyOf/0/properties/allowed_idps/items',
+              $ref: '#/$defs/allowed_idps',
             },
           },
           app_launcher_logo_url: {
@@ -2371,7 +1904,7 @@ export const tool: Tool = {
                       type: 'array',
                       description: 'Administrators who can approve a temporary authentication request.',
                       items: {
-                        $ref: '#/anyOf/0/properties/policies/items/anyOf/2/approval_groups/items',
+                        $ref: '#/$defs/approval_group',
                       },
                     },
                     approval_required: {
@@ -2427,13 +1960,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -2466,13 +1999,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -2522,7 +2055,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  $ref: '#/anyOf/0/properties/scim_config/mappings/items',
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -2543,10 +2076,10 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           type: {
-            $ref: '#/anyOf/4/properties/type',
+            $ref: '#/$defs/application_type',
           },
           account_id: {
             type: 'string',
@@ -2561,7 +2094,7 @@ export const tool: Tool = {
             description:
               'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
             items: {
-              $ref: '#/anyOf/0/properties/allowed_idps/items',
+              $ref: '#/$defs/allowed_idps',
             },
           },
           app_launcher_logo_url: {
@@ -2663,7 +2196,7 @@ export const tool: Tool = {
                       type: 'array',
                       description: 'Administrators who can approve a temporary authentication request.',
                       items: {
-                        $ref: '#/anyOf/0/properties/policies/items/anyOf/2/approval_groups/items',
+                        $ref: '#/$defs/approval_group',
                       },
                     },
                     approval_required: {
@@ -2719,13 +2252,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -2758,13 +2291,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -2814,7 +2347,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  $ref: '#/anyOf/0/properties/scim_config/mappings/items',
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -2835,7 +2368,7 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           account_id: {
             type: 'string',
@@ -2878,13 +2411,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -2917,13 +2450,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -2973,7 +2506,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  $ref: '#/anyOf/0/properties/scim_config/mappings/items',
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -2998,7 +2531,7 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           target_criteria: {
             type: 'array',
@@ -3025,7 +2558,7 @@ export const tool: Tool = {
             },
           },
           type: {
-            $ref: '#/anyOf/4/properties/type',
+            $ref: '#/$defs/application_type',
           },
           account_id: {
             type: 'string',
@@ -3046,447 +2579,14 @@ export const tool: Tool = {
               type: 'object',
               properties: {
                 decision: {
-                  type: 'string',
-                  description:
-                    'The action Access will take if a user matches this policy. Infrastructure application policies can only use the Allow action.',
-                  enum: ['allow', 'deny', 'non_identity', 'bypass'],
+                  $ref: '#/$defs/decision',
                 },
                 include: {
                   type: 'array',
                   description:
                     'Rules evaluated with an OR logical operator. A user needs to meet only one of the Include rules.',
                   items: {
-                    anyOf: [
-                      {
-                        type: 'object',
-                        title: 'Access groups',
-                        description: 'Matches an Access group.',
-                        properties: {
-                          group: {
-                            type: 'object',
-                            properties: {
-                              id: {
-                                type: 'string',
-                                description: 'The ID of a previously created Access group.',
-                              },
-                            },
-                            required: ['id'],
-                          },
-                        },
-                        required: ['group'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Any Valid Service Token',
-                        description: 'Matches any valid Access Service Token',
-                        properties: {
-                          any_valid_service_token: {
-                            type: 'object',
-                            description: 'An empty object which matches on all service tokens.',
-                            properties: {},
-                            required: [],
-                          },
-                        },
-                        required: ['any_valid_service_token'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Authentication Context',
-                        description:
-                          'Matches an Azure Authentication Context.\nRequires an Azure identity provider.',
-                        properties: {
-                          auth_context: {
-                            type: 'object',
-                            properties: {
-                              id: {
-                                type: 'string',
-                                description: 'The ID of an Authentication context.',
-                              },
-                              ac_id: {
-                                type: 'string',
-                                description: 'The ACID of an Authentication context.',
-                              },
-                              identity_provider_id: {
-                                type: 'string',
-                                description: 'The ID of your Azure identity provider.',
-                              },
-                            },
-                            required: ['id', 'ac_id', 'identity_provider_id'],
-                          },
-                        },
-                        required: ['auth_context'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Authentication method',
-                        description: 'Enforce different MFA options',
-                        properties: {
-                          auth_method: {
-                            type: 'object',
-                            properties: {
-                              auth_method: {
-                                type: 'string',
-                                description:
-                                  'The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176#section-2.',
-                              },
-                            },
-                            required: ['auth_method'],
-                          },
-                        },
-                        required: ['auth_method'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Azure group',
-                        description: 'Matches an Azure group.\nRequires an Azure identity provider.',
-                        properties: {
-                          azureAD: {
-                            type: 'object',
-                            properties: {
-                              id: {
-                                type: 'string',
-                                description: 'The ID of an Azure group.',
-                              },
-                              identity_provider_id: {
-                                type: 'string',
-                                description: 'The ID of your Azure identity provider.',
-                              },
-                            },
-                            required: ['id', 'identity_provider_id'],
-                          },
-                        },
-                        required: ['azureAD'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Valid certificate',
-                        description: 'Matches any valid client certificate.',
-                        properties: {
-                          certificate: {
-                            type: 'object',
-                            properties: {},
-                            required: [],
-                          },
-                        },
-                        required: ['certificate'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Common Name',
-                        description: 'Matches a specific common name.',
-                        properties: {
-                          common_name: {
-                            type: 'object',
-                            properties: {
-                              common_name: {
-                                type: 'string',
-                                description: 'The common name to match.',
-                              },
-                            },
-                            required: ['common_name'],
-                          },
-                        },
-                        required: ['common_name'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Country',
-                        description: 'Matches a specific country',
-                        properties: {
-                          geo: {
-                            type: 'object',
-                            properties: {
-                              country_code: {
-                                type: 'string',
-                                description: 'The country code that should be matched.',
-                              },
-                            },
-                            required: ['country_code'],
-                          },
-                        },
-                        required: ['geo'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Device Posture',
-                        description: 'Enforces a device posture rule has run successfully',
-                        properties: {
-                          device_posture: {
-                            type: 'object',
-                            properties: {
-                              integration_uid: {
-                                type: 'string',
-                                description: 'The ID of a device posture integration.',
-                              },
-                            },
-                            required: ['integration_uid'],
-                          },
-                        },
-                        required: ['device_posture'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Email domain',
-                        description: 'Match an entire email domain.',
-                        properties: {
-                          email_domain: {
-                            type: 'object',
-                            properties: {
-                              domain: {
-                                type: 'string',
-                                description: 'The email domain to match.',
-                              },
-                            },
-                            required: ['domain'],
-                          },
-                        },
-                        required: ['email_domain'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Email list',
-                        description: 'Matches an email address from a list.',
-                        properties: {
-                          email_list: {
-                            type: 'object',
-                            properties: {
-                              id: {
-                                type: 'string',
-                                description: 'The ID of a previously created email list.',
-                              },
-                            },
-                            required: ['id'],
-                          },
-                        },
-                        required: ['email_list'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Email',
-                        description: 'Matches a specific email.',
-                        properties: {
-                          email: {
-                            type: 'object',
-                            properties: {
-                              email: {
-                                type: 'string',
-                                description: 'The email of the user.',
-                              },
-                            },
-                            required: ['email'],
-                          },
-                        },
-                        required: ['email'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Everyone',
-                        description: 'Matches everyone.',
-                        properties: {
-                          everyone: {
-                            type: 'object',
-                            description: 'An empty object which matches on all users.',
-                            properties: {},
-                            required: [],
-                          },
-                        },
-                        required: ['everyone'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'External Evaluation',
-                        description:
-                          'Create Allow or Block policies which evaluate the user based on custom criteria.',
-                        properties: {
-                          external_evaluation: {
-                            type: 'object',
-                            properties: {
-                              evaluate_url: {
-                                type: 'string',
-                                description: 'The API endpoint containing your business logic.',
-                              },
-                              keys_url: {
-                                type: 'string',
-                                description:
-                                  'The API endpoint containing the key that Access uses to verify that the response came from your API.',
-                              },
-                            },
-                            required: ['evaluate_url', 'keys_url'],
-                          },
-                        },
-                        required: ['external_evaluation'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Github organization',
-                        description: 'Matches a Github organization.\nRequires a Github identity provider.',
-                        properties: {
-                          'github-organization': {
-                            type: 'object',
-                            properties: {
-                              identity_provider_id: {
-                                type: 'string',
-                                description: 'The ID of your Github identity provider.',
-                              },
-                              name: {
-                                type: 'string',
-                                description: 'The name of the organization.',
-                              },
-                              team: {
-                                type: 'string',
-                                description: 'The name of the team',
-                              },
-                            },
-                            required: ['identity_provider_id', 'name'],
-                          },
-                        },
-                        required: ['github-organization'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Google Workspace group',
-                        description:
-                          'Matches a group in Google Workspace.\nRequires a Google Workspace identity provider.',
-                        properties: {
-                          gsuite: {
-                            type: 'object',
-                            properties: {
-                              email: {
-                                type: 'string',
-                                description: 'The email of the Google Workspace group.',
-                              },
-                              identity_provider_id: {
-                                type: 'string',
-                                description: 'The ID of your Google Workspace identity provider.',
-                              },
-                            },
-                            required: ['email', 'identity_provider_id'],
-                          },
-                        },
-                        required: ['gsuite'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Login Method',
-                        description: 'Matches a specific identity provider id.',
-                        properties: {
-                          login_method: {
-                            type: 'object',
-                            properties: {
-                              id: {
-                                type: 'string',
-                                description: 'The ID of an identity provider.',
-                              },
-                            },
-                            required: ['id'],
-                          },
-                        },
-                        required: ['login_method'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'IP list',
-                        description: 'Matches an IP address from a list.',
-                        properties: {
-                          ip_list: {
-                            type: 'object',
-                            properties: {
-                              id: {
-                                type: 'string',
-                                description: 'The ID of a previously created IP list.',
-                              },
-                            },
-                            required: ['id'],
-                          },
-                        },
-                        required: ['ip_list'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'IP ranges',
-                        description: 'Matches an IP address block.',
-                        properties: {
-                          ip: {
-                            type: 'object',
-                            properties: {
-                              ip: {
-                                type: 'string',
-                                description: 'An IPv4 or IPv6 CIDR block.',
-                              },
-                            },
-                            required: ['ip'],
-                          },
-                        },
-                        required: ['ip'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Okta group',
-                        description: 'Matches an Okta group.\nRequires an Okta identity provider.',
-                        properties: {
-                          okta: {
-                            type: 'object',
-                            properties: {
-                              identity_provider_id: {
-                                type: 'string',
-                                description: 'The ID of your Okta identity provider.',
-                              },
-                              name: {
-                                type: 'string',
-                                description: 'The name of the Okta group.',
-                              },
-                            },
-                            required: ['identity_provider_id', 'name'],
-                          },
-                        },
-                        required: ['okta'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'SAML group',
-                        description: 'Matches a SAML group.\nRequires a SAML identity provider.',
-                        properties: {
-                          saml: {
-                            type: 'object',
-                            properties: {
-                              attribute_name: {
-                                type: 'string',
-                                description: 'The name of the SAML attribute.',
-                              },
-                              attribute_value: {
-                                type: 'string',
-                                description: 'The SAML attribute value to look for.',
-                              },
-                              identity_provider_id: {
-                                type: 'string',
-                                description: 'The ID of your SAML identity provider.',
-                              },
-                            },
-                            required: ['attribute_name', 'attribute_value', 'identity_provider_id'],
-                          },
-                        },
-                        required: ['saml'],
-                      },
-                      {
-                        type: 'object',
-                        title: 'Service Token',
-                        description: 'Matches a specific Access Service Token',
-                        properties: {
-                          service_token: {
-                            type: 'object',
-                            properties: {
-                              token_id: {
-                                type: 'string',
-                                description: 'The ID of a Service Token.',
-                              },
-                            },
-                            required: ['token_id'],
-                          },
-                        },
-                        required: ['service_token'],
-                      },
-                    ],
-                    description: 'Matches an Access group.',
+                    $ref: '#/$defs/access_rule',
                   },
                 },
                 name: {
@@ -3528,7 +2628,7 @@ export const tool: Tool = {
                   description:
                     'Rules evaluated with a NOT logical operator. To match the policy, a user cannot meet any of the Exclude rules.',
                   items: {
-                    $ref: '#/anyOf/8/properties/policies/items/include/items',
+                    $ref: '#/$defs/access_rule',
                   },
                 },
                 require: {
@@ -3536,7 +2636,7 @@ export const tool: Tool = {
                   description:
                     'Rules evaluated with an AND logical operator. To match the policy, a user must meet all of the Require rules.',
                   items: {
-                    $ref: '#/anyOf/8/properties/policies/items/include/items',
+                    $ref: '#/$defs/access_rule',
                   },
                 },
               },
@@ -3549,7 +2649,7 @@ export const tool: Tool = {
         type: 'object',
         properties: {
           app_id: {
-            $ref: '#/anyOf/0/properties/app_id',
+            $ref: '#/$defs/app_id',
           },
           domain: {
             type: 'string',
@@ -3602,7 +2702,7 @@ export const tool: Tool = {
             description:
               'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
             items: {
-              $ref: '#/anyOf/0/properties/allowed_idps/items',
+              $ref: '#/$defs/allowed_idps',
             },
           },
           app_launcher_visible: {
@@ -3615,7 +2715,7 @@ export const tool: Tool = {
               'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
           },
           cors_headers: {
-            $ref: '#/anyOf/0/properties/cors_headers',
+            $ref: '#/$defs/cors_headers',
           },
           custom_deny_message: {
             type: 'string',
@@ -3772,7 +2872,7 @@ export const tool: Tool = {
                       type: 'array',
                       description: 'Administrators who can approve a temporary authentication request.',
                       items: {
-                        $ref: '#/anyOf/0/properties/policies/items/anyOf/2/approval_groups/items',
+                        $ref: '#/$defs/approval_group',
                       },
                     },
                     approval_required: {
@@ -3838,13 +2938,13 @@ export const tool: Tool = {
               authentication: {
                 anyOf: [
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                   },
                   {
-                    $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
                   },
                   {
                     type: 'object',
@@ -3877,13 +2977,13 @@ export const tool: Tool = {
                     items: {
                       anyOf: [
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/0',
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/1',
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
                         },
                         {
-                          $ref: '#/anyOf/0/properties/scim_config/authentication/anyOf/2',
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
                         },
                         {
                           type: 'object',
@@ -3933,7 +3033,7 @@ export const tool: Tool = {
                 description:
                   'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
                 items: {
-                  $ref: '#/anyOf/0/properties/scim_config/mappings/items',
+                  $ref: '#/$defs/scim_config_mapping',
                 },
               },
             },
@@ -3944,7 +3044,7 @@ export const tool: Tool = {
             description:
               'List of public domains that Access will secure. This field is deprecated in favor of `destinations` and will be supported until **November 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
             items: {
-              $ref: '#/anyOf/0/properties/self_hosted_domains/items',
+              $ref: '#/$defs/self_hosted_domains',
             },
           },
           service_auth_401_redirect: {
@@ -3972,11 +3072,1012 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      app_id: {
+        type: 'string',
+        description: 'Identifier.',
+      },
+      allowed_idps: {
+        type: 'string',
+        description: 'The identity providers selected for application.',
+      },
+      allowed_headers: {
+        type: 'string',
+      },
+      allowed_methods: {
+        type: 'string',
+        enum: ['GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'],
+      },
+      allowed_origins: {
+        type: 'string',
+      },
+      cors_headers: {
+        type: 'object',
+        properties: {
+          allow_all_headers: {
+            type: 'boolean',
+            description: 'Allows all HTTP request headers.',
+          },
+          allow_all_methods: {
+            type: 'boolean',
+            description: 'Allows all HTTP request methods.',
+          },
+          allow_all_origins: {
+            type: 'boolean',
+            description: 'Allows all origins.',
+          },
+          allow_credentials: {
+            type: 'boolean',
+            description:
+              'When set to `true`, includes credentials (cookies, authorization headers, or TLS client certificates) with requests.',
+          },
+          allowed_headers: {
+            type: 'array',
+            description: 'Allowed HTTP request headers.',
+            items: {
+              $ref: '#/$defs/allowed_headers',
+            },
+          },
+          allowed_methods: {
+            type: 'array',
+            description: 'Allowed HTTP request methods.',
+            items: {
+              $ref: '#/$defs/allowed_methods',
+            },
+          },
+          allowed_origins: {
+            type: 'array',
+            description: 'Allowed origins.',
+            items: {
+              $ref: '#/$defs/allowed_origins',
+            },
+          },
+          max_age: {
+            type: 'number',
+            description: 'The maximum number of seconds the results of a preflight request can be cached.',
+          },
+        },
+        required: [],
+      },
+      approval_group: {
+        type: 'object',
+        description: 'A group of email addresses that can approve a temporary authentication request.',
+        properties: {
+          approvals_needed: {
+            type: 'number',
+            description: 'The number of approvals needed to obtain access.',
+          },
+          email_addresses: {
+            type: 'array',
+            description: 'A list of emails that can approve the access request.',
+            items: {
+              type: 'string',
+            },
+          },
+          email_list_uuid: {
+            type: 'string',
+            description: 'The UUID of an re-usable email list.',
+          },
+        },
+        required: ['approvals_needed'],
+      },
+      scim_config_authentication_http_basic: {
+        type: 'object',
+        title: 'HTTP Basic',
+        description:
+          'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
+        properties: {
+          password: {
+            type: 'string',
+            description: 'Password used to authenticate with the remote SCIM service.',
+          },
+          scheme: {
+            type: 'string',
+            description: 'The authentication scheme to use when making SCIM requests to this application.',
+            enum: ['httpbasic'],
+          },
+          user: {
+            type: 'string',
+            description: 'User name used to authenticate with the remote SCIM service.',
+          },
+        },
+        required: ['password', 'scheme', 'user'],
+      },
+      scim_config_authentication_oauth_bearer_token: {
+        type: 'object',
+        title: 'OAuth Bearer Token',
+        description:
+          'Attributes for configuring OAuth Bearer Token authentication scheme for SCIM provisioning to an application.',
+        properties: {
+          token: {
+            type: 'string',
+            description: 'Token used to authenticate with the remote SCIM service.',
+          },
+          scheme: {
+            type: 'string',
+            description: 'The authentication scheme to use when making SCIM requests to this application.',
+            enum: ['oauthbearertoken'],
+          },
+        },
+        required: ['token', 'scheme'],
+      },
+      scim_config_authentication_oauth2: {
+        type: 'object',
+        title: 'OAuth 2',
+        description:
+          'Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning to an application.',
+        properties: {
+          authorization_url: {
+            type: 'string',
+            description: 'URL used to generate the auth code used during token generation.',
+          },
+          client_id: {
+            type: 'string',
+            description:
+              'Client ID used to authenticate when generating a token for authenticating with the remote SCIM service.',
+          },
+          client_secret: {
+            type: 'string',
+            description:
+              'Secret used to authenticate when generating a token for authenticating with the remove SCIM service.',
+          },
+          scheme: {
+            type: 'string',
+            description: 'The authentication scheme to use when making SCIM requests to this application.',
+            enum: ['oauth2'],
+          },
+          token_url: {
+            type: 'string',
+            description: 'URL used to generate the token used to authenticate with the remote SCIM service.',
+          },
+          scopes: {
+            type: 'array',
+            description:
+              'The authorization scopes to request when generating the token used to authenticate with the remove SCIM service.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: ['authorization_url', 'client_id', 'client_secret', 'scheme', 'token_url'],
+      },
+      scim_config_mapping: {
+        type: 'object',
+        description:
+          'Transformations and filters applied to resources before they are provisioned in the remote SCIM service.',
+        properties: {
+          schema: {
+            type: 'string',
+            description: 'Which SCIM resource type this mapping applies to.',
+          },
+          enabled: {
+            type: 'boolean',
+            description: 'Whether or not this mapping is enabled.',
+          },
+          filter: {
+            type: 'string',
+            description:
+              'A [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2) that matches resources that should be provisioned to this application.',
+          },
+          operations: {
+            type: 'object',
+            description: 'Whether or not this mapping applies to creates, updates, or deletes.',
+            properties: {
+              create: {
+                type: 'boolean',
+                description: 'Whether or not this mapping applies to create (POST) operations.',
+              },
+              delete: {
+                type: 'boolean',
+                description: 'Whether or not this mapping applies to DELETE operations.',
+              },
+              update: {
+                type: 'boolean',
+                description: 'Whether or not this mapping applies to update (PATCH/PUT) operations.',
+              },
+            },
+            required: [],
+          },
+          strictness: {
+            type: 'string',
+            description:
+              'The level of adherence to outbound resource schemas when provisioning to this mapping. ‘Strict’ removes unknown values, while ‘passthrough’ passes unknown values to the target.',
+            enum: ['strict', 'passthrough'],
+          },
+          transform_jsonata: {
+            type: 'string',
+            description:
+              'A [JSONata](https://jsonata.org/) expression that transforms the resource before provisioning it in the application.',
+          },
+        },
+        required: ['schema'],
+      },
+      self_hosted_domains: {
+        type: 'string',
+        description: 'A domain that Access will secure.',
+      },
+      saas_app_name_id_format: {
+        type: 'string',
+        description: 'The format of the name identifier sent to the SaaS application.',
+        enum: ['id', 'email'],
+      },
+      saml_saas_app: {
+        type: 'object',
+        title: 'SAML SaaS App',
+        properties: {
+          auth_type: {
+            type: 'string',
+            description:
+              'Optional identifier indicating the authentication protocol used for the saas app. Required for OIDC. Default if unset is "saml"',
+            enum: ['saml', 'oidc'],
+          },
+          consumer_service_url: {
+            type: 'string',
+            description:
+              "The service provider's endpoint that is responsible for receiving and parsing a SAML assertion.",
+          },
+          created_at: {
+            type: 'string',
+            format: 'date-time',
+          },
+          custom_attributes: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                friendly_name: {
+                  type: 'string',
+                  description: 'The SAML FriendlyName of the attribute.',
+                },
+                name: {
+                  type: 'string',
+                  description: 'The name of the attribute.',
+                },
+                name_format: {
+                  type: 'string',
+                  description: 'A globally unique name for an identity or service provider.',
+                  enum: [
+                    'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified',
+                    'urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+                    'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+                  ],
+                },
+                required: {
+                  type: 'boolean',
+                  description: 'If the attribute is required when building a SAML assertion.',
+                },
+                source: {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                      description: 'The name of the IdP attribute.',
+                    },
+                    name_by_idp: {
+                      type: 'array',
+                      description: 'A mapping from IdP ID to attribute name.',
+                      items: {
+                        type: 'object',
+                        properties: {
+                          idp_id: {
+                            type: 'string',
+                            description: 'The UID of the IdP.',
+                          },
+                          source_name: {
+                            type: 'string',
+                            description: 'The name of the IdP provided attribute.',
+                          },
+                        },
+                        required: [],
+                      },
+                    },
+                  },
+                  required: [],
+                },
+              },
+              required: [],
+            },
+          },
+          default_relay_state: {
+            type: 'string',
+            description:
+              'The URL that the user will be redirected to after a successful login for IDP initiated logins.',
+          },
+          idp_entity_id: {
+            type: 'string',
+            description: 'The unique identifier for your SaaS application.',
+          },
+          name_id_format: {
+            $ref: '#/$defs/saas_app_name_id_format',
+          },
+          name_id_transform_jsonata: {
+            type: 'string',
+            description:
+              "A [JSONata](https://jsonata.org/) expression that transforms an application's user identities into a NameID value for its SAML assertion. This expression should evaluate to a singular string. The output of this expression can override the `name_id_format` setting.\n",
+          },
+          public_key: {
+            type: 'string',
+            description: 'The Access public certificate that will be used to verify your identity.',
+          },
+          saml_attribute_transform_jsonata: {
+            type: 'string',
+            description:
+              "A [JSONata] (https://jsonata.org/) expression that transforms an application's user identities into attribute assertions in the SAML response. The expression can transform id, email, name, and groups values. It can also transform fields listed in the saml_attributes or oidc_fields of the identity provider used to authenticate. The output of this expression must be a JSON object.\n",
+          },
+          sp_entity_id: {
+            type: 'string',
+            description: 'A globally unique name for an identity or service provider.',
+          },
+          sso_endpoint: {
+            type: 'string',
+            description: 'The endpoint where your SaaS application will send login requests.',
+          },
+          updated_at: {
+            type: 'string',
+            format: 'date-time',
+          },
+        },
+        required: [],
+      },
+      oidc_saas_app: {
+        type: 'object',
+        title: 'OIDC SaaS App',
+        properties: {
+          access_token_lifetime: {
+            type: 'string',
+            description:
+              'The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must be greater than or equal to 1m and less than or equal to 24h.',
+          },
+          allow_pkce_without_client_secret: {
+            type: 'boolean',
+            description:
+              'If client secret should be required on the token endpoint when authorization_code_with_pkce grant is used.',
+          },
+          app_launcher_url: {
+            type: 'string',
+            description: 'The URL where this applications tile redirects users',
+          },
+          auth_type: {
+            type: 'string',
+            description:
+              'Identifier of the authentication protocol used for the saas app. Required for OIDC.',
+            enum: ['saml', 'oidc'],
+          },
+          client_id: {
+            type: 'string',
+            description: 'The application client id',
+          },
+          client_secret: {
+            type: 'string',
+            description: 'The application client secret, only returned on POST request.',
+          },
+          created_at: {
+            type: 'string',
+            format: 'date-time',
+          },
+          custom_claims: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  description: 'The name of the claim.',
+                },
+                required: {
+                  type: 'boolean',
+                  description: 'If the claim is required when building an OIDC token.',
+                },
+                scope: {
+                  type: 'string',
+                  description: 'The scope of the claim.',
+                  enum: ['groups', 'profile', 'email', 'openid'],
+                },
+                source: {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                      description: 'The name of the IdP claim.',
+                    },
+                    name_by_idp: {
+                      type: 'object',
+                      description: 'A mapping from IdP ID to claim name.',
+                    },
+                  },
+                  required: [],
+                },
+              },
+              required: [],
+            },
+          },
+          grant_types: {
+            type: 'array',
+            description: 'The OIDC flows supported by this application',
+            items: {
+              type: 'string',
+              enum: [
+                'authorization_code',
+                'authorization_code_with_pkce',
+                'refresh_tokens',
+                'hybrid',
+                'implicit',
+              ],
+            },
+          },
+          group_filter_regex: {
+            type: 'string',
+            description: 'A regex to filter Cloudflare groups returned in ID token and userinfo endpoint',
+          },
+          hybrid_and_implicit_options: {
+            type: 'object',
+            properties: {
+              return_access_token_from_authorization_endpoint: {
+                type: 'boolean',
+                description: 'If an Access Token should be returned from the OIDC Authorization endpoint',
+              },
+              return_id_token_from_authorization_endpoint: {
+                type: 'boolean',
+                description: 'If an ID Token should be returned from the OIDC Authorization endpoint',
+              },
+            },
+            required: [],
+          },
+          public_key: {
+            type: 'string',
+            description: 'The Access public certificate that will be used to verify your identity.',
+          },
+          redirect_uris: {
+            type: 'array',
+            description:
+              "The permitted URL's for Cloudflare to return Authorization codes and Access/ID tokens",
+            items: {
+              type: 'string',
+            },
+          },
+          refresh_token_options: {
+            type: 'object',
+            properties: {
+              lifetime: {
+                type: 'string',
+                description:
+                  'How long a refresh token will be valid for after creation. Valid units are m,h,d. Must be longer than 1m.',
+              },
+            },
+            required: [],
+          },
+          scopes: {
+            type: 'array',
+            description:
+              'Define the user information shared with access, "offline_access" scope will be automatically enabled if refresh tokens are enabled',
+            items: {
+              type: 'string',
+              enum: ['openid', 'groups', 'email', 'profile'],
+            },
+          },
+          updated_at: {
+            type: 'string',
+            format: 'date-time',
+          },
+        },
+        required: [],
+      },
+      application_type: {
+        type: 'string',
+        description: 'The application type.',
+        enum: [
+          'self_hosted',
+          'saas',
+          'ssh',
+          'vnc',
+          'app_launcher',
+          'warp',
+          'biso',
+          'bookmark',
+          'dash_sso',
+          'infrastructure',
+          'rdp',
+        ],
+      },
+      decision: {
+        type: 'string',
+        description:
+          'The action Access will take if a user matches this policy. Infrastructure application policies can only use the Allow action.',
+        enum: ['allow', 'deny', 'non_identity', 'bypass'],
+      },
+      group_rule: {
+        type: 'object',
+        title: 'Access groups',
+        description: 'Matches an Access group.',
+        properties: {
+          group: {
+            type: 'object',
+            properties: {
+              id: {
+                type: 'string',
+                description: 'The ID of a previously created Access group.',
+              },
+            },
+            required: ['id'],
+          },
+        },
+        required: ['group'],
+      },
+      any_valid_service_token_rule: {
+        type: 'object',
+        title: 'Any Valid Service Token',
+        description: 'Matches any valid Access Service Token',
+        properties: {
+          any_valid_service_token: {
+            type: 'object',
+            description: 'An empty object which matches on all service tokens.',
+            properties: {},
+            required: [],
+          },
+        },
+        required: ['any_valid_service_token'],
+      },
+      authentication_method_rule: {
+        type: 'object',
+        title: 'Authentication method',
+        description: 'Enforce different MFA options',
+        properties: {
+          auth_method: {
+            type: 'object',
+            properties: {
+              auth_method: {
+                type: 'string',
+                description:
+                  'The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176#section-2.',
+              },
+            },
+            required: ['auth_method'],
+          },
+        },
+        required: ['auth_method'],
+      },
+      azure_group_rule: {
+        type: 'object',
+        title: 'Azure group',
+        description: 'Matches an Azure group.\nRequires an Azure identity provider.',
+        properties: {
+          azureAD: {
+            type: 'object',
+            properties: {
+              id: {
+                type: 'string',
+                description: 'The ID of an Azure group.',
+              },
+              identity_provider_id: {
+                type: 'string',
+                description: 'The ID of your Azure identity provider.',
+              },
+            },
+            required: ['id', 'identity_provider_id'],
+          },
+        },
+        required: ['azureAD'],
+      },
+      certificate_rule: {
+        type: 'object',
+        title: 'Valid certificate',
+        description: 'Matches any valid client certificate.',
+        properties: {
+          certificate: {
+            type: 'object',
+            properties: {},
+            required: [],
+          },
+        },
+        required: ['certificate'],
+      },
+      country_rule: {
+        type: 'object',
+        title: 'Country',
+        description: 'Matches a specific country',
+        properties: {
+          geo: {
+            type: 'object',
+            properties: {
+              country_code: {
+                type: 'string',
+                description: 'The country code that should be matched.',
+              },
+            },
+            required: ['country_code'],
+          },
+        },
+        required: ['geo'],
+      },
+      access_device_posture_rule: {
+        type: 'object',
+        title: 'Device Posture',
+        description: 'Enforces a device posture rule has run successfully',
+        properties: {
+          device_posture: {
+            type: 'object',
+            properties: {
+              integration_uid: {
+                type: 'string',
+                description: 'The ID of a device posture integration.',
+              },
+            },
+            required: ['integration_uid'],
+          },
+        },
+        required: ['device_posture'],
+      },
+      domain_rule: {
+        type: 'object',
+        title: 'Email domain',
+        description: 'Match an entire email domain.',
+        properties: {
+          email_domain: {
+            type: 'object',
+            properties: {
+              domain: {
+                type: 'string',
+                description: 'The email domain to match.',
+              },
+            },
+            required: ['domain'],
+          },
+        },
+        required: ['email_domain'],
+      },
+      email_list_rule: {
+        type: 'object',
+        title: 'Email list',
+        description: 'Matches an email address from a list.',
+        properties: {
+          email_list: {
+            type: 'object',
+            properties: {
+              id: {
+                type: 'string',
+                description: 'The ID of a previously created email list.',
+              },
+            },
+            required: ['id'],
+          },
+        },
+        required: ['email_list'],
+      },
+      email_rule: {
+        type: 'object',
+        title: 'Email',
+        description: 'Matches a specific email.',
+        properties: {
+          email: {
+            type: 'object',
+            properties: {
+              email: {
+                type: 'string',
+                description: 'The email of the user.',
+              },
+            },
+            required: ['email'],
+          },
+        },
+        required: ['email'],
+      },
+      everyone_rule: {
+        type: 'object',
+        title: 'Everyone',
+        description: 'Matches everyone.',
+        properties: {
+          everyone: {
+            type: 'object',
+            description: 'An empty object which matches on all users.',
+            properties: {},
+            required: [],
+          },
+        },
+        required: ['everyone'],
+      },
+      external_evaluation_rule: {
+        type: 'object',
+        title: 'External Evaluation',
+        description: 'Create Allow or Block policies which evaluate the user based on custom criteria.',
+        properties: {
+          external_evaluation: {
+            type: 'object',
+            properties: {
+              evaluate_url: {
+                type: 'string',
+                description: 'The API endpoint containing your business logic.',
+              },
+              keys_url: {
+                type: 'string',
+                description:
+                  'The API endpoint containing the key that Access uses to verify that the response came from your API.',
+              },
+            },
+            required: ['evaluate_url', 'keys_url'],
+          },
+        },
+        required: ['external_evaluation'],
+      },
+      github_organization_rule: {
+        type: 'object',
+        title: 'Github organization',
+        description: 'Matches a Github organization.\nRequires a Github identity provider.',
+        properties: {
+          'github-organization': {
+            type: 'object',
+            properties: {
+              identity_provider_id: {
+                type: 'string',
+                description: 'The ID of your Github identity provider.',
+              },
+              name: {
+                type: 'string',
+                description: 'The name of the organization.',
+              },
+              team: {
+                type: 'string',
+                description: 'The name of the team',
+              },
+            },
+            required: ['identity_provider_id', 'name'],
+          },
+        },
+        required: ['github-organization'],
+      },
+      gsuite_group_rule: {
+        type: 'object',
+        title: 'Google Workspace group',
+        description: 'Matches a group in Google Workspace.\nRequires a Google Workspace identity provider.',
+        properties: {
+          gsuite: {
+            type: 'object',
+            properties: {
+              email: {
+                type: 'string',
+                description: 'The email of the Google Workspace group.',
+              },
+              identity_provider_id: {
+                type: 'string',
+                description: 'The ID of your Google Workspace identity provider.',
+              },
+            },
+            required: ['email', 'identity_provider_id'],
+          },
+        },
+        required: ['gsuite'],
+      },
+      ip_list_rule: {
+        type: 'object',
+        title: 'IP list',
+        description: 'Matches an IP address from a list.',
+        properties: {
+          ip_list: {
+            type: 'object',
+            properties: {
+              id: {
+                type: 'string',
+                description: 'The ID of a previously created IP list.',
+              },
+            },
+            required: ['id'],
+          },
+        },
+        required: ['ip_list'],
+      },
+      ip_rule: {
+        type: 'object',
+        title: 'IP ranges',
+        description: 'Matches an IP address block.',
+        properties: {
+          ip: {
+            type: 'object',
+            properties: {
+              ip: {
+                type: 'string',
+                description: 'An IPv4 or IPv6 CIDR block.',
+              },
+            },
+            required: ['ip'],
+          },
+        },
+        required: ['ip'],
+      },
+      okta_group_rule: {
+        type: 'object',
+        title: 'Okta group',
+        description: 'Matches an Okta group.\nRequires an Okta identity provider.',
+        properties: {
+          okta: {
+            type: 'object',
+            properties: {
+              identity_provider_id: {
+                type: 'string',
+                description: 'The ID of your Okta identity provider.',
+              },
+              name: {
+                type: 'string',
+                description: 'The name of the Okta group.',
+              },
+            },
+            required: ['identity_provider_id', 'name'],
+          },
+        },
+        required: ['okta'],
+      },
+      saml_group_rule: {
+        type: 'object',
+        title: 'SAML group',
+        description: 'Matches a SAML group.\nRequires a SAML identity provider.',
+        properties: {
+          saml: {
+            type: 'object',
+            properties: {
+              attribute_name: {
+                type: 'string',
+                description: 'The name of the SAML attribute.',
+              },
+              attribute_value: {
+                type: 'string',
+                description: 'The SAML attribute value to look for.',
+              },
+              identity_provider_id: {
+                type: 'string',
+                description: 'The ID of your SAML identity provider.',
+              },
+            },
+            required: ['attribute_name', 'attribute_value', 'identity_provider_id'],
+          },
+        },
+        required: ['saml'],
+      },
+      service_token_rule: {
+        type: 'object',
+        title: 'Service Token',
+        description: 'Matches a specific Access Service Token',
+        properties: {
+          service_token: {
+            type: 'object',
+            properties: {
+              token_id: {
+                type: 'string',
+                description: 'The ID of a Service Token.',
+              },
+            },
+            required: ['token_id'],
+          },
+        },
+        required: ['service_token'],
+      },
+      access_rule: {
+        anyOf: [
+          {
+            $ref: '#/$defs/group_rule',
+          },
+          {
+            $ref: '#/$defs/any_valid_service_token_rule',
+          },
+          {
+            type: 'object',
+            title: 'Authentication Context',
+            description: 'Matches an Azure Authentication Context.\nRequires an Azure identity provider.',
+            properties: {
+              auth_context: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    description: 'The ID of an Authentication context.',
+                  },
+                  ac_id: {
+                    type: 'string',
+                    description: 'The ACID of an Authentication context.',
+                  },
+                  identity_provider_id: {
+                    type: 'string',
+                    description: 'The ID of your Azure identity provider.',
+                  },
+                },
+                required: ['id', 'ac_id', 'identity_provider_id'],
+              },
+            },
+            required: ['auth_context'],
+          },
+          {
+            $ref: '#/$defs/authentication_method_rule',
+          },
+          {
+            $ref: '#/$defs/azure_group_rule',
+          },
+          {
+            $ref: '#/$defs/certificate_rule',
+          },
+          {
+            type: 'object',
+            title: 'Common Name',
+            description: 'Matches a specific common name.',
+            properties: {
+              common_name: {
+                type: 'object',
+                properties: {
+                  common_name: {
+                    type: 'string',
+                    description: 'The common name to match.',
+                  },
+                },
+                required: ['common_name'],
+              },
+            },
+            required: ['common_name'],
+          },
+          {
+            $ref: '#/$defs/country_rule',
+          },
+          {
+            $ref: '#/$defs/access_device_posture_rule',
+          },
+          {
+            $ref: '#/$defs/domain_rule',
+          },
+          {
+            $ref: '#/$defs/email_list_rule',
+          },
+          {
+            $ref: '#/$defs/email_rule',
+          },
+          {
+            $ref: '#/$defs/everyone_rule',
+          },
+          {
+            $ref: '#/$defs/external_evaluation_rule',
+          },
+          {
+            $ref: '#/$defs/github_organization_rule',
+          },
+          {
+            $ref: '#/$defs/gsuite_group_rule',
+          },
+          {
+            type: 'object',
+            title: 'Login Method',
+            description: 'Matches a specific identity provider id.',
+            properties: {
+              login_method: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    description: 'The ID of an identity provider.',
+                  },
+                },
+                required: ['id'],
+              },
+            },
+            required: ['login_method'],
+          },
+          {
+            $ref: '#/$defs/ip_list_rule',
+          },
+          {
+            $ref: '#/$defs/ip_rule',
+          },
+          {
+            $ref: '#/$defs/okta_group_rule',
+          },
+          {
+            $ref: '#/$defs/saml_group_rule',
+          },
+          {
+            $ref: '#/$defs/service_token_rule',
+          },
+        ],
+        description: 'Matches an Access group.',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { app_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { app_id, ...body } = args as any;
   return client.zeroTrust.access.applications.update(app_id, body);
 };
 

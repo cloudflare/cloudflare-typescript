@@ -57,6 +57,11 @@ export const tool: Tool = {
         required: [],
       },
       filter: {
+        $ref: '#/$defs/firewall_filter',
+      },
+    },
+    $defs: {
+      firewall_filter: {
         type: 'object',
         properties: {
           id: {
@@ -87,8 +92,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.firewall.rules.create(body);
 };
 

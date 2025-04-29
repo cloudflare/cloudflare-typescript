@@ -30,7 +30,7 @@ export const tool: Tool = {
         description:
           'Lists the origins allowed to display the video. Enter allowed origin domains in an array and use `*` for wildcard subdomains. Empty arrays allow the video to be viewed on any origin.',
         items: {
-          type: 'string',
+          $ref: '#/$defs/allowed_origins',
         },
       },
       creator: {
@@ -78,11 +78,16 @@ export const tool: Tool = {
         description: 'A user-defined identifier for the media creator.',
       },
     },
+    $defs: {
+      allowed_origins: {
+        type: 'string',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.stream.directUpload.create(body);
 };
 

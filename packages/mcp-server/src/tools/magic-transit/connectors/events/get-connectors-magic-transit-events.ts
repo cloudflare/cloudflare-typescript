@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { event_n, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { event_n, ...body } = args as any;
   return client.magicTransit.connectors.events.get(event_n, body);
 };
 

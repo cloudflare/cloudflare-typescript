@@ -42,6 +42,15 @@ export const tool: Tool = {
         description: 'An optional human provided description of the static route.',
       },
       scope: {
+        $ref: '#/$defs/scope',
+      },
+      weight: {
+        type: 'integer',
+        description: 'Optional weight of the ECMP scope - if provided.',
+      },
+    },
+    $defs: {
+      scope: {
         type: 'object',
         description: 'Used only for ECMP routes.',
         properties: {
@@ -64,16 +73,12 @@ export const tool: Tool = {
         },
         required: [],
       },
-      weight: {
-        type: 'integer',
-        description: 'Optional weight of the ECMP scope - if provided.',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { route_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { route_id, ...body } = args as any;
   return client.magicTransit.routes.update(route_id, body);
 };
 

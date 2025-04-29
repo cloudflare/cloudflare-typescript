@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { signing_key_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { signing_key_name, ...body } = args as any;
   return client.images.v1.keys.delete(signing_key_name, body);
 };
 

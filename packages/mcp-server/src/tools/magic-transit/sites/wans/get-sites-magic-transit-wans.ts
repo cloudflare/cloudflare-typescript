@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { wan_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { wan_id, ...body } = args as any;
   return client.magicTransit.sites.wans.get(wan_id, body);
 };
 

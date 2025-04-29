@@ -25,20 +25,7 @@ export const tool: Tool = {
         description: 'Identifier.',
       },
       attack_mitigation: {
-        type: 'object',
-        description: 'Attack mitigation settings',
-        properties: {
-          enabled: {
-            type: 'boolean',
-            description:
-              'When enabled, automatically mitigate random-prefix attacks to protect upstream DNS servers',
-          },
-          only_when_upstream_unhealthy: {
-            type: 'boolean',
-            description: 'Only mitigate attacks when upstream servers seem unhealthy',
-          },
-        },
-        required: [],
+        $ref: '#/$defs/attack_mitigation',
       },
       deprecate_any_requests: {
         type: 'boolean',
@@ -80,16 +67,37 @@ export const tool: Tool = {
       upstream_ips: {
         type: 'array',
         items: {
-          type: 'string',
-          description: 'Upstream DNS Server IPv4 address',
+          $ref: '#/$defs/upstream_ips',
         },
+      },
+    },
+    $defs: {
+      attack_mitigation: {
+        type: 'object',
+        description: 'Attack mitigation settings',
+        properties: {
+          enabled: {
+            type: 'boolean',
+            description:
+              'When enabled, automatically mitigate random-prefix attacks to protect upstream DNS servers',
+          },
+          only_when_upstream_unhealthy: {
+            type: 'boolean',
+            description: 'Only mitigate attacks when upstream servers seem unhealthy',
+          },
+        },
+        required: [],
+      },
+      upstream_ips: {
+        type: 'string',
+        description: 'Upstream DNS Server IPv4 address',
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { dns_firewall_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { dns_firewall_id, ...body } = args as any;
   return client.dnsFirewall.edit(dns_firewall_id, body);
 };
 

@@ -25,64 +25,77 @@ export const tool: Tool = {
         description: 'The unique identifier of the Zone Lockdown rule.',
       },
       configurations: {
-        type: 'array',
-        description:
-          'A list of IP addresses or CIDR ranges that will be allowed to access the URLs specified in the Zone Lockdown rule. You can include any number of `ip` or `ip_range` configurations.',
-        items: {
-          anyOf: [
-            {
-              type: 'object',
-              title: 'An IP address configuration.',
-              properties: {
-                target: {
-                  type: 'string',
-                  description:
-                    'The configuration target. You must set the target to `ip` when specifying an IP address in the Zone Lockdown rule.',
-                  enum: ['ip'],
-                },
-                value: {
-                  type: 'string',
-                  description:
-                    'The IP address to match. This address will be compared to the IP address of incoming requests.',
-                },
-              },
-              required: [],
-            },
-            {
-              type: 'object',
-              title: 'An IP address range configuration.',
-              properties: {
-                target: {
-                  type: 'string',
-                  description:
-                    'The configuration target. You must set the target to `ip_range` when specifying an IP address range in the Zone Lockdown rule.',
-                  enum: ['ip_range'],
-                },
-                value: {
-                  type: 'string',
-                  description:
-                    'The IP address range to match. You can only use prefix lengths `/16` and `/24`.',
-                },
-              },
-              required: [],
-            },
-          ],
-        },
+        $ref: '#/$defs/configuration',
       },
       urls: {
         type: 'array',
         description:
           'The URLs to include in the current WAF override. You can use wildcards. Each entered URL will be escaped before use, which means you can only use simple wildcard patterns.',
         items: {
-          type: 'string',
+          $ref: '#/$defs/override_url',
         },
+      },
+    },
+    $defs: {
+      lockdown_ip_configuration: {
+        type: 'object',
+        title: 'An IP address configuration.',
+        properties: {
+          target: {
+            type: 'string',
+            description:
+              'The configuration target. You must set the target to `ip` when specifying an IP address in the Zone Lockdown rule.',
+            enum: ['ip'],
+          },
+          value: {
+            type: 'string',
+            description:
+              'The IP address to match. This address will be compared to the IP address of incoming requests.',
+          },
+        },
+        required: [],
+      },
+      lockdown_cidr_configuration: {
+        type: 'object',
+        title: 'An IP address range configuration.',
+        properties: {
+          target: {
+            type: 'string',
+            description:
+              'The configuration target. You must set the target to `ip_range` when specifying an IP address range in the Zone Lockdown rule.',
+            enum: ['ip_range'],
+          },
+          value: {
+            type: 'string',
+            description: 'The IP address range to match. You can only use prefix lengths `/16` and `/24`.',
+          },
+        },
+        required: [],
+      },
+      configuration: {
+        type: 'array',
+        description:
+          'A list of IP addresses or CIDR ranges that will be allowed to access the URLs specified in the Zone Lockdown rule. You can include any number of `ip` or `ip_range` configurations.',
+        items: {
+          anyOf: [
+            {
+              $ref: '#/$defs/lockdown_ip_configuration',
+            },
+            {
+              $ref: '#/$defs/lockdown_cidr_configuration',
+            },
+          ],
+        },
+      },
+      override_url: {
+        type: 'string',
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { lock_downs_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { lock_downs_id, ...body } = args as any;
   return client.firewall.lockdowns.update(lock_downs_id, body);
 };
 

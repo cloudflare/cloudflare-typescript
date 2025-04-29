@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { store_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { store_id, ...body } = args as any;
   return client.secretsStore.stores.delete(store_id, body);
 };
 

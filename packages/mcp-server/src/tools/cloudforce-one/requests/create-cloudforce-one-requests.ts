@@ -47,8 +47,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { account_identifier, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { account_identifier, ...body } = args as any;
   return client.cloudforceOne.requests.create(account_identifier, body);
 };
 

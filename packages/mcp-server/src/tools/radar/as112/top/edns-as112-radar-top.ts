@@ -82,8 +82,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { edns, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { edns, ...body } = args as any;
   return client.radar.as112.top.edns(edns, body);
 };
 

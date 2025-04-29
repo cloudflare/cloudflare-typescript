@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { destination_address_identifier, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { destination_address_identifier, ...body } = args as any;
   return client.emailRouting.addresses.delete(destination_address_identifier, body);
 };
 

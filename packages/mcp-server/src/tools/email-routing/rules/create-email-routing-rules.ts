@@ -25,48 +25,14 @@ export const tool: Tool = {
         type: 'array',
         description: 'List actions patterns.',
         items: {
-          type: 'object',
-          description: 'Actions pattern.',
-          properties: {
-            type: {
-              type: 'string',
-              description: 'Type of supported action.',
-              enum: ['drop', 'forward', 'worker'],
-            },
-            value: {
-              type: 'array',
-              items: {
-                type: 'string',
-                description: 'Value for action.',
-              },
-            },
-          },
-          required: ['type', 'value'],
+          $ref: '#/$defs/action',
         },
       },
       matchers: {
         type: 'array',
         description: 'Matching patterns to forward to your actions.',
         items: {
-          type: 'object',
-          description: 'Matching pattern to forward your actions.',
-          properties: {
-            field: {
-              type: 'string',
-              description: 'Field for type matcher.',
-              enum: ['to'],
-            },
-            type: {
-              type: 'string',
-              description: 'Type of matcher.',
-              enum: ['literal'],
-            },
-            value: {
-              type: 'string',
-              description: 'Value for matcher.',
-            },
-          },
-          required: ['field', 'type', 'value'],
+          $ref: '#/$defs/matcher',
         },
       },
       enabled: {
@@ -83,11 +49,53 @@ export const tool: Tool = {
         description: 'Priority of the routing rule.',
       },
     },
+    $defs: {
+      action: {
+        type: 'object',
+        description: 'Actions pattern.',
+        properties: {
+          type: {
+            type: 'string',
+            description: 'Type of supported action.',
+            enum: ['drop', 'forward', 'worker'],
+          },
+          value: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'Value for action.',
+            },
+          },
+        },
+        required: ['type', 'value'],
+      },
+      matcher: {
+        type: 'object',
+        description: 'Matching pattern to forward your actions.',
+        properties: {
+          field: {
+            type: 'string',
+            description: 'Field for type matcher.',
+            enum: ['to'],
+          },
+          type: {
+            type: 'string',
+            description: 'Type of matcher.',
+            enum: ['literal'],
+          },
+          value: {
+            type: 'string',
+            description: 'Value for matcher.',
+          },
+        },
+        required: ['field', 'type', 'value'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.emailRouting.rules.create(body);
 };
 

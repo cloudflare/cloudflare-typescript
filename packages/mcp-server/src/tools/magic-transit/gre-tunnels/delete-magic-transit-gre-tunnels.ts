@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { gre_tunnel_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { gre_tunnel_id, ...body } = args as any;
   return client.magicTransit.greTunnels.delete(gre_tunnel_id, body);
 };
 

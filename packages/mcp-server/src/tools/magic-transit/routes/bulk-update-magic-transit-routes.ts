@@ -47,27 +47,7 @@ export const tool: Tool = {
               description: 'An optional human provided description of the static route.',
             },
             scope: {
-              type: 'object',
-              description: 'Used only for ECMP routes.',
-              properties: {
-                colo_names: {
-                  type: 'array',
-                  description: 'List of colo names for the ECMP scope.',
-                  items: {
-                    type: 'string',
-                    description: 'Scope colo name.',
-                  },
-                },
-                colo_regions: {
-                  type: 'array',
-                  description: 'List of colo regions for the ECMP scope.',
-                  items: {
-                    type: 'string',
-                    description: 'Scope colo region.',
-                  },
-                },
-              },
-              required: [],
+              $ref: '#/$defs/scope',
             },
             weight: {
               type: 'integer',
@@ -78,11 +58,36 @@ export const tool: Tool = {
         },
       },
     },
+    $defs: {
+      scope: {
+        type: 'object',
+        description: 'Used only for ECMP routes.',
+        properties: {
+          colo_names: {
+            type: 'array',
+            description: 'List of colo names for the ECMP scope.',
+            items: {
+              type: 'string',
+              description: 'Scope colo name.',
+            },
+          },
+          colo_regions: {
+            type: 'array',
+            description: 'List of colo regions for the ECMP scope.',
+            items: {
+              type: 'string',
+              description: 'Scope colo region.',
+            },
+          },
+        },
+        required: [],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.magicTransit.routes.bulkUpdate(body);
 };
 

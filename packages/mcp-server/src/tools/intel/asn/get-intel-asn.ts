@@ -21,14 +21,19 @@ export const tool: Tool = {
         description: 'Identifier',
       },
       asn: {
+        $ref: '#/$defs/asn',
+      },
+    },
+    $defs: {
+      asn: {
         type: 'integer',
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { asn, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { asn, ...body } = args as any;
   return client.intel.asn.get(asn, body);
 };
 

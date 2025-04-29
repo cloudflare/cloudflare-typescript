@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { dispatch_namespace, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { dispatch_namespace, ...body } = args as any;
   return client.workersForPlatforms.dispatch.namespaces.get(dispatch_namespace, body);
 };
 

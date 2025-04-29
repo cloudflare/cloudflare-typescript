@@ -73,9 +73,7 @@ export const tool: Tool = {
         required: [],
       },
       direction: {
-        type: 'string',
-        description: 'Direction to order DNS records in.',
-        enum: ['asc', 'desc'],
+        $ref: '#/$defs/sort_direction',
       },
       match: {
         type: 'string',
@@ -197,11 +195,18 @@ export const tool: Tool = {
         ],
       },
     },
+    $defs: {
+      sort_direction: {
+        type: 'string',
+        description: 'Direction to order DNS records in.',
+        enum: ['asc', 'desc'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.dns.records.list(body);
 };
 

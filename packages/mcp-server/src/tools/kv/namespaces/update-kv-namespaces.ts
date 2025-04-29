@@ -32,8 +32,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { namespace_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { namespace_id, ...body } = args as any;
   return client.kv.namespaces.update(namespace_id, body);
 };
 

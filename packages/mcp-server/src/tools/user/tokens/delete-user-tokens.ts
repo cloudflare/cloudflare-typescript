@@ -24,8 +24,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { token_id } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { token_id, ...body } = args as any;
   return client.user.tokens.delete(token_id);
 };
 

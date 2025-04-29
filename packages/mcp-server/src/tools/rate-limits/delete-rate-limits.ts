@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { rate_limit_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { rate_limit_id, ...body } = args as any;
   return client.rateLimits.delete(rate_limit_id, body);
 };
 

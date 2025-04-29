@@ -27,27 +27,32 @@ export const tool: Tool = {
       body: {
         type: 'array',
         items: {
-          type: 'object',
-          properties: {
-            created_on: {
-              type: 'string',
-            },
-            cron: {
-              type: 'string',
-            },
-            modified_on: {
-              type: 'string',
-            },
-          },
-          required: [],
+          $ref: '#/$defs/schedule',
         },
+      },
+    },
+    $defs: {
+      schedule: {
+        type: 'object',
+        properties: {
+          created_on: {
+            type: 'string',
+          },
+          cron: {
+            type: 'string',
+          },
+          modified_on: {
+            type: 'string',
+          },
+        },
+        required: [],
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { script_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { script_name, ...body } = args as any;
   return client.workers.scripts.schedules.update(script_name, body);
 };
 

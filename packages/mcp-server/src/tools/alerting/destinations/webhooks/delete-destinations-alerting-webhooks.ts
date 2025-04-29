@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { webhook_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { webhook_id, ...body } = args as any;
   return client.alerting.destinations.webhooks.delete(webhook_id, body);
 };
 

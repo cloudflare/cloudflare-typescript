@@ -38,8 +38,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { script_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { script_name, ...body } = args as any;
   return client.workersForPlatforms.dispatch.namespaces.scripts.delete(script_name, body);
 };
 

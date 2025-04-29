@@ -75,6 +75,15 @@ export const tool: Tool = {
           'Optional human readable job name. Not unique. Cloudflare suggests that you set this to a meaningful string, like the domain name, to make it easier to identify your job.',
       },
       output_options: {
+        $ref: '#/$defs/output_options',
+      },
+      ownership_challenge: {
+        type: 'string',
+        description: 'Ownership challenge token to prove destination ownership.',
+      },
+    },
+    $defs: {
+      output_options: {
         type: 'object',
         description:
           'The structured replacement for `logpull_options`. When including this field, the `logpull_option` field will be ignored.',
@@ -141,16 +150,12 @@ export const tool: Tool = {
         },
         required: [],
       },
-      ownership_challenge: {
-        type: 'string',
-        description: 'Ownership challenge token to prove destination ownership.',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { job_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { job_id, ...body } = args as any;
   return client.logpush.jobs.update(job_id, body);
 };
 

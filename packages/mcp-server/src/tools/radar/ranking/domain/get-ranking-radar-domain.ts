@@ -58,8 +58,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { domain, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { domain, ...body } = args as any;
   return client.radar.ranking.domain.get(domain, body);
 };
 

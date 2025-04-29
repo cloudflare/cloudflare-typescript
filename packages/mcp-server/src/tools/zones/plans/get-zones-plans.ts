@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { plan_identifier, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { plan_identifier, ...body } = args as any;
   return client.zones.plans.get(plan_identifier, body);
 };
 

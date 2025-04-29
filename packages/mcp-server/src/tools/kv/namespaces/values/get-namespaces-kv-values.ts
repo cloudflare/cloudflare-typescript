@@ -34,8 +34,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { key_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { key_name, ...body } = args as any;
   return client.kv.namespaces.values.get(key_name, body);
 };
 

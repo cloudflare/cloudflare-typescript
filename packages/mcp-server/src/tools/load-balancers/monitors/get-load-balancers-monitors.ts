@@ -27,8 +27,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { monitor_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { monitor_id, ...body } = args as any;
   return client.loadBalancers.monitors.get(monitor_id, body);
 };
 

@@ -41,8 +41,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { address_family, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { address_family, ...body } = args as any;
   return client.zeroTrust.networks.subnets.cloudflareSource.update(address_family, body);
 };
 

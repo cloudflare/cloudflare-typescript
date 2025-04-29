@@ -24,8 +24,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { membership_id } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { membership_id, ...body } = args as any;
   return client.memberships.delete(membership_id);
 };
 

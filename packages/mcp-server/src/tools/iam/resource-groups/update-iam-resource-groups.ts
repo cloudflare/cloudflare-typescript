@@ -62,8 +62,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { resource_group_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { resource_group_id, ...body } = args as any;
   return client.iam.resourceGroups.update(resource_group_id, body);
 };
 

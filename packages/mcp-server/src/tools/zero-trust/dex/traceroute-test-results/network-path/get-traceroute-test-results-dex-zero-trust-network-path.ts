@@ -27,8 +27,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { test_result_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { test_result_id, ...body } = args as any;
   return client.zeroTrust.dex.tracerouteTestResults.networkPath.get(test_result_id, body);
 };
 

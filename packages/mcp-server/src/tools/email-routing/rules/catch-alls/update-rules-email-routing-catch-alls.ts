@@ -25,39 +25,14 @@ export const tool: Tool = {
         type: 'array',
         description: 'List actions for the catch-all routing rule.',
         items: {
-          type: 'object',
-          description: 'Action for the catch-all routing rule.',
-          properties: {
-            type: {
-              type: 'string',
-              description: 'Type of action for catch-all rule.',
-              enum: ['drop', 'forward', 'worker'],
-            },
-            value: {
-              type: 'array',
-              items: {
-                type: 'string',
-                description: 'Input value for action.',
-              },
-            },
-          },
-          required: ['type'],
+          $ref: '#/$defs/catch_all_action',
         },
       },
       matchers: {
         type: 'array',
         description: 'List of matchers for the catch-all routing rule.',
         items: {
-          type: 'object',
-          description: 'Matcher for catch-all routing rule.',
-          properties: {
-            type: {
-              type: 'string',
-              description: "Type of matcher. Default is 'all'.",
-              enum: ['all'],
-            },
-          },
-          required: ['type'],
+          $ref: '#/$defs/catch_all_matcher',
         },
       },
       enabled: {
@@ -70,11 +45,44 @@ export const tool: Tool = {
         description: 'Routing rule name.',
       },
     },
+    $defs: {
+      catch_all_action: {
+        type: 'object',
+        description: 'Action for the catch-all routing rule.',
+        properties: {
+          type: {
+            type: 'string',
+            description: 'Type of action for catch-all rule.',
+            enum: ['drop', 'forward', 'worker'],
+          },
+          value: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'Input value for action.',
+            },
+          },
+        },
+        required: ['type'],
+      },
+      catch_all_matcher: {
+        type: 'object',
+        description: 'Matcher for catch-all routing rule.',
+        properties: {
+          type: {
+            type: 'string',
+            description: "Type of matcher. Default is 'all'.",
+            enum: ['all'],
+          },
+        },
+        required: ['type'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.emailRouting.rules.catchAlls.update(body);
 };
 

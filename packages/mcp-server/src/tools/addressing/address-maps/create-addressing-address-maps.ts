@@ -57,20 +57,25 @@ export const tool: Tool = {
               description: 'The identifier for the membership (eg. a zone or account tag).',
             },
             kind: {
-              type: 'string',
-              description: 'The type of the membership.',
-              enum: ['zone', 'account'],
+              $ref: '#/$defs/kind',
             },
           },
           required: [],
         },
       },
     },
+    $defs: {
+      kind: {
+        type: 'string',
+        description: 'The type of the membership.',
+        enum: ['zone', 'account'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.addressing.addressMaps.create(body);
 };
 

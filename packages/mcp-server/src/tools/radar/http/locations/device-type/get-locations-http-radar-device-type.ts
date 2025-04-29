@@ -146,8 +146,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { device_type, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { device_type, ...body } = args as any;
   return client.radar.http.locations.deviceType.get(device_type, body);
 };
 

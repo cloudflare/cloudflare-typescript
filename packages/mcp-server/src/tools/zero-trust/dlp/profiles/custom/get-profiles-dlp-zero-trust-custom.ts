@@ -26,8 +26,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { profile_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { profile_id, ...body } = args as any;
   return client.zeroTrust.dlp.profiles.custom.get(profile_id, body);
 };
 

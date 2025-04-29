@@ -40,8 +40,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { virtual_network_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { virtual_network_id, ...body } = args as any;
   return client.zeroTrust.networks.virtualNetworks.edit(virtual_network_id, body);
 };
 

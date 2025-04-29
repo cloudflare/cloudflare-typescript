@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { address_map_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { address_map_id, ...body } = args as any;
   return client.addressing.addressMaps.get(address_map_id, body);
 };
 

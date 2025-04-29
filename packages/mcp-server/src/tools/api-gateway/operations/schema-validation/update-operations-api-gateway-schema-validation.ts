@@ -34,8 +34,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { operation_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { operation_id, ...body } = args as any;
   return client.apiGateway.operations.schemaValidation.update(operation_id, body);
 };
 

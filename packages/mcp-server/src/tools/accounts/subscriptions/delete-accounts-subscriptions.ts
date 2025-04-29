@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { subscription_identifier, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { subscription_identifier, ...body } = args as any;
   return client.accounts.subscriptions.delete(subscription_identifier, body);
 };
 

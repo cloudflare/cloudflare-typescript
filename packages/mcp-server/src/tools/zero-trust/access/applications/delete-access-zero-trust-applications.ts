@@ -17,8 +17,7 @@ export const tool: Tool = {
     type: 'object',
     properties: {
       app_id: {
-        type: 'string',
-        description: 'Identifier.',
+        $ref: '#/$defs/app_id',
       },
       account_id: {
         type: 'string',
@@ -29,11 +28,17 @@ export const tool: Tool = {
         description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
       },
     },
+    $defs: {
+      app_id: {
+        type: 'string',
+        description: 'Identifier.',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { app_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { app_id, ...body } = args as any;
   return client.zeroTrust.access.applications.delete(app_id, body);
 };
 

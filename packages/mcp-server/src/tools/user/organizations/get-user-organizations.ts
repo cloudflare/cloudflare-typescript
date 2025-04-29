@@ -24,8 +24,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { organization_id } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { organization_id, ...body } = args as any;
   return client.user.organizations.get(organization_id);
 };
 

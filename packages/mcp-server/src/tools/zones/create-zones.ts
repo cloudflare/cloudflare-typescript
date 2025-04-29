@@ -31,6 +31,11 @@ export const tool: Tool = {
         description: 'The domain name',
       },
       type: {
+        $ref: '#/$defs/type',
+      },
+    },
+    $defs: {
+      type: {
         type: 'string',
         description:
           'A full zone implies that DNS is hosted with Cloudflare. A partial zone is\ntypically a partner-hosted zone or a CNAME setup.',
@@ -40,8 +45,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.zones.create(body);
 };
 

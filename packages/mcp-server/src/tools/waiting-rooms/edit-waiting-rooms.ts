@@ -48,41 +48,11 @@ export const tool: Tool = {
         description:
           'Only available for the Waiting Room Advanced subscription. Additional hostname and path combinations to which this waiting room will be applied. There is an implied wildcard at the end of the path. The hostname and path combination must be unique to this and all other waiting rooms.',
         items: {
-          type: 'object',
-          properties: {
-            host: {
-              type: 'string',
-              description:
-                'The hostname to which this waiting room will be applied (no wildcards). The hostname must be the primary domain, subdomain, or custom hostname (if using SSL for SaaS) of this zone. Please do not include the scheme (http:// or https://).',
-            },
-            path: {
-              type: 'string',
-              description:
-                'Sets the path within the host to enable the waiting room on. The waiting room will be enabled for all subpaths as well. If there are two waiting rooms on the same subpath, the waiting room for the most specific path will be chosen. Wildcards and query parameters are not supported.',
-            },
-          },
-          required: [],
+          $ref: '#/$defs/additional_routes',
         },
       },
       cookie_attributes: {
-        type: 'object',
-        description:
-          "Configures cookie attributes for the waiting room cookie. This encrypted cookie stores a user's status in the waiting room, such as queue position.",
-        properties: {
-          samesite: {
-            type: 'string',
-            description:
-              'Configures the SameSite attribute on the waiting room cookie. Value `auto` will be translated to `lax` or `none` depending if **Always Use HTTPS** is enabled. Note that when using value `none`, the secure attribute cannot be set to `never`.',
-            enum: ['auto', 'lax', 'none', 'strict'],
-          },
-          secure: {
-            type: 'string',
-            description:
-              'Configures the Secure attribute on the waiting room cookie. Value `always` indicates that the Secure attribute will be set in the Set-Cookie header, `never` indicates that the Secure attribute will not be set, and `auto` will set the Secure attribute depending if **Always Use HTTPS** is enabled.',
-            enum: ['auto', 'always', 'never'],
-          },
-        },
-        required: [],
+        $ref: '#/$defs/cookie_attributes',
       },
       cookie_suffix: {
         type: 'string',
@@ -205,11 +175,49 @@ export const tool: Tool = {
         enum: ['off', 'invisible', 'visible_non_interactive', 'visible_managed'],
       },
     },
+    $defs: {
+      additional_routes: {
+        type: 'object',
+        properties: {
+          host: {
+            type: 'string',
+            description:
+              'The hostname to which this waiting room will be applied (no wildcards). The hostname must be the primary domain, subdomain, or custom hostname (if using SSL for SaaS) of this zone. Please do not include the scheme (http:// or https://).',
+          },
+          path: {
+            type: 'string',
+            description:
+              'Sets the path within the host to enable the waiting room on. The waiting room will be enabled for all subpaths as well. If there are two waiting rooms on the same subpath, the waiting room for the most specific path will be chosen. Wildcards and query parameters are not supported.',
+          },
+        },
+        required: [],
+      },
+      cookie_attributes: {
+        type: 'object',
+        description:
+          "Configures cookie attributes for the waiting room cookie. This encrypted cookie stores a user's status in the waiting room, such as queue position.",
+        properties: {
+          samesite: {
+            type: 'string',
+            description:
+              'Configures the SameSite attribute on the waiting room cookie. Value `auto` will be translated to `lax` or `none` depending if **Always Use HTTPS** is enabled. Note that when using value `none`, the secure attribute cannot be set to `never`.',
+            enum: ['auto', 'lax', 'none', 'strict'],
+          },
+          secure: {
+            type: 'string',
+            description:
+              'Configures the Secure attribute on the waiting room cookie. Value `always` indicates that the Secure attribute will be set in the Set-Cookie header, `never` indicates that the Secure attribute will not be set, and `auto` will set the Secure attribute depending if **Always Use HTTPS** is enabled.',
+            enum: ['auto', 'always', 'never'],
+          },
+        },
+        required: [],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { waiting_room_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { waiting_room_id, ...body } = args as any;
   return client.waitingRooms.edit(waiting_room_id, body);
 };
 

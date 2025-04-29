@@ -112,6 +112,18 @@ export const tool: Tool = {
         description: 'Whether or not the Notification policy is enabled.',
       },
       filters: {
+        $ref: '#/$defs/policy_filter',
+      },
+      mechanisms: {
+        $ref: '#/$defs/mechanism',
+      },
+      name: {
+        type: 'string',
+        description: 'Name of the policy.',
+      },
+    },
+    $defs: {
+      policy_filter: {
         type: 'object',
         description:
           'Optional filters that allow you to be alerted only on a subset of events for that alert type based on some criteria. This is only available for select alert types. See alert type documentation for more details.',
@@ -420,7 +432,7 @@ export const tool: Tool = {
         },
         required: [],
       },
-      mechanisms: {
+      mechanism: {
         type: 'object',
         description:
           'List of IDs that will be used when dispatching a notification. IDs for email type will be the email address.',
@@ -467,16 +479,12 @@ export const tool: Tool = {
         },
         required: [],
       },
-      name: {
-        type: 'string',
-        description: 'Name of the policy.',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { policy_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { policy_id, ...body } = args as any;
   return client.alerting.policies.update(policy_id, body);
 };
 

@@ -62,25 +62,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              type: 'string',
-              description:
-                'Individual tag of the form name:value (the name must consist of only letters, numbers, underscores and hyphens)',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            anyOf: [
-              {
-                type: 'number',
-              },
-              {
-                type: 'string',
-                description:
-                  "Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30 for Enterprise zones.",
-                enum: [1],
-              },
-            ],
-            description:
-              "Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30 for Enterprise zones.",
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -134,11 +120,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -208,11 +194,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -285,11 +271,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -348,11 +334,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -425,11 +411,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -502,11 +488,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -575,11 +561,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -686,11 +672,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -749,11 +735,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -834,11 +820,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -892,11 +878,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -950,11 +936,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1008,11 +994,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1085,11 +1071,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1163,11 +1149,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1236,11 +1222,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1309,11 +1295,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1386,11 +1372,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1445,11 +1431,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1519,11 +1505,11 @@ export const tool: Tool = {
             type: 'array',
             description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
             items: {
-              $ref: '#/anyOf/0/properties/tags/items',
+              $ref: '#/$defs/record_tags',
             },
           },
           ttl: {
-            $ref: '#/anyOf/0/properties/ttl',
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1533,11 +1519,33 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      record_tags: {
+        type: 'string',
+        description:
+          'Individual tag of the form name:value (the name must consist of only letters, numbers, underscores and hyphens)',
+      },
+      ttl: {
+        anyOf: [
+          {
+            type: 'number',
+          },
+          {
+            type: 'string',
+            description:
+              "Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30 for Enterprise zones.",
+            enum: [1],
+          },
+        ],
+        description:
+          "Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30 for Enterprise zones.",
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.dns.records.create(body);
 };
 

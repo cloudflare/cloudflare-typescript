@@ -65,8 +65,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ruleset_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { ruleset_id, ...body } = args as any;
   return client.rum.rules.bulkCreate(ruleset_id, body);
 };
 

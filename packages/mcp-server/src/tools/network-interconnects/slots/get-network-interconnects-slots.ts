@@ -27,8 +27,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { slot, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { slot, ...body } = args as any;
   return client.networkInterconnects.slots.get(slot, body);
 };
 

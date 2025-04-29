@@ -50,6 +50,11 @@ export const tool: Tool = {
           'If set to true, the deployment will be created even if normally blocked by something such rolling back to an older version when a secret has changed.',
       },
       annotations: {
+        $ref: '#/$defs/deployment',
+      },
+    },
+    $defs: {
+      deployment: {
         type: 'object',
         properties: {
           'workers/message': {
@@ -63,8 +68,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { script_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { script_name, ...body } = args as any;
   return client.workers.scripts.deployments.create(script_name, body);
 };
 

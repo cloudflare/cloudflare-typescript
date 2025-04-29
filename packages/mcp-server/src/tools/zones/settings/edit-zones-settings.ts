@@ -1024,40 +1024,7 @@ export const tool: Tool = {
             enum: ['automatic_platform_optimization'],
           },
           value: {
-            type: 'object',
-            properties: {
-              cache_by_device_type: {
-                type: 'boolean',
-                description:
-                  'Indicates whether or not [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/) is enabled.',
-              },
-              cf: {
-                type: 'boolean',
-                description: 'Indicates whether or not Cloudflare proxy is enabled.',
-              },
-              enabled: {
-                type: 'boolean',
-                description: 'Indicates whether or not Automatic Platform Optimization is enabled.',
-              },
-              hostnames: {
-                type: 'array',
-                description:
-                  'An array of hostnames where Automatic Platform Optimization for WordPress is activated.',
-                items: {
-                  type: 'string',
-                },
-              },
-              wordpress: {
-                type: 'boolean',
-                description: 'Indicates whether or not site is powered by WordPress.',
-              },
-              wp_plugin: {
-                type: 'boolean',
-                description:
-                  'Indicates whether or not [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is installed.',
-              },
-            },
-            required: ['cache_by_device_type', 'cf', 'enabled', 'hostnames', 'wordpress', 'wp_plugin'],
+            $ref: '#/$defs/automatic_platform_optimization',
           },
         },
       },
@@ -1412,11 +1379,49 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      automatic_platform_optimization: {
+        type: 'object',
+        properties: {
+          cache_by_device_type: {
+            type: 'boolean',
+            description:
+              'Indicates whether or not [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/) is enabled.',
+          },
+          cf: {
+            type: 'boolean',
+            description: 'Indicates whether or not Cloudflare proxy is enabled.',
+          },
+          enabled: {
+            type: 'boolean',
+            description: 'Indicates whether or not Automatic Platform Optimization is enabled.',
+          },
+          hostnames: {
+            type: 'array',
+            description:
+              'An array of hostnames where Automatic Platform Optimization for WordPress is activated.',
+            items: {
+              type: 'string',
+            },
+          },
+          wordpress: {
+            type: 'boolean',
+            description: 'Indicates whether or not site is powered by WordPress.',
+          },
+          wp_plugin: {
+            type: 'boolean',
+            description:
+              'Indicates whether or not [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is installed.',
+          },
+        },
+        required: ['cache_by_device_type', 'cf', 'enabled', 'hostnames', 'wordpress', 'wp_plugin'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { setting_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { setting_id, ...body } = args as any;
   return client.zones.settings.edit(setting_id, body);
 };
 

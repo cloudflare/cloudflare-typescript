@@ -30,8 +30,7 @@ export const tool: Tool = {
         description:
           'Can be used to break down the data by given attributes. Options are: \n\nDimension                 | Name                            | Example\n--------------------------|---------------------------------|--------------------------\nevent                     | Connection Event                | connect, progress, disconnect, originError, clientFiltered\nappID                     | Application ID                  | 40d67c87c6cd4b889a4fd57805225e85\ncoloName                  | Colo Name                       | SFO\nipVersion                 | IP version used by the client   | 4, 6.',
         items: {
-          type: 'string',
-          enum: ['event', 'appID', 'coloName', 'ipVersion'],
+          $ref: '#/$defs/dimension',
         },
       },
       filters: {
@@ -77,11 +76,17 @@ export const tool: Tool = {
         format: 'date-time',
       },
     },
+    $defs: {
+      dimension: {
+        type: 'string',
+        enum: ['event', 'appID', 'coloName', 'ipVersion'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.spectrum.analytics.events.bytimes.get(body);
 };
 

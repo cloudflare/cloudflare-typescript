@@ -107,8 +107,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { pool_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { pool_id, ...body } = args as any;
   return client.loadBalancers.pools.health.create(pool_id, body);
 };
 

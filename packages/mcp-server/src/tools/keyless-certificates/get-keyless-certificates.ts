@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { keyless_certificate_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { keyless_certificate_id, ...body } = args as any;
   return client.keylessCertificates.get(keyless_certificate_id, body);
 };
 

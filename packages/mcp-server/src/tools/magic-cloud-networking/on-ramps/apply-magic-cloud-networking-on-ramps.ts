@@ -26,8 +26,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { onramp_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { onramp_id, ...body } = args as any;
   return client.magicCloudNetworking.onRamps.apply(onramp_id, body);
 };
 

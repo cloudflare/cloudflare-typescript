@@ -31,8 +31,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { token_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { token_id, ...body } = args as any;
   return client.accounts.tokens.value.update(token_id, body);
 };
 

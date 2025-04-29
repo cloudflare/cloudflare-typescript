@@ -36,8 +36,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ip, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { ip, ...body } = args as any;
   return client.zeroTrust.networks.routes.ips.get(ip, body);
 };
 

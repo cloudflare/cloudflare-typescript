@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { account_app_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { account_app_id, ...body } = args as any;
   return client.magicTransit.apps.delete(account_app_id, body);
 };
 

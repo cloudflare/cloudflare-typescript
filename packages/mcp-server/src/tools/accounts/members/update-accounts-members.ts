@@ -31,73 +31,7 @@ export const tool: Tool = {
             type: 'array',
             description: 'Roles assigned to this member.',
             items: {
-              type: 'object',
-              properties: {
-                id: {
-                  type: 'string',
-                  description: 'Role identifier tag.',
-                },
-                description: {
-                  type: 'string',
-                  description: "Description of role's permissions.",
-                },
-                name: {
-                  type: 'string',
-                  description: 'Role name.',
-                },
-                permissions: {
-                  type: 'object',
-                  properties: {
-                    analytics: {
-                      type: 'object',
-                      properties: {
-                        read: {
-                          type: 'boolean',
-                        },
-                        write: {
-                          type: 'boolean',
-                        },
-                      },
-                      required: [],
-                    },
-                    billing: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    cache_purge: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    dns: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    dns_records: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    lb: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    logs: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    organization: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    ssl: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    waf: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    zone_settings: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                    zones: {
-                      $ref: '#/anyOf/0/properties/roles/items/permissions/analytics',
-                    },
-                  },
-                  required: [],
-                },
-              },
-              required: ['id', 'description', 'name', 'permissions'],
+              $ref: '#/$defs/role',
             },
           },
         },
@@ -166,11 +100,85 @@ export const tool: Tool = {
         },
       },
     ],
+    $defs: {
+      permission_grant: {
+        type: 'object',
+        properties: {
+          read: {
+            type: 'boolean',
+          },
+          write: {
+            type: 'boolean',
+          },
+        },
+        required: [],
+      },
+      role: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'Role identifier tag.',
+          },
+          description: {
+            type: 'string',
+            description: "Description of role's permissions.",
+          },
+          name: {
+            type: 'string',
+            description: 'Role name.',
+          },
+          permissions: {
+            type: 'object',
+            properties: {
+              analytics: {
+                $ref: '#/$defs/permission_grant',
+              },
+              billing: {
+                $ref: '#/$defs/permission_grant',
+              },
+              cache_purge: {
+                $ref: '#/$defs/permission_grant',
+              },
+              dns: {
+                $ref: '#/$defs/permission_grant',
+              },
+              dns_records: {
+                $ref: '#/$defs/permission_grant',
+              },
+              lb: {
+                $ref: '#/$defs/permission_grant',
+              },
+              logs: {
+                $ref: '#/$defs/permission_grant',
+              },
+              organization: {
+                $ref: '#/$defs/permission_grant',
+              },
+              ssl: {
+                $ref: '#/$defs/permission_grant',
+              },
+              waf: {
+                $ref: '#/$defs/permission_grant',
+              },
+              zone_settings: {
+                $ref: '#/$defs/permission_grant',
+              },
+              zones: {
+                $ref: '#/$defs/permission_grant',
+              },
+            },
+            required: [],
+          },
+        },
+        required: ['id', 'description', 'name', 'permissions'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { member_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { member_id, ...body } = args as any;
   return client.accounts.members.update(member_id, body);
 };
 

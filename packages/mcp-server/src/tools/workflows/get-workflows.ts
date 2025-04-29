@@ -26,8 +26,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { workflow_name, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { workflow_name, ...body } = args as any;
   return client.workflows.get(workflow_name, body);
 };
 

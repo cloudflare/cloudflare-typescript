@@ -35,27 +35,7 @@ export const tool: Tool = {
         type: 'string',
       },
       context_awareness: {
-        type: 'object',
-        description: 'Scan the context of predefined entries to only return matches surrounded by keywords.',
-        properties: {
-          enabled: {
-            type: 'boolean',
-            description:
-              'If true, scan the context of predefined entries to only return matches surrounded by keywords.',
-          },
-          skip: {
-            type: 'object',
-            description: 'Content types to exclude from context analysis and return all matches.',
-            properties: {
-              files: {
-                type: 'boolean',
-                description: 'If the content type is a file, skip context analysis and return all matches.',
-              },
-            },
-            required: ['files'],
-          },
-        },
-        required: ['enabled', 'skip'],
+        $ref: '#/$defs/context_awareness',
       },
       description: {
         type: 'string',
@@ -80,17 +60,7 @@ export const tool: Tool = {
                   type: 'string',
                 },
                 pattern: {
-                  type: 'object',
-                  properties: {
-                    regex: {
-                      type: 'string',
-                    },
-                    validation: {
-                      type: 'string',
-                      enum: ['luhn'],
-                    },
-                  },
-                  required: ['regex'],
+                  $ref: '#/$defs/pattern',
                 },
               },
               required: ['enabled', 'entry_id', 'name', 'pattern'],
@@ -105,7 +75,7 @@ export const tool: Tool = {
                   type: 'string',
                 },
                 pattern: {
-                  $ref: '#/properties/entries/items/anyOf/0/pattern',
+                  $ref: '#/$defs/pattern',
                 },
               },
               required: ['enabled', 'name', 'pattern'],
@@ -173,11 +143,52 @@ export const tool: Tool = {
         },
       },
     },
+    $defs: {
+      skip_configuration: {
+        type: 'object',
+        description: 'Content types to exclude from context analysis and return all matches.',
+        properties: {
+          files: {
+            type: 'boolean',
+            description: 'If the content type is a file, skip context analysis and return all matches.',
+          },
+        },
+        required: ['files'],
+      },
+      context_awareness: {
+        type: 'object',
+        description: 'Scan the context of predefined entries to only return matches surrounded by keywords.',
+        properties: {
+          enabled: {
+            type: 'boolean',
+            description:
+              'If true, scan the context of predefined entries to only return matches surrounded by keywords.',
+          },
+          skip: {
+            $ref: '#/$defs/skip_configuration',
+          },
+        },
+        required: ['enabled', 'skip'],
+      },
+      pattern: {
+        type: 'object',
+        properties: {
+          regex: {
+            type: 'string',
+          },
+          validation: {
+            type: 'string',
+            enum: ['luhn'],
+          },
+        },
+        required: ['regex'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { profile_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { profile_id, ...body } = args as any;
   return client.zeroTrust.dlp.profiles.custom.update(profile_id, body);
 };
 

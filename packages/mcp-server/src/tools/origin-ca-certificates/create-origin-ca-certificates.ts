@@ -29,12 +29,20 @@ export const tool: Tool = {
         },
       },
       request_type: {
+        $ref: '#/$defs/certificate_request_type',
+      },
+      requested_validity: {
+        $ref: '#/$defs/request_validity',
+      },
+    },
+    $defs: {
+      certificate_request_type: {
         type: 'string',
         description:
           'Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa), or "keyless-certificate" (for Keyless SSL servers).',
         enum: ['origin-rsa', 'origin-ecc', 'keyless-certificate'],
       },
-      requested_validity: {
+      request_validity: {
         type: 'string',
         description: 'The number of days for which the certificate should be valid.',
         enum: [7, 30, 90, 365, 730, 1095, 5475],
@@ -43,8 +51,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.originCACertificates.create(body);
 };
 

@@ -26,8 +26,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { reference_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { reference_id, ...body } = args as any;
   return client.zeroTrust.riskScoring.integrations.references.get(reference_id, body);
 };
 

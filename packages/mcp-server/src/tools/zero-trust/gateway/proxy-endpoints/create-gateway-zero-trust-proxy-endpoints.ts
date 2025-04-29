@@ -23,9 +23,7 @@ export const tool: Tool = {
         type: 'array',
         description: 'A list of CIDRs to restrict ingress connections.',
         items: {
-          type: 'string',
-          description:
-            'The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4 CIDRs are limited to a maximum of /25.',
+          $ref: '#/$defs/gateway_ips',
         },
       },
       name: {
@@ -33,11 +31,18 @@ export const tool: Tool = {
         description: 'The name of the proxy endpoint.',
       },
     },
+    $defs: {
+      gateway_ips: {
+        type: 'string',
+        description:
+          'The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4 CIDRs are limited to a maximum of /25.',
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.zeroTrust.gateway.proxyEndpoints.create(body);
 };
 

@@ -26,8 +26,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { tsig_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { tsig_id, ...body } = args as any;
   return client.dns.zoneTransfers.tsigs.get(tsig_id, body);
 };
 

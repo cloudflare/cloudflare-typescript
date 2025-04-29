@@ -36,8 +36,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { asset_identifer, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { asset_identifer, ...body } = args as any;
   return client.cloudforceOne.requests.assets.update(asset_identifer, body);
 };
 

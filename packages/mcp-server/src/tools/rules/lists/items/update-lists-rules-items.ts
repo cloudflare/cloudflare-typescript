@@ -39,15 +39,7 @@ export const tool: Tool = {
               description: 'Defines an informative summary of the list item.',
             },
             hostname: {
-              type: 'object',
-              description:
-                'Valid characters for hostnames are ASCII(7) letters from a to z, the digits from 0 to 9, wildcards (*), and the hyphen (-).',
-              properties: {
-                url_hostname: {
-                  type: 'string',
-                },
-              },
-              required: ['url_hostname'],
+              $ref: '#/$defs/hostname',
             },
             ip: {
               type: 'string',
@@ -55,44 +47,60 @@ export const tool: Tool = {
                 'An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /64.',
             },
             redirect: {
-              type: 'object',
-              description: 'The definition of the redirect.',
-              properties: {
-                source_url: {
-                  type: 'string',
-                },
-                target_url: {
-                  type: 'string',
-                },
-                include_subdomains: {
-                  type: 'boolean',
-                },
-                preserve_path_suffix: {
-                  type: 'boolean',
-                },
-                preserve_query_string: {
-                  type: 'boolean',
-                },
-                status_code: {
-                  type: 'string',
-                  enum: [301, 302, 307, 308],
-                },
-                subpath_matching: {
-                  type: 'boolean',
-                },
-              },
-              required: ['source_url', 'target_url'],
+              $ref: '#/$defs/redirect',
             },
           },
           required: [],
         },
       },
     },
+    $defs: {
+      hostname: {
+        type: 'object',
+        description:
+          'Valid characters for hostnames are ASCII(7) letters from a to z, the digits from 0 to 9, wildcards (*), and the hyphen (-).',
+        properties: {
+          url_hostname: {
+            type: 'string',
+          },
+        },
+        required: ['url_hostname'],
+      },
+      redirect: {
+        type: 'object',
+        description: 'The definition of the redirect.',
+        properties: {
+          source_url: {
+            type: 'string',
+          },
+          target_url: {
+            type: 'string',
+          },
+          include_subdomains: {
+            type: 'boolean',
+          },
+          preserve_path_suffix: {
+            type: 'boolean',
+          },
+          preserve_query_string: {
+            type: 'boolean',
+          },
+          status_code: {
+            type: 'string',
+            enum: [301, 302, 307, 308],
+          },
+          subpath_matching: {
+            type: 'boolean',
+          },
+        },
+        required: ['source_url', 'target_url'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { list_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { list_id, ...body } = args as any;
   return client.rules.lists.items.update(list_id, body);
 };
 

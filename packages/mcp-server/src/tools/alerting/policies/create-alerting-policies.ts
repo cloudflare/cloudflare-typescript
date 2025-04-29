@@ -99,6 +99,27 @@ export const tool: Tool = {
         description: 'Whether or not the Notification policy is enabled.',
       },
       mechanisms: {
+        $ref: '#/$defs/mechanism',
+      },
+      name: {
+        type: 'string',
+        description: 'Name of the policy.',
+      },
+      alert_interval: {
+        type: 'string',
+        description:
+          'Optional specification of how often to re-alert from the same incident, not support on all alert types.',
+      },
+      description: {
+        type: 'string',
+        description: 'Optional description for the Notification policy.',
+      },
+      filters: {
+        $ref: '#/$defs/policy_filter',
+      },
+    },
+    $defs: {
+      mechanism: {
         type: 'object',
         description:
           'List of IDs that will be used when dispatching a notification. IDs for email type will be the email address.',
@@ -145,20 +166,7 @@ export const tool: Tool = {
         },
         required: [],
       },
-      name: {
-        type: 'string',
-        description: 'Name of the policy.',
-      },
-      alert_interval: {
-        type: 'string',
-        description:
-          'Optional specification of how often to re-alert from the same incident, not support on all alert types.',
-      },
-      description: {
-        type: 'string',
-        description: 'Optional description for the Notification policy.',
-      },
-      filters: {
+      policy_filter: {
         type: 'object',
         description:
           'Optional filters that allow you to be alerted only on a subset of events for that alert type based on some criteria. This is only available for select alert types. See alert type documentation for more details.',
@@ -471,8 +479,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.alerting.policies.create(body);
 };
 

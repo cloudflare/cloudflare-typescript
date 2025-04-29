@@ -38,25 +38,7 @@ export const tool: Tool = {
         description:
           'A list of regions from which to run health checks. Null means Cloudflare will pick a default region.',
         items: {
-          type: 'string',
-          description:
-            'WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe, EEU: Eastern Europe, NSAM: Northern South America, SSAM: Southern South America, OC: Oceania, ME: Middle East, NAF: North Africa, SAF: South Africa, IN: India, SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all regions (BUSINESS and ENTERPRISE customers only).',
-          enum: [
-            'WNAM',
-            'ENAM',
-            'WEU',
-            'EEU',
-            'NSAM',
-            'SSAM',
-            'OC',
-            'ME',
-            'NAF',
-            'SAF',
-            'IN',
-            'SEAS',
-            'NEAS',
-            'ALL_REGIONS',
-          ],
+          $ref: '#/$defs/check_region',
         },
       },
       consecutive_fails: {
@@ -74,6 +56,58 @@ export const tool: Tool = {
         description: 'A human-readable description of the health check.',
       },
       http_config: {
+        $ref: '#/$defs/http_configuration',
+      },
+      interval: {
+        type: 'integer',
+        description:
+          'The interval between each health check. Shorter intervals may give quicker notifications if the origin status changes, but will increase load on the origin as we check from multiple locations.',
+      },
+      retries: {
+        type: 'integer',
+        description:
+          'The number of retries to attempt in case of a timeout before marking the origin as unhealthy. Retries are attempted immediately.',
+      },
+      suspended: {
+        type: 'boolean',
+        description: 'If suspended, no health checks are sent to the origin.',
+      },
+      tcp_config: {
+        $ref: '#/$defs/tcp_configuration',
+      },
+      timeout: {
+        type: 'integer',
+        description: 'The timeout (in seconds) before marking the health check as failed.',
+      },
+      type: {
+        type: 'string',
+        description:
+          "The protocol to use for the health check. Currently supported protocols are 'HTTP', 'HTTPS' and 'TCP'.",
+      },
+    },
+    $defs: {
+      check_region: {
+        type: 'string',
+        description:
+          'WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe, EEU: Eastern Europe, NSAM: Northern South America, SSAM: Southern South America, OC: Oceania, ME: Middle East, NAF: North Africa, SAF: South Africa, IN: India, SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all regions (BUSINESS and ENTERPRISE customers only).',
+        enum: [
+          'WNAM',
+          'ENAM',
+          'WEU',
+          'EEU',
+          'NSAM',
+          'SSAM',
+          'OC',
+          'ME',
+          'NAF',
+          'SAF',
+          'IN',
+          'SEAS',
+          'NEAS',
+          'ALL_REGIONS',
+        ],
+      },
+      http_configuration: {
         type: 'object',
         description: 'Parameters specific to an HTTP or HTTPS health check.',
         properties: {
@@ -120,21 +154,7 @@ export const tool: Tool = {
         },
         required: [],
       },
-      interval: {
-        type: 'integer',
-        description:
-          'The interval between each health check. Shorter intervals may give quicker notifications if the origin status changes, but will increase load on the origin as we check from multiple locations.',
-      },
-      retries: {
-        type: 'integer',
-        description:
-          'The number of retries to attempt in case of a timeout before marking the origin as unhealthy. Retries are attempted immediately.',
-      },
-      suspended: {
-        type: 'boolean',
-        description: 'If suspended, no health checks are sent to the origin.',
-      },
-      tcp_config: {
+      tcp_configuration: {
         type: 'object',
         description: 'Parameters specific to TCP health check.',
         properties: {
@@ -150,21 +170,12 @@ export const tool: Tool = {
         },
         required: [],
       },
-      timeout: {
-        type: 'integer',
-        description: 'The timeout (in seconds) before marking the health check as failed.',
-      },
-      type: {
-        type: 'string',
-        description:
-          "The protocol to use for the health check. Currently supported protocols are 'HTTP', 'HTTPS' and 'TCP'.",
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { healthcheck_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { healthcheck_id, ...body } = args as any;
   return client.healthchecks.update(healthcheck_id, body);
 };
 

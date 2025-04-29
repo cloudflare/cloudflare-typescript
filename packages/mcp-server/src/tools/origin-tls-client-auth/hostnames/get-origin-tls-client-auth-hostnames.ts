@@ -28,8 +28,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { hostname, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { hostname, ...body } = args as any;
   return client.originTLSClientAuth.hostnames.get(hostname, body);
 };
 

@@ -45,8 +45,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { share_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { share_id, ...body } = args as any;
   return client.resourceSharing.resources.create(share_id, body);
 };
 

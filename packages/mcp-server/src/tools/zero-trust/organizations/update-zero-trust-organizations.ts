@@ -58,30 +58,7 @@ export const tool: Tool = {
           'Lock all settings as Read-Only in the Dashboard, regardless of user permission. Updates may only be made via the API or Terraform for this account when enabled.',
       },
       login_design: {
-        type: 'object',
-        properties: {
-          background_color: {
-            type: 'string',
-            description: 'The background color on your login page.',
-          },
-          footer_text: {
-            type: 'string',
-            description: 'The text at the bottom of your login page.',
-          },
-          header_text: {
-            type: 'string',
-            description: 'The text at the top of your login page.',
-          },
-          logo_path: {
-            type: 'string',
-            description: 'The URL of the logo on your login page.',
-          },
-          text_color: {
-            type: 'string',
-            description: 'The text color on your login page.',
-          },
-        },
-        required: [],
+        $ref: '#/$defs/login_design',
       },
       name: {
         type: 'string',
@@ -107,11 +84,39 @@ export const tool: Tool = {
           'The amount of time that tokens issued for applications will be valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.',
       },
     },
+    $defs: {
+      login_design: {
+        type: 'object',
+        properties: {
+          background_color: {
+            type: 'string',
+            description: 'The background color on your login page.',
+          },
+          footer_text: {
+            type: 'string',
+            description: 'The text at the bottom of your login page.',
+          },
+          header_text: {
+            type: 'string',
+            description: 'The text at the top of your login page.',
+          },
+          logo_path: {
+            type: 'string',
+            description: 'The URL of the logo on your login page.',
+          },
+          text_color: {
+            type: 'string',
+            description: 'The text color on your login page.',
+          },
+        },
+        required: [],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.zeroTrust.organizations.update(body);
 };
 

@@ -34,6 +34,15 @@ export const tool: Tool = {
         type: 'integer',
       },
       static_addressing: {
+        $ref: '#/$defs/wan_static_addressing',
+      },
+      vlan_tag: {
+        type: 'integer',
+        description: 'VLAN ID. Use zero for untagged.',
+      },
+    },
+    $defs: {
+      wan_static_addressing: {
         type: 'object',
         description:
           '(optional) if omitted, use DHCP. Submit secondary_address when site is in high availability mode.',
@@ -53,16 +62,12 @@ export const tool: Tool = {
         },
         required: ['address', 'gateway_address'],
       },
-      vlan_tag: {
-        type: 'integer',
-        description: 'VLAN ID. Use zero for untagged.',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { site_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { site_id, ...body } = args as any;
   return client.magicTransit.sites.wans.create(site_id, body);
 };
 

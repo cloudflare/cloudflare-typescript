@@ -47,6 +47,25 @@ export const tool: Tool = {
         type: 'string',
       },
       context_awareness: {
+        $ref: '#/$defs/context_awareness',
+      },
+      ocr_enabled: {
+        type: 'boolean',
+      },
+    },
+    $defs: {
+      skip_configuration: {
+        type: 'object',
+        description: 'Content types to exclude from context analysis and return all matches.',
+        properties: {
+          files: {
+            type: 'boolean',
+            description: 'If the content type is a file, skip context analysis and return all matches.',
+          },
+        },
+        required: ['files'],
+      },
+      context_awareness: {
         type: 'object',
         description: 'Scan the context of predefined entries to only return matches surrounded by keywords.',
         properties: {
@@ -56,28 +75,17 @@ export const tool: Tool = {
               'If true, scan the context of predefined entries to only return matches surrounded by keywords.',
           },
           skip: {
-            type: 'object',
-            description: 'Content types to exclude from context analysis and return all matches.',
-            properties: {
-              files: {
-                type: 'boolean',
-                description: 'If the content type is a file, skip context analysis and return all matches.',
-              },
-            },
-            required: ['files'],
+            $ref: '#/$defs/skip_configuration',
           },
         },
         required: ['enabled', 'skip'],
-      },
-      ocr_enabled: {
-        type: 'boolean',
       },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { profile_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { profile_id, ...body } = args as any;
   return client.zeroTrust.dlp.profiles.predefined.update(profile_id, body);
 };
 

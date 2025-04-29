@@ -26,8 +26,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { registration_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { registration_id, ...body } = args as any;
   return client.zeroTrust.devices.registrations.get(registration_id, body);
 };
 

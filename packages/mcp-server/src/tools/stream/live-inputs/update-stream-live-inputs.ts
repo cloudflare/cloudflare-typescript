@@ -78,8 +78,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { live_input_identifier, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { live_input_identifier, ...body } = args as any;
   return client.stream.liveInputs.update(live_input_identifier, body);
 };
 

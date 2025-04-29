@@ -26,6 +26,14 @@ export const tool: Tool = {
         type: 'string',
       },
       pattern: {
+        $ref: '#/$defs/pattern',
+      },
+      profile_id: {
+        type: 'string',
+      },
+    },
+    $defs: {
+      pattern: {
         type: 'object',
         properties: {
           regex: {
@@ -38,15 +46,12 @@ export const tool: Tool = {
         },
         required: ['regex'],
       },
-      profile_id: {
-        type: 'string',
-      },
     },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.zeroTrust.dlp.entries.create(body);
 };
 

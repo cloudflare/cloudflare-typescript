@@ -42,20 +42,13 @@ export const tool: Tool = {
       issue_type: {
         type: 'array',
         items: {
-          type: 'string',
-          enum: [
-            'compliance_violation',
-            'email_security',
-            'exposed_infrastructure',
-            'insecure_configuration',
-            'weak_authentication',
-          ],
+          $ref: '#/$defs/issue_type',
         },
       },
       'issue_type~neq': {
         type: 'array',
         items: {
-          $ref: '#/properties/issue_type/items',
+          $ref: '#/$defs/issue_type',
         },
       },
       product: {
@@ -73,14 +66,13 @@ export const tool: Tool = {
       severity: {
         type: 'array',
         items: {
-          type: 'string',
-          enum: ['low', 'moderate', 'critical'],
+          $ref: '#/$defs/severity_query_param',
         },
       },
       'severity~neq': {
         type: 'array',
         items: {
-          $ref: '#/properties/severity/items',
+          $ref: '#/$defs/severity_query_param',
         },
       },
       subject: {
@@ -96,11 +88,27 @@ export const tool: Tool = {
         },
       },
     },
+    $defs: {
+      issue_type: {
+        type: 'string',
+        enum: [
+          'compliance_violation',
+          'email_security',
+          'exposed_infrastructure',
+          'insecure_configuration',
+          'weak_authentication',
+        ],
+      },
+      severity_query_param: {
+        type: 'string',
+        enum: ['low', 'moderate', 'critical'],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.securityCenter.insights.type.get(body);
 };
 

@@ -30,8 +30,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { provider, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { provider, ...body } = args as any;
   return client.aiGateway.urls.get(provider, body);
 };
 

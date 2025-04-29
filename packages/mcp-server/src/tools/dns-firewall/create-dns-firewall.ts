@@ -27,25 +27,11 @@ export const tool: Tool = {
       upstream_ips: {
         type: 'array',
         items: {
-          type: 'string',
-          description: 'Upstream DNS Server IPv4 address',
+          $ref: '#/$defs/upstream_ips',
         },
       },
       attack_mitigation: {
-        type: 'object',
-        description: 'Attack mitigation settings',
-        properties: {
-          enabled: {
-            type: 'boolean',
-            description:
-              'When enabled, automatically mitigate random-prefix attacks to protect upstream DNS servers',
-          },
-          only_when_upstream_unhealthy: {
-            type: 'boolean',
-            description: 'Only mitigate attacks when upstream servers seem unhealthy',
-          },
-        },
-        required: [],
+        $ref: '#/$defs/attack_mitigation',
       },
       deprecate_any_requests: {
         type: 'boolean',
@@ -81,11 +67,33 @@ export const tool: Tool = {
           'Number of retries for fetching DNS responses from upstream nameservers (not counting the initial attempt)',
       },
     },
+    $defs: {
+      upstream_ips: {
+        type: 'string',
+        description: 'Upstream DNS Server IPv4 address',
+      },
+      attack_mitigation: {
+        type: 'object',
+        description: 'Attack mitigation settings',
+        properties: {
+          enabled: {
+            type: 'boolean',
+            description:
+              'When enabled, automatically mitigate random-prefix attacks to protect upstream DNS servers',
+          },
+          only_when_upstream_unhealthy: {
+            type: 'boolean',
+            description: 'Only mitigate attacks when upstream servers seem unhealthy',
+          },
+        },
+        required: [],
+      },
+    },
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.dnsFirewall.create(body);
 };
 

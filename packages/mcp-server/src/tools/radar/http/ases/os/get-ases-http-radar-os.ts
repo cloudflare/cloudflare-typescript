@@ -146,8 +146,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { os, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { os, ...body } = args as any;
   return client.radar.http.ases.os.get(os, body);
 };
 

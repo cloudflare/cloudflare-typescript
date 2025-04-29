@@ -43,6 +43,11 @@ export const tool: Tool = {
           "The keyless SSL port used to communicate between Cloudflare and the client's Keyless SSL server.",
       },
       tunnel: {
+        $ref: '#/$defs/tunnel',
+      },
+    },
+    $defs: {
+      tunnel: {
         type: 'object',
         description: 'Configuration for using Keyless SSL through a Cloudflare Tunnel',
         properties: {
@@ -61,8 +66,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { keyless_certificate_id, ...body } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { keyless_certificate_id, ...body } = args as any;
   return client.keylessCertificates.edit(keyless_certificate_id, body);
 };
 

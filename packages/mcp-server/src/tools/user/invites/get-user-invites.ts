@@ -24,8 +24,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: any) => {
-  const { invite_id } = args;
+export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { invite_id, ...body } = args as any;
   return client.user.invites.get(invite_id);
 };
 
