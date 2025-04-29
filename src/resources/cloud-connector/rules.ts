@@ -107,12 +107,12 @@ export namespace RuleListResponse {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
   /**
-   * Body param: List of Cloud Connector rules
+   * Body param:
    */
   rules?: Array<RuleUpdateParams.Rule>;
 }
@@ -153,7 +153,7 @@ export namespace RuleUpdateParams {
 
 export interface RuleListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

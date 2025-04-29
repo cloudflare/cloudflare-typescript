@@ -18,11 +18,10 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       rules: {
         type: 'array',
-        description: 'List of Cloud Connector rules',
         items: {
           type: 'object',
           properties: {
