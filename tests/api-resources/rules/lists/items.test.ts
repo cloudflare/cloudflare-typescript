@@ -124,4 +124,27 @@ describe('resource items', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.rules.lists.items.get(
+      '2c0fc9fa937b11eaa1b71c4d701ab86e',
+      '34b12448945f11eaa1b71c4d701ab86e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.rules.lists.items.get(
+      '2c0fc9fa937b11eaa1b71c4d701ab86e',
+      '34b12448945f11eaa1b71c4d701ab86e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+  });
 });

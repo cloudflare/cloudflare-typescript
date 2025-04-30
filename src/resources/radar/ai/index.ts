@@ -8,4 +8,9 @@ export {
   type TimeseriesGroupUserAgentResponse,
   type TimeseriesGroupUserAgentParams,
 } from './timeseries-groups';
-export { ToMarkdown } from './to-markdown';
+export {
+  ToMarkdownCreateResponsesSinglePage,
+  ToMarkdown,
+  type ToMarkdownCreateResponse,
+  type ToMarkdownCreateParams,
+} from './to-markdown';

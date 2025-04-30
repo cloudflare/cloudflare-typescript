@@ -84,6 +84,24 @@ export class Items extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Fetches a list item in the list.
+   */
+  get(
+    listId: string,
+    itemId: string,
+    params: ItemGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ItemGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/rules/lists/${listId}/items/${itemId}`,
+        options,
+      ) as Core.APIPromise<{ result: ItemGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface ListCursor {
@@ -163,6 +181,98 @@ export namespace ItemDeleteResponse {
      * The unique operation ID of the asynchronous action.
      */
     operation_id?: string;
+  }
+}
+
+export type ItemGetResponse = ItemGetResponse.UnionMember0 | ItemGetResponse.UnionMember1;
+
+export namespace ItemGetResponse {
+  export interface UnionMember0 {
+    /**
+     * The unique ID of the list.
+     */
+    id?: string;
+
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn?: number;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+
+    /**
+     * The RFC 3339 timestamp of when the item was created.
+     */
+    created_on?: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname?: ListsAPI.Hostname;
+
+    /**
+     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+     * maximum of /64.
+     */
+    ip?: string;
+
+    /**
+     * The RFC 3339 timestamp of when the item was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect?: ListsAPI.Redirect;
+  }
+
+  export interface UnionMember1 {
+    /**
+     * The unique ID of the list.
+     */
+    id?: string;
+
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn?: number;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+
+    /**
+     * The RFC 3339 timestamp of when the item was created.
+     */
+    created_on?: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname?: ListsAPI.Hostname;
+
+    /**
+     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+     * maximum of /64.
+     */
+    ip?: string;
+
+    /**
+     * The RFC 3339 timestamp of when the item was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect?: ListsAPI.Redirect;
   }
 }
 
@@ -287,6 +397,13 @@ export interface ItemDeleteParams {
   account_id: string;
 }
 
+export interface ItemGetParams {
+  /**
+   * Defines an identifier.
+   */
+  account_id: string;
+}
+
 export declare namespace Items {
   export {
     type ListCursor as ListCursor,
@@ -295,9 +412,11 @@ export declare namespace Items {
     type ItemUpdateResponse as ItemUpdateResponse,
     type ItemListResponse as ItemListResponse,
     type ItemDeleteResponse as ItemDeleteResponse,
+    type ItemGetResponse as ItemGetResponse,
     type ItemCreateParams as ItemCreateParams,
     type ItemUpdateParams as ItemUpdateParams,
     type ItemListParams as ItemListParams,
     type ItemDeleteParams as ItemDeleteParams,
+    type ItemGetParams as ItemGetParams,
   };
 }

@@ -85,6 +85,30 @@ describe('resource buckets', () => {
   });
 
   // TODO: investigate broken test
+  test.skip('edit: only required params', async () => {
+    const responsePromise = client.r2.buckets.edit('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      storage_class: 'Standard',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate broken test
+  test.skip('edit: required and optional params', async () => {
+    const response = await client.r2.buckets.edit('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      storage_class: 'Standard',
+      jurisdiction: 'default',
+    });
+  });
+
+  // TODO: investigate broken test
   test.skip('get: only required params', async () => {
     const responsePromise = client.r2.buckets.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
