@@ -351,6 +351,11 @@ export namespace Application {
     id?: string;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -807,6 +812,11 @@ export namespace Application {
     id?: string;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -964,6 +974,11 @@ export namespace Application {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -2496,6 +2511,11 @@ export namespace ApplicationCreateResponse {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -3153,6 +3173,11 @@ export namespace ApplicationCreateResponse {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -3557,6 +3582,11 @@ export namespace ApplicationCreateResponse {
      * authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -5291,6 +5321,11 @@ export namespace ApplicationCreateResponse {
      * authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -5731,6 +5766,11 @@ export namespace ApplicationUpdateResponse {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -6388,6 +6428,11 @@ export namespace ApplicationUpdateResponse {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -6792,6 +6837,11 @@ export namespace ApplicationUpdateResponse {
      * authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -8526,6 +8576,11 @@ export namespace ApplicationUpdateResponse {
      * authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -8966,6 +9021,11 @@ export namespace ApplicationListResponse {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -9623,6 +9683,11 @@ export namespace ApplicationListResponse {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -10027,6 +10092,11 @@ export namespace ApplicationListResponse {
      * authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -11761,6 +11831,11 @@ export namespace ApplicationListResponse {
      * authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -12208,6 +12283,11 @@ export namespace ApplicationGetResponse {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -12865,6 +12945,11 @@ export namespace ApplicationGetResponse {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -13269,6 +13354,11 @@ export namespace ApplicationGetResponse {
      * authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -15003,6 +15093,11 @@ export namespace ApplicationGetResponse {
      * authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -15452,6 +15547,11 @@ export declare namespace ApplicationCreateParams {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Body param: Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -16091,6 +16191,11 @@ export declare namespace ApplicationCreateParams {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Body param: Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -16487,6 +16592,11 @@ export declare namespace ApplicationCreateParams {
      * setting for WARP authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * Body param: The identity providers your users can select when connecting to this
@@ -18042,6 +18152,11 @@ export declare namespace ApplicationCreateParams {
      * setting for WARP authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * Body param: The identity providers your users can select when connecting to this
@@ -18474,6 +18589,11 @@ export declare namespace ApplicationUpdateParams {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Body param: Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -19113,6 +19233,11 @@ export declare namespace ApplicationUpdateParams {
     allow_authenticate_via_warp?: boolean;
 
     /**
+     * Body param: Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
+
+    /**
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
@@ -19509,6 +19634,11 @@ export declare namespace ApplicationUpdateParams {
      * setting for WARP authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * Body param: The identity providers your users can select when connecting to this
@@ -21064,6 +21194,11 @@ export declare namespace ApplicationUpdateParams {
      * setting for WARP authentication.
      */
     allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: Enables loading application content in an iFrame.
+     */
+    allow_iframe?: boolean;
 
     /**
      * Body param: The identity providers your users can select when connecting to this

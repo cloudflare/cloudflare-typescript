@@ -41,6 +41,10 @@ export const tool: Tool = {
             description:
               'When set to true, users can authenticate to this application using their WARP session.  When set to false this application will always require direct IdP authentication. This setting always overrides the organization setting for WARP authentication.',
           },
+          allow_iframe: {
+            type: 'boolean',
+            description: 'Enables loading application content in an iFrame.',
+          },
           allowed_idps: {
             type: 'array',
             description:
@@ -703,6 +707,10 @@ export const tool: Tool = {
             description:
               'When set to true, users can authenticate to this application using their WARP session.  When set to false this application will always require direct IdP authentication. This setting always overrides the organization setting for WARP authentication.',
           },
+          allow_iframe: {
+            type: 'boolean',
+            description: 'Enables loading application content in an iFrame.',
+          },
           allowed_idps: {
             type: 'array',
             description:
@@ -1101,6 +1109,10 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'When set to true, users can authenticate to this application using their WARP session.  When set to false this application will always require direct IdP authentication. This setting always overrides the organization setting for WARP authentication.',
+          },
+          allow_iframe: {
+            type: 'boolean',
+            description: 'Enables loading application content in an iFrame.',
           },
           allowed_idps: {
             type: 'array',
@@ -2666,6 +2678,10 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'When set to true, users can authenticate to this application using their WARP session.  When set to false this application will always require direct IdP authentication. This setting always overrides the organization setting for WARP authentication.',
+          },
+          allow_iframe: {
+            type: 'boolean',
+            description: 'Enables loading application content in an iFrame.',
           },
           allowed_idps: {
             type: 'array',
