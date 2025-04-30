@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       actions: {
         type: 'array',
@@ -67,28 +67,28 @@ export const tool: Tool = {
             },
           },
         },
-        required: ['type', 'value'],
+        required: ['type'],
       },
       matcher: {
         type: 'object',
         description: 'Matching pattern to forward your actions.',
         properties: {
-          field: {
-            type: 'string',
-            description: 'Field for type matcher.',
-            enum: ['to'],
-          },
           type: {
             type: 'string',
             description: 'Type of matcher.',
             enum: ['literal'],
+          },
+          field: {
+            type: 'string',
+            description: 'Field for type matcher.',
+            enum: ['to'],
           },
           value: {
             type: 'string',
             description: 'Value for matcher.',
           },
         },
-        required: ['field', 'type', 'value'],
+        required: ['type'],
       },
     },
   },
