@@ -19,20 +19,20 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier of a schema.',
       },
       package_id: {
         type: 'string',
-        description: 'The unique identifier of a WAF package.',
+        description: 'Defines the unique identifier of a WAF package.',
       },
       group_id: {
         type: 'string',
-        description: 'The unique identifier of a WAF package.',
+        description: 'Defines the unique identifier of a WAF package.',
       },
       mode: {
         type: 'string',
         description:
-          'The state of the rules contained in the rule group. When `on`, the rules in the group are configurable/usable.',
+          'Defines the state of the rules contained in the rule group. When `on`, the rules in the group are configurable/usable.',
         enum: ['on', 'off'],
       },
     },

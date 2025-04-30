@@ -19,52 +19,52 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier of a schema.',
       },
       package_id: {
         type: 'string',
-        description: 'The unique identifier of a WAF package.',
+        description: 'Defines the unique identifier of a WAF package.',
       },
       description: {
         type: 'string',
-        description: 'The public description of the WAF rule.',
+        description: 'Defines the public description of the WAF rule.',
       },
       direction: {
         type: 'string',
-        description: 'The direction used to sort returned rules.',
+        description: 'Defines the direction used to sort returned rules.',
         enum: ['asc', 'desc'],
       },
       group_id: {
         type: 'string',
-        description: 'The unique identifier of the rule group.',
+        description: 'Defines the unique identifier of the rule group.',
       },
       match: {
         type: 'string',
         description:
-          'When set to `all`, all the search requirements must match. When set to `any`, only one of the search requirements has to match.',
+          'Defines the search requirements. When set to `all`, all the search requirements must match. When set to `any`, only one of the search requirements has to match.',
         enum: ['any', 'all'],
       },
       mode: {
         type: 'string',
-        description: 'The action/mode a rule has been overridden to perform.',
+        description: 'Defines the action/mode a rule has been overridden to perform.',
         enum: ['DIS', 'CHL', 'BLK', 'SIM'],
       },
       order: {
         type: 'string',
-        description: 'The field used to sort returned rules.',
+        description: 'Defines the field used to sort returned rules.',
         enum: ['priority', 'group_id', 'description'],
       },
       page: {
         type: 'number',
-        description: 'The page number of paginated results.',
+        description: 'Defines the page number of paginated results.',
       },
       per_page: {
         type: 'number',
-        description: 'The number of rules per page.',
+        description: 'Defines the number of rules per page.',
       },
       priority: {
         type: 'string',
-        description: 'The order in which the individual WAF rule is executed within its rule group.',
+        description: 'Defines the order in which the individual WAF rule is executed within its rule group.',
       },
     },
   },

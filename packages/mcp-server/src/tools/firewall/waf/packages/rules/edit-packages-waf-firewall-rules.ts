@@ -19,20 +19,20 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier of a schema.',
       },
       package_id: {
         type: 'string',
-        description: 'The unique identifier of a WAF package.',
+        description: 'Defines the unique identifier of a WAF package.',
       },
       rule_id: {
         type: 'string',
-        description: 'The unique identifier of a WAF package.',
+        description: 'Defines the unique identifier of a WAF package.',
       },
       mode: {
         type: 'string',
         description:
-          'The mode/action of the rule when triggered. You must use a value from the `allowed_modes` array of the current rule.',
+          'Defines the mode/action of the rule when triggered. You must use a value from the `allowed_modes` array of the current rule.',
         enum: ['default', 'disable', 'simulate', 'block', 'challenge', 'on', 'off'],
       },
     },
