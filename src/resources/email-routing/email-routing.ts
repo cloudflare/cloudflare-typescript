@@ -125,7 +125,7 @@ export interface Settings {
 
 export interface EmailRoutingDisableParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -137,7 +137,7 @@ export interface EmailRoutingDisableParams {
 
 export interface EmailRoutingEnableParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -149,7 +149,7 @@ export interface EmailRoutingEnableParams {
 
 export interface EmailRoutingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

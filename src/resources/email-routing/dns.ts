@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as DNSAPI from './dns';
-import * as Shared from '../shared';
 import * as EmailRoutingAPI from './email-routing';
 import { SinglePage } from '../../pagination';
 
@@ -114,12 +113,12 @@ export type DNSGetResponse =
 
 export namespace DNSGetResponse {
   export interface EmailEmailRoutingDNSQueryResponse {
-    errors: Array<Shared.ResponseInfo>;
+    errors: Array<EmailEmailRoutingDNSQueryResponse.Error>;
 
-    messages: Array<Shared.ResponseInfo>;
+    messages: Array<EmailEmailRoutingDNSQueryResponse.Message>;
 
     /**
-     * Whether the API call was successful
+     * Whether the API call was successful.
      */
     success: true;
 
@@ -129,6 +128,38 @@ export namespace DNSGetResponse {
   }
 
   export namespace EmailEmailRoutingDNSQueryResponse {
+    export interface Error {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Error.Source;
+    }
+
+    export namespace Error {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Message.Source;
+    }
+
+    export namespace Message {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
     export interface Result {
       errors?: Array<Result.Error>;
 
@@ -148,34 +179,34 @@ export namespace DNSGetResponse {
 
     export interface ResultInfo {
       /**
-       * Total number of results for the requested service
+       * Total number of results for the requested service.
        */
       count?: number;
 
       /**
-       * Current page within paginated list of results
+       * Current page within paginated list of results.
        */
       page?: number;
 
       /**
-       * Number of results per page of results
+       * Number of results per page of results.
        */
       per_page?: number;
 
       /**
-       * Total results available without any search parameters
+       * Total results available without any search parameters.
        */
       total_count?: number;
     }
   }
 
   export interface EmailDNSSettingsResponseCollection {
-    errors: Array<Shared.ResponseInfo>;
+    errors: Array<EmailDNSSettingsResponseCollection.Error>;
 
-    messages: Array<Shared.ResponseInfo>;
+    messages: Array<EmailDNSSettingsResponseCollection.Message>;
 
     /**
-     * Whether the API call was successful
+     * Whether the API call was successful.
      */
     success: true;
 
@@ -185,24 +216,56 @@ export namespace DNSGetResponse {
   }
 
   export namespace EmailDNSSettingsResponseCollection {
+    export interface Error {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Error.Source;
+    }
+
+    export namespace Error {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Message.Source;
+    }
+
+    export namespace Message {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
     export interface ResultInfo {
       /**
-       * Total number of results for the requested service
+       * Total number of results for the requested service.
        */
       count?: number;
 
       /**
-       * Current page within paginated list of results
+       * Current page within paginated list of results.
        */
       page?: number;
 
       /**
-       * Number of results per page of results
+       * Number of results per page of results.
        */
       per_page?: number;
 
       /**
-       * Total results available without any search parameters
+       * Total results available without any search parameters.
        */
       total_count?: number;
     }
@@ -211,7 +274,7 @@ export namespace DNSGetResponse {
 
 export interface DNSCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -223,14 +286,14 @@ export interface DNSCreateParams {
 
 export interface DNSDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface DNSEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -242,7 +305,7 @@ export interface DNSEditParams {
 
 export interface DNSGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

@@ -144,7 +144,7 @@ export interface CatchAllGetResponse {
 
 export interface CatchAllUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -171,7 +171,7 @@ export interface CatchAllUpdateParams {
 
 export interface CatchAllGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
