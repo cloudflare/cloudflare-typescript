@@ -19,49 +19,49 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier of a schema.',
       },
       package_id: {
         type: 'string',
-        description: 'The unique identifier of a WAF package.',
+        description: 'Defines the unique identifier of a WAF package.',
       },
       direction: {
         type: 'string',
-        description: 'The direction used to sort returned rule groups.',
+        description: 'Defines the direction used to sort returned rule groups.',
         enum: ['asc', 'desc'],
       },
       match: {
         type: 'string',
         description:
-          'When set to `all`, all the search requirements must match. When set to `any`, only one of the search requirements has to match.',
+          'Defines the condition for search requirements. When set to `all`, all the search requirements must match. When set to `any`, only one of the search requirements has to match.',
         enum: ['any', 'all'],
       },
       mode: {
         type: 'string',
         description:
-          'The state of the rules contained in the rule group. When `on`, the rules in the group are configurable/usable.',
+          'Defines the state of the rules contained in the rule group. When `on`, the rules in the group are configurable/usable.',
         enum: ['on', 'off'],
       },
       name: {
         type: 'string',
-        description: 'The name of the rule group.',
+        description: 'Defines the name of the rule group.',
       },
       order: {
         type: 'string',
-        description: 'The field used to sort returned rule groups.',
+        description: 'Defines the field used to sort returned rule groups.',
         enum: ['mode', 'rules_count'],
       },
       page: {
         type: 'number',
-        description: 'The page number of paginated results.',
+        description: 'Defines the page number of paginated results.',
       },
       per_page: {
         type: 'number',
-        description: 'The number of rule groups per page.',
+        description: 'Defines the number of rule groups per page.',
       },
       rules_count: {
         type: 'number',
-        description: 'The number of rules in the current rule group.',
+        description: 'Defines the number of rules in the current rule group.',
       },
     },
   },

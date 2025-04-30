@@ -19,15 +19,15 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Defines an identifier of a schema.',
       },
       package_id: {
         type: 'string',
-        description: 'The unique identifier of a WAF package.',
+        description: 'Defines the unique identifier of a WAF package.',
       },
       group_id: {
         type: 'string',
-        description: 'The unique identifier of a WAF package.',
+        description: 'Defines the unique identifier of a WAF package.',
       },
     },
   },
