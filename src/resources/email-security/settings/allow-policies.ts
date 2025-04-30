@@ -379,17 +379,17 @@ export interface AllowPolicyCreateParams {
   comments?: string | null;
 
   /**
-   * Body param:
+   * @deprecated Body param:
    */
   is_recipient?: boolean;
 
   /**
-   * Body param:
+   * @deprecated Body param:
    */
   is_sender?: boolean;
 
   /**
-   * Body param:
+   * @deprecated Body param:
    */
   is_spoof?: boolean;
 }
