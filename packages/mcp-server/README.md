@@ -1705,6 +1705,7 @@ subnets of an IP prefix.
 - `update_magic_transit_apps` (`write`): Updates an Account App
 - `list_magic_transit_apps` (`read`): Lists Apps associated with an account.
 - `delete_magic_transit_apps` (`write`): Deletes specific Account App.
+- `edit_magic_transit_apps` (`write`): Updates an Account App
 
 ### Resource `magic_transit.cf_interconnects`:
 
@@ -1978,6 +1979,12 @@ subnets of an IP prefix.
 - `delete_rules_lists` (`write`): Deletes a specific list and all its items.
 - `get_rules_lists` (`read`): Fetches the details of a list.
 
+### Resource `rules.lists.bulk_operations`:
+
+- `get_lists_rules_bulk_operations` (`read`): Gets the current status of an asynchronous operation on a list.
+
+The `status` property can have one of the following values: `pending`, `running`, `completed`, or `failed`. If the status is `failed`, the `error` property will contain a message describing the error.
+
 ### Resource `rules.lists.items`:
 
 - `create_lists_rules_items` (`write`): Appends new items to the list.
@@ -1992,6 +1999,8 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `delete_lists_rules_items` (`write`): Removes one or more items from a list.
 
 This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+
+- `get_lists_rules_items` (`read`): Fetches a list item in the list.
 
 ### Resource `stream`:
 
@@ -2143,6 +2152,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `create_r2_buckets` (`write`): Creates a new R2 bucket.
 - `list_r2_buckets` (`read`): Lists all R2 buckets on your account.
 - `delete_r2_buckets` (`write`): Deletes an existing R2 bucket.
+- `edit_r2_buckets` (`write`): Updates properties of an existing R2 bucket.
 - `get_r2_buckets` (`read`): Gets properties of an existing R2 bucket.
 
 ### Resource `r2.buckets.lifecycle`:
@@ -2979,6 +2989,10 @@ Note that secrets cannot be rotated again during the grace period.
 - `har_url_scanner_scans` (`read`): Get a URL scan's HAR file. See HAR spec at http://www.softwareishard.com/blog/har-12-spec/.
 - `screenshot_url_scanner_scans` (`read`): Get scan's screenshot by resolution (desktop/mobile/tablet).
 
+### Resource `radar.ai.to_markdown`:
+
+- `create_ai_radar_to_markdown` (`write`): Convert Files into Markdown
+
 ### Resource `radar.ai.inference.summary`:
 
 - `model_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by model.
@@ -3800,6 +3814,7 @@ It is strongly recommended that you ensure you have [custom rules](https://devel
 
 - `update_workflows` (`write`): Create/modify Workflow
 - `list_workflows` (`read`): List all Workflows
+- `delete_workflows` (`write`): Deletes a Workflow. This only deletes the Workflow and does not delete or modify any Worker associated to this Workflow or bounded to it.
 - `get_workflows` (`read`): Get Workflow details
 
 ### Resource `workflows.instances`:
@@ -3981,6 +3996,7 @@ Model specific inputs available in [Cloudflare Docs](https://developers.cloudfla
 - `list_stores_secrets_store_secrets` (`read`): Lists all store secrets
 - `delete_stores_secrets_store_secrets` (`write`): Deletes a single secret
 - `bulk_delete_stores_secrets_store_secrets` (`write`): Deletes one or more secrets
+- `duplicate_stores_secrets_store_secrets` (`write`): Duplicates the secret, keeping the value
 - `edit_stores_secrets_store_secrets` (`write`): Updates a single secret
 - `get_stores_secrets_store_secrets` (`read`): Returns details of a single secret
 

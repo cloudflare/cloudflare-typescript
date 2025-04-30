@@ -66,6 +66,23 @@ export class Apps extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Updates an Account App
+   */
+  edit(
+    accountAppID: string,
+    params: AppEditParams,
+    options?: RequestOptions,
+  ): APIPromise<AppEditResponse | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(path`/accounts/${account_id}/magic/apps/${accountAppID}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: AppEditResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type AppListResponsesSinglePage = SinglePage<AppListResponse>;
@@ -227,6 +244,36 @@ export interface AppDeleteResponse {
   type?: string;
 }
 
+/**
+ * Custom app defined for an account.
+ */
+export interface AppEditResponse {
+  /**
+   * Magic account app ID.
+   */
+  account_app_id: string;
+
+  /**
+   * FQDNs to associate with traffic decisions.
+   */
+  hostnames?: Array<string>;
+
+  /**
+   * CIDRs to associate with traffic decisions.
+   */
+  ip_subnets?: Array<string>;
+
+  /**
+   * Display name for the app.
+   */
+  name?: string;
+
+  /**
+   * Category of the app.
+   */
+  type?: string;
+}
+
 export interface AppCreateParams {
   /**
    * Path param: Identifier
@@ -295,16 +342,45 @@ export interface AppDeleteParams {
   account_id: string;
 }
 
+export interface AppEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: FQDNs to associate with traffic decisions.
+   */
+  hostnames?: Array<string>;
+
+  /**
+   * Body param: CIDRs to associate with traffic decisions.
+   */
+  ip_subnets?: Array<string>;
+
+  /**
+   * Body param: Display name for the app.
+   */
+  name?: string;
+
+  /**
+   * Body param: Category of the app.
+   */
+  type?: string;
+}
+
 export declare namespace Apps {
   export {
     type AppCreateResponse as AppCreateResponse,
     type AppUpdateResponse as AppUpdateResponse,
     type AppListResponse as AppListResponse,
     type AppDeleteResponse as AppDeleteResponse,
+    type AppEditResponse as AppEditResponse,
     type AppListResponsesSinglePage as AppListResponsesSinglePage,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
     type AppListParams as AppListParams,
     type AppDeleteParams as AppDeleteParams,
+    type AppEditParams as AppEditParams,
   };
 }

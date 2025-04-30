@@ -8,7 +8,12 @@ import {
   TimeseriesGroups,
 } from './timeseries-groups';
 import * as ToMarkdownAPI from './to-markdown';
-import { ToMarkdown } from './to-markdown';
+import {
+  ToMarkdown,
+  ToMarkdownCreateParams,
+  ToMarkdownCreateResponse,
+  ToMarkdownCreateResponsesSinglePage,
+} from './to-markdown';
 import * as BotsAPI from './bots/bots';
 import { Bots } from './bots/bots';
 import * as InferenceAPI from './inference/inference';
@@ -29,7 +34,12 @@ AI.Bots = Bots;
 AI.TimeseriesGroups = TimeseriesGroups;
 
 export declare namespace AI {
-  export { ToMarkdown as ToMarkdown };
+  export {
+    ToMarkdown as ToMarkdown,
+    type ToMarkdownCreateResponse as ToMarkdownCreateResponse,
+    type ToMarkdownCreateResponsesSinglePage as ToMarkdownCreateResponsesSinglePage,
+    type ToMarkdownCreateParams as ToMarkdownCreateParams,
+  };
 
   export { Inference as Inference };
 

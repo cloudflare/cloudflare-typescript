@@ -66,6 +66,23 @@ export class Workflows extends APIResource {
   }
 
   /**
+   * Deletes a Workflow. This only deletes the Workflow and does not delete or modify
+   * any Worker associated to this Workflow or bounded to it.
+   */
+  delete(
+    workflowName: string,
+    params: WorkflowDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<WorkflowDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(path`/accounts/${account_id}/workflows/${workflowName}`, options) as APIPromise<{
+        result: WorkflowDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get Workflow details
    */
   get(
@@ -144,6 +161,12 @@ export namespace WorkflowListResponse {
   }
 }
 
+export interface WorkflowDeleteResponse {
+  status: 'ok';
+
+  success: boolean | null;
+}
+
 export interface WorkflowGetResponse {
   id: string;
 
@@ -206,6 +229,10 @@ export interface WorkflowListParams extends V4PagePaginationArrayParams {
   account_id: string;
 }
 
+export interface WorkflowDeleteParams {
+  account_id: string;
+}
+
 export interface WorkflowGetParams {
   account_id: string;
 }
@@ -217,10 +244,12 @@ export declare namespace Workflows {
   export {
     type WorkflowUpdateResponse as WorkflowUpdateResponse,
     type WorkflowListResponse as WorkflowListResponse,
+    type WorkflowDeleteResponse as WorkflowDeleteResponse,
     type WorkflowGetResponse as WorkflowGetResponse,
     type WorkflowListResponsesV4PagePaginationArray as WorkflowListResponsesV4PagePaginationArray,
     type WorkflowUpdateParams as WorkflowUpdateParams,
     type WorkflowListParams as WorkflowListParams,
+    type WorkflowDeleteParams as WorkflowDeleteParams,
     type WorkflowGetParams as WorkflowGetParams,
   };
 

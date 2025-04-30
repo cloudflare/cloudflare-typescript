@@ -8,6 +8,7 @@ export {
   type BucketCreateParams,
   type BucketListParams,
   type BucketDeleteParams,
+  type BucketEditParams,
   type BucketGetParams,
 } from './buckets';
 export {

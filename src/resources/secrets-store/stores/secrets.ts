@@ -78,6 +78,23 @@ export class Secrets extends APIResource {
   }
 
   /**
+   * Duplicates the secret, keeping the value
+   */
+  duplicate(
+    secretID: string,
+    params: SecretDuplicateParams,
+    options?: RequestOptions,
+  ): APIPromise<SecretDuplicateResponse> {
+    const { account_id, store_id, ...body } = params;
+    return (
+      this._client.post(
+        path`/accounts/${account_id}/secrets_store/stores/${store_id}/secrets/${secretID}/duplicate`,
+        { body, ...options },
+      ) as APIPromise<{ result: SecretDuplicateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Updates a single secret
    */
   edit(secretID: string, params: SecretEditParams, options?: RequestOptions): APIPromise<SecretEditResponse> {
@@ -213,6 +230,40 @@ export interface SecretDeleteResponse {
 }
 
 export interface SecretBulkDeleteResponse {
+  /**
+   * Secret identifier tag.
+   */
+  id: string;
+
+  /**
+   * Whenthe secret was created.
+   */
+  created: string;
+
+  /**
+   * When the secret was modified.
+   */
+  modified: string;
+
+  /**
+   * The name of the secret
+   */
+  name: string;
+
+  status: 'pending' | 'active' | 'deleted';
+
+  /**
+   * Store Identifier
+   */
+  store_id: string;
+
+  /**
+   * Freeform text describing the secret
+   */
+  comment?: string;
+}
+
+export interface SecretDuplicateResponse {
   /**
    * Secret identifier tag.
    */
@@ -388,6 +439,23 @@ export interface SecretBulkDeleteParams {
   account_id: string;
 }
 
+export interface SecretDuplicateParams {
+  /**
+   * Path param: Account Identifier
+   */
+  account_id: string;
+
+  /**
+   * Path param: Store Identifier
+   */
+  store_id: string;
+
+  /**
+   * Body param: The name of the secret
+   */
+  name: string;
+}
+
 export interface SecretEditParams {
   /**
    * Path param: Account Identifier
@@ -434,6 +502,7 @@ export declare namespace Secrets {
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
     type SecretBulkDeleteResponse as SecretBulkDeleteResponse,
+    type SecretDuplicateResponse as SecretDuplicateResponse,
     type SecretEditResponse as SecretEditResponse,
     type SecretGetResponse as SecretGetResponse,
     type SecretCreateResponsesSinglePage as SecretCreateResponsesSinglePage,
@@ -443,6 +512,7 @@ export declare namespace Secrets {
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
     type SecretBulkDeleteParams as SecretBulkDeleteParams,
+    type SecretDuplicateParams as SecretDuplicateParams,
     type SecretEditParams as SecretEditParams,
     type SecretGetParams as SecretGetParams,
   };
