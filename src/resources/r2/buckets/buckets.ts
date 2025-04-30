@@ -128,6 +128,27 @@ export class Buckets extends APIResource {
   }
 
   /**
+   * Updates properties of an existing R2 bucket.
+   */
+  edit(bucketName: string, params: BucketEditParams, options?: RequestOptions): APIPromise<Bucket> {
+    const { account_id, storage_class, jurisdiction } = params;
+    return (
+      this._client.patch(path`/accounts/${account_id}/r2/buckets/${bucketName}`, {
+        ...options,
+        headers: buildHeaders([
+          {
+            'cf-r2-storage-class': storage_class.toString(),
+            ...(jurisdiction?.toString() != null ?
+              { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+            : undefined),
+          },
+          options?.headers,
+        ]),
+      }) as APIPromise<{ result: Bucket }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets properties of an existing R2 bucket.
    */
   get(bucketName: string, params: BucketGetParams, options?: RequestOptions): APIPromise<Bucket> {
@@ -264,6 +285,24 @@ export interface BucketDeleteParams {
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
+export interface BucketEditParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Header param: Storage class for newly uploaded objects, unless specified
+   * otherwise.
+   */
+  storage_class: 'Standard' | 'InfrequentAccess';
+
+  /**
+   * Header param: The bucket jurisdiction.
+   */
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
+}
+
 export interface BucketGetParams {
   /**
    * Path param: Account ID.
@@ -292,6 +331,7 @@ export declare namespace Buckets {
     type BucketCreateParams as BucketCreateParams,
     type BucketListParams as BucketListParams,
     type BucketDeleteParams as BucketDeleteParams,
+    type BucketEditParams as BucketEditParams,
     type BucketGetParams as BucketGetParams,
   };
 

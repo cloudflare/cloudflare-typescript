@@ -2,13 +2,15 @@
 
 import { APIResource } from '../../../core/resource';
 import * as BulkOperationsAPI from './bulk-operations';
-import { BulkOperations } from './bulk-operations';
+import { BulkOperationGetParams, BulkOperationGetResponse, BulkOperations } from './bulk-operations';
 import * as ItemsAPI from './items';
 import {
   ItemCreateParams,
   ItemCreateResponse,
   ItemDeleteParams,
   ItemDeleteResponse,
+  ItemGetParams,
+  ItemGetResponse,
   ItemListParams,
   ItemListResponse,
   ItemUpdateParams,
@@ -551,7 +553,11 @@ export declare namespace Lists {
     type ListGetParams as ListGetParams,
   };
 
-  export { BulkOperations as BulkOperations };
+  export {
+    BulkOperations as BulkOperations,
+    type BulkOperationGetResponse as BulkOperationGetResponse,
+    type BulkOperationGetParams as BulkOperationGetParams,
+  };
 
   export {
     Items as Items,
@@ -561,9 +567,11 @@ export declare namespace Lists {
     type ItemUpdateResponse as ItemUpdateResponse,
     type ItemListResponse as ItemListResponse,
     type ItemDeleteResponse as ItemDeleteResponse,
+    type ItemGetResponse as ItemGetResponse,
     type ItemCreateParams as ItemCreateParams,
     type ItemUpdateParams as ItemUpdateParams,
     type ItemListParams as ItemListParams,
     type ItemDeleteParams as ItemDeleteParams,
+    type ItemGetParams as ItemGetParams,
   };
 }

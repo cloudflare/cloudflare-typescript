@@ -436,6 +436,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.intel.attackSurfaceReport.issues.dismiss()`
 - `client.magicTransit.apps.update()`
 - `client.magicTransit.apps.delete()`
+- `client.magicTransit.apps.edit()`
 - `client.magicTransit.cfInterconnects.update()`
 - `client.magicTransit.cfInterconnects.get()`
 - `client.magicTransit.greTunnels.update()`
@@ -535,10 +536,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.rules.lists.update()`
 - `client.rules.lists.delete()`
 - `client.rules.lists.get()`
+- `client.rules.lists.bulkOperations.get()`
 - `client.rules.lists.items.create()`
 - `client.rules.lists.items.update()`
 - `client.rules.lists.items.list()`
 - `client.rules.lists.items.delete()`
+- `client.rules.lists.items.get()`
 - `client.stream.delete()`
 - `client.stream.edit()`
 - `client.stream.get()`
@@ -583,6 +586,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.d1.database.query()`
 - `client.d1.database.raw()`
 - `client.r2.buckets.delete()`
+- `client.r2.buckets.edit()`
 - `client.r2.buckets.get()`
 - `client.r2.buckets.lifecycle.update()`
 - `client.r2.buckets.lifecycle.get()`
@@ -915,6 +919,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.botnetFeed.asn.fullReport()`
 - `client.botnetFeed.configs.asn.delete()`
 - `client.workflows.update()`
+- `client.workflows.delete()`
 - `client.workflows.get()`
 - `client.workflows.instances.create()`
 - `client.workflows.instances.list()`
@@ -955,6 +960,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.secretsStore.stores.secrets.list()`
 - `client.secretsStore.stores.secrets.delete()`
 - `client.secretsStore.stores.secrets.bulkDelete()`
+- `client.secretsStore.stores.secrets.duplicate()`
 - `client.secretsStore.stores.secrets.edit()`
 - `client.secretsStore.stores.secrets.get()`
 - `client.pipelines.update()`
@@ -1056,6 +1062,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.vectorize.indexes.insert()`
 - `client.vectorize.indexes.upsert()`
 - `client.urlScanner.scans.bulkCreate()`
+- `client.radar.ai.toMarkdown.create()`
 - `client.zaraz.update()`
 - `client.zaraz.history.update()`
 - `client.zaraz.publish.create()`

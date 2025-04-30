@@ -14,6 +14,7 @@ import {
   BucketCreateParams,
   BucketDeleteParams,
   BucketDeleteResponse,
+  BucketEditParams,
   BucketGetParams,
   BucketListParams,
   BucketListResponse,
@@ -42,6 +43,7 @@ export declare namespace R2 {
     type BucketCreateParams as BucketCreateParams,
     type BucketListParams as BucketListParams,
     type BucketDeleteParams as BucketDeleteParams,
+    type BucketEditParams as BucketEditParams,
     type BucketGetParams as BucketGetParams,
   };
 
