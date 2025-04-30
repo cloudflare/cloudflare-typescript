@@ -15712,10 +15712,10 @@ export declare namespace ApplicationCreateParams {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * Body param: List of public domains that Access will secure. This field is
-     * deprecated in favor of `destinations` and will be supported until **November
-     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
-     * ignored.
+     * @deprecated Body param: List of public domains that Access will secure. This
+     * field is deprecated in favor of `destinations` and will be supported until
+     * **November 21, 2025.** If `destinations` are provided, then
+     * `self_hosted_domains` will be ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -16356,10 +16356,10 @@ export declare namespace ApplicationCreateParams {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * Body param: List of public domains that Access will secure. This field is
-     * deprecated in favor of `destinations` and will be supported until **November
-     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
-     * ignored.
+     * @deprecated Body param: List of public domains that Access will secure. This
+     * field is deprecated in favor of `destinations` and will be supported until
+     * **November 21, 2025.** If `destinations` are provided, then
+     * `self_hosted_domains` will be ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -16759,10 +16759,10 @@ export declare namespace ApplicationCreateParams {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * Body param: List of public domains that Access will secure. This field is
-     * deprecated in favor of `destinations` and will be supported until **November
-     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
-     * ignored.
+     * @deprecated Body param: List of public domains that Access will secure. This
+     * field is deprecated in favor of `destinations` and will be supported until
+     * **November 21, 2025.** If `destinations` are provided, then
+     * `self_hosted_domains` will be ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -18319,10 +18319,10 @@ export declare namespace ApplicationCreateParams {
     scim_config?: BrowserRdpApplication.SCIMConfig;
 
     /**
-     * Body param: List of public domains that Access will secure. This field is
-     * deprecated in favor of `destinations` and will be supported until **November
-     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
-     * ignored.
+     * @deprecated Body param: List of public domains that Access will secure. This
+     * field is deprecated in favor of `destinations` and will be supported until
+     * **November 21, 2025.** If `destinations` are provided, then
+     * `self_hosted_domains` will be ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -18754,10 +18754,10 @@ export declare namespace ApplicationUpdateParams {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * Body param: List of public domains that Access will secure. This field is
-     * deprecated in favor of `destinations` and will be supported until **November
-     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
-     * ignored.
+     * @deprecated Body param: List of public domains that Access will secure. This
+     * field is deprecated in favor of `destinations` and will be supported until
+     * **November 21, 2025.** If `destinations` are provided, then
+     * `self_hosted_domains` will be ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -19398,10 +19398,10 @@ export declare namespace ApplicationUpdateParams {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * Body param: List of public domains that Access will secure. This field is
-     * deprecated in favor of `destinations` and will be supported until **November
-     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
-     * ignored.
+     * @deprecated Body param: List of public domains that Access will secure. This
+     * field is deprecated in favor of `destinations` and will be supported until
+     * **November 21, 2025.** If `destinations` are provided, then
+     * `self_hosted_domains` will be ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -19801,10 +19801,10 @@ export declare namespace ApplicationUpdateParams {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * Body param: List of public domains that Access will secure. This field is
-     * deprecated in favor of `destinations` and will be supported until **November
-     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
-     * ignored.
+     * @deprecated Body param: List of public domains that Access will secure. This
+     * field is deprecated in favor of `destinations` and will be supported until
+     * **November 21, 2025.** If `destinations` are provided, then
+     * `self_hosted_domains` will be ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -21361,10 +21361,10 @@ export declare namespace ApplicationUpdateParams {
     scim_config?: BrowserRdpApplication.SCIMConfig;
 
     /**
-     * Body param: List of public domains that Access will secure. This field is
-     * deprecated in favor of `destinations` and will be supported until **November
-     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
-     * ignored.
+     * @deprecated Body param: List of public domains that Access will secure. This
+     * field is deprecated in favor of `destinations` and will be supported until
+     * **November 21, 2025.** If `destinations` are provided, then
+     * `self_hosted_domains` will be ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 

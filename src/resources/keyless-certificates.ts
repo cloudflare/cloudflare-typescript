@@ -244,7 +244,7 @@ export interface KeylessCertificateEditParams {
   zone_id: string;
 
   /**
-   * Body param: Whether or not the Keyless SSL is on or off.
+   * @deprecated Body param: Whether or not the Keyless SSL is on or off.
    */
   enabled?: boolean;
 
