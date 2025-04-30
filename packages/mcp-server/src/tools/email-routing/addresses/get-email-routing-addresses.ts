@@ -18,7 +18,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       destination_address_identifier: {
         type: 'string',
