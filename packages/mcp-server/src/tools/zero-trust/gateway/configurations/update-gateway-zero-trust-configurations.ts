@@ -276,6 +276,17 @@ export const tool: Tool = {
           fips: {
             $ref: '#/$defs/fips_settings',
           },
+          host_selector: {
+            type: 'object',
+            description: 'Setting to enable host selector in egress policies.',
+            properties: {
+              enabled: {
+                type: 'boolean',
+                description: 'Enable filtering via hosts for egress policies.',
+              },
+            },
+            required: [],
+          },
           protocol_detection: {
             $ref: '#/$defs/protocol_detection',
           },

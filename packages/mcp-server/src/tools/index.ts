@@ -1179,7 +1179,6 @@ import list_gateway_zero_trust_app_types from './zero-trust/gateway/app-types/li
 import update_gateway_zero_trust_configurations from './zero-trust/gateway/configurations/update-gateway-zero-trust-configurations';
 import edit_gateway_zero_trust_configurations from './zero-trust/gateway/configurations/edit-gateway-zero-trust-configurations';
 import get_gateway_zero_trust_configurations from './zero-trust/gateway/configurations/get-gateway-zero-trust-configurations';
-import get_configurations_gateway_zero_trust_custom_certificate from './zero-trust/gateway/configurations/custom-certificate/get-configurations-gateway-zero-trust-custom-certificate';
 import create_gateway_zero_trust_lists from './zero-trust/gateway/lists/create-gateway-zero-trust-lists';
 import update_gateway_zero_trust_lists from './zero-trust/gateway/lists/update-gateway-zero-trust-lists';
 import list_gateway_zero_trust_lists from './zero-trust/gateway/lists/list-gateway-zero-trust-lists';
@@ -2914,7 +2913,6 @@ addEndpoint(list_gateway_zero_trust_app_types);
 addEndpoint(update_gateway_zero_trust_configurations);
 addEndpoint(edit_gateway_zero_trust_configurations);
 addEndpoint(get_gateway_zero_trust_configurations);
-addEndpoint(get_configurations_gateway_zero_trust_custom_certificate);
 addEndpoint(create_gateway_zero_trust_lists);
 addEndpoint(update_gateway_zero_trust_lists);
 addEndpoint(list_gateway_zero_trust_lists);
