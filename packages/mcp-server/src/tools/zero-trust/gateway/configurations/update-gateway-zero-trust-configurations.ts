@@ -24,6 +24,83 @@ export const tool: Tool = {
       },
     },
     $defs: {
+      gateway_configuration_settings: {
+        type: 'object',
+        description: 'Account settings',
+        properties: {
+          activity_log: {
+            $ref: '#/$defs/activity_log_settings',
+          },
+          antivirus: {
+            $ref: '#/$defs/anti_virus_settings',
+          },
+          block_page: {
+            $ref: '#/$defs/block_page_settings',
+          },
+          body_scanning: {
+            $ref: '#/$defs/body_scanning_settings',
+          },
+          browser_isolation: {
+            $ref: '#/$defs/browser_isolation_settings',
+          },
+          certificate: {
+            type: 'object',
+            description:
+              'Certificate settings for Gateway TLS interception. If not specified, the Cloudflare Root CA will be used.',
+            properties: {
+              id: {
+                type: 'string',
+                description:
+                  "UUID of certificate to be used for interception. Certificate must be available (previously called 'active') on the edge. A nil UUID will indicate the Cloudflare Root CA should be used.",
+              },
+            },
+            required: ['id'],
+          },
+          custom_certificate: {
+            $ref: '#/$defs/custom_certificate_settings',
+          },
+          extended_email_matching: {
+            $ref: '#/$defs/extended_email_matching',
+          },
+          fips: {
+            $ref: '#/$defs/fips_settings',
+          },
+          host_selector: {
+            type: 'object',
+            description: 'Setting to enable host selector in egress policies.',
+            properties: {
+              enabled: {
+                type: 'boolean',
+                description: 'Enable filtering via hosts for egress policies.',
+              },
+            },
+            required: [],
+          },
+          protocol_detection: {
+            $ref: '#/$defs/protocol_detection',
+          },
+          sandbox: {
+            type: 'object',
+            description: 'Sandbox settings.',
+            properties: {
+              enabled: {
+                type: 'boolean',
+                description: 'Enable sandbox.',
+              },
+              fallback_action: {
+                type: 'string',
+                description: 'Action to take when the file cannot be scanned.',
+                enum: ['allow', 'block'],
+              },
+            },
+            required: [],
+          },
+          tls_decrypt: {
+            $ref: '#/$defs/tls_settings',
+          },
+        },
+        required: [],
+      },
       activity_log_settings: {
         type: 'object',
         description: 'Activity log settings.',
@@ -31,6 +108,28 @@ export const tool: Tool = {
           enabled: {
             type: 'boolean',
             description: 'Enable activity logging.',
+          },
+        },
+        required: [],
+      },
+      anti_virus_settings: {
+        type: 'object',
+        description: 'Anti-virus settings.',
+        properties: {
+          enabled_download_phase: {
+            type: 'boolean',
+            description: 'Enable anti-virus scanning on downloads.',
+          },
+          enabled_upload_phase: {
+            type: 'boolean',
+            description: 'Enable anti-virus scanning on uploads.',
+          },
+          fail_closed: {
+            type: 'boolean',
+            description: 'Block requests for files that cannot be scanned.',
+          },
+          notification_settings: {
+            $ref: '#/$defs/notification_settings',
           },
         },
         required: [],
@@ -56,28 +155,6 @@ export const tool: Tool = {
             type: 'string',
             description:
               'Optional URL to direct users to additional information. If not set, the notification will open a block page.',
-          },
-        },
-        required: [],
-      },
-      anti_virus_settings: {
-        type: 'object',
-        description: 'Anti-virus settings.',
-        properties: {
-          enabled_download_phase: {
-            type: 'boolean',
-            description: 'Enable anti-virus scanning on downloads.',
-          },
-          enabled_upload_phase: {
-            type: 'boolean',
-            description: 'Enable anti-virus scanning on uploads.',
-          },
-          fail_closed: {
-            type: 'boolean',
-            description: 'Block requests for files that cannot be scanned.',
-          },
-          notification_settings: {
-            $ref: '#/$defs/notification_settings',
           },
         },
         required: [],
@@ -231,83 +308,6 @@ export const tool: Tool = {
           enabled: {
             type: 'boolean',
             description: 'Enable inspecting encrypted HTTP traffic.',
-          },
-        },
-        required: [],
-      },
-      gateway_configuration_settings: {
-        type: 'object',
-        description: 'Account settings',
-        properties: {
-          activity_log: {
-            $ref: '#/$defs/activity_log_settings',
-          },
-          antivirus: {
-            $ref: '#/$defs/anti_virus_settings',
-          },
-          block_page: {
-            $ref: '#/$defs/block_page_settings',
-          },
-          body_scanning: {
-            $ref: '#/$defs/body_scanning_settings',
-          },
-          browser_isolation: {
-            $ref: '#/$defs/browser_isolation_settings',
-          },
-          certificate: {
-            type: 'object',
-            description:
-              'Certificate settings for Gateway TLS interception. If not specified, the Cloudflare Root CA will be used.',
-            properties: {
-              id: {
-                type: 'string',
-                description:
-                  "UUID of certificate to be used for interception. Certificate must be available (previously called 'active') on the edge. A nil UUID will indicate the Cloudflare Root CA should be used.",
-              },
-            },
-            required: ['id'],
-          },
-          custom_certificate: {
-            $ref: '#/$defs/custom_certificate_settings',
-          },
-          extended_email_matching: {
-            $ref: '#/$defs/extended_email_matching',
-          },
-          fips: {
-            $ref: '#/$defs/fips_settings',
-          },
-          host_selector: {
-            type: 'object',
-            description: 'Setting to enable host selector in egress policies.',
-            properties: {
-              enabled: {
-                type: 'boolean',
-                description: 'Enable filtering via hosts for egress policies.',
-              },
-            },
-            required: [],
-          },
-          protocol_detection: {
-            $ref: '#/$defs/protocol_detection',
-          },
-          sandbox: {
-            type: 'object',
-            description: 'Sandbox settings.',
-            properties: {
-              enabled: {
-                type: 'boolean',
-                description: 'Enable sandbox.',
-              },
-              fallback_action: {
-                type: 'string',
-                description: 'Action to take when the file cannot be scanned.',
-                enum: ['allow', 'block'],
-              },
-            },
-            required: [],
-          },
-          tls_decrypt: {
-            $ref: '#/$defs/tls_settings',
           },
         },
         required: [],

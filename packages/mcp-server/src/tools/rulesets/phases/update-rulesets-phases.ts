@@ -414,19 +414,6 @@ export const tool: Tool = {
           'magic_transit_ratelimit',
         ],
       },
-      logging: {
-        type: 'object',
-        title: 'Logging',
-        description: "An object configuring the rule's logging behavior.",
-        properties: {
-          enabled: {
-            type: 'boolean',
-            title: 'Enabled',
-            description: 'Whether to generate a log when the rule matches.',
-          },
-        },
-        required: ['enabled'],
-      },
       block_rule: {
         type: 'object',
         title: 'Block rule',
@@ -596,6 +583,19 @@ export const tool: Tool = {
           },
         },
         required: ['last_updated', 'version'],
+      },
+      logging: {
+        type: 'object',
+        title: 'Logging',
+        description: "An object configuring the rule's logging behavior.",
+        properties: {
+          enabled: {
+            type: 'boolean',
+            title: 'Enabled',
+            description: 'Whether to generate a log when the rule matches.',
+          },
+        },
+        required: ['enabled'],
       },
       compress_response_rule: {
         type: 'object',
@@ -1529,32 +1529,6 @@ export const tool: Tool = {
         },
         required: ['last_updated', 'version'],
       },
-      rewrite_uri_part: {
-        anyOf: [
-          {
-            type: 'object',
-            title: 'Static value',
-            properties: {
-              value: {
-                type: 'string',
-                description: 'Predefined replacement value.',
-              },
-            },
-            required: ['value'],
-          },
-          {
-            type: 'object',
-            title: 'Dynamic value',
-            properties: {
-              expression: {
-                type: 'string',
-                description: 'Expression to evaluate for the replacement value.',
-              },
-            },
-            required: ['expression'],
-          },
-        ],
-      },
       rewrite_rule: {
         type: 'object',
         title: 'Rewrite rule',
@@ -1720,6 +1694,32 @@ export const tool: Tool = {
           },
         },
         required: ['last_updated', 'version'],
+      },
+      rewrite_uri_part: {
+        anyOf: [
+          {
+            type: 'object',
+            title: 'Static value',
+            properties: {
+              value: {
+                type: 'string',
+                description: 'Predefined replacement value.',
+              },
+            },
+            required: ['value'],
+          },
+          {
+            type: 'object',
+            title: 'Dynamic value',
+            properties: {
+              expression: {
+                type: 'string',
+                description: 'Expression to evaluate for the replacement value.',
+              },
+            },
+            required: ['expression'],
+          },
+        ],
       },
       route_rule: {
         type: 'object',

@@ -329,17 +329,6 @@ export const tool: Tool = {
         },
         required: ['regex'],
       },
-      skip_configuration: {
-        type: 'object',
-        description: 'Content types to exclude from context analysis and return all matches.',
-        properties: {
-          files: {
-            type: 'boolean',
-            description: 'If the content type is a file, skip context analysis and return all matches.',
-          },
-        },
-        required: ['files'],
-      },
       context_awareness: {
         type: 'object',
         description: 'Scan the context of predefined entries to only return matches surrounded by keywords.',
@@ -354,6 +343,17 @@ export const tool: Tool = {
           },
         },
         required: ['enabled', 'skip'],
+      },
+      skip_configuration: {
+        type: 'object',
+        description: 'Content types to exclude from context analysis and return all matches.',
+        properties: {
+          files: {
+            type: 'boolean',
+            description: 'If the content type is a file, skip context analysis and return all matches.',
+          },
+        },
+        required: ['files'],
       },
     },
   },

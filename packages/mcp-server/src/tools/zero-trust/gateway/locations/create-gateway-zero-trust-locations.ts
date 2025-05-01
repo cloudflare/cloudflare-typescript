@@ -56,15 +56,25 @@ export const tool: Tool = {
       },
     },
     $defs: {
-      ip_network: {
+      endpoint: {
         type: 'object',
+        description:
+          'The destination endpoints configured for this location. When updating a location, if this field is absent or set with null, the endpoints configuration remains unchanged.',
         properties: {
-          network: {
-            type: 'string',
-            description: 'The IP address or IP CIDR.',
+          doh: {
+            $ref: '#/$defs/doh_endpoint',
+          },
+          dot: {
+            $ref: '#/$defs/dot_endpoint',
+          },
+          ipv4: {
+            $ref: '#/$defs/ipv4_endpoint',
+          },
+          ipv6: {
+            $ref: '#/$defs/ipv6_endpoint',
           },
         },
-        required: ['network'],
+        required: [],
       },
       doh_endpoint: {
         type: 'object',
@@ -88,6 +98,16 @@ export const tool: Tool = {
           },
         },
         required: [],
+      },
+      ip_network: {
+        type: 'object',
+        properties: {
+          network: {
+            type: 'string',
+            description: 'The IP address or IP CIDR.',
+          },
+        },
+        required: ['network'],
       },
       dot_endpoint: {
         type: 'object',
@@ -117,16 +137,6 @@ export const tool: Tool = {
         },
         required: [],
       },
-      ipv6_network: {
-        type: 'object',
-        properties: {
-          network: {
-            type: 'string',
-            description: 'The IPv6 address or IPv6 CIDR.',
-          },
-        },
-        required: ['network'],
-      },
       ipv6_endpoint: {
         type: 'object',
         properties: {
@@ -145,25 +155,15 @@ export const tool: Tool = {
         },
         required: [],
       },
-      endpoint: {
+      ipv6_network: {
         type: 'object',
-        description:
-          'The destination endpoints configured for this location. When updating a location, if this field is absent or set with null, the endpoints configuration remains unchanged.',
         properties: {
-          doh: {
-            $ref: '#/$defs/doh_endpoint',
-          },
-          dot: {
-            $ref: '#/$defs/dot_endpoint',
-          },
-          ipv4: {
-            $ref: '#/$defs/ipv4_endpoint',
-          },
-          ipv6: {
-            $ref: '#/$defs/ipv6_endpoint',
+          network: {
+            type: 'string',
+            description: 'The IPv6 address or IPv6 CIDR.',
           },
         },
-        required: [],
+        required: ['network'],
       },
     },
   },

@@ -80,6 +80,178 @@ export const tool: Tool = {
       },
     },
     $defs: {
+      device_input: {
+        anyOf: [
+          {
+            $ref: '#/$defs/file_input',
+          },
+          {
+            $ref: '#/$defs/unique_client_id_input',
+          },
+          {
+            $ref: '#/$defs/domain_joined_input',
+          },
+          {
+            $ref: '#/$defs/os_version_input',
+          },
+          {
+            $ref: '#/$defs/firewall_input',
+          },
+          {
+            $ref: '#/$defs/sentinelone_input',
+          },
+          {
+            type: 'object',
+            title: 'Carbonblack',
+            properties: {
+              operating_system: {
+                type: 'string',
+                description: 'Operating system',
+                enum: ['windows', 'linux', 'mac'],
+              },
+              path: {
+                type: 'string',
+                description: 'File path.',
+              },
+              sha256: {
+                type: 'string',
+                description: 'SHA-256.',
+              },
+              thumbprint: {
+                type: 'string',
+                description: 'Signing certificate thumbprint.',
+              },
+            },
+            required: ['operating_system', 'path'],
+          },
+          {
+            $ref: '#/$defs/disk_encryption_input',
+          },
+          {
+            type: 'object',
+            title: 'Application',
+            properties: {
+              operating_system: {
+                type: 'string',
+                description: 'Operating system',
+                enum: ['windows', 'linux', 'mac'],
+              },
+              path: {
+                type: 'string',
+                description: 'Path for the application.',
+              },
+              sha256: {
+                type: 'string',
+                description: 'SHA-256.',
+              },
+              thumbprint: {
+                type: 'string',
+                description: 'Signing certificate thumbprint.',
+              },
+            },
+            required: ['operating_system', 'path'],
+          },
+          {
+            $ref: '#/$defs/client_certificate_input',
+          },
+          {
+            type: 'object',
+            title: 'Client Certificate V2',
+            properties: {
+              certificate_id: {
+                type: 'string',
+                description: 'UUID of Cloudflare managed certificate.',
+              },
+              check_private_key: {
+                type: 'boolean',
+                description:
+                  'Confirm the certificate was not imported from another device. We recommend keeping this enabled unless the certificate was deployed without a private key.',
+              },
+              operating_system: {
+                type: 'string',
+                description: 'Operating system',
+                enum: ['windows', 'linux', 'mac'],
+              },
+              cn: {
+                type: 'string',
+                description:
+                  'Common Name that is protected by the client certificate. This may include one or more variables in the ${ } notation. Only ${serial_number} and ${hostname} are valid variables.',
+              },
+              extended_key_usage: {
+                type: 'array',
+                description:
+                  'List of values indicating purposes for which the certificate public key can be used',
+                items: {
+                  type: 'string',
+                  enum: ['clientAuth', 'emailProtection'],
+                },
+              },
+              locations: {
+                type: 'object',
+                properties: {
+                  paths: {
+                    type: 'array',
+                    description: 'List of paths to check for client certificate on linux.',
+                    items: {
+                      type: 'string',
+                    },
+                  },
+                  trust_stores: {
+                    type: 'array',
+                    description: 'List of trust stores to check for client certificate.',
+                    items: {
+                      type: 'string',
+                      enum: ['system', 'user'],
+                    },
+                  },
+                },
+                required: [],
+              },
+            },
+            required: ['certificate_id', 'check_private_key', 'operating_system'],
+          },
+          {
+            $ref: '#/$defs/workspace_one_input',
+          },
+          {
+            $ref: '#/$defs/crowdstrike_input',
+          },
+          {
+            $ref: '#/$defs/intune_input',
+          },
+          {
+            $ref: '#/$defs/kolide_input',
+          },
+          {
+            $ref: '#/$defs/tanium_input',
+          },
+          {
+            $ref: '#/$defs/sentinelone_s2s_input',
+          },
+          {
+            type: 'object',
+            title: 'Custom Device Posture Integration Input',
+            properties: {
+              connection_id: {
+                type: 'string',
+                description: 'Posture Integration ID.',
+              },
+              operator: {
+                type: 'string',
+                description: 'operator',
+                enum: ['<', '<=', '>', '>=', '=='],
+              },
+              score: {
+                type: 'number',
+                description:
+                  'A value between 0-100 assigned to devices set by the 3rd party posture provider.',
+              },
+            },
+            required: ['connection_id', 'operator', 'score'],
+          },
+        ],
+        description: 'The value to be checked against.',
+      },
       file_input: {
         type: 'object',
         title: 'File Check',
@@ -214,9 +386,6 @@ export const tool: Tool = {
         },
         required: ['operating_system', 'path'],
       },
-      carbonblack_input: {
-        type: 'string',
-      },
       disk_encryption_input: {
         type: 'object',
         title: 'Disk Encryption',
@@ -234,6 +403,9 @@ export const tool: Tool = {
           },
         },
         required: [],
+      },
+      carbonblack_input: {
+        type: 'string',
       },
       client_certificate_input: {
         type: 'object',
@@ -427,178 +599,6 @@ export const tool: Tool = {
           },
         },
         required: ['connection_id'],
-      },
-      device_input: {
-        anyOf: [
-          {
-            $ref: '#/$defs/file_input',
-          },
-          {
-            $ref: '#/$defs/unique_client_id_input',
-          },
-          {
-            $ref: '#/$defs/domain_joined_input',
-          },
-          {
-            $ref: '#/$defs/os_version_input',
-          },
-          {
-            $ref: '#/$defs/firewall_input',
-          },
-          {
-            $ref: '#/$defs/sentinelone_input',
-          },
-          {
-            type: 'object',
-            title: 'Carbonblack',
-            properties: {
-              operating_system: {
-                type: 'string',
-                description: 'Operating system',
-                enum: ['windows', 'linux', 'mac'],
-              },
-              path: {
-                type: 'string',
-                description: 'File path.',
-              },
-              sha256: {
-                type: 'string',
-                description: 'SHA-256.',
-              },
-              thumbprint: {
-                type: 'string',
-                description: 'Signing certificate thumbprint.',
-              },
-            },
-            required: ['operating_system', 'path'],
-          },
-          {
-            $ref: '#/$defs/disk_encryption_input',
-          },
-          {
-            type: 'object',
-            title: 'Application',
-            properties: {
-              operating_system: {
-                type: 'string',
-                description: 'Operating system',
-                enum: ['windows', 'linux', 'mac'],
-              },
-              path: {
-                type: 'string',
-                description: 'Path for the application.',
-              },
-              sha256: {
-                type: 'string',
-                description: 'SHA-256.',
-              },
-              thumbprint: {
-                type: 'string',
-                description: 'Signing certificate thumbprint.',
-              },
-            },
-            required: ['operating_system', 'path'],
-          },
-          {
-            $ref: '#/$defs/client_certificate_input',
-          },
-          {
-            type: 'object',
-            title: 'Client Certificate V2',
-            properties: {
-              certificate_id: {
-                type: 'string',
-                description: 'UUID of Cloudflare managed certificate.',
-              },
-              check_private_key: {
-                type: 'boolean',
-                description:
-                  'Confirm the certificate was not imported from another device. We recommend keeping this enabled unless the certificate was deployed without a private key.',
-              },
-              operating_system: {
-                type: 'string',
-                description: 'Operating system',
-                enum: ['windows', 'linux', 'mac'],
-              },
-              cn: {
-                type: 'string',
-                description:
-                  'Common Name that is protected by the client certificate. This may include one or more variables in the ${ } notation. Only ${serial_number} and ${hostname} are valid variables.',
-              },
-              extended_key_usage: {
-                type: 'array',
-                description:
-                  'List of values indicating purposes for which the certificate public key can be used',
-                items: {
-                  type: 'string',
-                  enum: ['clientAuth', 'emailProtection'],
-                },
-              },
-              locations: {
-                type: 'object',
-                properties: {
-                  paths: {
-                    type: 'array',
-                    description: 'List of paths to check for client certificate on linux.',
-                    items: {
-                      type: 'string',
-                    },
-                  },
-                  trust_stores: {
-                    type: 'array',
-                    description: 'List of trust stores to check for client certificate.',
-                    items: {
-                      type: 'string',
-                      enum: ['system', 'user'],
-                    },
-                  },
-                },
-                required: [],
-              },
-            },
-            required: ['certificate_id', 'check_private_key', 'operating_system'],
-          },
-          {
-            $ref: '#/$defs/workspace_one_input',
-          },
-          {
-            $ref: '#/$defs/crowdstrike_input',
-          },
-          {
-            $ref: '#/$defs/intune_input',
-          },
-          {
-            $ref: '#/$defs/kolide_input',
-          },
-          {
-            $ref: '#/$defs/tanium_input',
-          },
-          {
-            $ref: '#/$defs/sentinelone_s2s_input',
-          },
-          {
-            type: 'object',
-            title: 'Custom Device Posture Integration Input',
-            properties: {
-              connection_id: {
-                type: 'string',
-                description: 'Posture Integration ID.',
-              },
-              operator: {
-                type: 'string',
-                description: 'operator',
-                enum: ['<', '<=', '>', '>=', '=='],
-              },
-              score: {
-                type: 'number',
-                description:
-                  'A value between 0-100 assigned to devices set by the 3rd party posture provider.',
-              },
-            },
-            required: ['connection_id', 'operator', 'score'],
-          },
-        ],
-        description: 'The value to be checked against.',
       },
       device_match: {
         type: 'object',

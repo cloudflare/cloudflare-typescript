@@ -158,71 +158,6 @@ export const tool: Tool = {
         },
         required: [],
       },
-      session_affinity: {
-        type: 'string',
-        description:
-          'Specifies the type of session affinity the load balancer should use unless specified as `"none"`. The supported types are:\n- `"cookie"`: On the first request to a proxied load balancer, a cookie is generated, encoding information of which origin the request will be forwarded to. Subsequent requests, by the same client to the same load balancer, will be sent to the origin server the cookie encodes, for the duration of the cookie and as long as the origin server remains healthy. If the cookie has expired or the origin server is unhealthy, then a new origin server is calculated and used.\n- `"ip_cookie"`: Behaves the same as `"cookie"` except the initial origin selection is stable and based on the client\'s ip address.\n- `"header"`: On the first request to a proxied load balancer, a session key based on the configured HTTP headers (see `session_affinity_attributes.headers`) is generated, encoding the request headers used for storing in the load balancer session state which origin the request will be forwarded to. Subsequent requests to the load balancer with the same headers will be sent to the same origin server, for the duration of the session and as long as the origin server remains healthy. If the session has been idle for the duration of `session_affinity_ttl` seconds or the origin server is unhealthy, then a new origin server is calculated and used. See `headers` in `session_affinity_attributes` for additional required configuration.',
-        enum: ['none', 'cookie', 'ip_cookie', 'header'],
-      },
-      session_affinity_attributes: {
-        type: 'object',
-        description: 'Configures attributes for session affinity.',
-        properties: {
-          drain_duration: {
-            type: 'number',
-            description:
-              'Configures the drain duration in seconds. This field is only used when session affinity is enabled on the load balancer.',
-          },
-          headers: {
-            type: 'array',
-            description:
-              'Configures the names of HTTP headers to base session affinity on when header `session_affinity` is enabled. At least one HTTP header name must be provided. To specify the exact cookies to be used, include an item in the following format: `"cookie:<cookie-name-1>,<cookie-name-2>"` (example) where everything after the colon is a comma-separated list of cookie names. Providing only `"cookie"` will result in all cookies being used. The default max number of HTTP header names that can be provided depends on your plan: 5 for Enterprise, 1 for all other plans.',
-            items: {
-              type: 'string',
-              description: 'An HTTP header name.',
-            },
-          },
-          require_all_headers: {
-            type: 'boolean',
-            description:
-              'When header `session_affinity` is enabled, this option can be used to specify how HTTP headers on load balancing requests will be used. The supported values are:\n- `"true"`: Load balancing requests must contain *all* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren\'t created.\n- `"false"`: Load balancing requests must contain *at least one* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren\'t created.',
-          },
-          samesite: {
-            type: 'string',
-            description:
-              'Configures the SameSite attribute on session affinity cookie. Value "Auto" will be translated to "Lax" or "None" depending if Always Use HTTPS is enabled. Note: when using value "None", the secure attribute can not be set to "Never".',
-            enum: ['Auto', 'Lax', 'None', 'Strict'],
-          },
-          secure: {
-            type: 'string',
-            description:
-              'Configures the Secure attribute on session affinity cookie. Value "Always" indicates the Secure attribute will be set in the Set-Cookie header, "Never" indicates the Secure attribute will not be set, and "Auto" will set the Secure attribute depending if Always Use HTTPS is enabled.',
-            enum: ['Auto', 'Always', 'Never'],
-          },
-          zero_downtime_failover: {
-            type: 'string',
-            description:
-              'Configures the zero-downtime failover between origins within a pool when session affinity is enabled. This feature is currently incompatible with Argo, Tiered Cache, and Bandwidth Alliance. The supported values are:\n- `"none"`: No failover takes place for sessions pinned to the origin (default).\n- `"temporary"`: Traffic will be sent to another other healthy origin until the originally pinned origin is available; note that this can potentially result in heavy origin flapping.\n- `"sticky"`: The session affinity cookie is updated and subsequent requests are sent to the new origin. Note: Zero-downtime failover with sticky sessions is currently not supported for session affinity by header.',
-            enum: ['none', 'temporary', 'sticky'],
-          },
-        },
-        required: [],
-      },
-      steering_policy: {
-        type: 'string',
-        description:
-          'Steering Policy for this load balancer.\n- `"off"`: Use `default_pools`.\n- `"geo"`: Use `region_pools`/`country_pools`/`pop_pools`. For non-proxied requests, the country for `country_pools` is determined by `location_strategy`.\n- `"random"`: Select a pool randomly.\n- `"dynamic_latency"`: Use round trip time to select the closest pool in default_pools (requires pool health checks).\n- `"proximity"`: Use the pools\' latitude and longitude to select the closest pool using the Cloudflare PoP location for proxied requests or the location determined by `location_strategy` for non-proxied requests.\n- `"least_outstanding_requests"`: Select a pool by taking into consideration `random_steering` weights, as well as each pool\'s number of outstanding requests. Pools with more pending requests are weighted proportionately less relative to others.\n- `"least_connections"`: Select a pool by taking into consideration `random_steering` weights, as well as each pool\'s number of open connections. Pools with more open connections are weighted proportionately less relative to others. Supported for HTTP/1 and HTTP/2 connections.\n- `""`: Will map to `"geo"` if you use `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.',
-        enum: [
-          'off',
-          'geo',
-          'random',
-          'dynamic_latency',
-          'proximity',
-          'least_outstanding_requests',
-          'least_connections',
-          '',
-        ],
-      },
       rules: {
         type: 'object',
         description: 'A rule object containing conditions and overrides for this load balancer to evaluate.',
@@ -339,6 +274,71 @@ export const tool: Tool = {
           },
         },
         required: [],
+      },
+      session_affinity: {
+        type: 'string',
+        description:
+          'Specifies the type of session affinity the load balancer should use unless specified as `"none"`. The supported types are:\n- `"cookie"`: On the first request to a proxied load balancer, a cookie is generated, encoding information of which origin the request will be forwarded to. Subsequent requests, by the same client to the same load balancer, will be sent to the origin server the cookie encodes, for the duration of the cookie and as long as the origin server remains healthy. If the cookie has expired or the origin server is unhealthy, then a new origin server is calculated and used.\n- `"ip_cookie"`: Behaves the same as `"cookie"` except the initial origin selection is stable and based on the client\'s ip address.\n- `"header"`: On the first request to a proxied load balancer, a session key based on the configured HTTP headers (see `session_affinity_attributes.headers`) is generated, encoding the request headers used for storing in the load balancer session state which origin the request will be forwarded to. Subsequent requests to the load balancer with the same headers will be sent to the same origin server, for the duration of the session and as long as the origin server remains healthy. If the session has been idle for the duration of `session_affinity_ttl` seconds or the origin server is unhealthy, then a new origin server is calculated and used. See `headers` in `session_affinity_attributes` for additional required configuration.',
+        enum: ['none', 'cookie', 'ip_cookie', 'header'],
+      },
+      session_affinity_attributes: {
+        type: 'object',
+        description: 'Configures attributes for session affinity.',
+        properties: {
+          drain_duration: {
+            type: 'number',
+            description:
+              'Configures the drain duration in seconds. This field is only used when session affinity is enabled on the load balancer.',
+          },
+          headers: {
+            type: 'array',
+            description:
+              'Configures the names of HTTP headers to base session affinity on when header `session_affinity` is enabled. At least one HTTP header name must be provided. To specify the exact cookies to be used, include an item in the following format: `"cookie:<cookie-name-1>,<cookie-name-2>"` (example) where everything after the colon is a comma-separated list of cookie names. Providing only `"cookie"` will result in all cookies being used. The default max number of HTTP header names that can be provided depends on your plan: 5 for Enterprise, 1 for all other plans.',
+            items: {
+              type: 'string',
+              description: 'An HTTP header name.',
+            },
+          },
+          require_all_headers: {
+            type: 'boolean',
+            description:
+              'When header `session_affinity` is enabled, this option can be used to specify how HTTP headers on load balancing requests will be used. The supported values are:\n- `"true"`: Load balancing requests must contain *all* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren\'t created.\n- `"false"`: Load balancing requests must contain *at least one* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren\'t created.',
+          },
+          samesite: {
+            type: 'string',
+            description:
+              'Configures the SameSite attribute on session affinity cookie. Value "Auto" will be translated to "Lax" or "None" depending if Always Use HTTPS is enabled. Note: when using value "None", the secure attribute can not be set to "Never".',
+            enum: ['Auto', 'Lax', 'None', 'Strict'],
+          },
+          secure: {
+            type: 'string',
+            description:
+              'Configures the Secure attribute on session affinity cookie. Value "Always" indicates the Secure attribute will be set in the Set-Cookie header, "Never" indicates the Secure attribute will not be set, and "Auto" will set the Secure attribute depending if Always Use HTTPS is enabled.',
+            enum: ['Auto', 'Always', 'Never'],
+          },
+          zero_downtime_failover: {
+            type: 'string',
+            description:
+              'Configures the zero-downtime failover between origins within a pool when session affinity is enabled. This feature is currently incompatible with Argo, Tiered Cache, and Bandwidth Alliance. The supported values are:\n- `"none"`: No failover takes place for sessions pinned to the origin (default).\n- `"temporary"`: Traffic will be sent to another other healthy origin until the originally pinned origin is available; note that this can potentially result in heavy origin flapping.\n- `"sticky"`: The session affinity cookie is updated and subsequent requests are sent to the new origin. Note: Zero-downtime failover with sticky sessions is currently not supported for session affinity by header.',
+            enum: ['none', 'temporary', 'sticky'],
+          },
+        },
+        required: [],
+      },
+      steering_policy: {
+        type: 'string',
+        description:
+          'Steering Policy for this load balancer.\n- `"off"`: Use `default_pools`.\n- `"geo"`: Use `region_pools`/`country_pools`/`pop_pools`. For non-proxied requests, the country for `country_pools` is determined by `location_strategy`.\n- `"random"`: Select a pool randomly.\n- `"dynamic_latency"`: Use round trip time to select the closest pool in default_pools (requires pool health checks).\n- `"proximity"`: Use the pools\' latitude and longitude to select the closest pool using the Cloudflare PoP location for proxied requests or the location determined by `location_strategy` for non-proxied requests.\n- `"least_outstanding_requests"`: Select a pool by taking into consideration `random_steering` weights, as well as each pool\'s number of outstanding requests. Pools with more pending requests are weighted proportionately less relative to others.\n- `"least_connections"`: Select a pool by taking into consideration `random_steering` weights, as well as each pool\'s number of open connections. Pools with more open connections are weighted proportionately less relative to others. Supported for HTTP/1 and HTTP/2 connections.\n- `""`: Will map to `"geo"` if you use `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.',
+        enum: [
+          'off',
+          'geo',
+          'random',
+          'dynamic_latency',
+          'proximity',
+          'least_outstanding_requests',
+          'least_connections',
+          '',
+        ],
       },
     },
   },

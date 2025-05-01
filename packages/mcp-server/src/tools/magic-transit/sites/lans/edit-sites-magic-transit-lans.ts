@@ -79,6 +79,32 @@ export const tool: Tool = {
         },
         required: ['next_hop', 'prefix'],
       },
+      lan_static_addressing: {
+        type: 'object',
+        description:
+          'If the site is not configured in high availability mode, this configuration is optional (if omitted, use DHCP). However, if in high availability mode, static_address is required along with secondary and virtual address.',
+        properties: {
+          address: {
+            type: 'string',
+            description: 'A valid CIDR notation representing an IP range.',
+          },
+          dhcp_relay: {
+            $ref: '#/$defs/dhcp_relay',
+          },
+          dhcp_server: {
+            $ref: '#/$defs/dhcp_server',
+          },
+          secondary_address: {
+            type: 'string',
+            description: 'A valid CIDR notation representing an IP range.',
+          },
+          virtual_address: {
+            type: 'string',
+            description: 'A valid CIDR notation representing an IP range.',
+          },
+        },
+        required: ['address'],
+      },
       dhcp_relay: {
         type: 'object',
         properties: {
@@ -121,32 +147,6 @@ export const tool: Tool = {
           },
         },
         required: [],
-      },
-      lan_static_addressing: {
-        type: 'object',
-        description:
-          'If the site is not configured in high availability mode, this configuration is optional (if omitted, use DHCP). However, if in high availability mode, static_address is required along with secondary and virtual address.',
-        properties: {
-          address: {
-            type: 'string',
-            description: 'A valid CIDR notation representing an IP range.',
-          },
-          dhcp_relay: {
-            $ref: '#/$defs/dhcp_relay',
-          },
-          dhcp_server: {
-            $ref: '#/$defs/dhcp_server',
-          },
-          secondary_address: {
-            type: 'string',
-            description: 'A valid CIDR notation representing an IP range.',
-          },
-          virtual_address: {
-            type: 'string',
-            description: 'A valid CIDR notation representing an IP range.',
-          },
-        },
-        required: ['address'],
       },
     },
   },

@@ -88,25 +88,6 @@ export const tool: Tool = {
       },
     },
     $defs: {
-      host: {
-        type: 'string',
-      },
-      header: {
-        type: 'object',
-        description:
-          "The request header is used to pass additional information with an HTTP request. Currently supported header is 'Host'.",
-        properties: {
-          Host: {
-            type: 'array',
-            description:
-              "The 'Host' header allows to override the hostname set in the HTTP request. Current support is 1 'Host' header override per origin.",
-            items: {
-              $ref: '#/$defs/host',
-            },
-          },
-        },
-        required: [],
-      },
       origin: {
         type: 'object',
         properties: {
@@ -150,6 +131,25 @@ export const tool: Tool = {
           },
         },
         required: [],
+      },
+      header: {
+        type: 'object',
+        description:
+          "The request header is used to pass additional information with an HTTP request. Currently supported header is 'Host'.",
+        properties: {
+          Host: {
+            type: 'array',
+            description:
+              "The 'Host' header allows to override the hostname set in the HTTP request. Current support is 1 'Host' header override per origin.",
+            items: {
+              $ref: '#/$defs/host',
+            },
+          },
+        },
+        required: [],
+      },
+      host: {
+        type: 'string',
       },
       check_region: {
         type: 'string',
@@ -201,6 +201,20 @@ export const tool: Tool = {
         },
         required: [],
       },
+      notification_filter: {
+        type: 'object',
+        description:
+          'Filter pool and origin health notifications by resource type or health status. Use null to reset.',
+        properties: {
+          origin: {
+            $ref: '#/$defs/filter_options',
+          },
+          pool: {
+            $ref: '#/$defs/filter_options',
+          },
+        },
+        required: [],
+      },
       filter_options: {
         type: 'object',
         description: 'Filter options for a particular resource type (pool or origin). Use null to reset.',
@@ -213,20 +227,6 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'If present, send notifications only for this health status (e.g. false for only DOWN events). Use null to reset (all events).',
-          },
-        },
-        required: [],
-      },
-      notification_filter: {
-        type: 'object',
-        description:
-          'Filter pool and origin health notifications by resource type or health status. Use null to reset.',
-        properties: {
-          origin: {
-            $ref: '#/$defs/filter_options',
-          },
-          pool: {
-            $ref: '#/$defs/filter_options',
           },
         },
         required: [],

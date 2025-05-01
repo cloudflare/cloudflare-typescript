@@ -89,6 +89,130 @@ export const tool: Tool = {
           'The action Access will take if a user matches this policy. Infrastructure application policies can only use the Allow action.',
         enum: ['allow', 'deny', 'non_identity', 'bypass'],
       },
+      access_rule: {
+        anyOf: [
+          {
+            $ref: '#/$defs/group_rule',
+          },
+          {
+            $ref: '#/$defs/any_valid_service_token_rule',
+          },
+          {
+            type: 'object',
+            title: 'Authentication Context',
+            description: 'Matches an Azure Authentication Context.\nRequires an Azure identity provider.',
+            properties: {
+              auth_context: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    description: 'The ID of an Authentication context.',
+                  },
+                  ac_id: {
+                    type: 'string',
+                    description: 'The ACID of an Authentication context.',
+                  },
+                  identity_provider_id: {
+                    type: 'string',
+                    description: 'The ID of your Azure identity provider.',
+                  },
+                },
+                required: ['id', 'ac_id', 'identity_provider_id'],
+              },
+            },
+            required: ['auth_context'],
+          },
+          {
+            $ref: '#/$defs/authentication_method_rule',
+          },
+          {
+            $ref: '#/$defs/azure_group_rule',
+          },
+          {
+            $ref: '#/$defs/certificate_rule',
+          },
+          {
+            type: 'object',
+            title: 'Common Name',
+            description: 'Matches a specific common name.',
+            properties: {
+              common_name: {
+                type: 'object',
+                properties: {
+                  common_name: {
+                    type: 'string',
+                    description: 'The common name to match.',
+                  },
+                },
+                required: ['common_name'],
+              },
+            },
+            required: ['common_name'],
+          },
+          {
+            $ref: '#/$defs/country_rule',
+          },
+          {
+            $ref: '#/$defs/access_device_posture_rule',
+          },
+          {
+            $ref: '#/$defs/domain_rule',
+          },
+          {
+            $ref: '#/$defs/email_list_rule',
+          },
+          {
+            $ref: '#/$defs/email_rule',
+          },
+          {
+            $ref: '#/$defs/everyone_rule',
+          },
+          {
+            $ref: '#/$defs/external_evaluation_rule',
+          },
+          {
+            $ref: '#/$defs/github_organization_rule',
+          },
+          {
+            $ref: '#/$defs/gsuite_group_rule',
+          },
+          {
+            type: 'object',
+            title: 'Login Method',
+            description: 'Matches a specific identity provider id.',
+            properties: {
+              login_method: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    description: 'The ID of an identity provider.',
+                  },
+                },
+                required: ['id'],
+              },
+            },
+            required: ['login_method'],
+          },
+          {
+            $ref: '#/$defs/ip_list_rule',
+          },
+          {
+            $ref: '#/$defs/ip_rule',
+          },
+          {
+            $ref: '#/$defs/okta_group_rule',
+          },
+          {
+            $ref: '#/$defs/saml_group_rule',
+          },
+          {
+            $ref: '#/$defs/service_token_rule',
+          },
+        ],
+        description: 'Matches an Access group.',
+      },
       group_rule: {
         type: 'object',
         title: 'Access groups',
@@ -451,130 +575,6 @@ export const tool: Tool = {
           },
         },
         required: ['service_token'],
-      },
-      access_rule: {
-        anyOf: [
-          {
-            $ref: '#/$defs/group_rule',
-          },
-          {
-            $ref: '#/$defs/any_valid_service_token_rule',
-          },
-          {
-            type: 'object',
-            title: 'Authentication Context',
-            description: 'Matches an Azure Authentication Context.\nRequires an Azure identity provider.',
-            properties: {
-              auth_context: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'string',
-                    description: 'The ID of an Authentication context.',
-                  },
-                  ac_id: {
-                    type: 'string',
-                    description: 'The ACID of an Authentication context.',
-                  },
-                  identity_provider_id: {
-                    type: 'string',
-                    description: 'The ID of your Azure identity provider.',
-                  },
-                },
-                required: ['id', 'ac_id', 'identity_provider_id'],
-              },
-            },
-            required: ['auth_context'],
-          },
-          {
-            $ref: '#/$defs/authentication_method_rule',
-          },
-          {
-            $ref: '#/$defs/azure_group_rule',
-          },
-          {
-            $ref: '#/$defs/certificate_rule',
-          },
-          {
-            type: 'object',
-            title: 'Common Name',
-            description: 'Matches a specific common name.',
-            properties: {
-              common_name: {
-                type: 'object',
-                properties: {
-                  common_name: {
-                    type: 'string',
-                    description: 'The common name to match.',
-                  },
-                },
-                required: ['common_name'],
-              },
-            },
-            required: ['common_name'],
-          },
-          {
-            $ref: '#/$defs/country_rule',
-          },
-          {
-            $ref: '#/$defs/access_device_posture_rule',
-          },
-          {
-            $ref: '#/$defs/domain_rule',
-          },
-          {
-            $ref: '#/$defs/email_list_rule',
-          },
-          {
-            $ref: '#/$defs/email_rule',
-          },
-          {
-            $ref: '#/$defs/everyone_rule',
-          },
-          {
-            $ref: '#/$defs/external_evaluation_rule',
-          },
-          {
-            $ref: '#/$defs/github_organization_rule',
-          },
-          {
-            $ref: '#/$defs/gsuite_group_rule',
-          },
-          {
-            type: 'object',
-            title: 'Login Method',
-            description: 'Matches a specific identity provider id.',
-            properties: {
-              login_method: {
-                type: 'object',
-                properties: {
-                  id: {
-                    type: 'string',
-                    description: 'The ID of an identity provider.',
-                  },
-                },
-                required: ['id'],
-              },
-            },
-            required: ['login_method'],
-          },
-          {
-            $ref: '#/$defs/ip_list_rule',
-          },
-          {
-            $ref: '#/$defs/ip_rule',
-          },
-          {
-            $ref: '#/$defs/okta_group_rule',
-          },
-          {
-            $ref: '#/$defs/saml_group_rule',
-          },
-          {
-            $ref: '#/$defs/service_token_rule',
-          },
-        ],
-        description: 'Matches an Access group.',
       },
       approval_group: {
         type: 'object',
