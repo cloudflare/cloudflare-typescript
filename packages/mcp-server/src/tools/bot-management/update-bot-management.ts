@@ -22,7 +22,7 @@ export const tool: Tool = {
         properties: {
           zone_id: {
             type: 'string',
-            description: 'Identifier',
+            description: 'Identifier.',
           },
           ai_bots_protection: {
             type: 'string',
@@ -50,7 +50,7 @@ export const tool: Tool = {
         properties: {
           zone_id: {
             type: 'string',
-            description: 'Identifier',
+            description: 'Identifier.',
           },
           ai_bots_protection: {
             type: 'string',
@@ -93,7 +93,7 @@ export const tool: Tool = {
         properties: {
           zone_id: {
             type: 'string',
-            description: 'Identifier',
+            description: 'Identifier.',
           },
           ai_bots_protection: {
             type: 'string',
@@ -141,7 +141,7 @@ export const tool: Tool = {
         properties: {
           zone_id: {
             type: 'string',
-            description: 'Identifier',
+            description: 'Identifier.',
           },
           ai_bots_protection: {
             type: 'string',
