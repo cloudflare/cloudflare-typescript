@@ -101,18 +101,6 @@ export const tool: Tool = {
       },
     ],
     $defs: {
-      permission_grant: {
-        type: 'object',
-        properties: {
-          read: {
-            type: 'boolean',
-          },
-          write: {
-            type: 'boolean',
-          },
-        },
-        required: [],
-      },
       role: {
         type: 'object',
         properties: {
@@ -172,6 +160,18 @@ export const tool: Tool = {
           },
         },
         required: ['id', 'description', 'name', 'permissions'],
+      },
+      permission_grant: {
+        type: 'object',
+        properties: {
+          read: {
+            type: 'boolean',
+          },
+          write: {
+            type: 'boolean',
+          },
+        },
+        required: [],
       },
     },
   },

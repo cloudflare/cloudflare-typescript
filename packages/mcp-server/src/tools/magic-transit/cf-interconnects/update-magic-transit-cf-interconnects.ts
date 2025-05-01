@@ -59,16 +59,6 @@ export const tool: Tool = {
       },
     },
     $defs: {
-      health_check_rate: {
-        type: 'string',
-        description: 'How frequent the health check is run. The default value is `mid`.',
-        enum: ['low', 'mid', 'high'],
-      },
-      health_check_type: {
-        type: 'string',
-        description: 'The type of healthcheck to run, reply or request. The default value is `reply`.',
-        enum: ['reply', 'request'],
-      },
       health_check: {
         type: 'object',
         properties: {
@@ -111,6 +101,16 @@ export const tool: Tool = {
           },
         },
         required: [],
+      },
+      health_check_rate: {
+        type: 'string',
+        description: 'How frequent the health check is run. The default value is `mid`.',
+        enum: ['low', 'mid', 'high'],
+      },
+      health_check_type: {
+        type: 'string',
+        description: 'The type of healthcheck to run, reply or request. The default value is `reply`.',
+        enum: ['reply', 'request'],
       },
     },
   },

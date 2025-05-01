@@ -60,10 +60,6 @@ export const tool: Tool = {
       },
     },
     $defs: {
-      subnet: {
-        type: 'string',
-        description: 'A valid IPv4 address.',
-      },
       acl_configuration: {
         type: 'object',
         properties: {
@@ -102,6 +98,10 @@ export const tool: Tool = {
           },
         },
         required: ['lan_id'],
+      },
+      subnet: {
+        type: 'string',
+        description: 'A valid IPv4 address.',
       },
       allowed_protocol: {
         type: 'string',

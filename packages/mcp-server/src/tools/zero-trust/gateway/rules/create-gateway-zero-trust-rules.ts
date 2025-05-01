@@ -115,54 +115,6 @@ export const tool: Tool = {
         description: 'The protocol or layer to use.',
         enum: ['http', 'dns', 'l4', 'egress', 'dns_resolver'],
       },
-      dns_resolver_settings_v4: {
-        type: 'object',
-        properties: {
-          ip: {
-            type: 'string',
-            description: 'IPv4 address of upstream resolver.',
-          },
-          port: {
-            type: 'integer',
-            description: 'A port number to use for upstream resolver. Defaults to 53 if unspecified.',
-          },
-          route_through_private_network: {
-            type: 'boolean',
-            description:
-              'Whether to connect to this resolver over a private network. Must be set when vnet_id is set.',
-          },
-          vnet_id: {
-            type: 'string',
-            description:
-              'Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.',
-          },
-        },
-        required: ['ip'],
-      },
-      dns_resolver_settings_v6: {
-        type: 'object',
-        properties: {
-          ip: {
-            type: 'string',
-            description: 'IPv6 address of upstream resolver.',
-          },
-          port: {
-            type: 'integer',
-            description: 'A port number to use for upstream resolver. Defaults to 53 if unspecified.',
-          },
-          route_through_private_network: {
-            type: 'boolean',
-            description:
-              'Whether to connect to this resolver over a private network. Must be set when vnet_id is set.',
-          },
-          vnet_id: {
-            type: 'string',
-            description:
-              'Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.',
-          },
-        },
-        required: ['ip'],
-      },
       rule_setting: {
         type: 'object',
         description: "Additional settings that modify the rule's action.",
@@ -509,6 +461,54 @@ export const tool: Tool = {
           },
         },
         required: [],
+      },
+      dns_resolver_settings_v4: {
+        type: 'object',
+        properties: {
+          ip: {
+            type: 'string',
+            description: 'IPv4 address of upstream resolver.',
+          },
+          port: {
+            type: 'integer',
+            description: 'A port number to use for upstream resolver. Defaults to 53 if unspecified.',
+          },
+          route_through_private_network: {
+            type: 'boolean',
+            description:
+              'Whether to connect to this resolver over a private network. Must be set when vnet_id is set.',
+          },
+          vnet_id: {
+            type: 'string',
+            description:
+              'Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.',
+          },
+        },
+        required: ['ip'],
+      },
+      dns_resolver_settings_v6: {
+        type: 'object',
+        properties: {
+          ip: {
+            type: 'string',
+            description: 'IPv6 address of upstream resolver.',
+          },
+          port: {
+            type: 'integer',
+            description: 'A port number to use for upstream resolver. Defaults to 53 if unspecified.',
+          },
+          route_through_private_network: {
+            type: 'boolean',
+            description:
+              'Whether to connect to this resolver over a private network. Must be set when vnet_id is set.',
+          },
+          vnet_id: {
+            type: 'string',
+            description:
+              'Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.',
+          },
+        },
+        required: ['ip'],
       },
       schedule: {
         type: 'object',
