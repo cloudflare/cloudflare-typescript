@@ -27,8 +27,12 @@ describe('resource submissions', () => {
     const response = await client.emailSecurity.submissions.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       end: '2019-12-27T18:11:19.117Z',
+      original_disposition: 'MALICIOUS',
+      outcome_disposition: 'MALICIOUS',
       page: 1,
       per_page: 1,
+      query: 'query',
+      requested_disposition: 'MALICIOUS',
       start: '2019-12-27T18:11:19.117Z',
       submission_id: 'submission_id',
       type: 'TEAM',
