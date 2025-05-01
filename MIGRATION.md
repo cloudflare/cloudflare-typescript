@@ -692,6 +692,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.access.applications.policies.get()`
 - `client.zeroTrust.access.applications.policyTests.get()`
 - `client.zeroTrust.access.applications.policyTests.users.list()`
+- `client.zeroTrust.access.applications.settings.update()`
+- `client.zeroTrust.access.applications.settings.edit()`
 - `client.zeroTrust.access.certificates.create()`
 - `client.zeroTrust.access.certificates.update()`
 - `client.zeroTrust.access.certificates.list()`

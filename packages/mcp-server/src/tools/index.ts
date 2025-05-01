@@ -1046,6 +1046,8 @@ import get_applications_access_zero_trust_policies from './zero-trust/access/app
 import create_applications_access_zero_trust_policy_tests from './zero-trust/access/applications/policy-tests/create-applications-access-zero-trust-policy-tests';
 import get_applications_access_zero_trust_policy_tests from './zero-trust/access/applications/policy-tests/get-applications-access-zero-trust-policy-tests';
 import list_policy_tests_applications_access_zero_trust_users from './zero-trust/access/applications/policy-tests/users/list-policy-tests-applications-access-zero-trust-users';
+import update_applications_access_zero_trust_settings from './zero-trust/access/applications/settings/update-applications-access-zero-trust-settings';
+import edit_applications_access_zero_trust_settings from './zero-trust/access/applications/settings/edit-applications-access-zero-trust-settings';
 import create_access_zero_trust_certificates from './zero-trust/access/certificates/create-access-zero-trust-certificates';
 import update_access_zero_trust_certificates from './zero-trust/access/certificates/update-access-zero-trust-certificates';
 import list_access_zero_trust_certificates from './zero-trust/access/certificates/list-access-zero-trust-certificates';
@@ -2779,6 +2781,8 @@ addEndpoint(get_applications_access_zero_trust_policies);
 addEndpoint(create_applications_access_zero_trust_policy_tests);
 addEndpoint(get_applications_access_zero_trust_policy_tests);
 addEndpoint(list_policy_tests_applications_access_zero_trust_users);
+addEndpoint(update_applications_access_zero_trust_settings);
+addEndpoint(edit_applications_access_zero_trust_settings);
 addEndpoint(create_access_zero_trust_certificates);
 addEndpoint(update_access_zero_trust_certificates);
 addEndpoint(list_access_zero_trust_certificates);
