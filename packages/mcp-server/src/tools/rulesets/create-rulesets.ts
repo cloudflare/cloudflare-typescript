@@ -650,7 +650,7 @@ export const tool: Tool = {
                       type: 'string',
                       title: 'Name',
                       description: 'Name of compression algorithm to enable.',
-                      enum: ['none', 'auto', 'default', 'gzip', 'brotli'],
+                      enum: ['none', 'auto', 'default', 'gzip', 'brotli', 'zstd'],
                     },
                   },
                   required: [],
