@@ -507,7 +507,7 @@ export namespace CompressResponseRule {
       /**
        * Name of compression algorithm to enable.
        */
-      name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
+      name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
     }
   }
 
@@ -649,7 +649,7 @@ export namespace CompressResponseRuleParam {
       /**
        * Name of compression algorithm to enable.
        */
-      name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
+      name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
     }
   }
 
@@ -3168,7 +3168,11 @@ export namespace RewriteRule {
      */
     headers?: Record<
       string,
-      ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+      | ActionParameters.RemoveHeader
+      | ActionParameters.AddStaticHeader
+      | ActionParameters.SetStaticHeader
+      | ActionParameters.AddDynamicHeader
+      | ActionParameters.SetDynamicHeader
     >;
 
     /**
@@ -3186,9 +3190,21 @@ export namespace RewriteRule {
     }
 
     /**
+     * Add a request header with a static value.
+     */
+    export interface AddStaticHeader {
+      operation: 'add';
+
+      /**
+       * Static value for the header.
+       */
+      value: string;
+    }
+
+    /**
      * Set a request header with a static value.
      */
-    export interface StaticHeader {
+    export interface SetStaticHeader {
       operation: 'set';
 
       /**
@@ -3198,9 +3214,21 @@ export namespace RewriteRule {
     }
 
     /**
+     * Add a request header with a dynamic value.
+     */
+    export interface AddDynamicHeader {
+      /**
+       * Expression for the header value.
+       */
+      expression: string;
+
+      operation: 'add';
+    }
+
+    /**
      * Set a request header with a dynamic value.
      */
-    export interface DynamicHeader {
+    export interface SetDynamicHeader {
       /**
        * Expression for the header value.
        */
@@ -3354,7 +3382,11 @@ export namespace RewriteRuleParam {
      */
     headers?: Record<
       string,
-      ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+      | ActionParameters.RemoveHeader
+      | ActionParameters.AddStaticHeader
+      | ActionParameters.SetStaticHeader
+      | ActionParameters.AddDynamicHeader
+      | ActionParameters.SetDynamicHeader
     >;
 
     /**
@@ -3372,9 +3404,21 @@ export namespace RewriteRuleParam {
     }
 
     /**
+     * Add a request header with a static value.
+     */
+    export interface AddStaticHeader {
+      operation: 'add';
+
+      /**
+       * Static value for the header.
+       */
+      value: string;
+    }
+
+    /**
      * Set a request header with a static value.
      */
-    export interface StaticHeader {
+    export interface SetStaticHeader {
       operation: 'set';
 
       /**
@@ -3384,9 +3428,21 @@ export namespace RewriteRuleParam {
     }
 
     /**
+     * Add a request header with a dynamic value.
+     */
+    export interface AddDynamicHeader {
+      /**
+       * Expression for the header value.
+       */
+      expression: string;
+
+      operation: 'add';
+    }
+
+    /**
      * Set a request header with a dynamic value.
      */
-    export interface DynamicHeader {
+    export interface SetDynamicHeader {
       /**
        * Expression for the header value.
        */
@@ -7908,7 +7964,7 @@ export declare namespace RuleCreateParams {
         /**
          * Name of compression algorithm to enable.
          */
-        name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
+        name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
       }
     }
 
@@ -9132,7 +9188,11 @@ export declare namespace RuleCreateParams {
        */
       headers?: Record<
         string,
-        ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+        | ActionParameters.RemoveHeader
+        | ActionParameters.AddStaticHeader
+        | ActionParameters.SetStaticHeader
+        | ActionParameters.AddDynamicHeader
+        | ActionParameters.SetDynamicHeader
       >;
 
       /**
@@ -9150,9 +9210,21 @@ export declare namespace RuleCreateParams {
       }
 
       /**
+       * Add a request header with a static value.
+       */
+      export interface AddStaticHeader {
+        operation: 'add';
+
+        /**
+         * Static value for the header.
+         */
+        value: string;
+      }
+
+      /**
        * Set a request header with a static value.
        */
-      export interface StaticHeader {
+      export interface SetStaticHeader {
         operation: 'set';
 
         /**
@@ -9162,9 +9234,21 @@ export declare namespace RuleCreateParams {
       }
 
       /**
+       * Add a request header with a dynamic value.
+       */
+      export interface AddDynamicHeader {
+        /**
+         * Expression for the header value.
+         */
+        expression: string;
+
+        operation: 'add';
+      }
+
+      /**
        * Set a request header with a dynamic value.
        */
-      export interface DynamicHeader {
+      export interface SetDynamicHeader {
         /**
          * Expression for the header value.
          */
@@ -12043,7 +12127,7 @@ export declare namespace RuleEditParams {
         /**
          * Name of compression algorithm to enable.
          */
-        name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
+        name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
       }
     }
 
@@ -13297,7 +13381,11 @@ export declare namespace RuleEditParams {
        */
       headers?: Record<
         string,
-        ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+        | ActionParameters.RemoveHeader
+        | ActionParameters.AddStaticHeader
+        | ActionParameters.SetStaticHeader
+        | ActionParameters.AddDynamicHeader
+        | ActionParameters.SetDynamicHeader
       >;
 
       /**
@@ -13315,9 +13403,21 @@ export declare namespace RuleEditParams {
       }
 
       /**
+       * Add a request header with a static value.
+       */
+      export interface AddStaticHeader {
+        operation: 'add';
+
+        /**
+         * Static value for the header.
+         */
+        value: string;
+      }
+
+      /**
        * Set a request header with a static value.
        */
-      export interface StaticHeader {
+      export interface SetStaticHeader {
         operation: 'set';
 
         /**
@@ -13327,9 +13427,21 @@ export declare namespace RuleEditParams {
       }
 
       /**
+       * Add a request header with a dynamic value.
+       */
+      export interface AddDynamicHeader {
+        /**
+         * Expression for the header value.
+         */
+        expression: string;
+
+        operation: 'add';
+      }
+
+      /**
        * Set a request header with a dynamic value.
        */
-      export interface DynamicHeader {
+      export interface SetDynamicHeader {
         /**
          * Expression for the header value.
          */
