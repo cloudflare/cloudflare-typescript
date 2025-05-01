@@ -377,6 +377,11 @@ export interface DomainEditParams {
   /**
    * Body param:
    */
+  allowed_delivery_modes?: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
+
+  /**
+   * Body param:
+   */
   domain?: string | null;
 
   /**
