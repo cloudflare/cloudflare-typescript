@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as CustomCertificateAPI from './custom-certificate';
-import { CustomCertificate, CustomCertificateGetParams } from './custom-certificate';
+import { CustomCertificate } from './custom-certificate';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -451,6 +451,11 @@ export interface GatewayConfigurationSettings {
   fips?: FipsSettings | null;
 
   /**
+   * Setting to enable host selector in egress policies.
+   */
+  host_selector?: GatewayConfigurationSettings.HostSelector | null;
+
+  /**
    * Protocol Detection settings.
    */
   protocol_detection?: ProtocolDetection | null;
@@ -478,6 +483,16 @@ export namespace GatewayConfigurationSettings {
      * Cloudflare Root CA should be used.
      */
     id: string;
+  }
+
+  /**
+   * Setting to enable host selector in egress policies.
+   */
+  export interface HostSelector {
+    /**
+     * Enable filtering via hosts for egress policies.
+     */
+    enabled?: boolean;
   }
 
   /**
@@ -548,6 +563,11 @@ export interface GatewayConfigurationSettingsParam {
   fips?: FipsSettingsParam | null;
 
   /**
+   * Setting to enable host selector in egress policies.
+   */
+  host_selector?: GatewayConfigurationSettingsParam.HostSelector | null;
+
+  /**
    * Protocol Detection settings.
    */
   protocol_detection?: ProtocolDetectionParam | null;
@@ -575,6 +595,16 @@ export namespace GatewayConfigurationSettingsParam {
      * Cloudflare Root CA should be used.
      */
     id: string;
+  }
+
+  /**
+   * Setting to enable host selector in egress policies.
+   */
+  export interface HostSelector {
+    /**
+     * Enable filtering via hosts for egress policies.
+     */
+    enabled?: boolean;
   }
 
   /**
@@ -781,8 +811,5 @@ export declare namespace Configurations {
     type ConfigurationGetParams as ConfigurationGetParams,
   };
 
-  export {
-    CustomCertificate as CustomCertificate,
-    type CustomCertificateGetParams as CustomCertificateGetParams,
-  };
+  export { CustomCertificate as CustomCertificate };
 }

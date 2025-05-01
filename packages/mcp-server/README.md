@@ -2806,10 +2806,6 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `edit_gateway_zero_trust_configurations` (`write`): Patches the current Zero Trust account configuration. This endpoint can update a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate`, without updating the entire configuration object. Returns an error if any collection of settings is not properly configured.
 - `get_gateway_zero_trust_configurations` (`read`): Fetches the current Zero Trust account configuration.
 
-### Resource `zero_trust.gateway.configurations.custom_certificate`:
-
-- `get_configurations_gateway_zero_trust_custom_certificate` (`read`): Fetches the current Zero Trust certificate configuration.
-
 ### Resource `zero_trust.gateway.lists`:
 
 - `create_gateway_zero_trust_lists` (`write`): Creates a new Zero Trust list.
