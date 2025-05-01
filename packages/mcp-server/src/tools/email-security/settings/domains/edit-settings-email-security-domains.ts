@@ -31,6 +31,13 @@ export const tool: Tool = {
           type: 'string',
         },
       },
+      allowed_delivery_modes: {
+        type: 'array',
+        items: {
+          type: 'string',
+          enum: ['DIRECT', 'BCC', 'JOURNAL', 'API', 'RETRO_SCAN'],
+        },
+      },
       domain: {
         type: 'string',
       },

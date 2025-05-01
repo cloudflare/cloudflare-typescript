@@ -26,6 +26,14 @@ export const tool: Tool = {
         description: 'The end of the search date range.\nDefaults to `now`.',
         format: 'date-time',
       },
+      original_disposition: {
+        type: 'string',
+        enum: ['MALICIOUS', 'SUSPICIOUS', 'SPOOF', 'SPAM', 'BULK', 'NONE'],
+      },
+      outcome_disposition: {
+        type: 'string',
+        enum: ['MALICIOUS', 'SUSPICIOUS', 'SPOOF', 'SPAM', 'BULK', 'NONE'],
+      },
       page: {
         type: 'integer',
         description: 'The page number of paginated results.',
@@ -33,6 +41,13 @@ export const tool: Tool = {
       per_page: {
         type: 'integer',
         description: 'The number of results per page.',
+      },
+      query: {
+        type: 'string',
+      },
+      requested_disposition: {
+        type: 'string',
+        enum: ['MALICIOUS', 'SUSPICIOUS', 'SPOOF', 'SPAM', 'BULK', 'NONE'],
       },
       start: {
         type: 'string',
