@@ -51,6 +51,14 @@ import {
   SAMLGroupRule,
   ServiceTokenRule,
 } from './policies';
+import * as SettingsAPI from './settings';
+import {
+  SettingEditParams,
+  SettingEditResponse,
+  SettingUpdateParams,
+  SettingUpdateResponse,
+  Settings,
+} from './settings';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import {
   UserPolicyCheckGeo,
@@ -76,6 +84,7 @@ export class Applications extends APIResource {
   );
   policies: ApplicationsPoliciesAPI.Policies = new ApplicationsPoliciesAPI.Policies(this._client);
   policyTests: PolicyTestsAPI.PolicyTests = new PolicyTestsAPI.PolicyTests(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 
   /**
    * Adds a new application to Access.
@@ -21704,6 +21713,7 @@ Applications.UserPolicyChecks = UserPolicyChecks;
 Applications.Policies = Policies;
 Applications.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
 Applications.PolicyTests = PolicyTests;
+Applications.Settings = Settings;
 
 export declare namespace Applications {
   export {
@@ -21800,5 +21810,13 @@ export declare namespace Applications {
     type PolicyTestGetResponse as PolicyTestGetResponse,
     type PolicyTestCreateParams as PolicyTestCreateParams,
     type PolicyTestGetParams as PolicyTestGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingEditParams as SettingEditParams,
   };
 }

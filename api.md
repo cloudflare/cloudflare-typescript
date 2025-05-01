@@ -5025,6 +5025,18 @@ Methods:
 
 - <code title="get /accounts/{account_id}/access/policy-tests/{policy_test_id}/users">client.zeroTrust.access.applications.policyTests.users.<a href="./src/resources/zero-trust/access/applications/policy-tests/users.ts">list</a>(policyTestId, { ...params }) -> UserListResponsesV4PagePaginationArray</code>
 
+#### Settings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/settings.ts">SettingUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/settings.ts">SettingEditResponse</a></code>
+
+Methods:
+
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/settings">client.zeroTrust.access.applications.settings.<a href="./src/resources/zero-trust/access/applications/settings.ts">update</a>(appId, { ...params }) -> SettingUpdateResponse</code>
+- <code title="patch /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/settings">client.zeroTrust.access.applications.settings.<a href="./src/resources/zero-trust/access/applications/settings.ts">edit</a>(appId, { ...params }) -> SettingEditResponse</code>
+
 ### Certificates
 
 Types:
