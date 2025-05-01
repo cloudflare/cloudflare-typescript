@@ -5762,10 +5762,6 @@ Methods:
 
 #### CustomCertificate
 
-Methods:
-
-- <code title="get /accounts/{account_id}/gateway/configuration/custom_certificate">client.zeroTrust.gateway.configurations.customCertificate.<a href="./src/resources/zero-trust/gateway/configurations/custom-certificate.ts">get</a>({ ...params }) -> CustomCertificateSettings | null</code>
-
 ### Lists
 
 Types:

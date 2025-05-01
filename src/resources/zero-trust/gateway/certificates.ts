@@ -428,7 +428,9 @@ export interface CertificateCreateParams {
 
   /**
    * Body param: Number of days the generated certificate will be valid, minimum 1
-   * day and maximum 30 years. Defaults to 5 years.
+   * day and maximum 30 years. Defaults to 5 years. In terraform,
+   * validity_period_days can only be used while creating a certificate, and this CAN
+   * NOT be used to extend the validity of an already generated certificate.
    */
   validity_period_days?: number;
 }
