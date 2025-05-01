@@ -2493,6 +2493,11 @@ This operation is asynchronous. To get current the operation status, invoke the 
 
 - `list_policy_tests_applications_access_zero_trust_users` (`read`): Fetches a single page of user results from an Access policy test.
 
+### Resource `zero_trust.access.applications.settings`:
+
+- `update_applications_access_zero_trust_settings` (`write`): Updates Access application settings.
+- `edit_applications_access_zero_trust_settings` (`write`): Updates Access application settings.
+
 ### Resource `zero_trust.access.certificates`:
 
 - `create_access_zero_trust_certificates` (`write`): Adds a new mTLS root certificate to Access.
