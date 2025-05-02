@@ -1,0 +1,5520 @@
+{
+  "pkg": "cloudflare",
+  "githubRepo": "https://github.com/stainless-sdks/cloudflare-typescript",
+  "clientClass": "Cloudflare",
+  "methods": [
+    {
+      "base": "customHostnames.certificatePack.certificates",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "certificate_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "custom_hostname_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "certificate_pack_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "certificate_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "customHostnames.certificatePack.certificates",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "certificate_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "custom_hostname_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "certificate_pack_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "certificate_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "firewall.waf.packages.groups",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "group_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "package_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "group_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "firewall.waf.packages.groups",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "group_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "package_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "group_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "firewall.waf.packages.rules",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "package_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "firewall.waf.packages.rules",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "package_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "waitingRooms.events",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "waiting_room_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "waitingRooms.events",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "waiting_room_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "waitingRooms.events",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "waiting_room_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "waitingRooms.events",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "waiting_room_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "waitingRooms.events.details",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "waiting_room_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "waitingRooms.rules",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "waiting_room_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "waitingRooms.rules",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "waiting_room_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "web3.hostnames.ipfsUniversalPaths.contentLists.entries",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "content_list_entry_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "content_list_entry_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "web3.hostnames.ipfsUniversalPaths.contentLists.entries",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "content_list_entry_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "content_list_entry_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "web3.hostnames.ipfsUniversalPaths.contentLists.entries",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "content_list_entry_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "content_list_entry_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workers.scripts.tail",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workers.scripts.versions",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workers.scripts.secrets",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "secret_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "secret_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workers.scripts.secrets",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "secret_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "secret_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "kv.namespaces.metadata",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "key_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "namespace_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "key_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "kv.namespaces.values",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "key_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "namespace_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "key_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "kv.namespaces.values",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "key_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "namespace_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "key_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "kv.namespaces.values",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "key_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "namespace_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "key_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "queues.consumers",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "consumer_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "consumer_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "queues.consumers",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "consumer_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "consumer_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "rulesets.phases.versions",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "ruleset_version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "ruleset_phase",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ruleset_version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": true
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "rulesets.rules",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "ruleset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": true
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "rulesets.rules",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "ruleset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "rulesets.versions",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "ruleset_version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "ruleset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ruleset_version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": true
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "rulesets.versions",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "ruleset_version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "ruleset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ruleset_version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": true
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.addressMaps.ips",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "ip_address",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "address_map_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ip_address",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.addressMaps.ips",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "ip_address",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "address_map_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ip_address",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.prefixes.serviceBindings",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "binding_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "binding_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.prefixes.serviceBindings",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "binding_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "binding_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.prefixes.bgpPrefixes",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "bgp_prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "bgp_prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.prefixes.bgpPrefixes",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "bgp_prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "bgp_prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "addressing.prefixes.delegations",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "delegation_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "prefix_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "delegation_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.acls",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "acl_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "acl_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.acls",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "acl_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "acl_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.acls",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "acl_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "acl_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.acls",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "acl_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "acl_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.lans",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "lan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "lan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.lans",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "lan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "lan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.lans",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "lan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "lan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.lans",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "lan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "lan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.wans",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "wan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "wan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.wans",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "wan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "wan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.wans",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "wan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "wan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.sites.wans",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "wan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "wan_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.connectors.events",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_n",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "connector_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_t",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_n",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.connectors.snapshots",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "snapshot_t",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "connector_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "snapshot_t",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments",
+      "name": "retry",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments",
+      "name": "rollback",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments.history.logs",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.domains",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.domains",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.domains",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "rules.lists.items",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "item_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "list_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "item_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.audioTracks",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "audio_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "audio_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.audioTracks",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "audio_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "audio_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.liveInputs.outputs",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "output_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "live_input_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "output_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.liveInputs.outputs",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "output_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "live_input_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "output_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.captions.language",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.captions.language",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.captions.language",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.captions.language",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "stream.captions.language.vtt",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "language",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2.buckets.domains.custom",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2.buckets.domains.custom",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2.buckets.domains.custom",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2.buckets.eventNotifications",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2.buckets.eventNotifications",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.assetUpload",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.content",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.content",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.settings",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.settings",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.bindings",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.secrets",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.secrets",
+      "name": "list",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.secrets",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "secret_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "secret_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.secrets",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "secret_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "secret_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.tags",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.tags",
+      "name": "list",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.tags",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "tag",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tag",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.access.applications.policies",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "policy_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "policy_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.access.applications.policies",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "policy_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "policy_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": true
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.access.applications.policies",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "policy_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "policy_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": true
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.access.users.activeSessions",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "nonce",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "user_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "nonce",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dex.commands.downloads",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "filename",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "command_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "filename",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.tunnels.cloudflared.connectors",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "connector_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "tunnel_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "connector_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dlp.datasets.upload",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dlp.datasets.versions",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "version",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dlp.datasets.versions.entries",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "entry_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "version",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "entry_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "rum.rules",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "ruleset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "rum.rules",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "ruleset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "rule_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "speed.pages.tests",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "test_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "url",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "test_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "hostnames.settings.tls",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "setting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "hostnames.settings.tls",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "setting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.message",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.message",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "message_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "message_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.message",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "message_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "message_identifer",
+          "location": "path"
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.message",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.priority",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "priority_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "priority_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.priority",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "priority_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "priority_identifer",
+          "location": "path"
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.priority",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "priority_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "priority_identifer",
+          "location": "path"
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.assets",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.assets",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "asset_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "asset_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.assets",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "asset_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "asset_identifer",
+          "location": "path"
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.assets",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "asset_identifer",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "account_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "request_identifier",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "asset_identifer",
+          "location": "path"
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.datasets",
+      "name": "raw",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.raw",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "raw_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "raw_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.raw",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "raw_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "raw_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.insights",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "insight_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "insight_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.insights",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "insight_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "insight_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.insights",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "insight_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "insight_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.logs",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.logs",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.logs",
+      "name": "request",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.logs",
+      "name": "response",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.datasets",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.datasets",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.datasets",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.evaluations",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.evaluations",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "aiGateway.urls",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "provider",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "gateway_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "provider",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workflows.instances",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "workflow_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workflows.instances.status",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "workflow_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workflows.instances.events",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_type",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "workflow_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_type",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workflows.versions",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "workflow_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "resourceSharing.recipients",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "recipient_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "share_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "recipient_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "resourceSharing.recipients",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "recipient_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "share_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "recipient_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "resourceSharing.resources",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "share_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "resourceSharing.resources",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "share_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "resourceSharing.resources",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "share_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "secretsStore.stores.secrets",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "secret_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "store_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "secret_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "secretsStore.stores.secrets",
+      "name": "duplicate",
+      "params": [
+        {
+          "type": "param",
+          "key": "secret_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "store_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "secret_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "secretsStore.stores.secrets",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "secret_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "store_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "secret_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "secretsStore.stores.secrets",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "secret_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "store_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "secret_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    }
+  ]
+}
