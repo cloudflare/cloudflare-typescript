@@ -10,11 +10,11 @@ export class Upload extends APIResource {
    * https://developers.cloudflare.com/workers/static-assets/direct-upload/
    */
   create(params: UploadCreateParams, options?: Core.RequestOptions): Core.APIPromise<UploadCreateResponse> {
-    const { account_id, base64, ...body } = params;
+    const { account_id, base64, body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/workers/assets/upload`,
-        Core.multipartFormRequestOptions({ query: { base64 }, body, ...options }),
+        Core.multipartFormRequestOptions({ query: { base64 }, body: body, ...options }),
       ) as Core.APIPromise<{ result: UploadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -39,11 +39,9 @@ export interface UploadCreateParams {
   base64: true;
 
   /**
-   * Body param: Base-64 encoded contents of the file. The content type of the file
-   * should be included to ensure a valid "Content-Type" header is included in asset
-   * responses.
+   * Body param:
    */
-  '<any file hash>'?: Array<string>;
+  body: Record<string, string>;
 }
 
 export declare namespace Upload {
