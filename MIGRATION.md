@@ -965,6 +965,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.firewall.rules.bulkUpdate()`
 - `client.waitingRooms.rules.create()`
 - `client.waitingRooms.rules.update()`
+- `client.workers.assets.upload.create()`
 - `client.workers.scripts.schedules.update()`
 - `client.workers.scripts.tail.create()`
 - `client.kv.namespaces.keys.bulkDelete()`

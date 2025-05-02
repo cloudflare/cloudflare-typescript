@@ -26,13 +26,8 @@ export const tool: Tool = {
         description: 'Whether the file contents are base64-encoded. Must be `true`.',
         enum: [true],
       },
-      '<any file hash>': {
-        type: 'array',
-        description:
-          'Base-64 encoded contents of the file. The content type of the file should be included to ensure a valid "Content-Type" header is included in asset responses.',
-        items: {
-          type: 'string',
-        },
+      body: {
+        type: 'object',
       },
     },
   },
