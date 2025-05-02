@@ -40,6 +40,8 @@ export interface Whois {
 }
 
 export interface WhoisGetResponse {
+  dnssec: boolean;
+
   domain: string;
 
   extension: string;
@@ -115,8 +117,6 @@ export interface WhoisGetResponse {
   created_date?: string;
 
   created_date_raw?: string;
-
-  dnssec?: boolean;
 
   expiration_date?: string;
 
@@ -217,7 +217,7 @@ export interface WhoisGetResponse {
 
 export interface WhoisGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Use to uniquely identify or reference the resource.
    */
   account_id: string;
 
