@@ -13,6 +13,7 @@ describe('resource upload', () => {
     const responsePromise = client.workers.assets.upload.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       base64: true,
+      body: { foo: 'string' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +28,7 @@ describe('resource upload', () => {
     const response = await client.workers.assets.upload.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       base64: true,
-      '<any file hash>': ['string'],
+      body: { foo: 'string' },
     });
   });
 });
