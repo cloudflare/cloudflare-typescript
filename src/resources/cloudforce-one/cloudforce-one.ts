@@ -2,23 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as RequestsAPI from './requests/requests';
-import {
-  Item,
-  ListItem,
-  ListItemsSinglePage,
-  Quota,
-  RequestConstants,
-  RequestCreateParams,
-  RequestDeleteParams,
-  RequestDeleteResponse,
-  RequestGetParams,
-  RequestListParams,
-  RequestTypes,
-  RequestTypesResponse,
-  RequestTypesResponsesSinglePage,
-  RequestUpdateParams,
-  Requests,
-} from './requests/requests';
+import { Item, ListItem, Quota, RequestConstants, RequestTypes, Requests } from './requests/requests';
 import * as ScansAPI from './scans/scans';
 import { Scans } from './scans/scans';
 import * as ThreatEventsAPI from './threat-events/threat-events';
@@ -58,15 +42,6 @@ export declare namespace CloudforceOne {
     type Quota as Quota,
     type RequestConstants as RequestConstants,
     type RequestTypes as RequestTypes,
-    type RequestDeleteResponse as RequestDeleteResponse,
-    type RequestTypesResponse as RequestTypesResponse,
-    type ListItemsSinglePage as ListItemsSinglePage,
-    type RequestTypesResponsesSinglePage as RequestTypesResponsesSinglePage,
-    type RequestCreateParams as RequestCreateParams,
-    type RequestUpdateParams as RequestUpdateParams,
-    type RequestListParams as RequestListParams,
-    type RequestDeleteParams as RequestDeleteParams,
-    type RequestGetParams as RequestGetParams,
   };
 
   export {

@@ -8,15 +8,6 @@ export {
   type Quota,
   type RequestConstants,
   type RequestTypes,
-  type RequestDeleteResponse,
-  type RequestTypesResponse,
-  type RequestCreateParams,
-  type RequestUpdateParams,
-  type RequestListParams,
-  type RequestDeleteParams,
-  type RequestGetParams,
-  type ListItemsSinglePage,
-  type RequestTypesResponsesSinglePage,
 } from './requests/index';
 export { Scans } from './scans/index';
 export {
