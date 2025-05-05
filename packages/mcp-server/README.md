@@ -2294,7 +2294,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `zero_trust.devices.resilience.global_warp_override`:
 
 - `create_resilience_devices_zero_trust_global_warp_override` (`write`): Sets the Global WARP override state.
-- `get_resilience_devices_zero_trust_global_warp_override` (`read`): Fetch the Global WARP override state
+- `get_resilience_devices_zero_trust_global_warp_override` (`read`): Fetch the Global WARP override state.
 
 ### Resource `zero_trust.devices.registrations`:
 
@@ -2340,7 +2340,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `zero_trust.devices.policies.default.certificates`:
 
 - `edit_default_policies_devices_zero_trust_certificates` (`write`): Enable Zero Trust Clients to provision a certificate, containing a x509 subject, and referenced by Access device posture policies when the client visits MTLS protected domains. This facilitates device posture without a WARP session.
-- `get_default_policies_devices_zero_trust_certificates` (`read`): Fetches device certificate provisioning
+- `get_default_policies_devices_zero_trust_certificates` (`read`): Fetches device certificate provisioning.
 
 ### Resource `zero_trust.devices.policies.custom`:
 

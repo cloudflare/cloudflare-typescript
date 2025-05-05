@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../core/resource';
+import * as PoliciesAPI from '../policies';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
@@ -11,32 +12,34 @@ export class Certificates extends APIResource {
    * and referenced by Access device posture policies when the client visits MTLS
    * protected domains. This facilitates device posture without a WARP session.
    */
-  edit(params: CertificateEditParams, options?: RequestOptions): APIPromise<CertificateEditResponse | null> {
+  edit(
+    params: CertificateEditParams,
+    options?: RequestOptions,
+  ): APIPromise<PoliciesAPI.DevicePolicyCertificates | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/devices/policy/certificates`, {
         body,
         ...options,
-      }) as APIPromise<{ result: CertificateEditResponse | null }>
+      }) as APIPromise<{ result: PoliciesAPI.DevicePolicyCertificates | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Fetches device certificate provisioning
+   * Fetches device certificate provisioning.
    */
-  get(params: CertificateGetParams, options?: RequestOptions): APIPromise<CertificateGetResponse | null> {
+  get(
+    params: CertificateGetParams,
+    options?: RequestOptions,
+  ): APIPromise<PoliciesAPI.DevicePolicyCertificates | null> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/devices/policy/certificates`, options) as APIPromise<{
-        result: CertificateGetResponse | null;
+        result: PoliciesAPI.DevicePolicyCertificates | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type CertificateEditResponse = unknown | string;
-
-export type CertificateGetResponse = unknown | string;
 
 export interface CertificateEditParams {
   /**
@@ -57,8 +60,6 @@ export interface CertificateGetParams {
 
 export declare namespace Certificates {
   export {
-    type CertificateEditResponse as CertificateEditResponse,
-    type CertificateGetResponse as CertificateGetResponse,
     type CertificateEditParams as CertificateEditParams,
     type CertificateGetParams as CertificateGetParams,
   };

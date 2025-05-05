@@ -53,7 +53,7 @@ export interface SchemaHTTP {
   description?: string;
 
   /**
-   * Device settings profiles targeted by this test
+   * Device settings profiles targeted by this test.
    */
   target_policies?: Array<SchemaHTTP.TargetPolicy>;
 
@@ -68,17 +68,17 @@ export interface SchemaHTTP {
 export namespace SchemaHTTP {
   export interface TargetPolicy {
     /**
-     * The id of the device settings profile
+     * The id of the device settings profile.
      */
     id?: string;
 
     /**
-     * Whether the profile is the account default
+     * Whether the profile is the account default.
      */
     default?: boolean;
 
     /**
-     * The name of the device settings profile
+     * The name of the device settings profile.
      */
     name?: string;
   }

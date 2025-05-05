@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_devices_zero_trust_override_codes',
   description:
-    'Fetches a one-time use admin override code for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.   \n\n**Deprecated:** please use GET /accounts/{account_id}/devices/registrations/{registration_id}/override_codes instead.\n',
+    'Fetches a one-time use admin override code for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.\n\n**Deprecated:** please use GET /accounts/{account_id}/devices/registrations/{registration_id}/override_codes instead.\n',
   inputSchema: {
     type: 'object',
     properties: {

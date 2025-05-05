@@ -111,7 +111,7 @@ export interface ClientCertificateInput {
   certificate_id: string;
 
   /**
-   * Common Name that is protected by the certificate
+   * Common Name that is protected by the certificate.
    */
   cn: string;
 }
@@ -123,7 +123,7 @@ export interface ClientCertificateInputParam {
   certificate_id: string;
 
   /**
-   * Common Name that is protected by the certificate
+   * Common Name that is protected by the certificate.
    */
   cn: string;
 }
@@ -140,22 +140,22 @@ export interface CrowdstrikeInput {
   last_seen?: string;
 
   /**
-   * operator
+   * Operator.
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
 
   /**
-   * Os Version
+   * Os Version.
    */
   os?: string;
 
   /**
-   * overall
+   * Overall.
    */
   overall?: string;
 
   /**
-   * SensorConfig
+   * SensorConfig.
    */
   sensor_config?: string;
 
@@ -165,12 +165,12 @@ export interface CrowdstrikeInput {
   state?: 'online' | 'offline' | 'unknown';
 
   /**
-   * Version
+   * Version.
    */
   version?: string;
 
   /**
-   * Version Operator
+   * Version Operator.
    */
   versionOperator?: '<' | '<=' | '>' | '>=' | '==';
 }
@@ -187,22 +187,22 @@ export interface CrowdstrikeInputParam {
   last_seen?: string;
 
   /**
-   * operator
+   * Operator.
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
 
   /**
-   * Os Version
+   * Os Version.
    */
   os?: string;
 
   /**
-   * overall
+   * Overall.
    */
   overall?: string;
 
   /**
-   * SensorConfig
+   * SensorConfig.
    */
   sensor_config?: string;
 
@@ -212,12 +212,12 @@ export interface CrowdstrikeInputParam {
   state?: 'online' | 'offline' | 'unknown';
 
   /**
-   * Version
+   * Version.
    */
   version?: string;
 
   /**
-   * Version Operator
+   * Version Operator.
    */
   versionOperator?: '<' | '<=' | '>' | '>=' | '==';
 }
@@ -233,6 +233,7 @@ export type DeviceInput =
   | FirewallInput
   | SentineloneInput
   | DeviceInput.TeamsDevicesCarbonblackInputRequest
+  | DeviceInput.TeamsDevicesAccessSerialNumberListInputRequest
   | DiskEncryptionInput
   | DeviceInput.TeamsDevicesApplicationInputRequest
   | ClientCertificateInput
@@ -248,7 +249,7 @@ export type DeviceInput =
 export namespace DeviceInput {
   export interface TeamsDevicesCarbonblackInputRequest {
     /**
-     * Operating system
+     * Operating system.
      */
     operating_system: 'windows' | 'linux' | 'mac';
 
@@ -268,9 +269,16 @@ export namespace DeviceInput {
     thumbprint?: string;
   }
 
+  export interface TeamsDevicesAccessSerialNumberListInputRequest {
+    /**
+     * UUID of Access List
+     */
+    id: string;
+  }
+
   export interface TeamsDevicesApplicationInputRequest {
     /**
-     * Operating system
+     * Operating system.
      */
     operating_system: 'windows' | 'linux' | 'mac';
 
@@ -303,7 +311,7 @@ export namespace DeviceInput {
     check_private_key: boolean;
 
     /**
-     * Operating system
+     * Operating system.
      */
     operating_system: 'windows' | 'linux' | 'mac';
 
@@ -316,7 +324,7 @@ export namespace DeviceInput {
 
     /**
      * List of values indicating purposes for which the certificate public key can be
-     * used
+     * used.
      */
     extended_key_usage?: Array<'clientAuth' | 'emailProtection'>;
 
@@ -344,7 +352,7 @@ export namespace DeviceInput {
     connection_id: string;
 
     /**
-     * operator
+     * Operator.
      */
     operator: '<' | '<=' | '>' | '>=' | '==';
 
@@ -366,6 +374,7 @@ export type DeviceInputParam =
   | FirewallInputParam
   | SentineloneInputParam
   | DeviceInputParam.TeamsDevicesCarbonblackInputRequest
+  | DeviceInputParam.TeamsDevicesAccessSerialNumberListInputRequest
   | DiskEncryptionInputParam
   | DeviceInputParam.TeamsDevicesApplicationInputRequest
   | ClientCertificateInputParam
@@ -381,7 +390,7 @@ export type DeviceInputParam =
 export namespace DeviceInputParam {
   export interface TeamsDevicesCarbonblackInputRequest {
     /**
-     * Operating system
+     * Operating system.
      */
     operating_system: 'windows' | 'linux' | 'mac';
 
@@ -401,9 +410,16 @@ export namespace DeviceInputParam {
     thumbprint?: string;
   }
 
+  export interface TeamsDevicesAccessSerialNumberListInputRequest {
+    /**
+     * UUID of Access List
+     */
+    id: string;
+  }
+
   export interface TeamsDevicesApplicationInputRequest {
     /**
-     * Operating system
+     * Operating system.
      */
     operating_system: 'windows' | 'linux' | 'mac';
 
@@ -436,7 +452,7 @@ export namespace DeviceInputParam {
     check_private_key: boolean;
 
     /**
-     * Operating system
+     * Operating system.
      */
     operating_system: 'windows' | 'linux' | 'mac';
 
@@ -449,7 +465,7 @@ export namespace DeviceInputParam {
 
     /**
      * List of values indicating purposes for which the certificate public key can be
-     * used
+     * used.
      */
     extended_key_usage?: Array<'clientAuth' | 'emailProtection'>;
 
@@ -477,7 +493,7 @@ export namespace DeviceInputParam {
     connection_id: string;
 
     /**
-     * operator
+     * Operator.
      */
     operator: '<' | '<=' | '>' | '>=' | '==';
 
@@ -544,6 +560,7 @@ export interface DevicePostureRule {
     | 'gateway'
     | 'warp'
     | 'disk_encryption'
+    | 'serial_number'
     | 'sentinelone'
     | 'carbonblack'
     | 'firewall'
@@ -587,31 +604,31 @@ export interface DiskEncryptionInputParam {
 
 export interface DomainJoinedInput {
   /**
-   * Operating System
+   * Operating System.
    */
   operating_system: 'windows';
 
   /**
-   * Domain
+   * Domain.
    */
   domain?: string;
 }
 
 export interface DomainJoinedInputParam {
   /**
-   * Operating System
+   * Operating System.
    */
   operating_system: 'windows';
 
   /**
-   * Domain
+   * Domain.
    */
   domain?: string;
 }
 
 export interface FileInput {
   /**
-   * Operating system
+   * Operating system.
    */
   operating_system: 'windows' | 'linux' | 'mac';
 
@@ -621,7 +638,7 @@ export interface FileInput {
   path: string;
 
   /**
-   * Whether or not file exists
+   * Whether or not file exists.
    */
   exists?: boolean;
 
@@ -638,7 +655,7 @@ export interface FileInput {
 
 export interface FileInputParam {
   /**
-   * Operating system
+   * Operating system.
    */
   operating_system: 'windows' | 'linux' | 'mac';
 
@@ -648,7 +665,7 @@ export interface FileInputParam {
   path: string;
 
   /**
-   * Whether or not file exists
+   * Whether or not file exists.
    */
   exists?: boolean;
 
@@ -665,31 +682,31 @@ export interface FileInputParam {
 
 export interface FirewallInput {
   /**
-   * Enabled
+   * Enabled.
    */
   enabled: boolean;
 
   /**
-   * Operating System
+   * Operating System.
    */
   operating_system: 'windows' | 'mac';
 }
 
 export interface FirewallInputParam {
   /**
-   * Enabled
+   * Enabled.
    */
   enabled: boolean;
 
   /**
-   * Operating System
+   * Operating System.
    */
   operating_system: 'windows' | 'mac';
 }
 
 export interface IntuneInput {
   /**
-   * Compliance Status
+   * Compliance Status.
    */
   compliance_status: 'compliant' | 'noncompliant' | 'unknown' | 'notapplicable' | 'ingraceperiod' | 'error';
 
@@ -701,7 +718,7 @@ export interface IntuneInput {
 
 export interface IntuneInputParam {
   /**
-   * Compliance Status
+   * Compliance Status.
    */
   compliance_status: 'compliant' | 'noncompliant' | 'unknown' | 'notapplicable' | 'ingraceperiod' | 'error';
 
@@ -718,7 +735,7 @@ export interface KolideInput {
   connection_id: string;
 
   /**
-   * Count Operator
+   * Count Operator.
    */
   countOperator: '<' | '<=' | '>' | '>=' | '==';
 
@@ -735,7 +752,7 @@ export interface KolideInputParam {
   connection_id: string;
 
   /**
-   * Count Operator
+   * Count Operator.
    */
   countOperator: '<' | '<=' | '>' | '>=' | '==';
 
@@ -747,73 +764,73 @@ export interface KolideInputParam {
 
 export interface OSVersionInput {
   /**
-   * Operating System
+   * Operating System.
    */
   operating_system: 'windows';
 
   /**
-   * operator
+   * Operator.
    */
   operator: '<' | '<=' | '>' | '>=' | '==';
 
   /**
-   * Version of OS
+   * Version of OS.
    */
   version: string;
 
   /**
-   * Operating System Distribution Name (linux only)
+   * Operating System Distribution Name (linux only).
    */
   os_distro_name?: string;
 
   /**
-   * Version of OS Distribution (linux only)
+   * Version of OS Distribution (linux only).
    */
   os_distro_revision?: string;
 
   /**
    * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
-   * the kernel release version. (Mac, iOS, and Linux only)
+   * the kernel release version. (Mac, iOS, and Linux only).
    */
   os_version_extra?: string;
 }
 
 export interface OSVersionInputParam {
   /**
-   * Operating System
+   * Operating System.
    */
   operating_system: 'windows';
 
   /**
-   * operator
+   * Operator.
    */
   operator: '<' | '<=' | '>' | '>=' | '==';
 
   /**
-   * Version of OS
+   * Version of OS.
    */
   version: string;
 
   /**
-   * Operating System Distribution Name (linux only)
+   * Operating System Distribution Name (linux only).
    */
   os_distro_name?: string;
 
   /**
-   * Version of OS Distribution (linux only)
+   * Version of OS Distribution (linux only).
    */
   os_distro_revision?: string;
 
   /**
    * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
-   * the kernel release version. (Mac, iOS, and Linux only)
+   * the kernel release version. (Mac, iOS, and Linux only).
    */
   os_version_extra?: string;
 }
 
 export interface SentineloneInput {
   /**
-   * Operating system
+   * Operating system.
    */
   operating_system: 'windows' | 'linux' | 'mac';
 
@@ -835,7 +852,7 @@ export interface SentineloneInput {
 
 export interface SentineloneInputParam {
   /**
-   * Operating system
+   * Operating system.
    */
   operating_system: 'windows' | 'linux' | 'mac';
 
@@ -894,7 +911,7 @@ export interface SentineloneS2sInput {
     | 'db_corruption';
 
   /**
-   * operator
+   * Operator.
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
 }
@@ -938,7 +955,7 @@ export interface SentineloneS2sInputParam {
     | 'db_corruption';
 
   /**
-   * operator
+   * Operator.
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
 }
@@ -965,7 +982,7 @@ export interface TaniumInput {
   risk_level?: 'low' | 'medium' | 'high' | 'critical';
 
   /**
-   * Score Operator
+   * Score Operator.
    */
   scoreOperator?: '<' | '<=' | '>' | '>=' | '==';
 
@@ -997,7 +1014,7 @@ export interface TaniumInputParam {
   risk_level?: 'low' | 'medium' | 'high' | 'critical';
 
   /**
-   * Score Operator
+   * Score Operator.
    */
   scoreOperator?: '<' | '<=' | '>' | '>=' | '==';
 
@@ -1014,7 +1031,7 @@ export interface UniqueClientIDInput {
   id: string;
 
   /**
-   * Operating System
+   * Operating System.
    */
   operating_system: 'android' | 'ios' | 'chromeos';
 }
@@ -1026,14 +1043,14 @@ export interface UniqueClientIDInputParam {
   id: string;
 
   /**
-   * Operating System
+   * Operating System.
    */
   operating_system: 'android' | 'ios' | 'chromeos';
 }
 
 export interface WorkspaceOneInput {
   /**
-   * Compliance Status
+   * Compliance Status.
    */
   compliance_status: 'compliant' | 'noncompliant' | 'unknown';
 
@@ -1045,7 +1062,7 @@ export interface WorkspaceOneInput {
 
 export interface WorkspaceOneInputParam {
   /**
-   * Compliance Status
+   * Compliance Status.
    */
   compliance_status: 'compliant' | 'noncompliant' | 'unknown';
 
@@ -1083,6 +1100,7 @@ export interface PostureCreateParams {
     | 'gateway'
     | 'warp'
     | 'disk_encryption'
+    | 'serial_number'
     | 'sentinelone'
     | 'carbonblack'
     | 'firewall'
@@ -1148,6 +1166,7 @@ export interface PostureUpdateParams {
     | 'gateway'
     | 'warp'
     | 'disk_encryption'
+    | 'serial_number'
     | 'sentinelone'
     | 'carbonblack'
     | 'firewall'
