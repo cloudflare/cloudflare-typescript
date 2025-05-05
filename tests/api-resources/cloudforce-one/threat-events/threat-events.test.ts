@@ -54,6 +54,31 @@ describe('resource threatEvents', () => {
   });
 
   // TODO: HTTP 401 from prism
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.cloudforceOne.threatEvents.list({ account_id: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: HTTP 401 from prism
+  test.skip('list: required and optional params', async () => {
+    const response = await client.cloudforceOne.threatEvents.list({
+      account_id: 0,
+      datasetId: ['string'],
+      order: 'asc',
+      orderBy: 'orderBy',
+      page: 0,
+      pageSize: 0,
+      search: [{ field: 'attackerCountry', op: 'equals', value: 'usa' }],
+    });
+  });
+
+  // TODO: HTTP 401 from prism
   test.skip('delete: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.delete('event_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();

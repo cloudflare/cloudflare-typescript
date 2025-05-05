@@ -20,11 +20,13 @@ export { Scans } from './scans/index';
 export {
   ThreatEvents,
   type ThreatEventCreateResponse,
+  type ThreatEventListResponse,
   type ThreatEventDeleteResponse,
   type ThreatEventBulkCreateResponse,
   type ThreatEventEditResponse,
   type ThreatEventGetResponse,
   type ThreatEventCreateParams,
+  type ThreatEventListParams,
   type ThreatEventDeleteParams,
   type ThreatEventBulkCreateParams,
   type ThreatEventEditParams,
