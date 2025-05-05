@@ -218,7 +218,7 @@ export interface EventDeleteResponse {
 
 export interface EventCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -327,7 +327,7 @@ export interface EventCreateParams {
 
 export interface EventUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -441,14 +441,14 @@ export interface EventUpdateParams {
 
 export interface EventListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 }
 
 export interface EventDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 
@@ -457,7 +457,7 @@ export interface EventDeleteParams {
 
 export interface EventEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -571,7 +571,7 @@ export interface EventEditParams {
 
 export interface EventGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 
