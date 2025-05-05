@@ -1568,6 +1568,7 @@ import update_requests_cloudforce_one_assets from './cloudforce-one/requests/ass
 import delete_requests_cloudforce_one_assets from './cloudforce-one/requests/assets/delete-requests-cloudforce-one-assets';
 import get_requests_cloudforce_one_assets from './cloudforce-one/requests/assets/get-requests-cloudforce-one-assets';
 import create_cloudforce_one_threat_events from './cloudforce-one/threat-events/create-cloudforce-one-threat-events';
+import list_cloudforce_one_threat_events from './cloudforce-one/threat-events/list-cloudforce-one-threat-events';
 import delete_cloudforce_one_threat_events from './cloudforce-one/threat-events/delete-cloudforce-one-threat-events';
 import bulk_create_cloudforce_one_threat_events from './cloudforce-one/threat-events/bulk-create-cloudforce-one-threat-events';
 import edit_cloudforce_one_threat_events from './cloudforce-one/threat-events/edit-cloudforce-one-threat-events';
@@ -3302,6 +3303,7 @@ addEndpoint(update_requests_cloudforce_one_assets);
 addEndpoint(delete_requests_cloudforce_one_assets);
 addEndpoint(get_requests_cloudforce_one_assets);
 addEndpoint(create_cloudforce_one_threat_events);
+addEndpoint(list_cloudforce_one_threat_events);
 addEndpoint(delete_cloudforce_one_threat_events);
 addEndpoint(bulk_create_cloudforce_one_threat_events);
 addEndpoint(edit_cloudforce_one_threat_events);
