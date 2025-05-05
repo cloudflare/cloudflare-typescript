@@ -15,10 +15,12 @@ export class Subdomain extends APIResource {
     options?: RequestOptions,
   ): APIPromise<SubdomainCreateResponse> {
     const { account_id, ...body } = params;
-    return this._client.post(path`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`, {
-      body,
-      ...options,
-    });
+    return (
+      this._client.post(path`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: SubdomainCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -30,7 +32,12 @@ export class Subdomain extends APIResource {
     options?: RequestOptions,
   ): APIPromise<SubdomainGetResponse> {
     const { account_id } = params;
-    return this._client.get(path`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`, options);
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`,
+        options,
+      ) as APIPromise<{ result: SubdomainGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -38,26 +45,24 @@ export interface SubdomainCreateResponse {
   /**
    * Whether the Worker is available on the workers.dev subdomain.
    */
-  enabled?: boolean;
+  enabled: boolean;
 
   /**
-   * Whether the Worker's Preview URLs should be available on the workers.dev
-   * subdomain.
+   * Whether the Worker's Preview URLs are available on the workers.dev subdomain.
    */
-  previews_enabled?: boolean;
+  previews_enabled: boolean;
 }
 
 export interface SubdomainGetResponse {
   /**
    * Whether the Worker is available on the workers.dev subdomain.
    */
-  enabled?: boolean;
+  enabled: boolean;
 
   /**
-   * Whether the Worker's Preview URLs should be available on the workers.dev
-   * subdomain.
+   * Whether the Worker's Preview URLs are available on the workers.dev subdomain.
    */
-  previews_enabled?: boolean;
+  previews_enabled: boolean;
 }
 
 export interface SubdomainCreateParams {
