@@ -1099,7 +1099,7 @@ Note: This operation will affect all zones in the account or zone.
 3. `queueing_method`: The queueing method currently used by the waiting room.
    - **fifo** indicates a FIFO queue.
    - **random** indicates a Random queue.
-   - **passthrough** indicates a Passthrough queue. Keep in mind that the waiting room page will only be displayed if `force_queue=true` or `event=prequeueing` — for other cases the request will pass through to the origin. For our preview, this will be a fake origin website returning "Welcome".
+   - **passthrough** indicates a Passthrough queue. Keep in mind that the waiting room page will only be displayed if `force_queue=true` or `event=prequeueing` — for other cases the request will pass through to the origin. For our preview, this will be a fake origin website returning \"Welcome\".
    - **reject** indicates a Reject queue.
 4. `event`: Used to preview a waiting room event.
    - **none** indicates no event is occurring.
