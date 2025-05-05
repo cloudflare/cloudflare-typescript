@@ -3670,6 +3670,7 @@ It is strongly recommended that you ensure you have [custom rules](https://devel
 ### Resource `cloudforce_one.threat_events`:
 
 - `create_cloudforce_one_threat_events` (`write`): Events must be created in a client-specific dataset, which means the `datasetId` parameter must be defined. To create a dataset, see the [`Create Dataset`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/create/) endpoint.
+- `list_cloudforce_one_threat_events` (`read`): The `datasetId` parameter must be defined. Must provide query parameters. To list existing datasets (and their IDs), use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `delete_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `bulk_create_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `edit_cloudforce_one_threat_events` (`write`): Updates an event

@@ -100,6 +100,17 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
+   * The `datasetId` parameter must be defined. Must provide query parameters. To
+   * list existing datasets (and their IDs), use the
+   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
+   * endpoint.
+   */
+  list(params: ThreatEventListParams, options?: RequestOptions): APIPromise<ThreatEventListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.get(path`/accounts/${account_id}/cloudforce-one/events`, { query, ...options });
+  }
+
+  /**
    * The `datasetId` parameter must be defined. To list existing datasets (and their
    * IDs) in your account, use the
    * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
@@ -213,6 +224,66 @@ export interface ThreatEventCreateResponse {
   insight?: string;
 
   releasabilityId?: string;
+}
+
+export type ThreatEventListResponse = Array<ThreatEventListResponse.ThreatEventListResponseItem>;
+
+export namespace ThreatEventListResponse {
+  export interface ThreatEventListResponseItem {
+    id: number;
+
+    accountId: number;
+
+    attacker: string;
+
+    attackerCountry: string;
+
+    category: string;
+
+    categoryId: number;
+
+    date: string;
+
+    event: string;
+
+    indicator: string;
+
+    indicatorType: string;
+
+    indicatorTypeId: number;
+
+    killChain: number;
+
+    mitreAttack: Array<string>;
+
+    numReferenced: number;
+
+    numReferences: number;
+
+    rawId: string;
+
+    referenced: Array<string>;
+
+    referencedIds: Array<number>;
+
+    references: Array<string>;
+
+    referencesIds: Array<number>;
+
+    tags: Array<string>;
+
+    targetCountry: string;
+
+    targetIndustry: string;
+
+    tlp: string;
+
+    uuid: string;
+
+    insight?: string;
+
+    releasabilityId?: string;
+  }
 }
 
 export interface ThreatEventDeleteResponse {
@@ -479,6 +550,65 @@ export namespace ThreatEventCreateParams {
   }
 }
 
+export interface ThreatEventListParams {
+  /**
+   * Path param: Account ID
+   */
+  account_id: number;
+
+  /**
+   * Query param:
+   */
+  datasetId?: Array<string>;
+
+  /**
+   * Query param:
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Query param:
+   */
+  orderBy?: string;
+
+  /**
+   * Query param:
+   */
+  page?: number;
+
+  /**
+   * Query param:
+   */
+  pageSize?: number;
+
+  /**
+   * Query param:
+   */
+  search?: Array<ThreatEventListParams.Search>;
+}
+
+export namespace ThreatEventListParams {
+  export interface Search {
+    field?: string;
+
+    op?:
+      | 'equals'
+      | 'not'
+      | 'gt'
+      | 'gte'
+      | 'lt'
+      | 'lte'
+      | 'like'
+      | 'contains'
+      | 'startsWith'
+      | 'endsWith'
+      | 'in'
+      | 'find';
+
+    value?: string | number | Array<string | number>;
+  }
+}
+
 export interface ThreatEventDeleteParams {
   /**
    * Account ID
@@ -625,11 +755,13 @@ ThreatEvents.Insights = Insights;
 export declare namespace ThreatEvents {
   export {
     type ThreatEventCreateResponse as ThreatEventCreateResponse,
+    type ThreatEventListResponse as ThreatEventListResponse,
     type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
     type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
+    type ThreatEventListParams as ThreatEventListParams,
     type ThreatEventDeleteParams as ThreatEventDeleteParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
     type ThreatEventEditParams as ThreatEventEditParams,
