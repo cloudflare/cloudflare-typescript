@@ -432,7 +432,7 @@ export interface Query {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -468,6 +468,11 @@ export interface Query {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -536,7 +541,7 @@ export interface Query {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -785,7 +790,7 @@ export interface WaitingRoom {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -821,6 +826,11 @@ export interface WaitingRoom {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -889,7 +899,7 @@ export interface WaitingRoom {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -1018,7 +1028,7 @@ export interface WaitingRoomDeleteResponse {
 
 export interface WaitingRoomCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1206,7 +1216,7 @@ export interface WaitingRoomCreateParams {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -1242,6 +1252,11 @@ export interface WaitingRoomCreateParams {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -1310,7 +1325,7 @@ export interface WaitingRoomCreateParams {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -1399,7 +1414,7 @@ export interface WaitingRoomCreateParams {
 
 export interface WaitingRoomUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1587,7 +1602,7 @@ export interface WaitingRoomUpdateParams {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -1623,6 +1638,11 @@ export interface WaitingRoomUpdateParams {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -1691,7 +1711,7 @@ export interface WaitingRoomUpdateParams {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -1794,14 +1814,14 @@ export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
 
 export interface WaitingRoomDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface WaitingRoomEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1989,7 +2009,7 @@ export interface WaitingRoomEditParams {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -2025,6 +2045,11 @@ export interface WaitingRoomEditParams {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -2093,7 +2118,7 @@ export interface WaitingRoomEditParams {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -2182,7 +2207,7 @@ export interface WaitingRoomEditParams {
 
 export interface WaitingRoomGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

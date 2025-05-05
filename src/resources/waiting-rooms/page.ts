@@ -21,7 +21,7 @@ export class Page extends APIResource {
    *      waiting room page will only be displayed if `force_queue=true` or
    *      `event=prequeueing` — for other cases the request will pass through to the
    *      origin. For our preview, this will be a fake origin website returning
-   *      "Welcome".
+   *      \"Welcome\".
    *    - **reject** indicates a Reject queue.
    * 4. `event`: Used to preview a waiting room event.
    *    - **none** indicates no event is occurring.
@@ -61,7 +61,7 @@ export interface PagePreviewResponse {
 
 export interface PagePreviewParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

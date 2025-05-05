@@ -190,7 +190,7 @@ export interface DetailGetResponse {
 
 export interface DetailGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

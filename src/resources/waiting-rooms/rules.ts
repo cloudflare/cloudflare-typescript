@@ -128,7 +128,7 @@ export interface WaitingRoomRule {
 
 export interface RuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -164,7 +164,7 @@ export namespace RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -200,14 +200,14 @@ export namespace RuleUpdateParams {
 
 export interface RuleDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RuleEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -267,7 +267,7 @@ export namespace RuleEditParams {
 
 export interface RuleGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
