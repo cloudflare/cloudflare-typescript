@@ -2,19 +2,12 @@
 
 export { CloudforceOne } from './cloudforce-one';
 export {
-  ListItemsSinglePage,
-  RequestTypesResponsesSinglePage,
   Requests,
   type Item,
   type ListItem,
   type Quota,
   type RequestConstants,
   type RequestTypes,
-  type RequestDeleteResponse,
-  type RequestTypesResponse,
-  type RequestCreateParams,
-  type RequestUpdateParams,
-  type RequestListParams,
 } from './requests/index';
 export { Scans } from './scans/index';
 export {
