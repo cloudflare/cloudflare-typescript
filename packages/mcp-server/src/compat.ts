@@ -1,8 +1,5 @@
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { Endpoint } from './tools';
-import Ajv from 'ajv';
-
-const ajv = new Ajv();
 
 export interface ClientCapabilities {
   topLevelUnions: boolean;
@@ -23,14 +20,9 @@ export const defaultClientCapabilities: ClientCapabilities = {
 };
 
 /**
- * Attempts to parse strings into JSON objects if initial schema
- * validation fails.
+ * Attempts to parse strings into JSON objects
  */
 export function parseEmbeddedJSON(args: Record<string, unknown>, schema: Record<string, unknown>) {
-  if (ajv.validate(schema, args)) {
-    return args;
-  }
-
   let updated = false;
   const newArgs: Record<string, unknown> = Object.assign({}, args);
 
