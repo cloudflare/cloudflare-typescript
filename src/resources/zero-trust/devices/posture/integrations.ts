@@ -303,13 +303,13 @@ export namespace IntegrationCreateParams {
 
     /**
      * If present, this id will be passed in the `CF-Access-Client-ID` header when
-     * hitting the `api_url`
+     * hitting the `api_url`.
      */
     access_client_id?: string;
 
     /**
      * If present, this secret will be passed in the `CF-Access-Client-Secret` header
-     * when hitting the `api_url`
+     * when hitting the `api_url`.
      */
     access_client_secret?: string;
   }
@@ -329,13 +329,13 @@ export namespace IntegrationCreateParams {
   export interface TeamsDevicesCustomS2sConfigRequest {
     /**
      * This id will be passed in the `CF-Access-Client-ID` header when hitting the
-     * `api_url`
+     * `api_url`.
      */
     access_client_id: string;
 
     /**
      * This secret will be passed in the `CF-Access-Client-Secret` header when hitting
-     * the `api_url`
+     * the `api_url`.
      */
     access_client_secret: string;
 
@@ -508,13 +508,13 @@ export namespace IntegrationEditParams {
 
     /**
      * If present, this id will be passed in the `CF-Access-Client-ID` header when
-     * hitting the `api_url`
+     * hitting the `api_url`.
      */
     access_client_id?: string;
 
     /**
      * If present, this secret will be passed in the `CF-Access-Client-Secret` header
-     * when hitting the `api_url`
+     * when hitting the `api_url`.
      */
     access_client_secret?: string;
   }
@@ -534,13 +534,13 @@ export namespace IntegrationEditParams {
   export interface TeamsDevicesCustomS2sConfigRequest {
     /**
      * This id will be passed in the `CF-Access-Client-ID` header when hitting the
-     * `api_url`
+     * `api_url`.
      */
     access_client_id: string;
 
     /**
      * This secret will be passed in the `CF-Access-Client-Secret` header when hitting
-     * the `api_url`
+     * the `api_url`.
      */
     access_client_secret: string;
 

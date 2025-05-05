@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_resilience_devices_zero_trust_global_warp_override',
-  description: 'Fetch the Global WARP override state',
+  description: 'Fetch the Global WARP override state.',
   inputSchema: {
     type: 'object',
     properties: {

@@ -37,6 +37,7 @@ export const tool: Tool = {
           'gateway',
           'warp',
           'disk_encryption',
+          'serial_number',
           'sentinelone',
           'carbonblack',
           'firewall',
@@ -106,7 +107,7 @@ export const tool: Tool = {
             properties: {
               operating_system: {
                 type: 'string',
-                description: 'Operating system',
+                description: 'Operating system.',
                 enum: ['windows', 'linux', 'mac'],
               },
               path: {
@@ -125,6 +126,17 @@ export const tool: Tool = {
             required: ['operating_system', 'path'],
           },
           {
+            type: 'object',
+            title: 'Serial Number',
+            properties: {
+              id: {
+                type: 'string',
+                description: 'UUID of Access List',
+              },
+            },
+            required: ['id'],
+          },
+          {
             $ref: '#/$defs/disk_encryption_input',
           },
           {
@@ -133,7 +145,7 @@ export const tool: Tool = {
             properties: {
               operating_system: {
                 type: 'string',
-                description: 'Operating system',
+                description: 'Operating system.',
                 enum: ['windows', 'linux', 'mac'],
               },
               path: {
@@ -169,7 +181,7 @@ export const tool: Tool = {
               },
               operating_system: {
                 type: 'string',
-                description: 'Operating system',
+                description: 'Operating system.',
                 enum: ['windows', 'linux', 'mac'],
               },
               cn: {
@@ -180,7 +192,7 @@ export const tool: Tool = {
               extended_key_usage: {
                 type: 'array',
                 description:
-                  'List of values indicating purposes for which the certificate public key can be used',
+                  'List of values indicating purposes for which the certificate public key can be used.',
                 items: {
                   type: 'string',
                   enum: ['clientAuth', 'emailProtection'],
@@ -238,7 +250,7 @@ export const tool: Tool = {
               },
               operator: {
                 type: 'string',
-                description: 'operator',
+                description: 'Operator.',
                 enum: ['<', '<=', '>', '>=', '=='],
               },
               score: {
@@ -258,7 +270,7 @@ export const tool: Tool = {
         properties: {
           operating_system: {
             type: 'string',
-            description: 'Operating system',
+            description: 'Operating system.',
             enum: ['windows', 'linux', 'mac'],
           },
           path: {
@@ -267,7 +279,7 @@ export const tool: Tool = {
           },
           exists: {
             type: 'boolean',
-            description: 'Whether or not file exists',
+            description: 'Whether or not file exists.',
           },
           sha256: {
             type: 'string',
@@ -290,7 +302,7 @@ export const tool: Tool = {
           },
           operating_system: {
             type: 'string',
-            description: 'Operating System',
+            description: 'Operating System.',
             enum: ['android', 'ios', 'chromeos'],
           },
         },
@@ -302,12 +314,12 @@ export const tool: Tool = {
         properties: {
           operating_system: {
             type: 'string',
-            description: 'Operating System',
+            description: 'Operating System.',
             enum: ['windows'],
           },
           domain: {
             type: 'string',
-            description: 'Domain',
+            description: 'Domain.',
           },
         },
         required: ['operating_system'],
@@ -318,30 +330,30 @@ export const tool: Tool = {
         properties: {
           operating_system: {
             type: 'string',
-            description: 'Operating System',
+            description: 'Operating System.',
             enum: ['windows'],
           },
           operator: {
             type: 'string',
-            description: 'operator',
+            description: 'Operator.',
             enum: ['<', '<=', '>', '>=', '=='],
           },
           version: {
             type: 'string',
-            description: 'Version of OS',
+            description: 'Version of OS.',
           },
           os_distro_name: {
             type: 'string',
-            description: 'Operating System Distribution Name (linux only)',
+            description: 'Operating System Distribution Name (linux only).',
           },
           os_distro_revision: {
             type: 'string',
-            description: 'Version of OS Distribution (linux only)',
+            description: 'Version of OS Distribution (linux only).',
           },
           os_version_extra: {
             type: 'string',
             description:
-              'Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the kernel release version. (Mac, iOS, and Linux only)',
+              'Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the kernel release version. (Mac, iOS, and Linux only).',
           },
         },
         required: ['operating_system', 'operator', 'version'],
@@ -352,11 +364,11 @@ export const tool: Tool = {
         properties: {
           enabled: {
             type: 'boolean',
-            description: 'Enabled',
+            description: 'Enabled.',
           },
           operating_system: {
             type: 'string',
-            description: 'Operating System',
+            description: 'Operating System.',
             enum: ['windows', 'mac'],
           },
         },
@@ -368,7 +380,7 @@ export const tool: Tool = {
         properties: {
           operating_system: {
             type: 'string',
-            description: 'Operating system',
+            description: 'Operating system.',
             enum: ['windows', 'linux', 'mac'],
           },
           path: {
@@ -417,7 +429,7 @@ export const tool: Tool = {
           },
           cn: {
             type: 'string',
-            description: 'Common Name that is protected by the certificate',
+            description: 'Common Name that is protected by the certificate.',
           },
         },
         required: ['certificate_id', 'cn'],
@@ -428,7 +440,7 @@ export const tool: Tool = {
         properties: {
           compliance_status: {
             type: 'string',
-            description: 'Compliance Status',
+            description: 'Compliance Status.',
             enum: ['compliant', 'noncompliant', 'unknown'],
           },
           connection_id: {
@@ -452,20 +464,20 @@ export const tool: Tool = {
           },
           operator: {
             type: 'string',
-            description: 'operator',
+            description: 'Operator.',
             enum: ['<', '<=', '>', '>=', '=='],
           },
           os: {
             type: 'string',
-            description: 'Os Version',
+            description: 'Os Version.',
           },
           overall: {
             type: 'string',
-            description: 'overall',
+            description: 'Overall.',
           },
           sensor_config: {
             type: 'string',
-            description: 'SensorConfig',
+            description: 'SensorConfig.',
           },
           state: {
             type: 'string',
@@ -474,11 +486,11 @@ export const tool: Tool = {
           },
           version: {
             type: 'string',
-            description: 'Version',
+            description: 'Version.',
           },
           versionOperator: {
             type: 'string',
-            description: 'Version Operator',
+            description: 'Version Operator.',
             enum: ['<', '<=', '>', '>=', '=='],
           },
         },
@@ -490,7 +502,7 @@ export const tool: Tool = {
         properties: {
           compliance_status: {
             type: 'string',
-            description: 'Compliance Status',
+            description: 'Compliance Status.',
             enum: ['compliant', 'noncompliant', 'unknown', 'notapplicable', 'ingraceperiod', 'error'],
           },
           connection_id: {
@@ -510,7 +522,7 @@ export const tool: Tool = {
           },
           countOperator: {
             type: 'string',
-            description: 'Count Operator',
+            description: 'Count Operator.',
             enum: ['<', '<=', '>', '>=', '=='],
           },
           issue_count: {
@@ -544,7 +556,7 @@ export const tool: Tool = {
           },
           scoreOperator: {
             type: 'string',
-            description: 'Score Operator',
+            description: 'Score Operator.',
             enum: ['<', '<=', '>', '>=', '=='],
           },
           total_score: {
@@ -594,7 +606,7 @@ export const tool: Tool = {
           },
           operator: {
             type: 'string',
-            description: 'operator',
+            description: 'Operator.',
             enum: ['<', '<=', '>', '>=', '=='],
           },
         },

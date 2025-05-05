@@ -82,7 +82,7 @@ export const tool: Tool = {
         properties: {
           id: {
             type: 'array',
-            description: 'Filter by Access user ID',
+            description: 'Filter by Access user ID.',
             items: {
               type: 'string',
             },

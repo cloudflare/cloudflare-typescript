@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_default_policies_devices_zero_trust_certificates',
-  description: 'Fetches device certificate provisioning',
+  description: 'Fetches device certificate provisioning.',
   inputSchema: {
     type: 'object',
     properties: {

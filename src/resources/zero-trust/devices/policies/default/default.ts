@@ -3,13 +3,7 @@
 import { APIResource } from '../../../../../core/resource';
 import * as PoliciesAPI from '../policies';
 import * as CertificatesAPI from './certificates';
-import {
-  CertificateEditParams,
-  CertificateEditResponse,
-  CertificateGetParams,
-  CertificateGetResponse,
-  Certificates,
-} from './certificates';
+import { CertificateEditParams, CertificateGetParams, Certificates } from './certificates';
 import * as ExcludesAPI from './excludes';
 import { ExcludeGetParams, ExcludeUpdateParams, Excludes } from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
@@ -403,8 +397,6 @@ export declare namespace Default {
 
   export {
     Certificates as Certificates,
-    type CertificateEditResponse as CertificateEditResponse,
-    type CertificateGetResponse as CertificateGetResponse,
     type CertificateEditParams as CertificateEditParams,
     type CertificateGetParams as CertificateGetParams,
   };

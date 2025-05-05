@@ -139,12 +139,12 @@ export const tool: Tool = {
               access_client_id: {
                 type: 'string',
                 description:
-                  'If present, this id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`',
+                  'If present, this id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`.',
               },
               access_client_secret: {
                 type: 'string',
                 description:
-                  'If present, this secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`',
+                  'If present, this secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`.',
               },
             },
             required: ['api_url', 'client_secret'],
@@ -171,12 +171,12 @@ export const tool: Tool = {
               access_client_id: {
                 type: 'string',
                 description:
-                  'This id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`',
+                  'This id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`.',
               },
               access_client_secret: {
                 type: 'string',
                 description:
-                  'This secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`',
+                  'This secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`.',
               },
               api_url: {
                 type: 'string',

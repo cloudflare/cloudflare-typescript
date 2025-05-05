@@ -21,7 +21,7 @@ export const tool: Tool = {
       },
       id: {
         type: 'array',
-        description: 'A list of registration IDs to revoke',
+        description: 'A list of registration IDs to revoke.',
         items: {
           type: 'string',
         },
