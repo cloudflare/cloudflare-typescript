@@ -98,7 +98,8 @@ describe('resource secrets', () => {
     });
   });
 
-  test('duplicate: only required params', async () => {
+  // TODO: investigate prism error for invalid security scheme used
+  test.skip('duplicate: only required params', async () => {
     const responsePromise = client.secretsStore.stores.secrets.duplicate(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '3fd85f74b32742f1bff64a85009dda07',
@@ -113,7 +114,8 @@ describe('resource secrets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('duplicate: required and optional params', async () => {
+  // TODO: investigate prism error for invalid security scheme used
+  test.skip('duplicate: required and optional params', async () => {
     const response = await client.secretsStore.stores.secrets.duplicate(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '3fd85f74b32742f1bff64a85009dda07',
