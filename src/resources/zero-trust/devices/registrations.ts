@@ -147,7 +147,7 @@ export interface RegistrationListResponse {
 
   /**
    * The type of encryption key used by the WARP client for the active key. Currently
-   * 'curve25519' for WireGuard and 'secp256r1' for MASQUE
+   * 'curve25519' for WireGuard and 'secp256r1' for MASQUE.
    */
   key_type?: string | null;
 
@@ -170,24 +170,24 @@ export namespace RegistrationListResponse {
    */
   export interface Device {
     /**
-     * The ID of the device
+     * The ID of the device.
      */
     id: string;
 
     /**
-     * The name of the device
+     * The name of the device.
      */
     name: string;
 
     /**
-     * Version of the WARP client
+     * Version of the WARP client.
      */
     client_version?: string;
   }
 
   export interface User {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -249,7 +249,7 @@ export interface RegistrationGetResponse {
 
   /**
    * The type of encryption key used by the WARP client for the active key. Currently
-   * 'curve25519' for WireGuard and 'secp256r1' for MASQUE
+   * 'curve25519' for WireGuard and 'secp256r1' for MASQUE.
    */
   key_type?: string | null;
 
@@ -272,24 +272,24 @@ export namespace RegistrationGetResponse {
    */
   export interface Device {
     /**
-     * The ID of the device
+     * The ID of the device.
      */
     id: string;
 
     /**
-     * The name of the device
+     * The name of the device.
      */
     name: string;
 
     /**
-     * Version of the WARP client
+     * Version of the WARP client.
      */
     client_version?: string;
   }
 
   export interface User {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -378,7 +378,7 @@ export namespace RegistrationListParams {
 
   export interface User {
     /**
-     * Filter by Access user ID
+     * Filter by Access user ID.
      */
     id?: Array<string>;
   }
@@ -411,7 +411,7 @@ export interface RegistrationRevokeParams {
   account_id: string;
 
   /**
-   * Query param: A list of registration IDs to revoke
+   * Query param: A list of registration IDs to revoke.
    */
   id: Array<string>;
 }
@@ -423,7 +423,7 @@ export interface RegistrationUnrevokeParams {
   account_id: string;
 
   /**
-   * Query param: A list of registration IDs to unrevoke
+   * Query param: A list of registration IDs to unrevoke.
    */
   id: Array<string>;
 }
