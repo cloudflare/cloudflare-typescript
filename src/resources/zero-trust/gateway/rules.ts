@@ -260,7 +260,7 @@ export interface GatewayRule {
    *
    * This does not apply to HTTP or network policies.
    */
-  expiration?: GatewayRule.Expiration;
+  expiration?: GatewayRule.Expiration | null;
 
   /**
    * The protocol or layer to evaluate the traffic, identity, and device posture
@@ -294,7 +294,7 @@ export interface GatewayRule {
    * The schedule for activating DNS policies. This does not apply to HTTP or network
    * policies.
    */
-  schedule?: Schedule;
+  schedule?: Schedule | null;
 
   /**
    * The wirefilter expression used for traffic matching.
@@ -351,28 +351,28 @@ export interface RuleSetting {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: Record<string, string>;
+  add_headers?: Record<string, string> | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    */
-  allow_child_bypass?: boolean;
+  allow_child_bypass?: boolean | null;
 
   /**
    * Settings for the Audit SSH action.
    */
-  audit_ssh?: RuleSetting.AuditSSH;
+  audit_ssh?: RuleSetting.AuditSSH | null;
 
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSetting.BISOAdminControls;
+  biso_admin_controls?: RuleSetting.BISOAdminControls | null;
 
   /**
    * Custom block page settings. If missing/null, blocking will use the the account
    * settings.
    */
-  block_page?: RuleSetting.BlockPage;
+  block_page?: RuleSetting.BlockPage | null;
 
   /**
    * Enable the custom block page.
@@ -388,12 +388,12 @@ export interface RuleSetting {
   /**
    * Set by children MSP accounts to bypass their parent's rules.
    */
-  bypass_parent_rule?: boolean;
+  bypass_parent_rule?: boolean | null;
 
   /**
    * Configure how session check behaves.
    */
-  check_session?: RuleSetting.CheckSession;
+  check_session?: RuleSetting.CheckSession | null;
 
   /**
    * Add your own custom resolvers to route queries that match the resolver policy.
@@ -401,14 +401,14 @@ export interface RuleSetting {
    * are set. DNS queries will route to the address closest to their origin. Only
    * valid when a rule's action is set to 'resolve'.
    */
-  dns_resolvers?: RuleSetting.DNSResolvers;
+  dns_resolvers?: RuleSetting.DNSResolvers | null;
 
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for
    * rules with Egress actions and filters, or omit it to indicate local egress via
    * WARP IPs.
    */
-  egress?: RuleSetting.Egress;
+  egress?: RuleSetting.Egress | null;
 
   /**
    * Set to true, to ignore the category matches at CNAME domains in a response. If
@@ -437,13 +437,13 @@ export interface RuleSetting {
   /**
    * Send matching traffic to the supplied destination IP address and port.
    */
-  l4override?: RuleSetting.L4override;
+  l4override?: RuleSetting.L4override | null;
 
   /**
    * Configure a notification to display on the user's device when this rule is
    * matched.
    */
-  notification_settings?: RuleSetting.NotificationSettings;
+  notification_settings?: RuleSetting.NotificationSettings | null;
 
   /**
    * Override matching DNS queries with a hostname.
@@ -453,22 +453,22 @@ export interface RuleSetting {
   /**
    * Override matching DNS queries with an IP or set of IPs.
    */
-  override_ips?: Array<string>;
+  override_ips?: Array<string> | null;
 
   /**
    * Configure DLP payload logging.
    */
-  payload_log?: RuleSetting.PayloadLog;
+  payload_log?: RuleSetting.PayloadLog | null;
 
   /**
    * Settings that apply to quarantine rules
    */
-  quarantine?: RuleSetting.Quarantine;
+  quarantine?: RuleSetting.Quarantine | null;
 
   /**
    * Settings that apply to redirect rules
    */
-  redirect?: RuleSetting.Redirect;
+  redirect?: RuleSetting.Redirect | null;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
@@ -476,7 +476,7 @@ export interface RuleSetting {
    * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
    * set to 'resolve'.
    */
-  resolve_dns_internally?: RuleSetting.ResolveDNSInternally;
+  resolve_dns_internally?: RuleSetting.ResolveDNSInternally | null;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
@@ -489,7 +489,7 @@ export interface RuleSetting {
   /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
-  untrusted_cert?: RuleSetting.UntrustedCERT;
+  untrusted_cert?: RuleSetting.UntrustedCERT | null;
 }
 
 export namespace RuleSetting {
@@ -780,28 +780,28 @@ export interface RuleSettingParam {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: Record<string, string>;
+  add_headers?: Record<string, string> | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    */
-  allow_child_bypass?: boolean;
+  allow_child_bypass?: boolean | null;
 
   /**
    * Settings for the Audit SSH action.
    */
-  audit_ssh?: RuleSettingParam.AuditSSH;
+  audit_ssh?: RuleSettingParam.AuditSSH | null;
 
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSettingParam.BISOAdminControls;
+  biso_admin_controls?: RuleSettingParam.BISOAdminControls | null;
 
   /**
    * Custom block page settings. If missing/null, blocking will use the the account
    * settings.
    */
-  block_page?: RuleSettingParam.BlockPage;
+  block_page?: RuleSettingParam.BlockPage | null;
 
   /**
    * Enable the custom block page.
@@ -817,12 +817,12 @@ export interface RuleSettingParam {
   /**
    * Set by children MSP accounts to bypass their parent's rules.
    */
-  bypass_parent_rule?: boolean;
+  bypass_parent_rule?: boolean | null;
 
   /**
    * Configure how session check behaves.
    */
-  check_session?: RuleSettingParam.CheckSession;
+  check_session?: RuleSettingParam.CheckSession | null;
 
   /**
    * Add your own custom resolvers to route queries that match the resolver policy.
@@ -830,14 +830,14 @@ export interface RuleSettingParam {
    * are set. DNS queries will route to the address closest to their origin. Only
    * valid when a rule's action is set to 'resolve'.
    */
-  dns_resolvers?: RuleSettingParam.DNSResolvers;
+  dns_resolvers?: RuleSettingParam.DNSResolvers | null;
 
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for
    * rules with Egress actions and filters, or omit it to indicate local egress via
    * WARP IPs.
    */
-  egress?: RuleSettingParam.Egress;
+  egress?: RuleSettingParam.Egress | null;
 
   /**
    * Set to true, to ignore the category matches at CNAME domains in a response. If
@@ -866,13 +866,13 @@ export interface RuleSettingParam {
   /**
    * Send matching traffic to the supplied destination IP address and port.
    */
-  l4override?: RuleSettingParam.L4override;
+  l4override?: RuleSettingParam.L4override | null;
 
   /**
    * Configure a notification to display on the user's device when this rule is
    * matched.
    */
-  notification_settings?: RuleSettingParam.NotificationSettings;
+  notification_settings?: RuleSettingParam.NotificationSettings | null;
 
   /**
    * Override matching DNS queries with a hostname.
@@ -882,22 +882,22 @@ export interface RuleSettingParam {
   /**
    * Override matching DNS queries with an IP or set of IPs.
    */
-  override_ips?: Array<string>;
+  override_ips?: Array<string> | null;
 
   /**
    * Configure DLP payload logging.
    */
-  payload_log?: RuleSettingParam.PayloadLog;
+  payload_log?: RuleSettingParam.PayloadLog | null;
 
   /**
    * Settings that apply to quarantine rules
    */
-  quarantine?: RuleSettingParam.Quarantine;
+  quarantine?: RuleSettingParam.Quarantine | null;
 
   /**
    * Settings that apply to redirect rules
    */
-  redirect?: RuleSettingParam.Redirect;
+  redirect?: RuleSettingParam.Redirect | null;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
@@ -905,7 +905,7 @@ export interface RuleSettingParam {
    * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
    * set to 'resolve'.
    */
-  resolve_dns_internally?: RuleSettingParam.ResolveDNSInternally;
+  resolve_dns_internally?: RuleSettingParam.ResolveDNSInternally | null;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
@@ -918,7 +918,7 @@ export interface RuleSettingParam {
   /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
-  untrusted_cert?: RuleSettingParam.UntrustedCERT;
+  untrusted_cert?: RuleSettingParam.UntrustedCERT | null;
 }
 
 export namespace RuleSettingParam {
@@ -1389,7 +1389,7 @@ export interface RuleCreateParams {
    *
    * This does not apply to HTTP or network policies.
    */
-  expiration?: RuleCreateParams.Expiration;
+  expiration?: RuleCreateParams.Expiration | null;
 
   /**
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
@@ -1418,7 +1418,7 @@ export interface RuleCreateParams {
    * Body param: The schedule for activating DNS policies. This does not apply to
    * HTTP or network policies.
    */
-  schedule?: ScheduleParam;
+  schedule?: ScheduleParam | null;
 
   /**
    * Body param: The wirefilter expression used for traffic matching.
@@ -1509,7 +1509,7 @@ export interface RuleUpdateParams {
    *
    * This does not apply to HTTP or network policies.
    */
-  expiration?: RuleUpdateParams.Expiration;
+  expiration?: RuleUpdateParams.Expiration | null;
 
   /**
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
@@ -1538,7 +1538,7 @@ export interface RuleUpdateParams {
    * Body param: The schedule for activating DNS policies. This does not apply to
    * HTTP or network policies.
    */
-  schedule?: ScheduleParam;
+  schedule?: ScheduleParam | null;
 
   /**
    * Body param: The wirefilter expression used for traffic matching.
