@@ -92,6 +92,26 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   end?: string;
 
   /**
+   * Query param:
+   */
+  original_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
+
+  /**
+   * Query param:
+   */
+  outcome_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
+
+  /**
+   * Query param:
+   */
+  query?: string | null;
+
+  /**
+   * Query param:
+   */
+  requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
+
+  /**
    * Query param: The beginning of the search date range. Defaults to
    * `now - 30 days`.
    */
