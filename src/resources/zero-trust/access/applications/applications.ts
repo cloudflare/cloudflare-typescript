@@ -614,7 +614,10 @@ export namespace Application {
        */
       idp_entity_id?: string;
 
-      name_id_format?: unknown;
+      /**
+       * The format of the name identifier sent to the SaaS application.
+       */
+      name_id_format?: ApplicationsAPI.SaaSAppNameIDFormat;
 
       /**
        * A [JSONata](https://jsonata.org/) expression that transforms an application's
@@ -1950,7 +1953,15 @@ export namespace OIDCSaaSAppParam {
   }
 }
 
-export type SaaSAppNameIDFormat = unknown;
+/**
+ * The format of the name identifier sent to the SaaS application.
+ */
+export type SaaSAppNameIDFormat = 'id' | 'email';
+
+/**
+ * The format of the name identifier sent to the SaaS application.
+ */
+export type SaaSAppNameIDFormatParam = 'id' | 'email';
 
 export interface SAMLSaaSApp {
   /**
@@ -1980,7 +1991,10 @@ export interface SAMLSaaSApp {
    */
   idp_entity_id?: string;
 
-  name_id_format?: unknown;
+  /**
+   * The format of the name identifier sent to the SaaS application.
+   */
+  name_id_format?: SaaSAppNameIDFormat;
 
   /**
    * A [JSONata](https://jsonata.org/) expression that transforms an application's
@@ -2100,7 +2114,10 @@ export interface SAMLSaaSAppParam {
    */
   idp_entity_id?: string;
 
-  name_id_format?: unknown;
+  /**
+   * The format of the name identifier sent to the SaaS application.
+   */
+  name_id_format?: SaaSAppNameIDFormatParam;
 
   /**
    * A [JSONata](https://jsonata.org/) expression that transforms an application's
@@ -13171,10 +13188,6 @@ export declare namespace ApplicationCreateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -13416,10 +13429,6 @@ export declare namespace ApplicationCreateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -13807,10 +13816,6 @@ export declare namespace ApplicationCreateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -14198,10 +14203,6 @@ export declare namespace ApplicationCreateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -14493,10 +14494,6 @@ export declare namespace ApplicationCreateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -14790,10 +14787,6 @@ export declare namespace ApplicationCreateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -15087,10 +15080,6 @@ export declare namespace ApplicationCreateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -15776,10 +15765,6 @@ export declare namespace ApplicationCreateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -16181,10 +16166,6 @@ export declare namespace ApplicationUpdateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -16426,10 +16407,6 @@ export declare namespace ApplicationUpdateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -16817,10 +16794,6 @@ export declare namespace ApplicationUpdateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -17208,10 +17181,6 @@ export declare namespace ApplicationUpdateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -17503,10 +17472,6 @@ export declare namespace ApplicationUpdateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -17800,10 +17765,6 @@ export declare namespace ApplicationUpdateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -18097,10 +18058,6 @@ export declare namespace ApplicationUpdateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy
@@ -18786,10 +18743,6 @@ export declare namespace ApplicationUpdateParams {
       precedence?: number;
     }
 
-    /**
-     * An application-scoped policy JSON. If the policy does not yet exist, it will be
-     * created.
-     */
     export interface UnionMember2 {
       /**
        * The UUID of the policy

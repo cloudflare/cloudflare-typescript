@@ -76,7 +76,20 @@ export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArra
  */
 export type AllowedModesAnomaly = 'on' | 'off';
 
-export type WAFRuleGroup = unknown;
+/**
+ * The rule group to which the current WAF rule belongs.
+ */
+export interface WAFRuleGroup {
+  /**
+   * The unique identifier of the rule group.
+   */
+  id?: string;
+
+  /**
+   * The name of the rule group.
+   */
+  name?: string;
+}
 
 /**
  * When triggered, anomaly detection WAF rules contribute to an overall threat
@@ -113,7 +126,10 @@ export namespace RuleListResponse {
      */
     description: string;
 
-    group: unknown;
+    /**
+     * The rule group to which the current WAF rule belongs.
+     */
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * When set to `on`, the current WAF rule will be used when evaluating the request.
@@ -159,7 +175,10 @@ export namespace RuleListResponse {
      */
     description: string;
 
-    group: unknown;
+    /**
+     * The rule group to which the current WAF rule belongs.
+     */
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * The action that the current WAF rule will perform when triggered. Applies to
@@ -199,7 +218,10 @@ export namespace RuleListResponse {
      */
     description: string;
 
-    group: unknown;
+    /**
+     * The rule group to which the current WAF rule belongs.
+     */
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * When set to `on`, the current rule will be used when evaluating the request.
@@ -254,7 +276,10 @@ export namespace RuleEditResponse {
      */
     description: string;
 
-    group: unknown;
+    /**
+     * The rule group to which the current WAF rule belongs.
+     */
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * When set to `on`, the current WAF rule will be used when evaluating the request.
@@ -300,7 +325,10 @@ export namespace RuleEditResponse {
      */
     description: string;
 
-    group: unknown;
+    /**
+     * The rule group to which the current WAF rule belongs.
+     */
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * The action that the current WAF rule will perform when triggered. Applies to
@@ -340,7 +368,10 @@ export namespace RuleEditResponse {
      */
     description: string;
 
-    group: unknown;
+    /**
+     * The rule group to which the current WAF rule belongs.
+     */
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * When set to `on`, the current rule will be used when evaluating the request.

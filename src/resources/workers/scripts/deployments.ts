@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as DeploymentsAPI from './deployments';
 
 export class Deployments extends APIResource {
   /**
@@ -44,7 +45,19 @@ export class Deployments extends APIResource {
   }
 }
 
-export type Deployment = unknown;
+export interface Deployment {
+  /**
+   * Human-readable message about the deployment. Truncated to 100 bytes.
+   */
+  'workers/message'?: string;
+}
+
+export interface DeploymentParam {
+  /**
+   * Human-readable message about the deployment. Truncated to 100 bytes.
+   */
+  'workers/message'?: string;
+}
 
 export interface DeploymentCreateResponse {
   strategy: 'percentage';
@@ -53,7 +66,7 @@ export interface DeploymentCreateResponse {
 
   id?: string;
 
-  annotations?: unknown;
+  annotations?: Deployment;
 
   author_email?: string;
 
@@ -82,7 +95,7 @@ export namespace DeploymentGetResponse {
 
     id?: string;
 
-    annotations?: unknown;
+    annotations?: DeploymentsAPI.Deployment;
 
     author_email?: string;
 
@@ -126,7 +139,7 @@ export interface DeploymentCreateParams {
   /**
    * Body param:
    */
-  annotations?: unknown;
+  annotations?: DeploymentParam;
 }
 
 export namespace DeploymentCreateParams {

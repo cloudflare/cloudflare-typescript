@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
+import * as CustomHostnamesAPI from '../custom-hostnames';
 
 export class Certificates extends APIResource {
   /**
@@ -132,7 +133,13 @@ export namespace CertificateUpdateResponse {
      */
     id?: string;
 
-    bundle_method?: unknown;
+    /**
+     * A ubiquitous bundle has the highest probability of being verified everywhere,
+     * even by clients using outdated or unusual trust stores. An optimal bundle uses
+     * the shortest chain and newest intermediates. And the force bundle verifies the
+     * chain, but does not otherwise modify it.
+     */
+    bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
      * The Certificate Authority that will issue the certificate
@@ -169,7 +176,10 @@ export namespace CertificateUpdateResponse {
      */
     issuer?: string;
 
-    method?: unknown;
+    /**
+     * Domain control validation (DCV) method used for this hostname.
+     */
+    method?: CustomHostnamesAPI.DCVMethod;
 
     /**
      * The serial number on a custom uploaded certificate.
@@ -209,7 +219,11 @@ export namespace CertificateUpdateResponse {
       | 'backup_issued'
       | 'holding_deployment';
 
-    type?: unknown;
+    /**
+     * Level of validation to be used for this hostname. Domain validation (dv) must be
+     * used.
+     */
+    type?: CustomHostnamesAPI.DomainValidationType;
 
     /**
      * The time the custom certificate was uploaded.

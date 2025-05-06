@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as SippyAPI from './sippy';
 
 export class SippyResource extends APIResource {
   /**
@@ -68,7 +69,9 @@ export class SippyResource extends APIResource {
   }
 }
 
-export type Provider = unknown;
+export type Provider = 'r2';
+
+export type ProviderParam = 'r2';
 
 export interface Sippy {
   /**
@@ -104,7 +107,7 @@ export namespace Sippy {
      */
     bucket?: string;
 
-    provider?: unknown;
+    provider?: SippyAPI.Provider;
   }
 
   /**
@@ -169,7 +172,7 @@ export declare namespace SippyUpdateParams {
        */
       accessKeyId?: string;
 
-      provider?: unknown;
+      provider?: SippyAPI.ProviderParam;
 
       /**
        * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"
@@ -247,7 +250,7 @@ export declare namespace SippyUpdateParams {
        */
       accessKeyId?: string;
 
-      provider?: unknown;
+      provider?: SippyAPI.ProviderParam;
 
       /**
        * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"

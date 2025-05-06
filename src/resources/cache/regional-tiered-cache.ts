@@ -40,10 +40,16 @@ export class RegionalTieredCacheResource extends APIResource {
   }
 }
 
-export type RegionalTieredCache = unknown;
+/**
+ * ID of the zone setting.
+ */
+export type RegionalTieredCache = 'tc_regional';
 
 export interface RegionalTieredCacheEditResponse {
-  id: unknown;
+  /**
+   * ID of the zone setting.
+   */
+  id: RegionalTieredCache;
 
   /**
    * Whether the setting is editable
@@ -62,7 +68,10 @@ export interface RegionalTieredCacheEditResponse {
 }
 
 export interface RegionalTieredCacheGetResponse {
-  id: unknown;
+  /**
+   * ID of the zone setting.
+   */
+  id: RegionalTieredCache;
 
   /**
    * Whether the setting is editable

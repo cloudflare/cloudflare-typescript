@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 
 export class Tail extends APIResource {
   /**
@@ -101,9 +102,9 @@ export interface TailCreateResponse {
 }
 
 export interface TailDeleteResponse {
-  errors: Array<unknown>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<unknown>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful

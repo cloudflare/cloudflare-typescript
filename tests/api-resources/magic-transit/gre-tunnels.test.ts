@@ -64,9 +64,9 @@ describe('resource greTunnels', () => {
       health_check: {
         direction: 'unidirectional',
         enabled: true,
-        rate: {},
+        rate: 'low',
         target: { saved: '203.0.113.1' },
-        type: {},
+        type: 'reply',
       },
       mtu: 0,
       ttl: 0,

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
+import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 import { SinglePage } from '../../../../pagination';
 
 export class ActiveSessions extends APIResource {
@@ -91,7 +92,7 @@ export interface ActiveSessionGetResponse {
 
   email?: string;
 
-  geo?: unknown;
+  geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
 
   iat?: number;
 

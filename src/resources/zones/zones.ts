@@ -19,18 +19,7 @@ import {
   CustomNameservers,
 } from './custom-nameservers';
 import * as HoldsAPI from './holds';
-import {
-  HoldCreateParams,
-  HoldCreateResponse,
-  HoldDeleteParams,
-  HoldDeleteResponse,
-  HoldEditParams,
-  HoldEditResponse,
-  HoldGetParams,
-  HoldGetResponse,
-  Holds,
-  ZoneHold,
-} from './holds';
+import { HoldCreateParams, HoldDeleteParams, HoldEditParams, HoldGetParams, Holds, ZoneHold } from './holds';
 import * as PlansAPI from './plans';
 import {
   AvailableRatePlan,
@@ -605,10 +594,6 @@ export declare namespace Zones {
   export {
     Holds as Holds,
     type ZoneHold as ZoneHold,
-    type HoldCreateResponse as HoldCreateResponse,
-    type HoldDeleteResponse as HoldDeleteResponse,
-    type HoldEditResponse as HoldEditResponse,
-    type HoldGetResponse as HoldGetResponse,
     type HoldCreateParams as HoldCreateParams,
     type HoldDeleteParams as HoldDeleteParams,
     type HoldEditParams as HoldEditParams,
