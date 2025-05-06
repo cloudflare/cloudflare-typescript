@@ -60,6 +60,7 @@ export interface ScriptAndVersionSettingEditResponse {
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindKVNamespace
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindMTLSCertificate
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindPlainText
+    | ScriptAndVersionSettingEditResponse.WorkersBindingKindPipelines
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindQueue
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindR2Bucket
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindSecretText
@@ -374,6 +375,23 @@ export namespace ScriptAndVersionSettingEditResponse {
     type: 'plain_text';
   }
 
+  export interface WorkersBindingKindPipelines {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Name of the Pipeline to bind to.
+     */
+    pipeline: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'pipelines';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -618,6 +636,7 @@ export interface ScriptAndVersionSettingGetResponse {
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindKVNamespace
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindMTLSCertificate
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindPlainText
+    | ScriptAndVersionSettingGetResponse.WorkersBindingKindPipelines
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindQueue
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindR2Bucket
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindSecretText
@@ -932,6 +951,23 @@ export namespace ScriptAndVersionSettingGetResponse {
     type: 'plain_text';
   }
 
+  export interface WorkersBindingKindPipelines {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Name of the Pipeline to bind to.
+     */
+    pipeline: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'pipelines';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -1189,6 +1225,7 @@ export namespace ScriptAndVersionSettingEditParams {
       | Settings.WorkersBindingKindKVNamespace
       | Settings.WorkersBindingKindMTLSCertificate
       | Settings.WorkersBindingKindPlainText
+      | Settings.WorkersBindingKindPipelines
       | Settings.WorkersBindingKindQueue
       | Settings.WorkersBindingKindR2Bucket
       | Settings.WorkersBindingKindSecretText
@@ -1499,6 +1536,23 @@ export namespace ScriptAndVersionSettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'plain_text';
+    }
+
+    export interface WorkersBindingKindPipelines {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Pipeline to bind to.
+       */
+      pipeline: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'pipelines';
     }
 
     export interface WorkersBindingKindQueue {

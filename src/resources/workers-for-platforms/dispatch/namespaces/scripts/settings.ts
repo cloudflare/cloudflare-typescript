@@ -62,6 +62,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindKVNamespace
     | SettingEditResponse.WorkersBindingKindMTLSCertificate
     | SettingEditResponse.WorkersBindingKindPlainText
+    | SettingEditResponse.WorkersBindingKindPipelines
     | SettingEditResponse.WorkersBindingKindQueue
     | SettingEditResponse.WorkersBindingKindR2Bucket
     | SettingEditResponse.WorkersBindingKindSecretText
@@ -374,6 +375,23 @@ export namespace SettingEditResponse {
     type: 'plain_text';
   }
 
+  export interface WorkersBindingKindPipelines {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Name of the Pipeline to bind to.
+     */
+    pipeline: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'pipelines';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -618,6 +636,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindKVNamespace
     | SettingGetResponse.WorkersBindingKindMTLSCertificate
     | SettingGetResponse.WorkersBindingKindPlainText
+    | SettingGetResponse.WorkersBindingKindPipelines
     | SettingGetResponse.WorkersBindingKindQueue
     | SettingGetResponse.WorkersBindingKindR2Bucket
     | SettingGetResponse.WorkersBindingKindSecretText
@@ -930,6 +949,23 @@ export namespace SettingGetResponse {
     type: 'plain_text';
   }
 
+  export interface WorkersBindingKindPipelines {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Name of the Pipeline to bind to.
+     */
+    pipeline: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'pipelines';
+  }
+
   export interface WorkersBindingKindQueue {
     /**
      * A JavaScript variable name for the binding.
@@ -1187,6 +1223,7 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindKVNamespace
       | Settings.WorkersBindingKindMTLSCertificate
       | Settings.WorkersBindingKindPlainText
+      | Settings.WorkersBindingKindPipelines
       | Settings.WorkersBindingKindQueue
       | Settings.WorkersBindingKindR2Bucket
       | Settings.WorkersBindingKindSecretText
@@ -1497,6 +1534,23 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'plain_text';
+    }
+
+    export interface WorkersBindingKindPipelines {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Pipeline to bind to.
+       */
+      pipeline: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'pipelines';
     }
 
     export interface WorkersBindingKindQueue {
