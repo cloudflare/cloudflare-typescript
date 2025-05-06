@@ -163,7 +163,7 @@ export interface SettingsPolicy {
    * The wirefilter expression to match devices. Available values: "identity.email",
    * "identity.groups.id", "identity.groups.name", "identity.groups.email",
    * "identity.service_token_uuid", "identity.saml_attributes", "network", "os.name",
-   * "os.version"
+   * "os.version".
    */
   match?: string;
 
@@ -221,12 +221,12 @@ export namespace SettingsPolicy {
 
   export interface TargetTest {
     /**
-     * The id of the DEX test targeting this policy
+     * The id of the DEX test targeting this policy.
      */
     id?: string;
 
     /**
-     * The name of the DEX test targeting this policy
+     * The name of the DEX test targeting this policy.
      */
     name?: string;
   }

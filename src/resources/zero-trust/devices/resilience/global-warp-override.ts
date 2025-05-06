@@ -21,7 +21,7 @@ export class GlobalWARPOverride extends APIResource {
   }
 
   /**
-   * Fetch the Global WARP override state
+   * Fetch the Global WARP override state.
    */
   get(
     params: GlobalWARPOverrideGetParams,

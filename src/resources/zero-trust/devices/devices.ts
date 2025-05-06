@@ -177,7 +177,7 @@ export namespace DeviceListResponse {
    */
   export interface LastSeenUser {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -298,7 +298,7 @@ export namespace DeviceGetResponse {
    */
   export interface LastSeenUser {
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
