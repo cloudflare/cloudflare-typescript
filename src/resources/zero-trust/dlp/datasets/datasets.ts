@@ -116,7 +116,7 @@ export interface Dataset {
   case_sensitive?: boolean;
 
   /**
-   * The description of the dataset
+   * The description of the dataset.
    */
   description?: string | null;
 }
@@ -147,7 +147,7 @@ export interface DatasetCreation {
   dataset: Dataset;
 
   /**
-   * Encoding version to use for dataset
+   * Encoding version to use for dataset.
    */
   encoding_version: number;
 
@@ -184,7 +184,7 @@ export interface DatasetCreateParams {
   case_sensitive?: boolean;
 
   /**
-   * Body param: The description of the dataset
+   * Body param: The description of the dataset.
    */
   description?: string | null;
 
@@ -222,12 +222,12 @@ export interface DatasetUpdateParams {
   case_sensitive?: boolean;
 
   /**
-   * Body param: The description of the dataset
+   * Body param: The description of the dataset.
    */
   description?: string | null;
 
   /**
-   * Body param: The name of the dataset, must be unique
+   * Body param: The name of the dataset, must be unique.
    */
   name?: string | null;
 }

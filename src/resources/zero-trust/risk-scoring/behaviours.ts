@@ -63,7 +63,7 @@ export namespace BehaviourGetResponse {
 
 export interface BehaviourUpdateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
