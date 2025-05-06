@@ -173,10 +173,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -353,10 +352,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -555,10 +553,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -857,10 +854,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -1037,10 +1033,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -1217,10 +1212,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -1397,10 +1391,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -1645,10 +1638,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -1847,10 +1839,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -2066,10 +2057,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -2255,10 +2245,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -2454,10 +2443,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -2746,10 +2734,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -2973,10 +2960,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -3557,10 +3543,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -3840,10 +3825,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -4020,10 +4004,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',
@@ -4200,10 +4183,9 @@ export const tool: Tool = {
                 },
               },
               period: {
-                type: 'string',
+                type: 'integer',
                 title: 'Period',
                 description: 'Period in seconds over which the counter is being incremented.',
-                enum: [10, 60, 600, 3600],
               },
               counting_expression: {
                 type: 'string',

@@ -279,7 +279,7 @@ export namespace VersionGetResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -414,7 +414,7 @@ export namespace VersionGetResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
