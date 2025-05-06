@@ -12,6 +12,11 @@ export class Netflows extends APIResource {
   /**
    * Retrieves the distribution of network traffic (NetFlows) by HTTP vs other
    * protocols.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.netflows.summary();
+   * ```
    */
   summary(
     query: NetflowSummaryParams | null | undefined = {},
@@ -26,6 +31,11 @@ export class Netflows extends APIResource {
 
   /**
    * Retrieves network traffic (NetFlows) over time.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.netflows.timeseries();
+   * ```
    */
   timeseries(
     query: NetflowTimeseriesParams | null | undefined = {},

@@ -9,6 +9,13 @@ export class Quota extends APIResource {
   /**
    * Retrieves the current quota usage and limits for device commands within a
    * specific account, including the time when the quota will reset
+   *
+   * @example
+   * ```ts
+   * const quota = await client.zeroTrust.dex.commands.quota.get(
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   get(params: QuotaGetParams, options?: RequestOptions): APIPromise<QuotaGetResponse> {
     const { account_id } = params;

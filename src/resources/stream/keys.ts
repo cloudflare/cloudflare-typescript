@@ -11,6 +11,14 @@ export class Keys extends APIResource {
    * Creates an RSA private key in PEM and JWK formats. Key files are only displayed
    * once after creation. Keys are created, used, and deleted independently of
    * videos, and every key can sign any video.
+   *
+   * @example
+   * ```ts
+   * const keys = await client.stream.keys.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: {},
+   * });
+   * ```
    */
   create(params: KeyCreateParams, options?: RequestOptions): APIPromise<Keys> {
     const { account_id, body } = params;
@@ -23,6 +31,14 @@ export class Keys extends APIResource {
 
   /**
    * Deletes signing keys and revokes all signed URLs generated with the key.
+   *
+   * @example
+   * ```ts
+   * const key = await client.stream.keys.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     identifier: string,
@@ -39,6 +55,16 @@ export class Keys extends APIResource {
 
   /**
    * Lists the video ID and creation date and time when a signing key was created.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const keyGetResponse of client.stream.keys.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: KeyGetParams,

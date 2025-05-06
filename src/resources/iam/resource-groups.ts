@@ -9,6 +9,23 @@ import { path } from '../../internal/utils/path';
 export class ResourceGroups extends APIResource {
   /**
    * Create a new Resource Group under the specified account.
+   *
+   * @example
+   * ```ts
+   * const resourceGroup =
+   *   await client.iam.resourceGroups.create({
+   *     account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *     name: 'NewResourceGroup',
+   *     scope: {
+   *       key: 'com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4',
+   *       objects: [
+   *         {
+   *           key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5',
+   *         },
+   *       ],
+   *     },
+   *   });
+   * ```
    */
   create(
     params: ResourceGroupCreateParams,
@@ -20,6 +37,15 @@ export class ResourceGroups extends APIResource {
 
   /**
    * Modify an existing resource group.
+   *
+   * @example
+   * ```ts
+   * const resourceGroup =
+   *   await client.iam.resourceGroups.update(
+   *     '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
+   *     { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   );
+   * ```
    */
   update(
     resourceGroupID: string,
@@ -35,6 +61,16 @@ export class ResourceGroups extends APIResource {
 
   /**
    * List all the resource groups for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const resourceGroupListResponse of client.iam.resourceGroups.list(
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ResourceGroupListParams,
@@ -50,6 +86,15 @@ export class ResourceGroups extends APIResource {
 
   /**
    * Remove a resource group from an account.
+   *
+   * @example
+   * ```ts
+   * const resourceGroup =
+   *   await client.iam.resourceGroups.delete(
+   *     '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
+   *     { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   );
+   * ```
    */
   delete(
     resourceGroupID: string,
@@ -67,6 +112,14 @@ export class ResourceGroups extends APIResource {
 
   /**
    * Get information about a specific resource group in an account.
+   *
+   * @example
+   * ```ts
+   * const resourceGroup = await client.iam.resourceGroups.get(
+   *   '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * );
+   * ```
    */
   get(
     resourceGroupID: string,

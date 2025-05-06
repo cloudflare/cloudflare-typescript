@@ -11,6 +11,14 @@ import { path } from '../../internal/utils/path';
 export class DNS extends APIResource {
   /**
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.dns.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example.net',
+   * });
+   * ```
    */
   create(params: DNSCreateParams, options?: RequestOptions): APIPromise<EmailRoutingAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -24,6 +32,16 @@ export class DNS extends APIResource {
   /**
    * Disable your Email Routing zone. Also removes additional MX records previously
    * required for Email Routing to work.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dnsRecord of client.emailRouting.dns.delete(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   delete(params: DNSDeleteParams, options?: RequestOptions): PagePromise<DNSRecordsSinglePage, DNSRecord> {
     const { zone_id } = params;
@@ -35,6 +53,14 @@ export class DNS extends APIResource {
 
   /**
    * Unlock MX Records previously locked by Email Routing.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.dns.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example.net',
+   * });
+   * ```
    */
   edit(params: DNSEditParams, options?: RequestOptions): APIPromise<EmailRoutingAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -47,6 +73,13 @@ export class DNS extends APIResource {
 
   /**
    * Show the DNS records needed to configure your Email Routing zone.
+   *
+   * @example
+   * ```ts
+   * const dns = await client.emailRouting.dns.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DNSGetParams, options?: RequestOptions): APIPromise<DNSGetResponse> {
     const { zone_id, ...query } = params;

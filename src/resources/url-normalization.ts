@@ -9,6 +9,16 @@ import { path } from '../internal/utils/path';
 export class URLNormalization extends APIResource {
   /**
    * Updates the URL Normalization settings.
+   *
+   * @example
+   * ```ts
+   * const urlNormalization =
+   *   await client.urlNormalization.update({
+   *     zone_id: '9f1839b6152d298aca64c4e906b6d074',
+   *     scope: 'incoming',
+   *     type: 'cloudflare',
+   *   });
+   * ```
    */
   update(
     params: URLNormalizationUpdateParams,
@@ -24,6 +34,13 @@ export class URLNormalization extends APIResource {
 
   /**
    * Deletes the URL Normalization settings.
+   *
+   * @example
+   * ```ts
+   * await client.urlNormalization.delete({
+   *   zone_id: '9f1839b6152d298aca64c4e906b6d074',
+   * });
+   * ```
    */
   delete(params: URLNormalizationDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { zone_id } = params;
@@ -35,6 +52,13 @@ export class URLNormalization extends APIResource {
 
   /**
    * Fetches the current URL Normalization settings.
+   *
+   * @example
+   * ```ts
+   * const urlNormalization = await client.urlNormalization.get({
+   *   zone_id: '9f1839b6152d298aca64c4e906b6d074',
+   * });
+   * ```
    */
   get(params: URLNormalizationGetParams, options?: RequestOptions): APIPromise<URLNormalizationGetResponse> {
     const { zone_id } = params;

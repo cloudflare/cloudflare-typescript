@@ -9,6 +9,15 @@ import { path } from '../../../internal/utils/path';
 export class ACLs extends APIResource {
   /**
    * Create ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.dns.zoneTransfers.acls.create({
+   *   account_id: '01a7362d577a6c3019a474fd6f485823',
+   *   ip_range: '192.0.2.53/28',
+   *   name: 'my-acl-1',
+   * });
+   * ```
    */
   create(params: ACLCreateParams, options?: RequestOptions): APIPromise<ACL> {
     const { account_id, ...body } = params;
@@ -22,6 +31,18 @@ export class ACLs extends APIResource {
 
   /**
    * Modify ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.dns.zoneTransfers.acls.update(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     ip_range: '192.0.2.53/28',
+   *     name: 'my-acl-1',
+   *   },
+   * );
+   * ```
    */
   update(aclID: string, params: ACLUpdateParams, options?: RequestOptions): APIPromise<ACL> {
     const { account_id, ...body } = params;
@@ -35,6 +56,16 @@ export class ACLs extends APIResource {
 
   /**
    * List ACLs.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const acl of client.dns.zoneTransfers.acls.list({
+   *   account_id: '01a7362d577a6c3019a474fd6f485823',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: ACLListParams, options?: RequestOptions): PagePromise<ACLsSinglePage, ACL> {
     const { account_id } = params;
@@ -47,6 +78,14 @@ export class ACLs extends APIResource {
 
   /**
    * Delete ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.dns.zoneTransfers.acls.delete(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   delete(aclID: string, params: ACLDeleteParams, options?: RequestOptions): APIPromise<ACLDeleteResponse> {
     const { account_id } = params;
@@ -59,6 +98,14 @@ export class ACLs extends APIResource {
 
   /**
    * Get ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.dns.zoneTransfers.acls.get(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   get(aclID: string, params: ACLGetParams, options?: RequestOptions): APIPromise<ACL> {
     const { account_id } = params;

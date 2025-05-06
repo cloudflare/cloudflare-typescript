@@ -9,6 +9,14 @@ import { path } from '../../internal/utils/path';
 export class Purge extends APIResource {
   /**
    * Deletes all messages from the Queue.
+   *
+   * @example
+   * ```ts
+   * const queue = await client.queues.purge.start(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   start(queueID: string, params: PurgeStartParams, options?: RequestOptions): APIPromise<QueuesAPI.Queue> {
     const { account_id, ...body } = params;
@@ -22,6 +30,14 @@ export class Purge extends APIResource {
 
   /**
    * Get details about a Queue's purge status.
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.purge.status(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   status(
     queueID: string,

@@ -24,6 +24,20 @@ export class Commands extends APIResource {
 
   /**
    * Initiate commands for up to 10 devices per account
+   *
+   * @example
+   * ```ts
+   * const command = await client.zeroTrust.dex.commands.create({
+   *   account_id: '01a7362d577a6c3019a474fd6f485823',
+   *   commands: [
+   *     {
+   *       command_type: 'pcap',
+   *       device_id: 'device_id',
+   *       user_email: 'user_email',
+   *     },
+   *   ],
+   * });
+   * ```
    */
   create(params: CommandCreateParams, options?: RequestOptions): APIPromise<CommandCreateResponse> {
     const { account_id, ...body } = params;
@@ -37,6 +51,20 @@ export class Commands extends APIResource {
   /**
    * Retrieves a paginated list of commands issued to devices under the specified
    * account, optionally filtered by time range, device, or other parameters
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const commandListResponse of client.zeroTrust.dex.commands.list(
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     page: 1,
+   *     per_page: 50,
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CommandListParams,

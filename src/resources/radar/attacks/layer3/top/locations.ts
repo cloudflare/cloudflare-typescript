@@ -7,6 +7,12 @@ import { RequestOptions } from '../../../../../internal/request-options';
 export class Locations extends APIResource {
   /**
    * Retrieves the origin locations of layer 3 attacks.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer3.top.locations.origin();
+   * ```
    */
   origin(
     query: LocationOriginParams | null | undefined = {},
@@ -21,6 +27,12 @@ export class Locations extends APIResource {
 
   /**
    * Retrieves the target locations of layer 3 attacks.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer3.top.locations.target();
+   * ```
    */
   target(
     query: LocationTargetParams | null | undefined = {},

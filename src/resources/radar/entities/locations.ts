@@ -8,6 +8,12 @@ import { path } from '../../../internal/utils/path';
 export class Locations extends APIResource {
   /**
    * Retrieves a list of locations.
+   *
+   * @example
+   * ```ts
+   * const locations =
+   *   await client.radar.entities.locations.list();
+   * ```
    */
   list(
     query: LocationListParams | null | undefined = {},
@@ -24,6 +30,13 @@ export class Locations extends APIResource {
    * Retrieves the requested location information. (A confidence level below `5`
    * indicates a low level of confidence in the traffic data - normally this happens
    * because Cloudflare has a small amount of traffic from/to this location).
+   *
+   * @example
+   * ```ts
+   * const location = await client.radar.entities.locations.get(
+   *   'US',
+   * );
+   * ```
    */
   get(
     location: string,

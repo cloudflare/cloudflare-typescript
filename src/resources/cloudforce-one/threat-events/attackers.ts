@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class Attackers extends APIResource {
   /**
    * Lists attackers
+   *
+   * @example
+   * ```ts
+   * const attackers =
+   *   await client.cloudforceOne.threatEvents.attackers.list({
+   *     account_id: 0,
+   *   });
+   * ```
    */
   list(params: AttackerListParams, options?: RequestOptions): APIPromise<AttackerListResponse> {
     const { account_id } = params;

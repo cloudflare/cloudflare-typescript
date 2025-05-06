@@ -11,6 +11,18 @@ import { path } from '../../../../../internal/utils/path';
 export class Settings extends APIResource {
   /**
    * Patch script metadata, such as bindings
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.settings.edit(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *     },
+   *   );
+   * ```
    */
   edit(
     scriptName: string,
@@ -28,6 +40,18 @@ export class Settings extends APIResource {
 
   /**
    * Get script settings from a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const setting =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.settings.get(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *     },
+   *   );
+   * ```
    */
   get(
     scriptName: string,

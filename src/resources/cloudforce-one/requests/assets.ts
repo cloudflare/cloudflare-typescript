@@ -9,6 +9,21 @@ import { path } from '../../../internal/utils/path';
 export class Assets extends APIResource {
   /**
    * List Request Assets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const assetCreateResponse of client.cloudforceOne.requests.assets.create(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     page: 0,
+   *     per_page: 10,
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     requestID: string,
@@ -25,6 +40,18 @@ export class Assets extends APIResource {
 
   /**
    * Update a Request Asset
+   *
+   * @example
+   * ```ts
+   * const asset =
+   *   await client.cloudforceOne.requests.assets.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       request_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     },
+   *   );
+   * ```
    */
   update(
     assetID: string,
@@ -42,6 +69,18 @@ export class Assets extends APIResource {
 
   /**
    * Delete a Request Asset
+   *
+   * @example
+   * ```ts
+   * const asset =
+   *   await client.cloudforceOne.requests.assets.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       request_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     },
+   *   );
+   * ```
    */
   delete(
     assetID: string,
@@ -57,6 +96,20 @@ export class Assets extends APIResource {
 
   /**
    * Get a Request Asset
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const assetGetResponse of client.cloudforceOne.requests.assets.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     request_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     assetID: string,

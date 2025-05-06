@@ -7,6 +7,11 @@ import { RequestOptions } from '../../../internal/request-options';
 export class Profile extends APIResource {
   /**
    * Accesses your billing profile object.
+   *
+   * @example
+   * ```ts
+   * const profile = await client.user.billing.profile.get();
+   * ```
    */
   get(options?: RequestOptions): APIPromise<ProfileGetResponse> {
     return (

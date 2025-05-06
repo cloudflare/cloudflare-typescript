@@ -12,6 +12,13 @@ export class Domains extends APIResource {
 
   /**
    * Gets security details and statistics about a domain.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.intel.domains.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DomainGetParams, options?: RequestOptions): APIPromise<Domain> {
     const { account_id, ...query } = params;

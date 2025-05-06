@@ -8,6 +8,13 @@ import { path } from '../../../internal/utils/path';
 export class Quota extends APIResource {
   /**
    * For a given zone, list certificate pack quotas.
+   *
+   * @example
+   * ```ts
+   * const quota = await client.ssl.certificatePacks.quota.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: QuotaGetParams, options?: RequestOptions): APIPromise<QuotaGetResponse> {
     const { zone_id } = params;

@@ -13,6 +13,15 @@ export class ServiceBindings extends APIResource {
    * prefixes currently configured with a Magic Transit/Cloudflare CDN/Cloudflare
    * Spectrum service binding, and only allows creating upgrade service bindings for
    * the Cloudflare CDN or Cloudflare Spectrum.
+   *
+   * @example
+   * ```ts
+   * const serviceBinding =
+   *   await client.addressing.prefixes.serviceBindings.create(
+   *     '2af39739cc4e3b5910c918468bb89828',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   * ```
    */
   create(
     prefixID: string,
@@ -35,6 +44,17 @@ export class ServiceBindings extends APIResource {
    * `192.0.2.0/24` to Cloudflare Magic Transit and `192.0.2.1/32` to the Cloudflare
    * CDN would route traffic for `192.0.2.1` to the CDN, and traffic for all other
    * IPs in the prefix to Cloudflare Magic Transit.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const serviceBinding of client.addressing.prefixes.serviceBindings.list(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     prefixID: string,
@@ -51,6 +71,18 @@ export class ServiceBindings extends APIResource {
 
   /**
    * Delete a Service Binding
+   *
+   * @example
+   * ```ts
+   * const serviceBinding =
+   *   await client.addressing.prefixes.serviceBindings.delete(
+   *     '0429b49b6a5155297b78e75a44b09e14',
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       prefix_id: '2af39739cc4e3b5910c918468bb89828',
+   *     },
+   *   );
+   * ```
    */
   delete(
     bindingID: string,
@@ -66,6 +98,18 @@ export class ServiceBindings extends APIResource {
 
   /**
    * Fetch a single Service Binding
+   *
+   * @example
+   * ```ts
+   * const serviceBinding =
+   *   await client.addressing.prefixes.serviceBindings.get(
+   *     '0429b49b6a5155297b78e75a44b09e14',
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       prefix_id: '2af39739cc4e3b5910c918468bb89828',
+   *     },
+   *   );
+   * ```
    */
   get(
     bindingID: string,

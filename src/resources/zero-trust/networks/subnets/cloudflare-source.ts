@@ -8,6 +8,15 @@ import { path } from '../../../../internal/utils/path';
 export class CloudflareSource extends APIResource {
   /**
    * Updates the Cloudflare Source subnet of the given address family
+   *
+   * @example
+   * ```ts
+   * const cloudflareSource =
+   *   await client.zeroTrust.networks.subnets.cloudflareSource.update(
+   *     'v4',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   update(
     addressFamily: 'v4' | 'v6',

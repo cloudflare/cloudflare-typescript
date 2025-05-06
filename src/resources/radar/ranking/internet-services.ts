@@ -7,6 +7,12 @@ import { RequestOptions } from '../../../internal/request-options';
 export class InternetServices extends APIResource {
   /**
    * Retrieves the list of Internet services categories.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ranking.internetServices.categories();
+   * ```
    */
   categories(
     query: InternetServiceCategoriesParams | null | undefined = {},
@@ -21,6 +27,12 @@ export class InternetServices extends APIResource {
 
   /**
    * Retrieves Internet Services rank update changes over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ranking.internetServices.timeseriesGroups();
+   * ```
    */
   timeseriesGroups(
     query: InternetServiceTimeseriesGroupsParams | null | undefined = {},
@@ -36,6 +48,12 @@ export class InternetServices extends APIResource {
 
   /**
    * Retrieves top Internet services based on their rank.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ranking.internetServices.top();
+   * ```
    */
   top(
     query: InternetServiceTopParams | null | undefined = {},

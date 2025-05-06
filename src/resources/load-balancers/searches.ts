@@ -8,6 +8,16 @@ import { path } from '../../internal/utils/path';
 export class Searches extends APIResource {
   /**
    * Search for Load Balancing resources.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const searchListResponse of client.loadBalancers.searches.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SearchListParams,

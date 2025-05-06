@@ -9,6 +9,13 @@ import { path } from '../../internal/utils/path';
 export class Availabilities extends APIResource {
   /**
    * Retrieves quota for all plans, as well as the current zone quota.
+   *
+   * @example
+   * ```ts
+   * const availability = await client.speed.availabilities.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   list(params: AvailabilityListParams, options?: RequestOptions): APIPromise<Availability> {
     const { zone_id } = params;

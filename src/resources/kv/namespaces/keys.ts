@@ -13,6 +13,17 @@ import { path } from '../../../internal/utils/path';
 export class Keys extends APIResource {
   /**
    * Lists a namespace's keys.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const key of client.kv.namespaces.keys.list(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     namespaceID: string,
@@ -30,6 +41,17 @@ export class Keys extends APIResource {
   /**
    * Remove multiple KV pairs from the namespace. Body should be an array of up to
    * 10,000 keys to be removed.
+   *
+   * @example
+   * ```ts
+   * const response = await client.kv.namespaces.keys.bulkDelete(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: ['My-Key'],
+   *   },
+   * );
+   * ```
    */
   bulkDelete(
     namespaceID: string,
@@ -50,6 +72,17 @@ export class Keys extends APIResource {
    * at most 100. Keys must contain text-based values. If value is json, it can be
    * requested to return in JSON, instead of string. Metadata can be return if
    * withMetadata is true.
+   *
+   * @example
+   * ```ts
+   * const response = await client.kv.namespaces.keys.bulkGet(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     keys: ['My-Key'],
+   *   },
+   * );
+   * ```
    */
   bulkGet(
     namespaceID: string,
@@ -72,6 +105,17 @@ export class Keys extends APIResource {
    * `expiration_ttl` is specified, the key-value pair will never expire. If both are
    * set, `expiration_ttl` is used and `expiration` is ignored. The entire request
    * size must be 100 megabytes or less.
+   *
+   * @example
+   * ```ts
+   * const response = await client.kv.namespaces.keys.bulkUpdate(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{}],
+   *   },
+   * );
+   * ```
    */
   bulkUpdate(
     namespaceID: string,

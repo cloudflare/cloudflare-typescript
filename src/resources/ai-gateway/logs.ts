@@ -9,6 +9,17 @@ import { path } from '../../internal/utils/path';
 export class Logs extends APIResource {
   /**
    * List Gateway Logs
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const logListResponse of client.aiGateway.logs.list(
+   *   'my-gateway',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     gatewayID: string,
@@ -25,6 +36,14 @@ export class Logs extends APIResource {
 
   /**
    * Delete Gateway Logs
+   *
+   * @example
+   * ```ts
+   * const log = await client.aiGateway.logs.delete(
+   *   'my-gateway',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * );
+   * ```
    */
   delete(
     gatewayID: string,
@@ -40,6 +59,14 @@ export class Logs extends APIResource {
 
   /**
    * Patch Gateway Log
+   *
+   * @example
+   * ```ts
+   * const response = await client.aiGateway.logs.edit('id', {
+   *   account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+   *   gateway_id: 'my-gateway',
+   * });
+   * ```
    */
   edit(id: string, params: LogEditParams, options?: RequestOptions): APIPromise<LogEditResponse> {
     const { account_id, gateway_id, ...body } = params;
@@ -53,6 +80,14 @@ export class Logs extends APIResource {
 
   /**
    * Get Gateway Log Detail
+   *
+   * @example
+   * ```ts
+   * const log = await client.aiGateway.logs.get('id', {
+   *   account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+   *   gateway_id: 'my-gateway',
+   * });
+   * ```
    */
   get(id: string, params: LogGetParams, options?: RequestOptions): APIPromise<LogGetResponse> {
     const { account_id, gateway_id } = params;
@@ -66,6 +101,14 @@ export class Logs extends APIResource {
 
   /**
    * Get Gateway Log Request
+   *
+   * @example
+   * ```ts
+   * const response = await client.aiGateway.logs.request('id', {
+   *   account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+   *   gateway_id: 'my-gateway',
+   * });
+   * ```
    */
   request(id: string, params: LogRequestParams, options?: RequestOptions): APIPromise<unknown> {
     const { account_id, gateway_id } = params;
@@ -77,6 +120,17 @@ export class Logs extends APIResource {
 
   /**
    * Get Gateway Log Response
+   *
+   * @example
+   * ```ts
+   * const response = await client.aiGateway.logs.response(
+   *   'id',
+   *   {
+   *     account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+   *     gateway_id: 'my-gateway',
+   *   },
+   * );
+   * ```
    */
   response(id: string, params: LogResponseParams, options?: RequestOptions): APIPromise<unknown> {
     const { account_id, gateway_id } = params;

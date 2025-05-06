@@ -9,6 +9,15 @@ import { path } from '../internal/utils/path';
 export class PageRules extends APIResource {
   /**
    * Creates a new Page Rule.
+   *
+   * @example
+   * ```ts
+   * const pageRule = await client.pageRules.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   actions: [{}],
+   *   targets: [{}],
+   * });
+   * ```
    */
   create(params: PageRuleCreateParams, options?: RequestOptions): APIPromise<PageRule> {
     const { zone_id, ...body } = params;
@@ -22,6 +31,18 @@ export class PageRules extends APIResource {
   /**
    * Replaces the configuration of an existing Page Rule. The configuration of the
    * updated Page Rule will exactly match the data passed in the API request.
+   *
+   * @example
+   * ```ts
+   * const pageRule = await client.pageRules.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     actions: [{}],
+   *     targets: [{}],
+   *   },
+   * );
+   * ```
    */
   update(pageruleID: string, params: PageRuleUpdateParams, options?: RequestOptions): APIPromise<PageRule> {
     const { zone_id, ...body } = params;
@@ -34,6 +55,13 @@ export class PageRules extends APIResource {
 
   /**
    * Fetches Page Rules in a zone.
+   *
+   * @example
+   * ```ts
+   * const pageRules = await client.pageRules.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: PageRuleListParams, options?: RequestOptions): APIPromise<PageRuleListResponse> {
     const { zone_id, ...query } = params;
@@ -46,6 +74,14 @@ export class PageRules extends APIResource {
 
   /**
    * Deletes an existing Page Rule.
+   *
+   * @example
+   * ```ts
+   * const pageRule = await client.pageRules.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     pageruleID: string,
@@ -62,6 +98,14 @@ export class PageRules extends APIResource {
 
   /**
    * Updates one or more fields of an existing Page Rule.
+   *
+   * @example
+   * ```ts
+   * const pageRule = await client.pageRules.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(pageruleID: string, params: PageRuleEditParams, options?: RequestOptions): APIPromise<PageRule> {
     const { zone_id, ...body } = params;
@@ -75,6 +119,14 @@ export class PageRules extends APIResource {
 
   /**
    * Fetches the details of a Page Rule.
+   *
+   * @example
+   * ```ts
+   * const pageRule = await client.pageRules.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(pageruleID: string, params: PageRuleGetParams, options?: RequestOptions): APIPromise<PageRule> {
     const { zone_id } = params;

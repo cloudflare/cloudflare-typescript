@@ -8,6 +8,13 @@ import { path } from '../../internal/utils/path';
 export class Recommendations extends APIResource {
   /**
    * Retrieve the SSL/TLS Recommender's recommendation for a zone.
+   *
+   * @example
+   * ```ts
+   * const recommendation = await client.ssl.recommendations.get(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(params: RecommendationGetParams, options?: RequestOptions): APIPromise<RecommendationGetResponse> {
     const { zone_id } = params;

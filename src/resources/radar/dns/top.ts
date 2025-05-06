@@ -8,6 +8,11 @@ export class Top extends APIResource {
   /**
    * Retrieves the top autonomous systems by DNS queries made to 1.1.1.1 DNS
    * resolver.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.top.ases();
+   * ```
    */
   ases(query: TopAsesParams | null | undefined = {}, options?: RequestOptions): APIPromise<TopAsesResponse> {
     return (
@@ -19,6 +24,11 @@ export class Top extends APIResource {
 
   /**
    * Retrieves the top locations by DNS queries made to 1.1.1.1 DNS resolver.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.top.locations();
+   * ```
    */
   locations(
     query: TopLocationsParams | null | undefined = {},

@@ -8,6 +8,15 @@ import { path } from '../../../internal/utils/path';
 export class Preview extends APIResource {
   /**
    * Preview for non-detection messages
+   *
+   * @example
+   * ```ts
+   * const preview =
+   *   await client.emailSecurity.investigate.preview.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     postfix_id: '4Njp3P0STMz2c02Q',
+   *   });
+   * ```
    */
   create(params: PreviewCreateParams, options?: RequestOptions): APIPromise<PreviewCreateResponse> {
     const { account_id, ...body } = params;
@@ -22,6 +31,15 @@ export class Preview extends APIResource {
   /**
    * Returns a preview of the message body as a base64 encoded PNG image for
    * non-benign messages.
+   *
+   * @example
+   * ```ts
+   * const preview =
+   *   await client.emailSecurity.investigate.preview.get(
+   *     '4Njp3P0STMz2c02Q',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(postfixID: string, params: PreviewGetParams, options?: RequestOptions): APIPromise<PreviewGetResponse> {
     const { account_id } = params;

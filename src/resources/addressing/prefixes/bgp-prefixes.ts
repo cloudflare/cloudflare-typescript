@@ -11,6 +11,15 @@ export class BGPPrefixes extends APIResource {
    * Create a BGP prefix, controlling the BGP advertisement status of a specific
    * subnet. When created, BGP prefixes are initially withdrawn, and can be
    * advertised with the Update BGP Prefix API.
+   *
+   * @example
+   * ```ts
+   * const bgpPrefix =
+   *   await client.addressing.prefixes.bgpPrefixes.create(
+   *     '2af39739cc4e3b5910c918468bb89828',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   * ```
    */
   create(prefixID: string, params: BGPPrefixCreateParams, options?: RequestOptions): APIPromise<BGPPrefix> {
     const { account_id, ...body } = params;
@@ -27,6 +36,17 @@ export class BGPPrefixes extends APIResource {
    * control which specific subnets are advertised to the Internet. It is possible to
    * advertise subnets more specific than an IP Prefix by creating more specific BGP
    * Prefixes.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const bgpPrefix of client.addressing.prefixes.bgpPrefixes.list(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     prefixID: string,
@@ -44,6 +64,18 @@ export class BGPPrefixes extends APIResource {
   /**
    * Update the properties of a BGP Prefix, such as the on demand advertisement
    * status (advertised or withdrawn).
+   *
+   * @example
+   * ```ts
+   * const bgpPrefix =
+   *   await client.addressing.prefixes.bgpPrefixes.edit(
+   *     '7009ba364c7a5760798ceb430e603b74',
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       prefix_id: '2af39739cc4e3b5910c918468bb89828',
+   *     },
+   *   );
+   * ```
    */
   edit(bgpPrefixID: string, params: BGPPrefixEditParams, options?: RequestOptions): APIPromise<BGPPrefix> {
     const { account_id, prefix_id, ...body } = params;
@@ -57,6 +89,18 @@ export class BGPPrefixes extends APIResource {
 
   /**
    * Retrieve a single BGP Prefix according to its identifier
+   *
+   * @example
+   * ```ts
+   * const bgpPrefix =
+   *   await client.addressing.prefixes.bgpPrefixes.get(
+   *     '7009ba364c7a5760798ceb430e603b74',
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       prefix_id: '2af39739cc4e3b5910c918468bb89828',
+   *     },
+   *   );
+   * ```
    */
   get(bgpPrefixID: string, params: BGPPrefixGetParams, options?: RequestOptions): APIPromise<BGPPrefix> {
     const { account_id, prefix_id } = params;

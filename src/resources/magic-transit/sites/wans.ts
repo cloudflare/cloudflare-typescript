@@ -9,6 +9,20 @@ import { path } from '../../../internal/utils/path';
 export class WANs extends APIResource {
   /**
    * Creates a new Site WAN.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const wan of client.magicTransit.sites.wans.create(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     physport: 1,
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     siteID: string,
@@ -25,6 +39,17 @@ export class WANs extends APIResource {
 
   /**
    * Update a specific Site WAN.
+   *
+   * @example
+   * ```ts
+   * const wan = await client.magicTransit.sites.wans.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     site_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   },
+   * );
+   * ```
    */
   update(wanID: string, params: WANUpdateParams, options?: RequestOptions): APIPromise<WAN> {
     const { account_id, site_id, ...body } = params;
@@ -38,6 +63,17 @@ export class WANs extends APIResource {
 
   /**
    * Lists Site WANs associated with an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const wan of client.magicTransit.sites.wans.list(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(siteID: string, params: WANListParams, options?: RequestOptions): PagePromise<WANsSinglePage, WAN> {
     const { account_id } = params;
@@ -50,6 +86,17 @@ export class WANs extends APIResource {
 
   /**
    * Remove a specific Site WAN.
+   *
+   * @example
+   * ```ts
+   * const wan = await client.magicTransit.sites.wans.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     site_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   },
+   * );
+   * ```
    */
   delete(wanID: string, params: WANDeleteParams, options?: RequestOptions): APIPromise<WAN> {
     const { account_id, site_id } = params;
@@ -63,6 +110,17 @@ export class WANs extends APIResource {
 
   /**
    * Patch a specific Site WAN.
+   *
+   * @example
+   * ```ts
+   * const wan = await client.magicTransit.sites.wans.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     site_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   },
+   * );
+   * ```
    */
   edit(wanID: string, params: WANEditParams, options?: RequestOptions): APIPromise<WAN> {
     const { account_id, site_id, ...body } = params;
@@ -76,6 +134,17 @@ export class WANs extends APIResource {
 
   /**
    * Get a specific Site WAN.
+   *
+   * @example
+   * ```ts
+   * const wan = await client.magicTransit.sites.wans.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     site_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   },
+   * );
+   * ```
    */
   get(wanID: string, params: WANGetParams, options?: RequestOptions): APIPromise<WAN> {
     const { account_id, site_id } = params;

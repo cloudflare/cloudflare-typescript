@@ -9,6 +9,14 @@ import { path } from '../../internal/utils/path';
 export class Detections extends APIResource {
   /**
    * Create user-defined detection pattern for Leaked Credential Checks.
+   *
+   * @example
+   * ```ts
+   * const detection =
+   *   await client.leakedCredentialChecks.detections.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(params: DetectionCreateParams, options?: RequestOptions): APIPromise<DetectionCreateResponse> {
     const { zone_id, ...body } = params;
@@ -22,6 +30,15 @@ export class Detections extends APIResource {
 
   /**
    * Update user-defined detection pattern for Leaked Credential Checks.
+   *
+   * @example
+   * ```ts
+   * const detection =
+   *   await client.leakedCredentialChecks.detections.update(
+   *     '18a14bafaa8eb1df04ce683ec18c765e',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     detectionID: string,
@@ -39,6 +56,16 @@ export class Detections extends APIResource {
 
   /**
    * List user-defined detection patterns for Leaked Credential Checks.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const detectionListResponse of client.leakedCredentialChecks.detections.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DetectionListParams,
@@ -54,6 +81,15 @@ export class Detections extends APIResource {
 
   /**
    * Remove user-defined detection pattern for Leaked Credential Checks.
+   *
+   * @example
+   * ```ts
+   * const detection =
+   *   await client.leakedCredentialChecks.detections.delete(
+   *     '18a14bafaa8eb1df04ce683ec18c765e',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     detectionID: string,

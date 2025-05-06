@@ -10,6 +10,20 @@ export class Entries extends APIResource {
   /**
    * This is used for multi-column EDMv2 datasets. The EDMv2 format can only be
    * created in the Cloudflare dashboard.
+   *
+   * @example
+   * ```ts
+   * const entry =
+   *   await client.zeroTrust.dlp.datasets.versions.entries.create(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: 'account_id',
+   *       dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *       version: 0,
+   *       body: fs.createReadStream('path/to/file'),
+   *     },
+   *   );
+   * ```
    */
   create(
     entryID: string,

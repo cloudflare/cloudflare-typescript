@@ -17,6 +17,15 @@ export class Deployments extends APIResource {
   /**
    * Start a new deployment from production. The repository and account must have
    * already been authorized on the Cloudflare Pages dashboard.
+   *
+   * @example
+   * ```ts
+   * const deployment =
+   *   await client.pages.projects.deployments.create(
+   *     'this-is-my-project-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     projectName: string,
@@ -34,6 +43,17 @@ export class Deployments extends APIResource {
 
   /**
    * Fetch a list of project deployments.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const deployment of client.pages.projects.deployments.list(
+   *   'this-is-my-project-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     projectName: string,
@@ -50,6 +70,18 @@ export class Deployments extends APIResource {
 
   /**
    * Delete a deployment.
+   *
+   * @example
+   * ```ts
+   * const deployment =
+   *   await client.pages.projects.deployments.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       project_name: 'this-is-my-project-01',
+   *     },
+   *   );
+   * ```
    */
   delete(
     deploymentID: string,
@@ -67,6 +99,18 @@ export class Deployments extends APIResource {
 
   /**
    * Fetch information about a deployment.
+   *
+   * @example
+   * ```ts
+   * const deployment =
+   *   await client.pages.projects.deployments.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       project_name: 'this-is-my-project-01',
+   *     },
+   *   );
+   * ```
    */
   get(
     deploymentID: string,
@@ -84,6 +128,19 @@ export class Deployments extends APIResource {
 
   /**
    * Retry a previous deployment.
+   *
+   * @example
+   * ```ts
+   * const deployment =
+   *   await client.pages.projects.deployments.retry(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       project_name: 'this-is-my-project-01',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   retry(
     deploymentID: string,
@@ -102,6 +159,19 @@ export class Deployments extends APIResource {
   /**
    * Rollback the production deployment to a previous deployment. You can only
    * rollback to succesful builds on production.
+   *
+   * @example
+   * ```ts
+   * const deployment =
+   *   await client.pages.projects.deployments.rollback(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       project_name: 'this-is-my-project-01',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   rollback(
     deploymentID: string,

@@ -20,6 +20,12 @@ export class Top extends APIResource {
    * percentage out of the total layer 3 attacks (with billing country). You can
    * optionally limit the number of attacks by origin/target location (useful if all
    * the top attacks are from or to the same location).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer3.top.attacks();
+   * ```
    */
   attacks(
     query: TopAttacksParams | null | undefined = {},
@@ -35,6 +41,12 @@ export class Top extends APIResource {
   /**
    * This endpoint is deprecated. To continue getting this data, switch to the
    * summary by industry endpoint.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer3.top.industry();
+   * ```
    */
   industry(
     query: TopIndustryParams | null | undefined = {},
@@ -50,6 +62,12 @@ export class Top extends APIResource {
   /**
    * This endpoint is deprecated. To continue getting this data, switch to the
    * summary by vertical endpoint.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer3.top.vertical();
+   * ```
    */
   vertical(
     query: TopVerticalParams | null | undefined = {},

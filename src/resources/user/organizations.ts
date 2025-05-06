@@ -11,6 +11,14 @@ import { path } from '../../internal/utils/path';
 export class Organizations extends APIResource {
   /**
    * Lists organizations the user is associated with.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const organization of client.user.organizations.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: OrganizationListParams | null | undefined = {},
@@ -24,6 +32,13 @@ export class Organizations extends APIResource {
 
   /**
    * Removes association to an organization.
+   *
+   * @example
+   * ```ts
+   * const organization = await client.user.organizations.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   * );
+   * ```
    */
   delete(organizationID: string, options?: RequestOptions): APIPromise<OrganizationDeleteResponse> {
     return this._client.delete(path`/user/organizations/${organizationID}`, options);
@@ -31,6 +46,13 @@ export class Organizations extends APIResource {
 
   /**
    * Gets a specific organization the user is associated with.
+   *
+   * @example
+   * ```ts
+   * const organization = await client.user.organizations.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   * );
+   * ```
    */
   get(organizationID: string, options?: RequestOptions): APIPromise<OrganizationGetResponse> {
     return (

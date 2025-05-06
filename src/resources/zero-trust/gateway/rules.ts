@@ -10,6 +10,16 @@ import { path } from '../../../internal/utils/path';
 export class Rules extends APIResource {
   /**
    * Creates a new Zero Trust Gateway rule.
+   *
+   * @example
+   * ```ts
+   * const gatewayRule =
+   *   await client.zeroTrust.gateway.rules.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     action: 'allow',
+   *     name: 'block bad websites',
+   *   });
+   * ```
    */
   create(params: RuleCreateParams, options?: RequestOptions): APIPromise<GatewayRule> {
     const { account_id, ...body } = params;
@@ -22,6 +32,19 @@ export class Rules extends APIResource {
 
   /**
    * Updates a configured Zero Trust Gateway rule.
+   *
+   * @example
+   * ```ts
+   * const gatewayRule =
+   *   await client.zeroTrust.gateway.rules.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       action: 'allow',
+   *       name: 'block bad websites',
+   *     },
+   *   );
+   * ```
    */
   update(ruleID: string, params: RuleUpdateParams, options?: RequestOptions): APIPromise<GatewayRule> {
     const { account_id, ...body } = params;
@@ -35,6 +58,16 @@ export class Rules extends APIResource {
 
   /**
    * Fetches the Zero Trust Gateway rules for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const gatewayRule of client.zeroTrust.gateway.rules.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: RuleListParams, options?: RequestOptions): PagePromise<GatewayRulesSinglePage, GatewayRule> {
     const { account_id } = params;
@@ -47,6 +80,14 @@ export class Rules extends APIResource {
 
   /**
    * Deletes a Zero Trust Gateway rule.
+   *
+   * @example
+   * ```ts
+   * const rule = await client.zeroTrust.gateway.rules.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * );
+   * ```
    */
   delete(ruleID: string, params: RuleDeleteParams, options?: RequestOptions): APIPromise<RuleDeleteResponse> {
     const { account_id } = params;
@@ -59,6 +100,15 @@ export class Rules extends APIResource {
 
   /**
    * Fetches a single Zero Trust Gateway rule.
+   *
+   * @example
+   * ```ts
+   * const gatewayRule =
+   *   await client.zeroTrust.gateway.rules.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(ruleID: string, params: RuleGetParams, options?: RequestOptions): APIPromise<GatewayRule> {
     const { account_id } = params;
@@ -75,6 +125,15 @@ export class Rules extends APIResource {
    *
    * The Zero Trust Gateway Rule must have values for both `expiration.expires_at`
    * and `expiration.duration`.
+   *
+   * @example
+   * ```ts
+   * const gatewayRule =
+   *   await client.zeroTrust.gateway.rules.resetExpiration(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   resetExpiration(
     ruleID: string,

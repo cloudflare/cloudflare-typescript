@@ -8,6 +8,18 @@ import { path } from '../../../internal/utils/path';
 export class Subdomain extends APIResource {
   /**
    * Enable or disable the Worker on the workers.dev subdomain.
+   *
+   * @example
+   * ```ts
+   * const subdomain =
+   *   await client.workers.scripts.subdomain.create(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       enabled: true,
+   *     },
+   *   );
+   * ```
    */
   create(
     scriptName: string,
@@ -25,6 +37,15 @@ export class Subdomain extends APIResource {
 
   /**
    * Disable all workers.dev subdomains for a Worker.
+   *
+   * @example
+   * ```ts
+   * const subdomain =
+   *   await client.workers.scripts.subdomain.delete(
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     scriptName: string,
@@ -42,6 +63,15 @@ export class Subdomain extends APIResource {
 
   /**
    * Get if the Worker is available on the workers.dev subdomain.
+   *
+   * @example
+   * ```ts
+   * const subdomain =
+   *   await client.workers.scripts.subdomain.get(
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     scriptName: string,

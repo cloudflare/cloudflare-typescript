@@ -8,6 +8,17 @@ import { path } from '../../internal/utils/path';
 export class Downloads extends APIResource {
   /**
    * Creates a download for a video when a video is ready to view.
+   *
+   * @example
+   * ```ts
+   * const download = await client.stream.downloads.create(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: {},
+   *   },
+   * );
+   * ```
    */
   create(
     identifier: string,
@@ -25,6 +36,14 @@ export class Downloads extends APIResource {
 
   /**
    * Delete the downloads for a video.
+   *
+   * @example
+   * ```ts
+   * const download = await client.stream.downloads.delete(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     identifier: string,
@@ -42,6 +61,14 @@ export class Downloads extends APIResource {
 
   /**
    * Lists the downloads created for a video.
+   *
+   * @example
+   * ```ts
+   * const download = await client.stream.downloads.get(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     identifier: string,

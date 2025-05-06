@@ -10,6 +10,16 @@ import { path } from '../internal/utils/path';
 export class ClientCertificates extends APIResource {
   /**
    * Create a new API Shield mTLS Client Certificate
+   *
+   * @example
+   * ```ts
+   * const clientCertificate =
+   *   await client.clientCertificates.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     csr: '-----BEGIN CERTIFICATE REQUEST-----\\nMIICY....\\n-----END CERTIFICATE REQUEST-----\\n',
+   *     validity_days: 3650,
+   *   });
+   * ```
    */
   create(params: ClientCertificateCreateParams, options?: RequestOptions): APIPromise<ClientCertificate> {
     const { zone_id, ...body } = params;
@@ -23,6 +33,16 @@ export class ClientCertificates extends APIResource {
   /**
    * List all of your Zone's API Shield mTLS Client Certificates by Status and/or
    * using Pagination
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const clientCertificate of client.clientCertificates.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ClientCertificateListParams,
@@ -39,6 +59,15 @@ export class ClientCertificates extends APIResource {
   /**
    * Set a API Shield mTLS Client Certificate to pending_revocation status for
    * processing to revoked status.
+   *
+   * @example
+   * ```ts
+   * const clientCertificate =
+   *   await client.clientCertificates.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     clientCertificateID: string,
@@ -57,6 +86,15 @@ export class ClientCertificates extends APIResource {
   /**
    * If a API Shield mTLS Client Certificate is in a pending_revocation state, you
    * may reactivate it with this endpoint.
+   *
+   * @example
+   * ```ts
+   * const clientCertificate =
+   *   await client.clientCertificates.edit(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     clientCertificateID: string,
@@ -74,6 +112,15 @@ export class ClientCertificates extends APIResource {
 
   /**
    * Get Details for a single mTLS API Shield Client Certificate
+   *
+   * @example
+   * ```ts
+   * const clientCertificate =
+   *   await client.clientCertificates.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     clientCertificateID: string,

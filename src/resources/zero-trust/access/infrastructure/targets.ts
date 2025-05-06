@@ -14,6 +14,18 @@ import { path } from '../../../../internal/utils/path';
 export class Targets extends APIResource {
   /**
    * Create new target
+   *
+   * @example
+   * ```ts
+   * const target =
+   *   await client.zeroTrust.access.infrastructure.targets.create(
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       hostname: 'infra-access-target',
+   *       ip: {},
+   *     },
+   *   );
+   * ```
    */
   create(params: TargetCreateParams, options?: RequestOptions): APIPromise<TargetCreateResponse> {
     const { account_id, ...body } = params;
@@ -27,6 +39,19 @@ export class Targets extends APIResource {
 
   /**
    * Update target
+   *
+   * @example
+   * ```ts
+   * const target =
+   *   await client.zeroTrust.access.infrastructure.targets.update(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       hostname: 'infra-access-target',
+   *       ip: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     targetID: string,
@@ -45,6 +70,16 @@ export class Targets extends APIResource {
   /**
    * Lists and sorts an account’s targets. Filters are optional and are ANDed
    * together.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const targetListResponse of client.zeroTrust.access.infrastructure.targets.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: TargetListParams,
@@ -60,6 +95,14 @@ export class Targets extends APIResource {
 
   /**
    * Delete target
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.access.infrastructure.targets.delete(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(targetID: string, params: TargetDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -71,6 +114,13 @@ export class Targets extends APIResource {
 
   /**
    * Removes one or more targets.
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.access.infrastructure.targets.bulkDelete(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   bulkDelete(params: TargetBulkDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -82,6 +132,17 @@ export class Targets extends APIResource {
 
   /**
    * Adds one or more targets.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.access.infrastructure.targets.bulkUpdate(
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       body: [{ hostname: 'infra-access-target', ip: {} }],
+   *     },
+   *   );
+   * ```
    */
   bulkUpdate(params: TargetBulkUpdateParams, options?: RequestOptions): APIPromise<TargetBulkUpdateResponse> {
     const { account_id, body } = params;
@@ -93,6 +154,15 @@ export class Targets extends APIResource {
 
   /**
    * Get target
+   *
+   * @example
+   * ```ts
+   * const target =
+   *   await client.zeroTrust.access.infrastructure.targets.get(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(targetID: string, params: TargetGetParams, options?: RequestOptions): APIPromise<TargetGetResponse> {
     const { account_id } = params;

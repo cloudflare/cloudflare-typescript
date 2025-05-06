@@ -13,6 +13,20 @@ import { path } from '../../../internal/utils/path';
 export class TrustedDomains extends APIResource {
   /**
    * Create a trusted email domain
+   *
+   * @example
+   * ```ts
+   * const trustedDomain =
+   *   await client.emailSecurity.settings.trustedDomains.create(
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       is_recent: true,
+   *       is_regex: false,
+   *       is_similarity: false,
+   *       pattern: 'example.com',
+   *     },
+   *   );
+   * ```
    */
   create(
     params: TrustedDomainCreateParams,
@@ -29,6 +43,16 @@ export class TrustedDomains extends APIResource {
 
   /**
    * Lists, searches, and sorts an account’s trusted email domains.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const trustedDomainListResponse of client.emailSecurity.settings.trustedDomains.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: TrustedDomainListParams,
@@ -44,6 +68,15 @@ export class TrustedDomains extends APIResource {
 
   /**
    * Delete a trusted email domain
+   *
+   * @example
+   * ```ts
+   * const trustedDomain =
+   *   await client.emailSecurity.settings.trustedDomains.delete(
+   *     2401,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     trustedDomainID: number,
@@ -61,6 +94,15 @@ export class TrustedDomains extends APIResource {
 
   /**
    * Update a trusted email domain
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.emailSecurity.settings.trustedDomains.edit(
+   *     2401,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     trustedDomainID: number,
@@ -78,6 +120,15 @@ export class TrustedDomains extends APIResource {
 
   /**
    * Get a trusted email domain
+   *
+   * @example
+   * ```ts
+   * const trustedDomain =
+   *   await client.emailSecurity.settings.trustedDomains.get(
+   *     2401,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     trustedDomainID: number,

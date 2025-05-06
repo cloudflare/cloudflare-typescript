@@ -13,6 +13,17 @@ import { path } from '../../internal/utils/path';
 export class Versions extends APIResource {
   /**
    * Fetches the versions of an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const versionListResponse of client.rulesets.versions.list(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     rulesetID: string,
@@ -45,6 +56,14 @@ export class Versions extends APIResource {
 
   /**
    * Deletes an existing version of an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * await client.rulesets.versions.delete('1', {
+   *   ruleset_id: '2f2feab2026849078ba485f918791bdc',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   delete(rulesetVersion: string, params: VersionDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { ruleset_id, account_id, zone_id } = params;
@@ -72,6 +91,14 @@ export class Versions extends APIResource {
 
   /**
    * Fetches a specific version of an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * const version = await client.rulesets.versions.get('1', {
+   *   ruleset_id: '2f2feab2026849078ba485f918791bdc',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   get(
     rulesetVersion: string,

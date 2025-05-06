@@ -8,6 +8,14 @@ import { path } from '../../../../internal/utils/path';
 export class BrowserFamily extends APIResource {
   /**
    * Retrieves the top locations, by HTTP requests, of the requested browser family.
+   *
+   * @example
+   * ```ts
+   * const browserFamily =
+   *   await client.radar.http.locations.browserFamily.get(
+   *     'CHROME',
+   *   );
+   * ```
    */
   get(
     browserFamily: 'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI',

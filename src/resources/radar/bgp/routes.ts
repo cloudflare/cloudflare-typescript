@@ -7,6 +7,11 @@ import { RequestOptions } from '../../../internal/request-options';
 export class Routes extends APIResource {
   /**
    * Retrieves all ASes in the current global routing tables with routing statistics.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.ases();
+   * ```
    */
   ases(
     query: RouteAsesParams | null | undefined = {},
@@ -21,6 +26,11 @@ export class Routes extends APIResource {
 
   /**
    * Retrieves all Multi-Origin AS (MOAS) prefixes in the global routing tables.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.moas();
+   * ```
    */
   moas(
     query: RouteMoasParams | null | undefined = {},
@@ -35,6 +45,11 @@ export class Routes extends APIResource {
 
   /**
    * Retrieves the prefix-to-ASN mapping from global routing tables.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.pfx2as();
+   * ```
    */
   pfx2as(
     query: RoutePfx2asParams | null | undefined = {},
@@ -50,6 +65,11 @@ export class Routes extends APIResource {
   /**
    * Retrieves realtime routes for prefixes using public realtime data collectors
    * (RouteViews and RIPE RIS).
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.realtime();
+   * ```
    */
   realtime(
     query: RouteRealtimeParams | null | undefined = {},
@@ -64,6 +84,11 @@ export class Routes extends APIResource {
 
   /**
    * Retrieves the BGP routing table stats.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.stats();
+   * ```
    */
   stats(
     query: RouteStatsParams | null | undefined = {},

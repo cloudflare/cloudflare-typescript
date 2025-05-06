@@ -11,6 +11,11 @@ export class Top extends APIResource {
 
   /**
    * Retrieves the top network prefixes by BGP updates.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.top.prefixes();
+   * ```
    */
   prefixes(
     query: TopPrefixesParams | null | undefined = {},

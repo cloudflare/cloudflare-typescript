@@ -8,6 +8,17 @@ import { path } from '../../../../internal/utils/path';
 export class GlobalWARPOverride extends APIResource {
   /**
    * Sets the Global WARP override state.
+   *
+   * @example
+   * ```ts
+   * const globalWARPOverride =
+   *   await client.zeroTrust.devices.resilience.globalWARPOverride.create(
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       disconnect: false,
+   *     },
+   *   );
+   * ```
    */
   create(
     params: GlobalWARPOverrideCreateParams,
@@ -24,6 +35,14 @@ export class GlobalWARPOverride extends APIResource {
 
   /**
    * Fetch the Global WARP override state.
+   *
+   * @example
+   * ```ts
+   * const globalWARPOverride =
+   *   await client.zeroTrust.devices.resilience.globalWARPOverride.get(
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     params: GlobalWARPOverrideGetParams,

@@ -9,6 +9,16 @@ import { path } from '../../../internal/utils/path';
 export class ToMarkdown extends APIResource {
   /**
    * Convert Files into Markdown
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const toMarkdownCreateResponse of client.radar.ai.toMarkdown.create(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     params: ToMarkdownCreateParams,

@@ -32,6 +32,29 @@ export class Tokens extends APIResource {
 
   /**
    * Create a new Account Owned API token.
+   *
+   * @example
+   * ```ts
+   * const token = await client.accounts.tokens.create({
+   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   name: 'readonly token',
+   *   policies: [
+   *     {
+   *       effect: 'allow',
+   *       permission_groups: [
+   *         { id: 'c8fed203ed3043cba015a93ad1616f1f' },
+   *         { id: '82e64a83756745bbbb1c9c2701bf816b' },
+   *       ],
+   *       resources: {
+   *         'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43':
+   *           '*',
+   *         'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4':
+   *           '*',
+   *       },
+   *     },
+   *   ],
+   * });
+   * ```
    */
   create(params: TokenCreateParams, options?: RequestOptions): APIPromise<TokenCreateResponse> {
     const { account_id, ...body } = params;
@@ -44,6 +67,33 @@ export class Tokens extends APIResource {
 
   /**
    * Update an existing token.
+   *
+   * @example
+   * ```ts
+   * const token = await client.accounts.tokens.update(
+   *   'ed17574386854bf78a67040be0a770b0',
+   *   {
+   *     account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *     name: 'readonly token',
+   *     policies: [
+   *       {
+   *         effect: 'allow',
+   *         permission_groups: [
+   *           { id: 'c8fed203ed3043cba015a93ad1616f1f' },
+   *           { id: '82e64a83756745bbbb1c9c2701bf816b' },
+   *         ],
+   *         resources: {
+   *           'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43':
+   *             '*',
+   *           'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4':
+   *             '*',
+   *         },
+   *       },
+   *     ],
+   *     status: 'active',
+   *   },
+   * );
+   * ```
    */
   update(tokenID: string, params: TokenUpdateParams, options?: RequestOptions): APIPromise<Shared.Token> {
     const { account_id, ...body } = params;
@@ -56,6 +106,16 @@ export class Tokens extends APIResource {
 
   /**
    * List all Account Owned API tokens created for this account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const token of client.accounts.tokens.list({
+   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: TokenListParams,
@@ -71,6 +131,14 @@ export class Tokens extends APIResource {
 
   /**
    * Destroy an Account Owned API token.
+   *
+   * @example
+   * ```ts
+   * const token = await client.accounts.tokens.delete(
+   *   'ed17574386854bf78a67040be0a770b0',
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * );
+   * ```
    */
   delete(
     tokenID: string,
@@ -87,6 +155,14 @@ export class Tokens extends APIResource {
 
   /**
    * Get information about a specific Account Owned API token.
+   *
+   * @example
+   * ```ts
+   * const token = await client.accounts.tokens.get(
+   *   'ed17574386854bf78a67040be0a770b0',
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * );
+   * ```
    */
   get(tokenID: string, params: TokenGetParams, options?: RequestOptions): APIPromise<Shared.Token> {
     const { account_id } = params;
@@ -99,6 +175,13 @@ export class Tokens extends APIResource {
 
   /**
    * Test whether a token works.
+   *
+   * @example
+   * ```ts
+   * const response = await client.accounts.tokens.verify({
+   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   * });
+   * ```
    */
   verify(params: TokenVerifyParams, options?: RequestOptions): APIPromise<TokenVerifyResponse> {
     const { account_id } = params;

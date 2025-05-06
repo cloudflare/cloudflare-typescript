@@ -68,6 +68,17 @@ export class BotManagement extends APIResource {
    *   "fight_mode": false
    * }
    * ```
+   *
+   * @example
+   * ```ts
+   * const botManagement = await client.botManagement.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   ai_bots_protection: 'disabled',
+   *   crawler_protection: 'disabled',
+   *   enable_js: true,
+   *   fight_mode: true,
+   * });
+   * ```
    */
   update(
     params: BotManagementUpdateParams,
@@ -83,6 +94,13 @@ export class BotManagement extends APIResource {
 
   /**
    * Retrieve a zone's Bot Management Config
+   *
+   * @example
+   * ```ts
+   * const botManagement = await client.botManagement.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: BotManagementGetParams, options?: RequestOptions): APIPromise<BotManagementGetResponse> {
     const { zone_id } = params;

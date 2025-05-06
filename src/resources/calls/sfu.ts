@@ -10,6 +10,13 @@ export class SFU extends APIResource {
   /**
    * Creates a new Cloudflare calls app. An app is an unique enviroment where each
    * Session can access all Tracks within the app.
+   *
+   * @example
+   * ```ts
+   * const sfu = await client.calls.sfu.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: SFUCreateParams, options?: RequestOptions): APIPromise<SFUCreateResponse> {
     const { account_id, ...body } = params;
@@ -22,6 +29,14 @@ export class SFU extends APIResource {
 
   /**
    * Edit details for a single app.
+   *
+   * @example
+   * ```ts
+   * const sfu = await client.calls.sfu.update(
+   *   '2a95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(appID: string, params: SFUUpdateParams, options?: RequestOptions): APIPromise<SFUUpdateResponse> {
     const { account_id, ...body } = params;
@@ -35,6 +50,16 @@ export class SFU extends APIResource {
 
   /**
    * Lists all apps in the Cloudflare account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const sfuListResponse of client.calls.sfu.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SFUListParams,
@@ -50,6 +75,14 @@ export class SFU extends APIResource {
 
   /**
    * Deletes an app from Cloudflare Calls
+   *
+   * @example
+   * ```ts
+   * const sfu = await client.calls.sfu.delete(
+   *   '2a95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(appID: string, params: SFUDeleteParams, options?: RequestOptions): APIPromise<SFUDeleteResponse> {
     const { account_id } = params;
@@ -62,6 +95,14 @@ export class SFU extends APIResource {
 
   /**
    * Fetches details for a single Calls app.
+   *
+   * @example
+   * ```ts
+   * const sfu = await client.calls.sfu.get(
+   *   '2a95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(appID: string, params: SFUGetParams, options?: RequestOptions): APIPromise<SFUGetResponse> {
     const { account_id } = params;

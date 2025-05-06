@@ -17,6 +17,12 @@ export class Tlds extends APIResource {
 
   /**
    * Retrieves the top TLDs by number of email messages.
+   *
+   * @example
+   * ```ts
+   * const tld =
+   *   await client.radar.email.security.top.tlds.get();
+   * ```
    */
   get(query: TldGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<TldGetResponse> {
     return (

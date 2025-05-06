@@ -8,6 +8,18 @@ import { path } from '../../../internal/utils/path';
 export class Schedules extends APIResource {
   /**
    * Updates Cron Triggers for a Worker.
+   *
+   * @example
+   * ```ts
+   * const schedule =
+   *   await client.workers.scripts.schedules.update(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       body: [{}],
+   *     },
+   *   );
+   * ```
    */
   update(
     scriptName: string,
@@ -25,6 +37,14 @@ export class Schedules extends APIResource {
 
   /**
    * Fetches Cron Triggers for a Worker.
+   *
+   * @example
+   * ```ts
+   * const schedule = await client.workers.scripts.schedules.get(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     scriptName: string,

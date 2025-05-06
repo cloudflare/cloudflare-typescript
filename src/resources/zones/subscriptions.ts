@@ -9,6 +9,14 @@ import { path } from '../../internal/utils/path';
 export class Subscriptions extends APIResource {
   /**
    * Create a zone subscription, either plan or add-ons.
+   *
+   * @example
+   * ```ts
+   * const subscription =
+   *   await client.zones.subscriptions.create(
+   *     '506e3185e9c882d175a2d0cb0093d9f2',
+   *   );
+   * ```
    */
   create(
     identifier: string,
@@ -24,6 +32,14 @@ export class Subscriptions extends APIResource {
 
   /**
    * Updates zone subscriptions, either plan or add-ons.
+   *
+   * @example
+   * ```ts
+   * const subscription =
+   *   await client.zones.subscriptions.update(
+   *     '506e3185e9c882d175a2d0cb0093d9f2',
+   *   );
+   * ```
    */
   update(
     identifier: string,
@@ -39,6 +55,13 @@ export class Subscriptions extends APIResource {
 
   /**
    * Lists zone subscription details.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.zones.subscriptions.get(
+   *   '506e3185e9c882d175a2d0cb0093d9f2',
+   * );
+   * ```
    */
   get(identifier: string, options?: RequestOptions): APIPromise<SubscriptionGetResponse> {
     return (

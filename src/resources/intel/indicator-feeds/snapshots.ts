@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class Snapshots extends APIResource {
   /**
    * Update indicator feed data
+   *
+   * @example
+   * ```ts
+   * const snapshot =
+   *   await client.intel.indicatorFeeds.snapshots.update(12, {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   update(
     feedID: number,

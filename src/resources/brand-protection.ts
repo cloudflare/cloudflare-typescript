@@ -8,6 +8,13 @@ import { path } from '../internal/utils/path';
 export class BrandProtection extends APIResource {
   /**
    * Submit suspicious URL for scanning
+   *
+   * @example
+   * ```ts
+   * const submit = await client.brandProtection.submit({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   submit(params: BrandProtectionSubmitParams, options?: RequestOptions): APIPromise<Submit> {
     const { account_id, ...body } = params;
@@ -21,6 +28,13 @@ export class BrandProtection extends APIResource {
 
   /**
    * Gets phishing details about a URL.
+   *
+   * @example
+   * ```ts
+   * const info = await client.brandProtection.urlInfo({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   urlInfo(params: BrandProtectionURLInfoParams, options?: RequestOptions): APIPromise<Info> {
     const { account_id, ...query } = params;

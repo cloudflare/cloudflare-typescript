@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class Settings extends APIResource {
   /**
    * Patch Universal SSL Settings for a Zone.
+   *
+   * @example
+   * ```ts
+   * const universalSSLSettings =
+   *   await client.ssl.universal.settings.edit({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   edit(params: SettingEditParams, options?: RequestOptions): APIPromise<UniversalSSLSettings> {
     const { zone_id, ...body } = params;
@@ -20,6 +28,14 @@ export class Settings extends APIResource {
 
   /**
    * Get Universal SSL Settings for a Zone.
+   *
+   * @example
+   * ```ts
+   * const universalSSLSettings =
+   *   await client.ssl.universal.settings.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(params: SettingGetParams, options?: RequestOptions): APIPromise<UniversalSSLSettings> {
     const { zone_id } = params;

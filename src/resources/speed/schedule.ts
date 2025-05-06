@@ -9,6 +9,14 @@ import { path } from '../../internal/utils/path';
 export class ScheduleResource extends APIResource {
   /**
    * Creates a scheduled test for a page.
+   *
+   * @example
+   * ```ts
+   * const schedule = await client.speed.schedule.create(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   create(
     url: string,
@@ -26,6 +34,14 @@ export class ScheduleResource extends APIResource {
 
   /**
    * Deletes a scheduled test for a page.
+   *
+   * @example
+   * ```ts
+   * const schedule = await client.speed.schedule.delete(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     url: string,
@@ -43,6 +59,14 @@ export class ScheduleResource extends APIResource {
 
   /**
    * Retrieves the test schedule for a page in a specific region.
+   *
+   * @example
+   * ```ts
+   * const schedule = await client.speed.schedule.get(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(url: string, params: ScheduleGetParams, options?: RequestOptions): APIPromise<Schedule> {
     const { zone_id, ...query } = params;

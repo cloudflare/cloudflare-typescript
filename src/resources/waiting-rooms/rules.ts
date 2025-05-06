@@ -9,6 +9,23 @@ export class Rules extends APIResource {
   /**
    * Only available for the Waiting Room Advanced subscription. Creates a rule for a
    * waiting room.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const waitingRoomRule of client.waitingRooms.rules.create(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     rules: {
+   *       action: 'bypass_waiting_room',
+   *       expression: 'ip.src in {10.20.30.40}',
+   *     },
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     waitingRoomID: string,
@@ -26,6 +43,25 @@ export class Rules extends APIResource {
   /**
    * Only available for the Waiting Room Advanced subscription. Replaces all rules
    * for a waiting room.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const waitingRoomRule of client.waitingRooms.rules.update(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     rules: [
+   *       {
+   *         action: 'bypass_waiting_room',
+   *         expression: 'ip.src in {10.20.30.40}',
+   *       },
+   *     ],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   update(
     waitingRoomID: string,
@@ -42,6 +78,20 @@ export class Rules extends APIResource {
 
   /**
    * Deletes a rule for a waiting room.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const waitingRoomRule of client.waitingRooms.rules.delete(
+   *   '25756b2dfe6e378a06b033b670413757',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     waiting_room_id: '699d98642c564d2e855e9661899b7252',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   delete(
     ruleID: string,
@@ -58,6 +108,22 @@ export class Rules extends APIResource {
 
   /**
    * Patches a rule for a waiting room.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const waitingRoomRule of client.waitingRooms.rules.edit(
+   *   '25756b2dfe6e378a06b033b670413757',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     waiting_room_id: '699d98642c564d2e855e9661899b7252',
+   *     action: 'bypass_waiting_room',
+   *     expression: 'ip.src in {10.20.30.40}',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   edit(
     ruleID: string,
@@ -74,6 +140,17 @@ export class Rules extends APIResource {
 
   /**
    * Lists rules for a waiting room.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const waitingRoomRule of client.waitingRooms.rules.get(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     waitingRoomID: string,

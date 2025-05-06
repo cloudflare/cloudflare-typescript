@@ -10,6 +10,15 @@ import { path } from '../../internal/utils/path';
 export class UARules extends APIResource {
   /**
    * Creates a new User Agent Blocking rule in a zone.
+   *
+   * @example
+   * ```ts
+   * const uaRule = await client.firewall.uaRules.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   configuration: {},
+   *   mode: 'challenge',
+   * });
+   * ```
    */
   create(params: UARuleCreateParams, options?: RequestOptions): APIPromise<UARuleCreateResponse> {
     const { zone_id, ...body } = params;
@@ -22,6 +31,18 @@ export class UARules extends APIResource {
 
   /**
    * Updates an existing User Agent Blocking rule.
+   *
+   * @example
+   * ```ts
+   * const uaRule = await client.firewall.uaRules.update(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     configuration: {},
+   *     mode: 'challenge',
+   *   },
+   * );
+   * ```
    */
   update(
     uaRuleID: string,
@@ -40,6 +61,16 @@ export class UARules extends APIResource {
   /**
    * Fetches User Agent Blocking rules in a zone. You can filter the results using
    * several optional parameters.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const uaRuleListResponse of client.firewall.uaRules.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: UARuleListParams,
@@ -55,6 +86,14 @@ export class UARules extends APIResource {
 
   /**
    * Deletes an existing User Agent Blocking rule.
+   *
+   * @example
+   * ```ts
+   * const uaRule = await client.firewall.uaRules.delete(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     uaRuleID: string,
@@ -71,6 +110,14 @@ export class UARules extends APIResource {
 
   /**
    * Fetches the details of a User Agent Blocking rule.
+   *
+   * @example
+   * ```ts
+   * const uaRule = await client.firewall.uaRules.get(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(uaRuleID: string, params: UARuleGetParams, options?: RequestOptions): APIPromise<UARuleGetResponse> {
     const { zone_id } = params;

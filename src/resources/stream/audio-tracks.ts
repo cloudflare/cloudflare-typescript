@@ -10,6 +10,17 @@ export class AudioTracks extends APIResource {
   /**
    * Deletes additional audio tracks on a video. Deleting a default audio track is
    * not allowed. You must assign another audio track as default prior to deletion.
+   *
+   * @example
+   * ```ts
+   * const audioTrack = await client.stream.audioTracks.delete(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     identifier: 'ea95132c15732412d22c1476fa83f27a',
+   *   },
+   * );
+   * ```
    */
   delete(
     audioIdentifier: string,
@@ -27,6 +38,17 @@ export class AudioTracks extends APIResource {
 
   /**
    * Adds an additional audio track to a video using the provided audio track URL.
+   *
+   * @example
+   * ```ts
+   * const audio = await client.stream.audioTracks.copy(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     label: 'director commentary',
+   *   },
+   * );
+   * ```
    */
   copy(identifier: string, params: AudioTrackCopyParams, options?: RequestOptions): APIPromise<Audio> {
     const { account_id, ...body } = params;
@@ -42,6 +64,17 @@ export class AudioTracks extends APIResource {
    * Edits additional audio tracks on a video. Editing the default status of an audio
    * track to `true` will mark all other audio tracks on the video default status to
    * `false`.
+   *
+   * @example
+   * ```ts
+   * const audio = await client.stream.audioTracks.edit(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     identifier: 'ea95132c15732412d22c1476fa83f27a',
+   *   },
+   * );
+   * ```
    */
   edit(audioIdentifier: string, params: AudioTrackEditParams, options?: RequestOptions): APIPromise<Audio> {
     const { account_id, identifier, ...body } = params;
@@ -56,6 +89,17 @@ export class AudioTracks extends APIResource {
   /**
    * Lists additional audio tracks on a video. Note this API will not return
    * information for audio attached to the video upload.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const audio of client.stream.audioTracks.get(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     identifier: string,

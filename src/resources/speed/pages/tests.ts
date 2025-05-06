@@ -14,6 +14,14 @@ import { path } from '../../../internal/utils/path';
 export class Tests extends APIResource {
   /**
    * Starts a test for a specific webpage, in a specific region.
+   *
+   * @example
+   * ```ts
+   * const test = await client.speed.pages.tests.create(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   create(url: string, params: TestCreateParams, options?: RequestOptions): APIPromise<Test> {
     const { zone_id, ...body } = params;
@@ -27,6 +35,17 @@ export class Tests extends APIResource {
 
   /**
    * Test history (list of tests) for a specific webpage.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const test of client.speed.pages.tests.list(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     url: string,
@@ -44,6 +63,14 @@ export class Tests extends APIResource {
   /**
    * Deletes all tests for a specific webpage from a specific region. Deleted tests
    * are still counted as part of the quota.
+   *
+   * @example
+   * ```ts
+   * const test = await client.speed.pages.tests.delete(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(url: string, params: TestDeleteParams, options?: RequestOptions): APIPromise<TestDeleteResponse> {
     const { zone_id, region } = params;
@@ -57,6 +84,14 @@ export class Tests extends APIResource {
 
   /**
    * Retrieves the result of a specific test.
+   *
+   * @example
+   * ```ts
+   * const test = await client.speed.pages.tests.get('test_id', {
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   url: 'example.com',
+   * });
+   * ```
    */
   get(testID: string, params: TestGetParams, options?: RequestOptions): APIPromise<Test> {
     const { zone_id, url } = params;

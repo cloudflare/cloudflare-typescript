@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class Results extends APIResource {
   /**
    * Get the Latest Scan Result
+   *
+   * @example
+   * ```ts
+   * const result = await client.cloudforceOne.scans.results.get(
+   *   'config_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(configID: string, params: ResultGetParams, options?: RequestOptions): APIPromise<ResultGetResponse> {
     const { account_id } = params;

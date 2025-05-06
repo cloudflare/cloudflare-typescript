@@ -8,6 +8,14 @@ import { path } from '../../../../internal/utils/path';
 export class Config extends APIResource {
   /**
    * Updates CMB config.
+   *
+   * @example
+   * ```ts
+   * const cmbConfig =
+   *   await client.logs.control.cmb.config.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(params: ConfigCreateParams, options?: RequestOptions): APIPromise<CmbConfig | null> {
     const { account_id, ...body } = params;
@@ -21,6 +29,13 @@ export class Config extends APIResource {
 
   /**
    * Deletes CMB config.
+   *
+   * @example
+   * ```ts
+   * const config = await client.logs.control.cmb.config.delete({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(params: ConfigDeleteParams, options?: RequestOptions): APIPromise<ConfigDeleteResponse | null> {
     const { account_id } = params;
@@ -33,6 +48,13 @@ export class Config extends APIResource {
 
   /**
    * Gets CMB config.
+   *
+   * @example
+   * ```ts
+   * const cmbConfig = await client.logs.control.cmb.config.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ConfigGetParams, options?: RequestOptions): APIPromise<CmbConfig | null> {
     const { account_id } = params;

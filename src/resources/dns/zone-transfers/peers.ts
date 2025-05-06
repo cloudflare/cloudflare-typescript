@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class Peers extends APIResource {
   /**
    * Create Peer.
+   *
+   * @example
+   * ```ts
+   * const peer = await client.dns.zoneTransfers.peers.create({
+   *   account_id: '01a7362d577a6c3019a474fd6f485823',
+   *   name: 'my-peer-1',
+   * });
+   * ```
    */
   create(params: PeerCreateParams, options?: RequestOptions): APIPromise<Peer> {
     const { account_id, ...body } = params;
@@ -22,6 +30,17 @@ export class Peers extends APIResource {
 
   /**
    * Modify Peer.
+   *
+   * @example
+   * ```ts
+   * const peer = await client.dns.zoneTransfers.peers.update(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     name: 'my-peer-1',
+   *   },
+   * );
+   * ```
    */
   update(peerID: string, params: PeerUpdateParams, options?: RequestOptions): APIPromise<Peer> {
     const { account_id, ...body } = params;
@@ -35,6 +54,16 @@ export class Peers extends APIResource {
 
   /**
    * List Peers.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const peer of client.dns.zoneTransfers.peers.list(
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: PeerListParams, options?: RequestOptions): PagePromise<PeersSinglePage, Peer> {
     const { account_id } = params;
@@ -47,6 +76,14 @@ export class Peers extends APIResource {
 
   /**
    * Delete Peer.
+   *
+   * @example
+   * ```ts
+   * const peer = await client.dns.zoneTransfers.peers.delete(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   delete(peerID: string, params: PeerDeleteParams, options?: RequestOptions): APIPromise<PeerDeleteResponse> {
     const { account_id } = params;
@@ -60,6 +97,14 @@ export class Peers extends APIResource {
 
   /**
    * Get Peer.
+   *
+   * @example
+   * ```ts
+   * const peer = await client.dns.zoneTransfers.peers.get(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   get(peerID: string, params: PeerGetParams, options?: RequestOptions): APIPromise<Peer> {
     const { account_id } = params;

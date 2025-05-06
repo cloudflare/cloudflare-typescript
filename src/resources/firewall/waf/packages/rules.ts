@@ -17,6 +17,17 @@ export class Rules extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ruleListResponse of client.firewall.waf.packages.rules.list(
+   *   'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     packageID: string,
@@ -36,6 +47,18 @@ export class Rules extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.firewall.waf.packages.rules.edit(
+   *     'a25a9a7e9c00afc1fb2e0245519d725b',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       package_id: 'a25a9a7e9c00afc1fb2e0245519d725b',
+   *     },
+   *   );
+   * ```
    */
   edit(ruleID: string, params: RuleEditParams, options?: RequestOptions): APIPromise<RuleEditResponse> {
     const { zone_id, package_id, ...body } = params;
@@ -52,6 +75,17 @@ export class Rules extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const rule = await client.firewall.waf.packages.rules.get(
+   *   'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     package_id: 'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   },
+   * );
+   * ```
    */
   get(ruleID: string, params: RuleGetParams, options?: RequestOptions): APIPromise<RuleGetResponse> {
     const { zone_id, package_id } = params;

@@ -9,6 +9,14 @@ export class DomainHistoryResource extends APIResource {
   /**
    * Gets historical security threat and content categories currently and previously
    * assigned to a domain.
+   *
+   * @example
+   * ```ts
+   * const domainHistories =
+   *   await client.intel.domainHistory.get({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(params: DomainHistoryGetParams, options?: RequestOptions): APIPromise<DomainHistoryGetResponse | null> {
     const { account_id, ...query } = params;

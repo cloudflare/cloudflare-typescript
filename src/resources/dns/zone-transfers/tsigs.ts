@@ -9,6 +9,17 @@ import { path } from '../../../internal/utils/path';
 export class TSIGs extends APIResource {
   /**
    * Create TSIG.
+   *
+   * @example
+   * ```ts
+   * const tsig = await client.dns.zoneTransfers.tsigs.create({
+   *   account_id: '01a7362d577a6c3019a474fd6f485823',
+   *   algo: 'hmac-sha512.',
+   *   name: 'tsig.customer.cf.',
+   *   secret:
+   *     'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
+   * });
+   * ```
    */
   create(params: TSIGCreateParams, options?: RequestOptions): APIPromise<TSIG> {
     const { account_id, ...body } = params;
@@ -22,6 +33,20 @@ export class TSIGs extends APIResource {
 
   /**
    * Modify TSIG.
+   *
+   * @example
+   * ```ts
+   * const tsig = await client.dns.zoneTransfers.tsigs.update(
+   *   '69cd1e104af3e6ed3cb344f263fd0d5a',
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     algo: 'hmac-sha512.',
+   *     name: 'tsig.customer.cf.',
+   *     secret:
+   *       'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
+   *   },
+   * );
+   * ```
    */
   update(tsigID: string, params: TSIGUpdateParams, options?: RequestOptions): APIPromise<TSIG> {
     const { account_id, ...body } = params;
@@ -35,6 +60,16 @@ export class TSIGs extends APIResource {
 
   /**
    * List TSIGs.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tsig of client.dns.zoneTransfers.tsigs.list(
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: TSIGListParams, options?: RequestOptions): PagePromise<TSIGsSinglePage, TSIG> {
     const { account_id } = params;
@@ -47,6 +82,14 @@ export class TSIGs extends APIResource {
 
   /**
    * Delete TSIG.
+   *
+   * @example
+   * ```ts
+   * const tsig = await client.dns.zoneTransfers.tsigs.delete(
+   *   '69cd1e104af3e6ed3cb344f263fd0d5a',
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   delete(tsigID: string, params: TSIGDeleteParams, options?: RequestOptions): APIPromise<TSIGDeleteResponse> {
     const { account_id } = params;
@@ -60,6 +103,14 @@ export class TSIGs extends APIResource {
 
   /**
    * Get TSIG.
+   *
+   * @example
+   * ```ts
+   * const tsig = await client.dns.zoneTransfers.tsigs.get(
+   *   '69cd1e104af3e6ed3cb344f263fd0d5a',
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   get(tsigID: string, params: TSIGGetParams, options?: RequestOptions): APIPromise<TSIG> {
     const { account_id } = params;

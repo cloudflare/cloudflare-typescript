@@ -10,6 +10,14 @@ import { path } from '../../../internal/utils/path';
 export class SippyResource extends APIResource {
   /**
    * Sets configuration for Sippy for an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const sippy = await client.r2.buckets.sippy.update(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(bucketName: string, params: SippyUpdateParams, options?: RequestOptions): APIPromise<Sippy> {
     const { account_id, jurisdiction, ...body } = params;
@@ -31,6 +39,14 @@ export class SippyResource extends APIResource {
 
   /**
    * Disables Sippy on this bucket.
+   *
+   * @example
+   * ```ts
+   * const sippy = await client.r2.buckets.sippy.delete(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     bucketName: string,
@@ -55,6 +71,14 @@ export class SippyResource extends APIResource {
 
   /**
    * Gets configuration for Sippy for an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const sippy = await client.r2.buckets.sippy.get(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(bucketName: string, params: SippyGetParams, options?: RequestOptions): APIPromise<Sippy> {
     const { account_id, jurisdiction } = params;

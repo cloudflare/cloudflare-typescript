@@ -10,6 +10,14 @@ import { path } from '../../internal/utils/path';
 export class Consumers extends APIResource {
   /**
    * Creates a new consumer for a Queue
+   *
+   * @example
+   * ```ts
+   * const consumer = await client.queues.consumers.create(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   create(queueID: string, params: ConsumerCreateParams, options?: RequestOptions): APIPromise<Consumer> {
     const { account_id, ...body } = params;
@@ -23,6 +31,17 @@ export class Consumers extends APIResource {
 
   /**
    * Updates the consumer for a queue, or creates one if it does not exist.
+   *
+   * @example
+   * ```ts
+   * const consumer = await client.queues.consumers.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     queue_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   },
+   * );
+   * ```
    */
   update(consumerID: string, params: ConsumerUpdateParams, options?: RequestOptions): APIPromise<Consumer> {
     const { account_id, queue_id, ...body } = params;
@@ -36,6 +55,17 @@ export class Consumers extends APIResource {
 
   /**
    * Deletes the consumer for a queue.
+   *
+   * @example
+   * ```ts
+   * const consumer = await client.queues.consumers.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     queue_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   },
+   * );
+   * ```
    */
   delete(
     consumerID: string,
@@ -51,6 +81,17 @@ export class Consumers extends APIResource {
 
   /**
    * Returns the consumers for a Queue
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const consumer of client.queues.consumers.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     queueID: string,

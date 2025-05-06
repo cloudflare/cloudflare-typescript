@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class Certificates extends APIResource {
   /**
    * Creates a new Zero Trust certificate.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.zeroTrust.gateway.certificates.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   create(params: CertificateCreateParams, options?: RequestOptions): APIPromise<CertificateCreateResponse> {
     const { account_id, ...body } = params;
@@ -22,6 +30,16 @@ export class Certificates extends APIResource {
 
   /**
    * Fetches all Zero Trust certificates for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const certificateListResponse of client.zeroTrust.gateway.certificates.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CertificateListParams,
@@ -38,6 +56,15 @@ export class Certificates extends APIResource {
   /**
    * Deletes a gateway-managed Zero Trust certificate. A certificate must be
    * deactivated from the edge (inactive) before it is deleted.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.zeroTrust.gateway.certificates.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   delete(
     certificateID: string,
@@ -55,6 +82,18 @@ export class Certificates extends APIResource {
 
   /**
    * Binds a single Zero Trust certificate to the edge.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.gateway.certificates.activate(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   activate(
     certificateID: string,
@@ -72,6 +111,18 @@ export class Certificates extends APIResource {
 
   /**
    * Unbinds a single Zero Trust certificate from the edge
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.gateway.certificates.deactivate(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   deactivate(
     certificateID: string,
@@ -89,6 +140,15 @@ export class Certificates extends APIResource {
 
   /**
    * Fetches a single Zero Trust certificate.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.zeroTrust.gateway.certificates.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     certificateID: string,

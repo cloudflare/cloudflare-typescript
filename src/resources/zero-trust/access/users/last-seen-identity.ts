@@ -9,6 +9,15 @@ import { path } from '../../../../internal/utils/path';
 export class LastSeenIdentity extends APIResource {
   /**
    * Get last seen identity for a single user.
+   *
+   * @example
+   * ```ts
+   * const identity =
+   *   await client.zeroTrust.access.users.lastSeenIdentity.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(userID: string, params: LastSeenIdentityGetParams, options?: RequestOptions): APIPromise<Identity> {
     const { account_id } = params;

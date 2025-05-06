@@ -14,6 +14,16 @@ export class Tests extends APIResource {
 
   /**
    * List DEX tests with overview metrics
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tests of client.zeroTrust.dex.tests.list({
+   *   account_id: '01a7362d577a6c3019a474fd6f485823',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: TestListParams, options?: RequestOptions): PagePromise<TestsV4PagePagination, Tests> {
     const { account_id, ...query } = params;

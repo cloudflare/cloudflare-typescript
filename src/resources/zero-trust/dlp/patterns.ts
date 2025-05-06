@@ -11,6 +11,15 @@ export class Patterns extends APIResource {
    * regular expression is too complex or can match an unbounded-length string. The
    * regex will be rejected if it uses `*` or `+`. Bound the maximum number of
    * characters that can be matched using a range, e.g. `{1,100}`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.dlp.patterns.validate({
+   *     account_id: 'account_id',
+   *     regex: 'regex',
+   *   });
+   * ```
    */
   validate(params: PatternValidateParams, options?: RequestOptions): APIPromise<PatternValidateResponse> {
     const { account_id, ...body } = params;

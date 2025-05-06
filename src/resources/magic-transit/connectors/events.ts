@@ -8,6 +8,15 @@ import { path } from '../../../internal/utils/path';
 export class Events extends APIResource {
   /**
    * List Events
+   *
+   * @example
+   * ```ts
+   * const events =
+   *   await client.magicTransit.connectors.events.list(
+   *     'connector_id',
+   *     { account_id: 0, from: 0, to: 0 },
+   *   );
+   * ```
    */
   list(
     connectorID: string,
@@ -25,6 +34,16 @@ export class Events extends APIResource {
 
   /**
    * Get Event
+   *
+   * @example
+   * ```ts
+   * const event =
+   *   await client.magicTransit.connectors.events.get(0, {
+   *     account_id: 0,
+   *     connector_id: 'connector_id',
+   *     event_t: 0,
+   *   });
+   * ```
    */
   get(eventN: number, params: EventGetParams, options?: RequestOptions): APIPromise<EventGetResponse> {
     const { account_id, connector_id, event_t } = params;

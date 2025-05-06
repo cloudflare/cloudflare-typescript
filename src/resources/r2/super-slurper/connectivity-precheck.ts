@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class ConnectivityPrecheck extends APIResource {
   /**
    * Check whether tokens are valid against the source bucket
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.r2.superSlurper.connectivityPrecheck.source({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   source(
     params: ConnectivityPrecheckSourceParams,
@@ -25,6 +33,14 @@ export class ConnectivityPrecheck extends APIResource {
 
   /**
    * Check whether tokens are valid against the target bucket
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.r2.superSlurper.connectivityPrecheck.target({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   target(
     params: ConnectivityPrecheckTargetParams,

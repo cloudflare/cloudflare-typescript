@@ -22,6 +22,15 @@ export class Indexes extends APIResource {
 
   /**
    * Creates and returns a new Vectorize Index.
+   *
+   * @example
+   * ```ts
+   * const createIndex = await client.vectorize.indexes.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   config: { dimensions: 768, metric: 'cosine' },
+   *   name: 'example-index',
+   * });
+   * ```
    */
   create(params: IndexCreateParams, options?: RequestOptions): APIPromise<CreateIndex | null> {
     const { account_id, ...body } = params;
@@ -35,6 +44,16 @@ export class Indexes extends APIResource {
 
   /**
    * Returns a list of Vectorize Indexes
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const createIndex of client.vectorize.indexes.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: IndexListParams, options?: RequestOptions): PagePromise<CreateIndicesSinglePage, CreateIndex> {
     const { account_id } = params;
@@ -47,6 +66,14 @@ export class Indexes extends APIResource {
 
   /**
    * Deletes the specified Vectorize Index.
+   *
+   * @example
+   * ```ts
+   * const index = await client.vectorize.indexes.delete(
+   *   'example-index',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     indexName: string,
@@ -64,6 +91,14 @@ export class Indexes extends APIResource {
 
   /**
    * Delete a set of vectors from an index by their vector identifiers.
+   *
+   * @example
+   * ```ts
+   * const response = await client.vectorize.indexes.deleteByIDs(
+   *   'example-index',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   deleteByIDs(
     indexName: string,
@@ -81,6 +116,14 @@ export class Indexes extends APIResource {
 
   /**
    * Returns the specified Vectorize Index.
+   *
+   * @example
+   * ```ts
+   * const createIndex = await client.vectorize.indexes.get(
+   *   'example-index',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(indexName: string, params: IndexGetParams, options?: RequestOptions): APIPromise<CreateIndex | null> {
     const { account_id } = params;
@@ -94,6 +137,14 @@ export class Indexes extends APIResource {
 
   /**
    * Get a set of vectors from an index by their vector identifiers.
+   *
+   * @example
+   * ```ts
+   * const response = await client.vectorize.indexes.getByIDs(
+   *   'example-index',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   getByIDs(
     indexName: string,
@@ -111,6 +162,14 @@ export class Indexes extends APIResource {
 
   /**
    * Get information about a vectorize index.
+   *
+   * @example
+   * ```ts
+   * const response = await client.vectorize.indexes.info(
+   *   'example-index',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   info(
     indexName: string,
@@ -129,6 +188,17 @@ export class Indexes extends APIResource {
   /**
    * Inserts vectors into the specified index and returns a mutation id corresponding
    * to the vectors enqueued for insertion.
+   *
+   * @example
+   * ```ts
+   * const response = await client.vectorize.indexes.insert(
+   *   'example-index',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: '@/path/to/vectors.ndjson',
+   *   },
+   * );
+   * ```
    */
   insert(
     indexName: string,
@@ -148,6 +218,17 @@ export class Indexes extends APIResource {
 
   /**
    * Finds vectors closest to a given vector in an index.
+   *
+   * @example
+   * ```ts
+   * const response = await client.vectorize.indexes.query(
+   *   'example-index',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     vector: [0.5, 0.5, 0.5],
+   *   },
+   * );
+   * ```
    */
   query(
     indexName: string,
@@ -166,6 +247,17 @@ export class Indexes extends APIResource {
   /**
    * Upserts vectors into the specified index, creating them if they do not exist and
    * returns a mutation id corresponding to the vectors enqueued for upsertion.
+   *
+   * @example
+   * ```ts
+   * const response = await client.vectorize.indexes.upsert(
+   *   'example-index',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: '@/path/to/vectors.ndjson',
+   *   },
+   * );
+   * ```
    */
   upsert(
     indexName: string,

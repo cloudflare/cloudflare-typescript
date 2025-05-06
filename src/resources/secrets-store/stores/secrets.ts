@@ -14,6 +14,26 @@ import { path } from '../../../internal/utils/path';
 export class Secrets extends APIResource {
   /**
    * Creates a secret in the account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretCreateResponse of client.secretsStore.stores.secrets.create(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [
+   *       {
+   *         name: 'MY_API_KEY',
+   *         scopes: ['workers'],
+   *         value: 'api-token-secret-123',
+   *       },
+   *     ],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     storeID: string,
@@ -30,6 +50,17 @@ export class Secrets extends APIResource {
 
   /**
    * Lists all store secrets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretListResponse of client.secretsStore.stores.secrets.list(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     storeID: string,
@@ -46,6 +77,18 @@ export class Secrets extends APIResource {
 
   /**
    * Deletes a single secret
+   *
+   * @example
+   * ```ts
+   * const secret =
+   *   await client.secretsStore.stores.secrets.delete(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     {
+   *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     },
+   *   );
+   * ```
    */
   delete(
     secretID: string,
@@ -63,6 +106,17 @@ export class Secrets extends APIResource {
 
   /**
    * Deletes one or more secrets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretBulkDeleteResponse of client.secretsStore.stores.secrets.bulkDelete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   bulkDelete(
     storeID: string,
@@ -79,6 +133,19 @@ export class Secrets extends APIResource {
 
   /**
    * Duplicates the secret, keeping the value
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.secretsStore.stores.secrets.duplicate(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     {
+   *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       name: 'MY_API_KEY',
+   *     },
+   *   );
+   * ```
    */
   duplicate(
     secretID: string,
@@ -96,6 +163,19 @@ export class Secrets extends APIResource {
 
   /**
    * Updates a single secret
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.secretsStore.stores.secrets.edit(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     {
+   *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       name: 'MY_API_KEY',
+   *     },
+   *   );
+   * ```
    */
   edit(secretID: string, params: SecretEditParams, options?: RequestOptions): APIPromise<SecretEditResponse> {
     const { account_id, store_id, ...body } = params;
@@ -109,6 +189,17 @@ export class Secrets extends APIResource {
 
   /**
    * Returns details of a single secret
+   *
+   * @example
+   * ```ts
+   * const secret = await client.secretsStore.stores.secrets.get(
+   *   '3fd85f74b32742f1bff64a85009dda07',
+   *   {
+   *     account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *     store_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   },
+   * );
+   * ```
    */
   get(secretID: string, params: SecretGetParams, options?: RequestOptions): APIPromise<SecretGetResponse> {
     const { account_id, store_id } = params;

@@ -8,6 +8,14 @@ import { path } from '../../internal/utils/path';
 export class ConnectivitySettings extends APIResource {
   /**
    * Updates the Zero Trust Connectivity Settings for the given account.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.connectivitySettings.edit({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   edit(
     params: ConnectivitySettingEditParams,
@@ -24,6 +32,14 @@ export class ConnectivitySettings extends APIResource {
 
   /**
    * Gets the Zero Trust Connectivity Settings for the given account.
+   *
+   * @example
+   * ```ts
+   * const connectivitySetting =
+   *   await client.zeroTrust.connectivitySettings.get({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   get(
     params: ConnectivitySettingGetParams,

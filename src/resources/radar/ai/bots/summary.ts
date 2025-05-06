@@ -7,6 +7,12 @@ import { RequestOptions } from '../../../../internal/request-options';
 export class Summary extends APIResource {
   /**
    * Retrieves the distribution of traffic by AI user agent.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ai.bots.summary.userAgent();
+   * ```
    */
   userAgent(
     query: SummaryUserAgentParams | null | undefined = {},

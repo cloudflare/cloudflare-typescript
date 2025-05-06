@@ -9,6 +9,21 @@ import { path } from '../../../../../internal/utils/path';
 export class Tags extends APIResource {
   /**
    * Put script tags for a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tagUpdateResponse of client.workersForPlatforms.dispatch.namespaces.scripts.tags.update(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     dispatch_namespace: 'my-dispatch-namespace',
+   *     body: ['my-tag'],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   update(
     scriptName: string,
@@ -25,6 +40,20 @@ export class Tags extends APIResource {
 
   /**
    * Fetch tags from a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tagListResponse of client.workersForPlatforms.dispatch.namespaces.scripts.tags.list(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     dispatch_namespace: 'my-dispatch-namespace',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     scriptName: string,
@@ -41,6 +70,19 @@ export class Tags extends APIResource {
 
   /**
    * Delete script tag for a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const tag =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete(
+   *     'my-tag',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *       script_name: 'this-is_my_script-01',
+   *     },
+   *   );
+   * ```
    */
   delete(
     tag: string,

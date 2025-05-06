@@ -8,6 +8,20 @@ import { path } from '../../../../../internal/utils/path';
 export class Entries extends APIResource {
   /**
    * Create IPFS Universal Path Gateway Content List Entry
+   *
+   * @example
+   * ```ts
+   * const entry =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.create(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       content:
+   *         'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
+   *       type: 'cid',
+   *     },
+   *   );
+   * ```
    */
   create(
     identifier: string,
@@ -25,6 +39,21 @@ export class Entries extends APIResource {
 
   /**
    * Edit IPFS Universal Path Gateway Content List Entry
+   *
+   * @example
+   * ```ts
+   * const entry =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       identifier: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       content:
+   *         'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
+   *       type: 'cid',
+   *     },
+   *   );
+   * ```
    */
   update(
     contentListEntryIdentifier: string,
@@ -42,6 +71,15 @@ export class Entries extends APIResource {
 
   /**
    * List IPFS Universal Path Gateway Content List Entries
+   *
+   * @example
+   * ```ts
+   * const entries =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.list(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   list(
     identifier: string,
@@ -59,6 +97,18 @@ export class Entries extends APIResource {
 
   /**
    * Delete IPFS Universal Path Gateway Content List Entry
+   *
+   * @example
+   * ```ts
+   * const entry =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       identifier: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     },
+   *   );
+   * ```
    */
   delete(
     contentListEntryIdentifier: string,
@@ -76,6 +126,18 @@ export class Entries extends APIResource {
 
   /**
    * IPFS Universal Path Gateway Content List Entry Details
+   *
+   * @example
+   * ```ts
+   * const entry =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       identifier: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     },
+   *   );
+   * ```
    */
   get(
     contentListEntryIdentifier: string,

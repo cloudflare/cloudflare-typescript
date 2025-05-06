@@ -10,6 +10,15 @@ import { path } from '../../../internal/utils/path';
 export class OwnershipResource extends APIResource {
   /**
    * Adds an AWS or GCP bucket to use with full packet captures.
+   *
+   * @example
+   * ```ts
+   * const ownership =
+   *   await client.magicTransit.pcaps.ownership.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     destination_conf: 's3://pcaps-bucket?region=us-east-1',
+   *   });
+   * ```
    */
   create(params: OwnershipCreateParams, options?: RequestOptions): APIPromise<Ownership> {
     const { account_id, ...body } = params;
@@ -22,6 +31,14 @@ export class OwnershipResource extends APIResource {
 
   /**
    * Deletes buckets added to the packet captures API.
+   *
+   * @example
+   * ```ts
+   * await client.magicTransit.pcaps.ownership.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(ownershipID: string, params: OwnershipDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -33,6 +50,16 @@ export class OwnershipResource extends APIResource {
 
   /**
    * List all buckets configured for use with PCAPs API.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ownership of client.magicTransit.pcaps.ownership.get(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(params: OwnershipGetParams, options?: RequestOptions): PagePromise<OwnershipsSinglePage, Ownership> {
     const { account_id } = params;
@@ -45,6 +72,17 @@ export class OwnershipResource extends APIResource {
 
   /**
    * Validates buckets added to the packet captures API.
+   *
+   * @example
+   * ```ts
+   * const ownership =
+   *   await client.magicTransit.pcaps.ownership.validate({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     destination_conf: 's3://pcaps-bucket?region=us-east-1',
+   *     ownership_challenge:
+   *       'ownership-challenge-9883874ecac311ec8475433579a6bf5f.txt',
+   *   });
+   * ```
    */
   validate(params: OwnershipValidateParams, options?: RequestOptions): APIPromise<Ownership> {
     const { account_id, ...body } = params;

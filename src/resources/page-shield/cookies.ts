@@ -9,6 +9,16 @@ import { path } from '../../internal/utils/path';
 export class Cookies extends APIResource {
   /**
    * Lists all cookies collected by Page Shield.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const cookieListResponse of client.pageShield.cookies.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CookieListParams,
@@ -24,6 +34,14 @@ export class Cookies extends APIResource {
 
   /**
    * Fetches a cookie collected by Page Shield by cookie ID.
+   *
+   * @example
+   * ```ts
+   * const cookie = await client.pageShield.cookies.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     cookieID: string,

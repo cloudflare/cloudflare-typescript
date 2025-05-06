@@ -8,6 +8,14 @@ import { path } from '../../internal/utils/path';
 export class Settings extends APIResource {
   /**
    * Update the current settings for the active account
+   *
+   * @example
+   * ```ts
+   * const setting =
+   *   await client.networkInterconnects.settings.update({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<SettingUpdateResponse> {
     const { account_id, ...body } = params;
@@ -16,6 +24,14 @@ export class Settings extends APIResource {
 
   /**
    * Get the current settings for the active account
+   *
+   * @example
+   * ```ts
+   * const setting =
+   *   await client.networkInterconnects.settings.get({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
     const { account_id } = params;

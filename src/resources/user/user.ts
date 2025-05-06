@@ -46,6 +46,11 @@ export class User extends APIResource {
 
   /**
    * Edit part of your user details.
+   *
+   * @example
+   * ```ts
+   * const response = await client.user.edit();
+   * ```
    */
   edit(body: UserEditParams, options?: RequestOptions): APIPromise<UserEditResponse> {
     return (
@@ -55,6 +60,11 @@ export class User extends APIResource {
 
   /**
    * User Details
+   *
+   * @example
+   * ```ts
+   * const user = await client.user.get();
+   * ```
    */
   get(options?: RequestOptions): APIPromise<UserGetResponse> {
     return (this._client.get('/user', options) as APIPromise<{ result: UserGetResponse }>)._thenUnwrap(

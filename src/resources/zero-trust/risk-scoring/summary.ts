@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class Summary extends APIResource {
   /**
    * Get risk score info for all users in the account
+   *
+   * @example
+   * ```ts
+   * const summary =
+   *   await client.zeroTrust.riskScoring.summary.get({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(params: SummaryGetParams, options?: RequestOptions): APIPromise<SummaryGetResponse> {
     const { account_id } = params;

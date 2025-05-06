@@ -9,6 +9,16 @@ import { path } from '../../internal/utils/path';
 export class Connections extends APIResource {
   /**
    * Lists all connections detected by Page Shield.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const connection of client.pageShield.connections.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ConnectionListParams,
@@ -23,6 +33,14 @@ export class Connections extends APIResource {
 
   /**
    * Fetches a connection detected by Page Shield by connection ID.
+   *
+   * @example
+   * ```ts
+   * const connection = await client.pageShield.connections.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     connectionID: string,

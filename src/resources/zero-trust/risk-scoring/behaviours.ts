@@ -8,6 +8,17 @@ import { path } from '../../../internal/utils/path';
 export class Behaviours extends APIResource {
   /**
    * Update configuration for risk behaviors
+   *
+   * @example
+   * ```ts
+   * const behaviour =
+   *   await client.zeroTrust.riskScoring.behaviours.update({
+   *     account_id: 'account_id',
+   *     behaviors: {
+   *       foo: { enabled: true, risk_level: 'low' },
+   *     },
+   *   });
+   * ```
    */
   update(params: BehaviourUpdateParams, options?: RequestOptions): APIPromise<BehaviourUpdateResponse> {
     const { account_id, ...body } = params;
@@ -21,6 +32,14 @@ export class Behaviours extends APIResource {
 
   /**
    * Get all behaviors and associated configuration
+   *
+   * @example
+   * ```ts
+   * const behaviour =
+   *   await client.zeroTrust.riskScoring.behaviours.get({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(params: BehaviourGetParams, options?: RequestOptions): APIPromise<BehaviourGetResponse> {
     const { account_id } = params;

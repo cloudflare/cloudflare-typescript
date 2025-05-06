@@ -8,6 +8,16 @@ import { path } from '../../../internal/utils/path';
 export class AppTypes extends APIResource {
   /**
    * Fetches all application and application type mappings.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const appType of client.zeroTrust.gateway.appTypes.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: AppTypeListParams, options?: RequestOptions): PagePromise<AppTypesSinglePage, AppType> {
     const { account_id } = params;

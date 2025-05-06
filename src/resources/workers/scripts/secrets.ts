@@ -9,6 +9,19 @@ import { path } from '../../../internal/utils/path';
 export class Secrets extends APIResource {
   /**
    * Add a secret to a script.
+   *
+   * @example
+   * ```ts
+   * const secret = await client.workers.scripts.secrets.update(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'myBinding',
+   *     text: 'My secret.',
+   *     type: 'secret_text',
+   *   },
+   * );
+   * ```
    */
   update(
     scriptName: string,
@@ -26,6 +39,17 @@ export class Secrets extends APIResource {
 
   /**
    * List secrets bound to a script.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretListResponse of client.workers.scripts.secrets.list(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     scriptName: string,
@@ -42,6 +66,17 @@ export class Secrets extends APIResource {
 
   /**
    * Remove a secret from a script.
+   *
+   * @example
+   * ```ts
+   * const secret = await client.workers.scripts.secrets.delete(
+   *   'mySecret',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     script_name: 'this-is_my_script-01',
+   *   },
+   * );
+   * ```
    */
   delete(
     secretName: string,
@@ -59,6 +94,17 @@ export class Secrets extends APIResource {
 
   /**
    * Get a given secret binding (value omitted) on a script.
+   *
+   * @example
+   * ```ts
+   * const secret = await client.workers.scripts.secrets.get(
+   *   'mySecret',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     script_name: 'this-is_my_script-01',
+   *   },
+   * );
+   * ```
    */
   get(secretName: string, params: SecretGetParams, options?: RequestOptions): APIPromise<SecretGetResponse> {
     const { account_id, script_name } = params;

@@ -10,6 +10,17 @@ import { path } from '../../../internal/utils/path';
 export class Entries extends APIResource {
   /**
    * Creates a DLP custom entry.
+   *
+   * @example
+   * ```ts
+   * const entry = await client.zeroTrust.dlp.entries.create({
+   *   account_id: 'account_id',
+   *   enabled: true,
+   *   name: 'name',
+   *   pattern: { regex: 'regex' },
+   *   profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   * });
+   * ```
    */
   create(params: EntryCreateParams, options?: RequestOptions): APIPromise<EntryCreateResponse> {
     const { account_id, ...body } = params;
@@ -22,6 +33,19 @@ export class Entries extends APIResource {
 
   /**
    * Updates a DLP entry.
+   *
+   * @example
+   * ```ts
+   * const entry = await client.zeroTrust.dlp.entries.update(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   {
+   *     account_id: 'account_id',
+   *     name: 'name',
+   *     pattern: { regex: 'regex' },
+   *     type: 'custom',
+   *   },
+   * );
+   * ```
    */
   update(
     entryID: string,
@@ -39,6 +63,16 @@ export class Entries extends APIResource {
 
   /**
    * Lists all DLP entries in an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const entryListResponse of client.zeroTrust.dlp.entries.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: EntryListParams,
@@ -54,6 +88,14 @@ export class Entries extends APIResource {
 
   /**
    * Deletes a DLP custom entry.
+   *
+   * @example
+   * ```ts
+   * const entry = await client.zeroTrust.dlp.entries.delete(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     entryID: string,
@@ -70,6 +112,14 @@ export class Entries extends APIResource {
 
   /**
    * Fetches a DLP entry by ID.
+   *
+   * @example
+   * ```ts
+   * const entry = await client.zeroTrust.dlp.entries.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(entryID: string, params: EntryGetParams, options?: RequestOptions): APIPromise<EntryGetResponse> {
     const { account_id } = params;

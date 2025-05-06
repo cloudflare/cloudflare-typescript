@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class Full extends APIResource {
   /**
    * Lists default sampling, router IPs, warp devices, and rules for account.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.magicNetworkMonitoring.configs.full.get({
+   *     account_id: '6f91088a406011ed95aed352566e8d4c',
+   *   });
+   * ```
    */
   get(params: FullGetParams, options?: RequestOptions): APIPromise<ConfigsAPI.Configuration> {
     const { account_id } = params;

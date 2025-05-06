@@ -9,6 +9,14 @@ import { path } from '../../../../internal/utils/path';
 export class AccessRequests extends APIResource {
   /**
    * Gets a list of Access authentication audit logs for an account.
+   *
+   * @example
+   * ```ts
+   * const accessRequests =
+   *   await client.zeroTrust.access.logs.accessRequests.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   list(params: AccessRequestListParams, options?: RequestOptions): APIPromise<AccessRequestListResponse> {
     const { account_id, ...query } = params;

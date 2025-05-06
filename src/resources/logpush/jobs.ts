@@ -10,6 +10,14 @@ import { path } from '../../internal/utils/path';
 export class Jobs extends APIResource {
   /**
    * Creates a new Logpush job for an account or zone.
+   *
+   * @example
+   * ```ts
+   * const logpushJob = await client.logpush.jobs.create({
+   *   destination_conf: 's3://mybucket/logs?region=us-west-2',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   create(params: JobCreateParams, options?: RequestOptions): APIPromise<LogpushJob | null> {
     const { account_id, zone_id, ...body } = params;
@@ -39,6 +47,13 @@ export class Jobs extends APIResource {
 
   /**
    * Updates a Logpush job.
+   *
+   * @example
+   * ```ts
+   * const logpushJob = await client.logpush.jobs.update(1, {
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   update(jobID: number, params: JobUpdateParams, options?: RequestOptions): APIPromise<LogpushJob | null> {
     const { account_id, zone_id, ...body } = params;
@@ -68,6 +83,16 @@ export class Jobs extends APIResource {
 
   /**
    * Lists Logpush jobs for an account or zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const logpushJob of client.logpush.jobs.list({
+   *   account_id: 'account_id',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: JobListParams | null | undefined = {},
@@ -99,6 +124,13 @@ export class Jobs extends APIResource {
 
   /**
    * Deletes a Logpush job.
+   *
+   * @example
+   * ```ts
+   * const job = await client.logpush.jobs.delete(1, {
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   delete(
     jobID: number,
@@ -132,6 +164,13 @@ export class Jobs extends APIResource {
 
   /**
    * Gets the details of a Logpush job.
+   *
+   * @example
+   * ```ts
+   * const logpushJob = await client.logpush.jobs.get(1, {
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   get(
     jobID: number,

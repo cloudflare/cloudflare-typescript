@@ -12,6 +12,19 @@ export class OutgoingResource extends APIResource {
 
   /**
    * Create primary zone configuration for outgoing zone transfers.
+   *
+   * @example
+   * ```ts
+   * const outgoing =
+   *   await client.dns.zoneTransfers.outgoing.create({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *     name: 'www.example.com.',
+   *     peers: [
+   *       '23ff594956f20c2a721606e94745a8aa',
+   *       '00920f38ce07c2e2f4df50b1f61d4194',
+   *     ],
+   *   });
+   * ```
    */
   create(params: OutgoingCreateParams, options?: RequestOptions): APIPromise<OutgoingCreateResponse> {
     const { zone_id, ...body } = params;
@@ -24,6 +37,19 @@ export class OutgoingResource extends APIResource {
 
   /**
    * Update primary zone configuration for outgoing zone transfers.
+   *
+   * @example
+   * ```ts
+   * const outgoing =
+   *   await client.dns.zoneTransfers.outgoing.update({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *     name: 'www.example.com.',
+   *     peers: [
+   *       '23ff594956f20c2a721606e94745a8aa',
+   *       '00920f38ce07c2e2f4df50b1f61d4194',
+   *     ],
+   *   });
+   * ```
    */
   update(params: OutgoingUpdateParams, options?: RequestOptions): APIPromise<OutgoingUpdateResponse> {
     const { zone_id, ...body } = params;
@@ -36,6 +62,14 @@ export class OutgoingResource extends APIResource {
 
   /**
    * Delete primary zone configuration for outgoing zone transfers.
+   *
+   * @example
+   * ```ts
+   * const outgoing =
+   *   await client.dns.zoneTransfers.outgoing.delete({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *   });
+   * ```
    */
   delete(params: OutgoingDeleteParams, options?: RequestOptions): APIPromise<OutgoingDeleteResponse> {
     const { zone_id } = params;
@@ -49,6 +83,15 @@ export class OutgoingResource extends APIResource {
   /**
    * Disable outgoing zone transfers for primary zone and clears IXFR backlog of
    * primary zone.
+   *
+   * @example
+   * ```ts
+   * const disableTransfer =
+   *   await client.dns.zoneTransfers.outgoing.disable({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *     body: {},
+   *   });
+   * ```
    */
   disable(params: OutgoingDisableParams, options?: RequestOptions): APIPromise<DisableTransfer> {
     const { zone_id, body } = params;
@@ -62,6 +105,15 @@ export class OutgoingResource extends APIResource {
 
   /**
    * Enable outgoing zone transfers for primary zone.
+   *
+   * @example
+   * ```ts
+   * const enableTransfer =
+   *   await client.dns.zoneTransfers.outgoing.enable({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *     body: {},
+   *   });
+   * ```
    */
   enable(params: OutgoingEnableParams, options?: RequestOptions): APIPromise<EnableTransfer> {
     const { zone_id, body } = params;
@@ -75,6 +127,15 @@ export class OutgoingResource extends APIResource {
 
   /**
    * Notifies the secondary nameserver(s) and clears IXFR backlog of primary zone.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.dns.zoneTransfers.outgoing.forceNotify({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *     body: {},
+   *   });
+   * ```
    */
   forceNotify(
     params: OutgoingForceNotifyParams,
@@ -91,6 +152,14 @@ export class OutgoingResource extends APIResource {
 
   /**
    * Get primary zone configuration for outgoing zone transfers.
+   *
+   * @example
+   * ```ts
+   * const outgoing =
+   *   await client.dns.zoneTransfers.outgoing.get({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *   });
+   * ```
    */
   get(params: OutgoingGetParams, options?: RequestOptions): APIPromise<OutgoingGetResponse> {
     const { zone_id } = params;

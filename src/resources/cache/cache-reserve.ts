@@ -11,6 +11,14 @@ export class CacheReserveResource extends APIResource {
    * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
    * that you cannot undo or cancel this operation.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.cacheReserve.clear({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: {},
+   * });
+   * ```
    */
   clear(params: CacheReserveClearParams, options?: RequestOptions): APIPromise<CacheReserveClearResponse> {
     const { zone_id, body } = params;
@@ -29,6 +37,14 @@ export class CacheReserveResource extends APIResource {
    * to reduce Reserve operations costs. See the
    * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
    * for more information.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.cacheReserve.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   value: 'on',
+   * });
+   * ```
    */
   edit(params: CacheReserveEditParams, options?: RequestOptions): APIPromise<CacheReserveEditResponse> {
     const { zone_id, ...body } = params;
@@ -46,6 +62,13 @@ export class CacheReserveResource extends APIResource {
    * to reduce Reserve operations costs. See the
    * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
    * for more information.
+   *
+   * @example
+   * ```ts
+   * const cacheReserve = await client.cache.cacheReserve.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: CacheReserveGetParams, options?: RequestOptions): APIPromise<CacheReserveGetResponse> {
     const { zone_id } = params;
@@ -61,6 +84,13 @@ export class CacheReserveResource extends APIResource {
    * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
    * that you cannot undo or cancel this operation.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.cacheReserve.status({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   status(params: CacheReserveStatusParams, options?: RequestOptions): APIPromise<CacheReserveStatusResponse> {
     const { zone_id } = params;

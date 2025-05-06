@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class Locks extends APIResource {
   /**
    * Set lock rules for a bucket.
+   *
+   * @example
+   * ```ts
+   * const lock = await client.r2.buckets.locks.update(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     bucketName: string,
@@ -34,6 +42,14 @@ export class Locks extends APIResource {
 
   /**
    * Get lock rules for a bucket.
+   *
+   * @example
+   * ```ts
+   * const lock = await client.r2.buckets.locks.get(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(bucketName: string, params: LockGetParams, options?: RequestOptions): APIPromise<LockGetResponse> {
     const { account_id, jurisdiction } = params;

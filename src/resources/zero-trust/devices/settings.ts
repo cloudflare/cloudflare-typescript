@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class Settings extends APIResource {
   /**
    * Updates the current device settings for a Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const deviceSettings =
+   *   await client.zeroTrust.devices.settings.update({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
     const { account_id, ...body } = params;
@@ -20,6 +28,14 @@ export class Settings extends APIResource {
 
   /**
    * Describes the current device settings for a Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const deviceSettings =
+   *   await client.zeroTrust.devices.settings.list({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   list(params: SettingListParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
     const { account_id } = params;
@@ -32,6 +48,14 @@ export class Settings extends APIResource {
 
   /**
    * Patches the current device settings for a Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const deviceSettings =
+   *   await client.zeroTrust.devices.settings.edit({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   edit(params: SettingEditParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
     const { account_id, ...body } = params;

@@ -12,6 +12,14 @@ export class Rules extends APIResource {
   /**
    * Adds a new rule to an account or zone ruleset. The rule will be added to the end
    * of the existing list of rules in the ruleset by default.
+   *
+   * @example
+   * ```ts
+   * const rule = await client.rulesets.rules.create(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   create(
     rulesetID: string,
@@ -45,6 +53,17 @@ export class Rules extends APIResource {
 
   /**
    * Deletes an existing rule from an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * const rule = await client.rulesets.rules.delete(
+   *   '3a03d665bac047339bb530ecb439a90d',
+   *   {
+   *     ruleset_id: '2f2feab2026849078ba485f918791bdc',
+   *     account_id: 'account_id',
+   *   },
+   * );
+   * ```
    */
   delete(ruleID: string, params: RuleDeleteParams, options?: RequestOptions): APIPromise<RuleDeleteResponse> {
     const { ruleset_id, account_id, zone_id } = params;
@@ -74,6 +93,17 @@ export class Rules extends APIResource {
 
   /**
    * Updates an existing rule in an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * const response = await client.rulesets.rules.edit(
+   *   '3a03d665bac047339bb530ecb439a90d',
+   *   {
+   *     ruleset_id: '2f2feab2026849078ba485f918791bdc',
+   *     account_id: 'account_id',
+   *   },
+   * );
+   * ```
    */
   edit(ruleID: string, params: RuleEditParams, options?: RequestOptions): APIPromise<RuleEditResponse> {
     const { ruleset_id, account_id, zone_id, ...body } = params;

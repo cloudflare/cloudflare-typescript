@@ -28,6 +28,15 @@ export class Pools extends APIResource {
 
   /**
    * Create a new pool.
+   *
+   * @example
+   * ```ts
+   * const pool = await client.loadBalancers.pools.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'primary-dc-1',
+   *   origins: [{}],
+   * });
+   * ```
    */
   create(params: PoolCreateParams, options?: RequestOptions): APIPromise<Pool> {
     const { account_id, ...body } = params;
@@ -41,6 +50,18 @@ export class Pools extends APIResource {
 
   /**
    * Modify a configured pool.
+   *
+   * @example
+   * ```ts
+   * const pool = await client.loadBalancers.pools.update(
+   *   '17b5962d775c646f3f9725cbc7a53df4',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'primary-dc-1',
+   *     origins: [{}],
+   *   },
+   * );
+   * ```
    */
   update(poolID: string, params: PoolUpdateParams, options?: RequestOptions): APIPromise<Pool> {
     const { account_id, ...body } = params;
@@ -54,6 +75,16 @@ export class Pools extends APIResource {
 
   /**
    * List configured pools.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const pool of client.loadBalancers.pools.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: PoolListParams, options?: RequestOptions): PagePromise<PoolsSinglePage, Pool> {
     const { account_id, ...query } = params;
@@ -65,6 +96,14 @@ export class Pools extends APIResource {
 
   /**
    * Delete a configured pool.
+   *
+   * @example
+   * ```ts
+   * const pool = await client.loadBalancers.pools.delete(
+   *   '17b5962d775c646f3f9725cbc7a53df4',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(poolID: string, params: PoolDeleteParams, options?: RequestOptions): APIPromise<PoolDeleteResponse> {
     const { account_id } = params;
@@ -81,6 +120,16 @@ export class Pools extends APIResource {
    * properties. Pools are ordered by ascending `name`. Returns the list of affected
    * pools. Supports the standard pagination query parameters, either
    * `limit`/`offset` or `per_page`/`page`.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const pool of client.loadBalancers.pools.bulkEdit(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   bulkEdit(params: PoolBulkEditParams, options?: RequestOptions): PagePromise<PoolsSinglePage, Pool> {
     const { account_id, ...body } = params;
@@ -93,6 +142,14 @@ export class Pools extends APIResource {
 
   /**
    * Apply changes to an existing pool, overwriting the supplied properties.
+   *
+   * @example
+   * ```ts
+   * const pool = await client.loadBalancers.pools.edit(
+   *   '17b5962d775c646f3f9725cbc7a53df4',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(poolID: string, params: PoolEditParams, options?: RequestOptions): APIPromise<Pool> {
     const { account_id, ...body } = params;
@@ -106,6 +163,14 @@ export class Pools extends APIResource {
 
   /**
    * Fetch a single configured pool.
+   *
+   * @example
+   * ```ts
+   * const pool = await client.loadBalancers.pools.get(
+   *   '17b5962d775c646f3f9725cbc7a53df4',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(poolID: string, params: PoolGetParams, options?: RequestOptions): APIPromise<Pool> {
     const { account_id } = params;

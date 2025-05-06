@@ -8,6 +8,18 @@ import { path } from '../../../../../internal/utils/path';
 export class Logs extends APIResource {
   /**
    * Fetch deployment logs for a project.
+   *
+   * @example
+   * ```ts
+   * const log =
+   *   await client.pages.projects.deployments.history.logs.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       project_name: 'this-is-my-project-01',
+   *     },
+   *   );
+   * ```
    */
   get(deploymentID: string, params: LogGetParams, options?: RequestOptions): APIPromise<LogGetResponse> {
     const { account_id, project_name } = params;

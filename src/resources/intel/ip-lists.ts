@@ -8,6 +8,16 @@ import { path } from '../../internal/utils/path';
 export class IPLists extends APIResource {
   /**
    * Get IP Lists
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ipList of client.intel.ipLists.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   get(params: IPListGetParams, options?: RequestOptions): PagePromise<IPListsSinglePage, IPList> {
     const { account_id } = params;

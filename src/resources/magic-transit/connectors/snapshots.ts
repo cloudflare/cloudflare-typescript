@@ -8,6 +8,15 @@ import { path } from '../../../internal/utils/path';
 export class Snapshots extends APIResource {
   /**
    * List Snapshots
+   *
+   * @example
+   * ```ts
+   * const snapshots =
+   *   await client.magicTransit.connectors.snapshots.list(
+   *     'connector_id',
+   *     { account_id: 0, from: 0, to: 0 },
+   *   );
+   * ```
    */
   list(
     connectorID: string,
@@ -25,6 +34,15 @@ export class Snapshots extends APIResource {
 
   /**
    * Get Snapshot
+   *
+   * @example
+   * ```ts
+   * const snapshot =
+   *   await client.magicTransit.connectors.snapshots.get(0, {
+   *     account_id: 0,
+   *     connector_id: 'connector_id',
+   *   });
+   * ```
    */
   get(
     snapshotT: number,

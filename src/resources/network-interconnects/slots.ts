@@ -8,6 +8,13 @@ import { path } from '../../internal/utils/path';
 export class Slots extends APIResource {
   /**
    * Retrieve a list of all slots matching the specified parameters
+   *
+   * @example
+   * ```ts
+   * const slots = await client.networkInterconnects.slots.list({
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   list(params: SlotListParams, options?: RequestOptions): APIPromise<SlotListResponse> {
     const { account_id, ...query } = params;
@@ -16,6 +23,14 @@ export class Slots extends APIResource {
 
   /**
    * Get information about the specified slot
+   *
+   * @example
+   * ```ts
+   * const slot = await client.networkInterconnects.slots.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(slot: string, params: SlotGetParams, options?: RequestOptions): APIPromise<SlotGetResponse> {
     const { account_id } = params;

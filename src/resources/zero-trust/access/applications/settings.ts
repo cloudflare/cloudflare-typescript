@@ -10,6 +10,15 @@ import { path } from '../../../../internal/utils/path';
 export class Settings extends APIResource {
   /**
    * Updates Access application settings.
+   *
+   * @example
+   * ```ts
+   * const setting =
+   *   await client.zeroTrust.access.applications.settings.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   update(
     appID: ApplicationsAPI.AppIDParam,
@@ -43,6 +52,15 @@ export class Settings extends APIResource {
 
   /**
    * Updates Access application settings.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.access.applications.settings.edit(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   edit(
     appID: ApplicationsAPI.AppIDParam,

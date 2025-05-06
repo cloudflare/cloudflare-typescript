@@ -10,6 +10,16 @@ export class Routes extends APIResource {
   /**
    * Creates a new Magic static route. Use `?validate_only=true` as an optional query
    * parameter to run validation only without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const route = await client.magicTransit.routes.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   nexthop: '203.0.113.1',
+   *   prefix: '192.0.2.0/24',
+   *   priority: 0,
+   * });
+   * ```
    */
   create(params: RouteCreateParams, options?: RequestOptions): APIPromise<RouteCreateResponse> {
     const { account_id, ...body } = params;
@@ -23,6 +33,19 @@ export class Routes extends APIResource {
   /**
    * Update a specific Magic static route. Use `?validate_only=true` as an optional
    * query parameter to run validation only without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const route = await client.magicTransit.routes.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     nexthop: '203.0.113.1',
+   *     prefix: '192.0.2.0/24',
+   *     priority: 0,
+   *   },
+   * );
+   * ```
    */
   update(
     routeID: string,
@@ -40,6 +63,13 @@ export class Routes extends APIResource {
 
   /**
    * List all Magic static routes.
+   *
+   * @example
+   * ```ts
+   * const routes = await client.magicTransit.routes.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: RouteListParams, options?: RequestOptions): APIPromise<RouteListResponse> {
     const { account_id } = params;
@@ -52,6 +82,14 @@ export class Routes extends APIResource {
 
   /**
    * Disable and remove a specific Magic static route.
+   *
+   * @example
+   * ```ts
+   * const route = await client.magicTransit.routes.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     routeID: string,
@@ -70,6 +108,22 @@ export class Routes extends APIResource {
    * Update multiple Magic static routes. Use `?validate_only=true` as an optional
    * query parameter to run validation only without persisting changes. Only fields
    * for a route that need to be changed need be provided.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.routes.bulkUpdate({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     routes: [
+   *       {
+   *         id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *         nexthop: '203.0.113.1',
+   *         prefix: '192.0.2.0/24',
+   *         priority: 0,
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   bulkUpdate(params: RouteBulkUpdateParams, options?: RequestOptions): APIPromise<RouteBulkUpdateResponse> {
     const { account_id, ...body } = params;
@@ -82,6 +136,13 @@ export class Routes extends APIResource {
 
   /**
    * Delete multiple Magic static routes.
+   *
+   * @example
+   * ```ts
+   * const response = await client.magicTransit.routes.empty({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   empty(params: RouteEmptyParams, options?: RequestOptions): APIPromise<RouteEmptyResponse> {
     const { account_id } = params;
@@ -94,6 +155,14 @@ export class Routes extends APIResource {
 
   /**
    * Get a specific Magic static route.
+   *
+   * @example
+   * ```ts
+   * const route = await client.magicTransit.routes.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(routeID: string, params: RouteGetParams, options?: RequestOptions): APIPromise<RouteGetResponse> {
     const { account_id } = params;

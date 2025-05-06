@@ -9,6 +9,21 @@ import { path } from '../../../../internal/utils/path';
 export class Downloads extends APIResource {
   /**
    * Downloads artifacts for an executed command. Bulk downloads are not supported
+   *
+   * @example
+   * ```ts
+   * const download =
+   *   await client.zeroTrust.dex.commands.downloads.get(
+   *     'filename',
+   *     {
+   *       account_id: '01a7362d577a6c3019a474fd6f485823',
+   *       command_id: '5758fefe-ae7e-4538-a39b-1fef6abcb909',
+   *     },
+   *   );
+   *
+   * const content = await download.blob();
+   * console.log(content);
+   * ```
    */
   get(filename: string, params: DownloadGetParams, options?: RequestOptions): APIPromise<Response> {
     const { account_id, command_id } = params;

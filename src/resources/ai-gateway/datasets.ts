@@ -9,6 +9,25 @@ import { path } from '../../internal/utils/path';
 export class Datasets extends APIResource {
   /**
    * Create a new Dataset
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.aiGateway.datasets.create(
+   *   'my-gateway',
+   *   {
+   *     account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *     enable: true,
+   *     filters: [
+   *       {
+   *         key: 'created_at',
+   *         operator: 'eq',
+   *         value: ['string'],
+   *       },
+   *     ],
+   *     name: 'name',
+   *   },
+   * );
+   * ```
    */
   create(
     gatewayID: string,
@@ -26,6 +45,26 @@ export class Datasets extends APIResource {
 
   /**
    * Update a Dataset
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.aiGateway.datasets.update(
+   *   'id',
+   *   {
+   *     account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *     gateway_id: 'my-gateway',
+   *     enable: true,
+   *     filters: [
+   *       {
+   *         key: 'created_at',
+   *         operator: 'eq',
+   *         value: ['string'],
+   *       },
+   *     ],
+   *     name: 'name',
+   *   },
+   * );
+   * ```
    */
   update(
     id: string,
@@ -43,6 +82,17 @@ export class Datasets extends APIResource {
 
   /**
    * List Datasets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const datasetListResponse of client.aiGateway.datasets.list(
+   *   'my-gateway',
+   *   { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     gatewayID: string,
@@ -59,6 +109,17 @@ export class Datasets extends APIResource {
 
   /**
    * Delete a Dataset
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.aiGateway.datasets.delete(
+   *   'id',
+   *   {
+   *     account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *     gateway_id: 'my-gateway',
+   *   },
+   * );
+   * ```
    */
   delete(
     id: string,
@@ -76,6 +137,14 @@ export class Datasets extends APIResource {
 
   /**
    * Fetch a Dataset
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.aiGateway.datasets.get('id', {
+   *   account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *   gateway_id: 'my-gateway',
+   * });
+   * ```
    */
   get(id: string, params: DatasetGetParams, options?: RequestOptions): APIPromise<DatasetGetResponse> {
     const { account_id, gateway_id } = params;

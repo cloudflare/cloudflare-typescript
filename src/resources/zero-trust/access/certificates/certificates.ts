@@ -20,6 +20,17 @@ export class Certificates extends APIResource {
 
   /**
    * Adds a new mTLS root certificate to Access.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.zeroTrust.access.certificates.create({
+   *     certificate:
+   *       '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
+   *     name: 'Allow devs',
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   create(params: CertificateCreateParams, options?: RequestOptions): APIPromise<Certificate> {
     const { account_id, zone_id, ...body } = params;
@@ -49,6 +60,18 @@ export class Certificates extends APIResource {
 
   /**
    * Updates a configured mTLS certificate.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.zeroTrust.access.certificates.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       associated_hostnames: ['admin.example.com'],
+   *       account_id: 'account_id',
+   *     },
+   *   );
+   * ```
    */
   update(
     certificateID: string,
@@ -82,6 +105,16 @@ export class Certificates extends APIResource {
 
   /**
    * Lists all mTLS root certificates.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const certificate of client.zeroTrust.access.certificates.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CertificateListParams | null | undefined = {},
@@ -113,6 +146,15 @@ export class Certificates extends APIResource {
 
   /**
    * Deletes an mTLS certificate.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.zeroTrust.access.certificates.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     certificateID: string,
@@ -146,6 +188,15 @@ export class Certificates extends APIResource {
 
   /**
    * Fetches a single mTLS certificate.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.zeroTrust.access.certificates.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     certificateID: string,

@@ -8,6 +8,16 @@ import { path } from '../../internal/utils/path';
 export class Submissions extends APIResource {
   /**
    * This endpoint returns information for submissions to made to reclassify emails.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const submissionListResponse of client.emailSecurity.submissions.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SubmissionListParams,

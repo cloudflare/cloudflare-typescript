@@ -8,6 +8,16 @@ import { path } from '../../internal/utils/path';
 export class Sinkholes extends APIResource {
   /**
    * List sinkholes owned by this account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const sinkhole of client.intel.sinkholes.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: SinkholeListParams, options?: RequestOptions): PagePromise<SinkholesSinglePage, Sinkhole> {
     const { account_id } = params;

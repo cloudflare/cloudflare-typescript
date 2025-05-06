@@ -13,6 +13,19 @@ import { path } from '../../../../../internal/utils/path';
 export class Content extends APIResource {
   /**
    * Put script content for a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const script =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.content.update(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *       metadata: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     scriptName: string,
@@ -52,6 +65,21 @@ export class Content extends APIResource {
   /**
    * Fetch script content from a script uploaded to a Workers for Platforms
    * namespace.
+   *
+   * @example
+   * ```ts
+   * const content =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.content.get(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *     },
+   *   );
+   *
+   * const data = await content.blob();
+   * console.log(data);
+   * ```
    */
   get(scriptName: string, params: ContentGetParams, options?: RequestOptions): APIPromise<Response> {
     const { account_id, dispatch_namespace } = params;

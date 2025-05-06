@@ -10,6 +10,26 @@ import { path } from '../../../../internal/utils/path';
 export class Custom extends APIResource {
   /**
    * Creates a DLP custom profile.
+   *
+   * @example
+   * ```ts
+   * const custom =
+   *   await client.zeroTrust.dlp.profiles.custom.create({
+   *     account_id: 'account_id',
+   *     profiles: [
+   *       {
+   *         entries: [
+   *           {
+   *             enabled: true,
+   *             name: 'name',
+   *             pattern: { regex: 'regex' },
+   *           },
+   *         ],
+   *         name: 'name',
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   create(params: CustomCreateParams, options?: RequestOptions): APIPromise<CustomCreateResponse> {
     const { account_id, ...body } = params;
@@ -23,6 +43,15 @@ export class Custom extends APIResource {
 
   /**
    * Updates a DLP custom profile.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.custom.update(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id', name: 'name' },
+   *   );
+   * ```
    */
   update(
     profileID: string,
@@ -40,6 +69,15 @@ export class Custom extends APIResource {
 
   /**
    * Deletes a DLP custom profile.
+   *
+   * @example
+   * ```ts
+   * const custom =
+   *   await client.zeroTrust.dlp.profiles.custom.delete(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     profileID: string,
@@ -57,6 +95,15 @@ export class Custom extends APIResource {
 
   /**
    * Fetches a custom DLP profile by id.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.custom.get(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(profileID: string, params: CustomGetParams, options?: RequestOptions): APIPromise<ProfilesAPI.Profile> {
     const { account_id } = params;

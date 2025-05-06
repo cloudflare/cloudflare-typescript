@@ -10,6 +10,15 @@ import { path } from '../../../../internal/utils/path';
 export class Upload extends APIResource {
   /**
    * Prepare to upload a new version of a dataset
+   *
+   * @example
+   * ```ts
+   * const newVersion =
+   *   await client.zeroTrust.dlp.datasets.upload.create(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   create(datasetID: string, params: UploadCreateParams, options?: RequestOptions): APIPromise<NewVersion> {
     const { account_id } = params;
@@ -26,6 +35,16 @@ export class Upload extends APIResource {
    * only be created in the Cloudflare dashboard. For other clients, this operation
    * can only be used for non-secret Custom Word Lists. The body must be a UTF-8
    * encoded, newline (NL or CRNL) separated list of words to be matched.
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.zeroTrust.dlp.datasets.upload.edit(0, {
+   *     account_id: 'account_id',
+   *     dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     body: fs.createReadStream('path/to/file'),
+   *   });
+   * ```
    */
   edit(version: number, params: UploadEditParams, options?: RequestOptions): APIPromise<DatasetsAPI.Dataset> {
     const { account_id, dataset_id, body } = params;

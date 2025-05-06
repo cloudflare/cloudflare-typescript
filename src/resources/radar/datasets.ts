@@ -9,6 +9,11 @@ import { path } from '../../internal/utils/path';
 export class Datasets extends APIResource {
   /**
    * Retrieves a list of datasets.
+   *
+   * @example
+   * ```ts
+   * const datasets = await client.radar.datasets.list();
+   * ```
    */
   list(
     query: DatasetListParams | null | undefined = {},
@@ -23,6 +28,13 @@ export class Datasets extends APIResource {
 
   /**
    * Retrieves an URL to download a single dataset.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.datasets.download({
+   *   datasetId: 3,
+   * });
+   * ```
    */
   download(params: DatasetDownloadParams, options?: RequestOptions): APIPromise<DatasetDownloadResponse> {
     const { format, ...body } = params;
@@ -37,6 +49,13 @@ export class Datasets extends APIResource {
    * Retrieves the CSV content of a given dataset by alias or ID. When getting the
    * content by alias the latest dataset is returned, optionally filtered by the
    * latest available at a given date.
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.radar.datasets.get(
+   *   'ranking_top_1000',
+   * );
+   * ```
    */
   get(alias: string, options?: RequestOptions): APIPromise<string> {
     return this._client.get(path`/radar/datasets/${alias}`, {
