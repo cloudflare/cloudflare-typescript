@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 
 export class Zones extends APIResource {
   /**
@@ -37,9 +36,9 @@ export class Zones extends APIResource {
 }
 
 export interface ZoneUpdateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<ZoneUpdateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<ZoneUpdateResponse.Message>;
 
   /**
    * Whether the API call was successful
@@ -50,6 +49,18 @@ export interface ZoneUpdateResponse {
 }
 
 export namespace ZoneUpdateResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
+
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
@@ -74,9 +85,9 @@ export namespace ZoneUpdateResponse {
 }
 
 export interface ZoneDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<ZoneDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<ZoneDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
@@ -87,6 +98,18 @@ export interface ZoneDeleteResponse {
 }
 
 export namespace ZoneDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
+
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
