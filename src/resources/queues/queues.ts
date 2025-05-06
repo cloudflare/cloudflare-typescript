@@ -130,6 +130,11 @@ export namespace Queue {
     delivery_delay?: number;
 
     /**
+     * Indicates if message delivery to consumers is currently paused.
+     */
+    delivery_paused?: boolean;
+
+    /**
      * Number of seconds after which an unconsumed message will be delayed.
      */
     message_retention_period?: number;
@@ -182,6 +187,11 @@ export namespace QueueUpdateParams {
      * Number of seconds to delay delivery of all messages to consumers.
      */
     delivery_delay?: number;
+
+    /**
+     * Indicates if message delivery to consumers is currently paused.
+     */
+    delivery_paused?: boolean;
 
     /**
      * Number of seconds after which an unconsumed message will be delayed.
