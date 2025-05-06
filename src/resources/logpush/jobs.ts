@@ -549,6 +549,13 @@ export interface JobCreateParams {
   enabled?: boolean;
 
   /**
+   * Body param: The filters to select the events to include and/or remove from your
+   * logs. For more information, refer to
+   * [Filters](https://developers.cloudflare.com/logs/reference/filters/).
+   */
+  filter?: string | null;
+
+  /**
    * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
    * parameters instead. The frequency at which Cloudflare sends batches of logs to
    * your destination. Setting frequency to high sends your logs in larger quantities
@@ -643,6 +650,13 @@ export interface JobUpdateParams {
    * Body param: Flag that indicates if the job is enabled.
    */
   enabled?: boolean;
+
+  /**
+   * Body param: The filters to select the events to include and/or remove from your
+   * logs. For more information, refer to
+   * [Filters](https://developers.cloudflare.com/logs/reference/filters/).
+   */
+  filter?: string | null;
 
   /**
    * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
