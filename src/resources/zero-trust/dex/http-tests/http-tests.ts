@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DEXAPI from '../dex';
 import * as PercentilesAPI from './percentiles';
 import { HTTPDetailsPercentiles, PercentileGetParams, Percentiles, TestStatOverTime } from './percentiles';
 
@@ -55,7 +54,7 @@ export interface HTTPDetails {
    */
   name?: string;
 
-  target_policies?: Array<DEXAPI.DigitalExperienceMonitor> | null;
+  target_policies?: Array<unknown> | null;
 
   targeted?: boolean;
 }

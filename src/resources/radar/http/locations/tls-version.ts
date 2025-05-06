@@ -38,12 +38,12 @@ export class TLSVersion extends APIResource {
 export interface TLSVersionGetResponse {
   meta: TLSVersionGetResponse.Meta;
 
-  top_0: Array<TLSVersionGetResponse.Top0>;
+  top_0: Array<unknown>;
 }
 
 export namespace TLSVersionGetResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<unknown>;
 
     lastUpdated: string;
 
@@ -51,49 +51,11 @@ export namespace TLSVersionGetResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<unknown>;
 
       level?: number;
     }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Top0 {
-    clientCountryAlpha2: string;
-
-    clientCountryName: string;
-
-    value: string;
   }
 }
 

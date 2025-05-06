@@ -212,10 +212,7 @@ export namespace PhaseUpdateResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -347,10 +344,7 @@ export namespace PhaseUpdateResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -548,10 +542,7 @@ export namespace PhaseGetResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -683,10 +674,7 @@ export namespace PhaseGetResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -853,10 +841,7 @@ export namespace PhaseUpdateParams {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.LoggingParam;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -973,10 +958,7 @@ export namespace PhaseUpdateParams {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.LoggingParam;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.

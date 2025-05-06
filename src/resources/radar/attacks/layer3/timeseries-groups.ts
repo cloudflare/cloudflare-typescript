@@ -216,30 +216,13 @@ export namespace TimeseriesGroupDurationResponse {
 export interface TimeseriesGroupIndustryResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupIndustryResponse.Serie0;
-}
-
-export namespace TimeseriesGroupIndustryResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupIPVersionResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupIPVersionResponse.Serie0;
-}
-
-export namespace TimeseriesGroupIPVersionResponse {
-  export interface Serie0 {
-    IPv4: Array<string>;
-
-    IPv6: Array<string>;
-
-    timestamps: Array<string>;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupProtocolResponse {
@@ -265,27 +248,13 @@ export namespace TimeseriesGroupProtocolResponse {
 export interface TimeseriesGroupVectorResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupVectorResponse.Serie0;
-}
-
-export namespace TimeseriesGroupVectorResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupVerticalResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupVerticalResponse.Serie0;
-}
-
-export namespace TimeseriesGroupVerticalResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
-  }
+  serie_0: unknown;
 }
 
 export interface TimeseriesGroupBitrateParams {

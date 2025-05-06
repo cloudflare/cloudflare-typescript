@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 
 export class LastSeenIdentity extends APIResource {
   /**
@@ -38,7 +37,7 @@ export interface Identity {
 
   email?: string;
 
-  geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
+  geo?: unknown;
 
   iat?: number;
 

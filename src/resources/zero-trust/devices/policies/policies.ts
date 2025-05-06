@@ -75,7 +75,7 @@ export interface FallbackDomainParam {
   dns_server?: Array<string>;
 }
 
-export type FallbackDomainPolicy = Array<FallbackDomain>;
+export type FallbackDomainPolicy = unknown;
 
 export interface SettingsPolicy {
   /**

@@ -43,83 +43,9 @@ export class Zaraz extends APIResource {
   }
 }
 
-export interface ButtonTextTranslation {
-  /**
-   * Object where keys are language codes
-   */
-  accept_all: Record<string, string>;
+export type ButtonTextTranslation = unknown;
 
-  /**
-   * Object where keys are language codes
-   */
-  confirm_my_choices: Record<string, string>;
-
-  /**
-   * Object where keys are language codes
-   */
-  reject_all: Record<string, string>;
-}
-
-export interface ButtonTextTranslationParam {
-  /**
-   * Object where keys are language codes
-   */
-  accept_all: Record<string, string>;
-
-  /**
-   * Object where keys are language codes
-   */
-  confirm_my_choices: Record<string, string>;
-
-  /**
-   * Object where keys are language codes
-   */
-  reject_all: Record<string, string>;
-}
-
-export interface NeoEvent {
-  /**
-   * Tool event type
-   */
-  actionType: string;
-
-  /**
-   * List of blocking triggers IDs
-   */
-  blockingTriggers: Array<string>;
-
-  /**
-   * Event payload
-   */
-  data: unknown;
-
-  /**
-   * List of firing triggers IDs
-   */
-  firingTriggers: Array<string>;
-}
-
-export interface NeoEventParam {
-  /**
-   * Tool event type
-   */
-  actionType: string;
-
-  /**
-   * List of blocking triggers IDs
-   */
-  blockingTriggers: Array<string>;
-
-  /**
-   * Event payload
-   */
-  data: unknown;
-
-  /**
-   * List of firing triggers IDs
-   */
-  firingTriggers: Array<string>;
-}
+export type NeoEvent = unknown;
 
 export interface ZarazUpdateParams {
   /**

@@ -176,10 +176,7 @@ export interface BlockRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -328,10 +325,7 @@ export interface BlockRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -495,10 +489,7 @@ export interface CompressResponseRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -637,10 +628,7 @@ export interface CompressResponseRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -794,10 +782,7 @@ export interface DDoSDynamicRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -914,10 +899,7 @@ export interface DDoSDynamicRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -1049,10 +1031,7 @@ export interface ExecuteRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -1292,10 +1271,7 @@ export interface ExecuteRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -1550,10 +1526,7 @@ export interface ForceConnectionCloseRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -1670,10 +1643,7 @@ export interface ForceConnectionCloseRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -1805,10 +1775,7 @@ export interface LogCustomFieldRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -2017,10 +1984,7 @@ export interface LogCustomFieldRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -2244,10 +2208,7 @@ export interface LogRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -2364,10 +2325,7 @@ export interface LogRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -2448,25 +2406,7 @@ export namespace LogRuleParam {
   }
 }
 
-/**
- * An object configuring the rule's logging behavior.
- */
-export interface Logging {
-  /**
-   * Whether to generate a log when the rule matches.
-   */
-  enabled: boolean;
-}
-
-/**
- * An object configuring the rule's logging behavior.
- */
-export interface LoggingParam {
-  /**
-   * Whether to generate a log when the rule matches.
-   */
-  enabled: boolean;
-}
+export type Logging = unknown;
 
 export interface ManagedChallengeRule {
   /**
@@ -2519,10 +2459,7 @@ export interface ManagedChallengeRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -2639,10 +2576,7 @@ export interface ManagedChallengeRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -2774,10 +2708,7 @@ export interface RedirectRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -2962,10 +2893,7 @@ export interface RedirectRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -3165,10 +3093,7 @@ export interface RewriteRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -3351,10 +3276,7 @@ export interface RewriteRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -3588,10 +3510,7 @@ export interface RouteRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -3755,10 +3674,7 @@ export interface RouteRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -3937,10 +3853,7 @@ export interface RulesetRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -4072,10 +3985,7 @@ export interface ScoreRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -4203,10 +4113,7 @@ export interface ScoreRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -4349,10 +4256,7 @@ export interface ServeErrorRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -4489,10 +4393,7 @@ export interface ServeErrorRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -4644,10 +4545,7 @@ export interface SetCacheSettingsRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -5160,10 +5058,7 @@ export interface SetCacheSettingsRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -5691,10 +5586,7 @@ export interface SetConfigRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -5923,10 +5815,7 @@ export interface SetConfigRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -6170,10 +6059,7 @@ export interface SkipRule {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -6324,10 +6210,7 @@ export interface SkipRuleParam {
    */
   expression?: string;
 
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
+  logging?: unknown;
 
   /**
    * An object configuring the rule's ratelimit behavior.
@@ -6558,10 +6441,7 @@ export namespace RuleCreateResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -6693,10 +6573,7 @@ export namespace RuleCreateResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -6894,10 +6771,7 @@ export namespace RuleDeleteResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -7029,10 +6903,7 @@ export namespace RuleDeleteResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -7230,10 +7101,7 @@ export namespace RuleEditResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -7365,10 +7233,7 @@ export namespace RuleEditResponse {
      */
     expression?: string;
 
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
+    logging?: unknown;
 
     /**
      * An object configuring the rule's ratelimit behavior.
@@ -7520,9 +7385,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -7721,9 +7586,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -7890,9 +7755,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -8081,9 +7946,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -8373,9 +8238,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -8545,9 +8410,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -8714,9 +8579,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -8886,9 +8751,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -9123,9 +8988,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -9358,9 +9223,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -9574,9 +9439,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -9754,9 +9619,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -9943,9 +9808,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -10224,9 +10089,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -10427,9 +10292,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -10995,9 +10860,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -11259,9 +11124,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -11428,9 +11293,9 @@ export declare namespace RuleCreateParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -11634,9 +11499,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -11835,9 +11700,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -12004,9 +11869,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -12195,9 +12060,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -12487,9 +12352,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -12659,9 +12524,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -12828,9 +12693,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -13000,9 +12865,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -13237,9 +13102,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -13472,9 +13337,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -13688,9 +13553,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -13868,9 +13733,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -14057,9 +13922,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -14338,9 +14203,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -14541,9 +14406,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -15109,9 +14974,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -15373,9 +15238,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.
@@ -15542,9 +15407,9 @@ export declare namespace RuleEditParams {
     expression?: string;
 
     /**
-     * Body param: An object configuring the rule's logging behavior.
+     * Body param:
      */
-    logging?: LoggingParam;
+    logging?: unknown;
 
     /**
      * Body param: An object configuring where the rule will be placed.

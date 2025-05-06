@@ -180,20 +180,12 @@ export namespace RouteAsesResponse {
 }
 
 export interface RouteMoasResponse {
-  meta: RouteMoasResponse.Meta;
+  meta: unknown;
 
   moas: Array<RouteMoasResponse.Moa>;
 }
 
 export namespace RouteMoasResponse {
-  export interface Meta {
-    data_time: string;
-
-    query_time: string;
-
-    total_peers: number;
-  }
-
   export interface Moa {
     origins: Array<Moa.Origin>;
 
@@ -212,20 +204,12 @@ export namespace RouteMoasResponse {
 }
 
 export interface RoutePfx2asResponse {
-  meta: RoutePfx2asResponse.Meta;
+  meta: unknown;
 
   prefix_origins: Array<RoutePfx2asResponse.PrefixOrigin>;
 }
 
 export namespace RoutePfx2asResponse {
-  export interface Meta {
-    data_time: string;
-
-    query_time: string;
-
-    total_peers: number;
-  }
-
   export interface PrefixOrigin {
     origin: number;
 
@@ -301,20 +285,12 @@ export namespace RouteRealtimeResponse {
 }
 
 export interface RouteStatsResponse {
-  meta: RouteStatsResponse.Meta;
+  meta: unknown;
 
   stats: RouteStatsResponse.Stats;
 }
 
 export namespace RouteStatsResponse {
-  export interface Meta {
-    data_time: string;
-
-    query_time: string;
-
-    total_peers: number;
-  }
-
   export interface Stats {
     distinct_origins: number;
 

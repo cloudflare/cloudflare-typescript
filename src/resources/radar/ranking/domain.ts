@@ -72,21 +72,7 @@ export namespace DomainGetResponse {
   }
 
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
-  }
-
-  export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
+    dateRange: Array<unknown>;
   }
 }
 
