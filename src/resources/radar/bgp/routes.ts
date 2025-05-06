@@ -116,64 +116,64 @@ export namespace RouteAsesResponse {
     asn: number;
 
     /**
-     * AS's customer cone size
+     * AS's customer cone size.
      */
     coneSize: number;
 
     /**
-     * 2-letter country code for the AS's registration country
+     * Alpha-2 code for the AS's registration country.
      */
     country: string;
 
     /**
-     * number of IPv4 addresses originated by the AS
+     * Number of IPv4 addresses originated by the AS.
      */
     ipv4Count: number;
 
     /**
-     * number of IPv6 addresses originated by the AS
+     * Number of IPv6 addresses originated by the AS.
      */
     ipv6Count: string;
 
     /**
-     * name of the AS
+     * Name of the AS.
      */
     name: string;
 
     /**
-     * number of total IP prefixes originated by the AS
+     * Number of total IP prefixes originated by the AS.
      */
     pfxsCount: number;
 
     /**
-     * number of RPKI invalid prefixes originated by the AS
+     * Number of RPKI invalid prefixes originated by the AS.
      */
     rpkiInvalid: number;
 
     /**
-     * number of RPKI unknown prefixes originated by the AS
+     * Number of RPKI unknown prefixes originated by the AS.
      */
     rpkiUnknown: number;
 
     /**
-     * number of RPKI valid prefixes originated by the AS
+     * Number of RPKI valid prefixes originated by the AS.
      */
     rpkiValid: number;
   }
 
   export interface Meta {
     /**
-     * the timestamp of when the data is generated
+     * The timestamp of when the data is generated.
      */
     dataTime: string;
 
     /**
-     * the timestamp of the query
+     * The timestamp of the query.
      */
     queryTime: string;
 
     /**
-     * total number of route collector peers used to generate this data
+     * Total number of route collector peers used to generate this data.
      */
     totalPeers: number;
   }
@@ -245,56 +245,133 @@ export interface RouteRealtimeResponse {
 
 export namespace RouteRealtimeResponse {
   export interface Meta {
+    asn_info: Array<Meta.ASNInfo>;
+
     collectors: Array<Meta.Collector>;
+
+    rpki: Array<Meta.RPKI>;
+
+    visibility: Meta.Visibility;
   }
 
   export namespace Meta {
+    export interface ASNInfo {
+      /**
+       * Name of the autonomous system.
+       */
+      as_name: string;
+
+      /**
+       * AS number.
+       */
+      asn: number;
+
+      /**
+       * Alpha-2 code for the AS's registration country.
+       */
+      country_code: string;
+
+      /**
+       * Organization ID.
+       */
+      org_id: string;
+
+      /**
+       * Organization name.
+       */
+      org_name: string;
+    }
+
     export interface Collector {
       /**
-       * public route collector ID
+       * Public route collector ID.
        */
       collector: string;
 
       /**
-       * latest realtime stream timestamp for this collector
+       * Latest realtime stream timestamp for this collector.
        */
       latest_realtime_ts: string;
 
       /**
-       * latest RIB dump MRT file timestamp for this collector
+       * Latest RIB dump MRT file timestamp for this collector.
        */
       latest_rib_ts: string;
 
       /**
-       * latest BGP updates MRT file timestamp for this collector
+       * Latest BGP updates MRT file timestamp for this collector.
        */
       latest_updates_ts: string;
+
+      /**
+       * Total number of collector peers used from this collector.
+       */
+      peers_count: number;
+
+      /**
+       * Total number of collector peers used from this collector for IPv4 prefixes.
+       */
+      peers_v4_count: number;
+
+      /**
+       * Total number of collector peers used from this collector for IPv6 prefixes.
+       */
+      peers_v6_count: number;
+    }
+
+    export interface RPKI {
+      /**
+       * Origin ASN.
+       */
+      origin: number;
+
+      /**
+       * Validation status: valid, invalid, or unknown.
+       */
+      rpki_validation: string;
+    }
+
+    export interface Visibility {
+      /**
+       * Total number of peers.
+       */
+      total_peers: number;
+
+      /**
+       * Total number of peers seeing this prefix.
+       */
+      total_visible: number;
+
+      /**
+       * Ratio of peers seeing this prefix to total number of peers.
+       */
+      visibility: number;
     }
   }
 
   export interface Route {
     /**
-     * AS-level path for this route, from collector to origin
+     * AS-level path for this route, from collector to origin.
      */
     as_path: Array<number>;
 
     /**
-     * public collector ID for this route
+     * Public collector ID for this route.
      */
     collector: string;
 
     /**
-     * BGP community values
+     * BGP community values.
      */
     communities: Array<string>;
 
     /**
-     * IP prefix of this query
+     * IP prefix of this query.
      */
     prefix: string;
 
     /**
-     * latest timestamp of change for this route
+     * Latest timestamp of change for this route.
      */
     timestamp: string;
   }
@@ -366,7 +443,7 @@ export interface RouteAsesParams {
   limit?: number;
 
   /**
-   * Location alpha-2 code.
+   * Filters results by location. Specify an alpha-2 location code.
    */
   location?: string;
 
@@ -445,7 +522,8 @@ export interface RouteRealtimeParams {
 
 export interface RouteStatsParams {
   /**
-   * Single Autonomous System Number (ASN) as integer.
+   * Filters results by Autonomous System. Specify a single Autonomous System Number
+   * (ASN) as integer.
    */
   asn?: number;
 
@@ -455,7 +533,7 @@ export interface RouteStatsParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Location alpha-2 code.
+   * Filters results by location. Specify an alpha-2 location code.
    */
   location?: string;
 }
