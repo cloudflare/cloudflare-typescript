@@ -914,6 +914,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.pipelines.update()`
 - `client.pipelines.delete()`
 - `client.pipelines.get()`
+- `client.schemaValidation.schemas.delete()`
+- `client.schemaValidation.schemas.edit()`
+- `client.schemaValidation.schemas.get()`
+- `client.schemaValidation.settings.operations.update()`
+- `client.schemaValidation.settings.operations.delete()`
+- `client.schemaValidation.settings.operations.get()`
 
 </details>
 
@@ -1021,6 +1027,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.contentScanning.payloads.create()`
 - `client.secretsStore.stores.create()`
 - `client.secretsStore.stores.secrets.create()`
+- `client.schemaValidation.settings.operations.bulkEdit()`
 
 </details>
 
