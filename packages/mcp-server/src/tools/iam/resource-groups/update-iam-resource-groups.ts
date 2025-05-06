@@ -24,6 +24,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'Resource Group identifier tag.',
       },
+      name: {
+        type: 'string',
+        description: 'Name of the resource group',
+      },
       scope: {
         type: 'object',
         description: 'A scope is a combination of scope objects which provides additional context.',
@@ -53,10 +57,6 @@ export const tool: Tool = {
           },
         },
         required: ['key', 'objects'],
-      },
-      meta: {
-        type: 'object',
-        description: 'Attributes associated to the resource group.',
       },
     },
   },

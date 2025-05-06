@@ -346,15 +346,15 @@ export interface ResourceGroupCreateParams {
   account_id: string;
 
   /**
+   * Body param: Name of the resource group
+   */
+  name: string;
+
+  /**
    * Body param: A scope is a combination of scope objects which provides additional
    * context.
    */
   scope: ResourceGroupCreateParams.Scope;
-
-  /**
-   * Body param: Attributes associated to the resource group.
-   */
-  meta?: unknown;
 }
 
 export namespace ResourceGroupCreateParams {
@@ -397,15 +397,15 @@ export interface ResourceGroupUpdateParams {
   account_id: string;
 
   /**
+   * Body param: Name of the resource group
+   */
+  name?: string;
+
+  /**
    * Body param: A scope is a combination of scope objects which provides additional
    * context.
    */
-  scope: ResourceGroupUpdateParams.Scope;
-
-  /**
-   * Body param: Attributes associated to the resource group.
-   */
-  meta?: unknown;
+  scope?: ResourceGroupUpdateParams.Scope;
 }
 
 export namespace ResourceGroupUpdateParams {
