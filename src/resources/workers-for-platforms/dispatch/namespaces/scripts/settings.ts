@@ -530,14 +530,14 @@ export namespace SettingEditResponse {
 
   export interface WorkersBindingKindSecretKey {
     /**
-     * Algorithm-specific key parameters
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+     * Algorithm-specific key parameters.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
      */
     algorithm: unknown;
 
     /**
-     * Data format of the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+     * Data format of the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
      */
     format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
 
@@ -552,8 +552,8 @@ export namespace SettingEditResponse {
     type: 'secret_key';
 
     /**
-     * Allowed operations with the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+     * Allowed operations with the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
      */
     usages: Array<
       'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
@@ -1104,14 +1104,14 @@ export namespace SettingGetResponse {
 
   export interface WorkersBindingKindSecretKey {
     /**
-     * Algorithm-specific key parameters
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+     * Algorithm-specific key parameters.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
      */
     algorithm: unknown;
 
     /**
-     * Data format of the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+     * Data format of the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
      */
     format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
 
@@ -1126,8 +1126,8 @@ export namespace SettingGetResponse {
     type: 'secret_key';
 
     /**
-     * Allowed operations with the key
-     * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+     * Allowed operations with the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
      */
     usages: Array<
       'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
@@ -1696,14 +1696,14 @@ export namespace SettingEditParams {
 
     export interface WorkersBindingKindSecretKey {
       /**
-       * Algorithm-specific key parameters
-       * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+       * Algorithm-specific key parameters.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
        */
       algorithm: unknown;
 
       /**
-       * Data format of the key
-       * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+       * Data format of the key.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
        */
       format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
 
@@ -1718,8 +1718,8 @@ export namespace SettingEditParams {
       type: 'secret_key';
 
       /**
-       * Allowed operations with the key
-       * ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+       * Allowed operations with the key.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
        */
       usages: Array<
         'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
