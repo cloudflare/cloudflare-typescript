@@ -105,6 +105,11 @@ export interface SchemaValidationUpdateResponse {
    *   Level Schema Validation Settings for mitigation action that will be applied
    */
   mitigation_action?: 'log' | 'block' | 'none' | null;
+
+  /**
+   * UUID.
+   */
+  operation_id?: string;
 }
 
 export interface SchemaValidationGetResponse {
@@ -119,6 +124,11 @@ export interface SchemaValidationGetResponse {
    *   Level Schema Validation Settings for mitigation action that will be applied
    */
   mitigation_action?: 'log' | 'block' | 'none' | null;
+
+  /**
+   * UUID.
+   */
+  operation_id?: string;
 }
 
 export interface SchemaValidationUpdateParams {
