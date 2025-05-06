@@ -93,6 +93,7 @@ import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
+import { SchemaValidation } from './resources/schema-validation/schema-validation';
 import { SecretsStore } from './resources/secrets-store/secrets-store';
 import { SecurityCenter } from './resources/security-center/security-center';
 import { Snippets } from './resources/snippets/snippets';
@@ -344,6 +345,7 @@ export class Cloudflare extends Core.APIClient {
   customPages: API.CustomPages = new API.CustomPages(this);
   secretsStore: API.SecretsStore = new API.SecretsStore(this);
   pipelines: API.Pipelines = new API.Pipelines(this);
+  schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -548,6 +550,7 @@ Cloudflare.BrowserRendering = BrowserRendering;
 Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
+Cloudflare.SchemaValidation = SchemaValidation;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -765,6 +768,8 @@ export declare namespace Cloudflare {
   export { SecretsStore as SecretsStore };
 
   export { Pipelines as Pipelines };
+
+  export { SchemaValidation as SchemaValidation };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;
