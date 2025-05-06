@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { BulkOperations } from './bulk-operations';
+export {
+  BulkOperations,
+  type BulkOperationGetResponse,
+  type BulkOperationGetParams,
+} from './bulk-operations';
 export {
   Items,
   type ListCursor,
@@ -9,10 +13,12 @@ export {
   type ItemUpdateResponse,
   type ItemListResponse,
   type ItemDeleteResponse,
+  type ItemGetResponse,
   type ItemCreateParams,
   type ItemUpdateParams,
   type ItemListParams,
   type ItemDeleteParams,
+  type ItemGetParams,
 } from './items';
 export {
   Lists,

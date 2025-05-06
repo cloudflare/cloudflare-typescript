@@ -98,6 +98,29 @@ describe('resource secrets', () => {
     });
   });
 
+  test('duplicate: only required params', async () => {
+    const responsePromise = client.secretsStore.stores.secrets.duplicate(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '3fd85f74b32742f1bff64a85009dda07',
+      { account_id: '985e105f4ecef8ad9ca31a8372d0c353', name: 'MY_API_KEY' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('duplicate: required and optional params', async () => {
+    const response = await client.secretsStore.stores.secrets.duplicate(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '3fd85f74b32742f1bff64a85009dda07',
+      { account_id: '985e105f4ecef8ad9ca31a8372d0c353', name: 'MY_API_KEY' },
+    );
+  });
+
   test('edit: only required params', async () => {
     const responsePromise = client.secretsStore.stores.secrets.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',

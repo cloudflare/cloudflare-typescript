@@ -1,5 +1,91 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 
-export class BulkOperations extends APIResource {}
+export class BulkOperations extends APIResource {
+  /**
+   * Gets the current status of an asynchronous operation on a list.
+   *
+   * The `status` property can have one of the following values: `pending`,
+   * `running`, `completed`, or `failed`. If the status is `failed`, the `error`
+   * property will contain a message describing the error.
+   */
+  get(
+    operationId: string,
+    params: BulkOperationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BulkOperationGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/rules/lists/bulk_operations/${operationId}`,
+        options,
+      ) as Core.APIPromise<{ result: BulkOperationGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type BulkOperationGetResponse =
+  | BulkOperationGetResponse.UnionMember0
+  | BulkOperationGetResponse.UnionMember1;
+
+export namespace BulkOperationGetResponse {
+  export interface UnionMember0 {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    id?: string;
+
+    /**
+     * The RFC 3339 timestamp of when the operation was completed.
+     */
+    completed?: string;
+
+    /**
+     * A message describing the error when the status is `failed`.
+     */
+    error?: string;
+
+    /**
+     * The current status of the asynchronous operation.
+     */
+    status?: 'pending' | 'running' | 'completed' | 'failed';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    id?: string;
+
+    /**
+     * The RFC 3339 timestamp of when the operation was completed.
+     */
+    completed?: string;
+
+    /**
+     * A message describing the error when the status is `failed`.
+     */
+    error?: string;
+
+    /**
+     * The current status of the asynchronous operation.
+     */
+    status?: 'pending' | 'running' | 'completed' | 'failed';
+  }
+}
+
+export interface BulkOperationGetParams {
+  /**
+   * Defines an identifier.
+   */
+  account_id: string;
+}
+
+export declare namespace BulkOperations {
+  export {
+    type BulkOperationGetResponse as BulkOperationGetResponse,
+    type BulkOperationGetParams as BulkOperationGetParams,
+  };
+}

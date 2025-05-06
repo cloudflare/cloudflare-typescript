@@ -7,6 +7,8 @@ import {
   AppCreateResponse,
   AppDeleteParams,
   AppDeleteResponse,
+  AppEditParams,
+  AppEditResponse,
   AppListParams,
   AppListResponse,
   AppListResponsesSinglePage,
@@ -274,11 +276,13 @@ export declare namespace MagicTransit {
     type AppUpdateResponse as AppUpdateResponse,
     type AppListResponse as AppListResponse,
     type AppDeleteResponse as AppDeleteResponse,
+    type AppEditResponse as AppEditResponse,
     AppListResponsesSinglePage as AppListResponsesSinglePage,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
     type AppListParams as AppListParams,
     type AppDeleteParams as AppDeleteParams,
+    type AppEditParams as AppEditParams,
   };
 
   export {
