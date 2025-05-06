@@ -105,7 +105,10 @@ export interface CustomCreateParams {
   account_id: string;
 
   /**
-   * Body param: The wirefilter expression to match devices.
+   * Body param: The wirefilter expression to match devices. Available values:
+   * "identity.email", "identity.groups.id", "identity.groups.name",
+   * "identity.groups.email", "identity.service_token_uuid",
+   * "identity.saml_attributes", "network", "os.name", "os.version"
    */
   match: string;
 
@@ -313,7 +316,10 @@ export interface CustomEditParams {
   include?: Array<PoliciesAPI.SplitTunnelIncludeParam>;
 
   /**
-   * Body param: The wirefilter expression to match devices.
+   * Body param: The wirefilter expression to match devices. Available values:
+   * "identity.email", "identity.groups.id", "identity.groups.name",
+   * "identity.groups.email", "identity.service_token_uuid",
+   * "identity.saml_attributes", "network", "os.name", "os.version"
    */
   match?: string;
 
