@@ -1199,6 +1199,7 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 ### Resource `workers.scripts.subdomain`:
 
 - `create_scripts_workers_subdomain` (`write`): Enable or disable the Worker on the workers.dev subdomain.
+- `delete_scripts_workers_subdomain` (`write`): Disable all workers.dev subdomains for a Worker.
 - `get_scripts_workers_subdomain` (`read`): Get if the Worker is available on the workers.dev subdomain.
 
 ### Resource `workers.scripts.schedules`:
@@ -3633,6 +3634,39 @@ It is strongly recommended that you ensure you have [custom rules](https://devel
 - `list_scans_cloudforce_one_config` (`read`): List Scan Configs
 - `delete_scans_cloudforce_one_config` (`write`): Delete a Scan Config
 - `edit_scans_cloudforce_one_config` (`write`): Update an existing Scan Config
+
+### Resource `cloudforce_one.requests`:
+
+- `create_cloudforce_one_requests` (`write`): Creating a request adds the request into the Cloudforce One queue for analysis. In addition to the content, a short title, type, priority, and releasability should be provided. If one is not provided, a default will be assigned.
+- `update_cloudforce_one_requests` (`write`): Updating a request alters the request in the Cloudforce One queue. This API may be used to update any attributes of the request after the initial submission. Only fields that you choose to update need to be add to the request body.
+- `list_cloudforce_one_requests` (`write`): List Requests
+- `delete_cloudforce_one_requests` (`write`): Delete a Request
+- `constants_cloudforce_one_requests` (`read`): Get Request Priority, Status, and TLP constants
+- `get_cloudforce_one_requests` (`read`): Get a Request
+- `quota_cloudforce_one_requests` (`read`): Get Request Quota
+- `types_cloudforce_one_requests` (`read`): Get Request Types
+
+### Resource `cloudforce_one.requests.message`:
+
+- `create_requests_cloudforce_one_message` (`write`): Create a New Request Message
+- `update_requests_cloudforce_one_message` (`write`): Update a Request Message
+- `delete_requests_cloudforce_one_message` (`write`): Delete a Request Message
+- `get_requests_cloudforce_one_message` (`write`): List Request Messages
+
+### Resource `cloudforce_one.requests.priority`:
+
+- `create_requests_cloudforce_one_priority` (`write`): Create a New Priority Intelligence Requirement
+- `update_requests_cloudforce_one_priority` (`write`): Update a Priority Intelligence Requirement
+- `delete_requests_cloudforce_one_priority` (`write`): Delete a Priority Intelligence Requirement
+- `get_requests_cloudforce_one_priority` (`read`): Get a Priority Intelligence Requirement
+- `quota_requests_cloudforce_one_priority` (`read`): Get Priority Intelligence Requirement Quota
+
+### Resource `cloudforce_one.requests.assets`:
+
+- `create_requests_cloudforce_one_assets` (`write`): List Request Assets
+- `update_requests_cloudforce_one_assets` (`write`): Update a Request Asset
+- `delete_requests_cloudforce_one_assets` (`write`): Delete a Request Asset
+- `get_requests_cloudforce_one_assets` (`read`): Get a Request Asset
 
 ### Resource `cloudforce_one.threat_events`:
 
