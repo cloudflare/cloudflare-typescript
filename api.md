@@ -7603,33 +7603,12 @@ Types:
 - <code><a href="./src/resources/cloudforce-one/requests/requests.ts">Quota</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestConstants</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestTypes</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestDeleteResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestTypesResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_identifier}/cloudforce-one/requests/new">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">create</a>(accountIdentifier, { ...params }) -> Item</code>
-- <code title="put /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">update</a>(accountIdentifier, requestIdentifier, { ...params }) -> Item</code>
-- <code title="post /accounts/{account_identifier}/cloudforce-one/requests">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">list</a>(accountIdentifier, { ...params }) -> ListItemsSinglePage</code>
-- <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">delete</a>(accountIdentifier, requestIdentifier) -> RequestDeleteResponse</code>
-- <code title="get /accounts/{account_identifier}/cloudforce-one/requests/constants">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">constants</a>(accountIdentifier) -> RequestConstants</code>
-- <code title="get /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">get</a>(accountIdentifier, requestIdentifier) -> Item</code>
-- <code title="get /accounts/{account_identifier}/cloudforce-one/requests/quota">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">quota</a>(accountIdentifier) -> Quota</code>
-- <code title="get /accounts/{account_identifier}/cloudforce-one/requests/types">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">types</a>(accountIdentifier) -> RequestTypesResponsesSinglePage</code>
 
 ### Message
 
 Types:
 
 - <code><a href="./src/resources/cloudforce-one/requests/message.ts">Message</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/message.ts">MessageDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/message/new">client.cloudforceOne.requests.message.<a href="./src/resources/cloudforce-one/requests/message.ts">create</a>(accountIdentifier, requestIdentifier, { ...params }) -> Message</code>
-- <code title="put /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/message/{message_identifer}">client.cloudforceOne.requests.message.<a href="./src/resources/cloudforce-one/requests/message.ts">update</a>(accountIdentifier, requestIdentifier, messageIdentifer, { ...params }) -> Message</code>
-- <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/message/{message_identifer}">client.cloudforceOne.requests.message.<a href="./src/resources/cloudforce-one/requests/message.ts">delete</a>(accountIdentifier, requestIdentifier, messageIdentifer) -> MessageDeleteResponse</code>
-- <code title="post /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/message">client.cloudforceOne.requests.message.<a href="./src/resources/cloudforce-one/requests/message.ts">get</a>(accountIdentifier, requestIdentifier, { ...params }) -> MessagesSinglePage</code>
 
 ### Priority
 
@@ -7638,31 +7617,8 @@ Types:
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">Label</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">Priority</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityEdit</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_identifier}/cloudforce-one/requests/priority/new">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">create</a>(accountIdentifier, { ...params }) -> Priority</code>
-- <code title="put /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">update</a>(accountIdentifier, priorityIdentifer, { ...params }) -> Item</code>
-- <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">delete</a>(accountIdentifier, priorityIdentifer) -> PriorityDeleteResponse</code>
-- <code title="get /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">get</a>(accountIdentifier, priorityIdentifer) -> Item</code>
-- <code title="get /accounts/{account_identifier}/cloudforce-one/requests/priority/quota">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">quota</a>(accountIdentifier) -> Quota</code>
 
 ### Assets
-
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetCreateResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetUpdateResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetDeleteResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">create</a>(accountIdentifier, requestIdentifier, { ...params }) -> AssetCreateResponsesSinglePage</code>
-- <code title="put /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset/{asset_identifer}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">update</a>(accountIdentifier, requestIdentifier, assetIdentifer, { ...params }) -> AssetUpdateResponse</code>
-- <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset/{asset_identifer}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">delete</a>(accountIdentifier, requestIdentifier, assetIdentifer) -> AssetDeleteResponse</code>
-- <code title="get /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset/{asset_identifer}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">get</a>(accountIdentifier, requestIdentifier, assetIdentifer) -> AssetGetResponsesSinglePage</code>
 
 ## ThreatEvents
 
