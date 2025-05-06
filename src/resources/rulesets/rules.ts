@@ -230,7 +230,7 @@ export namespace BlockRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -382,7 +382,7 @@ export namespace BlockRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -539,7 +539,7 @@ export namespace CompressResponseRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -681,7 +681,7 @@ export namespace CompressResponseRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -816,7 +816,7 @@ export namespace DDoSDynamicRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -936,7 +936,7 @@ export namespace DDoSDynamicRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1194,7 +1194,7 @@ export namespace ExecuteRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1437,7 +1437,7 @@ export namespace ExecuteRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1572,7 +1572,7 @@ export namespace ForceConnectionCloseRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1692,7 +1692,7 @@ export namespace ForceConnectionCloseRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1919,7 +1919,7 @@ export namespace LogCustomFieldRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -2131,7 +2131,7 @@ export namespace LogCustomFieldRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -2266,7 +2266,7 @@ export namespace LogRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -2386,7 +2386,7 @@ export namespace LogRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -2541,7 +2541,7 @@ export namespace ManagedChallengeRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -2661,7 +2661,7 @@ export namespace ManagedChallengeRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -2864,7 +2864,7 @@ export namespace RedirectRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -3052,7 +3052,7 @@ export namespace RedirectRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -3281,7 +3281,7 @@ export namespace RewriteRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -3495,7 +3495,7 @@ export namespace RewriteRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -3713,7 +3713,7 @@ export namespace RouteRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -3880,7 +3880,7 @@ export namespace RouteRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -4015,7 +4015,7 @@ export namespace RulesetRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -4161,7 +4161,7 @@ export namespace ScoreRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -4292,7 +4292,7 @@ export namespace ScoreRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -4447,7 +4447,7 @@ export namespace ServeErrorRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -4587,7 +4587,7 @@ export namespace ServeErrorRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -5118,7 +5118,7 @@ export namespace SetCacheSettingsRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -5634,7 +5634,7 @@ export namespace SetCacheSettingsRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -5881,7 +5881,7 @@ export namespace SetConfigRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -6113,7 +6113,7 @@ export namespace SetConfigRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -6283,7 +6283,7 @@ export namespace SkipRule {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -6438,7 +6438,7 @@ export namespace SkipRuleParam {
     /**
      * Period in seconds over which the counter is being incremented.
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
 
     /**
      * Defines when the ratelimit counter should be incremented. It is optional and
@@ -6638,7 +6638,7 @@ export namespace RuleCreateResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -6773,7 +6773,7 @@ export namespace RuleCreateResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -6974,7 +6974,7 @@ export namespace RuleDeleteResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -7109,7 +7109,7 @@ export namespace RuleDeleteResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -7310,7 +7310,7 @@ export namespace RuleEditResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -7445,7 +7445,7 @@ export namespace RuleEditResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -7668,7 +7668,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -7837,7 +7837,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -8028,7 +8028,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -8320,7 +8320,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -8492,7 +8492,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -8661,7 +8661,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -8833,7 +8833,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -9070,7 +9070,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -9333,7 +9333,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -9549,7 +9549,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -9729,7 +9729,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -9918,7 +9918,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -10199,7 +10199,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -10403,7 +10403,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -10971,7 +10971,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -11235,7 +11235,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -11404,7 +11404,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -11576,7 +11576,7 @@ export declare namespace RuleCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -11821,7 +11821,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -11995,7 +11995,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -12191,7 +12191,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -12488,7 +12488,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -12665,7 +12665,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -12839,7 +12839,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -13016,7 +13016,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -13258,7 +13258,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -13526,7 +13526,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -13747,7 +13747,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -13932,7 +13932,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -14126,7 +14126,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -14412,7 +14412,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -14621,7 +14621,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -15194,7 +15194,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -15463,7 +15463,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -15637,7 +15637,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -15814,7 +15814,7 @@ export declare namespace RuleEditParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
