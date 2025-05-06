@@ -103,15 +103,14 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, files, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
         Core.maybeMultipartFormRequestOptions({
-          body,
+          body: { ...body, ...files },
           ...options,
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
-          __binaryRequest: true,
         }),
       ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -388,6 +387,8 @@ export interface ScriptUpdateParams {
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
+
+  files?: Record<string, Core.Uploadable>;
 }
 
 export namespace ScriptUpdateParams {
