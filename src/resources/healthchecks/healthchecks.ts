@@ -724,9 +724,26 @@ export interface HealthcheckGetParams {
   zone_id: string;
 }
 
+Healthchecks.HealthchecksV4PagePaginationArray = HealthchecksV4PagePaginationArray;
 Healthchecks.Previews = Previews;
 
 export declare namespace Healthchecks {
+  export {
+    type CheckRegion as CheckRegion,
+    type Healthcheck as Healthcheck,
+    type HTTPConfiguration as HTTPConfiguration,
+    type QueryHealthcheck as QueryHealthcheck,
+    type TCPConfiguration as TCPConfiguration,
+    type HealthcheckDeleteResponse as HealthcheckDeleteResponse,
+    HealthchecksV4PagePaginationArray as HealthchecksV4PagePaginationArray,
+    type HealthcheckCreateParams as HealthcheckCreateParams,
+    type HealthcheckUpdateParams as HealthcheckUpdateParams,
+    type HealthcheckListParams as HealthcheckListParams,
+    type HealthcheckDeleteParams as HealthcheckDeleteParams,
+    type HealthcheckEditParams as HealthcheckEditParams,
+    type HealthcheckGetParams as HealthcheckGetParams,
+  };
+
   export {
     Previews as Previews,
     type PreviewDeleteResponse as PreviewDeleteResponse,

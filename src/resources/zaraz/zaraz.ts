@@ -143,6 +143,12 @@ Zaraz.WorkflowResource = WorkflowResource;
 
 export declare namespace Zaraz {
   export {
+    type ButtonTextTranslation as ButtonTextTranslation,
+    type NeoEvent as NeoEvent,
+    type ZarazUpdateParams as ZarazUpdateParams,
+  };
+
+  export {
     Config as Config,
     type Configuration as Configuration,
     type ConfigUpdateParams as ConfigUpdateParams,

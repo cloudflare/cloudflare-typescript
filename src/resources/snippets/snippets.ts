@@ -160,12 +160,23 @@ export interface SnippetGetParams {
   zone_id: string;
 }
 
+Snippets.SnippetsSinglePage = SnippetsSinglePage;
 Snippets.Content = Content;
 Snippets.Rules = Rules;
 Snippets.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;
 Snippets.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
 
 export declare namespace Snippets {
+  export {
+    type Snippet as Snippet,
+    type SnippetDeleteResponse as SnippetDeleteResponse,
+    SnippetsSinglePage as SnippetsSinglePage,
+    type SnippetUpdateParams as SnippetUpdateParams,
+    type SnippetListParams as SnippetListParams,
+    type SnippetDeleteParams as SnippetDeleteParams,
+    type SnippetGetParams as SnippetGetParams,
+  };
+
   export { Content as Content, type ContentGetParams as ContentGetParams };
 
   export {

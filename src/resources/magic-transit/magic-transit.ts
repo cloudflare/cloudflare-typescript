@@ -263,6 +263,12 @@ MagicTransit.PCAPListResponsesSinglePage = PCAPListResponsesSinglePage;
 
 export declare namespace MagicTransit {
   export {
+    type HealthCheck as HealthCheck,
+    type HealthCheckRate as HealthCheckRate,
+    type HealthCheckType as HealthCheckType,
+  };
+
+  export {
     Apps as Apps,
     type AppCreateResponse as AppCreateResponse,
     type AppUpdateResponse as AppUpdateResponse,

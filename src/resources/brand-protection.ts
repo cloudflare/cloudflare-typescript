@@ -221,3 +221,15 @@ export interface BrandProtectionURLInfoParams {
    */
   url_id?: Array<number>;
 }
+
+export declare namespace BrandProtection {
+  export {
+    type Info as Info,
+    type RuleMatch as RuleMatch,
+    type ScanStatus as ScanStatus,
+    type Submit as Submit,
+    type URLInfoModelResults as URLInfoModelResults,
+    type BrandProtectionSubmitParams as BrandProtectionSubmitParams,
+    type BrandProtectionURLInfoParams as BrandProtectionURLInfoParams,
+  };
+}

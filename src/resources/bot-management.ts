@@ -727,3 +727,16 @@ export interface BotManagementGetParams {
    */
   zone_id: string;
 }
+
+export declare namespace BotManagement {
+  export {
+    type BotFightModeConfiguration as BotFightModeConfiguration,
+    type SubscriptionConfiguration as SubscriptionConfiguration,
+    type SuperBotFightModeDefinitelyConfiguration as SuperBotFightModeDefinitelyConfiguration,
+    type SuperBotFightModeLikelyConfiguration as SuperBotFightModeLikelyConfiguration,
+    type BotManagementUpdateResponse as BotManagementUpdateResponse,
+    type BotManagementGetResponse as BotManagementGetResponse,
+    type BotManagementUpdateParams as BotManagementUpdateParams,
+    type BotManagementGetParams as BotManagementGetParams,
+  };
+}

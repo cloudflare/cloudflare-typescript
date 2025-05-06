@@ -801,3 +801,20 @@ export interface RateLimitGetParams {
    */
   zone_id: string;
 }
+
+RateLimits.RateLimitsV4PagePaginationArray = RateLimitsV4PagePaginationArray;
+
+export declare namespace RateLimits {
+  export {
+    type Action as Action,
+    type Methods as Methods,
+    type RateLimit as RateLimit,
+    type RateLimitDeleteResponse as RateLimitDeleteResponse,
+    RateLimitsV4PagePaginationArray as RateLimitsV4PagePaginationArray,
+    type RateLimitCreateParams as RateLimitCreateParams,
+    type RateLimitListParams as RateLimitListParams,
+    type RateLimitDeleteParams as RateLimitDeleteParams,
+    type RateLimitEditParams as RateLimitEditParams,
+    type RateLimitGetParams as RateLimitGetParams,
+  };
+}
