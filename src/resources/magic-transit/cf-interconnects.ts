@@ -107,7 +107,7 @@ export interface CfInterconnectUpdateResponse {
 export namespace CfInterconnectUpdateResponse {
   export interface ModifiedInterconnect {
     /**
-     * Tunnel identifier tag.
+     * Identifier
      */
     id?: string;
 
@@ -178,7 +178,7 @@ export interface CfInterconnectListResponse {
 export namespace CfInterconnectListResponse {
   export interface Interconnect {
     /**
-     * Tunnel identifier tag.
+     * Identifier
      */
     id?: string;
 
@@ -251,7 +251,7 @@ export interface CfInterconnectBulkUpdateResponse {
 export namespace CfInterconnectBulkUpdateResponse {
   export interface ModifiedInterconnect {
     /**
-     * Tunnel identifier tag.
+     * Identifier
      */
     id?: string;
 
@@ -322,7 +322,7 @@ export interface CfInterconnectGetResponse {
 export namespace CfInterconnectGetResponse {
   export interface Interconnect {
     /**
-     * Tunnel identifier tag.
+     * Identifier
      */
     id?: string;
 

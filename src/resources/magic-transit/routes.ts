@@ -10,12 +10,11 @@ export class Routes extends APIResource {
    * parameter to run validation only without persisting changes.
    */
   create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/magic/routes`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: RouteCreateResponse }>
+      this._client.post(`/accounts/${account_id}/magic/routes`, { body, ...options }) as Core.APIPromise<{
+        result: RouteCreateResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -142,56 +141,50 @@ export interface ScopeParam {
 }
 
 export interface RouteCreateResponse {
-  routes?: Array<RouteCreateResponse.Route>;
-}
+  /**
+   * Identifier
+   */
+  id: string;
 
-export namespace RouteCreateResponse {
-  export interface Route {
-    /**
-     * The next-hop IP Address for the static route.
-     */
-    nexthop: string;
+  /**
+   * The next-hop IP Address for the static route.
+   */
+  nexthop: string;
 
-    /**
-     * IP Prefix in Classless Inter-Domain Routing format.
-     */
-    prefix: string;
+  /**
+   * IP Prefix in Classless Inter-Domain Routing format.
+   */
+  prefix: string;
 
-    /**
-     * Priority of the static route.
-     */
-    priority: number;
+  /**
+   * Priority of the static route.
+   */
+  priority: number;
 
-    /**
-     * Identifier
-     */
-    id?: string;
+  /**
+   * When the route was created.
+   */
+  created_on?: string;
 
-    /**
-     * When the route was created.
-     */
-    created_on?: string;
+  /**
+   * An optional human provided description of the static route.
+   */
+  description?: string;
 
-    /**
-     * An optional human provided description of the static route.
-     */
-    description?: string;
+  /**
+   * When the route was last modified.
+   */
+  modified_on?: string;
 
-    /**
-     * When the route was last modified.
-     */
-    modified_on?: string;
+  /**
+   * Used only for ECMP routes.
+   */
+  scope?: Scope;
 
-    /**
-     * Used only for ECMP routes.
-     */
-    scope?: RoutesAPI.Scope;
-
-    /**
-     * Optional weight of the ECMP scope - if provided.
-     */
-    weight?: number;
-  }
+  /**
+   * Optional weight of the ECMP scope - if provided.
+   */
+  weight?: number;
 }
 
 export interface RouteUpdateResponse {
@@ -203,6 +196,11 @@ export interface RouteUpdateResponse {
 export namespace RouteUpdateResponse {
   export interface ModifiedRoute {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -216,11 +214,6 @@ export namespace RouteUpdateResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -256,6 +249,11 @@ export interface RouteListResponse {
 export namespace RouteListResponse {
   export interface Route {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -269,11 +267,6 @@ export namespace RouteListResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -311,6 +304,11 @@ export interface RouteDeleteResponse {
 export namespace RouteDeleteResponse {
   export interface DeletedRoute {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -324,11 +322,6 @@ export namespace RouteDeleteResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -366,6 +359,11 @@ export interface RouteBulkUpdateResponse {
 export namespace RouteBulkUpdateResponse {
   export interface ModifiedRoute {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -379,11 +377,6 @@ export namespace RouteBulkUpdateResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -421,6 +414,11 @@ export interface RouteEmptyResponse {
 export namespace RouteEmptyResponse {
   export interface DeletedRoute {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -434,11 +432,6 @@ export namespace RouteEmptyResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -474,6 +467,11 @@ export interface RouteGetResponse {
 export namespace RouteGetResponse {
   export interface Route {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -487,11 +485,6 @@ export namespace RouteGetResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -527,9 +520,34 @@ export interface RouteCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The next-hop IP Address for the static route.
    */
-  body: unknown;
+  nexthop: string;
+
+  /**
+   * Body param: IP Prefix in Classless Inter-Domain Routing format.
+   */
+  prefix: string;
+
+  /**
+   * Body param: Priority of the static route.
+   */
+  priority: number;
+
+  /**
+   * Body param: An optional human provided description of the static route.
+   */
+  description?: string;
+
+  /**
+   * Body param: Used only for ECMP routes.
+   */
+  scope?: ScopeParam;
+
+  /**
+   * Body param: Optional weight of the ECMP scope - if provided.
+   */
+  weight?: number;
 }
 
 export interface RouteUpdateParams {
