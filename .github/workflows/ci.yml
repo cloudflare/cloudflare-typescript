@@ -71,6 +71,7 @@ jobs:
   examples:
     name: examples
     runs-on: ubuntu-latest
+    if: github.repository == 'cloudflare/cloudflare-typescript'
     timeout-minutes: 5
 
     steps:
