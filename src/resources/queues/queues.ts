@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 import * as ConsumersAPI from './consumers';
 import {
   Consumer,
@@ -157,7 +158,7 @@ export namespace Queue {
 }
 
 export interface QueueDeleteResponse {
-  errors?: Array<QueueDeleteResponse.Error>;
+  errors?: Array<Shared.ResponseInfo>;
 
   messages?: Array<string>;
 
@@ -165,14 +166,6 @@ export interface QueueDeleteResponse {
    * Indicates if the API call was successful or not.
    */
   success?: true;
-}
-
-export namespace QueueDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
 }
 
 export interface QueueCreateParams {

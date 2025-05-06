@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 
 export class IPs extends APIResource {
   /**
@@ -38,9 +39,9 @@ export class IPs extends APIResource {
 }
 
 export interface IPUpdateResponse {
-  errors: Array<IPUpdateResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<IPUpdateResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -51,18 +52,6 @@ export interface IPUpdateResponse {
 }
 
 export namespace IPUpdateResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
@@ -87,9 +76,9 @@ export namespace IPUpdateResponse {
 }
 
 export interface IPDeleteResponse {
-  errors: Array<IPDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<IPDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -100,18 +89,6 @@ export interface IPDeleteResponse {
 }
 
 export namespace IPDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
