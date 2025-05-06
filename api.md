@@ -2213,6 +2213,40 @@ Methods:
 - <code title="put /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">update</a>({ ...params }) -> SubdomainUpdateResponse</code>
 - <code title="get /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">get</a>({ ...params }) -> SubdomainGetResponse</code>
 
+## Observability
+
+### Telemetry
+
+#### Keys
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/telemetry/keys.ts">KeyCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/keys">client.workers.observability.telemetry.keys.<a href="./src/resources/workers/observability/telemetry/keys.ts">create</a>({ ...params }) -> KeyCreateResponsesSinglePage</code>
+
+#### Query
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/telemetry/query.ts">QueryCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/query">client.workers.observability.telemetry.query.<a href="./src/resources/workers/observability/telemetry/query.ts">create</a>({ ...params }) -> QueryCreateResponse</code>
+
+#### Values
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/telemetry/values.ts">ValueCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/values">client.workers.observability.telemetry.values.<a href="./src/resources/workers/observability/telemetry/values.ts">create</a>({ ...params }) -> ValueCreateResponsesSinglePage</code>
+
 # KV
 
 ## Namespaces
