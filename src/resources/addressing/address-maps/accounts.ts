@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 
 export class Accounts extends APIResource {
   /**
@@ -36,9 +37,9 @@ export class Accounts extends APIResource {
 }
 
 export interface AccountUpdateResponse {
-  errors: Array<AccountUpdateResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<AccountUpdateResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -49,18 +50,6 @@ export interface AccountUpdateResponse {
 }
 
 export namespace AccountUpdateResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
@@ -85,9 +74,9 @@ export namespace AccountUpdateResponse {
 }
 
 export interface AccountDeleteResponse {
-  errors: Array<AccountDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<AccountDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
@@ -98,18 +87,6 @@ export interface AccountDeleteResponse {
 }
 
 export namespace AccountDeleteResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
