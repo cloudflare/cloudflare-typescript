@@ -10,6 +10,17 @@ import { path } from '../../internal/utils/path';
 export class Domains extends APIResource {
   /**
    * Attaches a Worker to a zone and hostname.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.workers.domains.update({
+   *   account_id: '9a7806061c88ada191ed06f989cc3dac',
+   *   environment: 'production',
+   *   hostname: 'foo.example.com',
+   *   service: 'foo',
+   *   zone_id: '593c9c94de529bbbfaac7c53ced0447d',
+   * });
+   * ```
    */
   update(params: DomainUpdateParams, options?: RequestOptions): APIPromise<Domain> {
     const { account_id, ...body } = params;
@@ -22,6 +33,16 @@ export class Domains extends APIResource {
 
   /**
    * Lists all Worker Domains for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const domain of client.workers.domains.list({
+   *   account_id: '9a7806061c88ada191ed06f989cc3dac',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: DomainListParams, options?: RequestOptions): PagePromise<DomainsSinglePage, Domain> {
     const { account_id, ...query } = params;
@@ -33,6 +54,14 @@ export class Domains extends APIResource {
 
   /**
    * Detaches a Worker from a zone and hostname.
+   *
+   * @example
+   * ```ts
+   * await client.workers.domains.delete(
+   *   'dbe10b4bc17c295377eabd600e1787fd',
+   *   { account_id: '9a7806061c88ada191ed06f989cc3dac' },
+   * );
+   * ```
    */
   delete(domainID: string, params: DomainDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -44,6 +73,14 @@ export class Domains extends APIResource {
 
   /**
    * Gets a Worker domain.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.workers.domains.get(
+   *   'dbe10b4bc17c295377eabd600e1787fd',
+   *   { account_id: '9a7806061c88ada191ed06f989cc3dac' },
+   * );
+   * ```
    */
   get(domainID: string, params: DomainGetParams, options?: RequestOptions): APIPromise<Domain> {
     const { account_id } = params;

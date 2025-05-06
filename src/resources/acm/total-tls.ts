@@ -8,6 +8,14 @@ import { path } from '../../internal/utils/path';
 export class TotalTLS extends APIResource {
   /**
    * Set Total TLS Settings or disable the feature for a Zone.
+   *
+   * @example
+   * ```ts
+   * const totalTLS = await client.acm.totalTLS.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   enabled: true,
+   * });
+   * ```
    */
   create(params: TotalTLSCreateParams, options?: RequestOptions): APIPromise<TotalTLSCreateResponse> {
     const { zone_id, ...body } = params;
@@ -20,6 +28,13 @@ export class TotalTLS extends APIResource {
 
   /**
    * Get Total TLS Settings for a Zone.
+   *
+   * @example
+   * ```ts
+   * const totalTLS = await client.acm.totalTLS.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: TotalTLSGetParams, options?: RequestOptions): APIPromise<TotalTLSGetResponse> {
     const { zone_id } = params;

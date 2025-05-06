@@ -23,6 +23,16 @@ export class Posture extends APIResource {
 
   /**
    * Creates a new device posture rule.
+   *
+   * @example
+   * ```ts
+   * const devicePostureRule =
+   *   await client.zeroTrust.devices.posture.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     name: 'Admin Serial Numbers',
+   *     type: 'file',
+   *   });
+   * ```
    */
   create(params: PostureCreateParams, options?: RequestOptions): APIPromise<DevicePostureRule | null> {
     const { account_id, ...body } = params;
@@ -35,6 +45,19 @@ export class Posture extends APIResource {
 
   /**
    * Updates a device posture rule.
+   *
+   * @example
+   * ```ts
+   * const devicePostureRule =
+   *   await client.zeroTrust.devices.posture.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       name: 'Admin Serial Numbers',
+   *       type: 'file',
+   *     },
+   *   );
+   * ```
    */
   update(
     ruleID: string,
@@ -52,6 +75,16 @@ export class Posture extends APIResource {
 
   /**
    * Fetches device posture rules for a Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const devicePostureRule of client.zeroTrust.devices.posture.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PostureListParams,
@@ -67,6 +100,15 @@ export class Posture extends APIResource {
 
   /**
    * Deletes a device posture rule.
+   *
+   * @example
+   * ```ts
+   * const posture =
+   *   await client.zeroTrust.devices.posture.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   delete(
     ruleID: string,
@@ -83,6 +125,15 @@ export class Posture extends APIResource {
 
   /**
    * Fetches a single device posture rule.
+   *
+   * @example
+   * ```ts
+   * const devicePostureRule =
+   *   await client.zeroTrust.devices.posture.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     ruleID: string,

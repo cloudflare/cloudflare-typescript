@@ -7,6 +7,12 @@ import { RequestOptions } from '../../../internal/request-options';
 export class Summary extends APIResource {
   /**
    * Retrieves the distribution of HTTP authentication requests by bot class.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.leakedCredentials.summary.botClass();
+   * ```
    */
   botClass(
     query: SummaryBotClassParams | null | undefined = {},
@@ -23,6 +29,12 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of HTTP authentication requests by compromised
    * credential status.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.leakedCredentials.summary.compromised();
+   * ```
    */
   compromised(
     query: SummaryCompromisedParams | null | undefined = {},

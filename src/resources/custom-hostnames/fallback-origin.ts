@@ -8,6 +8,15 @@ import { path } from '../../internal/utils/path';
 export class FallbackOrigin extends APIResource {
   /**
    * Update Fallback Origin for Custom Hostnames
+   *
+   * @example
+   * ```ts
+   * const fallbackOrigin =
+   *   await client.customHostnames.fallbackOrigin.update({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     origin: 'fallback.example.com',
+   *   });
+   * ```
    */
   update(
     params: FallbackOriginUpdateParams,
@@ -24,6 +33,14 @@ export class FallbackOrigin extends APIResource {
 
   /**
    * Delete Fallback Origin for Custom Hostnames
+   *
+   * @example
+   * ```ts
+   * const fallbackOrigin =
+   *   await client.customHostnames.fallbackOrigin.delete({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   delete(
     params: FallbackOriginDeleteParams,
@@ -39,6 +56,14 @@ export class FallbackOrigin extends APIResource {
 
   /**
    * Get Fallback Origin for Custom Hostnames
+   *
+   * @example
+   * ```ts
+   * const fallbackOrigin =
+   *   await client.customHostnames.fallbackOrigin.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(params: FallbackOriginGetParams, options?: RequestOptions): APIPromise<FallbackOriginGetResponse> {
     const { zone_id } = params;

@@ -7,6 +7,11 @@ import { RequestOptions } from '../../../internal/request-options';
 export class Top extends APIResource {
   /**
    * Retrieves the top autonomous systems by network traffic (NetFlows).
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.netflows.top.ases();
+   * ```
    */
   ases(query: TopAsesParams | null | undefined = {}, options?: RequestOptions): APIPromise<TopAsesResponse> {
     return (
@@ -18,6 +23,12 @@ export class Top extends APIResource {
 
   /**
    * Retrieves the top locations by network traffic (NetFlows).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.netflows.top.locations();
+   * ```
    */
   locations(
     query: TopLocationsParams | null | undefined = {},

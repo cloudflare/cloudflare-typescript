@@ -9,6 +9,14 @@ import { path } from '../../../../internal/utils/path';
 export class Status extends APIResource {
   /**
    * Get primary zone transfer status.
+   *
+   * @example
+   * ```ts
+   * const enableTransfer =
+   *   await client.dns.zoneTransfers.outgoing.status.get({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *   });
+   * ```
    */
   get(params: StatusGetParams, options?: RequestOptions): APIPromise<OutgoingAPI.EnableTransfer> {
     const { zone_id } = params;

@@ -10,6 +10,15 @@ import { path } from '../../internal/utils/path';
 export class Lockdowns extends APIResource {
   /**
    * Creates a new Zone Lockdown rule.
+   *
+   * @example
+   * ```ts
+   * const lockdown = await client.firewall.lockdowns.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   configurations: [{}],
+   *   urls: ['shop.example.com/*'],
+   * });
+   * ```
    */
   create(params: LockdownCreateParams, options?: RequestOptions): APIPromise<Lockdown> {
     const { zone_id, ...body } = params;
@@ -22,6 +31,18 @@ export class Lockdowns extends APIResource {
 
   /**
    * Updates an existing Zone Lockdown rule.
+   *
+   * @example
+   * ```ts
+   * const lockdown = await client.firewall.lockdowns.update(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     configurations: [{}],
+   *     urls: ['shop.example.com/*'],
+   *   },
+   * );
+   * ```
    */
   update(lockDownsID: string, params: LockdownUpdateParams, options?: RequestOptions): APIPromise<Lockdown> {
     const { zone_id, ...body } = params;
@@ -36,6 +57,16 @@ export class Lockdowns extends APIResource {
   /**
    * Fetches Zone Lockdown rules. You can filter the results using several optional
    * parameters.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const lockdown of client.firewall.lockdowns.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: LockdownListParams,
@@ -51,6 +82,14 @@ export class Lockdowns extends APIResource {
 
   /**
    * Deletes an existing Zone Lockdown rule.
+   *
+   * @example
+   * ```ts
+   * const lockdown = await client.firewall.lockdowns.delete(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     lockDownsID: string,
@@ -67,6 +106,14 @@ export class Lockdowns extends APIResource {
 
   /**
    * Fetches the details of a Zone Lockdown rule.
+   *
+   * @example
+   * ```ts
+   * const lockdown = await client.firewall.lockdowns.get(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(lockDownsID: string, params: LockdownGetParams, options?: RequestOptions): APIPromise<Lockdown> {
     const { zone_id } = params;

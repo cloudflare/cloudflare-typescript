@@ -9,6 +9,22 @@ import { path } from '../../internal/utils/path';
 export class Resources extends APIResource {
   /**
    * Create a new share resource
+   *
+   * @example
+   * ```ts
+   * const resource =
+   *   await client.resourceSharing.resources.create(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       meta: {},
+   *       resource_account_id:
+   *         '023e105f4ecef8ad9ca31a8372d0c353',
+   *       resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       resource_type: 'custom-ruleset',
+   *     },
+   *   );
+   * ```
    */
   create(
     shareID: string,
@@ -27,6 +43,19 @@ export class Resources extends APIResource {
   /**
    * Update is not immediate, an updated share resource object with a new status will
    * be returned.
+   *
+   * @example
+   * ```ts
+   * const resource =
+   *   await client.resourceSharing.resources.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       share_id: '3fd85f74b32742f1bff64a85009dda07',
+   *       meta: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     resourceID: string,
@@ -44,6 +73,17 @@ export class Resources extends APIResource {
 
   /**
    * List share resources by share ID.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const resourceListResponse of client.resourceSharing.resources.list(
+   *   '3fd85f74b32742f1bff64a85009dda07',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     shareID: string,
@@ -61,6 +101,18 @@ export class Resources extends APIResource {
   /**
    * Deletion is not immediate, an updated share resource object with a new status
    * will be returned.
+   *
+   * @example
+   * ```ts
+   * const resource =
+   *   await client.resourceSharing.resources.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       share_id: '3fd85f74b32742f1bff64a85009dda07',
+   *     },
+   *   );
+   * ```
    */
   delete(
     resourceID: string,
@@ -78,6 +130,17 @@ export class Resources extends APIResource {
 
   /**
    * Get share resource by ID.
+   *
+   * @example
+   * ```ts
+   * const resource = await client.resourceSharing.resources.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     share_id: '3fd85f74b32742f1bff64a85009dda07',
+   *   },
+   * );
+   * ```
    */
   get(
     resourceID: string,

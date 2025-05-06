@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class Value extends APIResource {
   /**
    * Roll the token secret.
+   *
+   * @example
+   * ```ts
+   * const tokenValue = await client.user.tokens.value.update(
+   *   'ed17574386854bf78a67040be0a770b0',
+   *   { body: {} },
+   * );
+   * ```
    */
   update(
     tokenID: string,

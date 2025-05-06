@@ -9,6 +9,20 @@ export class Bindings extends APIResource {
   /**
    * Fetch script bindings from a script uploaded to a Workers for Platforms
    * namespace.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const bindingGetResponse of client.workersForPlatforms.dispatch.namespaces.scripts.bindings.get(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     dispatch_namespace: 'my-dispatch-namespace',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     scriptName: string,

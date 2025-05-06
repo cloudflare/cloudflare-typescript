@@ -22,6 +22,19 @@ export class DNSFirewall extends APIResource {
 
   /**
    * Create a DNS Firewall cluster
+   *
+   * @example
+   * ```ts
+   * const dnsFirewall = await client.dnsFirewall.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'My Awesome DNS Firewall cluster',
+   *   upstream_ips: [
+   *     '192.0.2.1',
+   *     '198.51.100.1',
+   *     '2001:DB8:100::CF',
+   *   ],
+   * });
+   * ```
    */
   create(params: DNSFirewallCreateParams, options?: RequestOptions): APIPromise<DNSFirewallCreateResponse> {
     const { account_id, ...body } = params;
@@ -34,6 +47,16 @@ export class DNSFirewall extends APIResource {
 
   /**
    * List DNS Firewall clusters for an account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dnsFirewallListResponse of client.dnsFirewall.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DNSFirewallListParams,
@@ -49,6 +72,14 @@ export class DNSFirewall extends APIResource {
 
   /**
    * Delete a DNS Firewall cluster
+   *
+   * @example
+   * ```ts
+   * const dnsFirewall = await client.dnsFirewall.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     dnsFirewallID: string,
@@ -66,6 +97,14 @@ export class DNSFirewall extends APIResource {
 
   /**
    * Modify the configuration of a DNS Firewall cluster
+   *
+   * @example
+   * ```ts
+   * const response = await client.dnsFirewall.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     dnsFirewallID: string,
@@ -83,6 +122,14 @@ export class DNSFirewall extends APIResource {
 
   /**
    * Show a single DNS Firewall cluster for an account
+   *
+   * @example
+   * ```ts
+   * const dnsFirewall = await client.dnsFirewall.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     dnsFirewallID: string,

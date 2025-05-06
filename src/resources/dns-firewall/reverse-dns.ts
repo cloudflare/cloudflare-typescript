@@ -8,6 +8,14 @@ import { path } from '../../internal/utils/path';
 export class ReverseDNS extends APIResource {
   /**
    * Update reverse DNS configuration (PTR records) for a DNS Firewall cluster
+   *
+   * @example
+   * ```ts
+   * const response = await client.dnsFirewall.reverseDNS.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     dnsFirewallID: string,
@@ -25,6 +33,14 @@ export class ReverseDNS extends APIResource {
 
   /**
    * Show reverse DNS configuration (PTR records) for a DNS Firewall cluster
+   *
+   * @example
+   * ```ts
+   * const reverseDNS = await client.dnsFirewall.reverseDNS.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     dnsFirewallID: string,

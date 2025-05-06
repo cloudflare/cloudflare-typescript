@@ -33,6 +33,14 @@ export class Zaraz extends APIResource {
 
   /**
    * Updates Zaraz workflow for a zone.
+   *
+   * @example
+   * ```ts
+   * const workflow = await client.zaraz.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   workflow: 'realtime',
+   * });
+   * ```
    */
   update(params: ZarazUpdateParams, options?: RequestOptions): APIPromise<WorkflowAPI.Workflow> {
     const { zone_id, workflow } = params;

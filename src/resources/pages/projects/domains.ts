@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class Domains extends APIResource {
   /**
    * Add a new domain for the Pages project.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.pages.projects.domains.create(
+   *   'this-is-my-project-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   create(
     projectName: string,
@@ -26,6 +34,17 @@ export class Domains extends APIResource {
 
   /**
    * Fetch a list of all domains associated with a Pages project.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const domainListResponse of client.pages.projects.domains.list(
+   *   'this-is-my-project-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     projectName: string,
@@ -42,6 +61,17 @@ export class Domains extends APIResource {
 
   /**
    * Delete a Pages project's domain.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.pages.projects.domains.delete(
+   *   'this-is-my-domain-01.com',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     project_name: 'this-is-my-project-01',
+   *   },
+   * );
+   * ```
    */
   delete(
     domainName: string,
@@ -59,6 +89,18 @@ export class Domains extends APIResource {
 
   /**
    * Retry the validation status of a single domain.
+   *
+   * @example
+   * ```ts
+   * const response = await client.pages.projects.domains.edit(
+   *   'this-is-my-domain-01.com',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     project_name: 'this-is-my-project-01',
+   *     body: {},
+   *   },
+   * );
+   * ```
    */
   edit(
     domainName: string,
@@ -76,6 +118,17 @@ export class Domains extends APIResource {
 
   /**
    * Fetch a single domain.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.pages.projects.domains.get(
+   *   'this-is-my-domain-01.com',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     project_name: 'this-is-my-project-01',
+   *   },
+   * );
+   * ```
    */
   get(
     domainName: string,

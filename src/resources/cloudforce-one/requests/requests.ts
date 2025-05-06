@@ -53,6 +53,13 @@ export class Requests extends APIResource {
    * Creating a request adds the request into the Cloudforce One queue for analysis.
    * In addition to the content, a short title, type, priority, and releasability
    * should be provided. If one is not provided, a default will be assigned.
+   *
+   * @example
+   * ```ts
+   * const item = await client.cloudforceOne.requests.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: RequestCreateParams, options?: RequestOptions): APIPromise<Item> {
     const { account_id, ...body } = params;
@@ -68,6 +75,14 @@ export class Requests extends APIResource {
    * Updating a request alters the request in the Cloudforce One queue. This API may
    * be used to update any attributes of the request after the initial submission.
    * Only fields that you choose to update need to be add to the request body.
+   *
+   * @example
+   * ```ts
+   * const item = await client.cloudforceOne.requests.update(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(requestID: string, params: RequestUpdateParams, options?: RequestOptions): APIPromise<Item> {
     const { account_id, ...body } = params;
@@ -81,6 +96,20 @@ export class Requests extends APIResource {
 
   /**
    * List Requests
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const listItem of client.cloudforceOne.requests.list(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     page: 0,
+   *     per_page: 10,
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: RequestListParams, options?: RequestOptions): PagePromise<ListItemsSinglePage, ListItem> {
     const { account_id, ...body } = params;
@@ -93,6 +122,14 @@ export class Requests extends APIResource {
 
   /**
    * Delete a Request
+   *
+   * @example
+   * ```ts
+   * const request = await client.cloudforceOne.requests.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     requestID: string,
@@ -105,6 +142,14 @@ export class Requests extends APIResource {
 
   /**
    * Get Request Priority, Status, and TLP constants
+   *
+   * @example
+   * ```ts
+   * const requestConstants =
+   *   await client.cloudforceOne.requests.constants({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   constants(params: RequestConstantsParams, options?: RequestOptions): APIPromise<RequestConstants> {
     const { account_id } = params;
@@ -118,6 +163,14 @@ export class Requests extends APIResource {
 
   /**
    * Get a Request
+   *
+   * @example
+   * ```ts
+   * const item = await client.cloudforceOne.requests.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(requestID: string, params: RequestGetParams, options?: RequestOptions): APIPromise<Item> {
     const { account_id } = params;
@@ -131,6 +184,13 @@ export class Requests extends APIResource {
 
   /**
    * Get Request Quota
+   *
+   * @example
+   * ```ts
+   * const quota = await client.cloudforceOne.requests.quota({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   quota(params: RequestQuotaParams, options?: RequestOptions): APIPromise<Quota> {
     const { account_id } = params;
@@ -143,6 +203,16 @@ export class Requests extends APIResource {
 
   /**
    * Get Request Types
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const requestTypesResponse of client.cloudforceOne.requests.types(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   types(
     params: RequestTypesParams,

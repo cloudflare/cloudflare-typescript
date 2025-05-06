@@ -9,6 +9,15 @@ import { path } from '../../internal/utils/path';
 export class Apps extends APIResource {
   /**
    * Creates a new App for an account
+   *
+   * @example
+   * ```ts
+   * const app = await client.magicTransit.apps.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'Cloudflare Dashboard',
+   *   type: 'Development',
+   * });
+   * ```
    */
   create(params: AppCreateParams, options?: RequestOptions): APIPromise<AppCreateResponse | null> {
     const { account_id, ...body } = params;
@@ -21,6 +30,14 @@ export class Apps extends APIResource {
 
   /**
    * Updates an Account App
+   *
+   * @example
+   * ```ts
+   * const app = await client.magicTransit.apps.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     accountAppID: string,
@@ -38,6 +55,16 @@ export class Apps extends APIResource {
 
   /**
    * Lists Apps associated with an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const appListResponse of client.magicTransit.apps.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: AppListParams,
@@ -53,6 +80,14 @@ export class Apps extends APIResource {
 
   /**
    * Deletes specific Account App.
+   *
+   * @example
+   * ```ts
+   * const app = await client.magicTransit.apps.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     accountAppID: string,
@@ -69,6 +104,14 @@ export class Apps extends APIResource {
 
   /**
    * Updates an Account App
+   *
+   * @example
+   * ```ts
+   * const response = await client.magicTransit.apps.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     accountAppID: string,

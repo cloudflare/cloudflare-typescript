@@ -32,6 +32,11 @@ export class Locations extends APIResource {
 
   /**
    * Retrieves the top locations by HTTP requests.
+   *
+   * @example
+   * ```ts
+   * const location = await client.radar.http.locations.get();
+   * ```
    */
   get(
     query: LocationGetParams | null | undefined = {},

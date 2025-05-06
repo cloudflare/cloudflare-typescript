@@ -13,6 +13,17 @@ import { path } from '../../../internal/utils/path';
 export class Content extends APIResource {
   /**
    * Put script content without touching config or metadata
+   *
+   * @example
+   * ```ts
+   * const script = await client.workers.scripts.content.update(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     metadata: {},
+   *   },
+   * );
+   * ```
    */
   update(
     scriptName: string,
@@ -50,6 +61,17 @@ export class Content extends APIResource {
 
   /**
    * Fetch script content only
+   *
+   * @example
+   * ```ts
+   * const content = await client.workers.scripts.content.get(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   *
+   * const data = await content.blob();
+   * console.log(data);
+   * ```
    */
   get(scriptName: string, params: ContentGetParams, options?: RequestOptions): APIPromise<Response> {
     const { account_id } = params;

@@ -10,6 +10,14 @@ import { path } from '../../internal/utils/path';
 export class Copy extends APIResource {
   /**
    * Uploads a video to Stream from a provided URL.
+   *
+   * @example
+   * ```ts
+   * const video = await client.stream.copy.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   url: 'https://example.com/myvideo.mp4',
+   * });
+   * ```
    */
   create(params: CopyCreateParams, options?: RequestOptions): APIPromise<StreamAPI.Video> {
     const { account_id, 'Upload-Creator': uploadCreator, ...body } = params;

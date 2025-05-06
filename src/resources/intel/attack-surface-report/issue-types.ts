@@ -8,6 +8,16 @@ import { path } from '../../../internal/utils/path';
 export class IssueTypes extends APIResource {
   /**
    * Get Security Center Issues Types
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const issueTypeGetResponse of client.intel.attackSurfaceReport.issueTypes.get(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: IssueTypeGetParams,

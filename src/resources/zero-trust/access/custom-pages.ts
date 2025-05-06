@@ -9,6 +9,18 @@ import { path } from '../../../internal/utils/path';
 export class CustomPages extends APIResource {
   /**
    * Create a custom page
+   *
+   * @example
+   * ```ts
+   * const customPageWithoutHTML =
+   *   await client.zeroTrust.access.customPages.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     custom_html:
+   *       '<html><body><h1>Access Denied</h1></body></html>',
+   *     name: 'name',
+   *     type: 'identity_denied',
+   *   });
+   * ```
    */
   create(params: CustomPageCreateParams, options?: RequestOptions): APIPromise<CustomPageWithoutHTML> {
     const { account_id, ...body } = params;
@@ -22,6 +34,21 @@ export class CustomPages extends APIResource {
 
   /**
    * Update a custom page
+   *
+   * @example
+   * ```ts
+   * const customPageWithoutHTML =
+   *   await client.zeroTrust.access.customPages.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       custom_html:
+   *         '<html><body><h1>Access Denied</h1></body></html>',
+   *       name: 'name',
+   *       type: 'identity_denied',
+   *     },
+   *   );
+   * ```
    */
   update(
     customPageID: string,
@@ -39,6 +66,16 @@ export class CustomPages extends APIResource {
 
   /**
    * List custom pages
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customPageWithoutHTML of client.zeroTrust.access.customPages.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CustomPageListParams,
@@ -54,6 +91,15 @@ export class CustomPages extends APIResource {
 
   /**
    * Delete a custom page
+   *
+   * @example
+   * ```ts
+   * const customPage =
+   *   await client.zeroTrust.access.customPages.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     customPageID: string,
@@ -71,6 +117,15 @@ export class CustomPages extends APIResource {
 
   /**
    * Fetches a custom page and also returns its HTML.
+   *
+   * @example
+   * ```ts
+   * const customPage =
+   *   await client.zeroTrust.access.customPages.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(customPageID: string, params: CustomPageGetParams, options?: RequestOptions): APIPromise<CustomPage> {
     const { account_id } = params;

@@ -8,6 +8,17 @@ import { path } from '../../../../internal/utils/path';
 export class Logs extends APIResource {
   /**
    * Get job logs
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const logListResponse of client.r2.superSlurper.jobs.logs.list(
+   *   'job_id',
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     jobID: string,

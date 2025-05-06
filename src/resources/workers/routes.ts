@@ -9,6 +9,15 @@ import { path } from '../../internal/utils/path';
 export class Routes extends APIResource {
   /**
    * Creates a route that maps a URL pattern to a Worker.
+   *
+   * @example
+   * ```ts
+   * const route = await client.workers.routes.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   pattern: 'example.com/*',
+   *   script: 'my-workers-script',
+   * });
+   * ```
    */
   create(params: RouteCreateParams, options?: RequestOptions): APIPromise<RouteCreateResponse> {
     const { zone_id, ...body } = params;
@@ -21,6 +30,18 @@ export class Routes extends APIResource {
 
   /**
    * Updates the URL pattern or Worker associated with a route.
+   *
+   * @example
+   * ```ts
+   * const route = await client.workers.routes.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     pattern: 'example.com/*',
+   *     script: 'my-workers-script',
+   *   },
+   * );
+   * ```
    */
   update(
     routeID: string,
@@ -38,6 +59,16 @@ export class Routes extends APIResource {
 
   /**
    * Returns routes for a zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const routeListResponse of client.workers.routes.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RouteListParams,
@@ -53,6 +84,14 @@ export class Routes extends APIResource {
 
   /**
    * Deletes a route.
+   *
+   * @example
+   * ```ts
+   * const route = await client.workers.routes.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     routeID: string,
@@ -69,6 +108,14 @@ export class Routes extends APIResource {
 
   /**
    * Returns information about a route, including URL pattern and Worker.
+   *
+   * @example
+   * ```ts
+   * const route = await client.workers.routes.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(routeID: string, params: RouteGetParams, options?: RequestOptions): APIPromise<RouteGetResponse> {
     const { zone_id } = params;

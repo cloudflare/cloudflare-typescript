@@ -8,6 +8,15 @@ import { path } from '../../../../internal/utils/path';
 export class Configurations extends APIResource {
   /**
    * Adds or updates the configuration for a remotely-managed tunnel.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.zeroTrust.tunnels.cloudflared.configurations.update(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     tunnelID: string,
@@ -25,6 +34,15 @@ export class Configurations extends APIResource {
 
   /**
    * Gets the configuration for a remotely-managed tunnel
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.zeroTrust.tunnels.cloudflared.configurations.get(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     tunnelID: string,

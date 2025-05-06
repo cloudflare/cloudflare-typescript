@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class Downloads extends APIResource {
   /**
    * Download indicator feed data
+   *
+   * @example
+   * ```ts
+   * const download =
+   *   await client.intel.indicatorFeeds.downloads.get(12, {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(feedID: number, params: DownloadGetParams, options?: RequestOptions): APIPromise<DownloadGetResponse> {
     const { account_id } = params;

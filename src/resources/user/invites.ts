@@ -9,6 +9,14 @@ import { path } from '../../internal/utils/path';
 export class Invites extends APIResource {
   /**
    * Lists all invitations associated with my user.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const invite of client.user.invites.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(options?: RequestOptions): PagePromise<InvitesSinglePage, Invite> {
     return this._client.getAPIList('/user/invites', SinglePage<Invite>, options);
@@ -16,6 +24,14 @@ export class Invites extends APIResource {
 
   /**
    * Responds to an invitation.
+   *
+   * @example
+   * ```ts
+   * const invite = await client.user.invites.edit(
+   *   '4f5f0c14a2a41d5063dd301b2f829f04',
+   *   { status: 'accepted' },
+   * );
+   * ```
    */
   edit(inviteID: string, body: InviteEditParams, options?: RequestOptions): APIPromise<Invite> {
     return (
@@ -27,6 +43,13 @@ export class Invites extends APIResource {
 
   /**
    * Gets the details of an invitation.
+   *
+   * @example
+   * ```ts
+   * const invite = await client.user.invites.get(
+   *   '4f5f0c14a2a41d5063dd301b2f829f04',
+   * );
+   * ```
    */
   get(inviteID: string, options?: RequestOptions): APIPromise<Invite> {
     return (

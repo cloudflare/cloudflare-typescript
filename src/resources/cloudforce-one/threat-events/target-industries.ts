@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class TargetIndustries extends APIResource {
   /**
    * Lists all target industries
+   *
+   * @example
+   * ```ts
+   * const targetIndustries =
+   *   await client.cloudforceOne.threatEvents.targetIndustries.list(
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   list(params: TargetIndustryListParams, options?: RequestOptions): APIPromise<TargetIndustryListResponse> {
     const { account_id } = params;

@@ -8,6 +8,14 @@ import { path } from '../../internal/utils/path';
 export class Rules extends APIResource {
   /**
    * Creates a new rule in a Web Analytics ruleset.
+   *
+   * @example
+   * ```ts
+   * const rumRule = await client.rum.rules.create(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   create(rulesetID: string, params: RuleCreateParams, options?: RequestOptions): APIPromise<RUMRule> {
     const { account_id, ...body } = params;
@@ -21,6 +29,17 @@ export class Rules extends APIResource {
 
   /**
    * Updates a rule in a Web Analytics ruleset.
+   *
+   * @example
+   * ```ts
+   * const rumRule = await client.rum.rules.update(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     ruleset_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   },
+   * );
+   * ```
    */
   update(ruleID: string, params: RuleUpdateParams, options?: RequestOptions): APIPromise<RUMRule> {
     const { account_id, ruleset_id, ...body } = params;
@@ -34,6 +53,14 @@ export class Rules extends APIResource {
 
   /**
    * Lists all the rules in a Web Analytics ruleset.
+   *
+   * @example
+   * ```ts
+   * const rules = await client.rum.rules.list(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   list(rulesetID: string, params: RuleListParams, options?: RequestOptions): APIPromise<RuleListResponse> {
     const { account_id } = params;
@@ -46,6 +73,17 @@ export class Rules extends APIResource {
 
   /**
    * Deletes an existing rule from a Web Analytics ruleset.
+   *
+   * @example
+   * ```ts
+   * const rule = await client.rum.rules.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     ruleset_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   },
+   * );
+   * ```
    */
   delete(ruleID: string, params: RuleDeleteParams, options?: RequestOptions): APIPromise<RuleDeleteResponse> {
     const { account_id, ruleset_id } = params;
@@ -59,6 +97,14 @@ export class Rules extends APIResource {
 
   /**
    * Modifies one or more rules in a Web Analytics ruleset with a single request.
+   *
+   * @example
+   * ```ts
+   * const response = await client.rum.rules.bulkCreate(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   bulkCreate(
     rulesetID: string,

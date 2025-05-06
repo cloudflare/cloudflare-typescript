@@ -9,6 +9,13 @@ import { path } from '../../internal/utils/path';
 export class Edge extends APIResource {
   /**
    * Creates a new Instant Logs job for a zone.
+   *
+   * @example
+   * ```ts
+   * const instantLogpushJob = await client.logpush.edge.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: EdgeCreateParams, options?: RequestOptions): APIPromise<InstantLogpushJob | null> {
     const { zone_id, ...body } = params;
@@ -21,6 +28,16 @@ export class Edge extends APIResource {
 
   /**
    * Lists Instant Logs jobs for a zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const instantLogpushJob of client.logpush.edge.get(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: EdgeGetParams,

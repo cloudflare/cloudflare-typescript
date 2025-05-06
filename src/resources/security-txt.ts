@@ -8,6 +8,13 @@ import { path } from '../internal/utils/path';
 export class SecurityTXT extends APIResource {
   /**
    * Update security.txt
+   *
+   * @example
+   * ```ts
+   * const securityTXT = await client.securityTXT.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   update(params: SecurityTXTUpdateParams, options?: RequestOptions): APIPromise<SecurityTXTUpdateResponse> {
     const { zone_id, ...body } = params;
@@ -16,6 +23,13 @@ export class SecurityTXT extends APIResource {
 
   /**
    * Delete security.txt
+   *
+   * @example
+   * ```ts
+   * const securityTXT = await client.securityTXT.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(params: SecurityTXTDeleteParams, options?: RequestOptions): APIPromise<SecurityTXTDeleteResponse> {
     const { zone_id } = params;
@@ -24,6 +38,13 @@ export class SecurityTXT extends APIResource {
 
   /**
    * Get security.txt
+   *
+   * @example
+   * ```ts
+   * const securityTXT = await client.securityTXT.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: SecurityTXTGetParams, options?: RequestOptions): APIPromise<SecurityTXTGetResponse> {
     const { zone_id } = params;

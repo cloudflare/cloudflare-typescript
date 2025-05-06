@@ -13,6 +13,15 @@ export class Lists extends APIResource {
 
   /**
    * Creates a new Zero Trust list.
+   *
+   * @example
+   * ```ts
+   * const list = await client.zeroTrust.gateway.lists.create({
+   *   account_id: '699d98642c564d2e855e9661899b7252',
+   *   name: 'Admin Serial Numbers',
+   *   type: 'SERIAL',
+   * });
+   * ```
    */
   create(params: ListCreateParams, options?: RequestOptions): APIPromise<ListCreateResponse> {
     const { account_id, ...body } = params;
@@ -26,6 +35,18 @@ export class Lists extends APIResource {
   /**
    * Updates a configured Zero Trust list. Skips updating list items if not included
    * in the payload.
+   *
+   * @example
+   * ```ts
+   * const gatewayList =
+   *   await client.zeroTrust.gateway.lists.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       name: 'Admin Serial Numbers',
+   *     },
+   *   );
+   * ```
    */
   update(listID: string, params: ListUpdateParams, options?: RequestOptions): APIPromise<GatewayList> {
     const { account_id, ...body } = params;
@@ -39,6 +60,16 @@ export class Lists extends APIResource {
 
   /**
    * Fetches all Zero Trust lists for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const gatewayList of client.zeroTrust.gateway.lists.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: ListListParams, options?: RequestOptions): PagePromise<GatewayListsSinglePage, GatewayList> {
     const { account_id, ...query } = params;
@@ -50,6 +81,14 @@ export class Lists extends APIResource {
 
   /**
    * Deletes a Zero Trust list.
+   *
+   * @example
+   * ```ts
+   * const list = await client.zeroTrust.gateway.lists.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * );
+   * ```
    */
   delete(listID: string, params: ListDeleteParams, options?: RequestOptions): APIPromise<ListDeleteResponse> {
     const { account_id } = params;
@@ -62,6 +101,15 @@ export class Lists extends APIResource {
 
   /**
    * Appends or removes an item from a configured Zero Trust list.
+   *
+   * @example
+   * ```ts
+   * const gatewayList =
+   *   await client.zeroTrust.gateway.lists.edit(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   edit(listID: string, params: ListEditParams, options?: RequestOptions): APIPromise<GatewayList> {
     const { account_id, ...body } = params;
@@ -75,6 +123,15 @@ export class Lists extends APIResource {
 
   /**
    * Fetches a single Zero Trust list.
+   *
+   * @example
+   * ```ts
+   * const gatewayList =
+   *   await client.zeroTrust.gateway.lists.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(listID: string, params: ListGetParams, options?: RequestOptions): APIPromise<GatewayList> {
     const { account_id } = params;

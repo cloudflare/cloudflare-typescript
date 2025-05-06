@@ -14,6 +14,13 @@ export class ASN extends APIResource {
   /**
    * Gets an overview of the Autonomous System Number (ASN) and a list of subnets for
    * it.
+   *
+   * @example
+   * ```ts
+   * const asn = await client.intel.asn.get(0, {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(asn: Shared.ASNParam, params: ASNGetParams, options?: RequestOptions): APIPromise<Shared.ASN> {
     const { account_id } = params;

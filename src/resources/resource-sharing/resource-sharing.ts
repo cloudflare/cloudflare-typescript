@@ -40,6 +40,26 @@ export class ResourceSharing extends APIResource {
 
   /**
    * Create a new share
+   *
+   * @example
+   * ```ts
+   * const resourceSharing = await client.resourceSharing.create(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'My Shared WAF Managed Rule',
+   *     recipients: [{}],
+   *     resources: [
+   *       {
+   *         meta: {},
+   *         resource_account_id:
+   *           '023e105f4ecef8ad9ca31a8372d0c353',
+   *         resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *         resource_type: 'custom-ruleset',
+   *       },
+   *     ],
+   *   },
+   * );
+   * ```
    */
   create(
     params: ResourceSharingCreateParams,
@@ -56,6 +76,17 @@ export class ResourceSharing extends APIResource {
   /**
    * Updating is not immediate, an updated share object with a new status will be
    * returned.
+   *
+   * @example
+   * ```ts
+   * const resourceSharing = await client.resourceSharing.update(
+   *   '3fd85f74b32742f1bff64a85009dda07',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'My Shared WAF Managed Rule',
+   *   },
+   * );
+   * ```
    */
   update(
     shareID: string,
@@ -72,6 +103,16 @@ export class ResourceSharing extends APIResource {
 
   /**
    * Lists all account shares.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const resourceSharingListResponse of client.resourceSharing.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ResourceSharingListParams,
@@ -88,6 +129,14 @@ export class ResourceSharing extends APIResource {
   /**
    * Deletion is not immediate, an updated share object with a new status will be
    * returned.
+   *
+   * @example
+   * ```ts
+   * const resourceSharing = await client.resourceSharing.delete(
+   *   '3fd85f74b32742f1bff64a85009dda07',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     shareID: string,
@@ -104,6 +153,14 @@ export class ResourceSharing extends APIResource {
 
   /**
    * Fetches share by ID.
+   *
+   * @example
+   * ```ts
+   * const resourceSharing = await client.resourceSharing.get(
+   *   '3fd85f74b32742f1bff64a85009dda07',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     shareID: string,

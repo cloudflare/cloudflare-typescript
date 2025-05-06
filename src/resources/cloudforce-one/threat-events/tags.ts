@@ -8,6 +8,15 @@ import { path } from '../../../internal/utils/path';
 export class Tags extends APIResource {
   /**
    * Creates a new tag
+   *
+   * @example
+   * ```ts
+   * const tag =
+   *   await client.cloudforceOne.threatEvents.tags.create({
+   *     account_id: 0,
+   *     name: 'name',
+   *   });
+   * ```
    */
   create(params: TagCreateParams, options?: RequestOptions): APIPromise<TagCreateResponse> {
     const { account_id, ...body } = params;

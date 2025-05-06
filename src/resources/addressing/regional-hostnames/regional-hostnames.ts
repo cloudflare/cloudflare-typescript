@@ -16,6 +16,16 @@ export class RegionalHostnames extends APIResource {
    * are physically located within the chosen region to decrypt and service HTTPS
    * traffic. Learn more about
    * [Regional Services](https://developers.cloudflare.com/data-localization/regional-services/get-started/).
+   *
+   * @example
+   * ```ts
+   * const regionalHostname =
+   *   await client.addressing.regionalHostnames.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     hostname: 'foo.example.com',
+   *     region_key: 'ca',
+   *   });
+   * ```
    */
   create(
     params: RegionalHostnameCreateParams,
@@ -32,6 +42,16 @@ export class RegionalHostnames extends APIResource {
 
   /**
    * List all Regional Hostnames within a zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const regionalHostnameListResponse of client.addressing.regionalHostnames.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RegionalHostnameListParams,
@@ -47,6 +67,15 @@ export class RegionalHostnames extends APIResource {
 
   /**
    * Delete the region configuration for a specific Regional Hostname.
+   *
+   * @example
+   * ```ts
+   * const regionalHostname =
+   *   await client.addressing.regionalHostnames.delete(
+   *     'foo.example.com',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     hostname: string,
@@ -60,6 +89,18 @@ export class RegionalHostnames extends APIResource {
   /**
    * Update the configuration for a specific Regional Hostname. Only the region_key
    * of a hostname is mutable.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.addressing.regionalHostnames.edit(
+   *     'foo.example.com',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       region_key: 'ca',
+   *     },
+   *   );
+   * ```
    */
   edit(
     hostname: string,
@@ -77,6 +118,15 @@ export class RegionalHostnames extends APIResource {
 
   /**
    * Fetch the configuration for a specific Regional Hostname, within a zone.
+   *
+   * @example
+   * ```ts
+   * const regionalHostname =
+   *   await client.addressing.regionalHostnames.get(
+   *     'foo.example.com',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     hostname: string,

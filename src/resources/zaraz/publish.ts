@@ -8,6 +8,13 @@ import { path } from '../../internal/utils/path';
 export class Publish extends APIResource {
   /**
    * Publish current Zaraz preview configuration for a zone.
+   *
+   * @example
+   * ```ts
+   * const publish = await client.zaraz.publish.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: PublishCreateParams, options?: RequestOptions): APIPromise<PublishCreateResponse> {
     const { zone_id, body } = params;

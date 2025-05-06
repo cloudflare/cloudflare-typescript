@@ -14,6 +14,13 @@ export class Jobs extends APIResource {
 
   /**
    * Create a job
+   *
+   * @example
+   * ```ts
+   * const job = await client.r2.superSlurper.jobs.create({
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   create(params: JobCreateParams, options?: RequestOptions): APIPromise<JobCreateResponse> {
     const { account_id, ...body } = params;
@@ -26,6 +33,16 @@ export class Jobs extends APIResource {
 
   /**
    * List jobs
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const jobListResponse of client.r2.superSlurper.jobs.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: JobListParams,
@@ -40,6 +57,14 @@ export class Jobs extends APIResource {
 
   /**
    * Abort a job
+   *
+   * @example
+   * ```ts
+   * const response = await client.r2.superSlurper.jobs.abort(
+   *   'job_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   abort(jobID: string, params: JobAbortParams, options?: RequestOptions): APIPromise<JobAbortResponse> {
     const { account_id } = params;
@@ -52,6 +77,13 @@ export class Jobs extends APIResource {
 
   /**
    * Abort all jobs
+   *
+   * @example
+   * ```ts
+   * const response = await client.r2.superSlurper.jobs.abortAll(
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   abortAll(params: JobAbortAllParams, options?: RequestOptions): APIPromise<JobAbortAllResponse> {
     const { account_id } = params;
@@ -64,6 +96,14 @@ export class Jobs extends APIResource {
 
   /**
    * Get job details
+   *
+   * @example
+   * ```ts
+   * const job = await client.r2.superSlurper.jobs.get(
+   *   'job_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(jobID: string, params: JobGetParams, options?: RequestOptions): APIPromise<JobGetResponse> {
     const { account_id } = params;
@@ -76,6 +116,14 @@ export class Jobs extends APIResource {
 
   /**
    * Pause a job
+   *
+   * @example
+   * ```ts
+   * const response = await client.r2.superSlurper.jobs.pause(
+   *   'job_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   pause(jobID: string, params: JobPauseParams, options?: RequestOptions): APIPromise<JobPauseResponse> {
     const { account_id } = params;
@@ -88,6 +136,14 @@ export class Jobs extends APIResource {
 
   /**
    * Get job progress
+   *
+   * @example
+   * ```ts
+   * const response = await client.r2.superSlurper.jobs.progress(
+   *   'job_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   progress(
     jobID: string,
@@ -104,6 +160,14 @@ export class Jobs extends APIResource {
 
   /**
    * Resume a job
+   *
+   * @example
+   * ```ts
+   * const response = await client.r2.superSlurper.jobs.resume(
+   *   'job_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   resume(jobID: string, params: JobResumeParams, options?: RequestOptions): APIPromise<JobResumeResponse> {
     const { account_id } = params;

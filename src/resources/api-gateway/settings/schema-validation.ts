@@ -9,6 +9,15 @@ import { path } from '../../../internal/utils/path';
 export class SchemaValidation extends APIResource {
   /**
    * Updates zone level schema validation settings on the zone
+   *
+   * @example
+   * ```ts
+   * const settings =
+   *   await client.apiGateway.settings.schemaValidation.update({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     validation_default_mitigation_action: 'block',
+   *   });
+   * ```
    */
   update(params: SchemaValidationUpdateParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -20,6 +29,14 @@ export class SchemaValidation extends APIResource {
 
   /**
    * Updates zone level schema validation settings on the zone
+   *
+   * @example
+   * ```ts
+   * const settings =
+   *   await client.apiGateway.settings.schemaValidation.edit({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   edit(params: SchemaValidationEditParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -31,6 +48,14 @@ export class SchemaValidation extends APIResource {
 
   /**
    * Retrieves zone level schema validation settings currently set on the zone
+   *
+   * @example
+   * ```ts
+   * const settings =
+   *   await client.apiGateway.settings.schemaValidation.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(params: SchemaValidationGetParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id } = params;

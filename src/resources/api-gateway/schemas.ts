@@ -8,6 +8,13 @@ import { path } from '../../internal/utils/path';
 export class Schemas extends APIResource {
   /**
    * Retrieve operations and features as OpenAPI schemas
+   *
+   * @example
+   * ```ts
+   * const schemas = await client.apiGateway.schemas.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: SchemaListParams, options?: RequestOptions): APIPromise<SchemaListResponse> {
     const { zone_id, ...query } = params;

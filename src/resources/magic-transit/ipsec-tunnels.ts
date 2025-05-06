@@ -13,6 +13,17 @@ export class IPSECTunnels extends APIResource {
    * Creates a new IPsec tunnel associated with an account. Use `?validate_only=true`
    * as an optional query parameter to only run validation without persisting
    * changes.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnel =
+   *   await client.magicTransit.ipsecTunnels.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     cloudflare_endpoint: '203.0.113.1',
+   *     interface_address: '192.0.2.0/31',
+   *     name: 'IPsec_1',
+   *   });
+   * ```
    */
   create(params: IPSECTunnelCreateParams, options?: RequestOptions): APIPromise<IPSECTunnelCreateResponse> {
     const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
@@ -36,6 +47,20 @@ export class IPSECTunnels extends APIResource {
    * Updates a specific IPsec tunnel associated with an account. Use
    * `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnel =
+   *   await client.magicTransit.ipsecTunnels.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       cloudflare_endpoint: '203.0.113.1',
+   *       interface_address: '192.0.2.0/31',
+   *       name: 'IPsec_1',
+   *     },
+   *   );
+   * ```
    */
   update(
     ipsecTunnelID: string,
@@ -61,6 +86,14 @@ export class IPSECTunnels extends APIResource {
 
   /**
    * Lists IPsec tunnels associated with an account.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnels =
+   *   await client.magicTransit.ipsecTunnels.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   list(params: IPSECTunnelListParams, options?: RequestOptions): APIPromise<IPSECTunnelListResponse> {
     const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
@@ -83,6 +116,15 @@ export class IPSECTunnels extends APIResource {
    * Disables and removes a specific static IPsec Tunnel associated with an account.
    * Use `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnel =
+   *   await client.magicTransit.ipsecTunnels.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     ipsecTunnelID: string,
@@ -109,6 +151,15 @@ export class IPSECTunnels extends APIResource {
    * Update multiple IPsec tunnels associated with an account. Use
    * `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.ipsecTunnels.bulkUpdate({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: {},
+   *   });
+   * ```
    */
   bulkUpdate(
     params: IPSECTunnelBulkUpdateParams,
@@ -133,6 +184,15 @@ export class IPSECTunnels extends APIResource {
 
   /**
    * Lists details for a specific IPsec tunnel.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnel =
+   *   await client.magicTransit.ipsecTunnels.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     ipsecTunnelID: string,
@@ -161,6 +221,18 @@ export class IPSECTunnels extends APIResource {
    * without persisting changes. After a PSK is generated, the PSK is immediately
    * persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a
    * safe place.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.ipsecTunnels.pskGenerate(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   pskGenerate(
     ipsecTunnelID: string,

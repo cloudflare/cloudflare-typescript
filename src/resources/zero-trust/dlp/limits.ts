@@ -8,6 +8,13 @@ import { path } from '../../../internal/utils/path';
 export class Limits extends APIResource {
   /**
    * Fetch limits associated with DLP for account
+   *
+   * @example
+   * ```ts
+   * const limits = await client.zeroTrust.dlp.limits.list({
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   list(params: LimitListParams, options?: RequestOptions): APIPromise<LimitListResponse> {
     const { account_id } = params;

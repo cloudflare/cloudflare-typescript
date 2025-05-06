@@ -9,6 +9,13 @@ import { path } from '../../../internal/utils/path';
 export class Tags extends APIResource {
   /**
    * Create a tag
+   *
+   * @example
+   * ```ts
+   * const tag = await client.zeroTrust.access.tags.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: TagCreateParams, options?: RequestOptions): APIPromise<Tag> {
     const { account_id, ...body } = params;
@@ -21,6 +28,17 @@ export class Tags extends APIResource {
 
   /**
    * Update a tag
+   *
+   * @example
+   * ```ts
+   * const tag = await client.zeroTrust.access.tags.update(
+   *   'engineers',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'engineers',
+   *   },
+   * );
+   * ```
    */
   update(tagName: string, params: TagUpdateParams, options?: RequestOptions): APIPromise<Tag> {
     const { account_id, ...body } = params;
@@ -34,6 +52,16 @@ export class Tags extends APIResource {
 
   /**
    * List tags
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tag of client.zeroTrust.access.tags.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: TagListParams, options?: RequestOptions): PagePromise<TagsSinglePage, Tag> {
     const { account_id } = params;
@@ -42,6 +70,14 @@ export class Tags extends APIResource {
 
   /**
    * Delete a tag
+   *
+   * @example
+   * ```ts
+   * const tag = await client.zeroTrust.access.tags.delete(
+   *   'engineers',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(tagName: string, params: TagDeleteParams, options?: RequestOptions): APIPromise<TagDeleteResponse> {
     const { account_id } = params;
@@ -54,6 +90,14 @@ export class Tags extends APIResource {
 
   /**
    * Get a tag
+   *
+   * @example
+   * ```ts
+   * const tag = await client.zeroTrust.access.tags.get(
+   *   'engineers',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(tagName: string, params: TagGetParams, options?: RequestOptions): APIPromise<Tag> {
     const { account_id } = params;

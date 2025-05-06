@@ -8,6 +8,14 @@ import { path } from '../../internal/utils/path';
 export class URLs extends APIResource {
   /**
    * Get Gateway URL
+   *
+   * @example
+   * ```ts
+   * const url = await client.aiGateway.urls.get('workers-ai', {
+   *   account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+   *   gateway_id: 'my-gateway',
+   * });
+   * ```
    */
   get(provider: string, params: URLGetParams, options?: RequestOptions): APIPromise<URLGetResponse> {
     const { account_id, gateway_id } = params;

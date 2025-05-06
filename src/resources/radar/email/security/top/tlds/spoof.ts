@@ -8,6 +8,14 @@ import { path } from '../../../../../../internal/utils/path';
 export class Spoof extends APIResource {
   /**
    * Retrieves the top TLDs by emails classified as spoof or not.
+   *
+   * @example
+   * ```ts
+   * const spoof =
+   *   await client.radar.email.security.top.tlds.spoof.get(
+   *     'SPOOF',
+   *   );
+   * ```
    */
   get(
     spoof: 'SPOOF' | 'NOT_SPOOF',

@@ -9,6 +9,12 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of HTTP requests classified as automated or human
    * over time. Visit https://developers.cloudflare.com/radar/concepts/bot-classes/
    * for more information.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.botClass();
+   * ```
    */
   botClass(
     query: TimeseriesGroupBotClassParams | null | undefined = {},
@@ -23,6 +29,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of HTTP requests by user agent over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.browser();
+   * ```
    */
   browser(
     query: TimeseriesGroupBrowserParams | null | undefined = {},
@@ -37,6 +49,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of HTTP requests by user agent family over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.browserFamily();
+   * ```
    */
   browserFamily(
     query: TimeseriesGroupBrowserFamilyParams | null | undefined = {},
@@ -51,6 +69,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of HTTP requests by device type over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.deviceType();
+   * ```
    */
   deviceType(
     query: TimeseriesGroupDeviceTypeParams | null | undefined = {},
@@ -66,6 +90,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by HTTP protocol (HTTP vs. HTTPS)
    * over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.httpProtocol();
+   * ```
    */
   httpProtocol(
     query: TimeseriesGroupHTTPProtocolParams | null | undefined = {},
@@ -80,6 +110,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of HTTP requests by HTTP version over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.httpVersion();
+   * ```
    */
   httpVersion(
     query: TimeseriesGroupHTTPVersionParams | null | undefined = {},
@@ -94,6 +130,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of HTTP requests by IP version over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.ipVersion();
+   * ```
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -108,6 +150,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of HTTP requests by operating system over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.os();
+   * ```
    */
   os(
     query: TimeseriesGroupOSParams | null | undefined = {},
@@ -122,6 +170,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of HTTP requests by post-quantum support over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.postQuantum();
+   * ```
    */
   postQuantum(
     query: TimeseriesGroupPostQuantumParams | null | undefined = {},
@@ -136,6 +190,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of HTTP requests by TLS version over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.timeseriesGroups.tlsVersion();
+   * ```
    */
   tlsVersion(
     query: TimeseriesGroupTLSVersionParams | null | undefined = {},

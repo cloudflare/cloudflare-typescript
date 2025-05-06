@@ -11,6 +11,15 @@ import { path } from '../../internal/utils/path';
 export class Members extends APIResource {
   /**
    * Add a user to the list of members for this account.
+   *
+   * @example
+   * ```ts
+   * const member = await client.accounts.members.create({
+   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   email: 'user@example.com',
+   *   roles: ['3536bcfad5faccb999b47003c79917fb'],
+   * });
+   * ```
    */
   create(params: MemberCreateParams, options?: RequestOptions): APIPromise<Shared.Member> {
     const { account_id, ...body } = params;
@@ -23,6 +32,14 @@ export class Members extends APIResource {
 
   /**
    * Modify an account member.
+   *
+   * @example
+   * ```ts
+   * const member = await client.accounts.members.update(
+   *   '4536bcfad5faccb111b47003c79917fa',
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * );
+   * ```
    */
   update(memberID: string, params: MemberUpdateParams, options?: RequestOptions): APIPromise<Shared.Member> {
     const { account_id, ...body } = params;
@@ -36,6 +53,16 @@ export class Members extends APIResource {
 
   /**
    * List all members of an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const member of client.accounts.members.list({
+   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: MemberListParams,
@@ -51,6 +78,14 @@ export class Members extends APIResource {
 
   /**
    * Remove a member from an account.
+   *
+   * @example
+   * ```ts
+   * const member = await client.accounts.members.delete(
+   *   '4536bcfad5faccb111b47003c79917fa',
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * );
+   * ```
    */
   delete(
     memberID: string,
@@ -67,6 +102,14 @@ export class Members extends APIResource {
 
   /**
    * Get information about a specific member of an account.
+   *
+   * @example
+   * ```ts
+   * const member = await client.accounts.members.get(
+   *   '4536bcfad5faccb111b47003c79917fa',
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * );
+   * ```
    */
   get(memberID: string, params: MemberGetParams, options?: RequestOptions): APIPromise<Shared.Member> {
     const { account_id } = params;

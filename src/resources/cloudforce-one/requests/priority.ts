@@ -9,6 +9,18 @@ import { path } from '../../../internal/utils/path';
 export class PriorityResource extends APIResource {
   /**
    * Create a New Priority Intelligence Requirement
+   *
+   * @example
+   * ```ts
+   * const priority =
+   *   await client.cloudforceOne.requests.priority.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     labels: ['DoS', 'CVE'],
+   *     priority: 1,
+   *     requirement: 'DoS attacks carried out by CVEs',
+   *     tlp: 'clear',
+   *   });
+   * ```
    */
   create(params: PriorityCreateParams, options?: RequestOptions): APIPromise<Priority> {
     const { account_id, ...body } = params;
@@ -22,6 +34,21 @@ export class PriorityResource extends APIResource {
 
   /**
    * Update a Priority Intelligence Requirement
+   *
+   * @example
+   * ```ts
+   * const item =
+   *   await client.cloudforceOne.requests.priority.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       labels: ['DoS', 'CVE'],
+   *       priority: 1,
+   *       requirement: 'DoS attacks carried out by CVEs',
+   *       tlp: 'clear',
+   *     },
+   *   );
+   * ```
    */
   update(
     priorityID: string,
@@ -39,6 +66,15 @@ export class PriorityResource extends APIResource {
 
   /**
    * Delete a Priority Intelligence Requirement
+   *
+   * @example
+   * ```ts
+   * const priority =
+   *   await client.cloudforceOne.requests.priority.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     priorityID: string,
@@ -54,6 +90,15 @@ export class PriorityResource extends APIResource {
 
   /**
    * Get a Priority Intelligence Requirement
+   *
+   * @example
+   * ```ts
+   * const item =
+   *   await client.cloudforceOne.requests.priority.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(priorityID: string, params: PriorityGetParams, options?: RequestOptions): APIPromise<RequestsAPI.Item> {
     const { account_id } = params;
@@ -67,6 +112,14 @@ export class PriorityResource extends APIResource {
 
   /**
    * Get Priority Intelligence Requirement Quota
+   *
+   * @example
+   * ```ts
+   * const quota =
+   *   await client.cloudforceOne.requests.priority.quota({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   quota(params: PriorityQuotaParams, options?: RequestOptions): APIPromise<RequestsAPI.Quota> {
     const { account_id } = params;

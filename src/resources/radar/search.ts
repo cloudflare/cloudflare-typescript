@@ -7,6 +7,13 @@ import { RequestOptions } from '../../internal/request-options';
 export class Search extends APIResource {
   /**
    * Searches for locations, autonomous systems, and reports.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.search.global({
+   *   query: 'United',
+   * });
+   * ```
    */
   global(query: SearchGlobalParams, options?: RequestOptions): APIPromise<SearchGlobalResponse> {
     return (

@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class Permissions extends APIResource {
   /**
    * Grant permission to indicator feed
+   *
+   * @example
+   * ```ts
+   * const permission =
+   *   await client.intel.indicatorFeeds.permissions.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(params: PermissionCreateParams, options?: RequestOptions): APIPromise<PermissionCreateResponse> {
     const { account_id, ...body } = params;
@@ -21,6 +29,14 @@ export class Permissions extends APIResource {
 
   /**
    * List indicator feed permissions
+   *
+   * @example
+   * ```ts
+   * const permissions =
+   *   await client.intel.indicatorFeeds.permissions.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   list(params: PermissionListParams, options?: RequestOptions): APIPromise<PermissionListResponse> {
     const { account_id } = params;
@@ -34,6 +50,14 @@ export class Permissions extends APIResource {
 
   /**
    * Revoke permission to indicator feed
+   *
+   * @example
+   * ```ts
+   * const permission =
+   *   await client.intel.indicatorFeeds.permissions.delete({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   delete(params: PermissionDeleteParams, options?: RequestOptions): APIPromise<PermissionDeleteResponse> {
     const { account_id, ...body } = params;

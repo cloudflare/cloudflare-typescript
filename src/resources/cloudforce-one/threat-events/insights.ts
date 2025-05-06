@@ -8,6 +8,19 @@ import { path } from '../../../internal/utils/path';
 export class Insights extends APIResource {
   /**
    * Adds an insight to an event
+   *
+   * @example
+   * ```ts
+   * const insight =
+   *   await client.cloudforceOne.threatEvents.insights.create(
+   *     'event_id',
+   *     {
+   *       account_id: 0,
+   *       content:
+   *         'Here is some additional context _in markdown_',
+   *     },
+   *   );
+   * ```
    */
   create(
     eventID: string,
@@ -25,6 +38,15 @@ export class Insights extends APIResource {
 
   /**
    * Deletes an event insight
+   *
+   * @example
+   * ```ts
+   * const insight =
+   *   await client.cloudforceOne.threatEvents.insights.delete(
+   *     'insight_id',
+   *     { account_id: 0, event_id: 'event_id' },
+   *   );
+   * ```
    */
   delete(
     insightID: string,
@@ -42,6 +64,20 @@ export class Insights extends APIResource {
 
   /**
    * Updates an event insight
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.insights.edit(
+   *     'insight_id',
+   *     {
+   *       account_id: 0,
+   *       event_id: 'event_id',
+   *       content:
+   *         'Updated: Here is some additional context _in markdown_',
+   *     },
+   *   );
+   * ```
    */
   edit(
     insightID: string,
@@ -59,6 +95,15 @@ export class Insights extends APIResource {
 
   /**
    * Reads an event insight
+   *
+   * @example
+   * ```ts
+   * const insight =
+   *   await client.cloudforceOne.threatEvents.insights.get(
+   *     'insight_id',
+   *     { account_id: 0, event_id: 'event_id' },
+   *   );
+   * ```
    */
   get(insightID: string, params: InsightGetParams, options?: RequestOptions): APIPromise<InsightGetResponse> {
     const { account_id, event_id } = params;

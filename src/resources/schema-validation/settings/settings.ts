@@ -25,6 +25,15 @@ export class Settings extends APIResource {
 
   /**
    * Update global schema validation settings
+   *
+   * @example
+   * ```ts
+   * const setting =
+   *   await client.schemaValidation.settings.update({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     validation_default_mitigation_action: 'block',
+   *   });
+   * ```
    */
   update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<SettingUpdateResponse> {
     const { zone_id, ...body } = params;
@@ -38,6 +47,14 @@ export class Settings extends APIResource {
 
   /**
    * Edit global schema validation settings
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.schemaValidation.settings.edit({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   edit(params: SettingEditParams, options?: RequestOptions): APIPromise<SettingEditResponse> {
     const { zone_id, ...body } = params;
@@ -51,6 +68,13 @@ export class Settings extends APIResource {
 
   /**
    * Get global schema validation settings
+   *
+   * @example
+   * ```ts
+   * const setting = await client.schemaValidation.settings.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
     const { zone_id } = params;

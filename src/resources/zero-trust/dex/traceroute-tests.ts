@@ -11,6 +11,20 @@ export class TracerouteTests extends APIResource {
   /**
    * Get test details and aggregate performance metrics for an traceroute test for a
    * given time period between 1 hour and 7 days.
+   *
+   * @example
+   * ```ts
+   * const traceroute =
+   *   await client.zeroTrust.dex.tracerouteTests.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '01a7362d577a6c3019a474fd6f485823',
+   *       from: '1689520412000',
+   *       interval: 'minute',
+   *       to: '1689606812000',
+   *     },
+   *   );
+   * ```
    */
   get(testID: string, params: TracerouteTestGetParams, options?: RequestOptions): APIPromise<Traceroute> {
     const { account_id, ...query } = params;
@@ -24,6 +38,21 @@ export class TracerouteTests extends APIResource {
 
   /**
    * Get a breakdown of metrics by hop for individual traceroute test runs
+   *
+   * @example
+   * ```ts
+   * const networkPathResponse =
+   *   await client.zeroTrust.dex.tracerouteTests.networkPath(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '01a7362d577a6c3019a474fd6f485823',
+   *       deviceId: 'deviceId',
+   *       from: '1689520412000',
+   *       interval: 'minute',
+   *       to: '1689606812000',
+   *     },
+   *   );
+   * ```
    */
   networkPath(
     testID: string,
@@ -42,6 +71,19 @@ export class TracerouteTests extends APIResource {
   /**
    * Get percentiles for a traceroute test for a given time period between 1 hour and
    * 7 days.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.dex.tracerouteTests.percentiles(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '01a7362d577a6c3019a474fd6f485823',
+   *       from: '2023-09-20T17:00:00Z',
+   *       to: '2023-09-20T17:00:00Z',
+   *     },
+   *   );
+   * ```
    */
   percentiles(
     testID: string,

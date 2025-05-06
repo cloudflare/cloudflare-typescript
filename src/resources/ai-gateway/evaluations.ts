@@ -9,6 +9,17 @@ import { path } from '../../internal/utils/path';
 export class Evaluations extends APIResource {
   /**
    * Create a new Evaluation
+   *
+   * @example
+   * ```ts
+   * const evaluation =
+   *   await client.aiGateway.evaluations.create('my-gateway', {
+   *     account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *     dataset_ids: ['string'],
+   *     evaluation_type_ids: ['string'],
+   *     name: 'name',
+   *   });
+   * ```
    */
   create(
     gatewayID: string,
@@ -26,6 +37,17 @@ export class Evaluations extends APIResource {
 
   /**
    * List Evaluations
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const evaluationListResponse of client.aiGateway.evaluations.list(
+   *   'my-gateway',
+   *   { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     gatewayID: string,
@@ -42,6 +64,15 @@ export class Evaluations extends APIResource {
 
   /**
    * Delete a Evaluation
+   *
+   * @example
+   * ```ts
+   * const evaluation =
+   *   await client.aiGateway.evaluations.delete('id', {
+   *     account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *     gateway_id: 'my-gateway',
+   *   });
+   * ```
    */
   delete(
     id: string,
@@ -59,6 +90,17 @@ export class Evaluations extends APIResource {
 
   /**
    * Fetch a Evaluation
+   *
+   * @example
+   * ```ts
+   * const evaluation = await client.aiGateway.evaluations.get(
+   *   'id',
+   *   {
+   *     account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *     gateway_id: 'my-gateway',
+   *   },
+   * );
+   * ```
    */
   get(id: string, params: EvaluationGetParams, options?: RequestOptions): APIPromise<EvaluationGetResponse> {
     const { account_id, gateway_id } = params;

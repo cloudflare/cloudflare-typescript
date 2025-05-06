@@ -9,6 +9,21 @@ import { path } from '../../../../../internal/utils/path';
 export class Secrets extends APIResource {
   /**
    * Add a secret to a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const secret =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.update(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *       name: 'myBinding',
+   *       text: 'My secret.',
+   *       type: 'secret_text',
+   *     },
+   *   );
+   * ```
    */
   update(
     scriptName: string,
@@ -26,6 +41,20 @@ export class Secrets extends APIResource {
 
   /**
    * List secrets bound to a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretListResponse of client.workersForPlatforms.dispatch.namespaces.scripts.secrets.list(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     dispatch_namespace: 'my-dispatch-namespace',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     scriptName: string,
@@ -42,6 +71,19 @@ export class Secrets extends APIResource {
 
   /**
    * Remove a secret from a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const secret =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.delete(
+   *     'mySecret',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *       script_name: 'this-is_my_script-01',
+   *     },
+   *   );
+   * ```
    */
   delete(
     secretName: string,
@@ -60,6 +102,19 @@ export class Secrets extends APIResource {
   /**
    * Get a given secret binding (value omitted) on a script uploaded to a Workers for
    * Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const secret =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.get(
+   *     'mySecret',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *       script_name: 'this-is_my_script-01',
+   *     },
+   *   );
+   * ```
    */
   get(secretName: string, params: SecretGetParams, options?: RequestOptions): APIPromise<SecretGetResponse> {
     const { account_id, dispatch_namespace, script_name } = params;

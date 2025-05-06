@@ -139,6 +139,13 @@ export class Gateway extends APIResource {
 
   /**
    * Creates a Zero Trust account with an existing Cloudflare account.
+   *
+   * @example
+   * ```ts
+   * const gateway = await client.zeroTrust.gateway.create({
+   *   account_id: '699d98642c564d2e855e9661899b7252',
+   * });
+   * ```
    */
   create(params: GatewayCreateParams, options?: RequestOptions): APIPromise<GatewayCreateResponse> {
     const { account_id } = params;
@@ -151,6 +158,13 @@ export class Gateway extends APIResource {
 
   /**
    * Gets information about the current Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const gateways = await client.zeroTrust.gateway.list({
+   *   account_id: '699d98642c564d2e855e9661899b7252',
+   * });
+   * ```
    */
   list(params: GatewayListParams, options?: RequestOptions): APIPromise<GatewayListResponse> {
     const { account_id } = params;

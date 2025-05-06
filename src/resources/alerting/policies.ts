@@ -10,6 +10,17 @@ import { path } from '../../internal/utils/path';
 export class Policies extends APIResource {
   /**
    * Creates a new Notification policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.alerting.policies.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   alert_type: 'universal_ssl_event_type',
+   *   enabled: true,
+   *   mechanisms: {},
+   *   name: 'SSL Notification Event Policy',
+   * });
+   * ```
    */
   create(params: PolicyCreateParams, options?: RequestOptions): APIPromise<PolicyCreateResponse> {
     const { account_id, ...body } = params;
@@ -23,6 +34,14 @@ export class Policies extends APIResource {
 
   /**
    * Update a Notification policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.alerting.policies.update(
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     policyID: string,
@@ -40,6 +59,16 @@ export class Policies extends APIResource {
 
   /**
    * Get a list of all Notification policies.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const policy of client.alerting.policies.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: PolicyListParams, options?: RequestOptions): PagePromise<PoliciesSinglePage, Policy> {
     const { account_id } = params;
@@ -52,6 +81,14 @@ export class Policies extends APIResource {
 
   /**
    * Delete a Notification policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.alerting.policies.delete(
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     policyID: string,
@@ -64,6 +101,14 @@ export class Policies extends APIResource {
 
   /**
    * Get details for a single policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.alerting.policies.get(
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(policyID: string, params: PolicyGetParams, options?: RequestOptions): APIPromise<Policy> {
     const { account_id } = params;

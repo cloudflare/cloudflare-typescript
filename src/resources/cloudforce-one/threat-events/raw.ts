@@ -8,6 +8,15 @@ import { path } from '../../../internal/utils/path';
 export class Raw extends APIResource {
   /**
    * Updates a raw event
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.raw.edit(
+   *     'raw_id',
+   *     { account_id: 0, event_id: 'event_id' },
+   *   );
+   * ```
    */
   edit(rawID: string, params: RawEditParams, options?: RequestOptions): APIPromise<RawEditResponse> {
     const { account_id, event_id, ...body } = params;
@@ -19,6 +28,14 @@ export class Raw extends APIResource {
 
   /**
    * Reads data for a raw event
+   *
+   * @example
+   * ```ts
+   * const raw = await client.cloudforceOne.threatEvents.raw.get(
+   *   'raw_id',
+   *   { account_id: 0, event_id: 'event_id' },
+   * );
+   * ```
    */
   get(rawID: string, params: RawGetParams, options?: RequestOptions): APIPromise<RawGetResponse> {
     const { account_id, event_id } = params;

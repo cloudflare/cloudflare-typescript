@@ -9,6 +9,18 @@ import { path } from '../../internal/utils/path';
 export class Settings extends APIResource {
   /**
    * Updates a single zone setting by the identifier
+   *
+   * @example
+   * ```ts
+   * const response = await client.zones.settings.edit(
+   *   'always_online',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     id: '0rtt',
+   *     value: 'on',
+   *   },
+   * );
+   * ```
    */
   edit(
     settingID: string,
@@ -25,6 +37,14 @@ export class Settings extends APIResource {
 
   /**
    * Fetch a single zone setting by name
+   *
+   * @example
+   * ```ts
+   * const setting = await client.zones.settings.get(
+   *   'always_online',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(settingID: string, params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
     const { zone_id } = params;

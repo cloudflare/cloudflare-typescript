@@ -89,6 +89,16 @@ export class Applications extends APIResource {
 
   /**
    * Adds a new application to Access.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.access.applications.create({
+   *     domain: 'test.example.com/admin',
+   *     type: 'self_hosted',
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   create(params: ApplicationCreateParams, options?: RequestOptions): APIPromise<ApplicationCreateResponse> {
     const { account_id, zone_id, ...body } = params;
@@ -118,6 +128,19 @@ export class Applications extends APIResource {
 
   /**
    * Updates an Access application.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.access.applications.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       domain: 'test.example.com/admin',
+   *       type: 'self_hosted',
+   *       account_id: 'account_id',
+   *     },
+   *   );
+   * ```
    */
   update(
     appID: AppIDParam,
@@ -151,6 +174,16 @@ export class Applications extends APIResource {
 
   /**
    * Lists all Access applications in an account or zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const applicationListResponse of client.zeroTrust.access.applications.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ApplicationListParams | null | undefined = {},
@@ -182,6 +215,15 @@ export class Applications extends APIResource {
 
   /**
    * Deletes an application from Access.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.access.applications.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     appID: AppIDParam,
@@ -215,6 +257,15 @@ export class Applications extends APIResource {
 
   /**
    * Fetches information about an Access application.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.access.applications.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     appID: AppIDParam,
@@ -248,6 +299,15 @@ export class Applications extends APIResource {
 
   /**
    * Revokes all tokens issued for an application.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.access.applications.revokeTokens(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   revokeTokens(
     appID: AppIDParam,

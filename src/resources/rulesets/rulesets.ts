@@ -62,6 +62,16 @@ export class Rulesets extends APIResource {
 
   /**
    * Creates a ruleset.
+   *
+   * @example
+   * ```ts
+   * const ruleset = await client.rulesets.create({
+   *   kind: 'root',
+   *   name: 'My ruleset',
+   *   phase: 'http_request_firewall_custom',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   create(params: RulesetCreateParams, options?: RequestOptions): APIPromise<RulesetCreateResponse> {
     const { account_id, zone_id, ...body } = params;
@@ -91,6 +101,14 @@ export class Rulesets extends APIResource {
 
   /**
    * Updates an account or zone ruleset, creating a new version.
+   *
+   * @example
+   * ```ts
+   * const ruleset = await client.rulesets.update(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   update(
     rulesetID: string,
@@ -124,6 +142,16 @@ export class Rulesets extends APIResource {
 
   /**
    * Fetches all rulesets.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const rulesetListResponse of client.rulesets.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RulesetListParams | null | undefined = {},
@@ -155,6 +183,14 @@ export class Rulesets extends APIResource {
 
   /**
    * Deletes all versions of an existing account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * await client.rulesets.delete(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     rulesetID: string,
@@ -186,6 +222,14 @@ export class Rulesets extends APIResource {
 
   /**
    * Fetches the latest version of an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * const ruleset = await client.rulesets.get(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     rulesetID: string,

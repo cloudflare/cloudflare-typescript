@@ -32,6 +32,16 @@ export class Profiles extends APIResource {
 
   /**
    * Lists all DLP profiles in an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const profile of client.zeroTrust.dlp.profiles.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: ProfileListParams, options?: RequestOptions): PagePromise<ProfilesSinglePage, Profile> {
     const { account_id, ...query } = params;
@@ -43,6 +53,14 @@ export class Profiles extends APIResource {
 
   /**
    * Fetches a DLP profile by ID.
+   *
+   * @example
+   * ```ts
+   * const profile = await client.zeroTrust.dlp.profiles.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(profileID: string, params: ProfileGetParams, options?: RequestOptions): APIPromise<Profile> {
     const { account_id } = params;

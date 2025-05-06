@@ -8,6 +8,18 @@ import { path } from '../../../internal/utils/path';
 export class IPs extends APIResource {
   /**
    * Add an IP from a prefix owned by the account to a particular address map.
+   *
+   * @example
+   * ```ts
+   * const ip = await client.addressing.addressMaps.ips.update(
+   *   '192.0.2.1',
+   *   {
+   *     account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *     address_map_id: '055817b111884e0227e1be16a0be6ee0',
+   *     body: {},
+   *   },
+   * );
+   * ```
    */
   update(ipAddress: string, params: IPUpdateParams, options?: RequestOptions): APIPromise<IPUpdateResponse> {
     const { account_id, address_map_id, body } = params;
@@ -19,6 +31,17 @@ export class IPs extends APIResource {
 
   /**
    * Remove an IP from a particular address map.
+   *
+   * @example
+   * ```ts
+   * const ip = await client.addressing.addressMaps.ips.delete(
+   *   '192.0.2.1',
+   *   {
+   *     account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *     address_map_id: '055817b111884e0227e1be16a0be6ee0',
+   *   },
+   * );
+   * ```
    */
   delete(ipAddress: string, params: IPDeleteParams, options?: RequestOptions): APIPromise<IPDeleteResponse> {
     const { account_id, address_map_id } = params;

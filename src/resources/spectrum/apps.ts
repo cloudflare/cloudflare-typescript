@@ -11,6 +11,19 @@ export class Apps extends APIResource {
   /**
    * Creates a new Spectrum application from a configuration using a name for the
    * origin.
+   *
+   * @example
+   * ```ts
+   * const app = await client.spectrum.apps.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   dns: {},
+   *   ip_firewall: true,
+   *   protocol: 'tcp/22',
+   *   proxy_protocol: 'off',
+   *   tls: 'full',
+   *   traffic_type: 'direct',
+   * });
+   * ```
    */
   create(params: AppCreateParams, options?: RequestOptions): APIPromise<AppCreateResponse> {
     const { zone_id, ...body } = params;
@@ -24,6 +37,22 @@ export class Apps extends APIResource {
   /**
    * Updates a previously existing application's configuration that uses a name for
    * the origin.
+   *
+   * @example
+   * ```ts
+   * const app = await client.spectrum.apps.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     dns: {},
+   *     ip_firewall: true,
+   *     protocol: 'tcp/22',
+   *     proxy_protocol: 'off',
+   *     tls: 'full',
+   *     traffic_type: 'direct',
+   *   },
+   * );
+   * ```
    */
   update(appID: string, params: AppUpdateParams, options?: RequestOptions): APIPromise<AppUpdateResponse> {
     const { zone_id, ...body } = params;

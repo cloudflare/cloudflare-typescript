@@ -8,6 +8,18 @@ import { path } from '../../../internal/utils/path';
 export class Advertisements extends APIResource {
   /**
    * Update advertisement for rule.
+   *
+   * @example
+   * ```ts
+   * const advertisement =
+   *   await client.magicNetworkMonitoring.rules.advertisements.edit(
+   *     '2890e6fa406311ed9b5a23f70f6fb8cf',
+   *     {
+   *       account_id: '6f91088a406011ed95aed352566e8d4c',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   edit(
     ruleID: string,

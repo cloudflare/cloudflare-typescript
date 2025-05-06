@@ -54,6 +54,13 @@ export class PageShield extends APIResource {
 
   /**
    * Updates Page Shield settings.
+   *
+   * @example
+   * ```ts
+   * const pageShield = await client.pageShield.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   update(params: PageShieldUpdateParams, options?: RequestOptions): APIPromise<PageShieldUpdateResponse> {
     const { zone_id, ...body } = params;
@@ -66,6 +73,13 @@ export class PageShield extends APIResource {
 
   /**
    * Fetches the Page Shield settings.
+   *
+   * @example
+   * ```ts
+   * const setting = await client.pageShield.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: PageShieldGetParams, options?: RequestOptions): APIPromise<Setting | null> {
     const { zone_id } = params;

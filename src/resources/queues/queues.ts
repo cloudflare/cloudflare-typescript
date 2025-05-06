@@ -36,6 +36,14 @@ export class Queues extends APIResource {
 
   /**
    * Create a new queue
+   *
+   * @example
+   * ```ts
+   * const queue = await client.queues.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   queue_name: 'example-queue',
+   * });
+   * ```
    */
   create(params: QueueCreateParams, options?: RequestOptions): APIPromise<Queue> {
     const { account_id, ...body } = params;
@@ -50,6 +58,14 @@ export class Queues extends APIResource {
    * Updates a Queue. Note that this endpoint does not support partial updates. If
    * successful, the Queue's configuration is overwritten with the supplied
    * configuration.
+   *
+   * @example
+   * ```ts
+   * const queue = await client.queues.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(queueID: string, params: QueueUpdateParams, options?: RequestOptions): APIPromise<Queue> {
     const { account_id, ...body } = params;
@@ -62,6 +78,16 @@ export class Queues extends APIResource {
 
   /**
    * Returns the queues owned by an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const queue of client.queues.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: QueueListParams, options?: RequestOptions): PagePromise<QueuesSinglePage, Queue> {
     const { account_id } = params;
@@ -70,6 +96,14 @@ export class Queues extends APIResource {
 
   /**
    * Deletes a queue
+   *
+   * @example
+   * ```ts
+   * const queue = await client.queues.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     queueID: string,
@@ -82,6 +116,14 @@ export class Queues extends APIResource {
 
   /**
    * Updates a Queue.
+   *
+   * @example
+   * ```ts
+   * const queue = await client.queues.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(queueID: string, params: QueueEditParams, options?: RequestOptions): APIPromise<Queue> {
     const { account_id, ...body } = params;
@@ -95,6 +137,14 @@ export class Queues extends APIResource {
 
   /**
    * Get details about a specific queue.
+   *
+   * @example
+   * ```ts
+   * const queue = await client.queues.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(queueID: string, params: QueueGetParams, options?: RequestOptions): APIPromise<Queue> {
     const { account_id } = params;

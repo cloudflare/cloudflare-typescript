@@ -9,6 +9,21 @@ import { path } from '../../../internal/utils/path';
 export class TLS extends APIResource {
   /**
    * Update the tls setting value for the hostname.
+   *
+   * @example
+   * ```ts
+   * const setting = await client.hostnames.settings.tls.update(
+   *   'app.example.com',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     setting_id: 'ciphers',
+   *     value: [
+   *       'ECDHE-RSA-AES128-GCM-SHA256',
+   *       'AES128-GCM-SHA256',
+   *     ],
+   *   },
+   * );
+   * ```
    */
   update(hostname: string, params: TLSUpdateParams, options?: RequestOptions): APIPromise<Setting> {
     const { zone_id, setting_id, ...body } = params;
@@ -22,6 +37,17 @@ export class TLS extends APIResource {
 
   /**
    * Delete the tls setting value for the hostname.
+   *
+   * @example
+   * ```ts
+   * const tls = await client.hostnames.settings.tls.delete(
+   *   'app.example.com',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     setting_id: 'ciphers',
+   *   },
+   * );
+   * ```
    */
   delete(hostname: string, params: TLSDeleteParams, options?: RequestOptions): APIPromise<TLSDeleteResponse> {
     const { zone_id, setting_id } = params;
@@ -35,6 +61,17 @@ export class TLS extends APIResource {
 
   /**
    * List the requested TLS setting for the hostnames under this zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tlsGetResponse of client.hostnames.settings.tls.get(
+   *   'ciphers',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     settingID: 'ciphers' | 'min_tls_version' | 'http2',

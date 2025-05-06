@@ -8,6 +8,13 @@ import { path } from '../../internal/utils/path';
 export class Subdomains extends APIResource {
   /**
    * Creates a Workers subdomain for an account.
+   *
+   * @example
+   * ```ts
+   * const subdomain = await client.workers.subdomains.update({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   update(params: SubdomainUpdateParams, options?: RequestOptions): APIPromise<SubdomainUpdateResponse> {
     const { account_id, ...body } = params;
@@ -20,6 +27,13 @@ export class Subdomains extends APIResource {
 
   /**
    * Returns a Workers subdomain for an account.
+   *
+   * @example
+   * ```ts
+   * const subdomain = await client.workers.subdomains.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: SubdomainGetParams, options?: RequestOptions): APIPromise<SubdomainGetResponse> {
     const { account_id } = params;

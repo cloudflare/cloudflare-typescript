@@ -12,6 +12,15 @@ export class ServiceTokens extends APIResource {
    * Generates a new service token. **Note:** This is the only time you can get the
    * Client Secret. If you lose the Client Secret, you will have to rotate the Client
    * Secret or create a new service token.
+   *
+   * @example
+   * ```ts
+   * const serviceToken =
+   *   await client.zeroTrust.access.serviceTokens.create({
+   *     name: 'CI/CD token',
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   create(params: ServiceTokenCreateParams, options?: RequestOptions): APIPromise<ServiceTokenCreateResponse> {
     const { account_id, zone_id, ...body } = params;
@@ -41,6 +50,15 @@ export class ServiceTokens extends APIResource {
 
   /**
    * Updates a configured service token.
+   *
+   * @example
+   * ```ts
+   * const serviceToken =
+   *   await client.zeroTrust.access.serviceTokens.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   update(
     serviceTokenID: string,
@@ -74,6 +92,16 @@ export class ServiceTokens extends APIResource {
 
   /**
    * Lists all service tokens.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const serviceToken of client.zeroTrust.access.serviceTokens.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ServiceTokenListParams | null | undefined = {},
@@ -105,6 +133,15 @@ export class ServiceTokens extends APIResource {
 
   /**
    * Deletes a service token.
+   *
+   * @example
+   * ```ts
+   * const serviceToken =
+   *   await client.zeroTrust.access.serviceTokens.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     serviceTokenID: string,
@@ -138,6 +175,15 @@ export class ServiceTokens extends APIResource {
 
   /**
    * Fetches a single service token.
+   *
+   * @example
+   * ```ts
+   * const serviceToken =
+   *   await client.zeroTrust.access.serviceTokens.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     serviceTokenID: string,
@@ -171,6 +217,15 @@ export class ServiceTokens extends APIResource {
 
   /**
    * Refreshes the expiration of a service token.
+   *
+   * @example
+   * ```ts
+   * const serviceToken =
+   *   await client.zeroTrust.access.serviceTokens.refresh(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   refresh(
     serviceTokenID: string,
@@ -188,6 +243,15 @@ export class ServiceTokens extends APIResource {
 
   /**
    * Generates a new Client Secret for a service token and revokes the old one.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.access.serviceTokens.rotate(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   rotate(
     serviceTokenID: string,

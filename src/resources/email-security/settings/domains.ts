@@ -14,6 +14,16 @@ import { path } from '../../../internal/utils/path';
 export class Domains extends APIResource {
   /**
    * Lists, searches, and sorts an account’s email domains.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const domainListResponse of client.emailSecurity.settings.domains.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DomainListParams,
@@ -29,6 +39,14 @@ export class Domains extends APIResource {
 
   /**
    * Unprotect an email domain
+   *
+   * @example
+   * ```ts
+   * const domain =
+   *   await client.emailSecurity.settings.domains.delete(2400, {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   delete(
     domainID: number,
@@ -46,6 +64,16 @@ export class Domains extends APIResource {
 
   /**
    * Unprotect multiple email domains
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const domainBulkDeleteResponse of client.emailSecurity.settings.domains.bulkDelete(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   bulkDelete(
     params: DomainBulkDeleteParams,
@@ -61,6 +89,15 @@ export class Domains extends APIResource {
 
   /**
    * Update an email domain
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.emailSecurity.settings.domains.edit(2400, {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+   *   });
+   * ```
    */
   edit(domainID: number, params: DomainEditParams, options?: RequestOptions): APIPromise<DomainEditResponse> {
     const { account_id, ...body } = params;
@@ -74,6 +111,14 @@ export class Domains extends APIResource {
 
   /**
    * Get an email domain
+   *
+   * @example
+   * ```ts
+   * const domain =
+   *   await client.emailSecurity.settings.domains.get(2400, {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(domainID: number, params: DomainGetParams, options?: RequestOptions): APIPromise<DomainGetResponse> {
     const { account_id } = params;

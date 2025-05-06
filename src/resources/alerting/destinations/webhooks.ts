@@ -10,6 +10,16 @@ import { path } from '../../../internal/utils/path';
 export class Webhooks extends APIResource {
   /**
    * Creates a new webhook destination.
+   *
+   * @example
+   * ```ts
+   * const webhook =
+   *   await client.alerting.destinations.webhooks.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'Slack Webhook',
+   *     url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
+   *   });
+   * ```
    */
   create(params: WebhookCreateParams, options?: RequestOptions): APIPromise<WebhookCreateResponse> {
     const { account_id, ...body } = params;
@@ -23,6 +33,19 @@ export class Webhooks extends APIResource {
 
   /**
    * Update a webhook destination.
+   *
+   * @example
+   * ```ts
+   * const webhook =
+   *   await client.alerting.destinations.webhooks.update(
+   *     'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       name: 'Slack Webhook',
+   *       url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
+   *     },
+   *   );
+   * ```
    */
   update(
     webhookID: string,
@@ -40,6 +63,16 @@ export class Webhooks extends APIResource {
 
   /**
    * Gets a list of all configured webhook destinations.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const webhooks of client.alerting.destinations.webhooks.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: WebhookListParams, options?: RequestOptions): PagePromise<WebhooksSinglePage, Webhooks> {
     const { account_id } = params;
@@ -52,6 +85,15 @@ export class Webhooks extends APIResource {
 
   /**
    * Delete a configured webhook destination.
+   *
+   * @example
+   * ```ts
+   * const webhook =
+   *   await client.alerting.destinations.webhooks.delete(
+   *     'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     webhookID: string,
@@ -67,6 +109,15 @@ export class Webhooks extends APIResource {
 
   /**
    * Get details for a single webhooks destination.
+   *
+   * @example
+   * ```ts
+   * const webhooks =
+   *   await client.alerting.destinations.webhooks.get(
+   *     'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(webhookID: string, params: WebhookGetParams, options?: RequestOptions): APIPromise<Webhooks> {
     const { account_id } = params;

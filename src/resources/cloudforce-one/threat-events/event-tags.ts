@@ -8,6 +8,15 @@ import { path } from '../../../internal/utils/path';
 export class EventTags extends APIResource {
   /**
    * Adds a tag to an event
+   *
+   * @example
+   * ```ts
+   * const eventTag =
+   *   await client.cloudforceOne.threatEvents.eventTags.create(
+   *     'event_id',
+   *     { account_id: 0, tags: ['botnet'] },
+   *   );
+   * ```
    */
   create(
     eventID: string,
@@ -25,6 +34,15 @@ export class EventTags extends APIResource {
 
   /**
    * Removes a tag from an event
+   *
+   * @example
+   * ```ts
+   * const eventTag =
+   *   await client.cloudforceOne.threatEvents.eventTags.delete(
+   *     'event_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   delete(
     eventID: string,

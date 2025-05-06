@@ -9,6 +9,18 @@ import { path } from '../../../internal/utils/path';
 export class Bookmarks extends APIResource {
   /**
    * Create a new Bookmark application.
+   *
+   * @example
+   * ```ts
+   * const bookmark =
+   *   await client.zeroTrust.access.bookmarks.create(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   create(bookmarkID: string, params: BookmarkCreateParams, options?: RequestOptions): APIPromise<Bookmark> {
     const { account_id, body } = params;
@@ -22,6 +34,18 @@ export class Bookmarks extends APIResource {
 
   /**
    * Updates a configured Bookmark application.
+   *
+   * @example
+   * ```ts
+   * const bookmark =
+   *   await client.zeroTrust.access.bookmarks.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   update(bookmarkID: string, params: BookmarkUpdateParams, options?: RequestOptions): APIPromise<Bookmark> {
     const { account_id, body } = params;
@@ -35,6 +59,16 @@ export class Bookmarks extends APIResource {
 
   /**
    * Lists Bookmark applications.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const bookmark of client.zeroTrust.access.bookmarks.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: BookmarkListParams, options?: RequestOptions): PagePromise<BookmarksSinglePage, Bookmark> {
     const { account_id } = params;
@@ -47,6 +81,15 @@ export class Bookmarks extends APIResource {
 
   /**
    * Deletes a Bookmark application.
+   *
+   * @example
+   * ```ts
+   * const bookmark =
+   *   await client.zeroTrust.access.bookmarks.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   delete(
     bookmarkID: string,
@@ -64,6 +107,15 @@ export class Bookmarks extends APIResource {
 
   /**
    * Fetches a single Bookmark application.
+   *
+   * @example
+   * ```ts
+   * const bookmark =
+   *   await client.zeroTrust.access.bookmarks.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(bookmarkID: string, params: BookmarkGetParams, options?: RequestOptions): APIPromise<Bookmark> {
     const { account_id } = params;

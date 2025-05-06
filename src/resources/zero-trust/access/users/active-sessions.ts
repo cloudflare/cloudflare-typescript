@@ -10,6 +10,17 @@ import { path } from '../../../../internal/utils/path';
 export class ActiveSessions extends APIResource {
   /**
    * Get active sessions for a single user.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const activeSessionListResponse of client.zeroTrust.access.users.activeSessions.list(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     userID: string,
@@ -26,6 +37,18 @@ export class ActiveSessions extends APIResource {
 
   /**
    * Get an active session for a single user.
+   *
+   * @example
+   * ```ts
+   * const activeSession =
+   *   await client.zeroTrust.access.users.activeSessions.get(
+   *     'X1aXj1lFVcqqyoXF',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       user_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     },
+   *   );
+   * ```
    */
   get(
     nonce: string,

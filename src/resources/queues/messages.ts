@@ -9,6 +9,14 @@ import { path } from '../../internal/utils/path';
 export class Messages extends APIResource {
   /**
    * Acknowledge + Retry messages from a Queue
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.messages.ack(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   ack(queueID: string, params: MessageAckParams, options?: RequestOptions): APIPromise<MessageAckResponse> {
     const { account_id, ...body } = params;
@@ -22,6 +30,17 @@ export class Messages extends APIResource {
 
   /**
    * Pull a batch of messages from a Queue
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const messagePullResponse of client.queues.messages.pull(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   pull(
     queueID: string,

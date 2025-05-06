@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class PayloadLogs extends APIResource {
   /**
    * Set payload log settings
+   *
+   * @example
+   * ```ts
+   * const payloadLog =
+   *   await client.zeroTrust.dlp.payloadLogs.update({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   update(params: PayloadLogUpdateParams, options?: RequestOptions): APIPromise<PayloadLogUpdateResponse> {
     const { account_id, ...body } = params;
@@ -20,6 +28,14 @@ export class PayloadLogs extends APIResource {
 
   /**
    * Get payload log settings
+   *
+   * @example
+   * ```ts
+   * const payloadLog =
+   *   await client.zeroTrust.dlp.payloadLogs.get({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(params: PayloadLogGetParams, options?: RequestOptions): APIPromise<PayloadLogGetResponse> {
     const { account_id } = params;

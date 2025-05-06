@@ -10,6 +10,17 @@ export class Metadata extends APIResource {
    * Returns the metadata associated with the given key in the given namespace. Use
    * URL-encoding to use special characters (for example, `:`, `!`, `%`) in the key
    * name.
+   *
+   * @example
+   * ```ts
+   * const metadata = await client.kv.namespaces.metadata.get(
+   *   'My-Key',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     namespace_id: '0f2ac74b498b48028cb68387c421e279',
+   *   },
+   * );
+   * ```
    */
   get(keyName: string, params: MetadataGetParams, options?: RequestOptions): APIPromise<MetadataGetResponse> {
     const { account_id, namespace_id } = params;

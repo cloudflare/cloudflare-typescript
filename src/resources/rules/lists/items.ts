@@ -13,6 +13,17 @@ export class Items extends APIResource {
    * This operation is asynchronous. To get current the operation status, invoke the
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
+   *
+   * @example
+   * ```ts
+   * const item = await client.rules.lists.items.create(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{}],
+   *   },
+   * );
+   * ```
    */
   create(listID: string, params: ItemCreateParams, options?: RequestOptions): APIPromise<ItemCreateResponse> {
     const { account_id, body } = params;
@@ -31,6 +42,17 @@ export class Items extends APIResource {
    * This operation is asynchronous. To get current the operation status, invoke the
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
+   *
+   * @example
+   * ```ts
+   * const item = await client.rules.lists.items.update(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{}],
+   *   },
+   * );
+   * ```
    */
   update(listID: string, params: ItemUpdateParams, options?: RequestOptions): APIPromise<ItemUpdateResponse> {
     const { account_id, body } = params;
@@ -44,6 +66,14 @@ export class Items extends APIResource {
 
   /**
    * Fetches all the items in the list.
+   *
+   * @example
+   * ```ts
+   * const items = await client.rules.lists.items.list(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   list(listID: string, params: ItemListParams, options?: RequestOptions): APIPromise<ItemListResponse> {
     const { account_id, ...query } = params;
@@ -61,6 +91,14 @@ export class Items extends APIResource {
    * This operation is asynchronous. To get current the operation status, invoke the
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
+   *
+   * @example
+   * ```ts
+   * const item = await client.rules.lists.items.delete(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(listID: string, params: ItemDeleteParams, options?: RequestOptions): APIPromise<ItemDeleteResponse> {
     const { account_id } = params;
@@ -73,6 +111,17 @@ export class Items extends APIResource {
 
   /**
    * Fetches a list item in the list.
+   *
+   * @example
+   * ```ts
+   * const item = await client.rules.lists.items.get(
+   *   '34b12448945f11eaa1b71c4d701ab86e',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     list_id: '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   },
+   * );
+   * ```
    */
   get(itemID: string, params: ItemGetParams, options?: RequestOptions): APIPromise<ItemGetResponse> {
     const { account_id, list_id } = params;

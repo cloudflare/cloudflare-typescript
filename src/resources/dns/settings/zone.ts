@@ -8,6 +8,13 @@ import { path } from '../../../internal/utils/path';
 export class Zone extends APIResource {
   /**
    * Update DNS settings for a zone
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.settings.zone.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: ZoneEditParams, options?: RequestOptions): APIPromise<ZoneEditResponse> {
     const { zone_id, ...body } = params;
@@ -20,6 +27,13 @@ export class Zone extends APIResource {
 
   /**
    * Show DNS settings for a zone
+   *
+   * @example
+   * ```ts
+   * const zone = await client.dns.settings.zone.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ZoneGetParams, options?: RequestOptions): APIPromise<ZoneGetResponse> {
     const { zone_id } = params;

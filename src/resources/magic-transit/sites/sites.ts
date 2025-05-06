@@ -59,6 +59,14 @@ export class Sites extends APIResource {
 
   /**
    * Creates a new Site
+   *
+   * @example
+   * ```ts
+   * const site = await client.magicTransit.sites.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'site_1',
+   * });
+   * ```
    */
   create(params: SiteCreateParams, options?: RequestOptions): APIPromise<Site> {
     const { account_id, ...body } = params;
@@ -71,6 +79,14 @@ export class Sites extends APIResource {
 
   /**
    * Update a specific Site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.magicTransit.sites.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(siteID: string, params: SiteUpdateParams, options?: RequestOptions): APIPromise<Site> {
     const { account_id, ...body } = params;
@@ -86,6 +102,16 @@ export class Sites extends APIResource {
    * Lists Sites associated with an account. Use connectorid query param to return
    * sites where connectorid matches either site.ConnectorID or
    * site.SecondaryConnectorID.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const site of client.magicTransit.sites.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: SiteListParams, options?: RequestOptions): PagePromise<SitesSinglePage, Site> {
     const { account_id, ...query } = params;
@@ -97,6 +123,14 @@ export class Sites extends APIResource {
 
   /**
    * Remove a specific Site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.magicTransit.sites.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(siteID: string, params: SiteDeleteParams, options?: RequestOptions): APIPromise<Site> {
     const { account_id } = params;
@@ -109,6 +143,14 @@ export class Sites extends APIResource {
 
   /**
    * Patch a specific Site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.magicTransit.sites.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(siteID: string, params: SiteEditParams, options?: RequestOptions): APIPromise<Site> {
     const { account_id, ...body } = params;
@@ -122,6 +164,14 @@ export class Sites extends APIResource {
 
   /**
    * Get a specific Site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.magicTransit.sites.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(siteID: string, params: SiteGetParams, options?: RequestOptions): APIPromise<Site> {
     const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;

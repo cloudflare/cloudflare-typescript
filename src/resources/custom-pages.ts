@@ -10,6 +10,18 @@ import { path } from '../internal/utils/path';
 export class CustomPages extends APIResource {
   /**
    * Updates the configuration of an existing custom page.
+   *
+   * @example
+   * ```ts
+   * const customPage = await client.customPages.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     state: 'default',
+   *     url: 'http://www.example.com',
+   *     account_id: 'account_id',
+   *   },
+   * );
+   * ```
    */
   update(
     identifier: string,
@@ -43,6 +55,16 @@ export class CustomPages extends APIResource {
 
   /**
    * Fetches all the custom pages.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customPageListResponse of client.customPages.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CustomPageListParams | null | undefined = {},
@@ -74,6 +96,14 @@ export class CustomPages extends APIResource {
 
   /**
    * Fetches the details of a custom page.
+   *
+   * @example
+   * ```ts
+   * const customPage = await client.customPages.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     identifier: string,

@@ -7,6 +7,12 @@ import { RequestOptions } from '../../../../../internal/request-options';
 export class Summary extends APIResource {
   /**
    * Retrieves the distribution of unique accounts by model over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ai.inference.timeseriesGroups.summary.model();
+   * ```
    */
   model(
     query: SummaryModelParams | null | undefined = {},
@@ -21,6 +27,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of unique accounts by task over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ai.inference.timeseriesGroups.summary.task();
+   * ```
    */
   task(
     query: SummaryTaskParams | null | undefined = {},

@@ -8,6 +8,15 @@ import { path } from '../../../internal/utils/path';
 export class Relate extends APIResource {
   /**
    * Removes an event reference
+   *
+   * @example
+   * ```ts
+   * const relate =
+   *   await client.cloudforceOne.threatEvents.relate.delete(
+   *     'event_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   delete(
     eventID: string,

@@ -8,6 +8,16 @@ import { path } from '../../../internal/utils/path';
 export class Datasets extends APIResource {
   /**
    * Creates a dataset
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.cloudforceOne.threatEvents.datasets.create({
+   *     account_id: 0,
+   *     isPublic: true,
+   *     name: 'x',
+   *   });
+   * ```
    */
   create(params: DatasetCreateParams, options?: RequestOptions): APIPromise<DatasetCreateResponse> {
     const { account_id, ...body } = params;
@@ -19,6 +29,14 @@ export class Datasets extends APIResource {
 
   /**
    * Lists all datasets in an account
+   *
+   * @example
+   * ```ts
+   * const datasets =
+   *   await client.cloudforceOne.threatEvents.datasets.list({
+   *     account_id: 0,
+   *   });
+   * ```
    */
   list(params: DatasetListParams, options?: RequestOptions): APIPromise<DatasetListResponse> {
     const { account_id } = params;
@@ -27,6 +45,15 @@ export class Datasets extends APIResource {
 
   /**
    * Updates an existing dataset
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.datasets.edit(
+   *     'dataset_id',
+   *     { account_id: 0, isPublic: true, name: 'x' },
+   *   );
+   * ```
    */
   edit(
     datasetID: string,
@@ -42,6 +69,15 @@ export class Datasets extends APIResource {
 
   /**
    * Reads a dataset
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.cloudforceOne.threatEvents.datasets.get(
+   *     'dataset_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   get(datasetID: string, params: DatasetGetParams, options?: RequestOptions): APIPromise<DatasetGetResponse> {
     const { account_id } = params;
@@ -53,6 +89,15 @@ export class Datasets extends APIResource {
 
   /**
    * Reads data for a raw event
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.datasets.raw(
+   *     'event_id',
+   *     { account_id: 0, dataset_id: 'dataset_id' },
+   *   );
+   * ```
    */
   raw(eventID: string, params: DatasetRawParams, options?: RequestOptions): APIPromise<DatasetRawResponse> {
     const { account_id, dataset_id } = params;

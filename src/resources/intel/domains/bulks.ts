@@ -8,6 +8,13 @@ import { path } from '../../../internal/utils/path';
 export class Bulks extends APIResource {
   /**
    * Same as summary
+   *
+   * @example
+   * ```ts
+   * const bulks = await client.intel.domains.bulks.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: BulkGetParams, options?: RequestOptions): APIPromise<BulkGetResponse | null> {
     const { account_id, ...query } = params;

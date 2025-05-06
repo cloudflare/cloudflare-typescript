@@ -8,6 +8,16 @@ import { path } from '../../internal/utils/path';
 export class DNS extends APIResource {
   /**
    * Gets a list of all the domains that have resolved to a specific IP address.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dns of client.intel.dns.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: DNSListParams, options?: RequestOptions): PagePromise<DNSV4PagePagination, DNS> {
     const { account_id, ...query } = params;

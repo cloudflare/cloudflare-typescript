@@ -8,6 +8,14 @@ import { path } from '../../../internal/utils/path';
 export class Keys extends APIResource {
   /**
    * Updates the Access key rotation settings for an account.
+   *
+   * @example
+   * ```ts
+   * const key = await client.zeroTrust.access.keys.update({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   key_rotation_interval_days: 30,
+   * });
+   * ```
    */
   update(params: KeyUpdateParams, options?: RequestOptions): APIPromise<KeyUpdateResponse> {
     const { account_id, ...body } = params;
@@ -20,6 +28,13 @@ export class Keys extends APIResource {
 
   /**
    * Gets the Access key rotation settings for an account.
+   *
+   * @example
+   * ```ts
+   * const key = await client.zeroTrust.access.keys.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: KeyGetParams, options?: RequestOptions): APIPromise<KeyGetResponse> {
     const { account_id } = params;
@@ -32,6 +47,13 @@ export class Keys extends APIResource {
 
   /**
    * Perfoms a key rotation for an account.
+   *
+   * @example
+   * ```ts
+   * const response = await client.zeroTrust.access.keys.rotate({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   rotate(params: KeyRotateParams, options?: RequestOptions): APIPromise<KeyRotateResponse> {
     const { account_id } = params;

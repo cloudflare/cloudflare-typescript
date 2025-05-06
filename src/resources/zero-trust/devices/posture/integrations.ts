@@ -9,6 +9,26 @@ import { path } from '../../../../internal/utils/path';
 export class Integrations extends APIResource {
   /**
    * Create a new device posture integration.
+   *
+   * @example
+   * ```ts
+   * const integration =
+   *   await client.zeroTrust.devices.posture.integrations.create(
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       config: {
+   *         api_url: 'https://as123.awmdm.com/API',
+   *         auth_url:
+   *           'https://na.uemauth.vmwservices.com/connect/token',
+   *         client_id: 'example client id',
+   *         client_secret: 'example client secret',
+   *       },
+   *       interval: '10m',
+   *       name: 'My Workspace One Integration',
+   *       type: 'workspace_one',
+   *     },
+   *   );
+   * ```
    */
   create(params: IntegrationCreateParams, options?: RequestOptions): APIPromise<Integration | null> {
     const { account_id, ...body } = params;
@@ -22,6 +42,16 @@ export class Integrations extends APIResource {
 
   /**
    * Fetches the list of device posture integrations for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const integration of client.zeroTrust.devices.posture.integrations.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: IntegrationListParams,
@@ -37,6 +67,15 @@ export class Integrations extends APIResource {
 
   /**
    * Delete a configured device posture integration.
+   *
+   * @example
+   * ```ts
+   * const integration =
+   *   await client.zeroTrust.devices.posture.integrations.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   delete(
     integrationID: string,
@@ -54,6 +93,15 @@ export class Integrations extends APIResource {
 
   /**
    * Updates a configured device posture integration.
+   *
+   * @example
+   * ```ts
+   * const integration =
+   *   await client.zeroTrust.devices.posture.integrations.edit(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   edit(
     integrationID: string,
@@ -71,6 +119,15 @@ export class Integrations extends APIResource {
 
   /**
    * Fetches details for a single device posture integration.
+   *
+   * @example
+   * ```ts
+   * const integration =
+   *   await client.zeroTrust.devices.posture.integrations.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     integrationID: string,

@@ -104,6 +104,16 @@ export class Stream extends APIResource {
    * with a status code 201 (created) and includes a `location` header to indicate
    * where the content should be uploaded. Refer to https://tus.io for protocol
    * details.
+   *
+   * @example
+   * ```ts
+   * await client.stream.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: {},
+   *   'Tus-Resumable': '1.0.0',
+   *   'Upload-Length': 0,
+   * });
+   * ```
    */
   create(params: StreamCreateParams, options?: RequestOptions): APIPromise<void> {
     const {
@@ -135,6 +145,16 @@ export class Stream extends APIResource {
   /**
    * Lists up to 1000 videos from a single request. For a specific range, refer to
    * the optional parameters.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const video of client.stream.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: StreamListParams, options?: RequestOptions): PagePromise<VideosSinglePage, Video> {
     const { account_id, ...query } = params;
@@ -146,6 +166,14 @@ export class Stream extends APIResource {
 
   /**
    * Deletes a video and its copies from Cloudflare Stream.
+   *
+   * @example
+   * ```ts
+   * await client.stream.delete(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(identifier: string, params: StreamDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -157,6 +185,14 @@ export class Stream extends APIResource {
 
   /**
    * Edit details for a single video.
+   *
+   * @example
+   * ```ts
+   * const video = await client.stream.edit(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(identifier: string, params: StreamEditParams, options?: RequestOptions): APIPromise<Video> {
     const { account_id, ...body } = params;
@@ -170,6 +206,14 @@ export class Stream extends APIResource {
 
   /**
    * Fetches details for a single video.
+   *
+   * @example
+   * ```ts
+   * const video = await client.stream.get(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(identifier: string, params: StreamGetParams, options?: RequestOptions): APIPromise<Video> {
     const { account_id } = params;

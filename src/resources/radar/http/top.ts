@@ -7,6 +7,11 @@ import { RequestOptions } from '../../../internal/request-options';
 export class Top extends APIResource {
   /**
    * Retrieves the top user agents by HTTP requests.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.http.top.browser();
+   * ```
    */
   browser(
     query: TopBrowserParams | null | undefined = {},
@@ -21,6 +26,12 @@ export class Top extends APIResource {
 
   /**
    * Retrieves the top user agents, aggregated in families, by HTTP requests.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.top.browserFamily();
+   * ```
    */
   browserFamily(
     query: TopBrowserFamilyParams | null | undefined = {},

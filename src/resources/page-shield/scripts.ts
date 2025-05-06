@@ -9,6 +9,16 @@ import { path } from '../../internal/utils/path';
 export class Scripts extends APIResource {
   /**
    * Lists all scripts detected by Page Shield.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const script of client.pageShield.scripts.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: ScriptListParams, options?: RequestOptions): PagePromise<ScriptsSinglePage, Script> {
     const { zone_id, ...query } = params;
@@ -20,6 +30,14 @@ export class Scripts extends APIResource {
 
   /**
    * Fetches a script detected by Page Shield by script ID.
+   *
+   * @example
+   * ```ts
+   * const script = await client.pageShield.scripts.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     scriptID: string,

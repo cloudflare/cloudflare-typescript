@@ -22,6 +22,19 @@ export class Events extends APIResource {
    * some of the properties in the event's configuration may either override or
    * inherit from the waiting room's configuration. Note that events cannot overlap
    * with each other, so only one event can be active at a time.
+   *
+   * @example
+   * ```ts
+   * const event = await client.waitingRooms.events.create(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     event_end_time: '2021-09-28T17:00:00.000Z',
+   *     event_start_time: '2021-09-28T15:30:00.000Z',
+   *     name: 'production_webinar_event',
+   *   },
+   * );
+   * ```
    */
   create(waitingRoomID: string, params: EventCreateParams, options?: RequestOptions): APIPromise<Event> {
     const { zone_id, ...body } = params;
@@ -35,6 +48,20 @@ export class Events extends APIResource {
 
   /**
    * Updates a configured event for a waiting room.
+   *
+   * @example
+   * ```ts
+   * const event = await client.waitingRooms.events.update(
+   *   '25756b2dfe6e378a06b033b670413757',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     waiting_room_id: '699d98642c564d2e855e9661899b7252',
+   *     event_end_time: '2021-09-28T17:00:00.000Z',
+   *     event_start_time: '2021-09-28T15:30:00.000Z',
+   *     name: 'production_webinar_event',
+   *   },
+   * );
+   * ```
    */
   update(eventID: string, params: EventUpdateParams, options?: RequestOptions): APIPromise<Event> {
     const { zone_id, waiting_room_id, ...body } = params;
@@ -48,6 +75,17 @@ export class Events extends APIResource {
 
   /**
    * Lists events for a waiting room.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const event of client.waitingRooms.events.list(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     waitingRoomID: string,
@@ -64,6 +102,17 @@ export class Events extends APIResource {
 
   /**
    * Deletes an event for a waiting room.
+   *
+   * @example
+   * ```ts
+   * const event = await client.waitingRooms.events.delete(
+   *   '25756b2dfe6e378a06b033b670413757',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     waiting_room_id: '699d98642c564d2e855e9661899b7252',
+   *   },
+   * );
+   * ```
    */
   delete(
     eventID: string,
@@ -81,6 +130,20 @@ export class Events extends APIResource {
 
   /**
    * Patches a configured event for a waiting room.
+   *
+   * @example
+   * ```ts
+   * const event = await client.waitingRooms.events.edit(
+   *   '25756b2dfe6e378a06b033b670413757',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     waiting_room_id: '699d98642c564d2e855e9661899b7252',
+   *     event_end_time: '2021-09-28T17:00:00.000Z',
+   *     event_start_time: '2021-09-28T15:30:00.000Z',
+   *     name: 'production_webinar_event',
+   *   },
+   * );
+   * ```
    */
   edit(eventID: string, params: EventEditParams, options?: RequestOptions): APIPromise<Event> {
     const { zone_id, waiting_room_id, ...body } = params;
@@ -94,6 +157,17 @@ export class Events extends APIResource {
 
   /**
    * Fetches a single configured event for a waiting room.
+   *
+   * @example
+   * ```ts
+   * const event = await client.waitingRooms.events.get(
+   *   '25756b2dfe6e378a06b033b670413757',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     waiting_room_id: '699d98642c564d2e855e9661899b7252',
+   *   },
+   * );
+   * ```
    */
   get(eventID: string, params: EventGetParams, options?: RequestOptions): APIPromise<Event> {
     const { zone_id, waiting_room_id } = params;

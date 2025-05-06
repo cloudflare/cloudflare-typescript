@@ -9,6 +9,15 @@ import { path } from '../../internal/utils/path';
 export class Recipients extends APIResource {
   /**
    * Create a new share recipient
+   *
+   * @example
+   * ```ts
+   * const recipient =
+   *   await client.resourceSharing.recipients.create(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     { path_account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     shareID: string,
@@ -26,6 +35,17 @@ export class Recipients extends APIResource {
 
   /**
    * List share recipients by share ID.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const recipientListResponse of client.resourceSharing.recipients.list(
+   *   '3fd85f74b32742f1bff64a85009dda07',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     shareID: string,
@@ -43,6 +63,18 @@ export class Recipients extends APIResource {
   /**
    * Deletion is not immediate, an updated share recipient object with a new status
    * will be returned.
+   *
+   * @example
+   * ```ts
+   * const recipient =
+   *   await client.resourceSharing.recipients.delete(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       share_id: '3fd85f74b32742f1bff64a85009dda07',
+   *     },
+   *   );
+   * ```
    */
   delete(
     recipientID: string,
@@ -60,6 +92,18 @@ export class Recipients extends APIResource {
 
   /**
    * Get share recipient by ID.
+   *
+   * @example
+   * ```ts
+   * const recipient =
+   *   await client.resourceSharing.recipients.get(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       share_id: '3fd85f74b32742f1bff64a85009dda07',
+   *     },
+   *   );
+   * ```
    */
   get(
     recipientID: string,

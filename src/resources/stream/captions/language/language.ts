@@ -14,6 +14,15 @@ export class Language extends APIResource {
 
   /**
    * Generate captions or subtitles for provided language via AI.
+   *
+   * @example
+   * ```ts
+   * const caption =
+   *   await client.stream.captions.language.create('tr', {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     identifier: 'ea95132c15732412d22c1476fa83f27a',
+   *   });
+   * ```
    */
   create(
     language: string,
@@ -32,6 +41,16 @@ export class Language extends APIResource {
   /**
    * Uploads the caption or subtitle file to the endpoint for a specific BCP47
    * language. One caption or subtitle file per language is allowed.
+   *
+   * @example
+   * ```ts
+   * const caption =
+   *   await client.stream.captions.language.update('tr', {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     identifier: 'ea95132c15732412d22c1476fa83f27a',
+   *     file: '@/Users/kyle/Desktop/tr.vtt',
+   *   });
+   * ```
    */
   update(
     language: string,
@@ -49,6 +68,15 @@ export class Language extends APIResource {
 
   /**
    * Removes the captions or subtitles from a video.
+   *
+   * @example
+   * ```ts
+   * const language =
+   *   await client.stream.captions.language.delete('tr', {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     identifier: 'ea95132c15732412d22c1476fa83f27a',
+   *   });
+   * ```
    */
   delete(
     language: string,
@@ -66,6 +94,17 @@ export class Language extends APIResource {
 
   /**
    * Lists the captions or subtitles for provided language.
+   *
+   * @example
+   * ```ts
+   * const caption = await client.stream.captions.language.get(
+   *   'tr',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     identifier: 'ea95132c15732412d22c1476fa83f27a',
+   *   },
+   * );
+   * ```
    */
   get(
     language: string,

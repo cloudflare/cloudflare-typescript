@@ -11,6 +11,16 @@ import { path } from '../../internal/utils/path';
 export class Roles extends APIResource {
   /**
    * Get all available roles for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const role of client.accounts.roles.list({
+   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RoleListParams,
@@ -25,6 +35,14 @@ export class Roles extends APIResource {
 
   /**
    * Get information about a specific role for an account.
+   *
+   * @example
+   * ```ts
+   * const role = await client.accounts.roles.get(
+   *   '3536bcfad5faccb999b47003c79917fb',
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * );
+   * ```
    */
   get(roleID: string, params: RoleGetParams, options?: RequestOptions): APIPromise<Shared.Role> {
     const { account_id } = params;

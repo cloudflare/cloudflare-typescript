@@ -9,6 +9,17 @@ import { path } from '../../../../internal/utils/path';
 export class Vtt extends APIResource {
   /**
    * Return WebVTT captions for a provided language.
+   *
+   * @example
+   * ```ts
+   * const vtt = await client.stream.captions.language.vtt.get(
+   *   'tr',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     identifier: 'ea95132c15732412d22c1476fa83f27a',
+   *   },
+   * );
+   * ```
    */
   get(language: string, params: VttGetParams, options?: RequestOptions): APIPromise<string> {
     const { account_id, identifier } = params;

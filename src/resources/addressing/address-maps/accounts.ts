@@ -8,6 +8,18 @@ import { path } from '../../../internal/utils/path';
 export class Accounts extends APIResource {
   /**
    * Add an account as a member of a particular address map.
+   *
+   * @example
+   * ```ts
+   * const account =
+   *   await client.addressing.addressMaps.accounts.update(
+   *     '055817b111884e0227e1be16a0be6ee0',
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     addressMapID: string,
@@ -23,6 +35,15 @@ export class Accounts extends APIResource {
 
   /**
    * Remove an account as a member of a particular address map.
+   *
+   * @example
+   * ```ts
+   * const account =
+   *   await client.addressing.addressMaps.accounts.delete(
+   *     '055817b111884e0227e1be16a0be6ee0',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   * ```
    */
   delete(
     addressMapID: string,

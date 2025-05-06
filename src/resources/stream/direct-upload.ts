@@ -11,6 +11,15 @@ import { path } from '../../internal/utils/path';
 export class DirectUpload extends APIResource {
   /**
    * Creates a direct upload that allows video uploads without an API key.
+   *
+   * @example
+   * ```ts
+   * const directUpload =
+   *   await client.stream.directUpload.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     maxDurationSeconds: 1,
+   *   });
+   * ```
    */
   create(params: DirectUploadCreateParams, options?: RequestOptions): APIPromise<DirectUploadCreateResponse> {
     const { account_id, 'Upload-Creator': uploadCreator, ...body } = params;

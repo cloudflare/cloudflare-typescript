@@ -9,6 +9,14 @@ import { path } from '../../internal/utils/path';
 export class Domains extends APIResource {
   /**
    * Update individual domain.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.registrar.domains.update(
+   *   'cloudflare.com',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     domainName: string,
@@ -26,6 +34,16 @@ export class Domains extends APIResource {
 
   /**
    * List domains handled by Registrar.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const domain of client.registrar.domains.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: DomainListParams, options?: RequestOptions): PagePromise<DomainsSinglePage, Domain> {
     const { account_id } = params;
@@ -38,6 +56,14 @@ export class Domains extends APIResource {
 
   /**
    * Show individual domain.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.registrar.domains.get(
+   *   'cloudflare.com',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     domainName: string,

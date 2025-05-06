@@ -14,6 +14,14 @@ export class History extends APIResource {
 
   /**
    * Restores a historical published Zaraz configuration by ID for a zone.
+   *
+   * @example
+   * ```ts
+   * const configuration = await client.zaraz.history.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: 12345,
+   * });
+   * ```
    */
   update(params: HistoryUpdateParams, options?: RequestOptions): APIPromise<ConfigAPI.Configuration> {
     const { zone_id, body } = params;
@@ -27,6 +35,16 @@ export class History extends APIResource {
 
   /**
    * Lists a history of published Zaraz configuration records for a zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const historyListResponse of client.zaraz.history.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: HistoryListParams,

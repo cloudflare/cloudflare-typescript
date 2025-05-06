@@ -7,6 +7,14 @@ import { RequestOptions } from '../../../../internal/request-options';
 export class Events extends APIResource {
   /**
    * Retrieves the BGP hijack events.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const eventListResponse of client.radar.bgp.hijacks.events.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: EventListParams | null | undefined = {},

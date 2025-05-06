@@ -10,6 +10,13 @@ import { path } from '../../internal/utils/path';
 export class SiteInfo extends APIResource {
   /**
    * Creates a new Web Analytics site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.rum.siteInfo.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: SiteInfoCreateParams, options?: RequestOptions): APIPromise<Site> {
     const { account_id, ...body } = params;
@@ -22,6 +29,14 @@ export class SiteInfo extends APIResource {
 
   /**
    * Updates an existing Web Analytics site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.rum.siteInfo.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(siteID: string, params: SiteInfoUpdateParams, options?: RequestOptions): APIPromise<Site> {
     const { account_id, ...body } = params;
@@ -35,6 +50,16 @@ export class SiteInfo extends APIResource {
 
   /**
    * Lists all Web Analytics sites of an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const site of client.rum.siteInfo.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: SiteInfoListParams, options?: RequestOptions): PagePromise<SitesV4PagePaginationArray, Site> {
     const { account_id, ...query } = params;
@@ -47,6 +72,14 @@ export class SiteInfo extends APIResource {
 
   /**
    * Deletes an existing Web Analytics site.
+   *
+   * @example
+   * ```ts
+   * const siteInfo = await client.rum.siteInfo.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     siteID: string,
@@ -63,6 +96,14 @@ export class SiteInfo extends APIResource {
 
   /**
    * Retrieves a Web Analytics site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.rum.siteInfo.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(siteID: string, params: SiteInfoGetParams, options?: RequestOptions): APIPromise<Site> {
     const { account_id } = params;

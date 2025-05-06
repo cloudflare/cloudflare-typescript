@@ -118,6 +118,14 @@ export class Zones extends APIResource {
 
   /**
    * Create Zone
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.create({
+   *   account: {},
+   *   name: 'example.com',
+   * });
+   * ```
    */
   create(body: ZoneCreateParams, options?: RequestOptions): APIPromise<Zone> {
     return (this._client.post('/zones', { body, ...options }) as APIPromise<{ result: Zone }>)._thenUnwrap(
@@ -128,6 +136,14 @@ export class Zones extends APIResource {
   /**
    * Lists, searches, sorts, and filters your zones. Listing zones across more than
    * 500 accounts is currently not allowed.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const zone of client.zones.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: ZoneListParams | null | undefined = {},
@@ -138,6 +154,13 @@ export class Zones extends APIResource {
 
   /**
    * Deletes an existing zone.
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(params: ZoneDeleteParams, options?: RequestOptions): APIPromise<ZoneDeleteResponse | null> {
     const { zone_id } = params;
@@ -150,6 +173,13 @@ export class Zones extends APIResource {
 
   /**
    * Edits a zone. Only one zone property can be changed at a time.
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: ZoneEditParams, options?: RequestOptions): APIPromise<Zone> {
     const { zone_id, ...body } = params;
@@ -160,6 +190,13 @@ export class Zones extends APIResource {
 
   /**
    * Zone Details
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ZoneGetParams, options?: RequestOptions): APIPromise<Zone> {
     const { zone_id } = params;
