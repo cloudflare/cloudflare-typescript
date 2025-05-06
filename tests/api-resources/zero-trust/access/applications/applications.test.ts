@@ -85,6 +85,7 @@ describe('resource applications', () => {
       options_preflight_bypass: true,
       path_cookie_attribute: true,
       policies: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 }],
+      read_service_tokens_from_header: 'Authorization',
       same_site_cookie_attribute: 'strict',
       scim_config: {
         idp_uid: 'idp_uid',
@@ -187,6 +188,7 @@ describe('resource applications', () => {
       options_preflight_bypass: true,
       path_cookie_attribute: true,
       policies: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 }],
+      read_service_tokens_from_header: 'Authorization',
       same_site_cookie_attribute: 'strict',
       scim_config: {
         idp_uid: 'idp_uid',

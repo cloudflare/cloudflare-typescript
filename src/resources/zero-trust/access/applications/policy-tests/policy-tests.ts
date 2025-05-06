@@ -106,7 +106,7 @@ export interface PolicyTestGetResponse {
 
 export interface PolicyTestCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -186,7 +186,7 @@ export namespace PolicyTestCreateParams {
 
 export interface PolicyTestGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

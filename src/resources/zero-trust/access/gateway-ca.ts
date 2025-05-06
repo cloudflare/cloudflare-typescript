@@ -81,28 +81,28 @@ export interface GatewayCAListResponse {
 
 export interface GatewayCADeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }
 
 export interface GatewayCACreateParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface GatewayCAListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface GatewayCADeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
