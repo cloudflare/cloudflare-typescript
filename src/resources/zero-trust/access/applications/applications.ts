@@ -2737,12 +2737,85 @@ export namespace ApplicationCreateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -2915,12 +2988,85 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SaaSApplication {
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -3248,12 +3394,85 @@ export namespace ApplicationCreateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -3581,12 +3800,85 @@ export namespace ApplicationCreateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -3821,12 +4113,85 @@ export namespace ApplicationCreateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -4061,12 +4426,85 @@ export namespace ApplicationCreateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -4301,12 +4739,85 @@ export namespace ApplicationCreateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -5041,12 +5552,85 @@ export namespace ApplicationCreateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -5388,12 +5972,85 @@ export namespace ApplicationUpdateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -5566,12 +6223,85 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SaaSApplication {
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -5899,12 +6629,85 @@ export namespace ApplicationUpdateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -6232,12 +7035,85 @@ export namespace ApplicationUpdateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -6472,12 +7348,85 @@ export namespace ApplicationUpdateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -6712,12 +7661,85 @@ export namespace ApplicationUpdateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -6952,12 +7974,85 @@ export namespace ApplicationUpdateResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -7692,12 +8787,85 @@ export namespace ApplicationUpdateResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -8039,12 +9207,85 @@ export namespace ApplicationListResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -8217,12 +9458,85 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SaaSApplication {
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -8550,12 +9864,85 @@ export namespace ApplicationListResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -8883,12 +10270,85 @@ export namespace ApplicationListResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -9123,12 +10583,85 @@ export namespace ApplicationListResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -9363,12 +10896,85 @@ export namespace ApplicationListResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -9603,12 +11209,85 @@ export namespace ApplicationListResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -10343,12 +12022,85 @@ export namespace ApplicationListResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -10697,12 +12449,85 @@ export namespace ApplicationGetResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -10875,12 +12700,85 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SaaSApplication {
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -11208,12 +13106,85 @@ export namespace ApplicationGetResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -11541,12 +13512,85 @@ export namespace ApplicationGetResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -11781,12 +13825,85 @@ export namespace ApplicationGetResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -12021,12 +14138,85 @@ export namespace ApplicationGetResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -12261,12 +14451,85 @@ export namespace ApplicationGetResponse {
       title?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
@@ -13001,12 +15264,85 @@ export namespace ApplicationGetResponse {
       vnet_id?: string;
     }
 
-    export interface Policy extends ApplicationsAPI.ApplicationPolicy {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
       precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
     }
 
     /**
