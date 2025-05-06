@@ -69,7 +69,12 @@ describe('resource bgpPrefixes', () => {
     const response = await client.addressing.prefixes.bgpPrefixes.edit(
       '2af39739cc4e3b5910c918468bb89828',
       '7009ba364c7a5760798ceb430e603b74',
-      { account_id: '258def64c72dae45f3e4c8516e2111f2', on_demand: { advertised: true } },
+      {
+        account_id: '258def64c72dae45f3e4c8516e2111f2',
+        asn_prepend_count: 2,
+        on_demand: { advertised: true },
+        withdraw_if_no_route: true,
+      },
     );
   });
 
