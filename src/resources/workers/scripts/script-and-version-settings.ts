@@ -1779,7 +1779,7 @@ export namespace ScriptAndVersionSettingGetResponse {
 
 export interface ScriptAndVersionSettingEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -2659,7 +2659,7 @@ export namespace ScriptAndVersionSettingEditParams {
 
 export interface ScriptAndVersionSettingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

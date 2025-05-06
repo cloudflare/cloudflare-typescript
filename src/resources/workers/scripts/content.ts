@@ -58,7 +58,7 @@ export class Content extends APIResource {
 
 export interface ContentUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -83,7 +83,7 @@ export interface ContentUpdateParams {
 
 export interface ContentGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
