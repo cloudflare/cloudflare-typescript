@@ -549,10 +549,10 @@ export interface JobCreateParams {
   enabled?: boolean;
 
   /**
-   * Body param: This field is deprecated. Please use `max_upload_*` parameters
-   * instead. The frequency at which Cloudflare sends batches of logs to your
-   * destination. Setting frequency to high sends your logs in larger quantities of
-   * smaller files. Setting frequency to low sends logs in smaller quantities of
+   * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
+   * parameters instead. The frequency at which Cloudflare sends batches of logs to
+   * your destination. Setting frequency to high sends your logs in larger quantities
+   * of smaller files. Setting frequency to low sends logs in smaller quantities of
    * larger files.
    */
   frequency?: 'high' | 'low' | null;
@@ -565,7 +565,7 @@ export interface JobCreateParams {
   kind?: 'edge' | null;
 
   /**
-   * Body param: This field is deprecated. Use `output_options` instead.
+   * @deprecated Body param: This field is deprecated. Use `output_options` instead.
    * Configuration string. It specifies things like requested fields and timestamp
    * formats. If migrating from the logpull api, copy the url (full url or just the
    * query string) of your call here, and logpush will keep on making this call for
@@ -645,10 +645,10 @@ export interface JobUpdateParams {
   enabled?: boolean;
 
   /**
-   * Body param: This field is deprecated. Please use `max_upload_*` parameters
-   * instead. The frequency at which Cloudflare sends batches of logs to your
-   * destination. Setting frequency to high sends your logs in larger quantities of
-   * smaller files. Setting frequency to low sends logs in smaller quantities of
+   * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
+   * parameters instead. The frequency at which Cloudflare sends batches of logs to
+   * your destination. Setting frequency to high sends your logs in larger quantities
+   * of smaller files. Setting frequency to low sends logs in smaller quantities of
    * larger files.
    */
   frequency?: 'high' | 'low' | null;
@@ -661,7 +661,7 @@ export interface JobUpdateParams {
   kind?: 'edge' | null;
 
   /**
-   * Body param: This field is deprecated. Use `output_options` instead.
+   * @deprecated Body param: This field is deprecated. Use `output_options` instead.
    * Configuration string. It specifies things like requested fields and timestamp
    * formats. If migrating from the logpull api, copy the url (full url or just the
    * query string) of your call here, and logpush will keep on making this call for

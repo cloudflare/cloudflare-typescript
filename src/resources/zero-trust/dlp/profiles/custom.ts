@@ -943,8 +943,8 @@ export interface CustomUpdateParams {
   description?: string | null;
 
   /**
-   * Body param: Custom entries from this profile. If this field is omitted, entries
-   * owned by this profile will not be changed.
+   * @deprecated Body param: Custom entries from this profile. If this field is
+   * omitted, entries owned by this profile will not be changed.
    */
   entries?: Array<CustomUpdateParams.DLPNewCustomEntryWithID | CustomUpdateParams.DLPNewCustomEntry> | null;
 

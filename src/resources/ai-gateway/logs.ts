@@ -216,22 +216,22 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   cached?: boolean;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   end_date?: string;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   feedback?: 0 | 1;
 
@@ -241,27 +241,27 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   filters?: Array<LogListParams.Filter>;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   max_cost?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   max_duration?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   max_tokens_in?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   max_tokens_out?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   max_total_tokens?: number;
 
@@ -271,37 +271,37 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   meta_info?: boolean;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   min_cost?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   min_duration?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   min_tokens_in?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   min_tokens_out?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   min_total_tokens?: number;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   model?: string;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   model_type?: string;
 
@@ -316,17 +316,17 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   order_by_direction?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   provider?: string;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   request_content_type?: string;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   response_content_type?: string;
 
@@ -336,12 +336,12 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   search?: string;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   start_date?: string;
 
   /**
-   * Query param:
+   * @deprecated Query param:
    */
   success?: boolean;
 }

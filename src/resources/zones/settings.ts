@@ -4319,7 +4319,9 @@ export declare namespace SettingEditParams {
     id: 'cname_flattening';
 
     /**
-     * Body param: Current value of the zone setting.
+     * @deprecated This zone setting is deprecated; please use the DNS Settings route
+     * instead. More information at
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
      */
     value: 'flatten_at_root' | 'flatten_all';
   }
@@ -4757,7 +4759,10 @@ export declare namespace SettingEditParams {
     id: 'privacy_pass';
 
     /**
-     * Body param: Current value of the zone setting.
+     * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
+     * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
+     * details -
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
      */
     value: 'on' | 'off';
   }
