@@ -103,7 +103,7 @@ export class CustomCertificatesSinglePage extends SinglePage<CustomCertificate> 
 
 export interface CustomCertificate {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -156,7 +156,7 @@ export interface CustomCertificate {
   uploaded_on: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 
@@ -221,14 +221,14 @@ export type Status = 'active' | 'pending_reactivation' | 'pending_revocation' | 
 
 export interface CustomCertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface CustomCertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -283,7 +283,7 @@ export interface CustomCertificateCreateParams {
 
 export interface CustomCertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -300,14 +300,14 @@ export interface CustomCertificateListParams extends V4PagePaginationArrayParams
 
 export interface CustomCertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CustomCertificateEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -356,7 +356,7 @@ export interface CustomCertificateEditParams {
 
 export interface CustomCertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

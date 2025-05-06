@@ -177,14 +177,14 @@ export interface TunnelParam {
 
 export interface KeylessCertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface KeylessCertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -225,21 +225,21 @@ export interface KeylessCertificateCreateParams {
 
 export interface KeylessCertificateListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface KeylessCertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface KeylessCertificateEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -272,7 +272,7 @@ export interface KeylessCertificateEditParams {
 
 export interface KeylessCertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

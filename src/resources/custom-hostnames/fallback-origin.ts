@@ -155,7 +155,7 @@ export interface FallbackOriginGetResponse {
 
 export interface FallbackOriginUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -168,14 +168,14 @@ export interface FallbackOriginUpdateParams {
 
 export interface FallbackOriginDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface FallbackOriginGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
