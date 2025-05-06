@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   lint:
+    timeout-minutes: 10
     name: lint
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -32,6 +33,7 @@ jobs:
         run: ./scripts/lint
 
   build:
+    timeout-minutes: 5
     name: build
     runs-on: ubuntu-latest
     permissions:
@@ -66,6 +68,7 @@ jobs:
           SHA: ${{ github.sha }}
         run: ./scripts/utils/upload-artifact.sh
   test:
+    timeout-minutes: 10
     name: test
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -83,6 +86,7 @@ jobs:
       - name: Run tests
         run: ./scripts/test
   examples:
+    timeout-minutes: 10
     name: examples
     runs-on: ubuntu-latest
     if: github.repository == 'cloudflare/cloudflare-typescript'
