@@ -1718,6 +1718,19 @@ import update_pipelines from './pipelines/update-pipelines';
 import list_pipelines from './pipelines/list-pipelines';
 import delete_pipelines from './pipelines/delete-pipelines';
 import get_pipelines from './pipelines/get-pipelines';
+import create_schema_validation_schemas from './schema-validation/schemas/create-schema-validation-schemas';
+import list_schema_validation_schemas from './schema-validation/schemas/list-schema-validation-schemas';
+import delete_schema_validation_schemas from './schema-validation/schemas/delete-schema-validation-schemas';
+import edit_schema_validation_schemas from './schema-validation/schemas/edit-schema-validation-schemas';
+import get_schema_validation_schemas from './schema-validation/schemas/get-schema-validation-schemas';
+import update_schema_validation_settings from './schema-validation/settings/update-schema-validation-settings';
+import edit_schema_validation_settings from './schema-validation/settings/edit-schema-validation-settings';
+import get_schema_validation_settings from './schema-validation/settings/get-schema-validation-settings';
+import update_settings_schema_validation_operations from './schema-validation/settings/operations/update-settings-schema-validation-operations';
+import list_settings_schema_validation_operations from './schema-validation/settings/operations/list-settings-schema-validation-operations';
+import delete_settings_schema_validation_operations from './schema-validation/settings/operations/delete-settings-schema-validation-operations';
+import bulk_edit_settings_schema_validation_operations from './schema-validation/settings/operations/bulk-edit-settings-schema-validation-operations';
+import get_settings_schema_validation_operations from './schema-validation/settings/operations/get-settings-schema-validation-operations';
 
 export type HandlerFunction = (client: Cloudflare, args: Record<string, unknown> | undefined) => Promise<any>;
 
@@ -3454,6 +3467,19 @@ addEndpoint(update_pipelines);
 addEndpoint(list_pipelines);
 addEndpoint(delete_pipelines);
 addEndpoint(get_pipelines);
+addEndpoint(create_schema_validation_schemas);
+addEndpoint(list_schema_validation_schemas);
+addEndpoint(delete_schema_validation_schemas);
+addEndpoint(edit_schema_validation_schemas);
+addEndpoint(get_schema_validation_schemas);
+addEndpoint(update_schema_validation_settings);
+addEndpoint(edit_schema_validation_settings);
+addEndpoint(get_schema_validation_settings);
+addEndpoint(update_settings_schema_validation_operations);
+addEndpoint(list_settings_schema_validation_operations);
+addEndpoint(delete_settings_schema_validation_operations);
+addEndpoint(bulk_edit_settings_schema_validation_operations);
+addEndpoint(get_settings_schema_validation_operations);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

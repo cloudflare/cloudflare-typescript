@@ -4014,3 +4014,25 @@ Model specific inputs available in [Cloudflare Docs](https://developers.cloudfla
 - `list_pipelines` (`read`): List, filter, and paginate pipelines in an account.
 - `delete_pipelines` (`write`): Delete a pipeline.
 - `get_pipelines` (`read`): Get configuration of a pipeline.
+
+### Resource `schema_validation.schemas`:
+
+- `create_schema_validation_schemas` (`write`): Upload a schema
+- `list_schema_validation_schemas` (`read`): List all uploaded schemas
+- `delete_schema_validation_schemas` (`write`): Delete a schema
+- `edit_schema_validation_schemas` (`write`): Edit details of a schema to enable validation
+- `get_schema_validation_schemas` (`read`): Get details of a schema
+
+### Resource `schema_validation.settings`:
+
+- `update_schema_validation_settings` (`write`): Update global schema validation settings
+- `edit_schema_validation_settings` (`write`): Edit global schema validation settings
+- `get_schema_validation_settings` (`read`): Get global schema validation settings
+
+### Resource `schema_validation.settings.operations`:
+
+- `update_settings_schema_validation_operations` (`write`): Update per-operation schema validation setting
+- `list_settings_schema_validation_operations` (`read`): List per-operation schema validation settings
+- `delete_settings_schema_validation_operations` (`write`): Delete per-operation schema validation setting
+- `bulk_edit_settings_schema_validation_operations` (`write`): Bulk edit per-operation schema validation settings
+- `get_settings_schema_validation_operations` (`read`): Get per-operation schema validation setting
