@@ -23,6 +23,14 @@ import {
   ScheduleUpdateResponse,
   Schedules,
 } from './schedules';
+import * as ScriptAndVersionSettingsAPI from './script-and-version-settings';
+import {
+  ScriptAndVersionSettingEditParams,
+  ScriptAndVersionSettingEditResponse,
+  ScriptAndVersionSettingGetParams,
+  ScriptAndVersionSettingGetResponse,
+  ScriptAndVersionSettings,
+} from './script-and-version-settings';
 import * as SecretsAPI from './secrets';
 import {
   SecretDeleteParams,
@@ -82,6 +90,8 @@ export class Scripts extends APIResource {
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
   secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
+  scriptAndVersionSettings: ScriptAndVersionSettingsAPI.ScriptAndVersionSettings =
+    new ScriptAndVersionSettingsAPI.ScriptAndVersionSettings(this._client);
 
   /**
    * Upload a worker module. You can find more about the multipart metadata on our
@@ -1350,6 +1360,7 @@ Scripts.Versions = Versions;
 Scripts.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
 Scripts.Secrets = Secrets;
 Scripts.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
+Scripts.ScriptAndVersionSettings = ScriptAndVersionSettings;
 
 export declare namespace Scripts {
   export {
@@ -1437,5 +1448,13 @@ export declare namespace Scripts {
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
     type SecretGetParams as SecretGetParams,
+  };
+
+  export {
+    ScriptAndVersionSettings as ScriptAndVersionSettings,
+    type ScriptAndVersionSettingEditResponse as ScriptAndVersionSettingEditResponse,
+    type ScriptAndVersionSettingGetResponse as ScriptAndVersionSettingGetResponse,
+    type ScriptAndVersionSettingEditParams as ScriptAndVersionSettingEditParams,
+    type ScriptAndVersionSettingGetParams as ScriptAndVersionSettingGetParams,
   };
 }
