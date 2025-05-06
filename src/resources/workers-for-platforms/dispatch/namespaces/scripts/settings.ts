@@ -53,7 +53,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindAI
     | SettingEditResponse.WorkersBindingKindAnalyticsEngine
     | SettingEditResponse.WorkersBindingKindAssets
-    | SettingEditResponse.WorkersBindingKindBrowserRendering
+    | SettingEditResponse.WorkersBindingKindBrowser
     | SettingEditResponse.WorkersBindingKindD1
     | SettingEditResponse.WorkersBindingKindDispatchNamespace
     | SettingEditResponse.WorkersBindingKindDurableObjectNamespace
@@ -171,7 +171,7 @@ export namespace SettingEditResponse {
     type: 'assets';
   }
 
-  export interface WorkersBindingKindBrowserRendering {
+  export interface WorkersBindingKindBrowser {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -180,7 +180,7 @@ export namespace SettingEditResponse {
     /**
      * The kind of resource that the binding provides.
      */
-    type: 'browser_rendering';
+    type: 'browser';
   }
 
   export interface WorkersBindingKindD1 {
@@ -627,7 +627,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindAI
     | SettingGetResponse.WorkersBindingKindAnalyticsEngine
     | SettingGetResponse.WorkersBindingKindAssets
-    | SettingGetResponse.WorkersBindingKindBrowserRendering
+    | SettingGetResponse.WorkersBindingKindBrowser
     | SettingGetResponse.WorkersBindingKindD1
     | SettingGetResponse.WorkersBindingKindDispatchNamespace
     | SettingGetResponse.WorkersBindingKindDurableObjectNamespace
@@ -745,7 +745,7 @@ export namespace SettingGetResponse {
     type: 'assets';
   }
 
-  export interface WorkersBindingKindBrowserRendering {
+  export interface WorkersBindingKindBrowser {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -754,7 +754,7 @@ export namespace SettingGetResponse {
     /**
      * The kind of resource that the binding provides.
      */
-    type: 'browser_rendering';
+    type: 'browser';
   }
 
   export interface WorkersBindingKindD1 {
@@ -1214,7 +1214,7 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindAI
       | Settings.WorkersBindingKindAnalyticsEngine
       | Settings.WorkersBindingKindAssets
-      | Settings.WorkersBindingKindBrowserRendering
+      | Settings.WorkersBindingKindBrowser
       | Settings.WorkersBindingKindD1
       | Settings.WorkersBindingKindDispatchNamespace
       | Settings.WorkersBindingKindDurableObjectNamespace
@@ -1332,7 +1332,7 @@ export namespace SettingEditParams {
       type: 'assets';
     }
 
-    export interface WorkersBindingKindBrowserRendering {
+    export interface WorkersBindingKindBrowser {
       /**
        * A JavaScript variable name for the binding.
        */
@@ -1341,7 +1341,7 @@ export namespace SettingEditParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'browser_rendering';
+      type: 'browser';
     }
 
     export interface WorkersBindingKindD1 {

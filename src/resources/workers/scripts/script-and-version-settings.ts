@@ -51,7 +51,7 @@ export interface ScriptAndVersionSettingEditResponse {
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindAI
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindAnalyticsEngine
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindAssets
-    | ScriptAndVersionSettingEditResponse.WorkersBindingKindBrowserRendering
+    | ScriptAndVersionSettingEditResponse.WorkersBindingKindBrowser
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindD1
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindDispatchNamespace
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindDurableObjectNamespace
@@ -171,7 +171,7 @@ export namespace ScriptAndVersionSettingEditResponse {
     type: 'assets';
   }
 
-  export interface WorkersBindingKindBrowserRendering {
+  export interface WorkersBindingKindBrowser {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -180,7 +180,7 @@ export namespace ScriptAndVersionSettingEditResponse {
     /**
      * The kind of resource that the binding provides.
      */
-    type: 'browser_rendering';
+    type: 'browser';
   }
 
   export interface WorkersBindingKindD1 {
@@ -627,7 +627,7 @@ export interface ScriptAndVersionSettingGetResponse {
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindAI
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindAnalyticsEngine
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindAssets
-    | ScriptAndVersionSettingGetResponse.WorkersBindingKindBrowserRendering
+    | ScriptAndVersionSettingGetResponse.WorkersBindingKindBrowser
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindD1
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindDispatchNamespace
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindDurableObjectNamespace
@@ -747,7 +747,7 @@ export namespace ScriptAndVersionSettingGetResponse {
     type: 'assets';
   }
 
-  export interface WorkersBindingKindBrowserRendering {
+  export interface WorkersBindingKindBrowser {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -756,7 +756,7 @@ export namespace ScriptAndVersionSettingGetResponse {
     /**
      * The kind of resource that the binding provides.
      */
-    type: 'browser_rendering';
+    type: 'browser';
   }
 
   export interface WorkersBindingKindD1 {
@@ -1216,7 +1216,7 @@ export namespace ScriptAndVersionSettingEditParams {
       | Settings.WorkersBindingKindAI
       | Settings.WorkersBindingKindAnalyticsEngine
       | Settings.WorkersBindingKindAssets
-      | Settings.WorkersBindingKindBrowserRendering
+      | Settings.WorkersBindingKindBrowser
       | Settings.WorkersBindingKindD1
       | Settings.WorkersBindingKindDispatchNamespace
       | Settings.WorkersBindingKindDurableObjectNamespace
@@ -1334,7 +1334,7 @@ export namespace ScriptAndVersionSettingEditParams {
       type: 'assets';
     }
 
-    export interface WorkersBindingKindBrowserRendering {
+    export interface WorkersBindingKindBrowser {
       /**
        * A JavaScript variable name for the binding.
        */
@@ -1343,7 +1343,7 @@ export namespace ScriptAndVersionSettingEditParams {
       /**
        * The kind of resource that the binding provides.
        */
-      type: 'browser_rendering';
+      type: 'browser';
     }
 
     export interface WorkersBindingKindD1 {
