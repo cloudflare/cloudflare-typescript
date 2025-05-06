@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
 import * as OperationsAPI from './operations';
@@ -95,7 +94,15 @@ export class UserSchemas extends APIResource {
 
 export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
 
-export type Message = Array<Shared.ResponseInfo>;
+export type Message = Array<Message.MessageItem>;
+
+export namespace Message {
+  export interface MessageItem {
+    code: number;
+
+    message: string;
+  }
+}
 
 export interface PublicSchema {
   created_at: string;
