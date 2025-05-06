@@ -554,7 +554,7 @@ export type BotManagementUpdateParams =
 export declare namespace BotManagementUpdateParams {
   export interface BotFightModeConfiguration {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -583,7 +583,7 @@ export declare namespace BotManagementUpdateParams {
 
   export interface SuperBotFightModeDefinitelyConfiguration {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -631,7 +631,7 @@ export declare namespace BotManagementUpdateParams {
 
   export interface SuperBotFightModeLikelyConfiguration {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -685,7 +685,7 @@ export declare namespace BotManagementUpdateParams {
 
   export interface SubscriptionConfiguration {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -723,7 +723,7 @@ export declare namespace BotManagementUpdateParams {
 
 export interface BotManagementGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
