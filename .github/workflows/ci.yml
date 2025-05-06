@@ -1,12 +1,12 @@
 name: CI
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-      - next
+    branches-ignore:
+      - 'generated'
+      - 'codegen/**'
+      - 'integrated/**'
+      - 'stl-preview-head/**'
+      - 'stl-preview-base/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -16,8 +16,7 @@ jobs:
   lint:
     timeout-minutes: 10
     name: lint
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+    runs-on: depot-ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
@@ -35,7 +34,7 @@ jobs:
   build:
     timeout-minutes: 5
     name: build
-    runs-on: ubuntu-latest
+    runs-on: depot-ubuntu-24.04
     permissions:
       contents: read
       id-token: write
@@ -70,8 +69,7 @@ jobs:
   test:
     timeout-minutes: 10
     name: test
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    runs-on: depot-ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
@@ -88,7 +86,7 @@ jobs:
   examples:
     timeout-minutes: 10
     name: examples
-    runs-on: ubuntu-latest
+    runs-on: depot-ubuntu-24.04
     if: github.repository == 'cloudflare/cloudflare-typescript'
     timeout-minutes: 5
 
