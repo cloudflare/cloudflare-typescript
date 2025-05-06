@@ -32,8 +32,7 @@ export interface StatusEditResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   /**
    * In ISO 8601 with no timezone offsets and in UTC.
