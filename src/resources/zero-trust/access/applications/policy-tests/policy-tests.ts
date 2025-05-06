@@ -13,6 +13,14 @@ export class PolicyTests extends APIResource {
 
   /**
    * Starts an Access policy test.
+   *
+   * @example
+   * ```ts
+   * const policyTest =
+   *   await client.zeroTrust.access.applications.policyTests.create(
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     params: PolicyTestCreateParams,
@@ -29,6 +37,15 @@ export class PolicyTests extends APIResource {
 
   /**
    * Fetches the current status of a given Access policy test.
+   *
+   * @example
+   * ```ts
+   * const policyTest =
+   *   await client.zeroTrust.access.applications.policyTests.get(
+   *     'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     policyTestId: string,

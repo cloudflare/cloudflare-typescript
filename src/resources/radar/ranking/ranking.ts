@@ -24,6 +24,12 @@ export class Ranking extends APIResource {
 
   /**
    * Retrieves domains rank over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ranking.timeseriesGroups();
+   * ```
    */
   timeseriesGroups(
     query?: RankingTimeseriesGroupsParams,
@@ -49,6 +55,11 @@ export class Ranking extends APIResource {
    * domains of broad appeal based on how people use the Internet. Trending domains
    * are domains that are generating a surge in interest. For more information on top
    * domains, see https://blog.cloudflare.com/radar-domain-rankings/.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.ranking.top();
+   * ```
    */
   top(query?: RankingTopParams, options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse>;
   top(options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse>;

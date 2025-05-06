@@ -7,6 +7,16 @@ import { CursorPagination, type CursorPaginationParams } from '../../../paginati
 export class Registrations extends APIResource {
   /**
    * List WARP registrations.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const registrationListResponse of client.zeroTrust.devices.registrations.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RegistrationListParams,
@@ -22,6 +32,15 @@ export class Registrations extends APIResource {
 
   /**
    * Deletes a WARP registration.
+   *
+   * @example
+   * ```ts
+   * const registration =
+   *   await client.zeroTrust.devices.registrations.delete(
+   *     'registration_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     registrationId: string,
@@ -39,6 +58,15 @@ export class Registrations extends APIResource {
 
   /**
    * Deletes a list of WARP registrations.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.devices.registrations.bulkDelete({
+   *     account_id: 'account_id',
+   *     id: ['string'],
+   *   });
+   * ```
    */
   bulkDelete(
     params: RegistrationBulkDeleteParams,
@@ -55,6 +83,15 @@ export class Registrations extends APIResource {
 
   /**
    * Fetches a single WARP registration.
+   *
+   * @example
+   * ```ts
+   * const registration =
+   *   await client.zeroTrust.devices.registrations.get(
+   *     'registration_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     registrationId: string,
@@ -72,6 +109,15 @@ export class Registrations extends APIResource {
 
   /**
    * Revokes a list of WARP registrations.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.devices.registrations.revoke({
+   *     account_id: 'account_id',
+   *     id: ['string'],
+   *   });
+   * ```
    */
   revoke(
     params: RegistrationRevokeParams,
@@ -88,6 +134,15 @@ export class Registrations extends APIResource {
 
   /**
    * Unrevokes a list of WARP registrations.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.devices.registrations.unrevoke({
+   *     account_id: 'account_id',
+   *     id: ['string'],
+   *   });
+   * ```
    */
   unrevoke(
     params: RegistrationUnrevokeParams,

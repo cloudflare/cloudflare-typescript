@@ -9,6 +9,12 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.arc();
+   * ```
    */
   arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
   arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
@@ -29,6 +35,12 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.dkim();
+   * ```
    */
   dkim(query?: SummaryDKIMParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
   dkim(options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
@@ -49,6 +61,12 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.dmarc();
+   * ```
    */
   dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
   dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
@@ -68,6 +86,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of emails by malicious classification.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.malicious();
+   * ```
    */
   malicious(
     query?: SummaryMaliciousParams,
@@ -90,6 +114,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the proportion of emails by spam classification (spam vs. non-spam).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.spam();
+   * ```
    */
   spam(query?: SummarySpamParams, options?: Core.RequestOptions): Core.APIPromise<SummarySpamResponse>;
   spam(options?: Core.RequestOptions): Core.APIPromise<SummarySpamResponse>;
@@ -110,6 +140,12 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by SPF (Sender Policy Framework)
    * validation.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.spf();
+   * ```
    */
   spf(query?: SummarySPFParams, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
   spf(options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
@@ -130,6 +166,12 @@ export class Summary extends APIResource {
   /**
    * Retrieves the proportion of emails by spoof classification (spoof vs.
    * non-spoof).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.spoof();
+   * ```
    */
   spoof(query?: SummarySpoofParams, options?: Core.RequestOptions): Core.APIPromise<SummarySpoofResponse>;
   spoof(options?: Core.RequestOptions): Core.APIPromise<SummarySpoofResponse>;
@@ -149,6 +191,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of emails by threat categories.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.threatCategory();
+   * ```
    */
   threatCategory(
     query?: SummaryThreatCategoryParams,
@@ -172,6 +220,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of emails by TLS version.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.tlsVersion();
+   * ```
    */
   tlsVersion(
     query?: SummaryTLSVersionParams,

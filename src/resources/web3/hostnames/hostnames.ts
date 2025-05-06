@@ -13,6 +13,15 @@ export class Hostnames extends APIResource {
 
   /**
    * Create Web3 Hostname
+   *
+   * @example
+   * ```ts
+   * const hostname = await client.web3.hostnames.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'gateway.example.com',
+   *   target: 'ipfs',
+   * });
+   * ```
    */
   create(params: HostnameCreateParams, options?: Core.RequestOptions): Core.APIPromise<Hostname> {
     const { zone_id, ...body } = params;
@@ -25,6 +34,16 @@ export class Hostnames extends APIResource {
 
   /**
    * List Web3 Hostnames
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const hostname of client.web3.hostnames.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: HostnameListParams,
@@ -36,6 +55,14 @@ export class Hostnames extends APIResource {
 
   /**
    * Delete Web3 Hostname
+   *
+   * @example
+   * ```ts
+   * const hostname = await client.web3.hostnames.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     identifier: string,
@@ -52,6 +79,14 @@ export class Hostnames extends APIResource {
 
   /**
    * Edit Web3 Hostname
+   *
+   * @example
+   * ```ts
+   * const hostname = await client.web3.hostnames.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     identifier: string,
@@ -69,6 +104,14 @@ export class Hostnames extends APIResource {
 
   /**
    * Web3 Hostname Details
+   *
+   * @example
+   * ```ts
+   * const hostname = await client.web3.hostnames.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     identifier: string,

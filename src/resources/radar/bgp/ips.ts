@@ -8,6 +8,11 @@ export class IPs extends APIResource {
   /**
    * Retrieves time series data for the announced IP space count, represented as the
    * number of IPv4 /24s and IPv6 /48s, for a given ASN.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.ips.timeseries();
+   * ```
    */
   timeseries(
     query?: IPTimeseriesParams,

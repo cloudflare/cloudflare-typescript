@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Raw extends APIResource {
   /**
    * Returns the raw eml of any non-benign message.
+   *
+   * @example
+   * ```ts
+   * const raw = await client.emailSecurity.investigate.raw.get(
+   *   '4Njp3P0STMz2c02Q',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     postfixId: string,

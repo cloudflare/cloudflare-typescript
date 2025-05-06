@@ -6,6 +6,13 @@ import * as Core from '../../../core';
 export class DOH extends APIResource {
   /**
    * Updates the DoH settings for your Zero Trust organization.
+   *
+   * @example
+   * ```ts
+   * const doh = await client.zeroTrust.organizations.doh.update(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(params: DOHUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DOHUpdateResponse> {
     const { account_id, ...body } = params;
@@ -19,6 +26,13 @@ export class DOH extends APIResource {
 
   /**
    * Returns the DoH settings for your Zero Trust organization.
+   *
+   * @example
+   * ```ts
+   * const doh = await client.zeroTrust.organizations.doh.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DOHGetParams, options?: Core.RequestOptions): Core.APIPromise<DOHGetResponse> {
     const { account_id } = params;

@@ -20,6 +20,14 @@ export class Default extends APIResource {
 
   /**
    * Updates the default device settings profile for an account.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.devices.policies.default.edit({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   edit(
     params: DefaultEditParams,
@@ -35,6 +43,14 @@ export class Default extends APIResource {
 
   /**
    * Fetches the default device settings profile for an account.
+   *
+   * @example
+   * ```ts
+   * const _default =
+   *   await client.zeroTrust.devices.policies.default.get({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   get(params: DefaultGetParams, options?: Core.RequestOptions): Core.APIPromise<DefaultGetResponse | null> {
     const { account_id } = params;

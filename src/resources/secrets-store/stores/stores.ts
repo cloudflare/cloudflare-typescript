@@ -30,6 +30,19 @@ export class Stores extends APIResource {
 
   /**
    * Creates a store in the account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const storeCreateResponse of client.secretsStore.stores.create(
+   *   {
+   *     account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{ name: 'service_x_keys' }],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     params: StoreCreateParams,
@@ -45,6 +58,16 @@ export class Stores extends APIResource {
 
   /**
    * Lists all the stores in an account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const storeListResponse of client.secretsStore.stores.list(
+   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: StoreListParams,
@@ -60,6 +83,14 @@ export class Stores extends APIResource {
 
   /**
    * Deletes a single store
+   *
+   * @example
+   * ```ts
+   * const store = await client.secretsStore.stores.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     storeId: string,

@@ -10,6 +10,19 @@ import { SinglePage } from '../../../pagination';
 export class Groups extends APIResource {
   /**
    * Creates a new Access group.
+   *
+   * @example
+   * ```ts
+   * const group = await client.zeroTrust.access.groups.create({
+   *   include: [
+   *     {
+   *       group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' },
+   *     },
+   *   ],
+   *   name: 'Allow devs',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   create(params: GroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<GroupCreateResponse> {
     const { account_id, zone_id, ...body } = params;
@@ -39,6 +52,24 @@ export class Groups extends APIResource {
 
   /**
    * Updates a configured Access group.
+   *
+   * @example
+   * ```ts
+   * const group = await client.zeroTrust.access.groups.update(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   {
+   *     include: [
+   *       {
+   *         group: {
+   *           id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f',
+   *         },
+   *       },
+   *     ],
+   *     name: 'Allow devs',
+   *     account_id: 'account_id',
+   *   },
+   * );
+   * ```
    */
   update(
     groupId: string,
@@ -72,6 +103,16 @@ export class Groups extends APIResource {
 
   /**
    * Lists all Access groups.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const groupListResponse of client.zeroTrust.access.groups.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params?: GroupListParams,
@@ -111,6 +152,14 @@ export class Groups extends APIResource {
 
   /**
    * Deletes an Access group.
+   *
+   * @example
+   * ```ts
+   * const group = await client.zeroTrust.access.groups.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     groupId: string,
@@ -153,6 +202,14 @@ export class Groups extends APIResource {
 
   /**
    * Fetches a single Access group.
+   *
+   * @example
+   * ```ts
+   * const group = await client.zeroTrust.access.groups.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     groupId: string,

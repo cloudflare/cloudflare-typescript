@@ -11,6 +11,14 @@ export class Rules extends APIResource {
   /**
    * Adds a new rule to an account or zone ruleset. The rule will be added to the end
    * of the existing list of rules in the ruleset by default.
+   *
+   * @example
+   * ```ts
+   * const rule = await client.rulesets.rules.create(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   create(
     rulesetId: string,
@@ -44,6 +52,15 @@ export class Rules extends APIResource {
 
   /**
    * Deletes an existing rule from an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * const rule = await client.rulesets.rules.delete(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   '3a03d665bac047339bb530ecb439a90d',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     rulesetId: string,
@@ -92,6 +109,15 @@ export class Rules extends APIResource {
 
   /**
    * Updates an existing rule in an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * const response = await client.rulesets.rules.edit(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   '3a03d665bac047339bb530ecb439a90d',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   edit(
     rulesetId: string,

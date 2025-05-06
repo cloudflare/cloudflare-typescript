@@ -32,6 +32,11 @@ export class Ases extends APIResource {
 
   /**
    * Retrieves the top autonomous systems by HTTP requests.
+   *
+   * @example
+   * ```ts
+   * const ase = await client.radar.http.ases.get();
+   * ```
    */
   get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;

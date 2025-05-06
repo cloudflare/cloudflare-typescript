@@ -12,6 +12,16 @@ export class Rules extends APIResource {
   /**
    * Create network monitoring rules for account. Currently only supports creating a
    * single rule per API request.
+   *
+   * @example
+   * ```ts
+   * const magicNetworkMonitoringRule =
+   *   await client.magicNetworkMonitoring.rules.create({
+   *     account_id: '6f91088a406011ed95aed352566e8d4c',
+   *     duration: '1m',
+   *     name: 'my_rule_1',
+   *   });
+   * ```
    */
   create(
     params: RuleCreateParams,
@@ -27,6 +37,16 @@ export class Rules extends APIResource {
 
   /**
    * Update network monitoring rules for account.
+   *
+   * @example
+   * ```ts
+   * const magicNetworkMonitoringRule =
+   *   await client.magicNetworkMonitoring.rules.update({
+   *     account_id: '6f91088a406011ed95aed352566e8d4c',
+   *     duration: '1m',
+   *     name: 'my_rule_1',
+   *   });
+   * ```
    */
   update(
     params: RuleUpdateParams,
@@ -42,6 +62,16 @@ export class Rules extends APIResource {
 
   /**
    * Lists network monitoring rules for account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const magicNetworkMonitoringRule of client.magicNetworkMonitoring.rules.list(
+   *   { account_id: '6f91088a406011ed95aed352566e8d4c' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RuleListParams,
@@ -57,6 +87,15 @@ export class Rules extends APIResource {
 
   /**
    * Delete a network monitoring rule for account.
+   *
+   * @example
+   * ```ts
+   * const magicNetworkMonitoringRule =
+   *   await client.magicNetworkMonitoring.rules.delete(
+   *     '2890e6fa406311ed9b5a23f70f6fb8cf',
+   *     { account_id: '6f91088a406011ed95aed352566e8d4c' },
+   *   );
+   * ```
    */
   delete(
     ruleId: string,
@@ -73,6 +112,15 @@ export class Rules extends APIResource {
 
   /**
    * Update a network monitoring rule for account.
+   *
+   * @example
+   * ```ts
+   * const magicNetworkMonitoringRule =
+   *   await client.magicNetworkMonitoring.rules.edit(
+   *     '2890e6fa406311ed9b5a23f70f6fb8cf',
+   *     { account_id: '6f91088a406011ed95aed352566e8d4c' },
+   *   );
+   * ```
    */
   edit(
     ruleId: string,
@@ -90,6 +138,15 @@ export class Rules extends APIResource {
 
   /**
    * List a single network monitoring rule for account.
+   *
+   * @example
+   * ```ts
+   * const magicNetworkMonitoringRule =
+   *   await client.magicNetworkMonitoring.rules.get(
+   *     '2890e6fa406311ed9b5a23f70f6fb8cf',
+   *     { account_id: '6f91088a406011ed95aed352566e8d4c' },
+   *   );
+   * ```
    */
   get(
     ruleId: string,

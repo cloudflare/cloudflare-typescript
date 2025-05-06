@@ -7,6 +7,15 @@ import { SinglePage } from '../../../pagination';
 export class Config extends APIResource {
   /**
    * Create a new Scan Config
+   *
+   * @example
+   * ```ts
+   * const config =
+   *   await client.cloudforceOne.scans.config.create({
+   *     account_id: 'account_id',
+   *     ips: ['1.1.1.1', '2606:4700:4700::1111'],
+   *   });
+   * ```
    */
   create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<ConfigCreateResponse> {
     const { account_id, ...body } = params;
@@ -20,6 +29,16 @@ export class Config extends APIResource {
 
   /**
    * List Scan Configs
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const configListResponse of client.cloudforceOne.scans.config.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ConfigListParams,
@@ -35,6 +54,15 @@ export class Config extends APIResource {
 
   /**
    * Delete a Scan Config
+   *
+   * @example
+   * ```ts
+   * const config =
+   *   await client.cloudforceOne.scans.config.delete(
+   *     'config_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     configId: string,
@@ -52,6 +80,15 @@ export class Config extends APIResource {
 
   /**
    * Update an existing Scan Config
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.scans.config.edit(
+   *     'config_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   edit(
     configId: string,

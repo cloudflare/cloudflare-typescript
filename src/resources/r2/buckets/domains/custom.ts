@@ -6,6 +6,20 @@ import * as Core from '../../../../core';
 export class Custom extends APIResource {
   /**
    * Register a new custom domain for an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const custom =
+   *   await client.r2.buckets.domains.custom.create(
+   *     'example-bucket',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       domain: 'prefix.example-domain.com',
+   *       enabled: true,
+   *       zoneId: '36ca64a6d92827b8a6b90be344bb1bfd',
+   *     },
+   *   );
+   * ```
    */
   create(
     bucketName: string,
@@ -29,6 +43,16 @@ export class Custom extends APIResource {
 
   /**
    * Edit the configuration for a custom domain on an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const custom =
+   *   await client.r2.buckets.domains.custom.update(
+   *     'example-bucket',
+   *     'example-domain/custom-domain.com',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     bucketName: string,
@@ -53,6 +77,14 @@ export class Custom extends APIResource {
 
   /**
    * Gets a list of all custom domains registered with an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const customs = await client.r2.buckets.domains.custom.list(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   list(
     bucketName: string,
@@ -75,6 +107,16 @@ export class Custom extends APIResource {
 
   /**
    * Remove custom domain registration from an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const custom =
+   *   await client.r2.buckets.domains.custom.delete(
+   *     'example-bucket',
+   *     'example-domain/custom-domain.com',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     bucketName: string,
@@ -98,6 +140,15 @@ export class Custom extends APIResource {
 
   /**
    * Get the configuration for a custom domain on an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const custom = await client.r2.buckets.domains.custom.get(
+   *   'example-bucket',
+   *   'example-domain/custom-domain.com',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     bucketName: string,

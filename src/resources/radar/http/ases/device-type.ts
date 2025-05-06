@@ -8,6 +8,12 @@ export class DeviceType extends APIResource {
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested device
    * type.
+   *
+   * @example
+   * ```ts
+   * const deviceType =
+   *   await client.radar.http.ases.deviceType.get('DESKTOP');
+   * ```
    */
   get(
     deviceType: 'DESKTOP' | 'MOBILE' | 'OTHER',

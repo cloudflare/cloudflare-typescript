@@ -7,6 +7,17 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class Users extends APIResource {
   /**
    * Fetches a single page of user results from an Access policy test.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const userListResponse of client.zeroTrust.access.applications.policyTests.users.list(
+   *   'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     policyTestId: string,

@@ -9,6 +9,12 @@ export class Locations extends APIResource {
    * Retrieves the top origin locations of layer 7 attacks. Values are percentages of
    * the total layer 7 attacks, with the origin location determined by the client IP
    * address.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.top.locations.origin();
+   * ```
    */
   origin(
     query?: LocationOriginParams,
@@ -34,6 +40,12 @@ export class Locations extends APIResource {
    * Retrieves the top target locations of and by layer 7 attacks. Values are a
    * percentage out of the total layer 7 attacks. The target location is determined
    * by the attacked zone's billing country, when available.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.top.locations.target();
+   * ```
    */
   target(
     query?: LocationTargetParams,

@@ -24,6 +24,14 @@ export class AddressMaps extends APIResource {
 
   /**
    * Create a new address map under the account.
+   *
+   * @example
+   * ```ts
+   * const addressMap =
+   *   await client.addressing.addressMaps.create({
+   *     account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *   });
+   * ```
    */
   create(
     params: AddressMapCreateParams,
@@ -40,6 +48,16 @@ export class AddressMaps extends APIResource {
 
   /**
    * List all address maps owned by the account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const addressMap of client.addressing.addressMaps.list(
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: AddressMapListParams,
@@ -56,6 +74,15 @@ export class AddressMaps extends APIResource {
   /**
    * Delete a particular address map owned by the account. An Address Map must be
    * disabled before it can be deleted.
+   *
+   * @example
+   * ```ts
+   * const addressMap =
+   *   await client.addressing.addressMaps.delete(
+   *     '055817b111884e0227e1be16a0be6ee0',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   * ```
    */
   delete(
     addressMapId: string,
@@ -68,6 +95,14 @@ export class AddressMaps extends APIResource {
 
   /**
    * Modify properties of an address map owned by the account.
+   *
+   * @example
+   * ```ts
+   * const addressMap = await client.addressing.addressMaps.edit(
+   *   '055817b111884e0227e1be16a0be6ee0',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * );
+   * ```
    */
   edit(
     addressMapId: string,
@@ -85,6 +120,14 @@ export class AddressMaps extends APIResource {
 
   /**
    * Show a particular address map owned by the account.
+   *
+   * @example
+   * ```ts
+   * const addressMap = await client.addressing.addressMaps.get(
+   *   '055817b111884e0227e1be16a0be6ee0',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * );
+   * ```
    */
   get(
     addressMapId: string,

@@ -7,6 +7,11 @@ import * as Core from '../../../core';
 export class Outages extends APIResource {
   /**
    * Retrieves the latest Internet outages and anomalies.
+   *
+   * @example
+   * ```ts
+   * const outage = await client.radar.annotations.outages.get();
+   * ```
    */
   get(query?: OutageGetParams, options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse>;
@@ -26,6 +31,12 @@ export class Outages extends APIResource {
 
   /**
    * Retrieves the number of outages by location.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.annotations.outages.locations();
+   * ```
    */
   locations(
     query?: OutageLocationsParams,

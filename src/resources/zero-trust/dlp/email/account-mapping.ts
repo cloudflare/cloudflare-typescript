@@ -6,6 +6,18 @@ import * as Core from '../../../../core';
 export class AccountMapping extends APIResource {
   /**
    * Create mapping
+   *
+   * @example
+   * ```ts
+   * const accountMapping =
+   *   await client.zeroTrust.dlp.email.accountMapping.create({
+   *     account_id: 'account_id',
+   *     auth_requirements: {
+   *       allowed_microsoft_organizations: ['string'],
+   *       type: 'Org',
+   *     },
+   *   });
+   * ```
    */
   create(
     params: AccountMappingCreateParams,
@@ -22,6 +34,14 @@ export class AccountMapping extends APIResource {
 
   /**
    * Get mapping
+   *
+   * @example
+   * ```ts
+   * const accountMapping =
+   *   await client.zeroTrust.dlp.email.accountMapping.get({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(
     params: AccountMappingGetParams,

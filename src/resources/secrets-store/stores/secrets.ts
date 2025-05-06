@@ -7,6 +7,26 @@ import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } f
 export class Secrets extends APIResource {
   /**
    * Creates a secret in the account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretCreateResponse of client.secretsStore.stores.secrets.create(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [
+   *       {
+   *         name: 'MY_API_KEY',
+   *         scopes: ['workers'],
+   *         value: 'api-token-secret-123',
+   *       },
+   *     ],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     storeId: string,
@@ -23,6 +43,17 @@ export class Secrets extends APIResource {
 
   /**
    * Lists all store secrets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretListResponse of client.secretsStore.stores.secrets.list(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     storeId: string,
@@ -39,6 +70,16 @@ export class Secrets extends APIResource {
 
   /**
    * Deletes a single secret
+   *
+   * @example
+   * ```ts
+   * const secret =
+   *   await client.secretsStore.stores.secrets.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     storeId: string,
@@ -57,6 +98,17 @@ export class Secrets extends APIResource {
 
   /**
    * Deletes one or more secrets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretBulkDeleteResponse of client.secretsStore.stores.secrets.bulkDelete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   bulkDelete(
     storeId: string,
@@ -73,6 +125,19 @@ export class Secrets extends APIResource {
 
   /**
    * Duplicates the secret, keeping the value
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.secretsStore.stores.secrets.duplicate(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     {
+   *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *       name: 'MY_API_KEY',
+   *     },
+   *   );
+   * ```
    */
   duplicate(
     storeId: string,
@@ -91,6 +156,19 @@ export class Secrets extends APIResource {
 
   /**
    * Updates a single secret
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.secretsStore.stores.secrets.edit(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     {
+   *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *       name: 'MY_API_KEY',
+   *     },
+   *   );
+   * ```
    */
   edit(
     storeId: string,
@@ -109,6 +187,15 @@ export class Secrets extends APIResource {
 
   /**
    * Returns details of a single secret
+   *
+   * @example
+   * ```ts
+   * const secret = await client.secretsStore.stores.secrets.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '3fd85f74b32742f1bff64a85009dda07',
+   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     storeId: string,

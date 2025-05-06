@@ -59,6 +59,12 @@ export class Layer3 extends APIResource {
 
   /**
    * Retrieves layer 3 attacks over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer3.timeseries();
+   * ```
    */
   timeseries(
     query?: Layer3TimeseriesParams,

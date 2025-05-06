@@ -8,6 +8,12 @@ export class TCPResetsTimeouts extends APIResource {
   /**
    * Retrieves the distribution of connection stage by TCP connections terminated
    * within the first 10 packets by a reset or timeout.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.tcpResetsTimeouts.summary();
+   * ```
    */
   summary(
     query?: TCPResetsTimeoutSummaryParams,
@@ -31,6 +37,12 @@ export class TCPResetsTimeouts extends APIResource {
   /**
    * Retrieves the distribution of connection stage by TCP connections terminated
    * within the first 10 packets by a reset or timeout over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.tcpResetsTimeouts.timeseriesGroups();
+   * ```
    */
   timeseriesGroups(
     query?: TCPResetsTimeoutTimeseriesGroupsParams,

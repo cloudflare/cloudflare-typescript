@@ -7,6 +7,18 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class Operations extends APIResource {
   /**
    * Update per-operation schema validation setting
+   *
+   * @example
+   * ```ts
+   * const operation =
+   *   await client.schemaValidation.settings.operations.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       mitigation_action: 'block',
+   *     },
+   *   );
+   * ```
    */
   update(
     operationId: string,
@@ -24,6 +36,16 @@ export class Operations extends APIResource {
 
   /**
    * List per-operation schema validation settings
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const operationListResponse of client.schemaValidation.settings.operations.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: OperationListParams,
@@ -39,6 +61,15 @@ export class Operations extends APIResource {
 
   /**
    * Delete per-operation schema validation setting
+   *
+   * @example
+   * ```ts
+   * const operation =
+   *   await client.schemaValidation.settings.operations.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     operationId: string,
@@ -56,6 +87,20 @@ export class Operations extends APIResource {
 
   /**
    * Bulk edit per-operation schema validation settings
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.schemaValidation.settings.operations.bulkEdit(
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       body: {
+   *         '3818d821-5901-4147-a474-f5f5aec1d54e': {},
+   *         'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': {},
+   *       },
+   *     },
+   *   );
+   * ```
    */
   bulkEdit(
     params: OperationBulkEditParams,
@@ -72,6 +117,15 @@ export class Operations extends APIResource {
 
   /**
    * Get per-operation schema validation setting
+   *
+   * @example
+   * ```ts
+   * const operation =
+   *   await client.schemaValidation.settings.operations.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     operationId: string,

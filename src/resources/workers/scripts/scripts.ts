@@ -99,6 +99,17 @@ export class Scripts extends APIResource {
    * Upload a worker module. You can find more about the multipart metadata on our
    * docs:
    * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
+   *
+   * @example
+   * ```ts
+   * const script = await client.workers.scripts.update(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     metadata: {},
+   *   },
+   * );
+   * ```
    */
   update(
     scriptName: string,
@@ -120,6 +131,16 @@ export class Scripts extends APIResource {
 
   /**
    * Fetch a list of uploaded workers.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const script of client.workers.scripts.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script> {
     const { account_id } = params;
@@ -128,6 +149,14 @@ export class Scripts extends APIResource {
 
   /**
    * Delete your worker. This call has no response body on a successful delete.
+   *
+   * @example
+   * ```ts
+   * await client.workers.scripts.delete(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     scriptName: string,
@@ -145,6 +174,14 @@ export class Scripts extends APIResource {
   /**
    * Fetch raw script content for your worker. Note this is the original script
    * content, not JSON encoded.
+   *
+   * @example
+   * ```ts
+   * const script = await client.workers.scripts.get(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(scriptName: string, params: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { account_id } = params;

@@ -9,6 +9,17 @@ export class Certificates extends APIResource {
    * Enable Zero Trust Clients to provision a certificate, containing a x509 subject,
    * and referenced by Access device posture policies when the client visits MTLS
    * protected domains. This facilitates device posture without a WARP session.
+   *
+   * @example
+   * ```ts
+   * const devicePolicyCertificates =
+   *   await client.zeroTrust.devices.policies.default.certificates.edit(
+   *     {
+   *       zone_id: '699d98642c564d2e855e9661899b7252',
+   *       enabled: true,
+   *     },
+   *   );
+   * ```
    */
   edit(
     params: CertificateEditParams,
@@ -25,6 +36,14 @@ export class Certificates extends APIResource {
 
   /**
    * Fetches device certificate provisioning.
+   *
+   * @example
+   * ```ts
+   * const devicePolicyCertificates =
+   *   await client.zeroTrust.devices.policies.default.certificates.get(
+   *     { zone_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     params: CertificateGetParams,

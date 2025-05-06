@@ -6,6 +6,13 @@ import * as Core from '../../../core';
 export class Stats extends APIResource {
   /**
    * Fetch usage statistics details for Cloudflare Images.
+   *
+   * @example
+   * ```ts
+   * const stat = await client.images.v1.stats.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: StatGetParams, options?: Core.RequestOptions): Core.APIPromise<Stat> {
     const { account_id } = params;

@@ -7,6 +7,21 @@ import { SinglePage } from '../../../../../pagination';
 export class Secrets extends APIResource {
   /**
    * Add a secret to a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const secret =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.update(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       name: 'myBinding',
+   *       text: 'My secret.',
+   *       type: 'secret_text',
+   *     },
+   *   );
+   * ```
    */
   update(
     dispatchNamespace: string,
@@ -25,6 +40,18 @@ export class Secrets extends APIResource {
 
   /**
    * List secrets bound to a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const secretListResponse of client.workersForPlatforms.dispatch.namespaces.scripts.secrets.list(
+   *   'my-dispatch-namespace',
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     dispatchNamespace: string,
@@ -42,6 +69,17 @@ export class Secrets extends APIResource {
 
   /**
    * Remove a secret from a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const secret =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.delete(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     'mySecret',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     dispatchNamespace: string,
@@ -62,6 +100,17 @@ export class Secrets extends APIResource {
   /**
    * Get a given secret binding (value omitted) on a script uploaded to a Workers for
    * Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const secret =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.get(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     'mySecret',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     dispatchNamespace: string,

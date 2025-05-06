@@ -8,6 +8,12 @@ export class HTTPMethod extends APIResource {
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested HTTP
    * version.
+   *
+   * @example
+   * ```ts
+   * const httpMethod =
+   *   await client.radar.http.ases.httpMethod.get('HTTPv1');
+   * ```
    */
   get(
     httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3',

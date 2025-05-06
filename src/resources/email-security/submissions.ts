@@ -7,6 +7,16 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Submissions extends APIResource {
   /**
    * This endpoint returns information for submissions to made to reclassify emails.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const submissionListResponse of client.emailSecurity.submissions.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SubmissionListParams,

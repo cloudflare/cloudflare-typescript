@@ -8,6 +8,12 @@ export class IPVersion extends APIResource {
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested IP
    * version.
+   *
+   * @example
+   * ```ts
+   * const ipVersion =
+   *   await client.radar.http.ases.ipVersion.get('IPv4');
+   * ```
    */
   get(
     ipVersion: 'IPv4' | 'IPv6',

@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Search extends APIResource {
   /**
    * Searches for locations, autonomous systems, and reports.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.search.global({
+   *   query: 'United',
+   * });
+   * ```
    */
   global(query: SearchGlobalParams, options?: Core.RequestOptions): Core.APIPromise<SearchGlobalResponse> {
     return (

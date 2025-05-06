@@ -7,6 +7,14 @@ import * as Core from '../../../../core';
 export class HTTPMethod extends APIResource {
   /**
    * Retrieves the top locations, by HTTP requests, of the requested HTTP version.
+   *
+   * @example
+   * ```ts
+   * const httpMethod =
+   *   await client.radar.http.locations.httpMethod.get(
+   *     'HTTPv1',
+   *   );
+   * ```
    */
   get(
     httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3',

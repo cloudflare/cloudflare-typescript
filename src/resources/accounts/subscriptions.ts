@@ -8,6 +8,14 @@ import { SubscriptionsSinglePage } from '../shared';
 export class Subscriptions extends APIResource {
   /**
    * Creates an account subscription.
+   *
+   * @example
+   * ```ts
+   * const subscription =
+   *   await client.accounts.subscriptions.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(
     params: SubscriptionCreateParams,
@@ -23,6 +31,15 @@ export class Subscriptions extends APIResource {
 
   /**
    * Updates an account subscription.
+   *
+   * @example
+   * ```ts
+   * const subscription =
+   *   await client.accounts.subscriptions.update(
+   *     '506e3185e9c882d175a2d0cb0093d9f2',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     subscriptionIdentifier: string,
@@ -40,6 +57,15 @@ export class Subscriptions extends APIResource {
 
   /**
    * Deletes an account's subscription.
+   *
+   * @example
+   * ```ts
+   * const subscription =
+   *   await client.accounts.subscriptions.delete(
+   *     '506e3185e9c882d175a2d0cb0093d9f2',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     subscriptionIdentifier: string,
@@ -57,6 +83,16 @@ export class Subscriptions extends APIResource {
 
   /**
    * Lists all of an account's subscriptions.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const subscription of client.accounts.subscriptions.get(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: SubscriptionGetParams,

@@ -6,6 +6,17 @@ import * as Core from '../../../core';
 export class Behaviours extends APIResource {
   /**
    * Update configuration for risk behaviors
+   *
+   * @example
+   * ```ts
+   * const behaviour =
+   *   await client.zeroTrust.riskScoring.behaviours.update({
+   *     account_id: 'account_id',
+   *     behaviors: {
+   *       foo: { enabled: true, risk_level: 'low' },
+   *     },
+   *   });
+   * ```
    */
   update(
     params: BehaviourUpdateParams,
@@ -22,6 +33,14 @@ export class Behaviours extends APIResource {
 
   /**
    * Get all behaviors and associated configuration
+   *
+   * @example
+   * ```ts
+   * const behaviour =
+   *   await client.zeroTrust.riskScoring.behaviours.get({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(params: BehaviourGetParams, options?: Core.RequestOptions): Core.APIPromise<BehaviourGetResponse> {
     const { account_id } = params;

@@ -7,6 +7,18 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Schemas extends APIResource {
   /**
    * Upload a schema
+   *
+   * @example
+   * ```ts
+   * const schema = await client.schemaValidation.schemas.create(
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     kind: 'openapi_v3',
+   *     name: 'petstore schema',
+   *     source: '<schema file contents>',
+   *   },
+   * );
+   * ```
    */
   create(params: SchemaCreateParams, options?: Core.RequestOptions): Core.APIPromise<SchemaCreateResponse> {
     const { zone_id, ...body } = params;
@@ -20,6 +32,16 @@ export class Schemas extends APIResource {
 
   /**
    * List all uploaded schemas
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const schemaListResponse of client.schemaValidation.schemas.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SchemaListParams,
@@ -35,6 +57,14 @@ export class Schemas extends APIResource {
 
   /**
    * Delete a schema
+   *
+   * @example
+   * ```ts
+   * const schema = await client.schemaValidation.schemas.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     schemaId: string,
@@ -52,6 +82,14 @@ export class Schemas extends APIResource {
 
   /**
    * Edit details of a schema to enable validation
+   *
+   * @example
+   * ```ts
+   * const response = await client.schemaValidation.schemas.edit(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     schemaId: string,
@@ -69,6 +107,14 @@ export class Schemas extends APIResource {
 
   /**
    * Get details of a schema
+   *
+   * @example
+   * ```ts
+   * const schema = await client.schemaValidation.schemas.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     schemaId: string,

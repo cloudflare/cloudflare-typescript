@@ -7,6 +7,16 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class EvaluationTypes extends APIResource {
   /**
    * List Evaluators
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const evaluationTypeListResponse of client.aiGateway.evaluationTypes.list(
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: EvaluationTypeListParams,

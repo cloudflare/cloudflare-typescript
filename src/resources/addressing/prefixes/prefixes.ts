@@ -51,6 +51,16 @@ export class Prefixes extends APIResource {
 
   /**
    * Add a new prefix under the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.create({
+   *   account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *   asn: 209242,
+   *   cidr: '192.0.2.0/24',
+   *   loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
+   * });
+   * ```
    */
   create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id, ...body } = params;
@@ -64,6 +74,16 @@ export class Prefixes extends APIResource {
 
   /**
    * List all prefixes owned by the account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const prefix of client.addressing.prefixes.list({
+   *   account_id: '258def64c72dae45f3e4c8516e2111f2',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PrefixListParams,
@@ -79,6 +99,14 @@ export class Prefixes extends APIResource {
 
   /**
    * Delete an unapproved prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.delete(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * );
+   * ```
    */
   delete(
     prefixId: string,
@@ -91,6 +119,17 @@ export class Prefixes extends APIResource {
 
   /**
    * Modify the description for a prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.edit(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   {
+   *     account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *     description: 'Internal test prefix',
+   *   },
+   * );
+   * ```
    */
   edit(prefixId: string, params: PrefixEditParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id, ...body } = params;
@@ -104,6 +143,14 @@ export class Prefixes extends APIResource {
 
   /**
    * List a particular prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.get(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * );
+   * ```
    */
   get(prefixId: string, params: PrefixGetParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id } = params;

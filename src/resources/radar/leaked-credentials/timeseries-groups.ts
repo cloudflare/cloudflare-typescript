@@ -8,6 +8,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP authentication requests by bot class over
    * time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.leakedCredentials.timeseriesGroups.botClass();
+   * ```
    */
   botClass(
     query?: TimeseriesGroupBotClassParams,
@@ -32,6 +38,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP authentication requests by compromised
    * credential status over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.leakedCredentials.timeseriesGroups.compromised();
+   * ```
    */
   compromised(
     query?: TimeseriesGroupCompromisedParams,

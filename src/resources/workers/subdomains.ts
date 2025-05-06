@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Subdomains extends APIResource {
   /**
    * Creates a Workers subdomain for an account.
+   *
+   * @example
+   * ```ts
+   * const subdomain = await client.workers.subdomains.update({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   update(
     params: SubdomainUpdateParams,
@@ -21,6 +28,13 @@ export class Subdomains extends APIResource {
 
   /**
    * Returns a Workers subdomain for an account.
+   *
+   * @example
+   * ```ts
+   * const subdomain = await client.workers.subdomains.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: SubdomainGetParams, options?: Core.RequestOptions): Core.APIPromise<SubdomainGetResponse> {
     const { account_id } = params;

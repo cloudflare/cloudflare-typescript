@@ -7,6 +7,23 @@ import { SinglePage } from '../../../../pagination';
 export class Rules extends APIResource {
   /**
    * Create email scanner rule
+   *
+   * @example
+   * ```ts
+   * const rule = await client.zeroTrust.dlp.email.rules.create({
+   *   account_id: 'account_id',
+   *   action: { action: 'Block' },
+   *   conditions: [
+   *     {
+   *       operator: 'InList',
+   *       selector: 'Recipients',
+   *       value: ['string'],
+   *     },
+   *   ],
+   *   enabled: true,
+   *   name: 'name',
+   * });
+   * ```
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<RuleCreateResponse> {
     const { account_id, ...body } = params;
@@ -19,6 +36,26 @@ export class Rules extends APIResource {
 
   /**
    * Update email scanner rule
+   *
+   * @example
+   * ```ts
+   * const rule = await client.zeroTrust.dlp.email.rules.update(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   {
+   *     account_id: 'account_id',
+   *     action: { action: 'Block' },
+   *     conditions: [
+   *       {
+   *         operator: 'InList',
+   *         selector: 'Recipients',
+   *         value: ['string'],
+   *       },
+   *     ],
+   *     enabled: true,
+   *     name: 'name',
+   *   },
+   * );
+   * ```
    */
   update(
     ruleId: string,
@@ -36,6 +73,16 @@ export class Rules extends APIResource {
 
   /**
    * Lists all email scanner rules for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ruleListResponse of client.zeroTrust.dlp.email.rules.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RuleListParams,
@@ -51,6 +98,14 @@ export class Rules extends APIResource {
 
   /**
    * Delete email scanner rule
+   *
+   * @example
+   * ```ts
+   * const rule = await client.zeroTrust.dlp.email.rules.delete(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     ruleId: string,
@@ -67,6 +122,15 @@ export class Rules extends APIResource {
 
   /**
    * Update email scanner rule priorities
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.dlp.email.rules.bulkEdit({
+   *     account_id: 'account_id',
+   *     new_priorities: { foo: 0 },
+   *   });
+   * ```
    */
   bulkEdit(params: RuleBulkEditParams, options?: Core.RequestOptions): Core.APIPromise<RuleBulkEditResponse> {
     const { account_id, ...body } = params;
@@ -79,6 +143,14 @@ export class Rules extends APIResource {
 
   /**
    * Get an email scanner rule
+   *
+   * @example
+   * ```ts
+   * const rule = await client.zeroTrust.dlp.email.rules.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     ruleId: string,

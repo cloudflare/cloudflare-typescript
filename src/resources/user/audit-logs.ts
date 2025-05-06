@@ -11,6 +11,14 @@ export class AuditLogs extends APIResource {
   /**
    * Gets a list of audit logs for a user account. Can be filtered by who made the
    * change, on which zone, and the timeframe of the change.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const auditLog of client.user.auditLogs.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query?: AuditLogListParams,

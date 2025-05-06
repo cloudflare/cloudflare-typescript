@@ -43,6 +43,16 @@ export class Investigate extends APIResource {
 
   /**
    * Returns information for each email that matches the search parameter(s).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const investigateListResponse of client.emailSecurity.investigate.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: InvestigateListParams,
@@ -58,6 +68,15 @@ export class Investigate extends APIResource {
 
   /**
    * Get message details
+   *
+   * @example
+   * ```ts
+   * const investigate =
+   *   await client.emailSecurity.investigate.get(
+   *     '4Njp3P0STMz2c02Q',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     postfixId: string,

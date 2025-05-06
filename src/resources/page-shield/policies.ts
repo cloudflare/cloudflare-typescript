@@ -7,6 +7,19 @@ import { SinglePage } from '../../pagination';
 export class Policies extends APIResource {
   /**
    * Create a Page Shield policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.pageShield.policies.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   action: 'allow',
+   *   description: 'Checkout page CSP policy',
+   *   enabled: true,
+   *   expression:
+   *     'ends_with(http.request.uri.path, "/checkout")',
+   *   value: "script-src 'none';",
+   * });
+   * ```
    */
   create(
     params: PolicyCreateParams,
@@ -22,6 +35,14 @@ export class Policies extends APIResource {
 
   /**
    * Update a Page Shield policy by ID.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.pageShield.policies.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     policyId: string,
@@ -39,6 +60,16 @@ export class Policies extends APIResource {
 
   /**
    * Lists all Page Shield policies.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const policyListResponse of client.pageShield.policies.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PolicyListParams,
@@ -54,6 +85,14 @@ export class Policies extends APIResource {
 
   /**
    * Delete a Page Shield policy by ID.
+   *
+   * @example
+   * ```ts
+   * await client.pageShield.policies.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(policyId: string, params: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { zone_id } = params;
@@ -65,6 +104,14 @@ export class Policies extends APIResource {
 
   /**
    * Fetches a Page Shield policy by ID.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.pageShield.policies.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     policyId: string,

@@ -6,6 +6,15 @@ import * as Core from '../../../../core';
 export class References extends APIResource {
   /**
    * Get risk score integration by reference id.
+   *
+   * @example
+   * ```ts
+   * const reference =
+   *   await client.zeroTrust.riskScoring.integrations.references.get(
+   *     'reference_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     referenceId: string,

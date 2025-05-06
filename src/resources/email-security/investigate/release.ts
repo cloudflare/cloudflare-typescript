@@ -7,6 +7,19 @@ import { SinglePage } from '../../../pagination';
 export class Release extends APIResource {
   /**
    * Release messages from quarantine
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const releaseBulkResponse of client.emailSecurity.investigate.release.bulk(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: ['4Njp3P0STMz2c02Q'],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   bulk(
     params: ReleaseBulkParams,

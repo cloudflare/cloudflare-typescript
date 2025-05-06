@@ -18,6 +18,14 @@ export class Namespaces extends APIResource {
 
   /**
    * Create a new Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const namespace =
+   *   await client.workersForPlatforms.dispatch.namespaces.create(
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     params: NamespaceCreateParams,
@@ -34,6 +42,16 @@ export class Namespaces extends APIResource {
 
   /**
    * Fetch a list of Workers for Platforms namespaces.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const namespaceListResponse of client.workersForPlatforms.dispatch.namespaces.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: NamespaceListParams,
@@ -49,6 +67,15 @@ export class Namespaces extends APIResource {
 
   /**
    * Delete a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const namespace =
+   *   await client.workersForPlatforms.dispatch.namespaces.delete(
+   *     'my-dispatch-namespace',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     dispatchNamespace: string,
@@ -66,6 +93,15 @@ export class Namespaces extends APIResource {
 
   /**
    * Get a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const namespace =
+   *   await client.workersForPlatforms.dispatch.namespaces.get(
+   *     'my-dispatch-namespace',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     dispatchNamespace: string,

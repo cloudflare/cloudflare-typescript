@@ -7,6 +7,13 @@ export class Metrics extends APIResource {
   /**
    * Get Storage/Object Count Metrics across all buckets in your account. Note that
    * Account-Level Metrics may not immediately reflect the latest data.
+   *
+   * @example
+   * ```ts
+   * const metrics = await client.r2.buckets.metrics.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: MetricListParams, options?: Core.RequestOptions): Core.APIPromise<MetricListResponse> {
     const { account_id } = params;

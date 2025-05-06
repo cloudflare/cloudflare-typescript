@@ -7,6 +7,11 @@ import * as Core from '../../../core';
 export class ASNs extends APIResource {
   /**
    * Retrieves a list of autonomous systems.
+   *
+   * @example
+   * ```ts
+   * const asns = await client.radar.entities.asns.list();
+   * ```
    */
   list(query?: ASNListParams, options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
@@ -29,6 +34,11 @@ export class ASNs extends APIResource {
    * `5` indicates a low level of confidence in the traffic data - normally this
    * happens because Cloudflare has a small amount of traffic from/to this AS).
    * Population estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
+   *
+   * @example
+   * ```ts
+   * const asn = await client.radar.entities.asns.get(174);
+   * ```
    */
   get(asn: number, query?: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
   get(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
@@ -50,6 +60,13 @@ export class ASNs extends APIResource {
   /**
    * Retrieves the requested autonomous system information based on IP address.
    * Population estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.entities.asns.ip({
+   *   ip: '8.8.8.8',
+   * });
+   * ```
    */
   ip(query: ASNIPParams, options?: Core.RequestOptions): Core.APIPromise<ASNIPResponse> {
     return (
@@ -61,6 +78,11 @@ export class ASNs extends APIResource {
 
   /**
    * Retrieves AS-level relationship for given networks.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.entities.asns.rel(3);
+   * ```
    */
   rel(asn: number, query?: ASNRelParams, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>;
   rel(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>;

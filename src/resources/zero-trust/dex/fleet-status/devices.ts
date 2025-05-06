@@ -7,6 +7,22 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class Devices extends APIResource {
   /**
    * List details for devices using WARP
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const deviceListResponse of client.zeroTrust.dex.fleetStatus.devices.list(
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     from: '2023-10-11T00:00:00Z',
+   *     page: 1,
+   *     per_page: 10,
+   *     to: '2023-10-11T00:00:00Z',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DeviceListParams,

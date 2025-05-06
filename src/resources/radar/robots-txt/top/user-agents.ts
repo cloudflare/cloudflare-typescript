@@ -7,6 +7,12 @@ import * as Core from '../../../../core';
 export class UserAgents extends APIResource {
   /**
    * Retrieves the top user agents on robots.txt files.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.robotsTXT.top.userAgents.directive();
+   * ```
    */
   directive(
     query?: UserAgentDirectiveParams,

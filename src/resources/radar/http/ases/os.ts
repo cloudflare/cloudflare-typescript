@@ -8,6 +8,11 @@ export class OS extends APIResource {
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested
    * operating system.
+   *
+   * @example
+   * ```ts
+   * const os = await client.radar.http.ases.os.get('WINDOWS');
+   * ```
    */
   get(
     os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV',

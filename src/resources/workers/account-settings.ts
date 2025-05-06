@@ -6,6 +6,14 @@ import * as Core from '../../core';
 export class AccountSettings extends APIResource {
   /**
    * Creates Worker account settings for an account.
+   *
+   * @example
+   * ```ts
+   * const accountSetting =
+   *   await client.workers.accountSettings.update({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   update(
     params: AccountSettingUpdateParams,
@@ -22,6 +30,14 @@ export class AccountSettings extends APIResource {
 
   /**
    * Fetches Worker account settings for an account.
+   *
+   * @example
+   * ```ts
+   * const accountSetting =
+   *   await client.workers.accountSettings.get({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(
     params: AccountSettingGetParams,

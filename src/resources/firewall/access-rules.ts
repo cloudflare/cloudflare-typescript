@@ -13,6 +13,17 @@ export class AccessRules extends APIResource {
    *
    * Note: To create an IP Access rule that applies to a single zone, refer to the
    * [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.
+   *
+   * @example
+   * ```ts
+   * const accessRule = await client.firewall.accessRules.create(
+   *   {
+   *     configuration: {},
+   *     mode: 'challenge',
+   *     account_id: 'account_id',
+   *   },
+   * );
+   * ```
    */
   create(
     params: AccessRuleCreateParams,
@@ -47,6 +58,16 @@ export class AccessRules extends APIResource {
    * Fetches IP Access rules of an account or zone. These rules apply to all the
    * zones in the account or zone. You can filter the results using several optional
    * parameters.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const accessRuleListResponse of client.firewall.accessRules.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params?: AccessRuleListParams,
@@ -90,6 +111,14 @@ export class AccessRules extends APIResource {
    * Deletes an existing IP Access rule defined.
    *
    * Note: This operation will affect all zones in the account or zone.
+   *
+   * @example
+   * ```ts
+   * const accessRule = await client.firewall.accessRules.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     ruleId: string,
@@ -134,6 +163,18 @@ export class AccessRules extends APIResource {
    * Updates an IP Access rule defined.
    *
    * Note: This operation will affect all zones in the account or zone.
+   *
+   * @example
+   * ```ts
+   * const response = await client.firewall.accessRules.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     configuration: {},
+   *     mode: 'challenge',
+   *     account_id: 'account_id',
+   *   },
+   * );
+   * ```
    */
   edit(
     ruleId: string,
@@ -167,6 +208,14 @@ export class AccessRules extends APIResource {
 
   /**
    * Fetches the details of an IP Access rule defined.
+   *
+   * @example
+   * ```ts
+   * const accessRule = await client.firewall.accessRules.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     ruleId: string,

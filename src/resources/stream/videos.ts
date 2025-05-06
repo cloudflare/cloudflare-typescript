@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Videos extends APIResource {
   /**
    * Returns information about an account's storage use.
+   *
+   * @example
+   * ```ts
+   * const response = await client.stream.videos.storageUsage({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   storageUsage(
     params: VideoStorageUsageParams,

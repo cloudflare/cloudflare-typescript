@@ -6,6 +6,14 @@ import * as Core from '../../core';
 export class Miscategorizations extends APIResource {
   /**
    * Allows you to submit requests to change a domain’s category.
+   *
+   * @example
+   * ```ts
+   * const miscategorization =
+   *   await client.intel.miscategorizations.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(
     params: MiscategorizationCreateParams,

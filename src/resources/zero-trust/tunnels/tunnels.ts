@@ -41,6 +41,16 @@ export class Tunnels extends APIResource {
 
   /**
    * Lists and filters all types of Tunnels in an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tunnelListResponse of client.zeroTrust.tunnels.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: TunnelListParams,

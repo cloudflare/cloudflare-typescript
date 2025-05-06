@@ -7,6 +7,14 @@ import * as Core from '../../../../core';
 export class DeviceType extends APIResource {
   /**
    * Retrieves the top locations, by HTTP requests, of the requested device type.
+   *
+   * @example
+   * ```ts
+   * const deviceType =
+   *   await client.radar.http.locations.deviceType.get(
+   *     'DESKTOP',
+   *   );
+   * ```
    */
   get(
     deviceType: 'DESKTOP' | 'MOBILE' | 'OTHER',

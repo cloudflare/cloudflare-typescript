@@ -7,6 +7,16 @@ import { CursorPagination, type CursorPaginationParams } from '../../../paginati
 export class Devices extends APIResource {
   /**
    * Lists WARP devices.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const deviceListResponse of client.zeroTrust.devices.devices.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DeviceListParams,
@@ -22,6 +32,15 @@ export class Devices extends APIResource {
 
   /**
    * Deletes a WARP device.
+   *
+   * @example
+   * ```ts
+   * const device =
+   *   await client.zeroTrust.devices.devices.delete(
+   *     'device_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     deviceId: string,
@@ -39,6 +58,14 @@ export class Devices extends APIResource {
 
   /**
    * Fetches a single WARP device.
+   *
+   * @example
+   * ```ts
+   * const device = await client.zeroTrust.devices.devices.get(
+   *   'device_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     deviceId: string,
@@ -56,6 +83,15 @@ export class Devices extends APIResource {
 
   /**
    * Revokes all registrations associated with the specified device.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.devices.devices.revoke(
+   *     'device_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   revoke(
     deviceId: string,

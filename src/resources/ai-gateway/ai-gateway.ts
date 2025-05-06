@@ -67,6 +67,20 @@ export class AIGateway extends APIResource {
 
   /**
    * Create a new Gateway
+   *
+   * @example
+   * ```ts
+   * const aiGateway = await client.aiGateway.create({
+   *   account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *   id: 'my-gateway',
+   *   cache_invalidate_on_update: true,
+   *   cache_ttl: 0,
+   *   collect_logs: true,
+   *   rate_limiting_interval: 0,
+   *   rate_limiting_limit: 0,
+   *   rate_limiting_technique: 'fixed',
+   * });
+   * ```
    */
   create(
     params: AIGatewayCreateParams,
@@ -83,6 +97,22 @@ export class AIGateway extends APIResource {
 
   /**
    * Update a Gateway
+   *
+   * @example
+   * ```ts
+   * const aiGateway = await client.aiGateway.update(
+   *   'my-gateway',
+   *   {
+   *     account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *     cache_invalidate_on_update: true,
+   *     cache_ttl: 0,
+   *     collect_logs: true,
+   *     rate_limiting_interval: 0,
+   *     rate_limiting_limit: 0,
+   *     rate_limiting_technique: 'fixed',
+   *   },
+   * );
+   * ```
    */
   update(
     id: string,
@@ -100,6 +130,16 @@ export class AIGateway extends APIResource {
 
   /**
    * List Gateways
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const aiGatewayListResponse of client.aiGateway.list(
+   *   { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: AIGatewayListParams,
@@ -115,6 +155,14 @@ export class AIGateway extends APIResource {
 
   /**
    * Delete a Gateway
+   *
+   * @example
+   * ```ts
+   * const aiGateway = await client.aiGateway.delete(
+   *   'my-gateway',
+   *   { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' },
+   * );
+   * ```
    */
   delete(
     id: string,
@@ -131,6 +179,13 @@ export class AIGateway extends APIResource {
 
   /**
    * Fetch a Gateway
+   *
+   * @example
+   * ```ts
+   * const aiGateway = await client.aiGateway.get('my-gateway', {
+   *   account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   * });
+   * ```
    */
   get(
     id: string,

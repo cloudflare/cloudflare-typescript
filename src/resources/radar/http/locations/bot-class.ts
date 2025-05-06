@@ -7,6 +7,14 @@ import * as Core from '../../../../core';
 export class BotClass extends APIResource {
   /**
    * Retrieves the top locations, by HTTP requests, of the requested bot class.
+   *
+   * @example
+   * ```ts
+   * const botClass =
+   *   await client.radar.http.locations.botClass.get(
+   *     'LIKELY_AUTOMATED',
+   *   );
+   * ```
    */
   get(
     botClass: 'LIKELY_AUTOMATED' | 'LIKELY_HUMAN',

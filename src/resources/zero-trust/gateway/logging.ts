@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Logging extends APIResource {
   /**
    * Updates logging settings for the current Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const loggingSetting =
+   *   await client.zeroTrust.gateway.logging.update({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   update(params: LoggingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting> {
     const { account_id, ...body } = params;
@@ -18,6 +26,14 @@ export class Logging extends APIResource {
 
   /**
    * Fetches the current logging settings for Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const loggingSetting =
+   *   await client.zeroTrust.gateway.logging.get({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   get(params: LoggingGetParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting> {
     const { account_id } = params;

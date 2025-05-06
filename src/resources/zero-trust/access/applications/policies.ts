@@ -14,6 +14,15 @@ export class Policies extends APIResource {
    * users or groups who can reach it. We recommend creating a reusable policy
    * instead and subsequently referencing its ID in the application's 'policies'
    * array.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.applications.policies.create(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   create(
     appId: string,
@@ -48,6 +57,16 @@ export class Policies extends APIResource {
   /**
    * Updates an Access policy specific to an application. To update a reusable
    * policy, use the /account or zones/{account or zone_id}/policies/{uid} endpoint.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.applications.policies.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   update(
     appId: string,
@@ -83,6 +102,17 @@ export class Policies extends APIResource {
   /**
    * Lists Access policies configured for an application. Returns both exclusively
    * scoped and reusable policies used by the application.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const policyListResponse of client.zeroTrust.access.applications.policies.list(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     appId: string,
@@ -128,6 +158,16 @@ export class Policies extends APIResource {
   /**
    * Deletes an Access policy specific to an application. To delete a reusable
    * policy, use the /account or zones/{account or zone_id}/policies/{uid} endpoint.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.applications.policies.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     appId: string,
@@ -177,6 +217,16 @@ export class Policies extends APIResource {
   /**
    * Fetches a single Access policy configured for an application. Returns both
    * exclusively owned and reusable policies used by the application.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.applications.policies.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     appId: string,

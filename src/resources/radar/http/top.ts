@@ -7,6 +7,11 @@ import * as Core from '../../../core';
 export class Top extends APIResource {
   /**
    * Retrieves the top user agents by HTTP requests.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.http.top.browser();
+   * ```
    */
   browser(query?: TopBrowserParams, options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
   browser(options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
@@ -26,6 +31,12 @@ export class Top extends APIResource {
 
   /**
    * Retrieves the top user agents, aggregated in families, by HTTP requests.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.top.browserFamily();
+   * ```
    */
   browserFamily(
     query?: TopBrowserFamilyParams,

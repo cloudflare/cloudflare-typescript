@@ -8,6 +8,14 @@ export class TLSVersion extends APIResource {
   /**
    * Retrieves the top locations, by HTTP requests, of the requested TLS protocol
    * version.
+   *
+   * @example
+   * ```ts
+   * const tlsVersion =
+   *   await client.radar.http.locations.tlsVersion.get(
+   *     'TLSv1_0',
+   *   );
+   * ```
    */
   get(
     tlsVersion: 'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC',

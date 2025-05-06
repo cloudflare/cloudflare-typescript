@@ -7,6 +7,17 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Logs extends APIResource {
   /**
    * List Gateway Logs
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const logListResponse of client.aiGateway.logs.list(
+   *   'my-gateway',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     gatewayId: string,
@@ -23,6 +34,14 @@ export class Logs extends APIResource {
 
   /**
    * Delete Gateway Logs
+   *
+   * @example
+   * ```ts
+   * const log = await client.aiGateway.logs.delete(
+   *   'my-gateway',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * );
+   * ```
    */
   delete(
     gatewayId: string,
@@ -38,6 +57,15 @@ export class Logs extends APIResource {
 
   /**
    * Patch Gateway Log
+   *
+   * @example
+   * ```ts
+   * const response = await client.aiGateway.logs.edit(
+   *   'my-gateway',
+   *   'id',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * );
+   * ```
    */
   edit(
     gatewayId: string,
@@ -56,6 +84,15 @@ export class Logs extends APIResource {
 
   /**
    * Get Gateway Log Detail
+   *
+   * @example
+   * ```ts
+   * const log = await client.aiGateway.logs.get(
+   *   'my-gateway',
+   *   'id',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * );
+   * ```
    */
   get(
     gatewayId: string,
@@ -74,6 +111,15 @@ export class Logs extends APIResource {
 
   /**
    * Get Gateway Log Request
+   *
+   * @example
+   * ```ts
+   * const response = await client.aiGateway.logs.request(
+   *   'my-gateway',
+   *   'id',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * );
+   * ```
    */
   request(
     gatewayId: string,
@@ -90,6 +136,15 @@ export class Logs extends APIResource {
 
   /**
    * Get Gateway Log Response
+   *
+   * @example
+   * ```ts
+   * const response = await client.aiGateway.logs.response(
+   *   'my-gateway',
+   *   'id',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * );
+   * ```
    */
   response(
     gatewayId: string,

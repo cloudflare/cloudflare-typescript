@@ -16,6 +16,15 @@ export class FleetStatus extends APIResource {
 
   /**
    * List details for live (up to 60 minutes) devices using WARP
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.dex.fleetStatus.live({
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     since_minutes: 10,
+   *   });
+   * ```
    */
   live(
     params: FleetStatusLiveParams,
@@ -32,6 +41,15 @@ export class FleetStatus extends APIResource {
 
   /**
    * List details for devices using WARP, up to 7 days
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.dex.fleetStatus.overTime({
+   *   account_id: '01a7362d577a6c3019a474fd6f485823',
+   *   from: '2023-10-11T00:00:00Z',
+   *   to: '2023-10-11T00:00:00Z',
+   * });
+   * ```
    */
   overTime(params: FleetStatusOverTimeParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id, ...query } = params;

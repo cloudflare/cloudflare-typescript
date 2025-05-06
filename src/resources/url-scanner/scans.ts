@@ -8,6 +8,14 @@ export class Scans extends APIResource {
   /**
    * Submit a URL to scan. Check limits at
    * https://developers.cloudflare.com/security-center/investigate/scan-limits/.
+   *
+   * @example
+   * ```ts
+   * const scan = await client.urlScanner.scans.create({
+   *   account_id: 'account_id',
+   *   url: 'https://www.example.com',
+   * });
+   * ```
    */
   create(params: ScanCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScanCreateResponse> {
     const { account_id, ...body } = params;
@@ -23,6 +31,13 @@ export class Scans extends APIResource {
    * page.domain:microsoft.com': malicious scans whose hostname starts with
    * "microsoft".<br/>- 'apikey:me AND date:[2025-01 TO 2025-02]': my scans from 2025
    * January to 2025 February.
+   *
+   * @example
+   * ```ts
+   * const scans = await client.urlScanner.scans.list({
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   list(params: ScanListParams, options?: Core.RequestOptions): Core.APIPromise<ScanListResponse> {
     const { account_id, ...query } = params;
@@ -34,6 +49,13 @@ export class Scans extends APIResource {
    * https://developers.cloudflare.com/security-center/investigate/scan-limits/ and
    * take into account scans submitted in bulk have lower priority and may take
    * longer to finish.
+   *
+   * @example
+   * ```ts
+   * const response = await client.urlScanner.scans.bulkCreate({
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   bulkCreate(
     params: ScanBulkCreateParams,
@@ -46,6 +68,14 @@ export class Scans extends APIResource {
   /**
    * Returns a plain text response, with the scan's DOM content as rendered by
    * Chrome.
+   *
+   * @example
+   * ```ts
+   * const response = await client.urlScanner.scans.dom(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   dom(scanId: string, params: ScanDOMParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { account_id } = params;
@@ -57,6 +87,14 @@ export class Scans extends APIResource {
 
   /**
    * Get URL scan by uuid
+   *
+   * @example
+   * ```ts
+   * const scan = await client.urlScanner.scans.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     scanId: string,
@@ -70,6 +108,14 @@ export class Scans extends APIResource {
   /**
    * Get a URL scan's HAR file. See HAR spec at
    * http://www.softwareishard.com/blog/har-12-spec/.
+   *
+   * @example
+   * ```ts
+   * const response = await client.urlScanner.scans.har(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   har(
     scanId: string,
@@ -82,6 +128,17 @@ export class Scans extends APIResource {
 
   /**
    * Get scan's screenshot by resolution (desktop/mobile/tablet).
+   *
+   * @example
+   * ```ts
+   * const response = await client.urlScanner.scans.screenshot(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
    */
   screenshot(
     scanId: string,

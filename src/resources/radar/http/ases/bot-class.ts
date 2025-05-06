@@ -8,6 +8,13 @@ export class BotClass extends APIResource {
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested bot
    * class.
+   *
+   * @example
+   * ```ts
+   * const botClass = await client.radar.http.ases.botClass.get(
+   *   'LIKELY_AUTOMATED',
+   * );
+   * ```
    */
   get(
     botClass: 'LIKELY_AUTOMATED' | 'LIKELY_HUMAN',

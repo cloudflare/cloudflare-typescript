@@ -17,6 +17,14 @@ export class Received extends APIResource {
    * `start=2018-05-20T10:00:00Z&end=2018-05-20T10:01:00Z`, then
    * `start=2018-05-20T10:01:00Z&end=2018-05-20T10:02:00Z` and so on; the overlap
    * will be handled properly.
+   *
+   * @example
+   * ```ts
+   * const received = await client.logs.received.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   end: '2018-05-20T10:01:00Z',
+   * });
+   * ```
    */
   get(params: ReceivedGetParams, options?: Core.RequestOptions): Core.APIPromise<ReceivedGetResponse> {
     const { zone_id, ...query } = params;

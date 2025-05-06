@@ -9,6 +9,20 @@ export class Colos extends APIResource {
    * List Cloudflare colos that account's devices were connected to during a time
    * period, sorted by usage starting from the most used colo. Colos without traffic
    * are also returned and sorted alphabetically.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const coloListResponse of client.zeroTrust.dex.colos.list(
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     from: '2023-08-20T20:45:00Z',
+   *     to: '2023-08-24T20:45:00Z',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ColoListParams,

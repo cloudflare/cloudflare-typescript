@@ -6,6 +6,20 @@ import * as Core from '../../../core';
 export class Variants extends APIResource {
   /**
    * Specify variants that allow you to resize images for different use cases.
+   *
+   * @example
+   * ```ts
+   * const variant = await client.images.v1.variants.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   id: 'hero',
+   *   options: {
+   *     fit: 'scale-down',
+   *     height: 768,
+   *     metadata: 'none',
+   *     width: 1366,
+   *   },
+   * });
+   * ```
    */
   create(params: VariantCreateParams, options?: Core.RequestOptions): Core.APIPromise<VariantCreateResponse> {
     const { account_id, ...body } = params;
@@ -19,6 +33,13 @@ export class Variants extends APIResource {
 
   /**
    * Lists existing variants.
+   *
+   * @example
+   * ```ts
+   * const variant = await client.images.v1.variants.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<Variant> {
     const { account_id } = params;
@@ -31,6 +52,14 @@ export class Variants extends APIResource {
 
   /**
    * Deleting a variant purges the cache for all images associated with the variant.
+   *
+   * @example
+   * ```ts
+   * const variant = await client.images.v1.variants.delete(
+   *   'hero',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     variantId: string,
@@ -48,6 +77,22 @@ export class Variants extends APIResource {
 
   /**
    * Updating a variant purges the cache for all images associated with the variant.
+   *
+   * @example
+   * ```ts
+   * const response = await client.images.v1.variants.edit(
+   *   'hero',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     options: {
+   *       fit: 'scale-down',
+   *       height: 768,
+   *       metadata: 'none',
+   *       width: 1366,
+   *     },
+   *   },
+   * );
+   * ```
    */
   edit(
     variantId: string,
@@ -65,6 +110,14 @@ export class Variants extends APIResource {
 
   /**
    * Fetch details for a single variant.
+   *
+   * @example
+   * ```ts
+   * const variant = await client.images.v1.variants.get(
+   *   'hero',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     variantId: string,

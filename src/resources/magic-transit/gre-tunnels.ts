@@ -8,6 +8,18 @@ export class GRETunnels extends APIResource {
   /**
    * Creates a new GRE tunnel. Use `?validate_only=true` as an optional query
    * parameter to only run validation without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const greTunnel =
+   *   await client.magicTransit.greTunnels.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     cloudflare_gre_endpoint: '203.0.113.1',
+   *     customer_gre_endpoint: '203.0.113.1',
+   *     interface_address: '192.0.2.0/31',
+   *     name: 'GRE_1',
+   *   });
+   * ```
    */
   create(
     params: GRETunnelCreateParams,
@@ -31,6 +43,21 @@ export class GRETunnels extends APIResource {
   /**
    * Updates a specific GRE tunnel. Use `?validate_only=true` as an optional query
    * parameter to only run validation without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const greTunnel =
+   *   await client.magicTransit.greTunnels.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       cloudflare_gre_endpoint: '203.0.113.1',
+   *       customer_gre_endpoint: '203.0.113.1',
+   *       interface_address: '192.0.2.0/31',
+   *       name: 'GRE_1',
+   *     },
+   *   );
+   * ```
    */
   update(
     greTunnelId: string,
@@ -54,6 +81,14 @@ export class GRETunnels extends APIResource {
 
   /**
    * Lists GRE tunnels associated with an account.
+   *
+   * @example
+   * ```ts
+   * const greTunnels =
+   *   await client.magicTransit.greTunnels.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   list(params: GRETunnelListParams, options?: Core.RequestOptions): Core.APIPromise<GRETunnelListResponse> {
     const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
@@ -73,6 +108,15 @@ export class GRETunnels extends APIResource {
   /**
    * Disables and removes a specific static GRE tunnel. Use `?validate_only=true` as
    * an optional query parameter to only run validation without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const greTunnel =
+   *   await client.magicTransit.greTunnels.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     greTunnelId: string,
@@ -96,6 +140,15 @@ export class GRETunnels extends APIResource {
   /**
    * Updates multiple GRE tunnels. Use `?validate_only=true` as an optional query
    * parameter to only run validation without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.greTunnels.bulkUpdate({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: {},
+   *   });
+   * ```
    */
   bulkUpdate(
     params: GRETunnelBulkUpdateParams,
@@ -118,6 +171,14 @@ export class GRETunnels extends APIResource {
 
   /**
    * Lists informtion for a specific GRE tunnel.
+   *
+   * @example
+   * ```ts
+   * const greTunnel = await client.magicTransit.greTunnels.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     greTunnelId: string,

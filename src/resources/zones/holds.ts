@@ -7,6 +7,13 @@ export class Holds extends APIResource {
   /**
    * Enforce a zone hold on the zone, blocking the creation and activation of zones
    * with this zone's hostname.
+   *
+   * @example
+   * ```ts
+   * const zoneHold = await client.zones.holds.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: HoldCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id, include_subdomains } = params;
@@ -21,6 +28,13 @@ export class Holds extends APIResource {
   /**
    * Stop enforcement of a zone hold on the zone, permanently or temporarily,
    * allowing the creation and activation of zones with this zone's hostname.
+   *
+   * @example
+   * ```ts
+   * const zoneHold = await client.zones.holds.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(params: HoldDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id, hold_after } = params;
@@ -35,6 +49,13 @@ export class Holds extends APIResource {
   /**
    * Update the `hold_after` and/or `include_subdomains` values on an existing zone
    * hold. The hold is enabled if the `hold_after` date-time value is in the past.
+   *
+   * @example
+   * ```ts
+   * const zoneHold = await client.zones.holds.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: HoldEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id, ...body } = params;
@@ -48,6 +69,13 @@ export class Holds extends APIResource {
   /**
    * Retrieve whether the zone is subject to a zone hold, and metadata about the
    * hold.
+   *
+   * @example
+   * ```ts
+   * const zoneHold = await client.zones.holds.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: HoldGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id } = params;

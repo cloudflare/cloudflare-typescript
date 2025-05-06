@@ -27,6 +27,15 @@ export class Lists extends APIResource {
 
   /**
    * Creates a new list of the specified type.
+   *
+   * @example
+   * ```ts
+   * const list = await client.rules.lists.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   kind: 'ip',
+   *   name: 'list1',
+   * });
+   * ```
    */
   create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListCreateResponse> {
     const { account_id, ...body } = params;
@@ -39,6 +48,14 @@ export class Lists extends APIResource {
 
   /**
    * Updates the description of a list.
+   *
+   * @example
+   * ```ts
+   * const list = await client.rules.lists.update(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     listId: string,
@@ -56,6 +73,13 @@ export class Lists extends APIResource {
 
   /**
    * Fetches all lists in the account.
+   *
+   * @example
+   * ```ts
+   * const lists = await client.rules.lists.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: ListListParams, options?: Core.RequestOptions): Core.APIPromise<ListListResponse> {
     const { account_id } = params;
@@ -68,6 +92,14 @@ export class Lists extends APIResource {
 
   /**
    * Deletes a specific list and all its items.
+   *
+   * @example
+   * ```ts
+   * const list = await client.rules.lists.delete(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     listId: string,
@@ -84,6 +116,14 @@ export class Lists extends APIResource {
 
   /**
    * Fetches the details of a list.
+   *
+   * @example
+   * ```ts
+   * const list = await client.rules.lists.get(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     listId: string,

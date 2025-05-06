@@ -88,6 +88,22 @@ export class ThreatEvents extends APIResource {
    * parameter must be defined. To create a dataset, see the
    * [`Create Dataset`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/create/)
    * endpoint.
+   *
+   * @example
+   * ```ts
+   * const threatEvent =
+   *   await client.cloudforceOne.threatEvents.create({
+   *     account_id: 0,
+   *     attacker: 'Flying Yeti',
+   *     attackerCountry: 'CN',
+   *     category: 'Domain Resolution',
+   *     date: '2022-04-01T00:00:00Z',
+   *     event: 'An attacker registered the domain domain.com',
+   *     indicatorType: 'domain',
+   *     raw: {},
+   *     tlp: 'amber',
+   *   });
+   * ```
    */
   create(
     params: ThreatEventCreateParams,
@@ -102,6 +118,14 @@ export class ThreatEvents extends APIResource {
    * list existing datasets (and their IDs), use the
    * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
    * endpoint.
+   *
+   * @example
+   * ```ts
+   * const threatEvents =
+   *   await client.cloudforceOne.threatEvents.list({
+   *     account_id: 0,
+   *   });
+   * ```
    */
   list(
     params: ThreatEventListParams,
@@ -116,6 +140,15 @@ export class ThreatEvents extends APIResource {
    * IDs) in your account, use the
    * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
    * endpoint.
+   *
+   * @example
+   * ```ts
+   * const threatEvent =
+   *   await client.cloudforceOne.threatEvents.delete(
+   *     'event_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   delete(
     eventId: string,
@@ -131,6 +164,28 @@ export class ThreatEvents extends APIResource {
    * IDs) in your account, use the
    * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
    * endpoint.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.bulkCreate({
+   *     account_id: 0,
+   *     data: [
+   *       {
+   *         attacker: 'Flying Yeti',
+   *         attackerCountry: 'CN',
+   *         category: 'Domain Resolution',
+   *         date: '2022-04-01T00:00:00Z',
+   *         event:
+   *           'An attacker registered the domain domain.com',
+   *         indicatorType: 'domain',
+   *         raw: {},
+   *         tlp: 'amber',
+   *       },
+   *     ],
+   *     datasetId: 'durableObjectName',
+   *   });
+   * ```
    */
   bulkCreate(
     params: ThreatEventBulkCreateParams,
@@ -145,6 +200,14 @@ export class ThreatEvents extends APIResource {
 
   /**
    * Updates an event
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.edit('event_id', {
+   *     account_id: 0,
+   *   });
+   * ```
    */
   edit(
     eventId: string,
@@ -160,6 +223,14 @@ export class ThreatEvents extends APIResource {
 
   /**
    * Reads an event
+   *
+   * @example
+   * ```ts
+   * const threatEvent =
+   *   await client.cloudforceOne.threatEvents.get('event_id', {
+   *     account_id: 0,
+   *   });
+   * ```
    */
   get(
     eventId: string,

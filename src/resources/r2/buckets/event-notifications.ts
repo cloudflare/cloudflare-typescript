@@ -6,6 +6,16 @@ import * as Core from '../../../core';
 export class EventNotifications extends APIResource {
   /**
    * Create event notification rule.
+   *
+   * @example
+   * ```ts
+   * const eventNotification =
+   *   await client.r2.buckets.eventNotifications.update(
+   *     'example-bucket',
+   *     'queue_id',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     bucketName: string,
@@ -34,6 +44,16 @@ export class EventNotifications extends APIResource {
   /**
    * Delete an event notification rule. **If no body is provided, all rules for
    * specified queue will be deleted**.
+   *
+   * @example
+   * ```ts
+   * const eventNotification =
+   *   await client.r2.buckets.eventNotifications.delete(
+   *     'example-bucket',
+   *     'queue_id',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     bucketName: string,
@@ -60,6 +80,15 @@ export class EventNotifications extends APIResource {
 
   /**
    * List all event notification rules for a bucket.
+   *
+   * @example
+   * ```ts
+   * const eventNotification =
+   *   await client.r2.buckets.eventNotifications.get(
+   *     'example-bucket',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     bucketName: string,

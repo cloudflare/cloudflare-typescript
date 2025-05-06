@@ -8,6 +8,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by DNSSEC (DNS Security
    * Extensions) support over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.dnssec();
+   * ```
    */
   dnssec(
     query?: TimeseriesGroupDNSSECParams,
@@ -31,6 +37,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by EDNS (Extension Mechanisms
    * for DNS) support over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.edns();
+   * ```
    */
   edns(
     query?: TimeseriesGroupEdnsParams,
@@ -53,6 +65,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of AS112 DNS queries by IP version over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.ipVersion();
+   * ```
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -77,6 +95,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS requests classified by protocol over
    * time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.protocol();
+   * ```
    */
   protocol(
     query?: TimeseriesGroupProtocolParams,
@@ -99,6 +123,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of AS112 DNS queries by type over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.queryType();
+   * ```
    */
   queryType(
     query?: TimeseriesGroupQueryTypeParams,
@@ -123,6 +153,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS requests classified by response code
    * over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.responseCodes();
+   * ```
    */
   responseCodes(
     query?: TimeseriesGroupResponseCodesParams,

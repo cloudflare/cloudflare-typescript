@@ -6,6 +6,17 @@ import * as Core from '../../../core';
 export class Tail extends APIResource {
   /**
    * Starts a tail that receives logs and exception from a Worker.
+   *
+   * @example
+   * ```ts
+   * const tail = await client.workers.scripts.tail.create(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: {},
+   *   },
+   * );
+   * ```
    */
   create(
     scriptName: string,
@@ -23,6 +34,15 @@ export class Tail extends APIResource {
 
   /**
    * Deletes a tail from a Worker.
+   *
+   * @example
+   * ```ts
+   * const tail = await client.workers.scripts.tail.delete(
+   *   'this-is_my_script-01',
+   *   '03dc9f77817b488fb26c5861ec18f791',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     scriptName: string,
@@ -36,6 +56,14 @@ export class Tail extends APIResource {
 
   /**
    * Get list of tails currently deployed on a Worker.
+   *
+   * @example
+   * ```ts
+   * const tail = await client.workers.scripts.tail.get(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     scriptName: string,

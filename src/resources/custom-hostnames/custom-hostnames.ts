@@ -33,6 +33,15 @@ export class CustomHostnames extends APIResource {
    * certificates using the custom_cert_bundle field. The bundling process requires
    * the following condition One certificate in the bundle must use an RSA, and the
    * other must use an ECDSA.
+   *
+   * @example
+   * ```ts
+   * const customHostname = await client.customHostnames.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   hostname: 'app.example.com',
+   *   ssl: {},
+   * });
+   * ```
    */
   create(
     params: CustomHostnameCreateParams,
@@ -48,6 +57,16 @@ export class CustomHostnames extends APIResource {
 
   /**
    * List, search, sort, and filter all of your custom hostnames.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customHostnameListResponse of client.customHostnames.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CustomHostnameListParams,
@@ -63,6 +82,14 @@ export class CustomHostnames extends APIResource {
 
   /**
    * Delete Custom Hostname (and any issued SSL certificates)
+   *
+   * @example
+   * ```ts
+   * const customHostname = await client.customHostnames.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     customHostnameId: string,
@@ -81,6 +108,14 @@ export class CustomHostnames extends APIResource {
    * using the "custom_cert_bundle" field. The bundling process supports combining
    * certificates as long as the following condition is met. One certificate must use
    * the RSA algorithm, and the other must use the ECDSA algorithm.
+   *
+   * @example
+   * ```ts
+   * const response = await client.customHostnames.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     customHostnameId: string,
@@ -98,6 +133,14 @@ export class CustomHostnames extends APIResource {
 
   /**
    * Custom Hostname Details
+   *
+   * @example
+   * ```ts
+   * const customHostname = await client.customHostnames.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     customHostnameId: string,

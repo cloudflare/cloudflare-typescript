@@ -17,6 +17,11 @@ export class Annotations extends APIResource {
 
   /**
    * Retrieves the latest annotations.
+   *
+   * @example
+   * ```ts
+   * const annotations = await client.radar.annotations.list();
+   * ```
    */
   list(query?: AnnotationListParams, options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>;

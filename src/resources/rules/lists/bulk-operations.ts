@@ -10,6 +10,15 @@ export class BulkOperations extends APIResource {
    * The `status` property can have one of the following values: `pending`,
    * `running`, `completed`, or `failed`. If the status is `failed`, the `error`
    * property will contain a message describing the error.
+   *
+   * @example
+   * ```ts
+   * const bulkOperation =
+   *   await client.rules.lists.bulkOperations.get(
+   *     '4da8780eeb215e6cb7f48dd981c4ea02',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     operationId: string,

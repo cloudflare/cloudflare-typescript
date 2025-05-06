@@ -52,6 +52,20 @@ export class LoadBalancers extends APIResource {
 
   /**
    * Create a new load balancer.
+   *
+   * @example
+   * ```ts
+   * const loadBalancer = await client.loadBalancers.create({
+   *   zone_id: '699d98642c564d2e855e9661899b7252',
+   *   default_pools: [
+   *     '17b5962d775c646f3f9725cbc7a53df4',
+   *     '9290f38c5d07c2e2f4df57b1f61d4196',
+   *     '00920f38ce07c2e2f4df50b1f61d4194',
+   *   ],
+   *   fallback_pool: 'fallback_pool',
+   *   name: 'www.example.com',
+   * });
+   * ```
    */
   create(params: LoadBalancerCreateParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancer> {
     const { zone_id, ...body } = params;
@@ -64,6 +78,23 @@ export class LoadBalancers extends APIResource {
 
   /**
    * Update a configured load balancer.
+   *
+   * @example
+   * ```ts
+   * const loadBalancer = await client.loadBalancers.update(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   {
+   *     zone_id: '699d98642c564d2e855e9661899b7252',
+   *     default_pools: [
+   *       '17b5962d775c646f3f9725cbc7a53df4',
+   *       '9290f38c5d07c2e2f4df57b1f61d4196',
+   *       '00920f38ce07c2e2f4df50b1f61d4194',
+   *     ],
+   *     fallback_pool: 'fallback_pool',
+   *     name: 'www.example.com',
+   *   },
+   * );
+   * ```
    */
   update(
     loadBalancerId: string,
@@ -81,6 +112,16 @@ export class LoadBalancers extends APIResource {
 
   /**
    * List configured load balancers.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const loadBalancer of client.loadBalancers.list({
+   *   zone_id: '699d98642c564d2e855e9661899b7252',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: LoadBalancerListParams,
@@ -92,6 +133,14 @@ export class LoadBalancers extends APIResource {
 
   /**
    * Delete a configured load balancer.
+   *
+   * @example
+   * ```ts
+   * const loadBalancer = await client.loadBalancers.delete(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '699d98642c564d2e855e9661899b7252' },
+   * );
+   * ```
    */
   delete(
     loadBalancerId: string,
@@ -108,6 +157,14 @@ export class LoadBalancers extends APIResource {
 
   /**
    * Apply changes to an existing load balancer, overwriting the supplied properties.
+   *
+   * @example
+   * ```ts
+   * const loadBalancer = await client.loadBalancers.edit(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '699d98642c564d2e855e9661899b7252' },
+   * );
+   * ```
    */
   edit(
     loadBalancerId: string,
@@ -125,6 +182,14 @@ export class LoadBalancers extends APIResource {
 
   /**
    * Fetch a single configured load balancer.
+   *
+   * @example
+   * ```ts
+   * const loadBalancer = await client.loadBalancers.get(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '699d98642c564d2e855e9661899b7252' },
+   * );
+   * ```
    */
   get(
     loadBalancerId: string,

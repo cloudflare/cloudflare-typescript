@@ -59,6 +59,12 @@ export class Layer7 extends APIResource {
 
   /**
    * Retrieves layer 7 attacks over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.timeseries();
+   * ```
    */
   timeseries(
     query?: Layer7TimeseriesParams,

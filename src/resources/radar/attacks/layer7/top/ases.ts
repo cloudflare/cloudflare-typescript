@@ -9,6 +9,12 @@ export class Ases extends APIResource {
    * Retrieves the top origin autonomous systems of layer 7 attacks. Values are
    * percentages of the total layer 7 attacks, with the origin autonomous systems
    * determined by the client IP address.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.top.ases.origin();
+   * ```
    */
   origin(query?: AseOriginParams, options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>;
   origin(options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>;

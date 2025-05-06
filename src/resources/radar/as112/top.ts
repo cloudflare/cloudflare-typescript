@@ -8,6 +8,13 @@ export class Top extends APIResource {
   /**
    * Retrieves the top locations of DNS queries to AS112 with DNSSEC (DNS Security
    * Extensions) support.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.as112.top.dnssec(
+   *   'SUPPORTED',
+   * );
+   * ```
    */
   dnssec(
     dnssec: 'SUPPORTED' | 'NOT_SUPPORTED',
@@ -37,6 +44,13 @@ export class Top extends APIResource {
   /**
    * Retrieves the top locations of DNS queries to AS112 with EDNS (Extension
    * Mechanisms for DNS) support.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.as112.top.edns(
+   *   'SUPPORTED',
+   * );
+   * ```
    */
   edns(
     edns: 'SUPPORTED' | 'NOT_SUPPORTED',
@@ -61,6 +75,13 @@ export class Top extends APIResource {
 
   /**
    * Retrieves the top locations of DNS queries to AS112 for an IP version.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.as112.top.ipVersion(
+   *   'IPv4',
+   * );
+   * ```
    */
   ipVersion(
     ipVersion: 'IPv4' | 'IPv6',
@@ -86,6 +107,11 @@ export class Top extends APIResource {
 
   /**
    * Retrieves the top locations by AS112 DNS queries.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.as112.top.locations();
+   * ```
    */
   locations(query?: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;
   locations(options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;

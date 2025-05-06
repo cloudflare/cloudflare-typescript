@@ -7,6 +7,11 @@ import * as Core from '../../core';
 export class Datasets extends APIResource {
   /**
    * Retrieves a list of datasets.
+   *
+   * @example
+   * ```ts
+   * const datasets = await client.radar.datasets.list();
+   * ```
    */
   list(query?: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
@@ -26,6 +31,13 @@ export class Datasets extends APIResource {
 
   /**
    * Retrieves an URL to download a single dataset.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.datasets.download({
+   *   datasetId: 3,
+   * });
+   * ```
    */
   download(
     params: DatasetDownloadParams,
@@ -45,6 +57,13 @@ export class Datasets extends APIResource {
    * Retrieves the CSV content of a given dataset by alias or ID. When getting the
    * content by alias the latest dataset is returned, optionally filtered by the
    * latest available at a given date.
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.radar.datasets.get(
+   *   'ranking_top_1000',
+   * );
+   * ```
    */
   get(alias: string, options?: Core.RequestOptions): Core.APIPromise<string> {
     return this._client.get(`/radar/datasets/${alias}`, {

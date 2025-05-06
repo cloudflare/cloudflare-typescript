@@ -12,6 +12,12 @@ export class Speed extends APIResource {
   /**
    * Retrieves a histogram from the previous 90 days of Cloudflare Speed Test data,
    * split into fixed bandwidth (Mbps), latency (ms), or jitter (ms) buckets.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.quality.speed.histogram();
+   * ```
    */
   histogram(
     query?: SpeedHistogramParams,
@@ -35,6 +41,11 @@ export class Speed extends APIResource {
   /**
    * Retrieves a summary of bandwidth, latency, jitter, and packet loss, from the
    * previous 90 days of Cloudflare Speed Test data.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.quality.speed.summary();
+   * ```
    */
   summary(query?: SpeedSummaryParams, options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse>;
   summary(options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse>;

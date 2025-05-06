@@ -8,6 +8,19 @@ import { SplitTunnelIncludesSinglePage } from '../policies';
 export class Includes extends APIResource {
   /**
    * Sets the list of routes included in the WARP client's tunnel.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const splitTunnelInclude of client.zeroTrust.devices.policies.default.includes.update(
+   *   {
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     body: [{ address: '192.0.2.0/24' }],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   update(
     params: IncludeUpdateParams,
@@ -23,6 +36,16 @@ export class Includes extends APIResource {
 
   /**
    * Fetches the list of routes included in the WARP client's tunnel.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const splitTunnelInclude of client.zeroTrust.devices.policies.default.includes.get(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: IncludeGetParams,

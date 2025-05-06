@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Quota extends APIResource {
   /**
    * Lists the number of secrets used in the account.
+   *
+   * @example
+   * ```ts
+   * const quota = await client.secretsStore.quota.get({
+   *   account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: QuotaGetParams, options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse> {
     const { account_id } = params;

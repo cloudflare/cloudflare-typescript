@@ -19,6 +19,15 @@ export class Datasets extends APIResource {
 
   /**
    * Create a new dataset
+   *
+   * @example
+   * ```ts
+   * const datasetCreation =
+   *   await client.zeroTrust.dlp.datasets.create({
+   *     account_id: 'account_id',
+   *     name: 'name',
+   *   });
+   * ```
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreation> {
     const { account_id, ...body } = params;
@@ -31,6 +40,14 @@ export class Datasets extends APIResource {
 
   /**
    * Update details about a dataset
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.zeroTrust.dlp.datasets.update(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   update(
     datasetId: string,
@@ -48,6 +65,16 @@ export class Datasets extends APIResource {
 
   /**
    * Fetch all datasets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dataset of client.zeroTrust.dlp.datasets.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DatasetListParams,
@@ -59,6 +86,14 @@ export class Datasets extends APIResource {
 
   /**
    * This deletes all versions of the dataset.
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.dlp.datasets.delete(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     datasetId: string,
@@ -74,6 +109,14 @@ export class Datasets extends APIResource {
 
   /**
    * Fetch a specific dataset
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.zeroTrust.dlp.datasets.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(datasetId: string, params: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<Dataset> {
     const { account_id } = params;

@@ -7,6 +7,12 @@ import * as Core from '../../../core';
 export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of traffic by AI user agent over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ai.timeseriesGroups.userAgent();
+   * ```
    */
   userAgent(
     query?: TimeseriesGroupUserAgentParams,

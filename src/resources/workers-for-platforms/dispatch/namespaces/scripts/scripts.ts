@@ -57,6 +57,19 @@ export class Scripts extends APIResource {
    * Upload a worker module to a Workers for Platforms namespace. You can find more
    * about the multipart metadata on our docs:
    * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
+   *
+   * @example
+   * ```ts
+   * const script =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.update(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       metadata: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     dispatchNamespace: string,
@@ -80,6 +93,15 @@ export class Scripts extends APIResource {
   /**
    * Delete a worker from a Workers for Platforms namespace. This call has no
    * response body on a successful delete.
+   *
+   * @example
+   * ```ts
+   * await client.workersForPlatforms.dispatch.namespaces.scripts.delete(
+   *   'my-dispatch-namespace',
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     dispatchNamespace: string,
@@ -96,6 +118,16 @@ export class Scripts extends APIResource {
 
   /**
    * Fetch information about a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const script =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.get(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     dispatchNamespace: string,

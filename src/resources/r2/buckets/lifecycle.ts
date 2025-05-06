@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Lifecycle extends APIResource {
   /**
    * Set the object lifecycle rules for a bucket.
+   *
+   * @example
+   * ```ts
+   * const lifecycle = await client.r2.buckets.lifecycle.update(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     bucketName: string,
@@ -29,6 +37,14 @@ export class Lifecycle extends APIResource {
 
   /**
    * Get object lifecycle rules for a bucket.
+   *
+   * @example
+   * ```ts
+   * const lifecycle = await client.r2.buckets.lifecycle.get(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     bucketName: string,

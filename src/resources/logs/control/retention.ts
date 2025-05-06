@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Retention extends APIResource {
   /**
    * Updates log retention flag for Logpull API.
+   *
+   * @example
+   * ```ts
+   * const retention =
+   *   await client.logs.control.retention.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(
     params: RetentionCreateParams,
@@ -22,6 +30,13 @@ export class Retention extends APIResource {
 
   /**
    * Gets log retention flag for Logpull API.
+   *
+   * @example
+   * ```ts
+   * const retention = await client.logs.control.retention.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(
     params: RetentionGetParams,

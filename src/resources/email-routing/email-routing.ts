@@ -45,6 +45,14 @@ export class EmailRouting extends APIResource {
   /**
    * Disable your Email Routing zone. Also removes additional MX records previously
    * required for Email Routing to work.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.disable({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: {},
+   * });
+   * ```
    */
   disable(params: EmailRoutingDisableParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
     const { zone_id, body } = params;
@@ -58,6 +66,14 @@ export class EmailRouting extends APIResource {
 
   /**
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.enable({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: {},
+   * });
+   * ```
    */
   enable(params: EmailRoutingEnableParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
     const { zone_id, body } = params;
@@ -71,6 +87,13 @@ export class EmailRouting extends APIResource {
 
   /**
    * Get information about the settings for your Email Routing zone.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: EmailRoutingGetParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
     const { zone_id } = params;

@@ -22,6 +22,19 @@ export class ContentLists extends APIResource {
 
   /**
    * Update IPFS Universal Path Gateway Content List
+   *
+   * @example
+   * ```ts
+   * const contentList =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       action: 'block',
+   *       entries: [{}],
+   *     },
+   *   );
+   * ```
    */
   update(
     identifier: string,
@@ -39,6 +52,15 @@ export class ContentLists extends APIResource {
 
   /**
    * IPFS Universal Path Gateway Content List Details
+   *
+   * @example
+   * ```ts
+   * const contentList =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     identifier: string,

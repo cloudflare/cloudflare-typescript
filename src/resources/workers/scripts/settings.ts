@@ -10,6 +10,15 @@ export class Settings extends APIResource {
    * Patch script-level settings when using
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
    * Including but not limited to Logpush and Tail Consumers.
+   *
+   * @example
+   * ```ts
+   * const scriptSetting =
+   *   await client.workers.scripts.settings.edit(
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     scriptName: string,
@@ -29,6 +38,15 @@ export class Settings extends APIResource {
    * Get script-level settings when using
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
    * Includes Logpush and Tail Consumers.
+   *
+   * @example
+   * ```ts
+   * const scriptSetting =
+   *   await client.workers.scripts.settings.get(
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     scriptName: string,

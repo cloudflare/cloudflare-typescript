@@ -7,6 +7,14 @@ import { CloudflareError } from '../../error';
 export class Ownership extends APIResource {
   /**
    * Gets a new ownership challenge sent to your destination.
+   *
+   * @example
+   * ```ts
+   * const ownership = await client.logpush.ownership.create({
+   *   destination_conf: 's3://mybucket/logs?region=us-west-2',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   create(
     params: OwnershipCreateParams,
@@ -39,6 +47,16 @@ export class Ownership extends APIResource {
 
   /**
    * Validates ownership challenge of the destination.
+   *
+   * @example
+   * ```ts
+   * const ownershipValidation =
+   *   await client.logpush.ownership.validate({
+   *     destination_conf: 's3://mybucket/logs?region=us-west-2',
+   *     ownership_challenge: '00000000000000000000',
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   validate(
     params: OwnershipValidateParams,

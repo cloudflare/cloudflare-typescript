@@ -8,6 +8,14 @@ import { SinglePage } from '../../../pagination';
 export class PagerdutyResource extends APIResource {
   /**
    * Creates a new token for integrating with PagerDuty.
+   *
+   * @example
+   * ```ts
+   * const pagerduty =
+   *   await client.alerting.destinations.pagerduty.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(
     params: PagerdutyCreateParams,
@@ -24,6 +32,14 @@ export class PagerdutyResource extends APIResource {
 
   /**
    * Deletes all the PagerDuty Services connected to the account.
+   *
+   * @example
+   * ```ts
+   * const pagerduty =
+   *   await client.alerting.destinations.pagerduty.delete({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   delete(
     params: PagerdutyDeleteParams,
@@ -35,6 +51,16 @@ export class PagerdutyResource extends APIResource {
 
   /**
    * Get a list of all configured PagerDuty services.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const pagerduty of client.alerting.destinations.pagerduty.get(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: PagerdutyGetParams,
@@ -50,6 +76,15 @@ export class PagerdutyResource extends APIResource {
 
   /**
    * Links PagerDuty with the account using the integration token.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.alerting.destinations.pagerduty.link(
+   *     '8c71e667571b4f61b94d9e4b12158038',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   link(
     tokenId: string,
