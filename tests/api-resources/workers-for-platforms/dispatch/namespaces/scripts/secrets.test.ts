@@ -14,7 +14,12 @@ describe('resource secrets', () => {
     const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.secrets.update(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        name: 'myBinding',
+        text: 'My secret.',
+        type: 'secret_text',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,8 +36,8 @@ describe('resource secrets', () => {
       'this-is_my_script-01',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        name: 'MY_SECRET',
-        text: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+        name: 'myBinding',
+        text: 'My secret.',
         type: 'secret_text',
       },
     );
