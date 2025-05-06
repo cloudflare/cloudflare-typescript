@@ -13,10 +13,12 @@ export class Subdomain extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubdomainCreateResponse> {
     const { account_id, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`, {
-      body,
-      ...options,
-    });
+    return (
+      this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SubdomainCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,7 +30,12 @@ export class Subdomain extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubdomainGetResponse> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`, options);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`,
+        options,
+      ) as Core.APIPromise<{ result: SubdomainGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -36,26 +43,24 @@ export interface SubdomainCreateResponse {
   /**
    * Whether the Worker is available on the workers.dev subdomain.
    */
-  enabled?: boolean;
+  enabled: boolean;
 
   /**
-   * Whether the Worker's Preview URLs should be available on the workers.dev
-   * subdomain.
+   * Whether the Worker's Preview URLs are available on the workers.dev subdomain.
    */
-  previews_enabled?: boolean;
+  previews_enabled: boolean;
 }
 
 export interface SubdomainGetResponse {
   /**
    * Whether the Worker is available on the workers.dev subdomain.
    */
-  enabled?: boolean;
+  enabled: boolean;
 
   /**
-   * Whether the Worker's Preview URLs should be available on the workers.dev
-   * subdomain.
+   * Whether the Worker's Preview URLs are available on the workers.dev subdomain.
    */
-  previews_enabled?: boolean;
+  previews_enabled: boolean;
 }
 
 export interface SubdomainCreateParams {
