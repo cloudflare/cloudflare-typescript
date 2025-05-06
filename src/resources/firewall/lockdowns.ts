@@ -205,7 +205,7 @@ export interface LockdownDeleteResponse {
 
 export interface LockdownCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -226,7 +226,7 @@ export interface LockdownCreateParams {
 
 export interface LockdownUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -247,7 +247,7 @@ export interface LockdownUpdateParams {
 
 export interface LockdownListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -301,14 +301,14 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
 
 export interface LockdownDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface LockdownGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
