@@ -50,6 +50,8 @@ import {
   Subdomain,
   SubdomainCreateParams,
   SubdomainCreateResponse,
+  SubdomainDeleteParams,
+  SubdomainDeleteResponse,
   SubdomainGetParams,
   SubdomainGetResponse,
 } from './subdomain';
@@ -1124,8 +1126,10 @@ export declare namespace Scripts {
   export {
     Subdomain as Subdomain,
     type SubdomainCreateResponse as SubdomainCreateResponse,
+    type SubdomainDeleteResponse as SubdomainDeleteResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
     type SubdomainCreateParams as SubdomainCreateParams,
+    type SubdomainDeleteParams as SubdomainDeleteParams,
     type SubdomainGetParams as SubdomainGetParams,
   };
 

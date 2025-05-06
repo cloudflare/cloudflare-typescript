@@ -3924,6 +3924,191 @@
       ]
     },
     {
+      "base": "cloudforceOne.requests.message",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "message_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "request_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "message_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.message",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "message_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "request_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "message_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.assets",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "asset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "request_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "asset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.assets",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "asset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "request_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "asset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.requests.assets",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "asset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "request_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "asset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "cloudforceOne.threatEvents.datasets",
       "name": "raw",
       "params": [

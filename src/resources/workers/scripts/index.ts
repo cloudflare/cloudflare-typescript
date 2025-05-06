@@ -53,8 +53,10 @@ export { Settings, type SettingEditParams, type SettingGetParams } from './setti
 export {
   Subdomain,
   type SubdomainCreateResponse,
+  type SubdomainDeleteResponse,
   type SubdomainGetResponse,
   type SubdomainCreateParams,
+  type SubdomainDeleteParams,
   type SubdomainGetParams,
 } from './subdomain';
 export {
