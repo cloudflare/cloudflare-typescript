@@ -31,6 +31,8 @@ import {
   ThreatEventEditResponse,
   ThreatEventGetParams,
   ThreatEventGetResponse,
+  ThreatEventListParams,
+  ThreatEventListResponse,
   ThreatEvents,
 } from './threat-events/threat-events';
 
@@ -68,11 +70,13 @@ export declare namespace CloudforceOne {
   export {
     ThreatEvents as ThreatEvents,
     type ThreatEventCreateResponse as ThreatEventCreateResponse,
+    type ThreatEventListResponse as ThreatEventListResponse,
     type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
     type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
+    type ThreatEventListParams as ThreatEventListParams,
     type ThreatEventDeleteParams as ThreatEventDeleteParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
     type ThreatEventEditParams as ThreatEventEditParams,
