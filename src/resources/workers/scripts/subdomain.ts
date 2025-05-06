@@ -22,6 +22,23 @@ export class Subdomain extends APIResource {
   }
 
   /**
+   * Disable all workers.dev subdomains for a Worker.
+   */
+  delete(
+    scriptName: string,
+    params: SubdomainDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubdomainDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`,
+        options,
+      ) as Core.APIPromise<{ result: SubdomainDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get if the Worker is available on the workers.dev subdomain.
    */
   get(
@@ -40,6 +57,18 @@ export class Subdomain extends APIResource {
 }
 
 export interface SubdomainCreateResponse {
+  /**
+   * Whether the Worker is available on the workers.dev subdomain.
+   */
+  enabled: boolean;
+
+  /**
+   * Whether the Worker's Preview URLs are available on the workers.dev subdomain.
+   */
+  previews_enabled: boolean;
+}
+
+export interface SubdomainDeleteResponse {
   /**
    * Whether the Worker is available on the workers.dev subdomain.
    */
@@ -81,6 +110,13 @@ export interface SubdomainCreateParams {
   previews_enabled?: boolean;
 }
 
+export interface SubdomainDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
 export interface SubdomainGetParams {
   /**
    * Identifier.
@@ -91,8 +127,10 @@ export interface SubdomainGetParams {
 export declare namespace Subdomain {
   export {
     type SubdomainCreateResponse as SubdomainCreateResponse,
+    type SubdomainDeleteResponse as SubdomainDeleteResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
     type SubdomainCreateParams as SubdomainCreateParams,
+    type SubdomainDeleteParams as SubdomainDeleteParams,
     type SubdomainGetParams as SubdomainGetParams,
   };
 }
