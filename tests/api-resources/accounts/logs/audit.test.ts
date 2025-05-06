@@ -41,7 +41,7 @@ describe('resource audit', () => {
       actor_ip_address: '17.168.228.63',
       actor_token_id: '144cdb2e39c55e203cf225d8d8208647',
       actor_token_name: 'Test Token',
-      actor_type: 'cloudflare_admin',
+      actor_type: 'account',
       audit_log_id: 'f174be97-19b1-40d6-954d-70cd5fbd52db',
       cursor: 'Q1buH-__DQqqig7SVYXT-SsMOTGY2Z3Y80W-fGgva7yaDdmPKveucH5ddOcHsJRhNb-xUK8agZQqkJSMAENGO8NU6g==',
       direction: 'desc',

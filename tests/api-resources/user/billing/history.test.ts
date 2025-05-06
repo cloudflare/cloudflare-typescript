@@ -35,7 +35,7 @@ describe('resource history', () => {
         {
           action: 'subscription',
           occurred_at: '2014-03-01T12:21:59.3456Z',
-          order: 'type',
+          order: 'occurred_at',
           page: 1,
           per_page: 5,
           type: 'charge',
