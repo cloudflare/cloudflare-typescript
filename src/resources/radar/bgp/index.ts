@@ -9,10 +9,12 @@ export {
   type RouteAsesResponse,
   type RouteMoasResponse,
   type RoutePfx2asResponse,
+  type RouteRealtimeResponse,
   type RouteStatsResponse,
   type RouteAsesParams,
   type RouteMoasParams,
   type RoutePfx2asParams,
+  type RouteRealtimeParams,
   type RouteStatsParams,
 } from './routes';
 export { Top, type TopPrefixesResponse, type TopPrefixesParams } from './top/index';
