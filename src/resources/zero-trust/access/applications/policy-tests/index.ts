@@ -7,4 +7,9 @@ export {
   type PolicyTestCreateParams,
   type PolicyTestGetParams,
 } from './policy-tests';
-export { UserListResponsesSinglePage, Users, type UserListResponse, type UserListParams } from './users';
+export {
+  UserListResponsesV4PagePaginationArray,
+  Users,
+  type UserListResponse,
+  type UserListParams,
+} from './users';
