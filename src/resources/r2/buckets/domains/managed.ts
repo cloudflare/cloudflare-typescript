@@ -52,63 +52,63 @@ export class Managed extends APIResource {
 
 export interface ManagedUpdateResponse {
   /**
-   * Bucket ID
+   * Bucket ID.
    */
   bucketId: string;
 
   /**
-   * Domain name of the bucket's r2.dev domain
+   * Domain name of the bucket's r2.dev domain.
    */
   domain: string;
 
   /**
-   * Whether this bucket is publicly accessible at the r2.dev domain
+   * Whether this bucket is publicly accessible at the r2.dev domain.
    */
   enabled: boolean;
 }
 
 export interface ManagedListResponse {
   /**
-   * Bucket ID
+   * Bucket ID.
    */
   bucketId: string;
 
   /**
-   * Domain name of the bucket's r2.dev domain
+   * Domain name of the bucket's r2.dev domain.
    */
   domain: string;
 
   /**
-   * Whether this bucket is publicly accessible at the r2.dev domain
+   * Whether this bucket is publicly accessible at the r2.dev domain.
    */
   enabled: boolean;
 }
 
 export interface ManagedUpdateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Body param: Whether to enable public bucket access at the r2.dev domain
+   * Body param: Whether to enable public bucket access at the r2.dev domain.
    */
   enabled: boolean;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface ManagedListParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
