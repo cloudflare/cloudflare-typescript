@@ -109,7 +109,7 @@ export interface Action {
    */
   type: 'drop' | 'forward' | 'worker';
 
-  value: Array<string>;
+  value?: Array<string>;
 }
 
 /**
@@ -121,7 +121,7 @@ export interface ActionParam {
    */
   type: 'drop' | 'forward' | 'worker';
 
-  value: Array<string>;
+  value?: Array<string>;
 }
 
 export interface EmailRoutingRule {
@@ -166,19 +166,19 @@ export interface EmailRoutingRule {
  */
 export interface Matcher {
   /**
-   * Field for type matcher.
-   */
-  field: 'to';
-
-  /**
    * Type of matcher.
    */
   type: 'literal';
 
   /**
+   * Field for type matcher.
+   */
+  field?: 'to';
+
+  /**
    * Value for matcher.
    */
-  value: string;
+  value?: string;
 }
 
 /**
@@ -186,24 +186,24 @@ export interface Matcher {
  */
 export interface MatcherParam {
   /**
-   * Field for type matcher.
-   */
-  field: 'to';
-
-  /**
    * Type of matcher.
    */
   type: 'literal';
 
   /**
+   * Field for type matcher.
+   */
+  field?: 'to';
+
+  /**
    * Value for matcher.
    */
-  value: string;
+  value?: string;
 }
 
 export interface RuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -235,7 +235,7 @@ export interface RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -267,7 +267,7 @@ export interface RuleUpdateParams {
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -279,14 +279,14 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
 
 export interface RuleDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RuleGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

@@ -107,7 +107,7 @@ export interface Address {
 
 export interface AddressCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -119,7 +119,7 @@ export interface AddressCreateParams {
 
 export interface AddressListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -136,14 +136,14 @@ export interface AddressListParams extends V4PagePaginationArrayParams {
 
 export interface AddressDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface AddressGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
