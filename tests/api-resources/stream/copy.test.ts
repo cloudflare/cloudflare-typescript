@@ -36,8 +36,6 @@ describe('resource copy', () => {
       thumbnailTimestampPct: 0.529241,
       watermark: { uid: 'ea95132c15732412d22c1476fa83f27a' },
       'Upload-Creator': 'creator-id_abcde12345',
-      'Upload-Metadata':
-        'name aGVsbG8gd29ybGQ=, requiresignedurls, allowedorigins ZXhhbXBsZS5jb20sdGVzdC5jb20=',
     });
   });
 });

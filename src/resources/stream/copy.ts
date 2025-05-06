@@ -9,19 +9,13 @@ export class Copy extends APIResource {
    * Uploads a video to Stream from a provided URL.
    */
   create(params: CopyCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamAPI.Video> {
-    const {
-      account_id,
-      'Upload-Creator': uploadCreator,
-      'Upload-Metadata': uploadMetadata,
-      ...body
-    } = params;
+    const { account_id, 'Upload-Creator': uploadCreator, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/copy`, {
         body,
         ...options,
         headers: {
           ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
-          ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined),
           ...options?.headers,
         },
       }) as Core.APIPromise<{ result: StreamAPI.Video }>
@@ -94,14 +88,6 @@ export interface CopyCreateParams {
    * Header param: A user-defined identifier for the media creator.
    */
   'Upload-Creator'?: string;
-
-  /**
-   * Header param: Comma-separated key-value pairs following the TUS protocol
-   * specification. Values are Base-64 encoded. Supported keys: `name`,
-   * `requiresignedurls`, `allowedorigins`, `thumbnailtimestamppct`, `watermark`,
-   * `scheduleddeletion`.
-   */
-  'Upload-Metadata'?: string;
 }
 
 export namespace CopyCreateParams {
