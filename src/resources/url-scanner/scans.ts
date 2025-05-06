@@ -11,12 +11,7 @@ export class Scans extends APIResource {
    */
   create(params: ScanCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScanCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/urlscanner/v2/scan`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ScanCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.post(`/accounts/${account_id}/urlscanner/v2/scan`, { body, ...options });
   }
 
   /**
@@ -103,10 +98,42 @@ export class Scans extends APIResource {
   }
 }
 
-/**
- * URL to report.
- */
-export type ScanCreateResponse = string;
+export interface ScanCreateResponse {
+  /**
+   * URL to api report.
+   */
+  api: string;
+
+  message: string;
+
+  /**
+   * URL to report.
+   */
+  result: string;
+
+  /**
+   * Canonical form of submitted URL. Use this if you want to later search by URL.
+   */
+  url: string;
+
+  /**
+   * Scan ID.
+   */
+  uuid: string;
+
+  /**
+   * Submitted visibility status.
+   */
+  visibility: string;
+
+  options?: ScanCreateResponse.Options;
+}
+
+export namespace ScanCreateResponse {
+  export interface Options {
+    useragent?: string;
+  }
+}
 
 export interface ScanListResponse {
   results: Array<ScanListResponse.Result>;
