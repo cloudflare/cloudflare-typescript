@@ -8,6 +8,14 @@ import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } f
 export class Database extends APIResource {
   /**
    * Returns the created D1 database.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'my-database',
+   * });
+   * ```
    */
   create(params: DatabaseCreateParams, options?: Core.RequestOptions): Core.APIPromise<D1API.D1> {
     const { account_id, ...body } = params;
@@ -20,6 +28,17 @@ export class Database extends APIResource {
 
   /**
    * Updates the specified D1 database.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.update(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     read_replication: { mode: 'auto' },
+   *   },
+   * );
+   * ```
    */
   update(
     databaseId: string,
@@ -37,6 +56,16 @@ export class Database extends APIResource {
 
   /**
    * Returns a list of D1 databases.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const databaseListResponse of client.d1.database.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DatabaseListParams,
@@ -52,6 +81,14 @@ export class Database extends APIResource {
 
   /**
    * Deletes the specified D1 database.
+   *
+   * @example
+   * ```ts
+   * const database = await client.d1.database.delete(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     databaseId: string,
@@ -68,6 +105,14 @@ export class Database extends APIResource {
 
   /**
    * Updates partially the specified D1 database.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.edit(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     databaseId: string,
@@ -88,6 +133,17 @@ export class Database extends APIResource {
    * process may take some time for larger DBs, during which your D1 will be
    * unavailable to serve queries. To avoid blocking your DB unnecessarily, an
    * in-progress export must be continually polled or will automatically cancel.
+   *
+   * @example
+   * ```ts
+   * const response = await client.d1.database.export(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     output_format: 'polling',
+   *   },
+   * );
+   * ```
    */
   export(
     databaseId: string,
@@ -105,6 +161,14 @@ export class Database extends APIResource {
 
   /**
    * Returns the specified D1 database.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.get(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     databaseId: string,
@@ -123,6 +187,18 @@ export class Database extends APIResource {
    * Generates a temporary URL for uploading an SQL file to, then instructing the D1
    * to import it and polling it for status updates. Imports block the D1 for their
    * duration.
+   *
+   * @example
+   * ```ts
+   * const response = await client.d1.database.import(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     action: 'init',
+   *     etag: 'etag',
+   *   },
+   * );
+   * ```
    */
   import(
     databaseId: string,
@@ -140,6 +216,20 @@ export class Database extends APIResource {
 
   /**
    * Returns the query result as an object.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const queryResult of client.d1.database.query(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   query(
     databaseId: string,
@@ -157,6 +247,20 @@ export class Database extends APIResource {
   /**
    * Returns the query result rows as arrays rather than objects. This is a
    * performance-optimized version of the /query endpoint.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const databaseRawResponse of client.d1.database.raw(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   raw(
     databaseId: string,

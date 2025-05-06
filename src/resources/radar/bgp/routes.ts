@@ -7,6 +7,11 @@ import * as Core from '../../../core';
 export class Routes extends APIResource {
   /**
    * Retrieves all ASes in the current global routing tables with routing statistics.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.ases();
+   * ```
    */
   ases(query?: RouteAsesParams, options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
   ases(options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
@@ -26,6 +31,11 @@ export class Routes extends APIResource {
 
   /**
    * Retrieves all Multi-Origin AS (MOAS) prefixes in the global routing tables.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.moas();
+   * ```
    */
   moas(query?: RouteMoasParams, options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;
   moas(options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;
@@ -45,6 +55,11 @@ export class Routes extends APIResource {
 
   /**
    * Retrieves the prefix-to-ASN mapping from global routing tables.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.pfx2as();
+   * ```
    */
   pfx2as(query?: RoutePfx2asParams, options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse>;
   pfx2as(options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse>;
@@ -65,6 +80,11 @@ export class Routes extends APIResource {
   /**
    * Retrieves realtime routes for prefixes using public realtime data collectors
    * (RouteViews and RIPE RIS).
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.realtime();
+   * ```
    */
   realtime(
     query?: RouteRealtimeParams,
@@ -87,6 +107,11 @@ export class Routes extends APIResource {
 
   /**
    * Retrieves the BGP routing table stats.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.routes.stats();
+   * ```
    */
   stats(query?: RouteStatsParams, options?: Core.RequestOptions): Core.APIPromise<RouteStatsResponse>;
   stats(options?: Core.RequestOptions): Core.APIPromise<RouteStatsResponse>;

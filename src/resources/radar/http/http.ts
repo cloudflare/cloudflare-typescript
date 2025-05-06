@@ -71,6 +71,11 @@ export class HTTP extends APIResource {
 
   /**
    * Retrieves the HTTP requests over time.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.http.timeseries();
+   * ```
    */
   timeseries(
     query?: HTTPTimeseriesParams,

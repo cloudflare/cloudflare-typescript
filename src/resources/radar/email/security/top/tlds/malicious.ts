@@ -7,6 +7,14 @@ import * as Core from '../../../../../../core';
 export class Malicious extends APIResource {
   /**
    * Retrieves the top TLDs by emails classified as malicious or not.
+   *
+   * @example
+   * ```ts
+   * const malicious =
+   *   await client.radar.email.security.top.tlds.malicious.get(
+   *     'MALICIOUS',
+   *   );
+   * ```
    */
   get(
     malicious: 'MALICIOUS' | 'NOT_MALICIOUS',

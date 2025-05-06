@@ -17,6 +17,16 @@ export class Subnets extends APIResource {
 
   /**
    * Lists and filters subnets in an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const subnetListResponse of client.zeroTrust.networks.subnets.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SubnetListParams,

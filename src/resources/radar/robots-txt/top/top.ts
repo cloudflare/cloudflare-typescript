@@ -11,6 +11,12 @@ export class Top extends APIResource {
 
   /**
    * Retrieves the top domain categories by the number of robots.txt files parsed.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.robotsTXT.top.domainCategories();
+   * ```
    */
   domainCategories(
     query?: TopDomainCategoriesParams,

@@ -7,6 +7,13 @@ import * as ConfigAPI from './config';
 export class Default extends APIResource {
   /**
    * Gets default Zaraz configuration for a zone.
+   *
+   * @example
+   * ```ts
+   * const configuration = await client.zaraz.default.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DefaultGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigAPI.Configuration> {
     const { zone_id } = params;

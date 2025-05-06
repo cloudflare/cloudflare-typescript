@@ -9,6 +9,23 @@ import { SinglePage } from '../../../pagination';
 export class Policies extends APIResource {
   /**
    * Creates a new Access reusable policy.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.policies.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     decision: 'allow',
+   *     include: [
+   *       {
+   *         group: {
+   *           id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f',
+   *         },
+   *       },
+   *     ],
+   *     name: 'Allow devs',
+   *   });
+   * ```
    */
   create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
     const { account_id, ...body } = params;
@@ -21,6 +38,26 @@ export class Policies extends APIResource {
 
   /**
    * Updates a Access reusable policy.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.policies.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       decision: 'allow',
+   *       include: [
+   *         {
+   *           group: {
+   *             id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f',
+   *           },
+   *         },
+   *       ],
+   *       name: 'Allow devs',
+   *     },
+   *   );
+   * ```
    */
   update(
     policyId: string,
@@ -38,6 +75,16 @@ export class Policies extends APIResource {
 
   /**
    * Lists Access reusable policies.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const policyListResponse of client.zeroTrust.access.policies.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PolicyListParams,
@@ -53,6 +100,15 @@ export class Policies extends APIResource {
 
   /**
    * Deletes an Access reusable policy.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.policies.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     policyId: string,
@@ -69,6 +125,14 @@ export class Policies extends APIResource {
 
   /**
    * Fetches a single Access reusable policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.zeroTrust.access.policies.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     policyId: string,

@@ -8,6 +8,12 @@ export class BrowserFamily extends APIResource {
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested browser
    * family.
+   *
+   * @example
+   * ```ts
+   * const browserFamily =
+   *   await client.radar.http.ases.browserFamily.get('CHROME');
+   * ```
    */
   get(
     browserFamily: 'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI',

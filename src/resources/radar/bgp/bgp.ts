@@ -36,6 +36,11 @@ export class BGP extends APIResource {
   /**
    * Retrieves BGP updates over time. When requesting updates for an autonomous
    * system, only BGP updates of type announcement are returned.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.timeseries();
+   * ```
    */
   timeseries(
     query?: BGPTimeseriesParams,

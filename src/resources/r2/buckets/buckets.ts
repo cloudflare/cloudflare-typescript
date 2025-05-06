@@ -60,6 +60,14 @@ export class Buckets extends APIResource {
 
   /**
    * Creates a new R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const bucket = await client.r2.buckets.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example-bucket',
+   * });
+   * ```
    */
   create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id, jurisdiction, ...body } = params;
@@ -79,6 +87,13 @@ export class Buckets extends APIResource {
 
   /**
    * Lists all R2 buckets on your account.
+   *
+   * @example
+   * ```ts
+   * const buckets = await client.r2.buckets.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: BucketListParams, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse> {
     const { account_id, jurisdiction, ...query } = params;
@@ -98,6 +113,14 @@ export class Buckets extends APIResource {
 
   /**
    * Deletes an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const bucket = await client.r2.buckets.delete(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     bucketName: string,
@@ -120,6 +143,17 @@ export class Buckets extends APIResource {
 
   /**
    * Updates properties of an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const bucket = await client.r2.buckets.edit(
+   *   'example-bucket',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     storage_class: 'Standard',
+   *   },
+   * );
+   * ```
    */
   edit(bucketName: string, params: BucketEditParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id, storage_class, jurisdiction } = params;
@@ -139,6 +173,14 @@ export class Buckets extends APIResource {
 
   /**
    * Gets properties of an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const bucket = await client.r2.buckets.get(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id, jurisdiction } = params;

@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class DNSSECResource extends APIResource {
   /**
    * Delete DNSSEC.
+   *
+   * @example
+   * ```ts
+   * const dnssec = await client.dns.dnssec.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(params: DNSSECDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse> {
     const { zone_id } = params;
@@ -18,6 +25,13 @@ export class DNSSECResource extends APIResource {
 
   /**
    * Enable or disable DNSSEC.
+   *
+   * @example
+   * ```ts
+   * const dnssec = await client.dns.dnssec.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: DNSSECEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
     const { zone_id, ...body } = params;
@@ -30,6 +44,13 @@ export class DNSSECResource extends APIResource {
 
   /**
    * Details about DNSSEC status and configuration.
+   *
+   * @example
+   * ```ts
+   * const dnssec = await client.dns.dnssec.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DNSSECGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
     const { zone_id } = params;

@@ -7,6 +7,11 @@ import * as Core from '../../../../core';
 export class Ases extends APIResource {
   /**
    * Retrieves the top autonomous systems by BGP updates (announcements only).
+   *
+   * @example
+   * ```ts
+   * const ase = await client.radar.bgp.top.ases.get();
+   * ```
    */
   get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
@@ -28,6 +33,11 @@ export class Ases extends APIResource {
    * Retrieves the full list of autonomous systems on the global routing table
    * ordered by announced prefixes count. The data comes from public BGP MRT data
    * archives and updates every 2 hours.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.top.ases.prefixes();
+   * ```
    */
   prefixes(query?: AsePrefixesParams, options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse>;
   prefixes(options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse>;

@@ -7,6 +7,14 @@ import * as Shared from '../../shared';
 export class Value extends APIResource {
   /**
    * Roll the token secret.
+   *
+   * @example
+   * ```ts
+   * const tokenValue = await client.user.tokens.value.update(
+   *   'ed17574386854bf78a67040be0a770b0',
+   *   {},
+   * );
+   * ```
    */
   update(
     tokenId: string,

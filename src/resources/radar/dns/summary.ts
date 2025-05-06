@@ -7,6 +7,11 @@ import * as Core from '../../../core';
 export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by cache status.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.cacheHit();
+   * ```
    */
   cacheHit(
     query?: SummaryCacheHitParams,
@@ -30,6 +35,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions)
    * support.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.dnssec();
+   * ```
    */
   dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
   dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
@@ -50,6 +60,12 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions)
    * client awareness.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.dns.summary.dnssecAware();
+   * ```
    */
   dnssecAware(
     query?: SummaryDNSSECAwareParams,
@@ -73,6 +89,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNSSEC-validated answers by end-to-end security
    * status.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.dnssecE2E();
+   * ```
    */
   dnssecE2E(
     query?: SummaryDNSSECE2EParams,
@@ -95,6 +116,11 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by IP version.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.ipVersion();
+   * ```
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -117,6 +143,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by matching answers.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.dns.summary.matchingAnswer();
+   * ```
    */
   matchingAnswer(
     query?: SummaryMatchingAnswerParams,
@@ -139,6 +171,11 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by DNS transport protocol.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.protocol();
+   * ```
    */
   protocol(
     query?: SummaryProtocolParams,
@@ -161,6 +198,11 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by type.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.queryType();
+   * ```
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -183,6 +225,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by response code.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.dns.summary.responseCode();
+   * ```
    */
   responseCode(
     query?: SummaryResponseCodeParams,
@@ -205,6 +253,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by minimum response TTL.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.dns.summary.responseTTL();
+   * ```
    */
   responseTTL(
     query?: SummaryResponseTTLParams,

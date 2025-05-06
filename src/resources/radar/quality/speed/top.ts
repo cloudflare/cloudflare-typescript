@@ -8,6 +8,12 @@ export class Top extends APIResource {
   /**
    * Retrieves the top autonomous systems by bandwidth, latency, jitter, or packet
    * loss, from the previous 90 days of Cloudflare Speed Test data.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.quality.speed.top.ases();
+   * ```
    */
   ases(query?: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
   ases(options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
@@ -28,6 +34,12 @@ export class Top extends APIResource {
   /**
    * Retrieves the top locations by bandwidth, latency, jitter, or packet loss, from
    * the previous 90 days of Cloudflare Speed Test data.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.quality.speed.top.locations();
+   * ```
    */
   locations(query?: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;
   locations(options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;

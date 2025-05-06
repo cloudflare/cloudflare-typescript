@@ -37,6 +37,14 @@ export class Namespaces extends APIResource {
    * Creates a namespace under the given title. A `400` is returned if the account
    * already owns a namespace with this title. A namespace must be explicitly deleted
    * to be replaced.
+   *
+   * @example
+   * ```ts
+   * const namespace = await client.kv.namespaces.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   title: 'My Own Namespace',
+   * });
+   * ```
    */
   create(params: NamespaceCreateParams, options?: Core.RequestOptions): Core.APIPromise<Namespace> {
     const { account_id, ...body } = params;
@@ -50,6 +58,17 @@ export class Namespaces extends APIResource {
 
   /**
    * Modifies a namespace's title.
+   *
+   * @example
+   * ```ts
+   * const namespace = await client.kv.namespaces.update(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     title: 'My Own Namespace',
+   *   },
+   * );
+   * ```
    */
   update(
     namespaceId: string,
@@ -67,6 +86,16 @@ export class Namespaces extends APIResource {
 
   /**
    * Returns the namespaces owned by an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const namespace of client.kv.namespaces.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: NamespaceListParams,
@@ -82,6 +111,14 @@ export class Namespaces extends APIResource {
 
   /**
    * Deletes the namespace corresponding to the given ID.
+   *
+   * @example
+   * ```ts
+   * const namespace = await client.kv.namespaces.delete(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     namespaceId: string,
@@ -99,6 +136,14 @@ export class Namespaces extends APIResource {
 
   /**
    * Get the namespace corresponding to the given ID.
+   *
+   * @example
+   * ```ts
+   * const namespace = await client.kv.namespaces.get(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     namespaceId: string,

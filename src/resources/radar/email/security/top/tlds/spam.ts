@@ -7,6 +7,14 @@ import * as Core from '../../../../../../core';
 export class Spam extends APIResource {
   /**
    * Retrieves the top TLDs by emails classified as spam or not.
+   *
+   * @example
+   * ```ts
+   * const spam =
+   *   await client.radar.email.security.top.tlds.spam.get(
+   *     'SPAM',
+   *   );
+   * ```
    */
   get(
     spam: 'SPAM' | 'NOT_SPAM',

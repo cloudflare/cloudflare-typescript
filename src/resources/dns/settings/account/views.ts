@@ -7,6 +7,17 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class Views extends APIResource {
   /**
    * Create Internal DNS View for an account
+   *
+   * @example
+   * ```ts
+   * const view = await client.dns.settings.account.views.create(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'my view',
+   *     zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
+   *   },
+   * );
+   * ```
    */
   create(params: ViewCreateParams, options?: Core.RequestOptions): Core.APIPromise<ViewCreateResponse> {
     const { account_id, ...body } = params;
@@ -20,6 +31,16 @@ export class Views extends APIResource {
 
   /**
    * List DNS Internal Views for an Account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const viewListResponse of client.dns.settings.account.views.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ViewListParams,
@@ -35,6 +56,14 @@ export class Views extends APIResource {
 
   /**
    * Delete an existing Internal DNS View
+   *
+   * @example
+   * ```ts
+   * const view = await client.dns.settings.account.views.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     viewId: string,
@@ -52,6 +81,15 @@ export class Views extends APIResource {
 
   /**
    * Update an existing Internal DNS View
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.dns.settings.account.views.edit(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     viewId: string,
@@ -69,6 +107,14 @@ export class Views extends APIResource {
 
   /**
    * Get DNS Internal View
+   *
+   * @example
+   * ```ts
+   * const view = await client.dns.settings.account.views.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     viewId: string,

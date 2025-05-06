@@ -6,6 +6,15 @@ import * as Core from '../../../core';
 export class Trace extends APIResource {
   /**
    * Get email trace
+   *
+   * @example
+   * ```ts
+   * const trace =
+   *   await client.emailSecurity.investigate.trace.get(
+   *     '4Njp3P0STMz2c02Q',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     postfixId: string,

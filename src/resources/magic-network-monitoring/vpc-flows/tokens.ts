@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Tokens extends APIResource {
   /**
    * Generate authentication token for VPC flow logs export.
+   *
+   * @example
+   * ```ts
+   * const token =
+   *   await client.magicNetworkMonitoring.vpcFlows.tokens.create(
+   *     { account_id: '6f91088a406011ed95aed352566e8d4c' },
+   *   );
+   * ```
    */
   create(params: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse> {
     const { account_id } = params;

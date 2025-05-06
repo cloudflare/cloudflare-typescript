@@ -7,6 +7,11 @@ import * as Core from '../../../core';
 export class Top extends APIResource {
   /**
    * Retrieves the top verified bots by HTTP requests, with owner and category.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.verifiedBots.top.bots();
+   * ```
    */
   bots(query?: TopBotsParams, options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse>;
   bots(options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse>;
@@ -27,6 +32,12 @@ export class Top extends APIResource {
   /**
    * Retrieves the top verified bot categories by HTTP requests, along with their
    * corresponding percentage, over the total verified bot HTTP requests.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.verifiedBots.top.categories();
+   * ```
    */
   categories(
     query?: TopCategoriesParams,

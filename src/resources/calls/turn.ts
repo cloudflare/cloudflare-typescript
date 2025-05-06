@@ -7,6 +7,13 @@ import { SinglePage } from '../../pagination';
 export class TURN extends APIResource {
   /**
    * Creates a new Cloudflare Calls TURN key.
+   *
+   * @example
+   * ```ts
+   * const turn = await client.calls.turn.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: TURNCreateParams, options?: Core.RequestOptions): Core.APIPromise<TURNCreateResponse> {
     const { account_id, ...body } = params;
@@ -15,6 +22,14 @@ export class TURN extends APIResource {
 
   /**
    * Edit details for a single TURN key.
+   *
+   * @example
+   * ```ts
+   * const turn = await client.calls.turn.update(
+   *   '2a95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     keyId: string,
@@ -32,6 +47,16 @@ export class TURN extends APIResource {
 
   /**
    * Lists all TURN keys in the Cloudflare account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const turnListResponse of client.calls.turn.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: TURNListParams,
@@ -47,6 +72,14 @@ export class TURN extends APIResource {
 
   /**
    * Deletes a TURN key from Cloudflare Calls
+   *
+   * @example
+   * ```ts
+   * const turn = await client.calls.turn.delete(
+   *   '2a95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     keyId: string,
@@ -63,6 +96,14 @@ export class TURN extends APIResource {
 
   /**
    * Fetches details for a single TURN key.
+   *
+   * @example
+   * ```ts
+   * const turn = await client.calls.turn.get(
+   *   '2a95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(keyId: string, params: TURNGetParams, options?: Core.RequestOptions): Core.APIPromise<TURNGetResponse> {
     const { account_id } = params;

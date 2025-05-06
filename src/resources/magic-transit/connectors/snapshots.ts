@@ -6,6 +6,15 @@ import * as Core from '../../../core';
 export class Snapshots extends APIResource {
   /**
    * List Snapshots
+   *
+   * @example
+   * ```ts
+   * const snapshots =
+   *   await client.magicTransit.connectors.snapshots.list(
+   *     'connector_id',
+   *     { account_id: 0, from: 0, to: 0 },
+   *   );
+   * ```
    */
   list(
     connectorId: string,
@@ -23,6 +32,16 @@ export class Snapshots extends APIResource {
 
   /**
    * Get Snapshot
+   *
+   * @example
+   * ```ts
+   * const snapshot =
+   *   await client.magicTransit.connectors.snapshots.get(
+   *     'connector_id',
+   *     0,
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   get(
     connectorId: string,

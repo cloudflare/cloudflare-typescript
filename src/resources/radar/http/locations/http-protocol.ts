@@ -7,6 +7,14 @@ import * as Core from '../../../../core';
 export class HTTPProtocol extends APIResource {
   /**
    * Retrieves the top locations, by HTTP requests, of the requested HTTP protocol.
+   *
+   * @example
+   * ```ts
+   * const httpProtocol =
+   *   await client.radar.http.locations.httpProtocol.get(
+   *     'HTTP',
+   *   );
+   * ```
    */
   get(
     httpProtocol: 'HTTP' | 'HTTPS',

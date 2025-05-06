@@ -7,6 +7,15 @@ import { SinglePage } from '../../../pagination';
 export class MessageResource extends APIResource {
   /**
    * Create a New Request Message
+   *
+   * @example
+   * ```ts
+   * const message =
+   *   await client.cloudforceOne.requests.message.create(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     requestId: string,
@@ -24,6 +33,16 @@ export class MessageResource extends APIResource {
 
   /**
    * Update a Request Message
+   *
+   * @example
+   * ```ts
+   * const message =
+   *   await client.cloudforceOne.requests.message.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     0,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     requestId: string,
@@ -42,6 +61,16 @@ export class MessageResource extends APIResource {
 
   /**
    * Delete a Request Message
+   *
+   * @example
+   * ```ts
+   * const message =
+   *   await client.cloudforceOne.requests.message.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     0,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     requestId: string,
@@ -58,6 +87,21 @@ export class MessageResource extends APIResource {
 
   /**
    * List Request Messages
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const message of client.cloudforceOne.requests.message.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     page: 0,
+   *     per_page: 10,
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     requestId: string,

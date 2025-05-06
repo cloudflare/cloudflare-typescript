@@ -13,6 +13,12 @@ export class TrafficAnomalies extends APIResource {
    * Retrieves the latest Internet traffic anomalies, which are signals that might
    * indicate an outage. These alerts are automatically detected by Radar and
    * manually verified by our team.
+   *
+   * @example
+   * ```ts
+   * const trafficAnomaly =
+   *   await client.radar.trafficAnomalies.get();
+   * ```
    */
   get(
     query?: TrafficAnomalyGetParams,

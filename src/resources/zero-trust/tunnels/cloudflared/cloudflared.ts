@@ -37,6 +37,15 @@ export class Cloudflared extends APIResource {
 
   /**
    * Creates a new Cloudflare Tunnel in an account.
+   *
+   * @example
+   * ```ts
+   * const cloudflared =
+   *   await client.zeroTrust.tunnels.cloudflared.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     name: 'blog',
+   *   });
+   * ```
    */
   create(
     params: CloudflaredCreateParams,
@@ -52,6 +61,16 @@ export class Cloudflared extends APIResource {
 
   /**
    * Lists and filters Cloudflare Tunnels in an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const cloudflaredListResponse of client.zeroTrust.tunnels.cloudflared.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CloudflaredListParams,
@@ -67,6 +86,15 @@ export class Cloudflared extends APIResource {
 
   /**
    * Deletes a Cloudflare Tunnel from an account.
+   *
+   * @example
+   * ```ts
+   * const cloudflared =
+   *   await client.zeroTrust.tunnels.cloudflared.delete(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   delete(
     tunnelId: string,
@@ -83,6 +111,15 @@ export class Cloudflared extends APIResource {
 
   /**
    * Updates an existing Cloudflare Tunnel.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.tunnels.cloudflared.edit(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   edit(
     tunnelId: string,
@@ -100,6 +137,15 @@ export class Cloudflared extends APIResource {
 
   /**
    * Fetches a single Cloudflare Tunnel.
+   *
+   * @example
+   * ```ts
+   * const cloudflared =
+   *   await client.zeroTrust.tunnels.cloudflared.get(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     tunnelId: string,

@@ -7,6 +7,13 @@ export class IQI extends APIResource {
   /**
    * Retrieves a summary (percentiles) of bandwidth, latency, or DNS response time
    * from the Radar Internet Quality Index (IQI).
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.quality.iqi.summary({
+   *   metric: 'BANDWIDTH',
+   * });
+   * ```
    */
   summary(query: IQISummaryParams, options?: Core.RequestOptions): Core.APIPromise<IQISummaryResponse> {
     return (
@@ -19,6 +26,14 @@ export class IQI extends APIResource {
   /**
    * Retrieves a time series (percentiles) of bandwidth, latency, or DNS response
    * time from the Radar Internet Quality Index (IQI).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.quality.iqi.timeseriesGroups({
+   *     metric: 'BANDWIDTH',
+   *   });
+   * ```
    */
   timeseriesGroups(
     query: IQITimeseriesGroupsParams,

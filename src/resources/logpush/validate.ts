@@ -7,6 +7,14 @@ import { CloudflareError } from '../../error';
 export class Validate extends APIResource {
   /**
    * Validates destination.
+   *
+   * @example
+   * ```ts
+   * const response = await client.logpush.validate.destination({
+   *   destination_conf: 's3://mybucket/logs?region=us-west-2',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   destination(
     params: ValidateDestinationParams,
@@ -39,6 +47,15 @@ export class Validate extends APIResource {
 
   /**
    * Checks if there is an existing job with a destination.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.logpush.validate.destinationExists({
+   *     destination_conf: 's3://mybucket/logs?region=us-west-2',
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   destinationExists(
     params: ValidateDestinationExistsParams,
@@ -71,6 +88,15 @@ export class Validate extends APIResource {
 
   /**
    * Validates logpull origin with logpull_options.
+   *
+   * @example
+   * ```ts
+   * const response = await client.logpush.validate.origin({
+   *   logpull_options:
+   *     'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   origin(
     params: ValidateOriginParams,

@@ -8,6 +8,12 @@ export class HTTPProtocol extends APIResource {
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested HTTP
    * protocol.
+   *
+   * @example
+   * ```ts
+   * const httpProtocol =
+   *   await client.radar.http.ases.httpProtocol.get('HTTP');
+   * ```
    */
   get(
     httpProtocol: 'HTTP' | 'HTTPS',

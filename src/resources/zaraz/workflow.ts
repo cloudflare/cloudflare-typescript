@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class WorkflowResource extends APIResource {
   /**
    * Gets Zaraz workflow for a zone.
+   *
+   * @example
+   * ```ts
+   * const workflow = await client.zaraz.workflow.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: WorkflowGetParams, options?: Core.RequestOptions): Core.APIPromise<Workflow> {
     const { zone_id } = params;

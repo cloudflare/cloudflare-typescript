@@ -16,6 +16,13 @@ export class Records extends APIResource {
    * - NS records cannot exist on the same name as any other record type.
    * - Domain names are always represented in Punycode, even if Unicode characters
    *   were used when creating the record.
+   *
+   * @example
+   * ```ts
+   * const recordResponse = await client.dns.records.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<RecordResponse> {
     const { zone_id, ...body } = params;
@@ -35,6 +42,14 @@ export class Records extends APIResource {
    * - NS records cannot exist on the same name as any other record type.
    * - Domain names are always represented in Punycode, even if Unicode characters
    *   were used when creating the record.
+   *
+   * @example
+   * ```ts
+   * const recordResponse = await client.dns.records.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     dnsRecordId: string,
@@ -52,6 +67,16 @@ export class Records extends APIResource {
 
   /**
    * List, search, sort, and filter a zones' DNS records.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const recordResponse of client.dns.records.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RecordListParams,
@@ -66,6 +91,14 @@ export class Records extends APIResource {
 
   /**
    * Delete DNS Record
+   *
+   * @example
+   * ```ts
+   * const record = await client.dns.records.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     dnsRecordId: string,
@@ -98,6 +131,13 @@ export class Records extends APIResource {
    *   - Patches
    *   - Puts
    *   - Posts
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.records.batch({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   batch(params: RecordBatchParams, options?: Core.RequestOptions): Core.APIPromise<RecordBatchResponse> {
     const { zone_id, ...body } = params;
@@ -117,6 +157,14 @@ export class Records extends APIResource {
    * - NS records cannot exist on the same name as any other record type.
    * - Domain names are always represented in Punycode, even if Unicode characters
    *   were used when creating the record.
+   *
+   * @example
+   * ```ts
+   * const recordResponse = await client.dns.records.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     dnsRecordId: string,
@@ -140,6 +188,13 @@ export class Records extends APIResource {
    * See
    * [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ "Import and export records")
    * for more information.
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.records.export({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   export(params: RecordExportParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { zone_id } = params;
@@ -151,6 +206,14 @@ export class Records extends APIResource {
 
   /**
    * DNS Record Details
+   *
+   * @example
+   * ```ts
+   * const recordResponse = await client.dns.records.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     dnsRecordId: string,
@@ -174,6 +237,14 @@ export class Records extends APIResource {
    * See
    * [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ "Import and export records")
    * for more information.
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.records.import({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   file: 'www.example.com. 300 IN  A 127.0.0.1',
+   * });
+   * ```
    */
   import(params: RecordImportParams, options?: Core.RequestOptions): Core.APIPromise<RecordImportResponse> {
     const { zone_id, ...body } = params;
@@ -188,6 +259,14 @@ export class Records extends APIResource {
   /**
    * Scan for common DNS records on your domain and automatically add them to your
    * zone. Useful if you haven't updated your nameservers yet.
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.records.scan({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: {},
+   * });
+   * ```
    */
   scan(params: RecordScanParams, options?: Core.RequestOptions): Core.APIPromise<RecordScanResponse> {
     const { zone_id, body } = params;

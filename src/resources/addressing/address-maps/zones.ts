@@ -6,6 +6,19 @@ import * as Core from '../../../core';
 export class Zones extends APIResource {
   /**
    * Add a zone as a member of a particular address map.
+   *
+   * @example
+   * ```ts
+   * const zone =
+   *   await client.addressing.addressMaps.zones.update(
+   *     '055817b111884e0227e1be16a0be6ee0',
+   *     {
+   *       zone_id: '8ac8489932db6327334c9b6d58544cfe',
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     addressMapId: string,
@@ -21,6 +34,18 @@ export class Zones extends APIResource {
 
   /**
    * Remove a zone as a member of a particular address map.
+   *
+   * @example
+   * ```ts
+   * const zone =
+   *   await client.addressing.addressMaps.zones.delete(
+   *     '055817b111884e0227e1be16a0be6ee0',
+   *     {
+   *       zone_id: '8ac8489932db6327334c9b6d58544cfe',
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *     },
+   *   );
+   * ```
    */
   delete(
     addressMapId: string,

@@ -10,6 +10,12 @@ export class OriginCACertificates extends APIResource {
   /**
    * Create an Origin CA certificate. You can use an Origin CA Key as your User
    * Service Key or an API token when calling this endpoint ([see above](#requests)).
+   *
+   * @example
+   * ```ts
+   * const originCACertificate =
+   *   await client.originCACertificates.create();
+   * ```
    */
   create(
     body: OriginCACertificateCreateParams,
@@ -26,6 +32,16 @@ export class OriginCACertificates extends APIResource {
    * List all existing Origin CA certificates for a given zone. You can use an Origin
    * CA Key as your User Service Key or an API token when calling this endpoint
    * ([see above](#requests)).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const originCACertificate of client.originCACertificates.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: OriginCACertificateListParams,
@@ -41,6 +57,14 @@ export class OriginCACertificates extends APIResource {
    * Revoke an existing Origin CA certificate by its serial number. You can use an
    * Origin CA Key as your User Service Key or an API token when calling this
    * endpoint ([see above](#requests)).
+   *
+   * @example
+   * ```ts
+   * const originCACertificate =
+   *   await client.originCACertificates.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *   );
+   * ```
    */
   delete(
     certificateId: string,
@@ -57,6 +81,14 @@ export class OriginCACertificates extends APIResource {
    * Get an existing Origin CA certificate by its serial number. You can use an
    * Origin CA Key as your User Service Key or an API token when calling this
    * endpoint ([see above](#requests)).
+   *
+   * @example
+   * ```ts
+   * const originCACertificate =
+   *   await client.originCACertificates.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *   );
+   * ```
    */
   get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificate> {
     return (

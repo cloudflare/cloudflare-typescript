@@ -8,6 +8,23 @@ import * as ProfilesAPI from './profiles';
 export class Predefined extends APIResource {
   /**
    * Updates a DLP predefined profile. Only supports enabling/disabling entries.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.predefined.update(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: 'account_id',
+   *       entries: [
+   *         {
+   *           id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *           enabled: true,
+   *         },
+   *       ],
+   *     },
+   *   );
+   * ```
    */
   update(
     profileId: string,
@@ -25,6 +42,15 @@ export class Predefined extends APIResource {
 
   /**
    * Fetches a predefined DLP profile by id.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.predefined.get(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     profileId: string,

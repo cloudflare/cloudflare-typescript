@@ -12,6 +12,14 @@ export class Configurations extends APIResource {
 
   /**
    * Updates the current Zero Trust account configuration.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.zeroTrust.gateway.configurations.update({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   update(
     params: ConfigurationUpdateParams,
@@ -32,6 +40,14 @@ export class Configurations extends APIResource {
    * `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or
    * `certificate`, without updating the entire configuration object. Returns an
    * error if any collection of settings is not properly configured.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.gateway.configurations.edit({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   edit(
     params: ConfigurationEditParams,
@@ -48,6 +64,14 @@ export class Configurations extends APIResource {
 
   /**
    * Fetches the current Zero Trust account configuration.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.zeroTrust.gateway.configurations.get({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   get(
     params: ConfigurationGetParams,

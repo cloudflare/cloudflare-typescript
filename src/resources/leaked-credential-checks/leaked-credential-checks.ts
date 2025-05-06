@@ -21,6 +21,14 @@ export class LeakedCredentialChecks extends APIResource {
 
   /**
    * Updates the current status of Leaked Credential Checks.
+   *
+   * @example
+   * ```ts
+   * const leakedCredentialCheck =
+   *   await client.leakedCredentialChecks.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(
     params: LeakedCredentialCheckCreateParams,
@@ -37,6 +45,14 @@ export class LeakedCredentialChecks extends APIResource {
 
   /**
    * Retrieves the current status of Leaked Credential Checks.
+   *
+   * @example
+   * ```ts
+   * const leakedCredentialCheck =
+   *   await client.leakedCredentialChecks.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(
     params: LeakedCredentialCheckGetParams,

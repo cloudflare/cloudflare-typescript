@@ -6,6 +6,11 @@ import * as Core from '../../../core';
 export class Profile extends APIResource {
   /**
    * Accesses your billing profile object.
+   *
+   * @example
+   * ```ts
+   * const profile = await client.user.billing.profile.get();
+   * ```
    */
   get(options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
     return (

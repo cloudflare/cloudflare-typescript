@@ -63,6 +63,11 @@ export class DNS extends APIResource {
 
   /**
    * Retrieves normalized query volume to the 1.1.1.1 DNS resolver over time.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.timeseries();
+   * ```
    */
   timeseries(
     query?: DNSTimeseriesParams,

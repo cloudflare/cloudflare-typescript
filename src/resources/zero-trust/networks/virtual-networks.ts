@@ -7,6 +7,15 @@ import { SinglePage } from '../../../pagination';
 export class VirtualNetworks extends APIResource {
   /**
    * Adds a new virtual network to an account.
+   *
+   * @example
+   * ```ts
+   * const virtualNetwork =
+   *   await client.zeroTrust.networks.virtualNetworks.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     name: 'us-east-1-vpc',
+   *   });
+   * ```
    */
   create(params: VirtualNetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<VirtualNetwork> {
     const { account_id, ...body } = params;
@@ -20,6 +29,16 @@ export class VirtualNetworks extends APIResource {
 
   /**
    * Lists and filters virtual networks in an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const virtualNetwork of client.zeroTrust.networks.virtualNetworks.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: VirtualNetworkListParams,
@@ -35,6 +54,15 @@ export class VirtualNetworks extends APIResource {
 
   /**
    * Deletes an existing virtual network.
+   *
+   * @example
+   * ```ts
+   * const virtualNetwork =
+   *   await client.zeroTrust.networks.virtualNetworks.delete(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   delete(
     virtualNetworkId: string,
@@ -52,6 +80,15 @@ export class VirtualNetworks extends APIResource {
 
   /**
    * Updates an existing virtual network.
+   *
+   * @example
+   * ```ts
+   * const virtualNetwork =
+   *   await client.zeroTrust.networks.virtualNetworks.edit(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   edit(
     virtualNetworkId: string,
@@ -69,6 +106,15 @@ export class VirtualNetworks extends APIResource {
 
   /**
    * Get a virtual network.
+   *
+   * @example
+   * ```ts
+   * const virtualNetwork =
+   *   await client.zeroTrust.networks.virtualNetworks.get(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     virtualNetworkId: string,

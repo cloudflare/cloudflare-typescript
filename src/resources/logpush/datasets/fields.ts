@@ -9,6 +9,14 @@ export class Fields extends APIResource {
   /**
    * Lists all fields available for a dataset. The response result is an object with
    * key-value pairs, where keys are field names, and values are descriptions.
+   *
+   * @example
+   * ```ts
+   * const field = await client.logpush.datasets.fields.get(
+   *   'gateway_dns',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     datasetId:

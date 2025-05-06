@@ -21,6 +21,14 @@ export class Phases extends APIResource {
 
   /**
    * Updates an account or zone entry point ruleset, creating a new version.
+   *
+   * @example
+   * ```ts
+   * const phase = await client.rulesets.phases.update(
+   *   'http_request_firewall_custom',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   update(
     rulesetPhase: RulesetsAPI.PhaseParam,
@@ -55,6 +63,14 @@ export class Phases extends APIResource {
   /**
    * Fetches the latest version of the account or zone entry point ruleset for a
    * given phase.
+   *
+   * @example
+   * ```ts
+   * const phase = await client.rulesets.phases.get(
+   *   'http_request_firewall_custom',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     rulesetPhase: RulesetsAPI.PhaseParam,

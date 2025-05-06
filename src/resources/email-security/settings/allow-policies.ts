@@ -7,6 +7,21 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class AllowPolicies extends APIResource {
   /**
    * Create an email allow policy
+   *
+   * @example
+   * ```ts
+   * const allowPolicy =
+   *   await client.emailSecurity.settings.allowPolicies.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     is_acceptable_sender: false,
+   *     is_exempt_recipient: false,
+   *     is_regex: false,
+   *     is_trusted_sender: true,
+   *     pattern: 'test@example.com',
+   *     pattern_type: 'EMAIL',
+   *     verify_sender: true,
+   *   });
+   * ```
    */
   create(
     params: AllowPolicyCreateParams,
@@ -23,6 +38,16 @@ export class AllowPolicies extends APIResource {
 
   /**
    * Lists, searches, and sorts an account’s email allow policies.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const allowPolicyListResponse of client.emailSecurity.settings.allowPolicies.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: AllowPolicyListParams,
@@ -38,6 +63,15 @@ export class AllowPolicies extends APIResource {
 
   /**
    * Delete an email allow policy
+   *
+   * @example
+   * ```ts
+   * const allowPolicy =
+   *   await client.emailSecurity.settings.allowPolicies.delete(
+   *     2401,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     policyId: number,
@@ -55,6 +89,15 @@ export class AllowPolicies extends APIResource {
 
   /**
    * Update an email allow policy
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.emailSecurity.settings.allowPolicies.edit(
+   *     2401,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     policyId: number,
@@ -72,6 +115,15 @@ export class AllowPolicies extends APIResource {
 
   /**
    * Get an email allow policy
+   *
+   * @example
+   * ```ts
+   * const allowPolicy =
+   *   await client.emailSecurity.settings.allowPolicies.get(
+   *     2401,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     policyId: number,

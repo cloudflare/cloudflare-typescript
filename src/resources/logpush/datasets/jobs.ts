@@ -10,6 +10,17 @@ import { CloudflareError } from '../../../error';
 export class Jobs extends APIResource {
   /**
    * Lists Logpush jobs for an account or zone for a dataset.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const logpushJob of client.logpush.datasets.jobs.get(
+   *   'gateway_dns',
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     datasetId:

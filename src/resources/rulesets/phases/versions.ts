@@ -11,6 +11,17 @@ import { SinglePage } from '../../../pagination';
 export class Versions extends APIResource {
   /**
    * Fetches the versions of an account or zone entry point ruleset.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const versionListResponse of client.rulesets.phases.versions.list(
+   *   'http_request_firewall_custom',
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     rulesetPhase: RulesetsAPI.PhaseParam,
@@ -55,6 +66,15 @@ export class Versions extends APIResource {
 
   /**
    * Fetches a specific version of an account or zone entry point ruleset.
+   *
+   * @example
+   * ```ts
+   * const version = await client.rulesets.phases.versions.get(
+   *   'http_request_firewall_custom',
+   *   '1',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     rulesetPhase: RulesetsAPI.PhaseParam,

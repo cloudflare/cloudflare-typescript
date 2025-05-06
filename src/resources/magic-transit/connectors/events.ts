@@ -6,6 +6,15 @@ import * as Core from '../../../core';
 export class Events extends APIResource {
   /**
    * List Events
+   *
+   * @example
+   * ```ts
+   * const events =
+   *   await client.magicTransit.connectors.events.list(
+   *     'connector_id',
+   *     { account_id: 0, from: 0, to: 0 },
+   *   );
+   * ```
    */
   list(
     connectorId: string,
@@ -23,6 +32,17 @@ export class Events extends APIResource {
 
   /**
    * Get Event
+   *
+   * @example
+   * ```ts
+   * const event =
+   *   await client.magicTransit.connectors.events.get(
+   *     'connector_id',
+   *     0,
+   *     0,
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   get(
     connectorId: string,

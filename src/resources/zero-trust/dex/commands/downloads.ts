@@ -7,6 +7,19 @@ import { type Response } from '../../../../_shims/index';
 export class Downloads extends APIResource {
   /**
    * Downloads artifacts for an executed command. Bulk downloads are not supported
+   *
+   * @example
+   * ```ts
+   * const download =
+   *   await client.zeroTrust.dex.commands.downloads.get(
+   *     '5758fefe-ae7e-4538-a39b-1fef6abcb909',
+   *     'filename',
+   *     { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   *   );
+   *
+   * const content = await download.blob();
+   * console.log(content);
+   * ```
    */
   get(
     commandId: string,

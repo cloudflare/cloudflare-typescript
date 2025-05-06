@@ -9,6 +9,15 @@ export class CfInterconnects extends APIResource {
    * Updates a specific interconnect associated with an account. Use
    * `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const cfInterconnect =
+   *   await client.magicTransit.cfInterconnects.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     cfInterconnectId: string,
@@ -32,6 +41,14 @@ export class CfInterconnects extends APIResource {
 
   /**
    * Lists interconnects associated with an account.
+   *
+   * @example
+   * ```ts
+   * const cfInterconnects =
+   *   await client.magicTransit.cfInterconnects.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   list(
     params: CfInterconnectListParams,
@@ -55,6 +72,15 @@ export class CfInterconnects extends APIResource {
    * Updates multiple interconnects associated with an account. Use
    * `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.cfInterconnects.bulkUpdate({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: {},
+   *   });
+   * ```
    */
   bulkUpdate(
     params: CfInterconnectBulkUpdateParams,
@@ -77,6 +103,15 @@ export class CfInterconnects extends APIResource {
 
   /**
    * Lists details for a specific interconnect.
+   *
+   * @example
+   * ```ts
+   * const cfInterconnect =
+   *   await client.magicTransit.cfInterconnects.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     cfInterconnectId: string,

@@ -16,6 +16,14 @@ export class TieredCaching extends APIResource {
    * so they come from a small number of data centers rather than the full set of
    * network locations. This results in fewer open connections using server
    * resources.
+   *
+   * @example
+   * ```ts
+   * const response = await client.argo.tieredCaching.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   value: 'on',
+   * });
+   * ```
    */
   edit(
     params: TieredCachingEditParams,
@@ -41,6 +49,13 @@ export class TieredCaching extends APIResource {
    * so they come from a small number of data centers rather than the full set of
    * network locations. This results in fewer open connections using server
    * resources.
+   *
+   * @example
+   * ```ts
+   * const tieredCaching = await client.argo.tieredCaching.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(
     params: TieredCachingGetParams,

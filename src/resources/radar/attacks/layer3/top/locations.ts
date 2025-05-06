@@ -7,6 +7,12 @@ import * as Core from '../../../../../core';
 export class Locations extends APIResource {
   /**
    * Retrieves the origin locations of layer 3 attacks.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer3.top.locations.origin();
+   * ```
    */
   origin(
     query?: LocationOriginParams,
@@ -30,6 +36,12 @@ export class Locations extends APIResource {
 
   /**
    * Retrieves the target locations of layer 3 attacks.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer3.top.locations.target();
+   * ```
    */
   target(
     query?: LocationTargetParams,

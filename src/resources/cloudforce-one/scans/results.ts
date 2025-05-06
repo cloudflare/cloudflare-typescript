@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Results extends APIResource {
   /**
    * Get the Latest Scan Result
+   *
+   * @example
+   * ```ts
+   * const result = await client.cloudforceOne.scans.results.get(
+   *   'config_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     configId: string,

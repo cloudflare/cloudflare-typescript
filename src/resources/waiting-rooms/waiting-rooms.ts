@@ -54,6 +54,17 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Creates a new waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   host: 'shop.example.com',
+   *   name: 'production_webinar',
+   *   new_users_per_minute: 200,
+   *   total_active_users: 200,
+   * });
+   * ```
    */
   create(params: WaitingRoomCreateParams, options?: Core.RequestOptions): Core.APIPromise<WaitingRoom> {
     const { zone_id, ...body } = params;
@@ -66,6 +77,20 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Updates a configured waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.update(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     host: 'shop.example.com',
+   *     name: 'production_webinar',
+   *     new_users_per_minute: 200,
+   *     total_active_users: 200,
+   *   },
+   * );
+   * ```
    */
   update(
     waitingRoomId: string,
@@ -83,6 +108,16 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Lists waiting rooms for account or zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const waitingRoom of client.waitingRooms.list({
+   *   account_id: 'account_id',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params?: WaitingRoomListParams,
@@ -122,6 +157,14 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Deletes a waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.delete(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     waitingRoomId: string,
@@ -138,6 +181,20 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Patches a configured waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.edit(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     host: 'shop.example.com',
+   *     name: 'production_webinar',
+   *     new_users_per_minute: 200,
+   *     total_active_users: 200,
+   *   },
+   * );
+   * ```
    */
   edit(
     waitingRoomId: string,
@@ -155,6 +212,14 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Fetches a single configured waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.get(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     waitingRoomId: string,

@@ -7,6 +7,18 @@ export class TemporaryCredentials extends APIResource {
   /**
    * Creates temporary access credentials on a bucket that can be optionally scoped
    * to prefixes or objects.
+   *
+   * @example
+   * ```ts
+   * const temporaryCredential =
+   *   await client.r2.temporaryCredentials.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     bucket: 'example-bucket',
+   *     parentAccessKeyId: 'example-access-key-id',
+   *     permission: 'object-read-write',
+   *     ttlSeconds: 3600,
+   *   });
+   * ```
    */
   create(
     params: TemporaryCredentialCreateParams,

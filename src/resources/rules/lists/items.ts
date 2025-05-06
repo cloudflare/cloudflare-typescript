@@ -11,6 +11,17 @@ export class Items extends APIResource {
    * This operation is asynchronous. To get current the operation status, invoke the
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
+   *
+   * @example
+   * ```ts
+   * const item = await client.rules.lists.items.create(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{}],
+   *   },
+   * );
+   * ```
    */
   create(
     listId: string,
@@ -33,6 +44,17 @@ export class Items extends APIResource {
    * This operation is asynchronous. To get current the operation status, invoke the
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
+   *
+   * @example
+   * ```ts
+   * const item = await client.rules.lists.items.update(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{}],
+   *   },
+   * );
+   * ```
    */
   update(
     listId: string,
@@ -50,6 +72,14 @@ export class Items extends APIResource {
 
   /**
    * Fetches all the items in the list.
+   *
+   * @example
+   * ```ts
+   * const items = await client.rules.lists.items.list(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   list(
     listId: string,
@@ -71,6 +101,14 @@ export class Items extends APIResource {
    * This operation is asynchronous. To get current the operation status, invoke the
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
+   *
+   * @example
+   * ```ts
+   * const item = await client.rules.lists.items.delete(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     listId: string,
@@ -87,6 +125,15 @@ export class Items extends APIResource {
 
   /**
    * Fetches a list item in the list.
+   *
+   * @example
+   * ```ts
+   * const item = await client.rules.lists.items.get(
+   *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
+   *   '34b12448945f11eaa1b71c4d701ab86e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     listId: string,

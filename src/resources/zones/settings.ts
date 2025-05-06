@@ -7,6 +7,18 @@ import * as SettingsAPI from './settings';
 export class Settings extends APIResource {
   /**
    * Updates a single zone setting by the identifier
+   *
+   * @example
+   * ```ts
+   * const response = await client.zones.settings.edit(
+   *   'always_online',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     id: '0rtt',
+   *     value: 'on',
+   *   },
+   * );
+   * ```
    */
   edit(
     settingId: string,
@@ -23,6 +35,14 @@ export class Settings extends APIResource {
 
   /**
    * Fetch a single zone setting by name
+   *
+   * @example
+   * ```ts
+   * const setting = await client.zones.settings.get(
+   *   'always_online',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     settingId: string,

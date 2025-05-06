@@ -31,6 +31,16 @@ export class Users extends APIResource {
 
   /**
    * Gets a list of users for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const userListResponse of client.zeroTrust.access.users.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: UserListParams,

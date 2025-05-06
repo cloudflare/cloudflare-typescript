@@ -8,6 +8,19 @@ export class AssetUpload extends APIResource {
    * Start uploading a collection of assets for use in a Worker version. To learn
    * more about the direct uploads of assets, see
    * https://developers.cloudflare.com/workers/static-assets/direct-upload/
+   *
+   * @example
+   * ```ts
+   * const assetUpload =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.assetUpload.create(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       manifest: { foo: { hash: 'hash', size: 0 } },
+   *     },
+   *   );
+   * ```
    */
   create(
     dispatchNamespace: string,

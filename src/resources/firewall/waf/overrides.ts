@@ -10,6 +10,16 @@ export class Overrides extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const override = await client.firewall.waf.overrides.create(
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     urls: ['shop.example.com/*'],
+   *   },
+   * );
+   * ```
    */
   create(params: OverrideCreateParams, options?: Core.RequestOptions): Core.APIPromise<Override> {
     const { zone_id, ...body } = params;
@@ -25,6 +35,20 @@ export class Overrides extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const override = await client.firewall.waf.overrides.update(
+   *   'de677e5818985db1285d0e80225f06e5',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     rewrite_action: {},
+   *     rules: { '100015': 'disable' },
+   *     urls: ['shop.example.com/*'],
+   *   },
+   * );
+   * ```
    */
   update(
     overridesId: string,
@@ -45,6 +69,16 @@ export class Overrides extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const override of client.firewall.waf.overrides.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: OverrideListParams,
@@ -63,6 +97,14 @@ export class Overrides extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const override = await client.firewall.waf.overrides.delete(
+   *   'de677e5818985db1285d0e80225f06e5',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     overridesId: string,
@@ -83,6 +125,14 @@ export class Overrides extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const override = await client.firewall.waf.overrides.get(
+   *   'de677e5818985db1285d0e80225f06e5',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     overridesId: string,

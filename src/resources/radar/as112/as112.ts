@@ -57,6 +57,11 @@ export class AS112 extends APIResource {
 
   /**
    * Retrieves the AS112 DNS queries over time.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.as112.timeseries();
+   * ```
    */
   timeseries(
     query?: AS112TimeseriesParams,

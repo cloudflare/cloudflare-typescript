@@ -119,6 +119,13 @@ export class Cache extends APIResource {
    *
    * please refer to
    * [purge cache availability and limits documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/#availability-and-limits).
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.purge({
+   *   zone_id: 'zone_id',
+   * });
+   * ```
    */
   purge(params: CachePurgeParams, options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null> {
     const { zone_id, ...body } = params;

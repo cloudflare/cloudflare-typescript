@@ -7,6 +7,12 @@ import * as Core from '../../../../core';
 export class IPVersion extends APIResource {
   /**
    * Retrieves the top locations, by HTTP requests, of the requested IP version.
+   *
+   * @example
+   * ```ts
+   * const ipVersion =
+   *   await client.radar.http.locations.ipVersion.get('IPv4');
+   * ```
    */
   get(
     ipVersion: 'IPv4' | 'IPv6',

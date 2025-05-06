@@ -8,6 +8,16 @@ import { V4PagePagination, type V4PagePaginationParams } from '../../../paginati
 export class Issues extends APIResource {
   /**
    * Get Security Center Issues
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const issueListResponse of client.intel.attackSurfaceReport.issues.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: IssueListParams,
@@ -23,6 +33,14 @@ export class Issues extends APIResource {
 
   /**
    * Get Security Center Issue Counts by Class
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.intel.attackSurfaceReport.issues.class({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   class(params: IssueClassParams, options?: Core.RequestOptions): Core.APIPromise<IssueClassResponse> {
     const { account_id, ...query } = params;
@@ -36,6 +54,15 @@ export class Issues extends APIResource {
 
   /**
    * Archive Security Center Insight
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.intel.attackSurfaceReport.issues.dismiss(
+   *     'issue_id',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   dismiss(
     issueId: string,
@@ -51,6 +78,14 @@ export class Issues extends APIResource {
 
   /**
    * Get Security Center Issue Counts by Severity
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.intel.attackSurfaceReport.issues.severity({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   severity(
     params: IssueSeverityParams,
@@ -67,6 +102,14 @@ export class Issues extends APIResource {
 
   /**
    * Get Security Center Issue Counts by Type
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.intel.attackSurfaceReport.issues.type({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   type(params: IssueTypeParams, options?: Core.RequestOptions): Core.APIPromise<IssueTypeResponse> {
     const { account_id, ...query } = params;
