@@ -54,7 +54,7 @@ export interface StatusGetResponse {
 
 export interface StatusGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
