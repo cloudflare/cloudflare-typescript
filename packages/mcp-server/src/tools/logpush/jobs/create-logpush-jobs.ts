@@ -64,6 +64,11 @@ export const tool: Tool = {
         type: 'boolean',
         description: 'Flag that indicates if the job is enabled.',
       },
+      filter: {
+        type: 'string',
+        description:
+          'The filters to select the events to include and/or remove from your logs. For more information, refer to [Filters](https://developers.cloudflare.com/logs/reference/filters/).',
+      },
       frequency: {
         type: 'string',
         description:
