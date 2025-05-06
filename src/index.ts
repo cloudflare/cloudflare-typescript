@@ -393,12 +393,28 @@ export class Cloudflare extends Core.APIClient {
   }
 
   protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
-    return {
-      ...this.apiEmailAuth(opts),
-      ...this.apiKeyAuth(opts),
-      ...this.apiTokenAuth(opts),
-      ...this.userServiceKeyAuth(opts),
-    };
+    const apiEmailAuth = this.apiEmailAuth(opts);
+    const apiKeyAuth = this.apiKeyAuth(opts);
+    const apiTokenAuth = this.apiTokenAuth(opts);
+    const userServiceKeyAuth = this.userServiceKeyAuth(opts);
+
+    if (
+      apiEmailAuth != null &&
+      !Core.isEmptyObj(apiEmailAuth) &&
+      apiKeyAuth != null &&
+      !Core.isEmptyObj(apiKeyAuth)
+    ) {
+      return { ...apiEmailAuth, ...apiKeyAuth };
+    }
+
+    if (apiTokenAuth != null && !Core.isEmptyObj(apiTokenAuth)) {
+      return apiTokenAuth;
+    }
+
+    if (userServiceKeyAuth != null && !Core.isEmptyObj(userServiceKeyAuth)) {
+      return userServiceKeyAuth;
+    }
+    return {};
   }
 
   protected apiEmailAuth(opts: Core.FinalRequestOptions): Core.Headers {
