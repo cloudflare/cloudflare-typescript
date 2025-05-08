@@ -27,6 +27,19 @@ export class Hostnames extends APIResource {
    * even if activated at the zone level. 100 maximum associations on a single
    * certificate are allowed. Note: Use a null value for parameter _enabled_ to
    * invalidate the association.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const hostnameUpdateResponse of client.originTLSClientAuth.hostnames.update(
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     config: [{}],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   update(
     params: HostnameUpdateParams,
@@ -42,6 +55,15 @@ export class Hostnames extends APIResource {
 
   /**
    * Get the Hostname Status for Client Authentication
+   *
+   * @example
+   * ```ts
+   * const authenticatedOriginPull =
+   *   await client.originTLSClientAuth.hostnames.get(
+   *     'app.example.com',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     hostname: string,
@@ -62,7 +84,7 @@ export class HostnameUpdateResponsesSinglePage extends SinglePage<HostnameUpdate
 
 export interface AuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   cert_id?: string;
 
@@ -150,12 +172,12 @@ export interface AuthenticatedOriginPull {
 
 export interface HostnameUpdateResponse extends AuthenticatedOriginPull {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   cert_id?: string;
 
@@ -184,7 +206,7 @@ export interface HostnameUpdateResponse extends AuthenticatedOriginPull {
 
 export interface HostnameUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -217,7 +239,7 @@ export namespace HostnameUpdateParams {
 
 export interface HostnameGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

@@ -44,14 +44,14 @@ export interface ASNGetResponse {
 
 export interface ASNDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ASNGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

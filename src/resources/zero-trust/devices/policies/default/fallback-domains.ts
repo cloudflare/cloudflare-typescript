@@ -9,6 +9,19 @@ export class FallbackDomains extends APIResource {
   /**
    * Sets the list of domains to bypass Gateway DNS resolution. These domains will
    * use the specified local DNS resolver instead.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const fallbackDomain of client.zeroTrust.devices.policies.default.fallbackDomains.update(
+   *   {
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     domains: [{ suffix: 'example.com' }],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   update(
     params: FallbackDomainUpdateParams,
@@ -25,6 +38,16 @@ export class FallbackDomains extends APIResource {
   /**
    * Fetches a list of domains to bypass Gateway DNS resolution. These domains will
    * use the specified local DNS resolver instead.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const fallbackDomain of client.zeroTrust.devices.policies.default.fallbackDomains.get(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: FallbackDomainGetParams,

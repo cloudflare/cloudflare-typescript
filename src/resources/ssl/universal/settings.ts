@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Settings extends APIResource {
   /**
    * Patch Universal SSL Settings for a Zone.
+   *
+   * @example
+   * ```ts
+   * const universalSSLSettings =
+   *   await client.ssl.universal.settings.edit({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings> {
     const { zone_id, ...body } = params;
@@ -19,6 +27,14 @@ export class Settings extends APIResource {
 
   /**
    * Get Universal SSL Settings for a Zone.
+   *
+   * @example
+   * ```ts
+   * const universalSSLSettings =
+   *   await client.ssl.universal.settings.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings> {
     const { zone_id } = params;
@@ -63,7 +79,7 @@ export interface UniversalSSLSettings {
 
 export interface SettingEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -99,7 +115,7 @@ export interface SettingEditParams {
 
 export interface SettingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

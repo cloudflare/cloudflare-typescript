@@ -48,6 +48,21 @@ describe('resource workflows', () => {
     const response = await client.workflows.list({ account_id: 'account_id', page: 1, per_page: 1 });
   });
 
+  test('delete: only required params', async () => {
+    const responsePromise = client.workflows.delete('x', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.workflows.delete('x', { account_id: 'account_id' });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.workflows.get('x', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();

@@ -7,6 +7,15 @@ import { SinglePage } from '../pagination';
 export class CustomNameservers extends APIResource {
   /**
    * Add Account Custom Nameserver
+   *
+   * @example
+   * ```ts
+   * const customNameserver =
+   *   await client.customNameservers.create({
+   *     account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+   *     ns_name: 'ns1.example.com',
+   *   });
+   * ```
    */
   create(
     params: CustomNameserverCreateParams,
@@ -22,6 +31,17 @@ export class CustomNameservers extends APIResource {
 
   /**
    * Delete Account Custom Nameserver
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customNameserverDeleteResponse of client.customNameservers.delete(
+   *   'ns1.example.com',
+   *   { account_id: '372e67954025e0ba6aaa6d586b9e0b59' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   delete(
     customNSId: string,
@@ -37,22 +57,17 @@ export class CustomNameservers extends APIResource {
   }
 
   /**
-   * Get Eligible Zones for Account Custom Nameservers
-   */
-  availabilty(
-    params: CustomNameserverAvailabiltyParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CustomNameserverAvailabiltyResponsesSinglePage, CustomNameserverAvailabiltyResponse> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/custom_ns/availability`,
-      CustomNameserverAvailabiltyResponsesSinglePage,
-      options,
-    );
-  }
-
-  /**
    * List an account's custom nameservers.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customNameserver of client.customNameservers.get(
+   *   { account_id: '372e67954025e0ba6aaa6d586b9e0b59' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: CustomNameserverGetParams,
@@ -64,8 +79,6 @@ export class CustomNameservers extends APIResource {
 }
 
 export class CustomNameserverDeleteResponsesSinglePage extends SinglePage<CustomNameserverDeleteResponse> {}
-
-export class CustomNameserverAvailabiltyResponsesSinglePage extends SinglePage<CustomNameserverAvailabiltyResponse> {}
 
 export class CustomNameserversSinglePage extends SinglePage<CustomNameserver> {}
 
@@ -118,13 +131,6 @@ export namespace CustomNameserver {
  */
 export type CustomNameserverDeleteResponse = string;
 
-/**
- * Name of zone based on which account custom nameservers can be created. For
- * example, if example.com is returned, then ns1.example.com can be used as an
- * account custom nameserver.
- */
-export type CustomNameserverAvailabiltyResponse = string;
-
 export interface CustomNameserverCreateParams {
   /**
    * Path param: Account identifier tag.
@@ -149,16 +155,24 @@ export interface CustomNameserverDeleteParams {
   account_id: string;
 }
 
-export interface CustomNameserverAvailabiltyParams {
+export interface CustomNameserverGetParams {
   /**
    * Account identifier tag.
    */
   account_id: string;
 }
 
-export interface CustomNameserverGetParams {
-  /**
-   * Account identifier tag.
-   */
-  account_id: string;
+CustomNameservers.CustomNameserverDeleteResponsesSinglePage = CustomNameserverDeleteResponsesSinglePage;
+CustomNameservers.CustomNameserversSinglePage = CustomNameserversSinglePage;
+
+export declare namespace CustomNameservers {
+  export {
+    type CustomNameserver as CustomNameserver,
+    type CustomNameserverDeleteResponse as CustomNameserverDeleteResponse,
+    CustomNameserverDeleteResponsesSinglePage as CustomNameserverDeleteResponsesSinglePage,
+    CustomNameserversSinglePage as CustomNameserversSinglePage,
+    type CustomNameserverCreateParams as CustomNameserverCreateParams,
+    type CustomNameserverDeleteParams as CustomNameserverDeleteParams,
+    type CustomNameserverGetParams as CustomNameserverGetParams,
+  };
 }

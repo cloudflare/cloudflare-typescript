@@ -6,6 +6,16 @@ import * as Core from '../../../core';
 export class EventNotifications extends APIResource {
   /**
    * Create event notification rule.
+   *
+   * @example
+   * ```ts
+   * const eventNotification =
+   *   await client.r2.buckets.eventNotifications.update(
+   *     'example-bucket',
+   *     'queue_id',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     bucketName: string,
@@ -34,6 +44,16 @@ export class EventNotifications extends APIResource {
   /**
    * Delete an event notification rule. **If no body is provided, all rules for
    * specified queue will be deleted**.
+   *
+   * @example
+   * ```ts
+   * const eventNotification =
+   *   await client.r2.buckets.eventNotifications.delete(
+   *     'example-bucket',
+   *     'queue_id',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     bucketName: string,
@@ -60,6 +80,15 @@ export class EventNotifications extends APIResource {
 
   /**
    * List all event notification rules for a bucket.
+   *
+   * @example
+   * ```ts
+   * const eventNotification =
+   *   await client.r2.buckets.eventNotifications.get(
+   *     'example-bucket',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     bucketName: string,
@@ -100,12 +129,12 @@ export interface EventNotificationGetResponse {
 export namespace EventNotificationGetResponse {
   export interface Queue {
     /**
-     * Queue ID
+     * Queue ID.
      */
     queueId?: string;
 
     /**
-     * Name of the queue
+     * Name of the queue.
      */
     queueName?: string;
 
@@ -115,35 +144,35 @@ export namespace EventNotificationGetResponse {
   export namespace Queue {
     export interface Rule {
       /**
-       * Array of R2 object actions that will trigger notifications
+       * Array of R2 object actions that will trigger notifications.
        */
       actions: Array<
         'PutObject' | 'CopyObject' | 'DeleteObject' | 'CompleteMultipartUpload' | 'LifecycleDeletion'
       >;
 
       /**
-       * Timestamp when the rule was created
+       * Timestamp when the rule was created.
        */
       createdAt?: string;
 
       /**
        * A description that can be used to identify the event notification rule after
-       * creation
+       * creation.
        */
       description?: string;
 
       /**
-       * Notifications will be sent only for objects with this prefix
+       * Notifications will be sent only for objects with this prefix.
        */
       prefix?: string;
 
       /**
-       * Rule ID
+       * Rule ID.
        */
       ruleId?: string;
 
       /**
-       * Notifications will be sent only for objects with this suffix
+       * Notifications will be sent only for objects with this suffix.
        */
       suffix?: string;
     }
@@ -152,17 +181,17 @@ export namespace EventNotificationGetResponse {
 
 export interface EventNotificationUpdateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Body param: Array of rules to drive notifications
+   * Body param: Array of rules to drive notifications.
    */
   rules?: Array<EventNotificationUpdateParams.Rule>;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -170,7 +199,7 @@ export interface EventNotificationUpdateParams {
 export namespace EventNotificationUpdateParams {
   export interface Rule {
     /**
-     * Array of R2 object actions that will trigger notifications
+     * Array of R2 object actions that will trigger notifications.
      */
     actions: Array<
       'PutObject' | 'CopyObject' | 'DeleteObject' | 'CompleteMultipartUpload' | 'LifecycleDeletion'
@@ -178,17 +207,17 @@ export namespace EventNotificationUpdateParams {
 
     /**
      * A description that can be used to identify the event notification rule after
-     * creation
+     * creation.
      */
     description?: string;
 
     /**
-     * Notifications will be sent only for objects with this prefix
+     * Notifications will be sent only for objects with this prefix.
      */
     prefix?: string;
 
     /**
-     * Notifications will be sent only for objects with this suffix
+     * Notifications will be sent only for objects with this suffix.
      */
     suffix?: string;
   }
@@ -196,24 +225,24 @@ export namespace EventNotificationUpdateParams {
 
 export interface EventNotificationDeleteParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface EventNotificationGetParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: The bucket jurisdiction.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

@@ -7,6 +7,20 @@ import { SinglePage } from '../../../pagination';
 export class Move extends APIResource {
   /**
    * Move a message
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const moveCreateResponse of client.emailSecurity.investigate.move.create(
+   *   '4Njp3P0STMz2c02Q',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     destination: 'Inbox',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     postfixId: string,
@@ -23,6 +37,20 @@ export class Move extends APIResource {
 
   /**
    * Move multiple messages
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const moveBulkResponse of client.emailSecurity.investigate.move.bulk(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     destination: 'Inbox',
+   *     postfix_ids: ['4Njp3P0STMz2c02Q'],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   bulk(
     params: MoveBulkParams,

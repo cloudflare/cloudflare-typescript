@@ -7,6 +7,13 @@ export class ActivationCheck extends APIResource {
   /**
    * Triggeres a new activation check for a PENDING Zone. This can be triggered every
    * 5 min for paygo/ent customers, every hour for FREE Zones.
+   *
+   * @example
+   * ```ts
+   * const response = await client.zones.activationCheck.trigger(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   trigger(
     params: ActivationCheckTriggerParams,
@@ -23,14 +30,14 @@ export class ActivationCheck extends APIResource {
 
 export interface ActivationCheckTriggerResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface ActivationCheckTriggerParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

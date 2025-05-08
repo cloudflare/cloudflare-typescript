@@ -33,10 +33,10 @@ describe('resource organizations', () => {
     await expect(
       client.user.organizations.list(
         {
-          direction: 'asc',
+          direction: 'desc',
           match: 'any',
           name: 'Cloudflare, Inc.',
-          order: 'id',
+          order: 'status',
           page: 1,
           per_page: 5,
           status: 'member',

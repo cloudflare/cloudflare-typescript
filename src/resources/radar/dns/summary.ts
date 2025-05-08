@@ -7,6 +7,11 @@ import * as Core from '../../../core';
 export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by cache status.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.cacheHit();
+   * ```
    */
   cacheHit(
     query?: SummaryCacheHitParams,
@@ -30,6 +35,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions)
    * support.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.dnssec();
+   * ```
    */
   dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
   dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
@@ -50,6 +60,12 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions)
    * client awareness.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.dns.summary.dnssecAware();
+   * ```
    */
   dnssecAware(
     query?: SummaryDNSSECAwareParams,
@@ -73,6 +89,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNSSEC-validated answers by end-to-end security
    * status.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.dnssecE2E();
+   * ```
    */
   dnssecE2E(
     query?: SummaryDNSSECE2EParams,
@@ -95,6 +116,11 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by IP version.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.ipVersion();
+   * ```
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -117,6 +143,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by matching answers.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.dns.summary.matchingAnswer();
+   * ```
    */
   matchingAnswer(
     query?: SummaryMatchingAnswerParams,
@@ -139,6 +171,11 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by DNS transport protocol.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.protocol();
+   * ```
    */
   protocol(
     query?: SummaryProtocolParams,
@@ -161,6 +198,11 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by type.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.dns.summary.queryType();
+   * ```
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -183,6 +225,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by response code.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.dns.summary.responseCode();
+   * ```
    */
   responseCode(
     query?: SummaryResponseCodeParams,
@@ -205,6 +253,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of DNS queries by minimum response TTL.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.dns.summary.responseTTL();
+   * ```
    */
   responseTTL(
     query?: SummaryResponseTTLParams,
@@ -854,16 +908,17 @@ export namespace SummaryResponseTTLResponse {
 
 export interface SummaryCacheHitParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -873,9 +928,9 @@ export interface SummaryCacheHitParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -890,9 +945,9 @@ export interface SummaryCacheHitParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -902,7 +957,7 @@ export interface SummaryCacheHitParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -1037,16 +1092,17 @@ export interface SummaryCacheHitParams {
 
 export interface SummaryDNSSECParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -1056,9 +1112,9 @@ export interface SummaryDNSSECParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -1073,9 +1129,9 @@ export interface SummaryDNSSECParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -1085,7 +1141,7 @@ export interface SummaryDNSSECParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -1220,16 +1276,17 @@ export interface SummaryDNSSECParams {
 
 export interface SummaryDNSSECAwareParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -1239,9 +1296,9 @@ export interface SummaryDNSSECAwareParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -1256,9 +1313,9 @@ export interface SummaryDNSSECAwareParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -1268,7 +1325,7 @@ export interface SummaryDNSSECAwareParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -1403,16 +1460,17 @@ export interface SummaryDNSSECAwareParams {
 
 export interface SummaryDNSSECE2EParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -1422,9 +1480,9 @@ export interface SummaryDNSSECE2EParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -1439,9 +1497,9 @@ export interface SummaryDNSSECE2EParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -1451,7 +1509,7 @@ export interface SummaryDNSSECE2EParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -1586,16 +1644,17 @@ export interface SummaryDNSSECE2EParams {
 
 export interface SummaryIPVersionParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -1605,9 +1664,9 @@ export interface SummaryIPVersionParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -1622,9 +1681,9 @@ export interface SummaryIPVersionParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -1634,7 +1693,7 @@ export interface SummaryIPVersionParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -1769,16 +1828,17 @@ export interface SummaryIPVersionParams {
 
 export interface SummaryMatchingAnswerParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -1788,9 +1848,9 @@ export interface SummaryMatchingAnswerParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -1805,9 +1865,9 @@ export interface SummaryMatchingAnswerParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -1817,7 +1877,7 @@ export interface SummaryMatchingAnswerParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -1952,16 +2012,17 @@ export interface SummaryMatchingAnswerParams {
 
 export interface SummaryProtocolParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -1971,9 +2032,9 @@ export interface SummaryProtocolParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -1988,9 +2049,9 @@ export interface SummaryProtocolParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -2000,7 +2061,7 @@ export interface SummaryProtocolParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -2130,16 +2191,17 @@ export interface SummaryProtocolParams {
 
 export interface SummaryQueryTypeParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -2149,9 +2211,9 @@ export interface SummaryQueryTypeParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -2167,16 +2229,15 @@ export interface SummaryQueryTypeParams {
 
   /**
    * Limits the number of objects per group to the top items within the specified
-   * time range. If there are more items than the limit, the response will include
-   * the count of items, with any remaining items grouped together under an "other"
-   * category.
+   * time range. When item count exceeds the limit, extra items appear grouped under
+   * an "other" category.
    */
   limitPerGroup?: number;
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -2186,7 +2247,7 @@ export interface SummaryQueryTypeParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -2227,16 +2288,17 @@ export interface SummaryQueryTypeParams {
 
 export interface SummaryResponseCodeParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -2246,9 +2308,9 @@ export interface SummaryResponseCodeParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -2264,16 +2326,15 @@ export interface SummaryResponseCodeParams {
 
   /**
    * Limits the number of objects per group to the top items within the specified
-   * time range. If there are more items than the limit, the response will include
-   * the count of items, with any remaining items grouped together under an "other"
-   * category.
+   * time range. When item count exceeds the limit, extra items appear grouped under
+   * an "other" category.
    */
   limitPerGroup?: number;
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -2283,7 +2344,7 @@ export interface SummaryResponseCodeParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 
@@ -2394,16 +2455,17 @@ export interface SummaryResponseCodeParams {
 
 export interface SummaryResponseTTLParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
   /**
-   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to
-   * exclude continents from results. For example, `-EU,NA` excludes results from EU,
-   * but includes results from NA.
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
    */
   continent?: Array<string>;
 
@@ -2413,9 +2475,9 @@ export interface SummaryResponseTTLParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -2430,9 +2492,9 @@ export interface SummaryResponseTTLParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude
-   * locations from results. For example, `-US,PT` excludes results from the US, but
-   * includes results from PT.
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
    */
   location?: Array<string>;
 
@@ -2442,7 +2504,7 @@ export interface SummaryResponseTTLParams {
   name?: Array<string>;
 
   /**
-   * Includes empty DNS responses (NODATA).
+   * Specifies whether the response includes empty DNS responses (NODATA).
    */
   nodata?: boolean;
 

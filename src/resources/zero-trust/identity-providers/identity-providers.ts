@@ -14,6 +14,17 @@ export class IdentityProviders extends APIResource {
 
   /**
    * Adds a new identity provider to Access.
+   *
+   * @example
+   * ```ts
+   * const identityProvider =
+   *   await client.zeroTrust.identityProviders.create({
+   *     config: {},
+   *     name: 'Widget Corps IDP',
+   *     type: 'onetimepin',
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   create(
     params: IdentityProviderCreateParams,
@@ -46,6 +57,20 @@ export class IdentityProviders extends APIResource {
 
   /**
    * Updates a configured identity provider.
+   *
+   * @example
+   * ```ts
+   * const identityProvider =
+   *   await client.zeroTrust.identityProviders.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       config: {},
+   *       name: 'Widget Corps IDP',
+   *       type: 'onetimepin',
+   *       account_id: 'account_id',
+   *     },
+   *   );
+   * ```
    */
   update(
     identityProviderId: string,
@@ -79,6 +104,16 @@ export class IdentityProviders extends APIResource {
 
   /**
    * Lists all configured identity providers.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const identityProviderListResponse of client.zeroTrust.identityProviders.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params?: IdentityProviderListParams,
@@ -120,6 +155,15 @@ export class IdentityProviders extends APIResource {
 
   /**
    * Deletes an identity provider from Access.
+   *
+   * @example
+   * ```ts
+   * const identityProvider =
+   *   await client.zeroTrust.identityProviders.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     identityProviderId: string,
@@ -165,6 +209,15 @@ export class IdentityProviders extends APIResource {
 
   /**
    * Fetches a configured identity provider.
+   *
+   * @example
+   * ```ts
+   * const identityProvider =
+   *   await client.zeroTrust.identityProviders.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     identityProviderId: string,
@@ -229,7 +282,7 @@ export interface AzureAD {
   type: IdentityProviderType;
 
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 
@@ -441,7 +494,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -512,7 +565,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -544,7 +597,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -576,7 +629,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -637,7 +690,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -703,7 +756,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -735,7 +788,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -821,7 +874,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -892,7 +945,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -958,7 +1011,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1024,7 +1077,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1117,7 +1170,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -1149,7 +1202,7 @@ export namespace IdentityProvider {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2035,7 +2088,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2106,7 +2159,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2138,7 +2191,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2170,7 +2223,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2231,7 +2284,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2297,7 +2350,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2329,7 +2382,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2415,7 +2468,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2486,7 +2539,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2552,7 +2605,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2618,7 +2671,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2711,7 +2764,7 @@ export namespace IdentityProviderListResponse {
     type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
-     * UUID
+     * UUID.
      */
     id?: string;
 
@@ -2725,7 +2778,7 @@ export namespace IdentityProviderListResponse {
 
 export interface IdentityProviderDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }

@@ -7,6 +7,26 @@ import * as ZarazAPI from './zaraz';
 export class Config extends APIResource {
   /**
    * Updates Zaraz configuration for a zone.
+   *
+   * @example
+   * ```ts
+   * const configuration = await client.zaraz.config.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   dataLayer: true,
+   *   debugKey: 'debugKey',
+   *   settings: { autoInjectScript: true },
+   *   tools: {
+   *     foo: { ... },
+   *   },
+   *   triggers: {
+   *     foo: { ... },
+   *   },
+   *   variables: {
+   *     foo: { ... },
+   *   },
+   *   zarazVersion: 0,
+   * });
+   * ```
    */
   update(params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { zone_id, ...body } = params;
@@ -21,6 +41,13 @@ export class Config extends APIResource {
    * Gets latest Zaraz configuration for a zone. It can be preview or published
    * configuration, whichever was the last updated. Secret variables values will not
    * be included.
+   *
+   * @example
+   * ```ts
+   * const configuration = await client.zaraz.config.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { zone_id } = params;

@@ -8,6 +8,15 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class UARules extends APIResource {
   /**
    * Creates a new User Agent Blocking rule in a zone.
+   *
+   * @example
+   * ```ts
+   * const uaRule = await client.firewall.uaRules.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   configuration: {},
+   *   mode: 'challenge',
+   * });
+   * ```
    */
   create(params: UARuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<UARuleCreateResponse> {
     const { zone_id, ...body } = params;
@@ -20,6 +29,18 @@ export class UARules extends APIResource {
 
   /**
    * Updates an existing User Agent Blocking rule.
+   *
+   * @example
+   * ```ts
+   * const uaRule = await client.firewall.uaRules.update(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     configuration: {},
+   *     mode: 'challenge',
+   *   },
+   * );
+   * ```
    */
   update(
     uaRuleId: string,
@@ -38,6 +59,16 @@ export class UARules extends APIResource {
   /**
    * Fetches User Agent Blocking rules in a zone. You can filter the results using
    * several optional parameters.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const uaRuleListResponse of client.firewall.uaRules.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: UARuleListParams,
@@ -53,6 +84,14 @@ export class UARules extends APIResource {
 
   /**
    * Deletes an existing User Agent Blocking rule.
+   *
+   * @example
+   * ```ts
+   * const uaRule = await client.firewall.uaRules.delete(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     uaRuleId: string,
@@ -69,6 +108,14 @@ export class UARules extends APIResource {
 
   /**
    * Fetches the details of a User Agent Blocking rule.
+   *
+   * @example
+   * ```ts
+   * const uaRule = await client.firewall.uaRules.get(
+   *   '372e67954025e0ba6aaa6d586b9e0b59',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     uaRuleId: string,
@@ -147,7 +194,7 @@ export type UARuleGetResponse = unknown | string | null;
 
 export interface UARuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -169,7 +216,7 @@ export interface UARuleCreateParams {
 
 export interface UARuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -191,7 +238,7 @@ export interface UARuleUpdateParams {
 
 export interface UARuleListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -213,14 +260,14 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
 
 export interface UARuleDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface UARuleGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

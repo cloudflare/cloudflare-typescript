@@ -6,6 +6,19 @@ import * as Core from '../../../core';
 export class MetadataIndex extends APIResource {
   /**
    * Enable metadata filtering based on metadata property. Limited to 10 properties.
+   *
+   * @example
+   * ```ts
+   * const metadataIndex =
+   *   await client.vectorize.indexes.metadataIndex.create(
+   *     'example-index',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       indexType: 'string',
+   *       propertyName: 'random_metadata_property',
+   *     },
+   *   );
+   * ```
    */
   create(
     indexName: string,
@@ -23,6 +36,15 @@ export class MetadataIndex extends APIResource {
 
   /**
    * List Metadata Indexes for the specified Vectorize Index.
+   *
+   * @example
+   * ```ts
+   * const metadataIndices =
+   *   await client.vectorize.indexes.metadataIndex.list(
+   *     'example-index',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   list(
     indexName: string,
@@ -40,6 +62,18 @@ export class MetadataIndex extends APIResource {
 
   /**
    * Allow Vectorize to delete the specified metadata index.
+   *
+   * @example
+   * ```ts
+   * const metadataIndex =
+   *   await client.vectorize.indexes.metadataIndex.delete(
+   *     'example-index',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       propertyName: 'random_metadata_property',
+   *     },
+   *   );
+   * ```
    */
   delete(
     indexName: string,

@@ -4,12 +4,18 @@ import { APIResource } from '../resource';
 import * as Core from '../core';
 import * as Shared from './shared';
 import * as CertificatePacksAPI from './ssl/certificate-packs/certificate-packs';
-import { SinglePage } from '../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
 export class OriginCACertificates extends APIResource {
   /**
    * Create an Origin CA certificate. You can use an Origin CA Key as your User
    * Service Key or an API token when calling this endpoint ([see above](#requests)).
+   *
+   * @example
+   * ```ts
+   * const originCACertificate =
+   *   await client.originCACertificates.create();
+   * ```
    */
   create(
     body: OriginCACertificateCreateParams,
@@ -26,18 +32,39 @@ export class OriginCACertificates extends APIResource {
    * List all existing Origin CA certificates for a given zone. You can use an Origin
    * CA Key as your User Service Key or an API token when calling this endpoint
    * ([see above](#requests)).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const originCACertificate of client.originCACertificates.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: OriginCACertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
-    return this._client.getAPIList('/certificates', OriginCACertificatesSinglePage, { query, ...options });
+  ): Core.PagePromise<OriginCACertificatesV4PagePaginationArray, OriginCACertificate> {
+    return this._client.getAPIList('/certificates', OriginCACertificatesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Revoke an existing Origin CA certificate by its serial number. You can use an
    * Origin CA Key as your User Service Key or an API token when calling this
    * endpoint ([see above](#requests)).
+   *
+   * @example
+   * ```ts
+   * const originCACertificate =
+   *   await client.originCACertificates.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *   );
+   * ```
    */
   delete(
     certificateId: string,
@@ -54,6 +81,14 @@ export class OriginCACertificates extends APIResource {
    * Get an existing Origin CA certificate by its serial number. You can use an
    * Origin CA Key as your User Service Key or an API token when calling this
    * endpoint ([see above](#requests)).
+   *
+   * @example
+   * ```ts
+   * const originCACertificate =
+   *   await client.originCACertificates.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *   );
+   * ```
    */
   get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificate> {
     return (
@@ -64,7 +99,7 @@ export class OriginCACertificates extends APIResource {
   }
 }
 
-export class OriginCACertificatesSinglePage extends SinglePage<OriginCACertificate> {}
+export class OriginCACertificatesV4PagePaginationArray extends V4PagePaginationArray<OriginCACertificate> {}
 
 export interface OriginCACertificate {
   /**
@@ -90,7 +125,7 @@ export interface OriginCACertificate {
   requested_validity: CertificatePacksAPI.RequestValidity;
 
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -107,7 +142,7 @@ export interface OriginCACertificate {
 
 export interface OriginCACertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -141,9 +176,31 @@ export interface OriginCACertificateCreateParams {
   requested_validity?: CertificatePacksAPI.RequestValidityParam;
 }
 
-export interface OriginCACertificateListParams {
+export interface OriginCACertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
+
+  /**
+   * Limit to the number of records returned.
+   */
+  limit?: number;
+
+  /**
+   * Offset the results
+   */
+  offset?: number;
+}
+
+OriginCACertificates.OriginCACertificatesV4PagePaginationArray = OriginCACertificatesV4PagePaginationArray;
+
+export declare namespace OriginCACertificates {
+  export {
+    type OriginCACertificate as OriginCACertificate,
+    type OriginCACertificateDeleteResponse as OriginCACertificateDeleteResponse,
+    OriginCACertificatesV4PagePaginationArray as OriginCACertificatesV4PagePaginationArray,
+    type OriginCACertificateCreateParams as OriginCACertificateCreateParams,
+    type OriginCACertificateListParams as OriginCACertificateListParams,
+  };
 }

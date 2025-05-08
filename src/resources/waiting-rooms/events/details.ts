@@ -7,6 +7,15 @@ export class Details extends APIResource {
   /**
    * Previews an event's configuration as if it was active. Inherited fields from the
    * waiting room will be displayed with their current values.
+   *
+   * @example
+   * ```ts
+   * const detail = await client.waitingRooms.events.details.get(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   '25756b2dfe6e378a06b033b670413757',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     waitingRoomId: string,
@@ -108,6 +117,18 @@ export interface EventQuery {
    * the event's `new_users_per_minute` property is also set.
    */
   total_active_users?: number | null;
+
+  /**
+   * If set, the event will override the waiting room's `turnstile_action` property
+   * while it is active. If null, the event will inherit it.
+   */
+  turnstile_action?: 'log' | 'infinite_queue' | null;
+
+  /**
+   * If set, the event will override the waiting room's `turnstile_mode` property
+   * while it is active. If null, the event will inherit it.
+   */
+  turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed' | null;
 }
 
 export interface DetailGetResponse {
@@ -178,7 +199,7 @@ export interface DetailGetResponse {
 
 export interface DetailGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

@@ -7,6 +7,14 @@ export class Responses extends APIResource {
   /**
    * Returns the raw response of the network request. Find the `response_id` in the
    * `data.requests.response.hash`.
+   *
+   * @example
+   * ```ts
+   * const response = await client.urlScanner.responses.get(
+   *   'response_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(responseId: string, params: ResponseGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { account_id } = params;

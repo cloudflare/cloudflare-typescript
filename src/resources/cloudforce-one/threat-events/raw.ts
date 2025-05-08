@@ -6,6 +6,16 @@ import * as Core from '../../../core';
 export class Raw extends APIResource {
   /**
    * Updates a raw event
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.raw.edit(
+   *     'event_id',
+   *     'raw_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   edit(
     eventId: string,
@@ -22,6 +32,15 @@ export class Raw extends APIResource {
 
   /**
    * Reads data for a raw event
+   *
+   * @example
+   * ```ts
+   * const raw = await client.cloudforceOne.threatEvents.raw.get(
+   *   'event_id',
+   *   'raw_id',
+   *   { account_id: 0 },
+   * );
+   * ```
    */
   get(
     eventId: string,

@@ -8,6 +8,16 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagi
 export class ClientCertificates extends APIResource {
   /**
    * Create a new API Shield mTLS Client Certificate
+   *
+   * @example
+   * ```ts
+   * const clientCertificate =
+   *   await client.clientCertificates.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     csr: '-----BEGIN CERTIFICATE REQUEST-----\\nMIICY....\\n-----END CERTIFICATE REQUEST-----\\n',
+   *     validity_days: 3650,
+   *   });
+   * ```
    */
   create(
     params: ClientCertificateCreateParams,
@@ -24,6 +34,16 @@ export class ClientCertificates extends APIResource {
   /**
    * List all of your Zone's API Shield mTLS Client Certificates by Status and/or
    * using Pagination
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const clientCertificate of client.clientCertificates.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ClientCertificateListParams,
@@ -40,6 +60,15 @@ export class ClientCertificates extends APIResource {
   /**
    * Set a API Shield mTLS Client Certificate to pending_revocation status for
    * processing to revoked status.
+   *
+   * @example
+   * ```ts
+   * const clientCertificate =
+   *   await client.clientCertificates.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     clientCertificateId: string,
@@ -58,6 +87,15 @@ export class ClientCertificates extends APIResource {
   /**
    * If a API Shield mTLS Client Certificate is in a pending_revocation state, you
    * may reactivate it with this endpoint.
+   *
+   * @example
+   * ```ts
+   * const clientCertificate =
+   *   await client.clientCertificates.edit(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     clientCertificateId: string,
@@ -75,6 +113,15 @@ export class ClientCertificates extends APIResource {
 
   /**
    * Get Details for a single mTLS API Shield Client Certificate
+   *
+   * @example
+   * ```ts
+   * const clientCertificate =
+   *   await client.clientCertificates.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     clientCertificateId: string,
@@ -95,7 +142,7 @@ export class ClientCertificatesV4PagePaginationArray extends V4PagePaginationArr
 
 export interface ClientCertificate {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -199,7 +246,7 @@ export namespace ClientCertificate {
 
 export interface ClientCertificateCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -217,7 +264,7 @@ export interface ClientCertificateCreateParams {
 
 export interface ClientCertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -239,21 +286,35 @@ export interface ClientCertificateListParams extends V4PagePaginationArrayParams
 
 export interface ClientCertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface ClientCertificateEditParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface ClientCertificateGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
+}
+
+ClientCertificates.ClientCertificatesV4PagePaginationArray = ClientCertificatesV4PagePaginationArray;
+
+export declare namespace ClientCertificates {
+  export {
+    type ClientCertificate as ClientCertificate,
+    ClientCertificatesV4PagePaginationArray as ClientCertificatesV4PagePaginationArray,
+    type ClientCertificateCreateParams as ClientCertificateCreateParams,
+    type ClientCertificateListParams as ClientCertificateListParams,
+    type ClientCertificateDeleteParams as ClientCertificateDeleteParams,
+    type ClientCertificateEditParams as ClientCertificateEditParams,
+    type ClientCertificateGetParams as ClientCertificateGetParams,
+  };
 }

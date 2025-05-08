@@ -8,6 +8,16 @@ import { SinglePage } from '../../pagination';
 export class Rules extends APIResource {
   /**
    * Put Rules
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ruleUpdateResponse of client.snippets.rules.update(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   update(
     params: RuleUpdateParams,
@@ -23,6 +33,16 @@ export class Rules extends APIResource {
 
   /**
    * Rules
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ruleListResponse of client.snippets.rules.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RuleListParams,
@@ -38,6 +58,13 @@ export class Rules extends APIResource {
 
   /**
    * Delete All Rules
+   *
+   * @example
+   * ```ts
+   * const rule = await client.snippets.rules.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(params: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse> {
     const { zone_id } = params;

@@ -9,6 +9,15 @@ import { SinglePage } from '../../../../pagination';
 export class CAs extends APIResource {
   /**
    * Generates a new short-lived certificate CA and public key.
+   *
+   * @example
+   * ```ts
+   * const ca =
+   *   await client.zeroTrust.access.applications.cas.create(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   create(appId: string, params?: CACreateParams, options?: Core.RequestOptions): Core.APIPromise<CA>;
   create(appId: string, options?: Core.RequestOptions): Core.APIPromise<CA>;
@@ -47,6 +56,16 @@ export class CAs extends APIResource {
 
   /**
    * Lists short-lived certificate CAs and their public keys.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ca of client.zeroTrust.access.applications.cas.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params?: CAListParams, options?: Core.RequestOptions): Core.PagePromise<CAsSinglePage, CA>;
   list(options?: Core.RequestOptions): Core.PagePromise<CAsSinglePage, CA>;
@@ -83,6 +102,15 @@ export class CAs extends APIResource {
 
   /**
    * Deletes a short-lived certificate CA.
+   *
+   * @example
+   * ```ts
+   * const ca =
+   *   await client.zeroTrust.access.applications.cas.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     appId: string,
@@ -125,6 +153,15 @@ export class CAs extends APIResource {
 
   /**
    * Fetches a short-lived certificate CA and its public key.
+   *
+   * @example
+   * ```ts
+   * const ca =
+   *   await client.zeroTrust.access.applications.cas.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(appId: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CA>;
   get(appId: string, options?: Core.RequestOptions): Core.APIPromise<CA>;

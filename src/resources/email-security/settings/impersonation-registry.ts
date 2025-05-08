@@ -7,6 +7,19 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class ImpersonationRegistry extends APIResource {
   /**
    * Create an entry in impersonation registry
+   *
+   * @example
+   * ```ts
+   * const impersonationRegistry =
+   *   await client.emailSecurity.settings.impersonationRegistry.create(
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       email: 'email',
+   *       is_email_regex: true,
+   *       name: 'name',
+   *     },
+   *   );
+   * ```
    */
   create(
     params: ImpersonationRegistryCreateParams,
@@ -23,6 +36,16 @@ export class ImpersonationRegistry extends APIResource {
 
   /**
    * Lists, searches, and sorts entries in the impersonation registry.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const impersonationRegistryListResponse of client.emailSecurity.settings.impersonationRegistry.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ImpersonationRegistryListParams,
@@ -41,6 +64,15 @@ export class ImpersonationRegistry extends APIResource {
 
   /**
    * Delete an entry from impersonation registry
+   *
+   * @example
+   * ```ts
+   * const impersonationRegistry =
+   *   await client.emailSecurity.settings.impersonationRegistry.delete(
+   *     2403,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     displayNameId: number,
@@ -58,6 +90,15 @@ export class ImpersonationRegistry extends APIResource {
 
   /**
    * Update an entry in impersonation registry
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.emailSecurity.settings.impersonationRegistry.edit(
+   *     2403,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     displayNameId: number,
@@ -75,6 +116,15 @@ export class ImpersonationRegistry extends APIResource {
 
   /**
    * Get an entry in impersonation registry
+   *
+   * @example
+   * ```ts
+   * const impersonationRegistry =
+   *   await client.emailSecurity.settings.impersonationRegistry.get(
+   *     2403,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     displayNameId: number,

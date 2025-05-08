@@ -7,6 +7,15 @@ import * as SettingsAPI from './settings';
 export class SchemaValidation extends APIResource {
   /**
    * Updates zone level schema validation settings on the zone
+   *
+   * @example
+   * ```ts
+   * const settings =
+   *   await client.apiGateway.settings.schemaValidation.update({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     validation_default_mitigation_action: 'block',
+   *   });
+   * ```
    */
   update(
     params: SchemaValidationUpdateParams,
@@ -18,6 +27,14 @@ export class SchemaValidation extends APIResource {
 
   /**
    * Updates zone level schema validation settings on the zone
+   *
+   * @example
+   * ```ts
+   * const settings =
+   *   await client.apiGateway.settings.schemaValidation.edit({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   edit(
     params: SchemaValidationEditParams,
@@ -32,6 +49,14 @@ export class SchemaValidation extends APIResource {
 
   /**
    * Retrieves zone level schema validation settings currently set on the zone
+   *
+   * @example
+   * ```ts
+   * const settings =
+   *   await client.apiGateway.settings.schemaValidation.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(
     params: SchemaValidationGetParams,
@@ -44,7 +69,7 @@ export class SchemaValidation extends APIResource {
 
 export interface SchemaValidationUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -76,7 +101,7 @@ export interface SchemaValidationUpdateParams {
 
 export interface SchemaValidationEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -109,7 +134,7 @@ export interface SchemaValidationEditParams {
 
 export interface SchemaValidationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

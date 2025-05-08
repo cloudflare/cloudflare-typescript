@@ -23,6 +23,17 @@ export class PCAPs extends APIResource {
 
   /**
    * Create new PCAP request for account.
+   *
+   * @example
+   * ```ts
+   * const pcap = await client.magicTransit.pcaps.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   packet_limit: 10000,
+   *   system: 'magic-transit',
+   *   time_limit: 300,
+   *   type: 'simple',
+   * });
+   * ```
    */
   create(params: PCAPCreateParams, options?: Core.RequestOptions): Core.APIPromise<PCAPCreateResponse> {
     const { account_id, ...body } = params;
@@ -35,6 +46,16 @@ export class PCAPs extends APIResource {
 
   /**
    * Lists all packet capture requests for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const pcapListResponse of client.magicTransit.pcaps.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PCAPListParams,
@@ -46,6 +67,14 @@ export class PCAPs extends APIResource {
 
   /**
    * Get information for a PCAP request by id.
+   *
+   * @example
+   * ```ts
+   * const pcap = await client.magicTransit.pcaps.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     pcapId: string,

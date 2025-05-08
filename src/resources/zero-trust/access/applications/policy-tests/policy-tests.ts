@@ -6,13 +6,21 @@ import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
 import * as ApplicationsPoliciesAPI from '../policies';
 import * as UsersAPI from './users';
-import { UserListParams, UserListResponse, UserListResponsesSinglePage, Users } from './users';
+import { UserListParams, UserListResponse, UserListResponsesV4PagePaginationArray, Users } from './users';
 
 export class PolicyTests extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 
   /**
    * Starts an Access policy test.
+   *
+   * @example
+   * ```ts
+   * const policyTest =
+   *   await client.zeroTrust.access.applications.policyTests.create(
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     params: PolicyTestCreateParams,
@@ -29,18 +37,27 @@ export class PolicyTests extends APIResource {
 
   /**
    * Fetches the current status of a given Access policy test.
+   *
+   * @example
+   * ```ts
+   * const policyTest =
+   *   await client.zeroTrust.access.applications.policyTests.get(
+   *     'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     policyTestId: string,
     params: PolicyTestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyTestGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/access/policy-tests/${policyTestId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: PolicyTestGetResponse }>
+      this._client.get(
+        `/accounts/${account_id}/access/policy-tests/${policyTestId}`,
+        options,
+      ) as Core.APIPromise<{ result: PolicyTestGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -64,11 +81,6 @@ export interface PolicyTestGetResponse {
   id?: string;
 
   /**
-   * The number of pages of (processed) users.
-   */
-  pages_processed?: number;
-
-  /**
    * The percentage of (processed) users approved based on policy evaluation results.
    */
   percent_approved?: number;
@@ -79,6 +91,11 @@ export interface PolicyTestGetResponse {
   percent_blocked?: number;
 
   /**
+   * The percentage of (processed) users errored based on policy evaluation results.
+   */
+  percent_errored?: number;
+
+  /**
    * The percentage of users processed so far (of the entire user base).
    */
   percent_users_processed?: number;
@@ -86,7 +103,7 @@ export interface PolicyTestGetResponse {
   /**
    * The status of the policy test.
    */
-  status?: 'blocked' | 'processing' | 'complete';
+  status?: 'blocked' | 'processing' | 'exceeded time' | 'complete';
 
   /**
    * The total number of users in the user base.
@@ -102,11 +119,16 @@ export interface PolicyTestGetResponse {
    * The number of (processed) users blocked based on policy evaluation results.
    */
   users_blocked?: number;
+
+  /**
+   * The number of (processed) users errored based on policy evaluation results.
+   */
+  users_errored?: number;
 }
 
 export interface PolicyTestCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -186,18 +208,13 @@ export namespace PolicyTestCreateParams {
 
 export interface PolicyTestGetParams {
   /**
-   * Path param: Identifier
+   * Identifier.
    */
   account_id: string;
-
-  /**
-   * Query param:
-   */
-  page?: number;
 }
 
 PolicyTests.Users = Users;
-PolicyTests.UserListResponsesSinglePage = UserListResponsesSinglePage;
+PolicyTests.UserListResponsesV4PagePaginationArray = UserListResponsesV4PagePaginationArray;
 
 export declare namespace PolicyTests {
   export {
@@ -210,7 +227,7 @@ export declare namespace PolicyTests {
   export {
     Users as Users,
     type UserListResponse as UserListResponse,
-    UserListResponsesSinglePage as UserListResponsesSinglePage,
+    UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
     type UserListParams as UserListParams,
   };
 }

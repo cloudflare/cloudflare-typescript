@@ -25,6 +25,14 @@ export class Snippets extends APIResource {
 
   /**
    * Put Snippet
+   *
+   * @example
+   * ```ts
+   * const snippet = await client.snippets.update(
+   *   'snippet_name_01',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     snippetName: string,
@@ -42,6 +50,16 @@ export class Snippets extends APIResource {
 
   /**
    * All Snippets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const snippet of client.snippets.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SnippetListParams,
@@ -53,6 +71,14 @@ export class Snippets extends APIResource {
 
   /**
    * Delete Snippet
+   *
+   * @example
+   * ```ts
+   * const snippet = await client.snippets.delete(
+   *   'snippet_name_01',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     snippetName: string,
@@ -65,6 +91,14 @@ export class Snippets extends APIResource {
 
   /**
    * Snippet
+   *
+   * @example
+   * ```ts
+   * const snippet = await client.snippets.get(
+   *   'snippet_name_01',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     snippetName: string,
@@ -160,12 +194,23 @@ export interface SnippetGetParams {
   zone_id: string;
 }
 
+Snippets.SnippetsSinglePage = SnippetsSinglePage;
 Snippets.Content = Content;
 Snippets.Rules = Rules;
 Snippets.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;
 Snippets.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
 
 export declare namespace Snippets {
+  export {
+    type Snippet as Snippet,
+    type SnippetDeleteResponse as SnippetDeleteResponse,
+    SnippetsSinglePage as SnippetsSinglePage,
+    type SnippetUpdateParams as SnippetUpdateParams,
+    type SnippetListParams as SnippetListParams,
+    type SnippetDeleteParams as SnippetDeleteParams,
+    type SnippetGetParams as SnippetGetParams,
+  };
+
   export { Content as Content, type ContentGetParams as ContentGetParams };
 
   export {

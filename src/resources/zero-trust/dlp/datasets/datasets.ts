@@ -19,6 +19,15 @@ export class Datasets extends APIResource {
 
   /**
    * Create a new dataset
+   *
+   * @example
+   * ```ts
+   * const datasetCreation =
+   *   await client.zeroTrust.dlp.datasets.create({
+   *     account_id: 'account_id',
+   *     name: 'name',
+   *   });
+   * ```
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreation> {
     const { account_id, ...body } = params;
@@ -31,6 +40,14 @@ export class Datasets extends APIResource {
 
   /**
    * Update details about a dataset
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.zeroTrust.dlp.datasets.update(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   update(
     datasetId: string,
@@ -48,6 +65,16 @@ export class Datasets extends APIResource {
 
   /**
    * Fetch all datasets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dataset of client.zeroTrust.dlp.datasets.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DatasetListParams,
@@ -59,6 +86,14 @@ export class Datasets extends APIResource {
 
   /**
    * This deletes all versions of the dataset.
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.dlp.datasets.delete(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     datasetId: string,
@@ -74,6 +109,14 @@ export class Datasets extends APIResource {
 
   /**
    * Fetch a specific dataset
+   *
+   * @example
+   * ```ts
+   * const dataset = await client.zeroTrust.dlp.datasets.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(datasetId: string, params: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<Dataset> {
     const { account_id } = params;
@@ -113,8 +156,10 @@ export interface Dataset {
 
   uploads: Array<Dataset.Upload>;
 
+  case_sensitive?: boolean;
+
   /**
-   * The description of the dataset
+   * The description of the dataset.
    */
   description?: string | null;
 }
@@ -145,7 +190,7 @@ export interface DatasetCreation {
   dataset: Dataset;
 
   /**
-   * Encoding version to use for dataset
+   * Encoding version to use for dataset.
    */
   encoding_version: number;
 
@@ -175,7 +220,14 @@ export interface DatasetCreateParams {
   name: string;
 
   /**
-   * Body param: The description of the dataset
+   * Body param: Only applies to custom word lists. Determines if the words should be
+   * matched in a case-sensitive manner Cannot be set to false if `secret` is true or
+   * undefined
+   */
+  case_sensitive?: boolean;
+
+  /**
+   * Body param: The description of the dataset.
    */
   description?: string | null;
 
@@ -205,12 +257,20 @@ export interface DatasetUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The description of the dataset
+   * Body param: Determines if the words should be matched in a case-sensitive
+   * manner.
+   *
+   * Only required for custom word lists.
+   */
+  case_sensitive?: boolean;
+
+  /**
+   * Body param: The description of the dataset.
    */
   description?: string | null;
 
   /**
-   * Body param: The name of the dataset, must be unique
+   * Body param: The name of the dataset, must be unique.
    */
   name?: string | null;
 }

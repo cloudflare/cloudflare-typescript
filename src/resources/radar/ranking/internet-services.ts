@@ -7,6 +7,12 @@ import * as Core from '../../../core';
 export class InternetServices extends APIResource {
   /**
    * Retrieves the list of Internet services categories.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ranking.internetServices.categories();
+   * ```
    */
   categories(
     query?: InternetServiceCategoriesParams,
@@ -30,6 +36,12 @@ export class InternetServices extends APIResource {
 
   /**
    * Retrieves Internet Services rank update changes over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ranking.internetServices.timeseriesGroups();
+   * ```
    */
   timeseriesGroups(
     query?: InternetServiceTimeseriesGroupsParams,
@@ -53,6 +65,12 @@ export class InternetServices extends APIResource {
 
   /**
    * Retrieves top Internet services based on their rank.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ranking.internetServices.top();
+   * ```
    */
   top(
     query?: InternetServiceTopParams,
@@ -111,6 +129,7 @@ export namespace InternetServiceTimeseriesGroupsResponse {
 
   export interface Serie0 {
     timestamps: Array<string>;
+
     [k: string]: Array<string | number> | Array<string> | undefined;
   }
 }
@@ -143,7 +162,7 @@ export namespace InternetServiceTopResponse {
 
 export interface InternetServiceCategoriesParams {
   /**
-   * Array of dates to filter the results.
+   * Filters results by the specified array of dates.
    */
   date?: Array<string>;
 
@@ -170,9 +189,9 @@ export interface InternetServiceTimeseriesGroupsParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -204,7 +223,7 @@ export interface InternetServiceTimeseriesGroupsParams {
 
 export interface InternetServiceTopParams {
   /**
-   * Array of dates to filter the results.
+   * Filters results by the specified array of dates.
    */
   date?: Array<string>;
 

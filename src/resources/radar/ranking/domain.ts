@@ -10,6 +10,13 @@ export class Domain extends APIResource {
    * 100 domains, but for the remainder it only provides ranking buckets like top 200
    * thousand, top one million, etc.. These are available through Radar datasets
    * endpoints.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.radar.ranking.domain.get(
+   *   'google.com',
+   * );
+   * ```
    */
   get(
     domain: string,
@@ -92,7 +99,7 @@ export namespace DomainGetResponse {
 
 export interface DomainGetParams {
   /**
-   * Array of dates to filter the results.
+   * Filters results by the specified array of dates.
    */
   date?: Array<string>;
 
@@ -117,7 +124,7 @@ export interface DomainGetParams {
   name?: Array<string>;
 
   /**
-   * Ranking type.
+   * The ranking type.
    */
   rankingType?: 'POPULAR' | 'TRENDING_RISE' | 'TRENDING_STEADY';
 }

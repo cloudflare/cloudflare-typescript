@@ -6,6 +6,13 @@ import * as Core from '../core';
 export class BrandProtection extends APIResource {
   /**
    * Submit suspicious URL for scanning
+   *
+   * @example
+   * ```ts
+   * const submit = await client.brandProtection.submit({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   submit(params: BrandProtectionSubmitParams, options?: Core.RequestOptions): Core.APIPromise<Submit> {
     const { account_id, ...body } = params;
@@ -19,6 +26,13 @@ export class BrandProtection extends APIResource {
 
   /**
    * Gets phishing details about a URL.
+   *
+   * @example
+   * ```ts
+   * const info = await client.brandProtection.urlInfo({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   urlInfo(params: BrandProtectionURLInfoParams, options?: Core.RequestOptions): Core.APIPromise<Info> {
     const { account_id, ...query } = params;
@@ -220,4 +234,16 @@ export interface BrandProtectionURLInfoParams {
    * Query param: Submission ID(s) to filter submission results by.
    */
   url_id?: Array<number>;
+}
+
+export declare namespace BrandProtection {
+  export {
+    type Info as Info,
+    type RuleMatch as RuleMatch,
+    type ScanStatus as ScanStatus,
+    type Submit as Submit,
+    type URLInfoModelResults as URLInfoModelResults,
+    type BrandProtectionSubmitParams as BrandProtectionSubmitParams,
+    type BrandProtectionURLInfoParams as BrandProtectionURLInfoParams,
+  };
 }

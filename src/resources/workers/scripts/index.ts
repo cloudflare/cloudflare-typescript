@@ -19,6 +19,13 @@ export {
   type ScheduleGetParams,
 } from './schedules';
 export {
+  ScriptAndVersionSettings,
+  type ScriptAndVersionSettingEditResponse,
+  type ScriptAndVersionSettingGetResponse,
+  type ScriptAndVersionSettingEditParams,
+  type ScriptAndVersionSettingGetParams,
+} from './script-and-version-settings';
+export {
   ScriptsSinglePage,
   Scripts,
   type Script,
@@ -46,8 +53,10 @@ export { Settings, type SettingEditParams, type SettingGetParams } from './setti
 export {
   Subdomain,
   type SubdomainCreateResponse,
+  type SubdomainDeleteResponse,
   type SubdomainGetResponse,
   type SubdomainCreateParams,
+  type SubdomainDeleteParams,
   type SubdomainGetParams,
 } from './subdomain';
 export {

@@ -6,6 +6,14 @@ import * as Core from '../../core';
 export class SmartRouting extends APIResource {
   /**
    * Updates enablement of Argo Smart Routing.
+   *
+   * @example
+   * ```ts
+   * const response = await client.argo.smartRouting.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   value: 'on',
+   * });
+   * ```
    */
   edit(
     params: SmartRoutingEditParams,
@@ -21,6 +29,13 @@ export class SmartRouting extends APIResource {
 
   /**
    * Get Argo Smart Routing setting
+   *
+   * @example
+   * ```ts
+   * const smartRouting = await client.argo.smartRouting.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(
     params: SmartRoutingGetParams,

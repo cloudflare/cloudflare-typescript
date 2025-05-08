@@ -32,7 +32,7 @@ describe('resource bytimes', () => {
       metrics: 'queryCount,uncachedCount',
       since: '2023-11-11T12:00:00Z',
       sort: '+responseCode,-queryName',
-      time_delta: 'all',
+      time_delta: 'hour',
       until: '2023-11-11T13:00:00Z',
     });
   });

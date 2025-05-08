@@ -117,6 +117,14 @@ export class Zones extends APIResource {
 
   /**
    * Create Zone
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.create({
+   *   account: {},
+   *   name: 'example.com',
+   * });
+   * ```
    */
   create(body: ZoneCreateParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
     return (
@@ -127,6 +135,14 @@ export class Zones extends APIResource {
   /**
    * Lists, searches, sorts, and filters your zones. Listing zones across more than
    * 500 accounts is currently not allowed.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const zone of client.zones.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query?: ZoneListParams,
@@ -145,6 +161,13 @@ export class Zones extends APIResource {
 
   /**
    * Deletes an existing zone.
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(
     params: ZoneDeleteParams,
@@ -160,6 +183,13 @@ export class Zones extends APIResource {
 
   /**
    * Edits a zone. Only one zone property can be changed at a time.
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
     const { zone_id, ...body } = params;
@@ -170,6 +200,13 @@ export class Zones extends APIResource {
 
   /**
    * Zone Details
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
     const { zone_id } = params;
@@ -185,13 +222,13 @@ export class ZonesV4PagePaginationArray extends V4PagePaginationArray<Zone> {}
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
  * typically a partner-hosted zone or a CNAME setup.
  */
-export type Type = 'full' | 'partial' | 'secondary';
+export type Type = 'full' | 'partial' | 'secondary' | 'internal';
 
 /**
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
  * typically a partner-hosted zone or a CNAME setup.
  */
-export type TypeParam = 'full' | 'partial' | 'secondary';
+export type TypeParam = 'full' | 'partial' | 'secondary' | 'internal';
 
 export interface Zone {
   /**
@@ -426,7 +463,7 @@ export interface ZoneListParams extends V4PagePaginationArrayParams {
   /**
    * Field to order zones by.
    */
-  order?: 'name' | 'status' | 'account.id' | 'account.name';
+  order?: 'name' | 'status' | 'account.id' | 'account.name' | 'plan.id';
 
   /**
    * A zone status
@@ -493,6 +530,7 @@ export interface ZoneGetParams {
   zone_id: string;
 }
 
+Zones.ZonesV4PagePaginationArray = ZonesV4PagePaginationArray;
 Zones.ActivationCheck = ActivationCheck;
 Zones.Settings = Settings;
 Zones.CustomNameservers = CustomNameservers;
@@ -505,6 +543,18 @@ Zones.RatePlans = RatePlans;
 Zones.RatePlanGetResponsesSinglePage = RatePlanGetResponsesSinglePage;
 
 export declare namespace Zones {
+  export {
+    type Type as Type,
+    type Zone as Zone,
+    type ZoneDeleteResponse as ZoneDeleteResponse,
+    ZonesV4PagePaginationArray as ZonesV4PagePaginationArray,
+    type ZoneCreateParams as ZoneCreateParams,
+    type ZoneListParams as ZoneListParams,
+    type ZoneDeleteParams as ZoneDeleteParams,
+    type ZoneEditParams as ZoneEditParams,
+    type ZoneGetParams as ZoneGetParams,
+  };
+
   export {
     ActivationCheck as ActivationCheck,
     type ActivationCheckTriggerResponse as ActivationCheckTriggerResponse,

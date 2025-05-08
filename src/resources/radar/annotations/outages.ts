@@ -7,6 +7,11 @@ import * as Core from '../../../core';
 export class Outages extends APIResource {
   /**
    * Retrieves the latest Internet outages and anomalies.
+   *
+   * @example
+   * ```ts
+   * const outage = await client.radar.annotations.outages.get();
+   * ```
    */
   get(query?: OutageGetParams, options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse>;
@@ -26,6 +31,12 @@ export class Outages extends APIResource {
 
   /**
    * Retrieves the number of outages by location.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.annotations.outages.locations();
+   * ```
    */
   locations(
     query?: OutageLocationsParams,
@@ -127,7 +138,8 @@ export namespace OutageLocationsResponse {
 
 export interface OutageGetParams {
   /**
-   * Single Autonomous System Number (ASN) as integer.
+   * Filters results by Autonomous System. Specify a single Autonomous System Number
+   * (ASN) as integer.
    */
   asn?: number;
 
@@ -137,8 +149,7 @@ export interface OutageGetParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 
@@ -158,7 +169,7 @@ export interface OutageGetParams {
   limit?: number;
 
   /**
-   * Location alpha-2 code.
+   * Filters results by location. Specify an alpha-2 location code.
    */
   location?: string;
 
@@ -175,8 +186,7 @@ export interface OutageLocationsParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 

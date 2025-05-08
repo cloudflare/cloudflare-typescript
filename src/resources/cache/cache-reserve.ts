@@ -9,6 +9,14 @@ export class CacheReserveResource extends APIResource {
    * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
    * that you cannot undo or cancel this operation.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.cacheReserve.clear({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: {},
+   * });
+   * ```
    */
   clear(
     params: CacheReserveClearParams,
@@ -30,6 +38,14 @@ export class CacheReserveResource extends APIResource {
    * to reduce Reserve operations costs. See the
    * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
    * for more information.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.cacheReserve.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   value: 'on',
+   * });
+   * ```
    */
   edit(
     params: CacheReserveEditParams,
@@ -50,6 +66,13 @@ export class CacheReserveResource extends APIResource {
    * to reduce Reserve operations costs. See the
    * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
    * for more information.
+   *
+   * @example
+   * ```ts
+   * const cacheReserve = await client.cache.cacheReserve.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(
     params: CacheReserveGetParams,
@@ -68,6 +91,13 @@ export class CacheReserveResource extends APIResource {
    * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
    * that you cannot undo or cancel this operation.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.cacheReserve.status({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   status(
     params: CacheReserveStatusParams,

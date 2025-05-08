@@ -22,6 +22,19 @@ export class ContentLists extends APIResource {
 
   /**
    * Update IPFS Universal Path Gateway Content List
+   *
+   * @example
+   * ```ts
+   * const contentList =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       action: 'block',
+   *       entries: [{}],
+   *     },
+   *   );
+   * ```
    */
   update(
     identifier: string,
@@ -39,6 +52,15 @@ export class ContentLists extends APIResource {
 
   /**
    * IPFS Universal Path Gateway Content List Details
+   *
+   * @example
+   * ```ts
+   * const contentList =
+   *   await client.web3.hostnames.ipfsUniversalPaths.contentLists.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     identifier: string,
@@ -64,7 +86,7 @@ export interface ContentList {
 
 export interface ContentListUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Specify the identifier of the hostname.
    */
   zone_id: string;
 
@@ -74,28 +96,28 @@ export interface ContentListUpdateParams {
   action: 'block';
 
   /**
-   * Body param: Content list entries.
+   * Body param: Provides content list entries.
    */
   entries: Array<ContentListUpdateParams.Entry>;
 }
 
 export namespace ContentListUpdateParams {
   /**
-   * Content list entry to be blocked.
+   * Specify a content list entry to block.
    */
   export interface Entry {
     /**
-     * CID or content path of content to block.
+     * Specify the CID or content path of content to block.
      */
     content?: string;
 
     /**
-     * An optional description of the content list entry.
+     * Specify an optional description of the content list entry.
      */
     description?: string;
 
     /**
-     * Type of content list entry to block.
+     * Specify the type of content list entry to block.
      */
     type?: 'cid' | 'content_path';
   }
@@ -103,7 +125,7 @@ export namespace ContentListUpdateParams {
 
 export interface ContentListGetParams {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   zone_id: string;
 }

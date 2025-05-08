@@ -9,6 +9,19 @@ import { type Response } from '../../../../../_shims/index';
 export class Content extends APIResource {
   /**
    * Put script content for a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const script =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.content.update(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       metadata: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     dispatchNamespace: string,
@@ -43,6 +56,19 @@ export class Content extends APIResource {
   /**
    * Fetch script content from a script uploaded to a Workers for Platforms
    * namespace.
+   *
+   * @example
+   * ```ts
+   * const content =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.content.get(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   *
+   * const data = await content.blob();
+   * console.log(data);
+   * ```
    */
   get(
     dispatchNamespace: string,
@@ -60,7 +86,7 @@ export class Content extends APIResource {
 
 export interface ContentUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -81,11 +107,13 @@ export interface ContentUpdateParams {
    * content in es module format. Alternative to including in a metadata part.
    */
   'CF-WORKER-MAIN-MODULE-PART'?: string;
+
+  [k: string]: Array<Core.Uploadable> | string | WorkersAPI.WorkerMetadataParam | undefined;
 }
 
 export interface ContentGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

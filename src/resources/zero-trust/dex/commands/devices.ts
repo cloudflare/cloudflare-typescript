@@ -8,6 +8,20 @@ export class Devices extends APIResource {
   /**
    * List devices with WARP client support for remote captures which have been
    * connected in the last 1 hour.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const deviceListResponse of client.zeroTrust.dex.commands.devices.list(
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     page: 1,
+   *     per_page: 1,
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DeviceListParams,

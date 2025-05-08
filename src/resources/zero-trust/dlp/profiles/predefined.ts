@@ -8,6 +8,23 @@ import * as ProfilesAPI from './profiles';
 export class Predefined extends APIResource {
   /**
    * Updates a DLP predefined profile. Only supports enabling/disabling entries.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.predefined.update(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: 'account_id',
+   *       entries: [
+   *         {
+   *           id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *           enabled: true,
+   *         },
+   *       ],
+   *     },
+   *   );
+   * ```
    */
   update(
     profileId: string,
@@ -25,6 +42,15 @@ export class Predefined extends APIResource {
 
   /**
    * Fetches a predefined DLP profile by id.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.predefined.get(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     profileId: string,
@@ -43,7 +69,7 @@ export class Predefined extends APIResource {
 
 export interface PredefinedProfile {
   /**
-   * The id of the predefined profile (uuid)
+   * The id of the predefined profile (uuid).
    */
   id: string;
 
@@ -58,7 +84,7 @@ export interface PredefinedProfile {
   >;
 
   /**
-   * The name of the predefined profile
+   * The name of the predefined profile.
    */
   name: string;
 
@@ -75,7 +101,7 @@ export interface PredefinedProfile {
   ocr_enabled?: boolean;
 
   /**
-   * Whether this profile can be accessed by anyone
+   * Whether this profile can be accessed by anyone.
    */
   open_access?: boolean;
 }
@@ -116,13 +142,13 @@ export namespace PredefinedProfile {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
@@ -146,6 +172,12 @@ export namespace PredefinedProfile {
 
   export interface ExactDataEntry {
     id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
 
     created_at: string;
 

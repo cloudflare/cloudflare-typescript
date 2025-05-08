@@ -24,6 +24,14 @@ export class Statuses extends APIResource {
    *    currently active on the origin.
    * 5. `max_estimated_time_minutes`: Integer of the maximum estimated time currently
    *    presented to the users.
+   *
+   * @example
+   * ```ts
+   * const status = await client.waitingRooms.statuses.get(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     waitingRoomId: string,
@@ -54,7 +62,7 @@ export interface StatusGetResponse {
 
 export interface StatusGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

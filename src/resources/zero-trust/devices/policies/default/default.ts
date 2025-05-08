@@ -4,13 +4,7 @@ import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import * as CertificatesAPI from './certificates';
-import {
-  CertificateEditParams,
-  CertificateEditResponse,
-  CertificateGetParams,
-  CertificateGetResponse,
-  Certificates,
-} from './certificates';
+import { CertificateEditParams, CertificateGetParams, Certificates } from './certificates';
 import * as ExcludesAPI from './excludes';
 import { ExcludeGetParams, ExcludeUpdateParams, Excludes } from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
@@ -26,6 +20,14 @@ export class Default extends APIResource {
 
   /**
    * Updates the default device settings profile for an account.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.devices.policies.default.edit({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   edit(
     params: DefaultEditParams,
@@ -41,6 +43,14 @@ export class Default extends APIResource {
 
   /**
    * Fetches the default device settings profile for an account.
+   *
+   * @example
+   * ```ts
+   * const _default =
+   *   await client.zeroTrust.devices.policies.default.get({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   get(params: DefaultGetParams, options?: Core.RequestOptions): Core.APIPromise<DefaultGetResponse | null> {
     const { account_id } = params;
@@ -309,7 +319,21 @@ export interface DefaultEditParams {
    * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
    * and 'include' cannot be set in the same request.
    */
-  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+  include?: Array<PoliciesAPI.SplitTunnelIncludeParam>;
+
+  /**
+   * Body param: The amount of time in minutes a user is allowed access to their LAN.
+   * A value of 0 will allow LAN access until the next WARP reconnection, such as a
+   * reboot or a laptop waking from sleep. Note that this field is omitted from the
+   * response if null or unset.
+   */
+  lan_allow_minutes?: number;
+
+  /**
+   * Body param: The size of the subnet for the local access network. Note that this
+   * field is omitted from the response if null or unset.
+   */
+  lan_allow_subnet_size?: number;
 
   /**
    * Body param: Determines if the operating system will register WARP's local
@@ -390,8 +414,6 @@ export declare namespace Default {
 
   export {
     Certificates as Certificates,
-    type CertificateEditResponse as CertificateEditResponse,
-    type CertificateGetResponse as CertificateGetResponse,
     type CertificateEditParams as CertificateEditParams,
     type CertificateGetParams as CertificateGetParams,
   };

@@ -6,6 +6,15 @@ import * as Core from '../../core';
 export class URLs extends APIResource {
   /**
    * Get Gateway URL
+   *
+   * @example
+   * ```ts
+   * const url = await client.aiGateway.urls.get(
+   *   'my-gateway',
+   *   'workers-ai',
+   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
+   * );
+   * ```
    */
   get(
     gatewayId: string,

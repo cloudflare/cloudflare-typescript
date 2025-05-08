@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import * as AdvertisementStatusAPI from './advertisement-status';
 import {
   AdvertisementStatus,
@@ -52,6 +51,16 @@ export class Prefixes extends APIResource {
 
   /**
    * Add a new prefix under the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.create({
+   *   account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *   asn: 209242,
+   *   cidr: '192.0.2.0/24',
+   *   loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
+   * });
+   * ```
    */
   create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id, ...body } = params;
@@ -65,6 +74,16 @@ export class Prefixes extends APIResource {
 
   /**
    * List all prefixes owned by the account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const prefix of client.addressing.prefixes.list({
+   *   account_id: '258def64c72dae45f3e4c8516e2111f2',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PrefixListParams,
@@ -80,6 +99,14 @@ export class Prefixes extends APIResource {
 
   /**
    * Delete an unapproved prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.delete(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * );
+   * ```
    */
   delete(
     prefixId: string,
@@ -92,6 +119,17 @@ export class Prefixes extends APIResource {
 
   /**
    * Modify the description for a prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.edit(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   {
+   *     account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *     description: 'Internal test prefix',
+   *   },
+   * );
+   * ```
    */
   edit(prefixId: string, params: PrefixEditParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id, ...body } = params;
@@ -105,6 +143,14 @@ export class Prefixes extends APIResource {
 
   /**
    * List a particular prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.get(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * );
+   * ```
    */
   get(prefixId: string, params: PrefixGetParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id } = params;
@@ -185,12 +231,12 @@ export interface Prefix {
 }
 
 export interface PrefixDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<PrefixDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<PrefixDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 
@@ -198,24 +244,56 @@ export interface PrefixDeleteResponse {
 }
 
 export namespace PrefixDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
   export interface ResultInfo {
     /**
-     * Total number of results for the requested service
+     * Total number of results for the requested service.
      */
     count?: number;
 
     /**
-     * Current page within paginated list of results
+     * Current page within paginated list of results.
      */
     page?: number;
 
     /**
-     * Number of results per page of results
+     * Number of results per page of results.
      */
     per_page?: number;
 
     /**
-     * Total results available without any search parameters
+     * Total results available without any search parameters.
      */
     total_count?: number;
   }

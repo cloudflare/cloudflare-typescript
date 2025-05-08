@@ -8,6 +8,14 @@ export class Watermarks extends APIResource {
   /**
    * Creates watermark profiles using a single `HTTP POST multipart/form-data`
    * request.
+   *
+   * @example
+   * ```ts
+   * const watermark = await client.stream.watermarks.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   file: '@/Users/rchen/Downloads/watermark.png',
+   * });
+   * ```
    */
   create(params: WatermarkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Watermark> {
     const { account_id, ...body } = params;
@@ -21,6 +29,16 @@ export class Watermarks extends APIResource {
 
   /**
    * Lists all watermark profiles for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const watermark of client.stream.watermarks.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: WatermarkListParams,
@@ -36,6 +54,14 @@ export class Watermarks extends APIResource {
 
   /**
    * Deletes a watermark profile.
+   *
+   * @example
+   * ```ts
+   * const watermark = await client.stream.watermarks.delete(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     identifier: string,
@@ -53,6 +79,14 @@ export class Watermarks extends APIResource {
 
   /**
    * Retrieves details for a single watermark profile.
+   *
+   * @example
+   * ```ts
+   * const watermark = await client.stream.watermarks.get(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     identifier: string,

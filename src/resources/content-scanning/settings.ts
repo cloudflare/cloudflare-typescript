@@ -5,7 +5,7 @@ import * as Core from '../../core';
 
 export class Settings extends APIResource {
   /**
-   * Retrieve the current status of Content Scanning
+   * Retrieve the current status of Content Scanning.
    */
   get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
     const { zone_id } = params;
@@ -18,23 +18,23 @@ export class Settings extends APIResource {
 }
 
 /**
- * The status for Content Scanning
+ * Defines the status for Content Scanning.
  */
 export interface SettingGetResponse {
   /**
-   * Last modification date (ISO 8601) of the Content Scanning status
+   * Defines the last modification date (ISO 8601) of the Content Scanning status.
    */
   modified?: string;
 
   /**
-   * Status of Content Scanning
+   * Defines the status of Content Scanning.
    */
   value?: string;
 }
 
 export interface SettingGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

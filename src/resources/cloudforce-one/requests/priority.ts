@@ -2,20 +2,28 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import * as RequestsAPI from './requests';
 
 export class PriorityResource extends APIResource {
   /**
    * Create a New Priority Intelligence Requirement
+   *
+   * @example
+   * ```ts
+   * const priority =
+   *   await client.cloudforceOne.requests.priority.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     labels: ['DoS', 'CVE'],
+   *     priority: 1,
+   *     requirement: 'DoS attacks carried out by CVEs',
+   *     tlp: 'clear',
+   *   });
+   * ```
    */
-  create(
-    accountIdentifier: string,
-    body: PriorityCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Priority> {
+  create(params: PriorityCreateParams, options?: Core.RequestOptions): Core.APIPromise<Priority> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/new`, {
+      this._client.post(`/accounts/${account_id}/cloudforce-one/requests/priority/new`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: Priority }>
@@ -24,46 +32,81 @@ export class PriorityResource extends APIResource {
 
   /**
    * Update a Priority Intelligence Requirement
+   *
+   * @example
+   * ```ts
+   * const item =
+   *   await client.cloudforceOne.requests.priority.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       labels: ['DoS', 'CVE'],
+   *       priority: 1,
+   *       requirement: 'DoS attacks carried out by CVEs',
+   *       tlp: 'clear',
+   *     },
+   *   );
+   * ```
    */
   update(
-    accountIdentifier: string,
-    priorityIdentifer: string,
-    body: PriorityUpdateParams,
+    priorityId: string,
+    params: PriorityUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RequestsAPI.Item> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: RequestsAPI.Item }>
+      this._client.put(`/accounts/${account_id}/cloudforce-one/requests/priority/${priorityId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RequestsAPI.Item }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete a Priority Intelligence Requirement
+   *
+   * @example
+   * ```ts
+   * const priority =
+   *   await client.cloudforceOne.requests.priority.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
-    accountIdentifier: string,
-    priorityIdentifer: string,
+    priorityId: string,
+    params: PriorityDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PriorityDeleteResponse> {
+    const { account_id } = params;
     return this._client.delete(
-      `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
+      `/accounts/${account_id}/cloudforce-one/requests/priority/${priorityId}`,
       options,
     );
   }
 
   /**
    * Get a Priority Intelligence Requirement
+   *
+   * @example
+   * ```ts
+   * const item =
+   *   await client.cloudforceOne.requests.priority.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
-    accountIdentifier: string,
-    priorityIdentifer: string,
+    priorityId: string,
+    params: PriorityGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RequestsAPI.Item> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
+        `/accounts/${account_id}/cloudforce-one/requests/priority/${priorityId}`,
         options,
       ) as Core.APIPromise<{ result: RequestsAPI.Item }>
     )._thenUnwrap((obj) => obj.result);
@@ -71,11 +114,20 @@ export class PriorityResource extends APIResource {
 
   /**
    * Get Priority Intelligence Requirement Quota
+   *
+   * @example
+   * ```ts
+   * const quota =
+   *   await client.cloudforceOne.requests.priority.quota({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
-  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Quota> {
+  quota(params: PriorityQuotaParams, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Quota> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/quota`,
+        `/accounts/${account_id}/cloudforce-one/requests/priority/quota`,
         options,
       ) as Core.APIPromise<{ result: RequestsAPI.Quota }>
     )._thenUnwrap((obj) => obj.result);
@@ -88,116 +140,181 @@ export type LabelParam = string;
 
 export interface Priority {
   /**
-   * UUID
+   * UUID.
    */
   id: string;
 
   /**
-   * Priority creation time
+   * Priority creation time.
    */
   created: string;
 
   /**
-   * List of labels
+   * List of labels.
    */
   labels: Array<Label>;
 
   /**
-   * Priority
+   * Priority.
    */
   priority: number;
 
   /**
-   * Requirement
+   * Requirement.
    */
   requirement: string;
 
   /**
-   * The CISA defined Traffic Light Protocol (TLP)
+   * The CISA defined Traffic Light Protocol (TLP).
    */
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 
   /**
-   * Priority last updated time
+   * Priority last updated time.
    */
   updated: string;
 }
 
 export interface PriorityEdit {
   /**
-   * List of labels
+   * List of labels.
    */
   labels: Array<Label>;
 
   /**
-   * Priority
+   * Priority.
    */
   priority: number;
 
   /**
-   * Requirement
+   * Requirement.
    */
   requirement: string;
 
   /**
-   * The CISA defined Traffic Light Protocol (TLP)
+   * The CISA defined Traffic Light Protocol (TLP).
    */
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
 export interface PriorityDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<PriorityDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<PriorityDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
+export namespace PriorityDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
 export interface PriorityCreateParams {
   /**
-   * List of labels
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: List of labels.
    */
   labels: Array<LabelParam>;
 
   /**
-   * Priority
+   * Body param: Priority.
    */
   priority: number;
 
   /**
-   * Requirement
+   * Body param: Requirement.
    */
   requirement: string;
 
   /**
-   * The CISA defined Traffic Light Protocol (TLP)
+   * Body param: The CISA defined Traffic Light Protocol (TLP).
    */
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
 export interface PriorityUpdateParams {
   /**
-   * List of labels
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: List of labels.
    */
   labels: Array<LabelParam>;
 
   /**
-   * Priority
+   * Body param: Priority.
    */
   priority: number;
 
   /**
-   * Requirement
+   * Body param: Requirement.
    */
   requirement: string;
 
   /**
-   * The CISA defined Traffic Light Protocol (TLP)
+   * Body param: The CISA defined Traffic Light Protocol (TLP).
    */
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
+}
+
+export interface PriorityDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export interface PriorityGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export interface PriorityQuotaParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
 }
 
 export declare namespace PriorityResource {
@@ -208,5 +325,8 @@ export declare namespace PriorityResource {
     type PriorityDeleteResponse as PriorityDeleteResponse,
     type PriorityCreateParams as PriorityCreateParams,
     type PriorityUpdateParams as PriorityUpdateParams,
+    type PriorityDeleteParams as PriorityDeleteParams,
+    type PriorityGetParams as PriorityGetParams,
+    type PriorityQuotaParams as PriorityQuotaParams,
   };
 }

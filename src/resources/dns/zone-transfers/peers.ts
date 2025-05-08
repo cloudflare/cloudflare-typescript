@@ -7,6 +7,14 @@ import { SinglePage } from '../../../pagination';
 export class Peers extends APIResource {
   /**
    * Create Peer.
+   *
+   * @example
+   * ```ts
+   * const peer = await client.dns.zoneTransfers.peers.create({
+   *   account_id: '01a7362d577a6c3019a474fd6f485823',
+   *   name: 'my-peer-1',
+   * });
+   * ```
    */
   create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id, ...body } = params;
@@ -20,6 +28,17 @@ export class Peers extends APIResource {
 
   /**
    * Modify Peer.
+   *
+   * @example
+   * ```ts
+   * const peer = await client.dns.zoneTransfers.peers.update(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     name: 'my-peer-1',
+   *   },
+   * );
+   * ```
    */
   update(peerId: string, params: PeerUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id, ...body } = params;
@@ -33,6 +52,16 @@ export class Peers extends APIResource {
 
   /**
    * List Peers.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const peer of client.dns.zoneTransfers.peers.list(
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: PeerListParams, options?: Core.RequestOptions): Core.PagePromise<PeersSinglePage, Peer> {
     const { account_id } = params;
@@ -41,6 +70,14 @@ export class Peers extends APIResource {
 
   /**
    * Delete Peer.
+   *
+   * @example
+   * ```ts
+   * const peer = await client.dns.zoneTransfers.peers.delete(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   delete(
     peerId: string,
@@ -58,6 +95,14 @@ export class Peers extends APIResource {
 
   /**
    * Get Peer.
+   *
+   * @example
+   * ```ts
+   * const peer = await client.dns.zoneTransfers.peers.get(
+   *   '23ff594956f20c2a721606e94745a8aa',
+   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   * );
+   * ```
    */
   get(peerId: string, params: PeerGetParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id } = params;

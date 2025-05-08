@@ -2,67 +2,93 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class OverrideCodes extends APIResource {
   /**
-   * Fetches a one-time use admin override code for a device. This relies on the
-   * **Admin Override** setting being enabled in your device configuration.
+   * Fetches a one-time use admin override code for a registration. This relies on
+   * the **Admin Override** setting being enabled in your device configuration.
+   *
+   * **Deprecated:** please use GET
+   * /accounts/{account_id}/devices/registrations/{registration_id}/override_codes
+   * instead.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const overrideCodeListResponse of client.zeroTrust.devices.overrideCodes.list(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     deviceId: string,
     params: OverrideCodeListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OverrideCodeListResponse | null> {
+  ): Core.PagePromise<OverrideCodeListResponsesSinglePage, OverrideCodeListResponse> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/${deviceId}/override_codes`,
+      OverrideCodeListResponsesSinglePage,
+      options,
+    );
+  }
+
+  /**
+   * Fetches one-time use admin override codes for a registration. This relies on the
+   * **Admin Override** setting being enabled in your device configuration.
+   *
+   * @example
+   * ```ts
+   * const overrideCode =
+   *   await client.zeroTrust.devices.overrideCodes.get(
+   *     'registration_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  get(
+    registrationId: string,
+    params: OverrideCodeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OverrideCodeGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/devices/${deviceId}/override_codes`,
+        `/accounts/${account_id}/devices/registrations/${registrationId}/override_codes`,
         options,
-      ) as Core.APIPromise<{ result: OverrideCodeListResponse | null }>
+      ) as Core.APIPromise<{ result: OverrideCodeGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface OverrideCodeListResponse {
-  disable_for_time?: OverrideCodeListResponse.DisableForTime;
-}
+export class OverrideCodeListResponsesSinglePage extends SinglePage<OverrideCodeListResponse> {}
 
-export namespace OverrideCodeListResponse {
-  export interface DisableForTime {
-    /**
-     * Override code that is valid for 1 hour.
-     */
-    '1'?: string;
+export type OverrideCodeListResponse = unknown;
 
-    /**
-     * Override code that is valid for 12 hour2.
-     */
-    '12'?: string;
-
-    /**
-     * Override code that is valid for 24 hour.2.
-     */
-    '24'?: string;
-
-    /**
-     * Override code that is valid for 3 hours.
-     */
-    '3'?: string;
-
-    /**
-     * Override code that is valid for 6 hours.
-     */
-    '6'?: string;
-  }
+export interface OverrideCodeGetResponse {
+  disable_for_time?: Record<string, string>;
 }
 
 export interface OverrideCodeListParams {
   account_id: string;
 }
 
+export interface OverrideCodeGetParams {
+  account_id: string;
+}
+
+OverrideCodes.OverrideCodeListResponsesSinglePage = OverrideCodeListResponsesSinglePage;
+
 export declare namespace OverrideCodes {
   export {
     type OverrideCodeListResponse as OverrideCodeListResponse,
+    type OverrideCodeGetResponse as OverrideCodeGetResponse,
+    OverrideCodeListResponsesSinglePage as OverrideCodeListResponsesSinglePage,
     type OverrideCodeListParams as OverrideCodeListParams,
+    type OverrideCodeGetParams as OverrideCodeGetParams,
   };
 }

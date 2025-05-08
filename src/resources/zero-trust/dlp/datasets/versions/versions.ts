@@ -13,6 +13,23 @@ export class Versions extends APIResource {
    * This is used for multi-column EDMv2 datasets. The EDMv2 format can only be
    * created in the Cloudflare dashboard. The columns in the response appear in the
    * same order as in the request.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const versionCreateResponse of client.zeroTrust.dlp.datasets.versions.create(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   0,
+   *   {
+   *     account_id: 'account_id',
+   *     body: [
+   *       { entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+   *     ],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     datasetId: string,

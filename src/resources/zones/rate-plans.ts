@@ -7,6 +7,16 @@ import { SinglePage } from '../../pagination';
 export class RatePlans extends APIResource {
   /**
    * Lists all rate plans the zone can subscribe to.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ratePlanGetResponse of client.zones.ratePlans.get(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: RatePlanGetParams,

@@ -13,7 +13,7 @@ describe('resource bytimes', () => {
   test('get: only required params', async () => {
     const responsePromise = client.spectrum.analytics.events.bytimes.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      time_delta: 'year',
+      time_delta: 'minute',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource bytimes', () => {
   test('get: required and optional params', async () => {
     const response = await client.spectrum.analytics.events.bytimes.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      time_delta: 'year',
+      time_delta: 'minute',
       dimensions: ['event', 'appID'],
       filters: 'event==disconnect%20AND%20coloName!=SFO',
       metrics: ['count', 'bytesIngress'],

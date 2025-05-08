@@ -33,6 +33,7 @@ describe('resource applications', () => {
       type: 'self_hosted',
       account_id: 'account_id',
       allow_authenticate_via_warp: true,
+      allow_iframe: true,
       allowed_idps: ['699d98642c564d2e855e9661899b7252'],
       app_launcher_visible: true,
       auto_redirect_to_identity: true,
@@ -85,6 +86,7 @@ describe('resource applications', () => {
       options_preflight_bypass: true,
       path_cookie_attribute: true,
       policies: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 }],
+      read_service_tokens_from_header: 'Authorization',
       same_site_cookie_attribute: 'strict',
       scim_config: {
         idp_uid: 'idp_uid',
@@ -135,6 +137,7 @@ describe('resource applications', () => {
       type: 'self_hosted',
       account_id: 'account_id',
       allow_authenticate_via_warp: true,
+      allow_iframe: true,
       allowed_idps: ['699d98642c564d2e855e9661899b7252'],
       app_launcher_visible: true,
       auto_redirect_to_identity: true,
@@ -187,6 +190,7 @@ describe('resource applications', () => {
       options_preflight_bypass: true,
       path_cookie_attribute: true,
       policies: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 }],
+      read_service_tokens_from_header: 'Authorization',
       same_site_cookie_attribute: 'strict',
       scim_config: {
         idp_uid: 'idp_uid',

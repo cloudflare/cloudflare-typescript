@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Schemas extends APIResource {
   /**
    * Retrieve operations and features as OpenAPI schemas
+   *
+   * @example
+   * ```ts
+   * const schemas = await client.apiGateway.schemas.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: SchemaListParams, options?: Core.RequestOptions): Core.APIPromise<SchemaListResponse> {
     const { zone_id, ...query } = params;
@@ -25,7 +32,7 @@ export interface SchemaListResponse {
 
 export interface SchemaListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

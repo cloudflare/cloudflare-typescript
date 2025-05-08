@@ -10,6 +10,17 @@ export class Groups extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const group of client.firewall.waf.packages.groups.list(
+   *   'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     packageId: string,
@@ -30,6 +41,16 @@ export class Groups extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.firewall.waf.packages.groups.edit(
+   *     'a25a9a7e9c00afc1fb2e0245519d725b',
+   *     'a25a9a7e9c00afc1fb2e0245519d725b',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     packageId: string,
@@ -51,6 +72,15 @@ export class Groups extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const group = await client.firewall.waf.packages.groups.get(
+   *   'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     packageId: string,
@@ -72,44 +102,44 @@ export class GroupsV4PagePaginationArray extends V4PagePaginationArray<Group> {}
 
 export interface Group {
   /**
-   * The unique identifier of the rule group.
+   * Defines the unique identifier of the rule group.
    */
   id: string;
 
   /**
-   * An informative summary of what the rule group does.
+   * Defines an informative summary of what the rule group does.
    */
   description: string | null;
 
   /**
-   * The state of the rules contained in the rule group. When `on`, the rules in the
-   * group are configurable/usable.
+   * Defines the state of the rules contained in the rule group. When `on`, the rules
+   * in the group are configurable/usable.
    */
   mode: 'on' | 'off';
 
   /**
-   * The name of the rule group.
+   * Defines the name of the rule group.
    */
   name: string;
 
   /**
-   * The number of rules in the current rule group.
+   * Defines the number of rules in the current rule group.
    */
   rules_count: number;
 
   /**
-   * The available states for the rule group.
+   * Defines the available states for the rule group.
    */
   allowed_modes?: Array<'on' | 'off'>;
 
   /**
-   * The number of rules within the group that have been modified from their default
-   * configuration.
+   * Defines the number of rules within the group that have been modified from their
+   * default configuration.
    */
   modified_rules_count?: number;
 
   /**
-   * The unique identifier of a WAF package.
+   * Defines the unique identifier of a WAF package.
    */
   package_id?: string;
 }
@@ -120,59 +150,60 @@ export type GroupGetResponse = unknown | string | null;
 
 export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier of a schema.
    */
   zone_id: string;
 
   /**
-   * Query param: The direction used to sort returned rule groups.
+   * Query param: Defines the direction used to sort returned rule groups.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: When set to `all`, all the search requirements must match. When set
-   * to `any`, only one of the search requirements has to match.
+   * Query param: Defines the condition for search requirements. When set to `all`,
+   * all the search requirements must match. When set to `any`, only one of the
+   * search requirements has to match.
    */
   match?: 'any' | 'all';
 
   /**
-   * Query param: The state of the rules contained in the rule group. When `on`, the
-   * rules in the group are configurable/usable.
+   * Query param: Defines the state of the rules contained in the rule group. When
+   * `on`, the rules in the group are configurable/usable.
    */
   mode?: 'on' | 'off';
 
   /**
-   * Query param: The name of the rule group.
+   * Query param: Defines the name of the rule group.
    */
   name?: string;
 
   /**
-   * Query param: The field used to sort returned rule groups.
+   * Query param: Defines the field used to sort returned rule groups.
    */
   order?: 'mode' | 'rules_count';
 
   /**
-   * Query param: The number of rules in the current rule group.
+   * Query param: Defines the number of rules in the current rule group.
    */
   rules_count?: number;
 }
 
 export interface GroupEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier of a schema.
    */
   zone_id: string;
 
   /**
-   * Body param: The state of the rules contained in the rule group. When `on`, the
-   * rules in the group are configurable/usable.
+   * Body param: Defines the state of the rules contained in the rule group. When
+   * `on`, the rules in the group are configurable/usable.
    */
   mode?: 'on' | 'off';
 }
 
 export interface GroupGetParams {
   /**
-   * Identifier
+   * Defines an identifier of a schema.
    */
   zone_id: string;
 }

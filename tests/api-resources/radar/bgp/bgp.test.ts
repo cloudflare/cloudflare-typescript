@@ -33,7 +33,7 @@ describe('resource bgp', () => {
     await expect(
       client.radar.bgp.timeseries(
         {
-          aggInterval: '15m',
+          aggInterval: '1h',
           asn: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],

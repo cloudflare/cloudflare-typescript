@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class TargetIndustries extends APIResource {
   /**
    * Lists all target industries
+   *
+   * @example
+   * ```ts
+   * const targetIndustries =
+   *   await client.cloudforceOne.threatEvents.targetIndustries.list(
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   list(
     params: TargetIndustryListParams,

@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Recommendations extends APIResource {
   /**
    * Retrieve the SSL/TLS Recommender's recommendation for a zone.
+   *
+   * @example
+   * ```ts
+   * const recommendation = await client.ssl.recommendations.get(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     params: RecommendationGetParams,
@@ -33,7 +40,7 @@ export interface RecommendationGetResponse {
 
 export interface RecommendationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

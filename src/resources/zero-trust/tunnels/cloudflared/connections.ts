@@ -10,6 +10,15 @@ export class Connections extends APIResource {
    * independently of its current state. If no connector id (client_id) is provided
    * all connectors will be removed. We recommend running this command after rotating
    * tokens.
+   *
+   * @example
+   * ```ts
+   * const connection =
+   *   await client.zeroTrust.tunnels.cloudflared.connections.delete(
+   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   delete(
     tunnelId: string,
@@ -27,6 +36,17 @@ export class Connections extends APIResource {
 
   /**
    * Fetches connection details for a Cloudflare Tunnel.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const client of client.zeroTrust.tunnels.cloudflared.connections.get(
+   *   'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     tunnelId: string,

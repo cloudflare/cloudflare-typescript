@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Eligible extends APIResource {
   /**
    * Get a list of all delivery mechanism types for which an account is eligible.
+   *
+   * @example
+   * ```ts
+   * const eligible =
+   *   await client.alerting.destinations.eligible.get({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(params: EligibleGetParams, options?: Core.RequestOptions): Core.APIPromise<EligibleGetResponse> {
     const { account_id } = params;

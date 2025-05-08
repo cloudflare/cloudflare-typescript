@@ -8,6 +8,13 @@ import { SubscriptionsSinglePage } from '../shared';
 export class Subscriptions extends APIResource {
   /**
    * Updates a user's subscriptions.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.user.subscriptions.update(
+   *   '506e3185e9c882d175a2d0cb0093d9f2',
+   * );
+   * ```
    */
   update(
     identifier: string,
@@ -23,6 +30,13 @@ export class Subscriptions extends APIResource {
 
   /**
    * Deletes a user's subscription.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.user.subscriptions.delete(
+   *   '506e3185e9c882d175a2d0cb0093d9f2',
+   * );
+   * ```
    */
   delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionDeleteResponse> {
     return this._client.delete(`/user/subscriptions/${identifier}`, options);
@@ -30,6 +44,14 @@ export class Subscriptions extends APIResource {
 
   /**
    * Lists all of a user's subscriptions.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const subscription of client.user.subscriptions.get()) {
+   *   // ...
+   * }
+   * ```
    */
   get(options?: Core.RequestOptions): Core.PagePromise<SubscriptionsSinglePage, Shared.Subscription> {
     return this._client.getAPIList('/user/subscriptions', SubscriptionsSinglePage, options);

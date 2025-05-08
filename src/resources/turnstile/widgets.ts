@@ -7,6 +7,20 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Widgets extends APIResource {
   /**
    * Lists challenge widgets.
+   *
+   * @example
+   * ```ts
+   * const widget = await client.turnstile.widgets.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   domains: [
+   *     '203.0.113.1',
+   *     'cloudflare.com',
+   *     'blog.example.com',
+   *   ],
+   *   mode: 'invisible',
+   *   name: 'blog.cloudflare.com login form',
+   * });
+   * ```
    */
   create(params: WidgetCreateParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id, direction, order, page, per_page, ...body } = params;
@@ -21,6 +35,23 @@ export class Widgets extends APIResource {
 
   /**
    * Update the configuration of a widget.
+   *
+   * @example
+   * ```ts
+   * const widget = await client.turnstile.widgets.update(
+   *   '0x4AAF00AAAABn0R22HWm-YUc',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     domains: [
+   *       '203.0.113.1',
+   *       'cloudflare.com',
+   *       'blog.example.com',
+   *     ],
+   *     mode: 'invisible',
+   *     name: 'blog.cloudflare.com login form',
+   *   },
+   * );
+   * ```
    */
   update(
     sitekey: string,
@@ -38,6 +69,16 @@ export class Widgets extends APIResource {
 
   /**
    * Lists all turnstile widgets of an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const widgetListResponse of client.turnstile.widgets.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: WidgetListParams,
@@ -53,6 +94,14 @@ export class Widgets extends APIResource {
 
   /**
    * Destroy a Turnstile Widget.
+   *
+   * @example
+   * ```ts
+   * const widget = await client.turnstile.widgets.delete(
+   *   '0x4AAF00AAAABn0R22HWm-YUc',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     sitekey: string,
@@ -70,6 +119,14 @@ export class Widgets extends APIResource {
 
   /**
    * Show a single challenge widget configuration.
+   *
+   * @example
+   * ```ts
+   * const widget = await client.turnstile.widgets.get(
+   *   '0x4AAF00AAAABn0R22HWm-YUc',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(sitekey: string, params: WidgetGetParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id } = params;
@@ -85,6 +142,14 @@ export class Widgets extends APIResource {
    * `false`, the previous secret remains valid for 2 hours.
    *
    * Note that secrets cannot be rotated again during the grace period.
+   *
+   * @example
+   * ```ts
+   * const widget = await client.turnstile.widgets.rotateSecret(
+   *   '0x4AAF00AAAABn0R22HWm-YUc',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   rotateSecret(
     sitekey: string,

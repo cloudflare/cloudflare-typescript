@@ -12,9 +12,8 @@ const client = new Cloudflare({
 describe('resource assets', () => {
   test('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.assets.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { page: 0, per_page: 10 },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', page: 0, per_page: 10 },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,18 +26,16 @@ describe('resource assets', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.cloudforceOne.requests.assets.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { page: 0, per_page: 10 },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', page: 0, per_page: 10 },
     );
   });
 
-  test('update', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.assets.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,11 +46,19 @@ describe('resource assets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete', async () => {
+  test('update: required and optional params', async () => {
+    const response = await client.cloudforceOne.requests.assets.update(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', source: '@/Users/me/example.docx' },
+    );
+  });
+
+  test('delete: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.assets.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,23 +69,19 @@ describe('resource assets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.cloudforceOne.requests.assets.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await client.cloudforceOne.requests.assets.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
-  test('get', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.assets.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -91,15 +92,11 @@ describe('resource assets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.cloudforceOne.requests.assets.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await client.cloudforceOne.requests.assets.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

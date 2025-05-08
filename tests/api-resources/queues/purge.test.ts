@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource analytics', () => {
-  test('list: only required params', async () => {
-    const responsePromise = client.kv.namespaces.analytics.list({
+describe('resource purge', () => {
+  test('start: only required params', async () => {
+    const responsePromise = client.queues.purge.start('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -23,23 +23,15 @@ describe('resource analytics', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await client.kv.namespaces.analytics.list({
+  test('start: required and optional params', async () => {
+    const response = await client.queues.purge.start('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      query: {
-        dimensions: ['accountId'],
-        filters: 'requestType==read AND responseCode!=200',
-        limit: 0,
-        metrics: ['requests'],
-        since: '2019-01-02T02:20:00Z',
-        sort: ['+requests', '-responseCode'],
-        until: '2019-01-02T03:20:00Z',
-      },
+      delete_messages_permanently: true,
     });
   });
 
-  test('stored: only required params', async () => {
-    const responsePromise = client.kv.namespaces.analytics.stored({
+  test('status: only required params', async () => {
+    const responsePromise = client.queues.purge.status('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -51,18 +43,9 @@ describe('resource analytics', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('stored: required and optional params', async () => {
-    const response = await client.kv.namespaces.analytics.stored({
+  test('status: required and optional params', async () => {
+    const response = await client.queues.purge.status('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      query: {
-        dimensions: ['namespaceId'],
-        filters: 'namespaceId==a4e8cbb7-1b58-4990-925e-e026d40c4c64',
-        limit: 0,
-        metrics: ['storedBytes'],
-        since: '2019-01-02T02:20:00Z',
-        sort: ['+storedBytes', '-namespaceId'],
-        until: '2019-01-02T03:20:00Z',
-      },
     });
   });
 });

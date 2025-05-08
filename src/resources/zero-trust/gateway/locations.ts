@@ -7,6 +7,15 @@ import { SinglePage } from '../../../pagination';
 export class Locations extends APIResource {
   /**
    * Creates a new Zero Trust Gateway location.
+   *
+   * @example
+   * ```ts
+   * const location =
+   *   await client.zeroTrust.gateway.locations.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     name: 'Austin Office Location',
+   *   });
+   * ```
    */
   create(params: LocationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Location> {
     const { account_id, ...body } = params;
@@ -20,6 +29,18 @@ export class Locations extends APIResource {
 
   /**
    * Updates a configured Zero Trust Gateway location.
+   *
+   * @example
+   * ```ts
+   * const location =
+   *   await client.zeroTrust.gateway.locations.update(
+   *     'ed35569b41ce4d1facfe683550f54086',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       name: 'Austin Office Location',
+   *     },
+   *   );
+   * ```
    */
   update(
     locationId: string,
@@ -37,6 +58,16 @@ export class Locations extends APIResource {
 
   /**
    * Fetches Zero Trust Gateway locations for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const location of client.zeroTrust.gateway.locations.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: LocationListParams,
@@ -48,6 +79,15 @@ export class Locations extends APIResource {
 
   /**
    * Deletes a configured Zero Trust Gateway location.
+   *
+   * @example
+   * ```ts
+   * const location =
+   *   await client.zeroTrust.gateway.locations.delete(
+   *     'ed35569b41ce4d1facfe683550f54086',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   delete(
     locationId: string,
@@ -65,6 +105,15 @@ export class Locations extends APIResource {
 
   /**
    * Fetches a single Zero Trust Gateway location.
+   *
+   * @example
+   * ```ts
+   * const location =
+   *   await client.zeroTrust.gateway.locations.get(
+   *     'ed35569b41ce4d1facfe683550f54086',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     locationId: string,

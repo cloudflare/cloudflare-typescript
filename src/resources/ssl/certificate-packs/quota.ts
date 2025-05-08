@@ -6,6 +6,13 @@ import * as Core from '../../../core';
 export class Quota extends APIResource {
   /**
    * For a given zone, list certificate pack quotas.
+   *
+   * @example
+   * ```ts
+   * const quota = await client.ssl.certificatePacks.quota.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: QuotaGetParams, options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse> {
     const { zone_id } = params;
@@ -37,7 +44,7 @@ export namespace QuotaGetResponse {
 
 export interface QuotaGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

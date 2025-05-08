@@ -19,6 +19,13 @@ export class Monitors extends APIResource {
 
   /**
    * Create a configured monitor.
+   *
+   * @example
+   * ```ts
+   * const monitor = await client.loadBalancers.monitors.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: MonitorCreateParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
     const { account_id, ...body } = params;
@@ -32,6 +39,14 @@ export class Monitors extends APIResource {
 
   /**
    * Modify a configured monitor.
+   *
+   * @example
+   * ```ts
+   * const monitor = await client.loadBalancers.monitors.update(
+   *   'f1aba936b94213e5b8dca0c0dbf1f9cc',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     monitorId: string,
@@ -49,6 +64,16 @@ export class Monitors extends APIResource {
 
   /**
    * List configured monitors for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const monitor of client.loadBalancers.monitors.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: MonitorListParams,
@@ -64,6 +89,14 @@ export class Monitors extends APIResource {
 
   /**
    * Delete a configured monitor.
+   *
+   * @example
+   * ```ts
+   * const monitor = await client.loadBalancers.monitors.delete(
+   *   'f1aba936b94213e5b8dca0c0dbf1f9cc',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     monitorId: string,
@@ -81,6 +114,14 @@ export class Monitors extends APIResource {
 
   /**
    * Apply changes to an existing monitor, overwriting the supplied properties.
+   *
+   * @example
+   * ```ts
+   * const monitor = await client.loadBalancers.monitors.edit(
+   *   'f1aba936b94213e5b8dca0c0dbf1f9cc',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     monitorId: string,
@@ -98,6 +139,14 @@ export class Monitors extends APIResource {
 
   /**
    * List a single configured monitor for an account.
+   *
+   * @example
+   * ```ts
+   * const monitor = await client.loadBalancers.monitors.get(
+   *   'f1aba936b94213e5b8dca0c0dbf1f9cc',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(monitorId: string, params: MonitorGetParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
     const { account_id } = params;

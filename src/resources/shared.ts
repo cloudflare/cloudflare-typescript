@@ -263,7 +263,7 @@ export namespace ErrorData {
 
 export interface Identifier {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
@@ -599,6 +599,16 @@ export interface ResponseInfo {
   code: number;
 
   message: string;
+
+  documentation_url?: string;
+
+  source?: ResponseInfo.Source;
+}
+
+export namespace ResponseInfo {
+  export interface Source {
+    pointer?: string;
+  }
 }
 
 export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;

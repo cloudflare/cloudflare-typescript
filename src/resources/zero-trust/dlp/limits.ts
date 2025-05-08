@@ -6,6 +6,13 @@ import * as Core from '../../../core';
 export class Limits extends APIResource {
   /**
    * Fetch limits associated with DLP for account
+   *
+   * @example
+   * ```ts
+   * const limits = await client.zeroTrust.dlp.limits.list({
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   list(params: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<LimitListResponse> {
     const { account_id } = params;

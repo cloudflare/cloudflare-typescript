@@ -91,6 +91,48 @@ describe('resource summary', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
+  test('industry', async () => {
+    const responsePromise = client.radar.attacks.layer7.summary.industry();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('industry: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.attacks.layer7.summary.industry({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('industry: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.attacks.layer7.summary.industry(
+        {
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          format: 'JSON',
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['main_series'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
   test('ipVersion', async () => {
     const responsePromise = client.radar.attacks.layer7.summary.ipVersion();
     const rawResponse = await responsePromise.asResponse();
@@ -207,6 +249,48 @@ describe('resource summary', () => {
           ipVersion: ['IPv4'],
           limitPerGroup: 10,
           location: ['string'],
+          name: ['main_series'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('vertical', async () => {
+    const responsePromise = client.radar.attacks.layer7.summary.vertical();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('vertical: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.attacks.layer7.summary.vertical({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('vertical: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.attacks.layer7.summary.vertical(
+        {
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          format: 'JSON',
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
           name: ['main_series'],
         },
         { path: '/_stainless_unknown_path' },

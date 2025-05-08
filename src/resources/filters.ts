@@ -188,7 +188,7 @@ export interface FirewallFilterParam {
 
 export interface FilterCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -201,7 +201,7 @@ export interface FilterCreateParams {
 
 export interface FilterUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -213,7 +213,7 @@ export interface FilterUpdateParams {
 
 export interface FilterListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -246,28 +246,46 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
 
 export interface FilterDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface FilterBulkDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface FilterBulkUpdateParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface FilterGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
+}
+
+Filters.FirewallFiltersSinglePage = FirewallFiltersSinglePage;
+Filters.FirewallFiltersV4PagePaginationArray = FirewallFiltersV4PagePaginationArray;
+
+export declare namespace Filters {
+  export {
+    type FirewallFilter as FirewallFilter,
+    FirewallFiltersSinglePage as FirewallFiltersSinglePage,
+    FirewallFiltersV4PagePaginationArray as FirewallFiltersV4PagePaginationArray,
+    type FilterCreateParams as FilterCreateParams,
+    type FilterUpdateParams as FilterUpdateParams,
+    type FilterListParams as FilterListParams,
+    type FilterDeleteParams as FilterDeleteParams,
+    type FilterBulkDeleteParams as FilterBulkDeleteParams,
+    type FilterBulkUpdateParams as FilterBulkUpdateParams,
+    type FilterGetParams as FilterGetParams,
+  };
 }

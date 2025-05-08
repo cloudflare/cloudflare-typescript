@@ -7,6 +7,16 @@ import * as HealthchecksAPI from './healthchecks';
 export class Previews extends APIResource {
   /**
    * Create a new preview health check.
+   *
+   * @example
+   * ```ts
+   * const healthcheck =
+   *   await client.healthchecks.previews.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     address: 'www.example.com',
+   *     name: 'server-1',
+   *   });
+   * ```
    */
   create(
     params: PreviewCreateParams,
@@ -22,6 +32,14 @@ export class Previews extends APIResource {
 
   /**
    * Delete a health check.
+   *
+   * @example
+   * ```ts
+   * const preview = await client.healthchecks.previews.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     healthcheckId: string,
@@ -39,6 +57,14 @@ export class Previews extends APIResource {
 
   /**
    * Fetch a single configured health check preview.
+   *
+   * @example
+   * ```ts
+   * const healthcheck = await client.healthchecks.previews.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     healthcheckId: string,

@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Permissions extends APIResource {
   /**
    * Grant permission to indicator feed
+   *
+   * @example
+   * ```ts
+   * const permission =
+   *   await client.intel.indicatorFeeds.permissions.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(
     params: PermissionCreateParams,
@@ -22,6 +30,14 @@ export class Permissions extends APIResource {
 
   /**
    * List indicator feed permissions
+   *
+   * @example
+   * ```ts
+   * const permissions =
+   *   await client.intel.indicatorFeeds.permissions.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   list(params: PermissionListParams, options?: Core.RequestOptions): Core.APIPromise<PermissionListResponse> {
     const { account_id } = params;
@@ -35,6 +51,14 @@ export class Permissions extends APIResource {
 
   /**
    * Revoke permission to indicator feed
+   *
+   * @example
+   * ```ts
+   * const permission =
+   *   await client.intel.indicatorFeeds.permissions.delete({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   delete(
     params: PermissionDeleteParams,

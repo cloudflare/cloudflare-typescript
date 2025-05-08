@@ -63,6 +63,7 @@ export { OriginTLSClientAuth } from './origin-tls-client-auth/origin-tls-client-
 export { PageRules } from './page-rules';
 export { PageShield } from './page-shield/page-shield';
 export { Pages } from './pages/pages';
+export { Pipelines } from './pipelines';
 export { Queues } from './queues/queues';
 export { R2 } from './r2/r2';
 export { RUM } from './rum/rum';
@@ -74,6 +75,8 @@ export { ResourceSharing } from './resource-sharing/resource-sharing';
 export { Rules } from './rules/rules';
 export { Rulesets } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
+export { SchemaValidation } from './schema-validation/schema-validation';
+export { SecretsStore } from './secrets-store/secrets-store';
 export { SecurityCenter } from './security-center/security-center';
 export { SecurityTXT } from './security-txt';
 export { Snippets } from './snippets/snippets';

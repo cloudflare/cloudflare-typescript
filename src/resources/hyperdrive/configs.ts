@@ -8,6 +8,22 @@ import { HyperdrivesSinglePage } from './hyperdrive';
 export class Configs extends APIResource {
   /**
    * Creates and returns a new Hyperdrive configuration.
+   *
+   * @example
+   * ```ts
+   * const hyperdrive = await client.hyperdrive.configs.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example-hyperdrive',
+   *   origin: {
+   *     database: 'postgres',
+   *     host: 'database.example.com',
+   *     password: 'password',
+   *     port: 5432,
+   *     scheme: 'postgres',
+   *     user: 'postgres',
+   *   },
+   * });
+   * ```
    */
   create(
     params: ConfigCreateParams,
@@ -24,6 +40,25 @@ export class Configs extends APIResource {
 
   /**
    * Updates and returns the specified Hyperdrive configuration.
+   *
+   * @example
+   * ```ts
+   * const hyperdrive = await client.hyperdrive.configs.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'example-hyperdrive',
+   *     origin: {
+   *       database: 'postgres',
+   *       host: 'database.example.com',
+   *       password: 'password',
+   *       port: 5432,
+   *       scheme: 'postgres',
+   *       user: 'postgres',
+   *     },
+   *   },
+   * );
+   * ```
    */
   update(
     hyperdriveId: string,
@@ -41,6 +76,16 @@ export class Configs extends APIResource {
 
   /**
    * Returns a list of Hyperdrives
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const hyperdrive of client.hyperdrive.configs.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ConfigListParams,
@@ -56,6 +101,14 @@ export class Configs extends APIResource {
 
   /**
    * Deletes the specified Hyperdrive.
+   *
+   * @example
+   * ```ts
+   * const config = await client.hyperdrive.configs.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     hyperdriveId: string,
@@ -74,6 +127,14 @@ export class Configs extends APIResource {
   /**
    * Patches and returns the specified Hyperdrive configuration. Custom caching
    * settings are not kept if caching is disabled.
+   *
+   * @example
+   * ```ts
+   * const hyperdrive = await client.hyperdrive.configs.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     hyperdriveId: string,
@@ -91,6 +152,14 @@ export class Configs extends APIResource {
 
   /**
    * Returns the specified Hyperdrive configuration.
+   *
+   * @example
+   * ```ts
+   * const hyperdrive = await client.hyperdrive.configs.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     hyperdriveId: string,
@@ -133,6 +202,11 @@ export interface ConfigCreateParams {
   caching?:
     | ConfigCreateParams.HyperdriveHyperdriveCachingCommon
     | ConfigCreateParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigCreateParams.MTLS;
 }
 
 export namespace ConfigCreateParams {
@@ -161,7 +235,7 @@ export namespace ConfigCreateParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -200,7 +274,7 @@ export namespace ConfigCreateParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -233,6 +307,24 @@ export namespace ConfigCreateParams {
      */
     stale_while_revalidate?: number;
   }
+
+  export interface MTLS {
+    /**
+     * CA certificate ID
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * mTLS certificate ID
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * SSL mode used for CA verification. Must be 'require', 'verify-ca', or
+     * 'verify-full'
+     */
+    sslmode?: string;
+  }
 }
 
 export interface ConfigUpdateParams {
@@ -259,6 +351,11 @@ export interface ConfigUpdateParams {
   caching?:
     | ConfigUpdateParams.HyperdriveHyperdriveCachingCommon
     | ConfigUpdateParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigUpdateParams.MTLS;
 }
 
 export namespace ConfigUpdateParams {
@@ -287,7 +384,7 @@ export namespace ConfigUpdateParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -326,7 +423,7 @@ export namespace ConfigUpdateParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.
@@ -358,6 +455,24 @@ export namespace ConfigUpdateParams {
      * it becomes stale. Not returned if set to default. (Default: 15)
      */
     stale_while_revalidate?: number;
+  }
+
+  export interface MTLS {
+    /**
+     * CA certificate ID
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * mTLS certificate ID
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * SSL mode used for CA verification. Must be 'require', 'verify-ca', or
+     * 'verify-full'
+     */
+    sslmode?: string;
   }
 }
 
@@ -387,6 +502,11 @@ export interface ConfigEditParams {
   caching?:
     | ConfigEditParams.HyperdriveHyperdriveCachingCommon
     | ConfigEditParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigEditParams.MTLS;
 
   /**
    * Body param:
@@ -429,6 +549,24 @@ export namespace ConfigEditParams {
     stale_while_revalidate?: number;
   }
 
+  export interface MTLS {
+    /**
+     * CA certificate ID
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * mTLS certificate ID
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * SSL mode used for CA verification. Must be 'require', 'verify-ca', or
+     * 'verify-full'
+     */
+    sslmode?: string;
+  }
+
   export interface HyperdriveHyperdriveDatabase {
     /**
      * The name of your origin database.
@@ -444,7 +582,7 @@ export namespace ConfigEditParams {
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme?: 'postgres' | 'postgresql';
+    scheme?: 'postgres' | 'postgresql' | 'mysql';
 
     /**
      * The user of your origin database.

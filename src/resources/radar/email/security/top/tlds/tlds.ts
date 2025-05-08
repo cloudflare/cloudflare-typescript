@@ -17,6 +17,12 @@ export class Tlds extends APIResource {
 
   /**
    * Retrieves the top TLDs by number of email messages.
+   *
+   * @example
+   * ```ts
+   * const tld =
+   *   await client.radar.email.security.top.tlds.get();
+   * ```
    */
   get(query?: TldGetParams, options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
@@ -107,9 +113,9 @@ export interface TldGetParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 

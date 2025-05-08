@@ -52,6 +52,13 @@ export class PageShield extends APIResource {
 
   /**
    * Updates Page Shield settings.
+   *
+   * @example
+   * ```ts
+   * const pageShield = await client.pageShield.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   update(
     params: PageShieldUpdateParams,
@@ -67,6 +74,13 @@ export class PageShield extends APIResource {
 
   /**
    * Fetches the Page Shield settings.
+   *
+   * @example
+   * ```ts
+   * const setting = await client.pageShield.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: PageShieldGetParams, options?: Core.RequestOptions): Core.APIPromise<Setting | null> {
     const { zone_id } = params;
@@ -165,6 +179,13 @@ PageShield.Cookies = Cookies;
 PageShield.CookieListResponsesSinglePage = CookieListResponsesSinglePage;
 
 export declare namespace PageShield {
+  export {
+    type Setting as Setting,
+    type PageShieldUpdateResponse as PageShieldUpdateResponse,
+    type PageShieldUpdateParams as PageShieldUpdateParams,
+    type PageShieldGetParams as PageShieldGetParams,
+  };
+
   export {
     Policies as Policies,
     type Policy as Policy,

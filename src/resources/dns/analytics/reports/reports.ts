@@ -14,6 +14,13 @@ export class Reports extends APIResource {
    * See
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
+   *
+   * @example
+   * ```ts
+   * const report = await client.dns.analytics.reports.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ReportGetParams, options?: Core.RequestOptions): Core.APIPromise<Report> {
     const { zone_id, ...query } = params;

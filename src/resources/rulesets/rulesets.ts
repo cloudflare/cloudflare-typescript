@@ -60,6 +60,16 @@ export class Rulesets extends APIResource {
 
   /**
    * Creates a ruleset.
+   *
+   * @example
+   * ```ts
+   * const ruleset = await client.rulesets.create({
+   *   kind: 'root',
+   *   name: 'My ruleset',
+   *   phase: 'http_request_firewall_custom',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   create(params: RulesetCreateParams, options?: Core.RequestOptions): Core.APIPromise<RulesetCreateResponse> {
     const { account_id, zone_id, ...body } = params;
@@ -89,6 +99,14 @@ export class Rulesets extends APIResource {
 
   /**
    * Updates an account or zone ruleset, creating a new version.
+   *
+   * @example
+   * ```ts
+   * const ruleset = await client.rulesets.update(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   update(
     rulesetId: string,
@@ -122,6 +140,16 @@ export class Rulesets extends APIResource {
 
   /**
    * Fetches all rulesets.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const rulesetListResponse of client.rulesets.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params?: RulesetListParams,
@@ -163,6 +191,14 @@ export class Rulesets extends APIResource {
 
   /**
    * Deletes all versions of an existing account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * await client.rulesets.delete(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     rulesetId: string,
@@ -203,6 +239,14 @@ export class Rulesets extends APIResource {
 
   /**
    * Fetches the latest version of an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * const ruleset = await client.rulesets.get(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     rulesetId: string,
@@ -503,7 +547,7 @@ export namespace RulesetCreateResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -638,7 +682,7 @@ export namespace RulesetCreateResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -839,7 +883,7 @@ export namespace RulesetUpdateResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -974,7 +1018,7 @@ export namespace RulesetUpdateResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1215,7 +1259,7 @@ export namespace RulesetGetResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1350,7 +1394,7 @@ export namespace RulesetGetResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1530,7 +1574,7 @@ export namespace RulesetCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1650,7 +1694,7 @@ export namespace RulesetCreateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1830,7 +1874,7 @@ export namespace RulesetUpdateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -1950,7 +1994,7 @@ export namespace RulesetUpdateParams {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -2028,12 +2072,29 @@ export interface RulesetGetParams {
   zone_id?: string;
 }
 
+Rulesets.RulesetListResponsesCursorPagination = RulesetListResponsesCursorPagination;
 Rulesets.Phases = Phases;
 Rulesets.Rules = Rules;
 Rulesets.Versions = Versions;
 Rulesets.VersionListResponsesSinglePage = VersionListResponsesSinglePage;
 
 export declare namespace Rulesets {
+  export {
+    type Kind as Kind,
+    type Phase as Phase,
+    type Ruleset as Ruleset,
+    type RulesetCreateResponse as RulesetCreateResponse,
+    type RulesetUpdateResponse as RulesetUpdateResponse,
+    type RulesetListResponse as RulesetListResponse,
+    type RulesetGetResponse as RulesetGetResponse,
+    RulesetListResponsesCursorPagination as RulesetListResponsesCursorPagination,
+    type RulesetCreateParams as RulesetCreateParams,
+    type RulesetUpdateParams as RulesetUpdateParams,
+    type RulesetListParams as RulesetListParams,
+    type RulesetDeleteParams as RulesetDeleteParams,
+    type RulesetGetParams as RulesetGetParams,
+  };
+
   export {
     Phases as Phases,
     type PhaseUpdateResponse as PhaseUpdateResponse,

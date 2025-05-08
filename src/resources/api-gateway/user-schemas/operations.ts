@@ -8,6 +8,17 @@ export class Operations extends APIResource {
   /**
    * Retrieves all operations from the schema. Operations that already exist in API
    * Shield Endpoint Management will be returned as full operations.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const operationListResponse of client.apiGateway.userSchemas.operations.list(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     schemaId: string,
@@ -52,7 +63,7 @@ export namespace OperationListResponse {
     method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
     /**
-     * UUID
+     * UUID.
      */
     operation_id: string;
 
@@ -286,7 +297,7 @@ export namespace OperationListResponse {
          */
         export interface ActiveSchema {
           /**
-           * UUID
+           * UUID.
            */
           id?: string;
 
@@ -329,7 +340,7 @@ export namespace OperationListResponse {
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

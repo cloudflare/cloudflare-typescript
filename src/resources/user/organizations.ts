@@ -10,6 +10,14 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Organizations extends APIResource {
   /**
    * Lists organizations the user is associated with.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const organization of client.user.organizations.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query?: OrganizationListParams,
@@ -31,6 +39,13 @@ export class Organizations extends APIResource {
 
   /**
    * Removes association to an organization.
+   *
+   * @example
+   * ```ts
+   * const organization = await client.user.organizations.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   * );
+   * ```
    */
   delete(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<OrganizationDeleteResponse> {
     return this._client.delete(`/user/organizations/${organizationId}`, options);
@@ -38,6 +53,13 @@ export class Organizations extends APIResource {
 
   /**
    * Gets a specific organization the user is associated with.
+   *
+   * @example
+   * ```ts
+   * const organization = await client.user.organizations.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   * );
+   * ```
    */
   get(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<OrganizationGetResponse> {
     return (

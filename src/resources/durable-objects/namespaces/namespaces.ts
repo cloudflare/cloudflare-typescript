@@ -41,7 +41,7 @@ export interface Namespace {
 
 export interface NamespaceListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

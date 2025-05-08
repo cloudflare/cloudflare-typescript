@@ -11,6 +11,15 @@ export class Bytimes extends APIResource {
    * See
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
+   *
+   * @example
+   * ```ts
+   * const byTime =
+   *   await client.dnsFirewall.analytics.reports.bytimes.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     dnsFirewallId: string,

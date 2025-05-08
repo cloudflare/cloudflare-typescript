@@ -6,6 +6,18 @@ import * as Core from '../../../core';
 export class Reclassify extends APIResource {
   /**
    * Change email classfication
+   *
+   * @example
+   * ```ts
+   * const reclassify =
+   *   await client.emailSecurity.investigate.reclassify.create(
+   *     '4Njp3P0STMz2c02Q',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       expected_disposition: 'NONE',
+   *     },
+   *   );
+   * ```
    */
   create(
     postfixId: string,

@@ -8,6 +8,11 @@ export class IPs extends APIResource {
   /**
    * Retrieves time series data for the announced IP space count, represented as the
    * number of IPv4 /24s and IPv6 /48s, for a given ASN.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.bgp.ips.timeseries();
+   * ```
    */
   timeseries(
     query?: IPTimeseriesParams,
@@ -67,9 +72,10 @@ export namespace IPTimeseriesResponse {
 
 export interface IPTimeseriesParams {
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to
-   * exclude ASNs from results. For example, `-174, 3356` excludes results from
-   * AS174, but includes results from AS3356.
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
    */
   asn?: Array<string>;
 
@@ -79,9 +85,9 @@ export interface IPTimeseriesParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -96,7 +102,7 @@ export interface IPTimeseriesParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Include data delay meta information.
+   * Includes data delay meta information.
    */
   includeDelay?: boolean;
 
@@ -106,7 +112,8 @@ export interface IPTimeseriesParams {
   ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
-   * Comma-separated list of locations (alpha-2 codes).
+   * Filters results by location. Specify a comma-separated list of alpha-2 location
+   * codes.
    */
   location?: Array<string>;
 

@@ -23,6 +23,28 @@ export class Tokens extends APIResource {
 
   /**
    * Create a new access token.
+   *
+   * @example
+   * ```ts
+   * const token = await client.user.tokens.create({
+   *   name: 'readonly token',
+   *   policies: [
+   *     {
+   *       effect: 'allow',
+   *       permission_groups: [
+   *         { id: 'c8fed203ed3043cba015a93ad1616f1f' },
+   *         { id: '82e64a83756745bbbb1c9c2701bf816b' },
+   *       ],
+   *       resources: {
+   *         'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43':
+   *           '*',
+   *         'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4':
+   *           '*',
+   *       },
+   *     },
+   *   ],
+   * });
+   * ```
    */
   create(body: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse> {
     return (
@@ -34,6 +56,32 @@ export class Tokens extends APIResource {
 
   /**
    * Update an existing token.
+   *
+   * @example
+   * ```ts
+   * const token = await client.user.tokens.update(
+   *   'ed17574386854bf78a67040be0a770b0',
+   *   {
+   *     name: 'readonly token',
+   *     policies: [
+   *       {
+   *         effect: 'allow',
+   *         permission_groups: [
+   *           { id: 'c8fed203ed3043cba015a93ad1616f1f' },
+   *           { id: '82e64a83756745bbbb1c9c2701bf816b' },
+   *         ],
+   *         resources: {
+   *           'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43':
+   *             '*',
+   *           'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4':
+   *             '*',
+   *         },
+   *       },
+   *     ],
+   *     status: 'active',
+   *   },
+   * );
+   * ```
    */
   update(
     tokenId: string,
@@ -49,6 +97,14 @@ export class Tokens extends APIResource {
 
   /**
    * List all access tokens you created.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const token of client.user.tokens.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query?: TokenListParams,
@@ -67,6 +123,13 @@ export class Tokens extends APIResource {
 
   /**
    * Destroy a token.
+   *
+   * @example
+   * ```ts
+   * const token = await client.user.tokens.delete(
+   *   'ed17574386854bf78a67040be0a770b0',
+   * );
+   * ```
    */
   delete(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null> {
     return (
@@ -78,6 +141,13 @@ export class Tokens extends APIResource {
 
   /**
    * Get information about a specific token.
+   *
+   * @example
+   * ```ts
+   * const token = await client.user.tokens.get(
+   *   'ed17574386854bf78a67040be0a770b0',
+   * );
+   * ```
    */
   get(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<Shared.Token> {
     return (
@@ -87,6 +157,11 @@ export class Tokens extends APIResource {
 
   /**
    * Test whether a token works.
+   *
+   * @example
+   * ```ts
+   * const response = await client.user.tokens.verify();
+   * ```
    */
   verify(options?: Core.RequestOptions): Core.APIPromise<TokenVerifyResponse> {
     return (

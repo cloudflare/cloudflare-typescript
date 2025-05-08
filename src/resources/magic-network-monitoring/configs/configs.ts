@@ -10,6 +10,16 @@ export class Configs extends APIResource {
 
   /**
    * Create a new network monitoring configuration.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.magicNetworkMonitoring.configs.create({
+   *     account_id: '6f91088a406011ed95aed352566e8d4c',
+   *     default_sampling: 1,
+   *     name: "cloudflare user's account",
+   *   });
+   * ```
    */
   create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, ...body } = params;
@@ -23,6 +33,16 @@ export class Configs extends APIResource {
   /**
    * Update an existing network monitoring configuration, requires the entire
    * configuration to be updated at once.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.magicNetworkMonitoring.configs.update({
+   *     account_id: '6f91088a406011ed95aed352566e8d4c',
+   *     default_sampling: 1,
+   *     name: "cloudflare user's account",
+   *   });
+   * ```
    */
   update(params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, ...body } = params;
@@ -35,6 +55,14 @@ export class Configs extends APIResource {
 
   /**
    * Delete an existing network monitoring configuration.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.magicNetworkMonitoring.configs.delete({
+   *     account_id: '6f91088a406011ed95aed352566e8d4c',
+   *   });
+   * ```
    */
   delete(params: ConfigDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id } = params;
@@ -47,6 +75,14 @@ export class Configs extends APIResource {
 
   /**
    * Update fields in an existing network monitoring configuration.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.magicNetworkMonitoring.configs.edit({
+   *     account_id: '6f91088a406011ed95aed352566e8d4c',
+   *   });
+   * ```
    */
   edit(params: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, ...body } = params;
@@ -59,6 +95,14 @@ export class Configs extends APIResource {
 
   /**
    * Lists default sampling, router IPs and warp devices for account.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.magicNetworkMonitoring.configs.get({
+   *     account_id: '6f91088a406011ed95aed352566e8d4c',
+   *   });
+   * ```
    */
   get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id } = params;

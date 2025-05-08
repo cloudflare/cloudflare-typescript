@@ -7,6 +7,15 @@ export class Health extends APIResource {
   /**
    * Preview pool health using provided monitor details. The returned preview_id can
    * be used in the preview endpoint to retrieve the results.
+   *
+   * @example
+   * ```ts
+   * const health =
+   *   await client.loadBalancers.pools.health.create(
+   *     '17b5962d775c646f3f9725cbc7a53df4',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     poolId: string,
@@ -24,6 +33,14 @@ export class Health extends APIResource {
 
   /**
    * Fetch the latest pool health status for a single pool.
+   *
+   * @example
+   * ```ts
+   * const health = await client.loadBalancers.pools.health.get(
+   *   '17b5962d775c646f3f9725cbc7a53df4',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     poolId: string,

@@ -7,6 +7,18 @@ import * as SettingsAPI from './settings';
 export class Settings extends APIResource {
   /**
    * Updates a single zone setting by the identifier
+   *
+   * @example
+   * ```ts
+   * const response = await client.zones.settings.edit(
+   *   'always_online',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     id: '0rtt',
+   *     value: 'on',
+   *   },
+   * );
+   * ```
    */
   edit(
     settingId: string,
@@ -23,6 +35,14 @@ export class Settings extends APIResource {
 
   /**
    * Fetch a single zone setting by name
+   *
+   * @example
+   * ```ts
+   * const setting = await client.zones.settings.get(
+   *   'always_online',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     settingId: string,
@@ -2333,7 +2353,9 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Whether or not cname flattening is on.
+   * @deprecated This zone setting is deprecated; please use the DNS Settings route
+   * instead. More information at
+   * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
    */
   export interface ZonesCNAMEFlattening {
     /**
@@ -2342,7 +2364,9 @@ export namespace SettingEditResponse {
     id: 'cname_flattening';
 
     /**
-     * Current value of the zone setting.
+     * @deprecated This zone setting is deprecated; please use the DNS Settings route
+     * instead. More information at
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
      */
     value: 'flatten_at_root' | 'flatten_all';
 
@@ -3292,7 +3316,9 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Whether or not cname flattening is on.
+   * @deprecated This zone setting is deprecated; please use the DNS Settings route
+   * instead. More information at
+   * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
    */
   export interface ZonesCNAMEFlattening {
     /**
@@ -3301,7 +3327,9 @@ export namespace SettingGetResponse {
     id: 'cname_flattening';
 
     /**
-     * Current value of the zone setting.
+     * @deprecated This zone setting is deprecated; please use the DNS Settings route
+     * instead. More information at
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
      */
     value: 'flatten_at_root' | 'flatten_all';
 
@@ -4311,7 +4339,9 @@ export declare namespace SettingEditParams {
     id: 'cname_flattening';
 
     /**
-     * Body param: Current value of the zone setting.
+     * @deprecated This zone setting is deprecated; please use the DNS Settings route
+     * instead. More information at
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
      */
     value: 'flatten_at_root' | 'flatten_all';
   }
@@ -4749,7 +4779,10 @@ export declare namespace SettingEditParams {
     id: 'privacy_pass';
 
     /**
-     * Body param: Current value of the zone setting.
+     * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
+     * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
+     * details -
+     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
      */
     value: 'on' | 'off';
   }

@@ -7,6 +7,17 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class BlockSenders extends APIResource {
   /**
    * Create a blocked email sender
+   *
+   * @example
+   * ```ts
+   * const blockSender =
+   *   await client.emailSecurity.settings.blockSenders.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     is_regex: false,
+   *     pattern: 'test@example.com',
+   *     pattern_type: 'EMAIL',
+   *   });
+   * ```
    */
   create(
     params: BlockSenderCreateParams,
@@ -23,6 +34,16 @@ export class BlockSenders extends APIResource {
 
   /**
    * List blocked email senders
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const blockSenderListResponse of client.emailSecurity.settings.blockSenders.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: BlockSenderListParams,
@@ -38,6 +59,15 @@ export class BlockSenders extends APIResource {
 
   /**
    * Delete a blocked email sender
+   *
+   * @example
+   * ```ts
+   * const blockSender =
+   *   await client.emailSecurity.settings.blockSenders.delete(
+   *     2402,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     patternId: number,
@@ -55,6 +85,15 @@ export class BlockSenders extends APIResource {
 
   /**
    * Update a blocked email sender
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.emailSecurity.settings.blockSenders.edit(
+   *     2402,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     patternId: number,
@@ -72,6 +111,15 @@ export class BlockSenders extends APIResource {
 
   /**
    * Get a blocked email sender
+   *
+   * @example
+   * ```ts
+   * const blockSender =
+   *   await client.emailSecurity.settings.blockSenders.get(
+   *     2402,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     patternId: number,

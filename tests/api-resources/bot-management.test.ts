@@ -25,6 +25,7 @@ describe('resource botManagement', () => {
     const response = await client.botManagement.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ai_bots_protection: 'block',
+      crawler_protection: 'enabled',
       enable_js: true,
       fight_mode: true,
     });

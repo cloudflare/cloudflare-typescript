@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Countries extends APIResource {
   /**
    * Retrieves countries information for all countries
+   *
+   * @example
+   * ```ts
+   * const countries =
+   *   await client.cloudforceOne.threatEvents.countries.list({
+   *     account_id: 0,
+   *   });
+   * ```
    */
   list(params: CountryListParams, options?: Core.RequestOptions): Core.APIPromise<CountryListResponse> {
     const { account_id } = params;

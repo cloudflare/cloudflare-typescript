@@ -12,6 +12,14 @@ export class DirectUploads extends APIResource {
    * image itself has been uploaded, send an image details request
    * (accounts/:account_identifier/images/v1/:identifier), and check that the
    * `draft: true` property is not present.
+   *
+   * @example
+   * ```ts
+   * const directUpload =
+   *   await client.images.v2.directUploads.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(
     params: DirectUploadCreateParams,

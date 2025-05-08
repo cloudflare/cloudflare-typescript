@@ -7,6 +7,15 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Recipients extends APIResource {
   /**
    * Create a new share recipient
+   *
+   * @example
+   * ```ts
+   * const recipient =
+   *   await client.resourceSharing.recipients.create(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     { path_account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     shareId: string,
@@ -24,6 +33,17 @@ export class Recipients extends APIResource {
 
   /**
    * List share recipients by share ID.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const recipientListResponse of client.resourceSharing.recipients.list(
+   *   '3fd85f74b32742f1bff64a85009dda07',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     shareId: string,
@@ -41,6 +61,16 @@ export class Recipients extends APIResource {
   /**
    * Deletion is not immediate, an updated share recipient object with a new status
    * will be returned.
+   *
+   * @example
+   * ```ts
+   * const recipient =
+   *   await client.resourceSharing.recipients.delete(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     shareId: string,
@@ -59,6 +89,16 @@ export class Recipients extends APIResource {
 
   /**
    * Get share recipient by ID.
+   *
+   * @example
+   * ```ts
+   * const recipient =
+   *   await client.resourceSharing.recipients.get(
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     '3fd85f74b32742f1bff64a85009dda07',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     shareId: string,

@@ -8,6 +8,14 @@ import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagin
 export class Events extends APIResource {
   /**
    * Retrieves the BGP hijack events.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const eventListResponse of client.radar.bgp.hijacks.events.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query?: EventListParams,
@@ -103,8 +111,7 @@ export interface EventListParams extends V4PagePaginationParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 
@@ -139,12 +146,12 @@ export interface EventListParams extends V4PagePaginationParams {
   involvedCountry?: string;
 
   /**
-   * The maximum confidence score to filter events (1-4 low, 5-7 mid, 8+ high).
+   * Filters events by maximum confidence score (1-4 low, 5-7 mid, 8+ high).
    */
   maxConfidence?: number;
 
   /**
-   * The minimum confidence score to filter events (1-4 low, 5-7 mid, 8+ high).
+   * Filters events by minimum confidence score (1-4 low, 5-7 mid, 8+ high).
    */
   minConfidence?: number;
 

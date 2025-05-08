@@ -226,7 +226,7 @@ export type Product = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLeve
 
 export interface RuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -299,7 +299,7 @@ export namespace RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -372,7 +372,7 @@ export namespace RuleUpdateParams {
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -399,21 +399,21 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
 
 export interface RuleDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface RuleBulkDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface RuleBulkEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -425,7 +425,7 @@ export interface RuleBulkEditParams {
 
 export interface RuleBulkUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -437,14 +437,14 @@ export interface RuleBulkUpdateParams {
 
 export interface RuleEditParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface RuleGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

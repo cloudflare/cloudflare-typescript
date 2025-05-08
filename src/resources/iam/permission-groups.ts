@@ -7,6 +7,16 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class PermissionGroups extends APIResource {
   /**
    * List all the permissions groups for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const permissionGroupListResponse of client.iam.permissionGroups.list(
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PermissionGroupListParams,
@@ -22,6 +32,15 @@ export class PermissionGroups extends APIResource {
 
   /**
    * Get information about a specific permission group in an account.
+   *
+   * @example
+   * ```ts
+   * const permissionGroup =
+   *   await client.iam.permissionGroups.get(
+   *     '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
+   *     { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   );
+   * ```
    */
   get(
     permissionGroupId: string,

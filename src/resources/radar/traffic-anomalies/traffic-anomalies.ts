@@ -13,6 +13,12 @@ export class TrafficAnomalies extends APIResource {
    * Retrieves the latest Internet traffic anomalies, which are signals that might
    * indicate an outage. These alerts are automatically detected by Radar and
    * manually verified by our team.
+   *
+   * @example
+   * ```ts
+   * const trafficAnomaly =
+   *   await client.radar.trafficAnomalies.get();
+   * ```
    */
   get(
     query?: TrafficAnomalyGetParams,
@@ -84,7 +90,8 @@ export namespace TrafficAnomalyGetResponse {
 
 export interface TrafficAnomalyGetParams {
   /**
-   * Single Autonomous System Number (ASN) as integer.
+   * Filters results by Autonomous System. Specify a single Autonomous System Number
+   * (ASN) as integer.
    */
   asn?: number;
 
@@ -94,8 +101,7 @@ export interface TrafficAnomalyGetParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 
@@ -115,7 +121,7 @@ export interface TrafficAnomalyGetParams {
   limit?: number;
 
   /**
-   * Location alpha-2 code.
+   * Filters results by location. Specify an alpha-2 location code.
    */
   location?: string;
 

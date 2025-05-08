@@ -6,6 +6,14 @@ import * as Core from '../../core';
 export class Rules extends APIResource {
   /**
    * Creates a new rule in a Web Analytics ruleset.
+   *
+   * @example
+   * ```ts
+   * const rumRule = await client.rum.rules.create(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   create(
     rulesetId: string,
@@ -23,6 +31,15 @@ export class Rules extends APIResource {
 
   /**
    * Updates a rule in a Web Analytics ruleset.
+   *
+   * @example
+   * ```ts
+   * const rumRule = await client.rum.rules.update(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     rulesetId: string,
@@ -41,6 +58,14 @@ export class Rules extends APIResource {
 
   /**
    * Lists all the rules in a Web Analytics ruleset.
+   *
+   * @example
+   * ```ts
+   * const rules = await client.rum.rules.list(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   list(
     rulesetId: string,
@@ -57,6 +82,15 @@ export class Rules extends APIResource {
 
   /**
    * Deletes an existing rule from a Web Analytics ruleset.
+   *
+   * @example
+   * ```ts
+   * const rule = await client.rum.rules.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     rulesetId: string,
@@ -75,6 +109,14 @@ export class Rules extends APIResource {
 
   /**
    * Modifies one or more rules in a Web Analytics ruleset with a single request.
+   *
+   * @example
+   * ```ts
+   * const response = await client.rum.rules.bulkCreate(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   bulkCreate(
     rulesetId: string,
@@ -191,7 +233,7 @@ export namespace RuleBulkCreateResponse {
 
 export interface RuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -218,7 +260,7 @@ export interface RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -245,21 +287,21 @@ export interface RuleUpdateParams {
 
 export interface RuleListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface RuleDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface RuleBulkCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

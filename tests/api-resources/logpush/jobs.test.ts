@@ -32,6 +32,8 @@ describe('resource jobs', () => {
       account_id: 'account_id',
       dataset: 'http_requests',
       enabled: false,
+      filter:
+        '{"where":{"and":[{"key":"ClientRequestPath","operator":"contains","value":"/static"},{"key":"ClientRequestHost","operator":"eq","value":"example.com"}]}}',
       frequency: 'high',
       kind: 'edge',
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',

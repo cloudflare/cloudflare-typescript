@@ -8,6 +8,17 @@ import { SinglePage } from '../../../pagination';
 export class Entries extends APIResource {
   /**
    * Creates a DLP custom entry.
+   *
+   * @example
+   * ```ts
+   * const entry = await client.zeroTrust.dlp.entries.create({
+   *   account_id: 'account_id',
+   *   enabled: true,
+   *   name: 'name',
+   *   pattern: { regex: 'regex' },
+   *   profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   * });
+   * ```
    */
   create(params: EntryCreateParams, options?: Core.RequestOptions): Core.APIPromise<EntryCreateResponse> {
     const { account_id, ...body } = params;
@@ -20,6 +31,19 @@ export class Entries extends APIResource {
 
   /**
    * Updates a DLP entry.
+   *
+   * @example
+   * ```ts
+   * const entry = await client.zeroTrust.dlp.entries.update(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   {
+   *     account_id: 'account_id',
+   *     name: 'name',
+   *     pattern: { regex: 'regex' },
+   *     type: 'custom',
+   *   },
+   * );
+   * ```
    */
   update(
     entryId: string,
@@ -37,6 +61,16 @@ export class Entries extends APIResource {
 
   /**
    * Lists all DLP entries in an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const entryListResponse of client.zeroTrust.dlp.entries.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: EntryListParams,
@@ -52,6 +86,14 @@ export class Entries extends APIResource {
 
   /**
    * Deletes a DLP custom entry.
+   *
+   * @example
+   * ```ts
+   * const entry = await client.zeroTrust.dlp.entries.delete(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     entryId: string,
@@ -67,7 +109,15 @@ export class Entries extends APIResource {
   }
 
   /**
-   * Fetches a DLP entry by ID
+   * Fetches a DLP entry by ID.
+   *
+   * @example
+   * ```ts
+   * const entry = await client.zeroTrust.dlp.entries.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     entryId: string,
@@ -144,13 +194,13 @@ export namespace EntryUpdateResponse {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
@@ -174,6 +224,12 @@ export namespace EntryUpdateResponse {
 
   export interface ExactDataEntry {
     id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
 
     created_at: string;
 
@@ -250,13 +306,13 @@ export namespace EntryListResponse {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
@@ -280,6 +336,12 @@ export namespace EntryListResponse {
 
   export interface ExactDataEntry {
     id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
 
     created_at: string;
 
@@ -358,13 +420,13 @@ export namespace EntryGetResponse {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
@@ -388,6 +450,12 @@ export namespace EntryGetResponse {
 
   export interface ExactDataEntry {
     id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
 
     created_at: string;
 

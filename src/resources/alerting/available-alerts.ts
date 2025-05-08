@@ -6,6 +6,14 @@ import * as Core from '../../core';
 export class AvailableAlerts extends APIResource {
   /**
    * Gets a list of all alert types for which an account is eligible.
+   *
+   * @example
+   * ```ts
+   * const availableAlerts =
+   *   await client.alerting.availableAlerts.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   list(
     params: AvailableAlertListParams,

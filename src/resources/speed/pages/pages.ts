@@ -21,6 +21,16 @@ export class Pages extends APIResource {
 
   /**
    * Lists all webpages which have been tested.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const pageListResponse of client.speed.pages.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PageListParams,
@@ -32,6 +42,21 @@ export class Pages extends APIResource {
 
   /**
    * Lists the core web vital metrics trend over time for a specific page.
+   *
+   * @example
+   * ```ts
+   * const trend = await client.speed.pages.trend(
+   *   'example.com',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     deviceType: 'DESKTOP',
+   *     metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
+   *     region: 'us-central1',
+   *     start: '2014-01-01T05:20:00.12345Z',
+   *     tz: 'tz',
+   *   },
+   * );
+   * ```
    */
   trend(
     url: string,
@@ -71,14 +96,14 @@ export interface PageListResponse {
 
 export interface PageListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface PageTrendParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

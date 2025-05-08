@@ -12,6 +12,16 @@ export class Organizations extends APIResource {
 
   /**
    * Sets up a Zero Trust organization for your account or zone.
+   *
+   * @example
+   * ```ts
+   * const organization =
+   *   await client.zeroTrust.organizations.create({
+   *     auth_domain: 'test.cloudflareaccess.com',
+   *     name: 'Widget Corps Internal Applications',
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   create(params: OrganizationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Organization> {
     const { account_id, zone_id, ...body } = params;
@@ -41,6 +51,14 @@ export class Organizations extends APIResource {
 
   /**
    * Updates the configuration for your Zero Trust organization.
+   *
+   * @example
+   * ```ts
+   * const organization =
+   *   await client.zeroTrust.organizations.update({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   update(params: OrganizationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Organization> {
     const { account_id, zone_id, ...body } = params;
@@ -70,6 +88,14 @@ export class Organizations extends APIResource {
 
   /**
    * Returns the configuration for your Zero Trust organization.
+   *
+   * @example
+   * ```ts
+   * const organization =
+   *   await client.zeroTrust.organizations.list({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   list(params?: OrganizationListParams, options?: Core.RequestOptions): Core.APIPromise<Organization>;
   list(options?: Core.RequestOptions): Core.APIPromise<Organization>;
@@ -107,6 +133,15 @@ export class Organizations extends APIResource {
 
   /**
    * Revokes a user's access across all applications.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.organizations.revokeUsers({
+   *     email: 'test@example.com',
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   revokeUsers(
     params: OrganizationRevokeUsersParams,

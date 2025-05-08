@@ -7,6 +7,19 @@ import { SinglePage } from '../../pagination';
 export class Traceroutes extends APIResource {
   /**
    * Run traceroutes from Cloudflare colos.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const traceroute of client.diagnostics.traceroutes.create(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     targets: ['203.0.113.1', 'cloudflare.com'],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     params: TracerouteCreateParams,

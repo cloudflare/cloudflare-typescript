@@ -6,6 +6,15 @@ import * as Core from '../../core';
 export class FallbackOrigin extends APIResource {
   /**
    * Update Fallback Origin for Custom Hostnames
+   *
+   * @example
+   * ```ts
+   * const fallbackOrigin =
+   *   await client.customHostnames.fallbackOrigin.update({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     origin: 'fallback.example.com',
+   *   });
+   * ```
    */
   update(
     params: FallbackOriginUpdateParams,
@@ -22,6 +31,14 @@ export class FallbackOrigin extends APIResource {
 
   /**
    * Delete Fallback Origin for Custom Hostnames
+   *
+   * @example
+   * ```ts
+   * const fallbackOrigin =
+   *   await client.customHostnames.fallbackOrigin.delete({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   delete(
     params: FallbackOriginDeleteParams,
@@ -37,6 +54,14 @@ export class FallbackOrigin extends APIResource {
 
   /**
    * Get Fallback Origin for Custom Hostnames
+   *
+   * @example
+   * ```ts
+   * const fallbackOrigin =
+   *   await client.customHostnames.fallbackOrigin.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(
     params: FallbackOriginGetParams,
@@ -155,7 +180,7 @@ export interface FallbackOriginGetResponse {
 
 export interface FallbackOriginUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -168,14 +193,14 @@ export interface FallbackOriginUpdateParams {
 
 export interface FallbackOriginDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface FallbackOriginGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

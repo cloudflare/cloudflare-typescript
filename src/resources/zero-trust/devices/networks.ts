@@ -7,6 +7,17 @@ import { SinglePage } from '../../../pagination';
 export class Networks extends APIResource {
   /**
    * Creates a new device managed network.
+   *
+   * @example
+   * ```ts
+   * const deviceNetwork =
+   *   await client.zeroTrust.devices.networks.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     config: { tls_sockaddr: 'foo.bar:1234' },
+   *     name: 'managed-network-1',
+   *     type: 'tls',
+   *   });
+   * ```
    */
   create(params: NetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceNetwork | null> {
     const { account_id, ...body } = params;
@@ -19,6 +30,15 @@ export class Networks extends APIResource {
 
   /**
    * Updates a configured device managed network.
+   *
+   * @example
+   * ```ts
+   * const deviceNetwork =
+   *   await client.zeroTrust.devices.networks.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   update(
     networkId: string,
@@ -36,6 +56,16 @@ export class Networks extends APIResource {
 
   /**
    * Fetches a list of managed networks for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const deviceNetwork of client.zeroTrust.devices.networks.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: NetworkListParams,
@@ -52,6 +82,17 @@ export class Networks extends APIResource {
   /**
    * Deletes a device managed network and fetches a list of the remaining device
    * managed networks for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const deviceNetwork of client.zeroTrust.devices.networks.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   delete(
     networkId: string,
@@ -68,6 +109,15 @@ export class Networks extends APIResource {
 
   /**
    * Fetches details for a single managed network.
+   *
+   * @example
+   * ```ts
+   * const deviceNetwork =
+   *   await client.zeroTrust.devices.networks.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     networkId: string,

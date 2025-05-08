@@ -8,6 +8,14 @@ import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } f
 export class Database extends APIResource {
   /**
    * Returns the created D1 database.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'my-database',
+   * });
+   * ```
    */
   create(params: DatabaseCreateParams, options?: Core.RequestOptions): Core.APIPromise<D1API.D1> {
     const { account_id, ...body } = params;
@@ -19,7 +27,45 @@ export class Database extends APIResource {
   }
 
   /**
+   * Updates the specified D1 database.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.update(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     read_replication: { mode: 'auto' },
+   *   },
+   * );
+   * ```
+   */
+  update(
+    databaseId: string,
+    params: DatabaseUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<D1API.D1> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/d1/database/${databaseId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: D1API.D1 }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns a list of D1 databases.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const databaseListResponse of client.d1.database.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: DatabaseListParams,
@@ -35,6 +81,14 @@ export class Database extends APIResource {
 
   /**
    * Deletes the specified D1 database.
+   *
+   * @example
+   * ```ts
+   * const database = await client.d1.database.delete(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     databaseId: string,
@@ -50,10 +104,46 @@ export class Database extends APIResource {
   }
 
   /**
+   * Updates partially the specified D1 database.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.edit(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  edit(
+    databaseId: string,
+    params: DatabaseEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<D1API.D1> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/d1/database/${databaseId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: D1API.D1 }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns a URL where the SQL contents of your D1 can be downloaded. Note: this
    * process may take some time for larger DBs, during which your D1 will be
    * unavailable to serve queries. To avoid blocking your DB unnecessarily, an
    * in-progress export must be continually polled or will automatically cancel.
+   *
+   * @example
+   * ```ts
+   * const response = await client.d1.database.export(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     output_format: 'polling',
+   *   },
+   * );
+   * ```
    */
   export(
     databaseId: string,
@@ -71,6 +161,14 @@ export class Database extends APIResource {
 
   /**
    * Returns the specified D1 database.
+   *
+   * @example
+   * ```ts
+   * const d1 = await client.d1.database.get(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     databaseId: string,
@@ -89,6 +187,18 @@ export class Database extends APIResource {
    * Generates a temporary URL for uploading an SQL file to, then instructing the D1
    * to import it and polling it for status updates. Imports block the D1 for their
    * duration.
+   *
+   * @example
+   * ```ts
+   * const response = await client.d1.database.import(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     action: 'init',
+   *     etag: 'etag',
+   *   },
+   * );
+   * ```
    */
   import(
     databaseId: string,
@@ -106,6 +216,20 @@ export class Database extends APIResource {
 
   /**
    * Returns the query result as an object.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const queryResult of client.d1.database.query(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   query(
     databaseId: string,
@@ -123,6 +247,20 @@ export class Database extends APIResource {
   /**
    * Returns the query result rows as arrays rather than objects. This is a
    * performance-optimized version of the /query endpoint.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const databaseRawResponse of client.d1.database.raw(
+   *   'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   raw(
     databaseId: string,
@@ -154,19 +292,72 @@ export interface QueryResult {
 
 export namespace QueryResult {
   export interface Meta {
+    /**
+     * Denotes if the database has been altered in some way, like deleting rows.
+     */
     changed_db?: boolean;
 
+    /**
+     * Rough indication of how many rows were modified by the query, as provided by
+     * SQLite's `sqlite3_total_changes()`.
+     */
     changes?: number;
 
+    /**
+     * The duration of the SQL query execution inside the database. Does not include
+     * any network communication.
+     */
     duration?: number;
 
+    /**
+     * The row ID of the last inserted row in a table with an `INTEGER PRIMARY KEY` as
+     * provided by SQLite. Tables created with `WITHOUT ROWID` do not populate this.
+     */
     last_row_id?: number;
 
+    /**
+     * Number of rows read during the SQL query execution, including indices (not all
+     * rows are necessarily returned).
+     */
     rows_read?: number;
 
+    /**
+     * Number of rows written during the SQL query execution, including indices.
+     */
     rows_written?: number;
 
+    /**
+     * Denotes if the query has been handled by the database primary instance.
+     */
+    served_by_primary?: boolean;
+
+    /**
+     * Region location hint of the database instance that handled the query.
+     */
+    served_by_region?: 'WNAM' | 'ENAM' | 'WEUR' | 'EEUR' | 'APAC' | 'OC';
+
+    /**
+     * Size of the database after the query committed, in bytes.
+     */
     size_after?: number;
+
+    /**
+     * Various durations for the query.
+     */
+    timings?: Meta.Timings;
+  }
+
+  export namespace Meta {
+    /**
+     * Various durations for the query.
+     */
+    export interface Timings {
+      /**
+       * The duration of the SQL query execution inside the database. Does not include
+       * any network communication.
+       */
+      sql_duration_ms?: number;
+    }
   }
 }
 
@@ -301,19 +492,72 @@ export namespace DatabaseImportResponse {
 
   export namespace Result {
     export interface Meta {
+      /**
+       * Denotes if the database has been altered in some way, like deleting rows.
+       */
       changed_db?: boolean;
 
+      /**
+       * Rough indication of how many rows were modified by the query, as provided by
+       * SQLite's `sqlite3_total_changes()`.
+       */
       changes?: number;
 
+      /**
+       * The duration of the SQL query execution inside the database. Does not include
+       * any network communication.
+       */
       duration?: number;
 
+      /**
+       * The row ID of the last inserted row in a table with an `INTEGER PRIMARY KEY` as
+       * provided by SQLite. Tables created with `WITHOUT ROWID` do not populate this.
+       */
       last_row_id?: number;
 
+      /**
+       * Number of rows read during the SQL query execution, including indices (not all
+       * rows are necessarily returned).
+       */
       rows_read?: number;
 
+      /**
+       * Number of rows written during the SQL query execution, including indices.
+       */
       rows_written?: number;
 
+      /**
+       * Denotes if the query has been handled by the database primary instance.
+       */
+      served_by_primary?: boolean;
+
+      /**
+       * Region location hint of the database instance that handled the query.
+       */
+      served_by_region?: 'WNAM' | 'ENAM' | 'WEUR' | 'EEUR' | 'APAC' | 'OC';
+
+      /**
+       * Size of the database after the query committed, in bytes.
+       */
       size_after?: number;
+
+      /**
+       * Various durations for the query.
+       */
+      timings?: Meta.Timings;
+    }
+
+    export namespace Meta {
+      /**
+       * Various durations for the query.
+       */
+      export interface Timings {
+        /**
+         * The duration of the SQL query execution inside the database. Does not include
+         * any network communication.
+         */
+        sql_duration_ms?: number;
+      }
     }
   }
 }
@@ -328,19 +572,72 @@ export interface DatabaseRawResponse {
 
 export namespace DatabaseRawResponse {
   export interface Meta {
+    /**
+     * Denotes if the database has been altered in some way, like deleting rows.
+     */
     changed_db?: boolean;
 
+    /**
+     * Rough indication of how many rows were modified by the query, as provided by
+     * SQLite's `sqlite3_total_changes()`.
+     */
     changes?: number;
 
+    /**
+     * The duration of the SQL query execution inside the database. Does not include
+     * any network communication.
+     */
     duration?: number;
 
+    /**
+     * The row ID of the last inserted row in a table with an `INTEGER PRIMARY KEY` as
+     * provided by SQLite. Tables created with `WITHOUT ROWID` do not populate this.
+     */
     last_row_id?: number;
 
+    /**
+     * Number of rows read during the SQL query execution, including indices (not all
+     * rows are necessarily returned).
+     */
     rows_read?: number;
 
+    /**
+     * Number of rows written during the SQL query execution, including indices.
+     */
     rows_written?: number;
 
+    /**
+     * Denotes if the query has been handled by the database primary instance.
+     */
+    served_by_primary?: boolean;
+
+    /**
+     * Region location hint of the database instance that handled the query.
+     */
+    served_by_region?: 'WNAM' | 'ENAM' | 'WEUR' | 'EEUR' | 'APAC' | 'OC';
+
+    /**
+     * Size of the database after the query committed, in bytes.
+     */
     size_after?: number;
+
+    /**
+     * Various durations for the query.
+     */
+    timings?: Meta.Timings;
+  }
+
+  export namespace Meta {
+    /**
+     * Various durations for the query.
+     */
+    export interface Timings {
+      /**
+       * The duration of the SQL query execution inside the database. Does not include
+       * any network communication.
+       */
+      sql_duration_ms?: number;
+    }
   }
 
   export interface Results {
@@ -369,6 +666,32 @@ export interface DatabaseCreateParams {
   primary_location_hint?: 'wnam' | 'enam' | 'weur' | 'eeur' | 'apac' | 'oc';
 }
 
+export interface DatabaseUpdateParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Configuration for D1 read replication.
+   */
+  read_replication: DatabaseUpdateParams.ReadReplication;
+}
+
+export namespace DatabaseUpdateParams {
+  /**
+   * Configuration for D1 read replication.
+   */
+  export interface ReadReplication {
+    /**
+     * The read replication mode for the database. Use 'auto' to create replicas and
+     * allow D1 automatically place them around the world, or 'disabled' to not use any
+     * database replicas (it can take a few hours for all replicas to be deleted).
+     */
+    mode: 'auto' | 'disabled';
+  }
+}
+
 export interface DatabaseListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
@@ -386,6 +709,32 @@ export interface DatabaseDeleteParams {
    * Account identifier tag.
    */
   account_id: string;
+}
+
+export interface DatabaseEditParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Configuration for D1 read replication.
+   */
+  read_replication?: DatabaseEditParams.ReadReplication;
+}
+
+export namespace DatabaseEditParams {
+  /**
+   * Configuration for D1 read replication.
+   */
+  export interface ReadReplication {
+    /**
+     * The read replication mode for the database. Use 'auto' to create replicas and
+     * allow D1 automatically place them around the world, or 'disabled' to not use any
+     * database replicas (it can take a few hours for all replicas to be deleted).
+     */
+    mode: 'auto' | 'disabled';
+  }
 }
 
 export interface DatabaseExportParams {
@@ -559,8 +908,10 @@ export declare namespace Database {
     QueryResultsSinglePage as QueryResultsSinglePage,
     DatabaseRawResponsesSinglePage as DatabaseRawResponsesSinglePage,
     type DatabaseCreateParams as DatabaseCreateParams,
+    type DatabaseUpdateParams as DatabaseUpdateParams,
     type DatabaseListParams as DatabaseListParams,
     type DatabaseDeleteParams as DatabaseDeleteParams,
+    type DatabaseEditParams as DatabaseEditParams,
     type DatabaseExportParams as DatabaseExportParams,
     type DatabaseGetParams as DatabaseGetParams,
     type DatabaseImportParams as DatabaseImportParams,

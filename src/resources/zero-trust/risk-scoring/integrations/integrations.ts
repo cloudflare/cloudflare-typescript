@@ -11,6 +11,16 @@ export class Integrations extends APIResource {
 
   /**
    * Create new risk score integration.
+   *
+   * @example
+   * ```ts
+   * const integration =
+   *   await client.zeroTrust.riskScoring.integrations.create({
+   *     account_id: 'account_id',
+   *     integration_type: 'Okta',
+   *     tenant_url: 'https://example.com',
+   *   });
+   * ```
    */
   create(
     params: IntegrationCreateParams,
@@ -26,7 +36,21 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * Overwrite the reference_id, tenant_url, and active values with the ones provided
+   * Overwrite the reference_id, tenant_url, and active values with the ones
+   * provided.
+   *
+   * @example
+   * ```ts
+   * const integration =
+   *   await client.zeroTrust.riskScoring.integrations.update(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: 'account_id',
+   *       active: true,
+   *       tenant_url: 'https://example.com',
+   *     },
+   *   );
+   * ```
    */
   update(
     integrationId: string,
@@ -44,6 +68,16 @@ export class Integrations extends APIResource {
 
   /**
    * List all risk score integrations for the account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const integrationListResponse of client.zeroTrust.riskScoring.integrations.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: IntegrationListParams,
@@ -59,6 +93,15 @@ export class Integrations extends APIResource {
 
   /**
    * Delete a risk score integration.
+   *
+   * @example
+   * ```ts
+   * const integration =
+   *   await client.zeroTrust.riskScoring.integrations.delete(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     integrationId: string,
@@ -76,6 +119,15 @@ export class Integrations extends APIResource {
 
   /**
    * Get risk score integration by id.
+   *
+   * @example
+   * ```ts
+   * const integration =
+   *   await client.zeroTrust.riskScoring.integrations.get(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     integrationId: string,
@@ -125,14 +177,14 @@ export interface IntegrationCreateResponse {
   reference_id: string;
 
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
   /**
    * The URL for the Shared Signals Framework configuration, e.g.
    * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 }
@@ -168,14 +220,14 @@ export interface IntegrationUpdateResponse {
   reference_id: string;
 
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
   /**
    * The URL for the Shared Signals Framework configuration, e.g.
    * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 }
@@ -211,14 +263,14 @@ export interface IntegrationListResponse {
   reference_id: string;
 
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
   /**
    * The URL for the Shared Signals Framework configuration, e.g.
    * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 }
@@ -256,14 +308,14 @@ export interface IntegrationGetResponse {
   reference_id: string;
 
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
   /**
    * The URL for the Shared Signals Framework configuration, e.g.
    * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 }
@@ -280,7 +332,7 @@ export interface IntegrationCreateParams {
   integration_type: 'Okta';
 
   /**
-   * Body param: The base url of the tenant, e.g. "https://tenant.okta.com"
+   * Body param: The base url of the tenant, e.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 
@@ -305,7 +357,7 @@ export interface IntegrationUpdateParams {
   active: boolean;
 
   /**
-   * Body param: The base url of the tenant, e.g. "https://tenant.okta.com"
+   * Body param: The base url of the tenant, e.g. "https://tenant.okta.com".
    */
   tenant_url: string;
 

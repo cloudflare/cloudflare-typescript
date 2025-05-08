@@ -6,6 +6,14 @@ import * as Core from '../../core';
 export class Webhooks extends APIResource {
   /**
    * Creates a webhook notification.
+   *
+   * @example
+   * ```ts
+   * const webhook = await client.stream.webhooks.update({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   notificationUrl: 'https://example.com',
+   * });
+   * ```
    */
   update(params: WebhookUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookUpdateResponse> {
     const { account_id, ...body } = params;
@@ -18,6 +26,13 @@ export class Webhooks extends APIResource {
 
   /**
    * Deletes a webhook.
+   *
+   * @example
+   * ```ts
+   * const webhook = await client.stream.webhooks.delete({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(params: WebhookDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
     const { account_id } = params;
@@ -30,6 +45,13 @@ export class Webhooks extends APIResource {
 
   /**
    * Retrieves a list of webhooks.
+   *
+   * @example
+   * ```ts
+   * const webhook = await client.stream.webhooks.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<WebhookGetResponse> {
     const { account_id } = params;

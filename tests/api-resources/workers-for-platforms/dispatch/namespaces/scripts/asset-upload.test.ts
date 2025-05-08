@@ -14,7 +14,7 @@ describe('resource assetUpload', () => {
     const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.assetUpload.create(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', manifest: { foo: { hash: 'hash', size: 0 } } },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

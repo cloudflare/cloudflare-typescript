@@ -6,6 +6,13 @@ import * as Core from '../../../core';
 export class Keys extends APIResource {
   /**
    * Create a new signing key with specified name. Returns all keys available.
+   *
+   * @example
+   * ```ts
+   * const key = await client.images.v1.keys.update('someKey', {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   update(
     signingKeyName: string,
@@ -23,6 +30,13 @@ export class Keys extends APIResource {
 
   /**
    * Lists your signing keys. These can be found on your Cloudflare Images dashboard.
+   *
+   * @example
+   * ```ts
+   * const keys = await client.images.v1.keys.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
     const { account_id } = params;
@@ -36,6 +50,13 @@ export class Keys extends APIResource {
   /**
    * Delete signing key with specified name. Returns all keys available. When last
    * key is removed, a new default signing key will be generated.
+   *
+   * @example
+   * ```ts
+   * const key = await client.images.v1.keys.delete('someKey', {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(
     signingKeyName: string,

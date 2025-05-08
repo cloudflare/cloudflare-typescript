@@ -9,6 +9,16 @@ export class HistoryResource extends APIResource {
    * Gets a list of history records for notifications sent to an account. The records
    * are displayed for last `x` number of days based on the zone plan (free = 30, pro
    * = 30, biz = 30, ent = 90).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const history of client.alerting.history.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: HistoryListParams,

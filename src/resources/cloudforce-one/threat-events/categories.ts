@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Categories extends APIResource {
   /**
    * Creates a new category
+   *
+   * @example
+   * ```ts
+   * const category =
+   *   await client.cloudforceOne.threatEvents.categories.create(
+   *     { account_id: 0, killChain: 0, name: 'name' },
+   *   );
+   * ```
    */
   create(
     params: CategoryCreateParams,
@@ -20,6 +28,14 @@ export class Categories extends APIResource {
 
   /**
    * Lists categories
+   *
+   * @example
+   * ```ts
+   * const categories =
+   *   await client.cloudforceOne.threatEvents.categories.list({
+   *     account_id: 0,
+   *   });
+   * ```
    */
   list(params: CategoryListParams, options?: Core.RequestOptions): Core.APIPromise<CategoryListResponse> {
     const { account_id } = params;
@@ -28,6 +44,15 @@ export class Categories extends APIResource {
 
   /**
    * Deletes a category
+   *
+   * @example
+   * ```ts
+   * const category =
+   *   await client.cloudforceOne.threatEvents.categories.delete(
+   *     'category_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   delete(
     categoryId: string,
@@ -43,6 +68,15 @@ export class Categories extends APIResource {
 
   /**
    * Updates a category
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.categories.edit(
+   *     'category_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   edit(
     categoryId: string,
@@ -58,6 +92,15 @@ export class Categories extends APIResource {
 
   /**
    * Reads a category
+   *
+   * @example
+   * ```ts
+   * const category =
+   *   await client.cloudforceOne.threatEvents.categories.get(
+   *     'category_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   get(
     categoryId: string,

@@ -2,12 +2,15 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as EventsAPI from './events';
+import { EventCreateParams, EventCreateResponse, Events } from './events';
 import * as StatusAPI from './status';
 import { Status, StatusEditParams, StatusEditResponse } from './status';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Instances extends APIResource {
   status: StatusAPI.Status = new StatusAPI.Status(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
 
   /**
    * Create a new workflow instance
@@ -92,8 +95,7 @@ export interface InstanceCreateResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   version_id: string;
 
@@ -119,8 +121,7 @@ export interface InstanceListResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   version_id: string;
 
@@ -138,8 +139,7 @@ export interface InstanceBulkResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   version_id: string;
 
@@ -167,11 +167,13 @@ export interface InstanceGetResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 
   steps: Array<
-    InstanceGetResponse.UnionMember0 | InstanceGetResponse.UnionMember1 | InstanceGetResponse.UnionMember2
+    | InstanceGetResponse.UnionMember0
+    | InstanceGetResponse.UnionMember1
+    | InstanceGetResponse.UnionMember2
+    | InstanceGetResponse.UnionMember3
   >;
 
   success: boolean | null;
@@ -228,12 +230,12 @@ export namespace InstanceGetResponse {
     export interface Config {
       retries: Config.Retries;
 
-      timeout: string | number;
+      timeout: unknown | number;
     }
 
     export namespace Config {
       export interface Retries {
-        delay: string | number;
+        delay: unknown | number;
 
         limit: number;
 
@@ -273,6 +275,30 @@ export namespace InstanceGetResponse {
   export namespace UnionMember2 {
     export interface Trigger {
       source: string;
+    }
+  }
+
+  export interface UnionMember3 {
+    end: string;
+
+    error: UnionMember3.Error | null;
+
+    finished: boolean;
+
+    name: string;
+
+    output: unknown | string | number | boolean;
+
+    start: string;
+
+    type: 'waitForEvent';
+  }
+
+  export namespace UnionMember3 {
+    export interface Error {
+      message: string;
+
+      name: string;
     }
   }
 
@@ -325,8 +351,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
-    | 'unknown';
+    | 'waiting';
 }
 
 export interface InstanceBulkParams {
@@ -356,6 +381,7 @@ export interface InstanceGetParams {
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
 Instances.InstanceBulkResponsesSinglePage = InstanceBulkResponsesSinglePage;
 Instances.Status = Status;
+Instances.Events = Events;
 
 export declare namespace Instances {
   export {
@@ -375,5 +401,11 @@ export declare namespace Instances {
     Status as Status,
     type StatusEditResponse as StatusEditResponse,
     type StatusEditParams as StatusEditParams,
+  };
+
+  export {
+    Events as Events,
+    type EventCreateResponse as EventCreateResponse,
+    type EventCreateParams as EventCreateParams,
   };
 }

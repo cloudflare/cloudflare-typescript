@@ -6,6 +6,16 @@ import * as Core from '../../../../../core';
 export class Logs extends APIResource {
   /**
    * Fetch deployment logs for a project.
+   *
+   * @example
+   * ```ts
+   * const log =
+   *   await client.pages.projects.deployments.history.logs.get(
+   *     'this-is-my-project-01',
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     projectName: string,

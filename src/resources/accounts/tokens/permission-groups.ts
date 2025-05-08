@@ -7,6 +7,16 @@ import { SinglePage } from '../../../pagination';
 export class PermissionGroups extends APIResource {
   /**
    * Find all available permission groups for Account Owned API Tokens
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const permissionGroupListResponse of client.accounts.tokens.permissionGroups.list(
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PermissionGroupListParams,
@@ -22,6 +32,16 @@ export class PermissionGroups extends APIResource {
 
   /**
    * Find all available permission groups for Account Owned API Tokens
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const permissionGroupGetResponse of client.accounts.tokens.permissionGroups.get(
+   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: PermissionGroupGetParams,

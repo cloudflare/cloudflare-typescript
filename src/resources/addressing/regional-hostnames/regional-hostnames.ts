@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import * as RegionsAPI from './regions';
 import { RegionListParams, RegionListResponse, RegionListResponsesSinglePage, Regions } from './regions';
 import { SinglePage } from '../../../pagination';
@@ -15,6 +14,16 @@ export class RegionalHostnames extends APIResource {
    * are physically located within the chosen region to decrypt and service HTTPS
    * traffic. Learn more about
    * [Regional Services](https://developers.cloudflare.com/data-localization/regional-services/get-started/).
+   *
+   * @example
+   * ```ts
+   * const regionalHostname =
+   *   await client.addressing.regionalHostnames.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     hostname: 'foo.example.com',
+   *     region_key: 'ca',
+   *   });
+   * ```
    */
   create(
     params: RegionalHostnameCreateParams,
@@ -31,6 +40,16 @@ export class RegionalHostnames extends APIResource {
 
   /**
    * List all Regional Hostnames within a zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const regionalHostnameListResponse of client.addressing.regionalHostnames.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RegionalHostnameListParams,
@@ -46,6 +65,15 @@ export class RegionalHostnames extends APIResource {
 
   /**
    * Delete the region configuration for a specific Regional Hostname.
+   *
+   * @example
+   * ```ts
+   * const regionalHostname =
+   *   await client.addressing.regionalHostnames.delete(
+   *     'foo.example.com',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     hostname: string,
@@ -59,6 +87,18 @@ export class RegionalHostnames extends APIResource {
   /**
    * Update the configuration for a specific Regional Hostname. Only the region_key
    * of a hostname is mutable.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.addressing.regionalHostnames.edit(
+   *     'foo.example.com',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       region_key: 'ca',
+   *     },
+   *   );
+   * ```
    */
   edit(
     hostname: string,
@@ -76,6 +116,15 @@ export class RegionalHostnames extends APIResource {
 
   /**
    * Fetch the configuration for a specific Regional Hostname, within a zone.
+   *
+   * @example
+   * ```ts
+   * const regionalHostname =
+   *   await client.addressing.regionalHostnames.get(
+   *     'foo.example.com',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     hostname: string,
@@ -110,6 +159,11 @@ export interface RegionalHostnameCreateResponse {
    * Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameListResponse {
@@ -128,17 +182,56 @@ export interface RegionalHostnameListResponse {
    * Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<RegionalHostnameDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<RegionalHostnameDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
+}
+
+export namespace RegionalHostnameDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export interface RegionalHostnameEditResponse {
@@ -157,6 +250,11 @@ export interface RegionalHostnameEditResponse {
    * Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameGetResponse {
@@ -175,11 +273,16 @@ export interface RegionalHostnameGetResponse {
    * Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -193,25 +296,30 @@ export interface RegionalHostnameCreateParams {
    * Body param: Identifying key for the region
    */
   region_key: string;
+
+  /**
+   * Body param: Configure which routing method to use for the regional hostname
+   */
+  routing?: string;
 }
 
 export interface RegionalHostnameListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RegionalHostnameDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RegionalHostnameEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -223,7 +331,7 @@ export interface RegionalHostnameEditParams {
 
 export interface RegionalHostnameGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

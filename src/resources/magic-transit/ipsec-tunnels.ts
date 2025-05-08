@@ -7,9 +7,20 @@ import * as MagicTransitAPI from './magic-transit';
 
 export class IPSECTunnels extends APIResource {
   /**
-   * Creates new IPsec tunnels associated with an account. Use `?validate_only=true`
+   * Creates a new IPsec tunnel associated with an account. Use `?validate_only=true`
    * as an optional query parameter to only run validation without persisting
    * changes.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnel =
+   *   await client.magicTransit.ipsecTunnels.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     cloudflare_endpoint: '203.0.113.1',
+   *     interface_address: '192.0.2.0/31',
+   *     name: 'IPsec_1',
+   *   });
+   * ```
    */
   create(
     params: IPSECTunnelCreateParams,
@@ -34,6 +45,20 @@ export class IPSECTunnels extends APIResource {
    * Updates a specific IPsec tunnel associated with an account. Use
    * `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnel =
+   *   await client.magicTransit.ipsecTunnels.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       cloudflare_endpoint: '203.0.113.1',
+   *       interface_address: '192.0.2.0/31',
+   *       name: 'IPsec_1',
+   *     },
+   *   );
+   * ```
    */
   update(
     ipsecTunnelId: string,
@@ -57,6 +82,14 @@ export class IPSECTunnels extends APIResource {
 
   /**
    * Lists IPsec tunnels associated with an account.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnels =
+   *   await client.magicTransit.ipsecTunnels.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   list(
     params: IPSECTunnelListParams,
@@ -80,6 +113,15 @@ export class IPSECTunnels extends APIResource {
    * Disables and removes a specific static IPsec Tunnel associated with an account.
    * Use `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnel =
+   *   await client.magicTransit.ipsecTunnels.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     ipsecTunnelId: string,
@@ -104,6 +146,15 @@ export class IPSECTunnels extends APIResource {
    * Update multiple IPsec tunnels associated with an account. Use
    * `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.ipsecTunnels.bulkUpdate({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: {},
+   *   });
+   * ```
    */
   bulkUpdate(
     params: IPSECTunnelBulkUpdateParams,
@@ -126,6 +177,15 @@ export class IPSECTunnels extends APIResource {
 
   /**
    * Lists details for a specific IPsec tunnel.
+   *
+   * @example
+   * ```ts
+   * const ipsecTunnel =
+   *   await client.magicTransit.ipsecTunnels.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     ipsecTunnelId: string,
@@ -152,6 +212,18 @@ export class IPSECTunnels extends APIResource {
    * without persisting changes. After a PSK is generated, the PSK is immediately
    * persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a
    * safe place.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.ipsecTunnels.pskGenerate(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   pskGenerate(
     ipsecTunnelId: string,
@@ -179,133 +251,127 @@ export interface PSKMetadata {
 }
 
 export interface IPSECTunnelCreateResponse {
-  ipsec_tunnels?: Array<IPSECTunnelCreateResponse.IPSECTunnel>;
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The IP address assigned to the Cloudflare side of the IPsec tunnel.
+   */
+  cloudflare_endpoint: string;
+
+  /**
+   * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
+   * of the tunnel. Select the subnet from the following private IP space:
+   * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+   */
+  interface_address: string;
+
+  /**
+   * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
+   */
+  name: string;
+
+  /**
+   * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
+   * (Phase 2).
+   */
+  allow_null_cipher?: boolean;
+
+  /**
+   * The date and time the tunnel was created.
+   */
+  created_on?: string;
+
+  /**
+   * The IP address assigned to the customer side of the IPsec tunnel. Not required,
+   * but must be set for proactive traceroutes to work.
+   */
+  customer_endpoint?: string;
+
+  /**
+   * An optional description forthe IPsec tunnel.
+   */
+  description?: string;
+
+  health_check?: IPSECTunnelCreateResponse.HealthCheck;
+
+  /**
+   * The date and time the tunnel was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The PSK metadata that includes when the PSK was generated.
+   */
+  psk_metadata?: PSKMetadata;
+
+  /**
+   * If `true`, then IPsec replay protection will be supported in the
+   * Cloudflare-to-customer direction.
+   */
+  replay_protection?: boolean;
 }
 
 export namespace IPSECTunnelCreateResponse {
-  export interface IPSECTunnel {
+  export interface HealthCheck {
     /**
-     * The IP address assigned to the Cloudflare side of the IPsec tunnel.
+     * The direction of the flow of the healthcheck. Either unidirectional, where the
+     * probe comes to you via the tunnel and the result comes back to Cloudflare via
+     * the open Internet, or bidirectional where both the probe and result come and go
+     * via the tunnel.
      */
-    cloudflare_endpoint: string;
+    direction?: 'unidirectional' | 'bidirectional';
 
     /**
-     * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
-     * of the tunnel. Select the subnet from the following private IP space:
-     * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+     * Determines whether to run healthchecks for a tunnel.
      */
-    interface_address: string;
+    enabled?: boolean;
 
     /**
-     * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
+     * How frequent the health check is run. The default value is `mid`.
      */
-    name: string;
+    rate?: MagicTransitAPI.HealthCheckRate;
 
     /**
-     * Tunnel identifier tag.
+     * The destination address in a request type health check. After the healthcheck is
+     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+     * to this address. This field defaults to `customer_gre_endpoint address`. This
+     * field is ignored for bidirectional healthchecks as the interface_address (not
+     * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+     * object form if the x-magic-new-hc-target header is set to true and string form
+     * if x-magic-new-hc-target is absent or set to false.
      */
-    id?: string;
+    target?: HealthCheck.MagicHealthCheckTarget | string;
 
     /**
-     * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
-     * (Phase 2).
+     * The type of healthcheck to run, reply or request. The default value is `reply`.
      */
-    allow_null_cipher?: boolean;
-
-    /**
-     * The date and time the tunnel was created.
-     */
-    created_on?: string;
-
-    /**
-     * The IP address assigned to the customer side of the IPsec tunnel. Not required,
-     * but must be set for proactive traceroutes to work.
-     */
-    customer_endpoint?: string;
-
-    /**
-     * An optional description forthe IPsec tunnel.
-     */
-    description?: string;
-
-    health_check?: IPSECTunnel.HealthCheck;
-
-    /**
-     * The date and time the tunnel was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * The PSK metadata that includes when the PSK was generated.
-     */
-    psk_metadata?: IPSECTunnelsAPI.PSKMetadata;
-
-    /**
-     * If `true`, then IPsec replay protection will be supported in the
-     * Cloudflare-to-customer direction.
-     */
-    replay_protection?: boolean;
+    type?: MagicTransitAPI.HealthCheckType;
   }
 
-  export namespace IPSECTunnel {
-    export interface HealthCheck {
+  export namespace HealthCheck {
+    /**
+     * The destination address in a request type health check. After the healthcheck is
+     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+     * to this address. This field defaults to `customer_gre_endpoint address`. This
+     * field is ignored for bidirectional healthchecks as the interface_address (not
+     * assigned to the Cloudflare side of the tunnel) is used as the target.
+     */
+    export interface MagicHealthCheckTarget {
       /**
-       * The direction of the flow of the healthcheck. Either unidirectional, where the
-       * probe comes to you via the tunnel and the result comes back to Cloudflare via
-       * the open Internet, or bidirectional where both the probe and result come and go
-       * via the tunnel.
+       * The effective health check target. If 'saved' is empty, then this field will be
+       * populated with the calculated default value on GET requests. Ignored in POST,
+       * PUT, and PATCH requests.
        */
-      direction?: 'unidirectional' | 'bidirectional';
+      effective?: string;
 
       /**
-       * Determines whether to run healthchecks for a tunnel.
+       * The saved health check target. Setting the value to the empty string indicates
+       * that the calculated default value will be used.
        */
-      enabled?: boolean;
-
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.HealthCheckRate;
-
-      /**
-       * The destination address in a request type health check. After the healthcheck is
-       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-       * to this address. This field defaults to `customer_gre_endpoint address`. This
-       * field is ignored for bidirectional healthchecks as the interface_address (not
-       * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
-       * object form if the x-magic-new-hc-target header is set to true and string form
-       * if x-magic-new-hc-target is absent or set to false.
-       */
-      target?: HealthCheck.MagicHealthCheckTarget | string;
-
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.HealthCheckType;
-    }
-
-    export namespace HealthCheck {
-      /**
-       * The destination address in a request type health check. After the healthcheck is
-       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-       * to this address. This field defaults to `customer_gre_endpoint address`. This
-       * field is ignored for bidirectional healthchecks as the interface_address (not
-       * assigned to the Cloudflare side of the tunnel) is used as the target.
-       */
-      export interface MagicHealthCheckTarget {
-        /**
-         * The effective health check target. If 'saved' is empty, then this field will be
-         * populated with the calculated default value on GET requests. Ignored in POST,
-         * PUT, and PATCH requests.
-         */
-        effective?: string;
-
-        /**
-         * The saved health check target. Setting the value to the empty string indicates
-         * that the calculated default value will be used.
-         */
-        saved?: string;
-      }
+      saved?: string;
     }
   }
 }
@@ -319,6 +385,11 @@ export interface IPSECTunnelUpdateResponse {
 export namespace IPSECTunnelUpdateResponse {
   export interface ModifiedIPSECTunnel {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The IP address assigned to the Cloudflare side of the IPsec tunnel.
      */
     cloudflare_endpoint: string;
@@ -334,11 +405,6 @@ export namespace IPSECTunnelUpdateResponse {
      * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
      */
     name: string;
-
-    /**
-     * Tunnel identifier tag.
-     */
-    id?: string;
 
     /**
      * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
@@ -451,6 +517,11 @@ export interface IPSECTunnelListResponse {
 export namespace IPSECTunnelListResponse {
   export interface IPSECTunnel {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The IP address assigned to the Cloudflare side of the IPsec tunnel.
      */
     cloudflare_endpoint: string;
@@ -466,11 +537,6 @@ export namespace IPSECTunnelListResponse {
      * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
      */
     name: string;
-
-    /**
-     * Tunnel identifier tag.
-     */
-    id?: string;
 
     /**
      * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
@@ -585,6 +651,11 @@ export interface IPSECTunnelDeleteResponse {
 export namespace IPSECTunnelDeleteResponse {
   export interface DeletedIPSECTunnel {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The IP address assigned to the Cloudflare side of the IPsec tunnel.
      */
     cloudflare_endpoint: string;
@@ -600,11 +671,6 @@ export namespace IPSECTunnelDeleteResponse {
      * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
      */
     name: string;
-
-    /**
-     * Tunnel identifier tag.
-     */
-    id?: string;
 
     /**
      * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
@@ -719,6 +785,11 @@ export interface IPSECTunnelBulkUpdateResponse {
 export namespace IPSECTunnelBulkUpdateResponse {
   export interface ModifiedIPSECTunnel {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The IP address assigned to the Cloudflare side of the IPsec tunnel.
      */
     cloudflare_endpoint: string;
@@ -734,11 +805,6 @@ export namespace IPSECTunnelBulkUpdateResponse {
      * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
      */
     name: string;
-
-    /**
-     * Tunnel identifier tag.
-     */
-    id?: string;
 
     /**
      * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
@@ -851,6 +917,11 @@ export interface IPSECTunnelGetResponse {
 export namespace IPSECTunnelGetResponse {
   export interface IPSECTunnel {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The IP address assigned to the Cloudflare side of the IPsec tunnel.
      */
     cloudflare_endpoint: string;
@@ -866,11 +937,6 @@ export namespace IPSECTunnelGetResponse {
      * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
      */
     name: string;
-
-    /**
-     * Tunnel identifier tag.
-     */
-    id?: string;
 
     /**
      * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel

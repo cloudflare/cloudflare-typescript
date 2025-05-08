@@ -7,6 +7,21 @@ import { SinglePage } from '../../../pagination';
 export class TLS extends APIResource {
   /**
    * Update the tls setting value for the hostname.
+   *
+   * @example
+   * ```ts
+   * const setting = await client.hostnames.settings.tls.update(
+   *   'ciphers',
+   *   'app.example.com',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     value: [
+   *       'ECDHE-RSA-AES128-GCM-SHA256',
+   *       'AES128-GCM-SHA256',
+   *     ],
+   *   },
+   * );
+   * ```
    */
   update(
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
@@ -25,6 +40,15 @@ export class TLS extends APIResource {
 
   /**
    * Delete the tls setting value for the hostname.
+   *
+   * @example
+   * ```ts
+   * const tls = await client.hostnames.settings.tls.delete(
+   *   'ciphers',
+   *   'app.example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
@@ -43,6 +67,17 @@ export class TLS extends APIResource {
 
   /**
    * List the requested TLS setting for the hostnames under this zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tlsGetResponse of client.hostnames.settings.tls.get(
+   *   'ciphers',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
@@ -153,7 +188,7 @@ export interface TLSGetResponse {
 
 export interface TLSUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -165,14 +200,14 @@ export interface TLSUpdateParams {
 
 export interface TLSDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface TLSGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

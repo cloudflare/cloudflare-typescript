@@ -7,6 +7,16 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Submissions extends APIResource {
   /**
    * This endpoint returns information for submissions to made to reclassify emails.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const submissionListResponse of client.emailSecurity.submissions.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SubmissionListParams,
@@ -90,6 +100,26 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
    * Query param: The end of the search date range. Defaults to `now`.
    */
   end?: string;
+
+  /**
+   * Query param:
+   */
+  original_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
+
+  /**
+   * Query param:
+   */
+  outcome_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
+
+  /**
+   * Query param:
+   */
+  query?: string | null;
+
+  /**
+   * Query param:
+   */
+  requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
    * Query param: The beginning of the search date range. Defaults to

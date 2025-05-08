@@ -29,6 +29,13 @@ export class Entities extends APIResource {
 
   /**
    * Retrieves IP address information.
+   *
+   * @example
+   * ```ts
+   * const entity = await client.radar.entities.get({
+   *   ip: '8.8.8.8',
+   * });
+   * ```
    */
   get(query: EntityGetParams, options?: Core.RequestOptions): Core.APIPromise<EntityGetResponse> {
     return (

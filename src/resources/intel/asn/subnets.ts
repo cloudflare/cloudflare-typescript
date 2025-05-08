@@ -7,6 +7,13 @@ import * as Shared from '../../shared';
 export class Subnets extends APIResource {
   /**
    * Get ASN Subnets
+   *
+   * @example
+   * ```ts
+   * const subnet = await client.intel.asn.subnets.get(0, {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(
     asn: Shared.ASNParam,

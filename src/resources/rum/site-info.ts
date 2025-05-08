@@ -8,6 +8,13 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class SiteInfo extends APIResource {
   /**
    * Creates a new Web Analytics site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.rum.siteInfo.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: SiteInfoCreateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
@@ -20,6 +27,14 @@ export class SiteInfo extends APIResource {
 
   /**
    * Updates an existing Web Analytics site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.rum.siteInfo.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(siteId: string, params: SiteInfoUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
@@ -33,6 +48,16 @@ export class SiteInfo extends APIResource {
 
   /**
    * Lists all Web Analytics sites of an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const site of client.rum.siteInfo.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SiteInfoListParams,
@@ -47,6 +72,14 @@ export class SiteInfo extends APIResource {
 
   /**
    * Deletes an existing Web Analytics site.
+   *
+   * @example
+   * ```ts
+   * const siteInfo = await client.rum.siteInfo.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     siteId: string,
@@ -63,6 +96,14 @@ export class SiteInfo extends APIResource {
 
   /**
    * Retrieves a Web Analytics site.
+   *
+   * @example
+   * ```ts
+   * const site = await client.rum.siteInfo.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(siteId: string, params: SiteInfoGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id } = params;
@@ -138,7 +179,7 @@ export interface SiteInfoDeleteResponse {
 
 export interface SiteInfoCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -161,7 +202,7 @@ export interface SiteInfoCreateParams {
 
 export interface SiteInfoUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -196,7 +237,7 @@ export interface SiteInfoUpdateParams {
 
 export interface SiteInfoListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -208,14 +249,14 @@ export interface SiteInfoListParams extends V4PagePaginationArrayParams {
 
 export interface SiteInfoDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface SiteInfoGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

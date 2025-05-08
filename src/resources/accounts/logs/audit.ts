@@ -11,6 +11,20 @@ export class Audit extends APIResource {
    * missing entries in the available audit logs. Be aware of the following
    * limitations. <br /> <ul> <li>Audit logs are available only for the past 30 days.
    * <br /></li> <li>Error handling is not yet implemented. <br /> </li> </ul>
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const auditListResponse of client.accounts.logs.audit.list(
+   *   {
+   *     account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
+   *     before: '2024-10-31',
+   *     since: '2024-10-30',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: AuditListParams,
@@ -140,7 +154,7 @@ export namespace AuditListResponse {
     /**
      * The type of actor.
      */
-    type?: 'user' | 'account' | 'cloudflare-admin';
+    type?: 'account' | 'cloudflare_admin' | 'system' | 'user';
   }
 
   /**

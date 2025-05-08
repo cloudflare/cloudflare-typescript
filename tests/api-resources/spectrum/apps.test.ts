@@ -18,7 +18,7 @@ describe('resource apps', () => {
       ip_firewall: true,
       protocol: 'tcp/22',
       proxy_protocol: 'off',
-      tls: 'off',
+      tls: 'full',
       traffic_type: 'direct',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -38,7 +38,7 @@ describe('resource apps', () => {
       ip_firewall: true,
       protocol: 'tcp/22',
       proxy_protocol: 'off',
-      tls: 'off',
+      tls: 'full',
       traffic_type: 'direct',
       argo_smart_routing: true,
       edge_ips: { connectivity: 'all', type: 'dynamic' },
@@ -56,7 +56,7 @@ describe('resource apps', () => {
       ip_firewall: true,
       protocol: 'tcp/22',
       proxy_protocol: 'off',
-      tls: 'off',
+      tls: 'full',
       traffic_type: 'direct',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -76,7 +76,7 @@ describe('resource apps', () => {
       ip_firewall: true,
       protocol: 'tcp/22',
       proxy_protocol: 'off',
-      tls: 'off',
+      tls: 'full',
       traffic_type: 'direct',
       argo_smart_routing: true,
       edge_ips: { connectivity: 'all', type: 'dynamic' },
@@ -102,7 +102,7 @@ describe('resource apps', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.spectrum.apps.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      direction: 'asc',
+      direction: 'desc',
       order: 'protocol',
       page: 1,
       per_page: 1,
