@@ -5,10 +5,10 @@ import {
   inlineRefs,
   applyCompatibilityTransformations,
   removeFormats,
-} from './compat';
+} from '../src/compat';
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import { JSONSchema } from './compat';
-import { Endpoint } from './tools';
+import { JSONSchema } from '../src/compat';
+import { Endpoint } from '../src/tools';
 
 describe('truncateToolNames', () => {
   it('should return original names when maxLength is 0 or negative', () => {

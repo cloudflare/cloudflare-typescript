@@ -44,6 +44,8 @@ const CLIENT_PRESETS: Record<ClientType, ClientCapabilities> = {
 };
 
 export interface ParsedOptions {
+  includeDynamicTools: boolean | undefined;
+  includeAllTools: boolean | undefined;
   filters: Filter[];
   capabilities: ClientCapabilities;
   list: boolean;
@@ -80,6 +82,18 @@ function parseCapabilityValue(cap: string): { name: Capability; value?: number }
 
 export function parseOptions(): ParsedOptions {
   const opts = yargs(hideBin(process.argv))
+    .option('tools', {
+      type: 'string',
+      array: true,
+      choices: ['dynamic', 'all'],
+      description: 'Use dynamic tools or all tools',
+    })
+    .option('no-tools', {
+      type: 'string',
+      array: true,
+      choices: ['dynamic', 'all'],
+      description: 'Do not use any dynamic or all tools',
+    })
     .option('tool', {
       type: 'string',
       array: true,
@@ -262,7 +276,15 @@ export function parseOptions(): ParsedOptions {
     }
   }
 
+  const explicitTools = Boolean(argv.tools || argv.noTools);
+  const includeDynamicTools =
+    explicitTools ? argv.tools?.includes('dynamic') && !argv.noTools?.includes('dynamic') : undefined;
+  const includeAllTools =
+    explicitTools ? argv.tools?.includes('all') && !argv.noTools?.includes('all') : undefined;
+
   return {
+    includeDynamicTools,
+    includeAllTools,
     filters,
     capabilities: clientCapabilities,
     list: argv.list || false,

@@ -42,9 +42,9 @@ describe('Endpoint filtering', () => {
 
   const tests: { name: string; filters: Filter[]; expected: string[] }[] = [
     {
-      name: 'match all',
+      name: 'match none',
       filters: [],
-      expected: endpoints.map((e) => e.tool.name),
+      expected: [],
     },
 
     // Resource tests

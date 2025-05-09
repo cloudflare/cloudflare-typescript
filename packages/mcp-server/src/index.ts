@@ -1,28 +1,24 @@
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { init, server } from './server';
-import { Endpoint, endpoints, Filter, query } from './tools';
-import { applyCompatibilityTransformations } from './compat';
-import { parseOptions } from './options';
+import { init, selectTools, server } from './server';
+import { Endpoint, endpoints } from './tools';
+import { ParsedOptions, parseOptions } from './options';
 
 async function main() {
-  const { filters, capabilities, list } = parseOptionsOrError();
+  const options = parseOptionsOrError();
 
-  if (list) {
+  if (options.list) {
     listAllTools();
     return;
   }
 
-  const filteredEndpoints = filterEndpointsOrError(filters, endpoints);
-
-  // Apply compatibility transformations
-  const transformedEndpoints = applyCompatibilityTransformations(filteredEndpoints, capabilities);
+  const includedTools = selectToolsOrError(endpoints, options);
 
   console.error(
-    `MCP Server starting with ${transformedEndpoints.length} tools:`,
-    transformedEndpoints.map((e) => e.tool.name),
+    `MCP Server starting with ${includedTools.length} tools:`,
+    includedTools.map((e) => e.tool.name),
   );
 
-  init({ server, endpoints: transformedEndpoints });
+  init({ server, endpoints: includedTools });
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
@@ -45,14 +41,14 @@ function parseOptionsOrError() {
   }
 }
 
-function filterEndpointsOrError(filters: Filter[], endpoints: Endpoint[]) {
+function selectToolsOrError(endpoints: Endpoint[], options: ParsedOptions) {
   try {
-    const filteredEndpoints = query(filters, endpoints);
-    if (filteredEndpoints.length === 0) {
+    const includedTools = selectTools(endpoints, options);
+    if (includedTools.length === 0) {
       console.error('No tools match the provided filters.');
       process.exit(1);
     }
-    return filteredEndpoints;
+    return includedTools;
   } catch (error) {
     if (error instanceof Error) {
       console.error('Error filtering tools:', error.message);
@@ -65,10 +61,10 @@ function filterEndpointsOrError(filters: Filter[], endpoints: Endpoint[]) {
 
 function listAllTools() {
   if (endpoints.length === 0) {
-    console.error('No tools available.');
+    console.log('No tools available.');
     return;
   }
-  console.error('Available tools:\n');
+  console.log('Available tools:\n');
 
   // Group endpoints by resource
   const resourceGroups = new Map<string, typeof endpoints>();
@@ -86,7 +82,7 @@ function listAllTools() {
 
   // Display hierarchically by resource
   for (const resource of sortedResources) {
-    console.error(`Resource: ${resource}`);
+    console.log(`Resource: ${resource}`);
 
     const resourceEndpoints = resourceGroups.get(resource)!;
     // Sort endpoints by tool name
@@ -98,9 +94,9 @@ function listAllTools() {
         metadata: { operation, tags },
       } = endpoint;
 
-      console.error(`  - ${tool.name} (${operation}) ${tags.length > 0 ? `tags: ${tags.join(', ')}` : ''}`);
-      console.error(`    Description: ${tool.description}`);
+      console.log(`  - ${tool.name} (${operation}) ${tags.length > 0 ? `tags: ${tags.join(', ')}` : ''}`);
+      console.log(`    Description: ${tool.description}`);
     }
-    console.error('');
+    console.log('');
   }
 }

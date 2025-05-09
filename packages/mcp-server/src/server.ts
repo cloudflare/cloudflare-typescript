@@ -2,10 +2,17 @@
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { endpoints, HandlerFunction } from './tools';
+import { Endpoint, endpoints, HandlerFunction, query } from './tools';
 import { CallToolRequestSchema, ListToolsRequestSchema, Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
-import { ClientCapabilities, defaultClientCapabilities, parseEmbeddedJSON } from './compat';
+import {
+  applyCompatibilityTransformations,
+  ClientCapabilities,
+  defaultClientCapabilities,
+  parseEmbeddedJSON,
+} from './compat';
+import { dynamicTools } from './dynamic-tools';
+import { ParsedOptions } from './options';
 export { endpoints } from './tools';
 
 // Create server instance
@@ -53,6 +60,29 @@ export function init(params: {
 
     return executeHandler(endpoint.tool, endpoint.handler, client, args, params.capabilities);
   });
+}
+
+/**
+ * Selects the tools to include in the MCP Server based on the provided options.
+ */
+export function selectTools(endpoints: Endpoint[], options: ParsedOptions) {
+  const filteredEndpoints = query(options.filters, endpoints);
+
+  const includedTools = filteredEndpoints;
+
+  if (options.includeAllTools && includedTools.length === 0) {
+    includedTools.push(...endpoints);
+  }
+
+  if (options.includeDynamicTools) {
+    includedTools.push(...dynamicTools(endpoints));
+  }
+
+  if (includedTools.length === 0) {
+    includedTools.push(...endpoints);
+  }
+
+  return applyCompatibilityTransformations(includedTools, options.capabilities);
 }
 
 /**
