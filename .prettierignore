@@ -4,4 +4,4 @@ CHANGELOG.md
 /deno
 
 # don't format tsc output, will break source maps
-/dist
+dist

@@ -46,7 +46,7 @@ jobs:
         run: ./scripts/bootstrap
 
       - name: Check build
-        run: ./scripts/build-all
+        run: ./scripts/build
 
       - name: Get GitHub OIDC Token
         if: github.repository == 'stainless-sdks/cloudflare-typescript'

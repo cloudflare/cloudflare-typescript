@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-set -exuo pipefail
 
-# build the core SDK package and all sub-packages
+# build-all is deprecated, use build instead
 
 bash ./scripts/build
-
-for dir in packages/*; do
-    if [ -d "$dir" ]; then
-        (cd "$dir" && yarn install && yarn build)
-    fi
-done
