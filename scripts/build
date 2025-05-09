@@ -51,3 +51,9 @@ if [ -e ./scripts/build-deno ]
 then
   ./scripts/build-deno
 fi
+# build all sub-packages
+for dir in packages/*; do
+  if [ -d "$dir" ]; then
+      (cd "$dir" && yarn install && yarn build)
+  fi
+done
