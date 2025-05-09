@@ -29,7 +29,8 @@
   "dependencies": {
     "cloudflare": "file:../../dist/",
     "@modelcontextprotocol/sdk": "^1.6.1",
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.2",
+    "@cloudflare/cabidela": "^0.2.4"
   },
   "bin": {
     "mcp-server": "dist/index.js"

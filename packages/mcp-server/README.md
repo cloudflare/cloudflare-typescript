@@ -11,7 +11,8 @@ Because it's not published yet, clone the repo and build it:
 ```sh
 git clone git@github.com:stainless-sdks/cloudflare-typescript.git
 cd cloudflare-typescript
-yarn && ./scripts/build-all
+./scripts/bootstrap
+./scripts/build
 ```
 
 ### Running
@@ -22,7 +23,7 @@ export CLOUDFLARE_API_TOKEN="Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY"
 export CLOUDFLARE_API_KEY="144c9defac04969c7bfad8efaa8ea194"
 export CLOUDFLARE_EMAIL="user@example.com"
 export CLOUDFLARE_API_USER_SERVICE_KEY="v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719"
-npx ./packages/mcp-server
+node ./packages/mcp-server/dist/index.js
 ```
 
 > [!NOTE]
@@ -41,8 +42,12 @@ For clients with a configuration JSON, it might look something like this:
 {
   "mcpServers": {
     "cloudflare_api": {
-      "command": "npx",
-      "args": ["-y", "/path/to/local/cloudflare-typescript/packages/mcp-server", "--client=claude"],
+      "command": "node",
+      "args": [
+        "/path/to/local/cloudflare-typescript/packages/mcp-server",
+        "--client=claude",
+        "--tools=dynamic"
+      ],
       "env": {
         "CLOUDFLARE_API_TOKEN": "Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY",
         "CLOUDFLARE_API_KEY": "144c9defac04969c7bfad8efaa8ea194",
@@ -54,7 +59,14 @@ For clients with a configuration JSON, it might look something like this:
 }
 ```
 
-## Filtering tools
+## Exposing endpoints to your MCP Client
+
+There are two ways to expose endpoints as tools in the MCP server:
+
+1. Exposing one tool per endpoint, and filtering as necessary
+2. Exposing a set of tools to dynamically discover and invoke endpoints from the API
+
+### Filtering endpoints and tools
 
 You can run the package on the command line to discover and filter the set of tools that are exposed by the
 MCP Server. This can be helpful for large APIs where including all endpoints at once is too much for your AI's
@@ -65,6 +77,21 @@ You can filter by multiple aspects:
 - `--tool` includes a specific tool by name
 - `--resource` includes all tools under a specific resource, and can have wildcards, e.g. `my.resource*`
 - `--operation` includes just read (get/list) or just write operations
+
+### Dynamic tools
+
+If you specify `--tools=dynamic` to the MCP server, instead of exposing one tool per endpoint in the API, it will
+expose the following tools:
+
+1. `list_api_endpoints` - Discovers available endpoints, with optional filtering by search query
+2. `get_api_endpoint_schema` - Gets detailed schema information for a specific endpoint
+3. `invoke_api_endpoint` - Executes any endpoint with the appropriate parameters
+
+This allows you to have the full set of API endpoints available to your MCP Client, while not requiring that all
+of their schemas be loaded into context at once. Instead, the LLM will automatically use these tools together to
+search for, look up, and invoke endpoints dynamically. However, due to the indirect nature of the schemas, it
+can struggle to provide the correct properties a bit more than when tools are imported explicitly. Therefore,
+you can opt-in to explicit tools, the dynamic tools, or both.
 
 See more information with `--help`.
 

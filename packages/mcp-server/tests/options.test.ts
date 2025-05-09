@@ -1,5 +1,5 @@
-import { parseOptions } from './options';
-import { Filter } from './tools';
+import { parseOptions } from '../src/options';
+import { Filter } from '../src/tools';
 
 // Mock process.argv
 const mockArgv = (args: string[]) => {
