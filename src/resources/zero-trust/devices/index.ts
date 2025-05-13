@@ -90,8 +90,8 @@ export {
   Settings,
   type DeviceSettings,
   type SettingUpdateParams,
-  type SettingListParams,
   type SettingEditParams,
+  type SettingGetParams,
 } from './settings';
 export {
   SplitTunnelExcludesSinglePage,
