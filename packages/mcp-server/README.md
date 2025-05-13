@@ -2418,8 +2418,8 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `zero_trust.devices.settings`:
 
 - `update_devices_zero_trust_settings` (`write`): Updates the current device settings for a Zero Trust account.
-- `list_devices_zero_trust_settings` (`read`): Describes the current device settings for a Zero Trust account.
 - `edit_devices_zero_trust_settings` (`write`): Patches the current device settings for a Zero Trust account.
+- `get_devices_zero_trust_settings` (`read`): Describes the current device settings for a Zero Trust account.
 
 ### Resource `zero_trust.devices.unrevoke`:
 
