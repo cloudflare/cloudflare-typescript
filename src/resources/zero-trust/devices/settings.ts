@@ -27,26 +27,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Describes the current device settings for a Zero Trust account.
-   *
-   * @example
-   * ```ts
-   * const deviceSettings =
-   *   await client.zeroTrust.devices.settings.list({
-   *     account_id: '699d98642c564d2e855e9661899b7252',
-   *   });
-   * ```
-   */
-  list(params: SettingListParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
-    const { account_id } = params;
-    return (
-      this._client.get(path`/accounts/${account_id}/devices/settings`, options) as APIPromise<{
-        result: DeviceSettings | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Patches the current device settings for a Zero Trust account.
    *
    * @example
@@ -61,6 +41,26 @@ export class Settings extends APIResource {
     const { account_id, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/devices/settings`, { body, ...options }) as APIPromise<{
+        result: DeviceSettings | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Describes the current device settings for a Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const deviceSettings =
+   *   await client.zeroTrust.devices.settings.get({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
+   */
+  get(params: SettingGetParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/devices/settings`, options) as APIPromise<{
         result: DeviceSettings | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -128,10 +128,6 @@ export interface SettingUpdateParams {
   use_zt_virtual_ip?: boolean;
 }
 
-export interface SettingListParams {
-  account_id: string;
-}
-
 export interface SettingEditParams {
   /**
    * Path param:
@@ -165,11 +161,15 @@ export interface SettingEditParams {
   use_zt_virtual_ip?: boolean;
 }
 
+export interface SettingGetParams {
+  account_id: string;
+}
+
 export declare namespace Settings {
   export {
     type DeviceSettings as DeviceSettings,
     type SettingUpdateParams as SettingUpdateParams,
-    type SettingListParams as SettingListParams,
     type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
   };
 }

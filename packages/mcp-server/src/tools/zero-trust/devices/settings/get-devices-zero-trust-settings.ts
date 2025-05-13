@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export const tool: Tool = {
-  name: 'list_devices_zero_trust_settings',
+  name: 'get_devices_zero_trust_settings',
   description: 'Describes the current device settings for a Zero Trust account.',
   inputSchema: {
     type: 'object',
@@ -25,7 +25,7 @@ export const tool: Tool = {
 
 export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return client.zeroTrust.devices.settings.list(body);
+  return client.zeroTrust.devices.settings.get(body);
 };
 
 export default { metadata, tool, handler };
