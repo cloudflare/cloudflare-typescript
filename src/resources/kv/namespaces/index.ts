@@ -17,7 +17,6 @@ export {
   NamespacesV4PagePaginationArray,
   Namespaces,
   type Namespace,
-  type NamespaceUpdateResponse,
   type NamespaceDeleteResponse,
   type NamespaceCreateParams,
   type NamespaceUpdateParams,

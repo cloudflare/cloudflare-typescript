@@ -9,9 +9,15 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource accounts', () => {
+describe('resource dexTests', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.accounts.create({ name: 'name', type: 'standard' });
+    const responsePromise = client.zeroTrust.devices.dexTests.create({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      data: {},
+      enabled: true,
+      interval: '30m',
+      name: 'HTTP dash health check',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,17 +28,25 @@ describe('resource accounts', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.accounts.create({
-      name: 'name',
-      type: 'standard',
-      unit: { id: 'f267e341f3dd4697bd3b9f71dd96247f' },
+    const response = await client.zeroTrust.devices.dexTests.create({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      data: { host: 'https://dash.cloudflare.com', kind: 'http', method: 'GET' },
+      enabled: true,
+      interval: '30m',
+      name: 'HTTP dash health check',
+      description: 'Checks the dash endpoint every 30 minutes',
+      target_policies: [{ id: 'id', default: true, name: 'name' }],
+      targeted: true,
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.accounts.update({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
-      name: 'Demo Account',
+    const responsePromise = client.zeroTrust.devices.dexTests.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      data: {},
+      enabled: true,
+      interval: '30m',
+      name: 'HTTP dash health check',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,15 +58,22 @@ describe('resource accounts', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.accounts.update({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
-      name: 'Demo Account',
-      settings: { abuse_contact_email: 'abuse_contact_email', enforce_twofactor: true },
+    const response = await client.zeroTrust.devices.dexTests.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      data: { host: 'https://dash.cloudflare.com', kind: 'http', method: 'GET' },
+      enabled: true,
+      interval: '30m',
+      name: 'HTTP dash health check',
+      description: 'Checks the dash endpoint every 30 minutes',
+      target_policies: [{ id: 'id', default: true, name: 'name' }],
+      targeted: true,
     });
   });
 
-  test('list', async () => {
-    const responsePromise = client.accounts.list();
+  test('list: only required params', async () => {
+    const responsePromise = client.zeroTrust.devices.dexTests.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,25 +83,16 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.accounts.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
-  });
-
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.accounts.list(
-        { direction: 'desc', name: 'example.com', page: 1, per_page: 5 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('list: required and optional params', async () => {
+    const response = await client.zeroTrust.devices.dexTests.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.accounts.delete({ account_id: 'account_id' });
+    const responsePromise = client.zeroTrust.devices.dexTests.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,11 +103,15 @@ describe('resource accounts', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.accounts.delete({ account_id: 'account_id' });
+    const response = await client.zeroTrust.devices.dexTests.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.accounts.get({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const responsePromise = client.zeroTrust.devices.dexTests.get('372e67954025e0ba6aaa6d586b9e0b59', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -106,6 +122,8 @@ describe('resource accounts', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.accounts.get({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const response = await client.zeroTrust.devices.dexTests.get('372e67954025e0ba6aaa6d586b9e0b59', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 });

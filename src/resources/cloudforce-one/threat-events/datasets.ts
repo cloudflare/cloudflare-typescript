@@ -165,7 +165,7 @@ export interface DatasetRawResponse {
 
 export interface DatasetCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -176,21 +176,21 @@ export interface DatasetCreateParams {
   isPublic: boolean;
 
   /**
-   * Body param: Used to describe the dataset within the account context
+   * Body param: Used to describe the dataset within the account context.
    */
   name: string;
 }
 
 export interface DatasetListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface DatasetEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -201,21 +201,21 @@ export interface DatasetEditParams {
   isPublic: boolean;
 
   /**
-   * Body param: Used to describe the dataset within the account context
+   * Body param: Used to describe the dataset within the account context.
    */
   name: string;
 }
 
 export interface DatasetGetParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface DatasetRawParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

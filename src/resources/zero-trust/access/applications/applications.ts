@@ -2757,7 +2757,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -3419,7 +3419,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -3830,7 +3830,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -4157,7 +4157,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -4470,7 +4470,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -4783,7 +4783,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -5569,7 +5569,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -6012,7 +6012,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -6674,7 +6674,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -7085,7 +7085,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -7412,7 +7412,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -7725,7 +7725,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -8038,7 +8038,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -8824,7 +8824,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -9267,7 +9267,7 @@ export namespace ApplicationListResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -9929,7 +9929,7 @@ export namespace ApplicationListResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -10340,7 +10340,7 @@ export namespace ApplicationListResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -10667,7 +10667,7 @@ export namespace ApplicationListResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -10980,7 +10980,7 @@ export namespace ApplicationListResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -11293,7 +11293,7 @@ export namespace ApplicationListResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -12079,7 +12079,7 @@ export namespace ApplicationListResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -12529,7 +12529,7 @@ export namespace ApplicationGetResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -13191,7 +13191,7 @@ export namespace ApplicationGetResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -13602,7 +13602,7 @@ export namespace ApplicationGetResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -13929,7 +13929,7 @@ export namespace ApplicationGetResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -14242,7 +14242,7 @@ export namespace ApplicationGetResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -14555,7 +14555,7 @@ export namespace ApplicationGetResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -15341,7 +15341,7 @@ export namespace ApplicationGetResponse {
     /**
      * The amount of time that tokens issued for this application will be valid. Must
      * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
+     * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -15797,7 +15797,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -16441,7 +16441,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -16844,7 +16844,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -17149,7 +17149,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -17442,7 +17442,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -17735,7 +17735,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -18404,7 +18404,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -18839,7 +18839,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -19483,7 +19483,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -19886,7 +19886,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -20191,7 +20191,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -20484,7 +20484,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -20777,7 +20777,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 
@@ -21446,7 +21446,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
 

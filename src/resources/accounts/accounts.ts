@@ -191,36 +191,10 @@ export namespace Account {
     abuse_contact_email?: string;
 
     /**
-     * @deprecated Specifies the default nameservers to be used for new zones added to
-     * this account.
-     *
-     * - `cloudflare.standard` for Cloudflare-branded nameservers
-     * - `custom.account` for account custom nameservers
-     * - `custom.tenant` for tenant custom nameservers
-     *
-     * See
-     * [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
-     * for more information.
-     *
-     * Deprecated in favor of
-     * [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
-     */
-    default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
-
-    /**
      * Indicates whether membership in this account requires that Two-Factor
      * Authentication is enabled
      */
     enforce_twofactor?: boolean;
-
-    /**
-     * @deprecated Indicates whether new zones should use the account-level custom
-     * nameservers by default.
-     *
-     * Deprecated in favor of
-     * [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
-     */
-    use_account_custom_ns_by_default?: boolean;
   }
 }
 
@@ -293,36 +267,10 @@ export namespace AccountUpdateParams {
     abuse_contact_email?: string;
 
     /**
-     * @deprecated Specifies the default nameservers to be used for new zones added to
-     * this account.
-     *
-     * - `cloudflare.standard` for Cloudflare-branded nameservers
-     * - `custom.account` for account custom nameservers
-     * - `custom.tenant` for tenant custom nameservers
-     *
-     * See
-     * [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
-     * for more information.
-     *
-     * Deprecated in favor of
-     * [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
-     */
-    default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
-
-    /**
      * Indicates whether membership in this account requires that Two-Factor
      * Authentication is enabled
      */
     enforce_twofactor?: boolean;
-
-    /**
-     * @deprecated Indicates whether new zones should use the account-level custom
-     * nameservers by default.
-     *
-     * Deprecated in favor of
-     * [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
-     */
-    use_account_custom_ns_by_default?: boolean;
   }
 }
 

@@ -9,10 +9,10 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource bulks', () => {
+describe('resource customCertificate', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.intel.domains.bulks.get({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.zeroTrust.gateway.configurations.customCertificate.get({
+      account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,9 +24,8 @@ describe('resource bulks', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.intel.domains.bulks.get({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      domain: ['string'],
+    const response = await client.zeroTrust.gateway.configurations.customCertificate.get({
+      account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 });

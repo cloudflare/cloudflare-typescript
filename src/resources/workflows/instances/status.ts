@@ -47,7 +47,7 @@ export interface StatusEditParams {
   account_id: string;
 
   /**
-   * Body param: Possible actions to apply to instance
+   * Body param: Possible actions to apply to instance.
    */
   status: 'resume' | 'pause' | 'terminate';
 }

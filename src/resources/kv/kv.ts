@@ -10,7 +10,6 @@ import {
   NamespaceGetParams,
   NamespaceListParams,
   NamespaceUpdateParams,
-  NamespaceUpdateResponse,
   Namespaces,
   NamespacesV4PagePaginationArray,
 } from './namespaces/namespaces';
@@ -26,7 +25,6 @@ export declare namespace KV {
   export {
     Namespaces as Namespaces,
     type Namespace as Namespace,
-    type NamespaceUpdateResponse as NamespaceUpdateResponse,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
     NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
     type NamespaceCreateParams as NamespaceCreateParams,

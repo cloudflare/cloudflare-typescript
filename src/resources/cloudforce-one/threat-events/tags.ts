@@ -33,7 +33,7 @@ export interface TagCreateResponse {
 
 export interface TagCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 

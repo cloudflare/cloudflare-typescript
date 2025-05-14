@@ -6,7 +6,7 @@ import { SinglePage } from '../../pagination';
 
 export class IPLists extends APIResource {
   /**
-   * Get IP Lists
+   * Get IP Lists.
    *
    * @example
    * ```ts
@@ -36,7 +36,7 @@ export interface IPList {
 
 export interface IPListGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

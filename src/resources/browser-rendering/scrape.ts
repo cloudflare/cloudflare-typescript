@@ -23,7 +23,7 @@ export type ScrapeCreateResponse = Array<ScrapeCreateResponse.ScrapeCreateRespon
 
 export namespace ScrapeCreateResponse {
   export interface ScrapeCreateResponseItem {
-    result: ScrapeCreateResponseItem.Result;
+    results: ScrapeCreateResponseItem.Results;
 
     /**
      * Selector
@@ -32,8 +32,8 @@ export namespace ScrapeCreateResponse {
   }
 
   export namespace ScrapeCreateResponseItem {
-    export interface Result {
-      attributes: Array<Result.Attribute>;
+    export interface Results {
+      attributes: Array<Results.Attribute>;
 
       /**
        * Element height
@@ -66,7 +66,7 @@ export namespace ScrapeCreateResponse {
       width: number;
     }
 
-    export namespace Result {
+    export namespace Results {
       export interface Attribute {
         /**
          * Attribute name
@@ -97,6 +97,14 @@ export interface ScrapeCreateParams {
    * Query param: Cache TTL default is 5s. Set to 0 to disable.
    */
   cacheTTL?: number;
+
+  /**
+   * Body param: The maximum duration allowed for the browser action to complete
+   * after the page has loaded (such as taking screenshots, extracting content, or
+   * generating PDFs). If this time limit is exceeded, the action stops and returns a
+   * timeout error.
+   */
+  actionTimeout?: number;
 
   /**
    * Body param: Adds a `<script>` tag into the page with the desired URL or content.

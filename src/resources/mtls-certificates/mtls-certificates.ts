@@ -243,7 +243,9 @@ export interface MTLSCertificateCreateParams {
   name?: string;
 
   /**
-   * Body param: The private key for the certificate
+   * Body param: The private key for the certificate. This field is only needed for
+   * specific use cases such as using a custom certificate with Zero Trust's block
+   * page.
    */
   private_key?: string;
 }

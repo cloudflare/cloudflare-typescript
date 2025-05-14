@@ -48,7 +48,11 @@ describe('resource settings', () => {
             renamed_classes: [{ from: 'from', to: 'to' }],
             transferred_classes: [{ from: 'from', from_script: 'from_script', to: 'to' }],
           },
-          observability: { enabled: true, head_sampling_rate: 0.1 },
+          observability: {
+            enabled: true,
+            head_sampling_rate: 0.1,
+            logs: { enabled: true, invocation_logs: true, head_sampling_rate: 0.1 },
+          },
           placement: { mode: 'smart' },
           tags: ['my-tag'],
           tail_consumers: [

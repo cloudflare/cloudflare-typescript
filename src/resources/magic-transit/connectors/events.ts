@@ -106,6 +106,9 @@ export interface EventGetResponse {
     | EventGetResponse.StartRotateCryptKey
     | EventGetResponse.FinishRotateCryptKeySuccess
     | EventGetResponse.FinishRotateCryptKeyFailure
+    | EventGetResponse.StartRotatePki
+    | EventGetResponse.FinishRotatePkiSuccess
+    | EventGetResponse.FinishRotatePkiFailure
     | EventGetResponse.StartUpgrade
     | EventGetResponse.FinishUpgradeSuccess
     | EventGetResponse.FinishUpgradeFailure
@@ -178,6 +181,27 @@ export namespace EventGetResponse {
      * Failed crypt key rotation
      */
     k: 'FinishRotateCryptKeyFailure';
+  }
+
+  export interface StartRotatePki {
+    /**
+     * Started PKI rotation
+     */
+    k: 'StartRotatePki';
+  }
+
+  export interface FinishRotatePkiSuccess {
+    /**
+     * Finished PKI rotation
+     */
+    k: 'FinishRotatePkiSuccess';
+  }
+
+  export interface FinishRotatePkiFailure {
+    /**
+     * Failed PKI rotation
+     */
+    k: 'FinishRotatePkiFailure';
   }
 
   export interface StartUpgrade {

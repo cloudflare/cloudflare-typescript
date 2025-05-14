@@ -45,7 +45,12 @@ describe('resource workflows', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.workflows.list({ account_id: 'account_id', page: 1, per_page: 1 });
+    const response = await client.workflows.list({
+      account_id: 'account_id',
+      page: 1,
+      per_page: 1,
+      search: 'x',
+    });
   });
 
   test('delete: only required params', async () => {

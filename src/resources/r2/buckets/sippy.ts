@@ -176,7 +176,8 @@ export declare namespace SippyUpdateParams {
     source?: R2EnableSippyAws.Source;
 
     /**
-     * Header param: The bucket jurisdiction.
+     * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+     * stored.
      */
     jurisdiction?: 'default' | 'eu' | 'fedramp';
   }
@@ -254,7 +255,8 @@ export declare namespace SippyUpdateParams {
     source?: R2EnableSippyGcs.Source;
 
     /**
-     * Header param: The bucket jurisdiction.
+     * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+     * stored.
      */
     jurisdiction?: 'default' | 'eu' | 'fedramp';
   }
@@ -318,7 +320,8 @@ export interface SippyDeleteParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -330,7 +333,8 @@ export interface SippyGetParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

@@ -225,6 +225,11 @@ export interface WorkflowListParams extends V4PagePaginationArrayParams {
    * Path param:
    */
   account_id: string;
+
+  /**
+   * Query param: Filter workflows by name.
+   */
+  search?: string;
 }
 
 export interface WorkflowDeleteParams {
