@@ -16,4 +16,5 @@ export {
   type TargetBulkUpdateParams,
   type TargetGetParams,
   type TargetListResponsesV4PagePaginationArray,
+  type TargetBulkUpdateResponsesSinglePage,
 } from './targets';
