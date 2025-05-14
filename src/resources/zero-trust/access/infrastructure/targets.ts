@@ -4,6 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
+  SinglePage,
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
 } from '../../../../core/pagination';
@@ -135,21 +136,27 @@ export class Targets extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
-   *   await client.zeroTrust.access.infrastructure.targets.bulkUpdate(
-   *     {
-   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       body: [{ hostname: 'infra-access-target', ip: {} }],
-   *     },
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const targetBulkUpdateResponse of client.zeroTrust.access.infrastructure.targets.bulkUpdate(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{ hostname: 'infra-access-target', ip: {} }],
+   *   },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
-  bulkUpdate(params: TargetBulkUpdateParams, options?: RequestOptions): APIPromise<TargetBulkUpdateResponse> {
+  bulkUpdate(
+    params: TargetBulkUpdateParams,
+    options?: RequestOptions,
+  ): PagePromise<TargetBulkUpdateResponsesSinglePage, TargetBulkUpdateResponse> {
     const { account_id, body } = params;
-    return this._client.put(path`/accounts/${account_id}/infrastructure/targets/batch`, {
-      body: body,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/infrastructure/targets/batch`,
+      SinglePage<TargetBulkUpdateResponse>,
+      { body: body, method: 'put', ...options },
+    );
   }
 
   /**
@@ -176,6 +183,8 @@ export class Targets extends APIResource {
 }
 
 export type TargetListResponsesV4PagePaginationArray = V4PagePaginationArray<TargetListResponse>;
+
+export type TargetBulkUpdateResponsesSinglePage = SinglePage<TargetBulkUpdateResponse>;
 
 export interface TargetCreateResponse {
   /**
@@ -411,84 +420,80 @@ export namespace TargetListResponse {
   }
 }
 
-export type TargetBulkUpdateResponse = Array<TargetBulkUpdateResponse.TargetBulkUpdateResponseItem>;
+export interface TargetBulkUpdateResponse {
+  /**
+   * Target identifier
+   */
+  id: string;
+
+  /**
+   * Date and time at which the target was created
+   */
+  created_at: string;
+
+  /**
+   * A non-unique field that refers to a target
+   */
+  hostname: string;
+
+  /**
+   * The IPv4/IPv6 address that identifies where to reach a target
+   */
+  ip: TargetBulkUpdateResponse.IP;
+
+  /**
+   * Date and time at which the target was modified
+   */
+  modified_at: string;
+}
 
 export namespace TargetBulkUpdateResponse {
-  export interface TargetBulkUpdateResponseItem {
+  /**
+   * The IPv4/IPv6 address that identifies where to reach a target
+   */
+  export interface IP {
     /**
-     * Target identifier
+     * The target's IPv4 address
      */
-    id: string;
+    ipv4?: IP.IPV4;
 
     /**
-     * Date and time at which the target was created
+     * The target's IPv6 address
      */
-    created_at: string;
-
-    /**
-     * A non-unique field that refers to a target
-     */
-    hostname: string;
-
-    /**
-     * The IPv4/IPv6 address that identifies where to reach a target
-     */
-    ip: TargetBulkUpdateResponseItem.IP;
-
-    /**
-     * Date and time at which the target was modified
-     */
-    modified_at: string;
+    ipv6?: IP.IPV6;
   }
 
-  export namespace TargetBulkUpdateResponseItem {
+  export namespace IP {
     /**
-     * The IPv4/IPv6 address that identifies where to reach a target
+     * The target's IPv4 address
      */
-    export interface IP {
+    export interface IPV4 {
       /**
-       * The target's IPv4 address
+       * IP address of the target
        */
-      ipv4?: IP.IPV4;
+      ip_addr?: string;
 
       /**
-       * The target's IPv6 address
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
-      ipv6?: IP.IPV6;
+      virtual_network_id?: string;
     }
 
-    export namespace IP {
+    /**
+     * The target's IPv6 address
+     */
+    export interface IPV6 {
       /**
-       * The target's IPv4 address
+       * IP address of the target
        */
-      export interface IPV4 {
-        /**
-         * IP address of the target
-         */
-        ip_addr?: string;
-
-        /**
-         * (optional) Private virtual network identifier for the target. If omitted, the
-         * default virtual network ID will be used.
-         */
-        virtual_network_id?: string;
-      }
+      ip_addr?: string;
 
       /**
-       * The target's IPv6 address
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
-      export interface IPV6 {
-        /**
-         * IP address of the target
-         */
-        ip_addr?: string;
-
-        /**
-         * (optional) Private virtual network identifier for the target. If omitted, the
-         * default virtual network ID will be used.
-         */
-        virtual_network_id?: string;
-      }
+      virtual_network_id?: string;
     }
   }
 }
@@ -925,6 +930,7 @@ export declare namespace Targets {
     type TargetBulkUpdateResponse as TargetBulkUpdateResponse,
     type TargetGetResponse as TargetGetResponse,
     type TargetListResponsesV4PagePaginationArray as TargetListResponsesV4PagePaginationArray,
+    type TargetBulkUpdateResponsesSinglePage as TargetBulkUpdateResponsesSinglePage,
     type TargetCreateParams as TargetCreateParams,
     type TargetUpdateParams as TargetUpdateParams,
     type TargetListParams as TargetListParams,
