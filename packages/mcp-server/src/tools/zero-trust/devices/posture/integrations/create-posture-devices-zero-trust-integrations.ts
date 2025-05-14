@@ -206,7 +206,7 @@ export const tool: Tool = {
           'uptycs',
           'intune',
           'kolide',
-          'tanium',
+          'tanium_s2s',
           'sentinelone_s2s',
           'custom_s2s',
         ],

@@ -172,10 +172,6 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   properties: {
-                    class_name: {
-                      type: 'string',
-                      description: 'The exported class name of the Durable Object.',
-                    },
                     name: {
                       type: 'string',
                       description: 'A JavaScript variable name for the binding.',
@@ -184,6 +180,10 @@ export const tool: Tool = {
                       type: 'string',
                       description: 'The kind of resource that the binding provides.',
                       enum: ['durable_object_namespace'],
+                    },
+                    class_name: {
+                      type: 'string',
+                      description: 'The exported class name of the Durable Object.',
                     },
                     environment: {
                       type: 'string',
@@ -199,7 +199,7 @@ export const tool: Tool = {
                         'The script where the Durable Object is defined, if it is external to this Worker.',
                     },
                   },
-                  required: ['class_name', 'name', 'type'],
+                  required: ['name', 'type'],
                 },
                 {
                   type: 'object',
@@ -600,6 +600,27 @@ export const tool: Tool = {
                 type: 'number',
                 description:
                   'The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.',
+              },
+              logs: {
+                type: 'object',
+                description: 'Log settings for the Worker.',
+                properties: {
+                  enabled: {
+                    type: 'boolean',
+                    description: 'Whether logs are enabled for the Worker.',
+                  },
+                  invocation_logs: {
+                    type: 'boolean',
+                    description:
+                      'Whether [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs) are enabled for the Worker.',
+                  },
+                  head_sampling_rate: {
+                    type: 'number',
+                    description:
+                      'The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.',
+                  },
+                },
+                required: ['enabled', 'invocation_logs'],
               },
             },
             required: ['enabled'],

@@ -21,4 +21,4 @@ export {
   type ConfigurationEditParams,
   type ConfigurationGetParams,
 } from './configurations';
-export { CustomCertificate } from './custom-certificate';
+export { CustomCertificate, type CustomCertificateGetParams } from './custom-certificate';

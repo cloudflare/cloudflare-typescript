@@ -131,7 +131,7 @@ export const tool: Tool = {
             properties: {
               id: {
                 type: 'string',
-                description: 'UUID of Access List',
+                description: 'UUID of Access List.',
               },
             },
             required: ['id'],

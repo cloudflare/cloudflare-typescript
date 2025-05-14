@@ -53,7 +53,7 @@ export interface StatusEditParams {
   workflow_name: string;
 
   /**
-   * Body param: Possible actions to apply to instance
+   * Body param: Possible actions to apply to instance.
    */
   status: 'resume' | 'pause' | 'terminate';
 }

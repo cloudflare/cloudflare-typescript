@@ -25,6 +25,10 @@ export const tool: Tool = {
       per_page: {
         type: 'number',
       },
+      search: {
+        type: 'string',
+        description: 'Filter workflows by name.',
+      },
     },
   },
 };

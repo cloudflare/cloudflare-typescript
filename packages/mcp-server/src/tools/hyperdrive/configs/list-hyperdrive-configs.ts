@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_hyperdrive_configs',
-  description: 'Returns a list of Hyperdrives',
+  description: 'Returns a list of Hyperdrives.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Define configurations using a unique string identifier.',
       },
     },
   },

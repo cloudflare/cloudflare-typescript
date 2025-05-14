@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'submit_brand_protection',
-  description: 'Submit suspicious URL for scanning',
+  description: 'Submit suspicious URL for scanning.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       url: {
         type: 'string',
-        description: 'URL(s) to filter submissions results by',
+        description: 'URL(s) to filter submissions results by.',
       },
     },
   },

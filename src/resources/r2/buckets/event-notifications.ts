@@ -207,7 +207,8 @@ export interface EventNotificationUpdateParams {
   rules?: Array<EventNotificationUpdateParams.Rule>;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -251,7 +252,8 @@ export interface EventNotificationDeleteParams {
   bucket_name: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -263,7 +265,8 @@ export interface EventNotificationGetParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

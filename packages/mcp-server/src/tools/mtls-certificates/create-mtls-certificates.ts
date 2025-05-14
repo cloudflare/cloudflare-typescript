@@ -34,7 +34,8 @@ export const tool: Tool = {
       },
       private_key: {
         type: 'string',
-        description: 'The private key for the certificate',
+        description:
+          "The private key for the certificate. This field is only needed for specific use cases such as using a custom certificate with Zero Trust's block page.",
       },
     },
   },

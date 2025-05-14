@@ -18,16 +18,16 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'number',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       isPublic: {
         type: 'boolean',
         description:
-          'If true, then anyone can search the dataset. If false, then its limited to the account. ',
+          'If true, then anyone can search the dataset. If false, then its limited to the account.',
       },
       name: {
         type: 'string',
-        description: 'Used to describe the dataset within the account context',
+        description: 'Used to describe the dataset within the account context.',
       },
     },
   },

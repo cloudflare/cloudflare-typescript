@@ -18,15 +18,15 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'number',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       dataset_id: {
         type: 'string',
-        description: 'Dataset ID',
+        description: 'Dataset ID.',
       },
       event_id: {
         type: 'string',
-        description: 'Event ID',
+        description: 'Event ID.',
       },
     },
   },

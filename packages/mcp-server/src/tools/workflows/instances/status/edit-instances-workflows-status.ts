@@ -27,7 +27,7 @@ export const tool: Tool = {
       },
       status: {
         type: 'string',
-        description: 'Possible actions to apply to instance',
+        description: 'Possible actions to apply to instance.',
         enum: ['resume', 'pause', 'terminate'],
       },
     },

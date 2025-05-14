@@ -36,7 +36,7 @@ export const tool: Tool = {
       },
       jurisdiction: {
         type: 'string',
-        description: 'Creates the bucket in the provided jurisdiction.',
+        description: 'Jurisdiction where objects in this bucket are guaranteed to be stored.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },

@@ -24,6 +24,11 @@ export const tool: Tool = {
         type: 'number',
         description: 'Cache TTL default is 5s. Set to 0 to disable.',
       },
+      actionTimeout: {
+        type: 'number',
+        description:
+          'The maximum duration allowed for the browser action to complete after the page has loaded (such as taking screenshots, extracting content, or generating PDFs). If this time limit is exceeded, the action stops and returns a timeout error.',
+      },
       addScriptTag: {
         type: 'array',
         description: 'Adds a `<script>` tag into the page with the desired URL or content.',

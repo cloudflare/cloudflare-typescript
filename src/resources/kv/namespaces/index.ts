@@ -16,7 +16,6 @@ export { Metadata, type MetadataGetResponse, type MetadataGetParams } from './me
 export {
   Namespaces,
   type Namespace,
-  type NamespaceUpdateResponse,
   type NamespaceDeleteResponse,
   type NamespaceCreateParams,
   type NamespaceUpdateParams,

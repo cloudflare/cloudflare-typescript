@@ -18,11 +18,11 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'number',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       category_id: {
         type: 'string',
-        description: 'Category UUID',
+        description: 'Category UUID.',
       },
     },
   },

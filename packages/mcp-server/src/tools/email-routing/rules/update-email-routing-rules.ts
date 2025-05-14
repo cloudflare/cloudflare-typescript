@@ -79,7 +79,7 @@ export const tool: Tool = {
           type: {
             type: 'string',
             description: 'Type of matcher.',
-            enum: ['literal'],
+            enum: ['all', 'literal'],
           },
           field: {
             type: 'string',

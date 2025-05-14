@@ -8,7 +8,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Subnets extends APIResource {
   /**
-   * Get ASN Subnets
+   * Get ASN Subnets.
    *
    * @example
    * ```ts
@@ -52,7 +52,7 @@ export interface SubnetGetResponse {
 
 export interface SubnetGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

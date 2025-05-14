@@ -37,7 +37,7 @@ export namespace IndicatorTypeListResponse {
 
 export interface IndicatorTypeListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

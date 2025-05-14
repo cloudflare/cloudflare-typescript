@@ -59,6 +59,11 @@ export const tool: Tool = {
         type: 'boolean',
         description: 'Do not show any Cloudflare branding on the widget (ENT only).\n',
       },
+      region: {
+        type: 'string',
+        description: 'Region where this widget can be used. This cannot be changed after creation.',
+        enum: ['world', 'china'],
+      },
     },
     $defs: {
       widget_domain: {

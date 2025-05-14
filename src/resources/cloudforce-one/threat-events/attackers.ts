@@ -37,7 +37,7 @@ export namespace AttackerListResponse {
 
 export interface AttackerListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

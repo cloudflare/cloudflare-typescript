@@ -75,8 +75,8 @@ export const tool: Tool = {
       },
       region: {
         type: 'string',
-        description: 'Region where this widget can be used.',
-        enum: ['world'],
+        description: 'Region where this widget can be used. This cannot be changed after creation.',
+        enum: ['world', 'china'],
       },
     },
     $defs: {

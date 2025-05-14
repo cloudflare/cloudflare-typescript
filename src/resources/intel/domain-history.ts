@@ -37,11 +37,19 @@ export interface DomainHistory {
 
 export namespace DomainHistory {
   export interface Categorization {
-    categories?: Array<unknown>;
+    categories?: Array<Categorization.Category>;
 
     end?: string;
 
     start?: string;
+  }
+
+  export namespace Categorization {
+    export interface Category {
+      id?: number;
+
+      name?: string;
+    }
   }
 }
 
@@ -49,7 +57,7 @@ export type DomainHistoryGetResponse = Array<DomainHistory>;
 
 export interface DomainHistoryGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
