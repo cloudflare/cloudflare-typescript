@@ -72,7 +72,7 @@ export namespace DNS {
 
 export interface DNSListParams extends V4PagePaginationParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

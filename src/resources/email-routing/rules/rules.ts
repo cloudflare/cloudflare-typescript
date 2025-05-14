@@ -219,7 +219,7 @@ export interface Matcher {
   /**
    * Type of matcher.
    */
-  type: 'literal';
+  type: 'all' | 'literal';
 
   /**
    * Field for type matcher.
@@ -239,7 +239,7 @@ export interface MatcherParam {
   /**
    * Type of matcher.
    */
-  type: 'literal';
+  type: 'all' | 'literal';
 
   /**
    * Field for type matcher.

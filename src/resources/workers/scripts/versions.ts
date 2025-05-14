@@ -348,11 +348,6 @@ export namespace VersionCreateParams {
 
     export interface WorkersBindingKindDurableObjectNamespace {
       /**
-       * The exported class name of the Durable Object.
-       */
-      class_name: string;
-
-      /**
        * A JavaScript variable name for the binding.
        */
       name: string;
@@ -361,6 +356,11 @@ export namespace VersionCreateParams {
        * The kind of resource that the binding provides.
        */
       type: 'durable_object_namespace';
+
+      /**
+       * The exported class name of the Durable Object.
+       */
+      class_name?: string;
 
       /**
        * The environment of the script_name to bind to.

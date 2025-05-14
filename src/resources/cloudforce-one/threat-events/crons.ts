@@ -49,14 +49,14 @@ export interface CronEditResponse {
 
 export interface CronListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface CronEditParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

@@ -7,7 +7,7 @@ export class IPs extends APIResource {
   /**
    * Gets the geolocation, ASN, infrastructure type of the ASN, and any security
    * threat categories of an IP address. **Must provide ip query parameters.** For
-   * example, `/intel/ip?ipv4=1.1.1.1` or `/intel/ip?ipv6=2001:db8::1`
+   * example, `/intel/ip?ipv4=1.1.1.1` or `/intel/ip?ipv6=2001:db8::1`.
    *
    * @example
    * ```ts
@@ -71,7 +71,7 @@ export type IPGetResponse = Array<IP>;
 
 export interface IPGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

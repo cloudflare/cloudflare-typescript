@@ -305,7 +305,7 @@ export interface LogpushJob {
    * Log Delivery jobs. Currently, Edge Log Delivery is only supported for the
    * `http_requests` dataset.
    */
-  kind?: 'edge' | null;
+  kind?: 'edge';
 
   /**
    * Records the last time for which logs have been successfully pushed. If the last
@@ -608,7 +608,7 @@ export interface JobCreateParams {
    * Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only
    * supported for the `http_requests` dataset.
    */
-  kind?: 'edge' | null;
+  kind?: 'edge';
 
   /**
    * @deprecated Body param: This field is deprecated. Use `output_options` instead.
@@ -711,7 +711,7 @@ export interface JobUpdateParams {
    * Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only
    * supported for the `http_requests` dataset.
    */
-  kind?: 'edge' | null;
+  kind?: 'edge';
 
   /**
    * @deprecated Body param: This field is deprecated. Use `output_options` instead.

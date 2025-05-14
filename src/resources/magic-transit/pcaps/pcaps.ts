@@ -243,6 +243,11 @@ export namespace PCAPCreateResponse {
     filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
+     * The number of packets captured.
+     */
+    packets_captured?: number;
+
+    /**
      * The status of the packet capture request.
      */
     status?:
@@ -254,6 +259,12 @@ export namespace PCAPCreateResponse {
       | 'conversion_running'
       | 'complete'
       | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when stopping the packet capture was requested. This
+     * field only applies to `full` packet captures.
+     */
+    stop_requested?: string;
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.
@@ -317,6 +328,11 @@ export namespace PCAPListResponse {
     filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
+     * The number of packets captured.
+     */
+    packets_captured?: number;
+
+    /**
      * The status of the packet capture request.
      */
     status?:
@@ -328,6 +344,12 @@ export namespace PCAPListResponse {
       | 'conversion_running'
       | 'complete'
       | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when stopping the packet capture was requested. This
+     * field only applies to `full` packet captures.
+     */
+    stop_requested?: string;
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.
@@ -391,6 +413,11 @@ export namespace PCAPGetResponse {
     filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
+     * The number of packets captured.
+     */
+    packets_captured?: number;
+
+    /**
      * The status of the packet capture request.
      */
     status?:
@@ -402,6 +429,12 @@ export namespace PCAPGetResponse {
       | 'conversion_running'
       | 'complete'
       | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when stopping the packet capture was requested. This
+     * field only applies to `full` packet captures.
+     */
+    stop_requested?: string;
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.

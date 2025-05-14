@@ -36,7 +36,7 @@ export class ASN extends APIResource {
 
 export interface ASNGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

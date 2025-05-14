@@ -75,7 +75,7 @@ export interface RawGetResponse {
 
 export interface RawEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -97,7 +97,7 @@ export interface RawEditParams {
 
 export interface RawGetParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

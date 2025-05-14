@@ -277,11 +277,6 @@ export namespace ScriptAndVersionSettingEditResponse {
 
   export interface WorkersBindingKindDurableObjectNamespace {
     /**
-     * The exported class name of the Durable Object.
-     */
-    class_name: string;
-
-    /**
      * A JavaScript variable name for the binding.
      */
     name: string;
@@ -290,6 +285,11 @@ export namespace ScriptAndVersionSettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'durable_object_namespace';
+
+    /**
+     * The exported class name of the Durable Object.
+     */
+    class_name?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -620,6 +620,35 @@ export namespace ScriptAndVersionSettingEditResponse {
      * Default is 1.
      */
     head_sampling_rate?: number | null;
+
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: Observability.Logs | null;
+  }
+
+  export namespace Observability {
+    /**
+     * Log settings for the Worker.
+     */
+    export interface Logs {
+      /**
+       * Whether logs are enabled for the Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether
+       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+       * are enabled for the Worker.
+       */
+      invocation_logs: boolean;
+
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+    }
   }
 
   /**
@@ -853,11 +882,6 @@ export namespace ScriptAndVersionSettingGetResponse {
 
   export interface WorkersBindingKindDurableObjectNamespace {
     /**
-     * The exported class name of the Durable Object.
-     */
-    class_name: string;
-
-    /**
      * A JavaScript variable name for the binding.
      */
     name: string;
@@ -866,6 +890,11 @@ export namespace ScriptAndVersionSettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'durable_object_namespace';
+
+    /**
+     * The exported class name of the Durable Object.
+     */
+    class_name?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -1196,6 +1225,35 @@ export namespace ScriptAndVersionSettingGetResponse {
      * Default is 1.
      */
     head_sampling_rate?: number | null;
+
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: Observability.Logs | null;
+  }
+
+  export namespace Observability {
+    /**
+     * Log settings for the Worker.
+     */
+    export interface Logs {
+      /**
+       * Whether logs are enabled for the Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether
+       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+       * are enabled for the Worker.
+       */
+      invocation_logs: boolean;
+
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+    }
   }
 
   /**
@@ -1440,11 +1498,6 @@ export namespace ScriptAndVersionSettingEditParams {
 
     export interface WorkersBindingKindDurableObjectNamespace {
       /**
-       * The exported class name of the Durable Object.
-       */
-      class_name: string;
-
-      /**
        * A JavaScript variable name for the binding.
        */
       name: string;
@@ -1453,6 +1506,11 @@ export namespace ScriptAndVersionSettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'durable_object_namespace';
+
+      /**
+       * The exported class name of the Durable Object.
+       */
+      class_name?: string;
 
       /**
        * The environment of the script_name to bind to.
@@ -1800,6 +1858,35 @@ export namespace ScriptAndVersionSettingEditParams {
        * Default is 1.
        */
       head_sampling_rate?: number | null;
+
+      /**
+       * Log settings for the Worker.
+       */
+      logs?: Observability.Logs | null;
+    }
+
+    export namespace Observability {
+      /**
+       * Log settings for the Worker.
+       */
+      export interface Logs {
+        /**
+         * Whether logs are enabled for the Worker.
+         */
+        enabled: boolean;
+
+        /**
+         * Whether
+         * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+         * are enabled for the Worker.
+         */
+        invocation_logs: boolean;
+
+        /**
+         * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+         */
+        head_sampling_rate?: number | null;
+      }
     }
 
     /**

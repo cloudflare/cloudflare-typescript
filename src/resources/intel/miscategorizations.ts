@@ -71,7 +71,7 @@ export namespace MiscategorizationCreateResponse {
 
 export interface MiscategorizationCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

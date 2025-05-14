@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as CustomCertificateAPI from './custom-certificate';
-import { CustomCertificate } from './custom-certificate';
+import { CustomCertificate, CustomCertificateGetParams } from './custom-certificate';
 
 export class Configurations extends APIResource {
   customCertificate: CustomCertificateAPI.CustomCertificate = new CustomCertificateAPI.CustomCertificate(
@@ -129,7 +129,7 @@ export interface AntiVirusSettings {
    * Configure a message to display on the user's device when an antivirus search is
    * performed.
    */
-  notification_settings?: NotificationSettings | null;
+  notification_settings?: NotificationSettings;
 }
 
 /**
@@ -155,7 +155,7 @@ export interface AntiVirusSettingsParam {
    * Configure a message to display on the user's device when an antivirus search is
    * performed.
    */
-  notification_settings?: NotificationSettingsParam | null;
+  notification_settings?: NotificationSettingsParam;
 }
 
 /**
@@ -434,7 +434,7 @@ export interface GatewayConfigurationSettings {
   /**
    * Activity log settings.
    */
-  activity_log?: ActivityLogSettings | null;
+  activity_log?: ActivityLogSettings;
 
   /**
    * Anti-virus settings.
@@ -444,29 +444,29 @@ export interface GatewayConfigurationSettings {
   /**
    * Block page layout settings.
    */
-  block_page?: BlockPageSettings | null;
+  block_page?: BlockPageSettings;
 
   /**
    * DLP body scanning settings.
    */
-  body_scanning?: BodyScanningSettings | null;
+  body_scanning?: BodyScanningSettings;
 
   /**
    * Browser isolation settings.
    */
-  browser_isolation?: BrowserIsolationSettings | null;
+  browser_isolation?: BrowserIsolationSettings;
 
   /**
    * Certificate settings for Gateway TLS interception. If not specified, the
    * Cloudflare Root CA will be used.
    */
-  certificate?: GatewayConfigurationSettings.Certificate | null;
+  certificate?: GatewayConfigurationSettings.Certificate;
 
   /**
    * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
    * `certificate`)
    */
-  custom_certificate?: CustomCertificateSettings | null;
+  custom_certificate?: CustomCertificateSettings;
 
   /**
    * Extended e-mail matching settings.
@@ -476,27 +476,27 @@ export interface GatewayConfigurationSettings {
   /**
    * FIPS settings.
    */
-  fips?: FipsSettings | null;
+  fips?: FipsSettings;
 
   /**
    * Setting to enable host selector in egress policies.
    */
-  host_selector?: GatewayConfigurationSettings.HostSelector | null;
+  host_selector?: GatewayConfigurationSettings.HostSelector;
 
   /**
    * Protocol Detection settings.
    */
-  protocol_detection?: ProtocolDetection | null;
+  protocol_detection?: ProtocolDetection;
 
   /**
    * Sandbox settings.
    */
-  sandbox?: GatewayConfigurationSettings.Sandbox | null;
+  sandbox?: GatewayConfigurationSettings.Sandbox;
 
   /**
    * TLS interception settings.
    */
-  tls_decrypt?: TLSSettings | null;
+  tls_decrypt?: TLSSettings;
 }
 
 export namespace GatewayConfigurationSettings {
@@ -546,7 +546,7 @@ export interface GatewayConfigurationSettingsParam {
   /**
    * Activity log settings.
    */
-  activity_log?: ActivityLogSettingsParam | null;
+  activity_log?: ActivityLogSettingsParam;
 
   /**
    * Anti-virus settings.
@@ -556,29 +556,29 @@ export interface GatewayConfigurationSettingsParam {
   /**
    * Block page layout settings.
    */
-  block_page?: BlockPageSettingsParam | null;
+  block_page?: BlockPageSettingsParam;
 
   /**
    * DLP body scanning settings.
    */
-  body_scanning?: BodyScanningSettingsParam | null;
+  body_scanning?: BodyScanningSettingsParam;
 
   /**
    * Browser isolation settings.
    */
-  browser_isolation?: BrowserIsolationSettingsParam | null;
+  browser_isolation?: BrowserIsolationSettingsParam;
 
   /**
    * Certificate settings for Gateway TLS interception. If not specified, the
    * Cloudflare Root CA will be used.
    */
-  certificate?: GatewayConfigurationSettingsParam.Certificate | null;
+  certificate?: GatewayConfigurationSettingsParam.Certificate;
 
   /**
    * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
    * `certificate`)
    */
-  custom_certificate?: CustomCertificateSettingsParam | null;
+  custom_certificate?: CustomCertificateSettingsParam;
 
   /**
    * Extended e-mail matching settings.
@@ -588,27 +588,27 @@ export interface GatewayConfigurationSettingsParam {
   /**
    * FIPS settings.
    */
-  fips?: FipsSettingsParam | null;
+  fips?: FipsSettingsParam;
 
   /**
    * Setting to enable host selector in egress policies.
    */
-  host_selector?: GatewayConfigurationSettingsParam.HostSelector | null;
+  host_selector?: GatewayConfigurationSettingsParam.HostSelector;
 
   /**
    * Protocol Detection settings.
    */
-  protocol_detection?: ProtocolDetectionParam | null;
+  protocol_detection?: ProtocolDetectionParam;
 
   /**
    * Sandbox settings.
    */
-  sandbox?: GatewayConfigurationSettingsParam.Sandbox | null;
+  sandbox?: GatewayConfigurationSettingsParam.Sandbox;
 
   /**
    * TLS interception settings.
    */
-  tls_decrypt?: TLSSettingsParam | null;
+  tls_decrypt?: TLSSettingsParam;
 }
 
 export namespace GatewayConfigurationSettingsParam {
@@ -839,5 +839,8 @@ export declare namespace Configurations {
     type ConfigurationGetParams as ConfigurationGetParams,
   };
 
-  export { CustomCertificate as CustomCertificate };
+  export {
+    CustomCertificate as CustomCertificate,
+    type CustomCertificateGetParams as CustomCertificateGetParams,
+  };
 }

@@ -48,6 +48,14 @@ export interface SnapshotCreateParams {
   cacheTTL?: number;
 
   /**
+   * Body param: The maximum duration allowed for the browser action to complete
+   * after the page has loaded (such as taking screenshots, extracting content, or
+   * generating PDFs). If this time limit is exceeded, the action stops and returns a
+   * timeout error.
+   */
+  actionTimeout?: number;
+
+  /**
    * Body param: Adds a `<script>` tag into the page with the desired URL or content.
    */
   addScriptTag?: Array<SnapshotCreateParams.AddScriptTag>;

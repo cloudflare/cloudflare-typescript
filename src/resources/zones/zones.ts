@@ -299,15 +299,42 @@ export interface Zone {
   owner: Zone.Owner;
 
   /**
+   * @deprecated A Zones subscription information.
+   */
+  plan: Zone.Plan;
+
+  /**
+   * Allows the customer to use a custom apex. _Tenants Only Configuration_.
+   */
+  cname_suffix?: string;
+
+  /**
    * Indicates whether the zone is only using Cloudflare DNS services. A true value
    * means the zone will not receive security or performance benefits.
    */
   paused?: boolean;
 
   /**
+   * @deprecated Legacy permissions based on legacy user membership information.
+   */
+  permissions?: Array<string>;
+
+  /**
    * The zone status on Cloudflare.
    */
   status?: 'initializing' | 'pending' | 'active' | 'moved';
+
+  /**
+   * The root organizational unit that this zone belongs to (such as a tenant or
+   * organization).
+   */
+  tenant?: Zone.Tenant;
+
+  /**
+   * The immediate parent organizational unit that this zone belongs to (such as
+   * under a tenant or sub-organization).
+   */
+  tenant_unit?: Zone.TenantUnit;
 
   /**
    * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
@@ -398,6 +425,88 @@ export namespace Zone {
      * The type of owner
      */
     type?: string;
+  }
+
+  /**
+   * @deprecated A Zones subscription information.
+   */
+  export interface Plan {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * States if the subscription can be activated.
+     */
+    can_subscribe?: boolean;
+
+    /**
+     * The denomination of the customer.
+     */
+    currency?: string;
+
+    /**
+     * If this Zone is managed by another company.
+     */
+    externally_managed?: boolean;
+
+    /**
+     * How often the customer is billed.
+     */
+    frequency?: string;
+
+    /**
+     * States if the subscription active.
+     */
+    is_subscribed?: boolean;
+
+    /**
+     * If the legacy discount applies to this Zone.
+     */
+    legacy_discount?: boolean;
+
+    /**
+     * The legacy name of the plan.
+     */
+    legacy_id?: string;
+
+    /**
+     * Name of the owner
+     */
+    name?: string;
+
+    /**
+     * How much the customer is paying.
+     */
+    price?: number;
+  }
+
+  /**
+   * The root organizational unit that this zone belongs to (such as a tenant or
+   * organization).
+   */
+  export interface Tenant {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * The name of the Tenant account.
+     */
+    name?: string;
+  }
+
+  /**
+   * The immediate parent organizational unit that this zone belongs to (such as
+   * under a tenant or sub-organization).
+   */
+  export interface TenantUnit {
+    /**
+     * Identifier
+     */
+    id?: string;
   }
 }
 

@@ -173,7 +173,7 @@ export interface CategoryGetResponse {
 
 export interface CategoryCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -200,21 +200,21 @@ export interface CategoryCreateParams {
 
 export interface CategoryListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface CategoryDeleteParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface CategoryEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -241,7 +241,7 @@ export interface CategoryEditParams {
 
 export interface CategoryGetParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

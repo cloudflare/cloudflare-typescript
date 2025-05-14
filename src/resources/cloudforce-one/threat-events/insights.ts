@@ -147,7 +147,7 @@ export interface InsightGetResponse {
 
 export interface InsightCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -159,14 +159,14 @@ export interface InsightCreateParams {
 
 export interface InsightDeleteParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface InsightEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -178,7 +178,7 @@ export interface InsightEditParams {
 
 export interface InsightGetParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

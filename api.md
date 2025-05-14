@@ -2238,13 +2238,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/kv/namespaces/namespaces.ts">Namespace</a></code>
-- <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceUpdateResponse</a></code>
 - <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/storage/kv/namespaces">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">create</a>({ ...params }) -> Namespace</code>
-- <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">update</a>(namespaceId, { ...params }) -> NamespaceUpdateResponse | null</code>
+- <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">update</a>(namespaceId, { ...params }) -> Namespace</code>
 - <code title="get /accounts/{account_id}/storage/kv/namespaces">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">list</a>({ ...params }) -> NamespacesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">delete</a>(namespaceId, { ...params }) -> NamespaceDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">get</a>(namespaceId, { ...params }) -> Namespace</code>
@@ -4591,6 +4590,19 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">SchemaData</a></code>
 - <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">SchemaHTTP</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/dex_tests">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">create</a>({ ...params }) -> DEXTestCreateResponse</code>
+- <code title="put /accounts/{account_id}/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">update</a>(dexTestId, { ...params }) -> DEXTestUpdateResponse</code>
+- <code title="get /accounts/{account_id}/devices/dex_tests">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">list</a>({ ...params }) -> DEXTestListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">delete</a>(dexTestId, { ...params }) -> DEXTestDeleteResponse</code>
+- <code title="get /accounts/{account_id}/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">get</a>(dexTestId, { ...params }) -> DEXTestGetResponse</code>
 
 ### Networks
 
@@ -5758,6 +5770,10 @@ Methods:
 - <code title="get /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">get</a>({ ...params }) -> ConfigurationGetResponse</code>
 
 #### CustomCertificate
+
+Methods:
+
+- <code title="get /accounts/{account_id}/gateway/configuration/custom_certificate">client.zeroTrust.gateway.configurations.customCertificate.<a href="./src/resources/zero-trust/gateway/configurations/custom-certificate.ts">get</a>({ ...params }) -> CustomCertificateSettings</code>
 
 ### Lists
 

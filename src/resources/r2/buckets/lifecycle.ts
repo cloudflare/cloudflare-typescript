@@ -222,7 +222,8 @@ export interface LifecycleUpdateParams {
   rules?: Array<LifecycleUpdateParams.Rule>;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -372,7 +373,8 @@ export interface LifecycleGetParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

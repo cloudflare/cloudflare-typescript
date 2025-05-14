@@ -37,7 +37,7 @@ export interface RelateDeleteResponse {
 
 export interface RelateDeleteParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

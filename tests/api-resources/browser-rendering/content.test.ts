@@ -25,6 +25,7 @@ describe('resource content', () => {
     const response = await client.browserRendering.content.create({
       account_id: 'account_id',
       cacheTTL: 86400,
+      actionTimeout: 300000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
       addStyleTag: [{ content: 'content', url: 'url' }],
       allowRequestPattern: ['string'],

@@ -172,7 +172,8 @@ export interface CORSUpdateParams {
   rules?: Array<CORSUpdateParams.Rule>;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -240,7 +241,8 @@ export interface CORSDeleteParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -252,7 +254,8 @@ export interface CORSGetParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

@@ -337,7 +337,8 @@ export interface CustomCreateParams {
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -361,7 +362,8 @@ export interface CustomUpdateParams {
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -373,7 +375,8 @@ export interface CustomListParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -385,7 +388,8 @@ export interface CustomDeleteParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -397,7 +401,8 @@ export interface CustomGetParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

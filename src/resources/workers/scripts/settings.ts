@@ -77,12 +77,12 @@ export interface SettingEditParams {
   /**
    * Body param: Observability settings for the Worker.
    */
-  observability?: SettingEditParams.Observability;
+  observability?: SettingEditParams.Observability | null;
 
   /**
    * Body param: List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
+  tail_consumers?: Array<TailAPI.ConsumerScriptParam> | null;
 }
 
 export namespace SettingEditParams {
@@ -100,6 +100,35 @@ export namespace SettingEditParams {
      * Default is 1.
      */
     head_sampling_rate?: number | null;
+
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: Observability.Logs | null;
+  }
+
+  export namespace Observability {
+    /**
+     * Log settings for the Worker.
+     */
+    export interface Logs {
+      /**
+       * Whether logs are enabled for the Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether
+       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+       * are enabled for the Worker.
+       */
+      invocation_logs: boolean;
+
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+    }
   }
 }
 

@@ -12,11 +12,7 @@ export class Settings extends APIResource {
    * ```ts
    * const response = await client.zones.settings.edit(
    *   'always_online',
-   *   {
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     id: '0rtt',
-   *     value: 'on',
-   *   },
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -84,23 +80,6 @@ export interface AdvancedDDoS {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * Advanced protection from Distributed Denial of Service (DDoS) attacks on your
- * website. This is an uneditable value that is 'on' in the case of Business and
- * Enterprise zones.
- */
-export interface AdvancedDDoSParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'advanced_ddos';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
 }
 
 /**
@@ -172,25 +151,6 @@ export interface AlwaysOnline {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * When enabled, Cloudflare serves limited copies of web pages available from the
- * [Internet Archive's Wayback Machine](https://archive.org/web/) if your server is
- * offline. Refer to
- * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
- * more information.
- */
-export interface AlwaysOnlineParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'always_online';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
 }
 
 export interface AlwaysUseHTTPS {
@@ -334,22 +294,6 @@ export interface Brotli {
   modified_on?: string | null;
 }
 
-/**
- * When the client requesting an asset supports the Brotli compression algorithm,
- * Cloudflare will serve a Brotli compressed version of the asset.
- */
-export interface BrotliParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'brotli';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'off' | 'on';
-}
-
 export interface BrowserCacheTTL {
   /**
    * Control how long resources cached by client browsers remain valid.
@@ -485,39 +429,6 @@ export interface ChallengeTTL {
 }
 
 /**
- * Specify how long a visitor is allowed access to your site after successfully
- * completing a challenge (such as a CAPTCHA). After the TTL has expired the
- * visitor will have to complete a new challenge. We recommend a 15 - 45 minute
- * setting and will attempt to honor any setting above 45 minutes.
- * (https://support.cloudflare.com/hc/en-us/articles/200170136).
- */
-export interface ChallengeTTLParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'challenge_ttl';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value:
-    | 300
-    | 900
-    | 1800
-    | 2700
-    | 3600
-    | 7200
-    | 10800
-    | 14400
-    | 28800
-    | 57600
-    | 86400
-    | 604800
-    | 2592000
-    | 31536000;
-}
-
-/**
  * An allowlist of ciphers for TLS termination. These ciphers must be in the
  * BoringSSL format.
  */
@@ -542,22 +453,6 @@ export interface Ciphers {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * An allowlist of ciphers for TLS termination. These ciphers must be in the
- * BoringSSL format.
- */
-export interface CiphersParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'ciphers';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: Array<string>;
 }
 
 /**
@@ -599,26 +494,6 @@ export interface DevelopmentMode {
 }
 
 /**
- * Development Mode temporarily allows you to enter development mode for your
- * websites if you need to make changes to your site. This will bypass Cloudflare's
- * accelerated cache and slow down your site, but is useful if you are making
- * changes to cacheable content (like images, css, or JavaScript) and would like to
- * see those changes right away. Once entered, development mode will last for 3
- * hours and then automatically toggle off.
- */
-export interface DevelopmentModeParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'development_mode';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-/**
  * When enabled, Cloudflare will attempt to speed up overall page loads by serving
  * `103` responses with `Link` headers from the final response. Refer to
  * [Early Hints](https://developers.cloudflare.com/cache/about/early-hints) for
@@ -645,24 +520,6 @@ export interface EarlyHints {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * When enabled, Cloudflare will attempt to speed up overall page loads by serving
- * `103` responses with `Link` headers from the final response. Refer to
- * [Early Hints](https://developers.cloudflare.com/cache/about/early-hints) for
- * more information.
- */
-export interface EarlyHintsParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'early_hints';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
 }
 
 export interface EmailObfuscation {
@@ -746,23 +603,6 @@ export interface H2Prioritization {
 }
 
 /**
- * HTTP/2 Edge Prioritization optimises the delivery of resources served through
- * HTTP/2 to improve page load performance. It also supports fine control of
- * content delivery when used in conjunction with Workers.
- */
-export interface H2PrioritizationParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'h2_prioritization';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off' | 'custom';
-}
-
-/**
  * When enabled, the Hotlink Protection option ensures that other sites cannot suck
  * up your bandwidth by building pages that use images hosted on your site. Anytime
  * a request for an image on your site hits Cloudflare, we check to ensure that
@@ -795,27 +635,6 @@ export interface HotlinkProtection {
 }
 
 /**
- * When enabled, the Hotlink Protection option ensures that other sites cannot suck
- * up your bandwidth by building pages that use images hosted on your site. Anytime
- * a request for an image on your site hits Cloudflare, we check to ensure that
- * it's not another site requesting them. People will still be able to download and
- * view images from your page, but other sites won't be able to steal them for use
- * on their own pages.
- * (https://support.cloudflare.com/hc/en-us/articles/200170026).
- */
-export interface HotlinkProtectionParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'hotlink_protection';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-/**
  * HTTP2 enabled for this zone.
  */
 export interface HTTP2 {
@@ -839,21 +658,6 @@ export interface HTTP2 {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * HTTP2 enabled for this zone.
- */
-export interface HTTP2Param {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'http2';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
 }
 
 /**
@@ -883,25 +687,10 @@ export interface HTTP3 {
 }
 
 /**
- * HTTP3 enabled for this zone.
- */
-export interface HTTP3Param {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'http3';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-/**
- * Image Resizing provides on-demand resizing, conversion and optimisation for
- * images served through Cloudflare's network. Refer to the
- * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
- * more information.
+ * Image Transformations provides on-demand resizing, conversion and optimization
+ * for images served through Cloudflare's network. Refer to the
+ * [Image Transformations documentation](https://developers.cloudflare.com/images/)
+ * for more information.
  */
 export interface ImageResizing {
   /**
@@ -924,24 +713,6 @@ export interface ImageResizing {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * Image Resizing provides on-demand resizing, conversion and optimisation for
- * images served through Cloudflare's network. Refer to the
- * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
- * more information.
- */
-export interface ImageResizingParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'image_resizing';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off' | 'open';
 }
 
 export interface IPGeolocation {
@@ -998,22 +769,6 @@ export interface IPV6 {
 }
 
 /**
- * Enable IPv6 on all subdomains that are Cloudflare enabled.
- * (https://support.cloudflare.com/hc/en-us/articles/200168586).
- */
-export interface IPV6Param {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'ipv6';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'off' | 'on';
-}
-
-/**
  * Only accepts HTTPS requests that use at least the TLS protocol version
  * specified. For example, if TLS 1.1 is selected, TLS 1.0 connections will be
  * rejected, while 1.1, 1.2, and 1.3 (if enabled) will be permitted.
@@ -1039,23 +794,6 @@ export interface MinTLSVersion {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * Only accepts HTTPS requests that use at least the TLS protocol version
- * specified. For example, if TLS 1.1 is selected, TLS 1.0 connections will be
- * rejected, while 1.1, 1.2, and 1.3 (if enabled) will be permitted.
- */
-export interface MinTLSVersionParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'min_tls_version';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: '1.0' | '1.1' | '1.2' | '1.3';
 }
 
 export interface Mirage {
@@ -1121,30 +859,6 @@ export namespace NEL {
   }
 }
 
-/**
- * Enable Network Error Logging reporting on your zone. (Beta)
- */
-export interface NELParam {
-  /**
-   * Zone setting identifier.
-   */
-  id: 'nel';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: NELParam.Value;
-}
-
-export namespace NELParam {
-  /**
-   * Current value of the zone setting.
-   */
-  export interface Value {
-    enabled?: boolean;
-  }
-}
-
 export interface OpportunisticEncryption {
   /**
    * Opportunistic Encryption allows browsers to access HTTP URIs over an encrypted
@@ -1201,22 +915,6 @@ export interface OpportunisticOnion {
 }
 
 /**
- * Add an Alt-Svc header to all legitimate requests from Tor, allowing the
- * connection to use our onion services instead of exit nodes.
- */
-export interface OpportunisticOnionParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'opportunistic_onion';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-/**
  * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
  * on Cloudflare.
  */
@@ -1241,22 +939,6 @@ export interface OrangeToOrange {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
- * on Cloudflare.
- */
-export interface OrangeToOrangeParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'orange_to_orange';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
 }
 
 export interface OriginErrorPagePassThru {
@@ -1359,22 +1041,6 @@ export interface PrefetchPreload {
 }
 
 /**
- * Cloudflare will prefetch any URLs that are included in the response headers.
- * This is limited to Enterprise Zones.
- */
-export interface PrefetchPreloadParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'prefetch_preload';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-/**
  * Maximum time between two read operations from origin.
  */
 export interface ProxyReadTimeout {
@@ -1401,21 +1067,6 @@ export interface ProxyReadTimeout {
 }
 
 /**
- * Maximum time between two read operations from origin.
- */
-export interface ProxyReadTimeoutParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'proxy_read_timeout';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: number;
-}
-
-/**
  * The value set for the Pseudo IPv4 setting.
  */
 export interface PseudoIPV4 {
@@ -1439,21 +1090,6 @@ export interface PseudoIPV4 {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * The value set for the Pseudo IPv4 setting.
- */
-export interface PseudoIPV4Param {
-  /**
-   * Value of the Pseudo IPv4 setting.
-   */
-  id: 'pseudo_ipv4';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'off' | 'add_header' | 'overwrite_header';
 }
 
 export interface ResponseBuffering {
@@ -1578,65 +1214,6 @@ export namespace SecurityHeaders {
   }
 }
 
-/**
- * Cloudflare security header for a zone.
- */
-export interface SecurityHeadersParam {
-  /**
-   * ID of the zone's security header.
-   */
-  id: 'security_header';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: SecurityHeadersParam.Value;
-}
-
-export namespace SecurityHeadersParam {
-  /**
-   * Current value of the zone setting.
-   */
-  export interface Value {
-    /**
-     * Strict Transport Security.
-     */
-    strict_transport_security?: Value.StrictTransportSecurity;
-  }
-
-  export namespace Value {
-    /**
-     * Strict Transport Security.
-     */
-    export interface StrictTransportSecurity {
-      /**
-       * Whether or not strict transport security is enabled.
-       */
-      enabled?: boolean;
-
-      /**
-       * Include all subdomains for strict transport security.
-       */
-      include_subdomains?: boolean;
-
-      /**
-       * Max age in seconds of the strict transport security.
-       */
-      max_age?: number;
-
-      /**
-       * Whether or not to include 'X-Content-Type-Options: nosniff' header.
-       */
-      nosniff?: boolean;
-
-      /**
-       * Enable automatic preload of the HSTS configuration.
-       */
-      preload?: boolean;
-    }
-  }
-}
-
 export interface SecurityLevel {
   /**
    * Control options for the **Security Level** feature from the **Security** app.
@@ -1689,31 +1266,6 @@ export interface ServerSideExcludes {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * If there is sensitive content on your website that you want visible to real
- * visitors, but that you want to hide from suspicious visitors, all you have to do
- * is wrap the content with Cloudflare SSE tags. Wrap any content that you want to
- * be excluded from suspicious visitors in the following SSE tags:
- * <!--sse--><!--/sse-->. For example: <!--sse--> Bad visitors won't see my phone
- * number, 555-555-5555 <!--/sse-->. Note: SSE only will work with HTML. If you
- * have HTML minification enabled, you won't see the SSE tags in your HTML source
- * when it's served through Cloudflare. SSE will still function in this case, as
- * Cloudflare's HTML minification and SSE functionality occur on-the-fly as the
- * resource moves through our network to the visitor's computer.
- * (https://support.cloudflare.com/hc/en-us/articles/200170036).
- */
-export interface ServerSideExcludesParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'server_side_exclude';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
 }
 
 export interface SortQueryStringForCache {
@@ -1786,23 +1338,6 @@ export interface SSLRecommender {
 }
 
 /**
- * Enrollment in the SSL/TLS Recommender service which tries to detect and
- * recommend (by sending periodic emails) the most secure SSL/TLS setting your
- * origin servers support.
- */
-export interface SSLRecommenderParam {
-  /**
-   * Enrollment value for SSL/TLS Recommender.
-   */
-  id?: 'ssl_recommender';
-
-  /**
-   * ssl-recommender enrollment setting.
-   */
-  enabled?: boolean;
-}
-
-/**
  * Enables Crypto TLS 1.3 feature for a zone.
  */
 export interface TLS1_3 {
@@ -1826,21 +1361,6 @@ export interface TLS1_3 {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * Enables Crypto TLS 1.3 feature for a zone.
- */
-export interface TLS1_3Param {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'tls_1_3';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off' | 'zrt';
 }
 
 /**
@@ -1868,22 +1388,6 @@ export interface TLSClientAuth {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * TLS Client Auth requires Cloudflare to connect to your origin server using a
- * client certificate (Enterprise Only).
- */
-export interface TLSClientAuthParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'tls_client_auth';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
 }
 
 export interface TrueClientIPHeader {
@@ -1967,23 +1471,6 @@ export interface WebP {
 }
 
 /**
- * When the client requesting the image supports the WebP image codec, and WebP
- * offers a performance advantage over the original image format, Cloudflare will
- * serve a WebP version of the original image.
- */
-export interface WebPParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'webp';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'off' | 'on';
-}
-
-/**
  * WebSockets are open connections sustained between the client and the origin
  * server. Inside a WebSockets connection, the client and the origin can pass data
  * back and forth without having to reestablish sessions. This makes exchanging
@@ -2016,27 +1503,6 @@ export interface Websocket {
 }
 
 /**
- * WebSockets are open connections sustained between the client and the origin
- * server. Inside a WebSockets connection, the client and the origin can pass data
- * back and forth without having to reestablish sessions. This makes exchanging
- * data within a WebSockets connection fast. WebSockets are often used for
- * real-time applications such as live chat and gaming. For more information refer
- * to
- * [Can I use Cloudflare with Websockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Can-I-use-Cloudflare-with-WebSockets-).
- */
-export interface WebsocketParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'websockets';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'off' | 'on';
-}
-
-/**
  * 0-RTT session resumption enabled for this zone.
  */
 export interface ZeroRTT {
@@ -2065,21 +1531,6 @@ export interface ZeroRTT {
 /**
  * 0-RTT session resumption enabled for this zone.
  */
-export interface ZeroRTTParam {
-  /**
-   * ID of the zone setting.
-   */
-  id: '0rtt';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-/**
- * 0-RTT session resumption enabled for this zone.
- */
 export type SettingEditResponse =
   | ZeroRTT
   | AdvancedDDoS
@@ -2092,6 +1543,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesSchemasBrowserCheck
   | SettingEditResponse.ZonesSchemasCacheLevel
   | ChallengeTTL
+  | SettingEditResponse.ZonesChinaNetworkEnabled
   | Ciphers
   | SettingEditResponse.ZonesCNAMEFlattening
   | DevelopmentMode
@@ -2134,6 +1586,8 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesTLS1_2Only
   | TLS1_3
   | TLSClientAuth
+  | SettingEditResponse.ZonesTransformations
+  | SettingEditResponse.ZonesTransformationsAllowedOrigins
   | SettingEditResponse.ZonesSchemasTrueClientIPHeader
   | SettingEditResponse.ZonesSchemasWAF
   | WebP
@@ -2353,6 +1807,32 @@ export namespace SettingEditResponse {
   }
 
   /**
+   * Determines whether or not the china network is enabled.
+   */
+  export interface ZonesChinaNetworkEnabled {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'china_network_enabled';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
    * @deprecated This zone setting is deprecated; please use the DNS Settings route
    * instead. More information at
    * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
@@ -2978,6 +2458,68 @@ export namespace SettingEditResponse {
   }
 
   /**
+   * Media Transformations provides on-demand resizing, conversion and optimization
+   * for images and video served through Cloudflare's network. Refer to the
+   * [Image Transformations](https://developers.cloudflare.com/images/) and
+   * [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started)
+   * documentation for more information.
+   */
+  export interface ZonesTransformations {
+    /**
+     * ID of the zone setting. Shared between Image Transformations and Video
+     * Transformations.
+     */
+    id: 'transformations';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'on' | 'off' | 'open';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * Media Transformations Allowed Origins restricts transformations for images and
+   * video served through Cloudflare's network. Refer to the
+   * [Image Transformations](https://developers.cloudflare.com/images/) and
+   * [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started)
+   * documentation for more information.
+   */
+  export interface ZonesTransformationsAllowedOrigins {
+    /**
+     * ID of the zone setting. Shared between Image Transformations and Video
+     * Transformations.
+     */
+    id: 'transformations_allowed_origins';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: string;
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
    * Allows customer to continue to use True Client IP (Akamai feature) in the
    * headers we send to the origin. This is limited to Enterprise Zones.
    */
@@ -3055,6 +2597,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesSchemasBrowserCheck
   | SettingGetResponse.ZonesSchemasCacheLevel
   | ChallengeTTL
+  | SettingGetResponse.ZonesChinaNetworkEnabled
   | Ciphers
   | SettingGetResponse.ZonesCNAMEFlattening
   | DevelopmentMode
@@ -3097,6 +2640,8 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesTLS1_2Only
   | TLS1_3
   | TLSClientAuth
+  | SettingGetResponse.ZonesTransformations
+  | SettingGetResponse.ZonesTransformationsAllowedOrigins
   | SettingGetResponse.ZonesSchemasTrueClientIPHeader
   | SettingGetResponse.ZonesSchemasWAF
   | WebP
@@ -3316,6 +2861,32 @@ export namespace SettingGetResponse {
   }
 
   /**
+   * Determines whether or not the china network is enabled.
+   */
+  export interface ZonesChinaNetworkEnabled {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'china_network_enabled';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
    * @deprecated This zone setting is deprecated; please use the DNS Settings route
    * instead. More information at
    * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
@@ -3941,6 +3512,68 @@ export namespace SettingGetResponse {
   }
 
   /**
+   * Media Transformations provides on-demand resizing, conversion and optimization
+   * for images and video served through Cloudflare's network. Refer to the
+   * [Image Transformations](https://developers.cloudflare.com/images/) and
+   * [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started)
+   * documentation for more information.
+   */
+  export interface ZonesTransformations {
+    /**
+     * ID of the zone setting. Shared between Image Transformations and Video
+     * Transformations.
+     */
+    id: 'transformations';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'on' | 'off' | 'open';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * Media Transformations Allowed Origins restricts transformations for images and
+   * video served through Cloudflare's network. Refer to the
+   * [Image Transformations](https://developers.cloudflare.com/images/) and
+   * [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started)
+   * documentation for more information.
+   */
+  export interface ZonesTransformationsAllowedOrigins {
+    /**
+     * ID of the zone setting. Shared between Image Transformations and Video
+     * Transformations.
+     */
+    id: 'transformations_allowed_origins';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: string;
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
    * Allows customer to continue to use True Client IP (Akamai feature) in the
    * headers we send to the origin. This is limited to Enterprise Zones.
    */
@@ -4003,122 +3636,45 @@ export namespace SettingGetResponse {
   }
 }
 
-export type SettingEditParams =
-  | SettingEditParams.ZeroRTT
-  | SettingEditParams.AdvancedDDoS
-  | SettingEditParams.ZonesCacheRulesAegis
-  | SettingEditParams.AlwaysOnline
-  | SettingEditParams.ZonesSchemasAlwaysUseHTTPS
-  | SettingEditParams.ZonesSchemasAutomaticHTTPSRewrites
-  | SettingEditParams.Brotli
-  | SettingEditParams.ZonesSchemasBrowserCacheTTL
-  | SettingEditParams.ZonesSchemasBrowserCheck
-  | SettingEditParams.ZonesSchemasCacheLevel
-  | SettingEditParams.ChallengeTTL
-  | SettingEditParams.Ciphers
-  | SettingEditParams.ZonesCNAMEFlattening
-  | SettingEditParams.DevelopmentMode
-  | SettingEditParams.EarlyHints
-  | SettingEditParams.ZonesSchemasEdgeCacheTTL
-  | SettingEditParams.ZonesSchemasEmailObfuscation
-  | SettingEditParams.H2Prioritization
-  | SettingEditParams.HotlinkProtection
-  | SettingEditParams.HTTP2
-  | SettingEditParams.HTTP3
-  | SettingEditParams.ImageResizing
-  | SettingEditParams.ZonesSchemasIPGeolocation
-  | SettingEditParams.IPV6
-  | SettingEditParams.ZonesMaxUpload
-  | SettingEditParams.MinTLSVersion
-  | SettingEditParams.ZonesSchemasMirage
-  | SettingEditParams.NEL
-  | SettingEditParams.ZonesSchemasOpportunisticEncryption
-  | SettingEditParams.OpportunisticOnion
-  | SettingEditParams.OrangeToOrange
-  | SettingEditParams.ZonesSchemasOriginErrorPagePassThru
-  | SettingEditParams.ZonesCacheRulesOriginH2MaxStreams
-  | SettingEditParams.ZonesCacheRulesOriginMaxHTTPVersion
-  | SettingEditParams.ZonesSchemasPolish
-  | SettingEditParams.PrefetchPreload
-  | SettingEditParams.ZonesPrivacyPass
-  | SettingEditParams.ProxyReadTimeout
-  | SettingEditParams.PseudoIPV4
-  | SettingEditParams.ZonesReplaceInsecureJS
-  | SettingEditParams.ZonesSchemasResponseBuffering
-  | SettingEditParams.ZonesSchemasRocketLoader
-  | SettingEditParams.ZonesSchemasAutomaticPlatformOptimization
-  | SettingEditParams.SecurityHeaders
-  | SettingEditParams.ZonesSchemasSecurityLevel
-  | SettingEditParams.ServerSideExcludes
-  | SettingEditParams.ZonesSha1Support
-  | SettingEditParams.ZonesSchemasSortQueryStringForCache
-  | SettingEditParams.ZonesSchemasSSL
-  | SettingEditParams.SSLRecommender
-  | SettingEditParams.ZonesTLS1_2Only
-  | SettingEditParams.TLS1_3
-  | SettingEditParams.TLSClientAuth
-  | SettingEditParams.ZonesSchemasTrueClientIPHeader
-  | SettingEditParams.ZonesSchemasWAF
-  | SettingEditParams.WebP
-  | SettingEditParams.Websocket;
+export type SettingEditParams = SettingEditParams.Variant0 | SettingEditParams.Variant1;
 
 export declare namespace SettingEditParams {
-  export interface ZeroRTT {
+  export interface Variant0 {
     /**
      * Path param: Identifier
      */
     zone_id: string;
 
     /**
-     * Body param: ID of the zone setting.
+     * Body param: ssl-recommender enrollment setting.
      */
-    id: '0rtt';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
+    enabled?: boolean;
   }
 
-  export interface AdvancedDDoS {
+  export interface Variant1 {
     /**
      * Path param: Identifier
      */
     zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'advanced_ddos';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesCacheRulesAegis {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'aegis';
 
     /**
      * Body param: Value of the zone setting.
      */
-    value?: ZonesCacheRulesAegis.Value;
+    value?:
+      | unknown
+      | Variant1.ZonesCacheRulesAegisValue
+      | Array<string>
+      | Variant1.ZonesNELValue
+      | number
+      | AutomaticPlatformOptimizationParam
+      | Variant1.ZonesSecurityHeaderValue;
   }
 
-  export namespace ZonesCacheRulesAegis {
+  export namespace Variant1 {
     /**
      * Value of the zone setting.
      */
-    export interface Value {
+    export interface ZonesCacheRulesAegisValue {
       /**
        * Whether the feature is enabled or not.
        */
@@ -4130,794 +3686,22 @@ export declare namespace SettingEditParams {
        */
       pool_id?: string;
     }
-  }
 
-  export interface AlwaysOnline {
     /**
-     * Path param: Identifier
+     * Value of the zone setting.
      */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'always_online';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasAlwaysUseHTTPS {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'always_use_https';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasAutomaticHTTPSRewrites {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'automatic_https_rewrites';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface Brotli {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'brotli';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'on';
-  }
-
-  export interface ZonesSchemasBrowserCacheTTL {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'browser_cache_ttl';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value:
-      | 0
-      | 30
-      | 60
-      | 120
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 691200
-      | 1382400
-      | 2073600
-      | 2678400
-      | 5356800
-      | 16070400
-      | 31536000;
-  }
-
-  export interface ZonesSchemasBrowserCheck {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'browser_check';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasCacheLevel {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'cache_level';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'aggressive' | 'basic' | 'simplified';
-  }
-
-  export interface ChallengeTTL {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'challenge_ttl';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value:
-      | 300
-      | 900
-      | 1800
-      | 2700
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 28800
-      | 57600
-      | 86400
-      | 604800
-      | 2592000
-      | 31536000;
-  }
-
-  export interface Ciphers {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'ciphers';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: Array<string>;
-  }
-
-  export interface ZonesCNAMEFlattening {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: How to flatten the cname destination.
-     */
-    id: 'cname_flattening';
-
-    /**
-     * @deprecated This zone setting is deprecated; please use the DNS Settings route
-     * instead. More information at
-     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
-     */
-    value: 'flatten_at_root' | 'flatten_all';
-  }
-
-  export interface DevelopmentMode {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'development_mode';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface EarlyHints {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'early_hints';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasEdgeCacheTTL {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'edge_cache_ttl';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value:
-      | 30
-      | 60
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 518400
-      | 604800;
-  }
-
-  export interface ZonesSchemasEmailObfuscation {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'email_obfuscation';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface H2Prioritization {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'h2_prioritization';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off' | 'custom';
-  }
-
-  export interface HotlinkProtection {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'hotlink_protection';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface HTTP2 {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'http2';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface HTTP3 {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'http3';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ImageResizing {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'image_resizing';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off' | 'open';
-  }
-
-  export interface ZonesSchemasIPGeolocation {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'ip_geolocation';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface IPV6 {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'ipv6';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'on';
-  }
-
-  export interface ZonesMaxUpload {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: identifier of the zone setting.
-     */
-    id: 'max_upload';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 100 | 200 | 500;
-  }
-
-  export interface MinTLSVersion {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'min_tls_version';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: '1.0' | '1.1' | '1.2' | '1.3';
-  }
-
-  export interface ZonesSchemasMirage {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'mirage';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface NEL {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Zone setting identifier.
-     */
-    id: 'nel';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: NEL.Value;
-  }
-
-  export namespace NEL {
-    /**
-     * Current value of the zone setting.
-     */
-    export interface Value {
+    export interface ZonesNELValue {
       enabled?: boolean;
     }
-  }
 
-  export interface ZonesSchemasOpportunisticEncryption {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'opportunistic_encryption';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface OpportunisticOnion {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'opportunistic_onion';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface OrangeToOrange {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'orange_to_orange';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasOriginErrorPagePassThru {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'origin_error_page_pass_thru';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesCacheRulesOriginH2MaxStreams {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Value of the zone setting.
-     */
-    id: 'origin_h2_max_streams';
-
-    /**
-     * Body param: Value of the Origin H2 Max Streams Setting.
-     */
-    value?: number;
-  }
-
-  export interface ZonesCacheRulesOriginMaxHTTPVersion {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Value of the zone setting.
-     */
-    id: 'origin_max_http_version';
-
-    /**
-     * Body param: Value of the Origin Max HTTP Version Setting.
-     */
-    value?: '2' | '1';
-  }
-
-  export interface ZonesSchemasPolish {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'polish';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'lossless' | 'lossy';
-  }
-
-  export interface PrefetchPreload {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'prefetch_preload';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesPrivacyPass {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'privacy_pass';
-
-    /**
-     * @deprecated Privacy Pass v1 was deprecated in 2023. (Announcement -
-     * https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation
-     * details -
-     * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ProxyReadTimeout {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'proxy_read_timeout';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: number;
-  }
-
-  export interface PseudoIPV4 {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Value of the Pseudo IPv4 setting.
-     */
-    id: 'pseudo_ipv4';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'add_header' | 'overwrite_header';
-  }
-
-  export interface ZonesReplaceInsecureJS {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'replace_insecure_js';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasResponseBuffering {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'response_buffering';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasRocketLoader {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'rocket_loader';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasAutomaticPlatformOptimization {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'automatic_platform_optimization';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: AutomaticPlatformOptimizationParam;
-  }
-
-  export interface SecurityHeaders {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone's security header.
-     */
-    id: 'security_header';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: SecurityHeaders.Value;
-  }
-
-  export namespace SecurityHeaders {
-    /**
-     * Current value of the zone setting.
-     */
-    export interface Value {
+    export interface ZonesSecurityHeaderValue {
       /**
        * Strict Transport Security.
        */
-      strict_transport_security?: Value.StrictTransportSecurity;
+      strict_transport_security?: ZonesSecurityHeaderValue.StrictTransportSecurity;
     }
 
-    export namespace Value {
+    export namespace ZonesSecurityHeaderValue {
       /**
        * Strict Transport Security.
        */
@@ -4948,227 +3732,6 @@ export declare namespace SettingEditParams {
         preload?: boolean;
       }
     }
-  }
-
-  export interface ZonesSchemasSecurityLevel {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'security_level';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-  }
-
-  export interface ServerSideExcludes {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'server_side_exclude';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSha1Support {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Zone setting identifier.
-     */
-    id: 'sha1_support';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'on';
-  }
-
-  export interface ZonesSchemasSortQueryStringForCache {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'sort_query_string_for_cache';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasSSL {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'ssl';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'flexible' | 'full' | 'strict';
-  }
-
-  export interface SSLRecommender {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Enrollment value for SSL/TLS Recommender.
-     */
-    id?: 'ssl_recommender';
-
-    /**
-     * Body param: ssl-recommender enrollment setting.
-     */
-    enabled?: boolean;
-  }
-
-  export interface ZonesTLS1_2Only {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Zone setting identifier.
-     */
-    id: 'tls_1_2_only';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'on';
-  }
-
-  export interface TLS1_3 {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'tls_1_3';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off' | 'zrt';
-  }
-
-  export interface TLSClientAuth {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'tls_client_auth';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasTrueClientIPHeader {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'true_client_ip_header';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface ZonesSchemasWAF {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'waf';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-  }
-
-  export interface WebP {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'webp';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'on';
-  }
-
-  export interface Websocket {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: ID of the zone setting.
-     */
-    id: 'websockets';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: 'off' | 'on';
   }
 }
 
