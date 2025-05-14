@@ -3,6 +3,7 @@
 export { Infrastructure } from './infrastructure';
 export {
   TargetListResponsesV4PagePaginationArray,
+  TargetBulkUpdateResponsesSinglePage,
   Targets,
   type TargetCreateResponse,
   type TargetUpdateResponse,
