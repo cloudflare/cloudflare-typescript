@@ -37,7 +37,7 @@ export namespace TargetIndustryListResponse {
 
 export interface TargetIndustryListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

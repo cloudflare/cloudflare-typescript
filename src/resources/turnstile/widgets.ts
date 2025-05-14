@@ -213,9 +213,9 @@ export interface Widget {
   offlabel: boolean;
 
   /**
-   * Region where this widget can be used.
+   * Region where this widget can be used. This cannot be changed after creation.
    */
-  region: 'world';
+  region: 'world' | 'china';
 
   /**
    * Secret key for this widget.
@@ -291,9 +291,9 @@ export interface WidgetListResponse {
   offlabel: boolean;
 
   /**
-   * Region where this widget can be used.
+   * Region where this widget can be used. This cannot be changed after creation.
    */
-  region: 'world';
+  region: 'world' | 'china';
 
   /**
    * Widget item identifier tag.
@@ -368,9 +368,10 @@ export interface WidgetCreateParams {
   offlabel?: boolean;
 
   /**
-   * Body param: Region where this widget can be used.
+   * Body param: Region where this widget can be used. This cannot be changed after
+   * creation.
    */
-  region?: 'world';
+  region?: 'world' | 'china';
 }
 
 export interface WidgetUpdateParams {
@@ -418,6 +419,12 @@ export interface WidgetUpdateParams {
    * Body param: Do not show any Cloudflare branding on the widget (ENT only).
    */
   offlabel?: boolean;
+
+  /**
+   * Body param: Region where this widget can be used. This cannot be changed after
+   * creation.
+   */
+  region?: 'world' | 'china';
 }
 
 export interface WidgetListParams extends V4PagePaginationArrayParams {

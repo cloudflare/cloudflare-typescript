@@ -102,7 +102,7 @@ export class ThreatEvents extends APIResource {
    *     date: '2022-04-01T00:00:00Z',
    *     event: 'An attacker registered the domain domain.com',
    *     indicatorType: 'domain',
-   *     raw: {},
+   *     raw: { data: { foo: 'bar' } },
    *     tlp: 'amber',
    *   });
    * ```
@@ -178,7 +178,7 @@ export class ThreatEvents extends APIResource {
    *         event:
    *           'An attacker registered the domain domain.com',
    *         indicatorType: 'domain',
-   *         raw: {},
+   *         raw: { data: { foo: 'bar' } },
    *         tlp: 'amber',
    *       },
    *     ],
@@ -536,7 +536,7 @@ export interface ThreatEventGetResponse {
 
 export interface ThreatEventCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -613,7 +613,7 @@ export interface ThreatEventCreateParams {
 
 export namespace ThreatEventCreateParams {
   export interface Raw {
-    data?: unknown;
+    data: Record<string, unknown> | null;
 
     source?: string;
 
@@ -623,7 +623,7 @@ export namespace ThreatEventCreateParams {
 
 export interface ThreatEventListParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -682,14 +682,14 @@ export namespace ThreatEventListParams {
 
 export interface ThreatEventDeleteParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface ThreatEventBulkCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -737,7 +737,7 @@ export namespace ThreatEventBulkCreateParams {
 
   export namespace Data {
     export interface Raw {
-      data?: unknown;
+      data: Record<string, unknown> | null;
 
       source?: string;
 
@@ -748,7 +748,7 @@ export namespace ThreatEventBulkCreateParams {
 
 export interface ThreatEventEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -805,7 +805,7 @@ export interface ThreatEventEditParams {
 
 export interface ThreatEventGetParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

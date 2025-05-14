@@ -18,11 +18,11 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Define configurations using a unique string identifier.',
       },
       hyperdrive_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Define configurations using a unique string identifier.',
       },
       name: {
         type: 'string',
@@ -35,20 +35,20 @@ export const tool: Tool = {
             properties: {
               database: {
                 type: 'string',
-                description: 'The name of your origin database.',
+                description: 'Set the name of your origin database.',
               },
               host: {
                 type: 'string',
-                description: 'The host (hostname or IP) of your origin database.',
+                description: 'Defines the host (hostname or IP) of your origin database.',
               },
               password: {
                 type: 'string',
                 description:
-                  'The password required to access your origin database. This value is write-only and never returned by the API.',
+                  'Set the password needed to access your origin database. The API never returns this write-only value.',
               },
               port: {
                 type: 'integer',
-                description: 'The port (default: 5432 for Postgres) of your origin database.',
+                description: 'Defines the port (default: 5432 for Postgres) of your origin database.',
               },
               scheme: {
                 type: 'string',
@@ -57,7 +57,7 @@ export const tool: Tool = {
               },
               user: {
                 type: 'string',
-                description: 'The user of your origin database.',
+                description: 'Set the user of your origin database.',
               },
             },
             required: ['database', 'host', 'password', 'port', 'scheme', 'user'],
@@ -69,25 +69,25 @@ export const tool: Tool = {
               access_client_id: {
                 type: 'string',
                 description:
-                  'The Client ID of the Access token to use when connecting to the origin database.',
+                  'Defines the Client ID of the Access token to use when connecting to the origin database.',
               },
               access_client_secret: {
                 type: 'string',
                 description:
-                  'The Client Secret of the Access token to use when connecting to the origin database. This value is write-only and never returned by the API.',
+                  'Defines the Client Secret of the Access Token to use when connecting to the origin database. The API never returns this write-only value.',
               },
               database: {
                 type: 'string',
-                description: 'The name of your origin database.',
+                description: 'Set the name of your origin database.',
               },
               host: {
                 type: 'string',
-                description: 'The host (hostname or IP) of your origin database.',
+                description: 'Defines the host (hostname or IP) of your origin database.',
               },
               password: {
                 type: 'string',
                 description:
-                  'The password required to access your origin database. This value is write-only and never returned by the API.',
+                  'Set the password needed to access your origin database. The API never returns this write-only value.',
               },
               scheme: {
                 type: 'string',
@@ -96,7 +96,7 @@ export const tool: Tool = {
               },
               user: {
                 type: 'string',
-                description: 'The user of your origin database.',
+                description: 'Set the user of your origin database.',
               },
             },
             required: [
@@ -118,7 +118,7 @@ export const tool: Tool = {
             properties: {
               disabled: {
                 type: 'boolean',
-                description: 'When set to true, disables the caching of SQL responses. (Default: false)',
+                description: 'Set to true to disable caching of SQL responses. Default is false.',
               },
             },
             required: [],
@@ -128,17 +128,17 @@ export const tool: Tool = {
             properties: {
               disabled: {
                 type: 'boolean',
-                description: 'When set to true, disables the caching of SQL responses. (Default: false)',
+                description: 'Set to true to disable caching of SQL responses. Default is false.',
               },
               max_age: {
                 type: 'integer',
                 description:
-                  'When present, specifies max duration for which items should persist in the cache. Not returned if set to default. (Default: 60)',
+                  'Specify the maximum duration items should persist in the cache. Not returned if set to the default (60).',
               },
               stale_while_revalidate: {
                 type: 'integer',
                 description:
-                  'When present, indicates the number of seconds cache may serve the response after it becomes stale. Not returned if set to default. (Default: 15)',
+                  'Specify the number of seconds the cache may serve a stale response. Omitted if set to the default (15).',
               },
             },
             required: [],
@@ -151,16 +151,15 @@ export const tool: Tool = {
         properties: {
           ca_certificate_id: {
             type: 'string',
-            description: 'CA certificate ID',
+            description: 'Define CA certificate ID obtained after uploading CA cert.',
           },
           mtls_certificate_id: {
             type: 'string',
-            description: 'mTLS certificate ID',
+            description: 'Define mTLS certificate ID obtained after uploading client cert.',
           },
           sslmode: {
             type: 'string',
-            description:
-              "SSL mode used for CA verification. Must be 'require', 'verify-ca', or 'verify-full'",
+            description: "Set SSL mode to 'require', 'verify-ca', or 'verify-full' to verify the CA.",
           },
         },
         required: [],

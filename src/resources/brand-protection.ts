@@ -7,7 +7,7 @@ import { path } from '../internal/utils/path';
 
 export class BrandProtection extends APIResource {
   /**
-   * Submit suspicious URL for scanning
+   * Submit suspicious URL for scanning.
    *
    * @example
    * ```ts
@@ -154,7 +154,7 @@ export interface Submit {
   excluded_urls?: Array<Submit.ExcludedURL>;
 
   /**
-   * URLs that were skipped because the same URL is currently being scanned
+   * URLs that were skipped because the same URL is currently being scanned.
    */
   skipped_urls?: Array<Submit.SkippedURL>;
 
@@ -204,26 +204,26 @@ export interface URLInfoModelResults {
   model_name?: string;
 
   /**
-   * Score output by the model for this submission.
+   * This is the score that is outputted by the model for this submission.
    */
   model_score?: number;
 }
 
 export interface BrandProtectionSubmitParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Body param: URL(s) to filter submissions results by
+   * Body param: URL(s) to filter submissions results by.
    */
   url?: string;
 }
 
 export interface BrandProtectionURLInfoParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

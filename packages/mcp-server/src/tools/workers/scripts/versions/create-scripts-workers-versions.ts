@@ -189,10 +189,6 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   properties: {
-                    class_name: {
-                      type: 'string',
-                      description: 'The exported class name of the Durable Object.',
-                    },
                     name: {
                       type: 'string',
                       description: 'A JavaScript variable name for the binding.',
@@ -201,6 +197,10 @@ export const tool: Tool = {
                       type: 'string',
                       description: 'The kind of resource that the binding provides.',
                       enum: ['durable_object_namespace'],
+                    },
+                    class_name: {
+                      type: 'string',
+                      description: 'The exported class name of the Durable Object.',
                     },
                     environment: {
                       type: 'string',
@@ -216,7 +216,7 @@ export const tool: Tool = {
                         'The script where the Durable Object is defined, if it is external to this Worker.',
                     },
                   },
-                  required: ['class_name', 'name', 'type'],
+                  required: ['name', 'type'],
                 },
                 {
                   type: 'object',

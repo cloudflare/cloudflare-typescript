@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'number',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       data: {
         type: 'array',
@@ -58,7 +58,7 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
+              required: ['data'],
             },
             tlp: {
               type: 'string',

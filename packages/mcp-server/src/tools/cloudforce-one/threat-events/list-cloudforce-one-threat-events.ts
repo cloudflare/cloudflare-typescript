@@ -19,7 +19,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'number',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       datasetId: {
         type: 'array',

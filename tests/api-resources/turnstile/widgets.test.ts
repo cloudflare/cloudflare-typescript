@@ -69,6 +69,7 @@ describe('resource widgets', () => {
       clearance_level: 'interactive',
       ephemeral_id: false,
       offlabel: false,
+      region: 'world',
     });
   });
 

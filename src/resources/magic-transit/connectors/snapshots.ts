@@ -200,8 +200,8 @@ export interface SnapshotGetResponse {
   ha_state?: string;
 
   /**
-   * Numeric value associated with high availability state (0 = unknown, 1 = active,
-   * 2 = standby, 3 = disabled, 4 = fault)
+   * Numeric value associated with high availability state (0 = disabled, 1 = active,
+   * 2 = standby, 3 = stopped, 4 = fault)
    */
   ha_value?: number;
 

@@ -18,20 +18,20 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'number',
-        description: 'Account ID',
+        description: 'Account ID.',
       },
       dataset_id: {
         type: 'string',
-        description: 'Dataset ID',
+        description: 'Dataset ID.',
       },
       isPublic: {
         type: 'boolean',
         description:
-          'If true, then anyone can search the dataset. If false, then its limited to the account. ',
+          'If true, then anyone can search the dataset. If false, then its limited to the account.',
       },
       name: {
         type: 'string',
-        description: 'Used to describe the dataset within the account context',
+        description: 'Used to describe the dataset within the account context.',
       },
     },
   },

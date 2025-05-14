@@ -80,13 +80,13 @@ export class Namespaces extends APIResource {
     namespaceID: string,
     params: NamespaceUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<NamespaceUpdateResponse | null> {
+  ): APIPromise<Namespace> {
     const { account_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/storage/kv/namespaces/${namespaceID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: NamespaceUpdateResponse | null }>
+      }) as APIPromise<{ result: Namespace }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -187,8 +187,6 @@ export interface Namespace {
   supports_url_encoding?: boolean;
 }
 
-export interface NamespaceUpdateResponse {}
-
 export interface NamespaceDeleteResponse {}
 
 export interface NamespaceCreateParams {
@@ -253,7 +251,6 @@ Namespaces.Values = Values;
 export declare namespace Namespaces {
   export {
     type Namespace as Namespace,
-    type NamespaceUpdateResponse as NamespaceUpdateResponse,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
     type NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
     type NamespaceCreateParams as NamespaceCreateParams,

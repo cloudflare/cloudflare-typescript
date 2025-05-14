@@ -43,7 +43,7 @@ export namespace CountryListResponse {
 
 export interface CountryListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

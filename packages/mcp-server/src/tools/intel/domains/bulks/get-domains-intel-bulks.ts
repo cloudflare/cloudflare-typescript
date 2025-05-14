@@ -12,17 +12,20 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_domains_intel_bulks',
-  description: 'Same as summary',
+  description: 'Same as summary.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       domain: {
-        type: 'object',
-        description: 'Accepts multiple values, i.e. `?domain=cloudflare.com&domain=example.com`.',
+        type: 'array',
+        description: 'Accepts multiple values like `?domain=cloudflare.com&domain=example.com`.',
+        items: {
+          type: 'string',
+        },
       },
     },
   },

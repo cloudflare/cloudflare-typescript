@@ -69,7 +69,7 @@ export interface EventTagDeleteResponse {
 
 export interface EventTagCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -81,7 +81,7 @@ export interface EventTagCreateParams {
 
 export interface EventTagDeleteParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

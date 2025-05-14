@@ -18,11 +18,11 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Define configurations using a unique string identifier.',
       },
       hyperdrive_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Define configurations using a unique string identifier.',
       },
     },
   },

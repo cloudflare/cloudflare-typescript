@@ -126,7 +126,7 @@ export namespace Domain {
   export interface ResolvesToRef {
     /**
      * STIX 2.1 identifier:
-     * https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c
+     * https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c.
      */
     id?: string;
 
@@ -147,7 +147,7 @@ export namespace Domain {
 
 export interface DomainGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

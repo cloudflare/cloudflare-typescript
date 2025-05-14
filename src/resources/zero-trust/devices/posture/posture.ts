@@ -322,7 +322,7 @@ export namespace DeviceInput {
 
   export interface TeamsDevicesAccessSerialNumberListInputRequest {
     /**
-     * UUID of Access List
+     * UUID of Access List.
      */
     id: string;
   }
@@ -463,7 +463,7 @@ export namespace DeviceInputParam {
 
   export interface TeamsDevicesAccessSerialNumberListInputRequest {
     /**
-     * UUID of Access List
+     * UUID of Access List.
      */
     id: string;
   }

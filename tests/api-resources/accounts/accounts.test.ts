@@ -46,12 +46,7 @@ describe('resource accounts', () => {
     const response = await client.accounts.update({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       name: 'Demo Account',
-      settings: {
-        abuse_contact_email: 'abuse_contact_email',
-        default_nameservers: 'cloudflare.standard',
-        enforce_twofactor: true,
-        use_account_custom_ns_by_default: true,
-      },
+      settings: { abuse_contact_email: 'abuse_contact_email', enforce_twofactor: true },
     });
   });
 

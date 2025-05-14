@@ -1601,7 +1601,7 @@ subnets of an IP prefix.
 
 ### Resource `brand_protection`:
 
-- `submit_brand_protection` (`write`): Submit suspicious URL for scanning
+- `submit_brand_protection` (`write`): Submit suspicious URL for scanning.
 - `url_info_brand_protection` (`read`): Gets phishing details about a URL.
 
 ### Resource `diagnostics.traceroutes`:
@@ -1655,7 +1655,7 @@ subnets of an IP prefix.
 
 ### Resource `intel.asn.subnets`:
 
-- `get_asn_intel_subnets` (`read`): Get ASN Subnets
+- `get_asn_intel_subnets` (`read`): Get ASN Subnets.
 
 ### Resource `intel.dns`:
 
@@ -1667,7 +1667,7 @@ subnets of an IP prefix.
 
 ### Resource `intel.domains.bulks`:
 
-- `get_domains_intel_bulks` (`read`): Same as summary
+- `get_domains_intel_bulks` (`read`): Same as summary.
 
 ### Resource `intel.domain_history`:
 
@@ -1675,11 +1675,11 @@ subnets of an IP prefix.
 
 ### Resource `intel.ips`:
 
-- `get_intel_ips` (`read`): Gets the geolocation, ASN, infrastructure type of the ASN, and any security threat categories of an IP address. **Must provide ip query parameters.** For example, `/intel/ip?ipv4=1.1.1.1` or `/intel/ip?ipv6=2001:db8::1`
+- `get_intel_ips` (`read`): Gets the geolocation, ASN, infrastructure type of the ASN, and any security threat categories of an IP address. **Must provide ip query parameters.** For example, `/intel/ip?ipv4=1.1.1.1` or `/intel/ip?ipv6=2001:db8::1`.
 
 ### Resource `intel.ip_lists`:
 
-- `get_intel_ip_lists` (`read`): Get IP Lists
+- `get_intel_ip_lists` (`read`): Get IP Lists.
 
 ### Resource `intel.miscategorizations`:
 
@@ -2333,6 +2333,14 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `revoke_devices_zero_trust_registrations` (`write`): Revokes a list of WARP registrations.
 - `unrevoke_devices_zero_trust_registrations` (`write`): Unrevokes a list of WARP registrations.
 
+### Resource `zero_trust.devices.dex_tests`:
+
+- `create_devices_zero_trust_dex_tests` (`write`): Create a DEX test.
+- `update_devices_zero_trust_dex_tests` (`write`): Update a DEX test.
+- `list_devices_zero_trust_dex_tests` (`read`): Fetch all DEX tests.
+- `delete_devices_zero_trust_dex_tests` (`write`): Delete a Device DEX test. Returns the remaining device dex tests for the account.
+- `get_devices_zero_trust_dex_tests` (`read`): Fetch a single DEX test.
+
 ### Resource `zero_trust.devices.networks`:
 
 - `create_devices_zero_trust_networks` (`write`): Creates a new device managed network.
@@ -2834,6 +2842,10 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `edit_gateway_zero_trust_configurations` (`write`): Patches the current Zero Trust account configuration. This endpoint can update a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate`, without updating the entire configuration object. Returns an error if any collection of settings is not properly configured.
 - `get_gateway_zero_trust_configurations` (`read`): Fetches the current Zero Trust account configuration.
 
+### Resource `zero_trust.gateway.configurations.custom_certificate`:
+
+- `get_configurations_gateway_zero_trust_custom_certificate` (`read`): Fetches the current Zero Trust certificate configuration.
+
 ### Resource `zero_trust.gateway.lists`:
 
 - `create_gateway_zero_trust_lists` (`write`): Creates a new Zero Trust list.
@@ -2964,7 +2976,7 @@ Note that secrets cannot be rotated again during the grace period.
 
 - `create_hyperdrive_configs` (`write`): Creates and returns a new Hyperdrive configuration.
 - `update_hyperdrive_configs` (`write`): Updates and returns the specified Hyperdrive configuration.
-- `list_hyperdrive_configs` (`read`): Returns a list of Hyperdrives
+- `list_hyperdrive_configs` (`read`): Returns a list of Hyperdrives.
 - `delete_hyperdrive_configs` (`write`): Deletes the specified Hyperdrive.
 - `edit_hyperdrive_configs` (`write`): Patches and returns the specified Hyperdrive configuration. Custom caching settings are not kept if caching is disabled.
 - `get_hyperdrive_configs` (`read`): Returns the specified Hyperdrive configuration.

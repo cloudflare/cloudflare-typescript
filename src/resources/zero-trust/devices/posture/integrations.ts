@@ -177,7 +177,7 @@ export interface Integration {
     | 'uptycs'
     | 'intune'
     | 'kolide'
-    | 'tanium'
+    | 'tanium_s2s'
     | 'sentinelone_s2s'
     | 'custom_s2s';
 }
@@ -246,7 +246,7 @@ export interface IntegrationCreateParams {
     | 'uptycs'
     | 'intune'
     | 'kolide'
-    | 'tanium'
+    | 'tanium_s2s'
     | 'sentinelone_s2s'
     | 'custom_s2s';
 }
@@ -451,7 +451,7 @@ export interface IntegrationEditParams {
     | 'uptycs'
     | 'intune'
     | 'kolide'
-    | 'tanium'
+    | 'tanium_s2s'
     | 'sentinelone_s2s'
     | 'custom_s2s';
 }

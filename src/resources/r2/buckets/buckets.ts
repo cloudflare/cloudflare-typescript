@@ -221,6 +221,11 @@ export interface Bucket {
   creation_date?: string;
 
   /**
+   * Jurisdiction where objects in this bucket are guaranteed to be stored.
+   */
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+  /**
    * Location of the bucket.
    */
   location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
@@ -265,7 +270,8 @@ export interface BucketCreateParams {
   storageClass?: 'Standard' | 'InfrequentAccess';
 
   /**
-   * Header param: Creates the bucket in the provided jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -310,7 +316,8 @@ export interface BucketListParams {
   start_after?: string;
 
   /**
-   * Header param: Lists buckets in the provided jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -322,7 +329,8 @@ export interface BucketDeleteParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -340,7 +348,8 @@ export interface BucketEditParams {
   storage_class: 'Standard' | 'InfrequentAccess';
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -352,7 +361,8 @@ export interface BucketGetParams {
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction.
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

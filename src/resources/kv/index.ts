@@ -4,7 +4,6 @@ export { KV } from './kv';
 export {
   Namespaces,
   type Namespace,
-  type NamespaceUpdateResponse,
   type NamespaceDeleteResponse,
   type NamespaceCreateParams,
   type NamespaceUpdateParams,

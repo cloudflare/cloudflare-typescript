@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_asn_intel_subnets',
-  description: 'Get ASN Subnets',
+  description: 'Get ASN Subnets.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       asn: {
         $ref: '#/$defs/asn',

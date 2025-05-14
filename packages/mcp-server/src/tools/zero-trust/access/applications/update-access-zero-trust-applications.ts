@@ -405,7 +405,7 @@ export const tool: Tool = {
           session_duration: {
             type: 'string',
             description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
           },
           skip_interstitial: {
             type: 'boolean',
@@ -1077,7 +1077,7 @@ export const tool: Tool = {
           session_duration: {
             type: 'string',
             description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
           },
           skip_interstitial: {
             type: 'boolean',
@@ -1483,7 +1483,7 @@ export const tool: Tool = {
           session_duration: {
             type: 'string',
             description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
           },
           skip_interstitial: {
             type: 'boolean',
@@ -1784,7 +1784,7 @@ export const tool: Tool = {
           session_duration: {
             type: 'string',
             description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
           },
           skip_app_launcher_login_page: {
             type: 'boolean',
@@ -2076,7 +2076,7 @@ export const tool: Tool = {
           session_duration: {
             type: 'string',
             description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
           },
           skip_app_launcher_login_page: {
             type: 'boolean',
@@ -2368,7 +2368,7 @@ export const tool: Tool = {
           session_duration: {
             type: 'string',
             description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
           },
           skip_app_launcher_login_page: {
             type: 'boolean',
@@ -3070,7 +3070,7 @@ export const tool: Tool = {
           session_duration: {
             type: 'string',
             description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
           },
           skip_interstitial: {
             type: 'boolean',

@@ -68,12 +68,12 @@ export interface RawGetResponse {
 
 export interface RawEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
   /**
-   * Path param: Event UUID
+   * Path param: Event UUID.
    */
   event_id: string;
 
@@ -95,12 +95,12 @@ export interface RawEditParams {
 
 export interface RawGetParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 
   /**
-   * Event UUID
+   * Event UUID.
    */
   event_id: string;
 }
