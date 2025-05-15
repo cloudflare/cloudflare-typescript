@@ -101,6 +101,11 @@ export const tool: Tool = {
         description:
           "Determines if the operating system will register WARP's local interface IP with your on-premises DNS server.",
       },
+      sccm_vpn_boundary_support: {
+        type: 'boolean',
+        description:
+          'Determines whether the WARP client indicates to SCCM that it is inside a VPN boundary. (Windows only).',
+      },
       service_mode_v2: {
         type: 'object',
         properties: {
