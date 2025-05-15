@@ -8,7 +8,7 @@ import { type Response } from '../../../_shims/index';
 
 export class Content extends APIResource {
   /**
-   * Put script content without touching config or metadata
+   * Put script content without touching config or metadata.
    *
    * @example
    * ```ts
@@ -51,7 +51,7 @@ export class Content extends APIResource {
   }
 
   /**
-   * Fetch script content only
+   * Fetch script content only.
    *
    * @example
    * ```ts

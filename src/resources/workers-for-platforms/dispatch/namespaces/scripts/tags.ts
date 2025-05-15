@@ -102,12 +102,12 @@ export class TagUpdateResponsesSinglePage extends SinglePage<TagUpdateResponse> 
 export class TagListResponsesSinglePage extends SinglePage<TagListResponse> {}
 
 /**
- * Tag to help you manage your Worker
+ * Tag to help you manage your Worker.
  */
 export type TagUpdateResponse = string;
 
 /**
- * Tag to help you manage your Worker
+ * Tag to help you manage your Worker.
  */
 export type TagListResponse = string;
 
@@ -120,7 +120,7 @@ export interface TagUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Tags to help you manage your Workers
+   * Body param: Tags to help you manage your Workers.
    */
   body: Array<string>;
 }
