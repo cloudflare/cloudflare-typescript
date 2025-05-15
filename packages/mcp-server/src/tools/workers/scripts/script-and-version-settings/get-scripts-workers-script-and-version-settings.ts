@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_scripts_workers_script_and_version_settings',
-  description: 'Get metadata and config, such as bindings or usage model',
+  description: 'Get metadata and config, such as bindings or usage model.',
   inputSchema: {
     type: 'object',
     properties: {

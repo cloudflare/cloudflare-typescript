@@ -26,7 +26,7 @@ export const tool: Tool = {
       },
       id: {
         type: 'string',
-        description: 'Identifier for the tail.',
+        description: 'Identifier.',
       },
     },
   },

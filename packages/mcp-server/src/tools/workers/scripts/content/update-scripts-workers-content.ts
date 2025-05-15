@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_scripts_workers_content',
-  description: 'Put script content without touching config or metadata',
+  description: 'Put script content without touching config or metadata.',
   inputSchema: {
     type: 'object',
     properties: {

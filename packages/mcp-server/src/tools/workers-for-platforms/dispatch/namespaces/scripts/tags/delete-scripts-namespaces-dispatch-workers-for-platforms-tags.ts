@@ -30,7 +30,7 @@ export const tool: Tool = {
       },
       tag: {
         type: 'string',
-        description: 'Tag to help you manage your Worker',
+        description: 'Tag to help you manage your Worker.',
       },
     },
   },

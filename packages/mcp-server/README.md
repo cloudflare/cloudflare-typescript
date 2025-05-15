@@ -1210,7 +1210,7 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 
 ### Resource `workers.assets.upload`:
 
-- `create_assets_workers_upload` (`write`): Upload assets ahead of creating a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/
+- `create_assets_workers_upload` (`write`): Upload assets ahead of creating a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/.
 
 ### Resource `workers.scripts`:
 
@@ -1221,7 +1221,7 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 
 ### Resource `workers.scripts.assets.upload`:
 
-- `create_assets_scripts_workers_upload` (`write`): Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/
+- `create_assets_scripts_workers_upload` (`write`): Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/.
 
 ### Resource `workers.scripts.subdomain`:
 
@@ -1242,8 +1242,8 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 
 ### Resource `workers.scripts.content`:
 
-- `update_scripts_workers_content` (`write`): Put script content without touching config or metadata
-- `get_scripts_workers_content` (`read`): Fetch script content only
+- `update_scripts_workers_content` (`write`): Put script content without touching config or metadata.
+- `get_scripts_workers_content` (`read`): Fetch script content only.
 
 ### Resource `workers.scripts.settings`:
 
@@ -1270,8 +1270,8 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 
 ### Resource `workers.scripts.script_and_version_settings`:
 
-- `edit_scripts_workers_script_and_version_settings` (`write`): Patch metadata or config, such as bindings or usage model
-- `get_scripts_workers_script_and_version_settings` (`read`): Get metadata and config, such as bindings or usage model
+- `edit_scripts_workers_script_and_version_settings` (`write`): Patch metadata or config, such as bindings or usage model.
+- `get_scripts_workers_script_and_version_settings` (`read`): Get metadata and config, such as bindings or usage model.
 
 ### Resource `workers.account_settings`:
 
@@ -2279,7 +2279,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 
 ### Resource `workers_for_platforms.dispatch.namespaces.scripts.asset_upload`:
 
-- `create_scripts_namespaces_dispatch_workers_for_platforms_asset_upload` (`write`): Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/
+- `create_scripts_namespaces_dispatch_workers_for_platforms_asset_upload` (`write`): Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/.
 
 ### Resource `workers_for_platforms.dispatch.namespaces.scripts.content`:
 
@@ -2288,7 +2288,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 
 ### Resource `workers_for_platforms.dispatch.namespaces.scripts.settings`:
 
-- `edit_scripts_namespaces_dispatch_workers_for_platforms_settings` (`write`): Patch script metadata, such as bindings
+- `edit_scripts_namespaces_dispatch_workers_for_platforms_settings` (`write`): Patch script metadata, such as bindings.
 - `get_scripts_namespaces_dispatch_workers_for_platforms_settings` (`read`): Get script settings from a script uploaded to a Workers for Platforms namespace.
 
 ### Resource `workers_for_platforms.dispatch.namespaces.scripts.bindings`:

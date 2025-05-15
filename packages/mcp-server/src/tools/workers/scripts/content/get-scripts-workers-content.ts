@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_scripts_workers_content',
-  description: 'Fetch script content only',
+  description: 'Fetch script content only.',
   inputSchema: {
     type: 'object',
     properties: {

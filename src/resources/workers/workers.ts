@@ -50,6 +50,7 @@ import * as ScriptsAPI from './scripts/scripts';
 import {
   Script,
   ScriptDeleteParams,
+  ScriptDeleteResponse,
   ScriptGetParams,
   ScriptGetResponse,
   ScriptListParams,
@@ -347,6 +348,7 @@ export declare namespace Workers {
     type Script as Script,
     type ScriptSetting as ScriptSetting,
     type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptGetResponse as ScriptGetResponse,
     type ScriptsSinglePage as ScriptsSinglePage,
     type ScriptUpdateParams as ScriptUpdateParams,

@@ -22,7 +22,7 @@ export const tool: Tool = {
       },
       name: {
         type: 'string',
-        description: 'The name of the dispatch namespace',
+        description: 'The name of the dispatch namespace.',
       },
     },
   },

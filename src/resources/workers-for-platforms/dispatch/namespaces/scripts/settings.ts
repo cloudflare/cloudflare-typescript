@@ -10,7 +10,7 @@ import { path } from '../../../../../internal/utils/path';
 
 export class Settings extends APIResource {
   /**
-   * Patch script metadata, such as bindings
+   * Patch script metadata, such as bindings.
    *
    * @example
    * ```ts
@@ -139,7 +139,7 @@ export interface SettingEditResponse {
   placement?: SettingEditResponse.Placement;
 
   /**
-   * Tags to help you manage your Workers
+   * Tags to help you manage your Workers.
    */
   tags?: Array<string>;
 
@@ -742,7 +742,7 @@ export interface SettingGetResponse {
   placement?: SettingGetResponse.Placement;
 
   /**
-   * Tags to help you manage your Workers
+   * Tags to help you manage your Workers.
    */
   tags?: Array<string>;
 
@@ -1363,7 +1363,7 @@ export namespace SettingEditParams {
     placement?: Settings.Placement;
 
     /**
-     * Tags to help you manage your Workers
+     * Tags to help you manage your Workers.
      */
     tags?: Array<string>;
 

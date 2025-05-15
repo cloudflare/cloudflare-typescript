@@ -103,21 +103,28 @@ export class Scripts extends APIResource {
    *
    * @example
    * ```ts
-   * await client.workersForPlatforms.dispatch.namespaces.scripts.delete(
-   *   'this-is_my_script-01',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     dispatch_namespace: 'my-dispatch-namespace',
-   *   },
-   * );
+   * const script =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.delete(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       dispatch_namespace: 'my-dispatch-namespace',
+   *     },
+   *   );
    * ```
    */
-  delete(scriptName: string, params: ScriptDeleteParams, options?: RequestOptions): APIPromise<void> {
+  delete(
+    scriptName: string,
+    params: ScriptDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<ScriptDeleteResponse | null> {
     const { account_id, dispatch_namespace, force } = params;
-    return this._client.delete(
-      path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}`,
-      { query: { force }, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
-    );
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}`,
+        { query: { force }, ...options },
+      ) as APIPromise<{ result: ScriptDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -169,6 +176,8 @@ export interface Script {
 }
 
 export interface ScriptUpdateResponse {
+  startup_time_ms: number;
+
   /**
    * The id of the script in the Workers system. Usually the script name.
    */
@@ -211,18 +220,14 @@ export interface ScriptUpdateResponse {
   placement?: ScriptUpdateResponse.Placement;
 
   /**
-   * @deprecated Enables
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * @deprecated
    */
   placement_mode?: 'smart';
 
   /**
-   * @deprecated Status of
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * @deprecated
    */
   placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
-
-  startup_time_ms?: number;
 
   /**
    * List of Workers that will consume logs from the attached Worker.
@@ -261,6 +266,8 @@ export namespace ScriptUpdateResponse {
   }
 }
 
+export type ScriptDeleteResponse = unknown;
+
 export interface ScriptUpdateParams {
   /**
    * Path param: Identifier.
@@ -287,7 +294,7 @@ export namespace ScriptUpdateParams {
    */
   export interface Metadata {
     /**
-     * Configuration for assets within a Worker
+     * Configuration for assets within a Worker.
      */
     assets?: Metadata.Assets;
 
@@ -397,7 +404,7 @@ export namespace ScriptUpdateParams {
 
   export namespace Metadata {
     /**
-     * Configuration for assets within a Worker
+     * Configuration for assets within a Worker.
      */
     export interface Assets {
       /**
@@ -418,13 +425,13 @@ export namespace ScriptUpdateParams {
       export interface Config {
         /**
          * The contents of a \_headers file (used to attach custom headers on asset
-         * responses)
+         * responses).
          */
         _headers?: string;
 
         /**
          * The contents of a \_redirects file (used to apply redirects or proxy paths ahead
-         * of asset serving)
+         * of asset serving).
          */
         _redirects?: string;
 
@@ -1020,6 +1027,7 @@ export declare namespace Scripts {
   export {
     type Script as Script,
     type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptDeleteParams as ScriptDeleteParams,
     type ScriptGetParams as ScriptGetParams,

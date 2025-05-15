@@ -15,7 +15,6 @@ import {
 } from './deployments';
 import * as SchedulesAPI from './schedules';
 import {
-  Schedule,
   ScheduleGetParams,
   ScheduleGetResponse,
   ScheduleUpdateParams,
@@ -164,19 +163,24 @@ export class Scripts extends APIResource {
    *
    * @example
    * ```ts
-   * await client.workers.scripts.delete(
+   * const script = await client.workers.scripts.delete(
    *   'this-is_my_script-01',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
-  delete(scriptName: string, params: ScriptDeleteParams, options?: RequestOptions): APIPromise<void> {
+  delete(
+    scriptName: string,
+    params: ScriptDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<ScriptDeleteResponse | null> {
     const { account_id, force } = params;
-    return this._client.delete(path`/accounts/${account_id}/workers/scripts/${scriptName}`, {
-      query: { force },
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return (
+      this._client.delete(path`/accounts/${account_id}/workers/scripts/${scriptName}`, {
+        query: { force },
+        ...options,
+      }) as APIPromise<{ result: ScriptDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -358,6 +362,8 @@ export namespace ScriptSetting {
 }
 
 export interface ScriptUpdateResponse {
+  startup_time_ms: number;
+
   /**
    * The id of the script in the Workers system. Usually the script name.
    */
@@ -400,18 +406,14 @@ export interface ScriptUpdateResponse {
   placement?: ScriptUpdateResponse.Placement;
 
   /**
-   * @deprecated Enables
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * @deprecated
    */
   placement_mode?: 'smart';
 
   /**
-   * @deprecated Status of
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * @deprecated
    */
   placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
-
-  startup_time_ms?: number;
 
   /**
    * List of Workers that will consume logs from the attached Worker.
@@ -450,6 +452,8 @@ export namespace ScriptUpdateResponse {
   }
 }
 
+export type ScriptDeleteResponse = unknown;
+
 export type ScriptGetResponse = string;
 
 export interface ScriptUpdateParams {
@@ -473,7 +477,7 @@ export namespace ScriptUpdateParams {
    */
   export interface Metadata {
     /**
-     * Configuration for assets within a Worker
+     * Configuration for assets within a Worker.
      */
     assets?: Metadata.Assets;
 
@@ -583,7 +587,7 @@ export namespace ScriptUpdateParams {
 
   export namespace Metadata {
     /**
-     * Configuration for assets within a Worker
+     * Configuration for assets within a Worker.
      */
     export interface Assets {
       /**
@@ -604,13 +608,13 @@ export namespace ScriptUpdateParams {
       export interface Config {
         /**
          * The contents of a \_headers file (used to attach custom headers on asset
-         * responses)
+         * responses).
          */
         _headers?: string;
 
         /**
          * The contents of a \_redirects file (used to apply redirects or proxy paths ahead
-         * of asset serving)
+         * of asset serving).
          */
         _redirects?: string;
 
@@ -1208,6 +1212,7 @@ export declare namespace Scripts {
     type Script as Script,
     type ScriptSetting as ScriptSetting,
     type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptGetResponse as ScriptGetResponse,
     type ScriptsSinglePage as ScriptsSinglePage,
     type ScriptUpdateParams as ScriptUpdateParams,
@@ -1230,7 +1235,6 @@ export declare namespace Scripts {
 
   export {
     Schedules as Schedules,
-    type Schedule as Schedule,
     type ScheduleUpdateResponse as ScheduleUpdateResponse,
     type ScheduleGetResponse as ScheduleGetResponse,
     type ScheduleUpdateParams as ScheduleUpdateParams,
