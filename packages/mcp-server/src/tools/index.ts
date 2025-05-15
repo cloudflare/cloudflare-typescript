@@ -490,6 +490,7 @@ import update_queues_consumers from './queues/consumers/update-queues-consumers'
 import delete_queues_consumers from './queues/consumers/delete-queues-consumers';
 import get_queues_consumers from './queues/consumers/get-queues-consumers';
 import ack_queues_messages from './queues/messages/ack-queues-messages';
+import bulk_push_queues_messages from './queues/messages/bulk-push-queues-messages';
 import pull_queues_messages from './queues/messages/pull-queues-messages';
 import push_queues_messages from './queues/messages/push-queues-messages';
 import start_queues_purge from './queues/purge/start-queues-purge';
@@ -2250,6 +2251,7 @@ addEndpoint(update_queues_consumers);
 addEndpoint(delete_queues_consumers);
 addEndpoint(get_queues_consumers);
 addEndpoint(ack_queues_messages);
+addEndpoint(bulk_push_queues_messages);
 addEndpoint(pull_queues_messages);
 addEndpoint(push_queues_messages);
 addEndpoint(start_queues_purge);

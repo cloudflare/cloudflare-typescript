@@ -297,6 +297,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.consumers.delete()`
 - `client.queues.consumers.get()`
 - `client.queues.messages.ack()`
+- `client.queues.messages.bulkPush()`
 - `client.queues.messages.pull()`
 - `client.queues.messages.push()`
 - `client.queues.purge.start()`
