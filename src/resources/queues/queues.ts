@@ -18,6 +18,8 @@ import * as MessagesAPI from './messages';
 import {
   MessageAckParams,
   MessageAckResponse,
+  MessageBulkPushParams,
+  MessageBulkPushResponse,
   MessagePullParams,
   MessagePullResponse,
   MessagePullResponsesSinglePage,
@@ -359,10 +361,12 @@ export declare namespace Queues {
   export {
     Messages as Messages,
     type MessageAckResponse as MessageAckResponse,
+    type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
     type MessagePushResponse as MessagePushResponse,
     MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
     type MessageAckParams as MessageAckParams,
+    type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,
     type MessagePushParams as MessagePushParams,
   };
