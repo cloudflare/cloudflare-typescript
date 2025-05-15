@@ -42,6 +42,28 @@ describe('resource eventNotifications', () => {
   });
 
   // TODO: investigate auth errors on test suite
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.r2.buckets.eventNotifications.list('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate auth errors on test suite
+  test.skip('list: required and optional params', async () => {
+    const response = await client.r2.buckets.eventNotifications.list('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      jurisdiction: 'default',
+    });
+  });
+
+  // TODO: investigate auth errors on test suite
   test.skip('delete: only required params', async () => {
     const responsePromise = client.r2.buckets.eventNotifications.delete('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -67,8 +89,9 @@ describe('resource eventNotifications', () => {
 
   // TODO: investigate auth errors on test suite
   test.skip('get: only required params', async () => {
-    const responsePromise = client.r2.buckets.eventNotifications.get('example-bucket', {
+    const responsePromise = client.r2.buckets.eventNotifications.get('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      bucket_name: 'example-bucket',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -81,8 +104,9 @@ describe('resource eventNotifications', () => {
 
   // TODO: investigate auth errors on test suite
   test.skip('get: required and optional params', async () => {
-    const response = await client.r2.buckets.eventNotifications.get('example-bucket', {
+    const response = await client.r2.buckets.eventNotifications.get('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      bucket_name: 'example-bucket',
       jurisdiction: 'default',
     });
   });

@@ -2794,6 +2794,43 @@
       ]
     },
     {
+      "base": "r2.buckets.eventNotifications",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "workersForPlatforms.dispatch.namespaces.scripts",
       "name": "update",
       "params": [

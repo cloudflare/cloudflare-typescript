@@ -20,5 +20,6 @@ export {
   type PCAPCreateParams,
   type PCAPListParams,
   type PCAPGetParams,
+  type PCAPStopParams,
   type PCAPListResponsesSinglePage,
 } from './pcaps';

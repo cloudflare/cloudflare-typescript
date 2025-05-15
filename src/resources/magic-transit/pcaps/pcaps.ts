@@ -16,6 +16,7 @@ import {
 } from './ownership';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -89,6 +90,25 @@ export class PCAPs extends APIResource {
         result: PCAPGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Stop full PCAP
+   *
+   * @example
+   * ```ts
+   * await client.magicTransit.pcaps.stop(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  stop(pcapID: string, params: PCAPStopParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id } = params;
+    return this._client.put(path`/accounts/${account_id}/pcaps/${pcapID}/stop`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
@@ -575,6 +595,13 @@ export interface PCAPGetParams {
   account_id: string;
 }
 
+export interface PCAPStopParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 PCAPs.OwnershipResource = OwnershipResource;
 PCAPs.Download = Download;
 
@@ -589,6 +616,7 @@ export declare namespace PCAPs {
     type PCAPCreateParams as PCAPCreateParams,
     type PCAPListParams as PCAPListParams,
     type PCAPGetParams as PCAPGetParams,
+    type PCAPStopParams as PCAPStopParams,
   };
 
   export {
