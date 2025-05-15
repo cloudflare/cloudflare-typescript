@@ -30,6 +30,29 @@ export class Messages extends APIResource {
   }
 
   /**
+   * Push a batch of message to a Queue
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.messages.bulkPush(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  bulkPush(
+    queueID: string,
+    params: MessageBulkPushParams,
+    options?: RequestOptions,
+  ): APIPromise<MessageBulkPushResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/batch`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
    * Pull a batch of messages from a Queue
    *
    * @example
@@ -91,6 +114,17 @@ export interface MessageAckResponse {
   retryCount?: number;
 
   warnings?: Array<string>;
+}
+
+export interface MessageBulkPushResponse {
+  errors?: Array<Shared.ResponseInfo>;
+
+  messages?: Array<string>;
+
+  /**
+   * Indicates if the API call was successful or not.
+   */
+  success?: true;
 }
 
 export interface MessagePullResponse {
@@ -160,6 +194,50 @@ export namespace MessageAckParams {
      * You must hold on to this ID and use it to acknowledge this message.
      */
     lease_id?: string;
+  }
+}
+
+export interface MessageBulkPushParams {
+  /**
+   * Path param: A Resource identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The number of seconds to wait for attempting to deliver this batch
+   * to consumers
+   */
+  delay_seconds?: number;
+
+  /**
+   * Body param:
+   */
+  messages?: Array<MessageBulkPushParams.MqQueueMessageText | MessageBulkPushParams.MqQueueMessageJson>;
+}
+
+export namespace MessageBulkPushParams {
+  export interface MqQueueMessageText {
+    body?: string;
+
+    content_type?: 'text';
+
+    /**
+     * The number of seconds to wait for attempting to deliver this message to
+     * consumers
+     */
+    delay_seconds?: number;
+  }
+
+  export interface MqQueueMessageJson {
+    body?: unknown;
+
+    content_type?: 'json';
+
+    /**
+     * The number of seconds to wait for attempting to deliver this message to
+     * consumers
+     */
+    delay_seconds?: number;
   }
 }
 
@@ -234,10 +312,12 @@ export declare namespace MessagePushParams {
 export declare namespace Messages {
   export {
     type MessageAckResponse as MessageAckResponse,
+    type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
     type MessagePushResponse as MessagePushResponse,
     type MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
     type MessageAckParams as MessageAckParams,
+    type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,
     type MessagePushParams as MessagePushParams,
   };

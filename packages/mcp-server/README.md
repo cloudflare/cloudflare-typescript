@@ -1348,6 +1348,7 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 ### Resource `queues.messages`:
 
 - `ack_queues_messages` (`write`): Acknowledge + Retry messages from a Queue
+- `bulk_push_queues_messages` (`write`): Push a batch of message to a Queue
 - `pull_queues_messages` (`write`): Pull a batch of messages from a Queue
 - `push_queues_messages` (`write`): Push a message to a Queue
 
