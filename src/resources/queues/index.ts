@@ -14,9 +14,11 @@ export {
   MessagePullResponsesSinglePage,
   Messages,
   type MessageAckResponse,
+  type MessageBulkPushResponse,
   type MessagePullResponse,
   type MessagePushResponse,
   type MessageAckParams,
+  type MessageBulkPushParams,
   type MessagePullParams,
   type MessagePushParams,
 } from './messages';
