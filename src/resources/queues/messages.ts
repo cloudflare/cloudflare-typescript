@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Messages extends APIResource {
@@ -56,6 +57,26 @@ export class Messages extends APIResource {
       { body, method: 'post', ...options },
     );
   }
+
+  /**
+   * Push a message to a Queue
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.messages.push(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  push(
+    queueId: string,
+    params: MessagePushParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessagePushResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages`, { body, ...options });
+  }
 }
 
 export class MessagePullResponsesSinglePage extends SinglePage<MessagePullResponse> {}
@@ -90,6 +111,17 @@ export interface MessagePullResponse {
   metadata?: unknown;
 
   timestamp_ms?: number;
+}
+
+export interface MessagePushResponse {
+  errors?: Array<Shared.ResponseInfo>;
+
+  messages?: Array<string>;
+
+  /**
+   * Indicates if the API call was successful or not.
+   */
+  success?: true;
 }
 
 export interface MessageAckParams {
@@ -151,14 +183,66 @@ export interface MessagePullParams {
   visibility_timeout_ms?: number;
 }
 
+export type MessagePushParams = MessagePushParams.MqQueueMessageText | MessagePushParams.MqQueueMessageJson;
+
+export declare namespace MessagePushParams {
+  export interface MqQueueMessageText {
+    /**
+     * Path param: A Resource identifier.
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body?: string;
+
+    /**
+     * Body param:
+     */
+    content_type?: 'text';
+
+    /**
+     * Body param: The number of seconds to wait for attempting to deliver this message
+     * to consumers
+     */
+    delay_seconds?: number;
+  }
+
+  export interface MqQueueMessageJson {
+    /**
+     * Path param: A Resource identifier.
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body?: unknown;
+
+    /**
+     * Body param:
+     */
+    content_type?: 'json';
+
+    /**
+     * Body param: The number of seconds to wait for attempting to deliver this message
+     * to consumers
+     */
+    delay_seconds?: number;
+  }
+}
+
 Messages.MessagePullResponsesSinglePage = MessagePullResponsesSinglePage;
 
 export declare namespace Messages {
   export {
     type MessageAckResponse as MessageAckResponse,
     type MessagePullResponse as MessagePullResponse,
+    type MessagePushResponse as MessagePushResponse,
     MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
     type MessageAckParams as MessageAckParams,
     type MessagePullParams as MessagePullParams,
+    type MessagePushParams as MessagePushParams,
   };
 }

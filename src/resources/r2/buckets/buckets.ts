@@ -18,6 +18,8 @@ import {
   EventNotificationDeleteResponse,
   EventNotificationGetParams,
   EventNotificationGetResponse,
+  EventNotificationListParams,
+  EventNotificationListResponse,
   EventNotificationUpdateParams,
   EventNotificationUpdateResponse,
   EventNotifications,
@@ -397,9 +399,11 @@ export declare namespace Buckets {
   export {
     EventNotifications as EventNotifications,
     type EventNotificationUpdateResponse as EventNotificationUpdateResponse,
+    type EventNotificationListResponse as EventNotificationListResponse,
     type EventNotificationDeleteResponse as EventNotificationDeleteResponse,
     type EventNotificationGetResponse as EventNotificationGetResponse,
     type EventNotificationUpdateParams as EventNotificationUpdateParams,
+    type EventNotificationListParams as EventNotificationListParams,
     type EventNotificationDeleteParams as EventNotificationDeleteParams,
     type EventNotificationGetParams as EventNotificationGetParams,
   };

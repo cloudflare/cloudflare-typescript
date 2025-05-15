@@ -80,4 +80,23 @@ describe('resource pcaps', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
+
+  test('stop: only required params', async () => {
+    const responsePromise = client.magicTransit.pcaps.stop('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('stop: required and optional params', async () => {
+    const response = await client.magicTransit.pcaps.stop('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
 });
