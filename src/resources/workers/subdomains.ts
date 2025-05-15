@@ -13,6 +13,7 @@ export class Subdomains extends APIResource {
    * ```ts
    * const subdomain = await client.workers.subdomains.update({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   subdomain: 'my-subdomain',
    * });
    * ```
    */
@@ -46,11 +47,11 @@ export class Subdomains extends APIResource {
 }
 
 export interface SubdomainUpdateResponse {
-  subdomain?: string;
+  subdomain: string;
 }
 
 export interface SubdomainGetResponse {
-  subdomain?: string;
+  subdomain: string;
 }
 
 export interface SubdomainUpdateParams {
@@ -62,7 +63,7 @@ export interface SubdomainUpdateParams {
   /**
    * Body param:
    */
-  subdomain?: string;
+  subdomain: string;
 }
 
 export interface SubdomainGetParams {

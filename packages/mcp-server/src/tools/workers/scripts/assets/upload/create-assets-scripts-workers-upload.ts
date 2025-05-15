@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_assets_scripts_workers_upload',
   description:
-    'Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/',
+    'Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/.',
   inputSchema: {
     type: 'object',
     properties: {

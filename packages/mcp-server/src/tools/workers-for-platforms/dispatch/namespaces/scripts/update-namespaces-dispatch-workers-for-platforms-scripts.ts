@@ -35,7 +35,7 @@ export const tool: Tool = {
         properties: {
           assets: {
             type: 'object',
-            description: 'Configuration for assets within a Worker',
+            description: 'Configuration for assets within a Worker.',
             properties: {
               config: {
                 type: 'object',
@@ -44,12 +44,12 @@ export const tool: Tool = {
                   _headers: {
                     type: 'string',
                     description:
-                      'The contents of a _headers file (used to attach custom headers on asset responses)',
+                      'The contents of a _headers file (used to attach custom headers on asset responses).',
                   },
                   _redirects: {
                     type: 'string',
                     description:
-                      'The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving)',
+                      'The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving).',
                   },
                   html_handling: {
                     type: 'string',
@@ -577,7 +577,7 @@ export const tool: Tool = {
                   required: ['algorithm', 'format', 'name', 'type', 'usages'],
                 },
               ],
-              description: 'A binding to allow the Worker to communicate with resources',
+              description: 'A binding to allow the Worker to communicate with resources.',
             },
           },
           body_part: {

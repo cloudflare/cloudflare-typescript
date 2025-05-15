@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'edit_scripts_namespaces_dispatch_workers_for_platforms_settings',
-  description: 'Patch script metadata, such as bindings',
+  description: 'Patch script metadata, such as bindings.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -526,7 +526,7 @@ export const tool: Tool = {
                   required: ['algorithm', 'format', 'name', 'type', 'usages'],
                 },
               ],
-              description: 'A binding to allow the Worker to communicate with resources',
+              description: 'A binding to allow the Worker to communicate with resources.',
             },
           },
           compatibility_date: {
@@ -641,10 +641,10 @@ export const tool: Tool = {
           },
           tags: {
             type: 'array',
-            description: 'Tags to help you manage your Workers',
+            description: 'Tags to help you manage your Workers.',
             items: {
               type: 'string',
-              description: 'Tag to help you manage your Worker',
+              description: 'Tag to help you manage your Worker.',
             },
           },
           tail_consumers: {

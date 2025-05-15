@@ -27,25 +27,20 @@ export const tool: Tool = {
       body: {
         type: 'array',
         items: {
-          $ref: '#/$defs/schedule',
+          type: 'object',
+          properties: {
+            cron: {
+              type: 'string',
+            },
+            created_on: {
+              type: 'string',
+            },
+            modified_on: {
+              type: 'string',
+            },
+          },
+          required: ['cron'],
         },
-      },
-    },
-    $defs: {
-      schedule: {
-        type: 'object',
-        properties: {
-          created_on: {
-            type: 'string',
-          },
-          cron: {
-            type: 'string',
-          },
-          modified_on: {
-            type: 'string',
-          },
-        },
-        required: [],
       },
     },
   },

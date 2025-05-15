@@ -104,12 +104,12 @@ export type TagUpdateResponsesSinglePage = SinglePage<TagUpdateResponse>;
 export type TagListResponsesSinglePage = SinglePage<TagListResponse>;
 
 /**
- * Tag to help you manage your Worker
+ * Tag to help you manage your Worker.
  */
 export type TagUpdateResponse = string;
 
 /**
- * Tag to help you manage your Worker
+ * Tag to help you manage your Worker.
  */
 export type TagListResponse = string;
 
@@ -127,7 +127,7 @@ export interface TagUpdateParams {
   dispatch_namespace: string;
 
   /**
-   * Body param: Tags to help you manage your Workers
+   * Body param: Tags to help you manage your Workers.
    */
   body: Array<string>;
 }

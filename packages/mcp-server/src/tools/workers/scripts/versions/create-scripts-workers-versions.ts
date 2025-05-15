@@ -543,7 +543,7 @@ export const tool: Tool = {
                   required: ['algorithm', 'format', 'name', 'type', 'usages'],
                 },
               ],
-              description: 'A binding to allow the Worker to communicate with resources',
+              description: 'A binding to allow the Worker to communicate with resources.',
             },
           },
           compatibility_date: {

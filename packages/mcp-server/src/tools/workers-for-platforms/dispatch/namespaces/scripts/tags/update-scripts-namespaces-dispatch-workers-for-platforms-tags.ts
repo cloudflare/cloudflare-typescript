@@ -30,10 +30,10 @@ export const tool: Tool = {
       },
       body: {
         type: 'array',
-        description: 'Tags to help you manage your Workers',
+        description: 'Tags to help you manage your Workers.',
         items: {
           type: 'string',
-          description: 'Tag to help you manage your Worker',
+          description: 'Tag to help you manage your Worker.',
         },
       },
     },

@@ -40,7 +40,7 @@ export class Tail extends APIResource {
    * @example
    * ```ts
    * const tail = await client.workers.scripts.tail.delete(
-   *   '03dc9f77817b488fb26c5861ec18f791',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     script_name: 'this-is_my_script-01',
@@ -119,11 +119,14 @@ export interface ConsumerScriptParam {
 }
 
 export interface TailCreateResponse {
-  id?: string;
+  /**
+   * Identifier.
+   */
+  id: string;
 
-  expires_at?: string;
+  expires_at: string;
 
-  url?: string;
+  url: string;
 }
 
 export interface TailDeleteResponse {
@@ -172,11 +175,14 @@ export namespace TailDeleteResponse {
 }
 
 export interface TailGetResponse {
-  id?: string;
+  /**
+   * Identifier.
+   */
+  id: string;
 
-  expires_at?: string;
+  expires_at: string;
 
-  url?: string;
+  url: string;
 }
 
 export interface TailCreateParams {

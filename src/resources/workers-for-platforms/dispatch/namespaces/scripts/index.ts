@@ -12,6 +12,7 @@ export {
   Scripts,
   type Script,
   type ScriptUpdateResponse,
+  type ScriptDeleteResponse,
   type ScriptUpdateParams,
   type ScriptDeleteParams,
   type ScriptGetParams,
