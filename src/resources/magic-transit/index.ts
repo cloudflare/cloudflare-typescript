@@ -82,6 +82,7 @@ export {
   type PCAPCreateParams,
   type PCAPListParams,
   type PCAPGetParams,
+  type PCAPStopParams,
 } from './pcaps/index';
 export {
   Routes,

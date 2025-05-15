@@ -2,16 +2,22 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as EventsAPI from './events';
-import { EventGetParams, EventGetResponse, EventListParams, EventListResponse, Events } from './events';
-import * as SnapshotsAPI from './snapshots';
+import * as EventsAPI from './events/events';
+import {
+  EventGetParams,
+  EventGetResponse,
+  EventListParams,
+  EventListResponse,
+  Events,
+} from './events/events';
+import * as SnapshotsAPI from './snapshots/snapshots';
 import {
   SnapshotGetParams,
   SnapshotGetResponse,
   SnapshotListParams,
   SnapshotListResponse,
   Snapshots,
-} from './snapshots';
+} from './snapshots/snapshots';
 import { SinglePage } from '../../../pagination';
 
 export class Connectors extends APIResource {

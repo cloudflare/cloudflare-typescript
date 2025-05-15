@@ -106,6 +106,7 @@ import {
   PCAPListParams,
   PCAPListResponse,
   PCAPListResponsesSinglePage,
+  PCAPStopParams,
   PCAPs,
 } from './pcaps/pcaps';
 import * as SitesAPI from './sites/sites';
@@ -388,5 +389,6 @@ export declare namespace MagicTransit {
     type PCAPCreateParams as PCAPCreateParams,
     type PCAPListParams as PCAPListParams,
     type PCAPGetParams as PCAPGetParams,
+    type PCAPStopParams as PCAPStopParams,
   };
 }

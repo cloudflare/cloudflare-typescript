@@ -18,11 +18,11 @@ export {
   type EventGetResponse,
   type EventListParams,
   type EventGetParams,
-} from './events';
+} from './events/index';
 export {
   Snapshots,
   type SnapshotListResponse,
   type SnapshotGetResponse,
   type SnapshotListParams,
   type SnapshotGetParams,
-} from './snapshots';
+} from './snapshots/index';
