@@ -1349,6 +1349,7 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 
 - `ack_queues_messages` (`write`): Acknowledge + Retry messages from a Queue
 - `pull_queues_messages` (`write`): Pull a batch of messages from a Queue
+- `push_queues_messages` (`write`): Push a message to a Queue
 
 ### Resource `queues.purge`:
 
@@ -1819,16 +1820,25 @@ subnets of an IP prefix.
 - `list_connectors_magic_transit_events` (`read`): List Events
 - `get_connectors_magic_transit_events` (`read`): Get Event
 
+### Resource `magic_transit.connectors.events.latest`:
+
+- `list_events_connectors_magic_transit_latest` (`read`): Get latest Events
+
 ### Resource `magic_transit.connectors.snapshots`:
 
 - `list_connectors_magic_transit_snapshots` (`read`): List Snapshots
 - `get_connectors_magic_transit_snapshots` (`read`): Get Snapshot
+
+### Resource `magic_transit.connectors.snapshots.latest`:
+
+- `list_snapshots_connectors_magic_transit_latest` (`read`): Get latest Snapshots
 
 ### Resource `magic_transit.pcaps`:
 
 - `create_magic_transit_pcaps` (`write`): Create new PCAP request for account.
 - `list_magic_transit_pcaps` (`read`): Lists all packet capture requests for an account.
 - `get_magic_transit_pcaps` (`read`): Get information for a PCAP request by id.
+- `stop_magic_transit_pcaps` (`write`): Stop full PCAP
 
 ### Resource `magic_transit.pcaps.ownership`:
 
@@ -2210,8 +2220,9 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `r2.buckets.event_notifications`:
 
 - `update_buckets_r2_event_notifications` (`write`): Create event notification rule.
+- `list_buckets_r2_event_notifications` (`read`): List all event notification rules for a bucket.
 - `delete_buckets_r2_event_notifications` (`write`): Delete an event notification rule. **If no body is provided, all rules for specified queue will be deleted**.
-- `get_buckets_r2_event_notifications` (`read`): List all event notification rules for a bucket.
+- `get_buckets_r2_event_notifications` (`read`): Get a single event notification rule.
 
 ### Resource `r2.buckets.locks`:
 

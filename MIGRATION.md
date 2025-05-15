@@ -298,6 +298,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.consumers.get()`
 - `client.queues.messages.ack()`
 - `client.queues.messages.pull()`
+- `client.queues.messages.push()`
 - `client.queues.purge.start()`
 - `client.queues.purge.status()`
 - `client.apiGateway.discovery.operations.edit()`
@@ -421,9 +422,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.magicTransit.connectors.get()`
 - `client.magicTransit.connectors.events.list()`
 - `client.magicTransit.connectors.events.get()`
+- `client.magicTransit.connectors.events.latest.list()`
 - `client.magicTransit.connectors.snapshots.list()`
 - `client.magicTransit.connectors.snapshots.get()`
+- `client.magicTransit.connectors.snapshots.latest.list()`
 - `client.magicTransit.pcaps.get()`
+- `client.magicTransit.pcaps.stop()`
 - `client.magicTransit.pcaps.ownership.delete()`
 - `client.magicTransit.pcaps.download.get()`
 - `client.magicNetworkMonitoring.rules.delete()`
@@ -546,6 +550,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.r2.buckets.domains.managed.update()`
 - `client.r2.buckets.domains.managed.list()`
 - `client.r2.buckets.eventNotifications.update()`
+- `client.r2.buckets.eventNotifications.list()`
 - `client.r2.buckets.eventNotifications.delete()`
 - `client.r2.buckets.eventNotifications.get()`
 - `client.r2.buckets.locks.update()`

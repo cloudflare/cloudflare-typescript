@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 export const tool: Tool = {
-  name: 'get_buckets_r2_event_notifications',
-  description: 'Get a single event notification rule.',
+  name: 'list_buckets_r2_event_notifications',
+  description: 'List all event notification rules for a bucket.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -24,13 +24,9 @@ export const tool: Tool = {
         type: 'string',
         description: 'Name of the bucket.',
       },
-      queue_id: {
-        type: 'string',
-        description: 'Queue ID.',
-      },
       jurisdiction: {
         type: 'string',
-        description: 'The bucket jurisdiction.',
+        description: 'Jurisdiction where objects in this bucket are guaranteed to be stored.',
         enum: ['default', 'eu', 'fedramp'],
       },
     },
@@ -38,8 +34,8 @@ export const tool: Tool = {
 };
 
 export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { queue_id, ...body } = args as any;
-  return client.r2.buckets.eventNotifications.get(queue_id, body);
+  const { bucket_name, ...body } = args as any;
+  return client.r2.buckets.eventNotifications.list(bucket_name, body);
 };
 
 export default { metadata, tool, handler };

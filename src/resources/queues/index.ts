@@ -14,8 +14,10 @@ export {
   Messages,
   type MessageAckResponse,
   type MessagePullResponse,
+  type MessagePushResponse,
   type MessageAckParams,
   type MessagePullParams,
+  type MessagePushParams,
   type MessagePullResponsesSinglePage,
 } from './messages';
 export { Purge, type PurgeStatusResponse, type PurgeStartParams, type PurgeStatusParams } from './purge';

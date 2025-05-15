@@ -24,9 +24,11 @@ export { Domains } from './domains/index';
 export {
   EventNotifications,
   type EventNotificationUpdateResponse,
+  type EventNotificationListResponse,
   type EventNotificationDeleteResponse,
   type EventNotificationGetResponse,
   type EventNotificationUpdateParams,
+  type EventNotificationListParams,
   type EventNotificationDeleteParams,
   type EventNotificationGetParams,
 } from './event-notifications';
