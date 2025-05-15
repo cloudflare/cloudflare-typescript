@@ -131,6 +131,12 @@ export interface DefaultEditResponse {
    */
   register_interface_ip_with_dns?: boolean;
 
+  /**
+   * Determines whether the WARP client indicates to SCCM that it is inside a VPN
+   * boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
+
   service_mode_v2?: DefaultEditResponse.ServiceModeV2;
 
   /**
@@ -231,6 +237,12 @@ export interface DefaultGetResponse {
    * your on-premises DNS server.
    */
   register_interface_ip_with_dns?: boolean;
+
+  /**
+   * Determines whether the WARP client indicates to SCCM that it is inside a VPN
+   * boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
 
   service_mode_v2?: DefaultGetResponse.ServiceModeV2;
 
@@ -340,6 +352,12 @@ export interface DefaultEditParams {
    * interface IP with your on-premises DNS server.
    */
   register_interface_ip_with_dns?: boolean;
+
+  /**
+   * Body param: Determines whether the WARP client indicates to SCCM that it is
+   * inside a VPN boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
 
   /**
    * Body param:

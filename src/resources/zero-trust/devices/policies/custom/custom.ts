@@ -255,6 +255,12 @@ export interface CustomCreateParams {
   register_interface_ip_with_dns?: boolean;
 
   /**
+   * Body param: Determines whether the WARP client indicates to SCCM that it is
+   * inside a VPN boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
+
+  /**
    * Body param:
    */
   service_mode_v2?: CustomCreateParams.ServiceModeV2;
@@ -403,6 +409,12 @@ export interface CustomEditParams {
    * interface IP with your on-premises DNS server.
    */
   register_interface_ip_with_dns?: boolean;
+
+  /**
+   * Body param: Determines whether the WARP client indicates to SCCM that it is
+   * inside a VPN boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
 
   /**
    * Body param:
