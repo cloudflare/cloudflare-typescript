@@ -39,7 +39,7 @@ export class Bindings extends APIResource {
 export class BindingGetResponsesSinglePage extends SinglePage<BindingGetResponse> {}
 
 /**
- * A binding to allow the Worker to communicate with resources
+ * A binding to allow the Worker to communicate with resources.
  */
 export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindAI

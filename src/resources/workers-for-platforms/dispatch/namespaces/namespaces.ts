@@ -6,6 +6,7 @@ import * as ScriptsAPI from './scripts/scripts';
 import {
   Script,
   ScriptDeleteParams,
+  ScriptDeleteResponse,
   ScriptGetParams,
   ScriptUpdateParams,
   ScriptUpdateResponse,
@@ -152,7 +153,7 @@ export interface NamespaceCreateResponse {
   namespace_name?: string;
 
   /**
-   * The current number of scripts in this Dispatch Namespace
+   * The current number of scripts in this Dispatch Namespace.
    */
   script_count?: number;
 }
@@ -189,7 +190,7 @@ export interface NamespaceListResponse {
   namespace_name?: string;
 
   /**
-   * The current number of scripts in this Dispatch Namespace
+   * The current number of scripts in this Dispatch Namespace.
    */
   script_count?: number;
 }
@@ -228,7 +229,7 @@ export interface NamespaceGetResponse {
   namespace_name?: string;
 
   /**
-   * The current number of scripts in this Dispatch Namespace
+   * The current number of scripts in this Dispatch Namespace.
    */
   script_count?: number;
 }
@@ -240,7 +241,7 @@ export interface NamespaceCreateParams {
   account_id: string;
 
   /**
-   * Body param: The name of the dispatch namespace
+   * Body param: The name of the dispatch namespace.
    */
   name?: string;
 }
@@ -286,6 +287,7 @@ export declare namespace Namespaces {
     Scripts as Scripts,
     type Script as Script,
     type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptDeleteParams as ScriptDeleteParams,
     type ScriptGetParams as ScriptGetParams,

@@ -7,7 +7,7 @@ export class Upload extends APIResource {
   /**
    * Start uploading a collection of assets for use in a Worker version. To learn
    * more about the direct uploads of assets, see
-   * https://developers.cloudflare.com/workers/static-assets/direct-upload/
+   * https://developers.cloudflare.com/workers/static-assets/direct-upload/.
    *
    * @example
    * ```ts

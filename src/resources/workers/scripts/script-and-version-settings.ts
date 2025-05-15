@@ -7,7 +7,7 @@ import * as TailAPI from './tail';
 
 export class ScriptAndVersionSettings extends APIResource {
   /**
-   * Patch metadata or config, such as bindings or usage model
+   * Patch metadata or config, such as bindings or usage model.
    *
    * @example
    * ```ts
@@ -33,7 +33,7 @@ export class ScriptAndVersionSettings extends APIResource {
   }
 
   /**
-   * Get metadata and config, such as bindings or usage model
+   * Get metadata and config, such as bindings or usage model.
    *
    * @example
    * ```ts
@@ -132,7 +132,7 @@ export interface ScriptAndVersionSettingEditResponse {
   placement?: ScriptAndVersionSettingEditResponse.Placement;
 
   /**
-   * Tags to help you manage your Workers
+   * Tags to help you manage your Workers.
    */
   tags?: Array<string>;
 
@@ -737,7 +737,7 @@ export interface ScriptAndVersionSettingGetResponse {
   placement?: ScriptAndVersionSettingGetResponse.Placement;
 
   /**
-   * Tags to help you manage your Workers
+   * Tags to help you manage your Workers.
    */
   tags?: Array<string>;
 
@@ -1353,7 +1353,7 @@ export namespace ScriptAndVersionSettingEditParams {
     placement?: Settings.Placement;
 
     /**
-     * Tags to help you manage your Workers
+     * Tags to help you manage your Workers.
      */
     tags?: Array<string>;
 
