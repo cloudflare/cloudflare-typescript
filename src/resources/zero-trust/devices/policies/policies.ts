@@ -186,6 +186,12 @@ export interface SettingsPolicy {
    */
   register_interface_ip_with_dns?: boolean;
 
+  /**
+   * Determines whether the WARP client indicates to SCCM that it is inside a VPN
+   * boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
+
   service_mode_v2?: SettingsPolicy.ServiceModeV2;
 
   /**
