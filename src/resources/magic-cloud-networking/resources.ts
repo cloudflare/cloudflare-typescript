@@ -9,7 +9,7 @@ import { path } from '../../internal/utils/path';
 
 export class Resources extends APIResource {
   /**
-   * List resources in the Resource Catalog (Closed Beta)
+   * List resources in the Resource Catalog (Closed Beta).
    */
   list(
     params: ResourceListParams,
@@ -24,7 +24,7 @@ export class Resources extends APIResource {
   }
 
   /**
-   * Export resources in the Resource Catalog as a JSON file (Closed Beta)
+   * Export resources in the Resource Catalog as a JSON file (Closed Beta).
    */
   export(params: ResourceExportParams, options?: RequestOptions): APIPromise<Response> {
     const { account_id, ...query } = params;
@@ -37,7 +37,7 @@ export class Resources extends APIResource {
   }
 
   /**
-   * Read an resource from the Resource Catalog (Closed Beta)
+   * Read an resource from the Resource Catalog (Closed Beta).
    */
   get(
     resourceID: string,
@@ -54,7 +54,7 @@ export class Resources extends APIResource {
   }
 
   /**
-   * Preview Rego query result against the latest resource catalog (Closed Beta)
+   * Preview Rego query result against the latest resource catalog (Closed Beta).
    */
   policyPreview(
     params: ResourcePolicyPreviewParams,
@@ -1250,7 +1250,7 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   managed?: boolean;
 
   /**
-   * Query param: one of ["id", "resource_type", "region"]
+   * Query param: One of ["id", "resource_type", "region"].
    */
   order_by?: string;
 
@@ -1360,7 +1360,7 @@ export interface ResourceExportParams {
   desc?: boolean;
 
   /**
-   * Query param: one of ["id", "resource_type", "region"]
+   * Query param: One of ["id", "resource_type", "region"].
    */
   order_by?: string;
 

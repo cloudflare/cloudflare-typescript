@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_magic_cloud_networking_resources',
-  description: 'Read an resource from the Resource Catalog (Closed Beta)',
+  description: 'Read an resource from the Resource Catalog (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {

@@ -20,7 +20,7 @@ export class CatalogSyncs extends APIResource {
   );
 
   /**
-   * Create a new Catalog Sync (Closed Beta)
+   * Create a new Catalog Sync (Closed Beta).
    */
   create(params: CatalogSyncCreateParams, options?: RequestOptions): APIPromise<CatalogSyncCreateResponse> {
     const { account_id, forwarded, ...body } = params;
@@ -37,7 +37,7 @@ export class CatalogSyncs extends APIResource {
   }
 
   /**
-   * Update a Catalog Sync (Closed Beta)
+   * Update a Catalog Sync (Closed Beta).
    */
   update(
     syncID: string,
@@ -54,7 +54,7 @@ export class CatalogSyncs extends APIResource {
   }
 
   /**
-   * List Catalog Syncs (Closed Beta)
+   * List Catalog Syncs (Closed Beta).
    */
   list(
     params: CatalogSyncListParams,
@@ -69,7 +69,7 @@ export class CatalogSyncs extends APIResource {
   }
 
   /**
-   * Delete a Catalog Sync (Closed Beta)
+   * Delete a Catalog Sync (Closed Beta).
    */
   delete(
     syncID: string,
@@ -86,7 +86,7 @@ export class CatalogSyncs extends APIResource {
   }
 
   /**
-   * Update a Catalog Sync (Closed Beta)
+   * Update a Catalog Sync (Closed Beta).
    */
   edit(
     syncID: string,
@@ -103,7 +103,7 @@ export class CatalogSyncs extends APIResource {
   }
 
   /**
-   * Read a Catalog Sync (Closed Beta)
+   * Read a Catalog Sync (Closed Beta).
    */
   get(
     syncID: string,
@@ -121,7 +121,7 @@ export class CatalogSyncs extends APIResource {
 
   /**
    * Refresh a Catalog Sync's destination by running the sync policy against latest
-   * resource catalog (Closed Beta)
+   * resource catalog (Closed Beta).
    */
   refresh(
     syncID: string,

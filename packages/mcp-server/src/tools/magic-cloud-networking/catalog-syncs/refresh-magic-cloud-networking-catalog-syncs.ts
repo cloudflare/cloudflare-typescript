@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'refresh_magic_cloud_networking_catalog_syncs',
   description:
-    "Refresh a Catalog Sync's destination by running the sync policy against latest resource catalog (Closed Beta)",
+    "Refresh a Catalog Sync's destination by running the sync policy against latest resource catalog (Closed Beta).",
   inputSchema: {
     type: 'object',
     properties: {

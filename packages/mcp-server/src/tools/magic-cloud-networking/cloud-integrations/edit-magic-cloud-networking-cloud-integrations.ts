@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'edit_magic_cloud_networking_cloud_integrations',
-  description: 'Update a Cloud Integration (Closed Beta)',
+  description: 'Update a Cloud Integration (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {

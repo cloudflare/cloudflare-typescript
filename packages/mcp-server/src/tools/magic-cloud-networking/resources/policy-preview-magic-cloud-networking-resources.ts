@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'policy_preview_magic_cloud_networking_resources',
-  description: 'Preview Rego query result against the latest resource catalog (Closed Beta)',
+  description: 'Preview Rego query result against the latest resource catalog (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {

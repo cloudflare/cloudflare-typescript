@@ -7,7 +7,7 @@ import { path } from '../../../internal/utils/path';
 
 export class PrebuiltPolicies extends APIResource {
   /**
-   * List prebuilt catalog sync policies (Closed Beta)
+   * List prebuilt catalog sync policies (Closed Beta).
    */
   list(
     params: PrebuiltPolicyListParams,
@@ -41,7 +41,7 @@ export interface PrebuiltPolicyListParams {
   account_id: string;
 
   /**
-   * Query param: specify type of destination, omit to return all
+   * Query param: Specify type of destination, omit to return all.
    */
   destination_type?: 'NONE' | 'ZERO_TRUST_LIST';
 }

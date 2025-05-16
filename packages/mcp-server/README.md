@@ -1883,54 +1883,54 @@ subnets of an IP prefix.
 
 ### Resource `magic_cloud_networking.catalog_syncs`:
 
-- `create_magic_cloud_networking_catalog_syncs` (`write`): Create a new Catalog Sync (Closed Beta)
-- `update_magic_cloud_networking_catalog_syncs` (`write`): Update a Catalog Sync (Closed Beta)
-- `list_magic_cloud_networking_catalog_syncs` (`read`): List Catalog Syncs (Closed Beta)
-- `delete_magic_cloud_networking_catalog_syncs` (`write`): Delete a Catalog Sync (Closed Beta)
-- `edit_magic_cloud_networking_catalog_syncs` (`write`): Update a Catalog Sync (Closed Beta)
-- `get_magic_cloud_networking_catalog_syncs` (`read`): Read a Catalog Sync (Closed Beta)
-- `refresh_magic_cloud_networking_catalog_syncs` (`write`): Refresh a Catalog Sync's destination by running the sync policy against latest resource catalog (Closed Beta)
+- `create_magic_cloud_networking_catalog_syncs` (`write`): Create a new Catalog Sync (Closed Beta).
+- `update_magic_cloud_networking_catalog_syncs` (`write`): Update a Catalog Sync (Closed Beta).
+- `list_magic_cloud_networking_catalog_syncs` (`read`): List Catalog Syncs (Closed Beta).
+- `delete_magic_cloud_networking_catalog_syncs` (`write`): Delete a Catalog Sync (Closed Beta).
+- `edit_magic_cloud_networking_catalog_syncs` (`write`): Update a Catalog Sync (Closed Beta).
+- `get_magic_cloud_networking_catalog_syncs` (`read`): Read a Catalog Sync (Closed Beta).
+- `refresh_magic_cloud_networking_catalog_syncs` (`write`): Refresh a Catalog Sync's destination by running the sync policy against latest resource catalog (Closed Beta).
 
 ### Resource `magic_cloud_networking.catalog_syncs.prebuilt_policies`:
 
-- `list_catalog_syncs_magic_cloud_networking_prebuilt_policies` (`read`): List prebuilt catalog sync policies (Closed Beta)
+- `list_catalog_syncs_magic_cloud_networking_prebuilt_policies` (`read`): List prebuilt catalog sync policies (Closed Beta).
 
 ### Resource `magic_cloud_networking.on_ramps`:
 
-- `create_magic_cloud_networking_on_ramps` (`write`): Create a new On-ramp (Closed Beta)
-- `update_magic_cloud_networking_on_ramps` (`write`): Update an On-ramp (Closed Beta)
-- `list_magic_cloud_networking_on_ramps` (`read`): List On-ramps (Closed Beta)
-- `delete_magic_cloud_networking_on_ramps` (`write`): Delete an On-ramp (Closed Beta)
-- `apply_magic_cloud_networking_on_ramps` (`write`): Apply an On-ramp (Closed Beta)
-- `edit_magic_cloud_networking_on_ramps` (`write`): Update an On-ramp (Closed Beta)
-- `export_magic_cloud_networking_on_ramps` (`write`): Export an On-ramp to terraform ready file(s) (Closed Beta)
-- `get_magic_cloud_networking_on_ramps` (`read`): Read an On-ramp (Closed Beta)
-- `plan_magic_cloud_networking_on_ramps` (`write`): Plan an On-ramp (Closed Beta)
+- `create_magic_cloud_networking_on_ramps` (`write`): Create a new On-ramp (Closed Beta).
+- `update_magic_cloud_networking_on_ramps` (`write`): Update an On-ramp (Closed Beta).
+- `list_magic_cloud_networking_on_ramps` (`read`): List On-ramps (Closed Beta).
+- `delete_magic_cloud_networking_on_ramps` (`write`): Delete an On-ramp (Closed Beta).
+- `apply_magic_cloud_networking_on_ramps` (`write`): Apply an On-ramp (Closed Beta).
+- `edit_magic_cloud_networking_on_ramps` (`write`): Update an On-ramp (Closed Beta).
+- `export_magic_cloud_networking_on_ramps` (`write`): Export an On-ramp to terraform ready file(s) (Closed Beta).
+- `get_magic_cloud_networking_on_ramps` (`read`): Read an On-ramp (Closed Beta).
+- `plan_magic_cloud_networking_on_ramps` (`write`): Plan an On-ramp (Closed Beta).
 
 ### Resource `magic_cloud_networking.on_ramps.address_spaces`:
 
-- `update_on_ramps_magic_cloud_networking_address_spaces` (`write`): Update the Magic WAN Address Space (Closed Beta)
-- `list_on_ramps_magic_cloud_networking_address_spaces` (`read`): Read the Magic WAN Address Space (Closed Beta)
-- `edit_on_ramps_magic_cloud_networking_address_spaces` (`write`): Update the Magic WAN Address Space (Closed Beta)
+- `update_on_ramps_magic_cloud_networking_address_spaces` (`write`): Update the Magic WAN Address Space (Closed Beta).
+- `list_on_ramps_magic_cloud_networking_address_spaces` (`read`): Read the Magic WAN Address Space (Closed Beta).
+- `edit_on_ramps_magic_cloud_networking_address_spaces` (`write`): Update the Magic WAN Address Space (Closed Beta).
 
 ### Resource `magic_cloud_networking.cloud_integrations`:
 
-- `create_magic_cloud_networking_cloud_integrations` (`write`): Create a new Cloud Integration (Closed Beta)
-- `update_magic_cloud_networking_cloud_integrations` (`write`): Update a Cloud Integration (Closed Beta)
-- `list_magic_cloud_networking_cloud_integrations` (`read`): List Cloud Integrations (Closed Beta)
-- `delete_magic_cloud_networking_cloud_integrations` (`write`): Delete a Cloud Integration (Closed Beta)
-- `discover_magic_cloud_networking_cloud_integrations` (`write`): Run discovery for a Cloud Integration (Closed Beta)
-- `discover_all_magic_cloud_networking_cloud_integrations` (`write`): Run discovery for all Cloud Integrations in an account (Closed Beta)
-- `edit_magic_cloud_networking_cloud_integrations` (`write`): Update a Cloud Integration (Closed Beta)
-- `get_magic_cloud_networking_cloud_integrations` (`read`): Read a Cloud Integration (Closed Beta)
-- `initial_setup_magic_cloud_networking_cloud_integrations` (`read`): Get initial configuration to complete Cloud Integration setup (Closed Beta)
+- `create_magic_cloud_networking_cloud_integrations` (`write`): Create a new Cloud Integration (Closed Beta).
+- `update_magic_cloud_networking_cloud_integrations` (`write`): Update a Cloud Integration (Closed Beta).
+- `list_magic_cloud_networking_cloud_integrations` (`read`): List Cloud Integrations (Closed Beta).
+- `delete_magic_cloud_networking_cloud_integrations` (`write`): Delete a Cloud Integration (Closed Beta).
+- `discover_magic_cloud_networking_cloud_integrations` (`write`): Run discovery for a Cloud Integration (Closed Beta).
+- `discover_all_magic_cloud_networking_cloud_integrations` (`write`): Run discovery for all Cloud Integrations in an account (Closed Beta).
+- `edit_magic_cloud_networking_cloud_integrations` (`write`): Update a Cloud Integration (Closed Beta).
+- `get_magic_cloud_networking_cloud_integrations` (`read`): Read a Cloud Integration (Closed Beta).
+- `initial_setup_magic_cloud_networking_cloud_integrations` (`read`): Get initial configuration to complete Cloud Integration setup (Closed Beta).
 
 ### Resource `magic_cloud_networking.resources`:
 
-- `list_magic_cloud_networking_resources` (`read`): List resources in the Resource Catalog (Closed Beta)
-- `export_magic_cloud_networking_resources` (`read`): Export resources in the Resource Catalog as a JSON file (Closed Beta)
-- `get_magic_cloud_networking_resources` (`read`): Read an resource from the Resource Catalog (Closed Beta)
-- `policy_preview_magic_cloud_networking_resources` (`write`): Preview Rego query result against the latest resource catalog (Closed Beta)
+- `list_magic_cloud_networking_resources` (`read`): List resources in the Resource Catalog (Closed Beta).
+- `export_magic_cloud_networking_resources` (`read`): Export resources in the Resource Catalog as a JSON file (Closed Beta).
+- `get_magic_cloud_networking_resources` (`read`): Read an resource from the Resource Catalog (Closed Beta).
+- `policy_preview_magic_cloud_networking_resources` (`write`): Preview Rego query result against the latest resource catalog (Closed Beta).
 
 ### Resource `network_interconnects.cnis`:
 

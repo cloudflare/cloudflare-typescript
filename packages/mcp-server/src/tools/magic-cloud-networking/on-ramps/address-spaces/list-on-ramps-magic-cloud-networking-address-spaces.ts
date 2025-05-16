@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_on_ramps_magic_cloud_networking_address_spaces',
-  description: 'Read the Magic WAN Address Space (Closed Beta)',
+  description: 'Read the Magic WAN Address Space (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {

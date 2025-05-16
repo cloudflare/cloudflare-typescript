@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_magic_cloud_networking_on_ramps',
-  description: 'Delete an On-ramp (Closed Beta)',
+  description: 'Delete an On-ramp (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {

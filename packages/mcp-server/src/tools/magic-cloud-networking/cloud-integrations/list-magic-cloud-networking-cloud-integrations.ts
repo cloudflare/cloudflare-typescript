@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_magic_cloud_networking_cloud_integrations',
-  description: 'List Cloud Integrations (Closed Beta)',
+  description: 'List Cloud Integrations (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {
@@ -27,7 +27,7 @@ export const tool: Tool = {
       },
       order_by: {
         type: 'string',
-        description: 'one of ["updated_at", "id", "cloud_type", "name"]',
+        description: 'One of ["updated_at", "id", "cloud_type", "name"].',
       },
       status: {
         type: 'boolean',
