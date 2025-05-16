@@ -70,6 +70,7 @@ describe('resource threatEvents', () => {
     const response = await client.cloudforceOne.threatEvents.list({
       account_id: 0,
       datasetId: ['string'],
+      forceRefresh: true,
       order: 'asc',
       orderBy: 'orderBy',
       page: 0,
