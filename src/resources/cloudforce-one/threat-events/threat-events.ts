@@ -116,10 +116,10 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
-   * The `datasetId` parameter must be defined. Must provide query parameters. To
-   * list existing datasets (and their IDs), use the
+   * The `datasetId` must be defined (to list existing datasets (and their IDs), use
+   * the
    * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
-   * endpoint.
+   * endpoint). Also, must provide query parameters.
    *
    * @example
    * ```ts
@@ -631,6 +631,11 @@ export interface ThreatEventListParams {
    * Query param:
    */
   datasetId?: Array<string>;
+
+  /**
+   * Query param:
+   */
+  forceRefresh?: boolean;
 
   /**
    * Query param:

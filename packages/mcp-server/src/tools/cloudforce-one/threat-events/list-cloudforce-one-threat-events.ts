@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_cloudforce_one_threat_events',
   description:
-    'The `datasetId` parameter must be defined. Must provide query parameters. To list existing datasets (and their IDs), use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.',
+    'The `datasetId` must be defined (to list existing datasets (and their IDs), use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint). Also, must provide query parameters.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -26,6 +26,9 @@ export const tool: Tool = {
         items: {
           type: 'string',
         },
+      },
+      forceRefresh: {
+        type: 'boolean',
       },
       order: {
         type: 'string',
