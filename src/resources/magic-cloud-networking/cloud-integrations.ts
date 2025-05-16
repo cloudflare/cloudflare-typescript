@@ -6,7 +6,7 @@ import { SinglePage } from '../../pagination';
 
 export class CloudIntegrations extends APIResource {
   /**
-   * Create a new Cloud Integration (Closed Beta)
+   * Create a new Cloud Integration (Closed Beta).
    */
   create(
     params: CloudIntegrationCreateParams,
@@ -23,7 +23,7 @@ export class CloudIntegrations extends APIResource {
   }
 
   /**
-   * Update a Cloud Integration (Closed Beta)
+   * Update a Cloud Integration (Closed Beta).
    */
   update(
     providerId: string,
@@ -40,7 +40,7 @@ export class CloudIntegrations extends APIResource {
   }
 
   /**
-   * List Cloud Integrations (Closed Beta)
+   * List Cloud Integrations (Closed Beta).
    */
   list(
     params: CloudIntegrationListParams,
@@ -55,7 +55,7 @@ export class CloudIntegrations extends APIResource {
   }
 
   /**
-   * Delete a Cloud Integration (Closed Beta)
+   * Delete a Cloud Integration (Closed Beta).
    */
   delete(
     providerId: string,
@@ -72,7 +72,7 @@ export class CloudIntegrations extends APIResource {
   }
 
   /**
-   * Run discovery for a Cloud Integration (Closed Beta)
+   * Run discovery for a Cloud Integration (Closed Beta).
    */
   discover(
     providerId: string,
@@ -87,7 +87,7 @@ export class CloudIntegrations extends APIResource {
   }
 
   /**
-   * Run discovery for all Cloud Integrations in an account (Closed Beta)
+   * Run discovery for all Cloud Integrations in an account (Closed Beta).
    */
   discoverAll(
     params: CloudIntegrationDiscoverAllParams,
@@ -98,7 +98,7 @@ export class CloudIntegrations extends APIResource {
   }
 
   /**
-   * Update a Cloud Integration (Closed Beta)
+   * Update a Cloud Integration (Closed Beta).
    */
   edit(
     providerId: string,
@@ -115,7 +115,7 @@ export class CloudIntegrations extends APIResource {
   }
 
   /**
-   * Read a Cloud Integration (Closed Beta)
+   * Read a Cloud Integration (Closed Beta).
    */
   get(
     providerId: string,
@@ -132,7 +132,7 @@ export class CloudIntegrations extends APIResource {
   }
 
   /**
-   * Get initial configuration to complete Cloud Integration setup (Closed Beta)
+   * Get initial configuration to complete Cloud Integration setup (Closed Beta).
    */
   initialSetup(
     providerId: string,
@@ -1472,7 +1472,7 @@ export interface CloudIntegrationListParams {
   desc?: boolean;
 
   /**
-   * Query param: one of ["updated_at", "id", "cloud_type", "name"]
+   * Query param: One of ["updated_at", "id", "cloud_type", "name"].
    */
   order_by?: string;
 
