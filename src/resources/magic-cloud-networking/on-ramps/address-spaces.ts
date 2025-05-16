@@ -7,7 +7,7 @@ import { path } from '../../../internal/utils/path';
 
 export class AddressSpaces extends APIResource {
   /**
-   * Update the Magic WAN Address Space (Closed Beta)
+   * Update the Magic WAN Address Space (Closed Beta).
    */
   update(params: AddressSpaceUpdateParams, options?: RequestOptions): APIPromise<AddressSpaceUpdateResponse> {
     const { account_id, ...body } = params;
@@ -20,7 +20,7 @@ export class AddressSpaces extends APIResource {
   }
 
   /**
-   * Read the Magic WAN Address Space (Closed Beta)
+   * Read the Magic WAN Address Space (Closed Beta).
    */
   list(params: AddressSpaceListParams, options?: RequestOptions): APIPromise<AddressSpaceListResponse> {
     const { account_id } = params;
@@ -33,7 +33,7 @@ export class AddressSpaces extends APIResource {
   }
 
   /**
-   * Update the Magic WAN Address Space (Closed Beta)
+   * Update the Magic WAN Address Space (Closed Beta).
    */
   edit(params: AddressSpaceEditParams, options?: RequestOptions): APIPromise<AddressSpaceEditResponse> {
     const { account_id, ...body } = params;

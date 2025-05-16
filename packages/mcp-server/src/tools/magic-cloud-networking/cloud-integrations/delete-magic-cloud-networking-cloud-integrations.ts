@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_magic_cloud_networking_cloud_integrations',
-  description: 'Delete a Cloud Integration (Closed Beta)',
+  description: 'Delete a Cloud Integration (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {

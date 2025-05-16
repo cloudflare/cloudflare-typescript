@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'discover_all_magic_cloud_networking_cloud_integrations',
-  description: 'Run discovery for all Cloud Integrations in an account (Closed Beta)',
+  description: 'Run discovery for all Cloud Integrations in an account (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {

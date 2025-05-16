@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_catalog_syncs_magic_cloud_networking_prebuilt_policies',
-  description: 'List prebuilt catalog sync policies (Closed Beta)',
+  description: 'List prebuilt catalog sync policies (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {
@@ -21,7 +21,7 @@ export const tool: Tool = {
       },
       destination_type: {
         type: 'string',
-        description: 'specify type of destination, omit to return all',
+        description: 'Specify type of destination, omit to return all.',
         enum: ['NONE', 'ZERO_TRUST_LIST'],
       },
     },

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_magic_cloud_networking_catalog_syncs',
-  description: 'Create a new Catalog Sync (Closed Beta)',
+  description: 'Create a new Catalog Sync (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {

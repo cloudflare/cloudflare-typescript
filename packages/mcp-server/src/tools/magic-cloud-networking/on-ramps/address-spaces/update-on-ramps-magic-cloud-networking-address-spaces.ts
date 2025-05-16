@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_on_ramps_magic_cloud_networking_address_spaces',
-  description: 'Update the Magic WAN Address Space (Closed Beta)',
+  description: 'Update the Magic WAN Address Space (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {
@@ -23,7 +23,7 @@ export const tool: Tool = {
         type: 'array',
         items: {
           type: 'string',
-          description: 'IP prefix in CIDR format.',
+          description: 'An IP address prefix in CIDR format.',
         },
       },
     },

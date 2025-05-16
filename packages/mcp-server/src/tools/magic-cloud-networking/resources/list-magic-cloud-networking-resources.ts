@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_magic_cloud_networking_resources',
-  description: 'List resources in the Resource Catalog (Closed Beta)',
+  description: 'List resources in the Resource Catalog (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {
@@ -30,7 +30,7 @@ export const tool: Tool = {
       },
       order_by: {
         type: 'string',
-        description: 'one of ["id", "resource_type", "region"]',
+        description: 'One of ["id", "resource_type", "region"].',
       },
       page: {
         type: 'integer',

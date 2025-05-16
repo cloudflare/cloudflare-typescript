@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_magic_cloud_networking_on_ramps',
-  description: 'Update an On-ramp (Closed Beta)',
+  description: 'Update an On-ramp (Closed Beta).',
   inputSchema: {
     type: 'object',
     properties: {
