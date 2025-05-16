@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class AddressSpaces extends APIResource {
   /**
-   * Update the Magic WAN Address Space (Closed Beta)
+   * Update the Magic WAN Address Space (Closed Beta).
    */
   update(
     params: AddressSpaceUpdateParams,
@@ -21,7 +21,7 @@ export class AddressSpaces extends APIResource {
   }
 
   /**
-   * Read the Magic WAN Address Space (Closed Beta)
+   * Read the Magic WAN Address Space (Closed Beta).
    */
   list(
     params: AddressSpaceListParams,
@@ -37,7 +37,7 @@ export class AddressSpaces extends APIResource {
   }
 
   /**
-   * Update the Magic WAN Address Space (Closed Beta)
+   * Update the Magic WAN Address Space (Closed Beta).
    */
   edit(
     params: AddressSpaceEditParams,
