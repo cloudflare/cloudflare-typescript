@@ -22,7 +22,7 @@ export const tool: Tool = {
       },
       regions: {
         type: 'string',
-        description: 'Comma-separated list of regions.',
+        description: 'Name of the region.',
       },
     },
   },
