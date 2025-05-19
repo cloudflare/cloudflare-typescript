@@ -13,7 +13,6 @@ describe('resource routes', () => {
     const responsePromise = client.workers.routes.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       pattern: 'example.com/*',
-      script: 'my-workers-script',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -36,7 +35,6 @@ describe('resource routes', () => {
     const responsePromise = client.workers.routes.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       pattern: 'example.com/*',
-      script: 'my-workers-script',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
