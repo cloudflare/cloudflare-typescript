@@ -69,7 +69,7 @@ export class Config extends APIResource {
 
 export interface CmbConfig {
   /**
-   * Comma-separated list of regions.
+   * Name of the region.
    */
   regions?: string;
 }
@@ -83,7 +83,7 @@ export interface ConfigCreateParams {
   account_id: string;
 
   /**
-   * Body param: Comma-separated list of regions.
+   * Body param: Name of the region.
    */
   regions?: string;
 }
