@@ -217,137 +217,52 @@ export type EventNotificationDeleteResponse = unknown;
 
 export interface EventNotificationGetResponse {
   /**
-   * Unique identifier for this rule.
+   * Queue ID.
    */
-  id: string;
+  queueId?: string;
 
   /**
-   * Conditions that apply to all transitions of this rule.
+   * Name of the queue.
    */
-  conditions: EventNotificationGetResponse.Conditions;
+  queueName?: string;
 
-  /**
-   * Whether or not this rule is in effect.
-   */
-  enabled: boolean;
-
-  /**
-   * Transition to abort ongoing multipart uploads.
-   */
-  abortMultipartUploadsTransition?: EventNotificationGetResponse.AbortMultipartUploadsTransition;
-
-  /**
-   * Transition to delete objects.
-   */
-  deleteObjectsTransition?: EventNotificationGetResponse.DeleteObjectsTransition;
-
-  /**
-   * Transitions to change the storage class of objects.
-   */
-  storageClassTransitions?: Array<EventNotificationGetResponse.StorageClassTransition>;
+  rules?: Array<EventNotificationGetResponse.Rule>;
 }
 
 export namespace EventNotificationGetResponse {
-  /**
-   * Conditions that apply to all transitions of this rule.
-   */
-  export interface Conditions {
+  export interface Rule {
     /**
-     * Transitions will only apply to objects/uploads in the bucket that start with the
-     * given prefix, an empty prefix can be provided to scope rule to all
-     * objects/uploads.
+     * Array of R2 object actions that will trigger notifications.
      */
-    prefix: string;
-  }
-
-  /**
-   * Transition to abort ongoing multipart uploads.
-   */
-  export interface AbortMultipartUploadsTransition {
-    /**
-     * Condition for lifecycle transitions to apply after an object reaches an age in
-     * seconds.
-     */
-    condition?: AbortMultipartUploadsTransition.Condition;
-  }
-
-  export namespace AbortMultipartUploadsTransition {
-    /**
-     * Condition for lifecycle transitions to apply after an object reaches an age in
-     * seconds.
-     */
-    export interface Condition {
-      maxAge: number;
-
-      type: 'Age';
-    }
-  }
-
-  /**
-   * Transition to delete objects.
-   */
-  export interface DeleteObjectsTransition {
-    /**
-     * Condition for lifecycle transitions to apply after an object reaches an age in
-     * seconds.
-     */
-    condition?:
-      | DeleteObjectsTransition.R2LifecycleAgeCondition
-      | DeleteObjectsTransition.R2LifecycleDateCondition;
-  }
-
-  export namespace DeleteObjectsTransition {
-    /**
-     * Condition for lifecycle transitions to apply after an object reaches an age in
-     * seconds.
-     */
-    export interface R2LifecycleAgeCondition {
-      maxAge: number;
-
-      type: 'Age';
-    }
+    actions: Array<
+      'PutObject' | 'CopyObject' | 'DeleteObject' | 'CompleteMultipartUpload' | 'LifecycleDeletion'
+    >;
 
     /**
-     * Condition for lifecycle transitions to apply on a specific date.
+     * Timestamp when the rule was created.
      */
-    export interface R2LifecycleDateCondition {
-      date: string;
-
-      type: 'Date';
-    }
-  }
-
-  export interface StorageClassTransition {
-    /**
-     * Condition for lifecycle transitions to apply after an object reaches an age in
-     * seconds.
-     */
-    condition:
-      | StorageClassTransition.R2LifecycleAgeCondition
-      | StorageClassTransition.R2LifecycleDateCondition;
-
-    storageClass: 'InfrequentAccess';
-  }
-
-  export namespace StorageClassTransition {
-    /**
-     * Condition for lifecycle transitions to apply after an object reaches an age in
-     * seconds.
-     */
-    export interface R2LifecycleAgeCondition {
-      maxAge: number;
-
-      type: 'Age';
-    }
+    createdAt?: string;
 
     /**
-     * Condition for lifecycle transitions to apply on a specific date.
+     * A description that can be used to identify the event notification rule after
+     * creation.
      */
-    export interface R2LifecycleDateCondition {
-      date: string;
+    description?: string;
 
-      type: 'Date';
-    }
+    /**
+     * Notifications will be sent only for objects with this prefix.
+     */
+    prefix?: string;
+
+    /**
+     * Rule ID.
+     */
+    ruleId?: string;
+
+    /**
+     * Notifications will be sent only for objects with this suffix.
+     */
+    suffix?: string;
   }
 }
 
