@@ -98,7 +98,8 @@ describe('resource apps', () => {
     });
   });
 
-  test('edit: only required params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9360388260/job/25765690361?pr=482#step:5:7212
+  test.skip('edit: only required params', async () => {
     const responsePromise = client.magicTransit.apps.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -111,7 +112,8 @@ describe('resource apps', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9360388260/job/25765690361?pr=482#step:5:7212
+  test.skip('edit: required and optional params', async () => {
     const response = await client.magicTransit.apps.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostnames: ['auth.cloudflare.com'],
