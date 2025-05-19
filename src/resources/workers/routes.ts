@@ -13,7 +13,6 @@ export class Routes extends APIResource {
    * const route = await client.workers.routes.create({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   pattern: 'example.com/*',
-   *   script: 'my-workers-script',
    * });
    * ```
    */
@@ -36,7 +35,6 @@ export class Routes extends APIResource {
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     pattern: 'example.com/*',
-   *     script: 'my-workers-script',
    *   },
    * );
    * ```
@@ -142,7 +140,7 @@ export interface RouteCreateResponse {
   /**
    * Name of the script to run if the route matches.
    */
-  script: string;
+  script?: string;
 }
 
 export interface RouteUpdateResponse {
@@ -160,7 +158,7 @@ export interface RouteUpdateResponse {
   /**
    * Name of the script to run if the route matches.
    */
-  script: string;
+  script?: string;
 }
 
 export interface RouteListResponse {
@@ -178,7 +176,7 @@ export interface RouteListResponse {
   /**
    * Name of the script to run if the route matches.
    */
-  script: string;
+  script?: string;
 }
 
 export interface RouteDeleteResponse {
@@ -203,7 +201,7 @@ export interface RouteGetResponse {
   /**
    * Name of the script to run if the route matches.
    */
-  script: string;
+  script?: string;
 }
 
 export interface RouteCreateParams {
@@ -221,7 +219,7 @@ export interface RouteCreateParams {
   /**
    * Body param: Name of the script to run if the route matches.
    */
-  script: string;
+  script?: string;
 }
 
 export interface RouteUpdateParams {
@@ -239,7 +237,7 @@ export interface RouteUpdateParams {
   /**
    * Body param: Name of the script to run if the route matches.
    */
-  script: string;
+  script?: string;
 }
 
 export interface RouteListParams {
