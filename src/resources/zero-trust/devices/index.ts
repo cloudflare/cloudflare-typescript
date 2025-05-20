@@ -18,16 +18,12 @@ export {
 } from './dex-tests';
 export {
   DeviceListResponsesCursorPagination,
-  Devices,
   type DeviceListResponse,
   type DeviceDeleteResponse,
-  type DeviceGetResponse,
   type DeviceRevokeResponse,
-  type DeviceListParams,
   type DeviceDeleteParams,
-  type DeviceGetParams,
   type DeviceRevokeParams,
-} from './devices';
+} from './devices_';
 export {
   DeviceNetworksSinglePage,
   Networks,
