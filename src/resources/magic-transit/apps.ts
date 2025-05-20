@@ -139,7 +139,8 @@ export interface AppCreateResponse {
   hostnames?: Array<string>;
 
   /**
-   * CIDRs to associate with traffic decisions.
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -169,7 +170,8 @@ export interface AppUpdateResponse {
   hostnames?: Array<string>;
 
   /**
-   * CIDRs to associate with traffic decisions.
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -205,7 +207,8 @@ export namespace AppListResponse {
     hostnames?: Array<string>;
 
     /**
-     * CIDRs to associate with traffic decisions.
+     * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+     * unsupported)
      */
     ip_subnets?: Array<string>;
 
@@ -235,7 +238,8 @@ export namespace AppListResponse {
     hostnames?: Array<string>;
 
     /**
-     * CIDRs to associate with traffic decisions.
+     * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+     * unsupported)
      */
     ip_subnets?: Array<string>;
 
@@ -266,7 +270,8 @@ export interface AppDeleteResponse {
   hostnames?: Array<string>;
 
   /**
-   * CIDRs to associate with traffic decisions.
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -296,7 +301,8 @@ export interface AppEditResponse {
   hostnames?: Array<string>;
 
   /**
-   * CIDRs to associate with traffic decisions.
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -333,7 +339,8 @@ export interface AppCreateParams {
   hostnames?: Array<string>;
 
   /**
-   * Body param: CIDRs to associate with traffic decisions.
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
    */
   ip_subnets?: Array<string>;
 }
@@ -350,7 +357,8 @@ export interface AppUpdateParams {
   hostnames?: Array<string>;
 
   /**
-   * Body param: CIDRs to associate with traffic decisions.
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -391,7 +399,8 @@ export interface AppEditParams {
   hostnames?: Array<string>;
 
   /**
-   * Body param: CIDRs to associate with traffic decisions.
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
    */
   ip_subnets?: Array<string>;
 
