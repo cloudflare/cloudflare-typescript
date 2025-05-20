@@ -15,22 +15,7 @@ import {
   Devices as DevicesAPIDevices,
 } from './devices_';
 import * as DEXTestsAPI from './dex-tests';
-import {
-  DEXTestCreateParams,
-  DEXTestCreateResponse,
-  DEXTestDeleteParams,
-  DEXTestDeleteResponse,
-  DEXTestGetParams,
-  DEXTestGetResponse,
-  DEXTestListParams,
-  DEXTestListResponse,
-  DEXTestListResponsesSinglePage,
-  DEXTestUpdateParams,
-  DEXTestUpdateResponse,
-  DEXTests,
-  SchemaData,
-  SchemaHTTP,
-} from './dex-tests';
+import { DEXTests, SchemaData, SchemaHTTP } from './dex-tests';
 import * as FleetStatusAPI from './fleet-status';
 import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
 import * as NetworksAPI from './networks';
@@ -500,22 +485,7 @@ export declare namespace Devices {
     type RegistrationUnrevokeParams as RegistrationUnrevokeParams,
   };
 
-  export {
-    DEXTests as DEXTests,
-    type SchemaData as SchemaData,
-    type SchemaHTTP as SchemaHTTP,
-    type DEXTestCreateResponse as DEXTestCreateResponse,
-    type DEXTestUpdateResponse as DEXTestUpdateResponse,
-    type DEXTestListResponse as DEXTestListResponse,
-    type DEXTestDeleteResponse as DEXTestDeleteResponse,
-    type DEXTestGetResponse as DEXTestGetResponse,
-    type DEXTestListResponsesSinglePage as DEXTestListResponsesSinglePage,
-    type DEXTestCreateParams as DEXTestCreateParams,
-    type DEXTestUpdateParams as DEXTestUpdateParams,
-    type DEXTestListParams as DEXTestListParams,
-    type DEXTestDeleteParams as DEXTestDeleteParams,
-    type DEXTestGetParams as DEXTestGetParams,
-  };
+  export { DEXTests as DEXTests, type SchemaData as SchemaData, type SchemaHTTP as SchemaHTTP };
 
   export {
     Networks as Networks,
