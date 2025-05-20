@@ -33,7 +33,7 @@ export const tool: Tool = {
       },
       ip_subnets: {
         type: 'array',
-        description: 'CIDRs to associate with traffic decisions.',
+        description: 'IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently unsupported)',
         items: {
           type: 'string',
           description: 'A valid CIDR notation representing an IP range.',
