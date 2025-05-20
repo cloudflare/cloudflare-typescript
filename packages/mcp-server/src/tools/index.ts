@@ -954,10 +954,10 @@ import list_scripts_namespaces_dispatch_workers_for_platforms_tags from './worke
 import delete_scripts_namespaces_dispatch_workers_for_platforms_tags from './workers-for-platforms/dispatch/namespaces/scripts/tags/delete-scripts-namespaces-dispatch-workers-for-platforms-tags';
 import list_zero_trust_devices from './zero-trust/devices/list-zero-trust-devices';
 import get_zero_trust_devices from './zero-trust/devices/get-zero-trust-devices';
-import list_devices_zero_trust_devices from './zero-trust/devices/devices/list-devices-zero-trust-devices';
-import delete_devices_zero_trust_devices from './zero-trust/devices/devices/delete-devices-zero-trust-devices';
-import get_devices_zero_trust_devices from './zero-trust/devices/devices/get-devices-zero-trust-devices';
-import revoke_devices_zero_trust_devices from './zero-trust/devices/devices/revoke-devices-zero-trust-devices';
+import list_devices_zero_trust_devices from './zero-trust/devices/devices_/list-devices-zero-trust-devices';
+import delete_devices_zero_trust_devices from './zero-trust/devices/devices_/delete-devices-zero-trust-devices';
+import get_devices_zero_trust_devices from './zero-trust/devices/devices_/get-devices-zero-trust-devices';
+import revoke_devices_zero_trust_devices from './zero-trust/devices/devices_/revoke-devices-zero-trust-devices';
 import create_resilience_devices_zero_trust_global_warp_override from './zero-trust/devices/resilience/global-warp-override/create-resilience-devices-zero-trust-global-warp-override';
 import get_resilience_devices_zero_trust_global_warp_override from './zero-trust/devices/resilience/global-warp-override/get-resilience-devices-zero-trust-global-warp-override';
 import list_devices_zero_trust_registrations from './zero-trust/devices/registrations/list-devices-zero-trust-registrations';
