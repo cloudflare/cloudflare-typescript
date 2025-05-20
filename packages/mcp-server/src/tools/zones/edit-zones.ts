@@ -20,6 +20,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier',
       },
+      paused: {
+        type: 'boolean',
+        description:
+          'Indicates whether the zone is only using Cloudflare DNS services. A\ntrue value means the zone will not receive security or performance\nbenefits.\n',
+      },
       type: {
         type: 'string',
         description:
