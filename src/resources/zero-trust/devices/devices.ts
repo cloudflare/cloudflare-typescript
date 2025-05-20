@@ -6,9 +6,6 @@ import * as DevicesDevicesAPI from './devices_';
 import {
   DeviceDeleteParams,
   DeviceDeleteResponse,
-  DeviceGetParams as DevicesAPIDeviceGetParams,
-  DeviceGetResponse as DevicesAPIDeviceGetResponse,
-  DeviceListParams as DevicesAPIDeviceListParams,
   DeviceListResponse,
   DeviceListResponsesCursorPagination,
   DeviceRevokeParams,
@@ -461,12 +458,9 @@ export declare namespace Devices {
     DevicesAPIDevices as Devices,
     type DeviceListResponse as DeviceListResponse,
     type DeviceDeleteResponse as DeviceDeleteResponse,
-    type DevicesAPIDeviceGetResponse as DeviceGetResponse,
     type DeviceRevokeResponse as DeviceRevokeResponse,
     DeviceListResponsesCursorPagination as DeviceListResponsesCursorPagination,
-    type DevicesAPIDeviceListParams as DeviceListParams,
     type DeviceDeleteParams as DeviceDeleteParams,
-    type DevicesAPIDeviceGetParams as DeviceGetParams,
     type DeviceRevokeParams as DeviceRevokeParams,
   };
 
