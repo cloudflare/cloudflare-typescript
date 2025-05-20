@@ -10,9 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource devices', () => {
-  // TODO: investigate prism error for invalid security scheme used
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.zeroTrust.devices.devices.list({ account_id: 'account_id' });
+  test('list: only required params', async () => {
+    const responsePromise = client.zeroTrust.devices.list({ account_id: '699d98642c564d2e855e9661899b7252' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,28 +21,13 @@ describe('resource devices', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate prism error for invalid security scheme used
-  test.skip('list: required and optional params', async () => {
-    const response = await client.zeroTrust.devices.devices.list({
-      account_id: 'account_id',
-      id: ['string'],
-      active_registrations: 'include',
-      cursor: 'cursor',
-      include: 'include',
-      last_seen_user: { email: 'email' },
-      per_page: 0,
-      search: 'search',
-      seen_after: 'seen_after',
-      seen_before: 'seen_before',
-      sort_by: 'name',
-      sort_order: 'asc',
-    });
+  test('list: required and optional params', async () => {
+    const response = await client.zeroTrust.devices.list({ account_id: '699d98642c564d2e855e9661899b7252' });
   });
 
-  // TODO: investigate prism error for invalid security scheme used
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.zeroTrust.devices.devices.delete('device_id', {
-      account_id: 'account_id',
+  test('get: only required params', async () => {
+    const responsePromise = client.zeroTrust.devices.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,44 +38,9 @@ describe('resource devices', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate prism error for invalid security scheme used
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.zeroTrust.devices.devices.delete('device_id', { account_id: 'account_id' });
-  });
-
-  // TODO: investigate prism error for invalid security scheme used
-  test.skip('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.devices.devices.get('device_id', { account_id: 'account_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate prism error for invalid security scheme used
-  test.skip('get: required and optional params', async () => {
-    const response = await client.zeroTrust.devices.devices.get('device_id', { account_id: 'account_id' });
-  });
-
-  // TODO: investigate prism error for invalid security scheme used
-  test.skip('revoke: only required params', async () => {
-    const responsePromise = client.zeroTrust.devices.devices.revoke('device_id', {
-      account_id: 'account_id',
+  test('get: required and optional params', async () => {
+    const response = await client.zeroTrust.devices.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
     });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate prism error for invalid security scheme used
-  test.skip('revoke: required and optional params', async () => {
-    const response = await client.zeroTrust.devices.devices.revoke('device_id', { account_id: 'account_id' });
   });
 });

@@ -2,68 +2,180 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
+import * as DevicesDevicesAPI from './devices_';
+import {
+  DeviceDeleteParams,
+  DeviceDeleteResponse,
+  DeviceGetParams as DevicesAPIDeviceGetParams,
+  DeviceGetResponse as DevicesAPIDeviceGetResponse,
+  DeviceListParams as DevicesAPIDeviceListParams,
+  DeviceListResponse,
+  DeviceListResponsesCursorPagination,
+  DeviceRevokeParams,
+  DeviceRevokeResponse,
+  Devices as DevicesAPIDevices,
+} from './devices_';
+import * as DEXTestsAPI from './dex-tests';
+import {
+  DEXTestCreateParams,
+  DEXTestCreateResponse,
+  DEXTestDeleteParams,
+  DEXTestDeleteResponse,
+  DEXTestGetParams,
+  DEXTestGetResponse,
+  DEXTestListParams,
+  DEXTestListResponse,
+  DEXTestListResponsesSinglePage,
+  DEXTestUpdateParams,
+  DEXTestUpdateResponse,
+  DEXTests,
+  SchemaData,
+  SchemaHTTP,
+} from './dex-tests';
+import * as FleetStatusAPI from './fleet-status';
+import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
+import * as NetworksAPI from './networks';
+import {
+  DeviceNetwork,
+  DeviceNetworksSinglePage,
+  NetworkCreateParams,
+  NetworkDeleteParams,
+  NetworkGetParams,
+  NetworkListParams,
+  NetworkUpdateParams,
+  Networks,
+} from './networks';
+import * as OverrideCodesAPI from './override-codes';
+import {
+  OverrideCodeGetParams,
+  OverrideCodeGetResponse,
+  OverrideCodeListParams,
+  OverrideCodeListResponse,
+  OverrideCodeListResponsesSinglePage,
+  OverrideCodes,
+} from './override-codes';
+import * as RegistrationsAPI from './registrations';
+import {
+  RegistrationBulkDeleteParams,
+  RegistrationBulkDeleteResponse,
+  RegistrationDeleteParams,
+  RegistrationDeleteResponse,
+  RegistrationGetParams,
+  RegistrationGetResponse,
+  RegistrationListParams,
+  RegistrationListResponse,
+  RegistrationListResponsesCursorPagination,
+  RegistrationRevokeParams,
+  RegistrationRevokeResponse,
+  RegistrationUnrevokeParams,
+  RegistrationUnrevokeResponse,
+  Registrations,
+} from './registrations';
+import * as RevokeAPI from './revoke';
+import { Revoke, RevokeCreateParams, RevokeCreateResponse } from './revoke';
+import * as SettingsAPI from './settings';
+import {
+  DeviceSettings,
+  SettingEditParams,
+  SettingGetParams,
+  SettingUpdateParams,
+  Settings,
+} from './settings';
+import * as UnrevokeAPI from './unrevoke';
+import { Unrevoke, UnrevokeCreateParams, UnrevokeCreateResponse } from './unrevoke';
+import * as PoliciesAPI from './policies/policies';
+import {
+  DevicePolicyCertificates,
+  FallbackDomain,
+  FallbackDomainPolicy,
+  Policies,
+  SettingsPolicy,
+  SplitTunnelExclude,
+  SplitTunnelInclude,
+} from './policies/policies';
+import * as PostureAPI from './posture/posture';
+import {
+  CarbonblackInput,
+  ClientCertificateInput,
+  CrowdstrikeInput,
+  DeviceInput,
+  DeviceMatch,
+  DevicePostureRule,
+  DevicePostureRulesSinglePage,
+  DiskEncryptionInput,
+  DomainJoinedInput,
+  FileInput,
+  FirewallInput,
+  IntuneInput,
+  KolideInput,
+  OSVersionInput,
+  Posture,
+  PostureCreateParams,
+  PostureDeleteParams,
+  PostureDeleteResponse,
+  PostureGetParams,
+  PostureListParams,
+  PostureUpdateParams,
+  SentineloneInput,
+  SentineloneS2sInput,
+  TaniumInput,
+  UniqueClientIDInput,
+  WorkspaceOneInput,
+} from './posture/posture';
+import * as ResilienceAPI from './resilience/resilience';
+import { Resilience } from './resilience/resilience';
+import { SinglePage } from '../../../pagination';
 
 export class Devices extends APIResource {
+  devices: DevicesDevicesAPI.Devices = new DevicesDevicesAPI.Devices(this._client);
+  resilience: ResilienceAPI.Resilience = new ResilienceAPI.Resilience(this._client);
+  registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
+  dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
+  networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
+  fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
+  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
+  posture: PostureAPI.Posture = new PostureAPI.Posture(this._client);
+  revoke: RevokeAPI.Revoke = new RevokeAPI.Revoke(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  unrevoke: UnrevokeAPI.Unrevoke = new UnrevokeAPI.Unrevoke(this._client);
+  overrideCodes: OverrideCodesAPI.OverrideCodes = new OverrideCodesAPI.OverrideCodes(this._client);
+
   /**
-   * Lists WARP devices.
+   * List WARP registrations.
+   *
+   * **Deprecated**: please use one of the following endpoints instead:
+   *
+   * - GET /accounts/{account_id}/devices/physical-devices
+   * - GET /accounts/{account_id}/devices/registrations
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const deviceListResponse of client.zeroTrust.devices.devices.list(
-   *   { account_id: 'account_id' },
-   * )) {
+   * for await (const device of client.zeroTrust.devices.list({
+   *   account_id: '699d98642c564d2e855e9661899b7252',
+   * })) {
    *   // ...
    * }
    * ```
    */
-  list(
-    params: DeviceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DeviceListResponsesCursorPagination, DeviceListResponse> {
-    const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/devices/physical-devices`,
-      DeviceListResponsesCursorPagination,
-      { query, ...options },
-    );
-  }
-
-  /**
-   * Deletes a WARP device.
-   *
-   * @example
-   * ```ts
-   * const device =
-   *   await client.zeroTrust.devices.devices.delete(
-   *     'device_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  delete(
-    deviceId: string,
-    params: DeviceDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceDeleteResponse | null> {
+  list(params: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/devices/physical-devices/${deviceId}`,
-        options,
-      ) as Core.APIPromise<{ result: DeviceDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/devices`, DevicesSinglePage, options);
   }
 
   /**
-   * Fetches a single WARP device.
+   * Fetches a single WARP registration.
+   *
+   * **Deprecated**: please use one of the following endpoints instead:
+   *
+   * - GET /accounts/{account_id}/devices/physical-devices/{device_id}
+   * - GET /accounts/{account_id}/devices/registrations/{registration_id}
    *
    * @example
    * ```ts
-   * const device = await client.zeroTrust.devices.devices.get(
-   *   'device_id',
-   *   { account_id: 'account_id' },
+   * const device = await client.zeroTrust.devices.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
    * );
    * ```
    */
@@ -71,147 +183,117 @@ export class Devices extends APIResource {
     deviceId: string,
     params: DeviceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceGetResponse> {
+  ): Core.APIPromise<DeviceGetResponse | null> {
     const { account_id } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/devices/physical-devices/${deviceId}`,
-        options,
-      ) as Core.APIPromise<{ result: DeviceGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Revokes all registrations associated with the specified device.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.zeroTrust.devices.devices.revoke(
-   *     'device_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  revoke(
-    deviceId: string,
-    params: DeviceRevokeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceRevokeResponse | null> {
-    const { account_id } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/devices/physical-devices/${deviceId}/revoke`,
-        options,
-      ) as Core.APIPromise<{ result: DeviceRevokeResponse | null }>
+      this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
+        result: DeviceGetResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DeviceListResponsesCursorPagination extends CursorPagination<DeviceListResponse> {}
+export class DevicesSinglePage extends SinglePage<Device> {}
 
-/**
- * A WARP Device.
- */
-export interface DeviceListResponse {
+export interface Device {
   /**
-   * The unique ID of the device.
+   * Registration ID. Equal to Device ID except for accounts which enabled
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
    */
-  id: string;
+  id?: string;
 
   /**
-   * The number of active registrations for the device. Active registrations are
-   * those which haven't been revoked or deleted.
+   * When the device was created.
    */
-  active_registrations: number;
+  created?: string;
 
   /**
-   * The RFC3339 timestamp when the device was created.
+   * True if the device was deleted.
    */
-  created_at: string;
+  deleted?: boolean;
+
+  device_type?: 'windows' | 'mac' | 'linux' | 'android' | 'ios' | 'chromeos';
 
   /**
-   * The RFC3339 timestamp when the device was last seen.
+   * IPv4 or IPv6 address.
    */
-  last_seen_at: string | null;
+  ip?: string;
 
   /**
-   * The name of the device.
+   * The device's public key.
    */
-  name: string;
+  key?: string;
 
   /**
-   * The RFC3339 timestamp when the device was last updated.
+   * When the device last connected to Cloudflare services.
    */
-  updated_at: string;
+  last_seen?: string;
 
   /**
-   * Version of the WARP client.
+   * The device mac address.
    */
-  client_version?: string | null;
+  mac_address?: string;
 
   /**
-   * The RFC3339 timestamp when the device was deleted.
+   * The device manufacturer name.
    */
-  deleted_at?: string | null;
+  manufacturer?: string;
 
   /**
-   * The device operating system.
+   * The device model name.
    */
-  device_type?: string | null;
+  model?: string;
 
   /**
-   * A string that uniquely identifies the hardware or virtual machine (VM).
+   * The device name.
    */
-  hardware_id?: string | null;
+  name?: string;
 
   /**
-   * The last Access user to use the WARP device.
+   * The Linux distro name.
    */
-  last_seen_user?: DeviceListResponse.LastSeenUser | null;
+  os_distro_name?: string;
 
   /**
-   * The device MAC address.
+   * The Linux distro revision.
    */
-  mac_address?: string | null;
+  os_distro_revision?: string;
 
   /**
-   * The device manufacturer.
+   * The operating system version.
    */
-  manufacturer?: string | null;
+  os_version?: string;
 
   /**
-   * The model name of the device.
+   * The operating system version extra parameter.
    */
-  model?: string | null;
+  os_version_extra?: string;
 
   /**
-   * The device operating system version number.
+   * When the device was revoked.
    */
-  os_version?: string | null;
-
-  /**
-   * Additional operating system version data. For macOS or iOS, the Product Version
-   * Extra. For Linux, the kernel release version.
-   */
-  os_version_extra?: string | null;
-
-  /**
-   * The public IP address of the WARP client.
-   */
-  public_ip?: string | null;
+  revoked_at?: string;
 
   /**
    * The device serial number.
    */
-  serial_number?: string | null;
+  serial_number?: string;
+
+  /**
+   * When the device was updated.
+   */
+  updated?: string;
+
+  user?: Device.User;
+
+  /**
+   * The WARP client version.
+   */
+  version?: string;
 }
 
-export namespace DeviceListResponse {
-  /**
-   * The last Access user to use the WARP device.
-   */
-  export interface LastSeenUser {
+export namespace Device {
+  export interface User {
     /**
      * UUID.
      */
@@ -229,110 +311,114 @@ export namespace DeviceListResponse {
   }
 }
 
-export type DeviceDeleteResponse = unknown;
-
-/**
- * A WARP Device.
- */
 export interface DeviceGetResponse {
   /**
-   * The unique ID of the device.
+   * Registration ID. Equal to Device ID except for accounts which enabled
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
    */
-  id: string;
+  id?: string;
+
+  account?: DeviceGetResponse.Account;
 
   /**
-   * The number of active registrations for the device. Active registrations are
-   * those which haven't been revoked or deleted.
+   * When the device was created.
    */
-  active_registrations: number;
+  created?: string;
 
   /**
-   * The RFC3339 timestamp when the device was created.
+   * True if the device was deleted.
    */
-  created_at: string;
+  deleted?: boolean;
+
+  device_type?: string;
 
   /**
-   * The RFC3339 timestamp when the device was last seen.
+   * @deprecated
    */
-  last_seen_at: string | null;
+  gateway_device_id?: string;
 
   /**
-   * The name of the device.
+   * IPv4 or IPv6 address.
    */
-  name: string;
+  ip?: string;
 
   /**
-   * The RFC3339 timestamp when the device was last updated.
+   * The device's public key.
    */
-  updated_at: string;
+  key?: string;
 
   /**
-   * Version of the WARP client.
+   * Type of the key.
    */
-  client_version?: string | null;
+  key_type?: string;
 
   /**
-   * The RFC3339 timestamp when the device was deleted.
+   * When the device last connected to Cloudflare services.
    */
-  deleted_at?: string | null;
+  last_seen?: string;
 
   /**
-   * The device operating system.
+   * The device mac address.
    */
-  device_type?: string | null;
+  mac_address?: string;
 
   /**
-   * A string that uniquely identifies the hardware or virtual machine (VM).
+   * The device model name.
    */
-  hardware_id?: string | null;
+  model?: string;
 
   /**
-   * The last Access user to use the WARP device.
+   * The device name.
    */
-  last_seen_user?: DeviceGetResponse.LastSeenUser | null;
+  name?: string;
 
   /**
-   * The device MAC address.
+   * The operating system version.
    */
-  mac_address?: string | null;
-
-  /**
-   * The device manufacturer.
-   */
-  manufacturer?: string | null;
-
-  /**
-   * The model name of the device.
-   */
-  model?: string | null;
-
-  /**
-   * The device operating system version number.
-   */
-  os_version?: string | null;
-
-  /**
-   * Additional operating system version data. For macOS or iOS, the Product Version
-   * Extra. For Linux, the kernel release version.
-   */
-  os_version_extra?: string | null;
-
-  /**
-   * The public IP address of the WARP client.
-   */
-  public_ip?: string | null;
+  os_version?: string;
 
   /**
    * The device serial number.
    */
-  serial_number?: string | null;
+  serial_number?: string;
+
+  /**
+   * Type of the tunnel connection used.
+   */
+  tunnel_type?: string;
+
+  /**
+   * When the device was updated.
+   */
+  updated?: string;
+
+  user?: DeviceGetResponse.User;
+
+  /**
+   * The WARP client version.
+   */
+  version?: string;
 }
 
 export namespace DeviceGetResponse {
-  /**
-   * The last Access user to use the WARP device.
-   */
-  export interface LastSeenUser {
+  export interface Account {
+    /**
+     * @deprecated
+     */
+    id?: string;
+
+    /**
+     * @deprecated
+     */
+    account_type?: string;
+
+    /**
+     * The name of the enrolled account.
+     */
+    name?: string;
+  }
+
+  export interface User {
     /**
      * UUID.
      */
@@ -350,80 +436,7 @@ export namespace DeviceGetResponse {
   }
 }
 
-export type DeviceRevokeResponse = unknown;
-
-export interface DeviceListParams extends CursorPaginationParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Query param: Filter by a one or more device IDs.
-   */
-  id?: Array<string>;
-
-  /**
-   * Query param: Include or exclude devices with active registrations. The default
-   * is "only" - return only devices with active registrations.
-   */
-  active_registrations?: 'include' | 'only' | 'exclude';
-
-  /**
-   * Query param:
-   */
-  include?: string;
-
-  /**
-   * Query param:
-   */
-  last_seen_user?: DeviceListParams.LastSeenUser;
-
-  /**
-   * Query param: Search by device details.
-   */
-  search?: string;
-
-  /**
-   * Query param: Filters by the last_seen timestamp - returns only devices last seen
-   * after this timestamp.
-   */
-  seen_after?: string;
-
-  /**
-   * Query param: Filter by the last_seen timestamp - returns only devices last seen
-   * before this timestamp.
-   */
-  seen_before?: string;
-
-  /**
-   * Query param: The device field to order results by.
-   */
-  sort_by?:
-    | 'name'
-    | 'id'
-    | 'client_version'
-    | 'last_seen_user.email'
-    | 'last_seen_at'
-    | 'active_registrations'
-    | 'created_at';
-
-  /**
-   * Query param: Sort direction.
-   */
-  sort_order?: 'asc' | 'desc';
-}
-
-export namespace DeviceListParams {
-  export interface LastSeenUser {
-    /**
-     * Filter by the last seen user's email.
-     */
-    email?: string;
-  }
-}
-
-export interface DeviceDeleteParams {
+export interface DeviceListParams {
   account_id: string;
 }
 
@@ -431,22 +444,166 @@ export interface DeviceGetParams {
   account_id: string;
 }
 
-export interface DeviceRevokeParams {
-  account_id: string;
-}
-
+Devices.DevicesSinglePage = DevicesSinglePage;
+Devices.Devices = DevicesAPIDevices;
 Devices.DeviceListResponsesCursorPagination = DeviceListResponsesCursorPagination;
+Devices.Resilience = Resilience;
+Devices.Registrations = Registrations;
+Devices.RegistrationListResponsesCursorPagination = RegistrationListResponsesCursorPagination;
+Devices.DEXTests = DEXTests;
+Devices.DEXTestListResponsesSinglePage = DEXTestListResponsesSinglePage;
+Devices.Networks = Networks;
+Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
+Devices.FleetStatus = FleetStatus;
+Devices.Policies = Policies;
+Devices.Posture = Posture;
+Devices.DevicePostureRulesSinglePage = DevicePostureRulesSinglePage;
+Devices.Revoke = Revoke;
+Devices.Settings = Settings;
+Devices.Unrevoke = Unrevoke;
+Devices.OverrideCodes = OverrideCodes;
+Devices.OverrideCodeListResponsesSinglePage = OverrideCodeListResponsesSinglePage;
 
 export declare namespace Devices {
   export {
+    type Device as Device,
+    type DeviceGetResponse as DeviceGetResponse,
+    DevicesSinglePage as DevicesSinglePage,
+    type DeviceListParams as DeviceListParams,
+    type DeviceGetParams as DeviceGetParams,
+  };
+
+  export {
+    DevicesAPIDevices as Devices,
     type DeviceListResponse as DeviceListResponse,
     type DeviceDeleteResponse as DeviceDeleteResponse,
-    type DeviceGetResponse as DeviceGetResponse,
+    type DevicesAPIDeviceGetResponse as DeviceGetResponse,
     type DeviceRevokeResponse as DeviceRevokeResponse,
     DeviceListResponsesCursorPagination as DeviceListResponsesCursorPagination,
-    type DeviceListParams as DeviceListParams,
+    type DevicesAPIDeviceListParams as DeviceListParams,
     type DeviceDeleteParams as DeviceDeleteParams,
-    type DeviceGetParams as DeviceGetParams,
+    type DevicesAPIDeviceGetParams as DeviceGetParams,
     type DeviceRevokeParams as DeviceRevokeParams,
+  };
+
+  export { Resilience as Resilience };
+
+  export {
+    Registrations as Registrations,
+    type RegistrationListResponse as RegistrationListResponse,
+    type RegistrationDeleteResponse as RegistrationDeleteResponse,
+    type RegistrationBulkDeleteResponse as RegistrationBulkDeleteResponse,
+    type RegistrationGetResponse as RegistrationGetResponse,
+    type RegistrationRevokeResponse as RegistrationRevokeResponse,
+    type RegistrationUnrevokeResponse as RegistrationUnrevokeResponse,
+    RegistrationListResponsesCursorPagination as RegistrationListResponsesCursorPagination,
+    type RegistrationListParams as RegistrationListParams,
+    type RegistrationDeleteParams as RegistrationDeleteParams,
+    type RegistrationBulkDeleteParams as RegistrationBulkDeleteParams,
+    type RegistrationGetParams as RegistrationGetParams,
+    type RegistrationRevokeParams as RegistrationRevokeParams,
+    type RegistrationUnrevokeParams as RegistrationUnrevokeParams,
+  };
+
+  export {
+    DEXTests as DEXTests,
+    type SchemaData as SchemaData,
+    type SchemaHTTP as SchemaHTTP,
+    type DEXTestCreateResponse as DEXTestCreateResponse,
+    type DEXTestUpdateResponse as DEXTestUpdateResponse,
+    type DEXTestListResponse as DEXTestListResponse,
+    type DEXTestDeleteResponse as DEXTestDeleteResponse,
+    type DEXTestGetResponse as DEXTestGetResponse,
+    DEXTestListResponsesSinglePage as DEXTestListResponsesSinglePage,
+    type DEXTestCreateParams as DEXTestCreateParams,
+    type DEXTestUpdateParams as DEXTestUpdateParams,
+    type DEXTestListParams as DEXTestListParams,
+    type DEXTestDeleteParams as DEXTestDeleteParams,
+    type DEXTestGetParams as DEXTestGetParams,
+  };
+
+  export {
+    Networks as Networks,
+    type DeviceNetwork as DeviceNetwork,
+    DeviceNetworksSinglePage as DeviceNetworksSinglePage,
+    type NetworkCreateParams as NetworkCreateParams,
+    type NetworkUpdateParams as NetworkUpdateParams,
+    type NetworkListParams as NetworkListParams,
+    type NetworkDeleteParams as NetworkDeleteParams,
+    type NetworkGetParams as NetworkGetParams,
+  };
+
+  export {
+    FleetStatus as FleetStatus,
+    type FleetStatusGetResponse as FleetStatusGetResponse,
+    type FleetStatusGetParams as FleetStatusGetParams,
+  };
+
+  export {
+    Policies as Policies,
+    type DevicePolicyCertificates as DevicePolicyCertificates,
+    type FallbackDomain as FallbackDomain,
+    type FallbackDomainPolicy as FallbackDomainPolicy,
+    type SettingsPolicy as SettingsPolicy,
+    type SplitTunnelExclude as SplitTunnelExclude,
+    type SplitTunnelInclude as SplitTunnelInclude,
+  };
+
+  export {
+    Posture as Posture,
+    type CarbonblackInput as CarbonblackInput,
+    type ClientCertificateInput as ClientCertificateInput,
+    type CrowdstrikeInput as CrowdstrikeInput,
+    type DeviceInput as DeviceInput,
+    type DeviceMatch as DeviceMatch,
+    type DevicePostureRule as DevicePostureRule,
+    type DiskEncryptionInput as DiskEncryptionInput,
+    type DomainJoinedInput as DomainJoinedInput,
+    type FileInput as FileInput,
+    type FirewallInput as FirewallInput,
+    type IntuneInput as IntuneInput,
+    type KolideInput as KolideInput,
+    type OSVersionInput as OSVersionInput,
+    type SentineloneInput as SentineloneInput,
+    type SentineloneS2sInput as SentineloneS2sInput,
+    type TaniumInput as TaniumInput,
+    type UniqueClientIDInput as UniqueClientIDInput,
+    type WorkspaceOneInput as WorkspaceOneInput,
+    type PostureDeleteResponse as PostureDeleteResponse,
+    DevicePostureRulesSinglePage as DevicePostureRulesSinglePage,
+    type PostureCreateParams as PostureCreateParams,
+    type PostureUpdateParams as PostureUpdateParams,
+    type PostureListParams as PostureListParams,
+    type PostureDeleteParams as PostureDeleteParams,
+    type PostureGetParams as PostureGetParams,
+  };
+
+  export {
+    Revoke as Revoke,
+    type RevokeCreateResponse as RevokeCreateResponse,
+    type RevokeCreateParams as RevokeCreateParams,
+  };
+
+  export {
+    Settings as Settings,
+    type DeviceSettings as DeviceSettings,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
+
+  export {
+    Unrevoke as Unrevoke,
+    type UnrevokeCreateResponse as UnrevokeCreateResponse,
+    type UnrevokeCreateParams as UnrevokeCreateParams,
+  };
+
+  export {
+    OverrideCodes as OverrideCodes,
+    type OverrideCodeListResponse as OverrideCodeListResponse,
+    type OverrideCodeGetResponse as OverrideCodeGetResponse,
+    OverrideCodeListResponsesSinglePage as OverrideCodeListResponsesSinglePage,
+    type OverrideCodeListParams as OverrideCodeListParams,
+    type OverrideCodeGetParams as OverrideCodeGetParams,
   };
 }
