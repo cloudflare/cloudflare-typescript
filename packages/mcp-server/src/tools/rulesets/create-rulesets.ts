@@ -2328,7 +2328,7 @@ export const tool: Tool = {
                 type: 'string',
                 title: 'Polish',
                 description: 'Configure the Polish level.',
-                enum: ['off', 'lossless', 'lossy'],
+                enum: ['off', 'lossless', 'lossy', 'webp'],
               },
               rocket_loader: {
                 type: 'boolean',
