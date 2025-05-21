@@ -14,6 +14,19 @@ export class Values extends APIResource {
    * overwritten. If neither `expiration` nor `expiration_ttl` is specified, the
    * key-value pair will never expire. If both are set, `expiration_ttl` is used and
    * `expiration` is ignored.
+   *
+   * @example
+   * ```ts
+   * const value = await client.kv.namespaces.values.update(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   'My-Key',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     metadata: '{"someMetadataKey": "someMetadataValue"}',
+   *     value: 'Some Value',
+   *   },
+   * );
+   * ```
    */
   update(
     namespaceId: string,
@@ -38,6 +51,15 @@ export class Values extends APIResource {
   /**
    * Remove a KV pair from the namespace. Use URL-encoding to use special characters
    * (for example, `:`, `!`, `%`) in the key name.
+   *
+   * @example
+   * ```ts
+   * const value = await client.kv.namespaces.values.delete(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   'My-Key',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     namespaceId: string,
@@ -60,6 +82,18 @@ export class Values extends APIResource {
    * name. If the KV-pair is set to expire at some point, the expiration time as
    * measured in seconds since the UNIX epoch will be returned in the `expiration`
    * response header.
+   *
+   * @example
+   * ```ts
+   * const value = await client.kv.namespaces.values.get(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   'My-Key',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   *
+   * const content = await value.blob();
+   * console.log(content);
+   * ```
    */
   get(
     namespaceId: string,

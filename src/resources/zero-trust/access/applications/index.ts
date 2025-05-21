@@ -87,6 +87,13 @@ export {
   type PolicyTestGetParams,
 } from './policy-tests/index';
 export {
+  Settings,
+  type SettingUpdateResponse,
+  type SettingEditResponse,
+  type SettingUpdateParams,
+  type SettingEditParams,
+} from './settings';
+export {
   UserPolicyChecks,
   type UserPolicyCheckGeo,
   type UserPolicyCheckListResponse,

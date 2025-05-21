@@ -9,6 +9,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.arc();
+   * ```
    */
   arc(
     query?: TimeseriesGroupARCParams,
@@ -33,6 +39,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.dkim();
+   * ```
    */
   dkim(
     query?: TimeseriesGroupDKIMParams,
@@ -57,6 +69,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.dmarc();
+   * ```
    */
   dmarc(
     query?: TimeseriesGroupDMARCParams,
@@ -81,6 +99,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by encryption status (encrypted vs.
    * not-encrypted) over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.encrypted();
+   * ```
    */
   encrypted(
     query?: TimeseriesGroupEncryptedParams,
@@ -104,6 +128,12 @@ export class TimeseriesGroups extends APIResource {
 
   /**
    * Retrieves the distribution of emails by IP version over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.ipVersion();
+   * ```
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -128,6 +158,12 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by SPF (Sender Policy Framework) validation
    * over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.spf();
+   * ```
    */
   spf(
     query?: TimeseriesGroupSPFParams,
@@ -204,8 +240,8 @@ export interface TimeseriesGroupSPFResponse {
 
 export interface TimeseriesGroupARCParams {
   /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
+   * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+   * Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
@@ -216,9 +252,9 @@ export interface TimeseriesGroupARCParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -266,8 +302,8 @@ export interface TimeseriesGroupARCParams {
 
 export interface TimeseriesGroupDKIMParams {
   /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
+   * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+   * Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
@@ -283,9 +319,9 @@ export interface TimeseriesGroupDKIMParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -328,8 +364,8 @@ export interface TimeseriesGroupDKIMParams {
 
 export interface TimeseriesGroupDMARCParams {
   /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
+   * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+   * Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
@@ -345,9 +381,9 @@ export interface TimeseriesGroupDMARCParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -389,8 +425,8 @@ export interface TimeseriesGroupDMARCParams {
 
 export interface TimeseriesGroupEncryptedParams {
   /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
+   * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+   * Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
@@ -406,9 +442,9 @@ export interface TimeseriesGroupEncryptedParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -451,8 +487,8 @@ export interface TimeseriesGroupEncryptedParams {
 
 export interface TimeseriesGroupIPVersionParams {
   /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
+   * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+   * Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
@@ -468,9 +504,9 @@ export interface TimeseriesGroupIPVersionParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -513,8 +549,8 @@ export interface TimeseriesGroupIPVersionParams {
 
 export interface TimeseriesGroupSPFParams {
   /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
+   * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+   * Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
@@ -530,9 +566,9 @@ export interface TimeseriesGroupSPFParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 

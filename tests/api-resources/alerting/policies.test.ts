@@ -14,7 +14,7 @@ describe('resource policies', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      alert_type: 'access_custom_certificate_expiration_type',
+      alert_type: 'universal_ssl_event_type',
       enabled: true,
       mechanisms: {},
       name: 'SSL Notification Event Policy',
@@ -32,9 +32,13 @@ describe('resource policies', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      alert_type: 'access_custom_certificate_expiration_type',
+      alert_type: 'universal_ssl_event_type',
       enabled: true,
-      mechanisms: { email: [{ id: 'test@example.com' }], pagerduty: [{}], webhooks: [{}] },
+      mechanisms: {
+        email: [{ id: 'test@example.com' }],
+        pagerduty: [{ id: 'e8133a15-00a4-4d69-aec1-32f70c51f6e5' }],
+        webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
+      },
       name: 'SSL Notification Event Policy',
       alert_interval: '30m',
       description: 'Something describing the policy.',
@@ -104,7 +108,7 @@ describe('resource policies', () => {
     const response = await client.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_interval: '30m',
-      alert_type: 'access_custom_certificate_expiration_type',
+      alert_type: 'universal_ssl_event_type',
       description: 'Something describing the policy.',
       enabled: true,
       filters: {
@@ -151,7 +155,11 @@ describe('resource policies', () => {
         where: ['string'],
         zones: ['string'],
       },
-      mechanisms: { email: [{ id: 'test@example.com' }], pagerduty: [{}], webhooks: [{}] },
+      mechanisms: {
+        email: [{ id: 'test@example.com' }],
+        pagerduty: [{ id: 'e8133a15-00a4-4d69-aec1-32f70c51f6e5' }],
+        webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
+      },
       name: 'SSL Notification Event Policy',
     });
   });

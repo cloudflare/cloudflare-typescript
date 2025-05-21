@@ -8,6 +8,7 @@ export {
   type BucketCreateParams,
   type BucketListParams,
   type BucketDeleteParams,
+  type BucketEditParams,
   type BucketGetParams,
 } from './buckets';
 export {
@@ -23,9 +24,11 @@ export { Domains } from './domains/index';
 export {
   EventNotifications,
   type EventNotificationUpdateResponse,
+  type EventNotificationListResponse,
   type EventNotificationDeleteResponse,
   type EventNotificationGetResponse,
   type EventNotificationUpdateParams,
+  type EventNotificationListParams,
   type EventNotificationDeleteParams,
   type EventNotificationGetParams,
 } from './event-notifications';

@@ -93,6 +93,7 @@ describe('resource domains', () => {
     const response = await client.emailSecurity.settings.domains.edit(2400, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
+      allowed_delivery_modes: ['DIRECT'],
       domain: 'domain',
       drop_dispositions: ['MALICIOUS'],
       folder: 'AllItems',

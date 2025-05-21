@@ -6,6 +6,15 @@ import * as Core from '../../../core';
 export class ForceAXFRResource extends APIResource {
   /**
    * Sends AXFR zone transfer request to primary nameserver(s).
+   *
+   * @example
+   * ```ts
+   * const forceAXFR =
+   *   await client.dns.zoneTransfers.forceAXFR.create({
+   *     zone_id: '269d8f4853475ca241c4e730be286b20',
+   *     body: {},
+   *   });
+   * ```
    */
   create(params: ForceAXFRCreateParams, options?: Core.RequestOptions): Core.APIPromise<ForceAXFR> {
     const { zone_id, body } = params;

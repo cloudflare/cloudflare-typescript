@@ -12,18 +12,25 @@ export {
 } from './deployments';
 export {
   Schedules,
-  type Schedule,
   type ScheduleUpdateResponse,
   type ScheduleGetResponse,
   type ScheduleUpdateParams,
   type ScheduleGetParams,
 } from './schedules';
 export {
+  ScriptAndVersionSettings,
+  type ScriptAndVersionSettingEditResponse,
+  type ScriptAndVersionSettingGetResponse,
+  type ScriptAndVersionSettingEditParams,
+  type ScriptAndVersionSettingGetParams,
+} from './script-and-version-settings';
+export {
   ScriptsSinglePage,
   Scripts,
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
+  type ScriptDeleteResponse,
   type ScriptGetResponse,
   type ScriptUpdateParams,
   type ScriptListParams,
@@ -46,8 +53,10 @@ export { Settings, type SettingEditParams, type SettingGetParams } from './setti
 export {
   Subdomain,
   type SubdomainCreateResponse,
+  type SubdomainDeleteResponse,
   type SubdomainGetResponse,
   type SubdomainCreateParams,
+  type SubdomainDeleteParams,
   type SubdomainGetParams,
 } from './subdomain';
 export {

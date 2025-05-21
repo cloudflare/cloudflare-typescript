@@ -7,6 +7,12 @@ import * as Core from '../../../../core';
 export class Summary extends APIResource {
   /**
    * Retrieves the distribution of unique accounts by model.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ai.inference.summary.model();
+   * ```
    */
   model(query?: SummaryModelParams, options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>;
   model(options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>;
@@ -26,6 +32,12 @@ export class Summary extends APIResource {
 
   /**
    * Retrieves the distribution of unique accounts by task.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ai.inference.summary.task();
+   * ```
    */
   task(query?: SummaryTaskParams, options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>;
   task(options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>;
@@ -163,9 +175,9 @@ export interface SummaryModelParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -181,9 +193,8 @@ export interface SummaryModelParams {
 
   /**
    * Limits the number of objects per group to the top items within the specified
-   * time range. If there are more items than the limit, the response will include
-   * the count of items, with any remaining items grouped together under an "other"
-   * category.
+   * time range. When item count exceeds the limit, extra items appear grouped under
+   * an "other" category.
    */
   limitPerGroup?: number;
 
@@ -200,9 +211,9 @@ export interface SummaryTaskParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
@@ -218,9 +229,8 @@ export interface SummaryTaskParams {
 
   /**
    * Limits the number of objects per group to the top items within the specified
-   * time range. If there are more items than the limit, the response will include
-   * the count of items, with any remaining items grouped together under an "other"
-   * category.
+   * time range. When item count exceeds the limit, extra items appear grouped under
+   * an "other" category.
    */
   limitPerGroup?: number;
 

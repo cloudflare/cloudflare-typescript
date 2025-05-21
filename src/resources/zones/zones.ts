@@ -117,6 +117,14 @@ export class Zones extends APIResource {
 
   /**
    * Create Zone
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.create({
+   *   account: {},
+   *   name: 'example.com',
+   * });
+   * ```
    */
   create(body: ZoneCreateParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
     return (
@@ -127,6 +135,14 @@ export class Zones extends APIResource {
   /**
    * Lists, searches, sorts, and filters your zones. Listing zones across more than
    * 500 accounts is currently not allowed.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const zone of client.zones.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query?: ZoneListParams,
@@ -145,6 +161,13 @@ export class Zones extends APIResource {
 
   /**
    * Deletes an existing zone.
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(
     params: ZoneDeleteParams,
@@ -160,6 +183,13 @@ export class Zones extends APIResource {
 
   /**
    * Edits a zone. Only one zone property can be changed at a time.
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
     const { zone_id, ...body } = params;
@@ -170,6 +200,13 @@ export class Zones extends APIResource {
 
   /**
    * Zone Details
+   *
+   * @example
+   * ```ts
+   * const zone = await client.zones.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
     const { zone_id } = params;
@@ -185,13 +222,13 @@ export class ZonesV4PagePaginationArray extends V4PagePaginationArray<Zone> {}
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
  * typically a partner-hosted zone or a CNAME setup.
  */
-export type Type = 'full' | 'partial' | 'secondary';
+export type Type = 'full' | 'partial' | 'secondary' | 'internal';
 
 /**
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
  * typically a partner-hosted zone or a CNAME setup.
  */
-export type TypeParam = 'full' | 'partial' | 'secondary';
+export type TypeParam = 'full' | 'partial' | 'secondary' | 'internal';
 
 export interface Zone {
   /**
@@ -262,15 +299,42 @@ export interface Zone {
   owner: Zone.Owner;
 
   /**
+   * @deprecated A Zones subscription information.
+   */
+  plan: Zone.Plan;
+
+  /**
+   * Allows the customer to use a custom apex. _Tenants Only Configuration_.
+   */
+  cname_suffix?: string;
+
+  /**
    * Indicates whether the zone is only using Cloudflare DNS services. A true value
    * means the zone will not receive security or performance benefits.
    */
   paused?: boolean;
 
   /**
+   * @deprecated Legacy permissions based on legacy user membership information.
+   */
+  permissions?: Array<string>;
+
+  /**
    * The zone status on Cloudflare.
    */
   status?: 'initializing' | 'pending' | 'active' | 'moved';
+
+  /**
+   * The root organizational unit that this zone belongs to (such as a tenant or
+   * organization).
+   */
+  tenant?: Zone.Tenant;
+
+  /**
+   * The immediate parent organizational unit that this zone belongs to (such as
+   * under a tenant or sub-organization).
+   */
+  tenant_unit?: Zone.TenantUnit;
 
   /**
    * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
@@ -362,6 +426,88 @@ export namespace Zone {
      */
     type?: string;
   }
+
+  /**
+   * @deprecated A Zones subscription information.
+   */
+  export interface Plan {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * States if the subscription can be activated.
+     */
+    can_subscribe?: boolean;
+
+    /**
+     * The denomination of the customer.
+     */
+    currency?: string;
+
+    /**
+     * If this Zone is managed by another company.
+     */
+    externally_managed?: boolean;
+
+    /**
+     * How often the customer is billed.
+     */
+    frequency?: string;
+
+    /**
+     * States if the subscription active.
+     */
+    is_subscribed?: boolean;
+
+    /**
+     * If the legacy discount applies to this Zone.
+     */
+    legacy_discount?: boolean;
+
+    /**
+     * The legacy name of the plan.
+     */
+    legacy_id?: string;
+
+    /**
+     * Name of the owner
+     */
+    name?: string;
+
+    /**
+     * How much the customer is paying.
+     */
+    price?: number;
+  }
+
+  /**
+   * The root organizational unit that this zone belongs to (such as a tenant or
+   * organization).
+   */
+  export interface Tenant {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * The name of the Tenant account.
+     */
+    name?: string;
+  }
+
+  /**
+   * The immediate parent organizational unit that this zone belongs to (such as
+   * under a tenant or sub-organization).
+   */
+  export interface TenantUnit {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
 }
 
 export interface ZoneDeleteResponse {
@@ -426,7 +572,7 @@ export interface ZoneListParams extends V4PagePaginationArrayParams {
   /**
    * Field to order zones by.
    */
-  order?: 'name' | 'status' | 'account.id' | 'account.name';
+  order?: 'name' | 'status' | 'account.id' | 'account.name' | 'plan.id';
 
   /**
    * A zone status
@@ -472,6 +618,12 @@ export interface ZoneEditParams {
   zone_id: string;
 
   /**
+   * Body param: Indicates whether the zone is only using Cloudflare DNS services. A
+   * true value means the zone will not receive security or performance benefits.
+   */
+  paused?: boolean;
+
+  /**
    * Body param: A full zone implies that DNS is hosted with Cloudflare. A partial
    * zone is typically a partner-hosted zone or a CNAME setup. This parameter is only
    * available to Enterprise customers or if it has been explicitly enabled on a
@@ -493,6 +645,7 @@ export interface ZoneGetParams {
   zone_id: string;
 }
 
+Zones.ZonesV4PagePaginationArray = ZonesV4PagePaginationArray;
 Zones.ActivationCheck = ActivationCheck;
 Zones.Settings = Settings;
 Zones.CustomNameservers = CustomNameservers;
@@ -505,6 +658,18 @@ Zones.RatePlans = RatePlans;
 Zones.RatePlanGetResponsesSinglePage = RatePlanGetResponsesSinglePage;
 
 export declare namespace Zones {
+  export {
+    type Type as Type,
+    type Zone as Zone,
+    type ZoneDeleteResponse as ZoneDeleteResponse,
+    ZonesV4PagePaginationArray as ZonesV4PagePaginationArray,
+    type ZoneCreateParams as ZoneCreateParams,
+    type ZoneListParams as ZoneListParams,
+    type ZoneDeleteParams as ZoneDeleteParams,
+    type ZoneEditParams as ZoneEditParams,
+    type ZoneGetParams as ZoneGetParams,
+  };
+
   export {
     ActivationCheck as ActivationCheck,
     type ActivationCheckTriggerResponse as ActivationCheckTriggerResponse,

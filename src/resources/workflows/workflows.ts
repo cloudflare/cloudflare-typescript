@@ -64,6 +64,23 @@ export class Workflows extends APIResource {
   }
 
   /**
+   * Deletes a Workflow. This only deletes the Workflow and does not delete or modify
+   * any Worker associated to this Workflow or bounded to it.
+   */
+  delete(
+    workflowName: string,
+    params: WorkflowDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WorkflowDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(`/accounts/${account_id}/workflows/${workflowName}`, options) as Core.APIPromise<{
+        result: WorkflowDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get Workflow details
    */
   get(
@@ -89,11 +106,15 @@ export interface WorkflowUpdateResponse {
 
   created_on: string;
 
+  is_deleted: number;
+
   modified_on: string;
 
   name: string;
 
   script_name: string;
+
+  terminator_running: number;
 
   triggered_on: string | null;
 
@@ -132,12 +153,16 @@ export namespace WorkflowListResponse {
 
     terminated?: number;
 
-    unknown?: number;
-
     waiting?: number;
 
     waitingForPause?: number;
   }
+}
+
+export interface WorkflowDeleteResponse {
+  status: 'ok';
+
+  success: boolean | null;
 }
 
 export interface WorkflowGetResponse {
@@ -172,8 +197,6 @@ export namespace WorkflowGetResponse {
 
     terminated?: number;
 
-    unknown?: number;
-
     waiting?: number;
 
     waitingForPause?: number;
@@ -202,12 +225,22 @@ export interface WorkflowListParams extends V4PagePaginationArrayParams {
    * Path param:
    */
   account_id: string;
+
+  /**
+   * Query param: Filter workflows by name.
+   */
+  search?: string;
+}
+
+export interface WorkflowDeleteParams {
+  account_id: string;
 }
 
 export interface WorkflowGetParams {
   account_id: string;
 }
 
+Workflows.WorkflowListResponsesV4PagePaginationArray = WorkflowListResponsesV4PagePaginationArray;
 Workflows.Instances = InstancesAPIInstances;
 Workflows.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
 Workflows.InstanceBulkResponsesSinglePage = InstanceBulkResponsesSinglePage;
@@ -215,6 +248,18 @@ Workflows.Versions = Versions;
 Workflows.VersionListResponsesV4PagePaginationArray = VersionListResponsesV4PagePaginationArray;
 
 export declare namespace Workflows {
+  export {
+    type WorkflowUpdateResponse as WorkflowUpdateResponse,
+    type WorkflowListResponse as WorkflowListResponse,
+    type WorkflowDeleteResponse as WorkflowDeleteResponse,
+    type WorkflowGetResponse as WorkflowGetResponse,
+    WorkflowListResponsesV4PagePaginationArray as WorkflowListResponsesV4PagePaginationArray,
+    type WorkflowUpdateParams as WorkflowUpdateParams,
+    type WorkflowListParams as WorkflowListParams,
+    type WorkflowDeleteParams as WorkflowDeleteParams,
+    type WorkflowGetParams as WorkflowGetParams,
+  };
+
   export {
     InstancesAPIInstances as Instances,
     type InstanceCreateResponse as InstanceCreateResponse,

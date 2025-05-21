@@ -7,6 +7,17 @@ import { SinglePage } from '../../pagination';
 export class Associations extends APIResource {
   /**
    * Lists all active associations between the certificate and Cloudflare services.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const certificateAsssociation of client.mtlsCertificates.associations.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     mtlsCertificateId: string,
@@ -38,7 +49,7 @@ export interface CertificateAsssociation {
 
 export interface AssociationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

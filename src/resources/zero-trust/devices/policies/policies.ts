@@ -160,7 +160,10 @@ export interface SettingsPolicy {
   lan_allow_subnet_size?: number;
 
   /**
-   * The wirefilter expression to match devices.
+   * The wirefilter expression to match devices. Available values: "identity.email",
+   * "identity.groups.id", "identity.groups.name", "identity.groups.email",
+   * "identity.service_token_uuid", "identity.saml_attributes", "network", "os.name",
+   * "os.version".
    */
   match?: string;
 
@@ -169,9 +172,6 @@ export interface SettingsPolicy {
    */
   name?: string;
 
-  /**
-   * Device ID.
-   */
   policy_id?: string;
 
   /**
@@ -185,6 +185,12 @@ export interface SettingsPolicy {
    * your on-premises DNS server.
    */
   register_interface_ip_with_dns?: boolean;
+
+  /**
+   * Determines whether the WARP client indicates to SCCM that it is inside a VPN
+   * boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
 
   service_mode_v2?: SettingsPolicy.ServiceModeV2;
 
@@ -221,91 +227,143 @@ export namespace SettingsPolicy {
 
   export interface TargetTest {
     /**
-     * The id of the DEX test targeting this policy
+     * The id of the DEX test targeting this policy.
      */
     id?: string;
 
     /**
-     * The name of the DEX test targeting this policy
+     * The name of the DEX test targeting this policy.
      */
     name?: string;
   }
 }
 
-export interface SplitTunnelExclude {
-  /**
-   * The address in CIDR format to exclude from the tunnel. If `address` is present,
-   * `host` must not be present.
-   */
-  address: string;
+export type SplitTunnelExclude =
+  | SplitTunnelExclude.TeamsDevicesExcludeSplitTunnelWithAddress
+  | SplitTunnelExclude.TeamsDevicesExcludeSplitTunnelWithHost;
 
-  /**
-   * A description of the Split Tunnel item, displayed in the client UI.
-   */
-  description: string;
+export namespace SplitTunnelExclude {
+  export interface TeamsDevicesExcludeSplitTunnelWithAddress {
+    /**
+     * The address in CIDR format to exclude from the tunnel. If `address` is present,
+     * `host` must not be present.
+     */
+    address: string;
 
-  /**
-   * The domain name to exclude from the tunnel. If `host` is present, `address` must
-   * not be present.
-   */
-  host?: string;
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description?: string;
+  }
+
+  export interface TeamsDevicesExcludeSplitTunnelWithHost {
+    /**
+     * The domain name to exclude from the tunnel. If `host` is present, `address` must
+     * not be present.
+     */
+    host: string;
+
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description?: string;
+  }
 }
 
-export interface SplitTunnelExcludeParam {
-  /**
-   * The address in CIDR format to exclude from the tunnel. If `address` is present,
-   * `host` must not be present.
-   */
-  address: string;
+export type SplitTunnelExcludeParam =
+  | SplitTunnelExcludeParam.TeamsDevicesExcludeSplitTunnelWithAddress
+  | SplitTunnelExcludeParam.TeamsDevicesExcludeSplitTunnelWithHost;
 
-  /**
-   * A description of the Split Tunnel item, displayed in the client UI.
-   */
-  description: string;
+export namespace SplitTunnelExcludeParam {
+  export interface TeamsDevicesExcludeSplitTunnelWithAddress {
+    /**
+     * The address in CIDR format to exclude from the tunnel. If `address` is present,
+     * `host` must not be present.
+     */
+    address: string;
 
-  /**
-   * The domain name to exclude from the tunnel. If `host` is present, `address` must
-   * not be present.
-   */
-  host?: string;
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description?: string;
+  }
+
+  export interface TeamsDevicesExcludeSplitTunnelWithHost {
+    /**
+     * The domain name to exclude from the tunnel. If `host` is present, `address` must
+     * not be present.
+     */
+    host: string;
+
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description?: string;
+  }
 }
 
-export interface SplitTunnelInclude {
-  /**
-   * The address in CIDR format to include in the tunnel. If address is present, host
-   * must not be present.
-   */
-  address: string;
+export type SplitTunnelInclude =
+  | SplitTunnelInclude.TeamsDevicesIncludeSplitTunnelWithAddress
+  | SplitTunnelInclude.TeamsDevicesIncludeSplitTunnelWithHost;
 
-  /**
-   * A description of the split tunnel item, displayed in the client UI.
-   */
-  description: string;
+export namespace SplitTunnelInclude {
+  export interface TeamsDevicesIncludeSplitTunnelWithAddress {
+    /**
+     * The address in CIDR format to include in the tunnel. If `address` is present,
+     * `host` must not be present.
+     */
+    address: string;
 
-  /**
-   * The domain name to include in the tunnel. If host is present, address must not
-   * be present.
-   */
-  host?: string;
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description?: string;
+  }
+
+  export interface TeamsDevicesIncludeSplitTunnelWithHost {
+    /**
+     * The domain name to include in the tunnel. If `host` is present, `address` must
+     * not be present.
+     */
+    host: string;
+
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description?: string;
+  }
 }
 
-export interface SplitTunnelIncludeParam {
-  /**
-   * The address in CIDR format to include in the tunnel. If address is present, host
-   * must not be present.
-   */
-  address: string;
+export type SplitTunnelIncludeParam =
+  | SplitTunnelIncludeParam.TeamsDevicesIncludeSplitTunnelWithAddress
+  | SplitTunnelIncludeParam.TeamsDevicesIncludeSplitTunnelWithHost;
 
-  /**
-   * A description of the split tunnel item, displayed in the client UI.
-   */
-  description: string;
+export namespace SplitTunnelIncludeParam {
+  export interface TeamsDevicesIncludeSplitTunnelWithAddress {
+    /**
+     * The address in CIDR format to include in the tunnel. If `address` is present,
+     * `host` must not be present.
+     */
+    address: string;
 
-  /**
-   * The domain name to include in the tunnel. If host is present, address must not
-   * be present.
-   */
-  host?: string;
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description?: string;
+  }
+
+  export interface TeamsDevicesIncludeSplitTunnelWithHost {
+    /**
+     * The domain name to include in the tunnel. If `host` is present, `address` must
+     * not be present.
+     */
+    host: string;
+
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description?: string;
+  }
 }
 
 Policies.Default = Default;

@@ -2,16 +2,22 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as EventsAPI from './events';
-import { EventGetParams, EventGetResponse, EventListParams, EventListResponse, Events } from './events';
-import * as SnapshotsAPI from './snapshots';
+import * as EventsAPI from './events/events';
+import {
+  EventGetParams,
+  EventGetResponse,
+  EventListParams,
+  EventListResponse,
+  Events,
+} from './events/events';
+import * as SnapshotsAPI from './snapshots/snapshots';
 import {
   SnapshotGetParams,
   SnapshotGetResponse,
   SnapshotListParams,
   SnapshotListResponse,
   Snapshots,
-} from './snapshots';
+} from './snapshots/snapshots';
 import { SinglePage } from '../../../pagination';
 
 export class Connectors extends APIResource {
@@ -20,6 +26,15 @@ export class Connectors extends APIResource {
 
   /**
    * Replace Connector
+   *
+   * @example
+   * ```ts
+   * const connector =
+   *   await client.magicTransit.connectors.update(
+   *     'connector_id',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     connectorId: string,
@@ -37,6 +52,16 @@ export class Connectors extends APIResource {
 
   /**
    * List Connectors
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const connectorListResponse of client.magicTransit.connectors.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ConnectorListParams,
@@ -52,6 +77,14 @@ export class Connectors extends APIResource {
 
   /**
    * Update Connector
+   *
+   * @example
+   * ```ts
+   * const response = await client.magicTransit.connectors.edit(
+   *   'connector_id',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     connectorId: string,
@@ -69,6 +102,14 @@ export class Connectors extends APIResource {
 
   /**
    * Fetch Connector
+   *
+   * @example
+   * ```ts
+   * const connector = await client.magicTransit.connectors.get(
+   *   'connector_id',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     connectorId: string,

@@ -8,6 +8,22 @@ import { HyperdrivesSinglePage } from './hyperdrive';
 export class Configs extends APIResource {
   /**
    * Creates and returns a new Hyperdrive configuration.
+   *
+   * @example
+   * ```ts
+   * const hyperdrive = await client.hyperdrive.configs.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example-hyperdrive',
+   *   origin: {
+   *     database: 'postgres',
+   *     host: 'database.example.com',
+   *     password: 'password',
+   *     port: 5432,
+   *     scheme: 'postgres',
+   *     user: 'postgres',
+   *   },
+   * });
+   * ```
    */
   create(
     params: ConfigCreateParams,
@@ -24,6 +40,25 @@ export class Configs extends APIResource {
 
   /**
    * Updates and returns the specified Hyperdrive configuration.
+   *
+   * @example
+   * ```ts
+   * const hyperdrive = await client.hyperdrive.configs.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'example-hyperdrive',
+   *     origin: {
+   *       database: 'postgres',
+   *       host: 'database.example.com',
+   *       password: 'password',
+   *       port: 5432,
+   *       scheme: 'postgres',
+   *       user: 'postgres',
+   *     },
+   *   },
+   * );
+   * ```
    */
   update(
     hyperdriveId: string,
@@ -40,7 +75,17 @@ export class Configs extends APIResource {
   }
 
   /**
-   * Returns a list of Hyperdrives
+   * Returns a list of Hyperdrives.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const hyperdrive of client.hyperdrive.configs.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ConfigListParams,
@@ -56,6 +101,14 @@ export class Configs extends APIResource {
 
   /**
    * Deletes the specified Hyperdrive.
+   *
+   * @example
+   * ```ts
+   * const config = await client.hyperdrive.configs.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     hyperdriveId: string,
@@ -74,6 +127,14 @@ export class Configs extends APIResource {
   /**
    * Patches and returns the specified Hyperdrive configuration. Custom caching
    * settings are not kept if caching is disabled.
+   *
+   * @example
+   * ```ts
+   * const hyperdrive = await client.hyperdrive.configs.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     hyperdriveId: string,
@@ -91,6 +152,14 @@ export class Configs extends APIResource {
 
   /**
    * Returns the specified Hyperdrive configuration.
+   *
+   * @example
+   * ```ts
+   * const hyperdrive = await client.hyperdrive.configs.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     hyperdriveId: string,
@@ -111,7 +180,7 @@ export type ConfigDeleteResponse = unknown;
 
 export interface ConfigCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Define configurations using a unique string identifier.
    */
   account_id: string;
 
@@ -133,111 +202,134 @@ export interface ConfigCreateParams {
   caching?:
     | ConfigCreateParams.HyperdriveHyperdriveCachingCommon
     | ConfigCreateParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigCreateParams.MTLS;
 }
 
 export namespace ConfigCreateParams {
   export interface PublicDatabase {
     /**
-     * The name of your origin database.
+     * Set the name of your origin database.
      */
     database: string;
 
     /**
-     * The host (hostname or IP) of your origin database.
+     * Defines the host (hostname or IP) of your origin database.
      */
     host: string;
 
     /**
-     * The password required to access your origin database. This value is write-only
-     * and never returned by the API.
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
      */
     password: string;
 
     /**
-     * The port (default: 5432 for Postgres) of your origin database.
+     * Defines the port (default: 5432 for Postgres) of your origin database.
      */
     port: number;
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
-     * The user of your origin database.
+     * Set the user of your origin database.
      */
     user: string;
   }
 
   export interface AccessProtectedDatabaseBehindCloudflareTunnel {
     /**
-     * The Client ID of the Access token to use when connecting to the origin database.
+     * Defines the Client ID of the Access token to use when connecting to the origin
+     * database.
      */
     access_client_id: string;
 
     /**
-     * The Client Secret of the Access token to use when connecting to the origin
-     * database. This value is write-only and never returned by the API.
+     * Defines the Client Secret of the Access Token to use when connecting to the
+     * origin database. The API never returns this write-only value.
      */
     access_client_secret: string;
 
     /**
-     * The name of your origin database.
+     * Set the name of your origin database.
      */
     database: string;
 
     /**
-     * The host (hostname or IP) of your origin database.
+     * Defines the host (hostname or IP) of your origin database.
      */
     host: string;
 
     /**
-     * The password required to access your origin database. This value is write-only
-     * and never returned by the API.
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
      */
     password: string;
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
-     * The user of your origin database.
+     * Set the user of your origin database.
      */
     user: string;
   }
 
   export interface HyperdriveHyperdriveCachingCommon {
     /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
+     * Set to true to disable caching of SQL responses. Default is false.
      */
     disabled?: boolean;
   }
 
   export interface HyperdriveHyperdriveCachingEnabled {
     /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
+     * Set to true to disable caching of SQL responses. Default is false.
      */
     disabled?: boolean;
 
     /**
-     * When present, specifies max duration for which items should persist in the
-     * cache. Not returned if set to default. (Default: 60)
+     * Specify the maximum duration items should persist in the cache. Not returned if
+     * set to the default (60).
      */
     max_age?: number;
 
     /**
-     * When present, indicates the number of seconds cache may serve the response after
-     * it becomes stale. Not returned if set to default. (Default: 15)
+     * Specify the number of seconds the cache may serve a stale response. Omitted if
+     * set to the default (15).
      */
     stale_while_revalidate?: number;
+  }
+
+  export interface MTLS {
+    /**
+     * Define CA certificate ID obtained after uploading CA cert.
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * Define mTLS certificate ID obtained after uploading client cert.
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * Set SSL mode to 'require', 'verify-ca', or 'verify-full' to verify the CA.
+     */
+    sslmode?: string;
   }
 }
 
 export interface ConfigUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Define configurations using a unique string identifier.
    */
   account_id: string;
 
@@ -259,125 +351,148 @@ export interface ConfigUpdateParams {
   caching?:
     | ConfigUpdateParams.HyperdriveHyperdriveCachingCommon
     | ConfigUpdateParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigUpdateParams.MTLS;
 }
 
 export namespace ConfigUpdateParams {
   export interface PublicDatabase {
     /**
-     * The name of your origin database.
+     * Set the name of your origin database.
      */
     database: string;
 
     /**
-     * The host (hostname or IP) of your origin database.
+     * Defines the host (hostname or IP) of your origin database.
      */
     host: string;
 
     /**
-     * The password required to access your origin database. This value is write-only
-     * and never returned by the API.
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
      */
     password: string;
 
     /**
-     * The port (default: 5432 for Postgres) of your origin database.
+     * Defines the port (default: 5432 for Postgres) of your origin database.
      */
     port: number;
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
-     * The user of your origin database.
+     * Set the user of your origin database.
      */
     user: string;
   }
 
   export interface AccessProtectedDatabaseBehindCloudflareTunnel {
     /**
-     * The Client ID of the Access token to use when connecting to the origin database.
+     * Defines the Client ID of the Access token to use when connecting to the origin
+     * database.
      */
     access_client_id: string;
 
     /**
-     * The Client Secret of the Access token to use when connecting to the origin
-     * database. This value is write-only and never returned by the API.
+     * Defines the Client Secret of the Access Token to use when connecting to the
+     * origin database. The API never returns this write-only value.
      */
     access_client_secret: string;
 
     /**
-     * The name of your origin database.
+     * Set the name of your origin database.
      */
     database: string;
 
     /**
-     * The host (hostname or IP) of your origin database.
+     * Defines the host (hostname or IP) of your origin database.
      */
     host: string;
 
     /**
-     * The password required to access your origin database. This value is write-only
-     * and never returned by the API.
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
      */
     password: string;
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme: 'postgres' | 'postgresql';
+    scheme: 'postgres' | 'postgresql' | 'mysql';
 
     /**
-     * The user of your origin database.
+     * Set the user of your origin database.
      */
     user: string;
   }
 
   export interface HyperdriveHyperdriveCachingCommon {
     /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
+     * Set to true to disable caching of SQL responses. Default is false.
      */
     disabled?: boolean;
   }
 
   export interface HyperdriveHyperdriveCachingEnabled {
     /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
+     * Set to true to disable caching of SQL responses. Default is false.
      */
     disabled?: boolean;
 
     /**
-     * When present, specifies max duration for which items should persist in the
-     * cache. Not returned if set to default. (Default: 60)
+     * Specify the maximum duration items should persist in the cache. Not returned if
+     * set to the default (60).
      */
     max_age?: number;
 
     /**
-     * When present, indicates the number of seconds cache may serve the response after
-     * it becomes stale. Not returned if set to default. (Default: 15)
+     * Specify the number of seconds the cache may serve a stale response. Omitted if
+     * set to the default (15).
      */
     stale_while_revalidate?: number;
+  }
+
+  export interface MTLS {
+    /**
+     * Define CA certificate ID obtained after uploading CA cert.
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * Define mTLS certificate ID obtained after uploading client cert.
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * Set SSL mode to 'require', 'verify-ca', or 'verify-full' to verify the CA.
+     */
+    sslmode?: string;
   }
 }
 
 export interface ConfigListParams {
   /**
-   * Identifier
+   * Define configurations using a unique string identifier.
    */
   account_id: string;
 }
 
 export interface ConfigDeleteParams {
   /**
-   * Identifier
+   * Define configurations using a unique string identifier.
    */
   account_id: string;
 }
 
 export interface ConfigEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Define configurations using a unique string identifier.
    */
   account_id: string;
 
@@ -387,6 +502,11 @@ export interface ConfigEditParams {
   caching?:
     | ConfigEditParams.HyperdriveHyperdriveCachingCommon
     | ConfigEditParams.HyperdriveHyperdriveCachingEnabled;
+
+  /**
+   * Body param:
+   */
+  mtls?: ConfigEditParams.MTLS;
 
   /**
    * Body param:
@@ -405,79 +525,97 @@ export interface ConfigEditParams {
 export namespace ConfigEditParams {
   export interface HyperdriveHyperdriveCachingCommon {
     /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
+     * Set to true to disable caching of SQL responses. Default is false.
      */
     disabled?: boolean;
   }
 
   export interface HyperdriveHyperdriveCachingEnabled {
     /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
+     * Set to true to disable caching of SQL responses. Default is false.
      */
     disabled?: boolean;
 
     /**
-     * When present, specifies max duration for which items should persist in the
-     * cache. Not returned if set to default. (Default: 60)
+     * Specify the maximum duration items should persist in the cache. Not returned if
+     * set to the default (60).
      */
     max_age?: number;
 
     /**
-     * When present, indicates the number of seconds cache may serve the response after
-     * it becomes stale. Not returned if set to default. (Default: 15)
+     * Specify the number of seconds the cache may serve a stale response. Omitted if
+     * set to the default (15).
      */
     stale_while_revalidate?: number;
   }
 
+  export interface MTLS {
+    /**
+     * Define CA certificate ID obtained after uploading CA cert.
+     */
+    ca_certificate_id?: string;
+
+    /**
+     * Define mTLS certificate ID obtained after uploading client cert.
+     */
+    mtls_certificate_id?: string;
+
+    /**
+     * Set SSL mode to 'require', 'verify-ca', or 'verify-full' to verify the CA.
+     */
+    sslmode?: string;
+  }
+
   export interface HyperdriveHyperdriveDatabase {
     /**
-     * The name of your origin database.
+     * Set the name of your origin database.
      */
     database?: string;
 
     /**
-     * The password required to access your origin database. This value is write-only
-     * and never returned by the API.
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
      */
     password?: string;
 
     /**
      * Specifies the URL scheme used to connect to your origin database.
      */
-    scheme?: 'postgres' | 'postgresql';
+    scheme?: 'postgres' | 'postgresql' | 'mysql';
 
     /**
-     * The user of your origin database.
+     * Set the user of your origin database.
      */
     user?: string;
   }
 
   export interface HyperdriveInternetOrigin {
     /**
-     * The host (hostname or IP) of your origin database.
+     * Defines the host (hostname or IP) of your origin database.
      */
     host: string;
 
     /**
-     * The port (default: 5432 for Postgres) of your origin database.
+     * Defines the port (default: 5432 for Postgres) of your origin database.
      */
     port: number;
   }
 
   export interface HyperdriveOverAccessOrigin {
     /**
-     * The Client ID of the Access token to use when connecting to the origin database.
+     * Defines the Client ID of the Access token to use when connecting to the origin
+     * database.
      */
     access_client_id: string;
 
     /**
-     * The Client Secret of the Access token to use when connecting to the origin
-     * database. This value is write-only and never returned by the API.
+     * Defines the Client Secret of the Access Token to use when connecting to the
+     * origin database. The API never returns this write-only value.
      */
     access_client_secret: string;
 
     /**
-     * The host (hostname or IP) of your origin database.
+     * Defines the host (hostname or IP) of your origin database.
      */
     host: string;
   }
@@ -485,7 +623,7 @@ export namespace ConfigEditParams {
 
 export interface ConfigGetParams {
   /**
-   * Identifier
+   * Define configurations using a unique string identifier.
    */
   account_id: string;
 }

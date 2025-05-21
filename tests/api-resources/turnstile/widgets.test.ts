@@ -14,7 +14,7 @@ describe('resource widgets', () => {
     const responsePromise = client.turnstile.widgets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'non-interactive',
+      mode: 'invisible',
       name: 'blog.cloudflare.com login form',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,14 +30,14 @@ describe('resource widgets', () => {
     const response = await client.turnstile.widgets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'non-interactive',
+      mode: 'invisible',
       name: 'blog.cloudflare.com login form',
       direction: 'asc',
       order: 'id',
       page: 1,
       per_page: 5,
       bot_fight_mode: false,
-      clearance_level: 'no_clearance',
+      clearance_level: 'interactive',
       ephemeral_id: false,
       offlabel: false,
       region: 'world',
@@ -48,7 +48,7 @@ describe('resource widgets', () => {
     const responsePromise = client.turnstile.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'non-interactive',
+      mode: 'invisible',
       name: 'blog.cloudflare.com login form',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -64,12 +64,13 @@ describe('resource widgets', () => {
     const response = await client.turnstile.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'non-interactive',
+      mode: 'invisible',
       name: 'blog.cloudflare.com login form',
       bot_fight_mode: false,
-      clearance_level: 'no_clearance',
+      clearance_level: 'interactive',
       ephemeral_id: false,
       offlabel: false,
+      region: 'world',
     });
   });
 

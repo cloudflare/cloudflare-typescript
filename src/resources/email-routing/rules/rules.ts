@@ -21,6 +21,16 @@ export class Rules extends APIResource {
    * Rules consist of a set of criteria for matching emails (such as an email being
    * sent to a specific custom email address) plus a set of actions to take on the
    * email (like forwarding it to a specific destination address).
+   *
+   * @example
+   * ```ts
+   * const emailRoutingRule =
+   *   await client.emailRouting.rules.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     actions: [{ type: 'forward' }],
+   *     matchers: [{ type: 'literal' }],
+   *   });
+   * ```
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingRule> {
     const { zone_id, ...body } = params;
@@ -33,6 +43,19 @@ export class Rules extends APIResource {
 
   /**
    * Update actions and matches, or enable/disable specific routing rules.
+   *
+   * @example
+   * ```ts
+   * const emailRoutingRule =
+   *   await client.emailRouting.rules.update(
+   *     'a7e6fb77503c41d8a7f3113c6918f10c',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       actions: [{ type: 'forward' }],
+   *       matchers: [{ type: 'literal' }],
+   *     },
+   *   );
+   * ```
    */
   update(
     ruleIdentifier: string,
@@ -50,6 +73,16 @@ export class Rules extends APIResource {
 
   /**
    * Lists existing routing rules.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const emailRoutingRule of client.emailRouting.rules.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RuleListParams,
@@ -65,6 +98,15 @@ export class Rules extends APIResource {
 
   /**
    * Delete a specific routing rule.
+   *
+   * @example
+   * ```ts
+   * const emailRoutingRule =
+   *   await client.emailRouting.rules.delete(
+   *     'a7e6fb77503c41d8a7f3113c6918f10c',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     ruleIdentifier: string,
@@ -82,6 +124,15 @@ export class Rules extends APIResource {
 
   /**
    * Get information for a specific routing rule already created.
+   *
+   * @example
+   * ```ts
+   * const emailRoutingRule =
+   *   await client.emailRouting.rules.get(
+   *     'a7e6fb77503c41d8a7f3113c6918f10c',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     ruleIdentifier: string,
@@ -109,7 +160,7 @@ export interface Action {
    */
   type: 'drop' | 'forward' | 'worker';
 
-  value: Array<string>;
+  value?: Array<string>;
 }
 
 /**
@@ -121,7 +172,7 @@ export interface ActionParam {
    */
   type: 'drop' | 'forward' | 'worker';
 
-  value: Array<string>;
+  value?: Array<string>;
 }
 
 export interface EmailRoutingRule {
@@ -166,19 +217,19 @@ export interface EmailRoutingRule {
  */
 export interface Matcher {
   /**
-   * Field for type matcher.
-   */
-  field: 'to';
-
-  /**
    * Type of matcher.
    */
-  type: 'literal';
+  type: 'all' | 'literal';
+
+  /**
+   * Field for type matcher.
+   */
+  field?: 'to';
 
   /**
    * Value for matcher.
    */
-  value: string;
+  value?: string;
 }
 
 /**
@@ -186,24 +237,24 @@ export interface Matcher {
  */
 export interface MatcherParam {
   /**
-   * Field for type matcher.
-   */
-  field: 'to';
-
-  /**
    * Type of matcher.
    */
-  type: 'literal';
+  type: 'all' | 'literal';
+
+  /**
+   * Field for type matcher.
+   */
+  field?: 'to';
 
   /**
    * Value for matcher.
    */
-  value: string;
+  value?: string;
 }
 
 export interface RuleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -235,7 +286,7 @@ export interface RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -267,7 +318,7 @@ export interface RuleUpdateParams {
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -279,14 +330,14 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
 
 export interface RuleDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface RuleGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

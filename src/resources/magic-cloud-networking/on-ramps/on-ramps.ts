@@ -19,7 +19,7 @@ export class OnRamps extends APIResource {
   addressSpaces: AddressSpacesAPI.AddressSpaces = new AddressSpacesAPI.AddressSpaces(this._client);
 
   /**
-   * Create a new On-ramp (Closed Beta)
+   * Create a new On-ramp (Closed Beta).
    */
   create(params: OnRampCreateParams, options?: Core.RequestOptions): Core.APIPromise<OnRampCreateResponse> {
     const { account_id, forwarded, ...body } = params;
@@ -33,7 +33,7 @@ export class OnRamps extends APIResource {
   }
 
   /**
-   * Update an On-ramp (Closed Beta)
+   * Update an On-ramp (Closed Beta).
    */
   update(
     onrampId: string,
@@ -50,7 +50,7 @@ export class OnRamps extends APIResource {
   }
 
   /**
-   * List On-ramps (Closed Beta)
+   * List On-ramps (Closed Beta).
    */
   list(
     params: OnRampListParams,
@@ -65,7 +65,7 @@ export class OnRamps extends APIResource {
   }
 
   /**
-   * Delete an On-ramp (Closed Beta)
+   * Delete an On-ramp (Closed Beta).
    */
   delete(
     onrampId: string,
@@ -82,7 +82,7 @@ export class OnRamps extends APIResource {
   }
 
   /**
-   * Apply an On-ramp (Closed Beta)
+   * Apply an On-ramp (Closed Beta).
    */
   apply(
     onrampId: string,
@@ -94,7 +94,7 @@ export class OnRamps extends APIResource {
   }
 
   /**
-   * Update an On-ramp (Closed Beta)
+   * Update an On-ramp (Closed Beta).
    */
   edit(
     onrampId: string,
@@ -111,7 +111,7 @@ export class OnRamps extends APIResource {
   }
 
   /**
-   * Export an On-ramp to terraform ready file(s) (Closed Beta)
+   * Export an On-ramp to terraform ready file(s) (Closed Beta).
    */
   export(
     onrampId: string,
@@ -127,7 +127,7 @@ export class OnRamps extends APIResource {
   }
 
   /**
-   * Read an On-ramp (Closed Beta)
+   * Read an On-ramp (Closed Beta).
    */
   get(
     onrampId: string,
@@ -144,7 +144,7 @@ export class OnRamps extends APIResource {
   }
 
   /**
-   * Plan an On-ramp (Closed Beta)
+   * Plan an On-ramp (Closed Beta).
    */
   plan(
     onrampId: string,
@@ -212,7 +212,7 @@ export interface OnRampCreateResponse {
   vpcs_by_id?: Record<string, OnRampCreateResponse.VPCsByID>;
 
   /**
-   * The list of vpc IDs for which resource details could not be generated.
+   * The list of vpc IDs for which resource details failed to generate.
    */
   vpcs_by_id_unavailable?: Array<string>;
 }
@@ -1770,7 +1770,7 @@ export interface OnRampUpdateResponse {
   vpcs_by_id?: Record<string, OnRampUpdateResponse.VPCsByID>;
 
   /**
-   * The list of vpc IDs for which resource details could not be generated.
+   * The list of vpc IDs for which resource details failed to generate.
    */
   vpcs_by_id_unavailable?: Array<string>;
 }
@@ -3328,7 +3328,7 @@ export interface OnRampListResponse {
   vpcs_by_id?: Record<string, OnRampListResponse.VPCsByID>;
 
   /**
-   * The list of vpc IDs for which resource details could not be generated.
+   * The list of vpc IDs for which resource details failed to generate.
    */
   vpcs_by_id_unavailable?: Array<string>;
 }
@@ -5260,7 +5260,7 @@ export interface OnRampEditResponse {
   vpcs_by_id?: Record<string, OnRampEditResponse.VPCsByID>;
 
   /**
-   * The list of vpc IDs for which resource details could not be generated.
+   * The list of vpc IDs for which resource details failed to generate.
    */
   vpcs_by_id_unavailable?: Array<string>;
 }
@@ -6818,7 +6818,7 @@ export interface OnRampGetResponse {
   vpcs_by_id?: Record<string, OnRampGetResponse.VPCsByID>;
 
   /**
-   * The list of vpc IDs for which resource details could not be generated.
+   * The list of vpc IDs for which resource details failed to generate.
    */
   vpcs_by_id_unavailable?: Array<string>;
 }
@@ -8838,7 +8838,7 @@ export interface OnRampListParams {
   desc?: boolean;
 
   /**
-   * Query param: one of ["updated_at", "id", "cloud_type", "name"]
+   * Query param: One of ["updated_at", "id", "cloud_type", "name"].
    */
   order_by?: string;
 

@@ -6,6 +6,15 @@ import * as Core from '../../../core';
 export class SchemaValidation extends APIResource {
   /**
    * Updates operation-level schema validation settings on the zone
+   *
+   * @example
+   * ```ts
+   * const schemaValidation =
+   *   await client.apiGateway.operations.schemaValidation.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
     operationId: string,
@@ -21,6 +30,18 @@ export class SchemaValidation extends APIResource {
 
   /**
    * Updates multiple operation-level schema validation settings on the zone
+   *
+   * @example
+   * ```ts
+   * const settingsMultipleRequest =
+   *   await client.apiGateway.operations.schemaValidation.edit({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     settings_multiple_request: {
+   *       '3818d821-5901-4147-a474-f5f5aec1d54e': {},
+   *       'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': {},
+   *     },
+   *   });
+   * ```
    */
   edit(
     params: SchemaValidationEditParams,
@@ -37,6 +58,15 @@ export class SchemaValidation extends APIResource {
 
   /**
    * Retrieves operation-level schema validation settings on the zone
+   *
+   * @example
+   * ```ts
+   * const schemaValidation =
+   *   await client.apiGateway.operations.schemaValidation.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     operationId: string,
@@ -105,6 +135,11 @@ export interface SchemaValidationUpdateResponse {
    *   Level Schema Validation Settings for mitigation action that will be applied
    */
   mitigation_action?: 'log' | 'block' | 'none' | null;
+
+  /**
+   * UUID.
+   */
+  operation_id?: string;
 }
 
 export interface SchemaValidationGetResponse {
@@ -119,11 +154,16 @@ export interface SchemaValidationGetResponse {
    *   Level Schema Validation Settings for mitigation action that will be applied
    */
   mitigation_action?: 'log' | 'block' | 'none' | null;
+
+  /**
+   * UUID.
+   */
+  operation_id?: string;
 }
 
 export interface SchemaValidationUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -142,7 +182,7 @@ export interface SchemaValidationUpdateParams {
 
 export interface SchemaValidationEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -154,7 +194,7 @@ export interface SchemaValidationEditParams {
 
 export interface SchemaValidationGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

@@ -7,6 +7,15 @@ import { type Response } from '../../_shims/index';
 export class LOADocuments extends APIResource {
   /**
    * Submit LOA document (pdf format) under the account.
+   *
+   * @example
+   * ```ts
+   * const loaDocument =
+   *   await client.addressing.loaDocuments.create({
+   *     account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *     loa_document: '@document.pdf',
+   *   });
+   * ```
    */
   create(
     params: LOADocumentCreateParams,
@@ -23,6 +32,18 @@ export class LOADocuments extends APIResource {
 
   /**
    * Download specified LOA document under the account.
+   *
+   * @example
+   * ```ts
+   * const loaDocument =
+   *   await client.addressing.loaDocuments.get(
+   *     'd933b1530bc56c9953cf8ce166da8004',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   *
+   * const content = await loaDocument.blob();
+   * console.log(content);
+   * ```
    */
   get(
     loaDocumentId: string | null,

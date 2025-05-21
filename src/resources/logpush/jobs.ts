@@ -9,6 +9,14 @@ import { SinglePage } from '../../pagination';
 export class Jobs extends APIResource {
   /**
    * Creates a new Logpush job for an account or zone.
+   *
+   * @example
+   * ```ts
+   * const logpushJob = await client.logpush.jobs.create({
+   *   destination_conf: 's3://mybucket/logs?region=us-west-2',
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   create(params: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null> {
     const { account_id, zone_id, ...body } = params;
@@ -38,6 +46,13 @@ export class Jobs extends APIResource {
 
   /**
    * Updates a Logpush job.
+   *
+   * @example
+   * ```ts
+   * const logpushJob = await client.logpush.jobs.update(1, {
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   update(
     jobId: number,
@@ -71,6 +86,16 @@ export class Jobs extends APIResource {
 
   /**
    * Lists Logpush jobs for an account or zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const logpushJob of client.logpush.jobs.list({
+   *   account_id: 'account_id',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params?: JobListParams,
@@ -110,6 +135,13 @@ export class Jobs extends APIResource {
 
   /**
    * Deletes a Logpush job.
+   *
+   * @example
+   * ```ts
+   * const job = await client.logpush.jobs.delete(1, {
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   delete(
     jobId: number,
@@ -152,6 +184,13 @@ export class Jobs extends APIResource {
 
   /**
    * Gets the details of a Logpush job.
+   *
+   * @example
+   * ```ts
+   * const logpushJob = await client.logpush.jobs.get(1, {
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
   get(
     jobId: number,
@@ -205,7 +244,32 @@ export interface LogpushJob {
    * Name of the dataset. A list of supported datasets can be found on the
    * [Developer Docs](https://developers.cloudflare.com/logs/reference/log-fields/).
    */
-  dataset?: string | null;
+  dataset?:
+    | 'access_requests'
+    | 'audit_logs'
+    | 'biso_user_actions'
+    | 'casb_findings'
+    | 'device_posture_results'
+    | 'dlp_forensic_copies'
+    | 'dns_firewall_logs'
+    | 'dns_logs'
+    | 'email_security_alerts'
+    | 'firewall_events'
+    | 'gateway_dns'
+    | 'gateway_http'
+    | 'gateway_network'
+    | 'http_requests'
+    | 'magic_ids_detections'
+    | 'nel_reports'
+    | 'network_analytics_logs'
+    | 'page_shield_events'
+    | 'sinkhole_http_logs'
+    | 'spectrum_events'
+    | 'ssh_logs'
+    | 'workers_trace_events'
+    | 'zaraz_events'
+    | 'zero_trust_network_sessions'
+    | null;
 
   /**
    * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
@@ -241,7 +305,7 @@ export interface LogpushJob {
    * Log Delivery jobs. Currently, Edge Log Delivery is only supported for the
    * `http_requests` dataset.
    */
-  kind?: 'edge' | null;
+  kind?: 'edge';
 
   /**
    * Records the last time for which logs have been successfully pushed. If the last
@@ -363,10 +427,10 @@ export interface OutputOptions {
   record_suffix?: string | null;
 
   /**
-   * String to use as template for each record instead of the default comma-separated
-   * list. All fields used in the template must be present in `field_names` as well,
-   * otherwise they will end up as null. Format as a Go `text/template` without any
-   * standard functions, like conditionals, loops, sub-templates, etc.
+   * String to use as template for each record instead of the default json key value
+   * mapping. All fields used in the template must be present in `field_names` as
+   * well, otherwise they will end up as null. Format as a Go `text/template` without
+   * any standard functions, like conditionals, loops, sub-templates, etc.
    */
   record_template?: string | null;
 
@@ -439,10 +503,10 @@ export interface OutputOptionsParam {
   record_suffix?: string | null;
 
   /**
-   * String to use as template for each record instead of the default comma-separated
-   * list. All fields used in the template must be present in `field_names` as well,
-   * otherwise they will end up as null. Format as a Go `text/template` without any
-   * standard functions, like conditionals, loops, sub-templates, etc.
+   * String to use as template for each record instead of the default json key value
+   * mapping. All fields used in the template must be present in `field_names` as
+   * well, otherwise they will end up as null. Format as a Go `text/template` without
+   * any standard functions, like conditionals, loops, sub-templates, etc.
    */
   record_template?: string | null;
 
@@ -491,7 +555,32 @@ export interface JobCreateParams {
    * the
    * [Developer Docs](https://developers.cloudflare.com/logs/reference/log-fields/).
    */
-  dataset?: string | null;
+  dataset?:
+    | 'access_requests'
+    | 'audit_logs'
+    | 'biso_user_actions'
+    | 'casb_findings'
+    | 'device_posture_results'
+    | 'dlp_forensic_copies'
+    | 'dns_firewall_logs'
+    | 'dns_logs'
+    | 'email_security_alerts'
+    | 'firewall_events'
+    | 'gateway_dns'
+    | 'gateway_http'
+    | 'gateway_network'
+    | 'http_requests'
+    | 'magic_ids_detections'
+    | 'nel_reports'
+    | 'network_analytics_logs'
+    | 'page_shield_events'
+    | 'sinkhole_http_logs'
+    | 'spectrum_events'
+    | 'ssh_logs'
+    | 'workers_trace_events'
+    | 'zaraz_events'
+    | 'zero_trust_network_sessions'
+    | null;
 
   /**
    * Body param: Flag that indicates if the job is enabled.
@@ -499,10 +588,17 @@ export interface JobCreateParams {
   enabled?: boolean;
 
   /**
-   * Body param: This field is deprecated. Please use `max_upload_*` parameters
-   * instead. The frequency at which Cloudflare sends batches of logs to your
-   * destination. Setting frequency to high sends your logs in larger quantities of
-   * smaller files. Setting frequency to low sends logs in smaller quantities of
+   * Body param: The filters to select the events to include and/or remove from your
+   * logs. For more information, refer to
+   * [Filters](https://developers.cloudflare.com/logs/reference/filters/).
+   */
+  filter?: string | null;
+
+  /**
+   * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
+   * parameters instead. The frequency at which Cloudflare sends batches of logs to
+   * your destination. Setting frequency to high sends your logs in larger quantities
+   * of smaller files. Setting frequency to low sends logs in smaller quantities of
    * larger files.
    */
   frequency?: 'high' | 'low' | null;
@@ -512,10 +608,10 @@ export interface JobCreateParams {
    * Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only
    * supported for the `http_requests` dataset.
    */
-  kind?: 'edge' | null;
+  kind?: 'edge';
 
   /**
-   * Body param: This field is deprecated. Use `output_options` instead.
+   * @deprecated Body param: This field is deprecated. Use `output_options` instead.
    * Configuration string. It specifies things like requested fields and timestamp
    * formats. If migrating from the logpull api, copy the url (full url or just the
    * query string) of your call here, and logpush will keep on making this call for
@@ -595,10 +691,17 @@ export interface JobUpdateParams {
   enabled?: boolean;
 
   /**
-   * Body param: This field is deprecated. Please use `max_upload_*` parameters
-   * instead. The frequency at which Cloudflare sends batches of logs to your
-   * destination. Setting frequency to high sends your logs in larger quantities of
-   * smaller files. Setting frequency to low sends logs in smaller quantities of
+   * Body param: The filters to select the events to include and/or remove from your
+   * logs. For more information, refer to
+   * [Filters](https://developers.cloudflare.com/logs/reference/filters/).
+   */
+  filter?: string | null;
+
+  /**
+   * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
+   * parameters instead. The frequency at which Cloudflare sends batches of logs to
+   * your destination. Setting frequency to high sends your logs in larger quantities
+   * of smaller files. Setting frequency to low sends logs in smaller quantities of
    * larger files.
    */
   frequency?: 'high' | 'low' | null;
@@ -608,10 +711,10 @@ export interface JobUpdateParams {
    * Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only
    * supported for the `http_requests` dataset.
    */
-  kind?: 'edge' | null;
+  kind?: 'edge';
 
   /**
-   * Body param: This field is deprecated. Use `output_options` instead.
+   * @deprecated Body param: This field is deprecated. Use `output_options` instead.
    * Configuration string. It specifies things like requested fields and timestamp
    * formats. If migrating from the logpull api, copy the url (full url or just the
    * query string) of your call here, and logpush will keep on making this call for

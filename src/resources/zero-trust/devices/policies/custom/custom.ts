@@ -19,6 +19,17 @@ export class Custom extends APIResource {
   /**
    * Creates a device settings profile to be applied to certain devices matching the
    * criteria.
+   *
+   * @example
+   * ```ts
+   * const settingsPolicy =
+   *   await client.zeroTrust.devices.policies.custom.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     match: 'identity.email == "test@cloudflare.com"',
+   *     name: 'Allow Developers',
+   *     precedence: 100,
+   *   });
+   * ```
    */
   create(
     params: CustomCreateParams,
@@ -34,6 +45,16 @@ export class Custom extends APIResource {
 
   /**
    * Fetches a list of the device settings profiles for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const settingsPolicy of client.zeroTrust.devices.policies.custom.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CustomListParams,
@@ -50,6 +71,17 @@ export class Custom extends APIResource {
   /**
    * Deletes a device settings profile and fetches a list of the remaining profiles
    * for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const settingsPolicy of client.zeroTrust.devices.policies.custom.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   delete(
     policyId: string,
@@ -66,6 +98,15 @@ export class Custom extends APIResource {
 
   /**
    * Updates a configured device settings profile.
+   *
+   * @example
+   * ```ts
+   * const settingsPolicy =
+   *   await client.zeroTrust.devices.policies.custom.edit(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   edit(
     policyId: string,
@@ -83,6 +124,15 @@ export class Custom extends APIResource {
 
   /**
    * Fetches a device settings profile by ID.
+   *
+   * @example
+   * ```ts
+   * const settingsPolicy =
+   *   await client.zeroTrust.devices.policies.custom.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(
     policyId: string,
@@ -105,7 +155,10 @@ export interface CustomCreateParams {
   account_id: string;
 
   /**
-   * Body param: The wirefilter expression to match devices.
+   * Body param: The wirefilter expression to match devices. Available values:
+   * "identity.email", "identity.groups.id", "identity.groups.name",
+   * "identity.groups.email", "identity.service_token_uuid",
+   * "identity.saml_attributes", "network", "os.name", "os.version".
    */
   match: string;
 
@@ -179,7 +232,7 @@ export interface CustomCreateParams {
    * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
    * and 'include' cannot be set in the same request.
    */
-  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+  include?: Array<PoliciesAPI.SplitTunnelIncludeParam>;
 
   /**
    * Body param: The amount of time in minutes a user is allowed access to their LAN.
@@ -200,6 +253,12 @@ export interface CustomCreateParams {
    * interface IP with your on-premises DNS server.
    */
   register_interface_ip_with_dns?: boolean;
+
+  /**
+   * Body param: Determines whether the WARP client indicates to SCCM that it is
+   * inside a VPN boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
 
   /**
    * Body param:
@@ -310,10 +369,27 @@ export interface CustomEditParams {
    * Body param: List of routes included in the WARP client's tunnel. Both 'exclude'
    * and 'include' cannot be set in the same request.
    */
-  include?: Array<PoliciesAPI.SplitTunnelExcludeParam>;
+  include?: Array<PoliciesAPI.SplitTunnelIncludeParam>;
 
   /**
-   * Body param: The wirefilter expression to match devices.
+   * Body param: The amount of time in minutes a user is allowed access to their LAN.
+   * A value of 0 will allow LAN access until the next WARP reconnection, such as a
+   * reboot or a laptop waking from sleep. Note that this field is omitted from the
+   * response if null or unset.
+   */
+  lan_allow_minutes?: number;
+
+  /**
+   * Body param: The size of the subnet for the local access network. Note that this
+   * field is omitted from the response if null or unset.
+   */
+  lan_allow_subnet_size?: number;
+
+  /**
+   * Body param: The wirefilter expression to match devices. Available values:
+   * "identity.email", "identity.groups.id", "identity.groups.name",
+   * "identity.groups.email", "identity.service_token_uuid",
+   * "identity.saml_attributes", "network", "os.name", "os.version".
    */
   match?: string;
 
@@ -333,6 +409,12 @@ export interface CustomEditParams {
    * interface IP with your on-premises DNS server.
    */
   register_interface_ip_with_dns?: boolean;
+
+  /**
+   * Body param: Determines whether the WARP client indicates to SCCM that it is
+   * inside a VPN boundary. (Windows only).
+   */
+  sccm_vpn_boundary_support?: boolean;
 
   /**
    * Body param:

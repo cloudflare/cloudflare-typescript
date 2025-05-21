@@ -2,11 +2,22 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 
 export class Accounts extends APIResource {
   /**
    * Add an account as a member of a particular address map.
+   *
+   * @example
+   * ```ts
+   * const account =
+   *   await client.addressing.addressMaps.accounts.update(
+   *     '055817b111884e0227e1be16a0be6ee0',
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       body: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     addressMapId: string,
@@ -22,6 +33,15 @@ export class Accounts extends APIResource {
 
   /**
    * Remove an account as a member of a particular address map.
+   *
+   * @example
+   * ```ts
+   * const account =
+   *   await client.addressing.addressMaps.accounts.delete(
+   *     '055817b111884e0227e1be16a0be6ee0',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   * ```
    */
   delete(
     addressMapId: string,
@@ -37,12 +57,12 @@ export class Accounts extends APIResource {
 }
 
 export interface AccountUpdateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<AccountUpdateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<AccountUpdateResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 
@@ -50,36 +70,68 @@ export interface AccountUpdateResponse {
 }
 
 export namespace AccountUpdateResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
   export interface ResultInfo {
     /**
-     * Total number of results for the requested service
+     * Total number of results for the requested service.
      */
     count?: number;
 
     /**
-     * Current page within paginated list of results
+     * Current page within paginated list of results.
      */
     page?: number;
 
     /**
-     * Number of results per page of results
+     * Number of results per page of results.
      */
     per_page?: number;
 
     /**
-     * Total results available without any search parameters
+     * Total results available without any search parameters.
      */
     total_count?: number;
   }
 }
 
 export interface AccountDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<AccountDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<AccountDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 
@@ -87,24 +139,56 @@ export interface AccountDeleteResponse {
 }
 
 export namespace AccountDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
   export interface ResultInfo {
     /**
-     * Total number of results for the requested service
+     * Total number of results for the requested service.
      */
     count?: number;
 
     /**
-     * Current page within paginated list of results
+     * Current page within paginated list of results.
      */
     page?: number;
 
     /**
-     * Number of results per page of results
+     * Number of results per page of results.
      */
     per_page?: number;
 
     /**
-     * Total results available without any search parameters
+     * Total results available without any search parameters.
      */
     total_count?: number;
   }

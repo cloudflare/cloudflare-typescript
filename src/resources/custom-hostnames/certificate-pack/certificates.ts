@@ -11,6 +11,23 @@ export class Certificates extends APIResource {
    * bundled certificates. The replacement must adhere to the following constraints.
    * You can only replace an RSA certificate with another RSA certificate or an ECDSA
    * certificate with another ECDSA certificate.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.customHostnames.certificatePack.certificates.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       custom_certificate:
+   *         '-----BEGIN CERTIFICATE-----\nMIIDdjCCAl6gAwIBAgIJAPnMg0Fs+/B0MA0GCSqGSIb3DQEBCwUAMFsx...\n-----END CERTIFICATE-----\n',
+   *       custom_key:
+   *         '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/SCB5...\n-----END PRIVATE KEY-----\n',
+   *     },
+   *   );
+   * ```
    */
   update(
     customHostnameId: string,
@@ -33,6 +50,17 @@ export class Certificates extends APIResource {
    * bundled certificates. Deletion is subject to the following constraints. You
    * cannot delete a certificate if it is the only remaining certificate in the pack.
    * At least one certificate must remain in the pack.
+   *
+   * @example
+   * ```ts
+   * const certificate =
+   *   await client.customHostnames.certificatePack.certificates.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     customHostnameId: string,
@@ -51,7 +79,7 @@ export class Certificates extends APIResource {
 
 export interface CertificateUpdateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -352,14 +380,14 @@ export namespace CertificateUpdateResponse {
 
 export interface CertificateDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface CertificateUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -376,7 +404,7 @@ export interface CertificateUpdateParams {
 
 export interface CertificateDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

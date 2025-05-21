@@ -19,6 +19,13 @@ export class Discovery extends APIResource {
   /**
    * Retrieve the most up to date view of discovered operations, rendered as OpenAPI
    * schemas
+   *
+   * @example
+   * ```ts
+   * const discovery = await client.apiGateway.discovery.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DiscoveryGetParams, options?: Core.RequestOptions): Core.APIPromise<DiscoveryGetResponse> {
     const { zone_id } = params;
@@ -34,7 +41,7 @@ export class DiscoveryOperationsV4PagePaginationArray extends V4PagePaginationAr
 
 export interface DiscoveryOperation {
   /**
-   * UUID
+   * UUID.
    */
   id: string;
 
@@ -61,7 +68,7 @@ export interface DiscoveryOperation {
   /**
    * API discovery engine(s) that discovered this operation
    */
-  origin: Array<'ML' | 'SessionIdentifier'>;
+  origin: Array<'ML' | 'SessionIdentifier' | 'LabelDiscovery'>;
 
   /**
    * State of operation in API Discovery
@@ -105,7 +112,7 @@ export interface DiscoveryGetResponse {
 
 export interface DiscoveryGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

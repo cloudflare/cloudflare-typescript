@@ -8,6 +8,14 @@ export class Addresses extends APIResource {
   /**
    * Create a destination address to forward your emails to. Destination addresses
    * need to be verified before they can be used.
+   *
+   * @example
+   * ```ts
+   * const address = await client.emailRouting.addresses.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   email: 'user@example.com',
+   * });
+   * ```
    */
   create(params: AddressCreateParams, options?: Core.RequestOptions): Core.APIPromise<Address> {
     const { account_id, ...body } = params;
@@ -21,6 +29,16 @@ export class Addresses extends APIResource {
 
   /**
    * Lists existing destination addresses.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const address of client.emailRouting.addresses.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: AddressListParams,
@@ -36,6 +54,14 @@ export class Addresses extends APIResource {
 
   /**
    * Deletes a specific destination address.
+   *
+   * @example
+   * ```ts
+   * const address = await client.emailRouting.addresses.delete(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     destinationAddressIdentifier: string,
@@ -53,6 +79,14 @@ export class Addresses extends APIResource {
 
   /**
    * Gets information for a specific destination email already created.
+   *
+   * @example
+   * ```ts
+   * const address = await client.emailRouting.addresses.get(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     destinationAddressIdentifier: string,
@@ -107,7 +141,7 @@ export interface Address {
 
 export interface AddressCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -119,7 +153,7 @@ export interface AddressCreateParams {
 
 export interface AddressListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -136,14 +170,14 @@ export interface AddressListParams extends V4PagePaginationArrayParams {
 
 export interface AddressDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface AddressGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

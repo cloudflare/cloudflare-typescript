@@ -7,6 +7,15 @@ import { SinglePage } from '../../pagination';
 export class Apps extends APIResource {
   /**
    * Creates a new App for an account
+   *
+   * @example
+   * ```ts
+   * const app = await client.magicTransit.apps.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'Cloudflare Dashboard',
+   *   type: 'Development',
+   * });
+   * ```
    */
   create(params: AppCreateParams, options?: Core.RequestOptions): Core.APIPromise<AppCreateResponse | null> {
     const { account_id, ...body } = params;
@@ -19,6 +28,14 @@ export class Apps extends APIResource {
 
   /**
    * Updates an Account App
+   *
+   * @example
+   * ```ts
+   * const app = await client.magicTransit.apps.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     accountAppId: string,
@@ -36,6 +53,16 @@ export class Apps extends APIResource {
 
   /**
    * Lists Apps associated with an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const appListResponse of client.magicTransit.apps.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: AppListParams,
@@ -47,6 +74,14 @@ export class Apps extends APIResource {
 
   /**
    * Deletes specific Account App.
+   *
+   * @example
+   * ```ts
+   * const app = await client.magicTransit.apps.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     accountAppId: string,
@@ -58,6 +93,31 @@ export class Apps extends APIResource {
       this._client.delete(`/accounts/${account_id}/magic/apps/${accountAppId}`, options) as Core.APIPromise<{
         result: AppDeleteResponse | null;
       }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates an Account App
+   *
+   * @example
+   * ```ts
+   * const response = await client.magicTransit.apps.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  edit(
+    accountAppId: string,
+    params: AppEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AppEditResponse | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/magic/apps/${accountAppId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AppEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -79,7 +139,8 @@ export interface AppCreateResponse {
   hostnames?: Array<string>;
 
   /**
-   * CIDRs to associate with traffic decisions.
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -109,7 +170,8 @@ export interface AppUpdateResponse {
   hostnames?: Array<string>;
 
   /**
-   * CIDRs to associate with traffic decisions.
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -145,7 +207,8 @@ export namespace AppListResponse {
     hostnames?: Array<string>;
 
     /**
-     * CIDRs to associate with traffic decisions.
+     * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+     * unsupported)
      */
     ip_subnets?: Array<string>;
 
@@ -175,7 +238,8 @@ export namespace AppListResponse {
     hostnames?: Array<string>;
 
     /**
-     * CIDRs to associate with traffic decisions.
+     * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+     * unsupported)
      */
     ip_subnets?: Array<string>;
 
@@ -206,7 +270,39 @@ export interface AppDeleteResponse {
   hostnames?: Array<string>;
 
   /**
-   * CIDRs to associate with traffic decisions.
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  ip_subnets?: Array<string>;
+
+  /**
+   * Display name for the app.
+   */
+  name?: string;
+
+  /**
+   * Category of the app.
+   */
+  type?: string;
+}
+
+/**
+ * Custom app defined for an account.
+ */
+export interface AppEditResponse {
+  /**
+   * Magic account app ID.
+   */
+  account_app_id: string;
+
+  /**
+   * FQDNs to associate with traffic decisions.
+   */
+  hostnames?: Array<string>;
+
+  /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -243,7 +339,8 @@ export interface AppCreateParams {
   hostnames?: Array<string>;
 
   /**
-   * Body param: CIDRs to associate with traffic decisions.
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
    */
   ip_subnets?: Array<string>;
 }
@@ -260,7 +357,8 @@ export interface AppUpdateParams {
   hostnames?: Array<string>;
 
   /**
-   * Body param: CIDRs to associate with traffic decisions.
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
    */
   ip_subnets?: Array<string>;
 
@@ -289,6 +387,34 @@ export interface AppDeleteParams {
   account_id: string;
 }
 
+export interface AppEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: FQDNs to associate with traffic decisions.
+   */
+  hostnames?: Array<string>;
+
+  /**
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
+   */
+  ip_subnets?: Array<string>;
+
+  /**
+   * Body param: Display name for the app.
+   */
+  name?: string;
+
+  /**
+   * Body param: Category of the app.
+   */
+  type?: string;
+}
+
 Apps.AppListResponsesSinglePage = AppListResponsesSinglePage;
 
 export declare namespace Apps {
@@ -297,10 +423,12 @@ export declare namespace Apps {
     type AppUpdateResponse as AppUpdateResponse,
     type AppListResponse as AppListResponse,
     type AppDeleteResponse as AppDeleteResponse,
+    type AppEditResponse as AppEditResponse,
     AppListResponsesSinglePage as AppListResponsesSinglePage,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
     type AppListParams as AppListParams,
     type AppDeleteParams as AppDeleteParams,
+    type AppEditParams as AppEditParams,
   };
 }

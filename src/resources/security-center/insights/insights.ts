@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import * as IssuesAPI from '../../intel/attack-surface-report/issues';
 import * as ClassAPI from './class';
 import { Class, ClassGetParams, ClassGetResponse } from './class';
@@ -140,14 +139,48 @@ export namespace InsightListResponse {
 }
 
 export interface InsightDismissResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<InsightDismissResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<InsightDismissResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
+}
+
+export namespace InsightDismissResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export interface InsightListParams extends V4PagePaginationParams {

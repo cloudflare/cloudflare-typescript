@@ -6,6 +6,13 @@ import * as Core from '../../../core';
 export class Zone extends APIResource {
   /**
    * Update DNS settings for a zone
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.settings.zone.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneEditResponse> {
     const { zone_id, ...body } = params;
@@ -18,6 +25,13 @@ export class Zone extends APIResource {
 
   /**
    * Show DNS settings for a zone
+   *
+   * @example
+   * ```ts
+   * const zone = await client.dns.settings.zone.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneGetResponse> {
     const { zone_id } = params;
@@ -275,7 +289,7 @@ export namespace ZoneGetResponse {
 
 export interface ZoneEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -403,7 +417,7 @@ export namespace ZoneEditParams {
 
 export interface ZoneGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

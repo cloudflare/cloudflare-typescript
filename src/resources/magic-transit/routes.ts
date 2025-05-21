@@ -8,20 +8,42 @@ export class Routes extends APIResource {
   /**
    * Creates a new Magic static route. Use `?validate_only=true` as an optional query
    * parameter to run validation only without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const route = await client.magicTransit.routes.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   nexthop: '203.0.113.1',
+   *   prefix: '192.0.2.0/24',
+   *   priority: 0,
+   * });
+   * ```
    */
   create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/magic/routes`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: RouteCreateResponse }>
+      this._client.post(`/accounts/${account_id}/magic/routes`, { body, ...options }) as Core.APIPromise<{
+        result: RouteCreateResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a specific Magic static route. Use `?validate_only=true` as an optional
    * query parameter to run validation only without persisting changes.
+   *
+   * @example
+   * ```ts
+   * const route = await client.magicTransit.routes.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     nexthop: '203.0.113.1',
+   *     prefix: '192.0.2.0/24',
+   *     priority: 0,
+   *   },
+   * );
+   * ```
    */
   update(
     routeId: string,
@@ -39,6 +61,13 @@ export class Routes extends APIResource {
 
   /**
    * List all Magic static routes.
+   *
+   * @example
+   * ```ts
+   * const routes = await client.magicTransit.routes.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: RouteListParams, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
     const { account_id } = params;
@@ -51,6 +80,14 @@ export class Routes extends APIResource {
 
   /**
    * Disable and remove a specific Magic static route.
+   *
+   * @example
+   * ```ts
+   * const route = await client.magicTransit.routes.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     routeId: string,
@@ -69,6 +106,22 @@ export class Routes extends APIResource {
    * Update multiple Magic static routes. Use `?validate_only=true` as an optional
    * query parameter to run validation only without persisting changes. Only fields
    * for a route that need to be changed need be provided.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.routes.bulkUpdate({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     routes: [
+   *       {
+   *         id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *         nexthop: '203.0.113.1',
+   *         prefix: '192.0.2.0/24',
+   *         priority: 0,
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   bulkUpdate(
     params: RouteBulkUpdateParams,
@@ -84,6 +137,13 @@ export class Routes extends APIResource {
 
   /**
    * Delete multiple Magic static routes.
+   *
+   * @example
+   * ```ts
+   * const response = await client.magicTransit.routes.empty({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   empty(params: RouteEmptyParams, options?: Core.RequestOptions): Core.APIPromise<RouteEmptyResponse> {
     const { account_id } = params;
@@ -96,6 +156,14 @@ export class Routes extends APIResource {
 
   /**
    * Get a specific Magic static route.
+   *
+   * @example
+   * ```ts
+   * const route = await client.magicTransit.routes.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     routeId: string,
@@ -142,56 +210,50 @@ export interface ScopeParam {
 }
 
 export interface RouteCreateResponse {
-  routes?: Array<RouteCreateResponse.Route>;
-}
+  /**
+   * Identifier
+   */
+  id: string;
 
-export namespace RouteCreateResponse {
-  export interface Route {
-    /**
-     * The next-hop IP Address for the static route.
-     */
-    nexthop: string;
+  /**
+   * The next-hop IP Address for the static route.
+   */
+  nexthop: string;
 
-    /**
-     * IP Prefix in Classless Inter-Domain Routing format.
-     */
-    prefix: string;
+  /**
+   * IP Prefix in Classless Inter-Domain Routing format.
+   */
+  prefix: string;
 
-    /**
-     * Priority of the static route.
-     */
-    priority: number;
+  /**
+   * Priority of the static route.
+   */
+  priority: number;
 
-    /**
-     * Identifier
-     */
-    id?: string;
+  /**
+   * When the route was created.
+   */
+  created_on?: string;
 
-    /**
-     * When the route was created.
-     */
-    created_on?: string;
+  /**
+   * An optional human provided description of the static route.
+   */
+  description?: string;
 
-    /**
-     * An optional human provided description of the static route.
-     */
-    description?: string;
+  /**
+   * When the route was last modified.
+   */
+  modified_on?: string;
 
-    /**
-     * When the route was last modified.
-     */
-    modified_on?: string;
+  /**
+   * Used only for ECMP routes.
+   */
+  scope?: Scope;
 
-    /**
-     * Used only for ECMP routes.
-     */
-    scope?: RoutesAPI.Scope;
-
-    /**
-     * Optional weight of the ECMP scope - if provided.
-     */
-    weight?: number;
-  }
+  /**
+   * Optional weight of the ECMP scope - if provided.
+   */
+  weight?: number;
 }
 
 export interface RouteUpdateResponse {
@@ -203,6 +265,11 @@ export interface RouteUpdateResponse {
 export namespace RouteUpdateResponse {
   export interface ModifiedRoute {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -216,11 +283,6 @@ export namespace RouteUpdateResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -256,6 +318,11 @@ export interface RouteListResponse {
 export namespace RouteListResponse {
   export interface Route {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -269,11 +336,6 @@ export namespace RouteListResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -311,6 +373,11 @@ export interface RouteDeleteResponse {
 export namespace RouteDeleteResponse {
   export interface DeletedRoute {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -324,11 +391,6 @@ export namespace RouteDeleteResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -366,6 +428,11 @@ export interface RouteBulkUpdateResponse {
 export namespace RouteBulkUpdateResponse {
   export interface ModifiedRoute {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -379,11 +446,6 @@ export namespace RouteBulkUpdateResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -421,6 +483,11 @@ export interface RouteEmptyResponse {
 export namespace RouteEmptyResponse {
   export interface DeletedRoute {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -434,11 +501,6 @@ export namespace RouteEmptyResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -474,6 +536,11 @@ export interface RouteGetResponse {
 export namespace RouteGetResponse {
   export interface Route {
     /**
+     * Identifier
+     */
+    id: string;
+
+    /**
      * The next-hop IP Address for the static route.
      */
     nexthop: string;
@@ -487,11 +554,6 @@ export namespace RouteGetResponse {
      * Priority of the static route.
      */
     priority: number;
-
-    /**
-     * Identifier
-     */
-    id?: string;
 
     /**
      * When the route was created.
@@ -527,9 +589,34 @@ export interface RouteCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The next-hop IP Address for the static route.
    */
-  body: unknown;
+  nexthop: string;
+
+  /**
+   * Body param: IP Prefix in Classless Inter-Domain Routing format.
+   */
+  prefix: string;
+
+  /**
+   * Body param: Priority of the static route.
+   */
+  priority: number;
+
+  /**
+   * Body param: An optional human provided description of the static route.
+   */
+  description?: string;
+
+  /**
+   * Body param: Used only for ECMP routes.
+   */
+  scope?: ScopeParam;
+
+  /**
+   * Body param: Optional weight of the ECMP scope - if provided.
+   */
+  weight?: number;
 }
 
 export interface RouteUpdateParams {

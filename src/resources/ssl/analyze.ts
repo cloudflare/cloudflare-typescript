@@ -8,6 +8,13 @@ export class Analyze extends APIResource {
   /**
    * Returns the set of hostnames, the signature algorithm, and the expiration date
    * of the certificate.
+   *
+   * @example
+   * ```ts
+   * const analyze = await client.ssl.analyze.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: AnalyzeCreateParams, options?: Core.RequestOptions): Core.APIPromise<AnalyzeCreateResponse> {
     const { zone_id, ...body } = params;
@@ -23,7 +30,7 @@ export type AnalyzeCreateResponse = unknown;
 
 export interface AnalyzeCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

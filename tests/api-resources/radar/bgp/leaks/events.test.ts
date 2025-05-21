@@ -43,7 +43,7 @@ describe('resource events', () => {
           leakAsn: 0,
           page: 0,
           per_page: 0,
-          sortBy: 'ID',
+          sortBy: 'TIME',
           sortOrder: 'ASC',
         },
         { path: '/_stainless_unknown_path' },

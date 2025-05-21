@@ -52,7 +52,7 @@ export namespace CurrentGetResponse {
 
 export interface CurrentGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

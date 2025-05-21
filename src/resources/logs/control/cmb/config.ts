@@ -6,6 +6,14 @@ import * as Core from '../../../../core';
 export class Config extends APIResource {
   /**
    * Updates CMB config.
+   *
+   * @example
+   * ```ts
+   * const cmbConfig =
+   *   await client.logs.control.cmb.config.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null> {
     const { account_id, ...body } = params;
@@ -19,6 +27,13 @@ export class Config extends APIResource {
 
   /**
    * Deletes CMB config.
+   *
+   * @example
+   * ```ts
+   * const config = await client.logs.control.cmb.config.delete({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(
     params: ConfigDeleteParams,
@@ -34,6 +49,13 @@ export class Config extends APIResource {
 
   /**
    * Gets CMB config.
+   *
+   * @example
+   * ```ts
+   * const cmbConfig = await client.logs.control.cmb.config.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null> {
     const { account_id } = params;
@@ -47,7 +69,7 @@ export class Config extends APIResource {
 
 export interface CmbConfig {
   /**
-   * Comma-separated list of regions.
+   * Name of the region.
    */
   regions?: string;
 }
@@ -56,26 +78,26 @@ export type ConfigDeleteResponse = unknown;
 
 export interface ConfigCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Body param: Comma-separated list of regions.
+   * Body param: Name of the region.
    */
   regions?: string;
 }
 
 export interface ConfigDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ConfigGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

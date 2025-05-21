@@ -13,8 +13,6 @@ describe('resource settings', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.zones.settings.edit('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: '0rtt',
-      value: 'on',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,8 +26,7 @@ describe('resource settings', () => {
   test('edit: required and optional params', async () => {
     const response = await client.zones.settings.edit('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: '0rtt',
-      value: 'on',
+      enabled: true,
     });
   });
 

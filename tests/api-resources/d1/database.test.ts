@@ -32,6 +32,27 @@ describe('resource database', () => {
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = client.d1.database.update('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      read_replication: { mode: 'auto' },
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.d1.database.update('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      read_replication: { mode: 'auto' },
+    });
+  });
+
   test('list: only required params', async () => {
     const responsePromise = client.d1.database.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -68,6 +89,26 @@ describe('resource database', () => {
   test('delete: required and optional params', async () => {
     const response = await client.d1.database.delete('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('edit: only required params', async () => {
+    const responsePromise = client.d1.database.edit('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.d1.database.edit('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      read_replication: { mode: 'auto' },
     });
   });
 

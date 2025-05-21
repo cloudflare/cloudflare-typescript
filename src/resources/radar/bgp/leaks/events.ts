@@ -8,6 +8,14 @@ import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagin
 export class Events extends APIResource {
   /**
    * Retrieves the BGP route leak events.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const eventListResponse of client.radar.bgp.leaks.events.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query?: EventListParams,
@@ -83,8 +91,7 @@ export interface EventListParams extends V4PagePaginationParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 

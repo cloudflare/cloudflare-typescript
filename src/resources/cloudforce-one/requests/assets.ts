@@ -2,21 +2,35 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class Assets extends APIResource {
   /**
    * List Request Assets
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const assetCreateResponse of client.cloudforceOne.requests.assets.create(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     page: 0,
+   *     per_page: 10,
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
-    accountIdentifier: string,
-    requestIdentifier: string,
-    body: AssetCreateParams,
+    requestId: string,
+    params: AssetCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AssetCreateResponsesSinglePage, AssetCreateResponse> {
+    const { account_id, ...body } = params;
     return this._client.getAPIList(
-      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/asset`,
+      `/accounts/${account_id}/cloudforce-one/requests/${requestId}/asset`,
       AssetCreateResponsesSinglePage,
       { body, method: 'post', ...options },
     );
@@ -24,48 +38,82 @@ export class Assets extends APIResource {
 
   /**
    * Update a Request Asset
+   *
+   * @example
+   * ```ts
+   * const asset =
+   *   await client.cloudforceOne.requests.assets.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   update(
-    accountIdentifier: string,
-    requestIdentifier: string,
-    assetIdentifer: string,
-    body: AssetUpdateParams,
+    requestId: string,
+    assetId: string,
+    params: AssetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/asset/${assetIdentifer}`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: AssetUpdateResponse }>
+      this._client.put(`/accounts/${account_id}/cloudforce-one/requests/${requestId}/asset/${assetId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AssetUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete a Request Asset
+   *
+   * @example
+   * ```ts
+   * const asset =
+   *   await client.cloudforceOne.requests.assets.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
-    accountIdentifier: string,
-    requestIdentifier: string,
-    assetIdentifer: string,
+    requestId: string,
+    assetId: string,
+    params: AssetDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetDeleteResponse> {
+    const { account_id } = params;
     return this._client.delete(
-      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/asset/${assetIdentifer}`,
+      `/accounts/${account_id}/cloudforce-one/requests/${requestId}/asset/${assetId}`,
       options,
     );
   }
 
   /**
    * Get a Request Asset
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const assetGetResponse of client.cloudforceOne.requests.assets.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
-    accountIdentifier: string,
-    requestIdentifier: string,
-    assetIdentifer: string,
+    requestId: string,
+    assetId: string,
+    params: AssetGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AssetGetResponsesSinglePage, AssetGetResponse> {
+    const { account_id } = params;
     return this._client.getAPIList(
-      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/asset/${assetIdentifer}`,
+      `/accounts/${account_id}/cloudforce-one/requests/${requestId}/asset/${assetId}`,
       AssetGetResponsesSinglePage,
       options,
     );
@@ -78,113 +126,171 @@ export class AssetGetResponsesSinglePage extends SinglePage<AssetGetResponse> {}
 
 export interface AssetCreateResponse {
   /**
-   * Asset ID
+   * Asset ID.
    */
   id: number;
 
   /**
-   * Asset name
+   * Asset name.
    */
   name: string;
 
   /**
-   * Asset creation time
+   * Defines the asset creation time.
    */
   created?: string;
 
   /**
-   * Asset description
+   * Asset description.
    */
   description?: string;
 
   /**
-   * Asset file type
+   * Asset file type.
    */
   file_type?: string;
 }
 
 export interface AssetUpdateResponse {
   /**
-   * Asset ID
+   * Asset ID.
    */
   id: number;
 
   /**
-   * Asset name
+   * Asset name.
    */
   name: string;
 
   /**
-   * Asset creation time
+   * Defines the asset creation time.
    */
   created?: string;
 
   /**
-   * Asset description
+   * Asset description.
    */
   description?: string;
 
   /**
-   * Asset file type
+   * Asset file type.
    */
   file_type?: string;
 }
 
 export interface AssetDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<AssetDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<AssetDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
+export namespace AssetDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
 export interface AssetGetResponse {
   /**
-   * Asset ID
+   * Asset ID.
    */
   id: number;
 
   /**
-   * Asset name
+   * Asset name.
    */
   name: string;
 
   /**
-   * Asset creation time
+   * Defines the asset creation time.
    */
   created?: string;
 
   /**
-   * Asset description
+   * Asset description.
    */
   description?: string;
 
   /**
-   * Asset file type
+   * Asset file type.
    */
   file_type?: string;
 }
 
 export interface AssetCreateParams {
   /**
-   * Page number of results
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Page number of results.
    */
   page: number;
 
   /**
-   * Number of results per page
+   * Body param: Number of results per page.
    */
   per_page: number;
 }
 
 export interface AssetUpdateParams {
   /**
-   * Asset file to upload
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Asset file to upload.
    */
   source?: string;
+}
+
+export interface AssetDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export interface AssetGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
 }
 
 Assets.AssetCreateResponsesSinglePage = AssetCreateResponsesSinglePage;
@@ -200,5 +306,7 @@ export declare namespace Assets {
     AssetGetResponsesSinglePage as AssetGetResponsesSinglePage,
     type AssetCreateParams as AssetCreateParams,
     type AssetUpdateParams as AssetUpdateParams,
+    type AssetDeleteParams as AssetDeleteParams,
+    type AssetGetParams as AssetGetParams,
   };
 }

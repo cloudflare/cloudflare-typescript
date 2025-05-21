@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class DNSSECResource extends APIResource {
   /**
    * Delete DNSSEC.
+   *
+   * @example
+   * ```ts
+   * const dnssec = await client.dns.dnssec.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(params: DNSSECDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse> {
     const { zone_id } = params;
@@ -18,6 +25,13 @@ export class DNSSECResource extends APIResource {
 
   /**
    * Enable or disable DNSSEC.
+   *
+   * @example
+   * ```ts
+   * const dnssec = await client.dns.dnssec.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: DNSSECEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
     const { zone_id, ...body } = params;
@@ -30,6 +44,13 @@ export class DNSSECResource extends APIResource {
 
   /**
    * Details about DNSSEC status and configuration.
+   *
+   * @example
+   * ```ts
+   * const dnssec = await client.dns.dnssec.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DNSSECGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
     const { zone_id } = params;
@@ -84,6 +105,19 @@ export interface DNSSEC {
   dnssec_presigned?: boolean;
 
   /**
+   * If true, enables the use of NSEC3 together with DNSSEC on the zone. Combined
+   * with setting dnssec_presigned to true, this enables the use of NSEC3 records
+   * when transferring in from an external provider. If dnssec_presigned is instead
+   * set to false (default), NSEC3 records will be generated and signed at request
+   * time.
+   *
+   * See
+   * [DNSSEC with NSEC3](https://developers.cloudflare.com/dns/dnssec/enable-nsec3/)
+   * for details.
+   */
+  dnssec_use_nsec3?: boolean;
+
+  /**
    * Full DS record.
    */
   ds?: string | null;
@@ -123,14 +157,14 @@ export type DNSSECDeleteResponse = string;
 
 export interface DNSSECDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface DNSSECEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -158,6 +192,19 @@ export interface DNSSECEditParams {
   dnssec_presigned?: boolean;
 
   /**
+   * Body param: If true, enables the use of NSEC3 together with DNSSEC on the zone.
+   * Combined with setting dnssec_presigned to true, this enables the use of NSEC3
+   * records when transferring in from an external provider. If dnssec_presigned is
+   * instead set to false (default), NSEC3 records will be generated and signed at
+   * request time.
+   *
+   * See
+   * [DNSSEC with NSEC3](https://developers.cloudflare.com/dns/dnssec/enable-nsec3/)
+   * for details.
+   */
+  dnssec_use_nsec3?: boolean;
+
+  /**
    * Body param: Status of DNSSEC, based on user-desired state and presence of
    * necessary records.
    */
@@ -166,7 +213,7 @@ export interface DNSSECEditParams {
 
 export interface DNSSECGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

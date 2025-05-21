@@ -7,6 +7,21 @@ import { SinglePage } from '../../../../../pagination';
 export class Tags extends APIResource {
   /**
    * Put script tags for a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tagUpdateResponse of client.workersForPlatforms.dispatch.namespaces.scripts.tags.update(
+   *   'my-dispatch-namespace',
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: ['my-tag'],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   update(
     dispatchNamespace: string,
@@ -24,6 +39,18 @@ export class Tags extends APIResource {
 
   /**
    * Fetch tags from a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tagListResponse of client.workersForPlatforms.dispatch.namespaces.scripts.tags.list(
+   *   'my-dispatch-namespace',
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     dispatchNamespace: string,
@@ -41,6 +68,17 @@ export class Tags extends APIResource {
 
   /**
    * Delete script tag for a script uploaded to a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const tag =
+   *   await client.workersForPlatforms.dispatch.namespaces.scripts.tags.delete(
+   *     'my-dispatch-namespace',
+   *     'this-is_my_script-01',
+   *     'my-tag',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     dispatchNamespace: string,
@@ -64,12 +102,12 @@ export class TagUpdateResponsesSinglePage extends SinglePage<TagUpdateResponse> 
 export class TagListResponsesSinglePage extends SinglePage<TagListResponse> {}
 
 /**
- * Tag to help you manage your Worker
+ * Tag to help you manage your Worker.
  */
 export type TagUpdateResponse = string;
 
 /**
- * Tag to help you manage your Worker
+ * Tag to help you manage your Worker.
  */
 export type TagListResponse = string;
 
@@ -77,26 +115,26 @@ export type TagDeleteResponse = unknown;
 
 export interface TagUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Body param: Tags to help you manage your Workers
+   * Body param: Tags to help you manage your Workers.
    */
   body: Array<string>;
 }
 
 export interface TagListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface TagDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

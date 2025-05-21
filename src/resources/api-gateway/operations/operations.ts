@@ -26,6 +26,18 @@ export class Operations extends APIResource {
    * must be unique on the zone. Inserting an operation that matches an existing one
    * will return the record of the already existing operation and update its
    * last_updated date.
+   *
+   * @example
+   * ```ts
+   * const operation = await client.apiGateway.operations.create(
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     endpoint: '/api/v1/users/{var1}',
+   *     host: 'www.example.com',
+   *     method: 'GET',
+   *   },
+   * );
+   * ```
    */
   create(
     params: OperationCreateParams,
@@ -42,6 +54,16 @@ export class Operations extends APIResource {
 
   /**
    * Retrieve information about all operations on a zone
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const operationListResponse of client.apiGateway.operations.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: OperationListParams,
@@ -57,6 +79,14 @@ export class Operations extends APIResource {
 
   /**
    * Delete an operation
+   *
+   * @example
+   * ```ts
+   * const operation = await client.apiGateway.operations.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     operationId: string,
@@ -73,6 +103,25 @@ export class Operations extends APIResource {
    * operation and must be unique on the zone. Inserting an operation that matches an
    * existing one will return the record of the already existing operation and update
    * its last_updated date.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const operationBulkCreateResponse of client.apiGateway.operations.bulkCreate(
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [
+   *       {
+   *         endpoint: '/api/v1/users/{var1}',
+   *         host: 'www.example.com',
+   *         method: 'GET',
+   *       },
+   *     ],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   bulkCreate(
     params: OperationBulkCreateParams,
@@ -88,6 +137,14 @@ export class Operations extends APIResource {
 
   /**
    * Delete multiple operations
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.apiGateway.operations.bulkDelete({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   bulkDelete(
     params: OperationBulkDeleteParams,
@@ -99,6 +156,14 @@ export class Operations extends APIResource {
 
   /**
    * Retrieve information about an operation
+   *
+   * @example
+   * ```ts
+   * const operation = await client.apiGateway.operations.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     operationId: string,
@@ -141,7 +206,7 @@ export interface APIShield {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 }
@@ -168,7 +233,7 @@ export interface OperationCreateResponse {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 
@@ -402,7 +467,7 @@ export namespace OperationCreateResponse {
        */
       export interface ActiveSchema {
         /**
-         * UUID
+         * UUID.
          */
         id?: string;
 
@@ -444,7 +509,7 @@ export interface OperationListResponse {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 
@@ -678,7 +743,7 @@ export namespace OperationListResponse {
        */
       export interface ActiveSchema {
         /**
-         * UUID
+         * UUID.
          */
         id?: string;
 
@@ -704,7 +769,7 @@ export interface OperationDeleteResponse {
   messages: UserSchemasAPI.Message;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
@@ -731,7 +796,7 @@ export interface OperationBulkCreateResponse {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 
@@ -965,7 +1030,7 @@ export namespace OperationBulkCreateResponse {
        */
       export interface ActiveSchema {
         /**
-         * UUID
+         * UUID.
          */
         id?: string;
 
@@ -991,7 +1056,7 @@ export interface OperationBulkDeleteResponse {
   messages: UserSchemasAPI.Message;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
@@ -1018,7 +1083,7 @@ export interface OperationGetResponse {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
   /**
-   * UUID
+   * UUID.
    */
   operation_id: string;
 
@@ -1252,7 +1317,7 @@ export namespace OperationGetResponse {
        */
       export interface ActiveSchema {
         /**
-         * UUID
+         * UUID.
          */
         id?: string;
 
@@ -1274,7 +1339,7 @@ export namespace OperationGetResponse {
 
 export interface OperationCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1300,7 +1365,7 @@ export interface OperationCreateParams {
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1340,14 +1405,14 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
 
 export interface OperationDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface OperationBulkCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1381,14 +1446,14 @@ export namespace OperationBulkCreateParams {
 
 export interface OperationBulkDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface OperationGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

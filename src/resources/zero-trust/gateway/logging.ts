@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Logging extends APIResource {
   /**
    * Updates logging settings for the current Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const loggingSetting =
+   *   await client.zeroTrust.gateway.logging.update({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   update(params: LoggingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting> {
     const { account_id, ...body } = params;
@@ -18,6 +26,14 @@ export class Logging extends APIResource {
 
   /**
    * Fetches the current logging settings for Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const loggingSetting =
+   *   await client.zeroTrust.gateway.logging.get({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   get(params: LoggingGetParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting> {
     const { account_id } = params;
@@ -47,20 +63,49 @@ export namespace LoggingSetting {
    * Logging settings by rule type.
    */
   export interface SettingsByRuleType {
-    /**
-     * Logging settings for DNS firewall.
-     */
-    dns?: unknown;
+    dns?: SettingsByRuleType.DNS;
 
-    /**
-     * Logging settings for HTTP/HTTPS firewall.
-     */
-    http?: unknown;
+    http?: SettingsByRuleType.HTTP;
 
-    /**
-     * Logging settings for Network firewall.
-     */
-    l4?: unknown;
+    l4?: SettingsByRuleType.L4;
+  }
+
+  export namespace SettingsByRuleType {
+    export interface DNS {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
+
+    export interface HTTP {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
+
+    export interface L4 {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
   }
 }
 
@@ -88,20 +133,49 @@ export namespace LoggingUpdateParams {
    * Logging settings by rule type.
    */
   export interface SettingsByRuleType {
-    /**
-     * Logging settings for DNS firewall.
-     */
-    dns?: unknown;
+    dns?: SettingsByRuleType.DNS;
 
-    /**
-     * Logging settings for HTTP/HTTPS firewall.
-     */
-    http?: unknown;
+    http?: SettingsByRuleType.HTTP;
 
-    /**
-     * Logging settings for Network firewall.
-     */
-    l4?: unknown;
+    l4?: SettingsByRuleType.L4;
+  }
+
+  export namespace SettingsByRuleType {
+    export interface DNS {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
+
+    export interface HTTP {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
+
+    export interface L4 {
+      /**
+       * Log all requests to this service.
+       */
+      log_all?: boolean;
+
+      /**
+       * Log only blocking requests to this service.
+       */
+      log_blocks?: boolean;
+    }
   }
 }
 

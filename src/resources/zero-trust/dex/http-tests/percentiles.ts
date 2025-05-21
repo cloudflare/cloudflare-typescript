@@ -8,6 +8,19 @@ export class Percentiles extends APIResource {
   /**
    * Get percentiles for an http test for a given time period between 1 hour and 7
    * days.
+   *
+   * @example
+   * ```ts
+   * const httpDetailsPercentiles =
+   *   await client.zeroTrust.dex.httpTests.percentiles.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '01a7362d577a6c3019a474fd6f485823',
+   *       from: '2023-09-20T17:00:00Z',
+   *       to: '2023-09-20T17:00:00Z',
+   *     },
+   *   );
+   * ```
    */
   get(
     testId: string,

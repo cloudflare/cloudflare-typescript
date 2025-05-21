@@ -38,6 +38,16 @@ export class Packages extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const packageListResponse of client.firewall.waf.packages.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PackageListParams,
@@ -56,6 +66,14 @@ export class Packages extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const _package = await client.firewall.waf.packages.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     packageId: string,
@@ -82,7 +100,7 @@ export namespace PackageGetResponse {
     result: unknown | string | null;
 
     /**
-     * Whether the API call was successful
+     * Defines whether the API call was successful.
      */
     success: true;
   }
@@ -94,7 +112,7 @@ export namespace PackageGetResponse {
 
 export interface PackageListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -122,7 +140,7 @@ export interface PackageListParams extends V4PagePaginationArrayParams {
 
 export interface PackageGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }

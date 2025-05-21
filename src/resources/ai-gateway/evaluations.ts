@@ -7,6 +7,17 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Evaluations extends APIResource {
   /**
    * Create a new Evaluation
+   *
+   * @example
+   * ```ts
+   * const evaluation =
+   *   await client.aiGateway.evaluations.create('my-gateway', {
+   *     account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+   *     dataset_ids: ['string'],
+   *     evaluation_type_ids: ['string'],
+   *     name: 'name',
+   *   });
+   * ```
    */
   create(
     gatewayId: string,
@@ -24,6 +35,17 @@ export class Evaluations extends APIResource {
 
   /**
    * List Evaluations
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const evaluationListResponse of client.aiGateway.evaluations.list(
+   *   'my-gateway',
+   *   { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     gatewayId: string,
@@ -40,6 +62,16 @@ export class Evaluations extends APIResource {
 
   /**
    * Delete a Evaluation
+   *
+   * @example
+   * ```ts
+   * const evaluation =
+   *   await client.aiGateway.evaluations.delete(
+   *     'my-gateway',
+   *     'id',
+   *     { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' },
+   *   );
+   * ```
    */
   delete(
     gatewayId: string,
@@ -58,6 +90,15 @@ export class Evaluations extends APIResource {
 
   /**
    * Fetch a Evaluation
+   *
+   * @example
+   * ```ts
+   * const evaluation = await client.aiGateway.evaluations.get(
+   *   'my-gateway',
+   *   'id',
+   *   { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' },
+   * );
+   * ```
    */
   get(
     gatewayId: string,

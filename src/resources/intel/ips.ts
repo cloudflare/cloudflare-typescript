@@ -6,7 +6,15 @@ import * as Core from '../../core';
 export class IPs extends APIResource {
   /**
    * Gets the geolocation, ASN, infrastructure type of the ASN, and any security
-   * threat categories of an IP address.
+   * threat categories of an IP address. **Must provide ip query parameters.** For
+   * example, `/intel/ip?ipv4=1.1.1.1` or `/intel/ip?ipv6=2001:db8::1`.
+   *
+   * @example
+   * ```ts
+   * const ips = await client.intel.ips.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null> {
     const { account_id, ...query } = params;
@@ -63,7 +71,7 @@ export type IPGetResponse = Array<IP>;
 
 export interface IPGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

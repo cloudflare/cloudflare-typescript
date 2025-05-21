@@ -6,6 +6,18 @@ import * as Core from '../../../core';
 export class Schedules extends APIResource {
   /**
    * Updates Cron Triggers for a Worker.
+   *
+   * @example
+   * ```ts
+   * const schedule =
+   *   await client.workers.scripts.schedules.update(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       body: [{ cron: '* /30 * * * *' }],
+   *     },
+   *   );
+   * ```
    */
   update(
     scriptName: string,
@@ -23,6 +35,14 @@ export class Schedules extends APIResource {
 
   /**
    * Fetches Cron Triggers for a Worker.
+   *
+   * @example
+   * ```ts
+   * const schedule = await client.workers.scripts.schedules.get(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     scriptName: string,
@@ -39,48 +59,61 @@ export class Schedules extends APIResource {
   }
 }
 
-export interface Schedule {
-  created_on?: string;
-
-  cron?: string;
-
-  modified_on?: string;
-}
-
-export interface ScheduleParam {
-  cron?: string;
-}
-
 export interface ScheduleUpdateResponse {
-  schedules?: Array<Schedule>;
+  schedules: Array<ScheduleUpdateResponse.Schedule>;
+}
+
+export namespace ScheduleUpdateResponse {
+  export interface Schedule {
+    cron: string;
+
+    created_on?: string;
+
+    modified_on?: string;
+  }
 }
 
 export interface ScheduleGetResponse {
-  schedules?: Array<Schedule>;
+  schedules: Array<ScheduleGetResponse.Schedule>;
+}
+
+export namespace ScheduleGetResponse {
+  export interface Schedule {
+    cron: string;
+
+    created_on?: string;
+
+    modified_on?: string;
+  }
 }
 
 export interface ScheduleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
    * Body param:
    */
-  body: Array<ScheduleParam>;
+  body: Array<ScheduleUpdateParams.Body>;
+}
+
+export namespace ScheduleUpdateParams {
+  export interface Body {
+    cron: string;
+  }
 }
 
 export interface ScheduleGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export declare namespace Schedules {
   export {
-    type Schedule as Schedule,
     type ScheduleUpdateResponse as ScheduleUpdateResponse,
     type ScheduleGetResponse as ScheduleGetResponse,
     type ScheduleUpdateParams as ScheduleUpdateParams,

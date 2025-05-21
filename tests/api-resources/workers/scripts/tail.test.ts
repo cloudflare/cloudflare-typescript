@@ -34,7 +34,7 @@ describe('resource tail', () => {
   test('delete: only required params', async () => {
     const responsePromise = client.workers.scripts.tail.delete(
       'this-is_my_script-01',
-      '03dc9f77817b488fb26c5861ec18f791',
+      '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource tail', () => {
   test('delete: required and optional params', async () => {
     const response = await client.workers.scripts.tail.delete(
       'this-is_my_script-01',
-      '03dc9f77817b488fb26c5861ec18f791',
+      '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });

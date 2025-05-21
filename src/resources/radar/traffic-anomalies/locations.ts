@@ -9,6 +9,12 @@ export class Locations extends APIResource {
    * Retrieves the sum of Internet traffic anomalies, grouped by location. These
    * anomalies are signals that might indicate an outage, automatically detected by
    * Radar and manually verified by our team.
+   *
+   * @example
+   * ```ts
+   * const location =
+   *   await client.radar.trafficAnomalies.locations.get();
+   * ```
    */
   get(query?: LocationGetParams, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
@@ -48,8 +54,7 @@ export interface LocationGetParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 

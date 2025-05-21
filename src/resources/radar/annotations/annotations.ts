@@ -17,6 +17,11 @@ export class Annotations extends APIResource {
 
   /**
    * Retrieves the latest annotations.
+   *
+   * @example
+   * ```ts
+   * const annotations = await client.radar.annotations.list();
+   * ```
    */
   list(query?: AnnotationListParams, options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>;
@@ -101,7 +106,8 @@ export namespace AnnotationListResponse {
 
 export interface AnnotationListParams {
   /**
-   * Single Autonomous System Number (ASN) as integer.
+   * Filters results by Autonomous System. Specify a single Autonomous System Number
+   * (ASN) as integer.
    */
   asn?: number;
 
@@ -111,8 +117,7 @@ export interface AnnotationListParams {
   dateEnd?: string;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * Filters results by date range.
    */
   dateRange?: string;
 
@@ -132,7 +137,7 @@ export interface AnnotationListParams {
   limit?: number;
 
   /**
-   * Location alpha-2 code.
+   * Filters results by location. Specify an alpha-2 location code.
    */
   location?: string;
 

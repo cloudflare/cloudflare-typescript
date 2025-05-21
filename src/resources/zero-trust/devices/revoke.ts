@@ -5,7 +5,20 @@ import * as Core from '../../../core';
 
 export class Revoke extends APIResource {
   /**
-   * Revokes a list of devices.
+   * Revokes a list of registrations.
+   *
+   * **Deprecated**: please use POST
+   * /accounts/{account_id}/devices/registrations/revoke instead.
+   *
+   * @example
+   * ```ts
+   * const revoke = await client.zeroTrust.devices.revoke.create(
+   *   {
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     body: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
+   *   },
+   * );
+   * ```
    */
   create(
     params: RevokeCreateParams,
@@ -30,7 +43,7 @@ export interface RevokeCreateParams {
   account_id: string;
 
   /**
-   * Body param: A list of device ids to revoke.
+   * Body param: A list of Registration IDs to revoke.
    */
   body: Array<string>;
 }

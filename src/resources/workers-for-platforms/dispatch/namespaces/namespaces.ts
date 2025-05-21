@@ -6,6 +6,7 @@ import * as ScriptsAPI from './scripts/scripts';
 import {
   Script,
   ScriptDeleteParams,
+  ScriptDeleteResponse,
   ScriptGetParams,
   ScriptUpdateParams,
   ScriptUpdateResponse,
@@ -18,6 +19,14 @@ export class Namespaces extends APIResource {
 
   /**
    * Create a new Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const namespace =
+   *   await client.workersForPlatforms.dispatch.namespaces.create(
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     params: NamespaceCreateParams,
@@ -34,6 +43,16 @@ export class Namespaces extends APIResource {
 
   /**
    * Fetch a list of Workers for Platforms namespaces.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const namespaceListResponse of client.workersForPlatforms.dispatch.namespaces.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: NamespaceListParams,
@@ -49,6 +68,15 @@ export class Namespaces extends APIResource {
 
   /**
    * Delete a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const namespace =
+   *   await client.workersForPlatforms.dispatch.namespaces.delete(
+   *     'my-dispatch-namespace',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     dispatchNamespace: string,
@@ -66,6 +94,15 @@ export class Namespaces extends APIResource {
 
   /**
    * Get a Workers for Platforms namespace.
+   *
+   * @example
+   * ```ts
+   * const namespace =
+   *   await client.workersForPlatforms.dispatch.namespaces.get(
+   *     'my-dispatch-namespace',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     dispatchNamespace: string,
@@ -86,7 +123,7 @@ export class NamespaceListResponsesSinglePage extends SinglePage<NamespaceListRe
 
 export interface NamespaceCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   created_by?: string;
 
@@ -96,7 +133,7 @@ export interface NamespaceCreateResponse {
   created_on?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   modified_by?: string;
 
@@ -116,14 +153,14 @@ export interface NamespaceCreateResponse {
   namespace_name?: string;
 
   /**
-   * The current number of scripts in this Dispatch Namespace
+   * The current number of scripts in this Dispatch Namespace.
    */
   script_count?: number;
 }
 
 export interface NamespaceListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   created_by?: string;
 
@@ -133,7 +170,7 @@ export interface NamespaceListResponse {
   created_on?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   modified_by?: string;
 
@@ -153,7 +190,7 @@ export interface NamespaceListResponse {
   namespace_name?: string;
 
   /**
-   * The current number of scripts in this Dispatch Namespace
+   * The current number of scripts in this Dispatch Namespace.
    */
   script_count?: number;
 }
@@ -162,7 +199,7 @@ export type NamespaceDeleteResponse = unknown;
 
 export interface NamespaceGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   created_by?: string;
 
@@ -172,7 +209,7 @@ export interface NamespaceGetResponse {
   created_on?: string;
 
   /**
-   * Identifier
+   * Identifier.
    */
   modified_by?: string;
 
@@ -192,40 +229,40 @@ export interface NamespaceGetResponse {
   namespace_name?: string;
 
   /**
-   * The current number of scripts in this Dispatch Namespace
+   * The current number of scripts in this Dispatch Namespace.
    */
   script_count?: number;
 }
 
 export interface NamespaceCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Body param: The name of the dispatch namespace
+   * Body param: The name of the dispatch namespace.
    */
   name?: string;
 }
 
 export interface NamespaceListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface NamespaceDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface NamespaceGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
@@ -250,6 +287,7 @@ export declare namespace Namespaces {
     Scripts as Scripts,
     type Script as Script,
     type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptDeleteParams as ScriptDeleteParams,
     type ScriptGetParams as ScriptGetParams,

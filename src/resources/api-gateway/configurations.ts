@@ -7,6 +7,17 @@ import * as UserSchemasAPI from './user-schemas/user-schemas';
 export class Configurations extends APIResource {
   /**
    * Set configuration properties
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.apiGateway.configurations.update({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     auth_id_characteristics: [
+   *       { name: 'authorization', type: 'header' },
+   *     ],
+   *   });
+   * ```
    */
   update(
     params: ConfigurationUpdateParams,
@@ -18,6 +29,14 @@ export class Configurations extends APIResource {
 
   /**
    * Retrieve information about specific configuration properties
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.apiGateway.configurations.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(params: ConfigurationGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { zone_id, ...query } = params;
@@ -80,14 +99,14 @@ export interface ConfigurationUpdateResponse {
   messages: UserSchemasAPI.Message;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
 export interface ConfigurationUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -140,7 +159,7 @@ export namespace ConfigurationUpdateParams {
 
 export interface ConfigurationGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

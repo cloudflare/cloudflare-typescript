@@ -11,6 +11,16 @@ export class Language extends APIResource {
 
   /**
    * Generate captions or subtitles for provided language via AI.
+   *
+   * @example
+   * ```ts
+   * const caption =
+   *   await client.stream.captions.language.create(
+   *     'ea95132c15732412d22c1476fa83f27a',
+   *     'tr',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   create(
     identifier: string,
@@ -30,6 +40,19 @@ export class Language extends APIResource {
   /**
    * Uploads the caption or subtitle file to the endpoint for a specific BCP47
    * language. One caption or subtitle file per language is allowed.
+   *
+   * @example
+   * ```ts
+   * const caption =
+   *   await client.stream.captions.language.update(
+   *     'ea95132c15732412d22c1476fa83f27a',
+   *     'tr',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       file: '@/Users/kyle/Desktop/tr.vtt',
+   *     },
+   *   );
+   * ```
    */
   update(
     identifier: string,
@@ -48,6 +71,16 @@ export class Language extends APIResource {
 
   /**
    * Removes the captions or subtitles from a video.
+   *
+   * @example
+   * ```ts
+   * const language =
+   *   await client.stream.captions.language.delete(
+   *     'ea95132c15732412d22c1476fa83f27a',
+   *     'tr',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     identifier: string,
@@ -66,6 +99,15 @@ export class Language extends APIResource {
 
   /**
    * Lists the captions or subtitles for provided language.
+   *
+   * @example
+   * ```ts
+   * const caption = await client.stream.captions.language.get(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   'tr',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     identifier: string,
@@ -87,14 +129,14 @@ export type LanguageDeleteResponse = string;
 
 export interface LanguageCreateParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface LanguageUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -106,14 +148,14 @@ export interface LanguageUpdateParams {
 
 export interface LanguageDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface LanguageGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

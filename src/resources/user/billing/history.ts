@@ -8,6 +8,14 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class History extends APIResource {
   /**
    * Accesses your billing history object.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const billingHistory of client.user.billing.history.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query?: HistoryListParams,

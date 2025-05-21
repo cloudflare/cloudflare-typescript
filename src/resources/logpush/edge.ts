@@ -7,6 +7,13 @@ import { SinglePage } from '../../pagination';
 export class Edge extends APIResource {
   /**
    * Creates a new Instant Logs job for a zone.
+   *
+   * @example
+   * ```ts
+   * const instantLogpushJob = await client.logpush.edge.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: EdgeCreateParams, options?: Core.RequestOptions): Core.APIPromise<InstantLogpushJob | null> {
     const { zone_id, ...body } = params;
@@ -19,6 +26,16 @@ export class Edge extends APIResource {
 
   /**
    * Lists Instant Logs jobs for a zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const instantLogpushJob of client.logpush.edge.get(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params: EdgeGetParams,
@@ -61,7 +78,7 @@ export interface InstantLogpushJob {
 
 export interface EdgeCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -84,7 +101,7 @@ export interface EdgeCreateParams {
 
 export interface EdgeGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

@@ -6,6 +6,16 @@ import * as Core from '../../../core';
 export class Datasets extends APIResource {
   /**
    * Creates a dataset
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.cloudforceOne.threatEvents.datasets.create({
+   *     account_id: 0,
+   *     isPublic: true,
+   *     name: 'x',
+   *   });
+   * ```
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreateResponse> {
     const { account_id, ...body } = params;
@@ -17,6 +27,14 @@ export class Datasets extends APIResource {
 
   /**
    * Lists all datasets in an account
+   *
+   * @example
+   * ```ts
+   * const datasets =
+   *   await client.cloudforceOne.threatEvents.datasets.list({
+   *     account_id: 0,
+   *   });
+   * ```
    */
   list(params: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse> {
     const { account_id } = params;
@@ -25,6 +43,15 @@ export class Datasets extends APIResource {
 
   /**
    * Updates an existing dataset
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.datasets.edit(
+   *     'dataset_id',
+   *     { account_id: 0, isPublic: true, name: 'x' },
+   *   );
+   * ```
    */
   edit(
     datasetId: string,
@@ -40,6 +67,15 @@ export class Datasets extends APIResource {
 
   /**
    * Reads a dataset
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.cloudforceOne.threatEvents.datasets.get(
+   *     'dataset_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   get(
     datasetId: string,
@@ -52,6 +88,16 @@ export class Datasets extends APIResource {
 
   /**
    * Reads data for a raw event
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.datasets.raw(
+   *     'dataset_id',
+   *     'event_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   raw(
     datasetId: string,
@@ -119,7 +165,7 @@ export interface DatasetRawResponse {
 
 export interface DatasetCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -130,21 +176,21 @@ export interface DatasetCreateParams {
   isPublic: boolean;
 
   /**
-   * Body param: Used to describe the dataset within the account context
+   * Body param: Used to describe the dataset within the account context.
    */
   name: string;
 }
 
 export interface DatasetListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface DatasetEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -155,21 +201,21 @@ export interface DatasetEditParams {
   isPublic: boolean;
 
   /**
-   * Body param: Used to describe the dataset within the account context
+   * Body param: Used to describe the dataset within the account context.
    */
   name: string;
 }
 
 export interface DatasetGetParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface DatasetRawParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

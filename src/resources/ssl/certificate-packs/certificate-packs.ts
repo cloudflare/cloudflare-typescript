@@ -11,6 +11,23 @@ export class CertificatePacks extends APIResource {
 
   /**
    * For a given zone, order an advanced certificate pack.
+   *
+   * @example
+   * ```ts
+   * const certificatePack =
+   *   await client.ssl.certificatePacks.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     certificate_authority: 'lets_encrypt',
+   *     hosts: [
+   *       'example.com',
+   *       '*.example.com',
+   *       'www.example.com',
+   *     ],
+   *     type: 'advanced',
+   *     validation_method: 'txt',
+   *     validity_days: 14,
+   *   });
+   * ```
    */
   create(
     params: CertificatePackCreateParams,
@@ -27,6 +44,16 @@ export class CertificatePacks extends APIResource {
 
   /**
    * For a given zone, list all active certificate packs.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const certificatePackListResponse of client.ssl.certificatePacks.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CertificatePackListParams,
@@ -42,6 +69,15 @@ export class CertificatePacks extends APIResource {
 
   /**
    * For a given zone, delete an advanced certificate pack.
+   *
+   * @example
+   * ```ts
+   * const certificatePack =
+   *   await client.ssl.certificatePacks.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   delete(
     certificatePackId: string,
@@ -61,6 +97,14 @@ export class CertificatePacks extends APIResource {
    * For a given zone, restart validation or add cloudflare branding for an advanced
    * certificate pack. The former is only a validation operation for a Certificate
    * Pack in a validation_timed_out status.
+   *
+   * @example
+   * ```ts
+   * const response = await client.ssl.certificatePacks.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     certificatePackId: string,
@@ -78,6 +122,15 @@ export class CertificatePacks extends APIResource {
 
   /**
    * For a given zone, get a certificate pack.
+   *
+   * @example
+   * ```ts
+   * const certificatePack =
+   *   await client.ssl.certificatePacks.get(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     certificatePackId: string,
@@ -143,7 +196,7 @@ export type ValidationMethod = 'http' | 'cname' | 'txt';
 
 export interface CertificatePackCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -191,14 +244,14 @@ export type CertificatePackListResponse = unknown;
 
 export interface CertificatePackDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface CertificatePackEditResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 
@@ -246,7 +299,7 @@ export type CertificatePackGetResponse = unknown;
 
 export interface CertificatePackCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -288,7 +341,7 @@ export interface CertificatePackCreateParams {
 
 export interface CertificatePackListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -300,14 +353,14 @@ export interface CertificatePackListParams {
 
 export interface CertificatePackDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CertificatePackEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -320,7 +373,7 @@ export interface CertificatePackEditParams {
 
 export interface CertificatePackGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

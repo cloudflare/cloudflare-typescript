@@ -12,6 +12,14 @@ export class Configurations extends APIResource {
 
   /**
    * Updates the current Zero Trust account configuration.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.zeroTrust.gateway.configurations.update({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   update(
     params: ConfigurationUpdateParams,
@@ -32,6 +40,14 @@ export class Configurations extends APIResource {
    * `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or
    * `certificate`, without updating the entire configuration object. Returns an
    * error if any collection of settings is not properly configured.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.gateway.configurations.edit({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   edit(
     params: ConfigurationEditParams,
@@ -48,6 +64,14 @@ export class Configurations extends APIResource {
 
   /**
    * Fetches the current Zero Trust account configuration.
+   *
+   * @example
+   * ```ts
+   * const configuration =
+   *   await client.zeroTrust.gateway.configurations.get({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
    */
   get(
     params: ConfigurationGetParams,
@@ -105,7 +129,7 @@ export interface AntiVirusSettings {
    * Configure a message to display on the user's device when an antivirus search is
    * performed.
    */
-  notification_settings?: NotificationSettings;
+  notification_settings?: NotificationSettings | null;
 }
 
 /**
@@ -131,7 +155,7 @@ export interface AntiVirusSettingsParam {
    * Configure a message to display on the user's device when an antivirus search is
    * performed.
    */
-  notification_settings?: NotificationSettingsParam;
+  notification_settings?: NotificationSettingsParam | null;
 }
 
 /**
@@ -139,7 +163,7 @@ export interface AntiVirusSettingsParam {
  */
 export interface BlockPageSettings {
   /**
-   * Block page background color in #rrggbb format.
+   * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
 
@@ -149,39 +173,58 @@ export interface BlockPageSettings {
   enabled?: boolean;
 
   /**
-   * Block page footer text.
+   * If mode is customized_block_page: block page footer text.
    */
   footer_text?: string;
 
   /**
-   * Block page header text.
+   * If mode is customized_block_page: block page header text.
    */
   header_text?: string;
 
   /**
-   * Full URL to the logo file.
+   * If mode is redirect_uri: when enabled, context will be appended to target_uri as
+   * query parameters.
+   */
+  include_context?: boolean;
+
+  /**
+   * If mode is customized_block_page: full URL to the logo file.
    */
   logo_path?: string;
 
   /**
-   * Admin email for users to contact.
+   * If mode is customized_block_page: admin email for users to contact.
    */
   mailto_address?: string;
 
   /**
-   * Subject line for emails created from block page.
+   * If mode is customized_block_page: subject line for emails created from block
+   * page.
    */
   mailto_subject?: string;
 
   /**
-   * Block page title.
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode?: 'customized_block_page' | 'redirect_uri';
+
+  /**
+   * If mode is customized_block_page: block page title.
    */
   name?: string;
 
   /**
-   * Suppress detailed info at the bottom of the block page.
+   * If mode is customized_block_page: suppress detailed info at the bottom of the
+   * block page.
    */
   suppress_footer?: boolean;
+
+  /**
+   * If mode is redirect_uri: URI to which the user should be redirected.
+   */
+  target_uri?: string;
 }
 
 /**
@@ -189,7 +232,7 @@ export interface BlockPageSettings {
  */
 export interface BlockPageSettingsParam {
   /**
-   * Block page background color in #rrggbb format.
+   * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
 
@@ -199,39 +242,58 @@ export interface BlockPageSettingsParam {
   enabled?: boolean;
 
   /**
-   * Block page footer text.
+   * If mode is customized_block_page: block page footer text.
    */
   footer_text?: string;
 
   /**
-   * Block page header text.
+   * If mode is customized_block_page: block page header text.
    */
   header_text?: string;
 
   /**
-   * Full URL to the logo file.
+   * If mode is redirect_uri: when enabled, context will be appended to target_uri as
+   * query parameters.
+   */
+  include_context?: boolean;
+
+  /**
+   * If mode is customized_block_page: full URL to the logo file.
    */
   logo_path?: string;
 
   /**
-   * Admin email for users to contact.
+   * If mode is customized_block_page: admin email for users to contact.
    */
   mailto_address?: string;
 
   /**
-   * Subject line for emails created from block page.
+   * If mode is customized_block_page: subject line for emails created from block
+   * page.
    */
   mailto_subject?: string;
 
   /**
-   * Block page title.
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode?: 'customized_block_page' | 'redirect_uri';
+
+  /**
+   * If mode is customized_block_page: block page title.
    */
   name?: string;
 
   /**
-   * Suppress detailed info at the bottom of the block page.
+   * If mode is customized_block_page: suppress detailed info at the bottom of the
+   * block page.
    */
   suppress_footer?: boolean;
+
+  /**
+   * If mode is redirect_uri: URI to which the user should be redirected.
+   */
+  target_uri?: string;
 }
 
 /**
@@ -372,64 +434,69 @@ export interface GatewayConfigurationSettings {
   /**
    * Activity log settings.
    */
-  activity_log?: ActivityLogSettings;
+  activity_log?: ActivityLogSettings | null;
 
   /**
    * Anti-virus settings.
    */
-  antivirus?: AntiVirusSettings;
+  antivirus?: AntiVirusSettings | null;
 
   /**
    * Block page layout settings.
    */
-  block_page?: BlockPageSettings;
+  block_page?: BlockPageSettings | null;
 
   /**
    * DLP body scanning settings.
    */
-  body_scanning?: BodyScanningSettings;
+  body_scanning?: BodyScanningSettings | null;
 
   /**
    * Browser isolation settings.
    */
-  browser_isolation?: BrowserIsolationSettings;
+  browser_isolation?: BrowserIsolationSettings | null;
 
   /**
    * Certificate settings for Gateway TLS interception. If not specified, the
    * Cloudflare Root CA will be used.
    */
-  certificate?: GatewayConfigurationSettings.Certificate;
+  certificate?: GatewayConfigurationSettings.Certificate | null;
 
   /**
    * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
    * `certificate`)
    */
-  custom_certificate?: CustomCertificateSettings;
+  custom_certificate?: CustomCertificateSettings | null;
 
   /**
    * Extended e-mail matching settings.
    */
-  extended_email_matching?: ExtendedEmailMatching;
+  extended_email_matching?: ExtendedEmailMatching | null;
 
   /**
    * FIPS settings.
    */
-  fips?: FipsSettings;
+  fips?: FipsSettings | null;
+
+  /**
+   * Setting to enable host selector in egress policies.
+   */
+  host_selector?: GatewayConfigurationSettings.HostSelector | null;
 
   /**
    * Protocol Detection settings.
    */
-  protocol_detection?: ProtocolDetection;
+  protocol_detection?: ProtocolDetection | null;
 
   /**
    * Sandbox settings.
    */
-  sandbox?: GatewayConfigurationSettings.Sandbox;
+  sandbox?: GatewayConfigurationSettings.Sandbox | null;
 
   /**
    * TLS interception settings.
    */
-  tls_decrypt?: TLSSettings;
+  tls_decrypt?: TLSSettings | null;
 }
 
 export namespace GatewayConfigurationSettings {
@@ -444,6 +511,16 @@ export namespace GatewayConfigurationSettings {
      * Cloudflare Root CA should be used.
      */
     id: string;
+  }
+
+  /**
+   * Setting to enable host selector in egress policies.
+   */
+  export interface HostSelector {
+    /**
+     * Enable filtering via hosts for egress policies.
+     */
+    enabled?: boolean;
   }
 
   /**
@@ -469,64 +546,69 @@ export interface GatewayConfigurationSettingsParam {
   /**
    * Activity log settings.
    */
-  activity_log?: ActivityLogSettingsParam;
+  activity_log?: ActivityLogSettingsParam | null;
 
   /**
    * Anti-virus settings.
    */
-  antivirus?: AntiVirusSettingsParam;
+  antivirus?: AntiVirusSettingsParam | null;
 
   /**
    * Block page layout settings.
    */
-  block_page?: BlockPageSettingsParam;
+  block_page?: BlockPageSettingsParam | null;
 
   /**
    * DLP body scanning settings.
    */
-  body_scanning?: BodyScanningSettingsParam;
+  body_scanning?: BodyScanningSettingsParam | null;
 
   /**
    * Browser isolation settings.
    */
-  browser_isolation?: BrowserIsolationSettingsParam;
+  browser_isolation?: BrowserIsolationSettingsParam | null;
 
   /**
    * Certificate settings for Gateway TLS interception. If not specified, the
    * Cloudflare Root CA will be used.
    */
-  certificate?: GatewayConfigurationSettingsParam.Certificate;
+  certificate?: GatewayConfigurationSettingsParam.Certificate | null;
 
   /**
    * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
    * `certificate`)
    */
-  custom_certificate?: CustomCertificateSettingsParam;
+  custom_certificate?: CustomCertificateSettingsParam | null;
 
   /**
    * Extended e-mail matching settings.
    */
-  extended_email_matching?: ExtendedEmailMatchingParam;
+  extended_email_matching?: ExtendedEmailMatchingParam | null;
 
   /**
    * FIPS settings.
    */
-  fips?: FipsSettingsParam;
+  fips?: FipsSettingsParam | null;
+
+  /**
+   * Setting to enable host selector in egress policies.
+   */
+  host_selector?: GatewayConfigurationSettingsParam.HostSelector | null;
 
   /**
    * Protocol Detection settings.
    */
-  protocol_detection?: ProtocolDetectionParam;
+  protocol_detection?: ProtocolDetectionParam | null;
 
   /**
    * Sandbox settings.
    */
-  sandbox?: GatewayConfigurationSettingsParam.Sandbox;
+  sandbox?: GatewayConfigurationSettingsParam.Sandbox | null;
 
   /**
    * TLS interception settings.
    */
-  tls_decrypt?: TLSSettingsParam;
+  tls_decrypt?: TLSSettingsParam | null;
 }
 
 export namespace GatewayConfigurationSettingsParam {
@@ -541,6 +623,16 @@ export namespace GatewayConfigurationSettingsParam {
      * Cloudflare Root CA should be used.
      */
     id: string;
+  }
+
+  /**
+   * Setting to enable host selector in egress policies.
+   */
+  export interface HostSelector {
+    /**
+     * Enable filtering via hosts for egress policies.
+     */
+    enabled?: boolean;
   }
 
   /**
@@ -570,6 +662,11 @@ export interface NotificationSettings {
   enabled?: boolean;
 
   /**
+   * If true, context information will be passed as query parameters
+   */
+  include_context?: boolean;
+
+  /**
    * Customize the message shown in the notification.
    */
   msg?: string;
@@ -590,6 +687,11 @@ export interface NotificationSettingsParam {
    * Set notification on
    */
   enabled?: boolean;
+
+  /**
+   * If true, context information will be passed as query parameters
+   */
+  include_context?: boolean;
 
   /**
    * Customize the message shown in the notification.

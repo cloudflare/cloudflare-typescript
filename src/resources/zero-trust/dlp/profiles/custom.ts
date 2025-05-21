@@ -8,6 +8,26 @@ import * as ProfilesAPI from './profiles';
 export class Custom extends APIResource {
   /**
    * Creates a DLP custom profile.
+   *
+   * @example
+   * ```ts
+   * const custom =
+   *   await client.zeroTrust.dlp.profiles.custom.create({
+   *     account_id: 'account_id',
+   *     profiles: [
+   *       {
+   *         entries: [
+   *           {
+   *             enabled: true,
+   *             name: 'name',
+   *             pattern: { regex: 'regex' },
+   *           },
+   *         ],
+   *         name: 'name',
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomCreateResponse> {
     const { account_id, ...body } = params;
@@ -21,6 +41,15 @@ export class Custom extends APIResource {
 
   /**
    * Updates a DLP custom profile.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.custom.update(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id', name: 'name' },
+   *   );
+   * ```
    */
   update(
     profileId: string,
@@ -38,6 +67,15 @@ export class Custom extends APIResource {
 
   /**
    * Deletes a DLP custom profile.
+   *
+   * @example
+   * ```ts
+   * const custom =
+   *   await client.zeroTrust.dlp.profiles.custom.delete(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     profileId: string,
@@ -55,6 +93,15 @@ export class Custom extends APIResource {
 
   /**
    * Fetches a custom DLP profile by id.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.custom.get(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     profileId: string,
@@ -73,7 +120,7 @@ export class Custom extends APIResource {
 
 export interface CustomProfile {
   /**
-   * The id of the profile (uuid)
+   * The id of the profile (uuid).
    */
   id: string;
 
@@ -89,7 +136,7 @@ export interface CustomProfile {
   context_awareness: ProfilesAPI.ContextAwareness;
 
   /**
-   * When the profile was created
+   * When the profile was created.
    */
   created_at: string;
 
@@ -102,14 +149,14 @@ export interface CustomProfile {
   >;
 
   /**
-   * The name of the profile
+   * The name of the profile.
    */
   name: string;
 
   ocr_enabled: boolean;
 
   /**
-   * When the profile was lasted updated
+   * When the profile was lasted updated.
    */
   updated_at: string;
 
@@ -118,7 +165,7 @@ export interface CustomProfile {
   confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
   /**
-   * The description of the profile
+   * The description of the profile.
    */
   description?: string | null;
 }
@@ -159,13 +206,13 @@ export namespace CustomProfile {
   export namespace PredefinedEntry {
     export interface Confidence {
       /**
-       * Indicates whether this entry has AI remote service validation
+       * Indicates whether this entry has AI remote service validation.
        */
       ai_context_available: boolean;
 
       /**
        * Indicates whether this entry has any form of validation that is not an AI remote
-       * service
+       * service.
        */
       available: boolean;
     }
@@ -189,6 +236,12 @@ export namespace CustomProfile {
 
   export interface ExactDataEntry {
     id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
 
     created_at: string;
 
@@ -249,7 +302,7 @@ export type CustomCreateResponse =
 export namespace CustomCreateResponse {
   export interface CustomProfile {
     /**
-     * The id of the profile (uuid)
+     * The id of the profile (uuid).
      */
     id: string;
 
@@ -265,7 +318,7 @@ export namespace CustomCreateResponse {
     context_awareness: ProfilesAPI.ContextAwareness;
 
     /**
-     * When the profile was created
+     * When the profile was created.
      */
     created_at: string;
 
@@ -278,7 +331,7 @@ export namespace CustomCreateResponse {
     >;
 
     /**
-     * The name of the profile
+     * The name of the profile.
      */
     name: string;
 
@@ -287,7 +340,7 @@ export namespace CustomCreateResponse {
     type: 'custom';
 
     /**
-     * When the profile was lasted updated
+     * When the profile was lasted updated.
      */
     updated_at: string;
 
@@ -296,7 +349,7 @@ export namespace CustomCreateResponse {
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
-     * The description of the profile
+     * The description of the profile.
      */
     description?: string | null;
   }
@@ -337,13 +390,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }
@@ -367,6 +420,12 @@ export namespace CustomCreateResponse {
 
     export interface ExactDataEntry {
       id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
 
       created_at: string;
 
@@ -402,7 +461,7 @@ export namespace CustomCreateResponse {
 
   export interface PredefinedProfile {
     /**
-     * The id of the predefined profile (uuid)
+     * The id of the predefined profile (uuid).
      */
     id: string;
 
@@ -417,7 +476,7 @@ export namespace CustomCreateResponse {
     >;
 
     /**
-     * The name of the predefined profile
+     * The name of the predefined profile.
      */
     name: string;
 
@@ -436,7 +495,7 @@ export namespace CustomCreateResponse {
     ocr_enabled?: boolean;
 
     /**
-     * Whether this profile can be accessed by anyone
+     * Whether this profile can be accessed by anyone.
      */
     open_access?: boolean;
   }
@@ -477,13 +536,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }
@@ -507,6 +566,12 @@ export namespace CustomCreateResponse {
 
     export interface ExactDataEntry {
       id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
 
       created_at: string;
 
@@ -560,7 +625,7 @@ export namespace CustomCreateResponse {
     updated_at: string;
 
     /**
-     * The description of the profile
+     * The description of the profile.
      */
     description?: string | null;
   }
@@ -601,13 +666,13 @@ export namespace CustomCreateResponse {
     export namespace PredefinedEntry {
       export interface Confidence {
         /**
-         * Indicates whether this entry has AI remote service validation
+         * Indicates whether this entry has AI remote service validation.
          */
         ai_context_available: boolean;
 
         /**
          * Indicates whether this entry has any form of validation that is not an AI remote
-         * service
+         * service.
          */
         available: boolean;
       }
@@ -631,6 +696,12 @@ export namespace CustomCreateResponse {
 
     export interface ExactDataEntry {
       id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
 
       created_at: string;
 
@@ -704,7 +775,7 @@ export declare namespace CustomCreateParams {
       context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
       /**
-       * The description of the profile
+       * The description of the profile.
        */
       description?: string | null;
 
@@ -809,7 +880,7 @@ export declare namespace CustomCreateParams {
     context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
     /**
-     * Body param: The description of the profile
+     * Body param: The description of the profile.
      */
     description?: string | null;
 
@@ -914,13 +985,13 @@ export interface CustomUpdateParams {
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
   /**
-   * Body param: The description of the profile
+   * Body param: The description of the profile.
    */
   description?: string | null;
 
   /**
-   * Body param: Custom entries from this profile. If this field is omitted, entries
-   * owned by this profile will not be changed.
+   * @deprecated Body param: Custom entries from this profile. If this field is
+   * omitted, entries owned by this profile will not be changed.
    */
   entries?: Array<CustomUpdateParams.DLPNewCustomEntryWithID | CustomUpdateParams.DLPNewCustomEntry> | null;
 

@@ -8,6 +8,17 @@ import { SinglePage } from '../../pagination';
 export class Policies extends APIResource {
   /**
    * Creates a new Notification policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.alerting.policies.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   alert_type: 'universal_ssl_event_type',
+   *   enabled: true,
+   *   mechanisms: {},
+   *   name: 'SSL Notification Event Policy',
+   * });
+   * ```
    */
   create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
     const { account_id, ...body } = params;
@@ -21,6 +32,14 @@ export class Policies extends APIResource {
 
   /**
    * Update a Notification policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.alerting.policies.update(
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     policyId: string,
@@ -38,6 +57,16 @@ export class Policies extends APIResource {
 
   /**
    * Get a list of all Notification policies.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const policy of client.alerting.policies.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PolicyListParams,
@@ -53,6 +82,14 @@ export class Policies extends APIResource {
 
   /**
    * Delete a Notification policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.alerting.policies.delete(
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     policyId: string,
@@ -65,6 +102,14 @@ export class Policies extends APIResource {
 
   /**
    * Get details for a single policy.
+   *
+   * @example
+   * ```ts
+   * const policy = await client.alerting.policies.get(
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(policyId: string, params: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<Policy> {
     const { account_id } = params;
@@ -134,9 +179,19 @@ export namespace MechanismParam {
     id?: string;
   }
 
-  export interface Pagerduty {}
+  export interface Pagerduty {
+    /**
+     * UUID
+     */
+    id?: string;
+  }
 
-  export interface Webhook {}
+  export interface Webhook {
+    /**
+     * UUID
+     */
+    id?: string;
+  }
 }
 
 export interface Policy {
@@ -166,12 +221,14 @@ export interface Policy {
     | 'block_notification_block_removed'
     | 'block_notification_new_block'
     | 'block_notification_review_rejected'
+    | 'bot_traffic_basic_alert'
     | 'brand_protection_alert'
     | 'brand_protection_digest'
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
     | 'cloudforce_one_request_notification'
     | 'custom_analytics'
+    | 'custom_bot_detection_alert'
     | 'custom_ssl_certificate_event_type'
     | 'dedicated_ssl_certificate_event_type'
     | 'device_connectivity_anomaly_alert'
@@ -766,12 +823,14 @@ export interface PolicyCreateParams {
     | 'block_notification_block_removed'
     | 'block_notification_new_block'
     | 'block_notification_review_rejected'
+    | 'bot_traffic_basic_alert'
     | 'brand_protection_alert'
     | 'brand_protection_digest'
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
     | 'cloudforce_one_request_notification'
     | 'custom_analytics'
+    | 'custom_bot_detection_alert'
     | 'custom_ssl_certificate_event_type'
     | 'dedicated_ssl_certificate_event_type'
     | 'device_connectivity_anomaly_alert'
@@ -885,12 +944,14 @@ export interface PolicyUpdateParams {
     | 'block_notification_block_removed'
     | 'block_notification_new_block'
     | 'block_notification_review_rejected'
+    | 'bot_traffic_basic_alert'
     | 'brand_protection_alert'
     | 'brand_protection_digest'
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
     | 'cloudforce_one_request_notification'
     | 'custom_analytics'
+    | 'custom_bot_detection_alert'
     | 'custom_ssl_certificate_event_type'
     | 'dedicated_ssl_certificate_event_type'
     | 'device_connectivity_anomaly_alert'

@@ -34,7 +34,7 @@ describe('resource settings', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         settings: {
-          bindings: [{ name: 'MY_ENV_VAR', type: 'ai' }],
+          bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
           compatibility_date: '2021-01-01',
           compatibility_flags: ['nodejs_compat'],
           limits: { cpu_ms: 50 },
@@ -48,7 +48,11 @@ describe('resource settings', () => {
             renamed_classes: [{ from: 'from', to: 'to' }],
             transferred_classes: [{ from: 'from', from_script: 'from_script', to: 'to' }],
           },
-          observability: { enabled: true, head_sampling_rate: 0.1 },
+          observability: {
+            enabled: true,
+            head_sampling_rate: 0.1,
+            logs: { enabled: true, invocation_logs: true, head_sampling_rate: 0.1 },
+          },
           placement: { mode: 'smart' },
           tags: ['my-tag'],
           tail_consumers: [

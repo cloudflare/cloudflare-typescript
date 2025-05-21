@@ -21,7 +21,7 @@ export class Page extends APIResource {
    *      waiting room page will only be displayed if `force_queue=true` or
    *      `event=prequeueing` — for other cases the request will pass through to the
    *      origin. For our preview, this will be a fake origin website returning
-   *      "Welcome".
+   *      \"Welcome\".
    *    - **reject** indicates a Reject queue.
    * 4. `event`: Used to preview a waiting room event.
    *    - **none** indicates no event is occurring.
@@ -41,6 +41,15 @@ export class Page extends APIResource {
    * For example, you can make a request to
    * `http://waitingrooms.dev/preview/<uuid>?waitTime=50` to configure the estimated
    * wait time as 50 minutes.
+   *
+   * @example
+   * ```ts
+   * const response = await client.waitingRooms.page.preview({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   custom_html:
+   *     '{{#waitTimeKnown}} {{waitTime}} mins {{/waitTimeKnown}} {{^waitTimeKnown}} Queue all enabled {{/waitTimeKnown}}',
+   * });
+   * ```
    */
   preview(params: PagePreviewParams, options?: Core.RequestOptions): Core.APIPromise<PagePreviewResponse> {
     const { zone_id, ...body } = params;
@@ -61,7 +70,7 @@ export interface PagePreviewResponse {
 
 export interface PagePreviewParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

@@ -7,6 +7,14 @@ import * as Core from '../../../../../../core';
 export class Spam extends APIResource {
   /**
    * Retrieves the top TLDs by emails classified as spam or not.
+   *
+   * @example
+   * ```ts
+   * const spam =
+   *   await client.radar.email.security.top.tlds.spam.get(
+   *     'SPAM',
+   *   );
+   * ```
    */
   get(
     spam: 'SPAM' | 'NOT_SPAM',
@@ -103,9 +111,9 @@ export interface SpamGetParams {
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by the specified date range. For example, use `7d` and
-   * `7dcontrol` to compare this week with the previous week. Use this parameter or
-   * set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 

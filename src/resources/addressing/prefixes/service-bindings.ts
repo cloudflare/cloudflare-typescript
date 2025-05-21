@@ -2,15 +2,24 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class ServiceBindings extends APIResource {
   /**
    * Creates a new Service Binding, routing traffic to IPs within the given CIDR to a
    * service running on Cloudflare's network. **Note:** This API may only be used on
-   * prefixes currently configured with a Magic Transit service binding, and only
-   * allows creating service bindings for the Cloudflare CDN or Cloudflare Spectrum.
+   * prefixes currently configured with a Magic Transit/Cloudflare CDN/Cloudflare
+   * Spectrum service binding, and only allows creating upgrade service bindings for
+   * the Cloudflare CDN or Cloudflare Spectrum.
+   *
+   * @example
+   * ```ts
+   * const serviceBinding =
+   *   await client.addressing.prefixes.serviceBindings.create(
+   *     '2af39739cc4e3b5910c918468bb89828',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   * ```
    */
   create(
     prefixId: string,
@@ -33,6 +42,17 @@ export class ServiceBindings extends APIResource {
    * `192.0.2.0/24` to Cloudflare Magic Transit and `192.0.2.1/32` to the Cloudflare
    * CDN would route traffic for `192.0.2.1` to the CDN, and traffic for all other
    * IPs in the prefix to Cloudflare Magic Transit.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const serviceBinding of client.addressing.prefixes.serviceBindings.list(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     prefixId: string,
@@ -49,6 +69,16 @@ export class ServiceBindings extends APIResource {
 
   /**
    * Delete a Service Binding
+   *
+   * @example
+   * ```ts
+   * const serviceBinding =
+   *   await client.addressing.prefixes.serviceBindings.delete(
+   *     '2af39739cc4e3b5910c918468bb89828',
+   *     '0429b49b6a5155297b78e75a44b09e14',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   * ```
    */
   delete(
     prefixId: string,
@@ -65,6 +95,16 @@ export class ServiceBindings extends APIResource {
 
   /**
    * Fetch a single Service Binding
+   *
+   * @example
+   * ```ts
+   * const serviceBinding =
+   *   await client.addressing.prefixes.serviceBindings.get(
+   *     '2af39739cc4e3b5910c918468bb89828',
+   *     '0429b49b6a5155297b78e75a44b09e14',
+   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *   );
+   * ```
    */
   get(
     prefixId: string,
@@ -126,14 +166,48 @@ export namespace ServiceBinding {
 }
 
 export interface ServiceBindingDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<ServiceBindingDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<ServiceBindingDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
+}
+
+export namespace ServiceBindingDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export interface ServiceBindingCreateParams {

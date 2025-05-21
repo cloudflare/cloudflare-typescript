@@ -7,6 +7,8 @@ import {
   AppCreateResponse,
   AppDeleteParams,
   AppDeleteResponse,
+  AppEditParams,
+  AppEditResponse,
   AppListParams,
   AppListResponse,
   AppListResponsesSinglePage,
@@ -104,6 +106,7 @@ import {
   PCAPListParams,
   PCAPListResponse,
   PCAPListResponsesSinglePage,
+  PCAPStopParams,
   PCAPs,
 } from './pcaps/pcaps';
 import * as SitesAPI from './sites/sites';
@@ -263,16 +266,24 @@ MagicTransit.PCAPListResponsesSinglePage = PCAPListResponsesSinglePage;
 
 export declare namespace MagicTransit {
   export {
+    type HealthCheck as HealthCheck,
+    type HealthCheckRate as HealthCheckRate,
+    type HealthCheckType as HealthCheckType,
+  };
+
+  export {
     Apps as Apps,
     type AppCreateResponse as AppCreateResponse,
     type AppUpdateResponse as AppUpdateResponse,
     type AppListResponse as AppListResponse,
     type AppDeleteResponse as AppDeleteResponse,
+    type AppEditResponse as AppEditResponse,
     AppListResponsesSinglePage as AppListResponsesSinglePage,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
     type AppListParams as AppListParams,
     type AppDeleteParams as AppDeleteParams,
+    type AppEditParams as AppEditParams,
   };
 
   export {
@@ -378,5 +389,6 @@ export declare namespace MagicTransit {
     type PCAPCreateParams as PCAPCreateParams,
     type PCAPListParams as PCAPListParams,
     type PCAPGetParams as PCAPGetParams,
+    type PCAPStopParams as PCAPStopParams,
   };
 }

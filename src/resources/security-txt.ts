@@ -2,11 +2,17 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
-import * as Shared from './shared';
 
 export class SecurityTXT extends APIResource {
   /**
    * Update security.txt
+   *
+   * @example
+   * ```ts
+   * const securityTXT = await client.securityTXT.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   update(
     params: SecurityTXTUpdateParams,
@@ -18,6 +24,13 @@ export class SecurityTXT extends APIResource {
 
   /**
    * Delete security.txt
+   *
+   * @example
+   * ```ts
+   * const securityTXT = await client.securityTXT.delete({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(
     params: SecurityTXTDeleteParams,
@@ -29,6 +42,13 @@ export class SecurityTXT extends APIResource {
 
   /**
    * Get security.txt
+   *
+   * @example
+   * ```ts
+   * const securityTXT = await client.securityTXT.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: SecurityTXTGetParams, options?: Core.RequestOptions): Core.APIPromise<SecurityTXTGetResponse> {
     const { zone_id } = params;
@@ -41,25 +61,93 @@ export class SecurityTXT extends APIResource {
 }
 
 export interface SecurityTXTUpdateResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<SecurityTXTUpdateResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<SecurityTXTUpdateResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
-export interface SecurityTXTDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+export namespace SecurityTXTUpdateResponse {
+  export interface Error {
+    code: number;
 
-  messages: Array<Shared.ResponseInfo>;
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
+export interface SecurityTXTDeleteResponse {
+  errors: Array<SecurityTXTDeleteResponse.Error>;
+
+  messages: Array<SecurityTXTDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
+}
+
+export namespace SecurityTXTDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export interface SecurityTXTGetResponse {
@@ -84,7 +172,7 @@ export interface SecurityTXTGetResponse {
 
 export interface SecurityTXTUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -136,14 +224,25 @@ export interface SecurityTXTUpdateParams {
 
 export interface SecurityTXTDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface SecurityTXTGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
+}
+
+export declare namespace SecurityTXT {
+  export {
+    type SecurityTXTUpdateResponse as SecurityTXTUpdateResponse,
+    type SecurityTXTDeleteResponse as SecurityTXTDeleteResponse,
+    type SecurityTXTGetResponse as SecurityTXTGetResponse,
+    type SecurityTXTUpdateParams as SecurityTXTUpdateParams,
+    type SecurityTXTDeleteParams as SecurityTXTDeleteParams,
+    type SecurityTXTGetParams as SecurityTXTGetParams,
+  };
 }

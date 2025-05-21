@@ -23,6 +23,13 @@ export class Account extends APIResource {
 
   /**
    * Update DNS settings for an account
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.settings.account.edit({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: AccountEditParams, options?: Core.RequestOptions): Core.APIPromise<AccountEditResponse> {
     const { account_id, ...body } = params;
@@ -35,6 +42,13 @@ export class Account extends APIResource {
 
   /**
    * Show DNS settings for an account
+   *
+   * @example
+   * ```ts
+   * const account = await client.dns.settings.account.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse> {
     const { account_id } = params;
@@ -294,7 +308,7 @@ export namespace AccountGetResponse {
 
 export interface AccountEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -425,7 +439,7 @@ export namespace AccountEditParams {
 
 export interface AccountGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

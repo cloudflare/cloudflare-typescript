@@ -14,6 +14,15 @@ export class Policies extends APIResource {
    * users or groups who can reach it. We recommend creating a reusable policy
    * instead and subsequently referencing its ID in the application's 'policies'
    * array.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.applications.policies.create(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   create(
     appId: string,
@@ -48,6 +57,16 @@ export class Policies extends APIResource {
   /**
    * Updates an Access policy specific to an application. To update a reusable
    * policy, use the /account or zones/{account or zone_id}/policies/{uid} endpoint.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.applications.policies.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   update(
     appId: string,
@@ -83,6 +102,17 @@ export class Policies extends APIResource {
   /**
    * Lists Access policies configured for an application. Returns both exclusively
    * scoped and reusable policies used by the application.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const policyListResponse of client.zeroTrust.access.applications.policies.list(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     appId: string,
@@ -128,6 +158,16 @@ export class Policies extends APIResource {
   /**
    * Deletes an Access policy specific to an application. To delete a reusable
    * policy, use the /account or zones/{account or zone_id}/policies/{uid} endpoint.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.applications.policies.delete(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   delete(
     appId: string,
@@ -177,6 +217,16 @@ export class Policies extends APIResource {
   /**
    * Fetches a single Access policy configured for an application. Returns both
    * exclusively owned and reusable policies used by the application.
+   *
+   * @example
+   * ```ts
+   * const policy =
+   *   await client.zeroTrust.access.applications.policies.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   get(
     appId: string,
@@ -1084,43 +1134,335 @@ export namespace ServiceTokenRuleParam {
   }
 }
 
-export interface PolicyCreateResponse extends ApplicationsAPI.ApplicationPolicy {
+export interface PolicyCreateResponse {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
   /**
    * The order of execution for this policy. Must be unique for each policy within an
    * app.
    */
   precedence?: number;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
 }
 
-export interface PolicyUpdateResponse extends ApplicationsAPI.ApplicationPolicy {
+export interface PolicyUpdateResponse {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
   /**
    * The order of execution for this policy. Must be unique for each policy within an
    * app.
    */
   precedence?: number;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
 }
 
-export interface PolicyListResponse extends ApplicationsAPI.ApplicationPolicy {
+export interface PolicyListResponse {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
   /**
    * The order of execution for this policy. Must be unique for each policy within an
    * app.
    */
   precedence?: number;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
 }
 
 export interface PolicyDeleteResponse {
   /**
-   * UUID
+   * UUID.
    */
   id?: string;
 }
 
-export interface PolicyGetResponse extends ApplicationsAPI.ApplicationPolicy {
+export interface PolicyGetResponse {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
   /**
    * The order of execution for this policy. Must be unique for each policy within an
    * app.
    */
   precedence?: number;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
 }
 
 export interface PolicyCreateParams {

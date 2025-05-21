@@ -18,6 +18,8 @@ import {
   EventNotificationDeleteResponse,
   EventNotificationGetParams,
   EventNotificationGetResponse,
+  EventNotificationListParams,
+  EventNotificationListResponse,
   EventNotificationUpdateParams,
   EventNotificationUpdateResponse,
   EventNotifications,
@@ -60,6 +62,14 @@ export class Buckets extends APIResource {
 
   /**
    * Creates a new R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const bucket = await client.r2.buckets.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example-bucket',
+   * });
+   * ```
    */
   create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id, jurisdiction, ...body } = params;
@@ -78,7 +88,14 @@ export class Buckets extends APIResource {
   }
 
   /**
-   * Lists all R2 buckets on your account
+   * Lists all R2 buckets on your account.
+   *
+   * @example
+   * ```ts
+   * const buckets = await client.r2.buckets.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: BucketListParams, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse> {
     const { account_id, jurisdiction, ...query } = params;
@@ -98,6 +115,14 @@ export class Buckets extends APIResource {
 
   /**
    * Deletes an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const bucket = await client.r2.buckets.delete(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     bucketName: string,
@@ -119,7 +144,45 @@ export class Buckets extends APIResource {
   }
 
   /**
-   * Gets metadata for an existing R2 bucket.
+   * Updates properties of an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const bucket = await client.r2.buckets.edit(
+   *   'example-bucket',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     storage_class: 'Standard',
+   *   },
+   * );
+   * ```
+   */
+  edit(bucketName: string, params: BucketEditParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
+    const { account_id, storage_class, jurisdiction } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
+        ...options,
+        headers: {
+          'cf-r2-storage-class': storage_class.toString(),
+          ...(jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': jurisdiction?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: Bucket }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Gets properties of an existing R2 bucket.
+   *
+   * @example
+   * ```ts
+   * const bucket = await client.r2.buckets.get(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id, jurisdiction } = params;
@@ -138,21 +201,26 @@ export class Buckets extends APIResource {
 }
 
 /**
- * A single R2 bucket
+ * A single R2 bucket.
  */
 export interface Bucket {
   /**
-   * Creation timestamp
+   * Creation timestamp.
    */
   creation_date?: string;
 
   /**
-   * Location of the bucket
+   * Jurisdiction where objects in this bucket are guaranteed to be stored.
+   */
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+  /**
+   * Location of the bucket.
    */
   location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
   /**
-   * Name of the bucket
+   * Name of the bucket.
    */
   name?: string;
 
@@ -170,17 +238,17 @@ export type BucketDeleteResponse = unknown;
 
 export interface BucketCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Body param: Name of the bucket
+   * Body param: Name of the bucket.
    */
   name: string;
 
   /**
-   * Body param: Location of the bucket
+   * Body param: Location of the bucket.
    */
   locationHint?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
@@ -191,14 +259,15 @@ export interface BucketCreateParams {
   storageClass?: 'Standard' | 'InfrequentAccess';
 
   /**
-   * Header param: Creates the bucket in the provided jurisdiction
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketListParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
@@ -209,7 +278,7 @@ export interface BucketListParams {
   cursor?: string;
 
   /**
-   * Query param: Direction to order buckets
+   * Query param: Direction to order buckets.
    */
   direction?: 'asc' | 'desc';
 
@@ -220,12 +289,12 @@ export interface BucketListParams {
   name_contains?: string;
 
   /**
-   * Query param: Field to order buckets by
+   * Query param: Field to order buckets by.
    */
   order?: 'name';
 
   /**
-   * Query param: Maximum number of buckets to return in a single call
+   * Query param: Maximum number of buckets to return in a single call.
    */
   per_page?: number;
 
@@ -236,31 +305,53 @@ export interface BucketListParams {
   start_after?: string;
 
   /**
-   * Header param: Lists buckets in the provided jurisdiction
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketDeleteParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
+   */
+  jurisdiction?: 'default' | 'eu' | 'fedramp';
+}
+
+export interface BucketEditParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Header param: Storage class for newly uploaded objects, unless specified
+   * otherwise.
+   */
+  storage_class: 'Standard' | 'InfrequentAccess';
+
+  /**
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketGetParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -281,6 +372,7 @@ export declare namespace Buckets {
     type BucketCreateParams as BucketCreateParams,
     type BucketListParams as BucketListParams,
     type BucketDeleteParams as BucketDeleteParams,
+    type BucketEditParams as BucketEditParams,
     type BucketGetParams as BucketGetParams,
   };
 
@@ -307,9 +399,11 @@ export declare namespace Buckets {
   export {
     EventNotifications as EventNotifications,
     type EventNotificationUpdateResponse as EventNotificationUpdateResponse,
+    type EventNotificationListResponse as EventNotificationListResponse,
     type EventNotificationDeleteResponse as EventNotificationDeleteResponse,
     type EventNotificationGetResponse as EventNotificationGetResponse,
     type EventNotificationUpdateParams as EventNotificationUpdateParams,
+    type EventNotificationListParams as EventNotificationListParams,
     type EventNotificationDeleteParams as EventNotificationDeleteParams,
     type EventNotificationGetParams as EventNotificationGetParams,
   };

@@ -8,6 +8,20 @@ export class LANs extends APIResource {
   /**
    * Creates a new Site LAN. If the site is in high availability mode,
    * static_addressing is required along with secondary and virtual address.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const lan of client.magicTransit.sites.lans.create(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     physport: 1,
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     siteId: string,
@@ -24,6 +38,15 @@ export class LANs extends APIResource {
 
   /**
    * Update a specific Site LAN.
+   *
+   * @example
+   * ```ts
+   * const lan = await client.magicTransit.sites.lans.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     siteId: string,
@@ -42,6 +65,17 @@ export class LANs extends APIResource {
 
   /**
    * Lists Site LANs associated with an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const lan of client.magicTransit.sites.lans.list(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     siteId: string,
@@ -58,6 +92,15 @@ export class LANs extends APIResource {
 
   /**
    * Remove a specific Site LAN.
+   *
+   * @example
+   * ```ts
+   * const lan = await client.magicTransit.sites.lans.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     siteId: string,
@@ -76,6 +119,15 @@ export class LANs extends APIResource {
 
   /**
    * Patch a specific Site LAN.
+   *
+   * @example
+   * ```ts
+   * const lan = await client.magicTransit.sites.lans.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     siteId: string,
@@ -94,6 +146,15 @@ export class LANs extends APIResource {
 
   /**
    * Get a specific Site LAN.
+   *
+   * @example
+   * ```ts
+   * const lan = await client.magicTransit.sites.lans.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     siteId: string,
@@ -208,7 +269,7 @@ export interface LAN {
   static_addressing?: LANStaticAddressing;
 
   /**
-   * VLAN port number.
+   * VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }
@@ -319,11 +380,6 @@ export interface LANCreateParams {
   physport: number;
 
   /**
-   * Body param: VLAN port number.
-   */
-  vlan_tag: number;
-
-  /**
    * Body param: mark true to use this LAN for HA probing. only works for site with
    * HA turned on. only one LAN can be set as the ha_link.
    */
@@ -351,6 +407,11 @@ export interface LANCreateParams {
    * address.
    */
   static_addressing?: LANStaticAddressingParam;
+
+  /**
+   * Body param: VLAN ID. Use zero for untagged.
+   */
+  vlan_tag?: number;
 }
 
 export interface LANUpdateParams {
@@ -388,7 +449,7 @@ export interface LANUpdateParams {
   static_addressing?: LANStaticAddressingParam;
 
   /**
-   * Body param: VLAN port number.
+   * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }
@@ -442,7 +503,7 @@ export interface LANEditParams {
   static_addressing?: LANStaticAddressingParam;
 
   /**
-   * Body param: VLAN port number.
+   * Body param: VLAN ID. Use zero for untagged.
    */
   vlan_tag?: number;
 }

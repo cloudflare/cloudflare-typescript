@@ -11,10 +11,13 @@ const client = new Cloudflare({
 
 describe('resource priority', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.cloudforceOne.requests.priority.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { labels: ['DoS', 'CVE'], priority: 1, requirement: 'DoS attacks carried out by CVEs', tlp: 'clear' },
-    );
+    const responsePromise = client.cloudforceOne.requests.priority.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      labels: ['DoS', 'CVE'],
+      priority: 1,
+      requirement: 'DoS attacks carried out by CVEs',
+      tlp: 'clear',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +28,8 @@ describe('resource priority', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.cloudforceOne.requests.priority.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.cloudforceOne.requests.priority.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       labels: ['DoS', 'CVE'],
       priority: 1,
       requirement: 'DoS attacks carried out by CVEs',
@@ -35,9 +39,14 @@ describe('resource priority', () => {
 
   test('update: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.priority.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { labels: ['DoS', 'CVE'], priority: 1, requirement: 'DoS attacks carried out by CVEs', tlp: 'clear' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        labels: ['DoS', 'CVE'],
+        priority: 1,
+        requirement: 'DoS attacks carried out by CVEs',
+        tlp: 'clear',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,16 +59,21 @@ describe('resource priority', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.cloudforceOne.requests.priority.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { labels: ['DoS', 'CVE'], priority: 1, requirement: 'DoS attacks carried out by CVEs', tlp: 'clear' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        labels: ['DoS', 'CVE'],
+        priority: 1,
+        requirement: 'DoS attacks carried out by CVEs',
+        tlp: 'clear',
+      },
     );
   });
 
-  test('delete', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.priority.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -70,21 +84,17 @@ describe('resource priority', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.cloudforceOne.requests.priority.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await client.cloudforceOne.requests.priority.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
-  test('get', async () => {
+  test('get: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.priority.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -95,19 +105,17 @@ describe('resource priority', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.cloudforceOne.requests.priority.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await client.cloudforceOne.requests.priority.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
-  test('quota', async () => {
-    const responsePromise = client.cloudforceOne.requests.priority.quota('023e105f4ecef8ad9ca31a8372d0c353');
+  test('quota: only required params', async () => {
+    const responsePromise = client.cloudforceOne.requests.priority.quota({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -117,12 +125,9 @@ describe('resource priority', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('quota: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.cloudforceOne.requests.priority.quota('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('quota: required and optional params', async () => {
+    const response = await client.cloudforceOne.requests.priority.quota({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -7,6 +7,17 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class Views extends APIResource {
   /**
    * Create Internal DNS View for an account
+   *
+   * @example
+   * ```ts
+   * const view = await client.dns.settings.account.views.create(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'my view',
+   *     zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
+   *   },
+   * );
+   * ```
    */
   create(params: ViewCreateParams, options?: Core.RequestOptions): Core.APIPromise<ViewCreateResponse> {
     const { account_id, ...body } = params;
@@ -20,6 +31,16 @@ export class Views extends APIResource {
 
   /**
    * List DNS Internal Views for an Account
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const viewListResponse of client.dns.settings.account.views.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ViewListParams,
@@ -35,6 +56,14 @@ export class Views extends APIResource {
 
   /**
    * Delete an existing Internal DNS View
+   *
+   * @example
+   * ```ts
+   * const view = await client.dns.settings.account.views.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     viewId: string,
@@ -52,6 +81,15 @@ export class Views extends APIResource {
 
   /**
    * Update an existing Internal DNS View
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.dns.settings.account.views.edit(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     viewId: string,
@@ -69,6 +107,14 @@ export class Views extends APIResource {
 
   /**
    * Get DNS Internal View
+   *
+   * @example
+   * ```ts
+   * const view = await client.dns.settings.account.views.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     viewId: string,
@@ -88,7 +134,7 @@ export class ViewListResponsesV4PagePaginationArray extends V4PagePaginationArra
 
 export interface ViewCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -115,7 +161,7 @@ export interface ViewCreateResponse {
 
 export interface ViewListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -142,14 +188,14 @@ export interface ViewListResponse {
 
 export interface ViewDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface ViewEditResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -176,7 +222,7 @@ export interface ViewEditResponse {
 
 export interface ViewGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -203,7 +249,7 @@ export interface ViewGetResponse {
 
 export interface ViewCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -220,7 +266,7 @@ export interface ViewCreateParams {
 
 export interface ViewListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -283,14 +329,14 @@ export namespace ViewListParams {
 
 export interface ViewDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ViewEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -307,7 +353,7 @@ export interface ViewEditParams {
 
 export interface ViewGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

@@ -6,6 +6,19 @@ import * as Core from '../../../core';
 export class Insights extends APIResource {
   /**
    * Adds an insight to an event
+   *
+   * @example
+   * ```ts
+   * const insight =
+   *   await client.cloudforceOne.threatEvents.insights.create(
+   *     'event_id',
+   *     {
+   *       account_id: 0,
+   *       content:
+   *         'Here is some additional context _in markdown_',
+   *     },
+   *   );
+   * ```
    */
   create(
     eventId: string,
@@ -23,6 +36,16 @@ export class Insights extends APIResource {
 
   /**
    * Deletes an event insight
+   *
+   * @example
+   * ```ts
+   * const insight =
+   *   await client.cloudforceOne.threatEvents.insights.delete(
+   *     'event_id',
+   *     'insight_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   delete(
     eventId: string,
@@ -41,6 +64,20 @@ export class Insights extends APIResource {
 
   /**
    * Updates an event insight
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.insights.edit(
+   *     'event_id',
+   *     'insight_id',
+   *     {
+   *       account_id: 0,
+   *       content:
+   *         'Updated: Here is some additional context _in markdown_',
+   *     },
+   *   );
+   * ```
    */
   edit(
     eventId: string,
@@ -59,6 +96,16 @@ export class Insights extends APIResource {
 
   /**
    * Reads an event insight
+   *
+   * @example
+   * ```ts
+   * const insight =
+   *   await client.cloudforceOne.threatEvents.insights.get(
+   *     'event_id',
+   *     'insight_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
    */
   get(
     eventId: string,
@@ -100,7 +147,7 @@ export interface InsightGetResponse {
 
 export interface InsightCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -112,14 +159,14 @@ export interface InsightCreateParams {
 
 export interface InsightDeleteParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface InsightEditParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 
@@ -131,7 +178,7 @@ export interface InsightEditParams {
 
 export interface InsightGetParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

@@ -23,6 +23,17 @@ export class PCAPs extends APIResource {
 
   /**
    * Create new PCAP request for account.
+   *
+   * @example
+   * ```ts
+   * const pcap = await client.magicTransit.pcaps.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   packet_limit: 10000,
+   *   system: 'magic-transit',
+   *   time_limit: 300,
+   *   type: 'simple',
+   * });
+   * ```
    */
   create(params: PCAPCreateParams, options?: Core.RequestOptions): Core.APIPromise<PCAPCreateResponse> {
     const { account_id, ...body } = params;
@@ -35,6 +46,16 @@ export class PCAPs extends APIResource {
 
   /**
    * Lists all packet capture requests for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const pcapListResponse of client.magicTransit.pcaps.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PCAPListParams,
@@ -46,6 +67,14 @@ export class PCAPs extends APIResource {
 
   /**
    * Get information for a PCAP request by id.
+   *
+   * @example
+   * ```ts
+   * const pcap = await client.magicTransit.pcaps.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     pcapId: string,
@@ -58,6 +87,25 @@ export class PCAPs extends APIResource {
         result: PCAPGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Stop full PCAP
+   *
+   * @example
+   * ```ts
+   * await client.magicTransit.pcaps.stop(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  stop(pcapId: string, params: PCAPStopParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { account_id } = params;
+    return this._client.put(`/accounts/${account_id}/pcaps/${pcapId}/stop`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
   }
 }
 
@@ -214,6 +262,11 @@ export namespace PCAPCreateResponse {
     filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
+     * The number of packets captured.
+     */
+    packets_captured?: number;
+
+    /**
      * The status of the packet capture request.
      */
     status?:
@@ -225,6 +278,12 @@ export namespace PCAPCreateResponse {
       | 'conversion_running'
       | 'complete'
       | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when stopping the packet capture was requested. This
+     * field only applies to `full` packet captures.
+     */
+    stop_requested?: string;
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.
@@ -288,6 +347,11 @@ export namespace PCAPListResponse {
     filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
+     * The number of packets captured.
+     */
+    packets_captured?: number;
+
+    /**
      * The status of the packet capture request.
      */
     status?:
@@ -299,6 +363,12 @@ export namespace PCAPListResponse {
       | 'conversion_running'
       | 'complete'
       | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when stopping the packet capture was requested. This
+     * field only applies to `full` packet captures.
+     */
+    stop_requested?: string;
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.
@@ -362,6 +432,11 @@ export namespace PCAPGetResponse {
     filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
+     * The number of packets captured.
+     */
+    packets_captured?: number;
+
+    /**
      * The status of the packet capture request.
      */
     status?:
@@ -373,6 +448,12 @@ export namespace PCAPGetResponse {
       | 'conversion_running'
       | 'complete'
       | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when stopping the packet capture was requested. This
+     * field only applies to `full` packet captures.
+     */
+    stop_requested?: string;
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.
@@ -511,6 +592,13 @@ export interface PCAPGetParams {
   account_id: string;
 }
 
+export interface PCAPStopParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 PCAPs.PCAPListResponsesSinglePage = PCAPListResponsesSinglePage;
 PCAPs.OwnershipResource = OwnershipResource;
 PCAPs.OwnershipsSinglePage = OwnershipsSinglePage;
@@ -527,6 +615,7 @@ export declare namespace PCAPs {
     type PCAPCreateParams as PCAPCreateParams,
     type PCAPListParams as PCAPListParams,
     type PCAPGetParams as PCAPGetParams,
+    type PCAPStopParams as PCAPStopParams,
   };
 
   export {

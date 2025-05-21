@@ -7,6 +7,14 @@ import * as TestsAPI from './pages/tests';
 export class ScheduleResource extends APIResource {
   /**
    * Creates a scheduled test for a page.
+   *
+   * @example
+   * ```ts
+   * const schedule = await client.speed.schedule.create(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   create(
     url: string,
@@ -24,6 +32,14 @@ export class ScheduleResource extends APIResource {
 
   /**
    * Deletes a scheduled test for a page.
+   *
+   * @example
+   * ```ts
+   * const schedule = await client.speed.schedule.delete(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     url: string,
@@ -41,6 +57,14 @@ export class ScheduleResource extends APIResource {
 
   /**
    * Retrieves the test schedule for a page in a specific region.
+   *
+   * @example
+   * ```ts
+   * const schedule = await client.speed.schedule.get(
+   *   'example.com',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(url: string, params: ScheduleGetParams, options?: Core.RequestOptions): Core.APIPromise<Schedule> {
     const { zone_id, ...query } = params;
@@ -112,7 +136,7 @@ export interface ScheduleDeleteResponse {
 
 export interface ScheduleCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -145,7 +169,7 @@ export interface ScheduleCreateParams {
 
 export interface ScheduleDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -178,7 +202,7 @@ export interface ScheduleDeleteParams {
 
 export interface ScheduleGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

@@ -17,6 +17,15 @@ export class Healthchecks extends APIResource {
 
   /**
    * Create a new health check.
+   *
+   * @example
+   * ```ts
+   * const healthcheck = await client.healthchecks.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   address: 'www.example.com',
+   *   name: 'server-1',
+   * });
+   * ```
    */
   create(params: HealthcheckCreateParams, options?: Core.RequestOptions): Core.APIPromise<Healthcheck> {
     const { zone_id, ...body } = params;
@@ -29,6 +38,18 @@ export class Healthchecks extends APIResource {
 
   /**
    * Update a configured health check.
+   *
+   * @example
+   * ```ts
+   * const healthcheck = await client.healthchecks.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     address: 'www.example.com',
+   *     name: 'server-1',
+   *   },
+   * );
+   * ```
    */
   update(
     healthcheckId: string,
@@ -46,6 +67,16 @@ export class Healthchecks extends APIResource {
 
   /**
    * List configured health checks.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const healthcheck of client.healthchecks.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: HealthcheckListParams,
@@ -60,6 +91,14 @@ export class Healthchecks extends APIResource {
 
   /**
    * Delete a health check.
+   *
+   * @example
+   * ```ts
+   * const healthcheck = await client.healthchecks.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     healthcheckId: string,
@@ -76,6 +115,18 @@ export class Healthchecks extends APIResource {
 
   /**
    * Patch a configured health check.
+   *
+   * @example
+   * ```ts
+   * const healthcheck = await client.healthchecks.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     address: 'www.example.com',
+   *     name: 'server-1',
+   *   },
+   * );
+   * ```
    */
   edit(
     healthcheckId: string,
@@ -93,6 +144,14 @@ export class Healthchecks extends APIResource {
 
   /**
    * Fetch a single configured health check.
+   *
+   * @example
+   * ```ts
+   * const healthcheck = await client.healthchecks.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     healthcheckId: string,
@@ -724,9 +783,26 @@ export interface HealthcheckGetParams {
   zone_id: string;
 }
 
+Healthchecks.HealthchecksV4PagePaginationArray = HealthchecksV4PagePaginationArray;
 Healthchecks.Previews = Previews;
 
 export declare namespace Healthchecks {
+  export {
+    type CheckRegion as CheckRegion,
+    type Healthcheck as Healthcheck,
+    type HTTPConfiguration as HTTPConfiguration,
+    type QueryHealthcheck as QueryHealthcheck,
+    type TCPConfiguration as TCPConfiguration,
+    type HealthcheckDeleteResponse as HealthcheckDeleteResponse,
+    HealthchecksV4PagePaginationArray as HealthchecksV4PagePaginationArray,
+    type HealthcheckCreateParams as HealthcheckCreateParams,
+    type HealthcheckUpdateParams as HealthcheckUpdateParams,
+    type HealthcheckListParams as HealthcheckListParams,
+    type HealthcheckDeleteParams as HealthcheckDeleteParams,
+    type HealthcheckEditParams as HealthcheckEditParams,
+    type HealthcheckGetParams as HealthcheckGetParams,
+  };
+
   export {
     Previews as Previews,
     type PreviewDeleteResponse as PreviewDeleteResponse,

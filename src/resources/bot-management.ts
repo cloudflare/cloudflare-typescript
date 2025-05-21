@@ -66,6 +66,17 @@ export class BotManagement extends APIResource {
    *   "fight_mode": false
    * }
    * ```
+   *
+   * @example
+   * ```ts
+   * const botManagement = await client.botManagement.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   ai_bots_protection: 'disabled',
+   *   crawler_protection: 'disabled',
+   *   enable_js: true,
+   *   fight_mode: true,
+   * });
+   * ```
    */
   update(
     params: BotManagementUpdateParams,
@@ -81,6 +92,13 @@ export class BotManagement extends APIResource {
 
   /**
    * Retrieve a zone's Bot Management Config
+   *
+   * @example
+   * ```ts
+   * const botManagement = await client.botManagement.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(
     params: BotManagementGetParams,
@@ -100,6 +118,11 @@ export interface BotFightModeConfiguration {
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled';
+
+  /**
+   * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+   */
+  crawler_protection?: 'enabled' | 'disabled';
 
   /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
@@ -172,6 +195,11 @@ export interface BotFightModeConfigurationParam {
   ai_bots_protection?: 'block' | 'disabled';
 
   /**
+   * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+   */
+  crawler_protection?: 'enabled' | 'disabled';
+
+  /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
@@ -195,6 +223,11 @@ export interface SubscriptionConfiguration {
    * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
    */
   auto_update_model?: boolean;
+
+  /**
+   * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+   */
+  crawler_protection?: 'enabled' | 'disabled';
 
   /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
@@ -275,6 +308,11 @@ export interface SubscriptionConfigurationParam {
   auto_update_model?: boolean;
 
   /**
+   * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+   */
+  crawler_protection?: 'enabled' | 'disabled';
+
+  /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
@@ -292,6 +330,11 @@ export interface SuperBotFightModeDefinitelyConfiguration {
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled';
+
+  /**
+   * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+   */
+  crawler_protection?: 'enabled' | 'disabled';
 
   /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
@@ -360,6 +403,11 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
   ai_bots_protection?: 'block' | 'disabled';
 
   /**
+   * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+   */
+  crawler_protection?: 'enabled' | 'disabled';
+
+  /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
@@ -393,6 +441,11 @@ export interface SuperBotFightModeLikelyConfiguration {
    * Enable rule to block AI Scrapers and Crawlers.
    */
   ai_bots_protection?: 'block' | 'disabled';
+
+  /**
+   * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+   */
+  crawler_protection?: 'enabled' | 'disabled';
 
   /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
@@ -460,6 +513,11 @@ export interface SuperBotFightModeLikelyConfigurationParam {
   ai_bots_protection?: 'block' | 'disabled';
 
   /**
+   * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+   */
+  crawler_protection?: 'enabled' | 'disabled';
+
+  /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
@@ -514,7 +572,7 @@ export type BotManagementUpdateParams =
 export declare namespace BotManagementUpdateParams {
   export interface BotFightModeConfiguration {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -522,6 +580,11 @@ export declare namespace BotManagementUpdateParams {
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
     ai_bots_protection?: 'block' | 'disabled';
+
+    /**
+     * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
+     */
+    crawler_protection?: 'enabled' | 'disabled';
 
     /**
      * Body param: Use lightweight, invisible JavaScript detections to improve Bot
@@ -538,7 +601,7 @@ export declare namespace BotManagementUpdateParams {
 
   export interface SuperBotFightModeDefinitelyConfiguration {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -546,6 +609,11 @@ export declare namespace BotManagementUpdateParams {
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
     ai_bots_protection?: 'block' | 'disabled';
+
+    /**
+     * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
+     */
+    crawler_protection?: 'enabled' | 'disabled';
 
     /**
      * Body param: Use lightweight, invisible JavaScript detections to improve Bot
@@ -581,7 +649,7 @@ export declare namespace BotManagementUpdateParams {
 
   export interface SuperBotFightModeLikelyConfiguration {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -589,6 +657,11 @@ export declare namespace BotManagementUpdateParams {
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
     ai_bots_protection?: 'block' | 'disabled';
+
+    /**
+     * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
+     */
+    crawler_protection?: 'enabled' | 'disabled';
 
     /**
      * Body param: Use lightweight, invisible JavaScript detections to improve Bot
@@ -630,7 +703,7 @@ export declare namespace BotManagementUpdateParams {
 
   export interface SubscriptionConfiguration {
     /**
-     * Path param: Identifier
+     * Path param: Identifier.
      */
     zone_id: string;
 
@@ -645,6 +718,11 @@ export declare namespace BotManagementUpdateParams {
      * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
      */
     auto_update_model?: boolean;
+
+    /**
+     * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
+     */
+    crawler_protection?: 'enabled' | 'disabled';
 
     /**
      * Body param: Use lightweight, invisible JavaScript detections to improve Bot
@@ -663,7 +741,20 @@ export declare namespace BotManagementUpdateParams {
 
 export interface BotManagementGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
+}
+
+export declare namespace BotManagement {
+  export {
+    type BotFightModeConfiguration as BotFightModeConfiguration,
+    type SubscriptionConfiguration as SubscriptionConfiguration,
+    type SuperBotFightModeDefinitelyConfiguration as SuperBotFightModeDefinitelyConfiguration,
+    type SuperBotFightModeLikelyConfiguration as SuperBotFightModeLikelyConfiguration,
+    type BotManagementUpdateResponse as BotManagementUpdateResponse,
+    type BotManagementGetResponse as BotManagementGetResponse,
+    type BotManagementUpdateParams as BotManagementUpdateParams,
+    type BotManagementGetParams as BotManagementGetParams,
+  };
 }

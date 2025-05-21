@@ -6,6 +6,18 @@ import * as Core from '../../../../core';
 export class Managed extends APIResource {
   /**
    * Updates state of public access over the bucket's R2-managed (r2.dev) domain.
+   *
+   * @example
+   * ```ts
+   * const managed =
+   *   await client.r2.buckets.domains.managed.update(
+   *     'example-bucket',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       enabled: true,
+   *     },
+   *   );
+   * ```
    */
   update(
     bucketName: string,
@@ -29,6 +41,15 @@ export class Managed extends APIResource {
 
   /**
    * Gets state of public access over the bucket's R2-managed (r2.dev) domain.
+   *
+   * @example
+   * ```ts
+   * const manageds =
+   *   await client.r2.buckets.domains.managed.list(
+   *     'example-bucket',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   list(
     bucketName: string,
@@ -52,63 +73,65 @@ export class Managed extends APIResource {
 
 export interface ManagedUpdateResponse {
   /**
-   * Bucket ID
+   * Bucket ID.
    */
   bucketId: string;
 
   /**
-   * Domain name of the bucket's r2.dev domain
+   * Domain name of the bucket's r2.dev domain.
    */
   domain: string;
 
   /**
-   * Whether this bucket is publicly accessible at the r2.dev domain
+   * Whether this bucket is publicly accessible at the r2.dev domain.
    */
   enabled: boolean;
 }
 
 export interface ManagedListResponse {
   /**
-   * Bucket ID
+   * Bucket ID.
    */
   bucketId: string;
 
   /**
-   * Domain name of the bucket's r2.dev domain
+   * Domain name of the bucket's r2.dev domain.
    */
   domain: string;
 
   /**
-   * Whether this bucket is publicly accessible at the r2.dev domain
+   * Whether this bucket is publicly accessible at the r2.dev domain.
    */
   enabled: boolean;
 }
 
 export interface ManagedUpdateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Body param: Whether to enable public bucket access at the r2.dev domain
+   * Body param: Whether to enable public bucket access at the r2.dev domain.
    */
   enabled: boolean;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface ManagedListParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

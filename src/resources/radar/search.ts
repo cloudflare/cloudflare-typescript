@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Search extends APIResource {
   /**
    * Searches for locations, autonomous systems, and reports.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.search.global({
+   *   query: 'United',
+   * });
+   * ```
    */
   global(query: SearchGlobalParams, options?: Core.RequestOptions): Core.APIPromise<SearchGlobalResponse> {
     return (
@@ -37,7 +44,7 @@ export interface SearchGlobalParams {
   query: string;
 
   /**
-   * Search types to be excluded from results.
+   * Search types excluded from results.
    */
   exclude?: Array<'SPECIAL_EVENTS' | 'NOTEBOOKS' | 'LOCATIONS' | 'ASNS'>;
 
@@ -47,7 +54,7 @@ export interface SearchGlobalParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Search types to be included in results.
+   * Search types included in results.
    */
   include?: Array<'SPECIAL_EVENTS' | 'NOTEBOOKS' | 'LOCATIONS' | 'ASNS'>;
 
@@ -57,7 +64,7 @@ export interface SearchGlobalParams {
   limit?: number;
 
   /**
-   * Limit the number of objects per search category.
+   * Limits the number of objects per search category.
    */
   limitPerGroup?: number;
 }

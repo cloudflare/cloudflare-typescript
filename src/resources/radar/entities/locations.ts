@@ -7,6 +7,12 @@ import * as Core from '../../../core';
 export class Locations extends APIResource {
   /**
    * Retrieves a list of locations.
+   *
+   * @example
+   * ```ts
+   * const locations =
+   *   await client.radar.entities.locations.list();
+   * ```
    */
   list(query?: LocationListParams, options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>;
@@ -28,6 +34,13 @@ export class Locations extends APIResource {
    * Retrieves the requested location information. (A confidence level below `5`
    * indicates a low level of confidence in the traffic data - normally this happens
    * because Cloudflare has a small amount of traffic from/to this location).
+   *
+   * @example
+   * ```ts
+   * const location = await client.radar.entities.locations.get(
+   *   'US',
+   * );
+   * ```
    */
   get(
     location: string,
@@ -101,7 +114,8 @@ export interface LocationListParams {
   limit?: number;
 
   /**
-   * Comma-separated list of locations (alpha-2 location codes).
+   * Filters results by location. Specify a comma-separated list of alpha-2 location
+   * codes.
    */
   location?: string;
 

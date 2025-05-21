@@ -7,6 +7,14 @@ export class UniqueDevices extends APIResource {
   /**
    * Returns unique count of devices that have run synthetic application monitoring
    * tests in the past 7 days.
+   *
+   * @example
+   * ```ts
+   * const uniqueDevices =
+   *   await client.zeroTrust.dex.tests.uniqueDevices.list({
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *   });
+   * ```
    */
   list(params: UniqueDeviceListParams, options?: Core.RequestOptions): Core.APIPromise<UniqueDevices> {
     const { account_id, ...query } = params;

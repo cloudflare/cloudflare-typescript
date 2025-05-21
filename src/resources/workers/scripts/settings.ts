@@ -10,6 +10,15 @@ export class Settings extends APIResource {
    * Patch script-level settings when using
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
    * Including but not limited to Logpush and Tail Consumers.
+   *
+   * @example
+   * ```ts
+   * const scriptSetting =
+   *   await client.workers.scripts.settings.edit(
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     scriptName: string,
@@ -29,6 +38,15 @@ export class Settings extends APIResource {
    * Get script-level settings when using
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
    * Includes Logpush and Tail Consumers.
+   *
+   * @example
+   * ```ts
+   * const scriptSetting =
+   *   await client.workers.scripts.settings.get(
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     scriptName: string,
@@ -47,7 +65,7 @@ export class Settings extends APIResource {
 
 export interface SettingEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -59,12 +77,12 @@ export interface SettingEditParams {
   /**
    * Body param: Observability settings for the Worker.
    */
-  observability?: SettingEditParams.Observability;
+  observability?: SettingEditParams.Observability | null;
 
   /**
    * Body param: List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
+  tail_consumers?: Array<TailAPI.ConsumerScriptParam> | null;
 }
 
 export namespace SettingEditParams {
@@ -82,12 +100,41 @@ export namespace SettingEditParams {
      * Default is 1.
      */
     head_sampling_rate?: number | null;
+
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: Observability.Logs | null;
+  }
+
+  export namespace Observability {
+    /**
+     * Log settings for the Worker.
+     */
+    export interface Logs {
+      /**
+       * Whether logs are enabled for the Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether
+       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+       * are enabled for the Worker.
+       */
+      invocation_logs: boolean;
+
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+    }
   }
 }
 
 export interface SettingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

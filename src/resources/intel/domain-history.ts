@@ -7,6 +7,14 @@ export class DomainHistoryResource extends APIResource {
   /**
    * Gets historical security threat and content categories currently and previously
    * assigned to a domain.
+   *
+   * @example
+   * ```ts
+   * const domainHistories =
+   *   await client.intel.domainHistory.get({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(
     params: DomainHistoryGetParams,
@@ -30,11 +38,19 @@ export interface DomainHistory {
 
 export namespace DomainHistory {
   export interface Categorization {
-    categories?: Array<unknown>;
+    categories?: Array<Categorization.Category>;
 
     end?: string;
 
     start?: string;
+  }
+
+  export namespace Categorization {
+    export interface Category {
+      id?: number;
+
+      name?: string;
+    }
   }
 }
 
@@ -42,7 +58,7 @@ export type DomainHistoryGetResponse = Array<DomainHistory>;
 
 export interface DomainHistoryGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

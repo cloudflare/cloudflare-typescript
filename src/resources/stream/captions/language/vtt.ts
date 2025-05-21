@@ -6,6 +6,15 @@ import * as Core from '../../../../core';
 export class Vtt extends APIResource {
   /**
    * Return WebVTT captions for a provided language.
+   *
+   * @example
+   * ```ts
+   * const vtt = await client.stream.captions.language.vtt.get(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   'tr',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     identifier: string,
@@ -25,7 +34,7 @@ export type VttGetResponse = string;
 
 export interface VttGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

@@ -6,6 +6,15 @@ import * as Core from '../../../core';
 export class Tags extends APIResource {
   /**
    * Creates a new tag
+   *
+   * @example
+   * ```ts
+   * const tag =
+   *   await client.cloudforceOne.threatEvents.tags.create({
+   *     account_id: 0,
+   *     name: 'name',
+   *   });
+   * ```
    */
   create(params: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<TagCreateResponse> {
     const { account_id, ...body } = params;
@@ -24,7 +33,7 @@ export interface TagCreateResponse {
 
 export interface TagCreateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: number;
 

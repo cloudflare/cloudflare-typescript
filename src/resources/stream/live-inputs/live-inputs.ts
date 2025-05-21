@@ -19,6 +19,13 @@ export class LiveInputs extends APIResource {
   /**
    * Creates a live input, and returns credentials that you or your users can use to
    * stream live video to Cloudflare Stream.
+   *
+   * @example
+   * ```ts
+   * const liveInput = await client.stream.liveInputs.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: LiveInputCreateParams, options?: Core.RequestOptions): Core.APIPromise<LiveInput> {
     const { account_id, ...body } = params;
@@ -32,6 +39,14 @@ export class LiveInputs extends APIResource {
 
   /**
    * Updates a specified live input.
+   *
+   * @example
+   * ```ts
+   * const liveInput = await client.stream.liveInputs.update(
+   *   '66be4bf738797e01e1fca35a7bdecdcd',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     liveInputIdentifier: string,
@@ -50,6 +65,13 @@ export class LiveInputs extends APIResource {
   /**
    * Lists the live inputs created for an account. To get the credentials needed to
    * stream to a specific live input, request a single live input.
+   *
+   * @example
+   * ```ts
+   * const liveInputs = await client.stream.liveInputs.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: LiveInputListParams, options?: Core.RequestOptions): Core.APIPromise<LiveInputListResponse> {
     const { account_id, ...query } = params;
@@ -64,6 +86,14 @@ export class LiveInputs extends APIResource {
   /**
    * Prevents a live input from being streamed to and makes the live input
    * inaccessible to any future API calls.
+   *
+   * @example
+   * ```ts
+   * await client.stream.liveInputs.delete(
+   *   '66be4bf738797e01e1fca35a7bdecdcd',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     liveInputIdentifier: string,
@@ -79,6 +109,14 @@ export class LiveInputs extends APIResource {
 
   /**
    * Retrieves details of an existing live input.
+   *
+   * @example
+   * ```ts
+   * const liveInput = await client.stream.liveInputs.get(
+   *   '66be4bf738797e01e1fca35a7bdecdcd',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     liveInputIdentifier: string,
@@ -364,7 +402,7 @@ export namespace LiveInputListResponse {
 
 export interface LiveInputCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -441,7 +479,7 @@ export namespace LiveInputCreateParams {
 
 export interface LiveInputUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -518,7 +556,7 @@ export namespace LiveInputUpdateParams {
 
 export interface LiveInputListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -531,14 +569,14 @@ export interface LiveInputListParams {
 
 export interface LiveInputDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface LiveInputGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

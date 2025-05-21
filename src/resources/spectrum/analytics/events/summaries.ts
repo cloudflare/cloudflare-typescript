@@ -148,7 +148,7 @@ export namespace SummaryGetResponse {
 
 export interface SummaryGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

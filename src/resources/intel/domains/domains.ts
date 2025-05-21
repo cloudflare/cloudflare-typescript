@@ -10,6 +10,13 @@ export class Domains extends APIResource {
 
   /**
    * Gets security details and statistics about a domain.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.intel.domains.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
     const { account_id, ...query } = params;
@@ -117,7 +124,7 @@ export namespace Domain {
   export interface ResolvesToRef {
     /**
      * STIX 2.1 identifier:
-     * https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c
+     * https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c.
      */
     id?: string;
 
@@ -138,7 +145,7 @@ export namespace Domain {
 
 export interface DomainGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

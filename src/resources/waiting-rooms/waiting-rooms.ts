@@ -54,6 +54,17 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Creates a new waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   host: 'shop.example.com',
+   *   name: 'production_webinar',
+   *   new_users_per_minute: 200,
+   *   total_active_users: 200,
+   * });
+   * ```
    */
   create(params: WaitingRoomCreateParams, options?: Core.RequestOptions): Core.APIPromise<WaitingRoom> {
     const { zone_id, ...body } = params;
@@ -66,6 +77,20 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Updates a configured waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.update(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     host: 'shop.example.com',
+   *     name: 'production_webinar',
+   *     new_users_per_minute: 200,
+   *     total_active_users: 200,
+   *   },
+   * );
+   * ```
    */
   update(
     waitingRoomId: string,
@@ -83,6 +108,16 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Lists waiting rooms for account or zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const waitingRoom of client.waitingRooms.list({
+   *   account_id: 'account_id',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params?: WaitingRoomListParams,
@@ -122,6 +157,14 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Deletes a waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.delete(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     waitingRoomId: string,
@@ -138,6 +181,20 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Patches a configured waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.edit(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     host: 'shop.example.com',
+   *     name: 'production_webinar',
+   *     new_users_per_minute: 200,
+   *     total_active_users: 200,
+   *   },
+   * );
+   * ```
    */
   edit(
     waitingRoomId: string,
@@ -155,6 +212,14 @@ export class WaitingRooms extends APIResource {
 
   /**
    * Fetches a single configured waiting room.
+   *
+   * @example
+   * ```ts
+   * const waitingRoom = await client.waitingRooms.get(
+   *   '699d98642c564d2e855e9661899b7252',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     waitingRoomId: string,
@@ -432,7 +497,7 @@ export interface Query {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -468,6 +533,11 @@ export interface Query {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -536,7 +606,7 @@ export interface Query {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -785,7 +855,7 @@ export interface WaitingRoom {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -821,6 +891,11 @@ export interface WaitingRoom {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -889,7 +964,7 @@ export interface WaitingRoom {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -1018,7 +1093,7 @@ export interface WaitingRoomDeleteResponse {
 
 export interface WaitingRoomCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1206,7 +1281,7 @@ export interface WaitingRoomCreateParams {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -1242,6 +1317,11 @@ export interface WaitingRoomCreateParams {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -1310,7 +1390,7 @@ export interface WaitingRoomCreateParams {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -1399,7 +1479,7 @@ export interface WaitingRoomCreateParams {
 
 export interface WaitingRoomUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1587,7 +1667,7 @@ export interface WaitingRoomUpdateParams {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -1623,6 +1703,11 @@ export interface WaitingRoomUpdateParams {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -1691,7 +1776,7 @@ export interface WaitingRoomUpdateParams {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -1794,14 +1879,14 @@ export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
 
 export interface WaitingRoomDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface WaitingRoomEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1989,7 +2074,7 @@ export interface WaitingRoomEditParams {
    * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after
    *     `lastUpdated` until the user is able to make another attempt to leave the
    *     waiting room and be let into the origin website. When the `queueingMethod`
-   *     is `reject`, there is no specified refresh time — it will always be
+   *     is `reject`, there is no specified refresh time —\_it will always be
    *     **zero**.
    * 12. `queueingMethod`: The queueing method currently used by the waiting room. It
    *     is either **fifo**, **random**, **passthrough**, or **reject**.
@@ -2025,6 +2110,11 @@ export interface WaitingRoomEditParams {
    * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean
    *     indicating if the users in the prequeue are shuffled randomly when the event
    *     starts.
+   * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html
+   *     tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to
+   *     the `custom_html` template to ensure the Turnstile widget appears.
+   * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in
+   *     the infinite queue.
    *
    * An example cURL to a waiting room could be:
    *
@@ -2093,7 +2183,7 @@ export interface WaitingRoomEditParams {
    *     		"timeUntilEventEndFormatted": "15 minutes",
    *     		"shuffleAtEventStart": true
    *     	}
-   *     }.
+   *     }
    */
   json_response_enabled?: boolean;
 
@@ -2182,11 +2272,12 @@ export interface WaitingRoomEditParams {
 
 export interface WaitingRoomGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
+WaitingRooms.WaitingRoomsV4PagePaginationArray = WaitingRoomsV4PagePaginationArray;
 WaitingRooms.Page = Page;
 WaitingRooms.Events = Events;
 WaitingRooms.EventsV4PagePaginationArray = EventsV4PagePaginationArray;
@@ -2196,6 +2287,21 @@ WaitingRooms.Statuses = Statuses;
 WaitingRooms.Settings = Settings;
 
 export declare namespace WaitingRooms {
+  export {
+    type AdditionalRoutes as AdditionalRoutes,
+    type CookieAttributes as CookieAttributes,
+    type Query as Query,
+    type WaitingRoom as WaitingRoom,
+    type WaitingRoomDeleteResponse as WaitingRoomDeleteResponse,
+    WaitingRoomsV4PagePaginationArray as WaitingRoomsV4PagePaginationArray,
+    type WaitingRoomCreateParams as WaitingRoomCreateParams,
+    type WaitingRoomUpdateParams as WaitingRoomUpdateParams,
+    type WaitingRoomListParams as WaitingRoomListParams,
+    type WaitingRoomDeleteParams as WaitingRoomDeleteParams,
+    type WaitingRoomEditParams as WaitingRoomEditParams,
+    type WaitingRoomGetParams as WaitingRoomGetParams,
+  };
+
   export {
     Page as Page,
     type PagePreviewResponse as PagePreviewResponse,

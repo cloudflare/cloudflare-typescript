@@ -12,7 +12,9 @@ const client = new Cloudflare({
 describe('resource phases', () => {
   // TODO: investigate broken test
   test.skip('update', async () => {
-    const responsePromise = client.rulesets.phases.update('ddos_l4', { account_id: 'account_id' });
+    const responsePromise = client.rulesets.phases.update('http_request_firewall_custom', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +26,9 @@ describe('resource phases', () => {
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = client.rulesets.phases.get('ddos_l4', { account_id: 'account_id' });
+    const responsePromise = client.rulesets.phases.get('http_request_firewall_custom', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

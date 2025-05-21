@@ -35,6 +35,14 @@ export class RiskScoring extends APIResource {
 
   /**
    * Get risk event/score information for a specific user
+   *
+   * @example
+   * ```ts
+   * const riskScoring = await client.zeroTrust.riskScoring.get(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     userId: string,
@@ -51,6 +59,14 @@ export class RiskScoring extends APIResource {
 
   /**
    * Clear the risk score for a particular user
+   *
+   * @example
+   * ```ts
+   * const response = await client.zeroTrust.riskScoring.reset(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   reset(
     userId: string,

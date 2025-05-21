@@ -11,6 +11,17 @@ import { SinglePage } from '../../pagination';
 export class Versions extends APIResource {
   /**
    * Fetches the versions of an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const versionListResponse of client.rulesets.versions.list(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     rulesetId: string,
@@ -55,6 +66,15 @@ export class Versions extends APIResource {
 
   /**
    * Deletes an existing version of an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * await client.rulesets.versions.delete(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   '1',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   delete(
     rulesetId: string,
@@ -97,6 +117,15 @@ export class Versions extends APIResource {
 
   /**
    * Fetches a specific version of an account or zone ruleset.
+   *
+   * @example
+   * ```ts
+   * const version = await client.rulesets.versions.get(
+   *   '2f2feab2026849078ba485f918791bdc',
+   *   '1',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(
     rulesetId: string,
@@ -347,7 +376,7 @@ export namespace VersionGetResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and
@@ -482,7 +511,7 @@ export namespace VersionGetResponse {
       /**
        * Period in seconds over which the counter is being incremented.
        */
-      period: 10 | 60 | 600 | 3600;
+      period: number;
 
       /**
        * Defines when the ratelimit counter should be incremented. It is optional and

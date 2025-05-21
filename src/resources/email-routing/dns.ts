@@ -3,13 +3,20 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as DNSAPI from './dns';
-import * as Shared from '../shared';
 import * as EmailRoutingAPI from './email-routing';
 import { SinglePage } from '../../pagination';
 
 export class DNS extends APIResource {
   /**
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.dns.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example.net',
+   * });
+   * ```
    */
   create(params: DNSCreateParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -23,6 +30,16 @@ export class DNS extends APIResource {
   /**
    * Disable your Email Routing zone. Also removes additional MX records previously
    * required for Email Routing to work.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dnsRecord of client.emailRouting.dns.delete(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   delete(
     params: DNSDeleteParams,
@@ -37,6 +54,14 @@ export class DNS extends APIResource {
 
   /**
    * Unlock MX Records previously locked by Email Routing.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.dns.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example.net',
+   * });
+   * ```
    */
   edit(params: DNSEditParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -49,6 +74,13 @@ export class DNS extends APIResource {
 
   /**
    * Show the DNS records needed to configure your Email Routing zone.
+   *
+   * @example
+   * ```ts
+   * const dns = await client.emailRouting.dns.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: DNSGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse> {
     const { zone_id, ...query } = params;
@@ -114,12 +146,12 @@ export type DNSGetResponse =
 
 export namespace DNSGetResponse {
   export interface EmailEmailRoutingDNSQueryResponse {
-    errors: Array<Shared.ResponseInfo>;
+    errors: Array<EmailEmailRoutingDNSQueryResponse.Error>;
 
-    messages: Array<Shared.ResponseInfo>;
+    messages: Array<EmailEmailRoutingDNSQueryResponse.Message>;
 
     /**
-     * Whether the API call was successful
+     * Whether the API call was successful.
      */
     success: true;
 
@@ -129,6 +161,38 @@ export namespace DNSGetResponse {
   }
 
   export namespace EmailEmailRoutingDNSQueryResponse {
+    export interface Error {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Error.Source;
+    }
+
+    export namespace Error {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Message.Source;
+    }
+
+    export namespace Message {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
     export interface Result {
       errors?: Array<Result.Error>;
 
@@ -148,34 +212,34 @@ export namespace DNSGetResponse {
 
     export interface ResultInfo {
       /**
-       * Total number of results for the requested service
+       * Total number of results for the requested service.
        */
       count?: number;
 
       /**
-       * Current page within paginated list of results
+       * Current page within paginated list of results.
        */
       page?: number;
 
       /**
-       * Number of results per page of results
+       * Number of results per page of results.
        */
       per_page?: number;
 
       /**
-       * Total results available without any search parameters
+       * Total results available without any search parameters.
        */
       total_count?: number;
     }
   }
 
   export interface EmailDNSSettingsResponseCollection {
-    errors: Array<Shared.ResponseInfo>;
+    errors: Array<EmailDNSSettingsResponseCollection.Error>;
 
-    messages: Array<Shared.ResponseInfo>;
+    messages: Array<EmailDNSSettingsResponseCollection.Message>;
 
     /**
-     * Whether the API call was successful
+     * Whether the API call was successful.
      */
     success: true;
 
@@ -185,24 +249,56 @@ export namespace DNSGetResponse {
   }
 
   export namespace EmailDNSSettingsResponseCollection {
+    export interface Error {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Error.Source;
+    }
+
+    export namespace Error {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
+    export interface Message {
+      code: number;
+
+      message: string;
+
+      documentation_url?: string;
+
+      source?: Message.Source;
+    }
+
+    export namespace Message {
+      export interface Source {
+        pointer?: string;
+      }
+    }
+
     export interface ResultInfo {
       /**
-       * Total number of results for the requested service
+       * Total number of results for the requested service.
        */
       count?: number;
 
       /**
-       * Current page within paginated list of results
+       * Current page within paginated list of results.
        */
       page?: number;
 
       /**
-       * Number of results per page of results
+       * Number of results per page of results.
        */
       per_page?: number;
 
       /**
-       * Total results available without any search parameters
+       * Total results available without any search parameters.
        */
       total_count?: number;
     }
@@ -211,7 +307,7 @@ export namespace DNSGetResponse {
 
 export interface DNSCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -223,14 +319,14 @@ export interface DNSCreateParams {
 
 export interface DNSDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface DNSEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -242,7 +338,7 @@ export interface DNSEditParams {
 
 export interface DNSGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

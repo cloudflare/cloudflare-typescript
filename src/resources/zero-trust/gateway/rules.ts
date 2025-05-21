@@ -8,6 +8,16 @@ import { SinglePage } from '../../../pagination';
 export class Rules extends APIResource {
   /**
    * Creates a new Zero Trust Gateway rule.
+   *
+   * @example
+   * ```ts
+   * const gatewayRule =
+   *   await client.zeroTrust.gateway.rules.create({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     action: 'allow',
+   *     name: 'block bad websites',
+   *   });
+   * ```
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
     const { account_id, ...body } = params;
@@ -20,6 +30,19 @@ export class Rules extends APIResource {
 
   /**
    * Updates a configured Zero Trust Gateway rule.
+   *
+   * @example
+   * ```ts
+   * const gatewayRule =
+   *   await client.zeroTrust.gateway.rules.update(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     {
+   *       account_id: '699d98642c564d2e855e9661899b7252',
+   *       action: 'allow',
+   *       name: 'block bad websites',
+   *     },
+   *   );
+   * ```
    */
   update(
     ruleId: string,
@@ -37,6 +60,16 @@ export class Rules extends APIResource {
 
   /**
    * Fetches the Zero Trust Gateway rules for an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const gatewayRule of client.zeroTrust.gateway.rules.list(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RuleListParams,
@@ -48,6 +81,14 @@ export class Rules extends APIResource {
 
   /**
    * Deletes a Zero Trust Gateway rule.
+   *
+   * @example
+   * ```ts
+   * const rule = await client.zeroTrust.gateway.rules.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * );
+   * ```
    */
   delete(
     ruleId: string,
@@ -64,6 +105,15 @@ export class Rules extends APIResource {
 
   /**
    * Fetches a single Zero Trust Gateway rule.
+   *
+   * @example
+   * ```ts
+   * const gatewayRule =
+   *   await client.zeroTrust.gateway.rules.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
     const { account_id } = params;
@@ -80,6 +130,15 @@ export class Rules extends APIResource {
    *
    * The Zero Trust Gateway Rule must have values for both `expiration.expires_at`
    * and `expiration.duration`.
+   *
+   * @example
+   * ```ts
+   * const gatewayRule =
+   *   await client.zeroTrust.gateway.rules.resetExpiration(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '699d98642c564d2e855e9661899b7252' },
+   *   );
+   * ```
    */
   resetExpiration(
     ruleId: string,
@@ -229,7 +288,8 @@ export interface GatewayRule {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   created_at?: string;
 
@@ -259,7 +319,7 @@ export interface GatewayRule {
    *
    * This does not apply to HTTP or network policies.
    */
-  expiration?: GatewayRule.Expiration;
+  expiration?: GatewayRule.Expiration | null;
 
   /**
    * The protocol or layer to evaluate the traffic, identity, and device posture
@@ -280,7 +340,9 @@ export interface GatewayRule {
   /**
    * Precedence sets the order of your rules. Lower values indicate higher
    * precedence. At each processing phase, applicable rules are evaluated in
-   * ascending order of this value.
+   * ascending order of this value. Refer to
+   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
+   * docs on how to manage precedence via Terraform.
    */
   precedence?: number;
 
@@ -293,7 +355,7 @@ export interface GatewayRule {
    * The schedule for activating DNS policies. This does not apply to HTTP or network
    * policies.
    */
-  schedule?: Schedule;
+  schedule?: Schedule | null;
 
   /**
    * The wirefilter expression used for traffic matching.
@@ -350,22 +412,28 @@ export interface RuleSetting {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: Record<string, string>;
+  add_headers?: Record<string, string> | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    */
-  allow_child_bypass?: boolean;
+  allow_child_bypass?: boolean | null;
 
   /**
    * Settings for the Audit SSH action.
    */
-  audit_ssh?: RuleSetting.AuditSSH;
+  audit_ssh?: RuleSetting.AuditSSH | null;
 
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSetting.BISOAdminControls;
+  biso_admin_controls?: RuleSetting.BISOAdminControls | null;
+
+  /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  block_page?: RuleSetting.BlockPage | null;
 
   /**
    * Enable the custom block page.
@@ -381,12 +449,12 @@ export interface RuleSetting {
   /**
    * Set by children MSP accounts to bypass their parent's rules.
    */
-  bypass_parent_rule?: boolean;
+  bypass_parent_rule?: boolean | null;
 
   /**
    * Configure how session check behaves.
    */
-  check_session?: RuleSetting.CheckSession;
+  check_session?: RuleSetting.CheckSession | null;
 
   /**
    * Add your own custom resolvers to route queries that match the resolver policy.
@@ -394,14 +462,14 @@ export interface RuleSetting {
    * are set. DNS queries will route to the address closest to their origin. Only
    * valid when a rule's action is set to 'resolve'.
    */
-  dns_resolvers?: RuleSetting.DNSResolvers;
+  dns_resolvers?: RuleSetting.DNSResolvers | null;
 
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for
    * rules with Egress actions and filters, or omit it to indicate local egress via
    * WARP IPs.
    */
-  egress?: RuleSetting.Egress;
+  egress?: RuleSetting.Egress | null;
 
   /**
    * Set to true, to ignore the category matches at CNAME domains in a response. If
@@ -430,13 +498,13 @@ export interface RuleSetting {
   /**
    * Send matching traffic to the supplied destination IP address and port.
    */
-  l4override?: RuleSetting.L4override;
+  l4override?: RuleSetting.L4override | null;
 
   /**
    * Configure a notification to display on the user's device when this rule is
    * matched.
    */
-  notification_settings?: RuleSetting.NotificationSettings;
+  notification_settings?: RuleSetting.NotificationSettings | null;
 
   /**
    * Override matching DNS queries with a hostname.
@@ -446,17 +514,22 @@ export interface RuleSetting {
   /**
    * Override matching DNS queries with an IP or set of IPs.
    */
-  override_ips?: Array<string>;
+  override_ips?: Array<string> | null;
 
   /**
    * Configure DLP payload logging.
    */
-  payload_log?: RuleSetting.PayloadLog;
+  payload_log?: RuleSetting.PayloadLog | null;
 
   /**
    * Settings that apply to quarantine rules
    */
-  quarantine?: RuleSetting.Quarantine;
+  quarantine?: RuleSetting.Quarantine | null;
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  redirect?: RuleSetting.Redirect | null;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
@@ -464,7 +537,7 @@ export interface RuleSetting {
    * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
    * set to 'resolve'.
    */
-  resolve_dns_internally?: RuleSetting.ResolveDNSInternally;
+  resolve_dns_internally?: RuleSetting.ResolveDNSInternally | null;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
@@ -472,12 +545,12 @@ export interface RuleSetting {
    * 'resolve_dns_internally' is set. Only valid when a rule's action is set to
    * 'resolve'.
    */
-  resolve_dns_through_cloudflare?: boolean;
+  resolve_dns_through_cloudflare?: boolean | null;
 
   /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
-  untrusted_cert?: RuleSetting.UntrustedCERT;
+  untrusted_cert?: RuleSetting.UntrustedCERT | null;
 }
 
 export namespace RuleSetting {
@@ -565,6 +638,22 @@ export namespace RuleSetting {
   }
 
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  export interface BlockPage {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+  }
+
+  /**
    * Configure how session check behaves.
    */
   export interface CheckSession {
@@ -641,6 +730,11 @@ export namespace RuleSetting {
     enabled?: boolean;
 
     /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
      * Customize the message shown in the notification.
      */
     msg?: string;
@@ -687,6 +781,27 @@ export namespace RuleSetting {
   }
 
   /**
+   * Settings that apply to redirect rules
+   */
+  export interface Redirect {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
+     * If true, the path and query parameters from the original request will be
+     * appended to target_uri
+     */
+    preserve_path_and_query?: boolean;
+  }
+
+  /**
    * Configure to forward the query to the internal DNS service, passing the
    * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
    * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
@@ -726,22 +841,28 @@ export interface RuleSettingParam {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: Record<string, string>;
+  add_headers?: Record<string, string> | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    */
-  allow_child_bypass?: boolean;
+  allow_child_bypass?: boolean | null;
 
   /**
    * Settings for the Audit SSH action.
    */
-  audit_ssh?: RuleSettingParam.AuditSSH;
+  audit_ssh?: RuleSettingParam.AuditSSH | null;
 
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSettingParam.BISOAdminControls;
+  biso_admin_controls?: RuleSettingParam.BISOAdminControls | null;
+
+  /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  block_page?: RuleSettingParam.BlockPage | null;
 
   /**
    * Enable the custom block page.
@@ -757,12 +878,12 @@ export interface RuleSettingParam {
   /**
    * Set by children MSP accounts to bypass their parent's rules.
    */
-  bypass_parent_rule?: boolean;
+  bypass_parent_rule?: boolean | null;
 
   /**
    * Configure how session check behaves.
    */
-  check_session?: RuleSettingParam.CheckSession;
+  check_session?: RuleSettingParam.CheckSession | null;
 
   /**
    * Add your own custom resolvers to route queries that match the resolver policy.
@@ -770,14 +891,14 @@ export interface RuleSettingParam {
    * are set. DNS queries will route to the address closest to their origin. Only
    * valid when a rule's action is set to 'resolve'.
    */
-  dns_resolvers?: RuleSettingParam.DNSResolvers;
+  dns_resolvers?: RuleSettingParam.DNSResolvers | null;
 
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for
    * rules with Egress actions and filters, or omit it to indicate local egress via
    * WARP IPs.
    */
-  egress?: RuleSettingParam.Egress;
+  egress?: RuleSettingParam.Egress | null;
 
   /**
    * Set to true, to ignore the category matches at CNAME domains in a response. If
@@ -806,13 +927,13 @@ export interface RuleSettingParam {
   /**
    * Send matching traffic to the supplied destination IP address and port.
    */
-  l4override?: RuleSettingParam.L4override;
+  l4override?: RuleSettingParam.L4override | null;
 
   /**
    * Configure a notification to display on the user's device when this rule is
    * matched.
    */
-  notification_settings?: RuleSettingParam.NotificationSettings;
+  notification_settings?: RuleSettingParam.NotificationSettings | null;
 
   /**
    * Override matching DNS queries with a hostname.
@@ -822,17 +943,22 @@ export interface RuleSettingParam {
   /**
    * Override matching DNS queries with an IP or set of IPs.
    */
-  override_ips?: Array<string>;
+  override_ips?: Array<string> | null;
 
   /**
    * Configure DLP payload logging.
    */
-  payload_log?: RuleSettingParam.PayloadLog;
+  payload_log?: RuleSettingParam.PayloadLog | null;
 
   /**
    * Settings that apply to quarantine rules
    */
-  quarantine?: RuleSettingParam.Quarantine;
+  quarantine?: RuleSettingParam.Quarantine | null;
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  redirect?: RuleSettingParam.Redirect | null;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
@@ -840,7 +966,7 @@ export interface RuleSettingParam {
    * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
    * set to 'resolve'.
    */
-  resolve_dns_internally?: RuleSettingParam.ResolveDNSInternally;
+  resolve_dns_internally?: RuleSettingParam.ResolveDNSInternally | null;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
@@ -848,12 +974,12 @@ export interface RuleSettingParam {
    * 'resolve_dns_internally' is set. Only valid when a rule's action is set to
    * 'resolve'.
    */
-  resolve_dns_through_cloudflare?: boolean;
+  resolve_dns_through_cloudflare?: boolean | null;
 
   /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
-  untrusted_cert?: RuleSettingParam.UntrustedCERT;
+  untrusted_cert?: RuleSettingParam.UntrustedCERT | null;
 }
 
 export namespace RuleSettingParam {
@@ -941,6 +1067,22 @@ export namespace RuleSettingParam {
   }
 
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account
+   * settings.
+   */
+  export interface BlockPage {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+  }
+
+  /**
    * Configure how session check behaves.
    */
   export interface CheckSession {
@@ -1017,6 +1159,11 @@ export namespace RuleSettingParam {
     enabled?: boolean;
 
     /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
      * Customize the message shown in the notification.
      */
     msg?: string;
@@ -1060,6 +1207,27 @@ export namespace RuleSettingParam {
       | 'zip'
       | 'rar'
     >;
+  }
+
+  /**
+   * Settings that apply to redirect rules
+   */
+  export interface Redirect {
+    /**
+     * URI to which the user will be redirected
+     */
+    target_uri: string;
+
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+
+    /**
+     * If true, the path and query parameters from the original request will be
+     * appended to target_uri
+     */
+    preserve_path_and_query?: boolean;
   }
 
   /**
@@ -1253,7 +1421,8 @@ export interface RuleCreateParams {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   /**
    * Body param: The name of the rule.
@@ -1281,7 +1450,7 @@ export interface RuleCreateParams {
    *
    * This does not apply to HTTP or network policies.
    */
-  expiration?: RuleCreateParams.Expiration;
+  expiration?: RuleCreateParams.Expiration | null;
 
   /**
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
@@ -1297,7 +1466,9 @@ export interface RuleCreateParams {
   /**
    * Body param: Precedence sets the order of your rules. Lower values indicate
    * higher precedence. At each processing phase, applicable rules are evaluated in
-   * ascending order of this value.
+   * ascending order of this value. Refer to
+   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
+   * docs on how to manage precedence via Terraform.
    */
   precedence?: number;
 
@@ -1310,7 +1481,7 @@ export interface RuleCreateParams {
    * Body param: The schedule for activating DNS policies. This does not apply to
    * HTTP or network policies.
    */
-  schedule?: ScheduleParam;
+  schedule?: ScheduleParam | null;
 
   /**
    * Body param: The wirefilter expression used for traffic matching.
@@ -1344,11 +1515,6 @@ export namespace RuleCreateParams {
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
-
-    /**
-     * Whether the policy has expired.
-     */
-    expired?: boolean;
   }
 }
 
@@ -1377,7 +1543,8 @@ export interface RuleUpdateParams {
     | 'l4_override'
     | 'egress'
     | 'resolve'
-    | 'quarantine';
+    | 'quarantine'
+    | 'redirect';
 
   /**
    * Body param: The name of the rule.
@@ -1405,7 +1572,7 @@ export interface RuleUpdateParams {
    *
    * This does not apply to HTTP or network policies.
    */
-  expiration?: RuleUpdateParams.Expiration;
+  expiration?: RuleUpdateParams.Expiration | null;
 
   /**
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
@@ -1421,7 +1588,9 @@ export interface RuleUpdateParams {
   /**
    * Body param: Precedence sets the order of your rules. Lower values indicate
    * higher precedence. At each processing phase, applicable rules are evaluated in
-   * ascending order of this value.
+   * ascending order of this value. Refer to
+   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
+   * docs on how to manage precedence via Terraform.
    */
   precedence?: number;
 
@@ -1434,7 +1603,7 @@ export interface RuleUpdateParams {
    * Body param: The schedule for activating DNS policies. This does not apply to
    * HTTP or network policies.
    */
-  schedule?: ScheduleParam;
+  schedule?: ScheduleParam | null;
 
   /**
    * Body param: The wirefilter expression used for traffic matching.
@@ -1468,11 +1637,6 @@ export namespace RuleUpdateParams {
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
-
-    /**
-     * Whether the policy has expired.
-     */
-    expired?: boolean;
   }
 }
 

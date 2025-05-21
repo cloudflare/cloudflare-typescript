@@ -10,6 +10,15 @@ import { CloudflareError } from '../../../../error';
 export class UserPolicyChecks extends APIResource {
   /**
    * Tests if a specific user has permission to access an application.
+   *
+   * @example
+   * ```ts
+   * const userPolicyChecks =
+   *   await client.zeroTrust.access.applications.userPolicyChecks.list(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   list(
     appId: ApplicationsAPI.AppIDParam,
@@ -67,7 +76,7 @@ export interface UserPolicyCheckListResponse {
 export namespace UserPolicyCheckListResponse {
   export interface AppState {
     /**
-     * UUID
+     * UUID.
      */
     app_uid?: string;
 
@@ -102,7 +111,7 @@ export namespace UserPolicyCheckListResponse {
     name?: string;
 
     /**
-     * UUID
+     * UUID.
      */
     user_uuid?: string;
 

@@ -2,11 +2,21 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as Shared from '../../shared';
 
 export class Tail extends APIResource {
   /**
    * Starts a tail that receives logs and exception from a Worker.
+   *
+   * @example
+   * ```ts
+   * const tail = await client.workers.scripts.tail.create(
+   *   'this-is_my_script-01',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: {},
+   *   },
+   * );
+   * ```
    */
   create(
     scriptName: string,
@@ -24,6 +34,15 @@ export class Tail extends APIResource {
 
   /**
    * Deletes a tail from a Worker.
+   *
+   * @example
+   * ```ts
+   * const tail = await client.workers.scripts.tail.delete(
+   *   'this-is_my_script-01',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     scriptName: string,
@@ -37,6 +56,14 @@ export class Tail extends APIResource {
 
   /**
    * Get list of tails currently deployed on a Worker.
+   *
+   * @example
+   * ```ts
+   * const tail = await client.workers.scripts.tail.get(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     scriptName: string,
@@ -94,35 +121,75 @@ export interface ConsumerScriptParam {
 }
 
 export interface TailCreateResponse {
-  id?: string;
+  /**
+   * Identifier.
+   */
+  id: string;
 
-  expires_at?: string;
+  expires_at: string;
 
-  url?: string;
+  url: string;
 }
 
 export interface TailDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<TailDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<TailDeleteResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 }
 
+export namespace TailDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
 export interface TailGetResponse {
-  id?: string;
+  /**
+   * Identifier.
+   */
+  id: string;
 
-  expires_at?: string;
+  expires_at: string;
 
-  url?: string;
+  url: string;
 }
 
 export interface TailCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -134,14 +201,14 @@ export interface TailCreateParams {
 
 export interface TailDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface TailGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

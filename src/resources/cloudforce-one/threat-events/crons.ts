@@ -6,6 +6,14 @@ import * as Core from '../../../core';
 export class Crons extends APIResource {
   /**
    * Reads the last cron update time
+   *
+   * @example
+   * ```ts
+   * const crons =
+   *   await client.cloudforceOne.threatEvents.crons.list({
+   *     account_id: 0,
+   *   });
+   * ```
    */
   list(params: CronListParams, options?: Core.RequestOptions): Core.APIPromise<CronListResponse> {
     const { account_id } = params;
@@ -14,6 +22,14 @@ export class Crons extends APIResource {
 
   /**
    * Reads the last cron update time
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.cloudforceOne.threatEvents.crons.edit({
+   *     account_id: 0,
+   *   });
+   * ```
    */
   edit(params: CronEditParams, options?: Core.RequestOptions): Core.APIPromise<CronEditResponse> {
     const { account_id } = params;
@@ -33,14 +49,14 @@ export interface CronEditResponse {
 
 export interface CronListParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }
 
 export interface CronEditParams {
   /**
-   * Account ID
+   * Account ID.
    */
   account_id: number;
 }

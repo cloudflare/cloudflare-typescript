@@ -11,6 +11,14 @@ export class SmartTieredCache extends APIResource {
    * to an origin, and uses the latency data to determine how well any upper-tier
    * data center is connected with an origin. As a result, Cloudflare can select the
    * data center with the lowest latency to be the upper-tier for an origin.
+   *
+   * @example
+   * ```ts
+   * const smartTieredCache =
+   *   await client.cache.smartTieredCache.delete({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   delete(
     params: SmartTieredCacheDeleteParams,
@@ -32,6 +40,14 @@ export class SmartTieredCache extends APIResource {
    * to an origin, and uses the latency data to determine how well any upper-tier
    * data center is connected with an origin. As a result, Cloudflare can select the
    * data center with the lowest latency to be the upper-tier for an origin.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.smartTieredCache.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   value: 'on',
+   * });
+   * ```
    */
   edit(
     params: SmartTieredCacheEditParams,
@@ -53,6 +69,14 @@ export class SmartTieredCache extends APIResource {
    * to an origin, and uses the latency data to determine how well any upper-tier
    * data center is connected with an origin. As a result, Cloudflare can select the
    * data center with the lowest latency to be the upper-tier for an origin.
+   *
+   * @example
+   * ```ts
+   * const smartTieredCache =
+   *   await client.cache.smartTieredCache.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(
     params: SmartTieredCacheGetParams,

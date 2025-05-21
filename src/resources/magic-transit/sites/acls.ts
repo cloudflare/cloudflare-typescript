@@ -7,6 +7,19 @@ import { SinglePage } from '../../../pagination';
 export class ACLs extends APIResource {
   /**
    * Creates a new Site ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.magicTransit.sites.acls.create(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     lan_1: { lan_id: 'lan_id' },
+   *     lan_2: { lan_id: 'lan_id' },
+   *     name: 'PIN Pad - Cash Register',
+   *   },
+   * );
+   * ```
    */
   create(siteId: string, params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
@@ -20,6 +33,15 @@ export class ACLs extends APIResource {
 
   /**
    * Update a specific Site ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.magicTransit.sites.acls.update(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     siteId: string,
@@ -38,6 +60,17 @@ export class ACLs extends APIResource {
 
   /**
    * Lists Site ACLs associated with an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const acl of client.magicTransit.sites.acls.list(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     siteId: string,
@@ -54,6 +87,15 @@ export class ACLs extends APIResource {
 
   /**
    * Remove a specific Site ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.magicTransit.sites.acls.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     siteId: string,
@@ -72,6 +114,15 @@ export class ACLs extends APIResource {
 
   /**
    * Patch a specific Site ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.magicTransit.sites.acls.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     siteId: string,
@@ -90,6 +141,15 @@ export class ACLs extends APIResource {
 
   /**
    * Get a specific Site ACL.
+   *
+   * @example
+   * ```ts
+   * const acl = await client.magicTransit.sites.acls.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     siteId: string,

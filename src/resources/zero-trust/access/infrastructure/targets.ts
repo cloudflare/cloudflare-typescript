@@ -2,11 +2,23 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Targets extends APIResource {
   /**
    * Create new target
+   *
+   * @example
+   * ```ts
+   * const target =
+   *   await client.zeroTrust.access.infrastructure.targets.create(
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       hostname: 'infra-access-target',
+   *       ip: {},
+   *     },
+   *   );
+   * ```
    */
   create(params: TargetCreateParams, options?: Core.RequestOptions): Core.APIPromise<TargetCreateResponse> {
     const { account_id, ...body } = params;
@@ -20,6 +32,19 @@ export class Targets extends APIResource {
 
   /**
    * Update target
+   *
+   * @example
+   * ```ts
+   * const target =
+   *   await client.zeroTrust.access.infrastructure.targets.update(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       hostname: 'infra-access-target',
+   *       ip: {},
+   *     },
+   *   );
+   * ```
    */
   update(
     targetId: string,
@@ -38,6 +63,16 @@ export class Targets extends APIResource {
   /**
    * Lists and sorts an account’s targets. Filters are optional and are ANDed
    * together.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const targetListResponse of client.zeroTrust.access.infrastructure.targets.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: TargetListParams,
@@ -53,6 +88,14 @@ export class Targets extends APIResource {
 
   /**
    * Delete target
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.access.infrastructure.targets.delete(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(targetId: string, params: TargetDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id } = params;
@@ -64,6 +107,13 @@ export class Targets extends APIResource {
 
   /**
    * Removes one or more targets.
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.access.infrastructure.targets.bulkDelete(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   bulkDelete(params: TargetBulkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id } = params;
@@ -75,20 +125,43 @@ export class Targets extends APIResource {
 
   /**
    * Adds one or more targets.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const targetBulkUpdateResponse of client.zeroTrust.access.infrastructure.targets.bulkUpdate(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{ hostname: 'infra-access-target', ip: {} }],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   bulkUpdate(
     params: TargetBulkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TargetBulkUpdateResponse> {
+  ): Core.PagePromise<TargetBulkUpdateResponsesSinglePage, TargetBulkUpdateResponse> {
     const { account_id, body } = params;
-    return this._client.put(`/accounts/${account_id}/infrastructure/targets/batch`, {
-      body: body,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/infrastructure/targets/batch`,
+      TargetBulkUpdateResponsesSinglePage,
+      { body: body, method: 'put', ...options },
+    );
   }
 
   /**
    * Get target
+   *
+   * @example
+   * ```ts
+   * const target =
+   *   await client.zeroTrust.access.infrastructure.targets.get(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     targetId: string,
@@ -106,6 +179,8 @@ export class Targets extends APIResource {
 }
 
 export class TargetListResponsesV4PagePaginationArray extends V4PagePaginationArray<TargetListResponse> {}
+
+export class TargetBulkUpdateResponsesSinglePage extends SinglePage<TargetBulkUpdateResponse> {}
 
 export interface TargetCreateResponse {
   /**
@@ -341,84 +416,80 @@ export namespace TargetListResponse {
   }
 }
 
-export type TargetBulkUpdateResponse = Array<TargetBulkUpdateResponse.TargetBulkUpdateResponseItem>;
+export interface TargetBulkUpdateResponse {
+  /**
+   * Target identifier
+   */
+  id: string;
+
+  /**
+   * Date and time at which the target was created
+   */
+  created_at: string;
+
+  /**
+   * A non-unique field that refers to a target
+   */
+  hostname: string;
+
+  /**
+   * The IPv4/IPv6 address that identifies where to reach a target
+   */
+  ip: TargetBulkUpdateResponse.IP;
+
+  /**
+   * Date and time at which the target was modified
+   */
+  modified_at: string;
+}
 
 export namespace TargetBulkUpdateResponse {
-  export interface TargetBulkUpdateResponseItem {
+  /**
+   * The IPv4/IPv6 address that identifies where to reach a target
+   */
+  export interface IP {
     /**
-     * Target identifier
+     * The target's IPv4 address
      */
-    id: string;
+    ipv4?: IP.IPV4;
 
     /**
-     * Date and time at which the target was created
+     * The target's IPv6 address
      */
-    created_at: string;
-
-    /**
-     * A non-unique field that refers to a target
-     */
-    hostname: string;
-
-    /**
-     * The IPv4/IPv6 address that identifies where to reach a target
-     */
-    ip: TargetBulkUpdateResponseItem.IP;
-
-    /**
-     * Date and time at which the target was modified
-     */
-    modified_at: string;
+    ipv6?: IP.IPV6;
   }
 
-  export namespace TargetBulkUpdateResponseItem {
+  export namespace IP {
     /**
-     * The IPv4/IPv6 address that identifies where to reach a target
+     * The target's IPv4 address
      */
-    export interface IP {
+    export interface IPV4 {
       /**
-       * The target's IPv4 address
+       * IP address of the target
        */
-      ipv4?: IP.IPV4;
+      ip_addr?: string;
 
       /**
-       * The target's IPv6 address
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
-      ipv6?: IP.IPV6;
+      virtual_network_id?: string;
     }
 
-    export namespace IP {
+    /**
+     * The target's IPv6 address
+     */
+    export interface IPV6 {
       /**
-       * The target's IPv4 address
+       * IP address of the target
        */
-      export interface IPV4 {
-        /**
-         * IP address of the target
-         */
-        ip_addr?: string;
-
-        /**
-         * (optional) Private virtual network identifier for the target. If omitted, the
-         * default virtual network ID will be used.
-         */
-        virtual_network_id?: string;
-      }
+      ip_addr?: string;
 
       /**
-       * The target's IPv6 address
+       * (optional) Private virtual network identifier for the target. If omitted, the
+       * default virtual network ID will be used.
        */
-      export interface IPV6 {
-        /**
-         * IP address of the target
-         */
-        ip_addr?: string;
-
-        /**
-         * (optional) Private virtual network identifier for the target. If omitted, the
-         * default virtual network ID will be used.
-         */
-        virtual_network_id?: string;
-      }
+      virtual_network_id?: string;
     }
   }
 }
@@ -848,6 +919,7 @@ export interface TargetGetParams {
 }
 
 Targets.TargetListResponsesV4PagePaginationArray = TargetListResponsesV4PagePaginationArray;
+Targets.TargetBulkUpdateResponsesSinglePage = TargetBulkUpdateResponsesSinglePage;
 
 export declare namespace Targets {
   export {
@@ -857,6 +929,7 @@ export declare namespace Targets {
     type TargetBulkUpdateResponse as TargetBulkUpdateResponse,
     type TargetGetResponse as TargetGetResponse,
     TargetListResponsesV4PagePaginationArray as TargetListResponsesV4PagePaginationArray,
+    TargetBulkUpdateResponsesSinglePage as TargetBulkUpdateResponsesSinglePage,
     type TargetCreateParams as TargetCreateParams,
     type TargetUpdateParams as TargetUpdateParams,
     type TargetListParams as TargetListParams,

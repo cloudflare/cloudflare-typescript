@@ -5,7 +5,14 @@ import * as Core from '../../../core';
 
 export class Bulks extends APIResource {
   /**
-   * Same as summary
+   * Same as summary.
+   *
+   * @example
+   * ```ts
+   * const bulks = await client.intel.domains.bulks.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: BulkGetParams, options?: Core.RequestOptions): Core.APIPromise<BulkGetResponse | null> {
     const { account_id, ...query } = params;
@@ -120,15 +127,15 @@ export namespace BulkGetResponse {
 
 export interface BulkGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Query param: Accepts multiple values, i.e.
+   * Query param: Accepts multiple values like
    * `?domain=cloudflare.com&domain=example.com`.
    */
-  domain?: unknown;
+  domain?: Array<string>;
 }
 
 export declare namespace Bulks {

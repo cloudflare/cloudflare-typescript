@@ -5,7 +5,15 @@ import * as Core from '../../../core';
 
 export class Locks extends APIResource {
   /**
-   * Set lock rules for a bucket
+   * Set lock rules for a bucket.
+   *
+   * @example
+   * ```ts
+   * const lock = await client.r2.buckets.locks.update(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   update(
     bucketName: string,
@@ -28,7 +36,15 @@ export class Locks extends APIResource {
   }
 
   /**
-   * Get lock rules for a bucket
+   * Get lock rules for a bucket.
+   *
+   * @example
+   * ```ts
+   * const lock = await client.r2.buckets.locks.get(
+   *   'example-bucket',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     bucketName: string,
@@ -59,12 +75,12 @@ export interface LockGetResponse {
 export namespace LockGetResponse {
   export interface Rule {
     /**
-     * Unique identifier for this rule
+     * Unique identifier for this rule.
      */
     id: string;
 
     /**
-     * Condition to apply a lock rule to an object for how long in seconds
+     * Condition to apply a lock rule to an object for how long in seconds.
      */
     condition:
       | Rule.R2LockRuleAgeCondition
@@ -72,20 +88,20 @@ export namespace LockGetResponse {
       | Rule.R2LockRuleIndefiniteCondition;
 
     /**
-     * Whether or not this rule is in effect
+     * Whether or not this rule is in effect.
      */
     enabled: boolean;
 
     /**
      * Rule will only apply to objects/uploads in the bucket that start with the given
-     * prefix, an empty prefix can be provided to scope rule to all objects/uploads
+     * prefix, an empty prefix can be provided to scope rule to all objects/uploads.
      */
     prefix?: string;
   }
 
   export namespace Rule {
     /**
-     * Condition to apply a lock rule to an object for how long in seconds
+     * Condition to apply a lock rule to an object for how long in seconds.
      */
     export interface R2LockRuleAgeCondition {
       maxAgeSeconds: number;
@@ -94,7 +110,7 @@ export namespace LockGetResponse {
     }
 
     /**
-     * Condition to apply a lock rule to an object until a specific date
+     * Condition to apply a lock rule to an object until a specific date.
      */
     export interface R2LockRuleDateCondition {
       date: string;
@@ -103,7 +119,7 @@ export namespace LockGetResponse {
     }
 
     /**
-     * Condition to apply a lock rule indefinitely
+     * Condition to apply a lock rule indefinitely.
      */
     export interface R2LockRuleIndefiniteCondition {
       type: 'Indefinite';
@@ -113,7 +129,7 @@ export namespace LockGetResponse {
 
 export interface LockUpdateParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
@@ -123,7 +139,8 @@ export interface LockUpdateParams {
   rules?: Array<LockUpdateParams.Rule>;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }
@@ -131,12 +148,12 @@ export interface LockUpdateParams {
 export namespace LockUpdateParams {
   export interface Rule {
     /**
-     * Unique identifier for this rule
+     * Unique identifier for this rule.
      */
     id: string;
 
     /**
-     * Condition to apply a lock rule to an object for how long in seconds
+     * Condition to apply a lock rule to an object for how long in seconds.
      */
     condition:
       | Rule.R2LockRuleAgeCondition
@@ -144,20 +161,20 @@ export namespace LockUpdateParams {
       | Rule.R2LockRuleIndefiniteCondition;
 
     /**
-     * Whether or not this rule is in effect
+     * Whether or not this rule is in effect.
      */
     enabled: boolean;
 
     /**
      * Rule will only apply to objects/uploads in the bucket that start with the given
-     * prefix, an empty prefix can be provided to scope rule to all objects/uploads
+     * prefix, an empty prefix can be provided to scope rule to all objects/uploads.
      */
     prefix?: string;
   }
 
   export namespace Rule {
     /**
-     * Condition to apply a lock rule to an object for how long in seconds
+     * Condition to apply a lock rule to an object for how long in seconds.
      */
     export interface R2LockRuleAgeCondition {
       maxAgeSeconds: number;
@@ -166,7 +183,7 @@ export namespace LockUpdateParams {
     }
 
     /**
-     * Condition to apply a lock rule to an object until a specific date
+     * Condition to apply a lock rule to an object until a specific date.
      */
     export interface R2LockRuleDateCondition {
       date: string;
@@ -175,7 +192,7 @@ export namespace LockUpdateParams {
     }
 
     /**
-     * Condition to apply a lock rule indefinitely
+     * Condition to apply a lock rule indefinitely.
      */
     export interface R2LockRuleIndefiniteCondition {
       type: 'Indefinite';
@@ -185,12 +202,13 @@ export namespace LockUpdateParams {
 
 export interface LockGetParams {
   /**
-   * Path param: Account ID
+   * Path param: Account ID.
    */
   account_id: string;
 
   /**
-   * Header param: The bucket jurisdiction
+   * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+   * stored.
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

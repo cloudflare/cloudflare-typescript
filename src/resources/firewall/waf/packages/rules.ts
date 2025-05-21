@@ -11,6 +11,17 @@ export class Rules extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const ruleListResponse of client.firewall.waf.packages.rules.list(
+   *   'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     packageId: string,
@@ -30,6 +41,16 @@ export class Rules extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.firewall.waf.packages.rules.edit(
+   *     'a25a9a7e9c00afc1fb2e0245519d725b',
+   *     'a25a9a7e9c00afc1fb2e0245519d725b',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   edit(
     packageId: string,
@@ -51,6 +72,15 @@ export class Rules extends APIResource {
    *
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   *
+   * @example
+   * ```ts
+   * const rule = await client.firewall.waf.packages.rules.get(
+   *   'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   'a25a9a7e9c00afc1fb2e0245519d725b',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     packageId: string,
@@ -71,22 +101,22 @@ export class Rules extends APIResource {
 export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {}
 
 /**
- * When set to `on`, the current WAF rule will be used when evaluating the request.
- * Applies to anomaly detection WAF rules.
+ * Defines the mode anomaly. When set to `on`, the current WAF rule will be used
+ * when evaluating the request. Applies to anomaly detection WAF rules.
  */
 export type AllowedModesAnomaly = 'on' | 'off';
 
 /**
- * The rule group to which the current WAF rule belongs.
+ * Defines the rule group to which the current WAF rule belongs.
  */
 export interface WAFRuleGroup {
   /**
-   * The unique identifier of the rule group.
+   * Defines the unique identifier of the rule group.
    */
   id?: string;
 
   /**
-   * The name of the rule group.
+   * Defines the name of the rule group.
    */
   name?: string;
 }
@@ -111,7 +141,7 @@ export namespace RuleListResponse {
    */
   export interface WAFManagedRulesAnomalyRule {
     /**
-     * The unique identifier of the WAF rule.
+     * Defines the unique identifier of the WAF rule.
      */
     id: string;
 
@@ -122,28 +152,29 @@ export namespace RuleListResponse {
     allowed_modes: Array<RulesAPI.AllowedModesAnomaly>;
 
     /**
-     * The public description of the WAF rule.
+     * Defines the public description of the WAF rule.
      */
     description: string;
 
     /**
-     * The rule group to which the current WAF rule belongs.
+     * Defines the rule group to which the current WAF rule belongs.
      */
     group: RulesAPI.WAFRuleGroup;
 
     /**
-     * When set to `on`, the current WAF rule will be used when evaluating the request.
-     * Applies to anomaly detection WAF rules.
+     * Defines the mode anomaly. When set to `on`, the current WAF rule will be used
+     * when evaluating the request. Applies to anomaly detection WAF rules.
      */
     mode: RulesAPI.AllowedModesAnomaly;
 
     /**
-     * The unique identifier of a WAF package.
+     * Defines the unique identifier of a WAF package.
      */
     package_id: string;
 
     /**
-     * The order in which the individual WAF rule is executed within its rule group.
+     * Defines the order in which the individual WAF rule is executed within its rule
+     * group.
      */
     priority: string;
   }
@@ -156,43 +187,44 @@ export namespace RuleListResponse {
    */
   export interface WAFManagedRulesTraditionalDenyRule {
     /**
-     * The unique identifier of the WAF rule.
+     * Defines the unique identifier of the WAF rule.
      */
     id: string;
 
     /**
-     * The list of possible actions of the WAF rule when it is triggered.
+     * Defines the list of possible actions of the WAF rule when it is triggered.
      */
     allowed_modes: Array<'default' | 'disable' | 'simulate' | 'block' | 'challenge'>;
 
     /**
-     * The default action/mode of a rule.
+     * Defines the default action/mode of a rule.
      */
     default_mode: 'disable' | 'simulate' | 'block' | 'challenge';
 
     /**
-     * The public description of the WAF rule.
+     * Defines the public description of the WAF rule.
      */
     description: string;
 
     /**
-     * The rule group to which the current WAF rule belongs.
+     * Defines the rule group to which the current WAF rule belongs.
      */
     group: RulesAPI.WAFRuleGroup;
 
     /**
-     * The action that the current WAF rule will perform when triggered. Applies to
-     * traditional (deny) WAF rules.
+     * Defines the action that the current WAF rule will perform when triggered.
+     * Applies to traditional (deny) WAF rules.
      */
     mode: 'default' | 'disable' | 'simulate' | 'block' | 'challenge';
 
     /**
-     * The unique identifier of a WAF package.
+     * Defines the unique identifier of a WAF package.
      */
     package_id: string;
 
     /**
-     * The order in which the individual WAF rule is executed within its rule group.
+     * Defines the order in which the individual WAF rule is executed within its rule
+     * group.
      */
     priority: string;
   }
@@ -204,7 +236,7 @@ export namespace RuleListResponse {
    */
   export interface WAFManagedRulesTraditionalAllowRule {
     /**
-     * The unique identifier of the WAF rule.
+     * Defines the unique identifier of the WAF rule.
      */
     id: string;
 
@@ -214,12 +246,12 @@ export namespace RuleListResponse {
     allowed_modes: Array<'on' | 'off'>;
 
     /**
-     * The public description of the WAF rule.
+     * Defines the public description of the WAF rule.
      */
     description: string;
 
     /**
-     * The rule group to which the current WAF rule belongs.
+     * Defines the rule group to which the current WAF rule belongs.
      */
     group: RulesAPI.WAFRuleGroup;
 
@@ -230,12 +262,13 @@ export namespace RuleListResponse {
     mode: 'on' | 'off';
 
     /**
-     * The unique identifier of a WAF package.
+     * Defines the unique identifier of a WAF package.
      */
     package_id: string;
 
     /**
-     * The order in which the individual WAF rule is executed within its rule group.
+     * Defines the order in which the individual WAF rule is executed within its rule
+     * group.
      */
     priority: string;
   }
@@ -261,7 +294,7 @@ export namespace RuleEditResponse {
    */
   export interface WAFManagedRulesAnomalyRule {
     /**
-     * The unique identifier of the WAF rule.
+     * Defines the unique identifier of the WAF rule.
      */
     id: string;
 
@@ -272,28 +305,29 @@ export namespace RuleEditResponse {
     allowed_modes: Array<RulesAPI.AllowedModesAnomaly>;
 
     /**
-     * The public description of the WAF rule.
+     * Defines the public description of the WAF rule.
      */
     description: string;
 
     /**
-     * The rule group to which the current WAF rule belongs.
+     * Defines the rule group to which the current WAF rule belongs.
      */
     group: RulesAPI.WAFRuleGroup;
 
     /**
-     * When set to `on`, the current WAF rule will be used when evaluating the request.
-     * Applies to anomaly detection WAF rules.
+     * Defines the mode anomaly. When set to `on`, the current WAF rule will be used
+     * when evaluating the request. Applies to anomaly detection WAF rules.
      */
     mode: RulesAPI.AllowedModesAnomaly;
 
     /**
-     * The unique identifier of a WAF package.
+     * Defines the unique identifier of a WAF package.
      */
     package_id: string;
 
     /**
-     * The order in which the individual WAF rule is executed within its rule group.
+     * Defines the order in which the individual WAF rule is executed within its rule
+     * group.
      */
     priority: string;
   }
@@ -306,43 +340,44 @@ export namespace RuleEditResponse {
    */
   export interface WAFManagedRulesTraditionalDenyRule {
     /**
-     * The unique identifier of the WAF rule.
+     * Defines the unique identifier of the WAF rule.
      */
     id: string;
 
     /**
-     * The list of possible actions of the WAF rule when it is triggered.
+     * Defines the list of possible actions of the WAF rule when it is triggered.
      */
     allowed_modes: Array<'default' | 'disable' | 'simulate' | 'block' | 'challenge'>;
 
     /**
-     * The default action/mode of a rule.
+     * Defines the default action/mode of a rule.
      */
     default_mode: 'disable' | 'simulate' | 'block' | 'challenge';
 
     /**
-     * The public description of the WAF rule.
+     * Defines the public description of the WAF rule.
      */
     description: string;
 
     /**
-     * The rule group to which the current WAF rule belongs.
+     * Defines the rule group to which the current WAF rule belongs.
      */
     group: RulesAPI.WAFRuleGroup;
 
     /**
-     * The action that the current WAF rule will perform when triggered. Applies to
-     * traditional (deny) WAF rules.
+     * Defines the action that the current WAF rule will perform when triggered.
+     * Applies to traditional (deny) WAF rules.
      */
     mode: 'default' | 'disable' | 'simulate' | 'block' | 'challenge';
 
     /**
-     * The unique identifier of a WAF package.
+     * Defines the unique identifier of a WAF package.
      */
     package_id: string;
 
     /**
-     * The order in which the individual WAF rule is executed within its rule group.
+     * Defines the order in which the individual WAF rule is executed within its rule
+     * group.
      */
     priority: string;
   }
@@ -354,7 +389,7 @@ export namespace RuleEditResponse {
    */
   export interface WAFManagedRulesTraditionalAllowRule {
     /**
-     * The unique identifier of the WAF rule.
+     * Defines the unique identifier of the WAF rule.
      */
     id: string;
 
@@ -364,12 +399,12 @@ export namespace RuleEditResponse {
     allowed_modes: Array<'on' | 'off'>;
 
     /**
-     * The public description of the WAF rule.
+     * Defines the public description of the WAF rule.
      */
     description: string;
 
     /**
-     * The rule group to which the current WAF rule belongs.
+     * Defines the rule group to which the current WAF rule belongs.
      */
     group: RulesAPI.WAFRuleGroup;
 
@@ -380,12 +415,13 @@ export namespace RuleEditResponse {
     mode: 'on' | 'off';
 
     /**
-     * The unique identifier of a WAF package.
+     * Defines the unique identifier of a WAF package.
      */
     package_id: string;
 
     /**
-     * The order in which the individual WAF rule is executed within its rule group.
+     * Defines the order in which the individual WAF rule is executed within its rule
+     * group.
      */
     priority: string;
   }
@@ -395,64 +431,65 @@ export type RuleGetResponse = unknown | string | null;
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier of a schema.
    */
   zone_id: string;
 
   /**
-   * Query param: The public description of the WAF rule.
+   * Query param: Defines the public description of the WAF rule.
    */
   description?: string;
 
   /**
-   * Query param: The direction used to sort returned rules.
+   * Query param: Defines the direction used to sort returned rules.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: The unique identifier of the rule group.
+   * Query param: Defines the unique identifier of the rule group.
    */
   group_id?: string;
 
   /**
-   * Query param: When set to `all`, all the search requirements must match. When set
-   * to `any`, only one of the search requirements has to match.
+   * Query param: Defines the search requirements. When set to `all`, all the search
+   * requirements must match. When set to `any`, only one of the search requirements
+   * has to match.
    */
   match?: 'any' | 'all';
 
   /**
-   * Query param: The action/mode a rule has been overridden to perform.
+   * Query param: Defines the action/mode a rule has been overridden to perform.
    */
   mode?: 'DIS' | 'CHL' | 'BLK' | 'SIM';
 
   /**
-   * Query param: The field used to sort returned rules.
+   * Query param: Defines the field used to sort returned rules.
    */
   order?: 'priority' | 'group_id' | 'description';
 
   /**
-   * Query param: The order in which the individual WAF rule is executed within its
-   * rule group.
+   * Query param: Defines the order in which the individual WAF rule is executed
+   * within its rule group.
    */
   priority?: string;
 }
 
 export interface RuleEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier of a schema.
    */
   zone_id: string;
 
   /**
-   * Body param: The mode/action of the rule when triggered. You must use a value
-   * from the `allowed_modes` array of the current rule.
+   * Body param: Defines the mode/action of the rule when triggered. You must use a
+   * value from the `allowed_modes` array of the current rule.
    */
   mode?: 'default' | 'disable' | 'simulate' | 'block' | 'challenge' | 'on' | 'off';
 }
 
 export interface RuleGetParams {
   /**
-   * Identifier
+   * Defines an identifier of a schema.
    */
   zone_id: string;
 }

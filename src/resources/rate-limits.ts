@@ -2,7 +2,6 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
-import * as RateLimitsAPI from './rate-limits';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
 /**
@@ -110,16 +109,6 @@ export type Action =
   | 'allow'
   | 'log'
   | 'bypass';
-
-/**
- * An HTTP method or `_ALL_` to indicate all methods.
- */
-export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_';
-
-/**
- * An HTTP method or `_ALL_` to indicate all methods.
- */
-export type MethodsParam = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_';
 
 export interface RateLimit {
   /**
@@ -267,7 +256,7 @@ export namespace RateLimit {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<RateLimitsAPI.Methods>;
+      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
@@ -444,7 +433,7 @@ export namespace RateLimitDeleteResponse {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<RateLimitsAPI.Methods>;
+      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
@@ -477,7 +466,7 @@ export namespace RateLimitDeleteResponse {
 
 export interface RateLimitCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -597,7 +586,7 @@ export namespace RateLimitCreateParams {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<RateLimitsAPI.MethodsParam>;
+      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
@@ -630,21 +619,21 @@ export namespace RateLimitCreateParams {
 
 export interface RateLimitListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface RateLimitDeleteParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
 }
 
 export interface RateLimitEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Defines an identifier.
    */
   zone_id: string;
 
@@ -764,7 +753,7 @@ export namespace RateLimitEditParams {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<RateLimitsAPI.MethodsParam>;
+      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
@@ -797,7 +786,23 @@ export namespace RateLimitEditParams {
 
 export interface RateLimitGetParams {
   /**
-   * Identifier
+   * Defines an identifier.
    */
   zone_id: string;
+}
+
+RateLimits.RateLimitsV4PagePaginationArray = RateLimitsV4PagePaginationArray;
+
+export declare namespace RateLimits {
+  export {
+    type Action as Action,
+    type RateLimit as RateLimit,
+    type RateLimitDeleteResponse as RateLimitDeleteResponse,
+    RateLimitsV4PagePaginationArray as RateLimitsV4PagePaginationArray,
+    type RateLimitCreateParams as RateLimitCreateParams,
+    type RateLimitListParams as RateLimitListParams,
+    type RateLimitDeleteParams as RateLimitDeleteParams,
+    type RateLimitEditParams as RateLimitEditParams,
+    type RateLimitGetParams as RateLimitGetParams,
+  };
 }

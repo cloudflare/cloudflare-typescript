@@ -33,6 +33,15 @@ export class CustomHostnames extends APIResource {
    * certificates using the custom_cert_bundle field. The bundling process requires
    * the following condition One certificate in the bundle must use an RSA, and the
    * other must use an ECDSA.
+   *
+   * @example
+   * ```ts
+   * const customHostname = await client.customHostnames.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   hostname: 'app.example.com',
+   *   ssl: {},
+   * });
+   * ```
    */
   create(
     params: CustomHostnameCreateParams,
@@ -48,6 +57,16 @@ export class CustomHostnames extends APIResource {
 
   /**
    * List, search, sort, and filter all of your custom hostnames.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customHostnameListResponse of client.customHostnames.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CustomHostnameListParams,
@@ -63,6 +82,14 @@ export class CustomHostnames extends APIResource {
 
   /**
    * Delete Custom Hostname (and any issued SSL certificates)
+   *
+   * @example
+   * ```ts
+   * const customHostname = await client.customHostnames.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     customHostnameId: string,
@@ -81,6 +108,14 @@ export class CustomHostnames extends APIResource {
    * using the "custom_cert_bundle" field. The bundling process supports combining
    * certificates as long as the following condition is met. One certificate must use
    * the RSA algorithm, and the other must use the ECDSA algorithm.
+   *
+   * @example
+   * ```ts
+   * const response = await client.customHostnames.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     customHostnameId: string,
@@ -98,6 +133,14 @@ export class CustomHostnames extends APIResource {
 
   /**
    * Custom Hostname Details
+   *
+   * @example
+   * ```ts
+   * const customHostname = await client.customHostnames.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     customHostnameId: string,
@@ -133,7 +176,7 @@ export type BundleMethodParam = 'ubiquitous' | 'optimal' | 'force';
 
 export interface CustomHostname {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -456,7 +499,7 @@ export type DomainValidationTypeParam = 'dv';
 
 export interface CustomHostnameCreateResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -757,7 +800,7 @@ export namespace CustomHostnameCreateResponse {
 
 export interface CustomHostnameListResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -1058,14 +1101,14 @@ export namespace CustomHostnameListResponse {
 
 export interface CustomHostnameDeleteResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id?: string;
 }
 
 export interface CustomHostnameEditResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -1366,7 +1409,7 @@ export namespace CustomHostnameEditResponse {
 
 export interface CustomHostnameGetResponse {
   /**
-   * Identifier
+   * Identifier.
    */
   id: string;
 
@@ -1667,7 +1710,7 @@ export namespace CustomHostnameGetResponse {
 
 export interface CustomHostnameCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1797,7 +1840,7 @@ export namespace CustomHostnameCreateParams {
 
 export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1832,14 +1875,14 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
 
 export interface CustomHostnameDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CustomHostnameEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1979,15 +2022,35 @@ export namespace CustomHostnameEditParams {
 
 export interface CustomHostnameGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
+CustomHostnames.CustomHostnameListResponsesV4PagePaginationArray =
+  CustomHostnameListResponsesV4PagePaginationArray;
 CustomHostnames.FallbackOrigin = FallbackOrigin;
 CustomHostnames.CertificatePack = CertificatePack;
 
 export declare namespace CustomHostnames {
+  export {
+    type BundleMethod as BundleMethod,
+    type CustomHostname as CustomHostname,
+    type DCVMethod as DCVMethod,
+    type DomainValidationType as DomainValidationType,
+    type CustomHostnameCreateResponse as CustomHostnameCreateResponse,
+    type CustomHostnameListResponse as CustomHostnameListResponse,
+    type CustomHostnameDeleteResponse as CustomHostnameDeleteResponse,
+    type CustomHostnameEditResponse as CustomHostnameEditResponse,
+    type CustomHostnameGetResponse as CustomHostnameGetResponse,
+    CustomHostnameListResponsesV4PagePaginationArray as CustomHostnameListResponsesV4PagePaginationArray,
+    type CustomHostnameCreateParams as CustomHostnameCreateParams,
+    type CustomHostnameListParams as CustomHostnameListParams,
+    type CustomHostnameDeleteParams as CustomHostnameDeleteParams,
+    type CustomHostnameEditParams as CustomHostnameEditParams,
+    type CustomHostnameGetParams as CustomHostnameGetParams,
+  };
+
   export {
     FallbackOrigin as FallbackOrigin,
     type FallbackOriginUpdateResponse as FallbackOriginUpdateResponse,

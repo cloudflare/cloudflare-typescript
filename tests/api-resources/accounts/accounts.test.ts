@@ -47,12 +47,7 @@ describe('resource accounts', () => {
     const response = await client.accounts.update({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       name: 'Demo Account',
-      settings: {
-        abuse_contact_email: 'abuse_contact_email',
-        default_nameservers: 'cloudflare.standard',
-        enforce_twofactor: true,
-        use_account_custom_ns_by_default: true,
-      },
+      settings: { abuse_contact_email: 'abuse_contact_email', enforce_twofactor: true },
     });
   });
 
@@ -78,7 +73,7 @@ describe('resource accounts', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.accounts.list(
-        { direction: 'asc', name: 'example.com', page: 1, per_page: 5 },
+        { direction: 'desc', name: 'example.com', page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

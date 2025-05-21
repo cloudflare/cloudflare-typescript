@@ -42,6 +42,27 @@ describe('resource messages', () => {
     });
   });
 
+  test('bulkPush: only required params', async () => {
+    const responsePromise = client.queues.messages.bulkPush('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkPush: required and optional params', async () => {
+    const response = await client.queues.messages.bulkPush('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      delay_seconds: 0,
+      messages: [{ body: 'body', content_type: 'text', delay_seconds: 0 }],
+    });
+  });
+
   test('pull: only required params', async () => {
     const responsePromise = client.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -60,6 +81,28 @@ describe('resource messages', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       batch_size: 50,
       visibility_timeout_ms: 6000,
+    });
+  });
+
+  test('push: only required params', async () => {
+    const responsePromise = client.queues.messages.push('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('push: required and optional params', async () => {
+    const response = await client.queues.messages.push('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: 'body',
+      content_type: 'text',
+      delay_seconds: 0,
     });
   });
 });

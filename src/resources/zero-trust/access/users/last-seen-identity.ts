@@ -7,6 +7,15 @@ import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 export class LastSeenIdentity extends APIResource {
   /**
    * Get last seen identity for a single user.
+   *
+   * @example
+   * ```ts
+   * const identity =
+   *   await client.zeroTrust.access.users.lastSeenIdentity.get(
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   get(
     userId: string,
@@ -115,7 +124,7 @@ export namespace Identity {
 
 export interface LastSeenIdentityGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

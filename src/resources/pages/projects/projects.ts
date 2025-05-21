@@ -36,6 +36,13 @@ export class Projects extends APIResource {
 
   /**
    * Create a new project.
+   *
+   * @example
+   * ```ts
+   * const project = await client.pages.projects.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   create(params: ProjectCreateParams, options?: Core.RequestOptions): Core.APIPromise<Project> {
     const { account_id, ...body } = params;
@@ -48,6 +55,16 @@ export class Projects extends APIResource {
 
   /**
    * Fetch a list of all user projects.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const deployment of client.pages.projects.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ProjectListParams,
@@ -59,6 +76,14 @@ export class Projects extends APIResource {
 
   /**
    * Delete a project by name.
+   *
+   * @example
+   * ```ts
+   * const project = await client.pages.projects.delete(
+   *   'this-is-my-project-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     projectName: string,
@@ -77,6 +102,14 @@ export class Projects extends APIResource {
   /**
    * Set new attributes for an existing project. Modify environment variables. To
    * delete an environment variable, set the key to null.
+   *
+   * @example
+   * ```ts
+   * const project = await client.pages.projects.edit(
+   *   'this-is-my-project-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     projectName: string,
@@ -94,6 +127,14 @@ export class Projects extends APIResource {
 
   /**
    * Fetch a project by name.
+   *
+   * @example
+   * ```ts
+   * const project = await client.pages.projects.get(
+   *   'this-is-my-project-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     projectName: string,
@@ -110,6 +151,15 @@ export class Projects extends APIResource {
 
   /**
    * Purge all cached build artifacts for a Pages project
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.pages.projects.purgeBuildCache(
+   *     'this-is-my-project-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
    */
   purgeBuildCache(
     projectName: string,
@@ -1013,6 +1063,11 @@ export interface ProjectCreateParams {
    * deployments.
    */
   production_branch?: string;
+
+  /**
+   * Body param:
+   */
+  source?: ProjectCreateParams.Source;
 }
 
 export namespace ProjectCreateParams {
@@ -1548,6 +1603,38 @@ export namespace ProjectCreateParams {
       }
     }
   }
+
+  export interface Source {
+    config?: Source.Config;
+
+    type?: string;
+  }
+
+  export namespace Source {
+    export interface Config {
+      deployments_enabled?: boolean;
+
+      owner?: string;
+
+      path_excludes?: Array<string>;
+
+      path_includes?: Array<string>;
+
+      pr_comments_enabled?: boolean;
+
+      preview_branch_excludes?: Array<string>;
+
+      preview_branch_includes?: Array<string>;
+
+      preview_deployment_setting?: 'all' | 'none' | 'custom';
+
+      production_branch?: string;
+
+      production_deployments_enabled?: boolean;
+
+      repo_name?: string;
+    }
+  }
 }
 
 export interface ProjectListParams {
@@ -1590,6 +1677,11 @@ export interface ProjectEditParams {
    * deployments.
    */
   production_branch?: string;
+
+  /**
+   * Body param:
+   */
+  source?: ProjectEditParams.Source;
 }
 
 export namespace ProjectEditParams {
@@ -2123,6 +2215,38 @@ export namespace ProjectEditParams {
       export interface VectorizeBindings {
         index_name?: string;
       }
+    }
+  }
+
+  export interface Source {
+    config?: Source.Config;
+
+    type?: string;
+  }
+
+  export namespace Source {
+    export interface Config {
+      deployments_enabled?: boolean;
+
+      owner?: string;
+
+      path_excludes?: Array<string>;
+
+      path_includes?: Array<string>;
+
+      pr_comments_enabled?: boolean;
+
+      preview_branch_excludes?: Array<string>;
+
+      preview_branch_includes?: Array<string>;
+
+      preview_deployment_setting?: 'all' | 'none' | 'custom';
+
+      production_branch?: string;
+
+      production_deployments_enabled?: boolean;
+
+      repo_name?: string;
     }
   }
 }

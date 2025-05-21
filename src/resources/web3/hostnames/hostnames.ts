@@ -13,6 +13,15 @@ export class Hostnames extends APIResource {
 
   /**
    * Create Web3 Hostname
+   *
+   * @example
+   * ```ts
+   * const hostname = await client.web3.hostnames.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'gateway.example.com',
+   *   target: 'ipfs',
+   * });
+   * ```
    */
   create(params: HostnameCreateParams, options?: Core.RequestOptions): Core.APIPromise<Hostname> {
     const { zone_id, ...body } = params;
@@ -25,6 +34,16 @@ export class Hostnames extends APIResource {
 
   /**
    * List Web3 Hostnames
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const hostname of client.web3.hostnames.list({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: HostnameListParams,
@@ -36,6 +55,14 @@ export class Hostnames extends APIResource {
 
   /**
    * Delete Web3 Hostname
+   *
+   * @example
+   * ```ts
+   * const hostname = await client.web3.hostnames.delete(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     identifier: string,
@@ -52,6 +79,14 @@ export class Hostnames extends APIResource {
 
   /**
    * Edit Web3 Hostname
+   *
+   * @example
+   * ```ts
+   * const hostname = await client.web3.hostnames.edit(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   edit(
     identifier: string,
@@ -69,6 +104,14 @@ export class Hostnames extends APIResource {
 
   /**
    * Web3 Hostname Details
+   *
+   * @example
+   * ```ts
+   * const hostname = await client.web3.hostnames.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     identifier: string,
@@ -88,108 +131,108 @@ export class HostnamesSinglePage extends SinglePage<Hostname> {}
 
 export interface Hostname {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   id?: string;
 
   created_on?: string;
 
   /**
-   * An optional description of the hostname.
+   * Specify an optional description of the hostname.
    */
   description?: string;
 
   /**
-   * DNSLink value used if the target is ipfs.
+   * Specify the DNSLink value used if the target is ipfs.
    */
   dnslink?: string;
 
   modified_on?: string;
 
   /**
-   * The hostname that will point to the target gateway via CNAME.
+   * Specify the hostname that points to the target gateway via CNAME.
    */
   name?: string;
 
   /**
-   * Status of the hostname's activation.
+   * Specifies the status of the hostname's activation.
    */
   status?: 'active' | 'pending' | 'deleting' | 'error';
 
   /**
-   * Target gateway of the hostname.
+   * Specify the target gateway of the hostname.
    */
   target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
 }
 
 export interface HostnameDeleteResponse {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   id: string;
 }
 
 export interface HostnameCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Specify the identifier of the hostname.
    */
   zone_id: string;
 
   /**
-   * Body param: The hostname that will point to the target gateway via CNAME.
+   * Body param: Specify the hostname that points to the target gateway via CNAME.
    */
   name: string;
 
   /**
-   * Body param: Target gateway of the hostname.
+   * Body param: Specify the target gateway of the hostname.
    */
   target: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
 
   /**
-   * Body param: An optional description of the hostname.
+   * Body param: Specify an optional description of the hostname.
    */
   description?: string;
 
   /**
-   * Body param: DNSLink value used if the target is ipfs.
+   * Body param: Specify the DNSLink value used if the target is ipfs.
    */
   dnslink?: string;
 }
 
 export interface HostnameListParams {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   zone_id: string;
 }
 
 export interface HostnameDeleteParams {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   zone_id: string;
 }
 
 export interface HostnameEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Specify the identifier of the hostname.
    */
   zone_id: string;
 
   /**
-   * Body param: An optional description of the hostname.
+   * Body param: Specify an optional description of the hostname.
    */
   description?: string;
 
   /**
-   * Body param: DNSLink value used if the target is ipfs.
+   * Body param: Specify the DNSLink value used if the target is ipfs.
    */
   dnslink?: string;
 }
 
 export interface HostnameGetParams {
   /**
-   * Identifier
+   * Specify the identifier of the hostname.
    */
   zone_id: string;
 }

@@ -20,7 +20,7 @@ describe('resource threatEvents', () => {
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
       indicatorType: 'domain',
-      raw: {},
+      raw: { data: { foo: 'bar' } },
       tlp: 'amber',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -42,7 +42,7 @@ describe('resource threatEvents', () => {
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
       indicatorType: 'domain',
-      raw: { data: {}, source: 'example.com', tlp: 'amber' },
+      raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
       tlp: 'amber',
       accountId: 123456,
       datasetId: 'durableObjectName',
@@ -50,6 +50,32 @@ describe('resource threatEvents', () => {
       tags: ['malware'],
       targetCountry: 'US',
       targetIndustry: 'Agriculture',
+    });
+  });
+
+  // TODO: HTTP 401 from prism
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.cloudforceOne.threatEvents.list({ account_id: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: HTTP 401 from prism
+  test.skip('list: required and optional params', async () => {
+    const response = await client.cloudforceOne.threatEvents.list({
+      account_id: 0,
+      datasetId: ['string'],
+      forceRefresh: true,
+      order: 'asc',
+      orderBy: 'orderBy',
+      page: 0,
+      pageSize: 0,
+      search: [{ field: 'attackerCountry', op: 'equals', value: 'usa' }],
     });
   });
 
@@ -82,7 +108,7 @@ describe('resource threatEvents', () => {
           date: '2022-04-01T00:00:00Z',
           event: 'An attacker registered the domain domain.com',
           indicatorType: 'domain',
-          raw: {},
+          raw: { data: { foo: 'bar' } },
           tlp: 'amber',
         },
       ],
@@ -109,7 +135,7 @@ describe('resource threatEvents', () => {
           date: '2022-04-01T00:00:00Z',
           event: 'An attacker registered the domain domain.com',
           indicatorType: 'domain',
-          raw: { data: {}, source: 'example.com', tlp: 'amber' },
+          raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
           tlp: 'amber',
           accountId: 123456,
           datasetId: 'durableObjectName',

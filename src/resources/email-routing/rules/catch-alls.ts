@@ -7,6 +7,16 @@ export class CatchAlls extends APIResource {
   /**
    * Enable or disable catch-all routing rule, or change action to forward to
    * specific destination address.
+   *
+   * @example
+   * ```ts
+   * const catchAll =
+   *   await client.emailRouting.rules.catchAlls.update({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     actions: [{ type: 'forward' }],
+   *     matchers: [{ type: 'all' }],
+   *   });
+   * ```
    */
   update(
     params: CatchAllUpdateParams,
@@ -23,6 +33,14 @@ export class CatchAlls extends APIResource {
 
   /**
    * Get information on the default catch-all routing rule.
+   *
+   * @example
+   * ```ts
+   * const catchAll =
+   *   await client.emailRouting.rules.catchAlls.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
    */
   get(params: CatchAllGetParams, options?: Core.RequestOptions): Core.APIPromise<CatchAllGetResponse> {
     const { zone_id } = params;
@@ -144,7 +162,7 @@ export interface CatchAllGetResponse {
 
 export interface CatchAllUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -171,7 +189,7 @@ export interface CatchAllUpdateParams {
 
 export interface CatchAllGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

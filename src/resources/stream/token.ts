@@ -7,6 +7,14 @@ export class Token extends APIResource {
   /**
    * Creates a signed URL token for a video. If a body is not provided in the
    * request, a token is created with default values.
+   *
+   * @example
+   * ```ts
+   * const token = await client.stream.token.create(
+   *   'ea95132c15732412d22c1476fa83f27a',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   create(
     identifier: string,

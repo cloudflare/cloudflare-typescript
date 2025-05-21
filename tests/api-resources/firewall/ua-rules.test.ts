@@ -15,7 +15,7 @@ describe('resource uaRules', () => {
     const responsePromise = client.firewall.uaRules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       configuration: {},
-      mode: 'block',
+      mode: 'challenge',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,7 +31,7 @@ describe('resource uaRules', () => {
     const response = await client.firewall.uaRules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'block',
+      mode: 'challenge',
     });
   });
 
@@ -40,7 +40,7 @@ describe('resource uaRules', () => {
     const responsePromise = client.firewall.uaRules.update('372e67954025e0ba6aaa6d586b9e0b59', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       configuration: {},
-      mode: 'block',
+      mode: 'challenge',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,7 +56,7 @@ describe('resource uaRules', () => {
     const response = await client.firewall.uaRules.update('372e67954025e0ba6aaa6d586b9e0b59', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'block',
+      mode: 'challenge',
     });
   });
 

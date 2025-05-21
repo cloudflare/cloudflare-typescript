@@ -2,10 +2,19 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AnalyticsAPI from './analytics';
-import { Analytics, AnalyticsListParams, AnalyticsStoredParams, Components, Schema } from './analytics';
 import * as KeysAPI from './keys';
-import { Key, KeyListParams, Keys, KeysCursorLimitPagination } from './keys';
+import {
+  Key,
+  KeyBulkDeleteParams,
+  KeyBulkDeleteResponse,
+  KeyBulkGetParams,
+  KeyBulkGetResponse,
+  KeyBulkUpdateParams,
+  KeyBulkUpdateResponse,
+  KeyListParams,
+  Keys,
+  KeysCursorLimitPagination,
+} from './keys';
 import * as MetadataAPI from './metadata';
 import { Metadata, MetadataGetParams, MetadataGetResponse } from './metadata';
 import * as ValuesAPI from './values';
@@ -20,7 +29,6 @@ import {
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Namespaces extends APIResource {
-  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
   metadata: MetadataAPI.Metadata = new MetadataAPI.Metadata(this._client);
   values: ValuesAPI.Values = new ValuesAPI.Values(this._client);
@@ -29,6 +37,14 @@ export class Namespaces extends APIResource {
    * Creates a namespace under the given title. A `400` is returned if the account
    * already owns a namespace with this title. A namespace must be explicitly deleted
    * to be replaced.
+   *
+   * @example
+   * ```ts
+   * const namespace = await client.kv.namespaces.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   title: 'My Own Namespace',
+   * });
+   * ```
    */
   create(params: NamespaceCreateParams, options?: Core.RequestOptions): Core.APIPromise<Namespace> {
     const { account_id, ...body } = params;
@@ -42,23 +58,44 @@ export class Namespaces extends APIResource {
 
   /**
    * Modifies a namespace's title.
+   *
+   * @example
+   * ```ts
+   * const namespace = await client.kv.namespaces.update(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     title: 'My Own Namespace',
+   *   },
+   * );
+   * ```
    */
   update(
     namespaceId: string,
     params: NamespaceUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceUpdateResponse | null> {
+  ): Core.APIPromise<Namespace> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NamespaceUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: Namespace }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the namespaces owned by an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const namespace of client.kv.namespaces.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: NamespaceListParams,
@@ -74,6 +111,14 @@ export class Namespaces extends APIResource {
 
   /**
    * Deletes the namespace corresponding to the given ID.
+   *
+   * @example
+   * ```ts
+   * const namespace = await client.kv.namespaces.delete(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   delete(
     namespaceId: string,
@@ -90,47 +135,15 @@ export class Namespaces extends APIResource {
   }
 
   /**
-   * Remove multiple KV pairs from the namespace. Body should be an array of up to
-   * 10,000 keys to be removed.
-   */
-  bulkDelete(
-    namespaceId: string,
-    params: NamespaceBulkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceBulkDeleteResponse | null> {
-    const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk/delete`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: NamespaceBulkDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Write multiple keys and values at once. Body should be an array of up to 10,000
-   * key-value pairs to be stored, along with optional expiration information.
-   * Existing values and expirations will be overwritten. If neither `expiration` nor
-   * `expiration_ttl` is specified, the key-value pair will never expire. If both are
-   * set, `expiration_ttl` is used and `expiration` is ignored. The entire request
-   * size must be 100 megabytes or less.
-   */
-  bulkUpdate(
-    namespaceId: string,
-    params: NamespaceBulkUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceBulkUpdateResponse | null> {
-    const { account_id, body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: NamespaceBulkUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Get the namespace corresponding to the given ID.
+   *
+   * @example
+   * ```ts
+   * const namespace = await client.kv.namespaces.get(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     namespaceId: string,
@@ -161,39 +174,18 @@ export interface Namespace {
   title: string;
 
   /**
+   * True if new beta namespace, with additional preview features.
+   */
+  beta?: boolean;
+
+  /**
    * True if keys written on the URL will be URL-decoded before storing. For example,
    * if set to "true", a key written on the URL as "%3F" will be stored as "?".
    */
   supports_url_encoding?: boolean;
 }
 
-export interface NamespaceUpdateResponse {}
-
 export interface NamespaceDeleteResponse {}
-
-export interface NamespaceBulkDeleteResponse {
-  /**
-   * Number of keys successfully updated
-   */
-  successful_key_count?: number;
-
-  /**
-   * Name of the keys that failed to be fully updated. They should be retried.
-   */
-  unsuccessful_keys?: Array<string>;
-}
-
-export interface NamespaceBulkUpdateResponse {
-  /**
-   * Number of keys successfully updated
-   */
-  successful_key_count?: number;
-
-  /**
-   * Name of the keys that failed to be fully updated. They should be retried.
-   */
-  unsuccessful_keys?: Array<string>;
-}
 
 export interface NamespaceCreateParams {
   /**
@@ -243,69 +235,6 @@ export interface NamespaceDeleteParams {
   account_id: string;
 }
 
-export interface NamespaceBulkDeleteParams {
-  /**
-   * Path param: Identifier
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: Array<string>;
-}
-
-export interface NamespaceBulkUpdateParams {
-  /**
-   * Path param: Identifier
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: Array<NamespaceBulkUpdateParams.Body>;
-}
-
-export namespace NamespaceBulkUpdateParams {
-  export interface Body {
-    /**
-     * Whether or not the server should base64 decode the value before storing it.
-     * Useful for writing values that wouldn't otherwise be valid JSON strings, such as
-     * images.
-     */
-    base64?: boolean;
-
-    /**
-     * The time, measured in number of seconds since the UNIX epoch, at which the key
-     * should expire.
-     */
-    expiration?: number;
-
-    /**
-     * The number of seconds for which the key should be visible before it expires. At
-     * least 60.
-     */
-    expiration_ttl?: number;
-
-    /**
-     * A key's name. The name may be at most 512 bytes. All printable, non-whitespace
-     * characters are valid.
-     */
-    key?: string;
-
-    /**
-     * Arbitrary JSON that is associated with a key.
-     */
-    metadata?: Record<string, unknown>;
-
-    /**
-     * A UTF-8 encoded string to be stored, up to 25 MiB in length.
-     */
-    value?: string;
-  }
-}
-
 export interface NamespaceGetParams {
   /**
    * Identifier
@@ -314,7 +243,6 @@ export interface NamespaceGetParams {
 }
 
 Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
-Namespaces.Analytics = Analytics;
 Namespaces.Keys = Keys;
 Namespaces.KeysCursorLimitPagination = KeysCursorLimitPagination;
 Namespaces.Metadata = Metadata;
@@ -323,33 +251,26 @@ Namespaces.Values = Values;
 export declare namespace Namespaces {
   export {
     type Namespace as Namespace,
-    type NamespaceUpdateResponse as NamespaceUpdateResponse,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
-    type NamespaceBulkDeleteResponse as NamespaceBulkDeleteResponse,
-    type NamespaceBulkUpdateResponse as NamespaceBulkUpdateResponse,
     NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
     type NamespaceCreateParams as NamespaceCreateParams,
     type NamespaceUpdateParams as NamespaceUpdateParams,
     type NamespaceListParams as NamespaceListParams,
     type NamespaceDeleteParams as NamespaceDeleteParams,
-    type NamespaceBulkDeleteParams as NamespaceBulkDeleteParams,
-    type NamespaceBulkUpdateParams as NamespaceBulkUpdateParams,
     type NamespaceGetParams as NamespaceGetParams,
-  };
-
-  export {
-    Analytics as Analytics,
-    type Components as Components,
-    type Schema as Schema,
-    type AnalyticsListParams as AnalyticsListParams,
-    type AnalyticsStoredParams as AnalyticsStoredParams,
   };
 
   export {
     Keys as Keys,
     type Key as Key,
+    type KeyBulkDeleteResponse as KeyBulkDeleteResponse,
+    type KeyBulkGetResponse as KeyBulkGetResponse,
+    type KeyBulkUpdateResponse as KeyBulkUpdateResponse,
     KeysCursorLimitPagination as KeysCursorLimitPagination,
     type KeyListParams as KeyListParams,
+    type KeyBulkDeleteParams as KeyBulkDeleteParams,
+    type KeyBulkGetParams as KeyBulkGetParams,
+    type KeyBulkUpdateParams as KeyBulkUpdateParams,
   };
 
   export {

@@ -14,7 +14,9 @@ describe('resource routes', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.magicTransit.routes.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      nexthop: '203.0.113.1',
+      prefix: '192.0.2.0/24',
+      priority: 0,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +31,12 @@ describe('resource routes', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.magicTransit.routes.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      nexthop: '203.0.113.1',
+      prefix: '192.0.2.0/24',
+      priority: 0,
+      description: 'New route for new prefix 203.0.113.1',
+      scope: { colo_names: ['den01'], colo_regions: ['APAC'] },
+      weight: 0,
     });
   });
 

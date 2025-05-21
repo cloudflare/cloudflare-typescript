@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Settings extends APIResource {
   /**
    * Update zone-level Waiting Room settings
+   *
+   * @example
+   * ```ts
+   * const setting = await client.waitingRooms.settings.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SettingUpdateResponse> {
     const { zone_id, ...body } = params;
@@ -18,6 +25,13 @@ export class Settings extends APIResource {
 
   /**
    * Patch zone-level Waiting Room settings
+   *
+   * @example
+   * ```ts
+   * const response = await client.waitingRooms.settings.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingEditResponse> {
     const { zone_id, ...body } = params;
@@ -31,6 +45,13 @@ export class Settings extends APIResource {
 
   /**
    * Get zone-level Waiting Room settings
+   *
+   * @example
+   * ```ts
+   * const setting = await client.waitingRooms.settings.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
     const { zone_id } = params;
@@ -80,7 +101,7 @@ export interface SettingGetResponse {
 
 export interface SettingUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -95,7 +116,7 @@ export interface SettingUpdateParams {
 
 export interface SettingEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -110,7 +131,7 @@ export interface SettingEditParams {
 
 export interface SettingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

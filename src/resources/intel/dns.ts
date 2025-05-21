@@ -7,6 +7,16 @@ import { V4PagePagination, type V4PagePaginationParams } from '../../pagination'
 export class DNS extends APIResource {
   /**
    * Gets a list of all the domains that have resolved to a specific IP address.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dns of client.intel.dns.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(params: DNSListParams, options?: Core.RequestOptions): Core.PagePromise<DNSV4PagePagination, DNS> {
     const { account_id, ...query } = params;
@@ -62,7 +72,7 @@ export namespace DNS {
 
 export interface DNSListParams extends V4PagePaginationParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

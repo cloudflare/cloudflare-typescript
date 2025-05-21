@@ -9,6 +9,25 @@ import { SinglePage } from '../../../../pagination';
 export class Settings extends APIResource {
   /**
    * Updates an mTLS certificate's hostname settings.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const certificateSettings of client.zeroTrust.access.certificates.settings.update(
+   *   {
+   *     settings: [
+   *       {
+   *         china_network: false,
+   *         client_certificate_forwarding: true,
+   *         hostname: 'admin.example.com',
+   *       },
+   *     ],
+   *     account_id: 'account_id',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   update(
     params: SettingUpdateParams,
@@ -40,6 +59,16 @@ export class Settings extends APIResource {
 
   /**
    * List all mTLS hostname settings for this account or zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const certificateSettings of client.zeroTrust.access.certificates.settings.get(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   get(
     params?: SettingGetParams,
