@@ -28,7 +28,7 @@ export const tool: Tool = {
       },
       name: {
         type: 'string',
-        description: 'The domain name',
+        description: 'The domain name.',
       },
       type: {
         $ref: '#/$defs/type',
