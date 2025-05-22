@@ -20,7 +20,6 @@ export {
   type MessageBulkPushParams,
   type MessagePullParams,
   type MessagePushParams,
-  type MessagePullResponsesSinglePage,
 } from './messages';
 export { Purge, type PurgeStatusResponse, type PurgeStartParams, type PurgeStatusParams } from './purge';
 export { Queues } from './queues';
