@@ -5220,7 +5220,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -5598,7 +5598,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -8475,7 +8475,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -8853,7 +8853,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -11730,7 +11730,7 @@ export namespace ApplicationListResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -12108,7 +12108,7 @@ export namespace ApplicationListResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -14992,7 +14992,7 @@ export namespace ApplicationGetResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -15370,7 +15370,7 @@ export namespace ApplicationGetResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -18149,7 +18149,7 @@ export declare namespace ApplicationCreateParams {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -18431,7 +18431,7 @@ export declare namespace ApplicationCreateParams {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -21191,7 +21191,7 @@ export declare namespace ApplicationUpdateParams {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -21473,7 +21473,7 @@ export declare namespace ApplicationUpdateParams {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
