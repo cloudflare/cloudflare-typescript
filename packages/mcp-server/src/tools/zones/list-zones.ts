@@ -22,7 +22,7 @@ export const tool: Tool = {
         properties: {
           id: {
             type: 'string',
-            description: 'An account ID',
+            description: 'Filter by an account ID.',
           },
           name: {
             type: 'string',
@@ -62,7 +62,7 @@ export const tool: Tool = {
       },
       status: {
         type: 'string',
-        description: 'A zone status',
+        description: 'Specify a zone status to filter by.',
         enum: ['initializing', 'pending', 'active', 'moved'],
       },
     },
