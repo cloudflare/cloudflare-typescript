@@ -168,8 +168,8 @@ export const tool: Tool = {
               download: {
                 type: 'string',
                 description:
-                  'Configure whether downloading enabled or not. When absent, downloading is enabled. Only applies when `version == "v2"`.',
-                enum: ['enabled', 'disabled'],
+                  'Configure whether downloading enabled or not. When set with "remote_only", downloads are only available for viewing. Only applies when `version == "v2"`.',
+                enum: ['enabled', 'disabled', 'remote_only'],
               },
               dp: {
                 type: 'boolean',
