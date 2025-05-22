@@ -2532,7 +2532,7 @@ export const tool: Tool = {
                 protocol: {
                   type: 'string',
                   description: 'The communication protocol your application secures.',
-                  enum: ['ssh'],
+                  enum: ['SSH'],
                 },
                 target_attributes: {
                   type: 'object',
@@ -2652,7 +2652,7 @@ export const tool: Tool = {
                 protocol: {
                   type: 'string',
                   description: 'The communication protocol your application secures.',
-                  enum: ['ssh'],
+                  enum: ['SSH'],
                 },
                 target_attributes: {
                   type: 'object',
