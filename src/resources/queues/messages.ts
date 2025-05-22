@@ -3,7 +3,6 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
-import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -57,26 +56,24 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const messagePullResponse of client.queues.messages.pull(
+   * const response = await client.queues.messages.pull(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
+   * );
    * ```
    */
   pull(
     queueID: string,
     params: MessagePullParams,
     options?: RequestOptions,
-  ): PagePromise<MessagePullResponsesSinglePage, MessagePullResponse> {
+  ): APIPromise<MessagePullResponse> {
     const { account_id, ...body } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/queues/${queueID}/messages/pull`,
-      SinglePage<MessagePullResponse>,
-      { body, method: 'post', ...options },
-    );
+    return (
+      this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/pull`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: MessagePullResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -99,8 +96,6 @@ export class Messages extends APIResource {
     return this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages`, { body, ...options });
   }
 }
-
-export type MessagePullResponsesSinglePage = SinglePage<MessagePullResponse>;
 
 export interface MessageAckResponse {
   /**
@@ -128,21 +123,32 @@ export interface MessageBulkPushResponse {
 }
 
 export interface MessagePullResponse {
-  id?: string;
-
-  attempts?: number;
-
-  body?: string;
-
   /**
-   * An ID that represents an "in-flight" message that has been pulled from a Queue.
-   * You must hold on to this ID and use it to acknowledge this message.
+   * The number of unacknowledged messages in the queue
    */
-  lease_id?: string;
+  message_backlog_count?: number;
 
-  metadata?: unknown;
+  messages?: Array<MessagePullResponse.Message>;
+}
 
-  timestamp_ms?: number;
+export namespace MessagePullResponse {
+  export interface Message {
+    id?: string;
+
+    attempts?: number;
+
+    body?: string;
+
+    /**
+     * An ID that represents an "in-flight" message that has been pulled from a Queue.
+     * You must hold on to this ID and use it to acknowledge this message.
+     */
+    lease_id?: string;
+
+    metadata?: unknown;
+
+    timestamp_ms?: number;
+  }
 }
 
 export interface MessagePushResponse {
@@ -315,7 +321,6 @@ export declare namespace Messages {
     type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
     type MessagePushResponse as MessagePushResponse,
-    type MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
     type MessageAckParams as MessageAckParams,
     type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,
