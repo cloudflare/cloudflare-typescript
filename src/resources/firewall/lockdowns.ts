@@ -269,6 +269,24 @@ export interface LockdownCreateParams {
    * use simple wildcard patterns.
    */
   urls: Array<OverridesAPI.OverrideURLParam>;
+
+  /**
+   * Body param: An informative summary of the rate limit. This value is sanitized
+   * and any tags will be removed.
+   */
+  description?: string;
+
+  /**
+   * Body param: When true, indicates that the rule is currently paused.
+   */
+  paused?: boolean;
+
+  /**
+   * Body param: The priority of the rule to control the processing order. A lower
+   * number indicates higher priority. If not provided, any rules with a configured
+   * priority will be processed before rules without a priority.
+   */
+  priority?: number;
 }
 
 export interface LockdownUpdateParams {
