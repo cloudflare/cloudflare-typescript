@@ -21,6 +21,15 @@ export const tool: Tool = {
         title: 'account_id',
         description: 'Account identifier',
       },
+      target_ids: {
+        type: 'array',
+        description: 'List of target IDs to bulk delete',
+        items: {
+          type: 'string',
+          title: 'target_id',
+          description: 'Target identifier',
+        },
+      },
     },
   },
 };
