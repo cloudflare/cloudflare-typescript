@@ -31,6 +31,20 @@ export const tool: Tool = {
           $ref: '#/$defs/override_url',
         },
       },
+      description: {
+        type: 'string',
+        description:
+          'An informative summary of the rate limit. This value is sanitized and any tags will be removed.',
+      },
+      paused: {
+        type: 'boolean',
+        description: 'When true, indicates that the rule is currently paused.',
+      },
+      priority: {
+        type: 'number',
+        description:
+          'The priority of the rule to control the processing order. A lower number indicates higher priority. If not provided, any rules with a configured priority will be processed before rules without a priority.',
+      },
     },
     $defs: {
       configuration: {
