@@ -5,6 +5,7 @@ import {
   inlineRefs,
   applyCompatibilityTransformations,
   removeFormats,
+  findUsedDefs,
 } from '../src/compat';
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { JSONSchema } from '../src/compat';
@@ -313,6 +314,103 @@ describe('removeAnyOf', () => {
     };
 
     expect(removeAnyOf(schema)).toEqual(expected);
+  });
+});
+
+describe('findUsedDefs', () => {
+  it('should handle circular references without stack overflow', () => {
+    const defs = {
+      person: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          friend: { $ref: '#/$defs/person' }, // Circular reference
+        },
+      },
+    };
+
+    const schema = {
+      type: 'object',
+      properties: {
+        user: { $ref: '#/$defs/person' },
+      },
+    };
+
+    // This should not throw a stack overflow error
+    expect(() => {
+      const result = findUsedDefs(schema, defs);
+      expect(result).toHaveProperty('person');
+    }).not.toThrow();
+  });
+
+  it('should handle indirect circular references without stack overflow', () => {
+    const defs = {
+      node: {
+        type: 'object',
+        properties: {
+          value: { type: 'string' },
+          child: { $ref: '#/$defs/childNode' },
+        },
+      },
+      childNode: {
+        type: 'object',
+        properties: {
+          value: { type: 'string' },
+          parent: { $ref: '#/$defs/node' }, // Indirect circular reference
+        },
+      },
+    };
+
+    const schema = {
+      type: 'object',
+      properties: {
+        root: { $ref: '#/$defs/node' },
+      },
+    };
+
+    // This should not throw a stack overflow error
+    expect(() => {
+      const result = findUsedDefs(schema, defs);
+      expect(result).toHaveProperty('node');
+      expect(result).toHaveProperty('childNode');
+    }).not.toThrow();
+  });
+
+  it('should find all used definitions in non-circular schemas', () => {
+    const defs = {
+      user: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          address: { $ref: '#/$defs/address' },
+        },
+      },
+      address: {
+        type: 'object',
+        properties: {
+          street: { type: 'string' },
+          city: { type: 'string' },
+        },
+      },
+      unused: {
+        type: 'object',
+        properties: {
+          data: { type: 'string' },
+        },
+      },
+    };
+
+    const schema = {
+      type: 'object',
+      properties: {
+        person: { $ref: '#/$defs/user' },
+      },
+    };
+
+    const result = findUsedDefs(schema, defs);
+    expect(result).toHaveProperty('user');
+    expect(result).toHaveProperty('address');
+    expect(result).not.toHaveProperty('unused');
   });
 });
 
