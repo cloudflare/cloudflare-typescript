@@ -32,6 +32,10 @@ export const tool: Tool = {
         type: 'boolean',
         description: 'If `true`, this virtual network is the default for the account.',
       },
+      is_default_network: {
+        type: 'boolean',
+        description: 'If `true`, this virtual network is the default for the account.',
+      },
     },
   },
 };
