@@ -199,19 +199,29 @@ export interface UARuleCreateParams {
   zone_id: string;
 
   /**
-   * Body param: The rule configuration.
+   * Body param:
    */
-  configuration:
-    | AccessRulesAPI.AccessRuleIPConfigurationParam
-    | AccessRulesAPI.IPV6ConfigurationParam
-    | AccessRulesAPI.AccessRuleCIDRConfigurationParam
-    | AccessRulesAPI.ASNConfigurationParam
-    | AccessRulesAPI.CountryConfigurationParam;
+  configuration: UARuleCreateParams.Configuration;
 
   /**
    * Body param: The action to apply to a matched request.
    */
   mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+}
+
+export namespace UARuleCreateParams {
+  export interface Configuration {
+    /**
+     * The configuration target. You must set the target to `ua` when specifying a user
+     * agent in the rule.
+     */
+    target?: 'ua';
+
+    /**
+     * the user agent to exactly match
+     */
+    value?: string;
+  }
 }
 
 export interface UARuleUpdateParams {
