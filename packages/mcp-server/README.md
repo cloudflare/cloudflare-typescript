@@ -2345,6 +2345,14 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `revoke_devices_zero_trust_registrations` (`write`): Revokes a list of WARP registrations.
 - `unrevoke_devices_zero_trust_registrations` (`write`): Unrevokes a list of WARP registrations.
 
+### Resource `zero_trust.devices.dex_tests`:
+
+- `create_devices_zero_trust_dex_tests` (`write`): Create a DEX test.
+- `update_devices_zero_trust_dex_tests` (`write`): Update a DEX test.
+- `list_devices_zero_trust_dex_tests` (`read`): Fetch all DEX tests.
+- `delete_devices_zero_trust_dex_tests` (`write`): Delete a Device DEX test. Returns the remaining device dex tests for the account.
+- `get_devices_zero_trust_dex_tests` (`read`): Fetch a single DEX test.
+
 ### Resource `zero_trust.devices.networks`:
 
 - `create_devices_zero_trust_networks` (`write`): Creates a new device managed network.
@@ -2430,6 +2438,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 ### Resource `zero_trust.devices.settings`:
 
 - `update_devices_zero_trust_settings` (`write`): Updates the current device settings for a Zero Trust account.
+- `delete_devices_zero_trust_settings` (`write`): Resets the current device settings for a Zero Trust account.
 - `edit_devices_zero_trust_settings` (`write`): Patches the current device settings for a Zero Trust account.
 - `get_devices_zero_trust_settings` (`read`): Describes the current device settings for a Zero Trust account.
 
@@ -2631,6 +2640,10 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `list_access_zero_trust_policies` (`read`): Lists Access reusable policies.
 - `delete_access_zero_trust_policies` (`write`): Deletes an Access reusable policy.
 - `get_access_zero_trust_policies` (`read`): Fetches a single Access reusable policy.
+
+### Resource `zero_trust.dex.warp_change_events`:
+
+- `get_dex_zero_trust_warp_change_events` (`read`): List WARP configuration and enablement toggle change events by device.
 
 ### Resource `zero_trust.dex.commands`:
 
