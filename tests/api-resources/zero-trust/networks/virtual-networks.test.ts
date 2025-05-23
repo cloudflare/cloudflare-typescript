@@ -30,6 +30,7 @@ describe('resource virtualNetworks', () => {
       name: 'us-east-1-vpc',
       comment: 'Staging VPC for data science',
       is_default: true,
+      is_default_network: false,
     });
   });
 
@@ -97,7 +98,7 @@ describe('resource virtualNetworks', () => {
       {
         account_id: '699d98642c564d2e855e9661899b7252',
         comment: 'Staging VPC for data science',
-        is_default_network: true,
+        is_default_network: false,
         name: 'us-east-1-vpc',
       },
     );

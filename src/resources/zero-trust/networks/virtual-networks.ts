@@ -183,9 +183,14 @@ export interface VirtualNetworkCreateParams {
   comment?: string;
 
   /**
-   * Body param: If `true`, this virtual network is the default for the account.
+   * @deprecated Use the is_default_network property instead.
    */
   is_default?: boolean;
+
+  /**
+   * Body param: If `true`, this virtual network is the default for the account.
+   */
+  is_default_network?: boolean;
 }
 
 export interface VirtualNetworkListParams {
