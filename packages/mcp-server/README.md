@@ -334,13 +334,13 @@ The following tools are available in this MCP server.
 
 - `update_zones_custom_nameservers` (`write`): Set metadata for account-level custom nameservers on a zone.
 
-If you would like new zones in the account to use account custom nameservers by default, use PUT /accounts/:identifier to set the account setting use_account_custom_ns_by_default to true.
+  If you would like new zones in the account to use account custom nameservers by default, use PUT /accounts/:identifier to set the account setting use_account_custom_ns_by_default to true.
 
-Deprecated in favor of [Update DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-update-dns-settings).
+  Deprecated in favor of [Update DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-update-dns-settings).
 
 - `get_zones_custom_nameservers` (`read`): Get metadata for account-level custom nameservers on a zone.
 
-Deprecated in favor of [Show DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-list-dns-settings).
+  Deprecated in favor of [Show DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-list-dns-settings).
 
 ### Resource `zones.holds`:
 
@@ -429,55 +429,55 @@ Deprecated in favor of [Show DNS Settings](https://developers.cloudflare.com/api
 - `purge_cache` (`write`): ### Purge All Cached Content
   Removes ALL files from Cloudflare's cache. All tiers can purge everything.
 
-```
-{"purge_everything": true}
-```
+  ```
+  {"purge_everything": true}
+  ```
 
-### Purge Cached Content by URL
+  ### Purge Cached Content by URL
 
-Granularly removes one or more files from Cloudflare's cache by specifying URLs. All tiers can purge by URL.
+  Granularly removes one or more files from Cloudflare's cache by specifying URLs. All tiers can purge by URL.
 
-To purge files with custom cache keys, include the headers used to compute the cache key as in the example. If you have a device type or geo in your cache key, you will need to include the CF-Device-Type or CF-IPCountry headers. If you have lang in your cache key, you will need to include the Accept-Language header.
+  To purge files with custom cache keys, include the headers used to compute the cache key as in the example. If you have a device type or geo in your cache key, you will need to include the CF-Device-Type or CF-IPCountry headers. If you have lang in your cache key, you will need to include the Accept-Language header.
 
-**NB:** When including the Origin header, be sure to include the **scheme** and **hostname**. The port number can be omitted if it is the default port (80 for http, 443 for https), but must be included otherwise.
+  **NB:** When including the Origin header, be sure to include the **scheme** and **hostname**. The port number can be omitted if it is the default port (80 for http, 443 for https), but must be included otherwise.
 
-Single file purge example with files:
+  Single file purge example with files:
 
-```
-{"files": ["http://www.example.com/css/styles.css", "http://www.example.com/js/index.js"]}
-```
+  ```
+  {"files": ["http://www.example.com/css/styles.css", "http://www.example.com/js/index.js"]}
+  ```
 
-Single file purge example with url and header pairs:
+  Single file purge example with url and header pairs:
 
-```
-{"files": [{url: "http://www.example.com/cat_picture.jpg", headers: { "CF-IPCountry": "US", "CF-Device-Type": "desktop", "Accept-Language": "zh-CN" }}, {url: "http://www.example.com/dog_picture.jpg", headers: { "CF-IPCountry": "EU", "CF-Device-Type": "mobile", "Accept-Language": "en-US" }}]}
-```
+  ```
+  {"files": [{url: "http://www.example.com/cat_picture.jpg", headers: { "CF-IPCountry": "US", "CF-Device-Type": "desktop", "Accept-Language": "zh-CN" }}, {url: "http://www.example.com/dog_picture.jpg", headers: { "CF-IPCountry": "EU", "CF-Device-Type": "mobile", "Accept-Language": "en-US" }}]}
+  ```
 
-### Purge Cached Content by Tag, Host or Prefix
+  ### Purge Cached Content by Tag, Host or Prefix
 
-Granularly removes one or more files from Cloudflare's cache either by specifying the host, the associated Cache-Tag, or a Prefix.
+  Granularly removes one or more files from Cloudflare's cache either by specifying the host, the associated Cache-Tag, or a Prefix.
 
-Flex purge with tags:
+  Flex purge with tags:
 
-```
-{"tags": ["a-cache-tag", "another-cache-tag"]}
-```
+  ```
+  {"tags": ["a-cache-tag", "another-cache-tag"]}
+  ```
 
-Flex purge with hosts:
+  Flex purge with hosts:
 
-```
-{"hosts": ["www.example.com", "images.example.com"]}
-```
+  ```
+  {"hosts": ["www.example.com", "images.example.com"]}
+  ```
 
-Flex purge with prefixes:
+  Flex purge with prefixes:
 
-```
-{"prefixes": ["www.example.com/foo", "images.example.com/bar/baz"]}
-```
+  ```
+  {"prefixes": ["www.example.com/foo", "images.example.com/bar/baz"]}
+  ```
 
-### Availability and limits
+  ### Availability and limits
 
-please refer to [purge cache availability and limits documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/#availability-and-limits).
+  please refer to [purge cache availability and limits documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/#availability-and-limits).
 
 ### Resource `cache.cache_reserve`:
 
@@ -610,13 +610,13 @@ please refer to [purge cache availability and limits documentation page](https:/
 
 - `get_analytics_dns_firewall_reports` (`read`): Retrieves a list of summarised aggregate metrics over a given time period.
 
-See [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/) for detailed information about the available query parameters.
+  See [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/) for detailed information about the available query parameters.
 
 ### Resource `dns_firewall.analytics.reports.bytimes`:
 
 - `get_reports_analytics_dns_firewall_bytimes` (`read`): Retrieves a list of aggregate metrics grouped by time interval.
 
-See [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/) for detailed information about the available query parameters.
+  See [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/) for detailed information about the available query parameters.
 
 ### Resource `dns_firewall.reverse_dns`:
 
@@ -633,53 +633,53 @@ See [Analytics API properties](https://developers.cloudflare.com/dns/reference/a
 
 - `create_dns_records` (`write`): Create a new DNS record for a zone.
 
-Notes:
+  Notes:
 
-- A/AAAA records cannot exist on the same name as CNAME records.
-- NS records cannot exist on the same name as any other record type.
-- Domain names are always represented in Punycode, even if Unicode
-  characters were used when creating the record.
+  - A/AAAA records cannot exist on the same name as CNAME records.
+  - NS records cannot exist on the same name as any other record type.
+  - Domain names are always represented in Punycode, even if Unicode
+    characters were used when creating the record.
 
-* `update_dns_records` (`write`): Overwrite an existing DNS record.
+- `update_dns_records` (`write`): Overwrite an existing DNS record.
 
-Notes:
+  Notes:
 
-- A/AAAA records cannot exist on the same name as CNAME records.
-- NS records cannot exist on the same name as any other record type.
-- Domain names are always represented in Punycode, even if Unicode
-  characters were used when creating the record.
+  - A/AAAA records cannot exist on the same name as CNAME records.
+  - NS records cannot exist on the same name as any other record type.
+  - Domain names are always represented in Punycode, even if Unicode
+    characters were used when creating the record.
 
-* `list_dns_records` (`read`): List, search, sort, and filter a zones' DNS records.
-* `delete_dns_records` (`write`): Delete DNS Record
-* `batch_dns_records` (`write`): Send a Batch of DNS Record API calls to be executed together.
+- `list_dns_records` (`read`): List, search, sort, and filter a zones' DNS records.
+- `delete_dns_records` (`write`): Delete DNS Record
+- `batch_dns_records` (`write`): Send a Batch of DNS Record API calls to be executed together.
 
-Notes:
+  Notes:
 
-- Although Cloudflare will execute the batched operations in a single database transaction, Cloudflare's distributed KV store must treat each record change as a single key-value pair. This means that the propagation of changes is not atomic. See [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/batch-record-changes/ 'Batch DNS records') for more information.
-- The operations you specify within the /batch request body are always executed in the following order:
+  - Although Cloudflare will execute the batched operations in a single database transaction, Cloudflare's distributed KV store must treat each record change as a single key-value pair. This means that the propagation of changes is not atomic. See [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/batch-record-changes/ 'Batch DNS records') for more information.
+  - The operations you specify within the /batch request body are always executed in the following order:
 
-  - Deletes
-  - Patches
-  - Puts
-  - Posts
+    - Deletes
+    - Patches
+    - Puts
+    - Posts
 
-* `edit_dns_records` (`write`): Update an existing DNS record.
+- `edit_dns_records` (`write`): Update an existing DNS record.
 
-Notes:
+  Notes:
 
-- A/AAAA records cannot exist on the same name as CNAME records.
-- NS records cannot exist on the same name as any other record type.
-- Domain names are always represented in Punycode, even if Unicode
-  characters were used when creating the record.
+  - A/AAAA records cannot exist on the same name as CNAME records.
+  - NS records cannot exist on the same name as any other record type.
+  - Domain names are always represented in Punycode, even if Unicode
+    characters were used when creating the record.
 
-* `export_dns_records` (`read`): You can export your [BIND config](https://en.wikipedia.org/wiki/Zone_file 'Zone file') through this endpoint.
+- `export_dns_records` (`read`): You can export your [BIND config](https://en.wikipedia.org/wiki/Zone_file 'Zone file') through this endpoint.
 
-See [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ 'Import and export records') for more information.
+  See [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ 'Import and export records') for more information.
 
 - `get_dns_records` (`read`): DNS Record Details
 - `import_dns_records` (`write`): You can upload your [BIND config](https://en.wikipedia.org/wiki/Zone_file 'Zone file') through this endpoint. It assumes that cURL is called from a location with bind_config.txt (valid BIND config) present.
 
-See [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ 'Import and export records') for more information.
+  See [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ 'Import and export records') for more information.
 
 - `scan_dns_records` (`write`): Scan for common DNS records on your domain and automatically add them to your zone. Useful if you haven't updated your nameservers yet.
 
@@ -705,13 +705,13 @@ See [the documentation](https://developers.cloudflare.com/dns/manage-dns-records
 
 - `get_analytics_dns_reports` (`read`): Retrieves a list of summarised aggregate metrics over a given time period.
 
-See [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/) for detailed information about the available query parameters.
+  See [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/) for detailed information about the available query parameters.
 
 ### Resource `dns.analytics.reports.bytimes`:
 
 - `get_reports_analytics_dns_bytimes` (`read`): Retrieves a list of aggregate metrics grouped by time interval.
 
-See [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/) for detailed information about the available query parameters.
+  See [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/) for detailed information about the available query parameters.
 
 ### Resource `dns.zone_transfers.force_axfr`:
 
@@ -908,16 +908,16 @@ See [Analytics API properties](https://developers.cloudflare.com/dns/reference/a
 
 - `create_firewall_access_rules` (`write`): Creates a new IP Access rule for an account or zone. The rule will apply to all zones in the account or zone.
 
-Note: To create an IP Access rule that applies to a single zone, refer to the [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.
+  Note: To create an IP Access rule that applies to a single zone, refer to the [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.
 
 - `list_firewall_access_rules` (`read`): Fetches IP Access rules of an account or zone. These rules apply to all the zones in the account or zone. You can filter the results using several optional parameters.
 - `delete_firewall_access_rules` (`write`): Deletes an existing IP Access rule defined.
 
-Note: This operation will affect all zones in the account or zone.
+  Note: This operation will affect all zones in the account or zone.
 
 - `edit_firewall_access_rules` (`write`): Updates an IP Access rule defined.
 
-Note: This operation will affect all zones in the account or zone.
+  Note: This operation will affect all zones in the account or zone.
 
 - `get_firewall_access_rules` (`read`): Fetches the details of an IP Access rule defined.
 
@@ -933,61 +933,61 @@ Note: This operation will affect all zones in the account or zone.
 
 - `create_waf_firewall_overrides` (`write`): Creates a URI-based WAF override for a zone.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `update_waf_firewall_overrides` (`write`): Updates an existing URI-based WAF override.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `list_waf_firewall_overrides` (`read`): Fetches the URI-based WAF overrides in a zone.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `delete_waf_firewall_overrides` (`write`): Deletes an existing URI-based WAF override.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `get_waf_firewall_overrides` (`read`): Fetches the details of a URI-based WAF override.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 ### Resource `firewall.waf.packages`:
 
 - `list_waf_firewall_packages` (`read`): Fetches WAF packages for a zone.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `get_waf_firewall_packages` (`read`): Fetches the details of a WAF package.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 ### Resource `firewall.waf.packages.groups`:
 
 - `list_packages_waf_firewall_groups` (`read`): Fetches the WAF rule groups in a WAF package.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `edit_packages_waf_firewall_groups` (`write`): Updates a WAF rule group. You can update the state (`mode` parameter) of a rule group.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `get_packages_waf_firewall_groups` (`read`): Fetches the details of a WAF rule group.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 ### Resource `firewall.waf.packages.rules`:
 
 - `list_packages_waf_firewall_rules` (`read`): Fetches WAF rules in a WAF package.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `edit_packages_waf_firewall_rules` (`write`): Updates a WAF rule. You can only update the mode/action of the rule.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 - `get_packages_waf_firewall_rules` (`read`): Fetches the details of a WAF rule in a WAF package.
 
-**Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+  **Note:** Applies only to the [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
 
 ### Resource `healthchecks`:
 
@@ -1121,22 +1121,22 @@ Note: This operation will affect all zones in the account or zone.
 
 - `preview_waiting_rooms_page` (`write`): Creates a waiting room page preview. Upload a custom waiting room page for preview. You will receive a preview URL in the form `http://waitingrooms.dev/preview/<uuid>`. You can use the following query parameters to change the state of the preview:
 
-1. `force_queue`: Boolean indicating if all users will be queued in the waiting room and no one will be let into the origin website (also known as queueAll).
-2. `queue_is_full`: Boolean indicating if the waiting room's queue is currently full and not accepting new users at the moment.
-3. `queueing_method`: The queueing method currently used by the waiting room.
-   - **fifo** indicates a FIFO queue.
-   - **random** indicates a Random queue.
-   - **passthrough** indicates a Passthrough queue. Keep in mind that the waiting room page will only be displayed if `force_queue=true` or `event=prequeueing` — for other cases the request will pass through to the origin. For our preview, this will be a fake origin website returning \"Welcome\".
-   - **reject** indicates a Reject queue.
-4. `event`: Used to preview a waiting room event.
-   - **none** indicates no event is occurring.
-   - **prequeueing** indicates that an event is prequeueing (between `prequeue_start_time` and `event_start_time`).
-   - **started** indicates that an event has started (between `event_start_time` and `event_end_time`).
-5. `shuffle_at_event_start`: Boolean indicating if the event will shuffle users in the prequeue when it starts. This can only be set to **true** if an event is active (`event` is not **none**).
+  1. `force_queue`: Boolean indicating if all users will be queued in the waiting room and no one will be let into the origin website (also known as queueAll).
+  2. `queue_is_full`: Boolean indicating if the waiting room's queue is currently full and not accepting new users at the moment.
+  3. `queueing_method`: The queueing method currently used by the waiting room.
+     - **fifo** indicates a FIFO queue.
+     - **random** indicates a Random queue.
+     - **passthrough** indicates a Passthrough queue. Keep in mind that the waiting room page will only be displayed if `force_queue=true` or `event=prequeueing` — for other cases the request will pass through to the origin. For our preview, this will be a fake origin website returning \"Welcome\".
+     - **reject** indicates a Reject queue.
+  4. `event`: Used to preview a waiting room event.
+     - **none** indicates no event is occurring.
+     - **prequeueing** indicates that an event is prequeueing (between `prequeue_start_time` and `event_start_time`).
+     - **started** indicates that an event has started (between `event_start_time` and `event_end_time`).
+  5. `shuffle_at_event_start`: Boolean indicating if the event will shuffle users in the prequeue when it starts. This can only be set to **true** if an event is active (`event` is not **none**).
 
-For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?force_queue=false&queue_is_full=false&queueing_method=random&event=started&shuffle_at_event_start=true` 6. `waitTime`: Non-zero, positive integer indicating the estimated wait time in minutes. The default value is 10 minutes.
+  For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?force_queue=false&queue_is_full=false&queueing_method=random&event=started&shuffle_at_event_start=true` 6. `waitTime`: Non-zero, positive integer indicating the estimated wait time in minutes. The default value is 10 minutes.
 
-For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?waitTime=50` to configure the estimated wait time as 50 minutes.
+  For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?waitTime=50` to configure the estimated wait time as 50 minutes.
 
 ### Resource `waiting_rooms.events`:
 
@@ -1162,16 +1162,15 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 ### Resource `waiting_rooms.statuses`:
 
 - `get_waiting_rooms_statuses` (`read`): Fetches the status of a configured waiting room. Response fields include:
-
-1. `status`: String indicating the status of the waiting room. The possible status are:
-   - **not_queueing** indicates that the configured thresholds have not been met and all users are going through to the origin.
-   - **queueing** indicates that the thresholds have been met and some users are held in the waiting room.
-   - **event_prequeueing** indicates that an event is active and is currently prequeueing users before it starts.
-   - **suspended** indicates that the room is suspended.
-2. `event_id`: String of the current event's `id` if an event is active, otherwise an empty string.
-3. `estimated_queued_users`: Integer of the estimated number of users currently waiting in the queue.
-4. `estimated_total_active_users`: Integer of the estimated number of users currently active on the origin.
-5. `max_estimated_time_minutes`: Integer of the maximum estimated time currently presented to the users.
+  1. `status`: String indicating the status of the waiting room. The possible status are:
+     - **not_queueing** indicates that the configured thresholds have not been met and all users are going through to the origin.
+     - **queueing** indicates that the thresholds have been met and some users are held in the waiting room.
+     - **event_prequeueing** indicates that an event is active and is currently prequeueing users before it starts.
+     - **suspended** indicates that the room is suspended.
+  2. `event_id`: String of the current event's `id` if an event is active, otherwise an empty string.
+  3. `estimated_queued_users`: Integer of the estimated number of users currently waiting in the queue.
+  4. `estimated_total_active_users`: Integer of the estimated number of users currently active on the origin.
+  5. `max_estimated_time_minutes`: Integer of the maximum estimated time currently presented to the users.
 
 ### Resource `waiting_rooms.settings`:
 
@@ -1579,13 +1578,13 @@ For example, you can make a request to `http://waitingrooms.dev/preview/<uuid>?w
 
 - `edit_prefixes_addressing_advertisement_status` (`write`): Advertise or withdraw the BGP route for a prefix.
 
-**Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for advertising and withdrawing
-subnets of an IP prefix.
+  **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for advertising and withdrawing
+  subnets of an IP prefix.
 
 - `get_prefixes_addressing_advertisement_status` (`read`): View the current advertisement state for a prefix.
 
-**Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for advertising and withdrawing
-subnets of an IP prefix.
+  **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for advertising and withdrawing
+  subnets of an IP prefix.
 
 ### Resource `addressing.prefixes.delegations`:
 
@@ -2022,22 +2021,22 @@ subnets of an IP prefix.
 
 - `get_lists_rules_bulk_operations` (`read`): Gets the current status of an asynchronous operation on a list.
 
-The `status` property can have one of the following values: `pending`, `running`, `completed`, or `failed`. If the status is `failed`, the `error` property will contain a message describing the error.
+  The `status` property can have one of the following values: `pending`, `running`, `completed`, or `failed`. If the status is `failed`, the `error` property will contain a message describing the error.
 
 ### Resource `rules.lists.items`:
 
 - `create_lists_rules_items` (`write`): Appends new items to the list.
 
-This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+  This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
 
 - `update_lists_rules_items` (`write`): Removes all existing items from the list and adds the provided items to the list.
 
-This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+  This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
 
 - `list_lists_rules_items` (`read`): Fetches all the items in the list.
 - `delete_lists_rules_items` (`write`): Removes one or more items from a list.
 
-This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+  This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
 
 - `get_lists_rules_items` (`read`): Fetches a list item in the list.
 
@@ -2312,17 +2311,17 @@ This operation is asynchronous. To get current the operation status, invoke the 
 
 - `list_zero_trust_devices` (`read`): List WARP registrations.
 
-**Deprecated**: please use one of the following endpoints instead:
+  **Deprecated**: please use one of the following endpoints instead:
 
-- GET /accounts/{account_id}/devices/physical-devices
-- GET /accounts/{account_id}/devices/registrations
+  - GET /accounts/{account_id}/devices/physical-devices
+  - GET /accounts/{account_id}/devices/registrations
 
-* `get_zero_trust_devices` (`read`): Fetches a single WARP registration.
+- `get_zero_trust_devices` (`read`): Fetches a single WARP registration.
 
-**Deprecated**: please use one of the following endpoints instead:
+  **Deprecated**: please use one of the following endpoints instead:
 
-- GET /accounts/{account_id}/devices/physical-devices/{device_id}
-- GET /accounts/{account_id}/devices/registrations/{registration_id}
+  - GET /accounts/{account_id}/devices/physical-devices/{device_id}
+  - GET /accounts/{account_id}/devices/registrations/{registration_id}
 
 ### Resource `zero_trust.devices.devices`:
 
@@ -2433,7 +2432,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 
 - `create_devices_zero_trust_revoke` (`write`): Revokes a list of registrations.
 
-**Deprecated**: please use POST /accounts/{account_id}/devices/registrations/revoke instead.
+  **Deprecated**: please use POST /accounts/{account_id}/devices/registrations/revoke instead.
 
 ### Resource `zero_trust.devices.settings`:
 
@@ -2446,13 +2445,13 @@ This operation is asynchronous. To get current the operation status, invoke the 
 
 - `create_devices_zero_trust_unrevoke` (`write`): Unrevokes a list of registrations.
 
-**Deprecated**: please use POST /accounts/{account_id}/devices/registrations/unrevoke instead.
+  **Deprecated**: please use POST /accounts/{account_id}/devices/registrations/unrevoke instead.
 
 ### Resource `zero_trust.devices.override_codes`:
 
 - `list_devices_zero_trust_override_codes` (`read`): Fetches a one-time use admin override code for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.
 
-**Deprecated:** please use GET /accounts/{account_id}/devices/registrations/{registration_id}/override_codes instead.
+  **Deprecated:** please use GET /accounts/{account_id}/devices/registrations/{registration_id}/override_codes instead.
 
 - `get_devices_zero_trust_override_codes` (`read`): Fetches one-time use admin override codes for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.
 
@@ -2906,7 +2905,7 @@ This operation is asynchronous. To get current the operation status, invoke the 
 - `get_gateway_zero_trust_rules` (`read`): Fetches a single Zero Trust Gateway rule.
 - `reset_expiration_gateway_zero_trust_rules` (`write`): Resets the expiration of a Zero Trust Gateway Rule if its duration has elapsed and it has a default duration.
 
-The Zero Trust Gateway Rule must have values for both `expiration.expires_at` and `expiration.duration`.
+  The Zero Trust Gateway Rule must have values for both `expiration.expires_at` and `expiration.duration`.
 
 ### Resource `zero_trust.gateway.certificates`:
 
@@ -2987,7 +2986,7 @@ The Zero Trust Gateway Rule must have values for both `expiration.expires_at` an
 - `rotate_secret_turnstile_widgets` (`write`): Generate a new secret key for this widget. If `invalidate_immediately`
   is set to `false`, the previous secret remains valid for 2 hours.
 
-Note that secrets cannot be rotated again during the grace period.
+  Note that secrets cannot be rotated again during the grace period.
 
 ### Resource `hyperdrive.configs`:
 
@@ -3518,61 +3517,61 @@ Note that secrets cannot be rotated again during the grace period.
 
 - `update_bot_management` (`write`): Updates the Bot Management configuration for a zone.
 
-This API is used to update:
+  This API is used to update:
 
-- **Bot Fight Mode**
-- **Super Bot Fight Mode**
-- **Bot Management for Enterprise**
+  - **Bot Fight Mode**
+  - **Super Bot Fight Mode**
+  - **Bot Management for Enterprise**
 
-See [Bot Plans](https://developers.cloudflare.com/bots/plans/) for more information on the different plans
-\
-If you recently upgraded or downgraded your plan, refer to the following examples to clean up old configurations.
-Copy and paste the example body to remove old zone configurations based on your current plan.
+  See [Bot Plans](https://developers.cloudflare.com/bots/plans/) for more information on the different plans
+  \
+  If you recently upgraded or downgraded your plan, refer to the following examples to clean up old configurations.
+  Copy and paste the example body to remove old zone configurations based on your current plan.
 
-#### Clean up configuration for Bot Fight Mode plan
+  #### Clean up configuration for Bot Fight Mode plan
 
-```json
-{
-  "sbfm_likely_automated": "allow",
-  "sbfm_definitely_automated": "allow",
-  "sbfm_verified_bots": "allow",
-  "sbfm_static_resource_protection": false,
-  "optimize_wordpress": false,
-  "suppress_session_score": false
-}
-```
+  ```json
+  {
+    "sbfm_likely_automated": "allow",
+    "sbfm_definitely_automated": "allow",
+    "sbfm_verified_bots": "allow",
+    "sbfm_static_resource_protection": false,
+    "optimize_wordpress": false,
+    "suppress_session_score": false
+  }
+  ```
 
-#### Clean up configuration for SBFM Pro plan
+  #### Clean up configuration for SBFM Pro plan
 
-```json
-{
-  "sbfm_likely_automated": "allow",
-  "fight_mode": false
-}
-```
+  ```json
+  {
+    "sbfm_likely_automated": "allow",
+    "fight_mode": false
+  }
+  ```
 
-#### Clean up configuration for SBFM Biz plan
+  #### Clean up configuration for SBFM Biz plan
 
-```json
-{
-  "fight_mode": false
-}
-```
+  ```json
+  {
+    "fight_mode": false
+  }
+  ```
 
-#### Clean up configuration for BM Enterprise Subscription plan
+  #### Clean up configuration for BM Enterprise Subscription plan
 
-It is strongly recommended that you ensure you have [custom rules](https://developers.cloudflare.com/waf/custom-rules/) in place to protect your zone before disabling the SBFM rules. Without these protections, your zone is vulnerable to attacks.
+  It is strongly recommended that you ensure you have [custom rules](https://developers.cloudflare.com/waf/custom-rules/) in place to protect your zone before disabling the SBFM rules. Without these protections, your zone is vulnerable to attacks.
 
-```json
-{
-  "sbfm_likely_automated": "allow",
-  "sbfm_definitely_automated": "allow",
-  "sbfm_verified_bots": "allow",
-  "sbfm_static_resource_protection": false,
-  "optimize_wordpress": false,
-  "fight_mode": false
-}
-```
+  ```json
+  {
+    "sbfm_likely_automated": "allow",
+    "sbfm_definitely_automated": "allow",
+    "sbfm_verified_bots": "allow",
+    "sbfm_static_resource_protection": false,
+    "optimize_wordpress": false,
+    "fight_mode": false
+  }
+  ```
 
 - `get_bot_management` (`read`): Retrieve a zone's Bot Management Config
 
@@ -3954,10 +3953,10 @@ It is strongly recommended that you ensure you have [custom rules](https://devel
 
 - `run_ai` (`write`): This endpoint provides users with the capability to run specific AI models on-demand.
 
-By submitting the required input data, users can receive real-time predictions or results generated by the chosen AI
-model. The endpoint supports various AI model types, ensuring flexibility and adaptability for diverse use cases.
+  By submitting the required input data, users can receive real-time predictions or results generated by the chosen AI
+  model. The endpoint supports various AI model types, ensuring flexibility and adaptability for diverse use cases.
 
-Model specific inputs available in [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
+  Model specific inputs available in [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
 
 ### Resource `ai.finetunes`:
 
