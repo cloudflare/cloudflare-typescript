@@ -28,8 +28,7 @@ export const tool: Tool = {
               'The primary hostname and path secured by Access. This domain will be displayed if the app is visible in the App Launcher.',
           },
           type: {
-            type: 'string',
-            description: 'The application type.',
+            $ref: '#/$defs/application_type',
           },
           account_id: {
             type: 'string',
@@ -683,831 +682,870 @@ export const tool: Tool = {
             },
           },
           type: {
-            type: 'string',
-            description: 'The application type.',
-          },
-        },
-      },
-      {
-        type: 'object',
-        properties: {
-          app_id: {
-            $ref: '#/$defs/app_id',
-          },
-          domain: {
-            type: 'string',
-            description:
-              'The primary hostname and path secured by Access. This domain will be displayed if the app is visible in the App Launcher.',
-          },
-          type: {
-            type: 'string',
-            description: 'The application type.',
-          },
-          account_id: {
-            type: 'string',
-            description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
-          },
-          zone_id: {
-            type: 'string',
-            description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
-          },
-          allow_authenticate_via_warp: {
-            type: 'boolean',
-            description:
-              'When set to true, users can authenticate to this application using their WARP session.  When set to false this application will always require direct IdP authentication. This setting always overrides the organization setting for WARP authentication.',
-          },
-          allow_iframe: {
-            type: 'boolean',
-            description: 'Enables loading application content in an iFrame.',
-          },
-          allowed_idps: {
-            type: 'array',
-            description:
-              'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
-            items: {
-              $ref: '#/$defs/allowed_idps',
-            },
-          },
-          app_launcher_visible: {
-            type: 'boolean',
-            description: 'Displays the application in the App Launcher.',
-          },
-          auto_redirect_to_identity: {
-            type: 'boolean',
-            description:
-              'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
-          },
-          cors_headers: {
-            $ref: '#/$defs/cors_headers',
-          },
-          custom_deny_message: {
-            type: 'string',
-            description:
-              'The custom error message shown to a user when they are denied access to the application.',
-          },
-          custom_deny_url: {
-            type: 'string',
-            description:
-              'The custom URL a user is redirected to when they are denied access to the application when failing identity-based rules.',
-          },
-          custom_non_identity_deny_url: {
-            type: 'string',
-            description:
-              'The custom URL a user is redirected to when they are denied access to the application when failing non-identity rules.',
-          },
-          custom_pages: {
-            type: 'array',
-            description: 'The custom pages that will be displayed when applicable for this application',
-            items: {
-              type: 'string',
-              description: 'The custom pages selected for application.',
-            },
-          },
-          destinations: {
-            type: 'array',
-            description:
-              'List of destinations secured by Access. This supersedes `self_hosted_domains` to allow for more flexibility in defining different types of domains. If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
-            items: {
-              anyOf: [
-                {
-                  type: 'object',
-                  title: 'Public destination',
-                  description:
-                    "A public hostname that Access will secure. Public destinations support sub-domain and path. Wildcard '*' can be used in the definition.\n",
-                  properties: {
-                    type: {
-                      type: 'string',
-                      enum: ['public'],
-                    },
-                    uri: {
-                      type: 'string',
-                      description:
-                        "The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).\n",
-                    },
-                  },
-                  required: [],
-                },
-                {
-                  type: 'object',
-                  title: 'Private destination',
-                  description:
-                    'Private destinations are an early access feature and gated behind a feature flag.',
-                  properties: {
-                    cidr: {
-                      type: 'string',
-                      description: 'The CIDR range of the destination. Single IPs will be computed as /32.',
-                    },
-                    hostname: {
-                      type: 'string',
-                      description:
-                        'The hostname of the destination. Matches a valid SNI served by an HTTPS origin.',
-                    },
-                    l4_protocol: {
-                      type: 'string',
-                      description:
-                        'The L4 protocol of the destination. When omitted, both UDP and TCP traffic will match.',
-                      enum: ['tcp', 'udp'],
-                    },
-                    port_range: {
-                      type: 'string',
-                      description:
-                        'The port range of the destination. Can be a single port or a range of ports. When omitted, all ports will match.\n',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['private'],
-                    },
-                    vnet_id: {
-                      type: 'string',
-                      description:
-                        'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                  required: [],
-                },
-              ],
-              description:
-                "A public hostname that Access will secure. Public destinations support sub-domain and path. Wildcard '*' can be used in the definition.\n",
-            },
-          },
-          enable_binding_cookie: {
-            type: 'boolean',
-            description:
-              'Enables the binding cookie, which increases security against compromised authorization tokens and CSRF attacks.',
-          },
-          http_only_cookie_attribute: {
-            type: 'boolean',
-            description:
-              'Enables the HttpOnly cookie attribute, which increases security against XSS attacks.',
-          },
-          logo_url: {
-            type: 'string',
-            description: 'The image URL for the logo shown in the App Launcher dashboard.',
-          },
-          name: {
-            type: 'string',
-            description: 'The name of the application.',
-          },
-          options_preflight_bypass: {
-            type: 'boolean',
-            description:
-              'Allows options preflight requests to bypass Access authentication and go directly to the origin. Cannot turn on if cors_headers is set.',
-          },
-          path_cookie_attribute: {
-            type: 'boolean',
-            description:
-              "Enables cookie paths to scope an application's JWT to the application path. If disabled, the JWT will scope to the hostname by default",
-          },
-          policies: {
-            type: 'array',
-            description:
-              'The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.',
-            items: {
-              anyOf: [
-                {
-                  type: 'object',
-                  description: 'A JSON that links a reusable policy to an application.',
-                  properties: {
-                    id: {
-                      type: 'string',
-                      description: 'The UUID of the policy',
-                    },
-                    precedence: {
-                      type: 'integer',
-                      description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
-                    },
-                  },
-                  required: [],
-                },
-                {
-                  type: 'string',
-                  description: 'The UUID of the policy',
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    id: {
-                      type: 'string',
-                      description: 'The UUID of the policy',
-                    },
-                    approval_groups: {
-                      type: 'array',
-                      description: 'Administrators who can approve a temporary authentication request.',
-                      items: {
-                        $ref: '#/$defs/approval_group',
-                      },
-                    },
-                    approval_required: {
-                      type: 'boolean',
-                      description:
-                        'Requires the user to request access from an administrator at the start of each session.',
-                    },
-                    isolation_required: {
-                      type: 'boolean',
-                      description:
-                        "Require this application to be served in an isolated browser for users matching this policy. 'Client Web Isolation' must be on for the account in order to use this feature.",
-                    },
-                    precedence: {
-                      type: 'integer',
-                      description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
-                    },
-                    purpose_justification_prompt: {
-                      type: 'string',
-                      description: 'A custom message that will appear on the purpose justification screen.',
-                    },
-                    purpose_justification_required: {
-                      type: 'boolean',
-                      description:
-                        'Require users to enter a justification when they log in to the application.',
-                    },
-                    session_duration: {
-                      type: 'string',
-                      description:
-                        'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
-                    },
-                  },
-                  required: [],
-                },
-              ],
-              description: 'A JSON that links a reusable policy to an application.',
-            },
-          },
-          read_service_tokens_from_header: {
-            type: 'string',
-            description:
-              'Allows matching Access Service Tokens passed HTTP in a single header with this name.\nThis works as an alternative to the (CF-Access-Client-Id, CF-Access-Client-Secret) pair of headers.\nThe header value will be interpreted as a json object similar to: \n  {\n    "cf-access-client-id": "88bf3b6d86161464f6509f7219099e57.access.example.com",\n    "cf-access-client-secret": "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5"\n  }\n',
-          },
-          same_site_cookie_attribute: {
-            type: 'string',
-            description:
-              'Sets the SameSite cookie setting, which provides increased security against CSRF attacks.',
-          },
-          scim_config: {
-            type: 'object',
-            description:
-              'Configuration for provisioning to this application via SCIM. This is currently in closed beta.',
-            properties: {
-              idp_uid: {
-                type: 'string',
-                description:
-                  'The UID of the IdP to use as the source for SCIM resources to provision to this application.',
-              },
-              remote_uri: {
-                type: 'string',
-                description: "The base URI for the application's SCIM-compatible API.",
-              },
-              authentication: {
-                anyOf: [
-                  {
-                    $ref: '#/$defs/scim_config_authentication_http_basic',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth2',
-                  },
-                  {
-                    type: 'object',
-                    title: 'Access Service Token',
-                    description:
-                      'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      client_id: {
-                        type: 'string',
-                        description:
-                          'Client ID of the Access service token used to authenticate with the remote service.',
-                      },
-                      client_secret: {
-                        type: 'string',
-                        description:
-                          'Client secret of the Access service token used to authenticate with the remote service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['access_service_token'],
-                      },
-                    },
-                    required: ['client_id', 'client_secret', 'scheme'],
-                  },
-                  {
-                    type: 'array',
-                    description: 'Multiple authentication schemes',
-                    items: {
-                      anyOf: [
-                        {
-                          $ref: '#/$defs/scim_config_authentication_http_basic',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth2',
-                        },
-                        {
-                          type: 'object',
-                          title: 'Access Service Token',
-                          description:
-                            'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                          properties: {
-                            client_id: {
-                              type: 'string',
-                              description:
-                                'Client ID of the Access service token used to authenticate with the remote service.',
-                            },
-                            client_secret: {
-                              type: 'string',
-                              description:
-                                'Client secret of the Access service token used to authenticate with the remote service.',
-                            },
-                            scheme: {
-                              type: 'string',
-                              description:
-                                'The authentication scheme to use when making SCIM requests to this application.',
-                              enum: ['access_service_token'],
-                            },
-                          },
-                          required: ['client_id', 'client_secret', 'scheme'],
-                        },
-                      ],
-                      description:
-                        'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-                    },
-                  },
-                ],
-                description:
-                  'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-              },
-              deactivate_on_delete: {
-                type: 'boolean',
-                description:
-                  "If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.",
-              },
-              enabled: {
-                type: 'boolean',
-                description: 'Whether SCIM provisioning is turned on for this application.',
-              },
-              mappings: {
-                type: 'array',
-                description:
-                  'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
-                items: {
-                  $ref: '#/$defs/scim_config_mapping',
-                },
-              },
-            },
-            required: ['idp_uid', 'remote_uri'],
-          },
-          self_hosted_domains: {
-            type: 'array',
-            description:
-              'List of public domains that Access will secure. This field is deprecated in favor of `destinations` and will be supported until **November 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
-            items: {
-              $ref: '#/$defs/self_hosted_domains',
-            },
-          },
-          service_auth_401_redirect: {
-            type: 'boolean',
-            description: 'Returns a 401 status code when the request is blocked by a Service Auth policy.',
-          },
-          session_duration: {
-            type: 'string',
-            description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
-          },
-          skip_interstitial: {
-            type: 'boolean',
-            description: 'Enables automatic authentication through cloudflared.',
-          },
-          tags: {
-            type: 'array',
-            description:
-              'The tags you want assigned to an application. Tags are used to filter applications in the App Launcher dashboard.',
-            items: {
-              type: 'string',
-              description: 'The tag associated with an application.',
-            },
-          },
-        },
-      },
-      {
-        type: 'object',
-        properties: {
-          app_id: {
-            $ref: '#/$defs/app_id',
-          },
-          domain: {
-            type: 'string',
-            description:
-              'The primary hostname and path secured by Access. This domain will be displayed if the app is visible in the App Launcher.',
-          },
-          type: {
-            type: 'string',
-            description: 'The application type.',
-          },
-          account_id: {
-            type: 'string',
-            description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
-          },
-          zone_id: {
-            type: 'string',
-            description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
-          },
-          allow_authenticate_via_warp: {
-            type: 'boolean',
-            description:
-              'When set to true, users can authenticate to this application using their WARP session.  When set to false this application will always require direct IdP authentication. This setting always overrides the organization setting for WARP authentication.',
-          },
-          allow_iframe: {
-            type: 'boolean',
-            description: 'Enables loading application content in an iFrame.',
-          },
-          allowed_idps: {
-            type: 'array',
-            description:
-              'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
-            items: {
-              $ref: '#/$defs/allowed_idps',
-            },
-          },
-          app_launcher_visible: {
-            type: 'boolean',
-            description: 'Displays the application in the App Launcher.',
-          },
-          auto_redirect_to_identity: {
-            type: 'boolean',
-            description:
-              'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
-          },
-          cors_headers: {
-            $ref: '#/$defs/cors_headers',
-          },
-          custom_deny_message: {
-            type: 'string',
-            description:
-              'The custom error message shown to a user when they are denied access to the application.',
-          },
-          custom_deny_url: {
-            type: 'string',
-            description:
-              'The custom URL a user is redirected to when they are denied access to the application when failing identity-based rules.',
-          },
-          custom_non_identity_deny_url: {
-            type: 'string',
-            description:
-              'The custom URL a user is redirected to when they are denied access to the application when failing non-identity rules.',
-          },
-          custom_pages: {
-            type: 'array',
-            description: 'The custom pages that will be displayed when applicable for this application',
-            items: {
-              type: 'string',
-              description: 'The custom pages selected for application.',
-            },
-          },
-          destinations: {
-            type: 'array',
-            description:
-              'List of destinations secured by Access. This supersedes `self_hosted_domains` to allow for more flexibility in defining different types of domains. If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
-            items: {
-              anyOf: [
-                {
-                  type: 'object',
-                  title: 'Public destination',
-                  description:
-                    "A public hostname that Access will secure. Public destinations support sub-domain and path. Wildcard '*' can be used in the definition.\n",
-                  properties: {
-                    type: {
-                      type: 'string',
-                      enum: ['public'],
-                    },
-                    uri: {
-                      type: 'string',
-                      description:
-                        "The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).\n",
-                    },
-                  },
-                  required: [],
-                },
-                {
-                  type: 'object',
-                  title: 'Private destination',
-                  description:
-                    'Private destinations are an early access feature and gated behind a feature flag.',
-                  properties: {
-                    cidr: {
-                      type: 'string',
-                      description: 'The CIDR range of the destination. Single IPs will be computed as /32.',
-                    },
-                    hostname: {
-                      type: 'string',
-                      description:
-                        'The hostname of the destination. Matches a valid SNI served by an HTTPS origin.',
-                    },
-                    l4_protocol: {
-                      type: 'string',
-                      description:
-                        'The L4 protocol of the destination. When omitted, both UDP and TCP traffic will match.',
-                      enum: ['tcp', 'udp'],
-                    },
-                    port_range: {
-                      type: 'string',
-                      description:
-                        'The port range of the destination. Can be a single port or a range of ports. When omitted, all ports will match.\n',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['private'],
-                    },
-                    vnet_id: {
-                      type: 'string',
-                      description:
-                        'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                  required: [],
-                },
-              ],
-              description:
-                "A public hostname that Access will secure. Public destinations support sub-domain and path. Wildcard '*' can be used in the definition.\n",
-            },
-          },
-          enable_binding_cookie: {
-            type: 'boolean',
-            description:
-              'Enables the binding cookie, which increases security against compromised authorization tokens and CSRF attacks.',
-          },
-          http_only_cookie_attribute: {
-            type: 'boolean',
-            description:
-              'Enables the HttpOnly cookie attribute, which increases security against XSS attacks.',
-          },
-          logo_url: {
-            type: 'string',
-            description: 'The image URL for the logo shown in the App Launcher dashboard.',
-          },
-          name: {
-            type: 'string',
-            description: 'The name of the application.',
-          },
-          options_preflight_bypass: {
-            type: 'boolean',
-            description:
-              'Allows options preflight requests to bypass Access authentication and go directly to the origin. Cannot turn on if cors_headers is set.',
-          },
-          path_cookie_attribute: {
-            type: 'boolean',
-            description:
-              "Enables cookie paths to scope an application's JWT to the application path. If disabled, the JWT will scope to the hostname by default",
-          },
-          policies: {
-            type: 'array',
-            description:
-              'The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.',
-            items: {
-              anyOf: [
-                {
-                  type: 'object',
-                  description: 'A JSON that links a reusable policy to an application.',
-                  properties: {
-                    id: {
-                      type: 'string',
-                      description: 'The UUID of the policy',
-                    },
-                    precedence: {
-                      type: 'integer',
-                      description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
-                    },
-                  },
-                  required: [],
-                },
-                {
-                  type: 'string',
-                  description: 'The UUID of the policy',
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    id: {
-                      type: 'string',
-                      description: 'The UUID of the policy',
-                    },
-                    approval_groups: {
-                      type: 'array',
-                      description: 'Administrators who can approve a temporary authentication request.',
-                      items: {
-                        $ref: '#/$defs/approval_group',
-                      },
-                    },
-                    approval_required: {
-                      type: 'boolean',
-                      description:
-                        'Requires the user to request access from an administrator at the start of each session.',
-                    },
-                    isolation_required: {
-                      type: 'boolean',
-                      description:
-                        "Require this application to be served in an isolated browser for users matching this policy. 'Client Web Isolation' must be on for the account in order to use this feature.",
-                    },
-                    precedence: {
-                      type: 'integer',
-                      description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
-                    },
-                    purpose_justification_prompt: {
-                      type: 'string',
-                      description: 'A custom message that will appear on the purpose justification screen.',
-                    },
-                    purpose_justification_required: {
-                      type: 'boolean',
-                      description:
-                        'Require users to enter a justification when they log in to the application.',
-                    },
-                    session_duration: {
-                      type: 'string',
-                      description:
-                        'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
-                    },
-                  },
-                  required: [],
-                },
-              ],
-              description: 'A JSON that links a reusable policy to an application.',
-            },
-          },
-          read_service_tokens_from_header: {
-            type: 'string',
-            description:
-              'Allows matching Access Service Tokens passed HTTP in a single header with this name.\nThis works as an alternative to the (CF-Access-Client-Id, CF-Access-Client-Secret) pair of headers.\nThe header value will be interpreted as a json object similar to: \n  {\n    "cf-access-client-id": "88bf3b6d86161464f6509f7219099e57.access.example.com",\n    "cf-access-client-secret": "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5"\n  }\n',
-          },
-          same_site_cookie_attribute: {
-            type: 'string',
-            description:
-              'Sets the SameSite cookie setting, which provides increased security against CSRF attacks.',
-          },
-          scim_config: {
-            type: 'object',
-            description:
-              'Configuration for provisioning to this application via SCIM. This is currently in closed beta.',
-            properties: {
-              idp_uid: {
-                type: 'string',
-                description:
-                  'The UID of the IdP to use as the source for SCIM resources to provision to this application.',
-              },
-              remote_uri: {
-                type: 'string',
-                description: "The base URI for the application's SCIM-compatible API.",
-              },
-              authentication: {
-                anyOf: [
-                  {
-                    $ref: '#/$defs/scim_config_authentication_http_basic',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth2',
-                  },
-                  {
-                    type: 'object',
-                    title: 'Access Service Token',
-                    description:
-                      'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      client_id: {
-                        type: 'string',
-                        description:
-                          'Client ID of the Access service token used to authenticate with the remote service.',
-                      },
-                      client_secret: {
-                        type: 'string',
-                        description:
-                          'Client secret of the Access service token used to authenticate with the remote service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['access_service_token'],
-                      },
-                    },
-                    required: ['client_id', 'client_secret', 'scheme'],
-                  },
-                  {
-                    type: 'array',
-                    description: 'Multiple authentication schemes',
-                    items: {
-                      anyOf: [
-                        {
-                          $ref: '#/$defs/scim_config_authentication_http_basic',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth2',
-                        },
-                        {
-                          type: 'object',
-                          title: 'Access Service Token',
-                          description:
-                            'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                          properties: {
-                            client_id: {
-                              type: 'string',
-                              description:
-                                'Client ID of the Access service token used to authenticate with the remote service.',
-                            },
-                            client_secret: {
-                              type: 'string',
-                              description:
-                                'Client secret of the Access service token used to authenticate with the remote service.',
-                            },
-                            scheme: {
-                              type: 'string',
-                              description:
-                                'The authentication scheme to use when making SCIM requests to this application.',
-                              enum: ['access_service_token'],
-                            },
-                          },
-                          required: ['client_id', 'client_secret', 'scheme'],
-                        },
-                      ],
-                      description:
-                        'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-                    },
-                  },
-                ],
-                description:
-                  'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-              },
-              deactivate_on_delete: {
-                type: 'boolean',
-                description:
-                  "If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.",
-              },
-              enabled: {
-                type: 'boolean',
-                description: 'Whether SCIM provisioning is turned on for this application.',
-              },
-              mappings: {
-                type: 'array',
-                description:
-                  'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
-                items: {
-                  $ref: '#/$defs/scim_config_mapping',
-                },
-              },
-            },
-            required: ['idp_uid', 'remote_uri'],
-          },
-          self_hosted_domains: {
-            type: 'array',
-            description:
-              'List of public domains that Access will secure. This field is deprecated in favor of `destinations` and will be supported until **November 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
-            items: {
-              $ref: '#/$defs/self_hosted_domains',
-            },
-          },
-          service_auth_401_redirect: {
-            type: 'boolean',
-            description: 'Returns a 401 status code when the request is blocked by a Service Auth policy.',
-          },
-          session_duration: {
-            type: 'string',
-            description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
-          },
-          skip_interstitial: {
-            type: 'boolean',
-            description: 'Enables automatic authentication through cloudflared.',
-          },
-          tags: {
-            type: 'array',
-            description:
-              'The tags you want assigned to an application. Tags are used to filter applications in the App Launcher dashboard.',
-            items: {
-              type: 'string',
-              description: 'The tag associated with an application.',
-            },
-          },
-        },
-      },
-      {
-        type: 'object',
-        properties: {
-          app_id: {
-            $ref: '#/$defs/app_id',
-          },
-          type: {
             $ref: '#/$defs/application_type',
+          },
+        },
+      },
+      {
+        type: 'object',
+        properties: {
+          app_id: {
+            $ref: '#/$defs/app_id',
+          },
+          domain: {
+            type: 'string',
+            description:
+              'The primary hostname and path secured by Access. This domain will be displayed if the app is visible in the App Launcher.',
+          },
+          type: {
+            type: 'string',
+            description: 'The application type.',
+            enum: [
+              'self_hosted',
+              'saas',
+              'ssh',
+              'vnc',
+              'app_launcher',
+              'warp',
+              'biso',
+              'bookmark',
+              'dash_sso',
+              'infrastructure',
+              'rdp',
+            ],
+          },
+          account_id: {
+            type: 'string',
+            description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
+          },
+          zone_id: {
+            type: 'string',
+            description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
+          },
+          allow_authenticate_via_warp: {
+            type: 'boolean',
+            description:
+              'When set to true, users can authenticate to this application using their WARP session.  When set to false this application will always require direct IdP authentication. This setting always overrides the organization setting for WARP authentication.',
+          },
+          allow_iframe: {
+            type: 'boolean',
+            description: 'Enables loading application content in an iFrame.',
+          },
+          allowed_idps: {
+            type: 'array',
+            description:
+              'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
+            items: {
+              $ref: '#/$defs/allowed_idps',
+            },
+          },
+          app_launcher_visible: {
+            type: 'boolean',
+            description: 'Displays the application in the App Launcher.',
+          },
+          auto_redirect_to_identity: {
+            type: 'boolean',
+            description:
+              'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
+          },
+          cors_headers: {
+            $ref: '#/$defs/cors_headers',
+          },
+          custom_deny_message: {
+            type: 'string',
+            description:
+              'The custom error message shown to a user when they are denied access to the application.',
+          },
+          custom_deny_url: {
+            type: 'string',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing identity-based rules.',
+          },
+          custom_non_identity_deny_url: {
+            type: 'string',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing non-identity rules.',
+          },
+          custom_pages: {
+            type: 'array',
+            description: 'The custom pages that will be displayed when applicable for this application',
+            items: {
+              type: 'string',
+              description: 'The custom pages selected for application.',
+            },
+          },
+          destinations: {
+            type: 'array',
+            description:
+              'List of destinations secured by Access. This supersedes `self_hosted_domains` to allow for more flexibility in defining different types of domains. If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
+            items: {
+              anyOf: [
+                {
+                  type: 'object',
+                  title: 'Public destination',
+                  description:
+                    "A public hostname that Access will secure. Public destinations support sub-domain and path. Wildcard '*' can be used in the definition.\n",
+                  properties: {
+                    type: {
+                      type: 'string',
+                      enum: ['public'],
+                    },
+                    uri: {
+                      type: 'string',
+                      description:
+                        "The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).\n",
+                    },
+                  },
+                  required: [],
+                },
+                {
+                  type: 'object',
+                  title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
+                  properties: {
+                    cidr: {
+                      type: 'string',
+                      description: 'The CIDR range of the destination. Single IPs will be computed as /32.',
+                    },
+                    hostname: {
+                      type: 'string',
+                      description:
+                        'The hostname of the destination. Matches a valid SNI served by an HTTPS origin.',
+                    },
+                    l4_protocol: {
+                      type: 'string',
+                      description:
+                        'The L4 protocol of the destination. When omitted, both UDP and TCP traffic will match.',
+                      enum: ['tcp', 'udp'],
+                    },
+                    port_range: {
+                      type: 'string',
+                      description:
+                        'The port range of the destination. Can be a single port or a range of ports. When omitted, all ports will match.\n',
+                    },
+                    type: {
+                      type: 'string',
+                      enum: ['private'],
+                    },
+                    vnet_id: {
+                      type: 'string',
+                      description:
+                        'The VNET ID to match the destination. When omitted, all VNETs will match.',
+                    },
+                  },
+                  required: [],
+                },
+              ],
+              description:
+                "A public hostname that Access will secure. Public destinations support sub-domain and path. Wildcard '*' can be used in the definition.\n",
+            },
+          },
+          enable_binding_cookie: {
+            type: 'boolean',
+            description:
+              'Enables the binding cookie, which increases security against compromised authorization tokens and CSRF attacks.',
+          },
+          http_only_cookie_attribute: {
+            type: 'boolean',
+            description:
+              'Enables the HttpOnly cookie attribute, which increases security against XSS attacks.',
+          },
+          logo_url: {
+            type: 'string',
+            description: 'The image URL for the logo shown in the App Launcher dashboard.',
+          },
+          name: {
+            type: 'string',
+            description: 'The name of the application.',
+          },
+          options_preflight_bypass: {
+            type: 'boolean',
+            description:
+              'Allows options preflight requests to bypass Access authentication and go directly to the origin. Cannot turn on if cors_headers is set.',
+          },
+          path_cookie_attribute: {
+            type: 'boolean',
+            description:
+              "Enables cookie paths to scope an application's JWT to the application path. If disabled, the JWT will scope to the hostname by default",
+          },
+          policies: {
+            type: 'array',
+            description:
+              'The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.',
+            items: {
+              anyOf: [
+                {
+                  type: 'object',
+                  description: 'A JSON that links a reusable policy to an application.',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      description: 'The UUID of the policy',
+                    },
+                    precedence: {
+                      type: 'integer',
+                      description:
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
+                    },
+                  },
+                  required: [],
+                },
+                {
+                  type: 'string',
+                  description: 'The UUID of the policy',
+                },
+                {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      description: 'The UUID of the policy',
+                    },
+                    approval_groups: {
+                      type: 'array',
+                      description: 'Administrators who can approve a temporary authentication request.',
+                      items: {
+                        $ref: '#/$defs/approval_group',
+                      },
+                    },
+                    approval_required: {
+                      type: 'boolean',
+                      description:
+                        'Requires the user to request access from an administrator at the start of each session.',
+                    },
+                    isolation_required: {
+                      type: 'boolean',
+                      description:
+                        "Require this application to be served in an isolated browser for users matching this policy. 'Client Web Isolation' must be on for the account in order to use this feature.",
+                    },
+                    precedence: {
+                      type: 'integer',
+                      description:
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
+                    },
+                    purpose_justification_prompt: {
+                      type: 'string',
+                      description: 'A custom message that will appear on the purpose justification screen.',
+                    },
+                    purpose_justification_required: {
+                      type: 'boolean',
+                      description:
+                        'Require users to enter a justification when they log in to the application.',
+                    },
+                    session_duration: {
+                      type: 'string',
+                      description:
+                        'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+                    },
+                  },
+                  required: [],
+                },
+              ],
+              description: 'A JSON that links a reusable policy to an application.',
+            },
+          },
+          read_service_tokens_from_header: {
+            type: 'string',
+            description:
+              'Allows matching Access Service Tokens passed HTTP in a single header with this name.\nThis works as an alternative to the (CF-Access-Client-Id, CF-Access-Client-Secret) pair of headers.\nThe header value will be interpreted as a json object similar to: \n  {\n    "cf-access-client-id": "88bf3b6d86161464f6509f7219099e57.access.example.com",\n    "cf-access-client-secret": "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5"\n  }\n',
+          },
+          same_site_cookie_attribute: {
+            type: 'string',
+            description:
+              'Sets the SameSite cookie setting, which provides increased security against CSRF attacks.',
+          },
+          scim_config: {
+            type: 'object',
+            description:
+              'Configuration for provisioning to this application via SCIM. This is currently in closed beta.',
+            properties: {
+              idp_uid: {
+                type: 'string',
+                description:
+                  'The UID of the IdP to use as the source for SCIM resources to provision to this application.',
+              },
+              remote_uri: {
+                type: 'string',
+                description: "The base URI for the application's SCIM-compatible API.",
+              },
+              authentication: {
+                anyOf: [
+                  {
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
+                  },
+                  {
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
+                  },
+                  {
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
+                  },
+                  {
+                    type: 'object',
+                    title: 'Access Service Token',
+                    description:
+                      'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
+                    properties: {
+                      client_id: {
+                        type: 'string',
+                        description:
+                          'Client ID of the Access service token used to authenticate with the remote service.',
+                      },
+                      client_secret: {
+                        type: 'string',
+                        description:
+                          'Client secret of the Access service token used to authenticate with the remote service.',
+                      },
+                      scheme: {
+                        type: 'string',
+                        description:
+                          'The authentication scheme to use when making SCIM requests to this application.',
+                        enum: ['access_service_token'],
+                      },
+                    },
+                    required: ['client_id', 'client_secret', 'scheme'],
+                  },
+                  {
+                    type: 'array',
+                    description: 'Multiple authentication schemes',
+                    items: {
+                      anyOf: [
+                        {
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
+                        },
+                        {
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
+                        },
+                        {
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
+                        },
+                        {
+                          type: 'object',
+                          title: 'Access Service Token',
+                          description:
+                            'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
+                          properties: {
+                            client_id: {
+                              type: 'string',
+                              description:
+                                'Client ID of the Access service token used to authenticate with the remote service.',
+                            },
+                            client_secret: {
+                              type: 'string',
+                              description:
+                                'Client secret of the Access service token used to authenticate with the remote service.',
+                            },
+                            scheme: {
+                              type: 'string',
+                              description:
+                                'The authentication scheme to use when making SCIM requests to this application.',
+                              enum: ['access_service_token'],
+                            },
+                          },
+                          required: ['client_id', 'client_secret', 'scheme'],
+                        },
+                      ],
+                      description:
+                        'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
+                    },
+                  },
+                ],
+                description:
+                  'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
+              },
+              deactivate_on_delete: {
+                type: 'boolean',
+                description:
+                  "If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.",
+              },
+              enabled: {
+                type: 'boolean',
+                description: 'Whether SCIM provisioning is turned on for this application.',
+              },
+              mappings: {
+                type: 'array',
+                description:
+                  'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
+                items: {
+                  $ref: '#/$defs/scim_config_mapping',
+                },
+              },
+            },
+            required: ['idp_uid', 'remote_uri'],
+          },
+          self_hosted_domains: {
+            type: 'array',
+            description:
+              'List of public domains that Access will secure. This field is deprecated in favor of `destinations` and will be supported until **November 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
+            items: {
+              $ref: '#/$defs/self_hosted_domains',
+            },
+          },
+          service_auth_401_redirect: {
+            type: 'boolean',
+            description: 'Returns a 401 status code when the request is blocked by a Service Auth policy.',
+          },
+          session_duration: {
+            type: 'string',
+            description:
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
+          },
+          skip_interstitial: {
+            type: 'boolean',
+            description: 'Enables automatic authentication through cloudflared.',
+          },
+          tags: {
+            type: 'array',
+            description:
+              'The tags you want assigned to an application. Tags are used to filter applications in the App Launcher dashboard.',
+            items: {
+              type: 'string',
+              description: 'The tag associated with an application.',
+            },
+          },
+        },
+      },
+      {
+        type: 'object',
+        properties: {
+          app_id: {
+            $ref: '#/$defs/app_id',
+          },
+          domain: {
+            type: 'string',
+            description:
+              'The primary hostname and path secured by Access. This domain will be displayed if the app is visible in the App Launcher.',
+          },
+          type: {
+            type: 'string',
+            description: 'The application type.',
+            enum: [
+              'self_hosted',
+              'saas',
+              'ssh',
+              'vnc',
+              'app_launcher',
+              'warp',
+              'biso',
+              'bookmark',
+              'dash_sso',
+              'infrastructure',
+              'rdp',
+            ],
+          },
+          account_id: {
+            type: 'string',
+            description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
+          },
+          zone_id: {
+            type: 'string',
+            description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
+          },
+          allow_authenticate_via_warp: {
+            type: 'boolean',
+            description:
+              'When set to true, users can authenticate to this application using their WARP session.  When set to false this application will always require direct IdP authentication. This setting always overrides the organization setting for WARP authentication.',
+          },
+          allow_iframe: {
+            type: 'boolean',
+            description: 'Enables loading application content in an iFrame.',
+          },
+          allowed_idps: {
+            type: 'array',
+            description:
+              'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
+            items: {
+              $ref: '#/$defs/allowed_idps',
+            },
+          },
+          app_launcher_visible: {
+            type: 'boolean',
+            description: 'Displays the application in the App Launcher.',
+          },
+          auto_redirect_to_identity: {
+            type: 'boolean',
+            description:
+              'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
+          },
+          cors_headers: {
+            $ref: '#/$defs/cors_headers',
+          },
+          custom_deny_message: {
+            type: 'string',
+            description:
+              'The custom error message shown to a user when they are denied access to the application.',
+          },
+          custom_deny_url: {
+            type: 'string',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing identity-based rules.',
+          },
+          custom_non_identity_deny_url: {
+            type: 'string',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing non-identity rules.',
+          },
+          custom_pages: {
+            type: 'array',
+            description: 'The custom pages that will be displayed when applicable for this application',
+            items: {
+              type: 'string',
+              description: 'The custom pages selected for application.',
+            },
+          },
+          destinations: {
+            type: 'array',
+            description:
+              'List of destinations secured by Access. This supersedes `self_hosted_domains` to allow for more flexibility in defining different types of domains. If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
+            items: {
+              anyOf: [
+                {
+                  type: 'object',
+                  title: 'Public destination',
+                  description:
+                    "A public hostname that Access will secure. Public destinations support sub-domain and path. Wildcard '*' can be used in the definition.\n",
+                  properties: {
+                    type: {
+                      type: 'string',
+                      enum: ['public'],
+                    },
+                    uri: {
+                      type: 'string',
+                      description:
+                        "The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).\n",
+                    },
+                  },
+                  required: [],
+                },
+                {
+                  type: 'object',
+                  title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
+                  properties: {
+                    cidr: {
+                      type: 'string',
+                      description: 'The CIDR range of the destination. Single IPs will be computed as /32.',
+                    },
+                    hostname: {
+                      type: 'string',
+                      description:
+                        'The hostname of the destination. Matches a valid SNI served by an HTTPS origin.',
+                    },
+                    l4_protocol: {
+                      type: 'string',
+                      description:
+                        'The L4 protocol of the destination. When omitted, both UDP and TCP traffic will match.',
+                      enum: ['tcp', 'udp'],
+                    },
+                    port_range: {
+                      type: 'string',
+                      description:
+                        'The port range of the destination. Can be a single port or a range of ports. When omitted, all ports will match.\n',
+                    },
+                    type: {
+                      type: 'string',
+                      enum: ['private'],
+                    },
+                    vnet_id: {
+                      type: 'string',
+                      description:
+                        'The VNET ID to match the destination. When omitted, all VNETs will match.',
+                    },
+                  },
+                  required: [],
+                },
+              ],
+              description:
+                "A public hostname that Access will secure. Public destinations support sub-domain and path. Wildcard '*' can be used in the definition.\n",
+            },
+          },
+          enable_binding_cookie: {
+            type: 'boolean',
+            description:
+              'Enables the binding cookie, which increases security against compromised authorization tokens and CSRF attacks.',
+          },
+          http_only_cookie_attribute: {
+            type: 'boolean',
+            description:
+              'Enables the HttpOnly cookie attribute, which increases security against XSS attacks.',
+          },
+          logo_url: {
+            type: 'string',
+            description: 'The image URL for the logo shown in the App Launcher dashboard.',
+          },
+          name: {
+            type: 'string',
+            description: 'The name of the application.',
+          },
+          options_preflight_bypass: {
+            type: 'boolean',
+            description:
+              'Allows options preflight requests to bypass Access authentication and go directly to the origin. Cannot turn on if cors_headers is set.',
+          },
+          path_cookie_attribute: {
+            type: 'boolean',
+            description:
+              "Enables cookie paths to scope an application's JWT to the application path. If disabled, the JWT will scope to the hostname by default",
+          },
+          policies: {
+            type: 'array',
+            description:
+              'The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.',
+            items: {
+              anyOf: [
+                {
+                  type: 'object',
+                  description: 'A JSON that links a reusable policy to an application.',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      description: 'The UUID of the policy',
+                    },
+                    precedence: {
+                      type: 'integer',
+                      description:
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
+                    },
+                  },
+                  required: [],
+                },
+                {
+                  type: 'string',
+                  description: 'The UUID of the policy',
+                },
+                {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      description: 'The UUID of the policy',
+                    },
+                    approval_groups: {
+                      type: 'array',
+                      description: 'Administrators who can approve a temporary authentication request.',
+                      items: {
+                        $ref: '#/$defs/approval_group',
+                      },
+                    },
+                    approval_required: {
+                      type: 'boolean',
+                      description:
+                        'Requires the user to request access from an administrator at the start of each session.',
+                    },
+                    isolation_required: {
+                      type: 'boolean',
+                      description:
+                        "Require this application to be served in an isolated browser for users matching this policy. 'Client Web Isolation' must be on for the account in order to use this feature.",
+                    },
+                    precedence: {
+                      type: 'integer',
+                      description:
+                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
+                    },
+                    purpose_justification_prompt: {
+                      type: 'string',
+                      description: 'A custom message that will appear on the purpose justification screen.',
+                    },
+                    purpose_justification_required: {
+                      type: 'boolean',
+                      description:
+                        'Require users to enter a justification when they log in to the application.',
+                    },
+                    session_duration: {
+                      type: 'string',
+                      description:
+                        'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
+                    },
+                  },
+                  required: [],
+                },
+              ],
+              description: 'A JSON that links a reusable policy to an application.',
+            },
+          },
+          read_service_tokens_from_header: {
+            type: 'string',
+            description:
+              'Allows matching Access Service Tokens passed HTTP in a single header with this name.\nThis works as an alternative to the (CF-Access-Client-Id, CF-Access-Client-Secret) pair of headers.\nThe header value will be interpreted as a json object similar to: \n  {\n    "cf-access-client-id": "88bf3b6d86161464f6509f7219099e57.access.example.com",\n    "cf-access-client-secret": "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5"\n  }\n',
+          },
+          same_site_cookie_attribute: {
+            type: 'string',
+            description:
+              'Sets the SameSite cookie setting, which provides increased security against CSRF attacks.',
+          },
+          scim_config: {
+            type: 'object',
+            description:
+              'Configuration for provisioning to this application via SCIM. This is currently in closed beta.',
+            properties: {
+              idp_uid: {
+                type: 'string',
+                description:
+                  'The UID of the IdP to use as the source for SCIM resources to provision to this application.',
+              },
+              remote_uri: {
+                type: 'string',
+                description: "The base URI for the application's SCIM-compatible API.",
+              },
+              authentication: {
+                anyOf: [
+                  {
+                    $ref: '#/$defs/scim_config_authentication_http_basic',
+                  },
+                  {
+                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
+                  },
+                  {
+                    $ref: '#/$defs/scim_config_authentication_oauth2',
+                  },
+                  {
+                    type: 'object',
+                    title: 'Access Service Token',
+                    description:
+                      'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
+                    properties: {
+                      client_id: {
+                        type: 'string',
+                        description:
+                          'Client ID of the Access service token used to authenticate with the remote service.',
+                      },
+                      client_secret: {
+                        type: 'string',
+                        description:
+                          'Client secret of the Access service token used to authenticate with the remote service.',
+                      },
+                      scheme: {
+                        type: 'string',
+                        description:
+                          'The authentication scheme to use when making SCIM requests to this application.',
+                        enum: ['access_service_token'],
+                      },
+                    },
+                    required: ['client_id', 'client_secret', 'scheme'],
+                  },
+                  {
+                    type: 'array',
+                    description: 'Multiple authentication schemes',
+                    items: {
+                      anyOf: [
+                        {
+                          $ref: '#/$defs/scim_config_authentication_http_basic',
+                        },
+                        {
+                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
+                        },
+                        {
+                          $ref: '#/$defs/scim_config_authentication_oauth2',
+                        },
+                        {
+                          type: 'object',
+                          title: 'Access Service Token',
+                          description:
+                            'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
+                          properties: {
+                            client_id: {
+                              type: 'string',
+                              description:
+                                'Client ID of the Access service token used to authenticate with the remote service.',
+                            },
+                            client_secret: {
+                              type: 'string',
+                              description:
+                                'Client secret of the Access service token used to authenticate with the remote service.',
+                            },
+                            scheme: {
+                              type: 'string',
+                              description:
+                                'The authentication scheme to use when making SCIM requests to this application.',
+                              enum: ['access_service_token'],
+                            },
+                          },
+                          required: ['client_id', 'client_secret', 'scheme'],
+                        },
+                      ],
+                      description:
+                        'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
+                    },
+                  },
+                ],
+                description:
+                  'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
+              },
+              deactivate_on_delete: {
+                type: 'boolean',
+                description:
+                  "If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.",
+              },
+              enabled: {
+                type: 'boolean',
+                description: 'Whether SCIM provisioning is turned on for this application.',
+              },
+              mappings: {
+                type: 'array',
+                description:
+                  'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
+                items: {
+                  $ref: '#/$defs/scim_config_mapping',
+                },
+              },
+            },
+            required: ['idp_uid', 'remote_uri'],
+          },
+          self_hosted_domains: {
+            type: 'array',
+            description:
+              'List of public domains that Access will secure. This field is deprecated in favor of `destinations` and will be supported until **November 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be ignored.\n',
+            items: {
+              $ref: '#/$defs/self_hosted_domains',
+            },
+          },
+          service_auth_401_redirect: {
+            type: 'boolean',
+            description: 'Returns a 401 status code when the request is blocked by a Service Auth policy.',
+          },
+          session_duration: {
+            type: 'string',
+            description:
+              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
+          },
+          skip_interstitial: {
+            type: 'boolean',
+            description: 'Enables automatic authentication through cloudflared.',
+          },
+          tags: {
+            type: 'array',
+            description:
+              'The tags you want assigned to an application. Tags are used to filter applications in the App Launcher dashboard.',
+            items: {
+              type: 'string',
+              description: 'The tag associated with an application.',
+            },
+          },
+        },
+      },
+      {
+        type: 'object',
+        properties: {
+          app_id: {
+            $ref: '#/$defs/app_id',
+          },
+          type: {
+            type: 'string',
+            description: 'The application type.',
+            enum: [
+              'self_hosted',
+              'saas',
+              'ssh',
+              'vnc',
+              'app_launcher',
+              'warp',
+              'biso',
+              'bookmark',
+              'dash_sso',
+              'infrastructure',
+              'rdp',
+            ],
           },
           account_id: {
             type: 'string',
@@ -2534,8 +2572,7 @@ export const tool: Tool = {
             },
           },
           type: {
-            type: 'string',
-            description: 'The application type.',
+            $ref: '#/$defs/application_type',
           },
         },
       },
@@ -2693,8 +2730,7 @@ export const tool: Tool = {
             },
           },
           type: {
-            type: 'string',
-            description: 'The application type.',
+            $ref: '#/$defs/application_type',
           },
           account_id: {
             type: 'string',
@@ -3092,6 +3128,23 @@ export const tool: Tool = {
       app_id: {
         type: 'string',
         description: 'Identifier.',
+      },
+      application_type: {
+        type: 'string',
+        description: 'The application type.',
+        enum: [
+          'self_hosted',
+          'saas',
+          'ssh',
+          'vnc',
+          'app_launcher',
+          'warp',
+          'biso',
+          'bookmark',
+          'dash_sso',
+          'infrastructure',
+          'rdp',
+        ],
       },
       allowed_idps: {
         type: 'string',
@@ -3577,23 +3630,6 @@ export const tool: Tool = {
           },
         },
         required: [],
-      },
-      application_type: {
-        type: 'string',
-        description: 'The application type.',
-        enum: [
-          'self_hosted',
-          'saas',
-          'ssh',
-          'vnc',
-          'app_launcher',
-          'warp',
-          'biso',
-          'bookmark',
-          'dash_sso',
-          'infrastructure',
-          'rdp',
-        ],
       },
       decision: {
         type: 'string',
