@@ -26,20 +26,15 @@ export const tool: Tool = {
       per_page: {
         type: 'number',
       },
-      search_params: {
-        type: 'object',
-        properties: {
-          query: {
-            type: 'string',
-            description: 'Search query term.',
-          },
-          references: {
-            type: 'string',
-            description: 'The type of references to include ("*" for all).',
-            enum: ['', '*', 'referral', 'referrer'],
-          },
-        },
-        required: [],
+      query: {
+        type: 'string',
+        description: 'Search query term.',
+      },
+      references: {
+        type: 'string',
+        description:
+          'The type of references to include. "*" to include both referral and referrer references. "" to not include any reference information.',
+        enum: ['', '*', 'referral', 'referrer'],
       },
     },
   },
