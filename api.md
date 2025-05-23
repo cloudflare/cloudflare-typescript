@@ -4618,6 +4618,19 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">SchemaData</a></code>
 - <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">SchemaHTTP</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dex/devices/dex_tests">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">create</a>({ ...params }) -> DEXTestCreateResponse</code>
+- <code title="put /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">update</a>(dexTestId, { ...params }) -> DEXTestUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dex/devices/dex_tests">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">list</a>({ ...params }) -> DEXTestListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">delete</a>(dexTestId, { ...params }) -> DEXTestDeleteResponse</code>
+- <code title="get /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">get</a>(dexTestId, { ...params }) -> DEXTestGetResponse</code>
 
 ### Networks
 
@@ -4791,6 +4804,7 @@ Types:
 Methods:
 
 - <code title="put /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">update</a>({ ...params }) -> DeviceSettings | null</code>
+- <code title="delete /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">delete</a>({ ...params }) -> DeviceSettings | null</code>
 - <code title="patch /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">edit</a>({ ...params }) -> DeviceSettings | null</code>
 - <code title="get /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">get</a>({ ...params }) -> DeviceSettings | null</code>
 
@@ -5284,6 +5298,16 @@ Types:
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPath</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPathResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">Percentiles</a></code>
+
+### WARPChangeEvents
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/warp-change-events.ts">WARPChangeEventGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/warp-change-events">client.zeroTrust.dex.warpChangeEvents.<a href="./src/resources/zero-trust/dex/warp-change-events.ts">get</a>({ ...params }) -> WARPChangeEventGetResponse</code>
 
 ### Commands
 

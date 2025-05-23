@@ -13,7 +13,22 @@ import {
   Devices as DevicesAPIDevices,
 } from './devices_';
 import * as DEXTestsAPI from './dex-tests';
-import { DEXTests, SchemaData, SchemaHTTP } from './dex-tests';
+import {
+  DEXTestCreateParams,
+  DEXTestCreateResponse,
+  DEXTestDeleteParams,
+  DEXTestDeleteResponse,
+  DEXTestGetParams,
+  DEXTestGetResponse,
+  DEXTestListParams,
+  DEXTestListResponse,
+  DEXTestListResponsesSinglePage,
+  DEXTestUpdateParams,
+  DEXTestUpdateResponse,
+  DEXTests,
+  SchemaData,
+  SchemaHTTP,
+} from './dex-tests';
 import * as FleetStatusAPI from './fleet-status';
 import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
 import * as NetworksAPI from './networks';
@@ -58,6 +73,7 @@ import { Revoke, RevokeCreateParams, RevokeCreateResponse } from './revoke';
 import * as SettingsAPI from './settings';
 import {
   DeviceSettings,
+  SettingDeleteParams,
   SettingEditParams,
   SettingGetParams,
   SettingUpdateParams,
@@ -433,6 +449,7 @@ Devices.Resilience = Resilience;
 Devices.Registrations = Registrations;
 Devices.RegistrationListResponsesCursorPagination = RegistrationListResponsesCursorPagination;
 Devices.DEXTests = DEXTests;
+Devices.DEXTestListResponsesSinglePage = DEXTestListResponsesSinglePage;
 Devices.Networks = Networks;
 Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
 Devices.FleetStatus = FleetStatus;
@@ -483,7 +500,22 @@ export declare namespace Devices {
     type RegistrationUnrevokeParams as RegistrationUnrevokeParams,
   };
 
-  export { DEXTests as DEXTests, type SchemaData as SchemaData, type SchemaHTTP as SchemaHTTP };
+  export {
+    DEXTests as DEXTests,
+    type SchemaData as SchemaData,
+    type SchemaHTTP as SchemaHTTP,
+    type DEXTestCreateResponse as DEXTestCreateResponse,
+    type DEXTestUpdateResponse as DEXTestUpdateResponse,
+    type DEXTestListResponse as DEXTestListResponse,
+    type DEXTestDeleteResponse as DEXTestDeleteResponse,
+    type DEXTestGetResponse as DEXTestGetResponse,
+    DEXTestListResponsesSinglePage as DEXTestListResponsesSinglePage,
+    type DEXTestCreateParams as DEXTestCreateParams,
+    type DEXTestUpdateParams as DEXTestUpdateParams,
+    type DEXTestListParams as DEXTestListParams,
+    type DEXTestDeleteParams as DEXTestDeleteParams,
+    type DEXTestGetParams as DEXTestGetParams,
+  };
 
   export {
     Networks as Networks,
@@ -551,6 +583,7 @@ export declare namespace Devices {
     Settings as Settings,
     type DeviceSettings as DeviceSettings,
     type SettingUpdateParams as SettingUpdateParams,
+    type SettingDeleteParams as SettingDeleteParams,
     type SettingEditParams as SettingEditParams,
     type SettingGetParams as SettingGetParams,
   };
