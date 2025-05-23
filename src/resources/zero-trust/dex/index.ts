@@ -34,3 +34,8 @@ export {
   type TracerouteTestNetworkPathParams,
   type TracerouteTestPercentilesParams,
 } from './traceroute-tests';
+export {
+  WARPChangeEvents,
+  type WARPChangeEventGetResponse,
+  type WARPChangeEventGetParams,
+} from './warp-change-events';
