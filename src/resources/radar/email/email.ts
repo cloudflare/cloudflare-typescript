@@ -20,10 +20,19 @@ export interface RadarEmailSeries {
 }
 
 export interface RadarEmailSummary {
+  /**
+   * A numeric string.
+   */
   FAIL: string;
 
+  /**
+   * A numeric string.
+   */
   NONE: string;
 
+  /**
+   * A numeric string.
+   */
   PASS: string;
 }
 
