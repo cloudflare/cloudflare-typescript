@@ -78,8 +78,8 @@ export class Routes extends APIResource {
   }
 
   /**
-   * Retrieves realtime routes for prefixes using public realtime data collectors
-   * (RouteViews and RIPE RIS).
+   * Retrieves real-time BGP routes for a prefix, using public real-time data
+   * collectors (RouteViews and RIPE RIS).
    *
    * @example
    * ```ts
@@ -322,7 +322,7 @@ export namespace RouteRealtimeResponse {
       collector: string;
 
       /**
-       * Latest realtime stream timestamp for this collector.
+       * Latest real-time stream timestamp for this collector.
        */
       latest_realtime_ts: string;
 

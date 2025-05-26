@@ -62,6 +62,9 @@ export namespace TopPrefixesResponse {
   export interface Top0 {
     prefix: string;
 
+    /**
+     * A numeric string.
+     */
     value: string;
   }
 }
