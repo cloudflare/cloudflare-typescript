@@ -38,6 +38,9 @@ export namespace LocationGetResponse {
 
     clientCountryName: string;
 
+    /**
+     * A numeric string.
+     */
     value: string;
   }
 }

@@ -3103,7 +3103,7 @@ The following tools are available in this MCP server.
 - `ases_bgp_radar_routes` (`read`): Retrieves all ASes in the current global routing tables with routing statistics.
 - `moas_bgp_radar_routes` (`read`): Retrieves all Multi-Origin AS (MOAS) prefixes in the global routing tables.
 - `pfx2as_bgp_radar_routes` (`read`): Retrieves the prefix-to-ASN mapping from global routing tables.
-- `realtime_bgp_radar_routes` (`read`): Retrieves realtime routes for prefixes using public realtime data collectors (RouteViews and RIPE RIS).
+- `realtime_bgp_radar_routes` (`read`): Retrieves real-time BGP routes for a prefix, using public real-time data collectors (RouteViews and RIPE RIS).
 - `stats_bgp_radar_routes` (`read`): Retrieves the BGP routing table stats.
 
 ### Resource `radar.bgp.ips`:

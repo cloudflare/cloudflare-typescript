@@ -59,8 +59,14 @@ export namespace LocationListResponse {
   export interface Location {
     alpha2: string;
 
+    /**
+     * A numeric string.
+     */
     latitude: string;
 
+    /**
+     * A numeric string.
+     */
     longitude: string;
 
     name: string;
@@ -77,8 +83,14 @@ export namespace LocationGetResponse {
 
     confidenceLevel: number;
 
+    /**
+     * A numeric string.
+     */
     latitude: string;
 
+    /**
+     * A numeric string.
+     */
     longitude: string;
 
     name: string;

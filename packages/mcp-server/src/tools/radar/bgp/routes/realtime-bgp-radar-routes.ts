@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'realtime_bgp_radar_routes',
   description:
-    'Retrieves realtime routes for prefixes using public realtime data collectors (RouteViews and RIPE RIS).',
+    'Retrieves real-time BGP routes for a prefix, using public real-time data collectors (RouteViews and RIPE RIS).',
   inputSchema: {
     type: 'object',
     properties: {
