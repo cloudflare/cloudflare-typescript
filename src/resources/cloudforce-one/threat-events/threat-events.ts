@@ -21,20 +21,6 @@ import * as CountriesAPI from './countries';
 import { Countries, CountryListParams, CountryListResponse } from './countries';
 import * as CronsAPI from './crons';
 import { CronEditParams, CronEditResponse, CronListParams, CronListResponse, Crons } from './crons';
-import * as DatasetsAPI from './datasets';
-import {
-  DatasetCreateParams,
-  DatasetCreateResponse,
-  DatasetEditParams,
-  DatasetEditResponse,
-  DatasetGetParams,
-  DatasetGetResponse,
-  DatasetListParams,
-  DatasetListResponse,
-  DatasetRawParams,
-  DatasetRawResponse,
-  Datasets,
-} from './datasets';
 import * as EventTagsAPI from './event-tags';
 import {
   EventTagCreateParams,
@@ -65,6 +51,20 @@ import * as TagsAPI from './tags';
 import { TagCreateParams, TagCreateResponse, Tags } from './tags';
 import * as TargetIndustriesAPI from './target-industries';
 import { TargetIndustries, TargetIndustryListParams, TargetIndustryListResponse } from './target-industries';
+import * as DatasetsAPI from './datasets/datasets';
+import {
+  DatasetCreateParams,
+  DatasetCreateResponse,
+  DatasetEditParams,
+  DatasetEditResponse,
+  DatasetGetParams,
+  DatasetGetResponse,
+  DatasetListParams,
+  DatasetListResponse,
+  DatasetRawParams,
+  DatasetRawResponse,
+  Datasets,
+} from './datasets/datasets';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';

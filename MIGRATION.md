@@ -839,6 +839,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.cloudforceOne.threatEvents.datasets.edit()`
 - `client.cloudforceOne.threatEvents.datasets.get()`
 - `client.cloudforceOne.threatEvents.datasets.raw()`
+- `client.cloudforceOne.threatEvents.datasets.health.get()`
 - `client.cloudforceOne.threatEvents.raw.edit()`
 - `client.cloudforceOne.threatEvents.raw.get()`
 - `client.cloudforceOne.threatEvents.relate.delete()`
