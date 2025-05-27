@@ -5,29 +5,32 @@ import type { Metadata } from '../../../../';
 import Cloudflare from 'cloudflare';
 
 export const metadata: Metadata = {
-  resource: 'zero_trust.access.infrastructure.targets',
-  operation: 'write',
+  resource: 'cloudforce_one.threat_events.datasets.health',
+  operation: 'read',
   tags: [],
 };
 
 export const tool: Tool = {
-  name: 'bulk_delete_infrastructure_access_zero_trust_targets',
-  description: 'Removes one or more targets.',
+  name: 'get_datasets_threat_events_cloudforce_one_health',
+  description: 'Benchmark Durable Object warmup',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
+        type: 'number',
+        description: 'Account ID.',
+      },
+      dataset_id: {
         type: 'string',
-        title: 'account_id',
-        description: 'Account identifier',
+        description: 'Dataset ID.',
       },
     },
   },
 };
 
 export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const body = args as any;
-  return client.zeroTrust.access.infrastructure.targets.bulkDelete(body);
+  const { dataset_id, ...body } = args as any;
+  return client.cloudforceOne.threatEvents.datasets.health.get(dataset_id, body);
 };
 
 export default { metadata, tool, handler };
