@@ -133,7 +133,6 @@ describe('resource targets', () => {
   test('bulkDelete: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.bulkDelete({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      target_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -147,7 +146,6 @@ describe('resource targets', () => {
   test('bulkDelete: required and optional params', async () => {
     const response = await client.zeroTrust.access.infrastructure.targets.bulkDelete({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      target_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
     });
   });
 
