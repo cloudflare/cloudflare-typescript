@@ -49,11 +49,12 @@ export function dynamicTools(endpoints: Endpoint[]): Endpoint[] {
           endpoints.filter((endpoint) => {
             const fieldsToMatch = [
               endpoint.tool.name,
+              endpoint.tool.description,
               endpoint.metadata.resource,
               endpoint.metadata.operation,
               ...endpoint.metadata.tags,
             ];
-            return fieldsToMatch.some((field) => field.toLowerCase().includes(query.toLowerCase()));
+            return fieldsToMatch.some((field) => field && field.toLowerCase().includes(query.toLowerCase()));
           })
         : endpoints;
 
