@@ -11,7 +11,7 @@ export class Health extends APIResource {
    * ```ts
    * const health =
    *   await client.cloudforceOne.threatEvents.datasets.health.get(
-   *     'dataset_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 0 },
    *   );
    * ```
