@@ -111,17 +111,13 @@ export class Targets extends APIResource {
    * @example
    * ```ts
    * await client.zeroTrust.access.infrastructure.targets.bulkDelete(
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     target_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
   bulkDelete(params: TargetBulkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/infrastructure/targets/batch_delete`, {
-      body,
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/infrastructure/targets/batch`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -831,14 +827,9 @@ export interface TargetDeleteParams {
 
 export interface TargetBulkDeleteParams {
   /**
-   * Path param: Account identifier
+   * Account identifier
    */
   account_id: string;
-
-  /**
-   * Body param: List of target IDs to bulk delete
-   */
-  target_ids: Array<string>;
 }
 
 export interface TargetBulkUpdateParams {

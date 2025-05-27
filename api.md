@@ -4935,7 +4935,7 @@ Methods:
 - <code title="put /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">update</a>(targetId, { ...params }) -> TargetUpdateResponse</code>
 - <code title="get /accounts/{account_id}/infrastructure/targets">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">list</a>({ ...params }) -> TargetListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">delete</a>(targetId, { ...params }) -> void</code>
-- <code title="post /accounts/{account_id}/infrastructure/targets/batch_delete">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">bulkDelete</a>({ ...params }) -> void</code>
+- <code title="delete /accounts/{account_id}/infrastructure/targets/batch">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">bulkDelete</a>({ ...params }) -> void</code>
 - <code title="put /accounts/{account_id}/infrastructure/targets/batch">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">bulkUpdate</a>([ ...body ]) -> TargetBulkUpdateResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">get</a>(targetId, { ...params }) -> TargetGetResponse</code>
 
@@ -7795,19 +7795,29 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cloudforce-one/threat-events/datasets.ts">DatasetCreateResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/datasets.ts">DatasetListResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/datasets.ts">DatasetEditResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/datasets.ts">DatasetGetResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/datasets.ts">DatasetRawResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetGetResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetRawResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/cloudforce-one/events/dataset/create">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets.ts">create</a>({ ...params }) -> DatasetCreateResponse</code>
-- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets.ts">list</a>({ ...params }) -> DatasetListResponse</code>
-- <code title="patch /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets.ts">edit</a>(datasetId, { ...params }) -> DatasetEditResponse</code>
-- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets.ts">get</a>(datasetId, { ...params }) -> DatasetGetResponse</code>
-- <code title="get /accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets.ts">raw</a>(datasetId, eventId, { ...params }) -> DatasetRawResponse</code>
+- <code title="post /accounts/{account_id}/cloudforce-one/events/dataset/create">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">create</a>({ ...params }) -> DatasetCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">list</a>({ ...params }) -> DatasetListResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">edit</a>(datasetId, { ...params }) -> DatasetEditResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">get</a>(datasetId, { ...params }) -> DatasetGetResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">raw</a>(datasetId, eventId, { ...params }) -> DatasetRawResponse</code>
+
+#### Health
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/health.ts">HealthGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/health">client.cloudforceOne.threatEvents.datasets.health.<a href="./src/resources/cloudforce-one/threat-events/datasets/health.ts">get</a>(datasetId, { ...params }) -> HealthGetResponse</code>
 
 ### IndicatorTypes
 
