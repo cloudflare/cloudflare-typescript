@@ -13,13 +13,15 @@ describe('dynamicTools', () => {
 
   const tools = dynamicTools(endpoints);
 
+  const toolsMap = {
+    list_api_endpoints: toolOrError('list_api_endpoints'),
+    get_api_endpoint_schema: toolOrError('get_api_endpoint_schema'),
+    invoke_api_endpoint: toolOrError('invoke_api_endpoint'),
+  };
+
   describe('list_api_endpoints', () => {
-    const listEndpointsTool = tools.find((tool) => tool.tool.name === 'list_api_endpoints');
-
     it('should return all endpoints when no search query is provided', async () => {
-      if (!listEndpointsTool) fail('list_api_endpoints tool not found');
-
-      const result = await listEndpointsTool.handler(fakeClient, {});
+      const result = await toolsMap.list_api_endpoints.handler(fakeClient, {});
 
       expect(result.tools).toHaveLength(endpoints.length);
       expect(result.tools.map((t: { name: string }) => t.name)).toContain('test_read_endpoint');
@@ -29,36 +31,28 @@ describe('dynamicTools', () => {
     });
 
     it('should filter endpoints by name', async () => {
-      if (!listEndpointsTool) fail('list_api_endpoints tool not found');
-
-      const result = await listEndpointsTool.handler(fakeClient, { search_query: 'user' });
+      const result = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'user' });
 
       expect(result.tools).toHaveLength(1);
       expect(result.tools[0].name).toBe('user_endpoint');
     });
 
     it('should filter endpoints by resource', async () => {
-      if (!listEndpointsTool) fail('list_api_endpoints tool not found');
-
-      const result = await listEndpointsTool.handler(fakeClient, { search_query: 'admin' });
+      const result = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'admin' });
 
       expect(result.tools.some((t: { resource: string }) => t.resource === 'admin')).toBeTruthy();
     });
 
     it('should filter endpoints by tag', async () => {
-      if (!listEndpointsTool) fail('list_api_endpoints tool not found');
-
-      const result = await listEndpointsTool.handler(fakeClient, { search_query: 'admin' });
+      const result = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'admin' });
 
       expect(result.tools.some((t: { tags: string[] }) => t.tags.includes('admin'))).toBeTruthy();
     });
 
     it('should be case insensitive in search', async () => {
-      if (!listEndpointsTool) fail('list_api_endpoints tool not found');
+      const result = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'ADMIN' });
 
-      const result = await listEndpointsTool.handler(fakeClient, { search_query: 'ADMIN' });
-
-      expect(result.tools.length).toBeGreaterThan(0);
+      expect(result.tools.length).toBe(2);
       result.tools.forEach((tool: { name: string; resource: string; tags: string[] }) => {
         expect(
           tool.name.toLowerCase().includes('admin') ||
@@ -67,46 +61,55 @@ describe('dynamicTools', () => {
         ).toBeTruthy();
       });
     });
+
+    it('should filter endpoints by description', async () => {
+      const result = await toolsMap.list_api_endpoints.handler(fakeClient, {
+        search_query: 'Test endpoint for user_endpoint',
+      });
+
+      expect(result.tools).toHaveLength(1);
+      expect(result.tools[0].name).toBe('user_endpoint');
+      expect(result.tools[0].description).toBe('Test endpoint for user_endpoint');
+    });
+
+    it('should filter endpoints by partial description match', async () => {
+      const result = await toolsMap.list_api_endpoints.handler(fakeClient, {
+        search_query: 'endpoint for user',
+      });
+
+      expect(result.tools).toHaveLength(1);
+      expect(result.tools[0].name).toBe('user_endpoint');
+    });
   });
 
   describe('get_api_endpoint_schema', () => {
-    const getEndpointSchemaTool = tools.find((tool) => tool.tool.name === 'get_api_endpoint_schema');
-
     it('should return schema for existing endpoint', async () => {
-      if (!getEndpointSchemaTool) fail('get_api_endpoint_schema tool not found');
-
-      const result = await getEndpointSchemaTool.handler(fakeClient, { endpoint: 'test_read_endpoint' });
+      const result = await toolsMap.get_api_endpoint_schema.handler(fakeClient, {
+        endpoint: 'test_read_endpoint',
+      });
 
       expect(result).toEqual(endpoints[0]?.tool);
     });
 
     it('should throw error for non-existent endpoint', async () => {
-      if (!getEndpointSchemaTool) fail('get_api_endpoint_schema tool not found');
-
       await expect(
-        getEndpointSchemaTool.handler(fakeClient, { endpoint: 'non_existent_endpoint' }),
+        toolsMap.get_api_endpoint_schema.handler(fakeClient, { endpoint: 'non_existent_endpoint' }),
       ).rejects.toThrow('Endpoint non_existent_endpoint not found');
     });
 
     it('should throw error when no endpoint provided', async () => {
-      if (!getEndpointSchemaTool) fail('get_api_endpoint_schema tool not found');
-
-      await expect(getEndpointSchemaTool.handler(fakeClient, undefined)).rejects.toThrow(
+      await expect(toolsMap.get_api_endpoint_schema.handler(fakeClient, undefined)).rejects.toThrow(
         'No endpoint provided',
       );
     });
   });
 
   describe('invoke_api_endpoint', () => {
-    const invokeEndpointTool = tools.find((tool) => tool.tool.name === 'invoke_api_endpoint');
-
     it('should successfully invoke endpoint with valid arguments', async () => {
-      if (!invokeEndpointTool) fail('invoke_api_endpoint tool not found');
-
       const mockHandler = endpoints[0]?.handler as jest.Mock;
       mockHandler.mockClear();
 
-      await invokeEndpointTool.handler(fakeClient, {
+      await toolsMap.invoke_api_endpoint.handler(fakeClient, {
         endpoint_name: 'test_read_endpoint',
         args: { testParam: 'test value' },
       });
@@ -115,10 +118,8 @@ describe('dynamicTools', () => {
     });
 
     it('should throw error for non-existent endpoint', async () => {
-      if (!invokeEndpointTool) fail('invoke_api_endpoint tool not found');
-
       await expect(
-        invokeEndpointTool.handler(fakeClient, {
+        toolsMap.invoke_api_endpoint.handler(fakeClient, {
           endpoint_name: 'non_existent_endpoint',
           args: { testParam: 'test value' },
         }),
@@ -126,22 +127,26 @@ describe('dynamicTools', () => {
     });
 
     it('should throw error when no arguments provided', async () => {
-      if (!invokeEndpointTool) fail('invoke_api_endpoint tool not found');
-
-      await expect(invokeEndpointTool.handler(fakeClient, undefined)).rejects.toThrow('No endpoint provided');
+      await expect(toolsMap.invoke_api_endpoint.handler(fakeClient, undefined)).rejects.toThrow(
+        'No endpoint provided',
+      );
     });
 
     it('should throw error for invalid argument schema', async () => {
-      if (!invokeEndpointTool) fail('invoke_api_endpoint tool not found');
-
       await expect(
-        invokeEndpointTool.handler(fakeClient, {
+        toolsMap.invoke_api_endpoint.handler(fakeClient, {
           endpoint_name: 'test_read_endpoint',
           args: { wrongParam: 'test value' }, // Missing required testParam
         }),
       ).rejects.toThrow(/Invalid arguments for endpoint/);
     });
   });
+
+  function toolOrError(name: string) {
+    const tool = tools.find((tool) => tool.tool.name === name);
+    if (!tool) throw new Error(`Tool ${name} not found`);
+    return tool;
+  }
 });
 
 function makeEndpoint(
