@@ -85,6 +85,7 @@ describe('resource cnis', () => {
       cursor: 0,
       limit: 0,
       slot: 'slot',
+      tunnel_id: 'tunnel_id',
     });
   });
 
