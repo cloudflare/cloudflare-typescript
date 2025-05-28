@@ -146,15 +146,7 @@ export class Devices extends APIResource {
    * - GET /accounts/{account_id}/devices/physical-devices
    * - GET /accounts/{account_id}/devices/registrations
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const device of client.zeroTrust.devices.list({
-   *   account_id: '699d98642c564d2e855e9661899b7252',
-   * })) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(params: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device> {
     const { account_id } = params;
@@ -169,13 +161,7 @@ export class Devices extends APIResource {
    * - GET /accounts/{account_id}/devices/physical-devices/{device_id}
    * - GET /accounts/{account_id}/devices/registrations/{registration_id}
    *
-   * @example
-   * ```ts
-   * const device = await client.zeroTrust.devices.get(
-   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *   { account_id: '699d98642c564d2e855e9661899b7252' },
-   * );
-   * ```
+   * @deprecated
    */
   get(
     deviceId: string,

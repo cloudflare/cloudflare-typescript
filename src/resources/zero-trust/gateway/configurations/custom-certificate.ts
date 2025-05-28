@@ -8,13 +8,7 @@ export class CustomCertificate extends APIResource {
   /**
    * Fetches the current Zero Trust certificate configuration.
    *
-   * @example
-   * ```ts
-   * const customCertificateSettings =
-   *   await client.zeroTrust.gateway.configurations.customCertificate.get(
-   *     { account_id: '699d98642c564d2e855e9661899b7252' },
-   *   );
-   * ```
+   * @deprecated
    */
   get(
     params: CustomCertificateGetParams,

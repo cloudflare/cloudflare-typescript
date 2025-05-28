@@ -47,11 +47,7 @@ export class Top extends APIResource {
    * This endpoint is deprecated. To continue getting this data, switch to the
    * summary by industry endpoint.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.top.industry();
-   * ```
+   * @deprecated
    */
   industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
   industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
@@ -73,11 +69,7 @@ export class Top extends APIResource {
    * This endpoint is deprecated. To continue getting this data, switch to the
    * summary by vertical endpoint.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.top.vertical();
-   * ```
+   * @deprecated
    */
   vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
   vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
