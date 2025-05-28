@@ -33,6 +33,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'If specified, only show CNIs associated with the specified slot',
       },
+      tunnel_id: {
+        type: 'string',
+        description: 'If specified, only show cnis associated with the specified tunnel id',
+      },
     },
   },
 };
