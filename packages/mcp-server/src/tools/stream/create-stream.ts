@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream',
+  operationId: 'stream-videos-initiate-video-uploads-using-tus',
 };
 
 export const tool: Tool = {

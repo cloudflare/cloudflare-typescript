@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.prefixes',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/addressing/prefixes',
+  operationId: 'ip-address-management-prefixes-list-prefixes',
 };
 
 export const tool: Tool = {

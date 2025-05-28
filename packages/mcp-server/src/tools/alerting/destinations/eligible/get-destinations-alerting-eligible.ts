@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'alerting.destinations.eligible',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/alerting/v3/destinations/eligible',
+  operationId: 'notification-mechanism-eligibility-get-delivery-mechanism-eligibility',
 };
 
 export const tool: Tool = {

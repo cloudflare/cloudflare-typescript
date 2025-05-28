@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.commands.downloads',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/commands/{command_id}/downloads/{filename}',
+  operationId: 'get-commands-command-id-downloads-filename',
 };
 
 export const tool: Tool = {

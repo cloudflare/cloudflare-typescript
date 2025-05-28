@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.discovery.operations',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/api_gateway/discovery/operations/{operation_id}',
+  operationId: 'api-shield-api-patch-discovered-operation',
 };
 
 export const tool: Tool = {

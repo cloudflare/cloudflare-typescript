@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.prefixes.bgp_prefixes',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes',
+  operationId: 'ip-address-management-prefixes-create-bgp-prefix',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'schema_validation.settings.operations',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/schema_validation/settings/operations/{operation_id}',
+  operationId: 'schema-validation-update-per-operation-setting',
 };
 
 export const tool: Tool = {

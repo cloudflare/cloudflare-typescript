@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.investigate.preview',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/email-security/investigate/preview',
+  operationId: 'email_security_post_preview',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.lifecycle',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle',
+  operationId: 'r2-put-bucket-lifecycle-configuration',
 };
 
 export const tool: Tool = {

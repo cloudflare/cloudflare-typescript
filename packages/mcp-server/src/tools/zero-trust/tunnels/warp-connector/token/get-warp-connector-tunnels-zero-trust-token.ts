@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.tunnels.warp_connector.token',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/warp_connector/{tunnel_id}/token',
+  operationId: 'cloudflare-tunnel-get-a-warp-connector-tunnel-token',
 };
 
 export const tool: Tool = {

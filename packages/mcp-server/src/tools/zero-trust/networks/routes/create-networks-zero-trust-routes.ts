@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.networks.routes',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/teamnet/routes',
+  operationId: 'tunnel-route-create-a-tunnel-route',
 };
 
 export const tool: Tool = {

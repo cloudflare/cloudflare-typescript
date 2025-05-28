@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'network_interconnects.interconnects',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/cni/interconnects',
+  operationId: 'create_interconnect',
 };
 
 export const tool: Tool = {

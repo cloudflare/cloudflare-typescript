@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.registrations',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/devices/registrations',
+  operationId: 'delete-registrations',
 };
 
 export const tool: Tool = {

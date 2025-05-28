@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.indicator_feeds.permissions',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/indicator-feeds/permissions/view',
+  operationId: 'custom-indicator-feeds-view-permissions',
 };
 
 export const tool: Tool = {

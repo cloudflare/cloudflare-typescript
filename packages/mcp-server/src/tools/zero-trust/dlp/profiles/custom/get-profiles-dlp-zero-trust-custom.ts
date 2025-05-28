@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.profiles.custom',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dlp/profiles/custom/{profile_id}',
+  operationId: 'dlp-profiles-get-custom-profile',
 };
 
 export const tool: Tool = {

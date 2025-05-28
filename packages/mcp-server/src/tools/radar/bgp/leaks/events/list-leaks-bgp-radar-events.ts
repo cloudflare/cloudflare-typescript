@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.bgp.leaks.events',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/bgp/leaks/events',
+  operationId: 'radar-get-bgp-route-leak-events',
 };
 
 export const tool: Tool = {

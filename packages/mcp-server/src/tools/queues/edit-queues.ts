@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'queues',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/queues/{queue_id}',
+  operationId: 'queues-update-partial',
 };
 
 export const tool: Tool = {

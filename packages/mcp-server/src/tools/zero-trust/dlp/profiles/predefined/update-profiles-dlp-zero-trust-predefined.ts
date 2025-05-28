@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.profiles.predefined',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/dlp/profiles/predefined/{profile_id}',
+  operationId: 'dlp-profiles-update-predefined-profile',
 };
 
 export const tool: Tool = {

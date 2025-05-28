@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.policies.default.excludes',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/devices/policy/exclude',
+  operationId: 'devices-set-split-tunnel-exclude-list',
 };
 
 export const tool: Tool = {

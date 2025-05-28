@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workflows.instances',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/workflows/{workflow_name}/instances',
+  operationId: 'wor-list-workflow-instances',
 };
 
 export const tool: Tool = {

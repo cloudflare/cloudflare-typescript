@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.ases.tls_version',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/ases/tls_version/{tls_version}',
+  operationId: 'radar-get-http-top-ases-by-tls-version',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cache.cache_reserve',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/cache/cache_reserve',
+  operationId: 'zone-cache-settings-change-cache-reserve-setting',
 };
 
 export const tool: Tool = {

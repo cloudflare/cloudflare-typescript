@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.patterns',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/dlp/patterns/validate',
+  operationId: 'dlp-pattern-validate',
 };
 
 export const tool: Tool = {

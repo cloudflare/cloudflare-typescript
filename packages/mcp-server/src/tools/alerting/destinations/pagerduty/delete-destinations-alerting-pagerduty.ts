@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'alerting.destinations.pagerduty',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/alerting/v3/destinations/pagerduty',
+  operationId: 'notification-destinations-with-pager-duty-delete-pager-duty-services',
 };
 
 export const tool: Tool = {

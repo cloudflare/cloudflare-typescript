@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.applications.policy_tests',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/policy-tests/{policy_test_id}',
+  operationId: 'access-policy-tests-get-an-update',
 };
 
 export const tool: Tool = {

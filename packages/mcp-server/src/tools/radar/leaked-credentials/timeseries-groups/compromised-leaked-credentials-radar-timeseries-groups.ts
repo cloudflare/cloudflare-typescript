@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.leaked_credentials.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/leaked_credential_checks/timeseries_groups/compromised',
+  operationId: 'radar-get-leaked-credential-checks-timeseries-group-by-compromised',
 };
 
 export const tool: Tool = {

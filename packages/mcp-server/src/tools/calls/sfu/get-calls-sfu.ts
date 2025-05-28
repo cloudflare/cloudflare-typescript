@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'calls.sfu',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/calls/apps/{app_id}',
+  operationId: 'calls-apps-retrieve-app-details',
 };
 
 export const tool: Tool = {

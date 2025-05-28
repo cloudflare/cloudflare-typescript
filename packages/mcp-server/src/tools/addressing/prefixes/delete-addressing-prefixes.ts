@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.prefixes',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/addressing/prefixes/{prefix_id}',
+  operationId: 'ip-address-management-prefixes-delete-prefix',
 };
 
 export const tool: Tool = {

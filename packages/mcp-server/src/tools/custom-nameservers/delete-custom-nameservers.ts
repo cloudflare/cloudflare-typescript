@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_nameservers',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/custom_ns/{custom_ns_id}',
+  operationId: 'account-level-custom-nameservers-delete-account-custom-nameserver',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.regional_hostnames',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/addressing/regional_hostnames/{hostname}',
+  operationId: 'dls-account-regional-hostnames-account-delete-hostname',
 };
 
 export const tool: Tool = {

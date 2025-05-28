@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.ranking.domain',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/ranking/domain/{domain}',
+  operationId: 'radar-get-ranking-domain-details',
 };
 
 export const tool: Tool = {

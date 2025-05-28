@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.domains',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/domain',
+  operationId: 'domain-intelligence-get-domain-details',
 };
 
 export const tool: Tool = {

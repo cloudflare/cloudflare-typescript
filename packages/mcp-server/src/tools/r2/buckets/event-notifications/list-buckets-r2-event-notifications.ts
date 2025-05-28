@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.event_notifications',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration',
+  operationId: 'r2-get-event-notification-configs',
 };
 
 export const tool: Tool = {

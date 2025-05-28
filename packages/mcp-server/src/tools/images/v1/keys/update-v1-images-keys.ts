@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'images.v1.keys',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/images/v1/keys/{signing_key_name}',
+  operationId: 'cloudflare-images-keys-add-signing-key',
 };
 
 export const tool: Tool = {

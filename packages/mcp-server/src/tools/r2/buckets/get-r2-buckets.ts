@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}',
+  operationId: 'r2-get-bucket',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'user.tokens.value',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/user/tokens/{token_id}/value',
+  operationId: 'user-api-tokens-roll-token',
 };
 
 export const tool: Tool = {

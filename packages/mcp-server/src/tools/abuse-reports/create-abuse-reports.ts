@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'abuse_reports',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/abuse-reports/{report_type}',
+  operationId: 'SubmitAbuseReport',
 };
 
 export const tool: Tool = {

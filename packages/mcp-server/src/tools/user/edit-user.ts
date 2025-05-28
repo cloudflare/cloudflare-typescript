@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'user',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/user',
+  operationId: 'user-edit-user',
 };
 
 export const tool: Tool = {

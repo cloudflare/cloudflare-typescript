@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.fleet_status',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/fleet-status/over-time',
+  operationId: 'dex-fleet-status-over-time',
 };
 
 export const tool: Tool = {

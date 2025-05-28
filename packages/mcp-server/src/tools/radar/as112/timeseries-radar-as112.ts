@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.as112',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/as112/timeseries',
+  operationId: 'radar-get-dns-as112-timeseries',
 };
 
 export const tool: Tool = {

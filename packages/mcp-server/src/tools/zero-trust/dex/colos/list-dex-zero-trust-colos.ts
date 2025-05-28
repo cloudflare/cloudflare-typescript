@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.colos',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/colos',
+  operationId: 'dex-endpoints-list-colos',
 };
 
 export const tool: Tool = {

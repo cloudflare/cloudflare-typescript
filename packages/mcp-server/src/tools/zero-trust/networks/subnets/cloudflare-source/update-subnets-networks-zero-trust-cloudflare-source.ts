@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.networks.subnets.cloudflare_source',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}',
+  operationId: 'zero-trust-networks-subnet-update-cloudflare-source',
 };
 
 export const tool: Tool = {

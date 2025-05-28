@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'images.v1.variants',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/images/v1/variants/{variant_id}',
+  operationId: 'cloudflare-images-variants-update-a-variant',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.address_maps',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/addressing/address_maps',
+  operationId: 'ip-address-management-address-maps-list-address-maps',
 };
 
 export const tool: Tool = {

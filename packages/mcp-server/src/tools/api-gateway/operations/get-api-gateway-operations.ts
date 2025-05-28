@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.operations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/api_gateway/operations/{operation_id}',
+  operationId: 'api-shield-endpoint-management-retrieve-information-about-an-operation',
 };
 
 export const tool: Tool = {

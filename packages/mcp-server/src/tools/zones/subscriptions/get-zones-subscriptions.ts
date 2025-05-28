@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zones.subscriptions',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{identifier}/subscription',
+  operationId: 'zone-subscription-zone-subscription-details',
 };
 
 export const tool: Tool = {

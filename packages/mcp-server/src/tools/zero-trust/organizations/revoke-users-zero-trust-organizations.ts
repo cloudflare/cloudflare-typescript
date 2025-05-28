@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.organizations',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/organizations/revoke_user',
 };
 
 export const tool: Tool = {

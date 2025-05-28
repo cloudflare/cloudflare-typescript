@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_cloud_networking.on_ramps.address_spaces',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/magic/cloud/onramps/magic_wan_address_space',
+  operationId: 'onramps-mwan-addr-space-read',
 };
 
 export const tool: Tool = {

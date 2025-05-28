@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'argo.smart_routing',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/argo/smart_routing',
+  operationId: 'argo-smart-routing-get-argo-smart-routing-setting',
 };
 
 export const tool: Tool = {

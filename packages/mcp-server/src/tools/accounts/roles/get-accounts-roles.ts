@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'accounts.roles',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/roles/{role_id}',
+  operationId: 'account-roles-role-details',
 };
 
 export const tool: Tool = {

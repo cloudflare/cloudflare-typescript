@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/ai/run/{model_name}',
+  operationId: 'workers-ai-post-run-model',
 };
 
 export const tool: Tool = {

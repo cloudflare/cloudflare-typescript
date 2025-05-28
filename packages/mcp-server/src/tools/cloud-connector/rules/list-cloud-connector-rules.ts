@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloud_connector.rules',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/cloud_connector/rules',
+  operationId: 'zone-cloud-connector-rules',
 };
 
 export const tool: Tool = {

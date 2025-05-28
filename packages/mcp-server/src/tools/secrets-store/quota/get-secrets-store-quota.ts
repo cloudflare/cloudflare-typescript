@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'secrets_store.quota',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/secrets_store/quota',
+  operationId: 'secrets-store-quota',
 };
 
 export const tool: Tool = {

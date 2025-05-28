@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.settings',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/devices/settings',
+  operationId: 'zero-trust-accounts-update-device-settings-for-the-zero-trust-account',
 };
 
 export const tool: Tool = {

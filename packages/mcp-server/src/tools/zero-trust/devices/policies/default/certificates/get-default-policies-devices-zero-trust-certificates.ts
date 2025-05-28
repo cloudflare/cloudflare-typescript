@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.policies.default.certificates',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/devices/policy/certificates',
+  operationId: 'devices-get-policy-certificates',
 };
 
 export const tool: Tool = {

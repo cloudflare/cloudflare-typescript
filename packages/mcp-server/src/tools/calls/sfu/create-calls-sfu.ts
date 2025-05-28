@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'calls.sfu',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/calls/apps',
+  operationId: 'calls-apps-create-a-new-app',
 };
 
 export const tool: Tool = {

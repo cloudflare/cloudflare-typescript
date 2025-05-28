@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.pools.health',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/load_balancers/pools/{pool_id}/health',
+  operationId: 'account-load-balancer-pools-pool-health-details',
 };
 
 export const tool: Tool = {

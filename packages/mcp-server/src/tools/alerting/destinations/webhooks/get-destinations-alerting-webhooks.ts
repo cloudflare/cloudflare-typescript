@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'alerting.destinations.webhooks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}',
+  operationId: 'notification-webhooks-get-a-webhook',
 };
 
 export const tool: Tool = {

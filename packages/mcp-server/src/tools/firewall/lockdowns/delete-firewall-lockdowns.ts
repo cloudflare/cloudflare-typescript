@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'firewall.lockdowns',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/firewall/lockdowns/{lock_downs_id}',
+  operationId: 'zone-lockdown-delete-a-zone-lockdown-rule',
 };
 
 export const tool: Tool = {

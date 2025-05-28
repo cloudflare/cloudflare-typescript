@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}',
+  operationId: 'worker-script-download-worker',
 };
 
 export const tool: Tool = {

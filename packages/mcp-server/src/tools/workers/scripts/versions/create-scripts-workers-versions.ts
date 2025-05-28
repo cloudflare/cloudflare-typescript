@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.versions',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/versions',
+  operationId: 'worker-versions-upload-version',
 };
 
 export const tool: Tool = {

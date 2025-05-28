@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_cloud_networking.resources',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/magic/cloud/resources/policy-preview',
+  operationId: 'resources-catalog-policy-preview',
 };
 
 export const tool: Tool = {

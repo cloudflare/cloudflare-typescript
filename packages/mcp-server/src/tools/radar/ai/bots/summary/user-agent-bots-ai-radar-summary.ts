@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.ai.bots.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/ai/bots/summary/user_agent',
+  operationId: 'radar-get-ai-bots-summary-by-user-agent',
 };
 
 export const tool: Tool = {

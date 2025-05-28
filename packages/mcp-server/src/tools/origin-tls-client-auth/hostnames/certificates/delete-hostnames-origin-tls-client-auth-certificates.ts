@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'origin_tls_client_auth.hostnames.certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}',
+  operationId: 'per-hostname-authenticated-origin-pull-delete-hostname-client-certificate',
 };
 
 export const tool: Tool = {

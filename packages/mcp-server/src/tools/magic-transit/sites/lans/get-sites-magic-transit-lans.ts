@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.sites.lans',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}',
+  operationId: 'magic-site-lans-lan-details',
 };
 
 export const tool: Tool = {

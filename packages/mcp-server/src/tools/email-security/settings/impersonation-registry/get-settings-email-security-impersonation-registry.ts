@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.settings.impersonation_registry',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}',
+  operationId: 'email_security_get_display_name',
 };
 
 export const tool: Tool = {

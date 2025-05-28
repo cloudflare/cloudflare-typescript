@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/stream/{identifier}',
+  operationId: 'stream-videos-retrieve-video-details',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.tunnels.cloudflared.configurations',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/cfd_tunnel/{tunnel_id}/configurations',
+  operationId: 'cloudflare-tunnel-configuration-put-configuration',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workflows',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/workflows/{workflow_name}',
+  operationId: 'wor-create-or-modify-workflow',
 };
 
 export const tool: Tool = {

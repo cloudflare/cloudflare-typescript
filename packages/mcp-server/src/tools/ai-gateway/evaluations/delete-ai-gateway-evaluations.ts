@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai_gateway.evaluations',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}',
+  operationId: 'aig-config-delete-evaluations',
 };
 
 export const tool: Tool = {

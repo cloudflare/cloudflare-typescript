@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'security_center.insights.severity',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/security-center/insights/severity',
 };
 
 export const tool: Tool = {

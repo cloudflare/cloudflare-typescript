@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rules.lists',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/rules/lists/{list_id}',
+  operationId: 'lists-delete-a-list',
 };
 
 export const tool: Tool = {

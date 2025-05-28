@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'billing.profiles',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/billing/profile',
+  operationId: 'account-billing-profile-(-deprecated)-billing-profile-details',
 };
 
 export const tool: Tool = {

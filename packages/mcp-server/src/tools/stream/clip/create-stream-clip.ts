@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.clip',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/clip',
+  operationId: 'stream-video-clipping-clip-videos-given-a-start-and-end-time',
 };
 
 export const tool: Tool = {

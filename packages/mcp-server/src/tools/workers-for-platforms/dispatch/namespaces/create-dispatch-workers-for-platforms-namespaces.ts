@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers_for_platforms.dispatch.namespaces',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workers/dispatch/namespaces',
+  operationId: 'namespace-worker-create',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.watermarks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/stream/watermarks/{identifier}',
+  operationId: 'stream-watermark-profile-watermark-profile-details',
 };
 
 export const tool: Tool = {

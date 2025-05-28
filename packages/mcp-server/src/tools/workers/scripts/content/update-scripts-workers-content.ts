@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.content',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/content',
+  operationId: 'worker-script-put-content',
 };
 
 export const tool: Tool = {

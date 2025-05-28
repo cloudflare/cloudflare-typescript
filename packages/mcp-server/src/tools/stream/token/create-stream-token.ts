@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.token',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/token',
+  operationId: 'stream-videos-create-signed-url-tokens-for-videos',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'firewall.waf.packages.groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}',
+  operationId: 'waf-rule-groups-get-a-waf-rule-group',
 };
 
 export const tool: Tool = {

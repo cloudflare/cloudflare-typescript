@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.keys',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/keys',
+  operationId: 'stream-signing-keys-create-signing-keys',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.configurations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/api_gateway/configuration',
+  operationId: 'api-shield-settings-retrieve-information-about-specific-configuration-properties',
 };
 
 export const tool: Tool = {

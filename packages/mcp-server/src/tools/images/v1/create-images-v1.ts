@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'images.v1',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/images/v1',
+  operationId: 'cloudflare-images-upload-an-image-via-url',
 };
 
 export const tool: Tool = {

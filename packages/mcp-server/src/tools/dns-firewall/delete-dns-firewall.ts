@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns_firewall',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/dns_firewall/{dns_firewall_id}',
+  operationId: 'dns-firewall-delete-dns-firewall-cluster',
 };
 
 export const tool: Tool = {

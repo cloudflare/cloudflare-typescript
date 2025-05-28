@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.incoming',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/secondary_dns/incoming',
+  operationId: 'secondary-dns-(-secondary-zone)-secondary-zone-configuration-details',
 };
 
 export const tool: Tool = {

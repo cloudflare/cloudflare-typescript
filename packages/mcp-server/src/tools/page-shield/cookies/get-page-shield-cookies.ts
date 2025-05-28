@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'page_shield.cookies',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/page_shield/cookies/{cookie_id}',
+  operationId: 'page-shield-get-cookie',
 };
 
 export const tool: Tool = {

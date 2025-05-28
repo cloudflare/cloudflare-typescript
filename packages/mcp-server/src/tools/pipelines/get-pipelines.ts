@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pipelines',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/pipelines/{pipeline_name}',
+  operationId: 'getV4AccountsByAccount_idPipelinesByPipeline_name',
 };
 
 export const tool: Tool = {

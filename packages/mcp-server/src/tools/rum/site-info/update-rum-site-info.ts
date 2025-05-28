@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rum.site_info',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/rum/site_info/{site_id}',
+  operationId: 'web-analytics-update-site',
 };
 
 export const tool: Tool = {

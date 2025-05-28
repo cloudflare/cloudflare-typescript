@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'network_interconnects.slots',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cni/slots/{slot}',
+  operationId: 'get_slot',
 };
 
 export const tool: Tool = {

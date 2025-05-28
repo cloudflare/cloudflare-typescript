@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.force_axfr',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/secondary_dns/force_axfr',
+  operationId: 'secondary-dns-(-secondary-zone)-force-axfr',
 };
 
 export const tool: Tool = {

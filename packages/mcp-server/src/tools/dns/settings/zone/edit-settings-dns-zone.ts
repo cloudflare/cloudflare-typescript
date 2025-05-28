@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.settings.zone',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/dns_settings',
+  operationId: 'dns-settings-for-a-zone-update-dns-settings',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pages.projects.deployments',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}',
+  operationId: 'pages-deployment-get-deployment-info',
 };
 
 export const tool: Tool = {

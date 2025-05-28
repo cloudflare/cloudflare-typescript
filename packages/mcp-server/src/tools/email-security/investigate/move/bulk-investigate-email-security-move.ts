@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.investigate.move',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/email-security/investigate/move',
+  operationId: 'email_security_post_bulk_message_move',
 };
 
 export const tool: Tool = {

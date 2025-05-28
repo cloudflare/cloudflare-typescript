@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns_firewall.analytics.reports.bytimes',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dns_firewall/{dns_firewall_id}/dns_analytics/report/bytime',
+  operationId: 'dns-firewall-analytics-by-time',
 };
 
 export const tool: Tool = {

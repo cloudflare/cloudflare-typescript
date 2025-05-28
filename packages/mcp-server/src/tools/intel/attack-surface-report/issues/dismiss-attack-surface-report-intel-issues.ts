@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.attack_surface_report.issues',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/intel/attack-surface-report/{issue_id}/dismiss',
+  operationId: 'archive-security-center-insight-deprecated',
 };
 
 export const tool: Tool = {

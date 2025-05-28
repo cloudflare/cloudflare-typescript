@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'logs.rayid',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/logs/rayids/{ray_id}',
+  operationId: 'get-zones-zone_id-logs-rayids-ray_id',
 };
 
 export const tool: Tool = {

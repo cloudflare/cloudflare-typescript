@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'network_interconnects.cnis',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/cni/cnis/{cni}',
+  operationId: 'update_cni',
 };
 
 export const tool: Tool = {

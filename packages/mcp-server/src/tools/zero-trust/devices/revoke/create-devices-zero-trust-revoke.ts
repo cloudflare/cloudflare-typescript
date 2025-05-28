@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.revoke',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/devices/revoke',
+  operationId: 'devices-revoke-devices',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.infrastructure.targets',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/infrastructure/targets/{target_id}',
+  operationId: 'infra-targets-delete',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'schema_validation.settings',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/schema_validation/settings',
+  operationId: 'schema-validation-get-settings',
 };
 
 export const tool: Tool = {

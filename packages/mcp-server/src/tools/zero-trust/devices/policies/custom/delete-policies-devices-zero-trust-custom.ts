@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.policies.custom',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/devices/policy/{policy_id}',
+  operationId: 'devices-delete-device-settings-policy',
 };
 
 export const tool: Tool = {

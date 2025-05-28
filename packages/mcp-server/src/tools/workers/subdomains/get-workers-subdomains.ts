@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.subdomains',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/workers/subdomain',
+  operationId: 'worker-subdomain-get-subdomain',
 };
 
 export const tool: Tool = {

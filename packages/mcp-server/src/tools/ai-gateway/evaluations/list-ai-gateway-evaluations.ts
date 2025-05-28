@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai_gateway.evaluations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations',
+  operationId: 'aig-config-list-evaluations',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.warp_change_events',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/warp-change-events',
+  operationId: 'list-warp-change-events',
 };
 
 export const tool: Tool = {

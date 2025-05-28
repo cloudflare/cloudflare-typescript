@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'content_scanning',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/content-upload-scan/disable',
+  operationId: 'waf-content-scanning-disable',
 };
 
 export const tool: Tool = {

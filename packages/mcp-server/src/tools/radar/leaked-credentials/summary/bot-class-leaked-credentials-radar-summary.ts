@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.leaked_credentials.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/leaked_credential_checks/summary/bot_class',
+  operationId: 'radar-get-leaked-credential-checks-summary-by-bot-class',
 };
 
 export const tool: Tool = {

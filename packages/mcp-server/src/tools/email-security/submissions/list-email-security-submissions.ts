@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.submissions',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/email-security/submissions',
+  operationId: 'email_security_submissions',
 };
 
 export const tool: Tool = {

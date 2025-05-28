@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_network_monitoring.configs',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/mnm/config',
+  operationId: 'magic-network-monitoring-configuration-update-account-configuration-fields',
 };
 
 export const tool: Tool = {

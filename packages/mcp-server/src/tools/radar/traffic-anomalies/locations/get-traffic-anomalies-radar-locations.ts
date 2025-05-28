@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.traffic_anomalies.locations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/traffic_anomalies/locations',
+  operationId: 'radar-get-traffic-anomalies-top',
 };
 
 export const tool: Tool = {

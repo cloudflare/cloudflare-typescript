@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.domains',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/workers/domains',
+  operationId: 'worker-domain-list-domains',
 };
 
 export const tool: Tool = {

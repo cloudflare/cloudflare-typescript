@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai_gateway',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/ai-gateway/gateways',
+  operationId: 'aig-config-create-gateway',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.tags',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/access/tags/{tag_name}',
+  operationId: 'access-tags-delete-a-tag',
 };
 
 export const tool: Tool = {

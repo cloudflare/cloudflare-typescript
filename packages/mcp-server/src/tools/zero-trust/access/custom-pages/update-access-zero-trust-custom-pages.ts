@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.custom_pages',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/access/custom_pages/{custom_page_id}',
+  operationId: 'access-custom-pages-update-a-custom-page',
 };
 
 export const tool: Tool = {

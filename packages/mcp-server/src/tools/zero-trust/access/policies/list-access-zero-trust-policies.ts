@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.policies',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/policies',
+  operationId: 'access-policies-list-access-reusable-policies',
 };
 
 export const tool: Tool = {

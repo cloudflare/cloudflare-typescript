@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zaraz.publish',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/settings/zaraz/publish',
+  operationId: 'post-zones-zone_identifier-zaraz-publish',
 };
 
 export const tool: Tool = {

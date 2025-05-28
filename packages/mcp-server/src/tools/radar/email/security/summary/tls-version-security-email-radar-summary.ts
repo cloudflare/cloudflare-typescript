@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.email.security.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/email/security/summary/tls_version',
+  operationId: 'radar-get-email-security-summary-by-tls-version',
 };
 
 export const tool: Tool = {

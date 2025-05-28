@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'firewall.waf.overrides',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/firewall/waf/overrides',
+  operationId: 'waf-overrides-create-a-waf-override',
 };
 
 export const tool: Tool = {

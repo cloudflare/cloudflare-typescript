@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'kv.namespaces.metadata',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/metadata/{key_name}',
+  operationId: 'workers-kv-namespace-read-the-metadata-for-a-key',
 };
 
 export const tool: Tool = {

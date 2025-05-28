@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rum.site_info',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/rum/site_info/{site_id}',
+  operationId: 'web-analytics-delete-site',
 };
 
 export const tool: Tool = {

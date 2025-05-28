@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.captions.language',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/captions/{language}',
+  operationId: 'stream-subtitles/-captions-delete-captions-or-subtitles',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workflows.instances',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workflows/{workflow_name}/instances',
+  operationId: 'wor-create-new-workflow-instance',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.address_maps.ips',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/addressing/address_maps/{address_map_id}/ips/{ip_address}',
+  operationId: 'ip-address-management-address-maps-remove-an-ip-from-an-address-map',
 };
 
 export const tool: Tool = {

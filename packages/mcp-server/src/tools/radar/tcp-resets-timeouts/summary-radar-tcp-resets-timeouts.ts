@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.tcp_resets_timeouts',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/tcp_resets_timeouts/summary',
+  operationId: 'radar-get-tcp-resets-timeouts-summary',
 };
 
 export const tool: Tool = {

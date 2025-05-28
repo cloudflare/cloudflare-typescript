@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_hostnames.fallback_origin',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/custom_hostnames/fallback_origin',
+  operationId: 'custom-hostname-fallback-origin-for-a-zone-get-fallback-origin-for-custom-hostnames',
 };
 
 export const tool: Tool = {

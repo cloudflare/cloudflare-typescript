@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.users.active_sessions',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/users/{user_id}/active_sessions/{nonce}',
+  operationId: 'zero-trust-users-get-active-session',
 };
 
 export const tool: Tool = {

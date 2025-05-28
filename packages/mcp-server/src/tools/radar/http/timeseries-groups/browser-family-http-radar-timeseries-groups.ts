@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/timeseries_groups/browser_family',
+  operationId: 'radar-get-http-timeseries-group-by-browser-families',
 };
 
 export const tool: Tool = {

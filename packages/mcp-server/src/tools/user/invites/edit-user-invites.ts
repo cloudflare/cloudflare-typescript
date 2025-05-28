@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'user.invites',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/user/invites/{invite_id}',
+  operationId: "user'-s-invites-respond-to-invitation",
 };
 
 export const tool: Tool = {

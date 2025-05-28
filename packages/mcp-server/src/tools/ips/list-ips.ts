@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ips',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/ips',
+  operationId: 'cloudflare-i-ps-cloudflare-ip-details',
 };
 
 export const tool: Tool = {

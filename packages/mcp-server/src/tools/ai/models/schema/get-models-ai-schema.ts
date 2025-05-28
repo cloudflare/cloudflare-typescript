@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai.models.schema',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/ai/models/schema',
+  operationId: 'workers-ai-get-model-schema',
 };
 
 export const tool: Tool = {

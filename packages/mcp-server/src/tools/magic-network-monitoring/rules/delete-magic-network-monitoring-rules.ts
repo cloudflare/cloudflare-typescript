@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_network_monitoring.rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/mnm/rules/{rule_id}',
+  operationId: 'magic-network-monitoring-rules-delete-rule',
 };
 
 export const tool: Tool = {

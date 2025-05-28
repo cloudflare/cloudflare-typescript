@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_cloud_networking.catalog_syncs.prebuilt_policies',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/magic/cloud/catalog-syncs/prebuilt-policies',
+  operationId: 'catalog-syncs-prebuilt-policies-list',
 };
 
 export const tool: Tool = {

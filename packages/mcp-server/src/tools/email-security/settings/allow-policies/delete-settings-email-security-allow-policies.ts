@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.settings.allow_policies',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/email-security/settings/allow_policies/{policy_id}',
+  operationId: 'email_security_delete_allow_policy',
 };
 
 export const tool: Tool = {

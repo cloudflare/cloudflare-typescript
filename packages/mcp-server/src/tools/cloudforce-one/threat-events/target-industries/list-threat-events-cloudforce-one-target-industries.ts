@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.target_industries',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/targetIndustries',
+  operationId: 'get_TargetIndustryList',
 };
 
 export const tool: Tool = {

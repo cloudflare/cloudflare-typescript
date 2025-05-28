@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rulesets.phases.versions',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath:
+    '/{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions/{ruleset_version}',
 };
 
 export const tool: Tool = {

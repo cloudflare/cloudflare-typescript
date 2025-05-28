@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.settings.account',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/dns_settings',
+  operationId: 'dns-settings-for-an-account-update-dns-settings',
 };
 
 export const tool: Tool = {

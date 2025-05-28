@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_network_monitoring.rules.advertisements',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/mnm/rules/{rule_id}/advertisement',
+  operationId: 'magic-network-monitoring-rules-update-advertisement-for-rule',
 };
 
 export const tool: Tool = {

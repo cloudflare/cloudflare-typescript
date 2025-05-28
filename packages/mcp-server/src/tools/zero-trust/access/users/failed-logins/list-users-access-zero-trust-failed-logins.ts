@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.users.failed_logins',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/users/{user_id}/failed_logins',
+  operationId: 'zero-trust-users-get-failed-logins',
 };
 
 export const tool: Tool = {

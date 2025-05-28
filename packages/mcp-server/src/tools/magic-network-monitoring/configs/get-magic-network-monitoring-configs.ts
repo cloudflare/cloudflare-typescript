@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_network_monitoring.configs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/mnm/config',
+  operationId: 'magic-network-monitoring-configuration-list-account-configuration',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.indicator_feeds',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/indicator-feeds/{feed_id}/data',
+  operationId: 'custom-indicator-feeds-get-indicator-feed-data',
 };
 
 export const tool: Tool = {

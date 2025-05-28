@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.searches',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/load_balancers/search',
+  operationId: 'account-load-balancer-search-search-resources',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'spectrum.analytics.events.summaries',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/spectrum/analytics/events/summary',
+  operationId: 'spectrum-analytics-(-summary)-get-analytics-summary',
 };
 
 export const tool: Tool = {

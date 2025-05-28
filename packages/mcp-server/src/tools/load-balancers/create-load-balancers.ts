@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/load_balancers',
+  operationId: 'load-balancers-create-load-balancer',
 };
 
 export const tool: Tool = {

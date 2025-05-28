@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.top',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/browser_family',
+  operationId: 'radar-get-http-top-browser-families',
 };
 
 export const tool: Tool = {

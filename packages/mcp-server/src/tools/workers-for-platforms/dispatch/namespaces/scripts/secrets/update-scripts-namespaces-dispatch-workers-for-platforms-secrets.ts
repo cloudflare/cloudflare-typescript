@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'workers_for_platforms.dispatch.namespaces.scripts.secrets',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath:
+    '/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets',
+  operationId: 'namespace-worker-put-script-secrets',
 };
 
 export const tool: Tool = {

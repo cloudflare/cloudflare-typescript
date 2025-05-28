@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'web3.hostnames',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/web3/hostnames',
+  operationId: 'web3-hostname-list-web3-hostnames',
 };
 
 export const tool: Tool = {

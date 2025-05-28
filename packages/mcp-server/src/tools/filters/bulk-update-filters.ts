@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'filters',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/filters',
+  operationId: 'filters-update-filters',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'spectrum.analytics.aggregates.currents',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/spectrum/analytics/aggregate/current',
+  operationId: 'spectrum-aggregate-analytics-get-current-aggregated-analytics',
 };
 
 export const tool: Tool = {

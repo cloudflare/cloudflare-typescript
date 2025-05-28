@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.whois',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/whois',
+  operationId: 'whois-record-get-whois-record',
 };
 
 export const tool: Tool = {

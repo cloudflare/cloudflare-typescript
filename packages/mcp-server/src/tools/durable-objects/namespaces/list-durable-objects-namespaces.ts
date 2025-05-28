@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'durable_objects.namespaces',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/workers/durable_objects/namespaces',
+  operationId: 'durable-objects-namespace-list-namespaces',
 };
 
 export const tool: Tool = {

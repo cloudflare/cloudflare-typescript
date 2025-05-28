@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'speed.schedule',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/speed_api/schedule/{url}',
+  operationId: 'speed-get-scheduled-test',
 };
 
 export const tool: Tool = {

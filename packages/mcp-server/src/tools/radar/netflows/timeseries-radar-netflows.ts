@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.netflows',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/netflows/timeseries',
+  operationId: 'radar-get-netflows-timeseries',
 };
 
 export const tool: Tool = {

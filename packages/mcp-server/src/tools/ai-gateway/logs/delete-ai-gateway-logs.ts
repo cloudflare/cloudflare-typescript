@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai_gateway.logs',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs',
+  operationId: 'aig-config-delete-gateway-logs',
 };
 
 export const tool: Tool = {

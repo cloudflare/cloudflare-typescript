@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.ases.ip_version',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/ases/ip_version/{ip_version}',
+  operationId: 'radar-get-http-top-ases-by-ip-version',
 };
 
 export const tool: Tool = {

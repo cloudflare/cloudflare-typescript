@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.deployments',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/deployments',
+  operationId: 'worker-deployments-create-deployment',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'firewall.waf.packages.groups',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}',
+  operationId: 'waf-rule-groups-update-a-waf-rule-group',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workflows.instances.status',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/status',
+  operationId: 'wor-change-status-workflow-instance',
 };
 
 export const tool: Tool = {

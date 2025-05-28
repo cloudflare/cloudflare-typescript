@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.resilience.global_warp_override',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/devices/resilience/disconnect',
+  operationId: 'devices-resilience-set-global-warp-override',
 };
 
 export const tool: Tool = {

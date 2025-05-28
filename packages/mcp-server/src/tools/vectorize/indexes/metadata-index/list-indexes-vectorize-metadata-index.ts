@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'vectorize.indexes.metadata_index',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/vectorize/v2/indexes/{index_name}/metadata_index/list',
+  operationId: 'vectorize-list-metadata-indexes',
 };
 
 export const tool: Tool = {

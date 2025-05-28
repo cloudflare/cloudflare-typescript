@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'iam.permission_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/iam/permission_groups/{permission_group_id}',
+  operationId: 'account-permission-group-details',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'kv.namespaces.keys',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk',
+  operationId: 'workers-kv-namespace-write-multiple-key-value-pairs',
 };
 
 export const tool: Tool = {

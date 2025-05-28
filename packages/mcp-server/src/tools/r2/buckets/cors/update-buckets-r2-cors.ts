@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.cors',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/cors',
+  operationId: 'r2-put-bucket-cors-policy',
 };
 
 export const tool: Tool = {

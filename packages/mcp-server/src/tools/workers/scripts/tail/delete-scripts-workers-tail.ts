@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.tail',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/tails/{id}',
+  operationId: 'worker-tail-logs-delete-tail',
 };
 
 export const tool: Tool = {

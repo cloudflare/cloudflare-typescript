@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pages.projects',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/pages/projects',
+  operationId: 'pages-project-create-project',
 };
 
 export const tool: Tool = {

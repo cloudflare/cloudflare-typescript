@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'queues.consumers',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/queues/{queue_id}/consumers',
+  operationId: 'queues-list-consumers',
 };
 
 export const tool: Tool = {

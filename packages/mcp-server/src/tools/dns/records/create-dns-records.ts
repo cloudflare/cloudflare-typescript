@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.records',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/dns_records',
+  operationId: 'dns-records-for-a-zone-create-dns-record',
 };
 
 export const tool: Tool = {

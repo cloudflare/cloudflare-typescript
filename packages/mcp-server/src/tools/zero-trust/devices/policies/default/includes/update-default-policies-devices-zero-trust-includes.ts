@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.policies.default.includes',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/devices/policy/include',
+  operationId: 'devices-set-split-tunnel-include-list',
 };
 
 export const tool: Tool = {

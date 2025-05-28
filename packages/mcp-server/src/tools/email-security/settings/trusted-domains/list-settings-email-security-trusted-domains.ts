@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.settings.trusted_domains',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/email-security/settings/trusted_domains',
+  operationId: 'email_security_list_trusted_domains',
 };
 
 export const tool: Tool = {

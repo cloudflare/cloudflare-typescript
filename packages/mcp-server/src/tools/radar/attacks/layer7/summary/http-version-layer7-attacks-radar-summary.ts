@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.attacks.layer7.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/attacks/layer7/summary/http_version',
+  operationId: 'radar-get-attacks-layer7-summary-by-http-version',
 };
 
 export const tool: Tool = {

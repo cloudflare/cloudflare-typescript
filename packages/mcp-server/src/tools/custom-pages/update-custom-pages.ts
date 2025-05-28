@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'custom_pages',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_pages/{identifier}',
 };
 
 export const tool: Tool = {

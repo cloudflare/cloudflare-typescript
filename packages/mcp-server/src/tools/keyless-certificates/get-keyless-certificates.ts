@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'keyless_certificates',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/keyless_certificates/{keyless_certificate_id}',
+  operationId: 'keyless-ssl-for-a-zone-get-keyless-ssl-configuration',
 };
 
 export const tool: Tool = {

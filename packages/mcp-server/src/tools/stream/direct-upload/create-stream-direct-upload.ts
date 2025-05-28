@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.direct_upload',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/direct_upload',
+  operationId: 'stream-videos-upload-videos-via-direct-upload-ur-ls',
 };
 
 export const tool: Tool = {

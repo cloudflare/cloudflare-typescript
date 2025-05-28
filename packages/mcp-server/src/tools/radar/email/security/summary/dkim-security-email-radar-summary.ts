@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.email.security.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/email/security/summary/dkim',
+  operationId: 'radar-get-email-security-summary-by-dkim',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.tests',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/tests/overview',
+  operationId: 'dex-endpoints-list-tests-overview',
 };
 
 export const tool: Tool = {

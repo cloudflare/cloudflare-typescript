@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'origin_ca_certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/certificates/{certificate_id}',
+  operationId: 'origin-ca-revoke-certificate',
 };
 
 export const tool: Tool = {

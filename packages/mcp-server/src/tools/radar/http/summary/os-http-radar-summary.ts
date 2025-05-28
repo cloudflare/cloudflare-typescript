@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/summary/os',
+  operationId: 'radar-get-http-summary-by-operating-system',
 };
 
 export const tool: Tool = {

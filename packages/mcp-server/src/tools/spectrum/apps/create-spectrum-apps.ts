@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'spectrum.apps',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/spectrum/apps',
+  operationId: 'spectrum-applications-create-spectrum-application-using-a-name-for-the-origin',
 };
 
 export const tool: Tool = {

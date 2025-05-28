@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zones.activation_check',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/activation_check',
+  operationId: 'put-zones-zone_id-activation_check',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.proxy_endpoints',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}',
+  operationId: 'zero-trust-gateway-proxy-endpoints-proxy-endpoint-details',
 };
 
 export const tool: Tool = {

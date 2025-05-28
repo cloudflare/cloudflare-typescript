@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'resource_sharing.resources',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/shares/{share_id}/resources',
+  operationId: 'share-resource-create',
 };
 
 export const tool: Tool = {

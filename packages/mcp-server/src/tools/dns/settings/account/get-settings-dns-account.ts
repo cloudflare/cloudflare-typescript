@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.settings.account',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dns_settings',
+  operationId: 'dns-settings-for-an-account-list-dns-settings',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.records',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/dns_records/{dns_record_id}',
+  operationId: 'dns-records-for-a-zone-dns-record-details',
 };
 
 export const tool: Tool = {

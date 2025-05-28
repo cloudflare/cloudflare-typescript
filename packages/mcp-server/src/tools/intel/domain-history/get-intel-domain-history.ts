@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.domain_history',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/domain-history',
+  operationId: 'domain-history-get-domain-history',
 };
 
 export const tool: Tool = {

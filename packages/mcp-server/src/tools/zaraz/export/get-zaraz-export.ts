@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zaraz.export',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/settings/zaraz/export',
+  operationId: 'get-zones-zone_identifier-zaraz-export',
 };
 
 export const tool: Tool = {

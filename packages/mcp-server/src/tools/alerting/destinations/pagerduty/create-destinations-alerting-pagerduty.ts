@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'alerting.destinations.pagerduty',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/alerting/v3/destinations/pagerduty/connect',
+  operationId: 'notification-destinations-with-pager-duty-connect-pager-duty',
 };
 
 export const tool: Tool = {

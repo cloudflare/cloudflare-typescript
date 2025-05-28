@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zones.subscriptions',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{identifier}/subscription',
+  operationId: 'zone-subscription-update-zone-subscription',
 };
 
 export const tool: Tool = {

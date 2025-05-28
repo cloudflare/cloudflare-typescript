@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'url_scanner.responses',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/urlscanner/v2/responses/{response_id}',
+  operationId: 'urlscanner-get-response-v2',
 };
 
 export const tool: Tool = {

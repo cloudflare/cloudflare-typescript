@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns_firewall',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dns_firewall/{dns_firewall_id}',
+  operationId: 'dns-firewall-dns-firewall-cluster-details',
 };
 
 export const tool: Tool = {

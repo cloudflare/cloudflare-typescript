@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.categories',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/categories/{category_id}',
+  operationId: 'get_CategoryRead',
 };
 
 export const tool: Tool = {

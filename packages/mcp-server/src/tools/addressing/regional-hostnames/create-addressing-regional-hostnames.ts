@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.regional_hostnames',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/addressing/regional_hostnames',
+  operationId: 'dls-account-regional-hostnames-account-create-hostname',
 };
 
 export const tool: Tool = {

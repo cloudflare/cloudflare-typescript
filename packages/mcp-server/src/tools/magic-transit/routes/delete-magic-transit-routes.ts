@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.routes',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/magic/routes/{route_id}',
+  operationId: 'magic-static-routes-delete-route',
 };
 
 export const tool: Tool = {

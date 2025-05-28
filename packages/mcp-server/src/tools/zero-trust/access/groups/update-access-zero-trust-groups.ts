@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.groups',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/groups/{group_id}',
 };
 
 export const tool: Tool = {

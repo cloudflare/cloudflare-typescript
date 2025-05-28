@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'healthchecks.previews',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/healthchecks/preview',
+  operationId: 'health-checks-create-preview-health-check',
 };
 
 export const tool: Tool = {

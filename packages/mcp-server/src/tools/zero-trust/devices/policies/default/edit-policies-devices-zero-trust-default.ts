@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.policies.default',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/devices/policy',
+  operationId: 'devices-update-default-device-settings-policy',
 };
 
 export const tool: Tool = {

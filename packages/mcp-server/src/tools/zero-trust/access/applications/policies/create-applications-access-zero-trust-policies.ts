@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.applications.policies',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/policies',
 };
 
 export const tool: Tool = {

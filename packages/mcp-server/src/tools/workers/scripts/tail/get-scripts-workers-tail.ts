@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.tail',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/tails',
 };
 
 export const tool: Tool = {

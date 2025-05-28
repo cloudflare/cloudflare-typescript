@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'mtls_certificates',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/mtls_certificates/{mtls_certificate_id}',
+  operationId: 'm-tls-certificate-management-get-m-tls-certificate',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workflows.instances.events',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/events/{event_type}',
+  operationId: 'wor-send-event-workflow-instance',
 };
 
 export const tool: Tool = {

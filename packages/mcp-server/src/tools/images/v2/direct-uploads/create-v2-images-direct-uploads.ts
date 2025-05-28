@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'images.v2.direct_uploads',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/images/v2/direct_upload',
+  operationId: 'cloudflare-images-create-authenticated-direct-upload-url-v-2',
 };
 
 export const tool: Tool = {

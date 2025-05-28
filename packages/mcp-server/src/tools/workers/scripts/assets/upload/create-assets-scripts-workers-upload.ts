@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.assets.upload',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/assets-upload-session',
+  operationId: 'worker-script-update-create-assets-upload-session',
 };
 
 export const tool: Tool = {

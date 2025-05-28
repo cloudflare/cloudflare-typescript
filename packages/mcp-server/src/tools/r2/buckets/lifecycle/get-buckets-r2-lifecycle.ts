@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.lifecycle',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle',
+  operationId: 'r2-get-bucket-lifecycle-configuration',
 };
 
 export const tool: Tool = {

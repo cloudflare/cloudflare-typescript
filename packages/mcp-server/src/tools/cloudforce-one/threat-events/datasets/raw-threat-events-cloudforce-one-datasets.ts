@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.datasets',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}',
+  operationId: 'get_EventRawReadDS',
 };
 
 export const tool: Tool = {

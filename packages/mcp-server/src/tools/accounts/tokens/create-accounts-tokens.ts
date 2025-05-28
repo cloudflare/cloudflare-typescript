@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'accounts.tokens',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/tokens',
+  operationId: 'account-api-tokens-create-token',
 };
 
 export const tool: Tool = {

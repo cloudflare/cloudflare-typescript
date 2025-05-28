@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.outgoing',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/secondary_dns/outgoing',
+  operationId: 'secondary-dns-(-primary-zone)-update-primary-zone-configuration',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'botnet_feed.configs.asn',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/botnet_feed/configs/asn',
+  operationId: 'botnet-threat-feed-list-asn',
 };
 
 export const tool: Tool = {

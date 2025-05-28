@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.quality.speed.top',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/quality/speed/top/ases',
+  operationId: 'radar-get-quality-speed-top-ases',
 };
 
 export const tool: Tool = {

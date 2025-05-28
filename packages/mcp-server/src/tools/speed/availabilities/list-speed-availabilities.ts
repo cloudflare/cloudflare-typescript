@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'speed.availabilities',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/speed_api/availabilities',
+  operationId: 'speed-get-availabilities',
 };
 
 export const tool: Tool = {

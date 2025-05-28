@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'workers_for_platforms.dispatch.namespaces.scripts.asset_upload',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath:
+    '/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/assets-upload-session',
+  operationId: 'namespace-worker-script-update-create-assets-upload-session',
 };
 
 export const tool: Tool = {

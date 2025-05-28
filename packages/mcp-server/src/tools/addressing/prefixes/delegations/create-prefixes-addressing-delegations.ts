@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.prefixes.delegations',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/addressing/prefixes/{prefix_id}/delegations',
+  operationId: 'ip-address-management-prefix-delegation-create-prefix-delegation',
 };
 
 export const tool: Tool = {

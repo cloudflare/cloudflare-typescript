@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cache.smart_tiered_cache',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/cache/tiered_cache_smart_topology_enable',
+  operationId: 'smart-tiered-cache-get-smart-tiered-cache-setting',
 };
 
 export const tool: Tool = {

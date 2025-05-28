@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.resilience.global_warp_override',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/devices/resilience/disconnect',
+  operationId: 'devices-resilience-retrieve-global-warp-override',
 };
 
 export const tool: Tool = {

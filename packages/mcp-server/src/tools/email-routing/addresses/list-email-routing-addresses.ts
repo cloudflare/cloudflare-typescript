@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_routing.addresses',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/email/routing/addresses',
+  operationId: 'email-routing-destination-addresses-list-destination-addresses',
 };
 
 export const tool: Tool = {

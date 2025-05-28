@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.risk_scoring.behaviours',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/zt_risk_scoring/behaviors',
+  operationId: 'dlp-risk-score-behaviors-put',
 };
 
 export const tool: Tool = {

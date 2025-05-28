@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'browser_rendering.markdown',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/browser-rendering/markdown',
+  operationId: 'brapi-post_Markdown',
 };
 
 export const tool: Tool = {

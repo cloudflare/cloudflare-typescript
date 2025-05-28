@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'origin_ca_certificates',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/certificates/{certificate_id}',
+  operationId: 'origin-ca-get-certificate',
 };
 
 export const tool: Tool = {

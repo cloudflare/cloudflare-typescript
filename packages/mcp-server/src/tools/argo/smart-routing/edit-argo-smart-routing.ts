@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'argo.smart_routing',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/argo/smart_routing',
+  operationId: 'argo-smart-routing-patch-argo-smart-routing-setting',
 };
 
 export const tool: Tool = {

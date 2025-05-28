@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/summary/http_protocol',
+  operationId: 'radar-get-http-summary-by-http-protocol',
 };
 
 export const tool: Tool = {

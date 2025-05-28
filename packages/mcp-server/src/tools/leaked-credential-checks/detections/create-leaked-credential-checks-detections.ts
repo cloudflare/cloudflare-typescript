@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'leaked_credential_checks.detections',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/leaked-credential-checks/detections',
+  operationId: 'waf-product-api-leaked-credentials-create-detection',
 };
 
 export const tool: Tool = {

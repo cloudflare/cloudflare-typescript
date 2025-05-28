@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'healthchecks',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/healthchecks/{healthcheck_id}',
+  operationId: 'health-checks-delete-health-check',
 };
 
 export const tool: Tool = {

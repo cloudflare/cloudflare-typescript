@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'spectrum.analytics.events.bytimes',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/spectrum/analytics/events/bytime',
+  operationId: 'spectrum-analytics-(-by-time)-get-analytics-by-time',
 };
 
 export const tool: Tool = {

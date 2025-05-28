@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/r2/buckets',
+  operationId: 'r2-list-buckets',
 };
 
 export const tool: Tool = {

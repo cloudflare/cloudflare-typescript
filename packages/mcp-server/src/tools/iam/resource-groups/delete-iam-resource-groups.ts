@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'iam.resource_groups',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/iam/resource_groups/{resource_group_id}',
+  operationId: 'account-resource-group-delete',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.as112.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/as112/timeseries_groups/ip_version',
+  operationId: 'radar-get-dns-as112-timeseries-group-by-ip-version',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.users.last_seen_identity',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/users/{user_id}/last_seen_identity',
+  operationId: 'zero-trust-users-get-last-seen-identity',
 };
 
 export const tool: Tool = {

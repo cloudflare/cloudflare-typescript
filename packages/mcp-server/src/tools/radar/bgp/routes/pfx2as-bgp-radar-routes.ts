@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.bgp.routes',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/bgp/routes/pfx2as',
+  operationId: 'radar-get-bgp-pfx2as',
 };
 
 export const tool: Tool = {

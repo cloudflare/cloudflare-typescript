@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'page_shield',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/page_shield',
+  operationId: 'page-shield-update-settings',
 };
 
 export const tool: Tool = {

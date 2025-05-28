@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.dnssec',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/dnssec',
+  operationId: 'dnssec-edit-dnssec-status',
 };
 
 export const tool: Tool = {

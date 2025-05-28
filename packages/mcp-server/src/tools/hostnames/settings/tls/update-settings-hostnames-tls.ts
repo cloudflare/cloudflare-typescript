@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'hostnames.settings.tls',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}',
+  operationId: 'per-hostname-tls-settings-put',
 };
 
 export const tool: Tool = {

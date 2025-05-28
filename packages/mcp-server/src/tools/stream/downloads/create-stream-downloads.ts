@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.downloads',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/downloads',
+  operationId: 'stream-m-p-4-downloads-create-downloads',
 };
 
 export const tool: Tool = {

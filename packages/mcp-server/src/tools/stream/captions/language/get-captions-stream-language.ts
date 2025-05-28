@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.captions.language',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/captions/{language}',
+  operationId: 'stream-subtitles/-captions-get-caption-or-subtitle-for-language',
 };
 
 export const tool: Tool = {

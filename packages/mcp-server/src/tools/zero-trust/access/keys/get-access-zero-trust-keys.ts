@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.keys',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/keys',
+  operationId: 'access-key-configuration-get-the-access-key-configuration',
 };
 
 export const tool: Tool = {

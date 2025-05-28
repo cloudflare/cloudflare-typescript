@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.service_tokens',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/access/service_tokens/{service_token_id}/refresh',
+  operationId: 'access-service-tokens-refresh-a-service-token',
 };
 
 export const tool: Tool = {

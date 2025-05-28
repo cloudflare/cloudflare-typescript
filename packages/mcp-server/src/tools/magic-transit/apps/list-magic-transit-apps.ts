@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.apps',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/magic/apps',
+  operationId: 'magic-account-apps-list-apps',
 };
 
 export const tool: Tool = {

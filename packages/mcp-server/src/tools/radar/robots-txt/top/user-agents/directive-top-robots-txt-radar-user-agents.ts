@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.robots_txt.top.user_agents',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/robots_txt/top/user_agents/directive',
+  operationId: 'radar-get-robots-txt-top-user-agents-by-directive',
 };
 
 export const tool: Tool = {

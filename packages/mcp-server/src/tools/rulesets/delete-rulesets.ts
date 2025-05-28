@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'rulesets',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}',
 };
 
 export const tool: Tool = {

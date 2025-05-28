@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.ai.inference.timeseries_groups.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/ai/inference/timeseries_groups/model',
+  operationId: 'radar-get-ai-inference-timeseries-group-by-model',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.prefixes',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/addressing/prefixes/{prefix_id}',
+  operationId: 'ip-address-management-prefixes-update-prefix-description',
 };
 
 export const tool: Tool = {

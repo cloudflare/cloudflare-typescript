@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'calls.turn',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/calls/turn_keys',
+  operationId: 'calls-turn-key-create',
 };
 
 export const tool: Tool = {

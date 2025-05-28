@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.embed',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/embed',
+  operationId: 'stream-videos-retreieve-embed-code-html',
 };
 
 export const tool: Tool = {

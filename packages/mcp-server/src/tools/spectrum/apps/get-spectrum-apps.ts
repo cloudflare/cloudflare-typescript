@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'spectrum.apps',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/spectrum/apps/{app_id}',
+  operationId: 'spectrum-applications-get-spectrum-application-configuration',
 };
 
 export const tool: Tool = {

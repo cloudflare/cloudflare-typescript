@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.robots_txt.top',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/robots_txt/top/domain_categories',
+  operationId: 'radar-get-robots-txt-top-domain-categories-by-files-parsed',
 };
 
 export const tool: Tool = {

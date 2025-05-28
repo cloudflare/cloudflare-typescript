@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.audio_tracks',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/audio/{audio_identifier}',
+  operationId: 'delete-audio-tracks',
 };
 
 export const tool: Tool = {

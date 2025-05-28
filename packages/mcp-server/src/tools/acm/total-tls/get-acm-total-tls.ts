@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'acm.total_tls',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/acm/total_tls',
+  operationId: 'total-tls-total-tls-settings-details',
 };
 
 export const tool: Tool = {

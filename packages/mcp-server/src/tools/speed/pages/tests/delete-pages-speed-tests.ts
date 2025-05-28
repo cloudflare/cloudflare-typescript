@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'speed.pages.tests',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/speed_api/pages/{url}/tests',
+  operationId: 'speed-delete-tests',
 };
 
 export const tool: Tool = {

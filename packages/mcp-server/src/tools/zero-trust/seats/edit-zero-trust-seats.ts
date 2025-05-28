@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.seats',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/access/seats',
+  operationId: 'zero-trust-seats-update-a-user-seat',
 };
 
 export const tool: Tool = {

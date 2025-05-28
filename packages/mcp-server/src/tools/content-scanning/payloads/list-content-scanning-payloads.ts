@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'content_scanning.payloads',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/content-upload-scan/payloads',
+  operationId: 'waf-content-scanning-list-custom-scan-expressions',
 };
 
 export const tool: Tool = {

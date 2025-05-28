@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cache',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/purge_cache',
+  operationId: 'zone-purge',
 };
 
 export const tool: Tool = {

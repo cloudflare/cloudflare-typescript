@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'vectorize.indexes',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/vectorize/v2/indexes/{index_name}',
+  operationId: 'vectorize-delete-vectorize-index',
 };
 
 export const tool: Tool = {

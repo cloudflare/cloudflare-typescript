@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'user.billing.history',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/user/billing/history',
+  operationId: 'user-billing-history-(-deprecated)-billing-history-details',
 };
 
 export const tool: Tool = {

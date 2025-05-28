@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.networks.subnets',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/zerotrust/subnets',
+  operationId: 'zero-trust-networks-subnets-list',
 };
 
 export const tool: Tool = {

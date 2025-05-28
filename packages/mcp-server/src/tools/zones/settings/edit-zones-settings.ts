@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zones.settings',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/settings/{setting_id}',
+  operationId: 'zone-settings-edit-single-setting',
 };
 
 export const tool: Tool = {

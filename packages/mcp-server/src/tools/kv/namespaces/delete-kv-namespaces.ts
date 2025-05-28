@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'kv.namespaces',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/storage/kv/namespaces/{namespace_id}',
+  operationId: 'workers-kv-namespace-remove-a-namespace',
 };
 
 export const tool: Tool = {

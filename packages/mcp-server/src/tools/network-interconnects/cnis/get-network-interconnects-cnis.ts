@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'network_interconnects.cnis',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cni/cnis/{cni}',
+  operationId: 'get_cni',
 };
 
 export const tool: Tool = {

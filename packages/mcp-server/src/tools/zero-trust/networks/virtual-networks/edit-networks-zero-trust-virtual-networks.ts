@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.networks.virtual_networks',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}',
+  operationId: 'tunnel-virtual-network-update',
 };
 
 export const tool: Tool = {

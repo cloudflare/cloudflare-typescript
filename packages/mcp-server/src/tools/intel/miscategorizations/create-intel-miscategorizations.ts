@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.miscategorizations',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/intel/miscategorization',
+  operationId: 'miscategorization-create-miscategorization',
 };
 
 export const tool: Tool = {

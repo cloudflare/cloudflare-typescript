@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'browser_rendering.screenshot',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/browser-rendering/screenshot',
+  operationId: 'brapi-post_Screenshot',
 };
 
 export const tool: Tool = {

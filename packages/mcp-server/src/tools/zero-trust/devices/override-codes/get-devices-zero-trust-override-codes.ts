@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.override_codes',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/devices/registrations/{registration_id}/override_codes',
+  operationId: 'get-registration-override-codes',
 };
 
 export const tool: Tool = {

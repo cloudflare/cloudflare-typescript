@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.watermarks',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/watermarks',
+  operationId: 'stream-watermark-profile-create-watermark-profiles-via-basic-upload',
 };
 
 export const tool: Tool = {

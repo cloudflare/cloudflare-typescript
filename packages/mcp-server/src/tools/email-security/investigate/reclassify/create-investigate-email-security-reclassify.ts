@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.investigate.reclassify',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/email-security/investigate/{postfix_id}/reclassify',
+  operationId: 'email_security_post_reclassify',
 };
 
 export const tool: Tool = {

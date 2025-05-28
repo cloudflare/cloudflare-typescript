@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'alerting.history',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/alerting/v3/history',
+  operationId: 'notification-history-list-history',
 };
 
 export const tool: Tool = {

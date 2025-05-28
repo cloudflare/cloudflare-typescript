@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.settings',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/script-settings',
+  operationId: 'worker-script-settings-patch-settings',
 };
 
 export const tool: Tool = {

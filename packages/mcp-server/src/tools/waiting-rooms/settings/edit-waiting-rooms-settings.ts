@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'waiting_rooms.settings',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/waiting_rooms/settings',
+  operationId: 'waiting-room-patch-zone-settings',
 };
 
 export const tool: Tool = {

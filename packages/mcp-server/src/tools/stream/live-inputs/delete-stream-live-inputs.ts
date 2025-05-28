@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.live_inputs',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/stream/live_inputs/{live_input_identifier}',
+  operationId: 'stream-live-inputs-delete-a-live-input',
 };
 
 export const tool: Tool = {

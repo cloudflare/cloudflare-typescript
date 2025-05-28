@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'web3.hostnames.ipfs_universal_paths.content_lists.entries',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries',
+  operationId: 'web3-hostname-create-ipfs-universal-path-gateway-content-list-entry',
 };
 
 export const tool: Tool = {

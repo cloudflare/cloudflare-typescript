@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'logpush.edge',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/logpush/edge',
+  operationId: 'get-zones-zone_id-logpush-edge-jobs',
 };
 
 export const tool: Tool = {

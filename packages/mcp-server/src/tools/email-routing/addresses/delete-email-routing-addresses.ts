@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_routing.addresses',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/email/routing/addresses/{destination_address_identifier}',
+  operationId: 'email-routing-destination-addresses-delete-destination-address',
 };
 
 export const tool: Tool = {

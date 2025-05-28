@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.attacks.layer3.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/attacks/layer3/summary/ip_version',
+  operationId: 'radar-get-attacks-layer3-summary-by-ip-version',
 };
 
 export const tool: Tool = {

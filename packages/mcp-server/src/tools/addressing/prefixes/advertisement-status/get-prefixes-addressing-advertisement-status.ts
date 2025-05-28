@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.prefixes.advertisement_status',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status',
+  operationId: 'ip-address-management-dynamic-advertisement-get-advertisement-status',
 };
 
 export const tool: Tool = {

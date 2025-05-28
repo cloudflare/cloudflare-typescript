@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.investigate',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/email-security/investigate/{postfix_id}',
+  operationId: 'email_security_get_message',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'page_shield.policies',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/page_shield/policies/{policy_id}',
+  operationId: 'page-shield-update-policy',
 };
 
 export const tool: Tool = {

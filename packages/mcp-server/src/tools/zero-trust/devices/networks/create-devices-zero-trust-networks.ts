@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.networks',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/devices/networks',
+  operationId: 'device-managed-networks-create-device-managed-network',
 };
 
 export const tool: Tool = {

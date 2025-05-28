@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ssl.universal.settings',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/ssl/universal/settings',
+  operationId: 'universal-ssl-settings-for-a-zone-universal-ssl-settings-details',
 };
 
 export const tool: Tool = {

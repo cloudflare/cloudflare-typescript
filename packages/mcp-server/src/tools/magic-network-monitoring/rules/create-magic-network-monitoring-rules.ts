@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_network_monitoring.rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/mnm/rules',
+  operationId: 'magic-network-monitoring-rules-create-rules',
 };
 
 export const tool: Tool = {

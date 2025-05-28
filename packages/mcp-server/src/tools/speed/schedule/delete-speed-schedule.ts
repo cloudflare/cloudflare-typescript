@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'speed.schedule',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/speed_api/schedule/{url}',
+  operationId: 'speed-delete-test-schedule',
 };
 
 export const tool: Tool = {

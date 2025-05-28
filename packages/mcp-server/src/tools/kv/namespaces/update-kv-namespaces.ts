@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'kv.namespaces',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/storage/kv/namespaces/{namespace_id}',
+  operationId: 'workers-kv-namespace-rename-a-namespace',
 };
 
 export const tool: Tool = {
