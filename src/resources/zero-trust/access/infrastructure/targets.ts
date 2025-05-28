@@ -116,12 +116,7 @@ export class Targets extends APIResource {
   /**
    * Removes one or more targets.
    *
-   * @example
-   * ```ts
-   * await client.zeroTrust.access.infrastructure.targets.bulkDelete(
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * @deprecated
    */
   bulkDelete(params: TargetBulkDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;

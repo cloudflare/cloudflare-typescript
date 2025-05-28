@@ -11,15 +11,7 @@ export class Issues extends APIResource {
   /**
    * Get Security Center Issues
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const issueListResponse of client.intel.attackSurfaceReport.issues.list(
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     params: IssueListParams,
@@ -36,13 +28,7 @@ export class Issues extends APIResource {
   /**
    * Get Security Center Issue Counts by Class
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.intel.attackSurfaceReport.issues.class({
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated
    */
   class(params: IssueClassParams, options?: RequestOptions): APIPromise<IssueClassResponse> {
     const { account_id, ...query } = params;
@@ -57,14 +43,7 @@ export class Issues extends APIResource {
   /**
    * Archive Security Center Insight
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.intel.attackSurfaceReport.issues.dismiss(
-   *     'issue_id',
-   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   *   );
-   * ```
+   * @deprecated
    */
   dismiss(
     issueID: string,
@@ -81,13 +60,7 @@ export class Issues extends APIResource {
   /**
    * Get Security Center Issue Counts by Severity
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.intel.attackSurfaceReport.issues.severity({
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated
    */
   severity(params: IssueSeverityParams, options?: RequestOptions): APIPromise<IssueSeverityResponse> {
     const { account_id, ...query } = params;
@@ -102,13 +75,7 @@ export class Issues extends APIResource {
   /**
    * Get Security Center Issue Counts by Type
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.intel.attackSurfaceReport.issues.type({
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated
    */
   type(params: IssueTypeParams, options?: RequestOptions): APIPromise<IssueTypeResponse> {
     const { account_id, ...query } = params;

@@ -8,6 +8,8 @@ import { path } from '../../internal/utils/path';
 export class Profiles extends APIResource {
   /**
    * Gets the current billing profile for the account.
+   *
+   * @deprecated
    */
   get(params: ProfileGetParams, options?: RequestOptions): APIPromise<ProfileGetResponse> {
     const { account_id } = params;

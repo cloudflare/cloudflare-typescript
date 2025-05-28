@@ -17,16 +17,7 @@ export class Groups extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const group of client.firewall.waf.packages.groups.list(
-   *   'a25a9a7e9c00afc1fb2e0245519d725b',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     packageID: string,
@@ -48,17 +39,7 @@ export class Groups extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.firewall.waf.packages.groups.edit(
-   *     'a25a9a7e9c00afc1fb2e0245519d725b',
-   *     {
-   *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       package_id: 'a25a9a7e9c00afc1fb2e0245519d725b',
-   *     },
-   *   );
-   * ```
+   * @deprecated
    */
   edit(groupID: string, params: GroupEditParams, options?: RequestOptions): APIPromise<GroupEditResponse> {
     const { zone_id, package_id, ...body } = params;
@@ -76,16 +57,7 @@ export class Groups extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    *
-   * @example
-   * ```ts
-   * const group = await client.firewall.waf.packages.groups.get(
-   *   'a25a9a7e9c00afc1fb2e0245519d725b',
-   *   {
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     package_id: 'a25a9a7e9c00afc1fb2e0245519d725b',
-   *   },
-   * );
-   * ```
+   * @deprecated
    */
   get(groupID: string, params: GroupGetParams, options?: RequestOptions): APIPromise<GroupGetResponse> {
     const { zone_id, package_id } = params;
