@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.audio_tracks',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/audio/{audio_identifier}',
+  operationId: 'edit-audio-tracks',
 };
 
 export const tool: Tool = {

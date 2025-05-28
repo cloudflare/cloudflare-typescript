@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'alerting.policies',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/alerting/v3/policies',
+  operationId: 'notification-policies-list-notification-policies',
 };
 
 export const tool: Tool = {

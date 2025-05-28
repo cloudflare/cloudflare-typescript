@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'accounts.subscriptions',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/subscriptions',
+  operationId: 'account-subscriptions-create-subscription',
 };
 
 export const tool: Tool = {

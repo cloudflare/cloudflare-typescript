@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.outgoing',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/secondary_dns/outgoing/disable',
+  operationId: 'secondary-dns-(-primary-zone)-disable-outgoing-zone-transfers',
 };
 
 export const tool: Tool = {

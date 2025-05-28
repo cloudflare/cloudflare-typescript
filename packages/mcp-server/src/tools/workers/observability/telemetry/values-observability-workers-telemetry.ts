@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.observability.telemetry',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workers/observability/telemetry/values',
+  operationId: 'telemetry.values.list',
 };
 
 export const tool: Tool = {

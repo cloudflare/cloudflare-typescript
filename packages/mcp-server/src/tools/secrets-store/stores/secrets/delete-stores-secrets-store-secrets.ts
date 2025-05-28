@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'secrets_store.stores.secrets',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}',
+  operationId: 'secrets-store-secret-delete-by-id',
 };
 
 export const tool: Tool = {

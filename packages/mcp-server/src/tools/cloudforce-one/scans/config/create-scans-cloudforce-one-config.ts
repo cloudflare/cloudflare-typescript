@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.scans.config',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/cloudforce-one/scans/config',
+  operationId: 'post_ConfigCreate',
 };
 
 export const tool: Tool = {

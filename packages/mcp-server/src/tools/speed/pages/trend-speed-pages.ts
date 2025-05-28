@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'speed.pages',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/speed_api/pages/{url}/trend',
+  operationId: 'speed-list-page-trend',
 };
 
 export const tool: Tool = {

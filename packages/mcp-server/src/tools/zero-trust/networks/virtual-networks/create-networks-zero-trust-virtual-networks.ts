@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.networks.virtual_networks',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/teamnet/virtual_networks',
+  operationId: 'tunnel-virtual-network-create-a-virtual-network',
 };
 
 export const tool: Tool = {

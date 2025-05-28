@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rules.lists.bulk_operations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/rules/lists/bulk_operations/{operation_id}',
+  operationId: 'lists-get-bulk-operation-status',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'browser_rendering.scrape',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/browser-rendering/scrape',
+  operationId: 'brapi-post_Scrape',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'hostnames.settings.tls',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/hostnames/settings/{setting_id}',
+  operationId: 'per-hostname-tls-settings-list',
 };
 
 export const tool: Tool = {

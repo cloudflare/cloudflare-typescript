@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.requests.priority',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/cloudforce-one/requests/priority/new',
+  operationId: 'cloudforce-one-priority-new',
 };
 
 export const tool: Tool = {

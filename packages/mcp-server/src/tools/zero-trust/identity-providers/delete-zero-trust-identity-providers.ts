@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.identity_providers',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}',
 };
 
 export const tool: Tool = {

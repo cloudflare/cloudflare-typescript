@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'rulesets',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/rulesets',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'images.v1.variants',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/images/v1/variants',
+  operationId: 'cloudflare-images-variants-list-variants',
 };
 
 export const tool: Tool = {

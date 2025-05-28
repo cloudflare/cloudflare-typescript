@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'keyless_certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/keyless_certificates/{keyless_certificate_id}',
+  operationId: 'keyless-ssl-for-a-zone-delete-keyless-ssl-configuration',
 };
 
 export const tool: Tool = {

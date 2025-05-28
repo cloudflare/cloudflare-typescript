@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'waiting_rooms',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/waiting_rooms/{waiting_room_id}',
+  operationId: 'waiting-room-waiting-room-details',
 };
 
 export const tool: Tool = {

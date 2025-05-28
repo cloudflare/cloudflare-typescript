@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'calls.sfu',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/calls/apps/{app_id}',
+  operationId: 'calls-apps-delete-app',
 };
 
 export const tool: Tool = {

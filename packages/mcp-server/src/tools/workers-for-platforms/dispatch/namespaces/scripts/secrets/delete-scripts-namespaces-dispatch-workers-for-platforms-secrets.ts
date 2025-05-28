@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'workers_for_platforms.dispatch.namespaces.scripts.secrets',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath:
+    '/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets/{secret_name}',
+  operationId: 'namespace-worker-delete-script-secret',
 };
 
 export const tool: Tool = {

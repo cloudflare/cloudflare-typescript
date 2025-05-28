@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.ases',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/ases',
+  operationId: 'radar-get-http-top-ases-by-http-requests',
 };
 
 export const tool: Tool = {

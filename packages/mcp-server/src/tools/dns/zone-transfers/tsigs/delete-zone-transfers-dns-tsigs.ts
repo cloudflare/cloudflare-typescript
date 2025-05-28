@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.tsigs',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/secondary_dns/tsigs/{tsig_id}',
+  operationId: 'secondary-dns-(-tsig)-delete-tsig',
 };
 
 export const tool: Tool = {

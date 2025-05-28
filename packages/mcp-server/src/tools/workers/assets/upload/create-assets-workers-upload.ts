@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.assets.upload',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workers/assets/upload',
+  operationId: 'worker-assets-upload',
 };
 
 export const tool: Tool = {

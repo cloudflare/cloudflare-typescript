@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.settings.block_senders',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/email-security/settings/block_senders/{pattern_id}',
+  operationId: 'email_security_get_blocked_sender',
 };
 
 export const tool: Tool = {

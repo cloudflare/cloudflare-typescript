@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.domains',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/workers/domains',
+  operationId: 'worker-domain-attach-to-domain',
 };
 
 export const tool: Tool = {

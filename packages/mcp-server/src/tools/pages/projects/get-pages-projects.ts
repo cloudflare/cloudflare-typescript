@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pages.projects',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/pages/projects/{project_name}',
+  operationId: 'pages-project-get-project',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.incoming',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/secondary_dns/incoming',
+  operationId: 'secondary-dns-(-secondary-zone)-delete-secondary-zone-configuration',
 };
 
 export const tool: Tool = {

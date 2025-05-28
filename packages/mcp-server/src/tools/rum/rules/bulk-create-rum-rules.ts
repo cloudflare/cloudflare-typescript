@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rum.rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/rum/v2/{ruleset_id}/rules',
+  operationId: 'web-analytics-modify-rules',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_hostnames',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/custom_hostnames/{custom_hostname_id}',
+  operationId: 'custom-hostname-for-a-zone-delete-custom-hostname-(-and-any-issued-ssl-certificates)',
 };
 
 export const tool: Tool = {

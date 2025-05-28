@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'd1.database',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/d1/database',
+  operationId: 'cloudflare-d1-list-databases',
 };
 
 export const tool: Tool = {

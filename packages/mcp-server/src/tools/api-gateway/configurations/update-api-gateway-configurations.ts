@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.configurations',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/api_gateway/configuration',
+  operationId: 'api-shield-settings-set-configuration-properties',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.configurations.custom_certificate',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/gateway/configuration/custom_certificate',
+  operationId: 'zero-trust-accounts-get-zero-trust-certificate-configuration',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.ranking',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/ranking/timeseries_groups',
+  operationId: 'radar-get-ranking-domain-timeseries',
 };
 
 export const tool: Tool = {

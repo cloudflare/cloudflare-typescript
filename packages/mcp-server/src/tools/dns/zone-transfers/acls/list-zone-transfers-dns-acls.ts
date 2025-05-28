@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.acls',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/secondary_dns/acls',
+  operationId: 'secondary-dns-(-acl)-list-ac-ls',
 };
 
 export const tool: Tool = {

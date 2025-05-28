@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.domains.managed',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed',
+  operationId: 'r2-put-bucket-public-policy',
 };
 
 export const tool: Tool = {

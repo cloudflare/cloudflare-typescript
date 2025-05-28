@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zaraz.workflow',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/settings/zaraz/workflow',
+  operationId: 'get-zones-zone_identifier-zaraz-workflow',
 };
 
 export const tool: Tool = {

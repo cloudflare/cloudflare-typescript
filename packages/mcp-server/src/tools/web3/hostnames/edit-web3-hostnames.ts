@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'web3.hostnames',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/web3/hostnames/{identifier}',
+  operationId: 'web3-hostname-edit-web3-hostname',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rules.lists.items',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/rules/lists/{list_id}/items',
+  operationId: 'lists-update-all-list-items',
 };
 
 export const tool: Tool = {

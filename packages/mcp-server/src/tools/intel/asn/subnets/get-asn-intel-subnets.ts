@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.asn.subnets',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/asn/{asn}/subnets',
+  operationId: 'asn-intelligence-get-asn-subnets',
 };
 
 export const tool: Tool = {

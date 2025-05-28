@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.annotations.outages',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/annotations/outages',
+  operationId: 'radar-get-annotations-outages',
 };
 
 export const tool: Tool = {

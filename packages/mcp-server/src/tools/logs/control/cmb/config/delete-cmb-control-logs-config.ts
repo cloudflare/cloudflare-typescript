@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'logs.control.cmb.config',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/logs/control/cmb/config',
+  operationId: 'delete-accounts-account_id-logs-control-cmb-config',
 };
 
 export const tool: Tool = {

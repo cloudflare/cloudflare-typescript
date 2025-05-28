@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.bgp.ips',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/bgp/ips/timeseries',
+  operationId: 'radar-get-bgp-ips-timeseries',
 };
 
 export const tool: Tool = {

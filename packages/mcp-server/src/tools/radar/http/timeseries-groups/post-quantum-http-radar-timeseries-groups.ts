@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/timeseries_groups/post_quantum',
+  operationId: 'radar-get-http-timeseries-group-by-post-quantum',
 };
 
 export const tool: Tool = {

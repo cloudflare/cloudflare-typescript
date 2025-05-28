@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.domains',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/workers/domains/{domain_id}',
+  operationId: 'worker-domain-detach-from-domain',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.dns.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/dns/timeseries_groups/matching_answer',
+  operationId: 'radar-get-dns-timeseries-group-by-matching-answer-status',
 };
 
 export const tool: Tool = {

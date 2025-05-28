@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.subdomains',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/workers/subdomain',
+  operationId: 'worker-subdomain-create-subdomain',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.payload_logs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dlp/payload_log',
+  operationId: 'dlp-payload-log-get',
 };
 
 export const tool: Tool = {

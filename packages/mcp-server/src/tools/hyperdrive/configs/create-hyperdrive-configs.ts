@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'hyperdrive.configs',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/hyperdrive/configs',
+  operationId: 'create-hyperdrive',
 };
 
 export const tool: Tool = {

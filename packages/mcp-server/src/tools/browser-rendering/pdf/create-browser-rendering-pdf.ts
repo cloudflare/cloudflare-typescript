@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'browser_rendering.pdf',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/browser-rendering/pdf',
+  operationId: 'brapi-post_Pdf',
 };
 
 export const tool: Tool = {

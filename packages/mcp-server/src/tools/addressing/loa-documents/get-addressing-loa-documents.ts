@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.loa_documents',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download',
+  operationId: 'ip-address-management-prefixes-download-loa-document',
 };
 
 export const tool: Tool = {

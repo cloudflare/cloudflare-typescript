@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.attacks.layer7.top.locations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/attacks/layer7/top/locations/origin',
+  operationId: 'radar-get-attacks-layer7-top-origin-location',
 };
 
 export const tool: Tool = {

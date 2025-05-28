@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.routes',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/workers/routes',
+  operationId: 'worker-routes-create-route',
 };
 
 export const tool: Tool = {

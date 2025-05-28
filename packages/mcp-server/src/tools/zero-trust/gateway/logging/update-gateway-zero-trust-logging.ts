@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.logging',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/gateway/logging',
+  operationId: 'zero-trust-accounts-update-logging-settings-for-the-zero-trust-account',
 };
 
 export const tool: Tool = {

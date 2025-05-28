@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workflows',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/workflows/{workflow_name}',
+  operationId: 'wor-delete-workflow',
 };
 
 export const tool: Tool = {

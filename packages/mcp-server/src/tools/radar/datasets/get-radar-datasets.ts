@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.datasets',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/datasets/{alias}',
+  operationId: 'radar-get-reports-dataset-download',
 };
 
 export const tool: Tool = {

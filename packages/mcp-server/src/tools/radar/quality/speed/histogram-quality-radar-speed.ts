@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.quality.speed',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/quality/speed/histogram',
+  operationId: 'radar-get-quality-speed-histogram',
 };
 
 export const tool: Tool = {

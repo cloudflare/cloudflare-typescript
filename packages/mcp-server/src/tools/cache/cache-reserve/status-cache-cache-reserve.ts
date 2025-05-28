@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cache.cache_reserve',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/cache/cache_reserve_clear',
+  operationId: 'zone-cache-settings-get-cache-reserve-clear',
 };
 
 export const tool: Tool = {

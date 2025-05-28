@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.tags',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/tags/create',
+  operationId: 'post_TagCreate',
 };
 
 export const tool: Tool = {

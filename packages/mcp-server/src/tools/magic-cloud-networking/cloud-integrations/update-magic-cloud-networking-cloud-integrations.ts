@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_cloud_networking.cloud_integrations',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/magic/cloud/providers/{provider_id}',
+  operationId: 'providers-update',
 };
 
 export const tool: Tool = {

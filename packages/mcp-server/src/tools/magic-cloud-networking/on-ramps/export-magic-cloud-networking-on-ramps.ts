@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_cloud_networking.on_ramps',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/magic/cloud/onramps/{onramp_id}/export',
+  operationId: 'onramps-export',
 };
 
 export const tool: Tool = {

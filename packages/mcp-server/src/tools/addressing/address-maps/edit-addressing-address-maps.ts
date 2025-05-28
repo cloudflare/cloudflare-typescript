@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.address_maps',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/addressing/address_maps/{address_map_id}',
+  operationId: 'ip-address-management-address-maps-update-address-map',
 };
 
 export const tool: Tool = {

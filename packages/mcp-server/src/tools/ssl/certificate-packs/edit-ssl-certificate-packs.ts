@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ssl.certificate_packs',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}',
+  operationId: 'certificate-packs-restart-validation-for-advanced-certificate-manager-certificate-pack',
 };
 
 export const tool: Tool = {

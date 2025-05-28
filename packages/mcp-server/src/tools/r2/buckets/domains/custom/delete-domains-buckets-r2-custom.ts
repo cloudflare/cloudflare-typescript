@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.domains.custom',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain}',
+  operationId: 'r2-delete-custom-domain',
 };
 
 export const tool: Tool = {

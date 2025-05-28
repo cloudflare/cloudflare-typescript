@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.ip_lists',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/ip-list',
+  operationId: 'ip-list-get-ip-lists',
 };
 
 export const tool: Tool = {

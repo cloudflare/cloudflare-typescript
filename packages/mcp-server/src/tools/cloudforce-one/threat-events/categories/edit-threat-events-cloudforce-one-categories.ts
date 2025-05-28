@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.categories',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/categories/{category_id}',
+  operationId: 'patch_CategoryUpdate',
 };
 
 export const tool: Tool = {

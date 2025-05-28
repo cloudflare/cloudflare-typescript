@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.super_slurper.connectivity_precheck',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/slurper/target/connectivity-precheck',
+  operationId: 'slurper-check-target-connectivity',
 };
 
 export const tool: Tool = {

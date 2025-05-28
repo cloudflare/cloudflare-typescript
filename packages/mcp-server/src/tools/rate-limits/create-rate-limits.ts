@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rate_limits',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/rate_limits',
+  operationId: 'rate-limits-for-a-zone-create-a-rate-limit',
 };
 
 export const tool: Tool = {

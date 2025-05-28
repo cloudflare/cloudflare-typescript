@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.as112.top',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/as112/top/locations',
+  operationId: 'radar-get-dns-as112-top-locations',
 };
 
 export const tool: Tool = {

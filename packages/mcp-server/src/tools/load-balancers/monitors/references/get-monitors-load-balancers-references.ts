@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.monitors.references',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/load_balancers/monitors/{monitor_id}/references',
+  operationId: 'account-load-balancer-monitors-list-monitor-references',
 };
 
 export const tool: Tool = {

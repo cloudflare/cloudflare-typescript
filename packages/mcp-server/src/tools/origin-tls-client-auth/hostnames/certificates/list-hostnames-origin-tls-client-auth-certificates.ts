@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'origin_tls_client_auth.hostnames.certificates',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/origin_tls_client_auth/hostnames/certificates',
+  operationId: 'per-hostname-authenticated-origin-pull-list-certificates',
 };
 
 export const tool: Tool = {

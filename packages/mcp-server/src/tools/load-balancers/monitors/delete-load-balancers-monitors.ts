@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.monitors',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/load_balancers/monitors/{monitor_id}',
+  operationId: 'account-load-balancer-monitors-delete-monitor',
 };
 
 export const tool: Tool = {

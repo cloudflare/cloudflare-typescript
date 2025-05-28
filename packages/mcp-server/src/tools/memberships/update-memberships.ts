@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'memberships',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/memberships/{membership_id}',
+  operationId: "user'-s-account-memberships-update-membership",
 };
 
 export const tool: Tool = {

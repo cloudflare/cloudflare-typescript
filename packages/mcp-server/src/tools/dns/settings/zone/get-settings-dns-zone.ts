@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.settings.zone',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/dns_settings',
+  operationId: 'dns-settings-for-a-zone-list-dns-settings',
 };
 
 export const tool: Tool = {

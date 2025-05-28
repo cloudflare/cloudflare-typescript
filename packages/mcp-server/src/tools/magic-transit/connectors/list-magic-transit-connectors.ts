@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.connectors',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/magic/connectors',
+  operationId: 'mconn-connector-list',
 };
 
 export const tool: Tool = {

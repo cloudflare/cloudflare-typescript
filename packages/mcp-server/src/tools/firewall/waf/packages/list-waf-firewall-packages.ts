@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'firewall.waf.packages',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/firewall/waf/packages',
+  operationId: 'waf-packages-list-waf-packages',
 };
 
 export const tool: Tool = {

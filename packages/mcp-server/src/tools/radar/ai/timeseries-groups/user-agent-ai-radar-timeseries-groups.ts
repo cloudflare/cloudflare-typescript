@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.ai.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/ai/bots/timeseries_groups/user_agent',
+  operationId: 'radar-get-ai-bots-timeseries-group-by-user-agent',
 };
 
 export const tool: Tool = {

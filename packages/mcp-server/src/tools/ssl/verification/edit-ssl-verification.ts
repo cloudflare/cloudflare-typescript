@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ssl.verification',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/ssl/verification/{certificate_pack_id}',
+  operationId: 'ssl-verification-edit-ssl-certificate-pack-validation-method',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai_gateway',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/ai-gateway/gateways/{id}',
+  operationId: 'aig-config-fetch-gateway',
 };
 
 export const tool: Tool = {

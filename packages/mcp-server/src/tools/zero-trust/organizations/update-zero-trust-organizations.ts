@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.organizations',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/organizations',
 };
 
 export const tool: Tool = {

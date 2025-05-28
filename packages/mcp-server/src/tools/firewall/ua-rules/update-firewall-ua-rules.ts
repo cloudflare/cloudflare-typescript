@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'firewall.ua_rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/firewall/ua_rules/{ua_rule_id}',
+  operationId: 'user-agent-blocking-rules-update-a-user-agent-blocking-rule',
 };
 
 export const tool: Tool = {

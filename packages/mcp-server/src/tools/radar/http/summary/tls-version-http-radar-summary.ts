@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/summary/tls_version',
+  operationId: 'radar-get-http-summary-by-tls-version',
 };
 
 export const tool: Tool = {

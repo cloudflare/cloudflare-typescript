@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rules.lists.items',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/rules/lists/{list_id}/items',
+  operationId: 'lists-get-list-items',
 };
 
 export const tool: Tool = {

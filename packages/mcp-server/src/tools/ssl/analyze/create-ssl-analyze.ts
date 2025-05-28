@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ssl.analyze',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/ssl/analyze',
+  operationId: 'analyze-certificate-analyze-certificate',
 };
 
 export const tool: Tool = {

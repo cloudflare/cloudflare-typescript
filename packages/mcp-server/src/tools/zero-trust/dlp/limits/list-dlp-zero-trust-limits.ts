@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.limits',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dlp/limits',
+  operationId: 'dlp-limits-get',
 };
 
 export const tool: Tool = {

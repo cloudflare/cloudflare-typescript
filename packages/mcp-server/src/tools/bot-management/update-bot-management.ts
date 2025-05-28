@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'bot_management',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/bot_management',
+  operationId: 'bot-management-for-a-zone-update-config',
 };
 
 export const tool: Tool = {

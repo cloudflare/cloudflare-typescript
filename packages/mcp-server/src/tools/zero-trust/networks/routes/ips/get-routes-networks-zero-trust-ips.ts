@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.networks.routes.ips',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/teamnet/routes/ip/{ip}',
+  operationId: 'tunnel-route-get-tunnel-route-by-ip',
 };
 
 export const tool: Tool = {

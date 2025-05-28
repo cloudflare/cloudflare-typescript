@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.operations',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/api_gateway/operations',
+  operationId: 'api-shield-endpoint-management-delete-multiple-operations',
 };
 
 export const tool: Tool = {

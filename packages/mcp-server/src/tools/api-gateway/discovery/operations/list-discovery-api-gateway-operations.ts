@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.discovery.operations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/api_gateway/discovery/operations',
+  operationId: 'api-shield-api-discovery-retrieve-discovered-operations-on-a-zone',
 };
 
 export const tool: Tool = {

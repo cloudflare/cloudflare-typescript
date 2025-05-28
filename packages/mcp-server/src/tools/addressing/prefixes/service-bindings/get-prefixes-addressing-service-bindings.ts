@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.prefixes.service_bindings',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings/{binding_id}',
+  operationId: 'ip-address-management-service-bindings-get-service-binding',
 };
 
 export const tool: Tool = {

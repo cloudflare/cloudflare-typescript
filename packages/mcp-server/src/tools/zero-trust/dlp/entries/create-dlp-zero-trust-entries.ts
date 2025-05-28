@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.entries',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/dlp/entries',
+  operationId: 'dlp-entries-create-entry',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ssl.certificate_packs.quota',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/ssl/certificate_packs/quota',
+  operationId: 'certificate-packs-get-certificate-pack-quotas',
 };
 
 export const tool: Tool = {

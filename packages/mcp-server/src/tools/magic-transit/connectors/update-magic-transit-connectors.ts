@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.connectors',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/magic/connectors/{connector_id}',
+  operationId: 'mconn-connector-replace',
 };
 
 export const tool: Tool = {

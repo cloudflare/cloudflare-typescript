@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'page_rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/pagerules',
+  operationId: 'page-rules-create-a-page-rule',
 };
 
 export const tool: Tool = {

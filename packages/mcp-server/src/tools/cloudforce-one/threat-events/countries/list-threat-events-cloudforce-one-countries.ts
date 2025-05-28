@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.countries',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/countries',
+  operationId: 'get_CountryRead',
 };
 
 export const tool: Tool = {

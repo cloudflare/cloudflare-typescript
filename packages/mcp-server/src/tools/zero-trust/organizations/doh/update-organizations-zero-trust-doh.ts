@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.organizations.doh',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/access/organizations/doh',
+  operationId: 'zero-trust-organization-update-your-zero-trust-organization-doh-settings',
 };
 
 export const tool: Tool = {

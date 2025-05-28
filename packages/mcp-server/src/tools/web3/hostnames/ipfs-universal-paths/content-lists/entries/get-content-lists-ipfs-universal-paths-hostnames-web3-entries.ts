@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'web3.hostnames.ipfs_universal_paths.content_lists.entries',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath:
+    '/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}',
+  operationId: 'web3-hostname-ipfs-universal-path-gateway-content-list-entry-details',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.copy',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/copy',
+  operationId: 'stream-videos-upload-videos-from-a-url',
 };
 
 export const tool: Tool = {

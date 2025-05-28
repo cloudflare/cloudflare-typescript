@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.cf_interconnects',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/magic/cf_interconnects/{cf_interconnect_id}',
+  operationId: 'magic-interconnects-update-interconnect',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.email.routing.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/email/routing/timeseries_groups/encrypted',
+  operationId: 'radar-get-email-routing-timeseries-group-by-encrypted',
 };
 
 export const tool: Tool = {

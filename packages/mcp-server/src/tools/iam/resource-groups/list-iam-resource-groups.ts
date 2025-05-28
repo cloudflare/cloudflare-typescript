@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'iam.resource_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/iam/resource_groups',
+  operationId: 'account-resource-group-list',
 };
 
 export const tool: Tool = {

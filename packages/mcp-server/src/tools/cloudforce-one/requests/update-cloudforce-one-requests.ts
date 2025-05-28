@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.requests',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/cloudforce-one/requests/{request_id}',
+  operationId: 'cloudforce-one-request-update',
 };
 
 export const tool: Tool = {

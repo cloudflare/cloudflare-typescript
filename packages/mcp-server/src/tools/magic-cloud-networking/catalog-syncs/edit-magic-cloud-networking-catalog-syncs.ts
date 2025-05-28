@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_cloud_networking.catalog_syncs',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}',
+  operationId: 'catalog-syncs-patch',
 };
 
 export const tool: Tool = {

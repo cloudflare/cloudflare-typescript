@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.netflows.top',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/netflows/top/locations',
+  operationId: 'radar-get-netflows-top-locations',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.settings.account.views',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/dns_settings/views/{view_id}',
+  operationId: 'dns-views-for-an-account-delete-internal-dns-view',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.asn',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/asn/{asn}',
+  operationId: 'asn-intelligence-get-asn-overview',
 };
 
 export const tool: Tool = {

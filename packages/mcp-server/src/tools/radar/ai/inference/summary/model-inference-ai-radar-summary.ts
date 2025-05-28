@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.ai.inference.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/ai/inference/summary/model',
+  operationId: 'radar-get-ai-inference-summary-by-model',
 };
 
 export const tool: Tool = {

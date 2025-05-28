@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rate_limits',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/rate_limits/{rate_limit_id}',
+  operationId: 'rate-limits-for-a-zone-get-a-rate-limit',
 };
 
 export const tool: Tool = {

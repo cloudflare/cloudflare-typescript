@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_routing',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/email/routing/disable',
+  operationId: 'email-routing-settings-disable-email-routing',
 };
 
 export const tool: Tool = {

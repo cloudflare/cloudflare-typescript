@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.operations',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/api_gateway/operations/item',
+  operationId: 'api-shield-endpoint-management-add-operation-to-a-zone',
 };
 
 export const tool: Tool = {

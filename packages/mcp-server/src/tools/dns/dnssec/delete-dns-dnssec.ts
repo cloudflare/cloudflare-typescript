@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.dnssec',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/dnssec',
+  operationId: 'dnssec-delete-dnssec-records',
 };
 
 export const tool: Tool = {

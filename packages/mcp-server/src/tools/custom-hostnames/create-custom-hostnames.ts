@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_hostnames',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/custom_hostnames',
+  operationId: 'custom-hostname-for-a-zone-create-custom-hostname',
 };
 
 export const tool: Tool = {

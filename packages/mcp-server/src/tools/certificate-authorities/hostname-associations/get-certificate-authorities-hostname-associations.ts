@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'certificate_authorities.hostname_associations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/certificate_authorities/hostname_associations',
+  operationId: 'client-certificate-for-a-zone-list-hostname-associations',
 };
 
 export const tool: Tool = {

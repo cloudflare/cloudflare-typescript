@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'firewall.lockdowns',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/firewall/lockdowns',
+  operationId: 'zone-lockdown-list-zone-lockdown-rules',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.email.account_mapping',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dlp/email/account_mapping',
+  operationId: 'dlp-email-scanner-get-account-mapping',
 };
 
 export const tool: Tool = {

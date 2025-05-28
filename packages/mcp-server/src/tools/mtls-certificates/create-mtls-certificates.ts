@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'mtls_certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/mtls_certificates',
+  operationId: 'm-tls-certificate-management-upload-m-tls-certificate',
 };
 
 export const tool: Tool = {

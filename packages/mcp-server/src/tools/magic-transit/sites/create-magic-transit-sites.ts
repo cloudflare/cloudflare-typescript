@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.sites',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/magic/sites',
+  operationId: 'magic-sites-create-site',
 };
 
 export const tool: Tool = {

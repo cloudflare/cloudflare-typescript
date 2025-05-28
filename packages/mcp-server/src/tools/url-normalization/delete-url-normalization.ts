@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'url_normalization',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/url_normalization',
+  operationId: 'deleteUrlNormalization',
 };
 
 export const tool: Tool = {

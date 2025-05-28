@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.verified_bots.top',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/verified_bots/top/bots',
+  operationId: 'radar-get-verified-bots-top-by-http-requests',
 };
 
 export const tool: Tool = {

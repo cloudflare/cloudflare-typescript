@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'custom_hostnames.certificate_pack.certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath:
+    '/zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}',
+  operationId: 'custom-hostname-for-a-zone-edit-custom-certificate-custom-hostname',
 };
 
 export const tool: Tool = {

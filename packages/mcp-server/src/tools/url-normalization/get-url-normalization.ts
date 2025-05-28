@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'url_normalization',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/url_normalization',
+  operationId: 'getUrlNormalization',
 };
 
 export const tool: Tool = {

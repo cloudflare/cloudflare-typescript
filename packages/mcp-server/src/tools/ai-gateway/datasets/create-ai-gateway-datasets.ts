@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai_gateway.datasets',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets',
+  operationId: 'aig-config-create-dataset',
 };
 
 export const tool: Tool = {

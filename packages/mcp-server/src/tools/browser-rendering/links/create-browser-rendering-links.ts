@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'browser_rendering.links',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/browser-rendering/links',
+  operationId: 'brapi-post_Links',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pipelines',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/pipelines',
+  operationId: 'postV4AccountsByAccount_idPipelines',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.dns.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/dns/summary/query_type',
+  operationId: 'radar-get-dns-summary-by-query-type',
 };
 
 export const tool: Tool = {

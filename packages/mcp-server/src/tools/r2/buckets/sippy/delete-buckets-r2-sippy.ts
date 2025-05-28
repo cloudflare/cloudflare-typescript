@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.sippy',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/sippy',
+  operationId: 'r2-delete-bucket-sippy-config',
 };
 
 export const tool: Tool = {

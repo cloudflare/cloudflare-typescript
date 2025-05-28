@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.dns.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/dns/summary/response_ttl',
+  operationId: 'radar-get-dns-summary-by-response-ttl',
 };
 
 export const tool: Tool = {

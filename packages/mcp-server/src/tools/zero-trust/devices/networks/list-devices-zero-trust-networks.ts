@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.networks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/devices/networks',
+  operationId: 'device-managed-networks-list-device-managed-networks',
 };
 
 export const tool: Tool = {

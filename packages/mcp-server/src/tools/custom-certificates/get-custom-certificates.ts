@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_certificates',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/custom_certificates/{custom_certificate_id}',
+  operationId: 'custom-ssl-for-a-zone-ssl-configuration-details',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'botnet_feed.configs.asn',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/botnet_feed/configs/asn/{asn_id}',
+  operationId: 'botnet-threat-feed-delete-asn',
 };
 
 export const tool: Tool = {

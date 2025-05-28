@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'web3.hostnames',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/web3/hostnames',
+  operationId: 'web3-hostname-create-web3-hostname',
 };
 
 export const tool: Tool = {

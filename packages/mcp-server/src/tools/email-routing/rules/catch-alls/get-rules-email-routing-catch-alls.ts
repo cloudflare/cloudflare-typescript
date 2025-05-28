@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_routing.rules.catch_alls',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/email/routing/rules/catch_all',
+  operationId: 'email-routing-routing-rules-get-catch-all-rule',
 };
 
 export const tool: Tool = {

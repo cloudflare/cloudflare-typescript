@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dcv_delegation',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/dcv_delegation/uuid',
+  operationId: 'dcv-delegation-uuid-get',
 };
 
 export const tool: Tool = {

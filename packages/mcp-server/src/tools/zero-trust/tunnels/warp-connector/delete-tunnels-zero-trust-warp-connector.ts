@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.tunnels.warp_connector',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/warp_connector/{tunnel_id}',
+  operationId: 'cloudflare-tunnel-delete-a-warp-connector-tunnel',
 };
 
 export const tool: Tool = {

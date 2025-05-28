@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.attacks.layer7.top.ases',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/attacks/layer7/top/ases/origin',
+  operationId: 'radar-get-attacks-layer7-top-origin-as',
 };
 
 export const tool: Tool = {

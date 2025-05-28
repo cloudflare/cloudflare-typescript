@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.peers',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/secondary_dns/peers/{peer_id}',
+  operationId: 'secondary-dns-(-peer)-peer-details',
 };
 
 export const tool: Tool = {

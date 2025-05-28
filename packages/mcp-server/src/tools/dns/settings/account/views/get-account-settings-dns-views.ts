@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.settings.account.views',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dns_settings/views/{view_id}',
+  operationId: 'dns-views-for-an-account-get-internal-dns-view',
 };
 
 export const tool: Tool = {

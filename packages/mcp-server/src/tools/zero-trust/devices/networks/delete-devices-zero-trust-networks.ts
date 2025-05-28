@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.networks',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/devices/networks/{network_id}',
+  operationId: 'device-managed-networks-delete-device-managed-network',
 };
 
 export const tool: Tool = {

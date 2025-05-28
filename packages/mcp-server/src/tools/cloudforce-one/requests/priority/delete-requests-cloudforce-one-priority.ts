@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.requests.priority',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/cloudforce-one/requests/priority/{priority_id}',
+  operationId: 'cloudforce-one-priority-delete',
 };
 
 export const tool: Tool = {

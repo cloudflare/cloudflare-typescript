@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.ases.bot_class',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/ases/bot_class/{bot_class}',
+  operationId: 'radar-get-http-top-ases-by-bot-class',
 };
 
 export const tool: Tool = {

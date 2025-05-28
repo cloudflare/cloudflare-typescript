@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'firewall.rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/firewall/rules',
+  operationId: 'firewall-rules-update-firewall-rules',
 };
 
 export const tool: Tool = {

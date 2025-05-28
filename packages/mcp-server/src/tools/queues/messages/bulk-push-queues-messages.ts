@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'queues.messages',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/queues/{queue_id}/messages/batch',
+  operationId: 'queues-push-messages',
 };
 
 export const tool: Tool = {

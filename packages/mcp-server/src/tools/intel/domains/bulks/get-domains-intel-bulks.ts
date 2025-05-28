@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.domains.bulks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/domain/bulk',
+  operationId: 'domain-intelligence-get-multiple-domain-details',
 };
 
 export const tool: Tool = {

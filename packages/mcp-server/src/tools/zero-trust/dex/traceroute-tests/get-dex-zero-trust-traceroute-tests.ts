@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.traceroute_tests',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/traceroute-tests/{test_id}',
+  operationId: 'dex-endpoints-traceroute-test-details',
 };
 
 export const tool: Tool = {

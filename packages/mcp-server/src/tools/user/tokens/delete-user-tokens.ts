@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'user.tokens',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/user/tokens/{token_id}',
+  operationId: 'user-api-tokens-delete-token',
 };
 
 export const tool: Tool = {

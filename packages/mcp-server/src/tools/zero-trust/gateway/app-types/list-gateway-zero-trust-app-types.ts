@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.app_types',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/gateway/app_types',
+  operationId:
+    'zero-trust-gateway-application-and-application-type-mappings-list-application-and-application-type-mappings',
 };
 
 export const tool: Tool = {

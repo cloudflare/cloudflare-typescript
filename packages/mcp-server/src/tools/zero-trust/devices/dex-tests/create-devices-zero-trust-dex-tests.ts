@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.dex_tests',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/dex/devices/dex_tests',
+  operationId: 'device-dex-test-create-device-dex-test',
 };
 
 export const tool: Tool = {

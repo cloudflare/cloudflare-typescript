@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.dns.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/dns/timeseries_groups/cache_hit',
+  operationId: 'radar-get-dns-timeseries-group-by-cache-hit-status',
 };
 
 export const tool: Tool = {

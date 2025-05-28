@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.lists.items',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/gateway/lists/{list_id}/items',
+  operationId: 'zero-trust-lists-zero-trust-list-items',
 };
 
 export const tool: Tool = {

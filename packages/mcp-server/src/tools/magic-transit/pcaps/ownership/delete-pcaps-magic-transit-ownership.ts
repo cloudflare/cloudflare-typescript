@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.pcaps.ownership',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/pcaps/ownership/{ownership_id}',
+  operationId: 'magic-pcap-collection-delete-buckets-for-full-packet-captures',
 };
 
 export const tool: Tool = {

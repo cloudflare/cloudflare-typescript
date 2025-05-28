@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_network_monitoring.vpc_flows.tokens',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/mnm/vpc-flows/token',
+  operationId: 'magic-network-monitoring-vpc-flows-generate-authentication-token',
 };
 
 export const tool: Tool = {

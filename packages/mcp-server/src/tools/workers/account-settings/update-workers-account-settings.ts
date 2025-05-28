@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.account_settings',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/workers/account-settings',
+  operationId: 'worker-account-settings-create-worker-account-settings',
 };
 
 export const tool: Tool = {

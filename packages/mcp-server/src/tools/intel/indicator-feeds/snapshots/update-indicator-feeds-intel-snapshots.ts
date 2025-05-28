@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.indicator_feeds.snapshots',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/intel/indicator-feeds/{feed_id}/snapshot',
+  operationId: 'custom-indicator-feeds-update-indicator-feed-data',
 };
 
 export const tool: Tool = {

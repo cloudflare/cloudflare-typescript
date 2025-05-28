@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/custom_certificates',
+  operationId: 'custom-ssl-for-a-zone-create-ssl-configuration',
 };
 
 export const tool: Tool = {

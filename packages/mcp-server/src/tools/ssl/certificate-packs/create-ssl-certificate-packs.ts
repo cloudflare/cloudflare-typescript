@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ssl.certificate_packs',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/ssl/certificate_packs/order',
+  operationId: 'certificate-packs-order-advanced-certificate-manager-certificate-pack',
 };
 
 export const tool: Tool = {

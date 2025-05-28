@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns_firewall.reverse_dns',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns',
+  operationId: 'dns-firewall-update-dns-firewall-cluster-reverse-dns',
 };
 
 export const tool: Tool = {

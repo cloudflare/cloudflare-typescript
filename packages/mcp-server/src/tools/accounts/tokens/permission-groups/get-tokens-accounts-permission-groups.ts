@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'accounts.tokens.permission_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/tokens/permission_groups',
+  operationId: 'account-api-tokens-list-permission-groups',
 };
 
 export const tool: Tool = {

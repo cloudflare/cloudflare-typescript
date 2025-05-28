@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.pools',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/load_balancers/pools',
+  operationId: 'account-load-balancer-pools-patch-pools',
 };
 
 export const tool: Tool = {

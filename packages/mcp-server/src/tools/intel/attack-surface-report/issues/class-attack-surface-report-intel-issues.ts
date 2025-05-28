@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.attack_surface_report.issues',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/attack-surface-report/issues/class',
+  operationId: 'get-security-center-issue-counts-by-class',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.tail',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/tails',
+  operationId: 'worker-tail-logs-start-tail',
 };
 
 export const tool: Tool = {

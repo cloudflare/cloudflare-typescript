@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.keys',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/stream/keys/{identifier}',
+  operationId: 'stream-signing-keys-delete-signing-keys',
 };
 
 export const tool: Tool = {

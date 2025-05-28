@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'brand_protection',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/brand-protection/submit',
+  operationId: 'phishing-url-scanner-submit-suspicious-url-for-scanning',
 };
 
 export const tool: Tool = {

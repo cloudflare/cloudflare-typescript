@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.keys',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/access/keys/rotate',
+  operationId: 'access-key-configuration-rotate-access-keys',
 };
 
 export const tool: Tool = {

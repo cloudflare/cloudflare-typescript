@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'origin_tls_client_auth.hostnames',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/origin_tls_client_auth/hostnames',
+  operationId:
+    'per-hostname-authenticated-origin-pull-enable-or-disable-a-hostname-for-client-authentication',
 };
 
 export const tool: Tool = {

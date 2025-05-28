@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.http_tests.percentiles',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/http-tests/{test_id}/percentiles',
+  operationId: 'dex-endpoints-http-test-percentiles',
 };
 
 export const tool: Tool = {

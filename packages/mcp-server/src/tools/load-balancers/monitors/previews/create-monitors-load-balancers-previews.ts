@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.monitors.previews',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/load_balancers/monitors/{monitor_id}/preview',
+  operationId: 'account-load-balancer-monitors-preview-monitor',
 };
 
 export const tool: Tool = {

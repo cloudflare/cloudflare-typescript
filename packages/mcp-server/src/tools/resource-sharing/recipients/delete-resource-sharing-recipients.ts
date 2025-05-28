@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'resource_sharing.recipients',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/shares/{share_id}/recipients/{recipient_id}',
+  operationId: 'share-recipient-delete',
 };
 
 export const tool: Tool = {

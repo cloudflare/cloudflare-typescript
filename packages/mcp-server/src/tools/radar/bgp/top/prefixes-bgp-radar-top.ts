@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.bgp.top',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/bgp/top/prefixes',
+  operationId: 'radar-get-bgp-top-prefixes',
 };
 
 export const tool: Tool = {

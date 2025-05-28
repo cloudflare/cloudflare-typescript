@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.pcaps',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/pcaps/{pcap_id}/stop',
+  operationId: 'magic-pcap-collection-stop-full-pcap',
 };
 
 export const tool: Tool = {

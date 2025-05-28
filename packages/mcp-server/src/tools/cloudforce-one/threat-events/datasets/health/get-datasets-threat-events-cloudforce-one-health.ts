@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.datasets.health',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/health',
+  operationId: 'get_DOHealthCheck',
 };
 
 export const tool: Tool = {

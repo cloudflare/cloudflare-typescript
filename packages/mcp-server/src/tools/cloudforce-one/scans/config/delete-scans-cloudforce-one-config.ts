@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.scans.config',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/cloudforce-one/scans/config/{config_id}',
+  operationId: 'delete_DeleteScans',
 };
 
 export const tool: Tool = {

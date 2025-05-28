@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ssl.verification',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/ssl/verification',
+  operationId: 'ssl-verification-ssl-verification-details',
 };
 
 export const tool: Tool = {

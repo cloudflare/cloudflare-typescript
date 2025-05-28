@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'speed.pages.tests',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/speed_api/pages/{url}/tests',
+  operationId: 'speed-list-test-history',
 };
 
 export const tool: Tool = {

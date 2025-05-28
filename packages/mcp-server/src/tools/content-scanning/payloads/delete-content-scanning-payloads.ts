@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'content_scanning.payloads',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/content-upload-scan/payloads/{expression_id}',
+  operationId: 'waf-content-scanning-delete-custom-scan-expressions',
 };
 
 export const tool: Tool = {

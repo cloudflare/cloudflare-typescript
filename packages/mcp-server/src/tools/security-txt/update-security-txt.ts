@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'security_txt',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/security-center/securitytxt',
+  operationId: 'update-security-txt',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.service_tokens',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/service_tokens/{service_token_id}',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.tunnels.cloudflared.connections',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/cfd_tunnel/{tunnel_id}/connections',
+  operationId: 'cloudflare-tunnel-clean-up-cloudflare-tunnel-connections',
 };
 
 export const tool: Tool = {

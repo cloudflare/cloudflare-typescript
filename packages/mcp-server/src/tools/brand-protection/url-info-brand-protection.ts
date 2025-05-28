@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'brand_protection',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/brand-protection/url-info',
+  operationId: 'phishing-url-information-get-results-for-a-url-scan',
 };
 
 export const tool: Tool = {

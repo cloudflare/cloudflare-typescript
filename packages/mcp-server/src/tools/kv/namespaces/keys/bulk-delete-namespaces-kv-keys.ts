@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'kv.namespaces.keys',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/delete',
+  operationId: 'workers-kv-namespace-delete-multiple-key-value-pairs',
 };
 
 export const tool: Tool = {

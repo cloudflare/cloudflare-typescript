@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'security_center.insights',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/security-center/insights/{issue_id}/dismiss',
 };
 
 export const tool: Tool = {

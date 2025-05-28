@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'url_scanner.scans',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/urlscanner/v2/scan',
+  operationId: 'urlscanner-create-scan-v2',
 };
 
 export const tool: Tool = {

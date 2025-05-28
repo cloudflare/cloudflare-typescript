@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.watermarks',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/stream/watermarks/{identifier}',
+  operationId: 'stream-watermark-profile-delete-watermark-profiles',
 };
 
 export const tool: Tool = {

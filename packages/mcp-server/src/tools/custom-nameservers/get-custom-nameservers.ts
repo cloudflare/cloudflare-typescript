@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_nameservers',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/custom_ns',
+  operationId: 'account-level-custom-nameservers-list-account-custom-nameservers',
 };
 
 export const tool: Tool = {

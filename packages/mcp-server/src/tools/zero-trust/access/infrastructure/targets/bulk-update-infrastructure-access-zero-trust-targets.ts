@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.infrastructure.targets',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/infrastructure/targets/batch',
+  operationId: 'infra-targets-put-batch',
 };
 
 export const tool: Tool = {

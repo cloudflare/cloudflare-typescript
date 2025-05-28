@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cache.variants',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/cache/variants',
+  operationId: 'zone-cache-settings-delete-variants-setting',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.locations',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/gateway/locations',
+  operationId: 'zero-trust-gateway-locations-create-zero-trust-gateway-location',
 };
 
 export const tool: Tool = {

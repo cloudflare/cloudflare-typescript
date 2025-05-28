@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zones.plans',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/available_plans',
+  operationId: 'zone-rate-plan-list-available-plans',
 };
 
 export const tool: Tool = {

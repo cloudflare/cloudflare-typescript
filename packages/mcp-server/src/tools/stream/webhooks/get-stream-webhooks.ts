@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.webhooks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/stream/webhook',
+  operationId: 'stream-webhook-view-webhooks',
 };
 
 export const tool: Tool = {

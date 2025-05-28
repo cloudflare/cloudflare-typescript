@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.user_schemas',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/api_gateway/user_schemas',
+  operationId: 'api-shield-schema-validation-post-schema',
 };
 
 export const tool: Tool = {

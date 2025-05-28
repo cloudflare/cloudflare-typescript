@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_hostnames',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/custom_hostnames/{custom_hostname_id}',
+  operationId: 'custom-hostname-for-a-zone-edit-custom-hostname',
 };
 
 export const tool: Tool = {

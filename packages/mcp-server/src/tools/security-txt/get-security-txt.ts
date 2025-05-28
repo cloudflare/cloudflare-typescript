@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'security_txt',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/security-center/securitytxt',
+  operationId: 'get-security-txt',
 };
 
 export const tool: Tool = {

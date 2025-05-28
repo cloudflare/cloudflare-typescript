@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'schema_validation.schemas',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/schema_validation/schemas',
+  operationId: 'schema-validation-list-schemas-paginated',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.audio_tracks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/audio',
+  operationId: 'list-audio-tracks',
 };
 
 export const tool: Tool = {

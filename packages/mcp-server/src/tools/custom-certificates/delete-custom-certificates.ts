@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/custom_certificates/{custom_certificate_id}',
+  operationId: 'custom-ssl-for-a-zone-delete-ssl-configuration',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.schedules',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/schedules',
+  operationId: 'worker-cron-trigger-update-cron-triggers',
 };
 
 export const tool: Tool = {

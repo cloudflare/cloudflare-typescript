@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.risk_scoring.integrations',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/zt_risk_scoring/integrations/{integration_id}',
+  operationId: 'dlp-zt-risk-score-integration-delete',
 };
 
 export const tool: Tool = {

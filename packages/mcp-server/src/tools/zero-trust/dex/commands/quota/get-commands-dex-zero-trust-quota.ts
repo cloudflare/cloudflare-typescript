@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.commands.quota',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/commands/quota',
+  operationId: 'get-commands-quota',
 };
 
 export const tool: Tool = {

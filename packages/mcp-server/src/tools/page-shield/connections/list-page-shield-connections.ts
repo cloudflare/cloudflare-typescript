@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'page_shield.connections',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/page_shield/connections',
+  operationId: 'page-shield-list-connections',
 };
 
 export const tool: Tool = {

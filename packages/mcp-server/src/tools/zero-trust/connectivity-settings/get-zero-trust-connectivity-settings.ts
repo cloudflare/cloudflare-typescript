@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.connectivity_settings',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/zerotrust/connectivity_settings',
+  operationId: 'zero-trust-accounts-get-connectivity-settings',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'origin_post_quantum_encryption',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/cache/origin_post_quantum_encryption',
+  operationId: 'zone-cache-settings-change-origin-post-quantum-encryption-setting',
 };
 
 export const tool: Tool = {

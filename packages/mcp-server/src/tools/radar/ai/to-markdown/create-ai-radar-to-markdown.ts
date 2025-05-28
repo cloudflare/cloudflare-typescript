@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.ai.to_markdown',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/ai/tomarkdown',
+  operationId: 'workers-ai-post-to-markdown',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.payload_logs',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/dlp/payload_log',
+  operationId: 'dlp-payload-log-put',
 };
 
 export const tool: Tool = {

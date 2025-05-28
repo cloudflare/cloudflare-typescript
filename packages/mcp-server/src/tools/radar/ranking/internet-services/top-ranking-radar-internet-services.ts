@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.ranking.internet_services',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/ranking/internet_services/top',
+  operationId: 'radar-get-ranking-top-internet-services',
 };
 
 export const tool: Tool = {

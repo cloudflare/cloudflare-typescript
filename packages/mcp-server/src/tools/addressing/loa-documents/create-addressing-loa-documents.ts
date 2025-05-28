@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.loa_documents',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/addressing/loa_documents',
+  operationId: 'ip-address-management-prefixes-upload-loa-document',
 };
 
 export const tool: Tool = {

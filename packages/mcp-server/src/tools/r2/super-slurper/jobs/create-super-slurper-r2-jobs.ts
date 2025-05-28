@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.super_slurper.jobs',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/slurper/jobs',
+  operationId: 'slurper-create-job',
 };
 
 export const tool: Tool = {

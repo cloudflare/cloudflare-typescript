@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.schemas',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/api_gateway/schemas',
+  operationId: 'api-shield-endpoint-management-retrieve-operations-and-features-as-open-api-schemas',
 };
 
 export const tool: Tool = {

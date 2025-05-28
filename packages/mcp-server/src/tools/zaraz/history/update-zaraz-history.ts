@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zaraz.history',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/settings/zaraz/history',
+  operationId: 'put-zones-zone_identifier-zaraz-history',
 };
 
 export const tool: Tool = {

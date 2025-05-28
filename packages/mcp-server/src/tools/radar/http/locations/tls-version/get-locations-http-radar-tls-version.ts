@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.locations.tls_version',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/locations/tls_version/{tls_version}',
+  operationId: 'radar-get-http-top-locations-by-tls-version',
 };
 
 export const tool: Tool = {

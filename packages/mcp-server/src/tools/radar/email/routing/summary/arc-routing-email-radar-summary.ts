@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.email.routing.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/email/routing/summary/arc',
+  operationId: 'radar-get-email-routing-summary-by-arc',
 };
 
 export const tool: Tool = {

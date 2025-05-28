@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.pcaps',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/pcaps',
+  operationId: 'magic-pcap-collection-list-packet-capture-requests',
 };
 
 export const tool: Tool = {

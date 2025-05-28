@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.pcaps.ownership',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/pcaps/ownership/validate',
+  operationId: 'magic-pcap-collection-validate-buckets-for-full-packet-captures',
 };
 
 export const tool: Tool = {

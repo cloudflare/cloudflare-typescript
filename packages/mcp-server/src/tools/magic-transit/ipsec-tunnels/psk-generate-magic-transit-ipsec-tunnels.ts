@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.ipsec_tunnels',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}/psk_generate',
+  operationId: 'magic-ipsec-tunnels-generate-pre-shared-key-(-psk)-for-ipsec-tunnels',
 };
 
 export const tool: Tool = {

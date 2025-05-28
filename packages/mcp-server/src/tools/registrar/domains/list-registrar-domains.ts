@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'registrar.domains',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/registrar/domains',
+  operationId: 'registrar-domains-list-domains',
 };
 
 export const tool: Tool = {

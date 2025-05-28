@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'user.organizations',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/user/organizations/{organization_id}',
+  operationId: "user'-s-organizations-leave-organization",
 };
 
 export const tool: Tool = {

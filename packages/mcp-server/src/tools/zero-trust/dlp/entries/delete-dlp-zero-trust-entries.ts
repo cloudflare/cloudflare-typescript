@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.entries',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/dlp/entries/{entry_id}',
+  operationId: 'dlp-entries-delete-entry',
 };
 
 export const tool: Tool = {

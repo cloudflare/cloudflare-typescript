@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai.tasks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/ai/tasks/search',
+  operationId: 'workers-ai-search-task',
 };
 
 export const tool: Tool = {

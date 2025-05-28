@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.dnssec',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/dnssec',
+  operationId: 'dnssec-dnssec-details',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.analytics.reports.bytimes',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/dns_analytics/report/bytime',
+  operationId: 'dns-analytics-by-time',
 };
 
 export const tool: Tool = {

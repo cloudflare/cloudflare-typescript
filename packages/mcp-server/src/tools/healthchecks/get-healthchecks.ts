@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'healthchecks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/healthchecks/{healthcheck_id}',
+  operationId: 'health-checks-health-check-details',
 };
 
 export const tool: Tool = {

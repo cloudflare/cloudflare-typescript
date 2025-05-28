@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.temporary_credentials',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/r2/temp-access-credentials',
+  operationId: 'r2-create-temp-access-credentials',
 };
 
 export const tool: Tool = {

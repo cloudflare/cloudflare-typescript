@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/r2/buckets',
+  operationId: 'r2-create-bucket',
 };
 
 export const tool: Tool = {

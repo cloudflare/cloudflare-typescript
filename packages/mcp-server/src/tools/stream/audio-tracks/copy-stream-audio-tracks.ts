@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.audio_tracks',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/audio/copy',
+  operationId: 'add-audio-track',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'network_interconnects.interconnects',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/cni/interconnects/{icon}',
+  operationId: 'delete_interconnect',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.requests.message',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/cloudforce-one/requests/{request_id}/message/{message_id}',
+  operationId: 'cloudforce-one-request-message-update',
 };
 
 export const tool: Tool = {

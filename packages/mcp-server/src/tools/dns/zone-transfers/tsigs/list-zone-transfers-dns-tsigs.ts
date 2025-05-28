@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.zone_transfers.tsigs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/secondary_dns/tsigs',
+  operationId: 'secondary-dns-(-tsig)-list-tsi-gs',
 };
 
 export const tool: Tool = {

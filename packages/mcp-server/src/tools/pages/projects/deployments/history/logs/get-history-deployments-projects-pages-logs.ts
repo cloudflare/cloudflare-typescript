@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pages.projects.deployments.history.logs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/history/logs',
+  operationId: 'pages-deployment-get-deployment-logs',
 };
 
 export const tool: Tool = {

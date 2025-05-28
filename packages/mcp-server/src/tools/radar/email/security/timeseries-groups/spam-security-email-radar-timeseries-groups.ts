@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.email.security.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/email/security/timeseries_groups/spam',
+  operationId: 'radar-get-email-security-timeseries-group-by-spam',
 };
 
 export const tool: Tool = {

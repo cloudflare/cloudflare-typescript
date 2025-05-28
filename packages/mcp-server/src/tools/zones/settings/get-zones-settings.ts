@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zones.settings',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/settings/{setting_id}',
+  operationId: 'zone-settings-get-single-setting',
 };
 
 export const tool: Tool = {

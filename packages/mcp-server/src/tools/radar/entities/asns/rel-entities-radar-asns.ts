@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.entities.asns',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/entities/asns/{asn}/rel',
+  operationId: 'radar-get-asns-rel',
 };
 
 export const tool: Tool = {

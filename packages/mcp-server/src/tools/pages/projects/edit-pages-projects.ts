@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pages.projects',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/pages/projects/{project_name}',
+  operationId: 'pages-project-update-project',
 };
 
 export const tool: Tool = {

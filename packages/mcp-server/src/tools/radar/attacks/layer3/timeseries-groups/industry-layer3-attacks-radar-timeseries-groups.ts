@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.attacks.layer3.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/attacks/layer3/timeseries_groups/industry',
+  operationId: 'radar-get-attacks-layer3-timeseries-group-by-industry',
 };
 
 export const tool: Tool = {

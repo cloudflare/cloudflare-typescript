@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.monitors',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/load_balancers/monitors',
+  operationId: 'account-load-balancer-monitors-create-monitor',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.identity_providers',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/identity_providers',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zones',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones',
+  operationId: 'zones-post',
 };
 
 export const tool: Tool = {

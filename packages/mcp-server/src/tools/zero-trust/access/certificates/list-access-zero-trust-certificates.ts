@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.certificates',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/certificates',
 };
 
 export const tool: Tool = {

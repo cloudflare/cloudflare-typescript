@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.live_inputs.outputs',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs',
+  operationId: 'stream-live-inputs-create-a-new-output,-connected-to-a-live-input',
 };
 
 export const tool: Tool = {

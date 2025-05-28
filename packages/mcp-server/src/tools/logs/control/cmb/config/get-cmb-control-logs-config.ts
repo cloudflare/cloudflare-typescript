@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'logs.control.cmb.config',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/logs/control/cmb/config',
+  operationId: 'get-accounts-account_id-logs-control-cmb-config',
 };
 
 export const tool: Tool = {

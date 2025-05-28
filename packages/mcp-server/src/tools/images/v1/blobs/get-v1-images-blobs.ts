@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'images.v1.blobs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/images/v1/{image_id}/blob',
+  operationId: 'cloudflare-images-base-image',
 };
 
 export const tool: Tool = {

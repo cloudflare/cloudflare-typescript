@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.sinkholes',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/sinkholes',
+  operationId: 'sinkhole-config-get-sinkholes',
 };
 
 export const tool: Tool = {

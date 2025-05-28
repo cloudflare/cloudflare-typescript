@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_routing.dns',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/email/routing/dns',
+  operationId: 'email-routing-settings-email-routing-dns-settings',
 };
 
 export const tool: Tool = {

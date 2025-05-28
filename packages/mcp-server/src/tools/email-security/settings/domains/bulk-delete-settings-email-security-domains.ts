@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.settings.domains',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/email-security/settings/domains',
+  operationId: 'email_security_delete_domains',
 };
 
 export const tool: Tool = {

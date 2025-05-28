@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.dns.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/dns/summary/cache_hit',
+  operationId: 'radar-get-dns-summary-by-cache-hit-status',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'client_certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/client_certificates/{client_certificate_id}',
+  operationId: 'client-certificate-for-a-zone-edit-client-certificate',
 };
 
 export const tool: Tool = {

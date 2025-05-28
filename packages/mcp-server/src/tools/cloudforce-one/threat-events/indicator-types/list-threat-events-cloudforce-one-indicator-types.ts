@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.indicator_types',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/indicatorTypes',
+  operationId: 'get_IndicatorTypesList',
 };
 
 export const tool: Tool = {

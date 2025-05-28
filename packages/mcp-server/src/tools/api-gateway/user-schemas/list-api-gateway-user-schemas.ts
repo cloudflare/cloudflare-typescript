@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.user_schemas',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/api_gateway/user_schemas',
+  operationId: 'api-shield-schema-validation-retrieve-information-about-all-schemas',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.investigate.release',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/email-security/investigate/release',
+  operationId: 'email_security_post_release',
 };
 
 export const tool: Tool = {

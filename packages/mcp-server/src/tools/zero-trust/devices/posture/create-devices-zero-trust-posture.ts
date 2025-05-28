@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.posture',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/devices/posture',
+  operationId: 'device-posture-rules-create-device-posture-rule',
 };
 
 export const tool: Tool = {

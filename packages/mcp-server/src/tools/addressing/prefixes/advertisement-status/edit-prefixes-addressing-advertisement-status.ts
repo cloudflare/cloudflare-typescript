@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.prefixes.advertisement_status',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status',
+  operationId: 'ip-address-management-dynamic-advertisement-update-prefix-dynamic-advertisement-status',
 };
 
 export const tool: Tool = {

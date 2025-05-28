@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.quality.iqi',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/quality/iqi/summary',
+  operationId: 'radar-get-quality-index-summary',
 };
 
 export const tool: Tool = {

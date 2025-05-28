@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'rum.rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/rum/v2/{ruleset_id}/rule/{rule_id}',
+  operationId: 'web-analytics-delete-rule',
 };
 
 export const tool: Tool = {

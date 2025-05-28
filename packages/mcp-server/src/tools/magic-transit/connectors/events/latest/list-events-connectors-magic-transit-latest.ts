@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.connectors.events.latest',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events/latest',
+  operationId: 'mconn-connector-telemetry-events-listLatest',
 };
 
 export const tool: Tool = {

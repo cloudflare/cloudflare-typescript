@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.devices',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/devices/physical-devices/{device_id}',
+  operationId: 'get-device',
 };
 
 export const tool: Tool = {

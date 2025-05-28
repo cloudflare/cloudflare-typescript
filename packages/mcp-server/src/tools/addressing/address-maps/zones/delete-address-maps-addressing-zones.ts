@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.address_maps.zones',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}',
+  operationId: 'ip-address-management-address-maps-remove-a-zone-membership-from-an-address-map',
 };
 
 export const tool: Tool = {

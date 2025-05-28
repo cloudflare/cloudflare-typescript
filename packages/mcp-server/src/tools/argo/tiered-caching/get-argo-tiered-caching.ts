@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'argo.tiered_caching',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/argo/tiered_caching',
+  operationId: 'tiered-caching-get-tiered-caching-setting',
 };
 
 export const tool: Tool = {

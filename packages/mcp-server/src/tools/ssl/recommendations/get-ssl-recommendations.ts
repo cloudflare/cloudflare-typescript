@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ssl.recommendations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/ssl/recommendation',
+  operationId: 'ssl/-tls-mode-recommendation-ssl/-tls-recommendation',
 };
 
 export const tool: Tool = {

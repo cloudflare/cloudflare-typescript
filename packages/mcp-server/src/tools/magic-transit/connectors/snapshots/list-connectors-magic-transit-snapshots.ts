@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.connectors.snapshots',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots',
+  operationId: 'mconn-connector-telemetry-snapshots-list',
 };
 
 export const tool: Tool = {

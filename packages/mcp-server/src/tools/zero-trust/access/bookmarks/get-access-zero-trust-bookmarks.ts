@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.bookmarks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/bookmarks/{bookmark_id}',
+  operationId: 'access-bookmark-applications-(-deprecated)-get-a-bookmark-application',
 };
 
 export const tool: Tool = {

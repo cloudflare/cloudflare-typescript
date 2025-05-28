@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.pools',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/load_balancers/pools/{pool_id}',
+  operationId: 'account-load-balancer-pools-delete-pool',
 };
 
 export const tool: Tool = {

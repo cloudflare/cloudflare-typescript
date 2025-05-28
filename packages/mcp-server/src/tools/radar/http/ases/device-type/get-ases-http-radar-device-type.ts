@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.ases.device_type',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/ases/device_type/{device_type}',
+  operationId: 'radar-get-http-top-ases-by-device-type',
 };
 
 export const tool: Tool = {

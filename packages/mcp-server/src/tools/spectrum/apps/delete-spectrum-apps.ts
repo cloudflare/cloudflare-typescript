@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'spectrum.apps',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/spectrum/apps/{app_id}',
+  operationId: 'spectrum-applications-delete-spectrum-application',
 };
 
 export const tool: Tool = {

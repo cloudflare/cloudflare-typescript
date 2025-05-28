@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'logpush.validate',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logpush/validate/origin',
 };
 
 export const tool: Tool = {

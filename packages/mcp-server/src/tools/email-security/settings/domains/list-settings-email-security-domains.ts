@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.settings.domains',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/email-security/settings/domains',
+  operationId: 'email_security_list_domains',
 };
 
 export const tool: Tool = {

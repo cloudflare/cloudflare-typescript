@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'workers_for_platforms.dispatch.namespaces.scripts.bindings',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath:
+    '/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/bindings',
+  operationId: 'namespace-worker-get-script-bindings',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.posture.integrations',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/devices/posture/integration/{integration_id}',
+  operationId: 'device-posture-integrations-delete-device-posture-integration',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'waiting_rooms.rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}',
+  operationId: 'waiting-room-delete-waiting-room-rule',
 };
 
 export const tool: Tool = {

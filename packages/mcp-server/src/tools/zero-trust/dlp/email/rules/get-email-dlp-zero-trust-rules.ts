@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.email.rules',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dlp/email/rules/{rule_id}',
+  operationId: 'dlp-email-scanner-get-rule',
 };
 
 export const tool: Tool = {

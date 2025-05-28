@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.downloads',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/stream/{identifier}/downloads',
+  operationId: 'stream-m-p-4-downloads-delete-downloads',
 };
 
 export const tool: Tool = {

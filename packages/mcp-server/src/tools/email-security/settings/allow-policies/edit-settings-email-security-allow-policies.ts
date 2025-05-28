@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'email_security.settings.allow_policies',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/email-security/settings/allow_policies/{policy_id}',
+  operationId: 'email_security_update_allow_policy',
 };
 
 export const tool: Tool = {

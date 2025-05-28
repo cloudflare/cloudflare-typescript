@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.search',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/search/global',
+  operationId: 'radar-get-search-global',
 };
 
 export const tool: Tool = {

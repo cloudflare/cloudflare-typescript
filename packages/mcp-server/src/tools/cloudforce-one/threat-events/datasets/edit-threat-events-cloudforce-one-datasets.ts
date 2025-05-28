@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.threat_events.datasets',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}',
+  operationId: 'patch_DatasetUpdate',
 };
 
 export const tool: Tool = {

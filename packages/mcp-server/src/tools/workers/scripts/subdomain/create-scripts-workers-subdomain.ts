@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.scripts.subdomain',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/subdomain',
+  operationId: 'worker-script-post-subdomain',
 };
 
 export const tool: Tool = {

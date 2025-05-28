@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers.account_settings',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/workers/account-settings',
+  operationId: 'worker-account-settings-fetch-worker-account-settings',
 };
 
 export const tool: Tool = {

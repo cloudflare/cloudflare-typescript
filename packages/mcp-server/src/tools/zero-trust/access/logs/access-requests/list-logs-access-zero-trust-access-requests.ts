@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.logs.access_requests',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/logs/access_requests',
+  operationId: 'access-authentication-logs-get-access-authentication-logs',
 };
 
 export const tool: Tool = {

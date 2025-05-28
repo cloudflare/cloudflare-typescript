@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.ipsec_tunnels',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/magic/ipsec_tunnels',
+  operationId: 'magic-ipsec-tunnels-create-ipsec-tunnels',
 };
 
 export const tool: Tool = {

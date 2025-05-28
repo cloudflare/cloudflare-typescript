@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.super_slurper.jobs',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/slurper/jobs/abortAll',
+  operationId: 'slurper-abort-all-jobs',
 };
 
 export const tool: Tool = {

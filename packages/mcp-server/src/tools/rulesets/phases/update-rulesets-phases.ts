@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'rulesets.phases',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint',
 };
 
 export const tool: Tool = {

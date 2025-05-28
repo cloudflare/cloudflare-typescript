@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'intel.dns',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/intel/dns',
+  operationId: 'passive-dns-by-ip-get-passive-dns-by-ip',
 };
 
 export const tool: Tool = {

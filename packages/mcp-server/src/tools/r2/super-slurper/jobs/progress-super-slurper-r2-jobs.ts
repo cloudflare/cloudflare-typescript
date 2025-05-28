@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.super_slurper.jobs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/slurper/jobs/{job_id}/progress',
+  operationId: 'slurper-get-job-progress',
 };
 
 export const tool: Tool = {

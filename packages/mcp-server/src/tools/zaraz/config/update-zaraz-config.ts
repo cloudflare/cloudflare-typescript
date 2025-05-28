@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zaraz.config',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/settings/zaraz/config',
+  operationId: 'put-zones-zone_identifier-zaraz-config',
 };
 
 export const tool: Tool = {

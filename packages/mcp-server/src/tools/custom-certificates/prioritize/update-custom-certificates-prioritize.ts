@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'custom_certificates.prioritize',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/custom_certificates/prioritize',
+  operationId: 'custom-ssl-for-a-zone-re-prioritize-ssl-certificates',
 };
 
 export const tool: Tool = {

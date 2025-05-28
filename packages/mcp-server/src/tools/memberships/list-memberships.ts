@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'memberships',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/memberships',
+  operationId: "user'-s-account-memberships-list-memberships",
 };
 
 export const tool: Tool = {

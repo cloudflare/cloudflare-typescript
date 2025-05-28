@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.live_inputs',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/stream/live_inputs',
+  operationId: 'stream-live-inputs-create-a-live-input',
 };
 
 export const tool: Tool = {

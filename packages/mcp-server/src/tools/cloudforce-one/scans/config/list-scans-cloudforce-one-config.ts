@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.scans.config',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/scans/config',
+  operationId: 'get_ConfigFetch',
 };
 
 export const tool: Tool = {

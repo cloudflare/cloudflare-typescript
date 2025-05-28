@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'queues',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/queues/{queue_id}',
+  operationId: 'queues-delete',
 };
 
 export const tool: Tool = {

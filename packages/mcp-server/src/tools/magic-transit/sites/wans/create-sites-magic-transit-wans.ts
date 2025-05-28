@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.sites.wans',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/magic/sites/{site_id}/wans',
+  operationId: 'magic-site-wans-create-wan',
 };
 
 export const tool: Tool = {

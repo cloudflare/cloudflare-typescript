@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.gre_tunnels',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/magic/gre_tunnels',
+  operationId: 'magic-gre-tunnels-update-multiple-gre-tunnels',
 };
 
 export const tool: Tool = {

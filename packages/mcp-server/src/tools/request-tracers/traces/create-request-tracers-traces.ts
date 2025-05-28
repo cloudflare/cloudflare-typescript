@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'request_tracers.traces',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/request-tracer/trace',
+  operationId: 'account-request-tracer-request-trace',
 };
 
 export const tool: Tool = {

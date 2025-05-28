@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.metrics',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/r2/metrics',
+  operationId: 'r2-get-account-level-metrics',
 };
 
 export const tool: Tool = {

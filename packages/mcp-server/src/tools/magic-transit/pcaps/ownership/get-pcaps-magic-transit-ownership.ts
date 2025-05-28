@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.pcaps.ownership',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/pcaps/ownership',
+  operationId: 'magic-pcap-collection-list-pca-ps-bucket-ownership',
 };
 
 export const tool: Tool = {

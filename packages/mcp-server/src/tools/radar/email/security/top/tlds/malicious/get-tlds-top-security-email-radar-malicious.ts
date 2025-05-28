@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.email.security.top.tlds.malicious',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/email/security/top/tlds/malicious/{malicious}',
+  operationId: 'radar-get-email-security-top-tlds-by-malicious',
 };
 
 export const tool: Tool = {

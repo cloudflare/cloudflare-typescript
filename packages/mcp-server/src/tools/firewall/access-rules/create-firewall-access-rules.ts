@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'firewall.access_rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/firewall/access_rules/rules',
 };
 
 export const tool: Tool = {

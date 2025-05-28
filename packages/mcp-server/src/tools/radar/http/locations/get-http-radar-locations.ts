@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.locations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/locations',
+  operationId: 'radar-get-http-top-locations-by-http-requests',
 };
 
 export const tool: Tool = {

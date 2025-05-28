@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.top',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/top/browser',
+  operationId: 'radar-get-http-top-browsers',
 };
 
 export const tool: Tool = {

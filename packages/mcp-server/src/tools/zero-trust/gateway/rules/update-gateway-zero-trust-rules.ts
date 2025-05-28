@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/gateway/rules/{rule_id}',
+  operationId: 'zero-trust-gateway-rules-update-zero-trust-gateway-rule',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'user.tokens',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/user/tokens/verify',
+  operationId: 'user-api-tokens-verify-token',
 };
 
 export const tool: Tool = {

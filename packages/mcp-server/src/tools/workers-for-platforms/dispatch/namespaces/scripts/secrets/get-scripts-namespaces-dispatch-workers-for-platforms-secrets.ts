@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   resource: 'workers_for_platforms.dispatch.namespaces.scripts.secrets',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath:
+    '/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets/{secret_name}',
+  operationId: 'namespace-worker-get-script-secrets',
 };
 
 export const tool: Tool = {

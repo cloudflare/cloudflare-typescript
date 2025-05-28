@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/stream/{identifier}',
+  operationId: 'stream-videos-delete-video',
 };
 
 export const tool: Tool = {

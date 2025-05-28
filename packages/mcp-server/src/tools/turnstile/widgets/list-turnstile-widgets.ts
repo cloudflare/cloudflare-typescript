@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'turnstile.widgets',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/challenges/widgets',
+  operationId: 'accounts-turnstile-widgets-list',
 };
 
 export const tool: Tool = {

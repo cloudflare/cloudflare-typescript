@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.domains.custom',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom',
+  operationId: 'r2-list-custom-domains',
 };
 
 export const tool: Tool = {

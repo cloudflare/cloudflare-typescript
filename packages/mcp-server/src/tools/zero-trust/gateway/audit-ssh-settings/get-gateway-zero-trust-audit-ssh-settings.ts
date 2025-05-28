@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.audit_ssh_settings',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/gateway/audit_ssh_settings',
+  operationId: 'zero-trust-get-audit-ssh-settings',
 };
 
 export const tool: Tool = {

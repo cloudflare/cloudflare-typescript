@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.cors',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/cors',
+  operationId: 'r2-delete-bucket-cors-policy',
 };
 
 export const tool: Tool = {

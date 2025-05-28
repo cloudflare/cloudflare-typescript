@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'load_balancers.pools',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/load_balancers/pools',
+  operationId: 'account-load-balancer-pools-create-pool',
 };
 
 export const tool: Tool = {

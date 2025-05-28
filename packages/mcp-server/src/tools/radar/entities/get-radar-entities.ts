@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.entities',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/entities/ip',
+  operationId: 'radar-get-entities-ip',
 };
 
 export const tool: Tool = {

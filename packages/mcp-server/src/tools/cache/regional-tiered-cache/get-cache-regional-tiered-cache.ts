@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cache.regional_tiered_cache',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/cache/regional_tiered_cache',
+  operationId: 'zone-cache-settings-get-regional-tiered-cache-setting',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'logs.control.retention',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/logs/control/retention/flag',
+  operationId: 'post-zones-zone_id-logs-control-retention-flag',
 };
 
 export const tool: Tool = {

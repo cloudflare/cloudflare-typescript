@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'queues.consumers',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/queues/{queue_id}/consumers',
+  operationId: 'queues-create-consumer',
 };
 
 export const tool: Tool = {

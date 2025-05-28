@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'queues.purge',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/queues/{queue_id}/purge',
+  operationId: 'queues-purge',
 };
 
 export const tool: Tool = {

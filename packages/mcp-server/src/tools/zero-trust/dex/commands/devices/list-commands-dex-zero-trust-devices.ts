@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dex.commands.devices',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/dex/commands/devices',
+  operationId: 'get-commands-eligible-devices',
 };
 
 export const tool: Tool = {

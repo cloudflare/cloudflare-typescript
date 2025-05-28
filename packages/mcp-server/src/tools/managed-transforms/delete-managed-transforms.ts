@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'managed_transforms',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/managed_headers',
+  operationId: 'deleteManagedTransforms',
 };
 
 export const tool: Tool = {

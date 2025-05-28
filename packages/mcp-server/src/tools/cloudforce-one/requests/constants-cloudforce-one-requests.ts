@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.requests',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/requests/constants',
+  operationId: 'cloudforce-one-request-constants',
 };
 
 export const tool: Tool = {

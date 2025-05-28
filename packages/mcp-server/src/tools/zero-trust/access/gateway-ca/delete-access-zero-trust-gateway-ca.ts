@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.gateway_ca',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/access/gateway_ca/{certificate_id}',
+  operationId: 'access-gateway-ca-delete-an-SSH-ca',
 };
 
 export const tool: Tool = {

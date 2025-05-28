@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.webhooks',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/stream/webhook',
+  operationId: 'stream-webhook-delete-webhooks',
 };
 
 export const tool: Tool = {

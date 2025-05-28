@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'api_gateway.expression_template.fallthrough',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/api_gateway/expression-template/fallthrough',
+  operationId: 'api-shield-expression-templates-fallthrough',
 };
 
 export const tool: Tool = {

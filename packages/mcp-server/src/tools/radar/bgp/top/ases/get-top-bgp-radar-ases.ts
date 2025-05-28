@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.bgp.top.ases',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/bgp/top/ases',
+  operationId: 'radar-get-bgp-top-ases',
 };
 
 export const tool: Tool = {

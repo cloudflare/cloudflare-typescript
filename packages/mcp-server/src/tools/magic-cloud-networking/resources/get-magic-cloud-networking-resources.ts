@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_cloud_networking.resources',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/magic/cloud/resources/{resource_id}',
+  operationId: 'resources-catalog-read',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.dns.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/dns/summary/dnssec_aware',
+  operationId: 'radar-get-dns-summary-by-dnssec-awareness',
 };
 
 export const tool: Tool = {

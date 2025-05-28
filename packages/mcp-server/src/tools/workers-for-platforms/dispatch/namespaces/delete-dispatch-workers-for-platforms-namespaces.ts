@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'workers_for_platforms.dispatch.namespaces',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}',
+  operationId: 'namespace-worker-delete-namespace',
 };
 
 export const tool: Tool = {

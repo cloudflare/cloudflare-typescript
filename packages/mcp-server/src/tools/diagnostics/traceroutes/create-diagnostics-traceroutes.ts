@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'diagnostics.traceroutes',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/diagnostics/traceroute',
+  operationId: 'diagnostics-traceroute',
 };
 
 export const tool: Tool = {

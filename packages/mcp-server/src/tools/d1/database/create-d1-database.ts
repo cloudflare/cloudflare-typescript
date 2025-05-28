@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'd1.database',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/d1/database',
+  operationId: 'cloudflare-d1-create-database',
 };
 
 export const tool: Tool = {

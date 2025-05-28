@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'resource_sharing',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/shares/{share_id}',
+  operationId: 'shares-get-by-id',
 };
 
 export const tool: Tool = {

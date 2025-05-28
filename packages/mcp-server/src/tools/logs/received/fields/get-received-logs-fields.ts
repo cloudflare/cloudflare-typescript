@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'logs.received.fields',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/logs/received/fields',
+  operationId: 'get-zones-zone_id-logs-received-fields',
 };
 
 export const tool: Tool = {

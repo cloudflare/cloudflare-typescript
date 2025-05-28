@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.tunnels.cloudflared',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cfd_tunnel/{tunnel_id}',
+  operationId: 'cloudflare-tunnel-get-a-cloudflare-tunnel',
 };
 
 export const tool: Tool = {

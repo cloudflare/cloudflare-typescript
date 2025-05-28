@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.domains.custom',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom',
+  operationId: 'r2-add-custom-domain',
 };
 
 export const tool: Tool = {

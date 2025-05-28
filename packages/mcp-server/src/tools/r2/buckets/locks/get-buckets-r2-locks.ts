@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.locks',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/lock',
+  operationId: 'r2-get-bucket-lock-configuration',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.applications.cas',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/apps/ca',
 };
 
 export const tool: Tool = {

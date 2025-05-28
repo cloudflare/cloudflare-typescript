@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'managed_transforms',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/managed_headers',
+  operationId: 'updateManagedTransforms',
 };
 
 export const tool: Tool = {

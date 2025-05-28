@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.email.security.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/email/security/summary/threat_category',
+  operationId: 'radar-get-email-security-summary-by-threat-category',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai.finetunes',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/ai/finetunes',
+  operationId: 'workers-ai-create-finetune',
 };
 
 export const tool: Tool = {

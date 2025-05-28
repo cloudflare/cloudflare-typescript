@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.dlp.datasets.versions.entries',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}/entries/{entry_id}',
+  operationId: 'dlp-datasets-upload-dataset-column',
 };
 
 export const tool: Tool = {

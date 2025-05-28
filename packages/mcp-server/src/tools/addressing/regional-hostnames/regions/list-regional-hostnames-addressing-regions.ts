@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'addressing.regional_hostnames.regions',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/addressing/regional_hostnames/regions',
+  operationId: 'dls-account-regional-hostnames-account-list-regions',
 };
 
 export const tool: Tool = {

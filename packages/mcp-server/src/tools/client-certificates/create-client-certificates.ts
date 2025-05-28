@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'client_certificates',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/client_certificates',
+  operationId: 'client-certificate-for-a-zone-create-client-certificate',
 };
 
 export const tool: Tool = {

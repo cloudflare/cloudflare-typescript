@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'dns.records',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/zones/{zone_id}/dns_records/{dns_record_id}',
+  operationId: 'dns-records-for-a-zone-delete-dns-record',
 };
 
 export const tool: Tool = {

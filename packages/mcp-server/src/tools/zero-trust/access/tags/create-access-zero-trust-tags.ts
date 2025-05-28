@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.tags',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/access/tags',
+  operationId: 'access-tags-create-tag',
 };
 
 export const tool: Tool = {

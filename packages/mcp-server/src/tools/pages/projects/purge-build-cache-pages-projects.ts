@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pages.projects',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/pages/projects/{project_name}/purge_build_cache',
+  operationId: 'pages-purge-build-cache',
 };
 
 export const tool: Tool = {

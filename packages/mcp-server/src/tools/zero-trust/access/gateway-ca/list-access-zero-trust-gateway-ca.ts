@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.gateway_ca',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/gateway_ca',
+  operationId: 'access-gateway-ca-list-SSH-ca',
 };
 
 export const tool: Tool = {

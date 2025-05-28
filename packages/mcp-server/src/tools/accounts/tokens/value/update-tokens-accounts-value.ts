@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'accounts.tokens.value',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/tokens/{token_id}/value',
+  operationId: 'account-api-tokens-roll-token',
 };
 
 export const tool: Tool = {

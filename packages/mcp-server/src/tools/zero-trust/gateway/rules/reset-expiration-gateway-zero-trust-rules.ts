@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.gateway.rules',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/gateway/rules/{rule_id}/reset_expiration',
+  operationId: 'zero-trust-gateway-rules-reset-expiration-zero-trust-gateway-rule',
 };
 
 export const tool: Tool = {

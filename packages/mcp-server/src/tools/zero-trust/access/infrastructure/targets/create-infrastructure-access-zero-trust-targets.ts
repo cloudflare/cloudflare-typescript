@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.infrastructure.targets',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/infrastructure/targets',
+  operationId: 'infra-targets-post',
 };
 
 export const tool: Tool = {

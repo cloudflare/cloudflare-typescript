@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'logpush.jobs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logpush/jobs',
 };
 
 export const tool: Tool = {

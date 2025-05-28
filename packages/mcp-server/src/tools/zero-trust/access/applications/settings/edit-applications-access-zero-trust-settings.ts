@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.applications.settings',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/settings',
 };
 
 export const tool: Tool = {

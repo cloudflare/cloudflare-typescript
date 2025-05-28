@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.sites.acls',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/magic/sites/{site_id}/acls',
+  operationId: 'magic-site-acls-create-acl',
 };
 
 export const tool: Tool = {

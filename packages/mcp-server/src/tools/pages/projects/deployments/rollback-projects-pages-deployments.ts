@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pages.projects.deployments',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/rollback',
+  operationId: 'pages-deployment-rollback-deployment',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.access.logs.scim.updates',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/logs/scim/updates',
+  operationId: 'access-scim-update-logs-list-access-scim-update-logs',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.quality.iqi',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/quality/iqi/timeseries_groups',
+  operationId: 'radar-get-quality-index-timeseries-group',
 };
 
 export const tool: Tool = {

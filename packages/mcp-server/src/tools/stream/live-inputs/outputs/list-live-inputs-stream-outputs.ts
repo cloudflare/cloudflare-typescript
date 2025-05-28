@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'stream.live_inputs.outputs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs',
+  operationId: 'stream-live-inputs-list-all-outputs-associated-with-a-specified-live-input',
 };
 
 export const tool: Tool = {

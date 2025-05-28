@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'magic_transit.routes',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/magic/routes',
+  operationId: 'magic-static-routes-update-many-routes',
 };
 
 export const tool: Tool = {

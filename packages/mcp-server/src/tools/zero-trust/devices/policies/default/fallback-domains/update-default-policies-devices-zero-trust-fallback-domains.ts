@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.devices.policies.default.fallback_domains',
   operation: 'write',
   tags: [],
+  httpMethod: 'put',
+  httpPath: '/accounts/{account_id}/devices/policy/fallback_domains',
+  operationId: 'devices-set-local-domain-fallback-list',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'ai_gateway.urls',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/url/{provider}',
+  operationId: 'aig-config-get-gateway-url',
 };
 
 export const tool: Tool = {

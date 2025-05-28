@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'snippets.rules',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/snippets/snippet_rules',
+  operationId: 'zone-snippets-snippet-rules',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'secrets_store.stores',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/secrets_store/stores',
+  operationId: 'secrets-store-create',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.http.summary',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/http/summary/post_quantum',
+  operationId: 'radar-get-http-summary-by-post-quantum',
 };
 
 export const tool: Tool = {

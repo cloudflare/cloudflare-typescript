@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cloudforce_one.scans.results',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/cloudforce-one/scans/results/{config_id}',
+  operationId: 'get_GetOpenPorts',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'managed_transforms',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/zones/{zone_id}/managed_headers',
+  operationId: 'listManagedTransforms',
 };
 
 export const tool: Tool = {

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'r2.buckets.event_notifications',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}',
+  operationId: 'r2-event-notification-delete-config',
 };
 
 export const tool: Tool = {

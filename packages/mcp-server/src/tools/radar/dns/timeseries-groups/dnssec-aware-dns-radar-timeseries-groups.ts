@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.dns.timeseries_groups',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/dns/timeseries_groups/dnssec_aware',
+  operationId: 'radar-get-dns-timeseries-group-by-dnssec-awareness',
 };
 
 export const tool: Tool = {

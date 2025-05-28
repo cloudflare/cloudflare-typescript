@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'waiting_rooms.page',
   operation: 'write',
   tags: [],
+  httpMethod: 'post',
+  httpPath: '/zones/{zone_id}/waiting_rooms/preview',
+  operationId: 'waiting-room-create-a-custom-waiting-room-page-preview',
 };
 
 export const tool: Tool = {

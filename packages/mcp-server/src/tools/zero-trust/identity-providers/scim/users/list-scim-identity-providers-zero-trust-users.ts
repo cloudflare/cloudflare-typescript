@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'zero_trust.identity_providers.scim.users',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/users',
+  operationId: 'access-identity-providers-list-scim-user-resources',
 };
 
 export const tool: Tool = {

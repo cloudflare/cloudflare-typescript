@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'hyperdrive.configs',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}',
+  operationId: 'get-hyperdrive',
 };
 
 export const tool: Tool = {

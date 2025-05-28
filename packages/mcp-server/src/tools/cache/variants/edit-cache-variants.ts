@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'cache.variants',
   operation: 'write',
   tags: [],
+  httpMethod: 'patch',
+  httpPath: '/zones/{zone_id}/cache/variants',
+  operationId: 'zone-cache-settings-change-variants-setting',
 };
 
 export const tool: Tool = {

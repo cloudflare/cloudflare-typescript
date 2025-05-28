@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'alerting.available_alerts',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/accounts/{account_id}/alerting/v3/available_alerts',
+  operationId: 'notification-alert-types-get-alert-types',
 };
 
 export const tool: Tool = {

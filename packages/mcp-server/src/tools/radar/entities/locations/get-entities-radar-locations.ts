@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'radar.entities.locations',
   operation: 'read',
   tags: [],
+  httpMethod: 'get',
+  httpPath: '/radar/entities/locations/{location}',
+  operationId: 'radar-get-entities-location-by-alpha2',
 };
 
 export const tool: Tool = {

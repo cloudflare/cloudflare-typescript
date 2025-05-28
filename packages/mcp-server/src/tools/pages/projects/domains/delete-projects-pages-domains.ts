@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   resource: 'pages.projects.domains',
   operation: 'write',
   tags: [],
+  httpMethod: 'delete',
+  httpPath: '/accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}',
+  operationId: 'pages-domains-delete-domain',
 };
 
 export const tool: Tool = {
