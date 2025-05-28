@@ -10,15 +10,7 @@ export class Revoke extends APIResource {
    * **Deprecated**: please use POST
    * /accounts/{account_id}/devices/registrations/revoke instead.
    *
-   * @example
-   * ```ts
-   * const revoke = await client.zeroTrust.devices.revoke.create(
-   *   {
-   *     account_id: '699d98642c564d2e855e9661899b7252',
-   *     body: ['f174e90a-fafe-4643-bbbc-4a0ed4fc8415'],
-   *   },
-   * );
-   * ```
+   * @deprecated
    */
   create(
     params: RevokeCreateParams,

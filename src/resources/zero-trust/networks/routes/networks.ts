@@ -9,17 +9,7 @@ export class Networks extends APIResource {
    * Routes a private network through a Cloudflare Tunnel. The CIDR in
    * `ip_network_encoded` must be written in URL-encoded format.
    *
-   * @example
-   * ```ts
-   * const route =
-   *   await client.zeroTrust.networks.routes.networks.create(
-   *     '172.16.0.0%2F16',
-   *     {
-   *       account_id: '699d98642c564d2e855e9661899b7252',
-   *       tunnel_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-   *     },
-   *   );
-   * ```
+   * @deprecated This endpoint and its related APIs are deprecated in favor of the equivalent Tunnel Route (without CIDR) APIs.
    */
   create(
     ipNetworkEncoded: string,
@@ -44,14 +34,7 @@ export class Networks extends APIResource {
    * it will delete the route from that tunnel, otherwise it will delete the route
    * based on the vnet and tun_type.
    *
-   * @example
-   * ```ts
-   * const route =
-   *   await client.zeroTrust.networks.routes.networks.delete(
-   *     '172.16.0.0%2F16',
-   *     { account_id: '699d98642c564d2e855e9661899b7252' },
-   *   );
-   * ```
+   * @deprecated This endpoint and its related APIs are deprecated in favor of the equivalent Tunnel Route (without CIDR) APIs.
    */
   delete(
     ipNetworkEncoded: string,
@@ -71,14 +54,7 @@ export class Networks extends APIResource {
    * Updates an existing private network route in an account. The CIDR in
    * `ip_network_encoded` must be written in URL-encoded format.
    *
-   * @example
-   * ```ts
-   * const route =
-   *   await client.zeroTrust.networks.routes.networks.edit(
-   *     '172.16.0.0%2F16',
-   *     { account_id: '699d98642c564d2e855e9661899b7252' },
-   *   );
-   * ```
+   * @deprecated This endpoint and its related APIs are deprecated in favor of the equivalent Tunnel Route (without CIDR) APIs.
    */
   edit(
     ipNetworkEncoded: string,
