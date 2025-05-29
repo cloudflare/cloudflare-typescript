@@ -6,7 +6,7 @@ import { SinglePage } from '../../pagination';
 
 export class SFU extends APIResource {
   /**
-   * Creates a new Cloudflare calls app. An app is an unique enviroment where each
+   * Creates a new Cloudflare calls app. An app is an unique environment where each
    * Session can access all Tracks within the app.
    *
    * @example
