@@ -29,6 +29,7 @@ export const tool: Tool = {
       },
       country: {
         type: 'string',
+        description: 'Country to geo egress from',
         enum: [
           'AF',
           'AL',
