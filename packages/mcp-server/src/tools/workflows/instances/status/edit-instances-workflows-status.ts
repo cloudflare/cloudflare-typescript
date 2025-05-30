@@ -30,7 +30,7 @@ export const tool: Tool = {
       },
       status: {
         type: 'string',
-        description: 'Possible actions to apply to instance.',
+        description: 'Apply action to instance.',
         enum: ['resume', 'pause', 'terminate'],
       },
     },

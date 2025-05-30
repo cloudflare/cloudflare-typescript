@@ -27,12 +27,12 @@ export const tool: Tool = {
       },
       date_end: {
         type: 'string',
-        description: 'In ISO 8601 with no timezone offsets and in UTC.',
+        description: 'Accepts ISO 8601 with no timezone offsets and in UTC.',
         format: 'date-time',
       },
       date_start: {
         type: 'string',
-        description: 'In ISO 8601 with no timezone offsets and in UTC.',
+        description: 'Accepts ISO 8601 with no timezone offsets and in UTC.',
         format: 'date-time',
       },
       page: {
