@@ -30,7 +30,7 @@ export const tool: Tool = {
       },
       search: {
         type: 'string',
-        description: 'Filter workflows by name.',
+        description: 'Allows filtering workflows` name.',
       },
     },
   },
