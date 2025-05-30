@@ -23,6 +23,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
+      allow_out_of_region_access: {
+        type: 'boolean',
+        description: 'Allow out of region access',
+      },
       regions: {
         type: 'string',
         description: 'Name of the region.',
