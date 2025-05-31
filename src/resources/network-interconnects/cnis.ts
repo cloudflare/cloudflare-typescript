@@ -592,6 +592,12 @@ export interface CNIListParams {
    * Query param: If specified, only show CNIs associated with the specified slot
    */
   slot?: string | null;
+
+  /**
+   * Query param: If specified, only show cnis associated with the specified tunnel
+   * id
+   */
+  tunnel_id?: string | null;
 }
 
 export interface CNIDeleteParams {

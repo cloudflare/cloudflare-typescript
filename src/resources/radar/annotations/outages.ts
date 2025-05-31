@@ -132,6 +132,9 @@ export namespace OutageLocationsResponse {
 
     clientCountryName: string;
 
+    /**
+     * A numeric string.
+     */
     value: string;
   }
 }

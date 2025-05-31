@@ -13,16 +13,7 @@ export class OverrideCodes extends APIResource {
    * /accounts/{account_id}/devices/registrations/{registration_id}/override_codes
    * instead.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const overrideCodeListResponse of client.zeroTrust.devices.overrideCodes.list(
-   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *   { account_id: '699d98642c564d2e855e9661899b7252' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     deviceId: string,

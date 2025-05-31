@@ -591,10 +591,10 @@ export namespace RuleSetting {
     dk?: boolean;
 
     /**
-     * Configure whether downloading enabled or not. When absent, downloading is
-     * enabled. Only applies when `version == "v2"`.
+     * Configure whether downloading enabled or not. When set with "remote_only",
+     * downloads are only available for viewing. Only applies when `version == "v2"`.
      */
-    download?: 'enabled' | 'disabled';
+    download?: 'enabled' | 'disabled' | 'remote_only';
 
     /**
      * Set to false to enable printing. Only applies when `version == "v1"`.
@@ -1020,10 +1020,10 @@ export namespace RuleSettingParam {
     dk?: boolean;
 
     /**
-     * Configure whether downloading enabled or not. When absent, downloading is
-     * enabled. Only applies when `version == "v2"`.
+     * Configure whether downloading enabled or not. When set with "remote_only",
+     * downloads are only available for viewing. Only applies when `version == "v2"`.
      */
-    download?: 'enabled' | 'disabled';
+    download?: 'enabled' | 'disabled' | 'remote_only';
 
     /**
      * Set to false to enable printing. Only applies when `version == "v1"`.

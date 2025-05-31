@@ -49,7 +49,7 @@ export class Categories extends APIResource {
    * ```ts
    * const category =
    *   await client.cloudforceOne.threatEvents.categories.delete(
-   *     'category_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 0 },
    *   );
    * ```
@@ -73,7 +73,7 @@ export class Categories extends APIResource {
    * ```ts
    * const response =
    *   await client.cloudforceOne.threatEvents.categories.edit(
-   *     'category_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 0 },
    *   );
    * ```
@@ -97,7 +97,7 @@ export class Categories extends APIResource {
    * ```ts
    * const category =
    *   await client.cloudforceOne.threatEvents.categories.get(
-   *     'category_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 0 },
    *   );
    * ```

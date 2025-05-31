@@ -331,12 +331,12 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: In ISO 8601 with no timezone offsets and in UTC.
+   * Query param: Accepts ISO 8601 with no timezone offsets and in UTC.
    */
   date_end?: string;
 
   /**
-   * Query param: In ISO 8601 with no timezone offsets and in UTC.
+   * Query param: Accepts ISO 8601 with no timezone offsets and in UTC.
    */
   date_start?: string;
 

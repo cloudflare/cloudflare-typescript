@@ -8,17 +8,7 @@ export class Bookmarks extends APIResource {
   /**
    * Create a new Bookmark application.
    *
-   * @example
-   * ```ts
-   * const bookmark =
-   *   await client.zeroTrust.access.bookmarks.create(
-   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     {
-   *       account_id: '699d98642c564d2e855e9661899b7252',
-   *       body: {},
-   *     },
-   *   );
-   * ```
+   * @deprecated
    */
   create(
     bookmarkId: string,
@@ -37,17 +27,7 @@ export class Bookmarks extends APIResource {
   /**
    * Updates a configured Bookmark application.
    *
-   * @example
-   * ```ts
-   * const bookmark =
-   *   await client.zeroTrust.access.bookmarks.update(
-   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     {
-   *       account_id: '699d98642c564d2e855e9661899b7252',
-   *       body: {},
-   *     },
-   *   );
-   * ```
+   * @deprecated
    */
   update(
     bookmarkId: string,
@@ -66,15 +46,7 @@ export class Bookmarks extends APIResource {
   /**
    * Lists Bookmark applications.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const bookmark of client.zeroTrust.access.bookmarks.list(
-   *   { account_id: '699d98642c564d2e855e9661899b7252' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     params: BookmarkListParams,
@@ -87,14 +59,7 @@ export class Bookmarks extends APIResource {
   /**
    * Deletes a Bookmark application.
    *
-   * @example
-   * ```ts
-   * const bookmark =
-   *   await client.zeroTrust.access.bookmarks.delete(
-   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     { account_id: '699d98642c564d2e855e9661899b7252' },
-   *   );
-   * ```
+   * @deprecated
    */
   delete(
     bookmarkId: string,
@@ -113,14 +78,7 @@ export class Bookmarks extends APIResource {
   /**
    * Fetches a single Bookmark application.
    *
-   * @example
-   * ```ts
-   * const bookmark =
-   *   await client.zeroTrust.access.bookmarks.get(
-   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     { account_id: '699d98642c564d2e855e9661899b7252' },
-   *   );
-   * ```
+   * @deprecated
    */
   get(
     bookmarkId: string,

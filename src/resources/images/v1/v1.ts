@@ -65,15 +65,7 @@ export class V1 extends APIResource {
    * List up to 100 images with one request. Use the optional parameters below to get
    * a specific range of images.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const v1ListResponse of client.images.v1.list({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * })) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     params: V1ListParams,
