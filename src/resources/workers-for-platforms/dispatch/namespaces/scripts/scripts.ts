@@ -316,6 +316,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindVersionMetadata
       | Metadata.WorkersBindingKindSecretsStoreSecret
       | Metadata.WorkersBindingKindSecretKey
+      | Metadata.WorkersBindingKindWorkflow
     >;
 
     /**
@@ -896,6 +897,23 @@ export namespace ScriptUpdateParams {
        * format. Required if `format` is "jwk".
        */
       key_jwk?: unknown;
+    }
+
+    export interface WorkersBindingKindWorkflow {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'workflow';
+
+      /**
+       * Name of the Workflow to bind to.
+       */
+      workflow_name: string;
     }
 
     export interface WorkersMultipleStepMigrations {
