@@ -33,6 +33,7 @@ import create_origin_ca_certificates from './origin-ca-certificates/create-origi
 import list_origin_ca_certificates from './origin-ca-certificates/list-origin-ca-certificates';
 import delete_origin_ca_certificates from './origin-ca-certificates/delete-origin-ca-certificates';
 import get_origin_ca_certificates from './origin-ca-certificates/get-origin-ca-certificates';
+import list_ips from './ips/list-ips';
 import update_memberships from './memberships/update-memberships';
 import list_memberships from './memberships/list-memberships';
 import delete_memberships from './memberships/delete-memberships';
@@ -1809,6 +1810,7 @@ addEndpoint(create_origin_ca_certificates);
 addEndpoint(list_origin_ca_certificates);
 addEndpoint(delete_origin_ca_certificates);
 addEndpoint(get_origin_ca_certificates);
+addEndpoint(list_ips);
 addEndpoint(update_memberships);
 addEndpoint(list_memberships);
 addEndpoint(delete_memberships);
