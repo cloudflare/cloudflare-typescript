@@ -1058,7 +1058,6 @@ client.example.list(undefined, { headers: { ... } });
 <summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
-- `client.ips.list()`
 - `client.memberships.list()`
 - `client.user.auditLogs.list()`
 - `client.user.billing.history.list()`

@@ -145,12 +145,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/ips.ts">IPs</a></code>
-- <code><a href="./src/resources/ips.ts">JDCloudIPs</a></code>
-- <code><a href="./src/resources/ips.ts">IPListResponse</a></code>
-
-Methods:
-
-- <code title="get /ips">client.ips.<a href="./src/resources/ips.ts">list</a>({ ...params }) -> IPListResponse</code>
 
 # Memberships
 
