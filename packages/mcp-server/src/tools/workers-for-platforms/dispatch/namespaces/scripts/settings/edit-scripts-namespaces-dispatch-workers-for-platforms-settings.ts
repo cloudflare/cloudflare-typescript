@@ -529,6 +529,25 @@ export const tool: Tool = {
                   },
                   required: ['algorithm', 'format', 'name', 'type', 'usages'],
                 },
+                {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                      description: 'A JavaScript variable name for the binding.',
+                    },
+                    type: {
+                      type: 'string',
+                      description: 'The kind of resource that the binding provides.',
+                      enum: ['workflow'],
+                    },
+                    workflow_name: {
+                      type: 'string',
+                      description: 'Name of the Workflow to bind to.',
+                    },
+                  },
+                  required: ['name', 'type', 'workflow_name'],
+                },
               ],
               description: 'A binding to allow the Worker to communicate with resources.',
             },

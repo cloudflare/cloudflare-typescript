@@ -91,6 +91,7 @@ export interface ScriptAndVersionSettingEditResponse {
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindVersionMetadata
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindSecretsStoreSecret
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindSecretKey
+    | ScriptAndVersionSettingEditResponse.WorkersBindingKindWorkflow
   >;
 
   /**
@@ -581,6 +582,23 @@ export namespace ScriptAndVersionSettingEditResponse {
     >;
   }
 
+  export interface WorkersBindingKindWorkflow {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'workflow';
+
+    /**
+     * Name of the Workflow to bind to.
+     */
+    workflow_name: string;
+  }
+
   /**
    * Limits to apply for this Worker.
    */
@@ -696,6 +714,7 @@ export interface ScriptAndVersionSettingGetResponse {
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindVersionMetadata
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindSecretsStoreSecret
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindSecretKey
+    | ScriptAndVersionSettingGetResponse.WorkersBindingKindWorkflow
   >;
 
   /**
@@ -1186,6 +1205,23 @@ export namespace ScriptAndVersionSettingGetResponse {
     >;
   }
 
+  export interface WorkersBindingKindWorkflow {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'workflow';
+
+    /**
+     * Name of the Workflow to bind to.
+     */
+    workflow_name: string;
+  }
+
   /**
    * Limits to apply for this Worker.
    */
@@ -1314,6 +1350,7 @@ export namespace ScriptAndVersionSettingEditParams {
       | Settings.WorkersBindingKindVersionMetadata
       | Settings.WorkersBindingKindSecretsStoreSecret
       | Settings.WorkersBindingKindSecretKey
+      | Settings.WorkersBindingKindWorkflow
     >;
 
     /**
@@ -1817,6 +1854,23 @@ export namespace ScriptAndVersionSettingEditParams {
        * format. Required if `format` is "jwk".
        */
       key_jwk?: unknown;
+    }
+
+    export interface WorkersBindingKindWorkflow {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'workflow';
+
+      /**
+       * Name of the Workflow to bind to.
+       */
+      workflow_name: string;
     }
 
     /**
