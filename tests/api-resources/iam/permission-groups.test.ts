@@ -11,7 +11,7 @@ const client = new Cloudflare({
 describe('resource permissionGroups', () => {
   test('list: only required params', async () => {
     const responsePromise = client.iam.permissionGroups.list({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,7 +24,7 @@ describe('resource permissionGroups', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.iam.permissionGroups.list({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
       label: 'labelOfThePermissionGroup',
       name: 'NameOfThePermissionGroup',
@@ -34,8 +34,8 @@ describe('resource permissionGroups', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.iam.permissionGroups.get('6d7f2f5f5b1d4a0e9081fdc98d432fd1', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+    const responsePromise = client.iam.permissionGroups.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -47,8 +47,8 @@ describe('resource permissionGroups', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.iam.permissionGroups.get('6d7f2f5f5b1d4a0e9081fdc98d432fd1', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+    const response = await client.iam.permissionGroups.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });

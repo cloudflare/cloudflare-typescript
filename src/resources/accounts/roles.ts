@@ -16,7 +16,7 @@ export class Roles extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const role of client.accounts.roles.list({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * })) {
    *   // ...
    * }
@@ -40,7 +40,7 @@ export class Roles extends APIResource {
    * ```ts
    * const role = await client.accounts.roles.get(
    *   '3536bcfad5faccb999b47003c79917fb',
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */

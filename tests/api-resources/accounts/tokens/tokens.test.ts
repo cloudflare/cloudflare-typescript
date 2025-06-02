@@ -12,7 +12,7 @@ describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.accounts.tokens.create({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'readonly token',
       policies: [
         {
@@ -40,7 +40,7 @@ describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await client.accounts.tokens.create({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'readonly token',
       policies: [
         {
@@ -69,7 +69,7 @@ describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = client.accounts.tokens.update('ed17574386854bf78a67040be0a770b0', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'readonly token',
       policies: [
         {
@@ -98,7 +98,7 @@ describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await client.accounts.tokens.update('ed17574386854bf78a67040be0a770b0', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'readonly token',
       policies: [
         {
@@ -127,7 +127,7 @@ describe('resource tokens', () => {
 
   // TODO: investigate broken test
   test.skip('list: only required params', async () => {
-    const responsePromise = client.accounts.tokens.list({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const responsePromise = client.accounts.tokens.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -140,7 +140,7 @@ describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('list: required and optional params', async () => {
     const response = await client.accounts.tokens.list({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'desc',
       page: 1,
       per_page: 5,
@@ -150,7 +150,7 @@ describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('delete: only required params', async () => {
     const responsePromise = client.accounts.tokens.delete('ed17574386854bf78a67040be0a770b0', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -164,14 +164,14 @@ describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('delete: required and optional params', async () => {
     const response = await client.accounts.tokens.delete('ed17574386854bf78a67040be0a770b0', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // TODO: investigate broken test
   test.skip('get: only required params', async () => {
     const responsePromise = client.accounts.tokens.get('ed17574386854bf78a67040be0a770b0', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -185,13 +185,13 @@ describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('get: required and optional params', async () => {
     const response = await client.accounts.tokens.get('ed17574386854bf78a67040be0a770b0', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // TODO: investigate broken test
   test.skip('verify: only required params', async () => {
-    const responsePromise = client.accounts.tokens.verify({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const responsePromise = client.accounts.tokens.verify({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -203,6 +203,6 @@ describe('resource tokens', () => {
 
   // TODO: investigate broken test
   test.skip('verify: required and optional params', async () => {
-    const response = await client.accounts.tokens.verify({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const response = await client.accounts.tokens.verify({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

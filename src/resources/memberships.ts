@@ -244,7 +244,7 @@ export namespace MembershipUpdateResponse {
      */
     export interface PermissionGroup {
       /**
-       * Identifier of the group.
+       * Identifier of the permission group.
        */
       id: string;
 
@@ -254,7 +254,7 @@ export namespace MembershipUpdateResponse {
       meta?: PermissionGroup.Meta;
 
       /**
-       * Name of the group.
+       * Name of the permission group.
        */
       name?: string;
     }
@@ -275,7 +275,7 @@ export namespace MembershipUpdateResponse {
      */
     export interface ResourceGroup {
       /**
-       * Identifier of the group.
+       * Identifier of the resource group.
        */
       id: string;
 
@@ -439,7 +439,7 @@ export namespace MembershipGetResponse {
      */
     export interface PermissionGroup {
       /**
-       * Identifier of the group.
+       * Identifier of the permission group.
        */
       id: string;
 
@@ -449,7 +449,7 @@ export namespace MembershipGetResponse {
       meta?: PermissionGroup.Meta;
 
       /**
-       * Name of the group.
+       * Name of the permission group.
        */
       name?: string;
     }
@@ -470,7 +470,7 @@ export namespace MembershipGetResponse {
      */
     export interface ResourceGroup {
       /**
-       * Identifier of the group.
+       * Identifier of the resource group.
        */
       id: string;
 

@@ -21,7 +21,12 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
+        title: 'Account Identifier',
         description: 'Account identifier tag.',
+      },
+      id: {
+        type: 'string',
+        description: 'Identifier',
       },
       name: {
         type: 'string',
