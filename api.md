@@ -145,11 +145,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/ips.ts">IPs</a></code>
-- <code><a href="./src/resources/ips.ts">IPListResponse</a></code>
-
-Methods:
-
-- <code title="get /ips">client.ips.<a href="./src/resources/ips.ts">list</a>({ ...params }) -> IPListResponse</code>
 
 # Memberships
 
@@ -8021,6 +8016,40 @@ Methods:
 - <code title="get /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">list</a>({ ...params }) -> ResourceGroupListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">delete</a>(resourceGroupID, { ...params }) -> ResourceGroupDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">get</a>(resourceGroupID, { ...params }) -> ResourceGroupGetResponse</code>
+
+## UserGroups
+
+Types:
+
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupCreateResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupListResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupDeleteResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/iam/user_groups">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">create</a>({ ...params }) -> UserGroupCreateResponse</code>
+- <code title="put /accounts/{account_id}/iam/user_groups/{user_group_id}">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">update</a>(userGroupID, { ...params }) -> UserGroupUpdateResponse</code>
+- <code title="get /accounts/{account_id}/iam/user_groups">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">list</a>({ ...params }) -> UserGroupListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/iam/user_groups/{user_group_id}">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">delete</a>(userGroupID, { ...params }) -> UserGroupDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/iam/user_groups/{user_group_id}">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">get</a>(userGroupID, { ...params }) -> UserGroupGetResponse</code>
+
+### Members
+
+Types:
+
+- <code><a href="./src/resources/iam/user-groups/members.ts">MemberCreateResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/members.ts">MemberUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/members.ts">MemberListResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/members.ts">MemberDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/iam/user_groups/{user_group_id}/members">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">create</a>(userGroupID, [ ...body ]) -> MemberCreateResponse</code>
+- <code title="put /accounts/{account_id}/iam/user_groups/{user_group_id}/members">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">update</a>(userGroupID, [ ...body ]) -> MemberUpdateResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/iam/user_groups/{user_group_id}/members">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">list</a>(userGroupID, { ...params }) -> MemberListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/iam/user_groups/{user_group_id}/members/{member_id}">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">delete</a>(memberID, { ...params }) -> MemberDeleteResponse</code>
 
 # CloudConnector
 

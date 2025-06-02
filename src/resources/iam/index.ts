@@ -23,3 +23,17 @@ export {
   type ResourceGroupGetParams,
   type ResourceGroupListResponsesV4PagePaginationArray,
 } from './resource-groups';
+export {
+  UserGroups,
+  type UserGroupCreateResponse,
+  type UserGroupUpdateResponse,
+  type UserGroupListResponse,
+  type UserGroupDeleteResponse,
+  type UserGroupGetResponse,
+  type UserGroupCreateParams,
+  type UserGroupUpdateParams,
+  type UserGroupListParams,
+  type UserGroupDeleteParams,
+  type UserGroupGetParams,
+  type UserGroupListResponsesV4PagePaginationArray,
+} from './user-groups/index';

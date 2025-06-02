@@ -4738,6 +4738,43 @@
       ]
     },
     {
+      "base": "iam.userGroups.members",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "member_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "user_group_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "member_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "workflows.instances",
       "name": "get",
       "params": [
