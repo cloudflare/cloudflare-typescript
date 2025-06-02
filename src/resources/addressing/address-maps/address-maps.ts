@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AddressMapsAPI from './address-maps';
+import * as IPsAPI from '../../ips';
 import * as AccountsAPI from './accounts';
 import {
   AccountDeleteParams,
@@ -10,7 +11,7 @@ import {
   AccountUpdateResponse,
   Accounts,
 } from './accounts';
-import * as IPsAPI from './ips';
+import * as AddressMapsIPsAPI from './ips';
 import { IPDeleteParams, IPDeleteResponse, IPUpdateParams, IPUpdateResponse, IPs } from './ips';
 import * as ZonesAPI from './zones';
 import { ZoneDeleteParams, ZoneDeleteResponse, ZoneUpdateParams, ZoneUpdateResponse, Zones } from './zones';
@@ -21,7 +22,7 @@ import { path } from '../../../internal/utils/path';
 
 export class AddressMaps extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
-  ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
+  ips: AddressMapsIPsAPI.IPs = new AddressMapsIPsAPI.IPs(this._client);
   zones: ZonesAPI.Zones = new ZonesAPI.Zones(this._client);
 
   /**
@@ -242,7 +243,7 @@ export interface AddressMapCreateResponse {
   /**
    * The set of IPs on the Address Map.
    */
-  ips?: Array<AddressMapCreateResponse.IP>;
+  ips?: IPsAPI.IPs;
 
   /**
    * Zones and Accounts which will be assigned IPs on this Address Map. A zone
@@ -254,15 +255,6 @@ export interface AddressMapCreateResponse {
 }
 
 export namespace AddressMapCreateResponse {
-  export interface IP {
-    created_at?: string;
-
-    /**
-     * An IPv4 or IPv6 address.
-     */
-    ip?: string;
-  }
-
   export interface Membership {
     /**
      * Controls whether the membership can be deleted via the API or not.
@@ -396,7 +388,7 @@ export interface AddressMapGetResponse {
   /**
    * The set of IPs on the Address Map.
    */
-  ips?: Array<AddressMapGetResponse.IP>;
+  ips?: IPsAPI.IPs;
 
   /**
    * Zones and Accounts which will be assigned IPs on this Address Map. A zone
@@ -408,15 +400,6 @@ export interface AddressMapGetResponse {
 }
 
 export namespace AddressMapGetResponse {
-  export interface IP {
-    created_at?: string;
-
-    /**
-     * An IPv4 or IPv6 address.
-     */
-    ip?: string;
-  }
-
   export interface Membership {
     /**
      * Controls whether the membership can be deleted via the API or not.
