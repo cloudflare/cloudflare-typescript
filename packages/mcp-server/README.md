@@ -247,6 +247,10 @@ The following tools are available in this MCP server.
 - `delete_origin_ca_certificates` (`write`): Revoke an existing Origin CA certificate by its serial number. You can use an Origin CA Key as your User Service Key or an API token when calling this endpoint ([see above](#requests)).
 - `get_origin_ca_certificates` (`read`): Get an existing Origin CA certificate by its serial number. You can use an Origin CA Key as your User Service Key or an API token when calling this endpoint ([see above](#requests)).
 
+### Resource `ips`:
+
+- `list_ips` (`read`): Get IPs used on the Cloudflare/JD Cloud network, see https://www.cloudflare.com/ips for Cloudflare IPs or https://developers.cloudflare.com/china-network/reference/infrastructure/ for JD Cloud IPs.
+
 ### Resource `memberships`:
 
 - `update_memberships` (`write`): Accept or reject this account invitation.
