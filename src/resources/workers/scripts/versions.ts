@@ -145,6 +145,7 @@ export namespace VersionCreateResponse {
         | Bindings.WorkersBindingKindVersionMetadata
         | Bindings.WorkersBindingKindSecretsStoreSecret
         | Bindings.WorkersBindingKindSecretKey
+        | Bindings.WorkersBindingKindWorkflow
       >;
     }
 
@@ -577,6 +578,23 @@ export namespace VersionCreateResponse {
         usages: Array<
           'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
         >;
+      }
+
+      export interface WorkersBindingKindWorkflow {
+        /**
+         * A JavaScript variable name for the binding.
+         */
+        name: string;
+
+        /**
+         * The kind of resource that the binding provides.
+         */
+        type: 'workflow';
+
+        /**
+         * Name of the Workflow to bind to.
+         */
+        workflow_name: string;
       }
     }
 
@@ -725,6 +743,7 @@ export namespace VersionGetResponse {
         | Bindings.WorkersBindingKindVersionMetadata
         | Bindings.WorkersBindingKindSecretsStoreSecret
         | Bindings.WorkersBindingKindSecretKey
+        | Bindings.WorkersBindingKindWorkflow
       >;
     }
 
@@ -1158,6 +1177,23 @@ export namespace VersionGetResponse {
           'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
         >;
       }
+
+      export interface WorkersBindingKindWorkflow {
+        /**
+         * A JavaScript variable name for the binding.
+         */
+        name: string;
+
+        /**
+         * The kind of resource that the binding provides.
+         */
+        type: 'workflow';
+
+        /**
+         * Name of the Workflow to bind to.
+         */
+        workflow_name: string;
+      }
     }
 
     export interface Script {
@@ -1279,6 +1315,7 @@ export namespace VersionCreateParams {
       | Metadata.WorkersBindingKindVersionMetadata
       | Metadata.WorkersBindingKindSecretsStoreSecret
       | Metadata.WorkersBindingKindSecretKey
+      | Metadata.WorkersBindingKindWorkflow
     >;
 
     /**
@@ -1763,6 +1800,23 @@ export namespace VersionCreateParams {
        * format. Required if `format` is "jwk".
        */
       key_jwk?: unknown;
+    }
+
+    export interface WorkersBindingKindWorkflow {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'workflow';
+
+      /**
+       * Name of the Workflow to bind to.
+       */
+      workflow_name: string;
     }
   }
 }
