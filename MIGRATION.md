@@ -872,6 +872,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.iam.resourceGroups.update()`
 - `client.iam.resourceGroups.delete()`
 - `client.iam.resourceGroups.get()`
+- `client.iam.userGroups.update()`
+- `client.iam.userGroups.delete()`
+- `client.iam.userGroups.get()`
+- `client.iam.userGroups.members.create()`
+- `client.iam.userGroups.members.update()`
+- `client.iam.userGroups.members.list()`
+- `client.iam.userGroups.members.delete()`
 - `client.botnetFeed.asn.dayReport()`
 - `client.botnetFeed.asn.fullReport()`
 - `client.botnetFeed.configs.asn.delete()`
@@ -1030,6 +1037,8 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.zaraz.update()`
 - `client.zaraz.history.update()`
 - `client.zaraz.publish.create()`
+- `client.iam.userGroups.members.create()`
+- `client.iam.userGroups.members.update()`
 - `client.cloudConnector.rules.update()`
 - `client.workflows.instances.bulk()`
 - `client.workflows.instances.events.create()`
@@ -1058,7 +1067,6 @@ client.example.list(undefined, { headers: { ... } });
 <summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
-- `client.ips.list()`
 - `client.memberships.list()`
 - `client.user.auditLogs.list()`
 - `client.user.billing.history.list()`

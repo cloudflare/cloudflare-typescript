@@ -25,16 +25,33 @@ import {
   ResourceGroupUpdateResponse,
   ResourceGroups,
 } from './resource-groups';
+import * as UserGroupsAPI from './user-groups/user-groups';
+import {
+  UserGroupCreateParams,
+  UserGroupCreateResponse,
+  UserGroupDeleteParams,
+  UserGroupDeleteResponse,
+  UserGroupGetParams,
+  UserGroupGetResponse,
+  UserGroupListParams,
+  UserGroupListResponse,
+  UserGroupListResponsesV4PagePaginationArray,
+  UserGroupUpdateParams,
+  UserGroupUpdateResponse,
+  UserGroups,
+} from './user-groups/user-groups';
 
 export class IAM extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
     this._client,
   );
   resourceGroups: ResourceGroupsAPI.ResourceGroups = new ResourceGroupsAPI.ResourceGroups(this._client);
+  userGroups: UserGroupsAPI.UserGroups = new UserGroupsAPI.UserGroups(this._client);
 }
 
 IAM.PermissionGroups = PermissionGroups;
 IAM.ResourceGroups = ResourceGroups;
+IAM.UserGroups = UserGroups;
 
 export declare namespace IAM {
   export {
@@ -59,5 +76,20 @@ export declare namespace IAM {
     type ResourceGroupListParams as ResourceGroupListParams,
     type ResourceGroupDeleteParams as ResourceGroupDeleteParams,
     type ResourceGroupGetParams as ResourceGroupGetParams,
+  };
+
+  export {
+    UserGroups as UserGroups,
+    type UserGroupCreateResponse as UserGroupCreateResponse,
+    type UserGroupUpdateResponse as UserGroupUpdateResponse,
+    type UserGroupListResponse as UserGroupListResponse,
+    type UserGroupDeleteResponse as UserGroupDeleteResponse,
+    type UserGroupGetResponse as UserGroupGetResponse,
+    type UserGroupListResponsesV4PagePaginationArray as UserGroupListResponsesV4PagePaginationArray,
+    type UserGroupCreateParams as UserGroupCreateParams,
+    type UserGroupUpdateParams as UserGroupUpdateParams,
+    type UserGroupListParams as UserGroupListParams,
+    type UserGroupDeleteParams as UserGroupDeleteParams,
+    type UserGroupGetParams as UserGroupGetParams,
   };
 }
