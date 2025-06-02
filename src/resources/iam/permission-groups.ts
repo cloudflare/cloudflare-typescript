@@ -14,7 +14,7 @@ export class PermissionGroups extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const permissionGroupListResponse of client.iam.permissionGroups.list(
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }
@@ -39,8 +39,8 @@ export class PermissionGroups extends APIResource {
    * ```ts
    * const permissionGroup =
    *   await client.iam.permissionGroups.get(
-   *     '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
-   *     { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -66,7 +66,7 @@ export type PermissionGroupListResponsesV4PagePaginationArray =
  */
 export interface PermissionGroupListResponse {
   /**
-   * Identifier of the group.
+   * Identifier of the permission group.
    */
   id: string;
 
@@ -76,7 +76,7 @@ export interface PermissionGroupListResponse {
   meta?: PermissionGroupListResponse.Meta;
 
   /**
-   * Name of the group.
+   * Name of the permission group.
    */
   name?: string;
 }
@@ -98,7 +98,7 @@ export namespace PermissionGroupListResponse {
  */
 export interface PermissionGroupGetResponse {
   /**
-   * Identifier of the group.
+   * Identifier of the permission group.
    */
   id: string;
 
@@ -108,7 +108,7 @@ export interface PermissionGroupGetResponse {
   meta?: PermissionGroupGetResponse.Meta;
 
   /**
-   * Name of the group.
+   * Name of the permission group.
    */
   name?: string;
 }

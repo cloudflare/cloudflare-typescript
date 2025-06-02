@@ -24,6 +24,7 @@ export const tool: Tool = {
         properties: {
           account_id: {
             type: 'string',
+            title: 'Account Identifier',
             description: 'Account identifier tag.',
           },
           email: {
@@ -49,6 +50,7 @@ export const tool: Tool = {
         properties: {
           account_id: {
             type: 'string',
+            title: 'Account Identifier',
             description: 'Account identifier tag.',
           },
           email: {

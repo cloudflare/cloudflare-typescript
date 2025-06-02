@@ -10,7 +10,7 @@ const client = new Cloudflare({
 
 describe('resource roles', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.accounts.roles.list({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const responsePromise = client.accounts.roles.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource roles', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.accounts.roles.list({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 5,
     });
@@ -30,7 +30,7 @@ describe('resource roles', () => {
 
   test('get: only required params', async () => {
     const responsePromise = client.accounts.roles.get('3536bcfad5faccb999b47003c79917fb', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,7 +43,7 @@ describe('resource roles', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.accounts.roles.get('3536bcfad5faccb999b47003c79917fb', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });

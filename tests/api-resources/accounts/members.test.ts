@@ -12,7 +12,7 @@ describe('resource members', () => {
   // HTTP 422 error from prism
   test.skip('create: only required params', async () => {
     const responsePromise = client.accounts.members.create({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       email: 'user@example.com',
       roles: ['3536bcfad5faccb999b47003c79917fb'],
     });
@@ -28,7 +28,7 @@ describe('resource members', () => {
   // HTTP 422 error from prism
   test.skip('create: required and optional params', async () => {
     const response = await client.accounts.members.create({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       email: 'user@example.com',
       roles: ['3536bcfad5faccb999b47003c79917fb'],
       status: 'accepted',
@@ -38,7 +38,7 @@ describe('resource members', () => {
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = client.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,13 +52,13 @@ describe('resource members', () => {
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await client.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       roles: [{ id: '3536bcfad5faccb999b47003c79917fb' }],
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.accounts.members.list({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const responsePromise = client.accounts.members.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -70,7 +70,7 @@ describe('resource members', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.accounts.members.list({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'desc',
       order: 'status',
       page: 1,
@@ -82,7 +82,7 @@ describe('resource members', () => {
   // HTTP 422 error from prism
   test.skip('delete: only required params', async () => {
     const responsePromise = client.accounts.members.delete('4536bcfad5faccb111b47003c79917fa', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -96,14 +96,14 @@ describe('resource members', () => {
   // HTTP 422 error from prism
   test.skip('delete: required and optional params', async () => {
     const response = await client.accounts.members.delete('4536bcfad5faccb111b47003c79917fa', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // HTTP 422 error from prism
   test.skip('get: only required params', async () => {
     const responsePromise = client.accounts.members.get('4536bcfad5faccb111b47003c79917fa', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -117,7 +117,7 @@ describe('resource members', () => {
   // HTTP 422 error from prism
   test.skip('get: required and optional params', async () => {
     const response = await client.accounts.members.get('4536bcfad5faccb111b47003c79917fa', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });

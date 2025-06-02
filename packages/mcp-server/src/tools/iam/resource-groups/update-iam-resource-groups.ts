@@ -21,10 +21,12 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
+        title: 'Account Identifier',
         description: 'Account identifier tag.',
       },
       resource_group_id: {
         type: 'string',
+        title: 'Resource Group Identifier',
         description: 'Resource Group identifier tag.',
       },
       name: {

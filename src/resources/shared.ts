@@ -334,7 +334,7 @@ export namespace Member {
      */
     export interface PermissionGroup {
       /**
-       * Identifier of the group.
+       * Identifier of the permission group.
        */
       id: string;
 
@@ -344,7 +344,7 @@ export namespace Member {
       meta?: PermissionGroup.Meta;
 
       /**
-       * Name of the group.
+       * Name of the permission group.
        */
       name?: string;
     }
@@ -365,7 +365,7 @@ export namespace Member {
      */
     export interface ResourceGroup {
       /**
-       * Identifier of the group.
+       * Identifier of the resource group.
        */
       id: string;
 
@@ -898,7 +898,7 @@ export namespace TokenPolicy {
    */
   export interface PermissionGroup {
     /**
-     * Identifier of the group.
+     * Identifier of the permission group.
      */
     id: string;
 
@@ -908,7 +908,7 @@ export namespace TokenPolicy {
     meta?: PermissionGroup.Meta;
 
     /**
-     * Name of the group.
+     * Name of the permission group.
      */
     name?: string;
   }
@@ -949,7 +949,7 @@ export namespace TokenPolicyParam {
    */
   export interface PermissionGroup {
     /**
-     * Identifier of the group.
+     * Identifier of the permission group.
      */
     id: string;
 

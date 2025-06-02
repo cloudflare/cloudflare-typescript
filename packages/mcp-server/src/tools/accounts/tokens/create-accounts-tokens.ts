@@ -21,6 +21,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
+        title: 'Account Identifier',
         description: 'Account identifier tag.',
       },
       name: {
@@ -96,7 +97,7 @@ export const tool: Tool = {
               properties: {
                 id: {
                   type: 'string',
-                  description: 'Identifier of the group.',
+                  description: 'Identifier of the permission group.',
                 },
                 meta: {
                   type: 'object',
@@ -113,7 +114,7 @@ export const tool: Tool = {
                 },
                 name: {
                   type: 'string',
-                  description: 'Name of the group.',
+                  description: 'Name of the permission group.',
                 },
               },
               required: ['id'],
