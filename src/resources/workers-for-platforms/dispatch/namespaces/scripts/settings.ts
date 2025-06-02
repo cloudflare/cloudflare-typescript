@@ -92,6 +92,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindVersionMetadata
     | SettingEditResponse.WorkersBindingKindSecretsStoreSecret
     | SettingEditResponse.WorkersBindingKindSecretKey
+    | SettingEditResponse.WorkersBindingKindWorkflow
   >;
 
   /**
@@ -580,6 +581,23 @@ export namespace SettingEditResponse {
     >;
   }
 
+  export interface WorkersBindingKindWorkflow {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'workflow';
+
+    /**
+     * Name of the Workflow to bind to.
+     */
+    workflow_name: string;
+  }
+
   /**
    * Limits to apply for this Worker.
    */
@@ -695,6 +713,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindVersionMetadata
     | SettingGetResponse.WorkersBindingKindSecretsStoreSecret
     | SettingGetResponse.WorkersBindingKindSecretKey
+    | SettingGetResponse.WorkersBindingKindWorkflow
   >;
 
   /**
@@ -1183,6 +1202,23 @@ export namespace SettingGetResponse {
     >;
   }
 
+  export interface WorkersBindingKindWorkflow {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'workflow';
+
+    /**
+     * Name of the Workflow to bind to.
+     */
+    workflow_name: string;
+  }
+
   /**
    * Limits to apply for this Worker.
    */
@@ -1311,6 +1347,7 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindVersionMetadata
       | Settings.WorkersBindingKindSecretsStoreSecret
       | Settings.WorkersBindingKindSecretKey
+      | Settings.WorkersBindingKindWorkflow
     >;
 
     /**
@@ -1814,6 +1851,23 @@ export namespace SettingEditParams {
        * format. Required if `format` is "jwk".
        */
       key_jwk?: unknown;
+    }
+
+    export interface WorkersBindingKindWorkflow {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'workflow';
+
+      /**
+       * Name of the Workflow to bind to.
+       */
+      workflow_name: string;
     }
 
     /**
