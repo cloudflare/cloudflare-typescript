@@ -30,7 +30,7 @@ export class Tokens extends APIResource {
    * @example
    * ```ts
    * const token = await client.accounts.tokens.create({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   name: 'readonly token',
    *   policies: [
    *     {
@@ -67,7 +67,7 @@ export class Tokens extends APIResource {
    * const token = await client.accounts.tokens.update(
    *   'ed17574386854bf78a67040be0a770b0',
    *   {
-   *     account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     name: 'readonly token',
    *     policies: [
    *       {
@@ -109,7 +109,7 @@ export class Tokens extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const token of client.accounts.tokens.list({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * })) {
    *   // ...
    * }
@@ -133,7 +133,7 @@ export class Tokens extends APIResource {
    * ```ts
    * const token = await client.accounts.tokens.delete(
    *   'ed17574386854bf78a67040be0a770b0',
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -157,7 +157,7 @@ export class Tokens extends APIResource {
    * ```ts
    * const token = await client.accounts.tokens.get(
    *   'ed17574386854bf78a67040be0a770b0',
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -176,7 +176,7 @@ export class Tokens extends APIResource {
    * @example
    * ```ts
    * const response = await client.accounts.tokens.verify({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * });
    * ```
    */
