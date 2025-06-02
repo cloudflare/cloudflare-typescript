@@ -27,62 +27,164 @@ export const tool: Tool = {
       before: {
         type: 'string',
         description:
-          'Filters actions based on a given timestamp in the format yyyy-mm-dd, returning only logs that occurred on and before the specified date.',
+          'Limits the returned results to logs older than the specified date. This can be a date string 2019-04-30 (interpreted in UTC) or an absolute timestamp that conforms to RFC3339.',
         format: 'date',
       },
       since: {
         type: 'string',
         description:
-          'Filters actions based on a given timestamp in the format yyyy-mm-dd, returning only logs that occurred on and after the specified date.',
+          'Limits the returned results to logs newer than the specified date. This can be a date string 2019-04-30 (interpreted in UTC) or an absolute timestamp that conforms to RFC3339.',
         format: 'date',
       },
       account_name: {
-        type: 'string',
-        description: 'Filters by the account name.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the account name.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       action_result: {
-        type: 'string',
-        description: 'Whether the action was successful or not.',
-        enum: ['success', 'failure'],
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by whether the action was successful or not.',
+            items: {
+              type: 'string',
+              enum: ['success', 'failure'],
+            },
+          },
+        },
+        required: [],
       },
       action_type: {
-        type: 'string',
-        description: 'Filters by the action type.',
-        enum: ['create', 'delete', 'view', 'update'],
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the action type.',
+            items: {
+              type: 'string',
+              enum: ['create', 'delete', 'view', 'update'],
+            },
+          },
+        },
+        required: [],
       },
       actor_context: {
-        type: 'string',
-        description: 'Filters by the actor context.',
-        enum: ['api_key', 'api_token', 'dash', 'oauth', 'origin_ca_key'],
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the actor context.',
+            items: {
+              type: 'string',
+              enum: ['api_key', 'api_token', 'dash', 'oauth', 'origin_ca_key'],
+            },
+          },
+        },
+        required: [],
       },
       actor_email: {
-        type: 'string',
-        description: "Filters by the actor's email address.",
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: "Filters out audit logs by the actor's email address.",
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       actor_id: {
-        type: 'string',
-        description: 'Filters by the actor ID. This can be either the Account ID or User ID.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description:
+              'Filters out audit logs by the actor ID. This can be either the Account ID or User ID.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       actor_ip_address: {
-        type: 'string',
-        description: 'The IP address where the action was initiated.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs IP address where the action was initiated.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       actor_token_id: {
-        type: 'string',
-        description: 'Filters by the API token ID when the actor context is an api_token or oauth.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description:
+              'Filters out audit logs by the API token ID when the actor context is an api_token or oauth.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       actor_token_name: {
-        type: 'string',
-        description: 'Filters by the API token name when the actor context is an api_token or oauth.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description:
+              'Filters out audit logs by the API token name when the actor context is an api_token or oauth.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       actor_type: {
-        type: 'string',
-        description: 'Filters by the actor type.',
-        enum: ['cloudflare_admin', 'account', 'user'],
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the actor type.',
+            items: {
+              type: 'string',
+              enum: ['cloudflare_admin', 'account', 'user'],
+            },
+          },
+        },
+        required: [],
       },
       audit_log_id: {
-        type: 'string',
-        description: 'Finds a specific log by its ID.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by their IDs.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       cursor: {
         type: 'string',
@@ -100,46 +202,137 @@ export const tool: Tool = {
           'The number limits the objects to return. The cursor attribute may be used to iterate over the next batch of objects if there are more than the limit.',
       },
       raw_cf_ray_id: {
-        type: 'string',
-        description: 'Filters by the response CF Ray ID.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the response CF Ray ID.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       raw_method: {
-        type: 'string',
-        description: 'The HTTP method for the API call.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the HTTP method for the API call.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       raw_status_code: {
-        type: 'integer',
-        description: 'The response status code that was returned.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the response status code that was returned.',
+            items: {
+              type: 'integer',
+            },
+          },
+        },
+        required: [],
       },
       raw_uri: {
-        type: 'string',
-        description: 'Filters by the request URI.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the request URI.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       resource_id: {
-        type: 'string',
-        description: 'Filters by the resource ID.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the resource ID.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       resource_product: {
-        type: 'string',
-        description: 'Filters audit logs by the Cloudflare product associated with the changed resource.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description:
+              'Filters out audit logs by the Cloudflare product associated with the changed resource.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       resource_scope: {
-        type: 'string',
-        description:
-          'Filters by the resource scope, specifying whether the resource is associated with an user, an account, or a zone.',
-        enum: ['accounts', 'user', 'zones'],
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description:
+              'Filters out audit logs by the resource scope, specifying whether the resource is associated with an user, an account, or a zone.',
+            items: {
+              type: 'string',
+              enum: ['accounts', 'user', 'zones'],
+            },
+          },
+        },
+        required: [],
       },
       resource_type: {
-        type: 'string',
-        description: 'Filters audit logs based on the unique type of resource changed by the action.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs based on the unique type of resource changed by the action.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       zone_id: {
-        type: 'string',
-        description: 'Filters by the zone ID.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the zone ID.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
       zone_name: {
-        type: 'string',
-        description: 'Filters by the zone name associated with the change.',
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by the zone name associated with the change.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
       },
     },
   },
