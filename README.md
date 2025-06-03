@@ -27,17 +27,13 @@ const client = new Cloudflare({
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const zone = await client.zones.create({
-    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    name: 'example.com',
-    type: 'full',
-  });
+const zone = await client.zones.create({
+  account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+  name: 'example.com',
+  type: 'full',
+});
 
-  console.log(zone.id);
-}
-
-main();
+console.log(zone.id);
 ```
 
 ### Request & Response types
@@ -53,16 +49,12 @@ const client = new Cloudflare({
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const params: Cloudflare.ZoneCreateParams = {
-    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    name: 'example.com',
-    type: 'full',
-  };
-  const zone: Cloudflare.Zone = await client.zones.create(params);
-}
-
-main();
+const params: Cloudflare.ZoneCreateParams = {
+  account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+  name: 'example.com',
+  type: 'full',
+};
+const zone: Cloudflare.Zone = await client.zones.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -125,19 +117,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const zone = await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }).catch(async (err) => {
-    if (err instanceof Cloudflare.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
-}
-
-main();
+const zone = await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }).catch(async (err) => {
+  if (err instanceof Cloudflare.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
