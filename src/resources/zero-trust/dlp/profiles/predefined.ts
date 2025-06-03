@@ -16,15 +16,7 @@ export class Predefined extends APIResource {
    * const profile =
    *   await client.zeroTrust.dlp.profiles.predefined.update(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       account_id: 'account_id',
-   *       entries: [
-   *         {
-   *           id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *           enabled: true,
-   *         },
-   *       ],
-   *     },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -222,11 +214,6 @@ export interface PredefinedUpdateParams {
   /**
    * Body param:
    */
-  entries: Array<PredefinedUpdateParams.Entry>;
-
-  /**
-   * Body param:
-   */
   ai_context_enabled?: boolean;
 
   /**
@@ -244,6 +231,11 @@ export interface PredefinedUpdateParams {
    * surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
+
+  /**
+   * @deprecated Body param:
+   */
+  entries?: Array<PredefinedUpdateParams.Entry>;
 
   /**
    * Body param:

@@ -25,6 +25,18 @@ export const tool: Tool = {
       profile_id: {
         type: 'string',
       },
+      ai_context_enabled: {
+        type: 'boolean',
+      },
+      allowed_match_count: {
+        type: 'integer',
+      },
+      confidence_threshold: {
+        type: 'string',
+      },
+      context_awareness: {
+        $ref: '#/$defs/context_awareness',
+      },
       entries: {
         type: 'array',
         items: {
@@ -39,18 +51,6 @@ export const tool: Tool = {
           },
           required: ['id', 'enabled'],
         },
-      },
-      ai_context_enabled: {
-        type: 'boolean',
-      },
-      allowed_match_count: {
-        type: 'integer',
-      },
-      confidence_threshold: {
-        type: 'string',
-      },
-      context_awareness: {
-        $ref: '#/$defs/context_awareness',
       },
       ocr_enabled: {
         type: 'boolean',

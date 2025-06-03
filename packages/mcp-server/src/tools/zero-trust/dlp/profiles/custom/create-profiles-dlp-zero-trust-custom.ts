@@ -18,306 +18,147 @@ export const tool: Tool = {
   description: 'Creates a DLP custom profile.',
   inputSchema: {
     type: 'object',
-    anyOf: [
-      {
-        type: 'object',
-        properties: {
-          account_id: {
-            type: 'string',
-          },
-          profiles: {
-            type: 'array',
-            items: {
+    properties: {
+      account_id: {
+        type: 'string',
+      },
+      entries: {
+        type: 'array',
+        items: {
+          anyOf: [
+            {
               type: 'object',
               properties: {
-                entries: {
-                  type: 'array',
-                  items: {
-                    anyOf: [
-                      {
-                        type: 'object',
-                        properties: {
-                          enabled: {
-                            type: 'boolean',
-                          },
-                          name: {
-                            type: 'string',
-                          },
-                          pattern: {
-                            $ref: '#/$defs/pattern',
-                          },
-                        },
-                        required: ['enabled', 'name', 'pattern'],
-                      },
-                      {
-                        type: 'object',
-                        properties: {
-                          enabled: {
-                            type: 'boolean',
-                          },
-                          name: {
-                            type: 'string',
-                          },
-                          words: {
-                            type: 'array',
-                            items: {
-                              type: 'string',
-                            },
-                          },
-                        },
-                        required: ['enabled', 'name', 'words'],
-                      },
-                    ],
-                  },
+                enabled: {
+                  type: 'boolean',
                 },
                 name: {
                   type: 'string',
                 },
-                ai_context_enabled: {
+                pattern: {
+                  $ref: '#/$defs/pattern',
+                },
+              },
+              required: ['enabled', 'name', 'pattern'],
+            },
+            {
+              type: 'object',
+              properties: {
+                enabled: {
                   type: 'boolean',
                 },
-                allowed_match_count: {
-                  type: 'integer',
-                  description:
-                    'Related DLP policies will trigger when the match count exceeds the number set.',
-                },
-                confidence_threshold: {
+                name: {
                   type: 'string',
                 },
-                context_awareness: {
-                  $ref: '#/$defs/context_awareness',
-                },
-                description: {
-                  type: 'string',
-                  description: 'The description of the profile.',
-                },
-                ocr_enabled: {
-                  type: 'boolean',
-                },
-                shared_entries: {
+                words: {
                   type: 'array',
-                  description:
-                    'Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your Microsoft Information Protection profiles).',
                   items: {
-                    anyOf: [
-                      {
-                        type: 'object',
-                        properties: {
-                          enabled: {
-                            type: 'boolean',
-                          },
-                          entry_id: {
-                            type: 'string',
-                          },
-                          entry_type: {
-                            type: 'string',
-                            enum: ['custom'],
-                          },
-                        },
-                        required: ['enabled', 'entry_id', 'entry_type'],
-                      },
-                      {
-                        type: 'object',
-                        properties: {
-                          enabled: {
-                            type: 'boolean',
-                          },
-                          entry_id: {
-                            type: 'string',
-                          },
-                          entry_type: {
-                            type: 'string',
-                            enum: ['predefined'],
-                          },
-                        },
-                        required: ['enabled', 'entry_id', 'entry_type'],
-                      },
-                      {
-                        type: 'object',
-                        properties: {
-                          enabled: {
-                            type: 'boolean',
-                          },
-                          entry_id: {
-                            type: 'string',
-                          },
-                          entry_type: {
-                            type: 'string',
-                            enum: ['integration'],
-                          },
-                        },
-                        required: ['enabled', 'entry_id', 'entry_type'],
-                      },
-                      {
-                        type: 'object',
-                        properties: {
-                          enabled: {
-                            type: 'boolean',
-                          },
-                          entry_id: {
-                            type: 'string',
-                          },
-                          entry_type: {
-                            type: 'string',
-                            enum: ['exact_data'],
-                          },
-                        },
-                        required: ['enabled', 'entry_id', 'entry_type'],
-                      },
-                    ],
+                    type: 'string',
                   },
                 },
               },
-              required: ['entries', 'name'],
+              required: ['enabled', 'name', 'words'],
             },
-          },
+          ],
         },
       },
-      {
-        type: 'object',
-        properties: {
-          account_id: {
-            type: 'string',
-          },
-          entries: {
-            type: 'array',
-            items: {
-              anyOf: [
-                {
-                  type: 'object',
-                  properties: {
-                    enabled: {
-                      type: 'boolean',
-                    },
-                    name: {
-                      type: 'string',
-                    },
-                    pattern: {
-                      $ref: '#/$defs/pattern',
-                    },
-                  },
-                  required: ['enabled', 'name', 'pattern'],
+      name: {
+        type: 'string',
+      },
+      ai_context_enabled: {
+        type: 'boolean',
+      },
+      allowed_match_count: {
+        type: 'integer',
+        description: 'Related DLP policies will trigger when the match count exceeds the number set.',
+      },
+      confidence_threshold: {
+        type: 'string',
+      },
+      context_awareness: {
+        $ref: '#/$defs/context_awareness',
+      },
+      description: {
+        type: 'string',
+        description: 'The description of the profile.',
+      },
+      ocr_enabled: {
+        type: 'boolean',
+      },
+      shared_entries: {
+        type: 'array',
+        description:
+          'Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your Microsoft Information Protection profiles).',
+        items: {
+          anyOf: [
+            {
+              type: 'object',
+              properties: {
+                enabled: {
+                  type: 'boolean',
                 },
-                {
-                  type: 'object',
-                  properties: {
-                    enabled: {
-                      type: 'boolean',
-                    },
-                    name: {
-                      type: 'string',
-                    },
-                    words: {
-                      type: 'array',
-                      items: {
-                        type: 'string',
-                      },
-                    },
-                  },
-                  required: ['enabled', 'name', 'words'],
+                entry_id: {
+                  type: 'string',
                 },
-              ],
+                entry_type: {
+                  type: 'string',
+                  enum: ['custom'],
+                },
+              },
+              required: ['enabled', 'entry_id', 'entry_type'],
             },
-          },
-          name: {
-            type: 'string',
-          },
-          ai_context_enabled: {
-            type: 'boolean',
-          },
-          allowed_match_count: {
-            type: 'integer',
-            description: 'Related DLP policies will trigger when the match count exceeds the number set.',
-          },
-          confidence_threshold: {
-            type: 'string',
-          },
-          context_awareness: {
-            $ref: '#/$defs/context_awareness',
-          },
-          description: {
-            type: 'string',
-            description: 'The description of the profile.',
-          },
-          ocr_enabled: {
-            type: 'boolean',
-          },
-          shared_entries: {
-            type: 'array',
-            description:
-              'Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your Microsoft Information Protection profiles).',
-            items: {
-              anyOf: [
-                {
-                  type: 'object',
-                  properties: {
-                    enabled: {
-                      type: 'boolean',
-                    },
-                    entry_id: {
-                      type: 'string',
-                    },
-                    entry_type: {
-                      type: 'string',
-                      enum: ['custom'],
-                    },
-                  },
-                  required: ['enabled', 'entry_id', 'entry_type'],
+            {
+              type: 'object',
+              properties: {
+                enabled: {
+                  type: 'boolean',
                 },
-                {
-                  type: 'object',
-                  properties: {
-                    enabled: {
-                      type: 'boolean',
-                    },
-                    entry_id: {
-                      type: 'string',
-                    },
-                    entry_type: {
-                      type: 'string',
-                      enum: ['predefined'],
-                    },
-                  },
-                  required: ['enabled', 'entry_id', 'entry_type'],
+                entry_id: {
+                  type: 'string',
                 },
-                {
-                  type: 'object',
-                  properties: {
-                    enabled: {
-                      type: 'boolean',
-                    },
-                    entry_id: {
-                      type: 'string',
-                    },
-                    entry_type: {
-                      type: 'string',
-                      enum: ['integration'],
-                    },
-                  },
-                  required: ['enabled', 'entry_id', 'entry_type'],
+                entry_type: {
+                  type: 'string',
+                  enum: ['predefined'],
                 },
-                {
-                  type: 'object',
-                  properties: {
-                    enabled: {
-                      type: 'boolean',
-                    },
-                    entry_id: {
-                      type: 'string',
-                    },
-                    entry_type: {
-                      type: 'string',
-                      enum: ['exact_data'],
-                    },
-                  },
-                  required: ['enabled', 'entry_id', 'entry_type'],
-                },
-              ],
+              },
+              required: ['enabled', 'entry_id', 'entry_type'],
             },
-          },
+            {
+              type: 'object',
+              properties: {
+                enabled: {
+                  type: 'boolean',
+                },
+                entry_id: {
+                  type: 'string',
+                },
+                entry_type: {
+                  type: 'string',
+                  enum: ['integration'],
+                },
+              },
+              required: ['enabled', 'entry_id', 'entry_type'],
+            },
+            {
+              type: 'object',
+              properties: {
+                enabled: {
+                  type: 'boolean',
+                },
+                entry_id: {
+                  type: 'string',
+                },
+                entry_type: {
+                  type: 'string',
+                  enum: ['exact_data'],
+                },
+              },
+              required: ['enabled', 'entry_id', 'entry_type'],
+            },
+          ],
         },
       },
-    ],
+    },
     $defs: {
       pattern: {
         type: 'object',
