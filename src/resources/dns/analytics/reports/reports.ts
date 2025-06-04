@@ -125,7 +125,7 @@ export namespace Report {
 
 export interface ReportGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
