@@ -95,7 +95,7 @@ export namespace ByTime {
 
 export interface BytimeGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
