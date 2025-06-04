@@ -119,6 +119,8 @@ export interface InvestigateListResponse {
    */
   postfix_id: string;
 
+  properties: InvestigateListResponse.Properties;
+
   ts: string;
 
   alert_id?: string | null;
@@ -172,6 +174,10 @@ export interface InvestigateListResponse {
 }
 
 export namespace InvestigateListResponse {
+  export interface Properties {
+    whitelisted_pattern_type?: string;
+  }
+
   export interface Validation {
     comment?: string | null;
 
@@ -200,6 +206,8 @@ export interface InvestigateGetResponse {
    * The identifier of the message.
    */
   postfix_id: string;
+
+  properties: InvestigateGetResponse.Properties;
 
   ts: string;
 
@@ -254,6 +262,10 @@ export interface InvestigateGetResponse {
 }
 
 export namespace InvestigateGetResponse {
+  export interface Properties {
+    whitelisted_pattern_type?: string;
+  }
+
   export interface Validation {
     comment?: string | null;
 
