@@ -44,7 +44,7 @@ export class Reports extends APIResource {
 
 export interface ReportGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

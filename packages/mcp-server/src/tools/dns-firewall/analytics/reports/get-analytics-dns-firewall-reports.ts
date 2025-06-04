@@ -22,11 +22,11 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       dns_firewall_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       dimensions: {
         type: 'string',
