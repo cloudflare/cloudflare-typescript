@@ -597,6 +597,18 @@ export namespace ScriptAndVersionSettingEditResponse {
      * Name of the Workflow to bind to.
      */
     workflow_name: string;
+
+    /**
+     * Class name of the Workflow. Should only be provided if the Workflow belongs to
+     * this script.
+     */
+    class_name?: string;
+
+    /**
+     * Script name that contains the Workflow. If not provided, defaults to this script
+     * name.
+     */
+    script_name?: string;
   }
 
   /**
@@ -1220,6 +1232,18 @@ export namespace ScriptAndVersionSettingGetResponse {
      * Name of the Workflow to bind to.
      */
     workflow_name: string;
+
+    /**
+     * Class name of the Workflow. Should only be provided if the Workflow belongs to
+     * this script.
+     */
+    class_name?: string;
+
+    /**
+     * Script name that contains the Workflow. If not provided, defaults to this script
+     * name.
+     */
+    script_name?: string;
   }
 
   /**
@@ -1871,6 +1895,18 @@ export namespace ScriptAndVersionSettingEditParams {
        * Name of the Workflow to bind to.
        */
       workflow_name: string;
+
+      /**
+       * Class name of the Workflow. Should only be provided if the Workflow belongs to
+       * this script.
+       */
+      class_name?: string;
+
+      /**
+       * Script name that contains the Workflow. If not provided, defaults to this script
+       * name.
+       */
+      script_name?: string;
     }
 
     /**
