@@ -27,7 +27,6 @@ export {
   type NAPTRRecord,
   type NSRecord,
   type PTRRecord,
-  type Record,
   type RecordResponse,
   type RecordTags,
   type SMIMEARecord,

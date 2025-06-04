@@ -46,7 +46,126 @@ export const tool: Tool = {
       posts: {
         type: 'array',
         items: {
-          $ref: '#/$defs/record',
+          anyOf: [
+            {
+              $ref: '#/$defs/a_record',
+            },
+            {
+              $ref: '#/$defs/aaaa_record',
+            },
+            {
+              $ref: '#/$defs/cname_record',
+            },
+            {
+              $ref: '#/$defs/mx_record',
+            },
+            {
+              $ref: '#/$defs/ns_record',
+            },
+            {
+              type: 'object',
+              title: 'OPENPGPKEY Record',
+              properties: {
+                comment: {
+                  type: 'string',
+                  description:
+                    'Comments or notes about the DNS record. This field has no effect on DNS responses.',
+                },
+                content: {
+                  type: 'string',
+                  description:
+                    'A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)',
+                },
+                name: {
+                  type: 'string',
+                  description: 'DNS record name (or @ for the zone apex) in Punycode.',
+                },
+                proxied: {
+                  type: 'boolean',
+                  description:
+                    'Whether the record is receiving the performance and security benefits of Cloudflare.',
+                },
+                settings: {
+                  type: 'object',
+                  description: 'Settings for the DNS record.',
+                  properties: {
+                    ipv4_only: {
+                      type: 'boolean',
+                      description:
+                        'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+                    },
+                    ipv6_only: {
+                      type: 'boolean',
+                      description:
+                        'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+                    },
+                  },
+                  required: [],
+                },
+                tags: {
+                  type: 'array',
+                  description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
+                  items: {
+                    $ref: '#/$defs/record_tags',
+                  },
+                },
+                ttl: {
+                  $ref: '#/$defs/ttl',
+                },
+                type: {
+                  type: 'string',
+                  description: 'Record type.',
+                  enum: ['OPENPGPKEY'],
+                },
+              },
+              required: [],
+            },
+            {
+              $ref: '#/$defs/ptr_record',
+            },
+            {
+              $ref: '#/$defs/txt_record',
+            },
+            {
+              $ref: '#/$defs/caa_record',
+            },
+            {
+              $ref: '#/$defs/cert_record',
+            },
+            {
+              $ref: '#/$defs/dnskey_record',
+            },
+            {
+              $ref: '#/$defs/ds_record',
+            },
+            {
+              $ref: '#/$defs/https_record',
+            },
+            {
+              $ref: '#/$defs/loc_record',
+            },
+            {
+              $ref: '#/$defs/naptr_record',
+            },
+            {
+              $ref: '#/$defs/smimea_record',
+            },
+            {
+              $ref: '#/$defs/srv_record',
+            },
+            {
+              $ref: '#/$defs/sshfp_record',
+            },
+            {
+              $ref: '#/$defs/svcb_record',
+            },
+            {
+              $ref: '#/$defs/tlsa_record',
+            },
+            {
+              $ref: '#/$defs/uri_record',
+            },
+          ],
         },
       },
       puts: {
@@ -60,109 +179,24 @@ export const tool: Tool = {
       batch_patch: {
         anyOf: [
           {
-            allOf: [
-              {
-                $ref: '#/$defs/a_record',
-              },
-            ],
-            title: 'A Record',
+            $ref: '#/$defs/a_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/aaaa_record',
-              },
-            ],
-            title: 'AAAA Record',
+            $ref: '#/$defs/aaaa_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/caa_record',
-              },
-            ],
-            title: 'CAA Record',
+            $ref: '#/$defs/cname_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/cert_record',
-              },
-            ],
-            title: 'CERT Record',
+            $ref: '#/$defs/mx_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/cname_record',
-              },
-            ],
-            title: 'CNAME Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/dnskey_record',
-              },
-            ],
-            title: 'DNSKEY Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/ds_record',
-              },
-            ],
-            title: 'DS Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/https_record',
-              },
-            ],
-            title: 'HTTPS Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/loc_record',
-              },
-            ],
-            title: 'LOC Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/mx_record',
-              },
-            ],
-            title: 'MX Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/naptr_record',
-              },
-            ],
-            title: 'NAPTR Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/ns_record',
-              },
-            ],
-            title: 'NS Record',
+            $ref: '#/$defs/ns_record',
           },
           {
             type: 'object',
             title: 'OPENPGPKEY Record',
             properties: {
-              id: {
-                type: 'string',
-                description: 'Identifier.',
-              },
               comment: {
                 type: 'string',
                 description:
@@ -215,71 +249,52 @@ export const tool: Tool = {
                 enum: ['OPENPGPKEY'],
               },
             },
-            required: ['id'],
+            required: [],
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/ptr_record',
-              },
-            ],
-            title: 'PTR Record',
+            $ref: '#/$defs/ptr_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/smimea_record',
-              },
-            ],
-            title: 'SMIMEA Record',
+            $ref: '#/$defs/txt_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/srv_record',
-              },
-            ],
-            title: 'SRV Record',
+            $ref: '#/$defs/caa_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/sshfp_record',
-              },
-            ],
-            title: 'SSHFP Record',
+            $ref: '#/$defs/cert_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/svcb_record',
-              },
-            ],
-            title: 'SVCB Record',
+            $ref: '#/$defs/dnskey_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/tlsa_record',
-              },
-            ],
-            title: 'TLSA Record',
+            $ref: '#/$defs/ds_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/txt_record',
-              },
-            ],
-            title: 'TXT Record',
+            $ref: '#/$defs/https_record',
           },
           {
-            allOf: [
-              {
-                $ref: '#/$defs/uri_record',
-              },
-            ],
-            title: 'URI Record',
+            $ref: '#/$defs/loc_record',
+          },
+          {
+            $ref: '#/$defs/naptr_record',
+          },
+          {
+            $ref: '#/$defs/smimea_record',
+          },
+          {
+            $ref: '#/$defs/srv_record',
+          },
+          {
+            $ref: '#/$defs/sshfp_record',
+          },
+          {
+            $ref: '#/$defs/svcb_record',
+          },
+          {
+            $ref: '#/$defs/tlsa_record',
+          },
+          {
+            $ref: '#/$defs/uri_record',
           },
         ],
       },
@@ -411,6 +426,297 @@ export const tool: Tool = {
             type: 'string',
             description: 'Record type.',
             enum: ['AAAA'],
+          },
+        },
+        required: [],
+      },
+      cname_record: {
+        type: 'object',
+        title: 'CNAME Record',
+        properties: {
+          comment: {
+            type: 'string',
+            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
+          },
+          content: {
+            type: 'string',
+            description: "A valid hostname. Must not match the record's name.",
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          proxied: {
+            type: 'boolean',
+            description:
+              'Whether the record is receiving the performance and security benefits of Cloudflare.',
+          },
+          settings: {
+            type: 'object',
+            description: 'Settings for the DNS record.',
+            properties: {
+              flatten_cname: {
+                type: 'boolean',
+                description:
+                  'If enabled, causes the CNAME record to be resolved externally and the resulting address records (e.g., A and AAAA) to be returned instead of the CNAME record itself. This setting is unavailable for proxied records, since they are always flattened.',
+              },
+              ipv4_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+              ipv6_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+            },
+            required: [],
+          },
+          tags: {
+            type: 'array',
+            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
+            items: {
+              $ref: '#/$defs/record_tags',
+            },
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['CNAME'],
+          },
+        },
+        required: [],
+      },
+      mx_record: {
+        type: 'object',
+        title: 'MX Record',
+        properties: {
+          comment: {
+            type: 'string',
+            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
+          },
+          content: {
+            type: 'string',
+            description: 'A valid mail server hostname.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          priority: {
+            type: 'number',
+            description:
+              'Required for MX, SRV and URI records; unused by other record types. Records with lower priorities are preferred.',
+          },
+          proxied: {
+            type: 'boolean',
+            description:
+              'Whether the record is receiving the performance and security benefits of Cloudflare.',
+          },
+          settings: {
+            type: 'object',
+            description: 'Settings for the DNS record.',
+            properties: {
+              ipv4_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+              ipv6_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+            },
+            required: [],
+          },
+          tags: {
+            type: 'array',
+            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
+            items: {
+              $ref: '#/$defs/record_tags',
+            },
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['MX'],
+          },
+        },
+        required: [],
+      },
+      ns_record: {
+        type: 'object',
+        title: 'NS Record',
+        properties: {
+          comment: {
+            type: 'string',
+            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
+          },
+          content: {
+            type: 'string',
+            description: 'A valid name server host name.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          proxied: {
+            type: 'boolean',
+            description:
+              'Whether the record is receiving the performance and security benefits of Cloudflare.',
+          },
+          settings: {
+            type: 'object',
+            description: 'Settings for the DNS record.',
+            properties: {
+              ipv4_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+              ipv6_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+            },
+            required: [],
+          },
+          tags: {
+            type: 'array',
+            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
+            items: {
+              $ref: '#/$defs/record_tags',
+            },
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['NS'],
+          },
+        },
+        required: [],
+      },
+      ptr_record: {
+        type: 'object',
+        title: 'PTR Record',
+        properties: {
+          comment: {
+            type: 'string',
+            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
+          },
+          content: {
+            type: 'string',
+            description: 'Domain name pointing to the address.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          proxied: {
+            type: 'boolean',
+            description:
+              'Whether the record is receiving the performance and security benefits of Cloudflare.',
+          },
+          settings: {
+            type: 'object',
+            description: 'Settings for the DNS record.',
+            properties: {
+              ipv4_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+              ipv6_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+            },
+            required: [],
+          },
+          tags: {
+            type: 'array',
+            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
+            items: {
+              $ref: '#/$defs/record_tags',
+            },
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['PTR'],
+          },
+        },
+        required: [],
+      },
+      txt_record: {
+        type: 'object',
+        title: 'TXT Record',
+        properties: {
+          comment: {
+            type: 'string',
+            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
+          },
+          content: {
+            type: 'string',
+            description:
+              'Text content for the record. The content must consist of quoted "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings exceeding this allowed maximum length are automatically split.\n\nLearn more at <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          proxied: {
+            type: 'boolean',
+            description:
+              'Whether the record is receiving the performance and security benefits of Cloudflare.',
+          },
+          settings: {
+            type: 'object',
+            description: 'Settings for the DNS record.',
+            properties: {
+              ipv4_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+              ipv6_only: {
+                type: 'boolean',
+                description:
+                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
+              },
+            },
+            required: [],
+          },
+          tags: {
+            type: 'array',
+            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
+            items: {
+              $ref: '#/$defs/record_tags',
+            },
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['TXT'],
           },
         },
         required: [],
@@ -566,67 +872,6 @@ export const tool: Tool = {
             type: 'string',
             description: 'Record type.',
             enum: ['CERT'],
-          },
-        },
-        required: [],
-      },
-      cname_record: {
-        type: 'object',
-        title: 'CNAME Record',
-        properties: {
-          comment: {
-            type: 'string',
-            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
-          },
-          content: {
-            type: 'string',
-            description: "A valid hostname. Must not match the record's name.",
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
-          proxied: {
-            type: 'boolean',
-            description:
-              'Whether the record is receiving the performance and security benefits of Cloudflare.',
-          },
-          settings: {
-            type: 'object',
-            description: 'Settings for the DNS record.',
-            properties: {
-              flatten_cname: {
-                type: 'boolean',
-                description:
-                  'If enabled, causes the CNAME record to be resolved externally and the resulting address records (e.g., A and AAAA) to be returned instead of the CNAME record itself. This setting is unavailable for proxied records, since they are always flattened.',
-              },
-              ipv4_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-              ipv6_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-            },
-            required: [],
-          },
-          tags: {
-            type: 'array',
-            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
-            items: {
-              $ref: '#/$defs/record_tags',
-            },
-          },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['CNAME'],
           },
         },
         required: [],
@@ -977,67 +1222,6 @@ export const tool: Tool = {
         },
         required: [],
       },
-      mx_record: {
-        type: 'object',
-        title: 'MX Record',
-        properties: {
-          comment: {
-            type: 'string',
-            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
-          },
-          content: {
-            type: 'string',
-            description: 'A valid mail server hostname.',
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
-          priority: {
-            type: 'number',
-            description:
-              'Required for MX, SRV and URI records; unused by other record types. Records with lower priorities are preferred.',
-          },
-          proxied: {
-            type: 'boolean',
-            description:
-              'Whether the record is receiving the performance and security benefits of Cloudflare.',
-          },
-          settings: {
-            type: 'object',
-            description: 'Settings for the DNS record.',
-            properties: {
-              ipv4_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-              ipv6_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-            },
-            required: [],
-          },
-          tags: {
-            type: 'array',
-            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
-            items: {
-              $ref: '#/$defs/record_tags',
-            },
-          },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['MX'],
-          },
-        },
-        required: [],
-      },
       naptr_record: {
         type: 'object',
         title: 'NAPTR Record',
@@ -1121,118 +1305,6 @@ export const tool: Tool = {
             type: 'string',
             description: 'Record type.',
             enum: ['NAPTR'],
-          },
-        },
-        required: [],
-      },
-      ns_record: {
-        type: 'object',
-        title: 'NS Record',
-        properties: {
-          comment: {
-            type: 'string',
-            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
-          },
-          content: {
-            type: 'string',
-            description: 'A valid name server host name.',
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
-          proxied: {
-            type: 'boolean',
-            description:
-              'Whether the record is receiving the performance and security benefits of Cloudflare.',
-          },
-          settings: {
-            type: 'object',
-            description: 'Settings for the DNS record.',
-            properties: {
-              ipv4_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-              ipv6_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-            },
-            required: [],
-          },
-          tags: {
-            type: 'array',
-            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
-            items: {
-              $ref: '#/$defs/record_tags',
-            },
-          },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['NS'],
-          },
-        },
-        required: [],
-      },
-      ptr_record: {
-        type: 'object',
-        title: 'PTR Record',
-        properties: {
-          comment: {
-            type: 'string',
-            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
-          },
-          content: {
-            type: 'string',
-            description: 'Domain name pointing to the address.',
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
-          proxied: {
-            type: 'boolean',
-            description:
-              'Whether the record is receiving the performance and security benefits of Cloudflare.',
-          },
-          settings: {
-            type: 'object',
-            description: 'Settings for the DNS record.',
-            properties: {
-              ipv4_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-              ipv6_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-            },
-            required: [],
-          },
-          tags: {
-            type: 'array',
-            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
-            items: {
-              $ref: '#/$defs/record_tags',
-            },
-          },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['PTR'],
           },
         },
         required: [],
@@ -1626,63 +1698,6 @@ export const tool: Tool = {
         },
         required: [],
       },
-      txt_record: {
-        type: 'object',
-        title: 'TXT Record',
-        properties: {
-          comment: {
-            type: 'string',
-            description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
-          },
-          content: {
-            type: 'string',
-            description:
-              'Text content for the record. The content must consist of quoted "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings exceeding this allowed maximum length are automatically split.\n\nLearn more at <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.',
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
-          proxied: {
-            type: 'boolean',
-            description:
-              'Whether the record is receiving the performance and security benefits of Cloudflare.',
-          },
-          settings: {
-            type: 'object',
-            description: 'Settings for the DNS record.',
-            properties: {
-              ipv4_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-              ipv6_only: {
-                type: 'boolean',
-                description:
-                  'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-              },
-            },
-            required: [],
-          },
-          tags: {
-            type: 'array',
-            description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
-            items: {
-              $ref: '#/$defs/record_tags',
-            },
-          },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['TXT'],
-          },
-        },
-        required: [],
-      },
       uri_record: {
         type: 'object',
         title: 'URI Record',
@@ -1759,7 +1774,7 @@ export const tool: Tool = {
         },
         required: [],
       },
-      record: {
+      batch_put: {
         anyOf: [
           {
             $ref: '#/$defs/a_record',
@@ -1768,31 +1783,10 @@ export const tool: Tool = {
             $ref: '#/$defs/aaaa_record',
           },
           {
-            $ref: '#/$defs/caa_record',
-          },
-          {
-            $ref: '#/$defs/cert_record',
-          },
-          {
             $ref: '#/$defs/cname_record',
           },
           {
-            $ref: '#/$defs/dnskey_record',
-          },
-          {
-            $ref: '#/$defs/ds_record',
-          },
-          {
-            $ref: '#/$defs/https_record',
-          },
-          {
-            $ref: '#/$defs/loc_record',
-          },
-          {
             $ref: '#/$defs/mx_record',
-          },
-          {
-            $ref: '#/$defs/naptr_record',
           },
           {
             $ref: '#/$defs/ns_record',
@@ -1859,6 +1853,30 @@ export const tool: Tool = {
             $ref: '#/$defs/ptr_record',
           },
           {
+            $ref: '#/$defs/txt_record',
+          },
+          {
+            $ref: '#/$defs/caa_record',
+          },
+          {
+            $ref: '#/$defs/cert_record',
+          },
+          {
+            $ref: '#/$defs/dnskey_record',
+          },
+          {
+            $ref: '#/$defs/ds_record',
+          },
+          {
+            $ref: '#/$defs/https_record',
+          },
+          {
+            $ref: '#/$defs/loc_record',
+          },
+          {
+            $ref: '#/$defs/naptr_record',
+          },
+          {
             $ref: '#/$defs/smimea_record',
           },
           {
@@ -1874,236 +1892,7 @@ export const tool: Tool = {
             $ref: '#/$defs/tlsa_record',
           },
           {
-            $ref: '#/$defs/txt_record',
-          },
-          {
             $ref: '#/$defs/uri_record',
-          },
-        ],
-      },
-      batch_put: {
-        anyOf: [
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/a_record',
-              },
-            ],
-            title: 'A Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/aaaa_record',
-              },
-            ],
-            title: 'AAAA Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/caa_record',
-              },
-            ],
-            title: 'CAA Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/cert_record',
-              },
-            ],
-            title: 'CERT Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/cname_record',
-              },
-            ],
-            title: 'CNAME Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/dnskey_record',
-              },
-            ],
-            title: 'DNSKEY Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/ds_record',
-              },
-            ],
-            title: 'DS Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/https_record',
-              },
-            ],
-            title: 'HTTPS Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/loc_record',
-              },
-            ],
-            title: 'LOC Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/mx_record',
-              },
-            ],
-            title: 'MX Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/naptr_record',
-              },
-            ],
-            title: 'NAPTR Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/ns_record',
-              },
-            ],
-            title: 'NS Record',
-          },
-          {
-            type: 'object',
-            title: 'OPENPGPKEY Record',
-            properties: {
-              content: {
-                type: 'string',
-                description:
-                  'A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)',
-              },
-              name: {
-                type: 'string',
-                description: 'DNS record name (or @ for the zone apex) in Punycode.',
-              },
-              type: {
-                type: 'string',
-                description: 'Record type.',
-                enum: ['OPENPGPKEY'],
-              },
-              id: {
-                type: 'string',
-                description: 'Identifier.',
-              },
-              comment: {
-                type: 'string',
-                description:
-                  'Comments or notes about the DNS record. This field has no effect on DNS responses.',
-              },
-              proxied: {
-                type: 'boolean',
-                description:
-                  'Whether the record is receiving the performance and security benefits of Cloudflare.',
-              },
-              settings: {
-                type: 'object',
-                description: 'Settings for the DNS record.',
-                properties: {
-                  ipv4_only: {
-                    type: 'boolean',
-                    description:
-                      'When enabled, only A records will be generated, and AAAA records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-                  },
-                  ipv6_only: {
-                    type: 'boolean',
-                    description:
-                      'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
-                  },
-                },
-                required: [],
-              },
-              tags: {
-                type: 'array',
-                description: 'Custom tags for the DNS record. This field has no effect on DNS responses.',
-                items: {
-                  $ref: '#/$defs/record_tags',
-                },
-              },
-              ttl: {
-                $ref: '#/$defs/ttl',
-              },
-            },
-            required: ['content', 'name', 'type'],
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/ptr_record',
-              },
-            ],
-            title: 'PTR Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/smimea_record',
-              },
-            ],
-            title: 'SMIMEA Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/srv_record',
-              },
-            ],
-            title: 'SRV Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/sshfp_record',
-              },
-            ],
-            title: 'SSHFP Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/svcb_record',
-              },
-            ],
-            title: 'SVCB Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/tlsa_record',
-              },
-            ],
-            title: 'TLSA Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/txt_record',
-              },
-            ],
-            title: 'TXT Record',
-          },
-          {
-            allOf: [
-              {
-                $ref: '#/$defs/uri_record',
-              },
-            ],
-            title: 'URI Record',
           },
         ],
       },
