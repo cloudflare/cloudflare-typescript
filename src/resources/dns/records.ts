@@ -557,119 +557,30 @@ export namespace AAAARecordParam {
 }
 
 export type BatchPatch =
-  | BatchPatch.A
-  | BatchPatch.AAAA
-  | BatchPatch.CAA
-  | BatchPatch.CERT
-  | BatchPatch.CNAME
-  | BatchPatch.DNSKEY
-  | BatchPatch.DS
-  | BatchPatch.HTTPS
-  | BatchPatch.LOC
-  | BatchPatch.MX
-  | BatchPatch.NAPTR
-  | BatchPatch.NS
-  | BatchPatch.Openpgpkey
-  | BatchPatch.PTR
-  | BatchPatch.SMIMEA
-  | BatchPatch.SRV
-  | BatchPatch.SSHFP
-  | BatchPatch.SVCB
-  | BatchPatch.TLSA
-  | BatchPatch.TXT
-  | BatchPatch.URI;
+  | ARecord
+  | AAAARecord
+  | CNAMERecord
+  | MXRecord
+  | NSRecord
+  | BatchPatch.DNSRecordsOpenpgpkeyRecord
+  | PTRRecord
+  | TXTRecord
+  | CAARecord
+  | CERTRecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | NAPTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | URIRecord;
 
 export namespace BatchPatch {
-  export interface A extends RecordsAPI.ARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface AAAA extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface CAA extends RecordsAPI.CAARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface CERT extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface CNAME extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface DS extends RecordsAPI.DSRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface HTTPS extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface LOC extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface MX extends RecordsAPI.MXRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface NAPTR extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface NS extends RecordsAPI.NSRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface Openpgpkey {
-    /**
-     * Identifier.
-     */
-    id: string;
-
+  export interface DNSRecordsOpenpgpkeyRecord {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -695,7 +606,7 @@ export namespace BatchPatch {
     /**
      * Settings for the DNS record.
      */
-    settings?: Openpgpkey.Settings;
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -715,7 +626,7 @@ export namespace BatchPatch {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace Openpgpkey {
+  export namespace DNSRecordsOpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -736,179 +647,34 @@ export namespace BatchPatch {
        */
       ipv6_only?: boolean;
     }
-  }
-
-  export interface PTR extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface SMIMEA extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface SRV extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface SSHFP extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface SVCB extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface TLSA extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface TXT extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface URI extends RecordsAPI.URIRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
   }
 }
 
 export type BatchPatchParam =
-  | BatchPatchParam.A
-  | BatchPatchParam.AAAA
-  | BatchPatchParam.CAA
-  | BatchPatchParam.CERT
-  | BatchPatchParam.CNAME
-  | BatchPatchParam.DNSKEY
-  | BatchPatchParam.DS
-  | BatchPatchParam.HTTPS
-  | BatchPatchParam.LOC
-  | BatchPatchParam.MX
-  | BatchPatchParam.NAPTR
-  | BatchPatchParam.NS
-  | BatchPatchParam.Openpgpkey
-  | BatchPatchParam.PTR
-  | BatchPatchParam.SMIMEA
-  | BatchPatchParam.SRV
-  | BatchPatchParam.SSHFP
-  | BatchPatchParam.SVCB
-  | BatchPatchParam.TLSA
-  | BatchPatchParam.TXT
-  | BatchPatchParam.URI;
+  | ARecordParam
+  | AAAARecordParam
+  | CNAMERecordParam
+  | MXRecordParam
+  | NSRecordParam
+  | BatchPatchParam.DNSRecordsOpenpgpkeyRecord
+  | PTRRecordParam
+  | TXTRecordParam
+  | CAARecordParam
+  | CERTRecordParam
+  | DNSKEYRecordParam
+  | DSRecordParam
+  | HTTPSRecordParam
+  | LOCRecordParam
+  | NAPTRRecordParam
+  | SMIMEARecordParam
+  | SRVRecordParam
+  | SSHFPRecordParam
+  | SVCBRecordParam
+  | TLSARecordParam
+  | URIRecordParam;
 
 export namespace BatchPatchParam {
-  export interface A extends RecordsAPI.ARecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface AAAA extends RecordsAPI.AAAARecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface CAA extends RecordsAPI.CAARecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface CERT extends RecordsAPI.CERTRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface CNAME extends RecordsAPI.CNAMERecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface DNSKEY extends RecordsAPI.DNSKEYRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface DS extends RecordsAPI.DSRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface HTTPS extends RecordsAPI.HTTPSRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface LOC extends RecordsAPI.LOCRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface MX extends RecordsAPI.MXRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface NAPTR extends RecordsAPI.NAPTRRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface NS extends RecordsAPI.NSRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface Openpgpkey {
-    /**
-     * Identifier.
-     */
-    id: string;
-
+  export interface DNSRecordsOpenpgpkeyRecord {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -934,7 +700,7 @@ export namespace BatchPatchParam {
     /**
      * Settings for the DNS record.
      */
-    settings?: Openpgpkey.Settings;
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -954,7 +720,7 @@ export namespace BatchPatchParam {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace Openpgpkey {
+  export namespace DNSRecordsOpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -976,198 +742,48 @@ export namespace BatchPatchParam {
       ipv6_only?: boolean;
     }
   }
-
-  export interface PTR extends RecordsAPI.PTRRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface SMIMEA extends RecordsAPI.SMIMEARecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface SRV extends RecordsAPI.SRVRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface SSHFP extends RecordsAPI.SSHFPRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface SVCB extends RecordsAPI.SVCBRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface TLSA extends RecordsAPI.TLSARecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface TXT extends RecordsAPI.TXTRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
-
-  export interface URI extends RecordsAPI.URIRecordParam {
-    /**
-     * Identifier.
-     */
-    id: string;
-  }
 }
 
 export type BatchPut =
-  | BatchPut.A
-  | BatchPut.AAAA
-  | BatchPut.CAA
-  | BatchPut.CERT
-  | BatchPut.CNAME
-  | BatchPut.DNSKEY
-  | BatchPut.DS
-  | BatchPut.HTTPS
-  | BatchPut.LOC
-  | BatchPut.MX
-  | BatchPut.NAPTR
-  | BatchPut.NS
-  | BatchPut.Openpgpkey
-  | BatchPut.PTR
-  | BatchPut.SMIMEA
-  | BatchPut.SRV
-  | BatchPut.SSHFP
-  | BatchPut.SVCB
-  | BatchPut.TLSA
-  | BatchPut.TXT
-  | BatchPut.URI;
+  | ARecord
+  | AAAARecord
+  | CNAMERecord
+  | MXRecord
+  | NSRecord
+  | BatchPut.DNSRecordsOpenpgpkeyRecord
+  | PTRRecord
+  | TXTRecord
+  | CAARecord
+  | CERTRecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | NAPTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | URIRecord;
 
 export namespace BatchPut {
-  export interface A extends RecordsAPI.ARecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface AAAA extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface CAA extends RecordsAPI.CAARecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface CERT extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface CNAME extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface DS extends RecordsAPI.DSRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface HTTPS extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface LOC extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface MX extends RecordsAPI.MXRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface NAPTR extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface NS extends RecordsAPI.NSRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface Openpgpkey {
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * Identifier.
-     */
-    id?: string;
-
+  export interface DNSRecordsOpenpgpkeyRecord {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
     comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
 
     /**
      * Whether the record is receiving the performance and security benefits of
@@ -1178,7 +794,7 @@ export namespace BatchPut {
     /**
      * Settings for the DNS record.
      */
-    settings?: Openpgpkey.Settings;
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1191,9 +807,14 @@ export namespace BatchPut {
      * Enterprise zones.
      */
     ttl?: RecordsAPI.TTL;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
   }
 
-  export namespace Openpgpkey {
+  export namespace DNSRecordsOpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -1215,198 +836,48 @@ export namespace BatchPut {
       ipv6_only?: boolean;
     }
   }
-
-  export interface PTR extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface SMIMEA extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface SRV extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface SSHFP extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface SVCB extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface TLSA extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface TXT extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface URI extends RecordsAPI.URIRecord {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
 }
 
 export type BatchPutParam =
-  | BatchPutParam.A
-  | BatchPutParam.AAAA
-  | BatchPutParam.CAA
-  | BatchPutParam.CERT
-  | BatchPutParam.CNAME
-  | BatchPutParam.DNSKEY
-  | BatchPutParam.DS
-  | BatchPutParam.HTTPS
-  | BatchPutParam.LOC
-  | BatchPutParam.MX
-  | BatchPutParam.NAPTR
-  | BatchPutParam.NS
-  | BatchPutParam.Openpgpkey
-  | BatchPutParam.PTR
-  | BatchPutParam.SMIMEA
-  | BatchPutParam.SRV
-  | BatchPutParam.SSHFP
-  | BatchPutParam.SVCB
-  | BatchPutParam.TLSA
-  | BatchPutParam.TXT
-  | BatchPutParam.URI;
+  | ARecordParam
+  | AAAARecordParam
+  | CNAMERecordParam
+  | MXRecordParam
+  | NSRecordParam
+  | BatchPutParam.DNSRecordsOpenpgpkeyRecord
+  | PTRRecordParam
+  | TXTRecordParam
+  | CAARecordParam
+  | CERTRecordParam
+  | DNSKEYRecordParam
+  | DSRecordParam
+  | HTTPSRecordParam
+  | LOCRecordParam
+  | NAPTRRecordParam
+  | SMIMEARecordParam
+  | SRVRecordParam
+  | SSHFPRecordParam
+  | SVCBRecordParam
+  | TLSARecordParam
+  | URIRecordParam;
 
 export namespace BatchPutParam {
-  export interface A extends RecordsAPI.ARecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface AAAA extends RecordsAPI.AAAARecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface CAA extends RecordsAPI.CAARecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface CERT extends RecordsAPI.CERTRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface CNAME extends RecordsAPI.CNAMERecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface DNSKEY extends RecordsAPI.DNSKEYRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface DS extends RecordsAPI.DSRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface HTTPS extends RecordsAPI.HTTPSRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface LOC extends RecordsAPI.LOCRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface MX extends RecordsAPI.MXRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface NAPTR extends RecordsAPI.NAPTRRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface NS extends RecordsAPI.NSRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface Openpgpkey {
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * Identifier.
-     */
-    id?: string;
-
+  export interface DNSRecordsOpenpgpkeyRecord {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
     comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
 
     /**
      * Whether the record is receiving the performance and security benefits of
@@ -1417,7 +888,7 @@ export namespace BatchPutParam {
     /**
      * Settings for the DNS record.
      */
-    settings?: Openpgpkey.Settings;
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1430,9 +901,14 @@ export namespace BatchPutParam {
      * Enterprise zones.
      */
     ttl?: RecordsAPI.TTLParam;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
   }
 
-  export namespace Openpgpkey {
+  export namespace DNSRecordsOpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -1453,62 +929,6 @@ export namespace BatchPutParam {
        */
       ipv6_only?: boolean;
     }
-  }
-
-  export interface PTR extends RecordsAPI.PTRRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface SMIMEA extends RecordsAPI.SMIMEARecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface SRV extends RecordsAPI.SRVRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface SSHFP extends RecordsAPI.SSHFPRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface SVCB extends RecordsAPI.SVCBRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface TLSA extends RecordsAPI.TLSARecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface TXT extends RecordsAPI.TXTRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
-  }
-
-  export interface URI extends RecordsAPI.URIRecordParam {
-    /**
-     * Identifier.
-     */
-    id?: string;
   }
 }
 
@@ -3523,31 +2943,31 @@ export namespace PTRRecordParam {
   }
 }
 
-export type Record =
+export type RecordResponse =
   | ARecord
   | AAAARecord
+  | CNAMERecord
+  | MXRecord
+  | NSRecord
+  | RecordResponse.DNSRecordsOpenpgpkeyRecord
+  | PTRRecord
+  | TXTRecord
   | CAARecord
   | CERTRecord
-  | CNAMERecord
   | DNSKEYRecord
   | DSRecord
   | HTTPSRecord
   | LOCRecord
-  | MXRecord
   | NAPTRRecord
-  | NSRecord
-  | Record.Openpgpkey
-  | PTRRecord
   | SMIMEARecord
   | SRVRecord
   | SSHFPRecord
   | SVCBRecord
   | TLSARecord
-  | TXTRecord
   | URIRecord;
 
-export namespace Record {
-  export interface Openpgpkey {
+export namespace RecordResponse {
+  export interface DNSRecordsOpenpgpkeyRecord {
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -3573,7 +2993,7 @@ export namespace Record {
     /**
      * Settings for the DNS record.
      */
-    settings?: Openpgpkey.Settings;
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -3593,7 +3013,7 @@ export namespace Record {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace Openpgpkey {
+  export namespace DNSRecordsOpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -3614,969 +3034,6 @@ export namespace Record {
        */
       ipv6_only?: boolean;
     }
-  }
-}
-
-export type RecordParam =
-  | ARecordParam
-  | AAAARecordParam
-  | CAARecordParam
-  | CERTRecordParam
-  | CNAMERecordParam
-  | DNSKEYRecordParam
-  | DSRecordParam
-  | HTTPSRecordParam
-  | LOCRecordParam
-  | MXRecordParam
-  | NAPTRRecordParam
-  | NSRecordParam
-  | RecordParam.Openpgpkey
-  | PTRRecordParam
-  | SMIMEARecordParam
-  | SRVRecordParam
-  | SSHFPRecordParam
-  | SVCBRecordParam
-  | TLSARecordParam
-  | TXTRecordParam
-  | URIRecordParam;
-
-export namespace RecordParam {
-  export interface Openpgpkey {
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings?: Openpgpkey.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<RecordsAPI.RecordTagsParam>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTLParam;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace Openpgpkey {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-}
-
-export type RecordResponse =
-  | RecordResponse.A
-  | RecordResponse.AAAA
-  | RecordResponse.CAA
-  | RecordResponse.CERT
-  | RecordResponse.CNAME
-  | RecordResponse.DNSKEY
-  | RecordResponse.DS
-  | RecordResponse.HTTPS
-  | RecordResponse.LOC
-  | RecordResponse.MX
-  | RecordResponse.NAPTR
-  | RecordResponse.NS
-  | RecordResponse.Openpgpkey
-  | RecordResponse.PTR
-  | RecordResponse.SMIMEA
-  | RecordResponse.SRV
-  | RecordResponse.SSHFP
-  | RecordResponse.SVCB
-  | RecordResponse.TLSA
-  | RecordResponse.TXT
-  | RecordResponse.URI;
-
-export namespace RecordResponse {
-  export interface A extends RecordsAPI.ARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface AAAA extends RecordsAPI.AAAARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CAA extends RecordsAPI.CAARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CERT extends RecordsAPI.CERTRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface CNAME extends RecordsAPI.CNAMERecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface DS extends RecordsAPI.DSRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface HTTPS extends RecordsAPI.HTTPSRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface LOC extends RecordsAPI.LOCRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface MX extends RecordsAPI.MXRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NAPTR extends RecordsAPI.NAPTRRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface NS extends RecordsAPI.NSRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface Openpgpkey {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment: string;
-
-    /**
-     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
-     */
-    content: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings: Openpgpkey.Settings;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type: 'OPENPGPKEY';
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export namespace Openpgpkey {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface PTR extends RecordsAPI.PTRRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SMIMEA extends RecordsAPI.SMIMEARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SRV extends RecordsAPI.SRVRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SSHFP extends RecordsAPI.SSHFPRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface SVCB extends RecordsAPI.SVCBRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TLSA extends RecordsAPI.TLSARecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface TXT extends RecordsAPI.TXTRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
-  }
-
-  export interface URI extends RecordsAPI.URIRecord {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
   }
 }
 
@@ -5936,24 +4393,24 @@ export interface RecordScanResponse {
 export type RecordCreateParams =
   | RecordCreateParams.ARecord
   | RecordCreateParams.AAAARecord
+  | RecordCreateParams.CNAMERecord
+  | RecordCreateParams.MXRecord
+  | RecordCreateParams.NSRecord
+  | RecordCreateParams.DNSRecordsOpenpgpkeyRecord
+  | RecordCreateParams.PTRRecord
+  | RecordCreateParams.TXTRecord
   | RecordCreateParams.CAARecord
   | RecordCreateParams.CERTRecord
-  | RecordCreateParams.CNAMERecord
   | RecordCreateParams.DNSKEYRecord
   | RecordCreateParams.DSRecord
   | RecordCreateParams.HTTPSRecord
   | RecordCreateParams.LOCRecord
-  | RecordCreateParams.MXRecord
   | RecordCreateParams.NAPTRRecord
-  | RecordCreateParams.NSRecord
-  | RecordCreateParams.DNSRecordsOpenpgpkeyRecord
-  | RecordCreateParams.PTRRecord
   | RecordCreateParams.SMIMEARecord
   | RecordCreateParams.SRVRecord
   | RecordCreateParams.SSHFPRecord
   | RecordCreateParams.SVCBRecord
   | RecordCreateParams.TLSARecord
-  | RecordCreateParams.TXTRecord
   | RecordCreateParams.URIRecord;
 
 export declare namespace RecordCreateParams {
@@ -6107,6 +4564,476 @@ export declare namespace RecordCreateParams {
     }
   }
 
+  export interface CNAMERecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid hostname. Must not match the record's name.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: CNAMERecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'CNAME';
+  }
+
+  export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * If enabled, causes the CNAME record to be resolved externally and the resulting
+       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
+       * itself. This setting is unavailable for proxied records, since they are always
+       * flattened.
+       */
+      flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface MXRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid mail server hostname.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: MXRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface NSRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid name server host name.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: NSRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface PTRRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Domain name pointing to the address.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: PTRRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface TXTRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Text content for the record. The content must consist of quoted
+     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
+     * exceeding this allowed maximum length are automatically split.
+     *
+     * Learn more at
+     * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: TXTRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
   export interface CAARecord {
     /**
      * Path param: Identifier.
@@ -6284,89 +5211,6 @@ export declare namespace RecordCreateParams {
      * Settings for the DNS record.
      */
     export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface CNAMERecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid hostname. Must not match the record's name.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: CNAMERecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CNAME';
-  }
-
-  export namespace CNAMERecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * If enabled, causes the CNAME record to be resolved externally and the resulting
-       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting is unavailable for proxied records, since they are always
-       * flattened.
-       */
-      flatten_cname?: boolean;
-
       /**
        * When enabled, only A records will be generated, and AAAA records will not be
        * created. This setting is intended for exceptional cases. Note that this option
@@ -6820,87 +5664,6 @@ export declare namespace RecordCreateParams {
     }
   }
 
-  export interface MXRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid mail server hostname.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: MXRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'MX';
-  }
-
-  export namespace MXRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
   export interface NAPTRRecord {
     /**
      * Path param: Identifier.
@@ -6989,232 +5752,6 @@ export declare namespace RecordCreateParams {
       service?: string;
     }
 
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface NSRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid name server host name.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: NSRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NS';
-  }
-
-  export namespace NSRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
-     * Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface PTRRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: Domain name pointing to the address.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: PTRRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'PTR';
-  }
-
-  export namespace PTRRecord {
     /**
      * Settings for the DNS record.
      */
@@ -7728,86 +6265,6 @@ export declare namespace RecordCreateParams {
     }
   }
 
-  export interface TXTRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: Text content for the record. The content must consist of quoted
-     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
-     * exceeding this allowed maximum length are automatically split.
-     *
-     * Learn more at
-     * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: TXTRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TXT';
-  }
-
-  export namespace TXTRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
   export interface URIRecord {
     /**
      * Path param: Identifier.
@@ -7908,24 +6365,24 @@ export declare namespace RecordCreateParams {
 export type RecordUpdateParams =
   | RecordUpdateParams.ARecord
   | RecordUpdateParams.AAAARecord
+  | RecordUpdateParams.CNAMERecord
+  | RecordUpdateParams.MXRecord
+  | RecordUpdateParams.NSRecord
+  | RecordUpdateParams.DNSRecordsOpenpgpkeyRecord
+  | RecordUpdateParams.PTRRecord
+  | RecordUpdateParams.TXTRecord
   | RecordUpdateParams.CAARecord
   | RecordUpdateParams.CERTRecord
-  | RecordUpdateParams.CNAMERecord
   | RecordUpdateParams.DNSKEYRecord
   | RecordUpdateParams.DSRecord
   | RecordUpdateParams.HTTPSRecord
   | RecordUpdateParams.LOCRecord
-  | RecordUpdateParams.MXRecord
   | RecordUpdateParams.NAPTRRecord
-  | RecordUpdateParams.NSRecord
-  | RecordUpdateParams.DNSRecordsOpenpgpkeyRecord
-  | RecordUpdateParams.PTRRecord
   | RecordUpdateParams.SMIMEARecord
   | RecordUpdateParams.SRVRecord
   | RecordUpdateParams.SSHFPRecord
   | RecordUpdateParams.SVCBRecord
   | RecordUpdateParams.TLSARecord
-  | RecordUpdateParams.TXTRecord
   | RecordUpdateParams.URIRecord;
 
 export declare namespace RecordUpdateParams {
@@ -8079,6 +6536,476 @@ export declare namespace RecordUpdateParams {
     }
   }
 
+  export interface CNAMERecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid hostname. Must not match the record's name.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: CNAMERecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'CNAME';
+  }
+
+  export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * If enabled, causes the CNAME record to be resolved externally and the resulting
+       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
+       * itself. This setting is unavailable for proxied records, since they are always
+       * flattened.
+       */
+      flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface MXRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid mail server hostname.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: MXRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface NSRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid name server host name.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: NSRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface PTRRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Domain name pointing to the address.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: PTRRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface TXTRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Text content for the record. The content must consist of quoted
+     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
+     * exceeding this allowed maximum length are automatically split.
+     *
+     * Learn more at
+     * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: TXTRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
   export interface CAARecord {
     /**
      * Path param: Identifier.
@@ -8256,89 +7183,6 @@ export declare namespace RecordUpdateParams {
      * Settings for the DNS record.
      */
     export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface CNAMERecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid hostname. Must not match the record's name.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: CNAMERecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CNAME';
-  }
-
-  export namespace CNAMERecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * If enabled, causes the CNAME record to be resolved externally and the resulting
-       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting is unavailable for proxied records, since they are always
-       * flattened.
-       */
-      flatten_cname?: boolean;
-
       /**
        * When enabled, only A records will be generated, and AAAA records will not be
        * created. This setting is intended for exceptional cases. Note that this option
@@ -8792,87 +7636,6 @@ export declare namespace RecordUpdateParams {
     }
   }
 
-  export interface MXRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid mail server hostname.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: MXRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'MX';
-  }
-
-  export namespace MXRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
   export interface NAPTRRecord {
     /**
      * Path param: Identifier.
@@ -8961,232 +7724,6 @@ export declare namespace RecordUpdateParams {
       service?: string;
     }
 
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface NSRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid name server host name.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: NSRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NS';
-  }
-
-  export namespace NSRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
-     * Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface PTRRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: Domain name pointing to the address.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: PTRRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'PTR';
-  }
-
-  export namespace PTRRecord {
     /**
      * Settings for the DNS record.
      */
@@ -9678,86 +8215,6 @@ export declare namespace RecordUpdateParams {
       usage?: number;
     }
 
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface TXTRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: Text content for the record. The content must consist of quoted
-     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
-     * exceeding this allowed maximum length are automatically split.
-     *
-     * Learn more at
-     * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: TXTRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TXT';
-  }
-
-  export namespace TXTRecord {
     /**
      * Settings for the DNS record.
      */
@@ -10118,7 +8575,29 @@ export interface RecordBatchParams {
   /**
    * Body param:
    */
-  posts?: Array<RecordParam>;
+  posts?: Array<
+    | ARecordParam
+    | AAAARecordParam
+    | CNAMERecordParam
+    | MXRecordParam
+    | NSRecordParam
+    | RecordBatchParams.DNSRecordsOpenpgpkeyRecord
+    | PTRRecordParam
+    | TXTRecordParam
+    | CAARecordParam
+    | CERTRecordParam
+    | DNSKEYRecordParam
+    | DSRecordParam
+    | HTTPSRecordParam
+    | LOCRecordParam
+    | NAPTRRecordParam
+    | SMIMEARecordParam
+    | SRVRecordParam
+    | SSHFPRecordParam
+    | SVCBRecordParam
+    | TLSARecordParam
+    | URIRecordParam
+  >;
 
   /**
    * Body param:
@@ -10133,29 +8612,98 @@ export namespace RecordBatchParams {
      */
     id: string;
   }
+
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTagsParam>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTLParam;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
 }
 
 export type RecordEditParams =
   | RecordEditParams.ARecord
   | RecordEditParams.AAAARecord
+  | RecordEditParams.CNAMERecord
+  | RecordEditParams.MXRecord
+  | RecordEditParams.NSRecord
+  | RecordEditParams.DNSRecordsOpenpgpkeyRecord
+  | RecordEditParams.PTRRecord
+  | RecordEditParams.TXTRecord
   | RecordEditParams.CAARecord
   | RecordEditParams.CERTRecord
-  | RecordEditParams.CNAMERecord
   | RecordEditParams.DNSKEYRecord
   | RecordEditParams.DSRecord
   | RecordEditParams.HTTPSRecord
   | RecordEditParams.LOCRecord
-  | RecordEditParams.MXRecord
   | RecordEditParams.NAPTRRecord
-  | RecordEditParams.NSRecord
-  | RecordEditParams.DNSRecordsOpenpgpkeyRecord
-  | RecordEditParams.PTRRecord
   | RecordEditParams.SMIMEARecord
   | RecordEditParams.SRVRecord
   | RecordEditParams.SSHFPRecord
   | RecordEditParams.SVCBRecord
   | RecordEditParams.TLSARecord
-  | RecordEditParams.TXTRecord
   | RecordEditParams.URIRecord;
 
 export declare namespace RecordEditParams {
@@ -10287,6 +8835,476 @@ export declare namespace RecordEditParams {
   }
 
   export namespace AAAARecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface CNAMERecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid hostname. Must not match the record's name.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: CNAMERecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'CNAME';
+  }
+
+  export namespace CNAMERecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * If enabled, causes the CNAME record to be resolved externally and the resulting
+       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
+       * itself. This setting is unavailable for proxied records, since they are always
+       * flattened.
+       */
+      flatten_cname?: boolean;
+
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface MXRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid mail server hostname.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: MXRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface NSRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A valid name server host name.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: NSRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'NS';
+  }
+
+  export namespace NSRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface PTRRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Domain name pointing to the address.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: PTRRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'PTR';
+  }
+
+  export namespace PTRRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface TXTRecord {
+    /**
+     * Path param: Identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Text content for the record. The content must consist of quoted
+     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
+     * exceeding this allowed maximum length are automatically split.
+     *
+     * Learn more at
+     * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
+     */
+    content?: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Body param: Whether the record is receiving the performance and security
+     * benefits of Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Body param: Settings for the DNS record.
+     */
+    settings?: TXTRecord.Settings;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+
+    /**
+     * Body param: Record type.
+     */
+    type?: 'TXT';
+  }
+
+  export namespace TXTRecord {
     /**
      * Settings for the DNS record.
      */
@@ -10486,89 +9504,6 @@ export declare namespace RecordEditParams {
      * Settings for the DNS record.
      */
     export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface CNAMERecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid hostname. Must not match the record's name.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: CNAMERecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CNAME';
-  }
-
-  export namespace CNAMERecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * If enabled, causes the CNAME record to be resolved externally and the resulting
-       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting is unavailable for proxied records, since they are always
-       * flattened.
-       */
-      flatten_cname?: boolean;
-
       /**
        * When enabled, only A records will be generated, and AAAA records will not be
        * created. This setting is intended for exceptional cases. Note that this option
@@ -11022,87 +9957,6 @@ export declare namespace RecordEditParams {
     }
   }
 
-  export interface MXRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid mail server hostname.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: MXRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'MX';
-  }
-
-  export namespace MXRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
   export interface NAPTRRecord {
     /**
      * Path param: Identifier.
@@ -11191,232 +10045,6 @@ export declare namespace RecordEditParams {
       service?: string;
     }
 
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface NSRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A valid name server host name.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: NSRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NS';
-  }
-
-  export namespace NSRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
-     * Section 11.1)
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'OPENPGPKEY';
-  }
-
-  export namespace DNSRecordsOpenpgpkeyRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
-  export interface PTRRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: Domain name pointing to the address.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: PTRRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'PTR';
-  }
-
-  export namespace PTRRecord {
     /**
      * Settings for the DNS record.
      */
@@ -11930,86 +10558,6 @@ export declare namespace RecordEditParams {
     }
   }
 
-  export interface TXTRecord {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Comments or notes about the DNS record. This field has no effect on
-     * DNS responses.
-     */
-    comment?: string;
-
-    /**
-     * Body param: Text content for the record. The content must consist of quoted
-     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
-     * exceeding this allowed maximum length are automatically split.
-     *
-     * Learn more at
-     * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
-     */
-    content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
-
-    /**
-     * Body param: Whether the record is receiving the performance and security
-     * benefits of Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Body param: Settings for the DNS record.
-     */
-    settings?: TXTRecord.Settings;
-
-    /**
-     * Body param: Custom tags for the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TXT';
-  }
-
-  export namespace TXTRecord {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * When enabled, only A records will be generated, and AAAA records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv4_only?: boolean;
-
-      /**
-       * When enabled, only AAAA records will be generated, and A records will not be
-       * created. This setting is intended for exceptional cases. Note that this option
-       * only applies to proxied records and it has no effect on whether Cloudflare
-       * communicates with the origin using IPv4 or IPv6.
-       */
-      ipv6_only?: boolean;
-    }
-  }
-
   export interface URIRecord {
     /**
      * Path param: Identifier.
@@ -12175,7 +10723,6 @@ export declare namespace Records {
     type NAPTRRecord as NAPTRRecord,
     type NSRecord as NSRecord,
     type PTRRecord as PTRRecord,
-    type Record as Record,
     type RecordResponse as RecordResponse,
     type RecordTags as RecordTags,
     type SMIMEARecord as SMIMEARecord,
