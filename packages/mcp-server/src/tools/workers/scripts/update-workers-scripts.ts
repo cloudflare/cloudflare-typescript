@@ -62,14 +62,12 @@ export const tool: Tool = {
                     enum: ['none', '404-page', 'single-page-application'],
                   },
                   run_worker_first: {
-                    type: 'boolean',
+                    type: 'array',
                     description:
-                      'When true, requests will always invoke the Worker script. Otherwise, attempt to serve an asset matching the request, falling back to the Worker script.',
-                  },
-                  serve_directly: {
-                    type: 'boolean',
-                    description:
-                      'When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.',
+                      "Contains a list path rules to control routing to either the Worker or assets. Glob (*) and negative (!) rules are supported. Rules must start with either '/' or '!/'. At least one non-negative rule must be provided, and negative rules have higher precedence than non-negative rules.",
+                    items: {
+                      type: 'string',
+                    },
                   },
                 },
                 required: [],
@@ -590,6 +588,16 @@ export const tool: Tool = {
                     workflow_name: {
                       type: 'string',
                       description: 'Name of the Workflow to bind to.',
+                    },
+                    class_name: {
+                      type: 'string',
+                      description:
+                        'Class name of the Workflow. Should only be provided if the Workflow belongs to this script.',
+                    },
+                    script_name: {
+                      type: 'string',
+                      description:
+                        'Script name that contains the Workflow. If not provided, defaults to this script name.',
                     },
                   },
                   required: ['name', 'type', 'workflow_name'],

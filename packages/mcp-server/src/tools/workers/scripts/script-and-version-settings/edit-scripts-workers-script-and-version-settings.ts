@@ -540,6 +540,16 @@ export const tool: Tool = {
                       type: 'string',
                       description: 'Name of the Workflow to bind to.',
                     },
+                    class_name: {
+                      type: 'string',
+                      description:
+                        'Class name of the Workflow. Should only be provided if the Workflow belongs to this script.',
+                    },
+                    script_name: {
+                      type: 'string',
+                      description:
+                        'Script name that contains the Workflow. If not provided, defaults to this script name.',
+                    },
                   },
                   required: ['name', 'type', 'workflow_name'],
                 },
