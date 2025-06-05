@@ -21,7 +21,8 @@ describe('dynamicTools', () => {
 
   describe('list_api_endpoints', () => {
     it('should return all endpoints when no search query is provided', async () => {
-      const result = await toolsMap.list_api_endpoints.handler(fakeClient, {});
+      const content = await toolsMap.list_api_endpoints.handler(fakeClient, {});
+      const result = JSON.parse(content.content[0].text);
 
       expect(result.tools).toHaveLength(endpoints.length);
       expect(result.tools.map((t: { name: string }) => t.name)).toContain('test_read_endpoint');
@@ -31,26 +32,30 @@ describe('dynamicTools', () => {
     });
 
     it('should filter endpoints by name', async () => {
-      const result = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'user' });
+      const content = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'user' });
+      const result = JSON.parse(content.content[0].text);
 
       expect(result.tools).toHaveLength(1);
       expect(result.tools[0].name).toBe('user_endpoint');
     });
 
     it('should filter endpoints by resource', async () => {
-      const result = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'admin' });
+      const content = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'admin' });
+      const result = JSON.parse(content.content[0].text);
 
       expect(result.tools.some((t: { resource: string }) => t.resource === 'admin')).toBeTruthy();
     });
 
     it('should filter endpoints by tag', async () => {
-      const result = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'admin' });
+      const content = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'admin' });
+      const result = JSON.parse(content.content[0].text);
 
       expect(result.tools.some((t: { tags: string[] }) => t.tags.includes('admin'))).toBeTruthy();
     });
 
     it('should be case insensitive in search', async () => {
-      const result = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'ADMIN' });
+      const content = await toolsMap.list_api_endpoints.handler(fakeClient, { search_query: 'ADMIN' });
+      const result = JSON.parse(content.content[0].text);
 
       expect(result.tools.length).toBe(2);
       result.tools.forEach((tool: { name: string; resource: string; tags: string[] }) => {
@@ -63,9 +68,10 @@ describe('dynamicTools', () => {
     });
 
     it('should filter endpoints by description', async () => {
-      const result = await toolsMap.list_api_endpoints.handler(fakeClient, {
+      const content = await toolsMap.list_api_endpoints.handler(fakeClient, {
         search_query: 'Test endpoint for user_endpoint',
       });
+      const result = JSON.parse(content.content[0].text);
 
       expect(result.tools).toHaveLength(1);
       expect(result.tools[0].name).toBe('user_endpoint');
@@ -73,9 +79,10 @@ describe('dynamicTools', () => {
     });
 
     it('should filter endpoints by partial description match', async () => {
-      const result = await toolsMap.list_api_endpoints.handler(fakeClient, {
+      const content = await toolsMap.list_api_endpoints.handler(fakeClient, {
         search_query: 'endpoint for user',
       });
+      const result = JSON.parse(content.content[0].text);
 
       expect(result.tools).toHaveLength(1);
       expect(result.tools[0].name).toBe('user_endpoint');
@@ -84,9 +91,10 @@ describe('dynamicTools', () => {
 
   describe('get_api_endpoint_schema', () => {
     it('should return schema for existing endpoint', async () => {
-      const result = await toolsMap.get_api_endpoint_schema.handler(fakeClient, {
+      const content = await toolsMap.get_api_endpoint_schema.handler(fakeClient, {
         endpoint: 'test_read_endpoint',
       });
+      const result = JSON.parse(content.content[0].text);
 
       expect(result).toEqual(endpoints[0]?.tool);
     });
