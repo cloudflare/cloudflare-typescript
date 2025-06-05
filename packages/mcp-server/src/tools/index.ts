@@ -1039,6 +1039,7 @@ import update_infrastructure_access_zero_trust_targets from './zero-trust/access
 import list_infrastructure_access_zero_trust_targets from './zero-trust/access/infrastructure/targets/list-infrastructure-access-zero-trust-targets';
 import delete_infrastructure_access_zero_trust_targets from './zero-trust/access/infrastructure/targets/delete-infrastructure-access-zero-trust-targets';
 import bulk_delete_infrastructure_access_zero_trust_targets from './zero-trust/access/infrastructure/targets/bulk-delete-infrastructure-access-zero-trust-targets';
+import bulk_delete_v2_infrastructure_access_zero_trust_targets from './zero-trust/access/infrastructure/targets/bulk-delete-v2-infrastructure-access-zero-trust-targets';
 import bulk_update_infrastructure_access_zero_trust_targets from './zero-trust/access/infrastructure/targets/bulk-update-infrastructure-access-zero-trust-targets';
 import get_infrastructure_access_zero_trust_targets from './zero-trust/access/infrastructure/targets/get-infrastructure-access-zero-trust-targets';
 import create_access_zero_trust_applications from './zero-trust/access/applications/create-access-zero-trust-applications';
@@ -2798,6 +2799,7 @@ addEndpoint(update_infrastructure_access_zero_trust_targets);
 addEndpoint(list_infrastructure_access_zero_trust_targets);
 addEndpoint(delete_infrastructure_access_zero_trust_targets);
 addEndpoint(bulk_delete_infrastructure_access_zero_trust_targets);
+addEndpoint(bulk_delete_v2_infrastructure_access_zero_trust_targets);
 addEndpoint(bulk_update_infrastructure_access_zero_trust_targets);
 addEndpoint(get_infrastructure_access_zero_trust_targets);
 addEndpoint(create_access_zero_trust_applications);

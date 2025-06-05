@@ -2309,14 +2309,14 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.devices`:
 
-- `list_zero_trust_devices` (`read`): List WARP devices. Not supported when [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/) is enabled for the account.
+- `list_zero_trust_devices` (`read`): List WARP registrations.
 
   **Deprecated**: please use one of the following endpoints instead:
 
   - GET /accounts/{account_id}/devices/physical-devices
   - GET /accounts/{account_id}/devices/registrations
 
-- `get_zero_trust_devices` (`read`): Fetches a single WARP device. Not supported when [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/) is enabled for the account.
+- `get_zero_trust_devices` (`read`): Fetches a single WARP registration.
 
   **Deprecated**: please use one of the following endpoints instead:
 
@@ -2328,7 +2328,7 @@ The following tools are available in this MCP server.
 - `list_devices_zero_trust_devices` (`read`): Lists WARP devices.
 - `delete_devices_zero_trust_devices` (`write`): Deletes a WARP device.
 - `get_devices_zero_trust_devices` (`read`): Fetches a single WARP device.
-- `revoke_devices_zero_trust_devices` (`write`): Revokes all WARP registrations associated with the specified device.
+- `revoke_devices_zero_trust_devices` (`write`): Revokes all registrations associated with the specified device.
 
 ### Resource `zero_trust.devices.resilience.global_warp_override`:
 
@@ -2337,7 +2337,7 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.devices.registrations`:
 
-- `list_devices_zero_trust_registrations` (`read`): Lists WARP registrations.
+- `list_devices_zero_trust_registrations` (`read`): List WARP registrations.
 - `delete_devices_zero_trust_registrations` (`write`): Deletes a WARP registration.
 - `bulk_delete_devices_zero_trust_registrations` (`write`): Deletes a list of WARP registrations.
 - `get_devices_zero_trust_registrations` (`read`): Fetches a single WARP registration.
@@ -2430,7 +2430,7 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.devices.revoke`:
 
-- `create_devices_zero_trust_revoke` (`write`): Revokes a list of devices. Not supported when [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/) is enabled.
+- `create_devices_zero_trust_revoke` (`write`): Revokes a list of registrations.
 
   **Deprecated**: please use POST /accounts/{account_id}/devices/registrations/revoke instead.
 
@@ -2443,14 +2443,16 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.devices.unrevoke`:
 
-- `create_devices_zero_trust_unrevoke` (`write`): Unrevokes a list of devices. Not supported when [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/) is enabled.
+- `create_devices_zero_trust_unrevoke` (`write`): Unrevokes a list of registrations.
 
   **Deprecated**: please use POST /accounts/{account_id}/devices/registrations/unrevoke instead.
 
 ### Resource `zero_trust.devices.override_codes`:
 
-- `list_devices_zero_trust_override_codes` (`read`): Fetches a one-time use admin override code for a device. This relies on the **Admin Override** setting being enabled in your device configuration. Not supported when [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/) is enabled for the account.
+- `list_devices_zero_trust_override_codes` (`read`): Fetches a one-time use admin override code for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.
+
   **Deprecated:** please use GET /accounts/{account_id}/devices/registrations/{registration_id}/override_codes instead.
+
 - `get_devices_zero_trust_override_codes` (`read`): Fetches one-time use admin override codes for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.
 
 ### Resource `zero_trust.identity_providers`:
@@ -2499,6 +2501,7 @@ The following tools are available in this MCP server.
   together.
 - `delete_infrastructure_access_zero_trust_targets` (`write`): Delete target
 - `bulk_delete_infrastructure_access_zero_trust_targets` (`write`): Removes one or more targets.
+- `bulk_delete_v2_infrastructure_access_zero_trust_targets` (`write`): Removes one or more targets.
 - `bulk_update_infrastructure_access_zero_trust_targets` (`write`): Adds one or more targets.
 - `get_infrastructure_access_zero_trust_targets` (`read`): Get target
 
