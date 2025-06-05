@@ -12,7 +12,7 @@ describe('resource categories', () => {
   // TODO: HTTP 401 from prism
   test.skip('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.categories.create({
-      account_id: 0,
+      account_id: 'account_id',
       killChain: 0,
       name: 'name',
     });
@@ -28,7 +28,7 @@ describe('resource categories', () => {
   // TODO: HTTP 401 from prism
   test.skip('create: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.categories.create({
-      account_id: 0,
+      account_id: 'account_id',
       killChain: 0,
       name: 'name',
       mitreAttack: ['T1234'],
@@ -38,7 +38,7 @@ describe('resource categories', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('list: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.categories.list({ account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.categories.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,14 +50,14 @@ describe('resource categories', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('list: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.categories.list({ account_id: 0 });
+    const response = await client.cloudforceOne.threatEvents.categories.list({ account_id: 'account_id' });
   });
 
   // TODO: HTTP 401 from prism
   test.skip('delete: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.categories.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -72,7 +72,7 @@ describe('resource categories', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.categories.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
+      { account_id: 'account_id' },
     );
   });
 
@@ -80,7 +80,7 @@ describe('resource categories', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.categories.edit(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -95,7 +95,13 @@ describe('resource categories', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.categories.edit(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0, killChain: 0, mitreAttack: ['T1234'], name: 'name', shortname: 'shortname' },
+      {
+        account_id: 'account_id',
+        killChain: 0,
+        mitreAttack: ['T1234'],
+        name: 'name',
+        shortname: 'shortname',
+      },
     );
   });
 
@@ -103,7 +109,7 @@ describe('resource categories', () => {
   test.skip('get: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.categories.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -118,7 +124,7 @@ describe('resource categories', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.categories.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
+      { account_id: 'account_id' },
     );
   });
 });

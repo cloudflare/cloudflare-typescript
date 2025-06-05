@@ -18,7 +18,7 @@ export class Events extends APIResource {
    * const events =
    *   await client.magicTransit.connectors.events.list(
    *     'connector_id',
-   *     { account_id: 0, from: 0, to: 0 },
+   *     { account_id: 'account_id', from: 0, to: 0 },
    *   );
    * ```
    */
@@ -43,7 +43,7 @@ export class Events extends APIResource {
    * ```ts
    * const event =
    *   await client.magicTransit.connectors.events.get(0, {
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *     connector_id: 'connector_id',
    *     event_t: 0,
    *   });
@@ -248,7 +248,7 @@ export interface EventListParams {
   /**
    * Path param:
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Query param:
@@ -272,7 +272,7 @@ export interface EventListParams {
 }
 
 export interface EventGetParams {
-  account_id: number;
+  account_id: string;
 
   connector_id: string;
 

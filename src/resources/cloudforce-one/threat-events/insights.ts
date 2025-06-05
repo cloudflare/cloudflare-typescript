@@ -15,7 +15,7 @@ export class Insights extends APIResource {
    *   await client.cloudforceOne.threatEvents.insights.create(
    *     'event_id',
    *     {
-   *       account_id: 0,
+   *       account_id: 'account_id',
    *       content:
    *         'Here is some additional context _in markdown_',
    *     },
@@ -44,7 +44,7 @@ export class Insights extends APIResource {
    * const insight =
    *   await client.cloudforceOne.threatEvents.insights.delete(
    *     'insight_id',
-   *     { account_id: 0, event_id: 'event_id' },
+   *     { account_id: 'account_id', event_id: 'event_id' },
    *   );
    * ```
    */
@@ -71,7 +71,7 @@ export class Insights extends APIResource {
    *   await client.cloudforceOne.threatEvents.insights.edit(
    *     'insight_id',
    *     {
-   *       account_id: 0,
+   *       account_id: 'account_id',
    *       event_id: 'event_id',
    *       content:
    *         'Updated: Here is some additional context _in markdown_',
@@ -101,7 +101,7 @@ export class Insights extends APIResource {
    * const insight =
    *   await client.cloudforceOne.threatEvents.insights.get(
    *     'insight_id',
-   *     { account_id: 0, event_id: 'event_id' },
+   *     { account_id: 'account_id', event_id: 'event_id' },
    *   );
    * ```
    */
@@ -142,7 +142,7 @@ export interface InsightCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param:
@@ -154,7 +154,7 @@ export interface InsightDeleteParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Event UUID.
@@ -166,7 +166,7 @@ export interface InsightEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Path param: Event UUID.
@@ -183,7 +183,7 @@ export interface InsightGetParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Event UUID.
