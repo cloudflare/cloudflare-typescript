@@ -11,7 +11,7 @@ export class Countries extends APIResource {
    * ```ts
    * const countries =
    *   await client.cloudforceOne.threatEvents.countries.list({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *   });
    * ```
    */
@@ -43,7 +43,7 @@ export interface CountryListParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace Countries {

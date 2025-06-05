@@ -11,7 +11,11 @@ export class Categories extends APIResource {
    * ```ts
    * const category =
    *   await client.cloudforceOne.threatEvents.categories.create(
-   *     { account_id: 0, killChain: 0, name: 'name' },
+   *     {
+   *       account_id: 'account_id',
+   *       killChain: 0,
+   *       name: 'name',
+   *     },
    *   );
    * ```
    */
@@ -33,7 +37,7 @@ export class Categories extends APIResource {
    * ```ts
    * const categories =
    *   await client.cloudforceOne.threatEvents.categories.list({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *   });
    * ```
    */
@@ -50,7 +54,7 @@ export class Categories extends APIResource {
    * const category =
    *   await client.cloudforceOne.threatEvents.categories.delete(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -74,7 +78,7 @@ export class Categories extends APIResource {
    * const response =
    *   await client.cloudforceOne.threatEvents.categories.edit(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -98,7 +102,7 @@ export class Categories extends APIResource {
    * const category =
    *   await client.cloudforceOne.threatEvents.categories.get(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -175,7 +179,7 @@ export interface CategoryCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param:
@@ -202,21 +206,21 @@ export interface CategoryListParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export interface CategoryDeleteParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export interface CategoryEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param:
@@ -243,7 +247,7 @@ export interface CategoryGetParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace Categories {
