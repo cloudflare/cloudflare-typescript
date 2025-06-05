@@ -6,7 +6,7 @@ import { CursorPagination, type CursorPaginationParams } from '../../../paginati
 
 export class Registrations extends APIResource {
   /**
-   * Lists WARP registrations.
+   * List WARP registrations.
    *
    * @example
    * ```ts
@@ -433,7 +433,7 @@ export namespace RegistrationListParams {
 
   export interface User {
     /**
-     * Filter by user ID.
+     * Filter by Access user ID.
      */
     id?: Array<string>;
   }
