@@ -11,7 +11,7 @@ export class Attackers extends APIResource {
    * ```ts
    * const attackers =
    *   await client.cloudforceOne.threatEvents.attackers.list({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *   });
    * ```
    */
@@ -37,7 +37,7 @@ export interface AttackerListParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace Attackers {

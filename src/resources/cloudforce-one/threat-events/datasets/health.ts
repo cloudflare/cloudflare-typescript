@@ -12,7 +12,7 @@ export class Health extends APIResource {
    * const health =
    *   await client.cloudforceOne.threatEvents.datasets.health.get(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -45,7 +45,7 @@ export interface HealthGetParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace Health {

@@ -13,7 +13,7 @@ describe('resource health', () => {
   test('get: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.datasets.health.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource health', () => {
   test('get: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.datasets.health.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
+      { account_id: 'account_id' },
     );
   });
 });

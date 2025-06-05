@@ -11,7 +11,7 @@ export class Crons extends APIResource {
    * ```ts
    * const crons =
    *   await client.cloudforceOne.threatEvents.crons.list({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *   });
    * ```
    */
@@ -27,7 +27,7 @@ export class Crons extends APIResource {
    * ```ts
    * const response =
    *   await client.cloudforceOne.threatEvents.crons.edit({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *   });
    * ```
    */
@@ -51,14 +51,14 @@ export interface CronListParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export interface CronEditParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace Crons {

@@ -12,7 +12,9 @@ const client = new Cloudflare({
 describe('resource indicatorTypes', () => {
   // TODO: HTTP 401 from prism
   test.skip('list: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.indicatorTypes.list({ account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.indicatorTypes.list({
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,6 +26,8 @@ describe('resource indicatorTypes', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('list: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.indicatorTypes.list({ account_id: 0 });
+    const response = await client.cloudforceOne.threatEvents.indicatorTypes.list({
+      account_id: 'account_id',
+    });
   });
 });

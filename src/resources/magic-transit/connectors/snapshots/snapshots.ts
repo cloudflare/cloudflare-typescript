@@ -16,7 +16,7 @@ export class Snapshots extends APIResource {
    * const snapshots =
    *   await client.magicTransit.connectors.snapshots.list(
    *     'connector_id',
-   *     { account_id: 0, from: 0, to: 0 },
+   *     { account_id: 'account_id', from: 0, to: 0 },
    *   );
    * ```
    */
@@ -43,7 +43,7 @@ export class Snapshots extends APIResource {
    *   await client.magicTransit.connectors.snapshots.get(
    *     'connector_id',
    *     0,
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -1333,7 +1333,7 @@ export interface SnapshotListParams {
   /**
    * Path param:
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Query param:
@@ -1357,7 +1357,7 @@ export interface SnapshotListParams {
 }
 
 export interface SnapshotGetParams {
-  account_id: number;
+  account_id: string;
 }
 
 Snapshots.Latest = Latest;
