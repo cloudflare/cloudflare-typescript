@@ -149,6 +149,27 @@ describe('resource targets', () => {
     });
   });
 
+  test('bulkDeleteV2: only required params', async () => {
+    const responsePromise = client.zeroTrust.access.infrastructure.targets.bulkDeleteV2({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      target_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkDeleteV2: required and optional params', async () => {
+    const response = await client.zeroTrust.access.infrastructure.targets.bulkDeleteV2({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      target_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+    });
+  });
+
   test('bulkUpdate: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.bulkUpdate({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

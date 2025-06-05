@@ -5,9 +5,7 @@ import * as Core from '../../../core';
 
 export class Unrevoke extends APIResource {
   /**
-   * Unrevokes a list of devices. Not supported when
-   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)
-   * is enabled.
+   * Unrevokes a list of registrations.
    *
    * **Deprecated**: please use POST
    * /accounts/{account_id}/devices/registrations/unrevoke instead.
