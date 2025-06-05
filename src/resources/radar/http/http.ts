@@ -201,6 +201,12 @@ export namespace HTTPTimeseriesResponse {
       value: string;
     }
   }
+
+  export interface unnamed_schema_ref_75bae70cf28e6bcef364b9840db3bdeb {
+    timestamps: Array<string>;
+
+    values: Array<string>;
+  }
 }
 
 export interface HTTPTimeseriesParams {

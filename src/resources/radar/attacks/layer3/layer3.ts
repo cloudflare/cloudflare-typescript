@@ -190,6 +190,12 @@ export namespace Layer3TimeseriesResponse {
       value: string;
     }
   }
+
+  export interface unnamed_schema_ref_75bae70cf28e6bcef364b9840db3bdeb {
+    timestamps: Array<string>;
+
+    values: Array<string>;
+  }
 }
 
 export interface Layer3TimeseriesParams {
