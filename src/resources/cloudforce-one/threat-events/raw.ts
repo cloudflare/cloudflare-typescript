@@ -14,7 +14,7 @@ export class Raw extends APIResource {
    * const response =
    *   await client.cloudforceOne.threatEvents.raw.edit(
    *     'raw_id',
-   *     { account_id: 0, event_id: 'event_id' },
+   *     { account_id: 'account_id', event_id: 'event_id' },
    *   );
    * ```
    */
@@ -33,7 +33,7 @@ export class Raw extends APIResource {
    * ```ts
    * const raw = await client.cloudforceOne.threatEvents.raw.get(
    *   'raw_id',
-   *   { account_id: 0, event_id: 'event_id' },
+   *   { account_id: 'account_id', event_id: 'event_id' },
    * );
    * ```
    */
@@ -70,7 +70,7 @@ export interface RawEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Path param: Event UUID.
@@ -97,7 +97,7 @@ export interface RawGetParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Event UUID.

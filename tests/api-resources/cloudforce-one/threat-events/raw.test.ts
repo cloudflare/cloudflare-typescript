@@ -12,7 +12,7 @@ describe('resource raw', () => {
   // TODO: HTTP 401 from prism
   test.skip('edit: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.raw.edit('raw_id', {
-      account_id: 0,
+      account_id: 'account_id',
       event_id: 'event_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,7 +27,7 @@ describe('resource raw', () => {
   // TODO: HTTP 401 from prism
   test.skip('edit: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.raw.edit('raw_id', {
-      account_id: 0,
+      account_id: 'account_id',
       event_id: 'event_id',
       data: {},
       source: 'example.com',
@@ -38,7 +38,7 @@ describe('resource raw', () => {
   // TODO: HTTP 401 from prism
   test.skip('get: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.raw.get('raw_id', {
-      account_id: 0,
+      account_id: 'account_id',
       event_id: 'event_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -53,7 +53,7 @@ describe('resource raw', () => {
   // TODO: HTTP 401 from prism
   test.skip('get: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.raw.get('raw_id', {
-      account_id: 0,
+      account_id: 'account_id',
       event_id: 'event_id',
     });
   });

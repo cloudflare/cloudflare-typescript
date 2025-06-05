@@ -14,7 +14,7 @@ export class EventTags extends APIResource {
    * const eventTag =
    *   await client.cloudforceOne.threatEvents.eventTags.create(
    *     'event_id',
-   *     { account_id: 0, tags: ['botnet'] },
+   *     { account_id: 'account_id', tags: ['botnet'] },
    *   );
    * ```
    */
@@ -40,7 +40,7 @@ export class EventTags extends APIResource {
    * const eventTag =
    *   await client.cloudforceOne.threatEvents.eventTags.delete(
    *     'event_id',
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -71,7 +71,7 @@ export interface EventTagCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param:
@@ -83,7 +83,7 @@ export interface EventTagDeleteParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace EventTags {
