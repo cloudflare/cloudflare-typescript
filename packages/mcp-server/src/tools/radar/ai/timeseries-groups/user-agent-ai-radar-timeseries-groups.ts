@@ -1,5 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { asTextContentResult } from 'cloudflare-mcp/tools/types';
+
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import type { Metadata } from '../../../';
 import Cloudflare from 'cloudflare';
@@ -94,9 +96,9 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return client.radar.ai.timeseriesGroups.userAgent(body);
+  return asTextContentResult(await client.radar.ai.timeseriesGroups.userAgent(body));
 };
 
 export default { metadata, tool, handler };

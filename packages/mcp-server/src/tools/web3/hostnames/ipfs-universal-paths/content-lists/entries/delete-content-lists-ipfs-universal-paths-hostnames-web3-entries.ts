@@ -1,5 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { asTextContentResult } from 'cloudflare-mcp/tools/types';
+
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import type { Metadata } from '../../../../../';
 import Cloudflare from 'cloudflare';
@@ -36,11 +38,13 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { content_list_entry_identifier, ...body } = args as any;
-  return client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.delete(
-    content_list_entry_identifier,
-    body,
+  return asTextContentResult(
+    await client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.delete(
+      content_list_entry_identifier,
+      body,
+    ),
   );
 };
 

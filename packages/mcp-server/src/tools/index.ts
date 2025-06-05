@@ -1,7 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { Metadata, Endpoint, HandlerFunction } from './types';
+
+export { Metadata, Endpoint, HandlerFunction };
 
 import create_accounts from './accounts/create-accounts';
 import update_accounts from './accounts/update-accounts';
@@ -1755,24 +1756,6 @@ import list_settings_schema_validation_operations from './schema-validation/sett
 import delete_settings_schema_validation_operations from './schema-validation/settings/operations/delete-settings-schema-validation-operations';
 import bulk_edit_settings_schema_validation_operations from './schema-validation/settings/operations/bulk-edit-settings-schema-validation-operations';
 import get_settings_schema_validation_operations from './schema-validation/settings/operations/get-settings-schema-validation-operations';
-
-export type HandlerFunction = (client: Cloudflare, args: Record<string, unknown> | undefined) => Promise<any>;
-
-export type Metadata = {
-  resource: string;
-  operation: 'read' | 'write';
-  tags: string[];
-
-  httpMethod?: string;
-  httpPath?: string;
-  operationId?: string;
-};
-
-export type Endpoint = {
-  metadata: Metadata;
-  tool: Tool;
-  handler: HandlerFunction;
-};
 
 export const endpoints: Endpoint[] = [];
 
