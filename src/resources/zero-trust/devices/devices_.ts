@@ -80,7 +80,7 @@ export class Devices extends APIResource {
   }
 
   /**
-   * Revokes all registrations associated with the specified device.
+   * Revokes all WARP registrations associated with the specified device.
    *
    * @example
    * ```ts
@@ -164,7 +164,7 @@ export interface DeviceListResponse {
   hardware_id?: string | null;
 
   /**
-   * The last Access user to use the WARP device.
+   * The last user to use the WARP device.
    */
   last_seen_user?: DeviceListResponse.LastSeenUser | null;
 
@@ -207,7 +207,7 @@ export interface DeviceListResponse {
 
 export namespace DeviceListResponse {
   /**
-   * The last Access user to use the WARP device.
+   * The last user to use the WARP device.
    */
   export interface LastSeenUser {
     /**
@@ -285,7 +285,7 @@ export interface DeviceGetResponse {
   hardware_id?: string | null;
 
   /**
-   * The last Access user to use the WARP device.
+   * The last user to use the WARP device.
    */
   last_seen_user?: DeviceGetResponse.LastSeenUser | null;
 
@@ -328,7 +328,7 @@ export interface DeviceGetResponse {
 
 export namespace DeviceGetResponse {
   /**
-   * The last Access user to use the WARP device.
+   * The last user to use the WARP device.
    */
   export interface LastSeenUser {
     /**

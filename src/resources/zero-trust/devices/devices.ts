@@ -141,7 +141,9 @@ export class Devices extends APIResource {
   overrideCodes: OverrideCodesAPI.OverrideCodes = new OverrideCodesAPI.OverrideCodes(this._client);
 
   /**
-   * List WARP registrations.
+   * List WARP devices. Not supported when
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)
+   * is enabled for the account.
    *
    * **Deprecated**: please use one of the following endpoints instead:
    *
@@ -156,7 +158,9 @@ export class Devices extends APIResource {
   }
 
   /**
-   * Fetches a single WARP registration.
+   * Fetches a single WARP device. Not supported when
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)
+   * is enabled for the account.
    *
    * **Deprecated**: please use one of the following endpoints instead:
    *
