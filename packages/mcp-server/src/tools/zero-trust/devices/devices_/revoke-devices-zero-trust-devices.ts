@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'revoke_devices_zero_trust_devices',
-  description: 'Revokes all registrations associated with the specified device.',
+  description: 'Revokes all WARP registrations associated with the specified device.',
   inputSchema: {
     type: 'object',
     properties: {

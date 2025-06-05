@@ -8,7 +8,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Registrations extends APIResource {
   /**
-   * List WARP registrations.
+   * Lists WARP registrations.
    *
    * @example
    * ```ts
@@ -435,7 +435,7 @@ export namespace RegistrationListParams {
 
   export interface User {
     /**
-     * Filter by Access user ID.
+     * Filter by user ID.
      */
     id?: Array<string>;
   }
