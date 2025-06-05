@@ -13,6 +13,7 @@ export {
   type TargetListParams,
   type TargetDeleteParams,
   type TargetBulkDeleteParams,
+  type TargetBulkDeleteV2Params,
   type TargetBulkUpdateParams,
   type TargetGetParams,
   type TargetListResponsesV4PagePaginationArray,
