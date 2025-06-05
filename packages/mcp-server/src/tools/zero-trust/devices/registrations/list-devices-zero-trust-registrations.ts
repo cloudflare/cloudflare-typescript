@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_devices_zero_trust_registrations',
-  description: 'List WARP registrations.',
+  description: 'Lists WARP registrations.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -87,7 +87,7 @@ export const tool: Tool = {
         properties: {
           id: {
             type: 'array',
-            description: 'Filter by Access user ID.',
+            description: 'Filter by user ID.',
             items: {
               type: 'string',
             },
