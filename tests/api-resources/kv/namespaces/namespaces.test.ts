@@ -92,6 +92,80 @@ describe('resource namespaces', () => {
     });
   });
 
+  test('bulkDelete: only required params', async () => {
+    const responsePromise = client.kv.namespaces.bulkDelete('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: ['My-Key'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkDelete: required and optional params', async () => {
+    const response = await client.kv.namespaces.bulkDelete('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: ['My-Key'],
+    });
+  });
+
+  test('bulkGet: only required params', async () => {
+    const responsePromise = client.kv.namespaces.bulkGet('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      keys: ['My-Key'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkGet: required and optional params', async () => {
+    const response = await client.kv.namespaces.bulkGet('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      keys: ['My-Key'],
+      type: 'text',
+      withMetadata: true,
+    });
+  });
+
+  test('bulkUpdate: only required params', async () => {
+    const responsePromise = client.kv.namespaces.bulkUpdate('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [{}],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkUpdate: required and optional params', async () => {
+    const response = await client.kv.namespaces.bulkUpdate('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [
+        {
+          base64: true,
+          expiration: 1578435000,
+          expiration_ttl: 300,
+          key: 'My-Key',
+          metadata: { someMetadataKey: 'bar' },
+          value: 'Some string',
+        },
+      ],
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.kv.namespaces.get('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
