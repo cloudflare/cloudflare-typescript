@@ -1,0 +1,50 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { asTextContentResult } from 'cloudflare-mcp/tools/types';
+
+import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import type { Metadata } from '../../';
+import Cloudflare from 'cloudflare';
+
+export const metadata: Metadata = {
+  resource: 'kv.namespaces',
+  operation: 'write',
+  tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/delete',
+  operationId: 'workers-kv-namespace-delete-multiple-key-value-pairs',
+};
+
+export const tool: Tool = {
+  name: 'bulk_delete_kv_namespaces',
+  description:
+    'Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      account_id: {
+        type: 'string',
+        description: 'Identifier',
+      },
+      namespace_id: {
+        type: 'string',
+        description: 'Namespace identifier tag.',
+      },
+      body: {
+        type: 'array',
+        items: {
+          type: 'string',
+          description:
+            "A key's name. The name may be at most 512 bytes. All printable, non-whitespace characters are valid.",
+        },
+      },
+    },
+  },
+};
+
+export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { namespace_id, ...body } = args as any;
+  return asTextContentResult(await client.kv.namespaces.bulkDelete(namespace_id, body));
+};
+
+export default { metadata, tool, handler };
