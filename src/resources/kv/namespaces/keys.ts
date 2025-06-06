@@ -42,16 +42,7 @@ export class Keys extends APIResource {
    * Remove multiple KV pairs from the namespace. Body should be an array of up to
    * 10,000 keys to be removed.
    *
-   * @example
-   * ```ts
-   * const response = await client.kv.namespaces.keys.bulkDelete(
-   *   '0f2ac74b498b48028cb68387c421e279',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: ['My-Key'],
-   *   },
-   * );
-   * ```
+   * @deprecated Please use kv.namespaces.bulk_delete instead
    */
   bulkDelete(
     namespaceID: string,
@@ -73,16 +64,7 @@ export class Keys extends APIResource {
    * requested to return in JSON, instead of string. Metadata can be return if
    * withMetadata is true.
    *
-   * @example
-   * ```ts
-   * const response = await client.kv.namespaces.keys.bulkGet(
-   *   '0f2ac74b498b48028cb68387c421e279',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     keys: ['My-Key'],
-   *   },
-   * );
-   * ```
+   * @deprecated Please use kv.namespaces.bulk_get instead
    */
   bulkGet(
     namespaceID: string,
@@ -106,16 +88,7 @@ export class Keys extends APIResource {
    * set, `expiration_ttl` is used and `expiration` is ignored. The entire request
    * size must be 100 megabytes or less.
    *
-   * @example
-   * ```ts
-   * const response = await client.kv.namespaces.keys.bulkUpdate(
-   *   '0f2ac74b498b48028cb68387c421e279',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{}],
-   *   },
-   * );
-   * ```
+   * @deprecated Please use kv.namespaces.bulk_update instead
    */
   bulkUpdate(
     namespaceID: string,
