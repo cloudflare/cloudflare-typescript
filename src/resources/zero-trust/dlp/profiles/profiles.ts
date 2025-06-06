@@ -7,7 +7,6 @@ import * as CustomAPI from './custom';
 import {
   Custom,
   CustomCreateParams,
-  CustomCreateResponse,
   CustomDeleteParams,
   CustomDeleteResponse,
   CustomGetParams,
@@ -603,7 +602,6 @@ export declare namespace Profiles {
     Custom as Custom,
     type CustomAPICustomProfile as CustomProfile,
     type Pattern as Pattern,
-    type CustomCreateResponse as CustomCreateResponse,
     type CustomDeleteResponse as CustomDeleteResponse,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,

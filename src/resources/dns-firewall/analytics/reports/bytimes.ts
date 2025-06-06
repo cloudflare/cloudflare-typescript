@@ -38,7 +38,7 @@ export class Bytimes extends APIResource {
 
 export interface BytimeGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

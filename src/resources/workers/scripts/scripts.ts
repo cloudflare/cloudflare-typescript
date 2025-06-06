@@ -122,6 +122,7 @@ export class Scripts extends APIResource {
         Core.maybeMultipartFormRequestOptions({
           body: { ...body, ...files },
           ...options,
+          __multipartSyntax: 'json',
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
         }),
       ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
@@ -497,6 +498,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindVersionMetadata
       | Metadata.WorkersBindingKindSecretsStoreSecret
       | Metadata.WorkersBindingKindSecretKey
+      | Metadata.WorkersBindingKindWorkflow
     >;
 
     /**
@@ -618,17 +620,12 @@ export namespace ScriptUpdateParams {
         not_found_handling?: 'none' | '404-page' | 'single-page-application';
 
         /**
-         * When true, requests will always invoke the Worker script. Otherwise, attempt to
-         * serve an asset matching the request, falling back to the Worker script.
+         * Contains a list path rules to control routing to either the Worker or assets.
+         * Glob (\*) and negative (!) rules are supported. Rules must start with either '/'
+         * or '!/'. At least one non-negative rule must be provided, and negative rules
+         * have higher precedence than non-negative rules.
          */
-        run_worker_first?: boolean;
-
-        /**
-         * @deprecated When true and the incoming request matches an asset, that will be
-         * served instead of invoking the Worker script. When false, requests will always
-         * invoke the Worker script.
-         */
-        serve_directly?: boolean;
+        run_worker_first?: Array<string>;
       }
     }
 
@@ -1077,6 +1074,35 @@ export namespace ScriptUpdateParams {
        * format. Required if `format` is "jwk".
        */
       key_jwk?: unknown;
+    }
+
+    export interface WorkersBindingKindWorkflow {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'workflow';
+
+      /**
+       * Name of the Workflow to bind to.
+       */
+      workflow_name: string;
+
+      /**
+       * Class name of the Workflow. Should only be provided if the Workflow belongs to
+       * this script.
+       */
+      class_name?: string;
+
+      /**
+       * Script name that contains the Workflow. If not provided, defaults to this script
+       * name.
+       */
+      script_name?: string;
     }
 
     export interface WorkersMultipleStepMigrations {

@@ -74,7 +74,8 @@ export class Accounts extends APIResource {
    * @example
    * ```ts
    * const account = await client.accounts.update({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   name: 'Demo Account',
    * });
    * ```
@@ -144,7 +145,7 @@ export class Accounts extends APIResource {
    * @example
    * ```ts
    * const account = await client.accounts.get({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * });
    * ```
    */
@@ -244,6 +245,11 @@ export interface AccountUpdateParams {
    * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Body param: Identifier
+   */
+  id: string;
 
   /**
    * Body param: Account name

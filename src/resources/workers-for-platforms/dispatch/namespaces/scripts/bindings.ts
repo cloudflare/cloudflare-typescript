@@ -63,7 +63,8 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindVectorize
   | BindingGetResponse.WorkersBindingKindVersionMetadata
   | BindingGetResponse.WorkersBindingKindSecretsStoreSecret
-  | BindingGetResponse.WorkersBindingKindSecretKey;
+  | BindingGetResponse.WorkersBindingKindSecretKey
+  | BindingGetResponse.WorkersBindingKindWorkflow;
 
 export namespace BindingGetResponse {
   export interface WorkersBindingKindAI {
@@ -494,6 +495,35 @@ export namespace BindingGetResponse {
     usages: Array<
       'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
     >;
+  }
+
+  export interface WorkersBindingKindWorkflow {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'workflow';
+
+    /**
+     * Name of the Workflow to bind to.
+     */
+    workflow_name: string;
+
+    /**
+     * Class name of the Workflow. Should only be provided if the Workflow belongs to
+     * this script.
+     */
+    class_name?: string;
+
+    /**
+     * Script name that contains the Workflow. If not provided, defaults to this script
+     * name.
+     */
+    script_name?: string;
   }
 }
 

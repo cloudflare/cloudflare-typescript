@@ -12,7 +12,9 @@ const client = new Cloudflare({
 describe('resource relate', () => {
   // TODO: HTTP 401 from prism
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.relate.delete('event_id', { account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.relate.delete('event_id', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,6 +26,8 @@ describe('resource relate', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('delete: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.relate.delete('event_id', { account_id: 0 });
+    const response = await client.cloudforceOne.threatEvents.relate.delete('event_id', {
+      account_id: 'account_id',
+    });
   });
 });

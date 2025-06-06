@@ -6,6 +6,8 @@ import * as Core from '../../core';
 export class Profiles extends APIResource {
   /**
    * Gets the current billing profile for the account.
+   *
+   * @deprecated
    */
   get(params: ProfileGetParams, options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
     const { account_id } = params;

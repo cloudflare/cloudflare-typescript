@@ -199,20 +199,23 @@ export const maybeMultipartFormRequestOptions = async <T = Record<string, unknow
 ): Promise<RequestOptions<T | MultipartBody>> => {
   if (!hasUploadableValue(opts.body)) return opts;
 
-  const form = await createForm(opts.body);
+  const form = await createForm(opts.body, opts);
   return getMultipartRequestOptions(form, opts);
 };
 
 export const multipartFormRequestOptions = async <T = Record<string, unknown>>(
   opts: RequestOptions<T>,
 ): Promise<RequestOptions<T | MultipartBody>> => {
-  const form = await createForm(opts.body);
+  const form = await createForm(opts.body, opts);
   return getMultipartRequestOptions(form, opts);
 };
 
-export const createForm = async <T = Record<string, unknown>>(body: T | undefined): Promise<FormData> => {
+export const createForm = async <T = Record<string, unknown>>(
+  body: T | undefined,
+  opts?: RequestOptions<any>,
+): Promise<FormData> => {
   const form = new FormData();
-  await Promise.all(Object.entries(body || {}).map(([key, value]) => addFormValue(form, key, value)));
+  await Promise.all(Object.entries(body || {}).map(([key, value]) => addFormValue(form, key, value, opts)));
   return form;
 };
 
@@ -227,7 +230,16 @@ const hasUploadableValue = (value: unknown): boolean => {
   return false;
 };
 
-const addFormValue = async (form: FormData, key: string, value: unknown): Promise<void> => {
+const addFormValue = async (
+  form: FormData,
+  key: string,
+  value: unknown,
+  opts?: RequestOptions<any>,
+): Promise<void> => {
+  if (opts?.__multipartSyntax === 'json') {
+    return await addFormValueJson(form, key, value);
+  }
+
   if (value === undefined) return;
   if (value == null) {
     throw new TypeError(
@@ -247,9 +259,35 @@ const addFormValue = async (form: FormData, key: string, value: unknown): Promis
     await Promise.all(
       Object.entries(value).map(([name, prop]) => addFormValue(form, `${key}[${name}]`, prop)),
     );
-  } else {
+  }
+};
+
+const addFormValueJson = async (form: FormData, key: string, value: unknown): Promise<void> => {
+  if (value === undefined) return;
+  if (value == null) {
     throw new TypeError(
-      `Invalid value given to form, expected a string, number, boolean, object, Array, File or Blob but got ${value} instead`,
+      `Received null for "${key}"; to pass null in FormData, you must use the string 'null'`,
     );
   }
+
+  // TODO: make nested formats configurable
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    form.append(key, String(value));
+    return;
+  }
+
+  if (isUploadable(value)) {
+    const file = await toFile(value);
+    form.append(key, file as File);
+    return;
+  }
+
+  if (Array.isArray(value) || typeof value === 'object') {
+    form.append(key, new File([JSON.stringify(value)], key, { type: 'application/json' }));
+    return;
+  }
+
+  throw new TypeError(
+    `Invalid value given to form, expected a string, number, boolean, object, Array, File or Blob but got ${value} instead`,
+  );
 };

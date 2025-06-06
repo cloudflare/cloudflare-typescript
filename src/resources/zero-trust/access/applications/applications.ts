@@ -2606,7 +2606,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The application type.
      */
-    type: string;
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID.
@@ -3071,7 +3071,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The application type.
      */
-    type?: string;
+    type?: ApplicationsAPI.ApplicationType;
 
     updated_at?: string;
   }
@@ -3268,7 +3268,18 @@ export namespace ApplicationCreateResponse {
     /**
      * The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -3679,7 +3690,18 @@ export namespace ApplicationCreateResponse {
     /**
      * The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -4084,7 +4106,18 @@ export namespace ApplicationCreateResponse {
     /**
      * The application type.
      */
-    type: ApplicationsAPI.ApplicationType;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -5067,7 +5100,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The application type.
      */
-    type?: string;
+    type?: ApplicationsAPI.ApplicationType;
 
     updated_at?: string;
   }
@@ -5220,7 +5253,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -5418,7 +5451,7 @@ export namespace ApplicationCreateResponse {
     /**
      * The application type.
      */
-    type: string;
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID.
@@ -5598,7 +5631,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -5861,7 +5894,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The application type.
      */
-    type: string;
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID.
@@ -6326,7 +6359,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The application type.
      */
-    type?: string;
+    type?: ApplicationsAPI.ApplicationType;
 
     updated_at?: string;
   }
@@ -6523,7 +6556,18 @@ export namespace ApplicationUpdateResponse {
     /**
      * The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -6934,7 +6978,18 @@ export namespace ApplicationUpdateResponse {
     /**
      * The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -7339,7 +7394,18 @@ export namespace ApplicationUpdateResponse {
     /**
      * The application type.
      */
-    type: ApplicationsAPI.ApplicationType;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -8322,7 +8388,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The application type.
      */
-    type?: string;
+    type?: ApplicationsAPI.ApplicationType;
 
     updated_at?: string;
   }
@@ -8475,7 +8541,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -8673,7 +8739,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * The application type.
      */
-    type: string;
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID.
@@ -8853,7 +8919,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -9116,7 +9182,7 @@ export namespace ApplicationListResponse {
     /**
      * The application type.
      */
-    type: string;
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID.
@@ -9581,7 +9647,7 @@ export namespace ApplicationListResponse {
     /**
      * The application type.
      */
-    type?: string;
+    type?: ApplicationsAPI.ApplicationType;
 
     updated_at?: string;
   }
@@ -9778,7 +9844,18 @@ export namespace ApplicationListResponse {
     /**
      * The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -10189,7 +10266,18 @@ export namespace ApplicationListResponse {
     /**
      * The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -10594,7 +10682,18 @@ export namespace ApplicationListResponse {
     /**
      * The application type.
      */
-    type: ApplicationsAPI.ApplicationType;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -11577,7 +11676,7 @@ export namespace ApplicationListResponse {
     /**
      * The application type.
      */
-    type?: string;
+    type?: ApplicationsAPI.ApplicationType;
 
     updated_at?: string;
   }
@@ -11730,7 +11829,7 @@ export namespace ApplicationListResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -11928,7 +12027,7 @@ export namespace ApplicationListResponse {
     /**
      * The application type.
      */
-    type: string;
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID.
@@ -12108,7 +12207,7 @@ export namespace ApplicationListResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -12378,7 +12477,7 @@ export namespace ApplicationGetResponse {
     /**
      * The application type.
      */
-    type: string;
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID.
@@ -12843,7 +12942,7 @@ export namespace ApplicationGetResponse {
     /**
      * The application type.
      */
-    type?: string;
+    type?: ApplicationsAPI.ApplicationType;
 
     updated_at?: string;
   }
@@ -13040,7 +13139,18 @@ export namespace ApplicationGetResponse {
     /**
      * The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -13451,7 +13561,18 @@ export namespace ApplicationGetResponse {
     /**
      * The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -13856,7 +13977,18 @@ export namespace ApplicationGetResponse {
     /**
      * The application type.
      */
-    type: ApplicationsAPI.ApplicationType;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * UUID.
@@ -14839,7 +14971,7 @@ export namespace ApplicationGetResponse {
     /**
      * The application type.
      */
-    type?: string;
+    type?: ApplicationsAPI.ApplicationType;
 
     updated_at?: string;
   }
@@ -14992,7 +15124,7 @@ export namespace ApplicationGetResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -15190,7 +15322,7 @@ export namespace ApplicationGetResponse {
     /**
      * The application type.
      */
-    type: string;
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID.
@@ -15370,7 +15502,7 @@ export namespace ApplicationGetResponse {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -15635,7 +15767,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type: string;
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -16101,7 +16233,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type?: string;
+    type?: ApplicationTypeParam;
   }
 
   export namespace SaaSApplication {
@@ -16279,7 +16411,18 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -16682,7 +16825,18 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -17079,7 +17233,18 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type: ApplicationTypeParam;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -18000,7 +18165,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type?: string;
+    type?: ApplicationTypeParam;
   }
 
   export namespace BookmarkApplication {
@@ -18149,7 +18314,7 @@ export declare namespace ApplicationCreateParams {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -18242,7 +18407,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type: string;
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -18431,7 +18596,7 @@ export declare namespace ApplicationCreateParams {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -18677,7 +18842,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type: string;
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -19143,7 +19308,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type?: string;
+    type?: ApplicationTypeParam;
   }
 
   export namespace SaaSApplication {
@@ -19321,7 +19486,18 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -19724,7 +19900,18 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type: string;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -20121,7 +20308,18 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type: ApplicationTypeParam;
+    type:
+      | 'self_hosted'
+      | 'saas'
+      | 'ssh'
+      | 'vnc'
+      | 'app_launcher'
+      | 'warp'
+      | 'biso'
+      | 'bookmark'
+      | 'dash_sso'
+      | 'infrastructure'
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -21042,7 +21240,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type?: string;
+    type?: ApplicationTypeParam;
   }
 
   export namespace BookmarkApplication {
@@ -21191,7 +21389,7 @@ export declare namespace ApplicationUpdateParams {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.
@@ -21284,7 +21482,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type: string;
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -21473,7 +21671,7 @@ export declare namespace ApplicationUpdateParams {
       /**
        * The communication protocol your application secures.
        */
-      protocol: 'ssh';
+      protocol: 'SSH';
 
       /**
        * Contains a map of target attribute keys to target attribute values.

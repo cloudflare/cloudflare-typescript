@@ -18,10 +18,16 @@ export {
   Namespaces,
   type Namespace,
   type NamespaceDeleteResponse,
+  type NamespaceBulkDeleteResponse,
+  type NamespaceBulkGetResponse,
+  type NamespaceBulkUpdateResponse,
   type NamespaceCreateParams,
   type NamespaceUpdateParams,
   type NamespaceListParams,
   type NamespaceDeleteParams,
+  type NamespaceBulkDeleteParams,
+  type NamespaceBulkGetParams,
+  type NamespaceBulkUpdateParams,
   type NamespaceGetParams,
 } from './namespaces';
 export {

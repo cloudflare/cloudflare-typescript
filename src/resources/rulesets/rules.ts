@@ -5852,7 +5852,7 @@ export namespace SetConfigRule {
     /**
      * Configure the Polish level.
      */
-    polish?: 'off' | 'lossless' | 'lossy';
+    polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
     /**
      * Turn on or off Rocket Loader
@@ -6084,7 +6084,7 @@ export namespace SetConfigRuleParam {
     /**
      * Configure the Polish level.
      */
-    polish?: 'off' | 'lossless' | 'lossy';
+    polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
     /**
      * Turn on or off Rocket Loader
@@ -10136,7 +10136,7 @@ export declare namespace RuleCreateParams {
       /**
        * Configure the Polish level.
        */
-      polish?: 'off' | 'lossless' | 'lossy';
+      polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
       /**
        * Turn on or off Rocket Loader
@@ -14278,7 +14278,7 @@ export declare namespace RuleEditParams {
       /**
        * Configure the Polish level.
        */
-      polish?: 'off' | 'lossless' | 'lossy';
+      polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
       /**
        * Turn on or off Rocket Loader

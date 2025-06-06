@@ -13,7 +13,7 @@ describe('resource datasets', () => {
   // TODO: HTTP 401 from prism
   test.skip('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.datasets.create({
-      account_id: 0,
+      account_id: 'account_id',
       isPublic: true,
       name: 'x',
     });
@@ -29,7 +29,7 @@ describe('resource datasets', () => {
   // TODO: HTTP 401 from prism
   test.skip('create: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.datasets.create({
-      account_id: 0,
+      account_id: 'account_id',
       isPublic: true,
       name: 'x',
     });
@@ -37,7 +37,7 @@ describe('resource datasets', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('list: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.datasets.list({ account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.datasets.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,16 +49,15 @@ describe('resource datasets', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('list: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.datasets.list({ account_id: 0 });
+    const response = await client.cloudforceOne.threatEvents.datasets.list({ account_id: 'account_id' });
   });
 
   // TODO: HTTP 401 from prism
   test.skip('edit: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.datasets.edit('dataset_id', {
-      account_id: 0,
-      isPublic: true,
-      name: 'x',
-    });
+    const responsePromise = client.cloudforceOne.threatEvents.datasets.edit(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id', isPublic: true, name: 'x' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -70,16 +69,18 @@ describe('resource datasets', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('edit: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.datasets.edit('dataset_id', {
-      account_id: 0,
-      isPublic: true,
-      name: 'x',
-    });
+    const response = await client.cloudforceOne.threatEvents.datasets.edit(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id', isPublic: true, name: 'x' },
+    );
   });
 
   // TODO: HTTP 401 from prism
   test.skip('get: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.datasets.get('dataset_id', { account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.datasets.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,13 +92,16 @@ describe('resource datasets', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('get: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.datasets.get('dataset_id', { account_id: 0 });
+    const response = await client.cloudforceOne.threatEvents.datasets.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 
   // TODO: HTTP 401 from prism
   test.skip('raw: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.datasets.raw('dataset_id', 'event_id', {
-      account_id: 0,
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -111,7 +115,7 @@ describe('resource datasets', () => {
   // TODO: HTTP 401 from prism
   test.skip('raw: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.datasets.raw('dataset_id', 'event_id', {
-      account_id: 0,
+      account_id: 'account_id',
     });
   });
 });

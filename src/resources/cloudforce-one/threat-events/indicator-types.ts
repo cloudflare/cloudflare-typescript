@@ -11,7 +11,7 @@ export class IndicatorTypes extends APIResource {
    * ```ts
    * const indicatorTypes =
    *   await client.cloudforceOne.threatEvents.indicatorTypes.list(
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -40,7 +40,7 @@ export interface IndicatorTypeListParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace IndicatorTypes {

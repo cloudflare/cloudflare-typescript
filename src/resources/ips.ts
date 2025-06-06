@@ -26,46 +26,64 @@ export class IPs extends APIResource {
   }
 }
 
-export interface IPs {
-  /**
-   * A digest of the IP data. Useful for determining if the data has changed.
-   */
-  etag?: string;
+/**
+ * The set of IPs on the Address Map.
+ */
+export type IPs = Array<IPs.IPItem>;
 
-  /**
-   * List of Cloudflare IPv4 CIDR addresses.
-   */
-  ipv4_cidrs?: Array<string>;
+export namespace IPs {
+  export interface IPItem {
+    created_at?: string;
 
-  /**
-   * List of Cloudflare IPv6 CIDR addresses.
-   */
-  ipv6_cidrs?: Array<string>;
+    /**
+     * An IPv4 or IPv6 address.
+     */
+    ip?: string;
+  }
 }
 
-export interface JDCloudIPs {
-  /**
-   * A digest of the IP data. Useful for determining if the data has changed.
-   */
-  etag?: string;
+export type IPListResponse = IPListResponse.PublicIPIPs | IPListResponse.PublicIPIPsJDCloud;
 
-  /**
-   * List of Cloudflare IPv4 CIDR addresses.
-   */
-  ipv4_cidrs?: Array<string>;
+export namespace IPListResponse {
+  export interface PublicIPIPs {
+    /**
+     * A digest of the IP data. Useful for determining if the data has changed.
+     */
+    etag?: string;
 
-  /**
-   * List of Cloudflare IPv6 CIDR addresses.
-   */
-  ipv6_cidrs?: Array<string>;
+    /**
+     * List of Cloudflare IPv4 CIDR addresses.
+     */
+    ipv4_cidrs?: Array<string>;
 
-  /**
-   * List IPv4 and IPv6 CIDRs, only populated if `?networks=jdcloud` is used.
-   */
-  jdcloud_cidrs?: Array<string>;
+    /**
+     * List of Cloudflare IPv6 CIDR addresses.
+     */
+    ipv6_cidrs?: Array<string>;
+  }
+
+  export interface PublicIPIPsJDCloud {
+    /**
+     * A digest of the IP data. Useful for determining if the data has changed.
+     */
+    etag?: string;
+
+    /**
+     * List of Cloudflare IPv4 CIDR addresses.
+     */
+    ipv4_cidrs?: Array<string>;
+
+    /**
+     * List of Cloudflare IPv6 CIDR addresses.
+     */
+    ipv6_cidrs?: Array<string>;
+
+    /**
+     * List IPv4 and IPv6 CIDRs, only populated if `?networks=jdcloud` is used.
+     */
+    jdcloud_cidrs?: Array<string>;
+  }
 }
-
-export type IPListResponse = IPs | JDCloudIPs;
 
 export interface IPListParams {
   /**
@@ -75,10 +93,5 @@ export interface IPListParams {
 }
 
 export declare namespace IPs {
-  export {
-    type IPs as IPs,
-    type JDCloudIPs as JDCloudIPs,
-    type IPListResponse as IPListResponse,
-    type IPListParams as IPListParams,
-  };
+  export { type IPs as IPs, type IPListResponse as IPListResponse, type IPListParams as IPListParams };
 }

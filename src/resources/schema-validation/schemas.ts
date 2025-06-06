@@ -16,6 +16,7 @@ export class Schemas extends APIResource {
    *     kind: 'openapi_v3',
    *     name: 'petstore schema',
    *     source: '<schema file contents>',
+   *     validation_enabled: true,
    *   },
    * );
    * ```
@@ -292,7 +293,7 @@ export interface SchemaCreateParams {
   /**
    * Body param: An indicator if this schema is enabled
    */
-  validation_enabled?: boolean;
+  validation_enabled: boolean;
 }
 
 export interface SchemaListParams extends V4PagePaginationArrayParams {

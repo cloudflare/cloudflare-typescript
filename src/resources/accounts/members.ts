@@ -13,7 +13,7 @@ export class Members extends APIResource {
    * @example
    * ```ts
    * const member = await client.accounts.members.create({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   email: 'user@example.com',
    *   roles: ['3536bcfad5faccb999b47003c79917fb'],
    * });
@@ -35,7 +35,7 @@ export class Members extends APIResource {
    * ```ts
    * const member = await client.accounts.members.update(
    *   '4536bcfad5faccb111b47003c79917fa',
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -60,7 +60,7 @@ export class Members extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const member of client.accounts.members.list({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * })) {
    *   // ...
    * }
@@ -84,7 +84,7 @@ export class Members extends APIResource {
    * ```ts
    * const member = await client.accounts.members.delete(
    *   '4536bcfad5faccb111b47003c79917fa',
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -108,7 +108,7 @@ export class Members extends APIResource {
    * ```ts
    * const member = await client.accounts.members.get(
    *   '4536bcfad5faccb111b47003c79917fa',
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
