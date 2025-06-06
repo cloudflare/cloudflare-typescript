@@ -2943,6 +2943,100 @@ export namespace PTRRecordParam {
   }
 }
 
+export type Record =
+  | ARecord
+  | AAAARecord
+  | CNAMERecord
+  | MXRecord
+  | NSRecord
+  | Record.Openpgpkey
+  | PTRRecord
+  | TXTRecord
+  | CAARecord
+  | CERTRecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | NAPTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | URIRecord;
+
+export namespace Record {
+  export interface Openpgpkey {
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: Openpgpkey.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTL;
+
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
+
+  export namespace Openpgpkey {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+}
+
 export type RecordResponse =
   | ARecord
   | AAAARecord
@@ -10723,6 +10817,7 @@ export declare namespace Records {
     type NAPTRRecord as NAPTRRecord,
     type NSRecord as NSRecord,
     type PTRRecord as PTRRecord,
+    type Record as Record,
     type RecordResponse as RecordResponse,
     type RecordTags as RecordTags,
     type SMIMEARecord as SMIMEARecord,
