@@ -784,12 +784,12 @@ export interface DatabaseGetParams {
 }
 
 export type DatabaseImportParams =
-  | DatabaseImportParams.Variant0
-  | DatabaseImportParams.Variant1
-  | DatabaseImportParams.Variant2;
+  | DatabaseImportParams.Init
+  | DatabaseImportParams.Ingest
+  | DatabaseImportParams.Poll;
 
 export declare namespace DatabaseImportParams {
-  export interface Variant0 {
+  export interface Init {
     /**
      * Path param: Account identifier tag.
      */
@@ -808,7 +808,7 @@ export declare namespace DatabaseImportParams {
     etag: string;
   }
 
-  export interface Variant1 {
+  export interface Ingest {
     /**
      * Path param: Account identifier tag.
      */
@@ -832,7 +832,7 @@ export declare namespace DatabaseImportParams {
     filename: string;
   }
 
-  export interface Variant2 {
+  export interface Poll {
     /**
      * Path param: Account identifier tag.
      */
