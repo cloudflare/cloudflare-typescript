@@ -56,7 +56,7 @@ export const tool: Tool = {
             provider: {
               type: 'string',
               description: 'Cloud Provider type',
-              enum: ['aws_s3', 'r2', 'gcp_storage', 'azure_storage'],
+              enum: ['aws_s3', 'cloudflare_r2', 'gcp_storage', 'azure_storage'],
             },
           },
           required: [],
