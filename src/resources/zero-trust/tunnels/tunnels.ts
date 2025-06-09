@@ -108,7 +108,9 @@ export namespace TunnelListResponse {
     account_tag?: string;
 
     /**
-     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     * @deprecated This field will start returning an empty array. To fetch the
+     * connections of a given tunnel, please use the dedicated endpoint
+     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
      */
     connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 

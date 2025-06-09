@@ -321,14 +321,28 @@ export interface ListEditParams {
   account_id: string;
 
   /**
-   * Body param: The items in the list.
+   * Body param: items to add to the list.
    */
-  append?: Array<GatewayItemParam>;
+  append?: Array<ListEditParams.Append>;
 
   /**
    * Body param: A list of the item values you want to remove.
    */
   remove?: Array<string>;
+}
+
+export namespace ListEditParams {
+  export interface Append {
+    /**
+     * The description of the list item, if present
+     */
+    description?: string;
+
+    /**
+     * The value of the item in a list.
+     */
+    value?: string;
+  }
 }
 
 export interface ListGetParams {

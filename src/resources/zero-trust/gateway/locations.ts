@@ -322,7 +322,7 @@ export interface Location {
    * location's IPv6 address is allocated from the Bring Your Own Ipv6(BYOIPv6) block
    * and not from the standard CloudFlare IPv6 block.
    */
-  dns_destination_ipv6_block_id?: string;
+  dns_destination_ipv6_block_id?: string | null;
 
   /**
    * The DNS over HTTPS domain to send DNS requests to. This field is auto-generated
