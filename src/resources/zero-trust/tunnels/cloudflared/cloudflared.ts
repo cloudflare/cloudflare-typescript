@@ -189,7 +189,9 @@ export namespace CloudflaredCreateResponse {
     account_tag?: string;
 
     /**
-     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     * @deprecated This field will start returning an empty array. To fetch the
+     * connections of a given tunnel, please use the dedicated endpoint
+     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
      */
     connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
@@ -311,7 +313,9 @@ export namespace CloudflaredListResponse {
     account_tag?: string;
 
     /**
-     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     * @deprecated This field will start returning an empty array. To fetch the
+     * connections of a given tunnel, please use the dedicated endpoint
+     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
      */
     connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
@@ -433,7 +437,9 @@ export namespace CloudflaredDeleteResponse {
     account_tag?: string;
 
     /**
-     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     * @deprecated This field will start returning an empty array. To fetch the
+     * connections of a given tunnel, please use the dedicated endpoint
+     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
      */
     connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
@@ -555,7 +561,9 @@ export namespace CloudflaredEditResponse {
     account_tag?: string;
 
     /**
-     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     * @deprecated This field will start returning an empty array. To fetch the
+     * connections of a given tunnel, please use the dedicated endpoint
+     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
      */
     connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
@@ -677,7 +685,9 @@ export namespace CloudflaredGetResponse {
     account_tag?: string;
 
     /**
-     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     * @deprecated This field will start returning an empty array. To fetch the
+     * connections of a given tunnel, please use the dedicated endpoint
+     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
      */
     connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 

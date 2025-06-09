@@ -30,9 +30,20 @@ export const tool: Tool = {
       },
       append: {
         type: 'array',
-        description: 'The items in the list.',
+        description: 'items to add to the list.',
         items: {
-          $ref: '#/$defs/gateway_item',
+          type: 'object',
+          properties: {
+            description: {
+              type: 'string',
+              description: 'The description of the list item, if present',
+            },
+            value: {
+              type: 'string',
+              description: 'The value of the item in a list.',
+            },
+          },
+          required: [],
         },
       },
       remove: {
@@ -42,26 +53,6 @@ export const tool: Tool = {
           type: 'string',
           description: 'The value of the item in a list.',
         },
-      },
-    },
-    $defs: {
-      gateway_item: {
-        type: 'object',
-        properties: {
-          created_at: {
-            type: 'string',
-            format: 'date-time',
-          },
-          description: {
-            type: 'string',
-            description: 'The description of the list item, if present',
-          },
-          value: {
-            type: 'string',
-            description: 'The value of the item in a list.',
-          },
-        },
-        required: [],
       },
     },
   },
