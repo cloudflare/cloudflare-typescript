@@ -57,7 +57,7 @@ export interface RuleUpdateResponse {
   /**
    * Cloud Provider type
    */
-  provider?: 'aws_s3' | 'r2' | 'gcp_storage' | 'azure_storage';
+  provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage';
 }
 
 export namespace RuleUpdateResponse {
@@ -89,7 +89,7 @@ export interface RuleListResponse {
   /**
    * Cloud Provider type
    */
-  provider?: 'aws_s3' | 'r2' | 'gcp_storage' | 'azure_storage';
+  provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage';
 }
 
 export namespace RuleListResponse {
@@ -134,7 +134,7 @@ export namespace RuleUpdateParams {
     /**
      * Cloud Provider type
      */
-    provider?: 'aws_s3' | 'r2' | 'gcp_storage' | 'azure_storage';
+    provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage';
   }
 
   export namespace Rule {
