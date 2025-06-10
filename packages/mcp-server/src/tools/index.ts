@@ -3548,9 +3548,10 @@ export function query(filters: Filter[], endpoints: Endpoint[]): Endpoint[] {
   });
 
   // Check if any filters didn't match
-  if (unmatchedFilters.size > 0) {
+  const unmatched = Array.from(unmatchedFilters).filter((f) => f.type === 'tool' || f.type === 'resource');
+  if (unmatched.length > 0) {
     throw new Error(
-      `The following filters did not match any endpoints: ${[...unmatchedFilters]
+      `The following filters did not match any endpoints: ${unmatched
         .map((f) => `${f.type}=${f.value}`)
         .join(', ')}`,
     );

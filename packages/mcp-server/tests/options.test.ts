@@ -77,14 +77,7 @@ describe('parseOptions', () => {
 
     const result = parseOptions();
 
-    expect(result.capabilities).toEqual({
-      topLevelUnions: false,
-      validJson: true,
-      refs: true,
-      unions: true,
-      formats: true,
-      toolNameLength: undefined,
-    });
+    expect(result.client).toEqual('openai-agents');
 
     cleanup();
   });

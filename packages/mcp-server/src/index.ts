@@ -1,7 +1,7 @@
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { init, selectTools, server } from './server';
 import { Endpoint, endpoints } from './tools';
-import { ParsedOptions, parseOptions } from './options';
+import { McpOptions, parseOptions } from './options';
 
 async function main() {
   const options = parseOptionsOrError();
@@ -41,7 +41,7 @@ function parseOptionsOrError() {
   }
 }
 
-function selectToolsOrError(endpoints: Endpoint[], options: ParsedOptions) {
+function selectToolsOrError(endpoints: Endpoint[], options: McpOptions) {
   try {
     const includedTools = selectTools(endpoints, options);
     if (includedTools.length === 0) {
