@@ -181,24 +181,53 @@ export const tool: Tool = {
       batch_patch: {
         anyOf: [
           {
-            $ref: '#/$defs/a_record',
+            allOf: [
+              {
+                $ref: '#/$defs/a_record',
+              },
+            ],
+            title: 'A Record',
           },
           {
-            $ref: '#/$defs/aaaa_record',
+            allOf: [
+              {
+                $ref: '#/$defs/aaaa_record',
+              },
+            ],
+            title: 'AAAA Record',
           },
           {
-            $ref: '#/$defs/cname_record',
+            allOf: [
+              {
+                $ref: '#/$defs/cname_record',
+              },
+            ],
+            title: 'CNAME Record',
           },
           {
-            $ref: '#/$defs/mx_record',
+            allOf: [
+              {
+                $ref: '#/$defs/mx_record',
+              },
+            ],
+            title: 'MX Record',
           },
           {
-            $ref: '#/$defs/ns_record',
+            allOf: [
+              {
+                $ref: '#/$defs/ns_record',
+              },
+            ],
+            title: 'NS Record',
           },
           {
             type: 'object',
             title: 'OPENPGPKEY Record',
             properties: {
+              id: {
+                type: 'string',
+                description: 'Identifier.',
+              },
               comment: {
                 type: 'string',
                 description:
@@ -251,52 +280,127 @@ export const tool: Tool = {
                 enum: ['OPENPGPKEY'],
               },
             },
-            required: [],
+            required: ['id'],
           },
           {
-            $ref: '#/$defs/ptr_record',
+            allOf: [
+              {
+                $ref: '#/$defs/ptr_record',
+              },
+            ],
+            title: 'PTR Record',
           },
           {
-            $ref: '#/$defs/txt_record',
+            allOf: [
+              {
+                $ref: '#/$defs/txt_record',
+              },
+            ],
+            title: 'TXT Record',
           },
           {
-            $ref: '#/$defs/caa_record',
+            allOf: [
+              {
+                $ref: '#/$defs/caa_record',
+              },
+            ],
+            title: 'CAA Record',
           },
           {
-            $ref: '#/$defs/cert_record',
+            allOf: [
+              {
+                $ref: '#/$defs/cert_record',
+              },
+            ],
+            title: 'CERT Record',
           },
           {
-            $ref: '#/$defs/dnskey_record',
+            allOf: [
+              {
+                $ref: '#/$defs/dnskey_record',
+              },
+            ],
+            title: 'DNSKEY Record',
           },
           {
-            $ref: '#/$defs/ds_record',
+            allOf: [
+              {
+                $ref: '#/$defs/ds_record',
+              },
+            ],
+            title: 'DS Record',
           },
           {
-            $ref: '#/$defs/https_record',
+            allOf: [
+              {
+                $ref: '#/$defs/https_record',
+              },
+            ],
+            title: 'HTTPS Record',
           },
           {
-            $ref: '#/$defs/loc_record',
+            allOf: [
+              {
+                $ref: '#/$defs/loc_record',
+              },
+            ],
+            title: 'LOC Record',
           },
           {
-            $ref: '#/$defs/naptr_record',
+            allOf: [
+              {
+                $ref: '#/$defs/naptr_record',
+              },
+            ],
+            title: 'NAPTR Record',
           },
           {
-            $ref: '#/$defs/smimea_record',
+            allOf: [
+              {
+                $ref: '#/$defs/smimea_record',
+              },
+            ],
+            title: 'SMIMEA Record',
           },
           {
-            $ref: '#/$defs/srv_record',
+            allOf: [
+              {
+                $ref: '#/$defs/srv_record',
+              },
+            ],
+            title: 'SRV Record',
           },
           {
-            $ref: '#/$defs/sshfp_record',
+            allOf: [
+              {
+                $ref: '#/$defs/sshfp_record',
+              },
+            ],
+            title: 'SSHFP Record',
           },
           {
-            $ref: '#/$defs/svcb_record',
+            allOf: [
+              {
+                $ref: '#/$defs/svcb_record',
+              },
+            ],
+            title: 'SVCB Record',
           },
           {
-            $ref: '#/$defs/tlsa_record',
+            allOf: [
+              {
+                $ref: '#/$defs/tlsa_record',
+              },
+            ],
+            title: 'TLSA Record',
           },
           {
-            $ref: '#/$defs/uri_record',
+            allOf: [
+              {
+                $ref: '#/$defs/uri_record',
+              },
+            ],
+            title: 'URI Record',
           },
         ],
       },
@@ -1779,24 +1883,53 @@ export const tool: Tool = {
       batch_put: {
         anyOf: [
           {
-            $ref: '#/$defs/a_record',
+            allOf: [
+              {
+                $ref: '#/$defs/a_record',
+              },
+            ],
+            title: 'A Record',
           },
           {
-            $ref: '#/$defs/aaaa_record',
+            allOf: [
+              {
+                $ref: '#/$defs/aaaa_record',
+              },
+            ],
+            title: 'AAAA Record',
           },
           {
-            $ref: '#/$defs/cname_record',
+            allOf: [
+              {
+                $ref: '#/$defs/cname_record',
+              },
+            ],
+            title: 'CNAME Record',
           },
           {
-            $ref: '#/$defs/mx_record',
+            allOf: [
+              {
+                $ref: '#/$defs/mx_record',
+              },
+            ],
+            title: 'MX Record',
           },
           {
-            $ref: '#/$defs/ns_record',
+            allOf: [
+              {
+                $ref: '#/$defs/ns_record',
+              },
+            ],
+            title: 'NS Record',
           },
           {
             type: 'object',
             title: 'OPENPGPKEY Record',
             properties: {
+              id: {
+                type: 'string',
+                description: 'Identifier.',
+              },
               comment: {
                 type: 'string',
                 description:
@@ -1849,52 +1982,127 @@ export const tool: Tool = {
                 enum: ['OPENPGPKEY'],
               },
             },
-            required: [],
+            required: ['id'],
           },
           {
-            $ref: '#/$defs/ptr_record',
+            allOf: [
+              {
+                $ref: '#/$defs/ptr_record',
+              },
+            ],
+            title: 'PTR Record',
           },
           {
-            $ref: '#/$defs/txt_record',
+            allOf: [
+              {
+                $ref: '#/$defs/txt_record',
+              },
+            ],
+            title: 'TXT Record',
           },
           {
-            $ref: '#/$defs/caa_record',
+            allOf: [
+              {
+                $ref: '#/$defs/caa_record',
+              },
+            ],
+            title: 'CAA Record',
           },
           {
-            $ref: '#/$defs/cert_record',
+            allOf: [
+              {
+                $ref: '#/$defs/cert_record',
+              },
+            ],
+            title: 'CERT Record',
           },
           {
-            $ref: '#/$defs/dnskey_record',
+            allOf: [
+              {
+                $ref: '#/$defs/dnskey_record',
+              },
+            ],
+            title: 'DNSKEY Record',
           },
           {
-            $ref: '#/$defs/ds_record',
+            allOf: [
+              {
+                $ref: '#/$defs/ds_record',
+              },
+            ],
+            title: 'DS Record',
           },
           {
-            $ref: '#/$defs/https_record',
+            allOf: [
+              {
+                $ref: '#/$defs/https_record',
+              },
+            ],
+            title: 'HTTPS Record',
           },
           {
-            $ref: '#/$defs/loc_record',
+            allOf: [
+              {
+                $ref: '#/$defs/loc_record',
+              },
+            ],
+            title: 'LOC Record',
           },
           {
-            $ref: '#/$defs/naptr_record',
+            allOf: [
+              {
+                $ref: '#/$defs/naptr_record',
+              },
+            ],
+            title: 'NAPTR Record',
           },
           {
-            $ref: '#/$defs/smimea_record',
+            allOf: [
+              {
+                $ref: '#/$defs/smimea_record',
+              },
+            ],
+            title: 'SMIMEA Record',
           },
           {
-            $ref: '#/$defs/srv_record',
+            allOf: [
+              {
+                $ref: '#/$defs/srv_record',
+              },
+            ],
+            title: 'SRV Record',
           },
           {
-            $ref: '#/$defs/sshfp_record',
+            allOf: [
+              {
+                $ref: '#/$defs/sshfp_record',
+              },
+            ],
+            title: 'SSHFP Record',
           },
           {
-            $ref: '#/$defs/svcb_record',
+            allOf: [
+              {
+                $ref: '#/$defs/svcb_record',
+              },
+            ],
+            title: 'SVCB Record',
           },
           {
-            $ref: '#/$defs/tlsa_record',
+            allOf: [
+              {
+                $ref: '#/$defs/tlsa_record',
+              },
+            ],
+            title: 'TLSA Record',
           },
           {
-            $ref: '#/$defs/uri_record',
+            allOf: [
+              {
+                $ref: '#/$defs/uri_record',
+              },
+            ],
+            title: 'URI Record',
           },
         ],
       },
