@@ -138,6 +138,7 @@ export namespace Profile {
       | CustomProfile.PredefinedEntry
       | CustomProfile.IntegrationEntry
       | CustomProfile.ExactDataEntry
+      | CustomProfile.DocumentTemplateEntry
       | CustomProfile.WordListEntry
     >;
 
@@ -251,6 +252,20 @@ export namespace Profile {
       updated_at: string;
     }
 
+    export interface DocumentTemplateEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_template';
+
+      updated_at: string;
+    }
+
     export interface WordListEntry {
       id: string;
 
@@ -283,6 +298,7 @@ export namespace Profile {
       | PredefinedProfile.PredefinedEntry
       | PredefinedProfile.IntegrationEntry
       | PredefinedProfile.ExactDataEntry
+      | PredefinedProfile.DocumentTemplateEntry
       | PredefinedProfile.WordListEntry
     >;
 
@@ -397,6 +413,20 @@ export namespace Profile {
       updated_at: string;
     }
 
+    export interface DocumentTemplateEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_template';
+
+      updated_at: string;
+    }
+
     export interface WordListEntry {
       id: string;
 
@@ -426,6 +456,7 @@ export namespace Profile {
       | IntegrationProfile.PredefinedEntry
       | IntegrationProfile.IntegrationEntry
       | IntegrationProfile.ExactDataEntry
+      | IntegrationProfile.DocumentTemplateEntry
       | IntegrationProfile.WordListEntry
     >;
 
@@ -523,6 +554,20 @@ export namespace Profile {
       secret: boolean;
 
       type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface DocumentTemplateEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_template';
 
       updated_at: string;
     }
