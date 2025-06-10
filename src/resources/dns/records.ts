@@ -557,30 +557,70 @@ export namespace AAAARecordParam {
 }
 
 export type BatchPatch =
-  | ARecord
-  | AAAARecord
-  | CNAMERecord
-  | MXRecord
-  | NSRecord
-  | BatchPatch.DNSRecordsOpenpgpkeyRecord
-  | PTRRecord
-  | TXTRecord
-  | CAARecord
-  | CERTRecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | NAPTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | URIRecord;
+  | BatchPatch.ARecord
+  | BatchPatch.AAAARecord
+  | BatchPatch.CNAMERecord
+  | BatchPatch.MXRecord
+  | BatchPatch.NSRecord
+  | BatchPatch.OpenpgpkeyRecord
+  | BatchPatch.PTRRecord
+  | BatchPatch.TXTRecord
+  | BatchPatch.CAARecord
+  | BatchPatch.CERTRecord
+  | BatchPatch.DNSKEYRecord
+  | BatchPatch.DSRecord
+  | BatchPatch.HTTPSRecord
+  | BatchPatch.LOCRecord
+  | BatchPatch.NAPTRRecord
+  | BatchPatch.SMIMEARecord
+  | BatchPatch.SRVRecord
+  | BatchPatch.SSHFPRecord
+  | BatchPatch.SVCBRecord
+  | BatchPatch.TLSARecord
+  | BatchPatch.URIRecord;
 
 export namespace BatchPatch {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface ARecord extends RecordsAPI.ARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface OpenpgpkeyRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -606,7 +646,7 @@ export namespace BatchPatch {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: OpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -626,7 +666,7 @@ export namespace BatchPatch {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace OpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -647,34 +687,179 @@ export namespace BatchPatch {
        */
       ipv6_only?: boolean;
     }
+  }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
   }
 }
 
 export type BatchPatchParam =
-  | ARecordParam
-  | AAAARecordParam
-  | CNAMERecordParam
-  | MXRecordParam
-  | NSRecordParam
-  | BatchPatchParam.DNSRecordsOpenpgpkeyRecord
-  | PTRRecordParam
-  | TXTRecordParam
-  | CAARecordParam
-  | CERTRecordParam
-  | DNSKEYRecordParam
-  | DSRecordParam
-  | HTTPSRecordParam
-  | LOCRecordParam
-  | NAPTRRecordParam
-  | SMIMEARecordParam
-  | SRVRecordParam
-  | SSHFPRecordParam
-  | SVCBRecordParam
-  | TLSARecordParam
-  | URIRecordParam;
+  | BatchPatchParam.ARecord
+  | BatchPatchParam.AAAARecord
+  | BatchPatchParam.CNAMERecord
+  | BatchPatchParam.MXRecord
+  | BatchPatchParam.NSRecord
+  | BatchPatchParam.OpenpgpkeyRecord
+  | BatchPatchParam.PTRRecord
+  | BatchPatchParam.TXTRecord
+  | BatchPatchParam.CAARecord
+  | BatchPatchParam.CERTRecord
+  | BatchPatchParam.DNSKEYRecord
+  | BatchPatchParam.DSRecord
+  | BatchPatchParam.HTTPSRecord
+  | BatchPatchParam.LOCRecord
+  | BatchPatchParam.NAPTRRecord
+  | BatchPatchParam.SMIMEARecord
+  | BatchPatchParam.SRVRecord
+  | BatchPatchParam.SSHFPRecord
+  | BatchPatchParam.SVCBRecord
+  | BatchPatchParam.TLSARecord
+  | BatchPatchParam.URIRecord;
 
 export namespace BatchPatchParam {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface ARecord extends RecordsAPI.ARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface OpenpgpkeyRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -700,7 +885,7 @@ export namespace BatchPatchParam {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: OpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -720,7 +905,7 @@ export namespace BatchPatchParam {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace OpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -742,33 +927,178 @@ export namespace BatchPatchParam {
       ipv6_only?: boolean;
     }
   }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
 }
 
 export type BatchPut =
-  | ARecord
-  | AAAARecord
-  | CNAMERecord
-  | MXRecord
-  | NSRecord
-  | BatchPut.DNSRecordsOpenpgpkeyRecord
-  | PTRRecord
-  | TXTRecord
-  | CAARecord
-  | CERTRecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | NAPTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | URIRecord;
+  | BatchPut.ARecord
+  | BatchPut.AAAARecord
+  | BatchPut.CNAMERecord
+  | BatchPut.MXRecord
+  | BatchPut.NSRecord
+  | BatchPut.OpenpgpkeyRecord
+  | BatchPut.PTRRecord
+  | BatchPut.TXTRecord
+  | BatchPut.CAARecord
+  | BatchPut.CERTRecord
+  | BatchPut.DNSKEYRecord
+  | BatchPut.DSRecord
+  | BatchPut.HTTPSRecord
+  | BatchPut.LOCRecord
+  | BatchPut.NAPTRRecord
+  | BatchPut.SMIMEARecord
+  | BatchPut.SRVRecord
+  | BatchPut.SSHFPRecord
+  | BatchPut.SVCBRecord
+  | BatchPut.TLSARecord
+  | BatchPut.URIRecord;
 
 export namespace BatchPut {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface ARecord extends RecordsAPI.ARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface OpenpgpkeyRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -794,7 +1124,7 @@ export namespace BatchPut {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: OpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -814,7 +1144,7 @@ export namespace BatchPut {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace OpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -836,33 +1166,178 @@ export namespace BatchPut {
       ipv6_only?: boolean;
     }
   }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
 }
 
 export type BatchPutParam =
-  | ARecordParam
-  | AAAARecordParam
-  | CNAMERecordParam
-  | MXRecordParam
-  | NSRecordParam
-  | BatchPutParam.DNSRecordsOpenpgpkeyRecord
-  | PTRRecordParam
-  | TXTRecordParam
-  | CAARecordParam
-  | CERTRecordParam
-  | DNSKEYRecordParam
-  | DSRecordParam
-  | HTTPSRecordParam
-  | LOCRecordParam
-  | NAPTRRecordParam
-  | SMIMEARecordParam
-  | SRVRecordParam
-  | SSHFPRecordParam
-  | SVCBRecordParam
-  | TLSARecordParam
-  | URIRecordParam;
+  | BatchPutParam.ARecord
+  | BatchPutParam.AAAARecord
+  | BatchPutParam.CNAMERecord
+  | BatchPutParam.MXRecord
+  | BatchPutParam.NSRecord
+  | BatchPutParam.OpenpgpkeyRecord
+  | BatchPutParam.PTRRecord
+  | BatchPutParam.TXTRecord
+  | BatchPutParam.CAARecord
+  | BatchPutParam.CERTRecord
+  | BatchPutParam.DNSKEYRecord
+  | BatchPutParam.DSRecord
+  | BatchPutParam.HTTPSRecord
+  | BatchPutParam.LOCRecord
+  | BatchPutParam.NAPTRRecord
+  | BatchPutParam.SMIMEARecord
+  | BatchPutParam.SRVRecord
+  | BatchPutParam.SSHFPRecord
+  | BatchPutParam.SVCBRecord
+  | BatchPutParam.TLSARecord
+  | BatchPutParam.URIRecord;
 
 export namespace BatchPutParam {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface ARecord extends RecordsAPI.ARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface OpenpgpkeyRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
@@ -888,7 +1363,7 @@ export namespace BatchPutParam {
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings?: OpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -908,7 +1383,7 @@ export namespace BatchPutParam {
     type?: 'OPENPGPKEY';
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace OpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -929,6 +1404,111 @@ export namespace BatchPutParam {
        */
       ipv6_only?: boolean;
     }
+  }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecordParam {
+    /**
+     * Identifier.
+     */
+    id: string;
   }
 }
 
@@ -3038,76 +3618,296 @@ export namespace Record {
 }
 
 export type RecordResponse =
-  | ARecord
-  | AAAARecord
-  | CNAMERecord
-  | MXRecord
-  | NSRecord
-  | RecordResponse.DNSRecordsOpenpgpkeyRecord
-  | PTRRecord
-  | TXTRecord
-  | CAARecord
-  | CERTRecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | NAPTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | URIRecord;
+  | RecordResponse.ARecord
+  | RecordResponse.AAAARecord
+  | RecordResponse.CNAMERecord
+  | RecordResponse.MXRecord
+  | RecordResponse.NSRecord
+  | RecordResponse.OpenpgpkeyRecord
+  | RecordResponse.PTRRecord
+  | RecordResponse.TXTRecord
+  | RecordResponse.CAARecord
+  | RecordResponse.CERTRecord
+  | RecordResponse.DNSKEYRecord
+  | RecordResponse.DSRecord
+  | RecordResponse.HTTPSRecord
+  | RecordResponse.LOCRecord
+  | RecordResponse.NAPTRRecord
+  | RecordResponse.SMIMEARecord
+  | RecordResponse.SRVRecord
+  | RecordResponse.SSHFPRecord
+  | RecordResponse.SVCBRecord
+  | RecordResponse.TLSARecord
+  | RecordResponse.URIRecord;
 
 export namespace RecordResponse {
-  export interface DNSRecordsOpenpgpkeyRecord {
+  export interface ARecord extends RecordsAPI.ARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface OpenpgpkeyRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
     /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
-    comment?: string;
+    comment: string;
 
     /**
      * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
-    content?: string;
+    content: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
      */
-    name?: string;
+    name: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
 
     /**
      * Whether the record is receiving the performance and security benefits of
      * Cloudflare.
      */
-    proxied?: boolean;
+    proxied: boolean;
 
     /**
      * Settings for the DNS record.
      */
-    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+    settings: OpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
-    tags?: Array<RecordsAPI.RecordTags>;
+    tags: Array<RecordsAPI.RecordTags>;
 
     /**
      * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
      * Value must be between 60 and 86400, with the minimum reduced to 30 for
      * Enterprise zones.
      */
-    ttl?: RecordsAPI.TTL;
+    ttl: RecordsAPI.TTL;
 
     /**
      * Record type.
      */
-    type?: 'OPENPGPKEY';
+    type: 'OPENPGPKEY';
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
   }
 
-  export namespace DNSRecordsOpenpgpkeyRecord {
+  export namespace OpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -3128,6 +3928,561 @@ export namespace RecordResponse {
        */
       ipv6_only?: boolean;
     }
+  }
+
+  export interface PTRRecord extends RecordsAPI.PTRRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecord {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
   }
 }
 
