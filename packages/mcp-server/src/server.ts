@@ -4,15 +4,22 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { Endpoint, endpoints, HandlerFunction, query } from './tools';
 import { CallToolRequestSchema, ListToolsRequestSchema, Tool } from '@modelcontextprotocol/sdk/types.js';
+import { ClientOptions } from 'cloudflare';
 import Cloudflare from 'cloudflare';
 import {
   applyCompatibilityTransformations,
   ClientCapabilities,
   defaultClientCapabilities,
+  knownClients,
   parseEmbeddedJSON,
 } from './compat';
 import { dynamicTools } from './dynamic-tools';
-import { ParsedOptions } from './options';
+import { McpOptions } from './options';
+
+export { McpOptions } from './options';
+export { ClientType } from './compat';
+export { Filter } from './tools';
+export { ClientOptions } from 'cloudflare';
 export { endpoints } from './tools';
 
 // Create server instance
@@ -32,6 +39,21 @@ export const server = new McpServer(
  * Initializes the provided MCP Server with the given tools and handlers.
  * If not provided, the default client, tools and handlers will be used.
  */
+export function initMcpServer(params: {
+  server: Server | McpServer;
+  clientOptions: ClientOptions;
+  mcpOptions: McpOptions;
+  endpoints?: { tool: Tool; handler: HandlerFunction }[];
+}) {
+  const transformedEndpoints = selectTools(endpoints, params.mcpOptions);
+  const client = new Cloudflare(params.clientOptions);
+  const capabilities = {
+    ...defaultClientCapabilities,
+    ...(params.mcpOptions.client ? knownClients[params.mcpOptions.client] : params.mcpOptions.capabilities),
+  };
+  init({ server: params.server, client, endpoints: transformedEndpoints, capabilities });
+}
+
 export function init(params: {
   server: Server | McpServer;
   client?: Cloudflare;
@@ -65,24 +87,27 @@ export function init(params: {
 /**
  * Selects the tools to include in the MCP Server based on the provided options.
  */
-export function selectTools(endpoints: Endpoint[], options: ParsedOptions) {
+export function selectTools(endpoints: Endpoint[], options: McpOptions) {
   const filteredEndpoints = query(options.filters, endpoints);
 
-  const includedTools = filteredEndpoints;
+  let includedTools = filteredEndpoints;
 
-  if (options.includeAllTools && includedTools.length === 0) {
-    includedTools.push(...endpoints);
+  if (includedTools.length > 0) {
+    if (options.includeDynamicTools) {
+      includedTools = dynamicTools(includedTools);
+    }
+  } else {
+    if (options.includeAllTools) {
+      includedTools = endpoints;
+    } else if (options.includeDynamicTools) {
+      includedTools = dynamicTools(endpoints);
+    } else {
+      includedTools = endpoints;
+    }
   }
 
-  if (options.includeDynamicTools) {
-    includedTools.push(...dynamicTools(endpoints));
-  }
-
-  if (includedTools.length === 0) {
-    includedTools.push(...endpoints);
-  }
-
-  return applyCompatibilityTransformations(includedTools, options.capabilities);
+  const capabilities = { ...defaultClientCapabilities, ...options.capabilities };
+  return applyCompatibilityTransformations(includedTools, capabilities);
 }
 
 /**

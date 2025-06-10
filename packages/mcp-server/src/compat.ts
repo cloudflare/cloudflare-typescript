@@ -19,6 +19,46 @@ export const defaultClientCapabilities: ClientCapabilities = {
   toolNameLength: undefined,
 };
 
+export type ClientType = 'openai-agents' | 'claude' | 'claude-code' | 'cursor';
+
+// Client presets for compatibility
+// Note that these could change over time as models get better, so this is
+// a best effort.
+export const knownClients: Record<ClientType, ClientCapabilities> = {
+  'openai-agents': {
+    topLevelUnions: false,
+    validJson: true,
+    refs: true,
+    unions: true,
+    formats: true,
+    toolNameLength: undefined,
+  },
+  claude: {
+    topLevelUnions: true,
+    validJson: false,
+    refs: true,
+    unions: true,
+    formats: true,
+    toolNameLength: undefined,
+  },
+  'claude-code': {
+    topLevelUnions: false,
+    validJson: true,
+    refs: true,
+    unions: true,
+    formats: true,
+    toolNameLength: undefined,
+  },
+  cursor: {
+    topLevelUnions: false,
+    validJson: true,
+    refs: false,
+    unions: false,
+    formats: false,
+    toolNameLength: 50,
+  },
+};
+
 /**
  * Attempts to parse strings into JSON objects
  */
