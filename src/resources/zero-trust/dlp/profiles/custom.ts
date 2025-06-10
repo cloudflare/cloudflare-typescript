@@ -139,6 +139,7 @@ export interface CustomProfile {
     | CustomProfile.PredefinedEntry
     | CustomProfile.IntegrationEntry
     | CustomProfile.ExactDataEntry
+    | CustomProfile.DocumentTemplateEntry
     | CustomProfile.WordListEntry
   >;
 
@@ -246,6 +247,20 @@ export namespace CustomProfile {
     secret: boolean;
 
     type: 'exact_data';
+
+    updated_at: string;
+  }
+
+  export interface DocumentTemplateEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'document_template';
 
     updated_at: string;
   }
