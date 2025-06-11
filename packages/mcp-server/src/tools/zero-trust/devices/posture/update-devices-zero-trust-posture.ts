@@ -192,7 +192,7 @@ export const tool: Tool = {
               cn: {
                 type: 'string',
                 description:
-                  'Common Name that is protected by the client certificate. This may include one or more variables in the ${ } notation. Only ${serial_number} and ${hostname} are valid variables.',
+                  'Certificate Common Name. This may include one or more variables in the ${ } notation. Only ${serial_number} and ${hostname} are valid variables.',
               },
               extended_key_usage: {
                 type: 'array',
@@ -223,6 +223,13 @@ export const tool: Tool = {
                   },
                 },
                 required: [],
+              },
+              subject_alternative_names: {
+                type: 'array',
+                description: 'List of certificate Subject Alternative Names.',
+                items: {
+                  type: 'string',
+                },
               },
             },
             required: ['certificate_id', 'check_private_key', 'operating_system'],
