@@ -29,7 +29,7 @@ export class Default extends APIResource {
 
 export interface DefaultGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

@@ -751,7 +751,7 @@ export namespace Configuration {
 
 export interface ConfigUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -1443,7 +1443,7 @@ export namespace ConfigUpdateParams {
 
 export interface ConfigGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
