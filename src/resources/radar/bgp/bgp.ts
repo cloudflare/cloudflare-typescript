@@ -90,7 +90,7 @@ export namespace BGPTimeseriesResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -101,7 +101,7 @@ export namespace BGPTimeseriesResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 

@@ -47,7 +47,7 @@ export interface SearchGlobalParams {
   /**
    * Search types excluded from results.
    */
-  exclude?: Array<'SPECIAL_EVENTS' | 'NOTEBOOKS' | 'LOCATIONS' | 'ASNS'>;
+  exclude?: Array<'ASNS' | 'LOCATIONS' | 'NOTEBOOKS' | 'SPECIAL_EVENTS'>;
 
   /**
    * Format in which results will be returned.
@@ -57,7 +57,7 @@ export interface SearchGlobalParams {
   /**
    * Search types included in results.
    */
-  include?: Array<'SPECIAL_EVENTS' | 'NOTEBOOKS' | 'LOCATIONS' | 'ASNS'>;
+  include?: Array<'ASNS' | 'LOCATIONS' | 'NOTEBOOKS' | 'SPECIAL_EVENTS'>;
 
   /**
    * Limits the number of objects returned in the response.
