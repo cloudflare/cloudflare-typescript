@@ -520,7 +520,7 @@ export namespace ScanGetResponse {
 
           geonameId: string;
 
-          ll: Array<unknown>;
+          ll: Array<number>;
 
           region: string;
         }
