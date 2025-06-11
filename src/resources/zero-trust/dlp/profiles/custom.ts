@@ -359,10 +359,10 @@ export interface CustomCreateParams {
    * or your Microsoft Information Protection profiles).
    */
   shared_entries?: Array<
-    | CustomCreateParams.UnionMember0
-    | CustomCreateParams.UnionMember1
-    | CustomCreateParams.UnionMember2
-    | CustomCreateParams.UnionMember3
+    | CustomCreateParams.Custom
+    | CustomCreateParams.Predefined
+    | CustomCreateParams.Integration
+    | CustomCreateParams.ExactData
   >;
 }
 
@@ -383,7 +383,7 @@ export namespace CustomCreateParams {
     words: Array<string>;
   }
 
-  export interface UnionMember0 {
+  export interface Custom {
     enabled: boolean;
 
     entry_id: string;
@@ -391,7 +391,7 @@ export namespace CustomCreateParams {
     entry_type: 'custom';
   }
 
-  export interface UnionMember1 {
+  export interface Predefined {
     enabled: boolean;
 
     entry_id: string;
@@ -399,7 +399,7 @@ export namespace CustomCreateParams {
     entry_type: 'predefined';
   }
 
-  export interface UnionMember2 {
+  export interface Integration {
     enabled: boolean;
 
     entry_id: string;
@@ -407,7 +407,7 @@ export namespace CustomCreateParams {
     entry_type: 'integration';
   }
 
-  export interface UnionMember3 {
+  export interface ExactData {
     enabled: boolean;
 
     entry_id: string;
@@ -468,7 +468,7 @@ export interface CustomUpdateParams {
    * Body param: Other entries, e.g. predefined or integration.
    */
   shared_entries?: Array<
-    CustomUpdateParams.UnionMember0 | CustomUpdateParams.UnionMember1 | CustomUpdateParams.UnionMember2
+    CustomUpdateParams.Predefined | CustomUpdateParams.Integration | CustomUpdateParams.ExactData
   >;
 }
 
@@ -491,7 +491,7 @@ export namespace CustomUpdateParams {
     pattern: CustomAPI.PatternParam;
   }
 
-  export interface UnionMember0 {
+  export interface Predefined {
     enabled: boolean;
 
     entry_id: string;
@@ -499,7 +499,7 @@ export namespace CustomUpdateParams {
     entry_type: 'predefined';
   }
 
-  export interface UnionMember1 {
+  export interface Integration {
     enabled: boolean;
 
     entry_id: string;
@@ -507,7 +507,7 @@ export namespace CustomUpdateParams {
     entry_type: 'integration';
   }
 
-  export interface UnionMember2 {
+  export interface ExactData {
     enabled: boolean;
 
     entry_id: string;
