@@ -845,7 +845,7 @@ export const tool: Tool = {
                     items: {
                       type: 'object',
                       title: 'Category override',
-                      description: 'A category-level override',
+                      description: 'A category-level override.',
                       properties: {
                         category: {
                           type: 'string',
@@ -885,7 +885,7 @@ export const tool: Tool = {
                     items: {
                       type: 'object',
                       title: 'Rule override',
-                      description: 'A rule-level override',
+                      description: 'A rule-level override.',
                       properties: {
                         id: {
                           type: 'string',
@@ -2342,7 +2342,7 @@ export const tool: Tool = {
               rocket_loader: {
                 type: 'boolean',
                 title: 'Rocket Loader',
-                description: 'Turn on or off Rocket Loader',
+                description: 'Turn on or off Rocket Loader.',
               },
               security_level: {
                 type: 'string',
@@ -2709,7 +2709,7 @@ export const tool: Tool = {
                 items: {
                   type: 'integer',
                   title: 'Additional Cacheable Port',
-                  description: 'A port to enable caching on',
+                  description: 'A port to enable caching on.',
                 },
               },
               browser_ttl: {
@@ -2747,13 +2747,13 @@ export const tool: Tool = {
                   cache_by_device_type: {
                     type: 'boolean',
                     title: 'Cache by Device Type',
-                    description: 'Separate cached content based on the visitor’s device type',
+                    description: 'Separate cached content based on the visitor’s device type.',
                   },
                   cache_deception_armor: {
                     type: 'boolean',
                     title: 'Cache Deception Armor',
                     description:
-                      'Protect from web cache deception attacks while allowing static assets to be cached',
+                      'Protect from web cache deception attacks while allowing static assets to be cached.',
                   },
                   custom_key: {
                     type: 'object',
@@ -3015,19 +3015,19 @@ export const tool: Tool = {
                   mode: {
                     type: 'string',
                     title: 'Mode',
-                    description: 'edge ttl options',
+                    description: 'Edge TTL options.',
                     enum: ['respect_origin', 'bypass_by_default', 'override_origin'],
                   },
                   status_code_ttl: {
                     type: 'array',
                     title: 'Status Code TTLs',
                     description:
-                      'List of single status codes, or status code ranges to apply the selected mode',
+                      'List of single status codes, or status code ranges to apply the selected mode.',
                     items: {
                       type: 'object',
                       title: 'Status Code TTL',
                       description:
-                        'Specify how long Cloudflare should cache the response based on the status code from the origin. Can be a single status code or a range or status codes',
+                        'Specify how long Cloudflare should cache the response based on the status code from the origin. Can be a single status code or a range or status codes.',
                       properties: {
                         value: {
                           type: 'integer',
@@ -3043,12 +3043,12 @@ export const tool: Tool = {
                             from: {
                               type: 'integer',
                               title: 'Status Code lower bound',
-                              description: 'response status code lower bound',
+                              description: 'Response status code lower bound.',
                             },
                             to: {
                               type: 'integer',
                               title: 'Status Code upper bound',
-                              description: 'response status code upper bound',
+                              description: 'Response status code upper bound.',
                             },
                           },
                           required: ['from', 'to'],
@@ -3056,7 +3056,7 @@ export const tool: Tool = {
                         status_code_value: {
                           type: 'integer',
                           title: 'Status Code Value',
-                          description: 'Set the ttl for responses with this specific status code',
+                          description: 'Set the TTL for responses with this specific status code.',
                         },
                       },
                       required: ['value'],
@@ -3074,7 +3074,7 @@ export const tool: Tool = {
                 type: 'boolean',
                 title: 'Origin Error Page Passthru',
                 description:
-                  'Generate Cloudflare error pages from issues sent from the origin server. When on, error pages will trigger for issues from the origin',
+                  'Generate Cloudflare error pages from issues sent from the origin server. When on, error pages will trigger for issues from the origin.',
               },
               read_timeout: {
                 type: 'integer',

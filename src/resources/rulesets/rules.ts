@@ -1140,7 +1140,7 @@ export namespace ExecuteRule {
 
     export namespace Overrides {
       /**
-       * A category-level override
+       * A category-level override.
        */
       export interface Category {
         /**
@@ -1165,7 +1165,7 @@ export namespace ExecuteRule {
       }
 
       /**
-       * A rule-level override
+       * A rule-level override.
        */
       export interface Rule {
         /**
@@ -1383,7 +1383,7 @@ export namespace ExecuteRuleParam {
 
     export namespace Overrides {
       /**
-       * A category-level override
+       * A category-level override.
        */
       export interface Category {
         /**
@@ -1408,7 +1408,7 @@ export namespace ExecuteRuleParam {
       }
 
       /**
-       * A rule-level override
+       * A rule-level override.
        */
       export interface Rule {
         /**
@@ -4772,7 +4772,7 @@ export namespace SetCacheSettingsRule {
 
     /**
      * Generate Cloudflare error pages from issues sent from the origin server. When
-     * on, error pages will trigger for issues from the origin
+     * on, error pages will trigger for issues from the origin.
      */
     origin_error_page_passthru?: boolean;
 
@@ -4823,13 +4823,13 @@ export namespace SetCacheSettingsRule {
      */
     export interface CacheKey {
       /**
-       * Separate cached content based on the visitor’s device type
+       * Separate cached content based on the visitor’s device type.
        */
       cache_by_device_type?: boolean;
 
       /**
        * Protect from web cache deception attacks while allowing static assets to be
-       * cached
+       * cached.
        */
       cache_deception_armor?: boolean;
 
@@ -5053,12 +5053,12 @@ export namespace SetCacheSettingsRule {
       default: number;
 
       /**
-       * edge ttl options
+       * Edge TTL options.
        */
       mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
 
       /**
-       * List of single status codes, or status code ranges to apply the selected mode
+       * List of single status codes, or status code ranges to apply the selected mode.
        */
       status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
     }
@@ -5066,7 +5066,7 @@ export namespace SetCacheSettingsRule {
     export namespace EdgeTTL {
       /**
        * Specify how long Cloudflare should cache the response based on the status code
-       * from the origin. Can be a single status code or a range or status codes
+       * from the origin. Can be a single status code or a range or status codes.
        */
       export interface StatusCodeTTL {
         /**
@@ -5082,7 +5082,7 @@ export namespace SetCacheSettingsRule {
         status_code_range?: StatusCodeTTL.StatusCodeRange;
 
         /**
-         * Set the ttl for responses with this specific status code
+         * Set the TTL for responses with this specific status code.
          */
         status_code_value?: number;
       }
@@ -5093,12 +5093,12 @@ export namespace SetCacheSettingsRule {
          */
         export interface StatusCodeRange {
           /**
-           * response status code lower bound
+           * Response status code lower bound.
            */
           from: number;
 
           /**
-           * response status code upper bound
+           * Response status code upper bound.
            */
           to: number;
         }
@@ -5288,7 +5288,7 @@ export namespace SetCacheSettingsRuleParam {
 
     /**
      * Generate Cloudflare error pages from issues sent from the origin server. When
-     * on, error pages will trigger for issues from the origin
+     * on, error pages will trigger for issues from the origin.
      */
     origin_error_page_passthru?: boolean;
 
@@ -5339,13 +5339,13 @@ export namespace SetCacheSettingsRuleParam {
      */
     export interface CacheKey {
       /**
-       * Separate cached content based on the visitor’s device type
+       * Separate cached content based on the visitor’s device type.
        */
       cache_by_device_type?: boolean;
 
       /**
        * Protect from web cache deception attacks while allowing static assets to be
-       * cached
+       * cached.
        */
       cache_deception_armor?: boolean;
 
@@ -5569,12 +5569,12 @@ export namespace SetCacheSettingsRuleParam {
       default: number;
 
       /**
-       * edge ttl options
+       * Edge TTL options.
        */
       mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
 
       /**
-       * List of single status codes, or status code ranges to apply the selected mode
+       * List of single status codes, or status code ranges to apply the selected mode.
        */
       status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
     }
@@ -5582,7 +5582,7 @@ export namespace SetCacheSettingsRuleParam {
     export namespace EdgeTTL {
       /**
        * Specify how long Cloudflare should cache the response based on the status code
-       * from the origin. Can be a single status code or a range or status codes
+       * from the origin. Can be a single status code or a range or status codes.
        */
       export interface StatusCodeTTL {
         /**
@@ -5598,7 +5598,7 @@ export namespace SetCacheSettingsRuleParam {
         status_code_range?: StatusCodeTTL.StatusCodeRange;
 
         /**
-         * Set the ttl for responses with this specific status code
+         * Set the TTL for responses with this specific status code.
          */
         status_code_value?: number;
       }
@@ -5609,12 +5609,12 @@ export namespace SetCacheSettingsRuleParam {
          */
         export interface StatusCodeRange {
           /**
-           * response status code lower bound
+           * Response status code lower bound.
            */
           from: number;
 
           /**
-           * response status code upper bound
+           * Response status code upper bound.
            */
           to: number;
         }
@@ -5836,7 +5836,7 @@ export namespace SetConfigRule {
     polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
     /**
-     * Turn on or off Rocket Loader
+     * Turn on or off Rocket Loader.
      */
     rocket_loader?: boolean;
 
@@ -6068,7 +6068,7 @@ export namespace SetConfigRuleParam {
     polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
     /**
-     * Turn on or off Rocket Loader
+     * Turn on or off Rocket Loader.
      */
     rocket_loader?: boolean;
 
@@ -8232,7 +8232,7 @@ export declare namespace RuleCreateParams {
 
       export namespace Overrides {
         /**
-         * A category-level override
+         * A category-level override.
          */
         export interface Category {
           /**
@@ -8257,7 +8257,7 @@ export declare namespace RuleCreateParams {
         }
 
         /**
-         * A rule-level override
+         * A rule-level override.
          */
         export interface Rule {
           /**
@@ -10120,7 +10120,7 @@ export declare namespace RuleCreateParams {
       polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
       /**
-       * Turn on or off Rocket Loader
+       * Turn on or off Rocket Loader.
        */
       rocket_loader?: boolean;
 
@@ -10590,7 +10590,7 @@ export declare namespace RuleCreateParams {
 
       /**
        * Generate Cloudflare error pages from issues sent from the origin server. When
-       * on, error pages will trigger for issues from the origin
+       * on, error pages will trigger for issues from the origin.
        */
       origin_error_page_passthru?: boolean;
 
@@ -10641,13 +10641,13 @@ export declare namespace RuleCreateParams {
        */
       export interface CacheKey {
         /**
-         * Separate cached content based on the visitor’s device type
+         * Separate cached content based on the visitor’s device type.
          */
         cache_by_device_type?: boolean;
 
         /**
          * Protect from web cache deception attacks while allowing static assets to be
-         * cached
+         * cached.
          */
         cache_deception_armor?: boolean;
 
@@ -10871,12 +10871,12 @@ export declare namespace RuleCreateParams {
         default: number;
 
         /**
-         * edge ttl options
+         * Edge TTL options.
          */
         mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
 
         /**
-         * List of single status codes, or status code ranges to apply the selected mode
+         * List of single status codes, or status code ranges to apply the selected mode.
          */
         status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
       }
@@ -10884,7 +10884,7 @@ export declare namespace RuleCreateParams {
       export namespace EdgeTTL {
         /**
          * Specify how long Cloudflare should cache the response based on the status code
-         * from the origin. Can be a single status code or a range or status codes
+         * from the origin. Can be a single status code or a range or status codes.
          */
         export interface StatusCodeTTL {
           /**
@@ -10900,7 +10900,7 @@ export declare namespace RuleCreateParams {
           status_code_range?: StatusCodeTTL.StatusCodeRange;
 
           /**
-           * Set the ttl for responses with this specific status code
+           * Set the TTL for responses with this specific status code.
            */
           status_code_value?: number;
         }
@@ -10911,12 +10911,12 @@ export declare namespace RuleCreateParams {
            */
           export interface StatusCodeRange {
             /**
-             * response status code lower bound
+             * Response status code lower bound.
              */
             from: number;
 
             /**
-             * response status code upper bound
+             * Response status code upper bound.
              */
             to: number;
           }
@@ -12399,7 +12399,7 @@ export declare namespace RuleEditParams {
 
       export namespace Overrides {
         /**
-         * A category-level override
+         * A category-level override.
          */
         export interface Category {
           /**
@@ -12424,7 +12424,7 @@ export declare namespace RuleEditParams {
         }
 
         /**
-         * A rule-level override
+         * A rule-level override.
          */
         export interface Rule {
           /**
@@ -14332,7 +14332,7 @@ export declare namespace RuleEditParams {
       polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
       /**
-       * Turn on or off Rocket Loader
+       * Turn on or off Rocket Loader.
        */
       rocket_loader?: boolean;
 
@@ -14812,7 +14812,7 @@ export declare namespace RuleEditParams {
 
       /**
        * Generate Cloudflare error pages from issues sent from the origin server. When
-       * on, error pages will trigger for issues from the origin
+       * on, error pages will trigger for issues from the origin.
        */
       origin_error_page_passthru?: boolean;
 
@@ -14863,13 +14863,13 @@ export declare namespace RuleEditParams {
        */
       export interface CacheKey {
         /**
-         * Separate cached content based on the visitor’s device type
+         * Separate cached content based on the visitor’s device type.
          */
         cache_by_device_type?: boolean;
 
         /**
          * Protect from web cache deception attacks while allowing static assets to be
-         * cached
+         * cached.
          */
         cache_deception_armor?: boolean;
 
@@ -15093,12 +15093,12 @@ export declare namespace RuleEditParams {
         default: number;
 
         /**
-         * edge ttl options
+         * Edge TTL options.
          */
         mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
 
         /**
-         * List of single status codes, or status code ranges to apply the selected mode
+         * List of single status codes, or status code ranges to apply the selected mode.
          */
         status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
       }
@@ -15106,7 +15106,7 @@ export declare namespace RuleEditParams {
       export namespace EdgeTTL {
         /**
          * Specify how long Cloudflare should cache the response based on the status code
-         * from the origin. Can be a single status code or a range or status codes
+         * from the origin. Can be a single status code or a range or status codes.
          */
         export interface StatusCodeTTL {
           /**
@@ -15122,7 +15122,7 @@ export declare namespace RuleEditParams {
           status_code_range?: StatusCodeTTL.StatusCodeRange;
 
           /**
-           * Set the ttl for responses with this specific status code
+           * Set the TTL for responses with this specific status code.
            */
           status_code_value?: number;
         }
@@ -15133,12 +15133,12 @@ export declare namespace RuleEditParams {
            */
           export interface StatusCodeRange {
             /**
-             * response status code lower bound
+             * Response status code lower bound.
              */
             from: number;
 
             /**
-             * response status code upper bound
+             * Response status code upper bound.
              */
             to: number;
           }
