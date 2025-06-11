@@ -91,7 +91,7 @@ export interface HistoryListResponse {
 
 export interface HistoryUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -103,7 +103,7 @@ export interface HistoryUpdateParams {
 
 export interface HistoryListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
