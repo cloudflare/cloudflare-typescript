@@ -434,7 +434,7 @@ export namespace AuditListParams {
     /**
      * Filters out audit logs by the actor type.
      */
-    not?: Array<'cloudflare_admin' | 'account' | 'user'>;
+    not?: Array<'account' | 'cloudflare_admin' | 'system' | 'user'>;
   }
 
   export interface AuditLogID {
