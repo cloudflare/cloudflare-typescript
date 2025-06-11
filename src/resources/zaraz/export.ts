@@ -24,7 +24,7 @@ export class Export extends APIResource {
 
 export interface ExportGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
