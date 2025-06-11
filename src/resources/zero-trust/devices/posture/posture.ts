@@ -368,9 +368,8 @@ export namespace DeviceInput {
     operating_system: 'windows' | 'linux' | 'mac';
 
     /**
-     * Common Name that is protected by the client certificate. This may include one or
-     * more variables in the ${ } notation. Only ${serial_number} and ${hostname} are
-     * valid variables.
+     * Certificate Common Name. This may include one or more variables in the ${ }
+     * notation. Only ${serial_number} and ${hostname} are valid variables.
      */
     cn?: string;
 
@@ -381,6 +380,11 @@ export namespace DeviceInput {
     extended_key_usage?: Array<'clientAuth' | 'emailProtection'>;
 
     locations?: TeamsDevicesClientCertificateV2InputRequest.Locations;
+
+    /**
+     * List of certificate Subject Alternative Names.
+     */
+    subject_alternative_names?: Array<string>;
   }
 
   export namespace TeamsDevicesClientCertificateV2InputRequest {
@@ -509,9 +513,8 @@ export namespace DeviceInputParam {
     operating_system: 'windows' | 'linux' | 'mac';
 
     /**
-     * Common Name that is protected by the client certificate. This may include one or
-     * more variables in the ${ } notation. Only ${serial_number} and ${hostname} are
-     * valid variables.
+     * Certificate Common Name. This may include one or more variables in the ${ }
+     * notation. Only ${serial_number} and ${hostname} are valid variables.
      */
     cn?: string;
 
@@ -522,6 +525,11 @@ export namespace DeviceInputParam {
     extended_key_usage?: Array<'clientAuth' | 'emailProtection'>;
 
     locations?: TeamsDevicesClientCertificateV2InputRequest.Locations;
+
+    /**
+     * List of certificate Subject Alternative Names.
+     */
+    subject_alternative_names?: Array<string>;
   }
 
   export namespace TeamsDevicesClientCertificateV2InputRequest {
