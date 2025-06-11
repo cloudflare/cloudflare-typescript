@@ -169,7 +169,7 @@ export const tool: Tool = {
             description: 'Filters out audit logs by the actor type.',
             items: {
               type: 'string',
-              enum: ['cloudflare_admin', 'account', 'user'],
+              enum: ['account', 'cloudflare_admin', 'system', 'user'],
             },
           },
         },
