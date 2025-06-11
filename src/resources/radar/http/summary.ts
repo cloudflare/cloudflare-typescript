@@ -264,7 +264,8 @@ export namespace SummaryBotClassResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -291,7 +292,7 @@ export namespace SummaryBotClassResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -302,7 +303,7 @@ export namespace SummaryBotClassResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -372,7 +373,8 @@ export namespace SummaryDeviceTypeResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -399,7 +401,7 @@ export namespace SummaryDeviceTypeResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -410,7 +412,7 @@ export namespace SummaryDeviceTypeResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -485,7 +487,8 @@ export namespace SummaryHTTPProtocolResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -512,7 +515,7 @@ export namespace SummaryHTTPProtocolResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -523,7 +526,7 @@ export namespace SummaryHTTPProtocolResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -593,7 +596,8 @@ export namespace SummaryHTTPVersionResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -620,7 +624,7 @@ export namespace SummaryHTTPVersionResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -631,7 +635,7 @@ export namespace SummaryHTTPVersionResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -706,7 +710,8 @@ export namespace SummaryIPVersionResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -733,7 +738,7 @@ export namespace SummaryIPVersionResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -744,7 +749,7 @@ export namespace SummaryIPVersionResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -814,7 +819,8 @@ export namespace SummaryOSResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -841,7 +847,7 @@ export namespace SummaryOSResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -852,7 +858,7 @@ export namespace SummaryOSResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -922,7 +928,8 @@ export namespace SummaryPostQuantumResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -949,7 +956,7 @@ export namespace SummaryPostQuantumResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -960,7 +967,7 @@ export namespace SummaryPostQuantumResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -1030,7 +1037,8 @@ export namespace SummaryTLSVersionResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -1057,7 +1065,7 @@ export namespace SummaryTLSVersionResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -1068,7 +1076,7 @@ export namespace SummaryTLSVersionResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 

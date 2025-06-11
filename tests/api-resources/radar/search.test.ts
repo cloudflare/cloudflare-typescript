@@ -24,9 +24,9 @@ describe('resource search', () => {
   test('global: required and optional params', async () => {
     const response = await client.radar.search.global({
       query: 'United',
-      exclude: ['SPECIAL_EVENTS'],
+      exclude: ['ASNS'],
       format: 'JSON',
-      include: ['SPECIAL_EVENTS'],
+      include: ['ASNS'],
       limit: 5,
       limitPerGroup: 0,
     });

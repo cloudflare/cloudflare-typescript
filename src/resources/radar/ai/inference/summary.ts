@@ -90,7 +90,8 @@ export namespace SummaryModelResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -117,7 +118,7 @@ export namespace SummaryModelResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -128,7 +129,7 @@ export namespace SummaryModelResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -186,7 +187,8 @@ export namespace SummaryTaskResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -213,7 +215,7 @@ export namespace SummaryTaskResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -224,7 +226,7 @@ export namespace SummaryTaskResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 

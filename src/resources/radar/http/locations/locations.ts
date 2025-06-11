@@ -89,7 +89,8 @@ export namespace LocationGetResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -116,7 +117,7 @@ export namespace LocationGetResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -127,7 +128,7 @@ export namespace LocationGetResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 

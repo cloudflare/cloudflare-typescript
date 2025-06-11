@@ -75,7 +75,8 @@ export namespace IPTimeseriesResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -104,7 +105,7 @@ export namespace IPTimeseriesResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -115,7 +116,7 @@ export namespace IPTimeseriesResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
