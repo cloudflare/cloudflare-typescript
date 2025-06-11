@@ -93,7 +93,8 @@ export namespace TopBotsResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -120,7 +121,7 @@ export namespace TopBotsResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -131,7 +132,7 @@ export namespace TopBotsResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
@@ -202,7 +203,8 @@ export namespace TopCategoriesResponse {
       | 'RAW_VALUES'
       | 'PERCENTAGE_CHANGE'
       | 'ROLLING_AVERAGE'
-      | 'OVERLAPPED_PERCENTAGE';
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
     /**
      * Measurement units for the results.
@@ -229,7 +231,7 @@ export namespace TopCategoriesResponse {
 
         description: string;
 
-        endTime: string;
+        endDate: string;
 
         eventType: string;
 
@@ -240,7 +242,7 @@ export namespace TopCategoriesResponse {
 
         linkedUrl: string;
 
-        startTime: string;
+        startDate: string;
       }
     }
 
