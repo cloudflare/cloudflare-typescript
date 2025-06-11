@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource snapshots', () => {
   test('list: only required params', async () => {
     const responsePromise = client.magicTransit.connectors.snapshots.list('connector_id', {
-      account_id: 'account_id',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       from: 0,
       to: 0,
     });
@@ -27,7 +27,7 @@ describe('resource snapshots', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.magicTransit.connectors.snapshots.list('connector_id', {
-      account_id: 'account_id',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       from: 0,
       to: 0,
       cursor: 'cursor',
@@ -37,7 +37,7 @@ describe('resource snapshots', () => {
 
   test('get: only required params', async () => {
     const responsePromise = client.magicTransit.connectors.snapshots.get('connector_id', 0, {
-      account_id: 'account_id',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,7 +50,7 @@ describe('resource snapshots', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.magicTransit.connectors.snapshots.get('connector_id', 0, {
-      account_id: 'account_id',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });
