@@ -30,7 +30,7 @@ export const tool: Tool = {
         description: 'Search types excluded from results.',
         items: {
           type: 'string',
-          enum: ['SPECIAL_EVENTS', 'NOTEBOOKS', 'LOCATIONS', 'ASNS'],
+          enum: ['ASNS', 'LOCATIONS', 'NOTEBOOKS', 'SPECIAL_EVENTS'],
         },
       },
       format: {
@@ -43,7 +43,7 @@ export const tool: Tool = {
         description: 'Search types included in results.',
         items: {
           type: 'string',
-          enum: ['SPECIAL_EVENTS', 'NOTEBOOKS', 'LOCATIONS', 'ASNS'],
+          enum: ['ASNS', 'LOCATIONS', 'NOTEBOOKS', 'SPECIAL_EVENTS'],
         },
       },
       limit: {
