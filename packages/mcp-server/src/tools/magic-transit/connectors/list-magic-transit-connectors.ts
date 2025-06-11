@@ -23,6 +23,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
+        description: 'Account identifier',
       },
     },
   },
