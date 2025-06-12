@@ -12,7 +12,11 @@ const client = new Cloudflare({
 describe('resource records', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.dns.records.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.dns.records.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'A',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,14 +30,14 @@ describe('resource records', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'A',
       comment: 'Domain verification record',
       content: '198.51.100.4',
-      name: 'example.com',
       proxied: true,
       settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
       ttl: 3600,
-      type: 'A',
     });
   });
 
@@ -41,6 +45,8 @@ describe('resource records', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'A',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -55,14 +61,14 @@ describe('resource records', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'A',
       comment: 'Domain verification record',
       content: '198.51.100.4',
-      name: 'example.com',
       proxied: true,
       settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
       ttl: 3600,
-      type: 'A',
     });
   });
 
@@ -155,39 +161,39 @@ describe('resource records', () => {
       deletes: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
       patches: [
         {
+          name: 'example.com',
+          type: 'A',
           comment: 'Domain verification record',
           content: '198.51.100.4',
-          name: 'example.com',
           proxied: true,
           settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
           ttl: 3600,
-          type: 'A',
           id: '023e105f4ecef8ad9ca31a8372d0c353',
         },
       ],
       posts: [
         {
+          name: 'example.com',
+          type: 'A',
           comment: 'Domain verification record',
           content: '198.51.100.4',
-          name: 'example.com',
           proxied: true,
           settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
           ttl: 3600,
-          type: 'A',
         },
       ],
       puts: [
         {
+          name: 'example.com',
+          type: 'A',
           comment: 'Domain verification record',
           content: '198.51.100.4',
-          name: 'example.com',
           proxied: true,
           settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
           ttl: 3600,
-          type: 'A',
           id: '023e105f4ecef8ad9ca31a8372d0c353',
         },
       ],
@@ -198,6 +204,8 @@ describe('resource records', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = client.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'A',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -212,14 +220,14 @@ describe('resource records', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'A',
       comment: 'Domain verification record',
       content: '198.51.100.4',
-      name: 'example.com',
       proxied: true,
       settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
       ttl: 3600,
-      type: 'A',
     });
   });
 
