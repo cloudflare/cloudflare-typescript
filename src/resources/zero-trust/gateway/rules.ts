@@ -363,6 +363,11 @@ export interface GatewayRule {
    * version number of the rule
    */
   version?: number;
+
+  /**
+   * Warning for a misconfigured rule, if any.
+   */
+  warning_status?: string | null;
 }
 
 export namespace GatewayRule {
