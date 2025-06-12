@@ -25,6 +25,8 @@ export class Records extends APIResource {
    * ```ts
    * const recordResponse = await client.dns.records.create({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example.com',
+   *   type: 'A',
    * });
    * ```
    */
@@ -51,7 +53,11 @@ export class Records extends APIResource {
    * ```ts
    * const recordResponse = await client.dns.records.update(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'example.com',
+   *     type: 'A',
+   *   },
    * );
    * ```
    */
@@ -167,7 +173,11 @@ export class Records extends APIResource {
    * ```ts
    * const recordResponse = await client.dns.records.edit(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'example.com',
+   *     type: 'A',
+   *   },
    * );
    * ```
    */
@@ -279,6 +289,16 @@ export type RecordResponsesV4PagePaginationArray = V4PagePaginationArray<RecordR
 
 export interface ARecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'A';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -288,11 +308,6 @@ export interface ARecord {
    * A valid IPv4 address.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -316,11 +331,6 @@ export interface ARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'A';
 }
 
 export namespace ARecord {
@@ -348,6 +358,16 @@ export namespace ARecord {
 
 export interface ARecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'A';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -357,11 +377,6 @@ export interface ARecordParam {
    * A valid IPv4 address.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -385,11 +400,6 @@ export interface ARecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'A';
 }
 
 export namespace ARecordParam {
@@ -417,6 +427,16 @@ export namespace ARecordParam {
 
 export interface AAAARecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'AAAA';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -426,11 +446,6 @@ export interface AAAARecord {
    * A valid IPv6 address.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -454,11 +469,6 @@ export interface AAAARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'AAAA';
 }
 
 export namespace AAAARecord {
@@ -486,6 +496,16 @@ export namespace AAAARecord {
 
 export interface AAAARecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'AAAA';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -495,11 +515,6 @@ export interface AAAARecordParam {
    * A valid IPv6 address.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -523,11 +538,6 @@ export interface AAAARecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'AAAA';
 }
 
 export namespace AAAARecordParam {
@@ -619,6 +629,16 @@ export namespace BatchPatch {
     id: string;
 
     /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -628,11 +648,6 @@ export namespace BatchPatch {
      * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
     content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Whether the record is receiving the performance and security benefits of
@@ -656,11 +671,6 @@ export namespace BatchPatch {
      * Enterprise zones.
      */
     ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace OpenpgpkeyRecord {
@@ -858,6 +868,16 @@ export namespace BatchPatchParam {
     id: string;
 
     /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -867,11 +887,6 @@ export namespace BatchPatchParam {
      * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
     content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Whether the record is receiving the performance and security benefits of
@@ -895,11 +910,6 @@ export namespace BatchPatchParam {
      * Enterprise zones.
      */
     ttl?: RecordsAPI.TTLParam;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace OpenpgpkeyRecord {
@@ -1097,6 +1107,16 @@ export namespace BatchPut {
     id: string;
 
     /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -1106,11 +1126,6 @@ export namespace BatchPut {
      * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
     content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Whether the record is receiving the performance and security benefits of
@@ -1134,11 +1149,6 @@ export namespace BatchPut {
      * Enterprise zones.
      */
     ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace OpenpgpkeyRecord {
@@ -1336,6 +1346,16 @@ export namespace BatchPutParam {
     id: string;
 
     /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -1345,11 +1365,6 @@ export namespace BatchPutParam {
      * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
     content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Whether the record is receiving the performance and security benefits of
@@ -1373,11 +1388,6 @@ export namespace BatchPutParam {
      * Enterprise zones.
      */
     ttl?: RecordsAPI.TTLParam;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace OpenpgpkeyRecord {
@@ -1511,6 +1521,16 @@ export namespace BatchPutParam {
 
 export interface CAARecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'CAA';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -1525,11 +1545,6 @@ export interface CAARecord {
    * Components of a CAA record.
    */
   data?: CAARecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -1553,11 +1568,6 @@ export interface CAARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'CAA';
 }
 
 export namespace CAARecord {
@@ -1605,6 +1615,16 @@ export namespace CAARecord {
 
 export interface CAARecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'CAA';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -1614,11 +1634,6 @@ export interface CAARecordParam {
    * Components of a CAA record.
    */
   data?: CAARecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -1642,11 +1657,6 @@ export interface CAARecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'CAA';
 }
 
 export namespace CAARecordParam {
@@ -1694,6 +1704,16 @@ export namespace CAARecordParam {
 
 export interface CERTRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'CERT';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -1708,11 +1728,6 @@ export interface CERTRecord {
    * Components of a CERT record.
    */
   data?: CERTRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -1736,11 +1751,6 @@ export interface CERTRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'CERT';
 }
 
 export namespace CERTRecord {
@@ -1793,6 +1803,16 @@ export namespace CERTRecord {
 
 export interface CERTRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'CERT';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -1802,11 +1822,6 @@ export interface CERTRecordParam {
    * Components of a CERT record.
    */
   data?: CERTRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -1830,11 +1845,6 @@ export interface CERTRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'CERT';
 }
 
 export namespace CERTRecordParam {
@@ -1887,6 +1897,16 @@ export namespace CERTRecordParam {
 
 export interface CNAMERecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'CNAME';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -1896,11 +1916,6 @@ export interface CNAMERecord {
    * A valid hostname. Must not match the record's name.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -1924,11 +1939,6 @@ export interface CNAMERecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'CNAME';
 }
 
 export namespace CNAMERecord {
@@ -1964,6 +1974,16 @@ export namespace CNAMERecord {
 
 export interface CNAMERecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'CNAME';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -1973,11 +1993,6 @@ export interface CNAMERecordParam {
    * A valid hostname. Must not match the record's name.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2001,11 +2016,6 @@ export interface CNAMERecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'CNAME';
 }
 
 export namespace CNAMERecordParam {
@@ -2041,6 +2051,16 @@ export namespace CNAMERecordParam {
 
 export interface DNSKEYRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'DNSKEY';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2055,11 +2075,6 @@ export interface DNSKEYRecord {
    * Components of a DNSKEY record.
    */
   data?: DNSKEYRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2083,11 +2098,6 @@ export interface DNSKEYRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'DNSKEY';
 }
 
 export namespace DNSKEYRecord {
@@ -2140,6 +2150,16 @@ export namespace DNSKEYRecord {
 
 export interface DNSKEYRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'DNSKEY';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2149,11 +2169,6 @@ export interface DNSKEYRecordParam {
    * Components of a DNSKEY record.
    */
   data?: DNSKEYRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2177,11 +2192,6 @@ export interface DNSKEYRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'DNSKEY';
 }
 
 export namespace DNSKEYRecordParam {
@@ -2234,6 +2244,16 @@ export namespace DNSKEYRecordParam {
 
 export interface DSRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'DS';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2248,11 +2268,6 @@ export interface DSRecord {
    * Components of a DS record.
    */
   data?: DSRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2276,11 +2291,6 @@ export interface DSRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'DS';
 }
 
 export namespace DSRecord {
@@ -2333,6 +2343,16 @@ export namespace DSRecord {
 
 export interface DSRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'DS';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2342,11 +2362,6 @@ export interface DSRecordParam {
    * Components of a DS record.
    */
   data?: DSRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2370,11 +2385,6 @@ export interface DSRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'DS';
 }
 
 export namespace DSRecordParam {
@@ -2427,6 +2437,16 @@ export namespace DSRecordParam {
 
 export interface HTTPSRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'HTTPS';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2441,11 +2461,6 @@ export interface HTTPSRecord {
    * Components of a HTTPS record.
    */
   data?: HTTPSRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2469,11 +2484,6 @@ export interface HTTPSRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'HTTPS';
 }
 
 export namespace HTTPSRecord {
@@ -2521,6 +2531,16 @@ export namespace HTTPSRecord {
 
 export interface HTTPSRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'HTTPS';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2530,11 +2550,6 @@ export interface HTTPSRecordParam {
    * Components of a HTTPS record.
    */
   data?: HTTPSRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2558,11 +2573,6 @@ export interface HTTPSRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'HTTPS';
 }
 
 export namespace HTTPSRecordParam {
@@ -2610,6 +2620,16 @@ export namespace HTTPSRecordParam {
 
 export interface LOCRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'LOC';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2624,11 +2644,6 @@ export interface LOCRecord {
    * Components of a LOC record.
    */
   data?: LOCRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2652,11 +2667,6 @@ export interface LOCRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'LOC';
 }
 
 export namespace LOCRecord {
@@ -2749,6 +2759,16 @@ export namespace LOCRecord {
 
 export interface LOCRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'LOC';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2758,11 +2778,6 @@ export interface LOCRecordParam {
    * Components of a LOC record.
    */
   data?: LOCRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -2786,11 +2801,6 @@ export interface LOCRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'LOC';
 }
 
 export namespace LOCRecordParam {
@@ -2883,6 +2893,16 @@ export namespace LOCRecordParam {
 
 export interface MXRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'MX';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2892,11 +2912,6 @@ export interface MXRecord {
    * A valid mail server hostname.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Required for MX, SRV and URI records; unused by other record types. Records with
@@ -2926,11 +2941,6 @@ export interface MXRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'MX';
 }
 
 export namespace MXRecord {
@@ -2958,6 +2968,16 @@ export namespace MXRecord {
 
 export interface MXRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'MX';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -2967,11 +2987,6 @@ export interface MXRecordParam {
    * A valid mail server hostname.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Required for MX, SRV and URI records; unused by other record types. Records with
@@ -3001,11 +3016,6 @@ export interface MXRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'MX';
 }
 
 export namespace MXRecordParam {
@@ -3033,6 +3043,16 @@ export namespace MXRecordParam {
 
 export interface NAPTRRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'NAPTR';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -3047,11 +3067,6 @@ export interface NAPTRRecord {
    * Components of a NAPTR record.
    */
   data?: NAPTRRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -3075,11 +3090,6 @@ export interface NAPTRRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'NAPTR';
 }
 
 export namespace NAPTRRecord {
@@ -3142,6 +3152,16 @@ export namespace NAPTRRecord {
 
 export interface NAPTRRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'NAPTR';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -3151,11 +3171,6 @@ export interface NAPTRRecordParam {
    * Components of a NAPTR record.
    */
   data?: NAPTRRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -3179,11 +3194,6 @@ export interface NAPTRRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'NAPTR';
 }
 
 export namespace NAPTRRecordParam {
@@ -3246,6 +3256,16 @@ export namespace NAPTRRecordParam {
 
 export interface NSRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'NS';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -3255,11 +3275,6 @@ export interface NSRecord {
    * A valid name server host name.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -3283,11 +3298,6 @@ export interface NSRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'NS';
 }
 
 export namespace NSRecord {
@@ -3315,6 +3325,16 @@ export namespace NSRecord {
 
 export interface NSRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'NS';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -3324,11 +3344,6 @@ export interface NSRecordParam {
    * A valid name server host name.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -3352,11 +3367,6 @@ export interface NSRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'NS';
 }
 
 export namespace NSRecordParam {
@@ -3384,6 +3394,16 @@ export namespace NSRecordParam {
 
 export interface PTRRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'PTR';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -3393,11 +3413,6 @@ export interface PTRRecord {
    * Domain name pointing to the address.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -3421,11 +3436,6 @@ export interface PTRRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'PTR';
 }
 
 export namespace PTRRecord {
@@ -3453,6 +3463,16 @@ export namespace PTRRecord {
 
 export interface PTRRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'PTR';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -3462,11 +3482,6 @@ export interface PTRRecordParam {
    * Domain name pointing to the address.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -3490,11 +3505,6 @@ export interface PTRRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'PTR';
 }
 
 export namespace PTRRecordParam {
@@ -3546,6 +3556,16 @@ export type Record =
 export namespace Record {
   export interface Openpgpkey {
     /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -3555,11 +3575,6 @@ export namespace Record {
      * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
     content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Whether the record is receiving the performance and security benefits of
@@ -3583,11 +3598,6 @@ export namespace Record {
      * Enterprise zones.
      */
     ttl?: RecordsAPI.TTL;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace Openpgpkey {
@@ -4497,6 +4507,16 @@ export type RecordTagsParam = string;
 
 export interface SMIMEARecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'SMIMEA';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -4511,11 +4531,6 @@ export interface SMIMEARecord {
    * Components of a SMIMEA record.
    */
   data?: SMIMEARecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -4539,11 +4554,6 @@ export interface SMIMEARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'SMIMEA';
 }
 
 export namespace SMIMEARecord {
@@ -4596,6 +4606,16 @@ export namespace SMIMEARecord {
 
 export interface SMIMEARecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'SMIMEA';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -4605,11 +4625,6 @@ export interface SMIMEARecordParam {
    * Components of a SMIMEA record.
    */
   data?: SMIMEARecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -4633,11 +4648,6 @@ export interface SMIMEARecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'SMIMEA';
 }
 
 export namespace SMIMEARecordParam {
@@ -4690,6 +4700,16 @@ export namespace SMIMEARecordParam {
 
 export interface SRVRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'SRV';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -4705,11 +4725,6 @@ export interface SRVRecord {
    * Components of a SRV record.
    */
   data?: SRVRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -4733,11 +4748,6 @@ export interface SRVRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'SRV';
 }
 
 export namespace SRVRecord {
@@ -4791,6 +4801,16 @@ export namespace SRVRecord {
 
 export interface SRVRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'SRV';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -4800,11 +4820,6 @@ export interface SRVRecordParam {
    * Components of a SRV record.
    */
   data?: SRVRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -4828,11 +4843,6 @@ export interface SRVRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'SRV';
 }
 
 export namespace SRVRecordParam {
@@ -4886,6 +4896,16 @@ export namespace SRVRecordParam {
 
 export interface SSHFPRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'SSHFP';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -4900,11 +4920,6 @@ export interface SSHFPRecord {
    * Components of a SSHFP record.
    */
   data?: SSHFPRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -4928,11 +4943,6 @@ export interface SSHFPRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'SSHFP';
 }
 
 export namespace SSHFPRecord {
@@ -4980,6 +4990,16 @@ export namespace SSHFPRecord {
 
 export interface SSHFPRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'SSHFP';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -4989,11 +5009,6 @@ export interface SSHFPRecordParam {
    * Components of a SSHFP record.
    */
   data?: SSHFPRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -5017,11 +5032,6 @@ export interface SSHFPRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'SSHFP';
 }
 
 export namespace SSHFPRecordParam {
@@ -5069,6 +5079,16 @@ export namespace SSHFPRecordParam {
 
 export interface SVCBRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'SVCB';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -5083,11 +5103,6 @@ export interface SVCBRecord {
    * Components of a SVCB record.
    */
   data?: SVCBRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -5111,11 +5126,6 @@ export interface SVCBRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'SVCB';
 }
 
 export namespace SVCBRecord {
@@ -5163,6 +5173,16 @@ export namespace SVCBRecord {
 
 export interface SVCBRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'SVCB';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -5172,11 +5192,6 @@ export interface SVCBRecordParam {
    * Components of a SVCB record.
    */
   data?: SVCBRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -5200,11 +5215,6 @@ export interface SVCBRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'SVCB';
 }
 
 export namespace SVCBRecordParam {
@@ -5252,6 +5262,16 @@ export namespace SVCBRecordParam {
 
 export interface TLSARecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'TLSA';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -5266,11 +5286,6 @@ export interface TLSARecord {
    * Components of a TLSA record.
    */
   data?: TLSARecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -5294,11 +5309,6 @@ export interface TLSARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'TLSA';
 }
 
 export namespace TLSARecord {
@@ -5351,6 +5361,16 @@ export namespace TLSARecord {
 
 export interface TLSARecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'TLSA';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -5360,11 +5380,6 @@ export interface TLSARecordParam {
    * Components of a TLSA record.
    */
   data?: TLSARecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -5388,11 +5403,6 @@ export interface TLSARecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'TLSA';
 }
 
 export namespace TLSARecordParam {
@@ -5459,6 +5469,16 @@ export type TTLParam = number | 1;
 
 export interface TXTRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'TXT';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -5473,11 +5493,6 @@ export interface TXTRecord {
    * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -5501,11 +5516,6 @@ export interface TXTRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'TXT';
 }
 
 export namespace TXTRecord {
@@ -5533,6 +5543,16 @@ export namespace TXTRecord {
 
 export interface TXTRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'TXT';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -5547,11 +5567,6 @@ export interface TXTRecordParam {
    * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
    */
   content?: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -5575,11 +5590,6 @@ export interface TXTRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'TXT';
 }
 
 export namespace TXTRecordParam {
@@ -5607,6 +5617,16 @@ export namespace TXTRecordParam {
 
 export interface URIRecord {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'URI';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -5621,11 +5641,6 @@ export interface URIRecord {
    * Components of a URI record.
    */
   data?: URIRecord.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Required for MX, SRV and URI records; unused by other record types. Records with
@@ -5655,11 +5670,6 @@ export interface URIRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Record type.
-   */
-  type?: 'URI';
 }
 
 export namespace URIRecord {
@@ -5702,6 +5712,16 @@ export namespace URIRecord {
 
 export interface URIRecordParam {
   /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'URI';
+
+  /**
    * Comments or notes about the DNS record. This field has no effect on DNS
    * responses.
    */
@@ -5711,11 +5731,6 @@ export interface URIRecordParam {
    * Components of a URI record.
    */
   data?: URIRecordParam.Data;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
 
   /**
    * Required for MX, SRV and URI records; unused by other record types. Records with
@@ -5745,11 +5760,6 @@ export interface URIRecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-
-  /**
-   * Record type.
-   */
-  type?: 'URI';
 }
 
 export namespace URIRecordParam {
@@ -5867,6 +5877,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'A';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5876,11 +5896,6 @@ export declare namespace RecordCreateParams {
      * Body param: A valid IPv4 address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -5905,11 +5920,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'A';
   }
 
   export namespace ARecord {
@@ -5942,6 +5952,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'AAAA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5951,11 +5971,6 @@ export declare namespace RecordCreateParams {
      * Body param: A valid IPv6 address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -5980,11 +5995,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'AAAA';
   }
 
   export namespace AAAARecord {
@@ -6017,6 +6027,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CNAME';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6026,11 +6046,6 @@ export declare namespace RecordCreateParams {
      * Body param: A valid hostname. Must not match the record's name.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6055,11 +6070,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CNAME';
   }
 
   export namespace CNAMERecord {
@@ -6100,6 +6110,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'MX';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6109,11 +6129,6 @@ export declare namespace RecordCreateParams {
      * Body param: A valid mail server hostname.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Required for MX, SRV and URI records; unused by other record types.
@@ -6144,11 +6159,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'MX';
   }
 
   export namespace MXRecord {
@@ -6181,6 +6191,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'NS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6190,11 +6210,6 @@ export declare namespace RecordCreateParams {
      * Body param: A valid name server host name.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6219,11 +6234,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NS';
   }
 
   export namespace NSRecord {
@@ -6256,6 +6266,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6266,11 +6286,6 @@ export declare namespace RecordCreateParams {
      * Section 11.1)
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6295,11 +6310,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace DNSRecordsOpenpgpkeyRecord {
@@ -6332,6 +6342,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'PTR';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6341,11 +6361,6 @@ export declare namespace RecordCreateParams {
      * Body param: Domain name pointing to the address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6370,11 +6385,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'PTR';
   }
 
   export namespace PTRRecord {
@@ -6407,6 +6417,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'TXT';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6421,11 +6441,6 @@ export declare namespace RecordCreateParams {
      * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6450,11 +6465,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TXT';
   }
 
   export namespace TXTRecord {
@@ -6487,6 +6497,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CAA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6496,11 +6516,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a CAA record.
      */
     data?: CAARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6525,11 +6540,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CAA';
   }
 
   export namespace CAARecord {
@@ -6582,6 +6592,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CERT';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6591,11 +6611,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a CERT record.
      */
     data?: CERTRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6620,11 +6635,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CERT';
   }
 
   export namespace CERTRecord {
@@ -6682,6 +6692,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'DNSKEY';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6691,11 +6711,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a DNSKEY record.
      */
     data?: DNSKEYRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6720,11 +6735,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'DNSKEY';
   }
 
   export namespace DNSKEYRecord {
@@ -6782,6 +6792,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'DS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6791,11 +6811,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a DS record.
      */
     data?: DSRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6820,11 +6835,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'DS';
   }
 
   export namespace DSRecord {
@@ -6882,6 +6892,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'HTTPS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6891,11 +6911,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a HTTPS record.
      */
     data?: HTTPSRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -6920,11 +6935,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'HTTPS';
   }
 
   export namespace HTTPSRecord {
@@ -6977,6 +6987,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'LOC';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6986,11 +7006,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a LOC record.
      */
     data?: LOCRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7015,11 +7030,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'LOC';
   }
 
   export namespace LOCRecord {
@@ -7117,6 +7127,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'NAPTR';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7126,11 +7146,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a NAPTR record.
      */
     data?: NAPTRRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7155,11 +7170,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NAPTR';
   }
 
   export namespace NAPTRRecord {
@@ -7227,6 +7237,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SMIMEA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7236,11 +7256,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a SMIMEA record.
      */
     data?: SMIMEARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7265,11 +7280,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SMIMEA';
   }
 
   export namespace SMIMEARecord {
@@ -7327,6 +7337,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SRV';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7336,11 +7356,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a SRV record.
      */
     data?: SRVRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7365,11 +7380,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SRV';
   }
 
   export namespace SRVRecord {
@@ -7428,6 +7438,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SSHFP';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7437,11 +7457,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a SSHFP record.
      */
     data?: SSHFPRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7466,11 +7481,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SSHFP';
   }
 
   export namespace SSHFPRecord {
@@ -7523,6 +7533,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SVCB';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7532,11 +7552,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a SVCB record.
      */
     data?: SVCBRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7561,11 +7576,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SVCB';
   }
 
   export namespace SVCBRecord {
@@ -7618,6 +7628,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'TLSA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7627,11 +7647,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a TLSA record.
      */
     data?: TLSARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7656,11 +7671,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TLSA';
   }
 
   export namespace TLSARecord {
@@ -7718,6 +7728,16 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'URI';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7727,11 +7747,6 @@ export declare namespace RecordCreateParams {
      * Body param: Components of a URI record.
      */
     data?: URIRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Required for MX, SRV and URI records; unused by other record types.
@@ -7762,11 +7777,6 @@ export declare namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'URI';
   }
 
   export namespace URIRecord {
@@ -7839,6 +7849,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'A';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7848,11 +7868,6 @@ export declare namespace RecordUpdateParams {
      * Body param: A valid IPv4 address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7877,11 +7892,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'A';
   }
 
   export namespace ARecord {
@@ -7914,6 +7924,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'AAAA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7923,11 +7943,6 @@ export declare namespace RecordUpdateParams {
      * Body param: A valid IPv6 address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -7952,11 +7967,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'AAAA';
   }
 
   export namespace AAAARecord {
@@ -7989,6 +7999,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CNAME';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7998,11 +8018,6 @@ export declare namespace RecordUpdateParams {
      * Body param: A valid hostname. Must not match the record's name.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8027,11 +8042,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CNAME';
   }
 
   export namespace CNAMERecord {
@@ -8072,6 +8082,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'MX';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8081,11 +8101,6 @@ export declare namespace RecordUpdateParams {
      * Body param: A valid mail server hostname.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Required for MX, SRV and URI records; unused by other record types.
@@ -8116,11 +8131,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'MX';
   }
 
   export namespace MXRecord {
@@ -8153,6 +8163,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'NS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8162,11 +8182,6 @@ export declare namespace RecordUpdateParams {
      * Body param: A valid name server host name.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8191,11 +8206,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NS';
   }
 
   export namespace NSRecord {
@@ -8228,6 +8238,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8238,11 +8258,6 @@ export declare namespace RecordUpdateParams {
      * Section 11.1)
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8267,11 +8282,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace DNSRecordsOpenpgpkeyRecord {
@@ -8304,6 +8314,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'PTR';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8313,11 +8333,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Domain name pointing to the address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8342,11 +8357,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'PTR';
   }
 
   export namespace PTRRecord {
@@ -8379,6 +8389,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'TXT';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8393,11 +8413,6 @@ export declare namespace RecordUpdateParams {
      * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8422,11 +8437,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TXT';
   }
 
   export namespace TXTRecord {
@@ -8459,6 +8469,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CAA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8468,11 +8488,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a CAA record.
      */
     data?: CAARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8497,11 +8512,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CAA';
   }
 
   export namespace CAARecord {
@@ -8554,6 +8564,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CERT';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8563,11 +8583,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a CERT record.
      */
     data?: CERTRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8592,11 +8607,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CERT';
   }
 
   export namespace CERTRecord {
@@ -8654,6 +8664,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'DNSKEY';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8663,11 +8683,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a DNSKEY record.
      */
     data?: DNSKEYRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8692,11 +8707,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'DNSKEY';
   }
 
   export namespace DNSKEYRecord {
@@ -8754,6 +8764,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'DS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8763,11 +8783,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a DS record.
      */
     data?: DSRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8792,11 +8807,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'DS';
   }
 
   export namespace DSRecord {
@@ -8854,6 +8864,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'HTTPS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8863,11 +8883,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a HTTPS record.
      */
     data?: HTTPSRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8892,11 +8907,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'HTTPS';
   }
 
   export namespace HTTPSRecord {
@@ -8949,6 +8959,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'LOC';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8958,11 +8978,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a LOC record.
      */
     data?: LOCRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -8987,11 +9002,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'LOC';
   }
 
   export namespace LOCRecord {
@@ -9089,6 +9099,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'NAPTR';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9098,11 +9118,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a NAPTR record.
      */
     data?: NAPTRRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -9127,11 +9142,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NAPTR';
   }
 
   export namespace NAPTRRecord {
@@ -9199,6 +9209,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SMIMEA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9208,11 +9228,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a SMIMEA record.
      */
     data?: SMIMEARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -9237,11 +9252,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SMIMEA';
   }
 
   export namespace SMIMEARecord {
@@ -9299,6 +9309,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SRV';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9308,11 +9328,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a SRV record.
      */
     data?: SRVRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -9337,11 +9352,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SRV';
   }
 
   export namespace SRVRecord {
@@ -9400,6 +9410,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SSHFP';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9409,11 +9429,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a SSHFP record.
      */
     data?: SSHFPRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -9438,11 +9453,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SSHFP';
   }
 
   export namespace SSHFPRecord {
@@ -9495,6 +9505,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SVCB';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9504,11 +9524,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a SVCB record.
      */
     data?: SVCBRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -9533,11 +9548,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SVCB';
   }
 
   export namespace SVCBRecord {
@@ -9590,6 +9600,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'TLSA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9599,11 +9619,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a TLSA record.
      */
     data?: TLSARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -9628,11 +9643,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TLSA';
   }
 
   export namespace TLSARecord {
@@ -9690,6 +9700,16 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'URI';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9699,11 +9719,6 @@ export declare namespace RecordUpdateParams {
      * Body param: Components of a URI record.
      */
     data?: URIRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Required for MX, SRV and URI records; unused by other record types.
@@ -9734,11 +9749,6 @@ export declare namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'URI';
   }
 
   export namespace URIRecord {
@@ -10061,6 +10071,16 @@ export namespace RecordBatchParams {
 
   export interface DNSRecordsOpenpgpkeyRecord {
     /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Comments or notes about the DNS record. This field has no effect on DNS
      * responses.
      */
@@ -10070,11 +10090,6 @@ export namespace RecordBatchParams {
      * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
     content?: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Whether the record is receiving the performance and security benefits of
@@ -10098,11 +10113,6 @@ export namespace RecordBatchParams {
      * Enterprise zones.
      */
     ttl?: RecordsAPI.TTLParam;
-
-    /**
-     * Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace DNSRecordsOpenpgpkeyRecord {
@@ -10160,6 +10170,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'A';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10169,11 +10189,6 @@ export declare namespace RecordEditParams {
      * Body param: A valid IPv4 address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10198,11 +10213,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'A';
   }
 
   export namespace ARecord {
@@ -10235,6 +10245,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'AAAA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10244,11 +10264,6 @@ export declare namespace RecordEditParams {
      * Body param: A valid IPv6 address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10273,11 +10288,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'AAAA';
   }
 
   export namespace AAAARecord {
@@ -10310,6 +10320,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CNAME';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10319,11 +10339,6 @@ export declare namespace RecordEditParams {
      * Body param: A valid hostname. Must not match the record's name.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10348,11 +10363,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CNAME';
   }
 
   export namespace CNAMERecord {
@@ -10393,6 +10403,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'MX';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10402,11 +10422,6 @@ export declare namespace RecordEditParams {
      * Body param: A valid mail server hostname.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Required for MX, SRV and URI records; unused by other record types.
@@ -10437,11 +10452,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'MX';
   }
 
   export namespace MXRecord {
@@ -10474,6 +10484,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'NS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10483,11 +10503,6 @@ export declare namespace RecordEditParams {
      * Body param: A valid name server host name.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10512,11 +10527,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NS';
   }
 
   export namespace NSRecord {
@@ -10549,6 +10559,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10559,11 +10579,6 @@ export declare namespace RecordEditParams {
      * Section 11.1)
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10588,11 +10603,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'OPENPGPKEY';
   }
 
   export namespace DNSRecordsOpenpgpkeyRecord {
@@ -10625,6 +10635,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'PTR';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10634,11 +10654,6 @@ export declare namespace RecordEditParams {
      * Body param: Domain name pointing to the address.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10663,11 +10678,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'PTR';
   }
 
   export namespace PTRRecord {
@@ -10700,6 +10710,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'TXT';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10714,11 +10734,6 @@ export declare namespace RecordEditParams {
      * <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
      */
     content?: string;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10743,11 +10758,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TXT';
   }
 
   export namespace TXTRecord {
@@ -10780,6 +10790,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CAA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10789,11 +10809,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a CAA record.
      */
     data?: CAARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10818,11 +10833,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CAA';
   }
 
   export namespace CAARecord {
@@ -10875,6 +10885,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'CERT';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10884,11 +10904,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a CERT record.
      */
     data?: CERTRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -10913,11 +10928,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'CERT';
   }
 
   export namespace CERTRecord {
@@ -10975,6 +10985,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'DNSKEY';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10984,11 +11004,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a DNSKEY record.
      */
     data?: DNSKEYRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11013,11 +11028,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'DNSKEY';
   }
 
   export namespace DNSKEYRecord {
@@ -11075,6 +11085,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'DS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11084,11 +11104,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a DS record.
      */
     data?: DSRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11113,11 +11128,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'DS';
   }
 
   export namespace DSRecord {
@@ -11175,6 +11185,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'HTTPS';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11184,11 +11204,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a HTTPS record.
      */
     data?: HTTPSRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11213,11 +11228,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'HTTPS';
   }
 
   export namespace HTTPSRecord {
@@ -11270,6 +11280,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'LOC';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11279,11 +11299,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a LOC record.
      */
     data?: LOCRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11308,11 +11323,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'LOC';
   }
 
   export namespace LOCRecord {
@@ -11410,6 +11420,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'NAPTR';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11419,11 +11439,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a NAPTR record.
      */
     data?: NAPTRRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11448,11 +11463,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'NAPTR';
   }
 
   export namespace NAPTRRecord {
@@ -11520,6 +11530,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SMIMEA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11529,11 +11549,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a SMIMEA record.
      */
     data?: SMIMEARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11558,11 +11573,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SMIMEA';
   }
 
   export namespace SMIMEARecord {
@@ -11620,6 +11630,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SRV';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11629,11 +11649,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a SRV record.
      */
     data?: SRVRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11658,11 +11673,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SRV';
   }
 
   export namespace SRVRecord {
@@ -11721,6 +11731,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SSHFP';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11730,11 +11750,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a SSHFP record.
      */
     data?: SSHFPRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11759,11 +11774,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SSHFP';
   }
 
   export namespace SSHFPRecord {
@@ -11816,6 +11826,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'SVCB';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11825,11 +11845,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a SVCB record.
      */
     data?: SVCBRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11854,11 +11869,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'SVCB';
   }
 
   export namespace SVCBRecord {
@@ -11911,6 +11921,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'TLSA';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11920,11 +11940,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a TLSA record.
      */
     data?: TLSARecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Whether the record is receiving the performance and security
@@ -11949,11 +11964,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'TLSA';
   }
 
   export namespace TLSARecord {
@@ -12011,6 +12021,16 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'URI';
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -12020,11 +12040,6 @@ export declare namespace RecordEditParams {
      * Body param: Components of a URI record.
      */
     data?: URIRecord.Data;
-
-    /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name?: string;
 
     /**
      * Body param: Required for MX, SRV and URI records; unused by other record types.
@@ -12055,11 +12070,6 @@ export declare namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Record type.
-     */
-    type?: 'URI';
   }
 
   export namespace URIRecord {
