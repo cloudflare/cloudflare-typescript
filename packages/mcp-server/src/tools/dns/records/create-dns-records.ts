@@ -29,6 +29,15 @@ export const tool: Tool = {
             type: 'string',
             description: 'Identifier.',
           },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['A'],
+          },
           comment: {
             type: 'string',
             description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
@@ -36,10 +45,6 @@ export const tool: Tool = {
           content: {
             type: 'string',
             description: 'A valid IPv4 address.',
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
           },
           proxied: {
             type: 'boolean',
@@ -73,11 +78,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['A'],
-          },
         },
       },
       {
@@ -86,6 +86,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['AAAA'],
           },
           comment: {
             type: 'string',
@@ -95,10 +104,6 @@ export const tool: Tool = {
             type: 'string',
             description: 'A valid IPv6 address.',
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -131,11 +136,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['AAAA'],
-          },
         },
       },
       {
@@ -145,6 +145,15 @@ export const tool: Tool = {
             type: 'string',
             description: 'Identifier.',
           },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['CNAME'],
+          },
           comment: {
             type: 'string',
             description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
@@ -152,10 +161,6 @@ export const tool: Tool = {
           content: {
             type: 'string',
             description: "A valid hostname. Must not match the record's name.",
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
           },
           proxied: {
             type: 'boolean',
@@ -194,11 +199,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['CNAME'],
-          },
         },
       },
       {
@@ -208,6 +208,15 @@ export const tool: Tool = {
             type: 'string',
             description: 'Identifier.',
           },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['MX'],
+          },
           comment: {
             type: 'string',
             description: 'Comments or notes about the DNS record. This field has no effect on DNS responses.',
@@ -215,10 +224,6 @@ export const tool: Tool = {
           content: {
             type: 'string',
             description: 'A valid mail server hostname.',
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
           },
           priority: {
             type: 'number',
@@ -257,11 +262,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['MX'],
-          },
         },
       },
       {
@@ -270,6 +270,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['NS'],
           },
           comment: {
             type: 'string',
@@ -279,10 +288,6 @@ export const tool: Tool = {
             type: 'string',
             description: 'A valid name server host name.',
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -315,11 +320,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['NS'],
-          },
         },
       },
       {
@@ -328,6 +328,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['OPENPGPKEY'],
           },
           comment: {
             type: 'string',
@@ -337,10 +346,6 @@ export const tool: Tool = {
             type: 'string',
             description: 'A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)',
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -373,11 +378,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['OPENPGPKEY'],
-          },
         },
       },
       {
@@ -386,6 +386,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['PTR'],
           },
           comment: {
             type: 'string',
@@ -395,10 +404,6 @@ export const tool: Tool = {
             type: 'string',
             description: 'Domain name pointing to the address.',
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -431,11 +436,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['PTR'],
-          },
         },
       },
       {
@@ -444,6 +444,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['TXT'],
           },
           comment: {
             type: 'string',
@@ -454,10 +463,6 @@ export const tool: Tool = {
             description:
               'Text content for the record. The content must consist of quoted "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings exceeding this allowed maximum length are automatically split.\n\nLearn more at <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.',
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -490,11 +495,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['TXT'],
-          },
         },
       },
       {
@@ -503,6 +503,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['CAA'],
           },
           comment: {
             type: 'string',
@@ -528,10 +537,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -564,11 +569,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['CAA'],
-          },
         },
       },
       {
@@ -577,6 +577,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['CERT'],
           },
           comment: {
             type: 'string',
@@ -605,10 +614,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -641,11 +646,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['CERT'],
-          },
         },
       },
       {
@@ -654,6 +654,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['DNSKEY'],
           },
           comment: {
             type: 'string',
@@ -682,10 +691,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -718,11 +723,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['DNSKEY'],
-          },
         },
       },
       {
@@ -731,6 +731,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['DS'],
           },
           comment: {
             type: 'string',
@@ -759,10 +768,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -795,11 +800,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['DS'],
-          },
         },
       },
       {
@@ -808,6 +808,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['HTTPS'],
           },
           comment: {
             type: 'string',
@@ -832,10 +841,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -868,11 +873,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['HTTPS'],
-          },
         },
       },
       {
@@ -881,6 +881,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['LOC'],
           },
           comment: {
             type: 'string',
@@ -943,10 +952,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -979,11 +984,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['LOC'],
-          },
         },
       },
       {
@@ -992,6 +992,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['NAPTR'],
           },
           comment: {
             type: 'string',
@@ -1028,10 +1037,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -1064,11 +1069,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['NAPTR'],
-          },
         },
       },
       {
@@ -1077,6 +1077,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['SMIMEA'],
           },
           comment: {
             type: 'string',
@@ -1105,10 +1114,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -1141,11 +1146,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['SMIMEA'],
-          },
         },
       },
       {
@@ -1154,6 +1154,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['SRV'],
           },
           comment: {
             type: 'string',
@@ -1183,10 +1192,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -1219,11 +1224,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['SRV'],
-          },
         },
       },
       {
@@ -1232,6 +1232,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['SSHFP'],
           },
           comment: {
             type: 'string',
@@ -1256,10 +1265,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -1292,11 +1297,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['SSHFP'],
-          },
         },
       },
       {
@@ -1305,6 +1305,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['SVCB'],
           },
           comment: {
             type: 'string',
@@ -1329,10 +1338,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -1365,11 +1370,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['SVCB'],
-          },
         },
       },
       {
@@ -1378,6 +1378,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['TLSA'],
           },
           comment: {
             type: 'string',
@@ -1406,10 +1415,6 @@ export const tool: Tool = {
             },
             required: [],
           },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
-          },
           proxied: {
             type: 'boolean',
             description:
@@ -1442,11 +1447,6 @@ export const tool: Tool = {
           ttl: {
             $ref: '#/$defs/ttl',
           },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['TLSA'],
-          },
         },
       },
       {
@@ -1455,6 +1455,15 @@ export const tool: Tool = {
           zone_id: {
             type: 'string',
             description: 'Identifier.',
+          },
+          name: {
+            type: 'string',
+            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          type: {
+            type: 'string',
+            description: 'Record type.',
+            enum: ['URI'],
           },
           comment: {
             type: 'string',
@@ -1474,10 +1483,6 @@ export const tool: Tool = {
               },
             },
             required: [],
-          },
-          name: {
-            type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
           },
           priority: {
             type: 'number',
@@ -1515,11 +1520,6 @@ export const tool: Tool = {
           },
           ttl: {
             $ref: '#/$defs/ttl',
-          },
-          type: {
-            type: 'string',
-            description: 'Record type.',
-            enum: ['URI'],
           },
         },
       },
