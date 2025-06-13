@@ -23,13 +23,9 @@ PKG_JSON_PATH=../../packages/mcp-server/package.json node ../../scripts/utils/ma
 node scripts/postprocess-dist-package-json.cjs
 
 # build to .js/.mjs/.d.ts files
-npm exec tsc-multi
+./node_modules/.bin/tsc-multi
 
 cp tsconfig.dist-src.json dist/src/tsconfig.json
-
-# Add proper Node.js shebang to the top of the file
-sed -i.bak '1s;^;#!/usr/bin/env node\n;' dist/index.js
-rm dist/index.js.bak
 
 chmod +x dist/index.js
 
