@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { init, selectTools, server } from './server';
 import { Endpoint, endpoints } from './tools';
