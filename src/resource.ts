@@ -2,7 +2,7 @@
 
 import type { Cloudflare } from './index';
 
-export class APIResource {
+export abstract class APIResource {
   protected _client: Cloudflare;
 
   constructor(client: Cloudflare) {
