@@ -11,7 +11,6 @@ export {
   type ConsumerGetParams,
 } from './consumers';
 export {
-  MessagePullResponsesSinglePage,
   Messages,
   type MessageAckResponse,
   type MessageBulkPushResponse,

@@ -12,7 +12,7 @@ export class Relate extends APIResource {
    * const relate =
    *   await client.cloudforceOne.threatEvents.relate.delete(
    *     'event_id',
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -39,7 +39,7 @@ export interface RelateDeleteParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace Relate {

@@ -11,7 +11,7 @@ export class TargetIndustries extends APIResource {
    * ```ts
    * const targetIndustries =
    *   await client.cloudforceOne.threatEvents.targetIndustries.list(
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -40,7 +40,7 @@ export interface TargetIndustryListParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export declare namespace TargetIndustries {

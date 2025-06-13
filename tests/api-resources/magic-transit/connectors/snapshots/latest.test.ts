@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource latest', () => {
   test('list: only required params', async () => {
     const responsePromise = client.magicTransit.connectors.snapshots.latest.list('connector_id', {
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +25,7 @@ describe('resource latest', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.magicTransit.connectors.snapshots.latest.list('connector_id', {
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });

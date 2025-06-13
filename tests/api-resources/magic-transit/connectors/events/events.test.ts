@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource events', () => {
   test('list: only required params', async () => {
     const responsePromise = client.magicTransit.connectors.events.list('connector_id', {
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       from: 0,
       to: 0,
     });
@@ -27,7 +27,7 @@ describe('resource events', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.magicTransit.connectors.events.list('connector_id', {
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       from: 0,
       to: 0,
       cursor: 'cursor',
@@ -37,7 +37,7 @@ describe('resource events', () => {
 
   test('get: only required params', async () => {
     const responsePromise = client.magicTransit.connectors.events.get('connector_id', 0, 0, {
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,6 +49,8 @@ describe('resource events', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.events.get('connector_id', 0, 0, { account_id: 0 });
+    const response = await client.magicTransit.connectors.events.get('connector_id', 0, 0, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

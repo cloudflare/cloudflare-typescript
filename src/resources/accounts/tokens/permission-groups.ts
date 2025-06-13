@@ -12,7 +12,7 @@ export class PermissionGroups extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const permissionGroupListResponse of client.accounts.tokens.permissionGroups.list(
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }
@@ -37,7 +37,7 @@ export class PermissionGroups extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const permissionGroupGetResponse of client.accounts.tokens.permissionGroups.get(
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }

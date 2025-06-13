@@ -11,7 +11,7 @@ export class Tags extends APIResource {
    * ```ts
    * const tag =
    *   await client.cloudforceOne.threatEvents.tags.create({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *     name: 'name',
    *   });
    * ```
@@ -35,7 +35,7 @@ export interface TagCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param:

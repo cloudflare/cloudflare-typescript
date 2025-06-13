@@ -131,7 +131,7 @@ export interface NeoEventParam {
 
 export interface ZarazUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

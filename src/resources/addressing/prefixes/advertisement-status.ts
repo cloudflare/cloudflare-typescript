@@ -10,17 +10,7 @@ export class AdvertisementStatus extends APIResource {
    * **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for
    * advertising and withdrawing subnets of an IP prefix.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.addressing.prefixes.advertisementStatus.edit(
-   *     '2af39739cc4e3b5910c918468bb89828',
-   *     {
-   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
-   *       advertised: true,
-   *     },
-   *   );
-   * ```
+   * @deprecated
    */
   edit(
     prefixId: string,
@@ -42,14 +32,7 @@ export class AdvertisementStatus extends APIResource {
    * **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for
    * advertising and withdrawing subnets of an IP prefix.
    *
-   * @example
-   * ```ts
-   * const advertisementStatus =
-   *   await client.addressing.prefixes.advertisementStatus.get(
-   *     '2af39739cc4e3b5910c918468bb89828',
-   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
-   *   );
-   * ```
+   * @deprecated
    */
   get(
     prefixId: string,

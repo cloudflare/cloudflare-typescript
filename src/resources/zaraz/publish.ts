@@ -29,7 +29,7 @@ export type PublishCreateResponse = string;
 
 export interface PublishCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

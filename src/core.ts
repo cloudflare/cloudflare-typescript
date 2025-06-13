@@ -809,6 +809,8 @@ export type RequestOptions<
   signal?: AbortSignal | undefined | null;
   idempotencyKey?: string;
 
+  __multipartSyntax?: 'json' | 'nested';
+
   __binaryRequest?: boolean | undefined;
   __binaryResponse?: boolean | undefined;
 };
@@ -829,6 +831,8 @@ const requestOptionsKeys: KeysEnum<RequestOptions> = {
   httpAgent: true,
   signal: true,
   idempotencyKey: true,
+
+  __multipartSyntax: true,
 
   __binaryRequest: true,
   __binaryResponse: true,

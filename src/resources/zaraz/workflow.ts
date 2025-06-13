@@ -36,7 +36,7 @@ export type WorkflowParam = 'realtime' | 'preview';
 
 export interface WorkflowGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

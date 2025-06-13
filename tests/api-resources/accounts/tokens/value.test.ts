@@ -13,7 +13,7 @@ describe('resource value', () => {
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = client.accounts.tokens.value.update('ed17574386854bf78a67040be0a770b0', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +28,7 @@ describe('resource value', () => {
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await client.accounts.tokens.value.update('ed17574386854bf78a67040be0a770b0', {
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });

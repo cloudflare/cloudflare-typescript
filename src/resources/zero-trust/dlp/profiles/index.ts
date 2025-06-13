@@ -4,7 +4,6 @@ export {
   Custom,
   type CustomProfile,
   type Pattern,
-  type CustomCreateResponse,
   type CustomDeleteResponse,
   type CustomCreateParams,
   type CustomUpdateParams,

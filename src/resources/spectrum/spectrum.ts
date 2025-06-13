@@ -57,10 +57,10 @@ export interface DNSParam {
 /**
  * The anycast edge IP configuration for the hostname of this application.
  */
-export type EdgeIPs = EdgeIPs.UnionMember0 | EdgeIPs.UnionMember1;
+export type EdgeIPs = EdgeIPs.Dynamic | EdgeIPs.Static;
 
 export namespace EdgeIPs {
-  export interface UnionMember0 {
+  export interface Dynamic {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -74,7 +74,7 @@ export namespace EdgeIPs {
     type?: 'dynamic';
   }
 
-  export interface UnionMember1 {
+  export interface Static {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -93,10 +93,10 @@ export namespace EdgeIPs {
 /**
  * The anycast edge IP configuration for the hostname of this application.
  */
-export type EdgeIPsParam = EdgeIPsParam.UnionMember0 | EdgeIPsParam.UnionMember1;
+export type EdgeIPsParam = EdgeIPsParam.Dynamic | EdgeIPsParam.Static;
 
 export namespace EdgeIPsParam {
-  export interface UnionMember0 {
+  export interface Dynamic {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -110,7 +110,7 @@ export namespace EdgeIPsParam {
     type?: 'dynamic';
   }
 
-  export interface UnionMember1 {
+  export interface Static {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.

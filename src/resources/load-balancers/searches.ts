@@ -76,23 +76,15 @@ export interface SearchListParams extends V4PagePaginationParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param: Search query term.
    */
-  search_params?: SearchListParams.SearchParams;
-}
+  query?: string;
 
-export namespace SearchListParams {
-  export interface SearchParams {
-    /**
-     * Search query term.
-     */
-    query?: string;
-
-    /**
-     * The type of references to include ("\*" for all).
-     */
-    references?: '' | '*' | 'referral' | 'referrer';
-  }
+  /**
+   * Query param: The type of references to include. "\*" to include both referral
+   * and referrer references. "" to not include any reference information.
+   */
+  references?: '' | '*' | 'referral' | 'referrer';
 }
 
 Searches.SearchListResponsesV4PagePagination = SearchListResponsesV4PagePagination;

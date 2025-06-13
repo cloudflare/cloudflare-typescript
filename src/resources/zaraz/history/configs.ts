@@ -63,7 +63,7 @@ export namespace ConfigGetResponse {
 
 export interface ConfigGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

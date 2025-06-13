@@ -12,7 +12,7 @@ export class ResourceGroups extends APIResource {
    * ```ts
    * const resourceGroup =
    *   await client.iam.resourceGroups.create({
-   *     account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     name: 'NewResourceGroup',
    *     scope: {
    *       key: 'com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4',
@@ -40,8 +40,8 @@ export class ResourceGroups extends APIResource {
    * ```ts
    * const resourceGroup =
    *   await client.iam.resourceGroups.update(
-   *     '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
-   *     { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -64,7 +64,7 @@ export class ResourceGroups extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const resourceGroupListResponse of client.iam.resourceGroups.list(
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }
@@ -89,8 +89,8 @@ export class ResourceGroups extends APIResource {
    * ```ts
    * const resourceGroup =
    *   await client.iam.resourceGroups.delete(
-   *     '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
-   *     { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -114,8 +114,8 @@ export class ResourceGroups extends APIResource {
    * @example
    * ```ts
    * const resourceGroup = await client.iam.resourceGroups.get(
-   *   '6d7f2f5f5b1d4a0e9081fdc98d432fd1',
-   *   { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -189,7 +189,7 @@ export namespace ResourceGroupCreateResponse {
  */
 export interface ResourceGroupUpdateResponse {
   /**
-   * Identifier of the group.
+   * Identifier of the resource group.
    */
   id: string;
 
@@ -255,7 +255,7 @@ export namespace ResourceGroupUpdateResponse {
  */
 export interface ResourceGroupListResponse {
   /**
-   * Identifier of the group.
+   * Identifier of the resource group.
    */
   id: string;
 
@@ -328,7 +328,7 @@ export interface ResourceGroupDeleteResponse {
  */
 export interface ResourceGroupGetResponse {
   /**
-   * Identifier of the group.
+   * Identifier of the resource group.
    */
   id: string;
 

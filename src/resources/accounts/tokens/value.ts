@@ -14,7 +14,7 @@ export class Value extends APIResource {
    *   await client.accounts.tokens.value.update(
    *     'ed17574386854bf78a67040be0a770b0',
    *     {
-   *       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       body: {},
    *     },
    *   );

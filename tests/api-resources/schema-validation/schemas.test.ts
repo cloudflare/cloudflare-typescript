@@ -16,6 +16,7 @@ describe('resource schemas', () => {
       kind: 'openapi_v3',
       name: 'petstore schema',
       source: '<schema file contents>',
+      validation_enabled: true,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

@@ -592,7 +592,7 @@ export declare namespace AIRunParams {
     /**
      * Body param: A list of tools available for the assistant to use.
      */
-    tools?: Array<Messages.UnionMember0 | Messages.UnionMember1>;
+    tools?: Array<Messages.UnionMember0 | Messages.Function>;
 
     /**
      * Body param: Limits the AI to choose from the top 'k' most probable words. Lower
@@ -687,11 +687,11 @@ export declare namespace AIRunParams {
       }
     }
 
-    export interface UnionMember1 {
+    export interface Function {
       /**
        * Details of the function tool.
        */
-      function: UnionMember1.Function;
+      function: Function.Function;
 
       /**
        * Specifies the type of tool (e.g., 'function').
@@ -699,7 +699,7 @@ export declare namespace AIRunParams {
       type: string;
     }
 
-    export namespace UnionMember1 {
+    export namespace Function {
       /**
        * Details of the function tool.
        */

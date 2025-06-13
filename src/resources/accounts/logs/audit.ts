@@ -239,74 +239,73 @@ export interface AuditListParams extends CursorLimitPaginationParams {
   account_id: string;
 
   /**
-   * Query param: Filters actions based on a given timestamp in the format
-   * yyyy-mm-dd, returning only logs that occurred on and before the specified date.
+   * Query param: Limits the returned results to logs older than the specified date.
+   * This can be a date string 2019-04-30 (interpreted in UTC) or an absolute
+   * timestamp that conforms to RFC3339.
    */
   before: string;
 
   /**
-   * Query param: Filters actions based on a given timestamp in the format
-   * yyyy-mm-dd, returning only logs that occurred on and after the specified date.
+   * Query param: Limits the returned results to logs newer than the specified date.
+   * This can be a date string 2019-04-30 (interpreted in UTC) or an absolute
+   * timestamp that conforms to RFC3339.
    */
   since: string;
 
   /**
-   * Query param: Filters by the account name.
+   * Query param:
    */
-  account_name?: string;
+  account_name?: AuditListParams.AccountName;
 
   /**
-   * Query param: Whether the action was successful or not.
+   * Query param:
    */
-  action_result?: 'success' | 'failure';
+  action_result?: AuditListParams.ActionResult;
 
   /**
-   * Query param: Filters by the action type.
+   * Query param:
    */
-  action_type?: 'create' | 'delete' | 'view' | 'update';
+  action_type?: AuditListParams.ActionType;
 
   /**
-   * Query param: Filters by the actor context.
+   * Query param:
    */
-  actor_context?: 'api_key' | 'api_token' | 'dash' | 'oauth' | 'origin_ca_key';
+  actor_context?: AuditListParams.ActorContext;
 
   /**
-   * Query param: Filters by the actor's email address.
+   * Query param:
    */
-  actor_email?: string;
+  actor_email?: AuditListParams.ActorEmail;
 
   /**
-   * Query param: Filters by the actor ID. This can be either the Account ID or User
-   * ID.
+   * Query param:
    */
-  actor_id?: string;
+  actor_id?: AuditListParams.ActorID;
 
   /**
-   * Query param: The IP address where the action was initiated.
+   * Query param:
    */
-  actor_ip_address?: string;
+  actor_ip_address?: AuditListParams.ActorIPAddress;
 
   /**
-   * Query param: Filters by the API token ID when the actor context is an api_token
-   * or oauth.
+   * Query param:
    */
-  actor_token_id?: string;
+  actor_token_id?: AuditListParams.ActorTokenID;
 
   /**
-   * Query param: Filters by the API token name when the actor context is an
-   * api_token or oauth.
+   * Query param:
    */
-  actor_token_name?: string;
+  actor_token_name?: AuditListParams.ActorTokenName;
 
   /**
-   * Query param: Filters by the actor type.
+   * Query param:
    */
-  actor_type?: 'cloudflare_admin' | 'account' | 'user';
+  actor_type?: AuditListParams.ActorType;
 
   /**
-   * Query param: Finds a specific log by its ID.
+   * Query param:
    */
-  audit_log_id?: string;
+  audit_log_id?: AuditListParams.AuditLogID;
 
   /**
    * Query param: Sets sorting order.
@@ -314,57 +313,209 @@ export interface AuditListParams extends CursorLimitPaginationParams {
   direction?: 'desc' | 'asc';
 
   /**
-   * Query param: Filters by the response CF Ray ID.
+   * Query param:
    */
-  raw_cf_ray_id?: string;
+  raw_cf_ray_id?: AuditListParams.RawCfRayID;
 
   /**
-   * Query param: The HTTP method for the API call.
+   * Query param:
    */
-  raw_method?: string;
+  raw_method?: AuditListParams.RawMethod;
 
   /**
-   * Query param: The response status code that was returned.
+   * Query param:
    */
-  raw_status_code?: number;
+  raw_status_code?: AuditListParams.RawStatusCode;
 
   /**
-   * Query param: Filters by the request URI.
+   * Query param:
    */
-  raw_uri?: string;
+  raw_uri?: AuditListParams.RawURI;
 
   /**
-   * Query param: Filters by the resource ID.
+   * Query param:
    */
-  resource_id?: string;
+  resource_id?: AuditListParams.ResourceID;
 
   /**
-   * Query param: Filters audit logs by the Cloudflare product associated with the
-   * changed resource.
+   * Query param:
    */
-  resource_product?: string;
+  resource_product?: AuditListParams.ResourceProduct;
 
   /**
-   * Query param: Filters by the resource scope, specifying whether the resource is
-   * associated with an user, an account, or a zone.
+   * Query param:
    */
-  resource_scope?: 'accounts' | 'user' | 'zones';
+  resource_scope?: AuditListParams.ResourceScope;
 
   /**
-   * Query param: Filters audit logs based on the unique type of resource changed by
-   * the action.
+   * Query param:
    */
-  resource_type?: string;
+  resource_type?: AuditListParams.ResourceType;
 
   /**
-   * Query param: Filters by the zone ID.
+   * Query param:
    */
-  zone_id?: string;
+  zone_id?: AuditListParams.ZoneID;
 
   /**
-   * Query param: Filters by the zone name associated with the change.
+   * Query param:
    */
-  zone_name?: string;
+  zone_name?: AuditListParams.ZoneName;
+}
+
+export namespace AuditListParams {
+  export interface AccountName {
+    /**
+     * Filters out audit logs by the account name.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ActionResult {
+    /**
+     * Filters out audit logs by whether the action was successful or not.
+     */
+    not?: Array<'success' | 'failure'>;
+  }
+
+  export interface ActionType {
+    /**
+     * Filters out audit logs by the action type.
+     */
+    not?: Array<'create' | 'delete' | 'view' | 'update'>;
+  }
+
+  export interface ActorContext {
+    /**
+     * Filters out audit logs by the actor context.
+     */
+    not?: Array<'api_key' | 'api_token' | 'dash' | 'oauth' | 'origin_ca_key'>;
+  }
+
+  export interface ActorEmail {
+    /**
+     * Filters out audit logs by the actor's email address.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ActorID {
+    /**
+     * Filters out audit logs by the actor ID. This can be either the Account ID or
+     * User ID.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ActorIPAddress {
+    /**
+     * Filters out audit logs IP address where the action was initiated.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ActorTokenID {
+    /**
+     * Filters out audit logs by the API token ID when the actor context is an
+     * api_token or oauth.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ActorTokenName {
+    /**
+     * Filters out audit logs by the API token name when the actor context is an
+     * api_token or oauth.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ActorType {
+    /**
+     * Filters out audit logs by the actor type.
+     */
+    not?: Array<'account' | 'cloudflare_admin' | 'system' | 'user'>;
+  }
+
+  export interface AuditLogID {
+    /**
+     * Filters out audit logs by their IDs.
+     */
+    not?: Array<string>;
+  }
+
+  export interface RawCfRayID {
+    /**
+     * Filters out audit logs by the response CF Ray ID.
+     */
+    not?: Array<string>;
+  }
+
+  export interface RawMethod {
+    /**
+     * Filters out audit logs by the HTTP method for the API call.
+     */
+    not?: Array<string>;
+  }
+
+  export interface RawStatusCode {
+    /**
+     * Filters out audit logs by the response status code that was returned.
+     */
+    not?: Array<number>;
+  }
+
+  export interface RawURI {
+    /**
+     * Filters out audit logs by the request URI.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ResourceID {
+    /**
+     * Filters out audit logs by the resource ID.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ResourceProduct {
+    /**
+     * Filters out audit logs by the Cloudflare product associated with the changed
+     * resource.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ResourceScope {
+    /**
+     * Filters out audit logs by the resource scope, specifying whether the resource is
+     * associated with an user, an account, or a zone.
+     */
+    not?: Array<'accounts' | 'user' | 'zones'>;
+  }
+
+  export interface ResourceType {
+    /**
+     * Filters out audit logs based on the unique type of resource changed by the
+     * action.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ZoneID {
+    /**
+     * Filters out audit logs by the zone ID.
+     */
+    not?: Array<string>;
+  }
+
+  export interface ZoneName {
+    /**
+     * Filters out audit logs by the zone name associated with the change.
+     */
+    not?: Array<string>;
+  }
 }
 
 Audit.AuditListResponsesCursorLimitPagination = AuditListResponsesCursorLimitPagination;
