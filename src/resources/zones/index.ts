@@ -91,12 +91,5 @@ export {
   type SettingEditParams,
   type SettingGetParams,
 } from './settings';
-export {
-  Subscriptions,
-  type SubscriptionCreateResponse,
-  type SubscriptionUpdateResponse,
-  type SubscriptionGetResponse,
-  type SubscriptionCreateParams,
-  type SubscriptionUpdateParams,
-} from './subscriptions';
+export { Subscriptions } from './subscriptions';
 export { Zones } from './zones';

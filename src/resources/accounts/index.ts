@@ -15,8 +15,6 @@ export {
 export { Roles, type RoleListParams, type RoleGetParams } from './roles';
 export {
   Subscriptions,
-  type SubscriptionCreateResponse,
-  type SubscriptionUpdateResponse,
   type SubscriptionDeleteResponse,
   type SubscriptionCreateParams,
   type SubscriptionUpdateParams,
