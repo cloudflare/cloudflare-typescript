@@ -29,10 +29,10 @@ export class IPs extends APIResource {
 /**
  * The set of IPs on the Address Map.
  */
-export type IPs = Array<IPs.IPItem>;
+export type IPsArray = Array<IPsArray.IPsArrayItem>;
 
-export namespace IPs {
-  export interface IPItem {
+export namespace IPsArray {
+  export interface IPsArrayItem {
     created_at?: string;
 
     /**
@@ -93,5 +93,9 @@ export interface IPListParams {
 }
 
 export declare namespace IPs {
-  export { type IPs as IPs, type IPListResponse as IPListResponse, type IPListParams as IPListParams };
+  export {
+    type IPsArray as IPsArray,
+    type IPListResponse as IPListResponse,
+    type IPListParams as IPListParams,
+  };
 }

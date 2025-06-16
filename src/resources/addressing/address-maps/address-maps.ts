@@ -245,7 +245,7 @@ export interface AddressMapCreateResponse {
   /**
    * The set of IPs on the Address Map.
    */
-  ips?: IPsAPI.IPs;
+  ips?: IPsAPI.IPsArray;
 
   /**
    * Zones and Accounts which will be assigned IPs on this Address Map. A zone
@@ -390,7 +390,7 @@ export interface AddressMapGetResponse {
   /**
    * The set of IPs on the Address Map.
    */
-  ips?: IPsAPI.IPs;
+  ips?: IPsAPI.IPsArray;
 
   /**
    * Zones and Accounts which will be assigned IPs on this Address Map. A zone

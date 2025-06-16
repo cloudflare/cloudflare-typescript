@@ -142,7 +142,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ips.ts">IPs</a></code>
+- <code><a href="./src/resources/ips.ts">IPsArray</a></code>
 - <code><a href="./src/resources/ips.ts">IPListResponse</a></code>
 
 Methods:
