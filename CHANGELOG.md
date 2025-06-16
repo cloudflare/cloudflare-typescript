@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.4.1 (2025-06-16)
+
+Full Changelog: [v4.4.0...v4.4.1](https://github.com/cloudflare/cloudflare-typescript/compare/v4.4.0...v4.4.1)
+
+### Features
+
+* **client:** add support for endpoint-specific base URLs ([f399656](https://github.com/cloudflare/cloudflare-typescript/commit/f3996568d1d92a7f92956aa52c1e7d167e7afa59))
+
+
+### Bug Fixes
+
+* **api:** Update zone subscription paths ([f0ff0b7](https://github.com/cloudflare/cloudflare-typescript/commit/f0ff0b7456757c5c176a4c51b792e44ddb823285))
+
 ## 4.4.0 (2025-06-16)
 
 Full Changelog: [v4.3.0...v4.4.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.3.0...v4.4.0)
