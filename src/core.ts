@@ -171,6 +171,7 @@ export class APIPromise<T> extends Promise<T> {
 export abstract class APIClient {
   baseURL: string;
   apiVersion: string;
+  #baseURLOverridden: boolean;
   maxRetries: number;
   timeout: number;
   httpAgent: Agent | undefined;
@@ -181,6 +182,7 @@ export abstract class APIClient {
   constructor({
     baseURL,
     apiVersion,
+    baseURLOverridden,
     maxRetries = 2,
     timeout = 60000, // 1 minute
     httpAgent,
@@ -188,6 +190,7 @@ export abstract class APIClient {
   }: {
     baseURL: string;
     apiVersion: string;
+    baseURLOverridden: boolean;
     maxRetries?: number | undefined;
     timeout: number | undefined;
     httpAgent: Agent | undefined;
@@ -195,6 +198,7 @@ export abstract class APIClient {
   }) {
     this.baseURL = baseURL;
     this.apiVersion = apiVersion;
+    this.#baseURLOverridden = baseURLOverridden;
     this.maxRetries = validatePositiveInteger('maxRetries', maxRetries);
     this.timeout = validatePositiveInteger('timeout', timeout);
     this.httpAgent = httpAgent;
@@ -305,7 +309,7 @@ export abstract class APIClient {
     { retryCount = 0 }: { retryCount?: number } = {},
   ): { req: RequestInit; url: string; timeout: number } {
     const options = { ...inputOptions };
-    const { method, path, query, headers: headers = {} } = options;
+    const { method, path, query, defaultBaseURL, headers: headers = {} } = options;
 
     const body =
       ArrayBuffer.isView(options.body) || (options.__binaryRequest && typeof options.body === 'string') ?
@@ -315,7 +319,7 @@ export abstract class APIClient {
       : null;
     const contentLength = this.calculateContentLength(body);
 
-    const url = this.buildURL(path!, query);
+    const url = this.buildURL(path!, query, defaultBaseURL);
     if ('timeout' in options) validatePositiveInteger('timeout', options.timeout);
     options.timeout = options.timeout ?? this.timeout;
     const httpAgent = options.httpAgent ?? this.httpAgent ?? getDefaultAgent(url);
@@ -508,11 +512,12 @@ export abstract class APIClient {
     return new PagePromise<PageClass, Item>(this, request, Page);
   }
 
-  buildURL<Req>(path: string, query: Req | null | undefined): string {
+  buildURL<Req>(path: string, query: Req | null | undefined, defaultBaseURL?: string | undefined): string {
+    const baseURL = (!this.#baseURLOverridden && defaultBaseURL) || this.baseURL;
     const url =
       isAbsoluteURL(path) ?
         new URL(path)
-      : new URL(this.baseURL + (this.baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
+      : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
 
     const defaultQuery = this.defaultQuery();
     if (!isEmptyObj(defaultQuery)) {
@@ -801,6 +806,7 @@ export type RequestOptions<
   query?: Req | undefined;
   body?: Req | null | undefined;
   headers?: Headers | undefined;
+  defaultBaseURL?: string | undefined;
 
   maxRetries?: number;
   stream?: boolean | undefined;
@@ -824,6 +830,7 @@ const requestOptionsKeys: KeysEnum<RequestOptions> = {
   query: true,
   body: true,
   headers: true,
+  defaultBaseURL: true,
 
   maxRetries: true,
   stream: true,

@@ -246,6 +246,7 @@ export class Cloudflare extends Core.APIClient {
     super({
       baseURL: options.baseURL!,
       apiVersion: options.apiVersion!,
+      baseURLOverridden: baseURL ? baseURL !== 'https://api.cloudflare.com/client/v4' : false,
       timeout: options.timeout ?? 60000 /* 1 minute */,
       httpAgent: options.httpAgent,
       maxRetries: options.maxRetries,
@@ -355,6 +356,13 @@ export class Cloudflare extends Core.APIClient {
   secretsStore: API.SecretsStore = new API.SecretsStore(this);
   pipelines: API.Pipelines = new API.Pipelines(this);
   schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
+
+  /**
+   * Check whether the base URL is set to its default.
+   */
+  #baseURLOverridden(): boolean {
+    return this.baseURL !== 'https://api.cloudflare.com/client/v4';
+  }
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
