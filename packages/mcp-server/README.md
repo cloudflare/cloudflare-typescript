@@ -351,12 +351,6 @@ The following tools are available in this MCP server.
   The hold is enabled if the `hold_after` date-time value is in the past.
 - `get_zones_holds` (`read`): Retrieve whether the zone is subject to a zone hold, and metadata about the hold.
 
-### Resource `zones.subscriptions`:
-
-- `create_zones_subscriptions` (`write`): Create a zone subscription, either plan or add-ons.
-- `update_zones_subscriptions` (`write`): Updates zone subscriptions, either plan or add-ons.
-- `get_zones_subscriptions` (`read`): Lists zone subscription details.
-
 ### Resource `zones.plans`:
 
 - `list_zones_plans` (`read`): Lists available plans the zone can subscribe to.

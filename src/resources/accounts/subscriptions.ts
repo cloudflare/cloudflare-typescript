@@ -20,11 +20,11 @@ export class Subscriptions extends APIResource {
    *   });
    * ```
    */
-  create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<SubscriptionCreateResponse> {
+  create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<Shared.Subscription> {
     const { account_id, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/subscriptions`, { body, ...options }) as APIPromise<{
-        result: SubscriptionCreateResponse;
+        result: Shared.Subscription;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,13 +45,13 @@ export class Subscriptions extends APIResource {
     subscriptionIdentifier: string,
     params: SubscriptionUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<SubscriptionUpdateResponse> {
+  ): APIPromise<Shared.Subscription> {
     const { account_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: SubscriptionUpdateResponse }>
+      }) as APIPromise<{ result: Shared.Subscription }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -106,10 +106,6 @@ export class Subscriptions extends APIResource {
     );
   }
 }
-
-export type SubscriptionCreateResponse = unknown | string | null;
-
-export type SubscriptionUpdateResponse = unknown | string | null;
 
 export interface SubscriptionDeleteResponse {
   /**
@@ -168,8 +164,6 @@ export interface SubscriptionGetParams {
 
 export declare namespace Subscriptions {
   export {
-    type SubscriptionCreateResponse as SubscriptionCreateResponse,
-    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
