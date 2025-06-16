@@ -12,7 +12,7 @@ export class Latest extends APIResource {
    * const latests =
    *   await client.magicTransit.connectors.events.latest.list(
    *     'connector_id',
-   *     { account_id: 0 },
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -192,7 +192,10 @@ export namespace LatestListResponse {
 }
 
 export interface LatestListParams {
-  account_id: number;
+  /**
+   * Account identifier
+   */
+  account_id: string;
 }
 
 export declare namespace Latest {

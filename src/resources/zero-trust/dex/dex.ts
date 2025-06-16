@@ -12,6 +12,8 @@ import {
   TracerouteTestPercentilesResponse,
   TracerouteTests,
 } from './traceroute-tests';
+import * as WARPChangeEventsAPI from './warp-change-events';
+import { WARPChangeEventGetParams, WARPChangeEventGetResponse, WARPChangeEvents } from './warp-change-events';
 import * as CommandsAPI from './commands/commands';
 import {
   CommandCreateParams,
@@ -37,6 +39,9 @@ import * as TracerouteTestResultsAPI from './traceroute-test-results/traceroute-
 import { TracerouteTestResults } from './traceroute-test-results/traceroute-test-results';
 
 export class DEX extends APIResource {
+  warpChangeEvents: WARPChangeEventsAPI.WARPChangeEvents = new WARPChangeEventsAPI.WARPChangeEvents(
+    this._client,
+  );
   commands: CommandsAPI.Commands = new CommandsAPI.Commands(this._client);
   colos: ColosAPI.Colos = new ColosAPI.Colos(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
@@ -158,6 +163,7 @@ export interface Percentiles {
   p99?: number | null;
 }
 
+DEX.WARPChangeEvents = WARPChangeEvents;
 DEX.Commands = Commands;
 DEX.CommandListResponsesV4PagePagination = CommandListResponsesV4PagePagination;
 DEX.Colos = Colos;
@@ -174,6 +180,12 @@ export declare namespace DEX {
     type NetworkPath as NetworkPath,
     type NetworkPathResponse as NetworkPathResponse,
     type Percentiles as Percentiles,
+  };
+
+  export {
+    WARPChangeEvents as WARPChangeEvents,
+    type WARPChangeEventGetResponse as WARPChangeEventGetResponse,
+    type WARPChangeEventGetParams as WARPChangeEventGetParams,
   };
 
   export {

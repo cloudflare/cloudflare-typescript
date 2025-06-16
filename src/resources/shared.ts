@@ -141,7 +141,9 @@ export interface CloudflareTunnel {
   account_tag?: string;
 
   /**
-   * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+   * @deprecated This field will start returning an empty array. To fetch the
+   * connections of a given tunnel, please use the dedicated endpoint
+   * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
    */
   connections?: Array<CloudflareTunnel.Connection>;
 
@@ -334,7 +336,7 @@ export namespace Member {
      */
     export interface PermissionGroup {
       /**
-       * Identifier of the group.
+       * Identifier of the permission group.
        */
       id: string;
 
@@ -344,7 +346,7 @@ export namespace Member {
       meta?: PermissionGroup.Meta;
 
       /**
-       * Name of the group.
+       * Name of the permission group.
        */
       name?: string;
     }
@@ -365,7 +367,7 @@ export namespace Member {
      */
     export interface ResourceGroup {
       /**
-       * Identifier of the group.
+       * Identifier of the resource group.
        */
       id: string;
 
@@ -898,7 +900,7 @@ export namespace TokenPolicy {
    */
   export interface PermissionGroup {
     /**
-     * Identifier of the group.
+     * Identifier of the permission group.
      */
     id: string;
 
@@ -908,7 +910,7 @@ export namespace TokenPolicy {
     meta?: PermissionGroup.Meta;
 
     /**
-     * Name of the group.
+     * Name of the permission group.
      */
     name?: string;
   }
@@ -949,7 +951,7 @@ export namespace TokenPolicyParam {
    */
   export interface PermissionGroup {
     /**
-     * Identifier of the group.
+     * Identifier of the permission group.
      */
     id: string;
 

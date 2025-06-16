@@ -14,15 +14,7 @@ export class Predefined extends APIResource {
    * const profile =
    *   await client.zeroTrust.dlp.profiles.predefined.update(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       account_id: 'account_id',
-   *       entries: [
-   *         {
-   *           id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *           enabled: true,
-   *         },
-   *       ],
-   *     },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -80,6 +72,7 @@ export interface PredefinedProfile {
     | PredefinedProfile.PredefinedEntry
     | PredefinedProfile.IntegrationEntry
     | PredefinedProfile.ExactDataEntry
+    | PredefinedProfile.DocumentTemplateEntry
     | PredefinedProfile.WordListEntry
   >;
 
@@ -192,6 +185,20 @@ export namespace PredefinedProfile {
     updated_at: string;
   }
 
+  export interface DocumentTemplateEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'document_template';
+
+    updated_at: string;
+  }
+
   export interface WordListEntry {
     id: string;
 
@@ -220,11 +227,6 @@ export interface PredefinedUpdateParams {
   /**
    * Body param:
    */
-  entries: Array<PredefinedUpdateParams.Entry>;
-
-  /**
-   * Body param:
-   */
   ai_context_enabled?: boolean;
 
   /**
@@ -242,6 +244,11 @@ export interface PredefinedUpdateParams {
    * surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
+
+  /**
+   * @deprecated Body param:
+   */
+  entries?: Array<PredefinedUpdateParams.Entry>;
 
   /**
    * Body param:

@@ -9,13 +9,7 @@ export class History extends APIResource {
   /**
    * Accesses your billing history object.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const billingHistory of client.user.billing.history.list()) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     query?: HistoryListParams,

@@ -7,7 +7,6 @@ import * as CustomAPI from './custom';
 import {
   Custom,
   CustomCreateParams,
-  CustomCreateResponse,
   CustomDeleteParams,
   CustomDeleteResponse,
   CustomGetParams,
@@ -139,6 +138,7 @@ export namespace Profile {
       | CustomProfile.PredefinedEntry
       | CustomProfile.IntegrationEntry
       | CustomProfile.ExactDataEntry
+      | CustomProfile.DocumentTemplateEntry
       | CustomProfile.WordListEntry
     >;
 
@@ -252,6 +252,20 @@ export namespace Profile {
       updated_at: string;
     }
 
+    export interface DocumentTemplateEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_template';
+
+      updated_at: string;
+    }
+
     export interface WordListEntry {
       id: string;
 
@@ -284,6 +298,7 @@ export namespace Profile {
       | PredefinedProfile.PredefinedEntry
       | PredefinedProfile.IntegrationEntry
       | PredefinedProfile.ExactDataEntry
+      | PredefinedProfile.DocumentTemplateEntry
       | PredefinedProfile.WordListEntry
     >;
 
@@ -398,6 +413,20 @@ export namespace Profile {
       updated_at: string;
     }
 
+    export interface DocumentTemplateEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_template';
+
+      updated_at: string;
+    }
+
     export interface WordListEntry {
       id: string;
 
@@ -427,6 +456,7 @@ export namespace Profile {
       | IntegrationProfile.PredefinedEntry
       | IntegrationProfile.IntegrationEntry
       | IntegrationProfile.ExactDataEntry
+      | IntegrationProfile.DocumentTemplateEntry
       | IntegrationProfile.WordListEntry
     >;
 
@@ -528,6 +558,20 @@ export namespace Profile {
       updated_at: string;
     }
 
+    export interface DocumentTemplateEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_template';
+
+      updated_at: string;
+    }
+
     export interface WordListEntry {
       id: string;
 
@@ -603,7 +647,6 @@ export declare namespace Profiles {
     Custom as Custom,
     type CustomAPICustomProfile as CustomProfile,
     type Pattern as Pattern,
-    type CustomCreateResponse as CustomCreateResponse,
     type CustomDeleteResponse as CustomDeleteResponse,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,

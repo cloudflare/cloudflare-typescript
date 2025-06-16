@@ -69,6 +69,11 @@ export class Config extends APIResource {
 
 export interface CmbConfig {
   /**
+   * Allow out of region access
+   */
+  allow_out_of_region_access?: boolean;
+
+  /**
    * Name of the region.
    */
   regions?: string;
@@ -81,6 +86,11 @@ export interface ConfigCreateParams {
    * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Body param: Allow out of region access
+   */
+  allow_out_of_region_access?: boolean;
 
   /**
    * Body param: Name of the region.

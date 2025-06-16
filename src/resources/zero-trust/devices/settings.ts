@@ -25,6 +25,26 @@ export class Settings extends APIResource {
   }
 
   /**
+   * Resets the current device settings for a Zero Trust account.
+   *
+   * @example
+   * ```ts
+   * const deviceSettings =
+   *   await client.zeroTrust.devices.settings.delete({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
+   * ```
+   */
+  delete(params: SettingDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
+    const { account_id } = params;
+    return (
+      this._client.delete(`/accounts/${account_id}/devices/settings`, options) as Core.APIPromise<{
+        result: DeviceSettings | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Patches the current device settings for a Zero Trust account.
    *
    * @example
@@ -127,6 +147,10 @@ export interface SettingUpdateParams {
   use_zt_virtual_ip?: boolean;
 }
 
+export interface SettingDeleteParams {
+  account_id: string;
+}
+
 export interface SettingEditParams {
   /**
    * Path param:
@@ -168,6 +192,7 @@ export declare namespace Settings {
   export {
     type DeviceSettings as DeviceSettings,
     type SettingUpdateParams as SettingUpdateParams,
+    type SettingDeleteParams as SettingDeleteParams,
     type SettingEditParams as SettingEditParams,
     type SettingGetParams as SettingGetParams,
   };

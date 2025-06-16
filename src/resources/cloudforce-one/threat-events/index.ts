@@ -34,7 +34,7 @@ export {
   type DatasetEditParams,
   type DatasetGetParams,
   type DatasetRawParams,
-} from './datasets';
+} from './datasets/index';
 export {
   EventTags,
   type EventTagCreateResponse,

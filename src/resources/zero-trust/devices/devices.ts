@@ -13,7 +13,22 @@ import {
   Devices as DevicesAPIDevices,
 } from './devices_';
 import * as DEXTestsAPI from './dex-tests';
-import { DEXTests, SchemaData, SchemaHTTP } from './dex-tests';
+import {
+  DEXTestCreateParams,
+  DEXTestCreateResponse,
+  DEXTestDeleteParams,
+  DEXTestDeleteResponse,
+  DEXTestGetParams,
+  DEXTestGetResponse,
+  DEXTestListParams,
+  DEXTestListResponse,
+  DEXTestListResponsesSinglePage,
+  DEXTestUpdateParams,
+  DEXTestUpdateResponse,
+  DEXTests,
+  SchemaData,
+  SchemaHTTP,
+} from './dex-tests';
 import * as FleetStatusAPI from './fleet-status';
 import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
 import * as NetworksAPI from './networks';
@@ -58,6 +73,7 @@ import { Revoke, RevokeCreateParams, RevokeCreateResponse } from './revoke';
 import * as SettingsAPI from './settings';
 import {
   DeviceSettings,
+  SettingDeleteParams,
   SettingEditParams,
   SettingGetParams,
   SettingUpdateParams,
@@ -123,22 +139,16 @@ export class Devices extends APIResource {
   overrideCodes: OverrideCodesAPI.OverrideCodes = new OverrideCodesAPI.OverrideCodes(this._client);
 
   /**
-   * List WARP registrations.
+   * List WARP devices. Not supported when
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)
+   * is enabled for the account.
    *
    * **Deprecated**: please use one of the following endpoints instead:
    *
    * - GET /accounts/{account_id}/devices/physical-devices
    * - GET /accounts/{account_id}/devices/registrations
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const device of client.zeroTrust.devices.list({
-   *   account_id: '699d98642c564d2e855e9661899b7252',
-   * })) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(params: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device> {
     const { account_id } = params;
@@ -146,20 +156,16 @@ export class Devices extends APIResource {
   }
 
   /**
-   * Fetches a single WARP registration.
+   * Fetches a single WARP device. Not supported when
+   * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)
+   * is enabled for the account.
    *
    * **Deprecated**: please use one of the following endpoints instead:
    *
    * - GET /accounts/{account_id}/devices/physical-devices/{device_id}
    * - GET /accounts/{account_id}/devices/registrations/{registration_id}
    *
-   * @example
-   * ```ts
-   * const device = await client.zeroTrust.devices.get(
-   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *   { account_id: '699d98642c564d2e855e9661899b7252' },
-   * );
-   * ```
+   * @deprecated
    */
   get(
     deviceId: string,
@@ -433,6 +439,7 @@ Devices.Resilience = Resilience;
 Devices.Registrations = Registrations;
 Devices.RegistrationListResponsesCursorPagination = RegistrationListResponsesCursorPagination;
 Devices.DEXTests = DEXTests;
+Devices.DEXTestListResponsesSinglePage = DEXTestListResponsesSinglePage;
 Devices.Networks = Networks;
 Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
 Devices.FleetStatus = FleetStatus;
@@ -483,7 +490,22 @@ export declare namespace Devices {
     type RegistrationUnrevokeParams as RegistrationUnrevokeParams,
   };
 
-  export { DEXTests as DEXTests, type SchemaData as SchemaData, type SchemaHTTP as SchemaHTTP };
+  export {
+    DEXTests as DEXTests,
+    type SchemaData as SchemaData,
+    type SchemaHTTP as SchemaHTTP,
+    type DEXTestCreateResponse as DEXTestCreateResponse,
+    type DEXTestUpdateResponse as DEXTestUpdateResponse,
+    type DEXTestListResponse as DEXTestListResponse,
+    type DEXTestDeleteResponse as DEXTestDeleteResponse,
+    type DEXTestGetResponse as DEXTestGetResponse,
+    DEXTestListResponsesSinglePage as DEXTestListResponsesSinglePage,
+    type DEXTestCreateParams as DEXTestCreateParams,
+    type DEXTestUpdateParams as DEXTestUpdateParams,
+    type DEXTestListParams as DEXTestListParams,
+    type DEXTestDeleteParams as DEXTestDeleteParams,
+    type DEXTestGetParams as DEXTestGetParams,
+  };
 
   export {
     Networks as Networks,
@@ -551,6 +573,7 @@ export declare namespace Devices {
     Settings as Settings,
     type DeviceSettings as DeviceSettings,
     type SettingUpdateParams as SettingUpdateParams,
+    type SettingDeleteParams as SettingDeleteParams,
     type SettingEditParams as SettingEditParams,
     type SettingGetParams as SettingGetParams,
   };

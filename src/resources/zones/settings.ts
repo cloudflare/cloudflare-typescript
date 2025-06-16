@@ -1977,7 +1977,25 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 100 | 200 | 500;
+    value:
+      | 100
+      | 125
+      | 150
+      | 175
+      | 200
+      | 225
+      | 250
+      | 275
+      | 300
+      | 325
+      | 350
+      | 375
+      | 400
+      | 425
+      | 450
+      | 475
+      | 500
+      | 1000;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3031,7 +3049,25 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: 100 | 200 | 500;
+    value:
+      | 100
+      | 125
+      | 150
+      | 175
+      | 200
+      | 225
+      | 250
+      | 275
+      | 300
+      | 325
+      | 350
+      | 375
+      | 400
+      | 425
+      | 450
+      | 475
+      | 500
+      | 1000;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your

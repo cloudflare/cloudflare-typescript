@@ -16,7 +16,11 @@ export class Events extends APIResource {
    * const events =
    *   await client.magicTransit.connectors.events.list(
    *     'connector_id',
-   *     { account_id: 0, from: 0, to: 0 },
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       from: 0,
+   *       to: 0,
+   *     },
    *   );
    * ```
    */
@@ -44,7 +48,7 @@ export class Events extends APIResource {
    *     'connector_id',
    *     0,
    *     0,
-   *     { account_id: 0 },
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -251,9 +255,9 @@ export namespace EventGetResponse {
 
 export interface EventListParams {
   /**
-   * Path param:
+   * Path param: Account identifier
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Query param:
@@ -277,7 +281,10 @@ export interface EventListParams {
 }
 
 export interface EventGetParams {
-  account_id: number;
+  /**
+   * Account identifier
+   */
+  account_id: string;
 }
 
 Events.Latest = Latest;

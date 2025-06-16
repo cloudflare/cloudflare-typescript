@@ -13,7 +13,7 @@ describe('resource threatEvents', () => {
   // TODO: HTTP 401 from prism
   test.skip('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.create({
-      account_id: 0,
+      account_id: 'account_id',
       attacker: 'Flying Yeti',
       attackerCountry: 'CN',
       category: 'Domain Resolution',
@@ -35,7 +35,7 @@ describe('resource threatEvents', () => {
   // TODO: HTTP 401 from prism
   test.skip('create: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.create({
-      account_id: 0,
+      account_id: 'account_id',
       attacker: 'Flying Yeti',
       attackerCountry: 'CN',
       category: 'Domain Resolution',
@@ -55,7 +55,7 @@ describe('resource threatEvents', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('list: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.list({ account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -68,7 +68,7 @@ describe('resource threatEvents', () => {
   // TODO: HTTP 401 from prism
   test.skip('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.list({
-      account_id: 0,
+      account_id: 'account_id',
       datasetId: ['string'],
       forceRefresh: true,
       order: 'asc',
@@ -81,7 +81,9 @@ describe('resource threatEvents', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.delete('event_id', { account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.delete('event_id', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -93,13 +95,13 @@ describe('resource threatEvents', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('delete: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.delete('event_id', { account_id: 0 });
+    const response = await client.cloudforceOne.threatEvents.delete('event_id', { account_id: 'account_id' });
   });
 
   // TODO: HTTP 401 from prism
   test.skip('bulkCreate: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.bulkCreate({
-      account_id: 0,
+      account_id: 'account_id',
       data: [
         {
           attacker: 'Flying Yeti',
@@ -126,7 +128,7 @@ describe('resource threatEvents', () => {
   // TODO: HTTP 401 from prism
   test.skip('bulkCreate: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.bulkCreate({
-      account_id: 0,
+      account_id: 'account_id',
       data: [
         {
           attacker: 'Flying Yeti',
@@ -151,7 +153,7 @@ describe('resource threatEvents', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('edit: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.edit('event_id', { account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.edit('event_id', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -164,7 +166,7 @@ describe('resource threatEvents', () => {
   // TODO: HTTP 401 from prism
   test.skip('edit: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.edit('event_id', {
-      account_id: 0,
+      account_id: 'account_id',
       attacker: 'Flying Yeti',
       attackerCountry: 'CN',
       category: 'Domain Resolution',
@@ -180,7 +182,7 @@ describe('resource threatEvents', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('get: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.get('event_id', { account_id: 0 });
+    const responsePromise = client.cloudforceOne.threatEvents.get('event_id', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -192,6 +194,6 @@ describe('resource threatEvents', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('get: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.get('event_id', { account_id: 0 });
+    const response = await client.cloudforceOne.threatEvents.get('event_id', { account_id: 'account_id' });
   });
 });

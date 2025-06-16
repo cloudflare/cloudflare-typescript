@@ -156,6 +156,7 @@ export type EntryUpdateResponse =
   | EntryUpdateResponse.PredefinedEntry
   | EntryUpdateResponse.IntegrationEntry
   | EntryUpdateResponse.ExactDataEntry
+  | EntryUpdateResponse.DocumentTemplateEntry
   | EntryUpdateResponse.WordListEntry;
 
 export namespace EntryUpdateResponse {
@@ -244,6 +245,20 @@ export namespace EntryUpdateResponse {
     updated_at: string;
   }
 
+  export interface DocumentTemplateEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'document_template';
+
+    updated_at: string;
+  }
+
   export interface WordListEntry {
     id: string;
 
@@ -268,6 +283,7 @@ export type EntryListResponse =
   | EntryListResponse.PredefinedEntry
   | EntryListResponse.IntegrationEntry
   | EntryListResponse.ExactDataEntry
+  | EntryListResponse.DocumentTemplateEntry
   | EntryListResponse.WordListEntry;
 
 export namespace EntryListResponse {
@@ -356,6 +372,20 @@ export namespace EntryListResponse {
     updated_at: string;
   }
 
+  export interface DocumentTemplateEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'document_template';
+
+    updated_at: string;
+  }
+
   export interface WordListEntry {
     id: string;
 
@@ -382,6 +412,7 @@ export type EntryGetResponse =
   | EntryGetResponse.PredefinedEntry
   | EntryGetResponse.IntegrationEntry
   | EntryGetResponse.ExactDataEntry
+  | EntryGetResponse.DocumentTemplateEntry
   | EntryGetResponse.WordListEntry;
 
 export namespace EntryGetResponse {
@@ -466,6 +497,20 @@ export namespace EntryGetResponse {
     secret: boolean;
 
     type: 'exact_data';
+
+    updated_at: string;
+  }
+
+  export interface DocumentTemplateEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'document_template';
 
     updated_at: string;
   }

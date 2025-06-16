@@ -94,14 +94,7 @@ import {
   ZeroRTT,
 } from './settings';
 import * as SubscriptionsAPI from './subscriptions';
-import {
-  SubscriptionCreateParams,
-  SubscriptionCreateResponse,
-  SubscriptionGetResponse,
-  SubscriptionUpdateParams,
-  SubscriptionUpdateResponse,
-  Subscriptions,
-} from './subscriptions';
+import { Subscriptions } from './subscriptions';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Zones extends APIResource {
@@ -237,17 +230,17 @@ export interface Zone {
   id: string;
 
   /**
-   * The account the zone belongs to
+   * The account the zone belongs to.
    */
   account: Zone.Account;
 
   /**
-   * The last time proof of ownership was detected and the zone was made active
+   * The last time proof of ownership was detected and the zone was made active.
    */
   activated_on: string | null;
 
   /**
-   * When the zone was created
+   * When the zone was created.
    */
   created_on: string;
 
@@ -259,42 +252,42 @@ export interface Zone {
   development_mode: number;
 
   /**
-   * Metadata about the zone
+   * Metadata about the zone.
    */
   meta: Zone.Meta;
 
   /**
-   * When the zone was last modified
+   * When the zone was last modified.
    */
   modified_on: string;
 
   /**
-   * The domain name
+   * The domain name.
    */
   name: string;
 
   /**
-   * The name servers Cloudflare assigns to a zone
+   * The name servers Cloudflare assigns to a zone.
    */
   name_servers: Array<string>;
 
   /**
-   * DNS host at the time of switching to Cloudflare
+   * DNS host at the time of switching to Cloudflare.
    */
   original_dnshost: string | null;
 
   /**
-   * Original name servers before moving to Cloudflare
+   * Original name servers before moving to Cloudflare.
    */
   original_name_servers: Array<string> | null;
 
   /**
-   * Registrar for the domain at the time of switching to Cloudflare
+   * Registrar for the domain at the time of switching to Cloudflare.
    */
   original_registrar: string | null;
 
   /**
-   * The owner of the zone
+   * The owner of the zone.
    */
   owner: Zone.Owner;
 
@@ -356,7 +349,7 @@ export interface Zone {
 
 export namespace Zone {
   /**
-   * The account the zone belongs to
+   * The account the zone belongs to.
    */
   export interface Account {
     /**
@@ -365,42 +358,42 @@ export namespace Zone {
     id?: string;
 
     /**
-     * The name of the account
+     * The name of the account.
      */
     name?: string;
   }
 
   /**
-   * Metadata about the zone
+   * Metadata about the zone.
    */
   export interface Meta {
     /**
-     * The zone is only configured for CDN
+     * The zone is only configured for CDN.
      */
     cdn_only?: boolean;
 
     /**
-     * Number of Custom Certificates the zone can have
+     * Number of Custom Certificates the zone can have.
      */
     custom_certificate_quota?: number;
 
     /**
-     * The zone is only configured for DNS
+     * The zone is only configured for DNS.
      */
     dns_only?: boolean;
 
     /**
-     * The zone is setup with Foundation DNS
+     * The zone is setup with Foundation DNS.
      */
     foundation_dns?: boolean;
 
     /**
-     * Number of Page Rules a zone can have
+     * Number of Page Rules a zone can have.
      */
     page_rule_quota?: number;
 
     /**
-     * The zone has been flagged for phishing
+     * The zone has been flagged for phishing.
      */
     phishing_detected?: boolean;
 
@@ -408,7 +401,7 @@ export namespace Zone {
   }
 
   /**
-   * The owner of the zone
+   * The owner of the zone.
    */
   export interface Owner {
     /**
@@ -417,12 +410,12 @@ export namespace Zone {
     id?: string;
 
     /**
-     * Name of the owner
+     * Name of the owner.
      */
     name?: string;
 
     /**
-     * The type of owner
+     * The type of owner.
      */
     type?: string;
   }
@@ -472,7 +465,7 @@ export namespace Zone {
     legacy_id?: string;
 
     /**
-     * Name of the owner
+     * Name of the owner.
      */
     name?: string;
 
@@ -521,7 +514,7 @@ export interface ZoneCreateParams {
   account: ZoneCreateParams.Account;
 
   /**
-   * The domain name
+   * The domain name.
    */
   name: string;
 
@@ -575,7 +568,7 @@ export interface ZoneListParams extends V4PagePaginationArrayParams {
   order?: 'name' | 'status' | 'account.id' | 'account.name' | 'plan.id';
 
   /**
-   * A zone status
+   * Specify a zone status to filter by.
    */
   status?: 'initializing' | 'pending' | 'active' | 'moved';
 }
@@ -583,7 +576,7 @@ export interface ZoneListParams extends V4PagePaginationArrayParams {
 export namespace ZoneListParams {
   export interface Account {
     /**
-     * An account ID
+     * Filter by an account ID.
      */
     id?: string;
 
@@ -752,14 +745,7 @@ export declare namespace Zones {
     type HoldGetParams as HoldGetParams,
   };
 
-  export {
-    Subscriptions as Subscriptions,
-    type SubscriptionCreateResponse as SubscriptionCreateResponse,
-    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
-    type SubscriptionGetResponse as SubscriptionGetResponse,
-    type SubscriptionCreateParams as SubscriptionCreateParams,
-    type SubscriptionUpdateParams as SubscriptionUpdateParams,
-  };
+  export { Subscriptions as Subscriptions };
 
   export {
     Plans as Plans,

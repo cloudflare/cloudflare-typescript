@@ -67,7 +67,10 @@ export class Speed extends APIResource {
 export interface SpeedHistogramResponse {
   histogram_0: SpeedHistogramResponse.Histogram0;
 
-  meta: unknown;
+  /**
+   * Metadata for the results.
+   */
+  meta: SpeedHistogramResponse.Meta;
 }
 
 export namespace SpeedHistogramResponse {
@@ -78,26 +81,81 @@ export namespace SpeedHistogramResponse {
 
     bucketMin: Array<string>;
   }
-}
 
-export interface SpeedSummaryResponse {
-  meta: SpeedSummaryResponse.Meta;
-
-  summary_0: SpeedSummaryResponse.Summary0;
-}
-
-export namespace SpeedSummaryResponse {
+  /**
+   * Metadata for the results.
+   */
   export interface Meta {
+    /**
+     * The width for every bucket in the histogram.
+     */
+    bucketSize: number;
+
+    confidenceInfo: Meta.ConfidenceInfo | null;
+
     dateRange: Array<Meta.DateRange>;
 
+    /**
+     * Timestamp of the last dataset update.
+     */
     lastUpdated: string;
 
-    normalization: string;
+    /**
+     * Normalization method applied to the results. Refer to
+     * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+     */
+    normalization:
+      | 'PERCENTAGE'
+      | 'MIN0_MAX'
+      | 'MIN_MAX'
+      | 'RAW_VALUES'
+      | 'PERCENTAGE_CHANGE'
+      | 'ROLLING_AVERAGE'
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
 
-    confidenceInfo?: Meta.ConfidenceInfo;
+    totalTests: Array<number>;
+
+    /**
+     * Measurement units for the results.
+     */
+    units: Array<Meta.Unit>;
   }
 
   export namespace Meta {
+    export interface ConfidenceInfo {
+      annotations: Array<ConfidenceInfo.Annotation>;
+
+      /**
+       * Provides an indication of how much confidence Cloudflare has in the data.
+       */
+      level: number;
+    }
+
+    export namespace ConfidenceInfo {
+      /**
+       * Annotation associated with the result (e.g. outage or other type of event).
+       */
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        endDate: string;
+
+        eventType: string;
+
+        /**
+         * Whether event is a single point in time or a time range.
+         */
+        isInstantaneous: boolean;
+
+        linkedUrl: string;
+
+        startDate: string;
+      }
+    }
+
     export interface DateRange {
       /**
        * Adjusted end of date range.
@@ -110,28 +168,107 @@ export namespace SpeedSummaryResponse {
       startTime: string;
     }
 
-    export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+    export interface Unit {
+      name: string;
 
-      level?: number;
+      value: string;
+    }
+  }
+}
+
+export interface SpeedSummaryResponse {
+  /**
+   * Metadata for the results.
+   */
+  meta: SpeedSummaryResponse.Meta;
+
+  summary_0: SpeedSummaryResponse.Summary0;
+}
+
+export namespace SpeedSummaryResponse {
+  /**
+   * Metadata for the results.
+   */
+  export interface Meta {
+    confidenceInfo: Meta.ConfidenceInfo | null;
+
+    dateRange: Array<Meta.DateRange>;
+
+    /**
+     * Timestamp of the last dataset update.
+     */
+    lastUpdated: string;
+
+    /**
+     * Normalization method applied to the results. Refer to
+     * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+     */
+    normalization:
+      | 'PERCENTAGE'
+      | 'MIN0_MAX'
+      | 'MIN_MAX'
+      | 'RAW_VALUES'
+      | 'PERCENTAGE_CHANGE'
+      | 'ROLLING_AVERAGE'
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
+
+    /**
+     * Measurement units for the results.
+     */
+    units: Array<Meta.Unit>;
+  }
+
+  export namespace Meta {
+    export interface ConfidenceInfo {
+      annotations: Array<ConfidenceInfo.Annotation>;
+
+      /**
+       * Provides an indication of how much confidence Cloudflare has in the data.
+       */
+      level: number;
     }
 
     export namespace ConfidenceInfo {
+      /**
+       * Annotation associated with the result (e.g. outage or other type of event).
+       */
       export interface Annotation {
         dataSource: string;
 
         description: string;
 
+        endDate: string;
+
         eventType: string;
 
+        /**
+         * Whether event is a single point in time or a time range.
+         */
         isInstantaneous: boolean;
 
-        endTime?: string;
+        linkedUrl: string;
 
-        linkedUrl?: string;
-
-        startTime?: string;
+        startDate: string;
       }
+    }
+
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface Unit {
+      name: string;
+
+      value: string;
     }
   }
 

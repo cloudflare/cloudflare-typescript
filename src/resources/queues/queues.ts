@@ -22,7 +22,6 @@ import {
   MessageBulkPushResponse,
   MessagePullParams,
   MessagePullResponse,
-  MessagePullResponsesSinglePage,
   MessagePushParams,
   MessagePushResponse,
   Messages,
@@ -331,7 +330,6 @@ Queues.QueuesSinglePage = QueuesSinglePage;
 Queues.Consumers = Consumers;
 Queues.ConsumersSinglePage = ConsumersSinglePage;
 Queues.Messages = Messages;
-Queues.MessagePullResponsesSinglePage = MessagePullResponsesSinglePage;
 Queues.Purge = Purge;
 
 export declare namespace Queues {
@@ -364,7 +362,6 @@ export declare namespace Queues {
     type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
     type MessagePushResponse as MessagePushResponse,
-    MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
     type MessageAckParams as MessageAckParams,
     type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,

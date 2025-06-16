@@ -31,7 +31,8 @@ describe('resource accounts', () => {
 
   test('update: only required params', async () => {
     const responsePromise = client.accounts.update({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'Demo Account',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +46,8 @@ describe('resource accounts', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.accounts.update({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'Demo Account',
       settings: { abuse_contact_email: 'abuse_contact_email', enforce_twofactor: true },
     });
@@ -95,7 +97,7 @@ describe('resource accounts', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.accounts.get({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const responsePromise = client.accounts.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -106,6 +108,6 @@ describe('resource accounts', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.accounts.get({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const response = await client.accounts.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

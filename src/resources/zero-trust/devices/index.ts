@@ -1,6 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { DEXTests, type SchemaData, type SchemaHTTP } from './dex-tests';
+export {
+  DEXTestListResponsesSinglePage,
+  DEXTests,
+  type SchemaData,
+  type SchemaHTTP,
+  type DEXTestCreateResponse,
+  type DEXTestUpdateResponse,
+  type DEXTestListResponse,
+  type DEXTestDeleteResponse,
+  type DEXTestGetResponse,
+  type DEXTestCreateParams,
+  type DEXTestUpdateParams,
+  type DEXTestListParams,
+  type DEXTestDeleteParams,
+  type DEXTestGetParams,
+} from './dex-tests';
 export {
   DeviceListResponsesCursorPagination,
   type DeviceListResponse,
@@ -86,6 +101,7 @@ export {
   Settings,
   type DeviceSettings,
   type SettingUpdateParams,
+  type SettingDeleteParams,
   type SettingEditParams,
   type SettingGetParams,
 } from './settings';

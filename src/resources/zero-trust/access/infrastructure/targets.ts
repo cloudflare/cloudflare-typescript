@@ -108,16 +108,33 @@ export class Targets extends APIResource {
   /**
    * Removes one or more targets.
    *
-   * @example
-   * ```ts
-   * await client.zeroTrust.access.infrastructure.targets.bulkDelete(
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * @deprecated
    */
   bulkDelete(params: TargetBulkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/infrastructure/targets/batch`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
+  }
+
+  /**
+   * Removes one or more targets.
+   *
+   * @example
+   * ```ts
+   * await client.zeroTrust.access.infrastructure.targets.bulkDeleteV2(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     target_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+   *   },
+   * );
+   * ```
+   */
+  bulkDeleteV2(params: TargetBulkDeleteV2Params, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { account_id, ...body } = params;
+    return this._client.post(`/accounts/${account_id}/infrastructure/targets/batch_delete`, {
+      body,
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -832,6 +849,18 @@ export interface TargetBulkDeleteParams {
   account_id: string;
 }
 
+export interface TargetBulkDeleteV2Params {
+  /**
+   * Path param: Account identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: List of target IDs to bulk delete
+   */
+  target_ids: Array<string>;
+}
+
 export interface TargetBulkUpdateParams {
   /**
    * Path param: Account identifier
@@ -935,6 +964,7 @@ export declare namespace Targets {
     type TargetListParams as TargetListParams,
     type TargetDeleteParams as TargetDeleteParams,
     type TargetBulkDeleteParams as TargetBulkDeleteParams,
+    type TargetBulkDeleteV2Params as TargetBulkDeleteV2Params,
     type TargetBulkUpdateParams as TargetBulkUpdateParams,
     type TargetGetParams as TargetGetParams,
   };

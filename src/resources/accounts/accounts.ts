@@ -19,12 +19,10 @@ import { RoleGetParams, RoleListParams, Roles } from './roles';
 import * as SubscriptionsAPI from './subscriptions';
 import {
   SubscriptionCreateParams,
-  SubscriptionCreateResponse,
   SubscriptionDeleteParams,
   SubscriptionDeleteResponse,
   SubscriptionGetParams,
   SubscriptionUpdateParams,
-  SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
 import * as LogsAPI from './logs/logs';
@@ -74,7 +72,8 @@ export class Accounts extends APIResource {
    * @example
    * ```ts
    * const account = await client.accounts.update({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   name: 'Demo Account',
    * });
    * ```
@@ -144,7 +143,7 @@ export class Accounts extends APIResource {
    * @example
    * ```ts
    * const account = await client.accounts.get({
-   *   account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * });
    * ```
    */
@@ -246,6 +245,11 @@ export interface AccountUpdateParams {
   account_id: string;
 
   /**
+   * Body param: Identifier
+   */
+  id: string;
+
+  /**
    * Body param: Account name
    */
   name: string;
@@ -334,8 +338,6 @@ export declare namespace Accounts {
 
   export {
     Subscriptions as Subscriptions,
-    type SubscriptionCreateResponse as SubscriptionCreateResponse,
-    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,

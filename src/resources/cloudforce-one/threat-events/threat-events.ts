@@ -22,20 +22,6 @@ import * as CountriesAPI from './countries';
 import { Countries, CountryListParams, CountryListResponse } from './countries';
 import * as CronsAPI from './crons';
 import { CronEditParams, CronEditResponse, CronListParams, CronListResponse, Crons } from './crons';
-import * as DatasetsAPI from './datasets';
-import {
-  DatasetCreateParams,
-  DatasetCreateResponse,
-  DatasetEditParams,
-  DatasetEditResponse,
-  DatasetGetParams,
-  DatasetGetResponse,
-  DatasetListParams,
-  DatasetListResponse,
-  DatasetRawParams,
-  DatasetRawResponse,
-  Datasets,
-} from './datasets';
 import * as EventTagsAPI from './event-tags';
 import {
   EventTagCreateParams,
@@ -66,6 +52,20 @@ import * as TagsAPI from './tags';
 import { TagCreateParams, TagCreateResponse, Tags } from './tags';
 import * as TargetIndustriesAPI from './target-industries';
 import { TargetIndustries, TargetIndustryListParams, TargetIndustryListResponse } from './target-industries';
+import * as DatasetsAPI from './datasets/datasets';
+import {
+  DatasetCreateParams,
+  DatasetCreateResponse,
+  DatasetEditParams,
+  DatasetEditResponse,
+  DatasetGetParams,
+  DatasetGetResponse,
+  DatasetListParams,
+  DatasetListResponse,
+  DatasetRawParams,
+  DatasetRawResponse,
+  Datasets,
+} from './datasets/datasets';
 
 export class ThreatEvents extends APIResource {
   attackers: AttackersAPI.Attackers = new AttackersAPI.Attackers(this._client);
@@ -93,7 +93,7 @@ export class ThreatEvents extends APIResource {
    * ```ts
    * const threatEvent =
    *   await client.cloudforceOne.threatEvents.create({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *     attacker: 'Flying Yeti',
    *     attackerCountry: 'CN',
    *     category: 'Domain Resolution',
@@ -123,7 +123,7 @@ export class ThreatEvents extends APIResource {
    * ```ts
    * const threatEvents =
    *   await client.cloudforceOne.threatEvents.list({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *   });
    * ```
    */
@@ -146,7 +146,7 @@ export class ThreatEvents extends APIResource {
    * const threatEvent =
    *   await client.cloudforceOne.threatEvents.delete(
    *     'event_id',
-   *     { account_id: 0 },
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -169,7 +169,7 @@ export class ThreatEvents extends APIResource {
    * ```ts
    * const response =
    *   await client.cloudforceOne.threatEvents.bulkCreate({
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *     data: [
    *       {
    *         attacker: 'Flying Yeti',
@@ -205,7 +205,7 @@ export class ThreatEvents extends APIResource {
    * ```ts
    * const response =
    *   await client.cloudforceOne.threatEvents.edit('event_id', {
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *   });
    * ```
    */
@@ -228,7 +228,7 @@ export class ThreatEvents extends APIResource {
    * ```ts
    * const threatEvent =
    *   await client.cloudforceOne.threatEvents.get('event_id', {
-   *     account_id: 0,
+   *     account_id: 'account_id',
    *   });
    * ```
    */
@@ -539,7 +539,7 @@ export interface ThreatEventCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param:
@@ -626,7 +626,7 @@ export interface ThreatEventListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Query param:
@@ -690,14 +690,14 @@ export interface ThreatEventDeleteParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export interface ThreatEventBulkCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param:
@@ -756,7 +756,7 @@ export interface ThreatEventEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param:
@@ -813,7 +813,7 @@ export interface ThreatEventGetParams {
   /**
    * Account ID.
    */
-  account_id: number;
+  account_id: string;
 }
 
 ThreatEvents.Attackers = Attackers;

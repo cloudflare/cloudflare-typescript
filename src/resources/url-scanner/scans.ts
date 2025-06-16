@@ -164,7 +164,7 @@ export interface ScanCreateResponse {
   message: string;
 
   /**
-   * URL to report.
+   * Public URL to report.
    */
   result: string;
 
@@ -181,7 +181,7 @@ export interface ScanCreateResponse {
   /**
    * Submitted visibility status.
    */
-  visibility: string;
+  visibility: 'public' | 'unlisted';
 
   options?: ScanCreateResponse.Options;
 }
@@ -275,7 +275,7 @@ export namespace ScanBulkCreateResponse {
     /**
      * Submitted visibility status.
      */
-    visibility: string;
+    visibility: 'public' | 'unlisted';
 
     options?: ScanBulkCreateResponseItem.Options;
   }
@@ -533,7 +533,7 @@ export namespace ScanGetResponse {
 
           geonameId: string;
 
-          ll: Array<unknown>;
+          ll: Array<number>;
 
           region: string;
         }
@@ -1331,7 +1331,7 @@ export interface ScanCreateParams {
   url: string;
 
   /**
-   * Body param:
+   * Body param: Country to geo egress from
    */
   country?:
     | 'AF'

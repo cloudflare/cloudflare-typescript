@@ -30,7 +30,8 @@ describe('resource searches', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 1,
-      search_params: { query: 'primary', references: '*' },
+      query: 'primary',
+      references: '*',
     });
   });
 });

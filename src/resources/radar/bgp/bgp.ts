@@ -70,16 +70,49 @@ export interface BGPTimeseriesResponse {
 
 export namespace BGPTimeseriesResponse {
   export interface Meta {
-    aggInterval: string;
+    aggInterval: '15m' | '1h' | '1d' | '1w';
+
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
-
-    confidenceInfo?: Meta.ConfidenceInfo;
   }
 
   export namespace Meta {
+    export interface ConfidenceInfo {
+      annotations: Array<ConfidenceInfo.Annotation>;
+
+      /**
+       * Provides an indication of how much confidence Cloudflare has in the data.
+       */
+      level: number;
+    }
+
+    export namespace ConfidenceInfo {
+      /**
+       * Annotation associated with the result (e.g. outage or other type of event).
+       */
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        endDate: string;
+
+        eventType: string;
+
+        /**
+         * Whether event is a single point in time or a time range.
+         */
+        isInstantaneous: boolean;
+
+        linkedUrl: string;
+
+        startDate: string;
+      }
+    }
+
     export interface DateRange {
       /**
        * Adjusted end of date range.
@@ -90,30 +123,6 @@ export namespace BGPTimeseriesResponse {
        * Adjusted start of date range.
        */
       startTime: string;
-    }
-
-    export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
-
-      level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: boolean;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 

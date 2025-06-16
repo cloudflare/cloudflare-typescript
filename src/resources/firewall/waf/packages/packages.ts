@@ -39,15 +39,7 @@ export class Packages extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const packageListResponse of client.firewall.waf.packages.list(
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     params: PackageListParams,
@@ -67,13 +59,7 @@ export class Packages extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    *
-   * @example
-   * ```ts
-   * const _package = await client.firewall.waf.packages.get(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * @deprecated
    */
   get(
     packageId: string,
