@@ -214,6 +214,38 @@ describe('instantiate client', () => {
       });
       expect(client.baseURL).toEqual('https://api.cloudflare.com/client/v4');
     });
+
+    test('in request options', () => {
+      const client = new Cloudflare({
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/option/foo',
+      );
+    });
+
+    test('in request options overridden by client options', () => {
+      const client = new Cloudflare({
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+        baseURL: 'http://localhost:5000/client',
+      });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/client/foo',
+      );
+    });
+
+    test('in request options overridden by env variable', () => {
+      process.env['CLOUDFLARE_BASE_URL'] = 'http://localhost:5000/env';
+      const client = new Cloudflare({
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/env/foo',
+      );
+    });
   });
 
   test('maxRetries option is correctly set', () => {
