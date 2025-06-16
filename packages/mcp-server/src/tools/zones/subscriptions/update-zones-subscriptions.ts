@@ -1,0 +1,97 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { asTextContentResult } from 'cloudflare-mcp/tools/types';
+
+import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import type { Metadata } from '../../';
+import Cloudflare from 'cloudflare';
+
+export const metadata: Metadata = {
+  resource: 'zones.subscriptions',
+  operation: 'write',
+  tags: [],
+  httpMethod: 'put',
+  httpPath: '/zones/{zone_id}/subscription',
+  operationId: 'zone-subscription-update-zone-subscription',
+};
+
+export const tool: Tool = {
+  name: 'update_zones_subscriptions',
+  description: 'Updates zone subscriptions, either plan or add-ons.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      zone_id: {
+        type: 'string',
+        description: 'Subscription identifier tag.',
+      },
+      frequency: {
+        type: 'string',
+        description: 'How often the subscription is renewed automatically.',
+        enum: ['weekly', 'monthly', 'quarterly', 'yearly'],
+      },
+      rate_plan: {
+        $ref: '#/$defs/rate_plan',
+      },
+    },
+    $defs: {
+      rate_plan: {
+        type: 'object',
+        description: 'The rate plan applied to the subscription.',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'The ID of the rate plan.',
+            enum: [
+              'free',
+              'lite',
+              'pro',
+              'pro_plus',
+              'business',
+              'enterprise',
+              'partners_free',
+              'partners_pro',
+              'partners_business',
+              'partners_enterprise',
+            ],
+          },
+          currency: {
+            type: 'string',
+            description: 'The currency applied to the rate plan subscription.',
+          },
+          externally_managed: {
+            type: 'boolean',
+            description: 'Whether this rate plan is managed externally from Cloudflare.',
+          },
+          is_contract: {
+            type: 'boolean',
+            description: 'Whether a rate plan is enterprise-based (or newly adopted term contract).',
+          },
+          public_name: {
+            type: 'string',
+            description: 'The full name of the rate plan.',
+          },
+          scope: {
+            type: 'string',
+            description: 'The scope that this rate plan applies to.',
+          },
+          sets: {
+            type: 'array',
+            description: 'The list of sets this rate plan applies to.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: [],
+      },
+    },
+  },
+};
+
+export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
+  return asTextContentResult(await client.zones.subscriptions.update(body));
+};
+
+export default { metadata, tool, handler };

@@ -91,5 +91,10 @@ export {
   type SettingEditParams,
   type SettingGetParams,
 } from './settings';
-export { Subscriptions } from './subscriptions';
+export {
+  Subscriptions,
+  type SubscriptionCreateParams,
+  type SubscriptionUpdateParams,
+  type SubscriptionGetParams,
+} from './subscriptions';
 export { Zones } from './zones';

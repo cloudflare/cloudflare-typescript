@@ -92,7 +92,12 @@ import {
   ZeroRTT,
 } from './settings';
 import * as SubscriptionsAPI from './subscriptions';
-import { Subscriptions } from './subscriptions';
+import {
+  SubscriptionCreateParams,
+  SubscriptionGetParams,
+  SubscriptionUpdateParams,
+  Subscriptions,
+} from './subscriptions';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -731,7 +736,12 @@ export declare namespace Zones {
     type HoldGetParams as HoldGetParams,
   };
 
-  export { Subscriptions as Subscriptions };
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+    type SubscriptionGetParams as SubscriptionGetParams,
+  };
 
   export {
     Plans as Plans,
