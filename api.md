@@ -392,6 +392,12 @@ Methods:
 
 ## Subscriptions
 
+Methods:
+
+- <code title="post /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>({ ...params }) -> Subscription</code>
+- <code title="put /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">update</a>({ ...params }) -> Subscription</code>
+- <code title="get /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>({ ...params }) -> Subscription</code>
+
 ## Plans
 
 Types:
