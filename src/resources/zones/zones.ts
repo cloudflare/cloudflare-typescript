@@ -94,14 +94,7 @@ import {
   ZeroRTT,
 } from './settings';
 import * as SubscriptionsAPI from './subscriptions';
-import {
-  SubscriptionCreateParams,
-  SubscriptionCreateResponse,
-  SubscriptionGetResponse,
-  SubscriptionUpdateParams,
-  SubscriptionUpdateResponse,
-  Subscriptions,
-} from './subscriptions';
+import { Subscriptions } from './subscriptions';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Zones extends APIResource {
@@ -752,14 +745,7 @@ export declare namespace Zones {
     type HoldGetParams as HoldGetParams,
   };
 
-  export {
-    Subscriptions as Subscriptions,
-    type SubscriptionCreateResponse as SubscriptionCreateResponse,
-    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
-    type SubscriptionGetResponse as SubscriptionGetResponse,
-    type SubscriptionCreateParams as SubscriptionCreateParams,
-    type SubscriptionUpdateParams as SubscriptionUpdateParams,
-  };
+  export { Subscriptions as Subscriptions };
 
   export {
     Plans as Plans,

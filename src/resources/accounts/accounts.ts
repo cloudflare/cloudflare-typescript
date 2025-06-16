@@ -19,12 +19,10 @@ import { RoleGetParams, RoleListParams, Roles } from './roles';
 import * as SubscriptionsAPI from './subscriptions';
 import {
   SubscriptionCreateParams,
-  SubscriptionCreateResponse,
   SubscriptionDeleteParams,
   SubscriptionDeleteResponse,
   SubscriptionGetParams,
   SubscriptionUpdateParams,
-  SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
 import * as LogsAPI from './logs/logs';
@@ -340,8 +338,6 @@ export declare namespace Accounts {
 
   export {
     Subscriptions as Subscriptions,
-    type SubscriptionCreateResponse as SubscriptionCreateResponse,
-    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
