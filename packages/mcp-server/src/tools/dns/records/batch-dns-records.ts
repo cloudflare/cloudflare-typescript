@@ -72,6 +72,9 @@ export const tool: Tool = {
                   type: 'string',
                   description: 'DNS record name (or @ for the zone apex) in Punycode.',
                 },
+                ttl: {
+                  $ref: '#/$defs/ttl',
+                },
                 type: {
                   type: 'string',
                   description: 'Record type.',
@@ -116,11 +119,8 @@ export const tool: Tool = {
                     $ref: '#/$defs/record_tags',
                   },
                 },
-                ttl: {
-                  $ref: '#/$defs/ttl',
-                },
               },
-              required: ['name', 'type'],
+              required: ['name', 'ttl', 'type'],
             },
             {
               $ref: '#/$defs/ptr_record',
@@ -232,6 +232,9 @@ export const tool: Tool = {
                 type: 'string',
                 description: 'DNS record name (or @ for the zone apex) in Punycode.',
               },
+              ttl: {
+                $ref: '#/$defs/ttl',
+              },
               type: {
                 type: 'string',
                 description: 'Record type.',
@@ -276,11 +279,8 @@ export const tool: Tool = {
                   $ref: '#/$defs/record_tags',
                 },
               },
-              ttl: {
-                $ref: '#/$defs/ttl',
-              },
             },
-            required: ['id', 'name', 'type'],
+            required: ['id', 'name', 'ttl', 'type'],
           },
           {
             allOf: [
@@ -412,6 +412,9 @@ export const tool: Tool = {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
           },
+          ttl: {
+            $ref: '#/$defs/ttl',
+          },
           type: {
             type: 'string',
             description: 'Record type.',
@@ -454,16 +457,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
-      },
-      record_tags: {
-        type: 'string',
-        description:
-          'Individual tag of the form name:value (the name must consist of only letters, numbers, underscores and hyphens)',
+        required: ['name', 'ttl', 'type'],
       },
       ttl: {
         anyOf: [
@@ -480,6 +475,11 @@ export const tool: Tool = {
         description:
           "Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30 for Enterprise zones.",
       },
+      record_tags: {
+        type: 'string',
+        description:
+          'Individual tag of the form name:value (the name must consist of only letters, numbers, underscores and hyphens)',
+      },
       aaaa_record: {
         type: 'object',
         title: 'AAAA Record',
@@ -487,6 +487,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -530,11 +533,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       cname_record: {
         type: 'object',
@@ -543,6 +543,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -591,11 +594,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       mx_record: {
         type: 'object',
@@ -604,6 +604,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -652,11 +655,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       ns_record: {
         type: 'object',
@@ -665,6 +665,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -708,11 +711,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       ptr_record: {
         type: 'object',
@@ -721,6 +721,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -764,11 +767,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       txt_record: {
         type: 'object',
@@ -777,6 +777,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -821,11 +824,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       caa_record: {
         type: 'object',
@@ -834,6 +834,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -897,11 +900,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       cert_record: {
         type: 'object',
@@ -910,6 +910,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -976,11 +979,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       dnskey_record: {
         type: 'object',
@@ -989,6 +989,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1055,11 +1058,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       ds_record: {
         type: 'object',
@@ -1068,6 +1068,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1134,11 +1137,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       https_record: {
         type: 'object',
@@ -1147,6 +1147,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1209,11 +1212,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       loc_record: {
         type: 'object',
@@ -1222,6 +1222,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1322,11 +1325,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       naptr_record: {
         type: 'object',
@@ -1335,6 +1335,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1409,11 +1412,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       smimea_record: {
         type: 'object',
@@ -1422,6 +1422,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1488,11 +1491,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       srv_record: {
         type: 'object',
@@ -1501,6 +1501,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1569,11 +1572,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       sshfp_record: {
         type: 'object',
@@ -1582,6 +1582,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1644,11 +1647,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       svcb_record: {
         type: 'object',
@@ -1657,6 +1657,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1719,11 +1722,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       tlsa_record: {
         type: 'object',
@@ -1732,6 +1732,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1798,11 +1801,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       uri_record: {
         type: 'object',
@@ -1811,6 +1811,9 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'DNS record name (or @ for the zone apex) in Punycode.',
+          },
+          ttl: {
+            $ref: '#/$defs/ttl',
           },
           type: {
             type: 'string',
@@ -1874,11 +1877,8 @@ export const tool: Tool = {
               $ref: '#/$defs/record_tags',
             },
           },
-          ttl: {
-            $ref: '#/$defs/ttl',
-          },
         },
-        required: ['name', 'type'],
+        required: ['name', 'ttl', 'type'],
       },
       batch_put: {
         anyOf: [
@@ -1934,6 +1934,9 @@ export const tool: Tool = {
                 type: 'string',
                 description: 'DNS record name (or @ for the zone apex) in Punycode.',
               },
+              ttl: {
+                $ref: '#/$defs/ttl',
+              },
               type: {
                 type: 'string',
                 description: 'Record type.',
@@ -1978,11 +1981,8 @@ export const tool: Tool = {
                   $ref: '#/$defs/record_tags',
                 },
               },
-              ttl: {
-                $ref: '#/$defs/ttl',
-              },
             },
-            required: ['id', 'name', 'type'],
+            required: ['id', 'name', 'ttl', 'type'],
           },
           {
             allOf: [
