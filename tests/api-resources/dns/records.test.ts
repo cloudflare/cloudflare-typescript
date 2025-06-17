@@ -15,6 +15,7 @@ describe('resource records', () => {
     const responsePromise = client.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example.com',
+      ttl: 3600,
       type: 'A',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -31,13 +32,13 @@ describe('resource records', () => {
     const response = await client.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example.com',
+      ttl: 3600,
       type: 'A',
       comment: 'Domain verification record',
       content: '198.51.100.4',
       proxied: true,
       settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
-      ttl: 3600,
     });
   });
 
@@ -46,6 +47,7 @@ describe('resource records', () => {
     const responsePromise = client.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example.com',
+      ttl: 3600,
       type: 'A',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -62,13 +64,13 @@ describe('resource records', () => {
     const response = await client.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example.com',
+      ttl: 3600,
       type: 'A',
       comment: 'Domain verification record',
       content: '198.51.100.4',
       proxied: true,
       settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
-      ttl: 3600,
     });
   });
 
@@ -162,38 +164,38 @@ describe('resource records', () => {
       patches: [
         {
           name: 'example.com',
+          ttl: 3600,
           type: 'A',
           comment: 'Domain verification record',
           content: '198.51.100.4',
           proxied: true,
           settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
-          ttl: 3600,
           id: '023e105f4ecef8ad9ca31a8372d0c353',
         },
       ],
       posts: [
         {
           name: 'example.com',
+          ttl: 3600,
           type: 'A',
           comment: 'Domain verification record',
           content: '198.51.100.4',
           proxied: true,
           settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
-          ttl: 3600,
         },
       ],
       puts: [
         {
           name: 'example.com',
+          ttl: 3600,
           type: 'A',
           comment: 'Domain verification record',
           content: '198.51.100.4',
           proxied: true,
           settings: { ipv4_only: true, ipv6_only: true },
           tags: ['owner:dns-team'],
-          ttl: 3600,
           id: '023e105f4ecef8ad9ca31a8372d0c353',
         },
       ],
@@ -205,6 +207,7 @@ describe('resource records', () => {
     const responsePromise = client.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example.com',
+      ttl: 3600,
       type: 'A',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -221,13 +224,13 @@ describe('resource records', () => {
     const response = await client.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example.com',
+      ttl: 3600,
       type: 'A',
       comment: 'Domain verification record',
       content: '198.51.100.4',
       proxied: true,
       settings: { ipv4_only: true, ipv6_only: true },
       tags: ['owner:dns-team'],
-      ttl: 3600,
     });
   });
 
