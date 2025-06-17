@@ -26,6 +26,7 @@ export class Records extends APIResource {
    * const recordResponse = await client.dns.records.create({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   name: 'example.com',
+   *   ttl: 3600,
    *   type: 'A',
    * });
    * ```
@@ -56,6 +57,7 @@ export class Records extends APIResource {
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     name: 'example.com',
+   *     ttl: 3600,
    *     type: 'A',
    *   },
    * );
@@ -176,6 +178,7 @@ export class Records extends APIResource {
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     name: 'example.com',
+   *     ttl: 3600,
    *     type: 'A',
    *   },
    * );
@@ -294,6 +297,13 @@ export interface ARecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'A';
@@ -324,13 +334,6 @@ export interface ARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace ARecord {
@@ -363,6 +366,13 @@ export interface ARecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'A';
@@ -393,13 +403,6 @@ export interface ARecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace ARecordParam {
@@ -432,6 +435,13 @@ export interface AAAARecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'AAAA';
@@ -462,13 +472,6 @@ export interface AAAARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace AAAARecord {
@@ -501,6 +504,13 @@ export interface AAAARecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'AAAA';
@@ -531,13 +541,6 @@ export interface AAAARecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace AAAARecordParam {
@@ -634,6 +637,13 @@ export namespace BatchPatch {
     name: string;
 
     /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTL;
+
+    /**
      * Record type.
      */
     type: 'OPENPGPKEY';
@@ -664,13 +674,6 @@ export namespace BatchPatch {
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
   }
 
   export namespace OpenpgpkeyRecord {
@@ -873,6 +876,13 @@ export namespace BatchPatchParam {
     name: string;
 
     /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTLParam;
+
+    /**
      * Record type.
      */
     type: 'OPENPGPKEY';
@@ -903,13 +913,6 @@ export namespace BatchPatchParam {
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTagsParam>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTLParam;
   }
 
   export namespace OpenpgpkeyRecord {
@@ -1112,6 +1115,13 @@ export namespace BatchPut {
     name: string;
 
     /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTL;
+
+    /**
      * Record type.
      */
     type: 'OPENPGPKEY';
@@ -1142,13 +1152,6 @@ export namespace BatchPut {
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
   }
 
   export namespace OpenpgpkeyRecord {
@@ -1351,6 +1354,13 @@ export namespace BatchPutParam {
     name: string;
 
     /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTLParam;
+
+    /**
      * Record type.
      */
     type: 'OPENPGPKEY';
@@ -1381,13 +1391,6 @@ export namespace BatchPutParam {
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTagsParam>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTLParam;
   }
 
   export namespace OpenpgpkeyRecord {
@@ -1526,6 +1529,13 @@ export interface CAARecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'CAA';
@@ -1561,13 +1571,6 @@ export interface CAARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace CAARecord {
@@ -1620,6 +1623,13 @@ export interface CAARecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'CAA';
@@ -1650,13 +1660,6 @@ export interface CAARecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace CAARecordParam {
@@ -1709,6 +1712,13 @@ export interface CERTRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'CERT';
@@ -1744,13 +1754,6 @@ export interface CERTRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace CERTRecord {
@@ -1808,6 +1811,13 @@ export interface CERTRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'CERT';
@@ -1838,13 +1848,6 @@ export interface CERTRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace CERTRecordParam {
@@ -1902,6 +1905,13 @@ export interface CNAMERecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'CNAME';
@@ -1932,13 +1942,6 @@ export interface CNAMERecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace CNAMERecord {
@@ -1979,6 +1982,13 @@ export interface CNAMERecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'CNAME';
@@ -2009,13 +2019,6 @@ export interface CNAMERecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace CNAMERecordParam {
@@ -2056,6 +2059,13 @@ export interface DNSKEYRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'DNSKEY';
@@ -2091,13 +2101,6 @@ export interface DNSKEYRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace DNSKEYRecord {
@@ -2155,6 +2158,13 @@ export interface DNSKEYRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'DNSKEY';
@@ -2185,13 +2195,6 @@ export interface DNSKEYRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace DNSKEYRecordParam {
@@ -2249,6 +2252,13 @@ export interface DSRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'DS';
@@ -2284,13 +2294,6 @@ export interface DSRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace DSRecord {
@@ -2348,6 +2351,13 @@ export interface DSRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'DS';
@@ -2378,13 +2388,6 @@ export interface DSRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace DSRecordParam {
@@ -2442,6 +2445,13 @@ export interface HTTPSRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'HTTPS';
@@ -2477,13 +2487,6 @@ export interface HTTPSRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace HTTPSRecord {
@@ -2536,6 +2539,13 @@ export interface HTTPSRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'HTTPS';
@@ -2566,13 +2576,6 @@ export interface HTTPSRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace HTTPSRecordParam {
@@ -2625,6 +2628,13 @@ export interface LOCRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'LOC';
@@ -2660,13 +2670,6 @@ export interface LOCRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace LOCRecord {
@@ -2764,6 +2767,13 @@ export interface LOCRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'LOC';
@@ -2794,13 +2804,6 @@ export interface LOCRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace LOCRecordParam {
@@ -2898,6 +2901,13 @@ export interface MXRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'MX';
@@ -2934,13 +2944,6 @@ export interface MXRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace MXRecord {
@@ -2971,6 +2974,13 @@ export interface MXRecordParam {
    * DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
+
+  /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
 
   /**
    * Record type.
@@ -3009,13 +3019,6 @@ export interface MXRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace MXRecordParam {
@@ -3046,6 +3049,13 @@ export interface NAPTRRecord {
    * DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
+
+  /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
 
   /**
    * Record type.
@@ -3083,13 +3093,6 @@ export interface NAPTRRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace NAPTRRecord {
@@ -3157,6 +3160,13 @@ export interface NAPTRRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'NAPTR';
@@ -3187,13 +3197,6 @@ export interface NAPTRRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace NAPTRRecordParam {
@@ -3261,6 +3264,13 @@ export interface NSRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'NS';
@@ -3291,13 +3301,6 @@ export interface NSRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace NSRecord {
@@ -3330,6 +3333,13 @@ export interface NSRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'NS';
@@ -3360,13 +3370,6 @@ export interface NSRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace NSRecordParam {
@@ -3399,6 +3402,13 @@ export interface PTRRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'PTR';
@@ -3429,13 +3439,6 @@ export interface PTRRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace PTRRecord {
@@ -3468,6 +3471,13 @@ export interface PTRRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'PTR';
@@ -3498,13 +3508,6 @@ export interface PTRRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace PTRRecordParam {
@@ -3561,6 +3564,13 @@ export namespace Record {
     name: string;
 
     /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTL;
+
+    /**
      * Record type.
      */
     type: 'OPENPGPKEY';
@@ -3591,13 +3601,6 @@ export namespace Record {
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTL;
   }
 
   export namespace Openpgpkey {
@@ -4512,6 +4515,13 @@ export interface SMIMEARecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'SMIMEA';
@@ -4547,13 +4557,6 @@ export interface SMIMEARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace SMIMEARecord {
@@ -4611,6 +4614,13 @@ export interface SMIMEARecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'SMIMEA';
@@ -4641,13 +4651,6 @@ export interface SMIMEARecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace SMIMEARecordParam {
@@ -4705,6 +4708,13 @@ export interface SRVRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'SRV';
@@ -4741,13 +4751,6 @@ export interface SRVRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace SRVRecord {
@@ -4806,6 +4809,13 @@ export interface SRVRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'SRV';
@@ -4836,13 +4846,6 @@ export interface SRVRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace SRVRecordParam {
@@ -4901,6 +4904,13 @@ export interface SSHFPRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'SSHFP';
@@ -4936,13 +4946,6 @@ export interface SSHFPRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace SSHFPRecord {
@@ -4995,6 +4998,13 @@ export interface SSHFPRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'SSHFP';
@@ -5025,13 +5035,6 @@ export interface SSHFPRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace SSHFPRecordParam {
@@ -5084,6 +5087,13 @@ export interface SVCBRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'SVCB';
@@ -5119,13 +5129,6 @@ export interface SVCBRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace SVCBRecord {
@@ -5178,6 +5181,13 @@ export interface SVCBRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'SVCB';
@@ -5208,13 +5218,6 @@ export interface SVCBRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace SVCBRecordParam {
@@ -5267,6 +5270,13 @@ export interface TLSARecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'TLSA';
@@ -5302,13 +5312,6 @@ export interface TLSARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace TLSARecord {
@@ -5366,6 +5369,13 @@ export interface TLSARecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'TLSA';
@@ -5396,13 +5406,6 @@ export interface TLSARecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace TLSARecordParam {
@@ -5474,6 +5477,13 @@ export interface TXTRecord {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
+
+  /**
    * Record type.
    */
   type: 'TXT';
@@ -5509,13 +5519,6 @@ export interface TXTRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace TXTRecord {
@@ -5546,6 +5549,13 @@ export interface TXTRecordParam {
    * DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
+
+  /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
 
   /**
    * Record type.
@@ -5583,13 +5593,6 @@ export interface TXTRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace TXTRecordParam {
@@ -5620,6 +5623,13 @@ export interface URIRecord {
    * DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
+
+  /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTL;
 
   /**
    * Record type.
@@ -5663,13 +5673,6 @@ export interface URIRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
 }
 
 export namespace URIRecord {
@@ -5717,6 +5720,13 @@ export interface URIRecordParam {
   name: string;
 
   /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl: TTLParam;
+
+  /**
    * Record type.
    */
   type: 'URI';
@@ -5753,13 +5763,6 @@ export interface URIRecordParam {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
 }
 
 export namespace URIRecordParam {
@@ -5882,6 +5885,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'A';
@@ -5913,13 +5923,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace ARecord {
@@ -5957,6 +5960,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'AAAA';
@@ -5988,13 +5998,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace AAAARecord {
@@ -6032,6 +6035,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CNAME';
@@ -6063,13 +6073,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CNAMERecord {
@@ -6115,6 +6118,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'MX';
@@ -6152,13 +6162,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace MXRecord {
@@ -6196,6 +6199,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'NS';
@@ -6227,13 +6237,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace NSRecord {
@@ -6271,6 +6274,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
@@ -6303,13 +6313,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DNSRecordsOpenpgpkeyRecord {
@@ -6347,6 +6350,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'PTR';
@@ -6378,13 +6388,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace PTRRecord {
@@ -6420,6 +6423,13 @@ export declare namespace RecordCreateParams {
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
      */
     name: string;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
 
     /**
      * Body param: Record type.
@@ -6458,13 +6468,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace TXTRecord {
@@ -6502,6 +6505,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CAA';
@@ -6533,13 +6543,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CAARecord {
@@ -6597,6 +6600,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CERT';
@@ -6628,13 +6638,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CERTRecord {
@@ -6697,6 +6700,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'DNSKEY';
@@ -6728,13 +6738,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DNSKEYRecord {
@@ -6797,6 +6800,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'DS';
@@ -6828,13 +6838,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DSRecord {
@@ -6897,6 +6900,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'HTTPS';
@@ -6928,13 +6938,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace HTTPSRecord {
@@ -6992,6 +6995,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'LOC';
@@ -7023,13 +7033,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace LOCRecord {
@@ -7132,6 +7135,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'NAPTR';
@@ -7163,13 +7173,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace NAPTRRecord {
@@ -7242,6 +7245,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SMIMEA';
@@ -7273,13 +7283,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SMIMEARecord {
@@ -7342,6 +7345,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SRV';
@@ -7373,13 +7383,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SRVRecord {
@@ -7443,6 +7446,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SSHFP';
@@ -7474,13 +7484,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SSHFPRecord {
@@ -7538,6 +7541,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SVCB';
@@ -7569,13 +7579,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SVCBRecord {
@@ -7633,6 +7636,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'TLSA';
@@ -7664,13 +7674,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace TLSARecord {
@@ -7733,6 +7736,13 @@ export declare namespace RecordCreateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'URI';
@@ -7770,13 +7780,6 @@ export declare namespace RecordCreateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace URIRecord {
@@ -7854,6 +7857,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'A';
@@ -7885,13 +7895,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace ARecord {
@@ -7929,6 +7932,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'AAAA';
@@ -7960,13 +7970,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace AAAARecord {
@@ -8004,6 +8007,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CNAME';
@@ -8035,13 +8045,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CNAMERecord {
@@ -8087,6 +8090,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'MX';
@@ -8124,13 +8134,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace MXRecord {
@@ -8168,6 +8171,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'NS';
@@ -8199,13 +8209,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace NSRecord {
@@ -8243,6 +8246,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
@@ -8275,13 +8285,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DNSRecordsOpenpgpkeyRecord {
@@ -8319,6 +8322,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'PTR';
@@ -8350,13 +8360,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace PTRRecord {
@@ -8392,6 +8395,13 @@ export declare namespace RecordUpdateParams {
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
      */
     name: string;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
 
     /**
      * Body param: Record type.
@@ -8430,13 +8440,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace TXTRecord {
@@ -8474,6 +8477,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CAA';
@@ -8505,13 +8515,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CAARecord {
@@ -8569,6 +8572,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CERT';
@@ -8600,13 +8610,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CERTRecord {
@@ -8669,6 +8672,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'DNSKEY';
@@ -8700,13 +8710,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DNSKEYRecord {
@@ -8769,6 +8772,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'DS';
@@ -8800,13 +8810,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DSRecord {
@@ -8869,6 +8872,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'HTTPS';
@@ -8900,13 +8910,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace HTTPSRecord {
@@ -8964,6 +8967,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'LOC';
@@ -8995,13 +9005,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace LOCRecord {
@@ -9104,6 +9107,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'NAPTR';
@@ -9135,13 +9145,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace NAPTRRecord {
@@ -9214,6 +9217,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SMIMEA';
@@ -9245,13 +9255,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SMIMEARecord {
@@ -9314,6 +9317,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SRV';
@@ -9345,13 +9355,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SRVRecord {
@@ -9415,6 +9418,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SSHFP';
@@ -9446,13 +9456,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SSHFPRecord {
@@ -9510,6 +9513,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SVCB';
@@ -9541,13 +9551,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SVCBRecord {
@@ -9605,6 +9608,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'TLSA';
@@ -9636,13 +9646,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace TLSARecord {
@@ -9705,6 +9708,13 @@ export declare namespace RecordUpdateParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'URI';
@@ -9742,13 +9752,6 @@ export declare namespace RecordUpdateParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace URIRecord {
@@ -10076,6 +10079,13 @@ export namespace RecordBatchParams {
     name: string;
 
     /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTLParam;
+
+    /**
      * Record type.
      */
     type: 'OPENPGPKEY';
@@ -10106,13 +10116,6 @@ export namespace RecordBatchParams {
      * Custom tags for the DNS record. This field has no effect on DNS responses.
      */
     tags?: Array<RecordsAPI.RecordTagsParam>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: RecordsAPI.TTLParam;
   }
 
   export namespace DNSRecordsOpenpgpkeyRecord {
@@ -10175,6 +10178,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'A';
@@ -10206,13 +10216,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace ARecord {
@@ -10250,6 +10253,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'AAAA';
@@ -10281,13 +10291,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace AAAARecord {
@@ -10325,6 +10328,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CNAME';
@@ -10356,13 +10366,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CNAMERecord {
@@ -10408,6 +10411,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'MX';
@@ -10445,13 +10455,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace MXRecord {
@@ -10489,6 +10492,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'NS';
@@ -10520,13 +10530,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace NSRecord {
@@ -10564,6 +10567,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
@@ -10596,13 +10606,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DNSRecordsOpenpgpkeyRecord {
@@ -10640,6 +10643,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'PTR';
@@ -10671,13 +10681,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace PTRRecord {
@@ -10713,6 +10716,13 @@ export declare namespace RecordEditParams {
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
      */
     name: string;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
 
     /**
      * Body param: Record type.
@@ -10751,13 +10761,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace TXTRecord {
@@ -10795,6 +10798,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CAA';
@@ -10826,13 +10836,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CAARecord {
@@ -10890,6 +10893,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'CERT';
@@ -10921,13 +10931,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace CERTRecord {
@@ -10990,6 +10993,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'DNSKEY';
@@ -11021,13 +11031,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DNSKEYRecord {
@@ -11090,6 +11093,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'DS';
@@ -11121,13 +11131,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace DSRecord {
@@ -11190,6 +11193,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'HTTPS';
@@ -11221,13 +11231,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace HTTPSRecord {
@@ -11285,6 +11288,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'LOC';
@@ -11316,13 +11326,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace LOCRecord {
@@ -11425,6 +11428,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'NAPTR';
@@ -11456,13 +11466,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace NAPTRRecord {
@@ -11535,6 +11538,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SMIMEA';
@@ -11566,13 +11576,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SMIMEARecord {
@@ -11635,6 +11638,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SRV';
@@ -11666,13 +11676,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SRVRecord {
@@ -11736,6 +11739,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SSHFP';
@@ -11767,13 +11777,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SSHFPRecord {
@@ -11831,6 +11834,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'SVCB';
@@ -11862,13 +11872,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace SVCBRecord {
@@ -11926,6 +11929,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'TLSA';
@@ -11957,13 +11967,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace TLSARecord {
@@ -12026,6 +12029,13 @@ export declare namespace RecordEditParams {
     name: string;
 
     /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl: TTLParam;
+
+    /**
      * Body param: Record type.
      */
     type: 'URI';
@@ -12063,13 +12073,6 @@ export declare namespace RecordEditParams {
      * responses.
      */
     tags?: Array<RecordTagsParam>;
-
-    /**
-     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
-     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
-     * for Enterprise zones.
-     */
-    ttl?: TTLParam;
   }
 
   export namespace URIRecord {
