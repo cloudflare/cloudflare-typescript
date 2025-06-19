@@ -114,6 +114,8 @@ import { Zaraz } from './resources/zaraz/zaraz';
 import { ZeroTrust } from './resources/zero-trust/zero-trust';
 import { Zones } from './resources/zones/zones';
 
+const API_BASE_URL = 'https://api.cloudflare.com/client/v4';
+
 export interface ClientOptions {
   /**
    * The preferred authorization scheme for interacting with the Cloudflare API. [Create a token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
@@ -122,28 +124,36 @@ export interface ClientOptions {
 
   /**
    * The previous authorization scheme for interacting with the Cloudflare API. When possible, use API tokens instead of Global API keys.
+   *
+   * Defaults to process.env.CLOUDFLARE_API_KEY
    */
   apiKey?: string | null | undefined;
 
   /**
    * The previous authorization scheme for interacting with the Cloudflare API, used in conjunction with a Global API key.
+   *
+   * Defaults to process.env.CLOUDFLARE_EMAIL
    */
   apiEmail?: string | null | undefined;
 
   /**
    * Used when interacting with the Origin CA certificates API. [View/change your key](https://developers.cloudflare.com/fundamentals/api/get-started/ca-keys/#viewchange-your-origin-ca-keys).
+   *
+   * Defaults to process.env.CLOUDFLARE_API_USER_SERVICE_KEY
    */
   userServiceKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['CLOUDFLARE_BASE_URL'].
+   * Defaults to process.env.CLOUDFLARE_BASE_URL ?? API_BASE_URL
    */
   baseURL?: string | null | undefined;
 
   /**
    * Define the API version to target for the requests, e.g., "2025-01-01"
+   *
+   * Defaults to the current date.
    */
   apiVersion?: string | null;
 
@@ -215,7 +225,7 @@ export class Cloudflare extends Core.APIClient {
    * @param {string | null | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? null]
    * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
    * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
-   * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? API_BASE_URL] - Override the default base URL for the API.
    * @param {string | null} [opts.apiVersion] - Define the version to target for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -239,14 +249,14 @@ export class Cloudflare extends Core.APIClient {
       apiEmail,
       userServiceKey,
       ...opts,
-      baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
+      baseURL: baseURL || API_BASE_URL,
       apiVersion: apiVersion || new Date().toISOString().slice(0, 10),
     };
 
     super({
       baseURL: options.baseURL!,
       apiVersion: options.apiVersion!,
-      baseURLOverridden: baseURL ? baseURL !== 'https://api.cloudflare.com/client/v4' : false,
+      baseURLOverridden: baseURL ? baseURL !== API_BASE_URL : false,
       timeout: options.timeout ?? 60000 /* 1 minute */,
       httpAgent: options.httpAgent,
       maxRetries: options.maxRetries,
