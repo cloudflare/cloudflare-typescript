@@ -25,7 +25,6 @@ export class Values extends APIResource {
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     namespace_id: '0f2ac74b498b48028cb68387c421e279',
-   *     metadata: '{"someMetadataKey": "someMetadataValue"}',
    *     value: 'Some Value',
    *   },
    * );
@@ -45,7 +44,7 @@ export class Values extends APIResource {
             query: { expiration, expiration_ttl },
             body,
             ...options,
-            headers: buildHeaders([{ 'Content-Type': '*/*' }, options?.headers]),
+            headers: buildHeaders([{ 'Content-Type': 'application/octet-stream' }, options?.headers]),
           },
           this._client,
         ),
@@ -122,7 +121,7 @@ export interface ValueDeleteResponse {}
 
 export interface ValueUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -132,31 +131,30 @@ export interface ValueUpdateParams {
   namespace_id: string;
 
   /**
-   * Body param: Arbitrary JSON to be associated with a key/value pair.
-   */
-  metadata: string;
-
-  /**
    * Body param: A byte sequence to be stored, up to 25 MiB in length.
    */
   value: string;
 
   /**
-   * Query param: The time, measured in number of seconds since the UNIX epoch, at
-   * which the key should expire.
+   * Query param: Expires the key at a certain time, measured in number of seconds
+   * since the UNIX epoch.
    */
   expiration?: number;
 
   /**
-   * Query param: The number of seconds for which the key should be visible before it
-   * expires. At least 60.
+   * Query param: Expires the key after a number of seconds. Must be at least 60.
    */
   expiration_ttl?: number;
+
+  /**
+   * Body param:
+   */
+  metadata?: unknown;
 }
 
 export interface ValueDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 
@@ -168,7 +166,7 @@ export interface ValueDeleteParams {
 
 export interface ValueGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 

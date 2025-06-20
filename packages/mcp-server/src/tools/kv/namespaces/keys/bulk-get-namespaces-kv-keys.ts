@@ -18,13 +18,13 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'bulk_get_namespaces_kv_keys',
   description:
-    'Get multiple KV pairs from the namespace. Body should contain keys to retrieve at most 100. Keys must contain text-based values. If value is json, it can be requested to return in JSON, instead of string. Metadata can be return if withMetadata is true.',
+    'Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based values. JSON values can optionally be parsed instead of being returned as a string value. Metadata can be included if `withMetadata` is true.',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       namespace_id: {
         type: 'string',
@@ -32,7 +32,7 @@ export const tool: Tool = {
       },
       keys: {
         type: 'array',
-        description: 'Array of keys to retrieve (maximum 100)',
+        description: 'Array of keys to retrieve (maximum of 100).',
         items: {
           type: 'string',
           description:
@@ -41,12 +41,12 @@ export const tool: Tool = {
       },
       type: {
         type: 'string',
-        description: 'Whether to parse JSON values in the response',
+        description: 'Whether to parse JSON values in the response.',
         enum: ['text', 'json'],
       },
       withMetadata: {
         type: 'boolean',
-        description: 'Whether to include metadata in the response',
+        description: 'Whether to include metadata in the response.',
       },
     },
   },

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_devices_zero_trust_dex_tests',
-  description: 'Fetch all DEX tests.',
+  description: 'Fetch all DEX tests',
   inputSchema: {
     type: 'object',
     properties: {

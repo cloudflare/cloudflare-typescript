@@ -24,7 +24,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       namespace_id: {
         type: 'string',
@@ -35,23 +35,20 @@ export const tool: Tool = {
         description:
           "A key's name. The name may be at most 512 bytes. All printable, non-whitespace characters are valid. Use percent-encoding to define key names as part of a URL.",
       },
-      metadata: {
-        type: 'string',
-        description: 'Arbitrary JSON to be associated with a key/value pair.',
-      },
       value: {
         type: 'string',
         description: 'A byte sequence to be stored, up to 25 MiB in length.',
       },
       expiration: {
         type: 'number',
-        description:
-          'The time, measured in number of seconds since the UNIX epoch, at which the key should expire.',
+        description: 'Expires the key at a certain time, measured in number of seconds since the UNIX epoch.',
       },
       expiration_ttl: {
         type: 'number',
-        description:
-          'The number of seconds for which the key should be visible before it expires. At least 60.',
+        description: 'Expires the key after a number of seconds. Must be at least 60.',
+      },
+      metadata: {
+        type: 'object',
       },
     },
   },

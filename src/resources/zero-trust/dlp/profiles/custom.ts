@@ -139,7 +139,7 @@ export interface CustomProfile {
     | CustomProfile.PredefinedEntry
     | CustomProfile.IntegrationEntry
     | CustomProfile.ExactDataEntry
-    | CustomProfile.DocumentTemplateEntry
+    | CustomProfile.DocumentFingerprintEntry
     | CustomProfile.WordListEntry
   >;
 
@@ -251,7 +251,7 @@ export namespace CustomProfile {
     updated_at: string;
   }
 
-  export interface DocumentTemplateEntry {
+  export interface DocumentFingerprintEntry {
     id: string;
 
     created_at: string;
@@ -260,7 +260,7 @@ export namespace CustomProfile {
 
     name: string;
 
-    type: 'document_template';
+    type: 'document_fingerprint';
 
     updated_at: string;
   }
@@ -361,6 +361,7 @@ export interface CustomCreateParams {
     | CustomCreateParams.Predefined
     | CustomCreateParams.Integration
     | CustomCreateParams.ExactData
+    | CustomCreateParams.UnionMember4
   >;
 }
 
@@ -411,6 +412,14 @@ export namespace CustomCreateParams {
     entry_id: string;
 
     entry_type: 'exact_data';
+  }
+
+  export interface UnionMember4 {
+    enabled: boolean;
+
+    entry_id: string;
+
+    entry_type: 'document_fingerprint';
   }
 }
 
@@ -466,7 +475,10 @@ export interface CustomUpdateParams {
    * Body param: Other entries, e.g. predefined or integration.
    */
   shared_entries?: Array<
-    CustomUpdateParams.Predefined | CustomUpdateParams.Integration | CustomUpdateParams.ExactData
+    | CustomUpdateParams.Predefined
+    | CustomUpdateParams.Integration
+    | CustomUpdateParams.ExactData
+    | CustomUpdateParams.UnionMember3
   >;
 }
 
@@ -511,6 +523,14 @@ export namespace CustomUpdateParams {
     entry_id: string;
 
     entry_type: 'exact_data';
+  }
+
+  export interface UnionMember3 {
+    enabled: boolean;
+
+    entry_id: string;
+
+    entry_type: 'document_fingerprint';
   }
 }
 

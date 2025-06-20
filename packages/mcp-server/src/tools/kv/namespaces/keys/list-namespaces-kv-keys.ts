@@ -23,7 +23,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       namespace_id: {
         type: 'string',
@@ -37,12 +37,12 @@ export const tool: Tool = {
       limit: {
         type: 'number',
         description:
-          'The number of keys to return. The cursor attribute may be used to iterate over the next batch of keys if there are more than the limit.',
+          'Limits the number of keys returned in the response. The cursor attribute may be used to iterate over the next batch of keys if there are more than the limit.',
       },
       prefix: {
         type: 'string',
         description:
-          'A string prefix used to filter down which keys will be returned. Exact matches and any key names that begin with the prefix will be returned.',
+          'Filters returned keys by a name prefix. Exact matches and any key names that begin with the prefix will be returned.',
       },
     },
   },

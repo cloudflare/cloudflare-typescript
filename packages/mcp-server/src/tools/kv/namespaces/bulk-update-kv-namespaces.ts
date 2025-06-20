@@ -24,7 +24,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       namespace_id: {
         type: 'string',
@@ -35,36 +35,34 @@ export const tool: Tool = {
         items: {
           type: 'object',
           properties: {
-            base64: {
-              type: 'boolean',
-              description:
-                "Whether or not the server should base64 decode the value before storing it. Useful for writing values that wouldn't otherwise be valid JSON strings, such as images.",
-            },
-            expiration: {
-              type: 'number',
-              description:
-                'The time, measured in number of seconds since the UNIX epoch, at which the key should expire.',
-            },
-            expiration_ttl: {
-              type: 'number',
-              description:
-                'The number of seconds for which the key should be visible before it expires. At least 60.',
-            },
             key: {
               type: 'string',
               description:
                 "A key's name. The name may be at most 512 bytes. All printable, non-whitespace characters are valid.",
             },
-            metadata: {
-              type: 'object',
-              description: 'Arbitrary JSON that is associated with a key.',
-            },
             value: {
               type: 'string',
               description: 'A UTF-8 encoded string to be stored, up to 25 MiB in length.',
             },
+            base64: {
+              type: 'boolean',
+              description:
+                "Indicates whether or not the server should base64 decode the value before storing it. Useful for writing values that wouldn't otherwise be valid JSON strings, such as images.",
+            },
+            expiration: {
+              type: 'number',
+              description:
+                'Expires the key at a certain time, measured in number of seconds since the UNIX epoch.',
+            },
+            expiration_ttl: {
+              type: 'number',
+              description: 'Expires the key after a number of seconds. Must be at least 60.',
+            },
+            metadata: {
+              type: 'object',
+            },
           },
-          required: [],
+          required: ['key', 'value'],
         },
       },
     },

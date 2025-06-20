@@ -24,7 +24,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       namespace_id: {
         type: 'string',
@@ -41,7 +41,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { key_name, ...body } = args as any;
-  return asTextContentResult(await client.kv.namespaces.metadata.get(key_name, body));
+  return asTextContentResult((await client.kv.namespaces.metadata.get(key_name, body)) as object);
 };
 
 export default { metadata, tool, handler };

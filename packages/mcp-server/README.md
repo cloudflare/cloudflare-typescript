@@ -1302,7 +1302,7 @@ The following tools are available in this MCP server.
 - `list_kv_namespaces` (`read`): Returns the namespaces owned by an account.
 - `delete_kv_namespaces` (`write`): Deletes the namespace corresponding to the given ID.
 - `bulk_delete_kv_namespaces` (`write`): Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.
-- `bulk_get_kv_namespaces` (`write`): Get multiple KV pairs from the namespace. Body should contain keys to retrieve at most 100. Keys must contain text-based values. If value is json, it can be requested to return in JSON, instead of string. Metadata can be return if withMetadata is true.
+- `bulk_get_kv_namespaces` (`write`): Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based values. JSON values can optionally be parsed instead of being returned as a string value. Metadata can be included if `withMetadata` is true.
 - `bulk_update_kv_namespaces` (`write`): Write multiple keys and values at once. Body should be an array of up to 10,000 key-value pairs to be stored, along with optional expiration information. Existing values and expirations will be overwritten. If neither `expiration` nor `expiration_ttl` is specified, the key-value pair will never expire. If both are set, `expiration_ttl` is used and `expiration` is ignored. The entire request size must be 100 megabytes or less.
 - `get_kv_namespaces` (`read`): Get the namespace corresponding to the given ID.
 
@@ -1310,7 +1310,7 @@ The following tools are available in this MCP server.
 
 - `list_namespaces_kv_keys` (`read`): Lists a namespace's keys.
 - `bulk_delete_namespaces_kv_keys` (`write`): Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.
-- `bulk_get_namespaces_kv_keys` (`write`): Get multiple KV pairs from the namespace. Body should contain keys to retrieve at most 100. Keys must contain text-based values. If value is json, it can be requested to return in JSON, instead of string. Metadata can be return if withMetadata is true.
+- `bulk_get_namespaces_kv_keys` (`write`): Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based values. JSON values can optionally be parsed instead of being returned as a string value. Metadata can be included if `withMetadata` is true.
 - `bulk_update_namespaces_kv_keys` (`write`): Write multiple keys and values at once. Body should be an array of up to 10,000 key-value pairs to be stored, along with optional expiration information. Existing values and expirations will be overwritten. If neither `expiration` nor `expiration_ttl` is specified, the key-value pair will never expire. If both are set, `expiration_ttl` is used and `expiration` is ignored. The entire request size must be 100 megabytes or less.
 
 ### Resource `kv.namespaces.metadata`:
@@ -2351,7 +2351,7 @@ The following tools are available in this MCP server.
 
 - `create_devices_zero_trust_dex_tests` (`write`): Create a DEX test.
 - `update_devices_zero_trust_dex_tests` (`write`): Update a DEX test.
-- `list_devices_zero_trust_dex_tests` (`read`): Fetch all DEX tests.
+- `list_devices_zero_trust_dex_tests` (`read`): Fetch all DEX tests
 - `delete_devices_zero_trust_dex_tests` (`write`): Delete a Device DEX test. Returns the remaining device dex tests for the account.
 - `get_devices_zero_trust_dex_tests` (`read`): Fetch a single DEX test.
 
