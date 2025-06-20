@@ -94,8 +94,6 @@ export class ThreatEvents extends APIResource {
    * const threatEvent =
    *   await client.cloudforceOne.threatEvents.create({
    *     account_id: 'account_id',
-   *     attacker: 'Flying Yeti',
-   *     attackerCountry: 'CN',
    *     category: 'Domain Resolution',
    *     date: '2022-04-01T00:00:00Z',
    *     event: 'An attacker registered the domain domain.com',
@@ -172,8 +170,6 @@ export class ThreatEvents extends APIResource {
    *     account_id: 'account_id',
    *     data: [
    *       {
-   *         attacker: 'Flying Yeti',
-   *         attackerCountry: 'CN',
    *         category: 'Domain Resolution',
    *         date: '2022-04-01T00:00:00Z',
    *         event:
@@ -544,16 +540,6 @@ export interface ThreatEventCreateParams {
   /**
    * Body param:
    */
-  attacker: string;
-
-  /**
-   * Body param:
-   */
-  attackerCountry: string;
-
-  /**
-   * Body param:
-   */
   category: string;
 
   /**
@@ -585,6 +571,16 @@ export interface ThreatEventCreateParams {
    * Body param:
    */
   accountId?: number;
+
+  /**
+   * Body param:
+   */
+  attacker?: string;
+
+  /**
+   * Body param:
+   */
+  attackerCountry?: string;
 
   /**
    * Body param:
@@ -712,10 +708,6 @@ export interface ThreatEventBulkCreateParams {
 
 export namespace ThreatEventBulkCreateParams {
   export interface Data {
-    attacker: string;
-
-    attackerCountry: string;
-
     category: string;
 
     date: string;
@@ -729,6 +721,10 @@ export namespace ThreatEventBulkCreateParams {
     tlp: string;
 
     accountId?: number;
+
+    attacker?: string;
+
+    attackerCountry?: string;
 
     datasetId?: string;
 

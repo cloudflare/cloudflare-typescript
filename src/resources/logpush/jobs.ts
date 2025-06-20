@@ -15,6 +15,26 @@ export class Jobs extends APIResource {
    * const logpushJob = await client.logpush.jobs.create({
    *   destination_conf: 's3://mybucket/logs?region=us-west-2',
    *   account_id: 'account_id',
+   *   dataset: 'gateway_dns',
+   *   filter:
+   *     '{"where":{"and":[{"key":"ClientRequestPath","operator":"contains","value":"/static"},{"key":"ClientRequestHost","operator":"eq","value":"example.com"}]}}',
+   *   max_upload_bytes: 5000000,
+   *   max_upload_interval_seconds: 30,
+   *   max_upload_records: 1000,
+   *   name: 'example.com',
+   *   output_options: {
+   *     'CVE-2021-44228': false,
+   *     batch_prefix: '',
+   *     batch_suffix: '',
+   *     field_delimiter: ',',
+   *     field_names: ['Datetime', 'DstIP', 'SrcIP'],
+   *     output_type: 'ndjson',
+   *     record_delimiter: '',
+   *     record_prefix: '{',
+   *     record_suffix: '}\n',
+   *     sample_rate: 1,
+   *     timestamp_format: 'unixnano',
+   *   },
    * });
    * ```
    */
@@ -51,6 +71,25 @@ export class Jobs extends APIResource {
    * ```ts
    * const logpushJob = await client.logpush.jobs.update(1, {
    *   account_id: 'account_id',
+   *   destination_conf: 's3://mybucket/logs?region=us-west-2',
+   *   filter:
+   *     '{"where":{"and":[{"key":"ClientRequestPath","operator":"contains","value":"/static"},{"key":"ClientRequestHost","operator":"eq","value":"example.com"}]}}',
+   *   max_upload_bytes: 5000000,
+   *   max_upload_interval_seconds: 30,
+   *   max_upload_records: 1000,
+   *   output_options: {
+   *     'CVE-2021-44228': false,
+   *     batch_prefix: '',
+   *     batch_suffix: '',
+   *     field_delimiter: ',',
+   *     field_names: ['Datetime', 'DstIP', 'SrcIP'],
+   *     output_type: 'ndjson',
+   *     record_delimiter: '',
+   *     record_prefix: '{',
+   *     record_suffix: '}\n',
+   *     sample_rate: 1,
+   *     timestamp_format: 'unixnano',
+   *   },
    * });
    * ```
    */
@@ -302,10 +341,9 @@ export interface LogpushJob {
 
   /**
    * The kind parameter (optional) is used to differentiate between Logpush and Edge
-   * Log Delivery jobs. Currently, Edge Log Delivery is only supported for the
-   * `http_requests` dataset.
+   * Log Delivery jobs (when supported by the dataset).
    */
-  kind?: 'edge';
+  kind?: '' | 'edge';
 
   /**
    * Records the last time for which logs have been successfully pushed. If the last
@@ -605,10 +643,9 @@ export interface JobCreateParams {
 
   /**
    * Body param: The kind parameter (optional) is used to differentiate between
-   * Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only
-   * supported for the `http_requests` dataset.
+   * Logpush and Edge Log Delivery jobs (when supported by the dataset).
    */
-  kind?: 'edge';
+  kind?: '' | 'edge';
 
   /**
    * @deprecated Body param: This field is deprecated. Use `output_options` instead.
@@ -708,10 +745,9 @@ export interface JobUpdateParams {
 
   /**
    * Body param: The kind parameter (optional) is used to differentiate between
-   * Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only
-   * supported for the `http_requests` dataset.
+   * Logpush and Edge Log Delivery jobs (when supported by the dataset).
    */
-  kind?: 'edge';
+  kind?: '' | 'edge';
 
   /**
    * @deprecated Body param: This field is deprecated. Use `output_options` instead.

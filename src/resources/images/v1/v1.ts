@@ -192,6 +192,11 @@ export interface V1CreateParams {
   account_id: string;
 
   /**
+   * Body param: An optional custom unique identifier for your image.
+   */
+  id?: unknown;
+
+  /**
    * Body param: An image binary data. Only needed when type is uploading a file.
    */
   file?: unknown;

@@ -138,7 +138,7 @@ export namespace Profile {
       | CustomProfile.PredefinedEntry
       | CustomProfile.IntegrationEntry
       | CustomProfile.ExactDataEntry
-      | CustomProfile.DocumentTemplateEntry
+      | CustomProfile.DocumentFingerprintEntry
       | CustomProfile.WordListEntry
     >;
 
@@ -252,7 +252,7 @@ export namespace Profile {
       updated_at: string;
     }
 
-    export interface DocumentTemplateEntry {
+    export interface DocumentFingerprintEntry {
       id: string;
 
       created_at: string;
@@ -261,7 +261,7 @@ export namespace Profile {
 
       name: string;
 
-      type: 'document_template';
+      type: 'document_fingerprint';
 
       updated_at: string;
     }
@@ -298,7 +298,7 @@ export namespace Profile {
       | PredefinedProfile.PredefinedEntry
       | PredefinedProfile.IntegrationEntry
       | PredefinedProfile.ExactDataEntry
-      | PredefinedProfile.DocumentTemplateEntry
+      | PredefinedProfile.DocumentFingerprintEntry
       | PredefinedProfile.WordListEntry
     >;
 
@@ -413,7 +413,7 @@ export namespace Profile {
       updated_at: string;
     }
 
-    export interface DocumentTemplateEntry {
+    export interface DocumentFingerprintEntry {
       id: string;
 
       created_at: string;
@@ -422,7 +422,7 @@ export namespace Profile {
 
       name: string;
 
-      type: 'document_template';
+      type: 'document_fingerprint';
 
       updated_at: string;
     }
@@ -456,7 +456,7 @@ export namespace Profile {
       | IntegrationProfile.PredefinedEntry
       | IntegrationProfile.IntegrationEntry
       | IntegrationProfile.ExactDataEntry
-      | IntegrationProfile.DocumentTemplateEntry
+      | IntegrationProfile.DocumentFingerprintEntry
       | IntegrationProfile.WordListEntry
     >;
 
@@ -558,7 +558,7 @@ export namespace Profile {
       updated_at: string;
     }
 
-    export interface DocumentTemplateEntry {
+    export interface DocumentFingerprintEntry {
       id: string;
 
       created_at: string;
@@ -567,7 +567,7 @@ export namespace Profile {
 
       name: string;
 
-      type: 'document_template';
+      type: 'document_fingerprint';
 
       updated_at: string;
     }

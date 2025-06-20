@@ -168,18 +168,6 @@ export interface GatewayItem {
   value?: string;
 }
 
-export interface GatewayItemParam {
-  /**
-   * The description of the list item, if present
-   */
-  description?: string;
-
-  /**
-   * The value of the item in a list.
-   */
-  value?: string;
-}
-
 export interface GatewayList {
   /**
    * API Resource UUID tag.
@@ -271,9 +259,23 @@ export interface ListCreateParams {
   description?: string;
 
   /**
-   * Body param: The items in the list.
+   * Body param: items to add to the list.
    */
-  items?: Array<GatewayItemParam>;
+  items?: Array<ListCreateParams.Item>;
+}
+
+export namespace ListCreateParams {
+  export interface Item {
+    /**
+     * The description of the list item, if present
+     */
+    description?: string;
+
+    /**
+     * The value of the item in a list.
+     */
+    value?: string;
+  }
 }
 
 export interface ListUpdateParams {
@@ -293,9 +295,23 @@ export interface ListUpdateParams {
   description?: string;
 
   /**
-   * Body param: The items in the list.
+   * Body param: items to add to the list.
    */
-  items?: Array<GatewayItemParam>;
+  items?: Array<ListUpdateParams.Item>;
+}
+
+export namespace ListUpdateParams {
+  export interface Item {
+    /**
+     * The description of the list item, if present
+     */
+    description?: string;
+
+    /**
+     * The value of the item in a list.
+     */
+    value?: string;
+  }
 }
 
 export interface ListListParams {
