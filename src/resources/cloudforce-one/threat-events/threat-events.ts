@@ -358,66 +358,10 @@ export interface ThreatEventDeleteResponse {
   uuid: string;
 }
 
-export type ThreatEventBulkCreateResponse =
-  Array<ThreatEventBulkCreateResponse.ThreatEventBulkCreateResponseItem>;
-
-export namespace ThreatEventBulkCreateResponse {
-  export interface ThreatEventBulkCreateResponseItem {
-    id: number;
-
-    accountId: number;
-
-    attacker: string;
-
-    attackerCountry: string;
-
-    category: string;
-
-    categoryId: number;
-
-    date: string;
-
-    event: string;
-
-    indicator: string;
-
-    indicatorType: string;
-
-    indicatorTypeId: number;
-
-    killChain: number;
-
-    mitreAttack: Array<string>;
-
-    numReferenced: number;
-
-    numReferences: number;
-
-    rawId: string;
-
-    referenced: Array<string>;
-
-    referencedIds: Array<number>;
-
-    references: Array<string>;
-
-    referencesIds: Array<number>;
-
-    tags: Array<string>;
-
-    targetCountry: string;
-
-    targetIndustry: string;
-
-    tlp: string;
-
-    uuid: string;
-
-    insight?: string;
-
-    releasabilityId?: string;
-  }
-}
+/**
+ * Number of created bulk events
+ */
+export type ThreatEventBulkCreateResponse = number;
 
 export interface ThreatEventEditResponse {
   id: number;
