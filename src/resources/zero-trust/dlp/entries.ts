@@ -156,7 +156,7 @@ export type EntryUpdateResponse =
   | EntryUpdateResponse.PredefinedEntry
   | EntryUpdateResponse.IntegrationEntry
   | EntryUpdateResponse.ExactDataEntry
-  | EntryUpdateResponse.DocumentTemplateEntry
+  | EntryUpdateResponse.DocumentFingerprintEntry
   | EntryUpdateResponse.WordListEntry;
 
 export namespace EntryUpdateResponse {
@@ -245,7 +245,7 @@ export namespace EntryUpdateResponse {
     updated_at: string;
   }
 
-  export interface DocumentTemplateEntry {
+  export interface DocumentFingerprintEntry {
     id: string;
 
     created_at: string;
@@ -254,7 +254,7 @@ export namespace EntryUpdateResponse {
 
     name: string;
 
-    type: 'document_template';
+    type: 'document_fingerprint';
 
     updated_at: string;
   }
@@ -283,7 +283,7 @@ export type EntryListResponse =
   | EntryListResponse.PredefinedEntry
   | EntryListResponse.IntegrationEntry
   | EntryListResponse.ExactDataEntry
-  | EntryListResponse.DocumentTemplateEntry
+  | EntryListResponse.DocumentFingerprintEntry
   | EntryListResponse.WordListEntry;
 
 export namespace EntryListResponse {
@@ -372,7 +372,7 @@ export namespace EntryListResponse {
     updated_at: string;
   }
 
-  export interface DocumentTemplateEntry {
+  export interface DocumentFingerprintEntry {
     id: string;
 
     created_at: string;
@@ -381,7 +381,7 @@ export namespace EntryListResponse {
 
     name: string;
 
-    type: 'document_template';
+    type: 'document_fingerprint';
 
     updated_at: string;
   }
@@ -412,7 +412,7 @@ export type EntryGetResponse =
   | EntryGetResponse.PredefinedEntry
   | EntryGetResponse.IntegrationEntry
   | EntryGetResponse.ExactDataEntry
-  | EntryGetResponse.DocumentTemplateEntry
+  | EntryGetResponse.DocumentFingerprintEntry
   | EntryGetResponse.WordListEntry;
 
 export namespace EntryGetResponse {
@@ -501,7 +501,7 @@ export namespace EntryGetResponse {
     updated_at: string;
   }
 
-  export interface DocumentTemplateEntry {
+  export interface DocumentFingerprintEntry {
     id: string;
 
     created_at: string;
@@ -510,7 +510,7 @@ export namespace EntryGetResponse {
 
     name: string;
 
-    type: 'document_template';
+    type: 'document_fingerprint';
 
     updated_at: string;
   }

@@ -1,5 +1,20 @@
 # Changelog
 
+## 4.5.0 (2025-06-20)
+
+Full Changelog: [v4.4.1...v4.5.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.4.1...v4.5.0)
+
+### Features
+
+* **api:** api update ([59a17cf](https://github.com/cloudflare/cloudflare-typescript/commit/59a17cf3bd914f6447c46bb27be346ac95717af8))
+* **api:** api update ([cbdd3e8](https://github.com/cloudflare/cloudflare-typescript/commit/cbdd3e82869bac6065a6b888457c10b7e8541f84))
+
+
+### Chores
+
+* **api:** TTL is required on DNS records ([a492965](https://github.com/cloudflare/cloudflare-typescript/commit/a4929653c8c982a5c8fe81d21f315ea4c4d11086))
+* **ci:** enable for pull requests ([6898174](https://github.com/cloudflare/cloudflare-typescript/commit/6898174da5c2bf8e78b503dffeacba7c0bf7a539))
+
 ## 4.4.1 (2025-06-16)
 
 Full Changelog: [v4.4.0...v4.4.1](https://github.com/cloudflare/cloudflare-typescript/compare/v4.4.0...v4.4.1)

@@ -26,6 +26,7 @@ describe('resource v1', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.images.v1.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: {},
       file: {},
       metadata: {},
       requireSignedURLs: true,
