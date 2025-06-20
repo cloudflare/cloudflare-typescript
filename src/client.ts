@@ -313,6 +313,7 @@ export class Cloudflare {
       timeout: this.timeout,
       logger: this.logger,
       logLevel: this.logLevel,
+      fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiToken: this.apiToken,
       apiKey: this.apiKey,
