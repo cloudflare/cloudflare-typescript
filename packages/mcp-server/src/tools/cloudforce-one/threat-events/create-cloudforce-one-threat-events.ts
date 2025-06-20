@@ -26,12 +26,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'Account ID.',
       },
-      attacker: {
-        type: 'string',
-      },
-      attackerCountry: {
-        type: 'string',
-      },
       category: {
         type: 'string',
       },
@@ -65,6 +59,12 @@ export const tool: Tool = {
       },
       accountId: {
         type: 'number',
+      },
+      attacker: {
+        type: 'string',
+      },
+      attackerCountry: {
+        type: 'string',
       },
       datasetId: {
         type: 'string',

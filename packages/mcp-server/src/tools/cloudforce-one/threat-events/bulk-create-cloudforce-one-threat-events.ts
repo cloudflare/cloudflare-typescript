@@ -31,12 +31,6 @@ export const tool: Tool = {
         items: {
           type: 'object',
           properties: {
-            attacker: {
-              type: 'string',
-            },
-            attackerCountry: {
-              type: 'string',
-            },
             category: {
               type: 'string',
             },
@@ -71,6 +65,12 @@ export const tool: Tool = {
             accountId: {
               type: 'number',
             },
+            attacker: {
+              type: 'string',
+            },
+            attackerCountry: {
+              type: 'string',
+            },
             datasetId: {
               type: 'string',
             },
@@ -90,16 +90,7 @@ export const tool: Tool = {
               type: 'string',
             },
           },
-          required: [
-            'attacker',
-            'attackerCountry',
-            'category',
-            'date',
-            'event',
-            'indicatorType',
-            'raw',
-            'tlp',
-          ],
+          required: ['category', 'date', 'event', 'indicatorType', 'raw', 'tlp'],
         },
       },
       datasetId: {

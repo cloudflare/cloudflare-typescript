@@ -144,6 +144,22 @@ export const tool: Tool = {
               },
               required: ['enabled', 'entry_id', 'entry_type'],
             },
+            {
+              type: 'object',
+              properties: {
+                enabled: {
+                  type: 'boolean',
+                },
+                entry_id: {
+                  type: 'string',
+                },
+                entry_type: {
+                  type: 'string',
+                  enum: ['document_fingerprint'],
+                },
+              },
+              required: ['enabled', 'entry_id', 'entry_type'],
+            },
           ],
         },
       },

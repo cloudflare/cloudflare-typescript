@@ -55,8 +55,8 @@ export const tool: Tool = {
       kind: {
         type: 'string',
         description:
-          'The kind parameter (optional) is used to differentiate between Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only supported for the `http_requests` dataset.',
-        enum: ['edge'],
+          'The kind parameter (optional) is used to differentiate between Logpush and Edge Log Delivery jobs (when supported by the dataset).',
+        enum: ['', 'edge'],
       },
       logpull_options: {
         type: 'string',
