@@ -141,14 +141,14 @@ export namespace KeyBulkGetResponse {
     /**
      * Requested keys are paired with their values in an object.
      */
-    values?: Record<string, string | number | boolean | Record<string, unknown>>;
+    values?: { [key: string]: string | number | boolean | { [key: string]: unknown } };
   }
 
   export interface WorkersKVBulkGetResultWithMetadata {
     /**
      * Requested keys are paired with their values and metadata in an object.
      */
-    values?: Record<string, WorkersKVBulkGetResultWithMetadata.Values | null>;
+    values?: { [key: string]: WorkersKVBulkGetResultWithMetadata.Values | null };
   }
 
   export namespace WorkersKVBulkGetResultWithMetadata {

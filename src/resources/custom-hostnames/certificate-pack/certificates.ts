@@ -99,7 +99,7 @@ export interface CertificateUpdateResponse {
    * Unique key/value metadata for this hostname. These are per-hostname (customer)
    * settings.
    */
-  custom_metadata?: Record<string, string>;
+  custom_metadata?: { [key: string]: string };
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME

@@ -515,7 +515,7 @@ export interface RuleBulkEditParams {
   /**
    * Body param:
    */
-  new_priorities: Record<string, number>;
+  new_priorities: { [key: string]: number };
 }
 
 export interface RuleGetParams {

@@ -136,12 +136,12 @@ export interface TraceCreateParams {
   /**
    * Body param: Cookies added to tracing request
    */
-  cookies?: Record<string, string>;
+  cookies?: { [key: string]: string };
 
   /**
    * Body param: Headers added to tracing request
    */
-  headers?: Record<string, string>;
+  headers?: { [key: string]: string };
 
   /**
    * Body param: HTTP Protocol of tracing request
