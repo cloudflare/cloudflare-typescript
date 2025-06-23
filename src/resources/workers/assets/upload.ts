@@ -53,7 +53,7 @@ export interface UploadCreateParams {
   /**
    * Body param:
    */
-  body: Record<string, string>;
+  body: { [key: string]: string };
 }
 
 export declare namespace Upload {

@@ -578,7 +578,7 @@ export interface SummaryQueryTypeResponse {
    */
   meta: SummaryQueryTypeResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryQueryTypeResponse {
@@ -675,7 +675,7 @@ export interface SummaryResponseCodesResponse {
    */
   meta: SummaryResponseCodesResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryResponseCodesResponse {

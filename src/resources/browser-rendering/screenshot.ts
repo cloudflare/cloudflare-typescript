@@ -185,7 +185,7 @@ export interface ScreenshotCreateParams {
   /**
    * Body param:
    */
-  setExtraHTTPHeaders?: Record<string, string>;
+  setExtraHTTPHeaders?: { [key: string]: string };
 
   /**
    * Body param:

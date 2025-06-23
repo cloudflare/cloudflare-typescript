@@ -468,7 +468,7 @@ export interface ScriptUpdateParams {
    */
   metadata: ScriptUpdateParams.Metadata;
 
-  files?: Record<string, Uploadable>;
+  files?: { [key: string]: Uploadable };
 }
 
 export namespace ScriptUpdateParams {

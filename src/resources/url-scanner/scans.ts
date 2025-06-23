@@ -1525,7 +1525,7 @@ export interface ScanCreateParams {
   /**
    * Body param: Set custom headers.
    */
-  customHeaders?: Record<string, string>;
+  customHeaders?: { [key: string]: string };
 
   /**
    * Body param:
@@ -1585,7 +1585,7 @@ export namespace ScanBulkCreateParams {
     /**
      * Set custom headers.
      */
-    customHeaders?: Record<string, string>;
+    customHeaders?: { [key: string]: string };
 
     referer?: string;
 

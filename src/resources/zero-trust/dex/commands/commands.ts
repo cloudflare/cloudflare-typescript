@@ -98,7 +98,7 @@ export namespace CommandCreateResponse {
     /**
      * Command arguments
      */
-    args?: Record<string, string>;
+    args?: { [key: string]: string };
 
     /**
      * Identifier for the device associated with the command

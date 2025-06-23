@@ -199,7 +199,7 @@ export interface CustomHostname {
    * Unique key/value metadata for this hostname. These are per-hostname (customer)
    * settings.
    */
-  custom_metadata?: Record<string, string>;
+  custom_metadata?: { [key: string]: string };
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -522,7 +522,7 @@ export interface CustomHostnameCreateResponse {
    * Unique key/value metadata for this hostname. These are per-hostname (customer)
    * settings.
    */
-  custom_metadata?: Record<string, string>;
+  custom_metadata?: { [key: string]: string };
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -823,7 +823,7 @@ export interface CustomHostnameListResponse {
    * Unique key/value metadata for this hostname. These are per-hostname (customer)
    * settings.
    */
-  custom_metadata?: Record<string, string>;
+  custom_metadata?: { [key: string]: string };
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -1131,7 +1131,7 @@ export interface CustomHostnameEditResponse {
    * Unique key/value metadata for this hostname. These are per-hostname (customer)
    * settings.
    */
-  custom_metadata?: Record<string, string>;
+  custom_metadata?: { [key: string]: string };
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -1432,7 +1432,7 @@ export interface CustomHostnameGetResponse {
    * Unique key/value metadata for this hostname. These are per-hostname (customer)
    * settings.
    */
-  custom_metadata?: Record<string, string>;
+  custom_metadata?: { [key: string]: string };
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -1731,7 +1731,7 @@ export interface CustomHostnameCreateParams {
    * Body param: Unique key/value metadata for this hostname. These are per-hostname
    * (customer) settings.
    */
-  custom_metadata?: Record<string, string>;
+  custom_metadata?: { [key: string]: string };
 }
 
 export namespace CustomHostnameCreateParams {
@@ -1893,7 +1893,7 @@ export interface CustomHostnameEditParams {
    * Body param: Unique key/value metadata for this hostname. These are per-hostname
    * (customer) settings.
    */
-  custom_metadata?: Record<string, string>;
+  custom_metadata?: { [key: string]: string };
 
   /**
    * Body param: a valid hostname that’s been added to your DNS zone as an A, AAAA,

@@ -188,7 +188,7 @@ export interface OnRampCreateResponse {
 
   post_apply_monthly_cost_estimate?: OnRampCreateResponse.PostApplyMonthlyCostEstimate;
 
-  post_apply_resources?: Record<string, OnRampCreateResponse.PostApplyResources>;
+  post_apply_resources?: { [key: string]: OnRampCreateResponse.PostApplyResources };
 
   post_apply_resources_unavailable?: boolean;
 
@@ -198,7 +198,7 @@ export interface OnRampCreateResponse {
 
   vpc?: string;
 
-  vpcs_by_id?: Record<string, OnRampCreateResponse.VPCsByID>;
+  vpcs_by_id?: { [key: string]: OnRampCreateResponse.VPCsByID };
 
   /**
    * The list of vpc IDs for which resource details failed to generate.
@@ -337,7 +337,7 @@ export namespace OnRampCreateResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -349,11 +349,11 @@ export namespace OnRampCreateResponse {
 
     native_id: string;
 
-    observations: Record<string, PostApplyResources.Observations>;
+    observations: { [key: string]: PostApplyResources.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -420,9 +420,9 @@ export namespace OnRampCreateResponse {
 
     sections: Array<PostApplyResources.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -930,7 +930,7 @@ export namespace OnRampCreateResponse {
 
     tunnels: Array<string>;
 
-    lifecycle_errors?: Record<string, Status.LifecycleErrors>;
+    lifecycle_errors?: { [key: string]: Status.LifecycleErrors };
   }
 
   export namespace Status {
@@ -1134,7 +1134,7 @@ export namespace OnRampCreateResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -1146,11 +1146,11 @@ export namespace OnRampCreateResponse {
 
     native_id: string;
 
-    observations: Record<string, VPCsByID.Observations>;
+    observations: { [key: string]: VPCsByID.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -1217,9 +1217,9 @@ export namespace OnRampCreateResponse {
 
     sections: Array<VPCsByID.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -1746,7 +1746,7 @@ export interface OnRampUpdateResponse {
 
   post_apply_monthly_cost_estimate?: OnRampUpdateResponse.PostApplyMonthlyCostEstimate;
 
-  post_apply_resources?: Record<string, OnRampUpdateResponse.PostApplyResources>;
+  post_apply_resources?: { [key: string]: OnRampUpdateResponse.PostApplyResources };
 
   post_apply_resources_unavailable?: boolean;
 
@@ -1756,7 +1756,7 @@ export interface OnRampUpdateResponse {
 
   vpc?: string;
 
-  vpcs_by_id?: Record<string, OnRampUpdateResponse.VPCsByID>;
+  vpcs_by_id?: { [key: string]: OnRampUpdateResponse.VPCsByID };
 
   /**
    * The list of vpc IDs for which resource details failed to generate.
@@ -1895,7 +1895,7 @@ export namespace OnRampUpdateResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -1907,11 +1907,11 @@ export namespace OnRampUpdateResponse {
 
     native_id: string;
 
-    observations: Record<string, PostApplyResources.Observations>;
+    observations: { [key: string]: PostApplyResources.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -1978,9 +1978,9 @@ export namespace OnRampUpdateResponse {
 
     sections: Array<PostApplyResources.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -2488,7 +2488,7 @@ export namespace OnRampUpdateResponse {
 
     tunnels: Array<string>;
 
-    lifecycle_errors?: Record<string, Status.LifecycleErrors>;
+    lifecycle_errors?: { [key: string]: Status.LifecycleErrors };
   }
 
   export namespace Status {
@@ -2692,7 +2692,7 @@ export namespace OnRampUpdateResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -2704,11 +2704,11 @@ export namespace OnRampUpdateResponse {
 
     native_id: string;
 
-    observations: Record<string, VPCsByID.Observations>;
+    observations: { [key: string]: VPCsByID.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -2775,9 +2775,9 @@ export namespace OnRampUpdateResponse {
 
     sections: Array<VPCsByID.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -3304,7 +3304,7 @@ export interface OnRampListResponse {
 
   post_apply_monthly_cost_estimate?: OnRampListResponse.PostApplyMonthlyCostEstimate;
 
-  post_apply_resources?: Record<string, OnRampListResponse.PostApplyResources>;
+  post_apply_resources?: { [key: string]: OnRampListResponse.PostApplyResources };
 
   post_apply_resources_unavailable?: boolean;
 
@@ -3314,7 +3314,7 @@ export interface OnRampListResponse {
 
   vpc?: string;
 
-  vpcs_by_id?: Record<string, OnRampListResponse.VPCsByID>;
+  vpcs_by_id?: { [key: string]: OnRampListResponse.VPCsByID };
 
   /**
    * The list of vpc IDs for which resource details failed to generate.
@@ -3453,7 +3453,7 @@ export namespace OnRampListResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -3465,11 +3465,11 @@ export namespace OnRampListResponse {
 
     native_id: string;
 
-    observations: Record<string, PostApplyResources.Observations>;
+    observations: { [key: string]: PostApplyResources.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -3536,9 +3536,9 @@ export namespace OnRampListResponse {
 
     sections: Array<PostApplyResources.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -4046,7 +4046,7 @@ export namespace OnRampListResponse {
 
     tunnels: Array<string>;
 
-    lifecycle_errors?: Record<string, Status.LifecycleErrors>;
+    lifecycle_errors?: { [key: string]: Status.LifecycleErrors };
   }
 
   export namespace Status {
@@ -4250,7 +4250,7 @@ export namespace OnRampListResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -4262,11 +4262,11 @@ export namespace OnRampListResponse {
 
     native_id: string;
 
-    observations: Record<string, VPCsByID.Observations>;
+    observations: { [key: string]: VPCsByID.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -4333,9 +4333,9 @@ export namespace OnRampListResponse {
 
     sections: Array<VPCsByID.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -5236,7 +5236,7 @@ export interface OnRampEditResponse {
 
   post_apply_monthly_cost_estimate?: OnRampEditResponse.PostApplyMonthlyCostEstimate;
 
-  post_apply_resources?: Record<string, OnRampEditResponse.PostApplyResources>;
+  post_apply_resources?: { [key: string]: OnRampEditResponse.PostApplyResources };
 
   post_apply_resources_unavailable?: boolean;
 
@@ -5246,7 +5246,7 @@ export interface OnRampEditResponse {
 
   vpc?: string;
 
-  vpcs_by_id?: Record<string, OnRampEditResponse.VPCsByID>;
+  vpcs_by_id?: { [key: string]: OnRampEditResponse.VPCsByID };
 
   /**
    * The list of vpc IDs for which resource details failed to generate.
@@ -5385,7 +5385,7 @@ export namespace OnRampEditResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -5397,11 +5397,11 @@ export namespace OnRampEditResponse {
 
     native_id: string;
 
-    observations: Record<string, PostApplyResources.Observations>;
+    observations: { [key: string]: PostApplyResources.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -5468,9 +5468,9 @@ export namespace OnRampEditResponse {
 
     sections: Array<PostApplyResources.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -5978,7 +5978,7 @@ export namespace OnRampEditResponse {
 
     tunnels: Array<string>;
 
-    lifecycle_errors?: Record<string, Status.LifecycleErrors>;
+    lifecycle_errors?: { [key: string]: Status.LifecycleErrors };
   }
 
   export namespace Status {
@@ -6182,7 +6182,7 @@ export namespace OnRampEditResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -6194,11 +6194,11 @@ export namespace OnRampEditResponse {
 
     native_id: string;
 
-    observations: Record<string, VPCsByID.Observations>;
+    observations: { [key: string]: VPCsByID.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -6265,9 +6265,9 @@ export namespace OnRampEditResponse {
 
     sections: Array<VPCsByID.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -6794,7 +6794,7 @@ export interface OnRampGetResponse {
 
   post_apply_monthly_cost_estimate?: OnRampGetResponse.PostApplyMonthlyCostEstimate;
 
-  post_apply_resources?: Record<string, OnRampGetResponse.PostApplyResources>;
+  post_apply_resources?: { [key: string]: OnRampGetResponse.PostApplyResources };
 
   post_apply_resources_unavailable?: boolean;
 
@@ -6804,7 +6804,7 @@ export interface OnRampGetResponse {
 
   vpc?: string;
 
-  vpcs_by_id?: Record<string, OnRampGetResponse.VPCsByID>;
+  vpcs_by_id?: { [key: string]: OnRampGetResponse.VPCsByID };
 
   /**
    * The list of vpc IDs for which resource details failed to generate.
@@ -6943,7 +6943,7 @@ export namespace OnRampGetResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -6955,11 +6955,11 @@ export namespace OnRampGetResponse {
 
     native_id: string;
 
-    observations: Record<string, PostApplyResources.Observations>;
+    observations: { [key: string]: PostApplyResources.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -7026,9 +7026,9 @@ export namespace OnRampGetResponse {
 
     sections: Array<PostApplyResources.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
@@ -7536,7 +7536,7 @@ export namespace OnRampGetResponse {
 
     tunnels: Array<string>;
 
-    lifecycle_errors?: Record<string, Status.LifecycleErrors>;
+    lifecycle_errors?: { [key: string]: Status.LifecycleErrors };
   }
 
   export namespace Status {
@@ -7740,7 +7740,7 @@ export namespace OnRampGetResponse {
 
     cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-    config: Record<string, unknown>;
+    config: { [key: string]: unknown };
 
     deployment_provider: string;
 
@@ -7752,11 +7752,11 @@ export namespace OnRampGetResponse {
 
     native_id: string;
 
-    observations: Record<string, VPCsByID.Observations>;
+    observations: { [key: string]: VPCsByID.Observations };
 
     provider_ids: Array<string>;
 
-    provider_names_by_id: Record<string, string>;
+    provider_names_by_id: { [key: string]: string };
 
     region: string;
 
@@ -7823,9 +7823,9 @@ export namespace OnRampGetResponse {
 
     sections: Array<VPCsByID.Section>;
 
-    state: Record<string, unknown>;
+    state: { [key: string]: unknown };
 
-    tags: Record<string, string>;
+    tags: { [key: string]: string };
 
     updated_at: string;
 
