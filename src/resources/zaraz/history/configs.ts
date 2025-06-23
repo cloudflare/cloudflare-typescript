@@ -30,7 +30,7 @@ export class Configs extends APIResource {
 /**
  * Object where keys are numericc onfiguration IDs
  */
-export type ConfigGetResponse = Record<string, ConfigGetResponse.item>;
+export type ConfigGetResponse = { [key: string]: ConfigGetResponse.item };
 
 export namespace ConfigGetResponse {
   export interface item {

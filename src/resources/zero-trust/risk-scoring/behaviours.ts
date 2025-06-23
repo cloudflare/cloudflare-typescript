@@ -53,7 +53,7 @@ export class Behaviours extends APIResource {
 }
 
 export interface BehaviourUpdateResponse {
-  behaviors: Record<string, BehaviourUpdateResponse.Behaviors>;
+  behaviors: { [key: string]: BehaviourUpdateResponse.Behaviors };
 }
 
 export namespace BehaviourUpdateResponse {
@@ -65,7 +65,7 @@ export namespace BehaviourUpdateResponse {
 }
 
 export interface BehaviourGetResponse {
-  behaviors: Record<string, BehaviourGetResponse.Behaviors>;
+  behaviors: { [key: string]: BehaviourGetResponse.Behaviors };
 }
 
 export namespace BehaviourGetResponse {
@@ -89,7 +89,7 @@ export interface BehaviourUpdateParams {
   /**
    * Body param:
    */
-  behaviors: Record<string, BehaviourUpdateParams.Behaviors>;
+  behaviors: { [key: string]: BehaviourUpdateParams.Behaviors };
 }
 
 export namespace BehaviourUpdateParams {

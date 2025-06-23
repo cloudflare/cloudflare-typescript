@@ -77,7 +77,7 @@ export interface ResourceListResponse {
 
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-  config: Record<string, unknown>;
+  config: { [key: string]: unknown };
 
   deployment_provider: string;
 
@@ -89,11 +89,11 @@ export interface ResourceListResponse {
 
   native_id: string;
 
-  observations: Record<string, ResourceListResponse.Observations>;
+  observations: { [key: string]: ResourceListResponse.Observations };
 
   provider_ids: Array<string>;
 
-  provider_names_by_id: Record<string, string>;
+  provider_names_by_id: { [key: string]: string };
 
   region: string;
 
@@ -160,9 +160,9 @@ export interface ResourceListResponse {
 
   sections: Array<ResourceListResponse.Section>;
 
-  state: Record<string, unknown>;
+  state: { [key: string]: unknown };
 
-  tags: Record<string, string>;
+  tags: { [key: string]: string };
 
   updated_at: string;
 
@@ -654,7 +654,7 @@ export interface ResourceGetResponse {
 
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
-  config: Record<string, unknown>;
+  config: { [key: string]: unknown };
 
   deployment_provider: string;
 
@@ -666,11 +666,11 @@ export interface ResourceGetResponse {
 
   native_id: string;
 
-  observations: Record<string, ResourceGetResponse.Observations>;
+  observations: { [key: string]: ResourceGetResponse.Observations };
 
   provider_ids: Array<string>;
 
-  provider_names_by_id: Record<string, string>;
+  provider_names_by_id: { [key: string]: string };
 
   region: string;
 
@@ -737,9 +737,9 @@ export interface ResourceGetResponse {
 
   sections: Array<ResourceGetResponse.Section>;
 
-  state: Record<string, unknown>;
+  state: { [key: string]: unknown };
 
-  tags: Record<string, string>;
+  tags: { [key: string]: string };
 
   updated_at: string;
 

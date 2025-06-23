@@ -41,9 +41,9 @@ export interface Identity {
 
   device_id?: string;
 
-  device_sessions?: Record<string, Identity.DeviceSessions>;
+  device_sessions?: { [key: string]: Identity.DeviceSessions };
 
-  devicePosture?: Record<string, Identity.DevicePosture>;
+  devicePosture?: { [key: string]: Identity.DevicePosture };
 
   email?: string;
 

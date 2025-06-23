@@ -339,7 +339,7 @@ export interface HTTPConfiguration {
    * The HTTP request headers to send in the health check. It is recommended you set
    * a Host header by default. The User-Agent header cannot be overridden.
    */
-  header?: Record<string, Array<string>> | null;
+  header?: { [key: string]: Array<string> } | null;
 
   /**
    * The HTTP method to use for the health check.
@@ -388,7 +388,7 @@ export interface HTTPConfigurationParam {
    * The HTTP request headers to send in the health check. It is recommended you set
    * a Host header by default. The User-Agent header cannot be overridden.
    */
-  header?: Record<string, Array<string>> | null;
+  header?: { [key: string]: Array<string> } | null;
 
   /**
    * The HTTP method to use for the health check.
