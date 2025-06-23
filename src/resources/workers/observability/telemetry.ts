@@ -117,7 +117,7 @@ export interface TelemetryQueryResponse {
 
   events?: TelemetryQueryResponse.Events;
 
-  invocations?: Record<string, Array<TelemetryQueryResponse.Invocation>>;
+  invocations?: { [key: string]: Array<TelemetryQueryResponse.Invocation> };
 
   patterns?: Array<TelemetryQueryResponse.Pattern>;
 }
@@ -668,19 +668,19 @@ export namespace TelemetryQueryResponse {
 
         entrypoint?: string;
 
-        event?: Record<
-          string,
-          | string
-          | number
-          | boolean
-          | Record<
-              string,
-              | string
-              | number
-              | boolean
-              | Record<string, Array<string | number | boolean> | string | number | boolean>
-            >
-        >;
+        event?: {
+          [key: string]:
+            | string
+            | number
+            | boolean
+            | {
+                [key: string]:
+                  | string
+                  | number
+                  | boolean
+                  | { [key: string]: Array<string | number | boolean> | string | number | boolean };
+              };
+        };
 
         executionModel?: 'durableObject' | 'stateless';
 
@@ -728,7 +728,7 @@ export namespace TelemetryQueryResponse {
 
         entrypoint?: string;
 
-        event?: Record<string, string | number | boolean>;
+        event?: { [key: string]: string | number | boolean };
 
         executionModel?: 'durableObject' | 'stateless';
 
@@ -783,7 +783,7 @@ export namespace TelemetryQueryResponse {
         /**
          * Groups in the query results.
          */
-        groups?: Record<string, string | number | boolean>;
+        groups?: { [key: string]: string | number | boolean };
       }
 
       export namespace Data {
@@ -920,19 +920,19 @@ export namespace TelemetryQueryResponse {
 
       entrypoint?: string;
 
-      event?: Record<
-        string,
-        | string
-        | number
-        | boolean
-        | Record<
-            string,
-            | string
-            | number
-            | boolean
-            | Record<string, Array<string | number | boolean> | string | number | boolean>
-          >
-      >;
+      event?: {
+        [key: string]:
+          | string
+          | number
+          | boolean
+          | {
+              [key: string]:
+                | string
+                | number
+                | boolean
+                | { [key: string]: Array<string | number | boolean> | string | number | boolean };
+            };
+      };
 
       executionModel?: 'durableObject' | 'stateless';
 
@@ -980,7 +980,7 @@ export namespace TelemetryQueryResponse {
 
       entrypoint?: string;
 
-      event?: Record<string, string | number | boolean>;
+      event?: { [key: string]: string | number | boolean };
 
       executionModel?: 'durableObject' | 'stateless';
 

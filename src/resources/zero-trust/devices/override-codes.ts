@@ -64,7 +64,7 @@ export type OverrideCodeListResponsesSinglePage = SinglePage<OverrideCodeListRes
 export type OverrideCodeListResponse = unknown;
 
 export interface OverrideCodeGetResponse {
-  disable_for_time?: Record<string, string>;
+  disable_for_time?: { [key: string]: string };
 }
 
 export interface OverrideCodeListParams {

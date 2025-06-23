@@ -195,7 +195,7 @@ export interface OperationDeleteResponse {
 /**
  * Operation ID to per operation setting mapping
  */
-export type OperationBulkEditResponse = Record<string, OperationBulkEditResponse.item>;
+export type OperationBulkEditResponse = { [key: string]: OperationBulkEditResponse.item };
 
 export namespace OperationBulkEditResponse {
   export interface item {
@@ -279,7 +279,7 @@ export interface OperationBulkEditParams {
   /**
    * Body param:
    */
-  body: Record<string, OperationBulkEditParams.Body>;
+  body: { [key: string]: OperationBulkEditParams.Body };
 }
 
 export namespace OperationBulkEditParams {

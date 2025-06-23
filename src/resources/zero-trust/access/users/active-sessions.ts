@@ -77,7 +77,7 @@ export interface ActiveSessionListResponse {
 
 export namespace ActiveSessionListResponse {
   export interface Metadata {
-    apps?: Record<string, Metadata.Apps>;
+    apps?: { [key: string]: Metadata.Apps };
 
     expires?: number;
 
@@ -110,9 +110,9 @@ export interface ActiveSessionGetResponse {
 
   device_id?: string;
 
-  device_sessions?: Record<string, ActiveSessionGetResponse.DeviceSessions>;
+  device_sessions?: { [key: string]: ActiveSessionGetResponse.DeviceSessions };
 
-  devicePosture?: Record<string, ActiveSessionGetResponse.DevicePosture>;
+  devicePosture?: { [key: string]: ActiveSessionGetResponse.DevicePosture };
 
   email?: string;
 

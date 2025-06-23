@@ -153,7 +153,7 @@ export interface SummaryHTTPMethodResponse {
    */
   meta: SummaryHTTPMethodResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryHTTPMethodResponse {
@@ -355,7 +355,7 @@ export interface SummaryIndustryResponse {
    */
   meta: SummaryIndustryResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryIndustryResponse {
@@ -555,7 +555,7 @@ export interface SummaryManagedRulesResponse {
    */
   meta: SummaryManagedRulesResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryManagedRulesResponse {
@@ -652,7 +652,7 @@ export interface SummaryMitigationProductResponse {
    */
   meta: SummaryMitigationProductResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryMitigationProductResponse {
@@ -749,7 +749,7 @@ export interface SummaryVerticalResponse {
    */
   meta: SummaryVerticalResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryVerticalResponse {

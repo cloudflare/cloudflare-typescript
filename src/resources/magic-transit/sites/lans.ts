@@ -195,7 +195,7 @@ export interface DHCPServer {
   /**
    * Mapping of MAC addresses to IP addresses
    */
-  reservations?: Record<string, string>;
+  reservations?: { [key: string]: string };
 }
 
 export interface DHCPServerParam {
@@ -219,7 +219,7 @@ export interface DHCPServerParam {
   /**
    * Mapping of MAC addresses to IP addresses
    */
-  reservations?: Record<string, string>;
+  reservations?: { [key: string]: string };
 }
 
 export interface LAN {

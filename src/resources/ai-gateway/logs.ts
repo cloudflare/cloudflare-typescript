@@ -501,7 +501,7 @@ export interface LogEditParams {
   /**
    * Body param:
    */
-  metadata?: Record<string, string | number | boolean> | null;
+  metadata?: { [key: string]: string | number | boolean } | null;
 
   /**
    * Body param:

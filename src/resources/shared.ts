@@ -274,7 +274,7 @@ export interface LoadBalancerPreview {
   /**
    * Monitored pool IDs mapped to their respective names.
    */
-  pools?: Record<string, string>;
+  pools?: { [key: string]: string };
 
   preview_id?: string;
 }
@@ -890,7 +890,7 @@ export interface TokenPolicy {
   /**
    * A list of resource names that the policy applies to.
    */
-  resources: Record<string, string>;
+  resources: { [key: string]: string };
 }
 
 export namespace TokenPolicy {
@@ -941,7 +941,7 @@ export interface TokenPolicyParam {
   /**
    * A list of resource names that the policy applies to.
    */
-  resources: Record<string, string>;
+  resources: { [key: string]: string };
 }
 
 export namespace TokenPolicyParam {

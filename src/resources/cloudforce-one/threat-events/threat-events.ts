@@ -553,7 +553,7 @@ export interface ThreatEventCreateParams {
 
 export namespace ThreatEventCreateParams {
   export interface Raw {
-    data: Record<string, unknown> | null;
+    data: { [key: string]: unknown } | null;
 
     source?: string;
 
@@ -682,7 +682,7 @@ export namespace ThreatEventBulkCreateParams {
 
   export namespace Data {
     export interface Raw {
-      data: Record<string, unknown> | null;
+      data: { [key: string]: unknown } | null;
 
       source?: string;
 
