@@ -39,17 +39,6 @@ export const tool: Tool = {
           antivirus: {
             $ref: '#/$defs/anti_virus_settings',
           },
-          'app-control-settings': {
-            type: 'object',
-            description: 'Setting to enable App Control',
-            properties: {
-              enabled: {
-                type: 'boolean',
-                description: 'Enable App Control',
-              },
-            },
-            required: [],
-          },
           block_page: {
             $ref: '#/$defs/block_page_settings',
           },
