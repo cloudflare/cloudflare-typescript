@@ -38,7 +38,6 @@ describe('resource configurations', () => {
             support_url: 'support_url',
           },
         },
-        'app-control-settings': { enabled: false },
         block_page: {
           background_color: 'background_color',
           enabled: true,
@@ -96,7 +95,6 @@ describe('resource configurations', () => {
             support_url: 'support_url',
           },
         },
-        'app-control-settings': { enabled: false },
         block_page: {
           background_color: 'background_color',
           enabled: true,

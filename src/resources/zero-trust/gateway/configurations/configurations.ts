@@ -438,11 +438,6 @@ export interface GatewayConfigurationSettings {
   antivirus?: AntiVirusSettings | null;
 
   /**
-   * Setting to enable App Control
-   */
-  'app-control-settings'?: GatewayConfigurationSettings.AppControlSettings | null;
-
-  /**
    * Block page layout settings.
    */
   block_page?: BlockPageSettings | null;
@@ -502,16 +497,6 @@ export interface GatewayConfigurationSettings {
 
 export namespace GatewayConfigurationSettings {
   /**
-   * Setting to enable App Control
-   */
-  export interface AppControlSettings {
-    /**
-     * Enable App Control
-     */
-    enabled?: boolean;
-  }
-
-  /**
    * Certificate settings for Gateway TLS interception. If not specified, the
    * Cloudflare Root CA will be used.
    */
@@ -563,11 +548,6 @@ export interface GatewayConfigurationSettingsParam {
    * Anti-virus settings.
    */
   antivirus?: AntiVirusSettingsParam | null;
-
-  /**
-   * Setting to enable App Control
-   */
-  'app-control-settings'?: GatewayConfigurationSettingsParam.AppControlSettings | null;
 
   /**
    * Block page layout settings.
@@ -628,16 +608,6 @@ export interface GatewayConfigurationSettingsParam {
 }
 
 export namespace GatewayConfigurationSettingsParam {
-  /**
-   * Setting to enable App Control
-   */
-  export interface AppControlSettings {
-    /**
-     * Enable App Control
-     */
-    enabled?: boolean;
-  }
-
   /**
    * Certificate settings for Gateway TLS interception. If not specified, the
    * Cloudflare Root CA will be used.
