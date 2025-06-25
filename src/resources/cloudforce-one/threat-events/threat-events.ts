@@ -248,8 +248,6 @@ export interface ThreatEventCreateResponse {
 
   category: string;
 
-  categoryId: number;
-
   date: string;
 
   event: string;
@@ -306,8 +304,6 @@ export namespace ThreatEventListResponse {
     attackerCountry: string;
 
     category: string;
-
-    categoryId: number;
 
     date: string;
 
@@ -373,8 +369,6 @@ export interface ThreatEventEditResponse {
 
   category: string;
 
-  categoryId: number;
-
   date: string;
 
   event: string;
@@ -428,8 +422,6 @@ export interface ThreatEventGetResponse {
   attackerCountry: string;
 
   category: string;
-
-  categoryId: number;
 
   date: string;
 
