@@ -36,11 +36,6 @@ export const tool: Tool = {
           $ref: '#/$defs/token_policy',
         },
       },
-      status: {
-        type: 'string',
-        description: 'Status of the token.',
-        enum: ['active', 'disabled', 'expired'],
-      },
       condition: {
         type: 'object',
         properties: {
@@ -77,6 +72,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'The time before which the token MUST NOT be accepted for processing.',
         format: 'date-time',
+      },
+      status: {
+        type: 'string',
+        description: 'Status of the token.',
+        enum: ['active', 'disabled', 'expired'],
       },
     },
     $defs: {
