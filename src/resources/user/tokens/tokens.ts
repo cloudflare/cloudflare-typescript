@@ -35,12 +35,7 @@ export class Tokens extends APIResource {
    *         { id: 'c8fed203ed3043cba015a93ad1616f1f' },
    *         { id: '82e64a83756745bbbb1c9c2701bf816b' },
    *       ],
-   *       resources: {
-   *         'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43':
-   *           '*',
-   *         'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4':
-   *           '*',
-   *       },
+   *       resources: { foo: 'string' },
    *     },
    *   ],
    * });
@@ -70,15 +65,9 @@ export class Tokens extends APIResource {
    *           { id: 'c8fed203ed3043cba015a93ad1616f1f' },
    *           { id: '82e64a83756745bbbb1c9c2701bf816b' },
    *         ],
-   *         resources: {
-   *           'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43':
-   *             '*',
-   *           'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4':
-   *             '*',
-   *         },
+   *         resources: { foo: 'string' },
    *       },
    *     ],
-   *     status: 'active',
    *   },
    * );
    * ```
@@ -343,11 +332,6 @@ export interface TokenUpdateParams {
    */
   policies: Array<Shared.TokenPolicyParam>;
 
-  /**
-   * Status of the token.
-   */
-  status: 'active' | 'disabled' | 'expired';
-
   condition?: TokenUpdateParams.Condition;
 
   /**
@@ -360,6 +344,11 @@ export interface TokenUpdateParams {
    * The time before which the token MUST NOT be accepted for processing.
    */
   not_before?: string;
+
+  /**
+   * Status of the token.
+   */
+  status?: 'active' | 'disabled' | 'expired';
 }
 
 export namespace TokenUpdateParams {
