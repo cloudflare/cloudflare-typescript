@@ -37,8 +37,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { target_id, ...body } = args as any;
-  await client.zeroTrust.access.infrastructure.targets.delete(target_id, body);
-  return asTextContentResult('Successful tool call');
+  const response = await client.zeroTrust.access.infrastructure.targets.delete(target_id, body).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };

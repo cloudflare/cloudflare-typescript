@@ -35,8 +35,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { domain_id, ...body } = args as any;
-  await client.workers.domains.delete(domain_id, body);
-  return asTextContentResult('Successful tool call');
+  const response = await client.workers.domains.delete(domain_id, body).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };

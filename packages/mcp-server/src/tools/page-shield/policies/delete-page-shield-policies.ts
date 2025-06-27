@@ -35,8 +35,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { policy_id, ...body } = args as any;
-  await client.pageShield.policies.delete(policy_id, body);
-  return asTextContentResult('Successful tool call');
+  const response = await client.pageShield.policies.delete(policy_id, body).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };
