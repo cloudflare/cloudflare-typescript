@@ -427,7 +427,7 @@ export interface DomainEditParams {
   /**
    * Body param:
    */
-  domain?: string | null;
+  domain?: string;
 
   /**
    * Body param:
@@ -453,12 +453,12 @@ export interface DomainEditParams {
   /**
    * Body param:
    */
-  integration_id?: string | null;
+  integration_id?: string;
 
   /**
    * Body param:
    */
-  lookback_hops?: number | null;
+  lookback_hops?: number;
 
   /**
    * Body param:
