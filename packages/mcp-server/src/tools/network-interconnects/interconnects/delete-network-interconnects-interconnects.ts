@@ -34,8 +34,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { icon, ...body } = args as any;
-  await client.networkInterconnects.interconnects.delete(icon, body);
-  return asTextContentResult('Successful tool call');
+  const response = await client.networkInterconnects.interconnects.delete(icon, body).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };

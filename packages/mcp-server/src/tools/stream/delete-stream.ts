@@ -35,8 +35,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { identifier, ...body } = args as any;
-  await client.stream.delete(identifier, body);
-  return asTextContentResult('Successful tool call');
+  const response = await client.stream.delete(identifier, body).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };
