@@ -39,7 +39,7 @@ export class Tokens extends APIResource {
    *         { id: 'c8fed203ed3043cba015a93ad1616f1f' },
    *         { id: '82e64a83756745bbbb1c9c2701bf816b' },
    *       ],
-   *       resources: { foo: { foo: 'string' } },
+   *       resources: { foo: 'string' },
    *     },
    *   ],
    * });
@@ -71,7 +71,7 @@ export class Tokens extends APIResource {
    *           { id: 'c8fed203ed3043cba015a93ad1616f1f' },
    *           { id: '82e64a83756745bbbb1c9c2701bf816b' },
    *         ],
-   *         resources: { foo: { foo: 'string' } },
+   *         resources: { foo: 'string' },
    *       },
    *     ],
    *   },
