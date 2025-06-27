@@ -132,14 +132,7 @@ export const tool: Tool = {
             },
           },
           resources: {
-            anyOf: [
-              {
-                type: 'object',
-              },
-              {
-                type: 'object',
-              },
-            ],
+            type: 'object',
             description: 'A list of resource names that the policy applies to.',
           },
         },
