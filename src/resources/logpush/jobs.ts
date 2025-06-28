@@ -373,27 +373,25 @@ export interface LogpushJob {
    * The maximum uncompressed file size of a batch of logs. This setting value must
    * be between `5 MB` and `1 GB`, or `0` to disable it. Note that you cannot set a
    * minimum file size; this means that log files may be much smaller than this batch
-   * size. This parameter is not available for jobs with `edge` as its kind.
+   * size.
    */
-  max_upload_bytes?: number | null;
+  max_upload_bytes?: 0 | unknown | null;
 
   /**
    * The maximum interval in seconds for log batches. This setting must be between 30
    * and 300 seconds (5 minutes), or `0` to disable it. Note that you cannot specify
    * a minimum interval for log batches; this means that log files may be sent in
-   * shorter intervals than this. This parameter is only used for jobs with `edge` as
-   * its kind.
+   * shorter intervals than this.
    */
-  max_upload_interval_seconds?: number | null;
+  max_upload_interval_seconds?: 0 | unknown | null;
 
   /**
    * The maximum number of log lines per batch. This setting must be between 1000 and
    * 1,000,000 lines, or `0` to disable it. Note that you cannot specify a minimum
    * number of log lines per batch; this means that log files may contain many fewer
-   * lines than this. This parameter is not available for jobs with `edge` as its
-   * kind.
+   * lines than this.
    */
-  max_upload_records?: number | null;
+  max_upload_records?: 0 | unknown | null;
 
   /**
    * Optional human readable job name. Not unique. Cloudflare suggests that you set
@@ -660,28 +658,25 @@ export interface JobCreateParams {
    * Body param: The maximum uncompressed file size of a batch of logs. This setting
    * value must be between `5 MB` and `1 GB`, or `0` to disable it. Note that you
    * cannot set a minimum file size; this means that log files may be much smaller
-   * than this batch size. This parameter is not available for jobs with `edge` as
-   * its kind.
+   * than this batch size.
    */
-  max_upload_bytes?: number | null;
+  max_upload_bytes?: 0 | unknown | null;
 
   /**
    * Body param: The maximum interval in seconds for log batches. This setting must
    * be between 30 and 300 seconds (5 minutes), or `0` to disable it. Note that you
    * cannot specify a minimum interval for log batches; this means that log files may
-   * be sent in shorter intervals than this. This parameter is only used for jobs
-   * with `edge` as its kind.
+   * be sent in shorter intervals than this.
    */
-  max_upload_interval_seconds?: number | null;
+  max_upload_interval_seconds?: 0 | unknown | null;
 
   /**
    * Body param: The maximum number of log lines per batch. This setting must be
    * between 1000 and 1,000,000 lines, or `0` to disable it. Note that you cannot
    * specify a minimum number of log lines per batch; this means that log files may
-   * contain many fewer lines than this. This parameter is not available for jobs
-   * with `edge` as its kind.
+   * contain many fewer lines than this.
    */
-  max_upload_records?: number | null;
+  max_upload_records?: 0 | unknown | null;
 
   /**
    * Body param: Optional human readable job name. Not unique. Cloudflare suggests
@@ -762,28 +757,25 @@ export interface JobUpdateParams {
    * Body param: The maximum uncompressed file size of a batch of logs. This setting
    * value must be between `5 MB` and `1 GB`, or `0` to disable it. Note that you
    * cannot set a minimum file size; this means that log files may be much smaller
-   * than this batch size. This parameter is not available for jobs with `edge` as
-   * its kind.
+   * than this batch size.
    */
-  max_upload_bytes?: number | null;
+  max_upload_bytes?: 0 | unknown | null;
 
   /**
    * Body param: The maximum interval in seconds for log batches. This setting must
    * be between 30 and 300 seconds (5 minutes), or `0` to disable it. Note that you
    * cannot specify a minimum interval for log batches; this means that log files may
-   * be sent in shorter intervals than this. This parameter is only used for jobs
-   * with `edge` as its kind.
+   * be sent in shorter intervals than this.
    */
-  max_upload_interval_seconds?: number | null;
+  max_upload_interval_seconds?: 0 | unknown | null;
 
   /**
    * Body param: The maximum number of log lines per batch. This setting must be
    * between 1000 and 1,000,000 lines, or `0` to disable it. Note that you cannot
    * specify a minimum number of log lines per batch; this means that log files may
-   * contain many fewer lines than this. This parameter is not available for jobs
-   * with `edge` as its kind.
+   * contain many fewer lines than this.
    */
-  max_upload_records?: number | null;
+  max_upload_records?: 0 | unknown | null;
 
   /**
    * Body param: Optional human readable job name. Not unique. Cloudflare suggests
