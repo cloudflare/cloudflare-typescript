@@ -94,7 +94,7 @@ jobs:
     timeout-minutes: 10
     name: examples
     runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-node' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
-    if: github.repository == 'cloudflare/cloudflare-typescript && (github.event_name == 'push' || github.event.pull_request.head.repo.fork)'
+    if: github.repository == 'cloudflare/cloudflare-typescript' && (github.event_name == 'push' || github.event.pull_request.head.repo.fork)
 
     steps:
       - uses: actions/checkout@v4
