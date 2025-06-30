@@ -8,10 +8,7 @@ export class Top extends APIResource {
   /**
    * Retrieves the top verified bots by HTTP requests, with owner and category.
    *
-   * @example
-   * ```ts
-   * const response = await client.radar.verifiedBots.top.bots();
-   * ```
+   * @deprecated Use [Radar Bots API](https://developers.cloudflare.com/api/resources/radar/subresources/bots/) instead.
    */
   bots(query?: TopBotsParams, options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse>;
   bots(options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse>;
@@ -33,11 +30,7 @@ export class Top extends APIResource {
    * Retrieves the top verified bot categories by HTTP requests, along with their
    * corresponding percentage, over the total verified bot HTTP requests.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.verifiedBots.top.categories();
-   * ```
+   * @deprecated Use [Radar Bots API](https://developers.cloudflare.com/api/resources/radar/subresources/bots/) instead.
    */
   categories(
     query?: TopCategoriesParams,

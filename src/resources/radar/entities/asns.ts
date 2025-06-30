@@ -118,11 +118,6 @@ export namespace ASNListResponse {
 
     aka?: string;
 
-    /**
-     * Deprecated field. Please use 'aka'.
-     */
-    nameLong?: string;
-
     orgName?: string;
 
     website?: string;
@@ -159,11 +154,6 @@ export namespace ASNGetResponse {
     website: string;
 
     aka?: string;
-
-    /**
-     * Deprecated field. Please use 'aka'.
-     */
-    nameLong?: string;
   }
 
   export namespace ASN {
@@ -232,11 +222,6 @@ export namespace ASNIPResponse {
     website: string;
 
     aka?: string;
-
-    /**
-     * Deprecated field. Please use 'aka'.
-     */
-    nameLong?: string;
   }
 
   export namespace ASN {
