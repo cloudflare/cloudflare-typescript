@@ -133,9 +133,97 @@ export class UARules extends APIResource {
 
 export class UARuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UARuleListResponse> {}
 
-export type UARuleCreateResponse = unknown | string | null;
+export interface UARuleCreateResponse {
+  /**
+   * The unique identifier of the User Agent Blocking rule.
+   */
+  id?: string;
 
-export type UARuleUpdateResponse = unknown | string | null;
+  /**
+   * The configuration object for the current rule.
+   */
+  configuration?: UARuleCreateResponse.Configuration;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description?: string;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode?: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused?: boolean;
+}
+
+export namespace UARuleCreateResponse {
+  /**
+   * The configuration object for the current rule.
+   */
+  export interface Configuration {
+    /**
+     * The configuration target for this rule. You must set the target to `ua` for User
+     * Agent Blocking rules.
+     */
+    target?: string;
+
+    /**
+     * The exact user agent string to match. This value will be compared to the
+     * received `User-Agent` HTTP header value.
+     */
+    value?: string;
+  }
+}
+
+export interface UARuleUpdateResponse {
+  /**
+   * The unique identifier of the User Agent Blocking rule.
+   */
+  id?: string;
+
+  /**
+   * The configuration object for the current rule.
+   */
+  configuration?: UARuleUpdateResponse.Configuration;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description?: string;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode?: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused?: boolean;
+}
+
+export namespace UARuleUpdateResponse {
+  /**
+   * The configuration object for the current rule.
+   */
+  export interface Configuration {
+    /**
+     * The configuration target for this rule. You must set the target to `ua` for User
+     * Agent Blocking rules.
+     */
+    target?: string;
+
+    /**
+     * The exact user agent string to match. This value will be compared to the
+     * received `User-Agent` HTTP header value.
+     */
+    value?: string;
+  }
+}
 
 export interface UARuleListResponse {
   /**
@@ -188,9 +276,92 @@ export interface UARuleDeleteResponse {
    * The unique identifier of the User Agent Blocking rule.
    */
   id?: string;
+
+  /**
+   * The configuration object for the current rule.
+   */
+  configuration?: UARuleDeleteResponse.Configuration;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description?: string;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode?: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused?: boolean;
 }
 
-export type UARuleGetResponse = unknown | string | null;
+export namespace UARuleDeleteResponse {
+  /**
+   * The configuration object for the current rule.
+   */
+  export interface Configuration {
+    /**
+     * The configuration target for this rule. You must set the target to `ua` for User
+     * Agent Blocking rules.
+     */
+    target?: string;
+
+    /**
+     * The exact user agent string to match. This value will be compared to the
+     * received `User-Agent` HTTP header value.
+     */
+    value?: string;
+  }
+}
+
+export interface UARuleGetResponse {
+  /**
+   * The unique identifier of the User Agent Blocking rule.
+   */
+  id?: string;
+
+  /**
+   * The configuration object for the current rule.
+   */
+  configuration?: UARuleGetResponse.Configuration;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description?: string;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode?: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused?: boolean;
+}
+
+export namespace UARuleGetResponse {
+  /**
+   * The configuration object for the current rule.
+   */
+  export interface Configuration {
+    /**
+     * The configuration target for this rule. You must set the target to `ua` for User
+     * Agent Blocking rules.
+     */
+    target?: string;
+
+    /**
+     * The exact user agent string to match. This value will be compared to the
+     * received `User-Agent` HTTP header value.
+     */
+    value?: string;
+  }
+}
 
 export interface UARuleCreateParams {
   /**
@@ -207,6 +378,17 @@ export interface UARuleCreateParams {
    * Body param: The action to apply to a matched request.
    */
   mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * Body param: An informative summary of the rule. This value is sanitized and any
+   * tags will be removed.
+   */
+  description?: string;
+
+  /**
+   * Body param: When true, indicates that the rule is currently paused.
+   */
+  paused?: boolean;
 }
 
 export namespace UARuleCreateParams {
@@ -244,6 +426,17 @@ export interface UARuleUpdateParams {
    * Body param: The action to apply to a matched request.
    */
   mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * Body param: An informative summary of the rule. This value is sanitized and any
+   * tags will be removed.
+   */
+  description?: string;
+
+  /**
+   * Body param: When true, indicates that the rule is currently paused.
+   */
+  paused?: boolean;
 }
 
 export interface UARuleListParams extends V4PagePaginationArrayParams {
@@ -258,14 +451,14 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
   description?: string;
 
   /**
-   * Query param: A string to search for in the description of existing rules.
+   * Query param: When true, indicates that the rule is currently paused.
    */
-  description_search?: string;
+  paused?: boolean;
 
   /**
    * Query param: A string to search for in the user agent values of existing rules.
    */
-  ua_search?: string;
+  user_agent?: string;
 }
 
 export interface UARuleDeleteParams {

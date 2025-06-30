@@ -132,7 +132,7 @@ export interface Override {
   groups?: { [key: string]: unknown };
 
   /**
-   * When true, indicates that the WAF package is currently paused.
+   * When true, indicates that the rule is currently paused.
    */
   paused?: boolean;
 
