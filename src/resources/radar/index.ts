@@ -5,6 +5,19 @@ export { AS112, type AS112TimeseriesResponse, type AS112TimeseriesParams } from 
 export { Annotations, type AnnotationListResponse, type AnnotationListParams } from './annotations/index';
 export { Attacks } from './attacks/index';
 export { BGP, type BGPTimeseriesResponse, type BGPTimeseriesParams } from './bgp/index';
+export {
+  Bots,
+  type BotListResponse,
+  type BotGetResponse,
+  type BotSummaryResponse,
+  type BotTimeseriesResponse,
+  type BotTimeseriesGroupsResponse,
+  type BotListParams,
+  type BotGetParams,
+  type BotSummaryParams,
+  type BotTimeseriesParams,
+  type BotTimeseriesGroupsParams,
+} from './bots/index';
 export { DNS, type DNSTimeseriesResponse, type DNSTimeseriesParams } from './dns/index';
 export {
   Datasets,
