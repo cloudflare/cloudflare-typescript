@@ -266,8 +266,8 @@ export interface LockdownCreateParams {
   urls: Array<OverridesAPI.OverrideURLParam>;
 
   /**
-   * Body param: An informative summary of the rate limit. This value is sanitized
-   * and any tags will be removed.
+   * Body param: An informative summary of the rule. This value is sanitized and any
+   * tags will be removed.
    */
   description?: string;
 
