@@ -117,7 +117,7 @@ export interface BotFightModeConfiguration {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -192,7 +192,7 @@ export interface BotFightModeConfigurationParam {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -215,7 +215,7 @@ export interface SubscriptionConfiguration {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Automatically update to the newest bot detection models created by Cloudflare as
@@ -298,7 +298,7 @@ export interface SubscriptionConfigurationParam {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Automatically update to the newest bot detection models created by Cloudflare as
@@ -329,7 +329,7 @@ export interface SuperBotFightModeDefinitelyConfiguration {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -400,7 +400,7 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -440,7 +440,7 @@ export interface SuperBotFightModeLikelyConfiguration {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -510,7 +510,7 @@ export interface SuperBotFightModeLikelyConfigurationParam {
   /**
    * Enable rule to block AI Scrapers and Crawlers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -579,7 +579,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
-    ai_bots_protection?: 'block' | 'disabled';
+    ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -608,7 +608,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
-    ai_bots_protection?: 'block' | 'disabled';
+    ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -656,7 +656,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
-    ai_bots_protection?: 'block' | 'disabled';
+    ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -710,7 +710,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers.
      */
-    ai_bots_protection?: 'block' | 'disabled';
+    ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
      * Body param: Automatically update to the newest bot detection models created by
