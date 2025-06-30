@@ -6,7 +6,7 @@ import { RequestOptions } from '../../internal/request-options';
 
 export class Search extends APIResource {
   /**
-   * Searches for locations, autonomous systems, and reports.
+   * Searches for locations, autonomous systems, reports, and bots.
    *
    * @example
    * ```ts
@@ -47,7 +47,7 @@ export interface SearchGlobalParams {
   /**
    * Search types excluded from results.
    */
-  exclude?: Array<'ASNS' | 'LOCATIONS' | 'NOTEBOOKS' | 'SPECIAL_EVENTS'>;
+  exclude?: Array<'ASNS' | 'BOTS' | 'LOCATIONS' | 'NOTEBOOKS' | 'SPECIAL_EVENTS'>;
 
   /**
    * Format in which results will be returned.
@@ -57,7 +57,7 @@ export interface SearchGlobalParams {
   /**
    * Search types included in results.
    */
-  include?: Array<'ASNS' | 'LOCATIONS' | 'NOTEBOOKS' | 'SPECIAL_EVENTS'>;
+  include?: Array<'ASNS' | 'BOTS' | 'LOCATIONS' | 'NOTEBOOKS' | 'SPECIAL_EVENTS'>;
 
   /**
    * Limits the number of objects returned in the response.
