@@ -3165,7 +3165,7 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.search`:
 
-- `global_radar_search` (`read`): Searches for locations, autonomous systems, and reports.
+- `global_radar_search` (`read`): Searches for locations, autonomous systems, reports, and bots.
 
 ### Resource `radar.verified_bots.top`:
 

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'global_radar_search',
-  description: 'Searches for locations, autonomous systems, and reports.',
+  description: 'Searches for locations, autonomous systems, reports, and bots.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -30,7 +30,7 @@ export const tool: Tool = {
         description: 'Search types excluded from results.',
         items: {
           type: 'string',
-          enum: ['ASNS', 'LOCATIONS', 'NOTEBOOKS', 'SPECIAL_EVENTS'],
+          enum: ['ASNS', 'BOTS', 'LOCATIONS', 'NOTEBOOKS', 'SPECIAL_EVENTS'],
         },
       },
       format: {
@@ -43,7 +43,7 @@ export const tool: Tool = {
         description: 'Search types included in results.',
         items: {
           type: 'string',
-          enum: ['ASNS', 'LOCATIONS', 'NOTEBOOKS', 'SPECIAL_EVENTS'],
+          enum: ['ASNS', 'BOTS', 'LOCATIONS', 'NOTEBOOKS', 'SPECIAL_EVENTS'],
         },
       },
       limit: {
