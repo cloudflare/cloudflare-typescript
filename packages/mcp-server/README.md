@@ -3112,6 +3112,19 @@ The following tools are available in this MCP server.
 
 - `timeseries_bgp_radar_ips` (`read`): Retrieves time series data for the announced IP space count, represented as the number of IPv4 /24s and IPv6 /48s, for a given ASN.
 
+### Resource `radar.bots`:
+
+- `list_radar_bots` (`read`): Retrieves a list of bots.
+- `get_radar_bots` (`read`): Retrieves the requested bot information.
+- `summary_radar_bots` (`read`): Retrieves an aggregated summary of bots HTTP requests grouped by the specified dimension.
+- `timeseries_radar_bots` (`read`): Retrieves bots HTTP request volume over time.
+- `timeseries_groups_radar_bots` (`read`): Retrieves the distribution of HTTP requests from bots, grouped by chosen the specified dimension over time.
+
+### Resource `radar.bots.web_crawlers`:
+
+- `summary_bots_radar_web_crawlers` (`read`): Retrieves an aggregated summary of HTTP requests from crawlers, grouped by the specified dimension.
+- `timeseries_groups_bots_radar_web_crawlers` (`read`): Retrieves the distribution of HTTP requests from crawlers, grouped by chosen the specified dimension over time.
+
 ### Resource `radar.datasets`:
 
 - `list_radar_datasets` (`read`): Retrieves a list of datasets.

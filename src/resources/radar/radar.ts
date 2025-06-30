@@ -30,6 +30,20 @@ import * as AttacksAPI from './attacks/attacks';
 import { Attacks } from './attacks/attacks';
 import * as BGPAPI from './bgp/bgp';
 import { BGP, BGPTimeseriesParams, BGPTimeseriesResponse } from './bgp/bgp';
+import * as BotsAPI from './bots/bots';
+import {
+  BotGetParams,
+  BotGetResponse,
+  BotListParams,
+  BotListResponse,
+  BotSummaryParams,
+  BotSummaryResponse,
+  BotTimeseriesGroupsParams,
+  BotTimeseriesGroupsResponse,
+  BotTimeseriesParams,
+  BotTimeseriesResponse,
+  Bots,
+} from './bots/bots';
 import * as DNSAPI from './dns/dns';
 import { DNS, DNSTimeseriesParams, DNSTimeseriesResponse } from './dns/dns';
 import * as EmailAPI from './email/email';
@@ -73,6 +87,7 @@ export class Radar extends APIResource {
   ai: AIAPI.AI = new AIAPI.AI(this._client);
   annotations: AnnotationsAPI.Annotations = new AnnotationsAPI.Annotations(this._client);
   bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
+  bots: BotsAPI.Bots = new BotsAPI.Bots(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   netflows: NetflowsAPI.Netflows = new NetflowsAPI.Netflows(this._client);
@@ -100,6 +115,7 @@ export class Radar extends APIResource {
 Radar.AI = AI;
 Radar.Annotations = Annotations;
 Radar.BGP = BGP;
+Radar.Bots = Bots;
 Radar.Datasets = Datasets;
 Radar.DNS = DNS;
 Radar.Netflows = Netflows;
@@ -130,6 +146,20 @@ export declare namespace Radar {
     BGP as BGP,
     type BGPTimeseriesResponse as BGPTimeseriesResponse,
     type BGPTimeseriesParams as BGPTimeseriesParams,
+  };
+
+  export {
+    Bots as Bots,
+    type BotListResponse as BotListResponse,
+    type BotGetResponse as BotGetResponse,
+    type BotSummaryResponse as BotSummaryResponse,
+    type BotTimeseriesResponse as BotTimeseriesResponse,
+    type BotTimeseriesGroupsResponse as BotTimeseriesGroupsResponse,
+    type BotListParams as BotListParams,
+    type BotGetParams as BotGetParams,
+    type BotSummaryParams as BotSummaryParams,
+    type BotTimeseriesParams as BotTimeseriesParams,
+    type BotTimeseriesGroupsParams as BotTimeseriesGroupsParams,
   };
 
   export {

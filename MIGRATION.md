@@ -1139,6 +1139,13 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.bgp.routes.realtime()`
 - `client.radar.bgp.routes.stats()`
 - `client.radar.bgp.ips.timeseries()`
+- `client.radar.bots.list()`
+- `client.radar.bots.get()`
+- `client.radar.bots.summary()`
+- `client.radar.bots.timeseries()`
+- `client.radar.bots.timeseriesGroups()`
+- `client.radar.bots.webCrawlers.summary()`
+- `client.radar.bots.webCrawlers.timeseriesGroups()`
 - `client.radar.datasets.list()`
 - `client.radar.dns.timeseries()`
 - `client.radar.dns.top.ases()`
