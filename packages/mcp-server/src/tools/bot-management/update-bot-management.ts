@@ -32,7 +32,7 @@ export const tool: Tool = {
           ai_bots_protection: {
             type: 'string',
             description: 'Enable rule to block AI Scrapers and Crawlers.',
-            enum: ['block', 'disabled'],
+            enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
           crawler_protection: {
             type: 'string',
@@ -60,7 +60,7 @@ export const tool: Tool = {
           ai_bots_protection: {
             type: 'string',
             description: 'Enable rule to block AI Scrapers and Crawlers.',
-            enum: ['block', 'disabled'],
+            enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
           crawler_protection: {
             type: 'string',
@@ -103,7 +103,7 @@ export const tool: Tool = {
           ai_bots_protection: {
             type: 'string',
             description: 'Enable rule to block AI Scrapers and Crawlers.',
-            enum: ['block', 'disabled'],
+            enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
           crawler_protection: {
             type: 'string',
@@ -151,7 +151,7 @@ export const tool: Tool = {
           ai_bots_protection: {
             type: 'string',
             description: 'Enable rule to block AI Scrapers and Crawlers.',
-            enum: ['block', 'disabled'],
+            enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
           auto_update_model: {
             type: 'boolean',
