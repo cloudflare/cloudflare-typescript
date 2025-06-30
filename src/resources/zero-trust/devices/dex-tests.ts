@@ -63,7 +63,7 @@ export class DEXTests extends APIResource {
   }
 
   /**
-   * Fetch all DEX tests.
+   * Fetch all DEX tests
    *
    * @example
    * ```ts

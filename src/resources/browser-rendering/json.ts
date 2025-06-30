@@ -20,7 +20,7 @@ export class Json extends APIResource {
   }
 }
 
-export type JsonCreateResponse = Record<string, unknown>;
+export type JsonCreateResponse = { [key: string]: unknown };
 
 export interface JsonCreateParams {
   /**
@@ -158,7 +158,7 @@ export interface JsonCreateParams {
   /**
    * Body param:
    */
-  setExtraHTTPHeaders?: Record<string, string>;
+  setExtraHTTPHeaders?: { [key: string]: string };
 
   /**
    * Body param:
@@ -273,7 +273,7 @@ export namespace JsonCreateParams {
      * Schema for the response format. More information here:
      * https://developers.cloudflare.com/workers-ai/json-mode/
      */
-    schema?: Record<string, unknown>;
+    schema?: { [key: string]: unknown };
   }
 
   /**

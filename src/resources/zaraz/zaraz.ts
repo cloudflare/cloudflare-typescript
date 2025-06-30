@@ -55,34 +55,34 @@ export interface ButtonTextTranslation {
   /**
    * Object where keys are language codes
    */
-  accept_all: Record<string, string>;
+  accept_all: { [key: string]: string };
 
   /**
    * Object where keys are language codes
    */
-  confirm_my_choices: Record<string, string>;
+  confirm_my_choices: { [key: string]: string };
 
   /**
    * Object where keys are language codes
    */
-  reject_all: Record<string, string>;
+  reject_all: { [key: string]: string };
 }
 
 export interface ButtonTextTranslationParam {
   /**
    * Object where keys are language codes
    */
-  accept_all: Record<string, string>;
+  accept_all: { [key: string]: string };
 
   /**
    * Object where keys are language codes
    */
-  confirm_my_choices: Record<string, string>;
+  confirm_my_choices: { [key: string]: string };
 
   /**
    * Object where keys are language codes
    */
-  reject_all: Record<string, string>;
+  reject_all: { [key: string]: string };
 }
 
 export interface NeoEvent {

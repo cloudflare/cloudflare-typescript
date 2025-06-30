@@ -72,7 +72,7 @@ export interface PredefinedProfile {
     | PredefinedProfile.PredefinedEntry
     | PredefinedProfile.IntegrationEntry
     | PredefinedProfile.ExactDataEntry
-    | PredefinedProfile.DocumentTemplateEntry
+    | PredefinedProfile.DocumentFingerprintEntry
     | PredefinedProfile.WordListEntry
   >;
 
@@ -185,7 +185,7 @@ export namespace PredefinedProfile {
     updated_at: string;
   }
 
-  export interface DocumentTemplateEntry {
+  export interface DocumentFingerprintEntry {
     id: string;
 
     created_at: string;
@@ -194,7 +194,7 @@ export namespace PredefinedProfile {
 
     name: string;
 
-    type: 'document_template';
+    type: 'document_fingerprint';
 
     updated_at: string;
   }

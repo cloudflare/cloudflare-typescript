@@ -59,14 +59,14 @@ export interface ReverseDNSEditResponse {
   /**
    * Map of cluster IP addresses to PTR record contents
    */
-  ptr: Record<string, string>;
+  ptr: { [key: string]: string };
 }
 
 export interface ReverseDNSGetResponse {
   /**
    * Map of cluster IP addresses to PTR record contents
    */
-  ptr: Record<string, string>;
+  ptr: { [key: string]: string };
 }
 
 export interface ReverseDNSEditParams {
@@ -78,7 +78,7 @@ export interface ReverseDNSEditParams {
   /**
    * Body param: Map of cluster IP addresses to PTR record contents
    */
-  ptr?: Record<string, string>;
+  ptr?: { [key: string]: string };
 }
 
 export interface ReverseDNSGetParams {

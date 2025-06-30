@@ -3215,14 +3215,14 @@ export namespace RewriteRule {
     /**
      * Map of request headers to modify.
      */
-    headers?: Record<
-      string,
-      | ActionParameters.RemoveHeader
-      | ActionParameters.AddStaticHeader
-      | ActionParameters.SetStaticHeader
-      | ActionParameters.AddDynamicHeader
-      | ActionParameters.SetDynamicHeader
-    >;
+    headers?: {
+      [key: string]:
+        | ActionParameters.RemoveHeader
+        | ActionParameters.AddStaticHeader
+        | ActionParameters.SetStaticHeader
+        | ActionParameters.AddDynamicHeader
+        | ActionParameters.SetDynamicHeader;
+    };
 
     /**
      * URI to rewrite the request to.
@@ -3429,14 +3429,14 @@ export namespace RewriteRuleParam {
     /**
      * Map of request headers to modify.
      */
-    headers?: Record<
-      string,
-      | ActionParameters.RemoveHeader
-      | ActionParameters.AddStaticHeader
-      | ActionParameters.SetStaticHeader
-      | ActionParameters.AddDynamicHeader
-      | ActionParameters.SetDynamicHeader
-    >;
+    headers?: {
+      [key: string]:
+        | ActionParameters.RemoveHeader
+        | ActionParameters.AddStaticHeader
+        | ActionParameters.SetStaticHeader
+        | ActionParameters.AddDynamicHeader
+        | ActionParameters.SetDynamicHeader;
+    };
 
     /**
      * URI to rewrite the request to.
@@ -4930,7 +4930,7 @@ export namespace SetCacheSettingsRule {
            * whether any of the values provided are contained in the request header value is
            * used in building the cache key.
            */
-          contains?: Record<string, Array<string>>;
+          contains?: { [key: string]: Array<string> };
 
           /**
            * Whether or not to include the origin header. A value of true will exclude the
@@ -5446,7 +5446,7 @@ export namespace SetCacheSettingsRuleParam {
            * whether any of the values provided are contained in the request header value is
            * used in building the cache key.
            */
-          contains?: Record<string, Array<string>>;
+          contains?: { [key: string]: Array<string> };
 
           /**
            * Whether or not to include the origin header. A value of true will exclude the
@@ -6288,7 +6288,7 @@ export namespace SkipRule {
      * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
      * execution of. This option is incompatible with the ruleset option.
      */
-    rules?: Record<string, Array<string>>;
+    rules?: { [key: string]: Array<string> };
 
     /**
      * A ruleset to skip the execution of. This option is incompatible with the
@@ -6442,7 +6442,7 @@ export namespace SkipRuleParam {
      * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
      * execution of. This option is incompatible with the ruleset option.
      */
-    rules?: Record<string, Array<string>>;
+    rules?: { [key: string]: Array<string> };
 
     /**
      * A ruleset to skip the execution of. This option is incompatible with the
@@ -9233,14 +9233,14 @@ export declare namespace RuleCreateParams {
       /**
        * Map of request headers to modify.
        */
-      headers?: Record<
-        string,
-        | ActionParameters.RemoveHeader
-        | ActionParameters.AddStaticHeader
-        | ActionParameters.SetStaticHeader
-        | ActionParameters.AddDynamicHeader
-        | ActionParameters.SetDynamicHeader
-      >;
+      headers?: {
+        [key: string]:
+          | ActionParameters.RemoveHeader
+          | ActionParameters.AddStaticHeader
+          | ActionParameters.SetStaticHeader
+          | ActionParameters.AddDynamicHeader
+          | ActionParameters.SetDynamicHeader;
+      };
 
       /**
        * URI to rewrite the request to.
@@ -10374,7 +10374,7 @@ export declare namespace RuleCreateParams {
        * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
        * execution of. This option is incompatible with the ruleset option.
        */
-      rules?: Record<string, Array<string>>;
+      rules?: { [key: string]: Array<string> };
 
       /**
        * A ruleset to skip the execution of. This option is incompatible with the
@@ -10748,7 +10748,7 @@ export declare namespace RuleCreateParams {
              * whether any of the values provided are contained in the request header value is
              * used in building the cache key.
              */
-            contains?: Record<string, Array<string>>;
+            contains?: { [key: string]: Array<string> };
 
             /**
              * Whether or not to include the origin header. A value of true will exclude the
@@ -13375,14 +13375,14 @@ export declare namespace RuleEditParams {
       /**
        * Map of request headers to modify.
        */
-      headers?: Record<
-        string,
-        | ActionParameters.RemoveHeader
-        | ActionParameters.AddStaticHeader
-        | ActionParameters.SetStaticHeader
-        | ActionParameters.AddDynamicHeader
-        | ActionParameters.SetDynamicHeader
-      >;
+      headers?: {
+        [key: string]:
+          | ActionParameters.RemoveHeader
+          | ActionParameters.AddStaticHeader
+          | ActionParameters.SetStaticHeader
+          | ActionParameters.AddDynamicHeader
+          | ActionParameters.SetDynamicHeader;
+      };
 
       /**
        * URI to rewrite the request to.
@@ -14516,7 +14516,7 @@ export declare namespace RuleEditParams {
        * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
        * execution of. This option is incompatible with the ruleset option.
        */
-      rules?: Record<string, Array<string>>;
+      rules?: { [key: string]: Array<string> };
 
       /**
        * A ruleset to skip the execution of. This option is incompatible with the
@@ -14890,7 +14890,7 @@ export declare namespace RuleEditParams {
              * whether any of the values provided are contained in the request header value is
              * used in building the cache key.
              */
-            contains?: Record<string, Array<string>>;
+            contains?: { [key: string]: Array<string> };
 
             /**
              * Whether or not to include the origin header. A value of true will exclude the

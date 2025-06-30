@@ -424,30 +424,30 @@ export interface TrustedDomainEditParams {
   /**
    * Body param:
    */
-  comments?: string | null;
+  comments?: string;
 
   /**
    * Body param: Select to prevent recently registered domains from triggering a
    * Suspicious or Malicious disposition.
    */
-  is_recent?: boolean | null;
+  is_recent?: boolean;
 
   /**
    * Body param:
    */
-  is_regex?: boolean | null;
+  is_regex?: boolean;
 
   /**
    * Body param: Select for partner or other approved domains that have similar
    * spelling to your connected domains. Prevents listed domains from triggering a
    * Spoof disposition.
    */
-  is_similarity?: boolean | null;
+  is_similarity?: boolean;
 
   /**
    * Body param:
    */
-  pattern?: string | null;
+  pattern?: string;
 }
 
 export interface TrustedDomainGetParams {

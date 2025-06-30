@@ -458,7 +458,7 @@ export interface SummaryIndustryResponse {
    */
   meta: SummaryIndustryResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryIndustryResponse {
@@ -783,7 +783,7 @@ export interface SummaryVectorResponse {
    */
   meta: SummaryVectorResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryVectorResponse {
@@ -880,7 +880,7 @@ export interface SummaryVerticalResponse {
    */
   meta: SummaryVerticalResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryVerticalResponse {

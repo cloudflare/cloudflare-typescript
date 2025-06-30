@@ -14,8 +14,6 @@ describe('resource threatEvents', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.create({
       account_id: 'account_id',
-      attacker: 'Flying Yeti',
-      attackerCountry: 'CN',
       category: 'Domain Resolution',
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
@@ -36,8 +34,6 @@ describe('resource threatEvents', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.create({
       account_id: 'account_id',
-      attacker: 'Flying Yeti',
-      attackerCountry: 'CN',
       category: 'Domain Resolution',
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
@@ -45,6 +41,8 @@ describe('resource threatEvents', () => {
       raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
       tlp: 'amber',
       accountId: 123456,
+      attacker: 'Flying Yeti',
+      attackerCountry: 'CN',
       datasetId: 'durableObjectName',
       indicator: 'domain.com',
       tags: ['malware'],
@@ -104,8 +102,6 @@ describe('resource threatEvents', () => {
       account_id: 'account_id',
       data: [
         {
-          attacker: 'Flying Yeti',
-          attackerCountry: 'CN',
           category: 'Domain Resolution',
           date: '2022-04-01T00:00:00Z',
           event: 'An attacker registered the domain domain.com',
@@ -131,8 +127,6 @@ describe('resource threatEvents', () => {
       account_id: 'account_id',
       data: [
         {
-          attacker: 'Flying Yeti',
-          attackerCountry: 'CN',
           category: 'Domain Resolution',
           date: '2022-04-01T00:00:00Z',
           event: 'An attacker registered the domain domain.com',
@@ -140,6 +134,8 @@ describe('resource threatEvents', () => {
           raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
           tlp: 'amber',
           accountId: 123456,
+          attacker: 'Flying Yeti',
+          attackerCountry: 'CN',
           datasetId: 'durableObjectName',
           indicator: 'domain.com',
           tags: ['malware'],

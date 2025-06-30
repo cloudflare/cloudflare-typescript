@@ -147,7 +147,7 @@ export interface LinkCreateParams {
   /**
    * Body param:
    */
-  setExtraHTTPHeaders?: Record<string, string>;
+  setExtraHTTPHeaders?: { [key: string]: string };
 
   /**
    * Body param:

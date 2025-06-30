@@ -1,5 +1,36 @@
 # Changelog
 
+## 4.5.0 (2025-06-30)
+
+Full Changelog: [v4.4.1...v4.5.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.4.1...v4.5.0)
+
+### Features
+
+* **api:** api update ([25c67eb](https://github.com/cloudflare/cloudflare-typescript/commit/25c67ebe32c547e692ffdbde107267098b52e7ca))
+* **api:** api update ([3640b39](https://github.com/cloudflare/cloudflare-typescript/commit/3640b3922c6f7e30075bdfe3aa224cd60f58347d))
+* **api:** api update ([a3556ec](https://github.com/cloudflare/cloudflare-typescript/commit/a3556ec061ef64e96467f50b35333ee5430d5701))
+* **api:** api update ([3fae8c0](https://github.com/cloudflare/cloudflare-typescript/commit/3fae8c09b137827a5d0c721b274c40e022a325b2))
+* **api:** api update ([eb17884](https://github.com/cloudflare/cloudflare-typescript/commit/eb178842dd729e53d832f58e86ce41bd64e70600))
+* **api:** api update ([58ea846](https://github.com/cloudflare/cloudflare-typescript/commit/58ea846c9cc9622a959c354b81d13e108a83a869))
+* **api:** api update ([7c37a85](https://github.com/cloudflare/cloudflare-typescript/commit/7c37a85e50989df912f100a67e383624b2b70fbd))
+* **api:** api update ([99fa93e](https://github.com/cloudflare/cloudflare-typescript/commit/99fa93e063b91d33234384c739d0d492f8c4691b))
+* **api:** api update ([59a17cf](https://github.com/cloudflare/cloudflare-typescript/commit/59a17cf3bd914f6447c46bb27be346ac95717af8))
+* **api:** api update ([cbdd3e8](https://github.com/cloudflare/cloudflare-typescript/commit/cbdd3e82869bac6065a6b888457c10b7e8541f84))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([5257b08](https://github.com/cloudflare/cloudflare-typescript/commit/5257b08cf295cc66714bd879bbe7907cbf9275ec))
+* **ci:** release-doctor — report correct token name ([c4f2ddf](https://github.com/cloudflare/cloudflare-typescript/commit/c4f2ddfe3a5c3bf5cefaefe347b5a0707c538447))
+
+
+### Chores
+
+* **api:** TTL is required on DNS records ([a492965](https://github.com/cloudflare/cloudflare-typescript/commit/a4929653c8c982a5c8fe81d21f315ea4c4d11086))
+* **ci:** enable for pull requests ([6898174](https://github.com/cloudflare/cloudflare-typescript/commit/6898174da5c2bf8e78b503dffeacba7c0bf7a539))
+* **ci:** only run for pushes and fork pull requests ([ed461eb](https://github.com/cloudflare/cloudflare-typescript/commit/ed461eb0f3aa0fd81f48628830735cc70204eaed))
+* **internal:** codegen related update ([6a94ed9](https://github.com/cloudflare/cloudflare-typescript/commit/6a94ed94bfe950bf8193da2762ccf26a3a93065e))
+
 ## 4.4.1 (2025-06-16)
 
 Full Changelog: [v4.4.0...v4.4.1](https://github.com/cloudflare/cloudflare-typescript/compare/v4.4.0...v4.4.1)
