@@ -30,20 +30,20 @@ export const tool: Tool = {
         type: 'string',
         description: 'A string to search for in the description of existing rules.',
       },
-      description_search: {
-        type: 'string',
-        description: 'A string to search for in the description of existing rules.',
-      },
       page: {
         type: 'number',
         description: 'Page number of paginated results.',
+      },
+      paused: {
+        type: 'boolean',
+        description: 'When true, indicates that the rule is currently paused.',
       },
       per_page: {
         type: 'number',
         description:
           'The maximum number of results per page. You can only set the value to `1` or to a multiple of 5 such as `5`, `10`, `15`, or `20`.',
       },
-      ua_search: {
+      user_agent: {
         type: 'string',
         description: 'A string to search for in the user agent values of existing rules.',
       },

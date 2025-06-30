@@ -54,6 +54,15 @@ export const tool: Tool = {
         description: 'The action to apply to a matched request.',
         enum: ['block', 'challenge', 'whitelist', 'js_challenge', 'managed_challenge'],
       },
+      description: {
+        type: 'string',
+        description:
+          'An informative summary of the rule. This value is sanitized and any tags will be removed.',
+      },
+      paused: {
+        type: 'boolean',
+        description: 'When true, indicates that the rule is currently paused.',
+      },
     },
     $defs: {
       access_rule_ip_configuration: {

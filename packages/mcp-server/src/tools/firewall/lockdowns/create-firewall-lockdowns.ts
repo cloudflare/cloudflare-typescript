@@ -39,7 +39,7 @@ export const tool: Tool = {
       description: {
         type: 'string',
         description:
-          'An informative summary of the rate limit. This value is sanitized and any tags will be removed.',
+          'An informative summary of the rule. This value is sanitized and any tags will be removed.',
       },
       paused: {
         type: 'boolean',

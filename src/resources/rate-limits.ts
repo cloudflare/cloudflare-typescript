@@ -123,8 +123,8 @@ export interface RateLimit {
   bypass?: Array<RateLimit.Bypass>;
 
   /**
-   * An informative summary of the rate limit. This value is sanitized and any tags
-   * will be removed.
+   * An informative summary of the rule. This value is sanitized and any tags will be
+   * removed.
    */
   description?: string;
 
@@ -300,8 +300,8 @@ export interface RateLimitDeleteResponse {
   bypass?: Array<RateLimitDeleteResponse.Bypass>;
 
   /**
-   * An informative summary of the rate limit. This value is sanitized and any tags
-   * will be removed.
+   * An informative summary of the rule. This value is sanitized and any tags will be
+   * removed.
    */
   description?: string;
 
