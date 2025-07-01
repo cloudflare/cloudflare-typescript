@@ -422,6 +422,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.magicTransit.sites.wans.edit()`
 - `client.magicTransit.sites.wans.get()`
 - `client.magicTransit.connectors.update()`
+- `client.magicTransit.connectors.delete()`
 - `client.magicTransit.connectors.edit()`
 - `client.magicTransit.connectors.get()`
 - `client.magicTransit.connectors.events.list()`

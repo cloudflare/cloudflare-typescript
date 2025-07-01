@@ -1813,8 +1813,10 @@ The following tools are available in this MCP server.
 
 ### Resource `magic_transit.connectors`:
 
+- `create_magic_transit_connectors` (`write`): Add a connector to your account
 - `update_magic_transit_connectors` (`write`): Replace Connector
 - `list_magic_transit_connectors` (`read`): List Connectors
+- `delete_magic_transit_connectors` (`write`): Remove a connector from your account
 - `edit_magic_transit_connectors` (`write`): Edit Connector to update specific properties
 - `get_magic_transit_connectors` (`read`): Fetch Connector
 
