@@ -32,6 +32,7 @@ import {
 } from './variants';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
+import { type Uploadable } from '../../../core/uploads';
 import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
@@ -194,12 +195,12 @@ export interface V1CreateParams {
   /**
    * Body param: An optional custom unique identifier for your image.
    */
-  id?: unknown;
+  id?: string;
 
   /**
    * Body param: An image binary data. Only needed when type is uploading a file.
    */
-  file?: unknown;
+  file?: Uploadable;
 
   /**
    * Body param: User modifiable key-value store. Can use used for keeping references
