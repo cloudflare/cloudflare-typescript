@@ -1815,7 +1815,7 @@ The following tools are available in this MCP server.
 
 - `update_magic_transit_connectors` (`write`): Replace Connector
 - `list_magic_transit_connectors` (`read`): List Connectors
-- `edit_magic_transit_connectors` (`write`): Update Connector
+- `edit_magic_transit_connectors` (`write`): Edit Connector to update specific properties
 - `get_magic_transit_connectors` (`read`): Fetch Connector
 
 ### Resource `magic_transit.connectors.events`:
