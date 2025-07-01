@@ -27,11 +27,11 @@ export const tool: Tool = {
         description: 'Account identifier tag.',
       },
       id: {
-        type: 'object',
+        type: 'string',
         description: 'An optional custom unique identifier for your image.',
       },
       file: {
-        type: 'object',
+        type: 'string',
         description: 'An image binary data. Only needed when type is uploading a file.',
       },
       metadata: {
