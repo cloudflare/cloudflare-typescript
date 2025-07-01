@@ -51,6 +51,7 @@ describe('resource configs', () => {
         mtls_certificate_id: '00000000-0000-0000-0000-0000000000',
         sslmode: 'verify-full',
       },
+      origin_connection_limit: 60,
     });
   });
 
@@ -96,6 +97,7 @@ describe('resource configs', () => {
         mtls_certificate_id: '00000000-0000-0000-0000-0000000000',
         sslmode: 'verify-full',
       },
+      origin_connection_limit: 60,
     });
   });
 
@@ -161,6 +163,7 @@ describe('resource configs', () => {
       },
       name: 'example-hyperdrive',
       origin: { database: 'postgres', password: 'password', scheme: 'postgres', user: 'postgres' },
+      origin_connection_limit: 60,
     });
   });
 

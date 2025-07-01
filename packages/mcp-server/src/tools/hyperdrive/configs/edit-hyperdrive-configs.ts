@@ -151,6 +151,11 @@ export const tool: Tool = {
           },
         ],
       },
+      origin_connection_limit: {
+        type: 'integer',
+        description:
+          'The (soft) maximum number of connections the Hyperdrive is allowed to make to the origin database.',
+      },
     },
   },
 };
