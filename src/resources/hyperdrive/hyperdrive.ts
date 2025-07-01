@@ -102,6 +102,12 @@ export interface Hyperdrive {
   modified_on?: string;
 
   mtls?: Hyperdrive.MTLS;
+
+  /**
+   * The (soft) maximum number of connections the Hyperdrive is allowed to make to
+   * the origin database.
+   */
+  origin_connection_limit?: number;
 }
 
 export namespace Hyperdrive {
