@@ -64,12 +64,28 @@ export const tool: Tool = {
                     enum: ['none', '404-page', 'single-page-application'],
                   },
                   run_worker_first: {
-                    type: 'array',
+                    anyOf: [
+                      {
+                        type: 'array',
+                        description:
+                          "Contains a list path rules to control routing to either the Worker or assets. Glob (*) and negative (!) rules are supported. Rules must start with either '/' or '!/'. At least one non-negative rule must be provided, and negative rules have higher precedence than non-negative rules.",
+                        items: {
+                          type: 'string',
+                        },
+                      },
+                      {
+                        type: 'boolean',
+                        description:
+                          'Enables routing to always invoke the Worker script ahead of all requests. When true, this is equivalent to `["/*"]` in the string array version of this field.',
+                      },
+                    ],
                     description:
                       "Contains a list path rules to control routing to either the Worker or assets. Glob (*) and negative (!) rules are supported. Rules must start with either '/' or '!/'. At least one non-negative rule must be provided, and negative rules have higher precedence than non-negative rules.",
-                    items: {
-                      type: 'string',
-                    },
+                  },
+                  serve_directly: {
+                    type: 'boolean',
+                    description:
+                      'When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.',
                   },
                 },
                 required: [],
