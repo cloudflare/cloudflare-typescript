@@ -212,6 +212,15 @@ export const tool: Tool = {
             type: 'string',
             description: 'If mode is customized_block_page: block page title.',
           },
+          read_only: {
+            type: 'boolean',
+            description:
+              'This setting was shared via the Orgs API and cannot be edited by the current account',
+          },
+          source_account: {
+            type: 'string',
+            description: 'Account tag of account that shared this setting',
+          },
           suppress_footer: {
             type: 'boolean',
             description:
@@ -281,6 +290,15 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'Enable matching all variants of user emails (with + or . modifiers) used as criteria in Firewall policies.',
+          },
+          read_only: {
+            type: 'boolean',
+            description:
+              'This setting was shared via the Orgs API and cannot be edited by the current account',
+          },
+          source_account: {
+            type: 'string',
+            description: 'Account tag of account that shared this setting',
           },
         },
         required: [],
