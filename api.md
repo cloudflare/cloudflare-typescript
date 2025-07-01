@@ -2951,16 +2951,24 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/brand-protection.ts">Info</a></code>
-- <code><a href="./src/resources/brand-protection.ts">RuleMatch</a></code>
-- <code><a href="./src/resources/brand-protection.ts">ScanStatus</a></code>
-- <code><a href="./src/resources/brand-protection.ts">Submit</a></code>
-- <code><a href="./src/resources/brand-protection.ts">URLInfoModelResults</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">Info</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">RuleMatch</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">ScanStatus</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">Submit</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">URLInfoModelResults</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/brand-protection/submit">client.brandProtection.<a href="./src/resources/brand-protection.ts">submit</a>({ ...params }) -> Submit</code>
-- <code title="get /accounts/{account_id}/brand-protection/url-info">client.brandProtection.<a href="./src/resources/brand-protection.ts">urlInfo</a>({ ...params }) -> Info</code>
+- <code title="post /accounts/{account_id}/brand-protection/submit">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">submit</a>({ ...params }) -> Submit</code>
+- <code title="get /accounts/{account_id}/brand-protection/url-info">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">urlInfo</a>({ ...params }) -> Info</code>
+
+## Queries
+
+## Matches
+
+## Logos
+
+## LogoMatches
 
 # Diagnostics
 
