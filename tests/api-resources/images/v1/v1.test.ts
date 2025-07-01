@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -26,8 +26,8 @@ describe('resource v1', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.images.v1.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: {},
-      file: {},
+      id: 'id',
+      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       metadata: {},
       requireSignedURLs: true,
       url: 'https://example.com/path/to/logo.png',
