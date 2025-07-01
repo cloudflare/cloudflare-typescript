@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'edit_magic_transit_connectors',
-  description: 'Update Connector',
+  description: 'Edit Connector to update specific properties',
   inputSchema: {
     type: 'object',
     properties: {
