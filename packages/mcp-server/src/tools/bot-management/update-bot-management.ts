@@ -31,7 +31,8 @@ export const tool: Tool = {
           },
           ai_bots_protection: {
             type: 'string',
-            description: 'Enable rule to block AI Scrapers and Crawlers.',
+            description:
+              'Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.',
             enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
           crawler_protection: {
@@ -59,7 +60,8 @@ export const tool: Tool = {
           },
           ai_bots_protection: {
             type: 'string',
-            description: 'Enable rule to block AI Scrapers and Crawlers.',
+            description:
+              'Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.',
             enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
           crawler_protection: {
@@ -102,7 +104,8 @@ export const tool: Tool = {
           },
           ai_bots_protection: {
             type: 'string',
-            description: 'Enable rule to block AI Scrapers and Crawlers.',
+            description:
+              'Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.',
             enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
           crawler_protection: {
@@ -150,7 +153,8 @@ export const tool: Tool = {
           },
           ai_bots_protection: {
             type: 'string',
-            description: 'Enable rule to block AI Scrapers and Crawlers.',
+            description:
+              'Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.',
             enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
           auto_update_model: {
