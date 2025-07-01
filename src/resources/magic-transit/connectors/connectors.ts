@@ -76,7 +76,7 @@ export class Connectors extends APIResource {
   }
 
   /**
-   * Update Connector
+   * Edit Connector to update specific properties
    *
    * @example
    * ```ts
