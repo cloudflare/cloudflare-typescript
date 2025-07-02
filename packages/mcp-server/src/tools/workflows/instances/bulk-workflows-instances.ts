@@ -35,6 +35,9 @@ export const tool: Tool = {
             instance_id: {
               type: 'string',
             },
+            instance_retention: {
+              type: 'object',
+            },
             params: {
               type: 'object',
             },
