@@ -17,6 +17,9 @@ import {
 import * as PredefinedAPI from './predefined';
 import {
   Predefined,
+  PredefinedCreateParams,
+  PredefinedDeleteParams,
+  PredefinedDeleteResponse,
   PredefinedGetParams,
   PredefinedProfile as PredefinedAPIPredefinedProfile,
   PredefinedUpdateParams,
@@ -657,7 +660,10 @@ export declare namespace Profiles {
   export {
     Predefined as Predefined,
     type PredefinedAPIPredefinedProfile as PredefinedProfile,
+    type PredefinedDeleteResponse as PredefinedDeleteResponse,
+    type PredefinedCreateParams as PredefinedCreateParams,
     type PredefinedUpdateParams as PredefinedUpdateParams,
+    type PredefinedDeleteParams as PredefinedDeleteParams,
     type PredefinedGetParams as PredefinedGetParams,
   };
 }
