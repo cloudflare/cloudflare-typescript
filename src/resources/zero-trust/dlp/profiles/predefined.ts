@@ -9,6 +9,28 @@ import { path } from '../../../../internal/utils/path';
 
 export class Predefined extends APIResource {
   /**
+   * Creates a DLP predefined profile. Only supports enabling/disabling entries.
+   *
+   * @example
+   * ```ts
+   * const profile =
+   *   await client.zeroTrust.dlp.profiles.predefined.create({
+   *     account_id: 'account_id',
+   *     profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   });
+   * ```
+   */
+  create(params: PredefinedCreateParams, options?: RequestOptions): APIPromise<ProfilesAPI.Profile> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/dlp/profiles/predefined`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ProfilesAPI.Profile }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Updates a DLP predefined profile. Only supports enabling/disabling entries.
    *
    * @example
@@ -31,6 +53,33 @@ export class Predefined extends APIResource {
         body,
         ...options,
       }) as APIPromise<{ result: ProfilesAPI.Profile }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * This is a no-op as predefined profiles can't be deleted but is needed for our
+   * generated terraform API
+   *
+   * @example
+   * ```ts
+   * const predefined =
+   *   await client.zeroTrust.dlp.profiles.predefined.delete(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  delete(
+    profileID: string,
+    params: PredefinedDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<PredefinedDeleteResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/dlp/profiles/predefined/${profileID}`,
+        options,
+      ) as APIPromise<{ result: PredefinedDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -220,6 +269,59 @@ export namespace PredefinedProfile {
   }
 }
 
+export type PredefinedDeleteResponse = unknown;
+
+export interface PredefinedCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  profile_id: string;
+
+  /**
+   * Body param:
+   */
+  ai_context_enabled?: boolean;
+
+  /**
+   * Body param:
+   */
+  allowed_match_count?: number | null;
+
+  /**
+   * Body param:
+   */
+  confidence_threshold?: string | null;
+
+  /**
+   * Body param: Scan the context of predefined entries to only return matches
+   * surrounded by keywords.
+   */
+  context_awareness?: ProfilesAPI.ContextAwarenessParam;
+
+  /**
+   * @deprecated Body param:
+   */
+  entries?: Array<PredefinedCreateParams.Entry>;
+
+  /**
+   * Body param:
+   */
+  ocr_enabled?: boolean;
+}
+
+export namespace PredefinedCreateParams {
+  export interface Entry {
+    id: string;
+
+    enabled: boolean;
+  }
+}
+
 export interface PredefinedUpdateParams {
   /**
    * Path param:
@@ -266,6 +368,10 @@ export namespace PredefinedUpdateParams {
   }
 }
 
+export interface PredefinedDeleteParams {
+  account_id: string;
+}
+
 export interface PredefinedGetParams {
   account_id: string;
 }
@@ -273,7 +379,10 @@ export interface PredefinedGetParams {
 export declare namespace Predefined {
   export {
     type PredefinedProfile as PredefinedProfile,
+    type PredefinedDeleteResponse as PredefinedDeleteResponse,
+    type PredefinedCreateParams as PredefinedCreateParams,
     type PredefinedUpdateParams as PredefinedUpdateParams,
+    type PredefinedDeleteParams as PredefinedDeleteParams,
     type PredefinedGetParams as PredefinedGetParams,
   };
 }
