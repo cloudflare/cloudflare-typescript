@@ -9,10 +9,13 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource predefined', () => {
+describe('resource custom', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.profiles.predefined.create({
+    const responsePromise = client.zeroTrust.dlp.entries.custom.create({
       account_id: 'account_id',
+      enabled: true,
+      name: 'name',
+      pattern: { regex: 'regex' },
       profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,22 +28,19 @@ describe('resource predefined', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.predefined.create({
+    const response = await client.zeroTrust.dlp.entries.custom.create({
       account_id: 'account_id',
+      enabled: true,
+      name: 'name',
+      pattern: { regex: 'regex', validation: 'luhn' },
       profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      ai_context_enabled: true,
-      allowed_match_count: 0,
-      confidence_threshold: 'confidence_threshold',
-      context_awareness: { enabled: true, skip: { files: true } },
-      entries: [{ id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', enabled: true }],
-      ocr_enabled: true,
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.profiles.predefined.update(
+    const responsePromise = client.zeroTrust.dlp.entries.custom.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
+      { account_id: 'account_id', name: 'name', pattern: { regex: 'regex' }, type: 'custom' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,22 +52,20 @@ describe('resource predefined', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.predefined.update(
+    const response = await client.zeroTrust.dlp.entries.custom.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
-        ai_context_enabled: true,
-        allowed_match_count: 0,
-        confidence_threshold: 'confidence_threshold',
-        context_awareness: { enabled: true, skip: { files: true } },
-        entries: [{ id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', enabled: true }],
-        ocr_enabled: true,
+        name: 'name',
+        pattern: { regex: 'regex', validation: 'luhn' },
+        type: 'custom',
+        enabled: true,
       },
     );
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.profiles.predefined.delete(
+    const responsePromise = client.zeroTrust.dlp.entries.custom.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );
@@ -81,28 +79,7 @@ describe('resource predefined', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.predefined.delete(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
-    );
-  });
-
-  test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.profiles.predefined.get(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.predefined.get(
+    const response = await client.zeroTrust.dlp.entries.custom.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );
