@@ -24,6 +24,7 @@ describe('resource instances', () => {
     const response = await client.workflows.instances.create('x', {
       account_id: 'account_id',
       instance_id: 'instance_id',
+      instance_retention: {},
       params: {},
     });
   });
@@ -64,7 +65,7 @@ describe('resource instances', () => {
   test('bulk: required and optional params', async () => {
     const response = await client.workflows.instances.bulk('x', {
       account_id: 'account_id',
-      body: [{ instance_id: 'instance_id', params: {} }],
+      body: [{ instance_id: 'instance_id', instance_retention: {}, params: {} }],
     });
   });
 
