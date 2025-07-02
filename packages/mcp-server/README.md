@@ -2822,7 +2822,9 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.dlp.profiles.predefined`:
 
+- `create_profiles_dlp_zero_trust_predefined` (`write`): Creates a DLP predefined profile. Only supports enabling/disabling entries.
 - `update_profiles_dlp_zero_trust_predefined` (`write`): Updates a DLP predefined profile. Only supports enabling/disabling entries.
+- `delete_profiles_dlp_zero_trust_predefined` (`write`): This is a no-op as predefined profiles can't be deleted but is needed for our generated terraform API
 - `get_profiles_dlp_zero_trust_predefined` (`read`): Fetches a predefined DLP profile by id.
 
 ### Resource `zero_trust.dlp.limits`:
@@ -2836,6 +2838,24 @@ The following tools are available in this MCP server.
 - `list_dlp_zero_trust_entries` (`read`): Lists all DLP entries in an account.
 - `delete_dlp_zero_trust_entries` (`write`): Deletes a DLP custom entry.
 - `get_dlp_zero_trust_entries` (`read`): Fetches a DLP entry by ID.
+
+### Resource `zero_trust.dlp.entries.custom`:
+
+- `create_entries_dlp_zero_trust_custom` (`write`): Creates a DLP custom entry.
+- `update_entries_dlp_zero_trust_custom` (`write`): Updates a DLP entry.
+- `delete_entries_dlp_zero_trust_custom` (`write`): Deletes a DLP custom entry.
+
+### Resource `zero_trust.dlp.entries.predefined`:
+
+- `create_entries_dlp_zero_trust_predefined` (`write`): This will update an existing predefined entry
+- `update_entries_dlp_zero_trust_predefined` (`write`): Updates a DLP entry.
+- `delete_entries_dlp_zero_trust_predefined` (`write`): This is a no-op as predefined entires can't be deleted but is needed for our generated terraform API
+
+### Resource `zero_trust.dlp.entries.integration`:
+
+- `create_entries_dlp_zero_trust_integration` (`write`): This will update an existing integration entry
+- `update_entries_dlp_zero_trust_integration` (`write`): Updates a DLP entry.
+- `delete_entries_dlp_zero_trust_integration` (`write`): This is a no-op as integration entires can't be deleted but is needed for our generated terraform API
 
 ### Resource `zero_trust.gateway`:
 
