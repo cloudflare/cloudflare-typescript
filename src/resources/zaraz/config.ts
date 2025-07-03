@@ -82,23 +82,25 @@ export interface Configuration {
    * Tools set up under Zaraz configuration, where key is the alpha-numeric tool ID
    * and value is the tool configuration object.
    */
-  tools: Record<string, Configuration.ZarazManagedComponent | Configuration.Worker>;
+  tools: { [key: string]: Configuration.ZarazManagedComponent | Configuration.Worker };
 
   /**
    * Triggers set up under Zaraz configuration, where key is the trigger
    * alpha-numeric ID and value is the trigger configuration.
    */
-  triggers: Record<string, Configuration.Triggers>;
+  triggers: { [key: string]: Configuration.Triggers };
 
   /**
    * Variables set up under Zaraz configuration, where key is the variable
    * alpha-numeric ID and value is the variable configuration. Values of variables of
    * type secret are not included.
    */
-  variables: Record<
-    string,
-    Configuration.ZarazStringVariable | Configuration.ZarazSecretVariable | Configuration.ZarazWorkerVariable
-  >;
+  variables: {
+    [key: string]:
+      | Configuration.ZarazStringVariable
+      | Configuration.ZarazSecretVariable
+      | Configuration.ZarazWorkerVariable;
+  };
 
   /**
    * Zaraz internal version of the config.
@@ -222,7 +224,7 @@ export namespace Configuration {
     /**
      * Default fields for tool's actions
      */
-    defaultFields: Record<string, string | boolean>;
+    defaultFields: { [key: string]: string | boolean };
 
     /**
      * Whether tool is enabled
@@ -242,14 +244,14 @@ export namespace Configuration {
     /**
      * Tool's settings
      */
-    settings: Record<string, string | boolean>;
+    settings: { [key: string]: string | boolean };
 
     type: 'component';
 
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazAPI.NeoEvent>;
+    actions?: { [key: string]: ZarazAPI.NeoEvent };
 
     /**
      * Default consent purpose ID
@@ -289,7 +291,7 @@ export namespace Configuration {
     /**
      * Default fields for tool's actions
      */
-    defaultFields: Record<string, string | boolean>;
+    defaultFields: { [key: string]: string | boolean };
 
     /**
      * Whether tool is enabled
@@ -309,7 +311,7 @@ export namespace Configuration {
     /**
      * Tool's settings
      */
-    settings: Record<string, string | boolean>;
+    settings: { [key: string]: string | boolean };
 
     type: 'custom-mc';
 
@@ -321,7 +323,7 @@ export namespace Configuration {
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazAPI.NeoEvent>;
+    actions?: { [key: string]: ZarazAPI.NeoEvent };
 
     /**
      * Default consent purpose ID
@@ -699,7 +701,7 @@ export namespace Configuration {
     /**
      * Object where keys are language codes
      */
-    consentModalIntroHTMLWithTranslations?: Record<string, string>;
+    consentModalIntroHTMLWithTranslations?: { [key: string]: string };
 
     cookieName?: string;
 
@@ -714,12 +716,12 @@ export namespace Configuration {
     /**
      * Object where keys are purpose alpha-numeric IDs
      */
-    purposes?: Record<string, Consent.Purposes>;
+    purposes?: { [key: string]: Consent.Purposes };
 
     /**
      * Object where keys are purpose alpha-numeric IDs
      */
-    purposesWithTranslations?: Record<string, Consent.PurposesWithTranslations>;
+    purposesWithTranslations?: { [key: string]: Consent.PurposesWithTranslations };
 
     tcfCompliant?: boolean;
   }
@@ -735,12 +737,12 @@ export namespace Configuration {
       /**
        * Object where keys are language codes
        */
-      description: Record<string, string>;
+      description: { [key: string]: string };
 
       /**
        * Object where keys are language codes
        */
-      name: Record<string, string>;
+      name: { [key: string]: string };
 
       order: number;
     }
@@ -772,25 +774,25 @@ export interface ConfigUpdateParams {
    * Body param: Tools set up under Zaraz configuration, where key is the
    * alpha-numeric tool ID and value is the tool configuration object.
    */
-  tools: Record<string, ConfigUpdateParams.ZarazManagedComponent | ConfigUpdateParams.Worker>;
+  tools: { [key: string]: ConfigUpdateParams.ZarazManagedComponent | ConfigUpdateParams.Worker };
 
   /**
    * Body param: Triggers set up under Zaraz configuration, where key is the trigger
    * alpha-numeric ID and value is the trigger configuration.
    */
-  triggers: Record<string, ConfigUpdateParams.Triggers>;
+  triggers: { [key: string]: ConfigUpdateParams.Triggers };
 
   /**
    * Body param: Variables set up under Zaraz configuration, where key is the
    * variable alpha-numeric ID and value is the variable configuration. Values of
    * variables of type secret are not included.
    */
-  variables: Record<
-    string,
-    | ConfigUpdateParams.ZarazStringVariable
-    | ConfigUpdateParams.ZarazSecretVariable
-    | ConfigUpdateParams.ZarazWorkerVariable
-  >;
+  variables: {
+    [key: string]:
+      | ConfigUpdateParams.ZarazStringVariable
+      | ConfigUpdateParams.ZarazSecretVariable
+      | ConfigUpdateParams.ZarazWorkerVariable;
+  };
 
   /**
    * Body param: Zaraz internal version of the config.
@@ -914,7 +916,7 @@ export namespace ConfigUpdateParams {
     /**
      * Default fields for tool's actions
      */
-    defaultFields: Record<string, string | boolean>;
+    defaultFields: { [key: string]: string | boolean };
 
     /**
      * Whether tool is enabled
@@ -934,14 +936,14 @@ export namespace ConfigUpdateParams {
     /**
      * Tool's settings
      */
-    settings: Record<string, string | boolean>;
+    settings: { [key: string]: string | boolean };
 
     type: 'component';
 
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazAPI.NeoEventParam>;
+    actions?: { [key: string]: ZarazAPI.NeoEventParam };
 
     /**
      * Default consent purpose ID
@@ -981,7 +983,7 @@ export namespace ConfigUpdateParams {
     /**
      * Default fields for tool's actions
      */
-    defaultFields: Record<string, string | boolean>;
+    defaultFields: { [key: string]: string | boolean };
 
     /**
      * Whether tool is enabled
@@ -1001,7 +1003,7 @@ export namespace ConfigUpdateParams {
     /**
      * Tool's settings
      */
-    settings: Record<string, string | boolean>;
+    settings: { [key: string]: string | boolean };
 
     type: 'custom-mc';
 
@@ -1013,7 +1015,7 @@ export namespace ConfigUpdateParams {
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazAPI.NeoEventParam>;
+    actions?: { [key: string]: ZarazAPI.NeoEventParam };
 
     /**
      * Default consent purpose ID
@@ -1391,7 +1393,7 @@ export namespace ConfigUpdateParams {
     /**
      * Object where keys are language codes
      */
-    consentModalIntroHTMLWithTranslations?: Record<string, string>;
+    consentModalIntroHTMLWithTranslations?: { [key: string]: string };
 
     cookieName?: string;
 
@@ -1406,12 +1408,12 @@ export namespace ConfigUpdateParams {
     /**
      * Object where keys are purpose alpha-numeric IDs
      */
-    purposes?: Record<string, Consent.Purposes>;
+    purposes?: { [key: string]: Consent.Purposes };
 
     /**
      * Object where keys are purpose alpha-numeric IDs
      */
-    purposesWithTranslations?: Record<string, Consent.PurposesWithTranslations>;
+    purposesWithTranslations?: { [key: string]: Consent.PurposesWithTranslations };
 
     tcfCompliant?: boolean;
   }
@@ -1427,12 +1429,12 @@ export namespace ConfigUpdateParams {
       /**
        * Object where keys are language codes
        */
-      description: Record<string, string>;
+      description: { [key: string]: string };
 
       /**
        * Object where keys are language codes
        */
-      name: Record<string, string>;
+      name: { [key: string]: string };
 
       order: number;
     }

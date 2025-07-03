@@ -659,7 +659,7 @@ export declare namespace AIRunParams {
         /**
          * Definitions of each parameter.
          */
-        properties: Record<string, Parameters.Properties>;
+        properties: { [key: string]: Parameters.Properties };
 
         /**
          * The type of the parameters object (usually 'object').
@@ -728,7 +728,7 @@ export declare namespace AIRunParams {
           /**
            * Definitions of each parameter.
            */
-          properties: Record<string, Parameters.Properties>;
+          properties: { [key: string]: Parameters.Properties };
 
           /**
            * The type of the parameters object (usually 'object').

@@ -61,7 +61,7 @@ export interface HealthCreateResponse {
   /**
    * Monitored pool IDs mapped to their respective names.
    */
-  pools?: Record<string, string>;
+  pools?: { [key: string]: string };
 
   preview_id?: string;
 }
@@ -179,7 +179,7 @@ export interface HealthCreateParams {
    * recommended you set a Host header by default. The User-Agent header cannot be
    * overridden. This parameter is only valid for HTTP and HTTPS monitors.
    */
-  header?: Record<string, Array<string>>;
+  header?: { [key: string]: Array<string> };
 
   /**
    * Body param: The interval between each health check. Shorter intervals may

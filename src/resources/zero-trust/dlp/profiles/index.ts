@@ -13,7 +13,10 @@ export {
 export {
   Predefined,
   type PredefinedProfile,
+  type PredefinedDeleteResponse,
+  type PredefinedCreateParams,
   type PredefinedUpdateParams,
+  type PredefinedDeleteParams,
   type PredefinedGetParams,
 } from './predefined';
 export {

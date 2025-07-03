@@ -28,7 +28,7 @@ export class AvailableAlerts extends APIResource {
   }
 }
 
-export type AvailableAlertListResponse = Record<string, Array<AvailableAlertListResponse.Item>>;
+export type AvailableAlertListResponse = { [key: string]: Array<AvailableAlertListResponse.Item> };
 
 export namespace AvailableAlertListResponse {
   export interface Item {

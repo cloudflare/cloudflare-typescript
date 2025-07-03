@@ -84,6 +84,10 @@ import {
 } from './routes';
 import * as ConnectorsAPI from './connectors/connectors';
 import {
+  ConnectorCreateParams,
+  ConnectorCreateResponse,
+  ConnectorDeleteParams,
+  ConnectorDeleteResponse,
   ConnectorEditParams,
   ConnectorEditResponse,
   ConnectorGetParams,
@@ -367,13 +371,17 @@ export declare namespace MagicTransit {
 
   export {
     Connectors as Connectors,
+    type ConnectorCreateResponse as ConnectorCreateResponse,
     type ConnectorUpdateResponse as ConnectorUpdateResponse,
     type ConnectorListResponse as ConnectorListResponse,
+    type ConnectorDeleteResponse as ConnectorDeleteResponse,
     type ConnectorEditResponse as ConnectorEditResponse,
     type ConnectorGetResponse as ConnectorGetResponse,
     ConnectorListResponsesSinglePage as ConnectorListResponsesSinglePage,
+    type ConnectorCreateParams as ConnectorCreateParams,
     type ConnectorUpdateParams as ConnectorUpdateParams,
     type ConnectorListParams as ConnectorListParams,
+    type ConnectorDeleteParams as ConnectorDeleteParams,
     type ConnectorEditParams as ConnectorEditParams,
     type ConnectorGetParams as ConnectorGetParams,
   };

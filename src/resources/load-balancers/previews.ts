@@ -33,13 +33,13 @@ export class Previews extends APIResource {
 /**
  * Resulting health data from a preview operation.
  */
-export type PreviewGetResponse = Record<string, PreviewGetResponse.item>;
+export type PreviewGetResponse = { [key: string]: PreviewGetResponse.item };
 
 export namespace PreviewGetResponse {
   export interface item {
     healthy?: boolean;
 
-    origins?: Array<Record<string, item.load_balancing_origin_health_data>>;
+    origins?: Array<{ [key: string]: item.load_balancing_origin_health_data }>;
   }
 
   export namespace item {

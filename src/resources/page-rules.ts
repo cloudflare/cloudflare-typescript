@@ -437,7 +437,7 @@ export namespace PageRule {
      *   seconds or one of the following strings: no-store (equivalent to -1), no-cache
      *   (equivalent to 0).
      */
-    value?: Record<string, 'no-cache' | 'no-store' | number>;
+    value?: { [key: string]: 'no-cache' | 'no-store' | number };
   }
 
   export interface DisableApps {
@@ -920,7 +920,7 @@ export namespace PageRuleCreateParams {
      *   seconds or one of the following strings: no-store (equivalent to -1), no-cache
      *   (equivalent to 0).
      */
-    value?: Record<string, 'no-cache' | 'no-store' | number>;
+    value?: { [key: string]: 'no-cache' | 'no-store' | number };
   }
 
   export interface DisableApps {
@@ -1328,7 +1328,7 @@ export namespace PageRuleUpdateParams {
      *   seconds or one of the following strings: no-store (equivalent to -1), no-cache
      *   (equivalent to 0).
      */
-    value?: Record<string, 'no-cache' | 'no-store' | number>;
+    value?: { [key: string]: 'no-cache' | 'no-store' | number };
   }
 
   export interface DisableApps {
@@ -1771,7 +1771,7 @@ export namespace PageRuleEditParams {
      *   seconds or one of the following strings: no-store (equivalent to -1), no-cache
      *   (equivalent to 0).
      */
-    value?: Record<string, 'no-cache' | 'no-store' | number>;
+    value?: { [key: string]: 'no-cache' | 'no-store' | number };
   }
 
   export interface DisableApps {

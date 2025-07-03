@@ -27,7 +27,7 @@ export {
   type EntryListParams,
   type EntryDeleteParams,
   type EntryGetParams,
-} from './entries';
+} from './entries/index';
 export { Limits, type LimitListResponse, type LimitListParams } from './limits';
 export { Patterns, type PatternValidateResponse, type PatternValidateParams } from './patterns';
 export {

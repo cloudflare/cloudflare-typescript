@@ -169,6 +169,11 @@ export interface InvestigateListResponse {
 
 export namespace InvestigateListResponse {
   export interface Properties {
+    allowlisted_pattern_type?: string;
+
+    /**
+     * @deprecated
+     */
     whitelisted_pattern_type?: string;
   }
 
@@ -257,6 +262,11 @@ export interface InvestigateGetResponse {
 
 export namespace InvestigateGetResponse {
   export interface Properties {
+    allowlisted_pattern_type?: string;
+
+    /**
+     * @deprecated
+     */
     whitelisted_pattern_type?: string;
   }
 

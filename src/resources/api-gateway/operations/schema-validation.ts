@@ -81,7 +81,7 @@ export class SchemaValidation extends APIResource {
   }
 }
 
-export type SettingsMultipleRequest = Record<string, SettingsMultipleRequest.item>;
+export type SettingsMultipleRequest = { [key: string]: SettingsMultipleRequest.item };
 
 export namespace SettingsMultipleRequest {
   /**
@@ -102,7 +102,7 @@ export namespace SettingsMultipleRequest {
   }
 }
 
-export type SettingsMultipleRequestParam = Record<string, SettingsMultipleRequestParam.item>;
+export type SettingsMultipleRequestParam = { [key: string]: SettingsMultipleRequestParam.item };
 
 export namespace SettingsMultipleRequestParam {
   /**

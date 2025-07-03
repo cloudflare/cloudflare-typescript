@@ -1,21 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as EntriesAPI from './entries';
-import {
-  Entries,
-  EntryCreateParams,
-  EntryCreateResponse,
-  EntryDeleteParams,
-  EntryDeleteResponse,
-  EntryGetParams,
-  EntryGetResponse,
-  EntryListParams,
-  EntryListResponse,
-  EntryListResponsesSinglePage,
-  EntryUpdateParams,
-  EntryUpdateResponse,
-} from './entries';
 import * as LimitsAPI from './limits';
 import { LimitListParams, LimitListResponse, Limits } from './limits';
 import * as PatternsAPI from './patterns';
@@ -43,6 +28,21 @@ import {
 } from './datasets/datasets';
 import * as EmailAPI from './email/email';
 import { Email } from './email/email';
+import * as EntriesAPI from './entries/entries';
+import {
+  Entries,
+  EntryCreateParams,
+  EntryCreateResponse,
+  EntryDeleteParams,
+  EntryDeleteResponse,
+  EntryGetParams,
+  EntryGetResponse,
+  EntryListParams,
+  EntryListResponse,
+  EntryListResponsesSinglePage,
+  EntryUpdateParams,
+  EntryUpdateResponse,
+} from './entries/entries';
 import * as ProfilesAPI from './profiles/profiles';
 import {
   ContextAwareness,

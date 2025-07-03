@@ -41,6 +41,7 @@ describe('resource scripts', () => {
               html_handling: 'auto-trailing-slash',
               not_found_handling: '404-page',
               run_worker_first: ['string'],
+              serve_directly: true,
             },
             jwt: 'jwt',
           },

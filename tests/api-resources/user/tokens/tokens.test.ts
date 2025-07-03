@@ -21,10 +21,7 @@ describe('resource tokens', () => {
             { id: 'c8fed203ed3043cba015a93ad1616f1f' },
             { id: '82e64a83756745bbbb1c9c2701bf816b' },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { foo: 'string' },
         },
       ],
     });
@@ -48,10 +45,7 @@ describe('resource tokens', () => {
             { id: 'c8fed203ed3043cba015a93ad1616f1f', meta: { key: 'key', value: 'value' } },
             { id: '82e64a83756745bbbb1c9c2701bf816b', meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { foo: 'string' },
         },
       ],
       condition: {
@@ -76,13 +70,9 @@ describe('resource tokens', () => {
             { id: 'c8fed203ed3043cba015a93ad1616f1f' },
             { id: '82e64a83756745bbbb1c9c2701bf816b' },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { foo: 'string' },
         },
       ],
-      status: 'active',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -104,13 +94,9 @@ describe('resource tokens', () => {
             { id: 'c8fed203ed3043cba015a93ad1616f1f', meta: { key: 'key', value: 'value' } },
             { id: '82e64a83756745bbbb1c9c2701bf816b', meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { foo: 'string' },
         },
       ],
-      status: 'active',
       condition: {
         request_ip: {
           in: ['123.123.123.0/24', '2606:4700::/32'],
@@ -119,6 +105,7 @@ describe('resource tokens', () => {
       },
       expires_on: '2020-01-01T00:00:00Z',
       not_before: '2018-07-01T05:20:00Z',
+      status: 'active',
     });
   });
 

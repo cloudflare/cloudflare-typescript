@@ -216,6 +216,17 @@ export interface BlockPageSettings {
   name?: string;
 
   /**
+   * This setting was shared via the Orgs API and cannot be edited by the current
+   * account
+   */
+  read_only?: boolean;
+
+  /**
+   * Account tag of account that shared this setting
+   */
+  source_account?: string;
+
+  /**
    * If mode is customized_block_page: suppress detailed info at the bottom of the
    * block page.
    */
@@ -394,6 +405,17 @@ export interface ExtendedEmailMatching {
    * criteria in Firewall policies.
    */
   enabled?: boolean;
+
+  /**
+   * This setting was shared via the Orgs API and cannot be edited by the current
+   * account
+   */
+  read_only?: boolean;
+
+  /**
+   * Account tag of account that shared this setting
+   */
+  source_account?: string;
 }
 
 /**
@@ -440,11 +462,6 @@ export interface GatewayConfigurationSettings {
    * Anti-virus settings.
    */
   antivirus?: AntiVirusSettings | null;
-
-  /**
-   * Setting to enable App Control
-   */
-  'app-control-settings'?: GatewayConfigurationSettings.AppControlSettings | null;
 
   /**
    * Block page layout settings.
@@ -506,16 +523,6 @@ export interface GatewayConfigurationSettings {
 
 export namespace GatewayConfigurationSettings {
   /**
-   * Setting to enable App Control
-   */
-  export interface AppControlSettings {
-    /**
-     * Enable App Control
-     */
-    enabled?: boolean;
-  }
-
-  /**
    * Certificate settings for Gateway TLS interception. If not specified, the
    * Cloudflare Root CA will be used.
    */
@@ -567,11 +574,6 @@ export interface GatewayConfigurationSettingsParam {
    * Anti-virus settings.
    */
   antivirus?: AntiVirusSettingsParam | null;
-
-  /**
-   * Setting to enable App Control
-   */
-  'app-control-settings'?: GatewayConfigurationSettingsParam.AppControlSettings | null;
 
   /**
    * Block page layout settings.
@@ -632,16 +634,6 @@ export interface GatewayConfigurationSettingsParam {
 }
 
 export namespace GatewayConfigurationSettingsParam {
-  /**
-   * Setting to enable App Control
-   */
-  export interface AppControlSettings {
-    /**
-     * Enable App Control
-     */
-    enabled?: boolean;
-  }
-
   /**
    * Certificate settings for Gateway TLS interception. If not specified, the
    * Cloudflare Root CA will be used.
