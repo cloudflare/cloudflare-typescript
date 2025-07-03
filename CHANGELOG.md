@@ -1,5 +1,52 @@
 # Changelog
 
+## 4.5.0 (2025-07-03)
+
+Full Changelog: [v4.4.1...v4.5.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.4.1...v4.5.0)
+
+### Features
+
+* **api:** Add DELETE and POST routes for Magic Connector ([9963d9d](https://github.com/cloudflare/cloudflare-typescript/commit/9963d9d8653e1efde8a65571bdf6fa0fd8d6c4ac))
+* **api:** Add Radar Bots and Web Crawlers ([9e82821](https://github.com/cloudflare/cloudflare-typescript/commit/9e8282183e75e16c176e1fe958a7639f111405d0))
+* **api:** api update ([0589b23](https://github.com/cloudflare/cloudflare-typescript/commit/0589b23194553c5d09c1356cd644b68aba9a7462))
+* **api:** api update ([06999f3](https://github.com/cloudflare/cloudflare-typescript/commit/06999f36200d1711e625c48ef92514bda4a50782))
+* **api:** api update ([72e72e2](https://github.com/cloudflare/cloudflare-typescript/commit/72e72e25b94efbeaa81500c5d050a2d6d7324a81))
+* **api:** api update ([511790b](https://github.com/cloudflare/cloudflare-typescript/commit/511790b0dc6a4ef688d0c5985a9a3dc7b50a1dbe))
+* **api:** api update ([822a6ca](https://github.com/cloudflare/cloudflare-typescript/commit/822a6ca38c69db6fa78a551fe3368a47d578cfd0))
+* **api:** api update ([99e2090](https://github.com/cloudflare/cloudflare-typescript/commit/99e209062ab9f894022cbf352243380cd071a834))
+* **api:** api update ([01e5785](https://github.com/cloudflare/cloudflare-typescript/commit/01e5785827528323d01f1c956e82b1eac6886c4d))
+* **api:** api update ([47a21fc](https://github.com/cloudflare/cloudflare-typescript/commit/47a21fc0f3e78ce30d73add0c8eb07d0548b3cbf))
+* **api:** api update ([150ee87](https://github.com/cloudflare/cloudflare-typescript/commit/150ee8722272b75525dd1d6cea2fab03ff6f5e5f))
+* **api:** api update ([9f9cb78](https://github.com/cloudflare/cloudflare-typescript/commit/9f9cb78799ebe4b7dea3fe4665716c4893c0904e))
+* **api:** api update ([25c67eb](https://github.com/cloudflare/cloudflare-typescript/commit/25c67ebe32c547e692ffdbde107267098b52e7ca))
+* **api:** api update ([3640b39](https://github.com/cloudflare/cloudflare-typescript/commit/3640b3922c6f7e30075bdfe3aa224cd60f58347d))
+* **api:** api update ([a3556ec](https://github.com/cloudflare/cloudflare-typescript/commit/a3556ec061ef64e96467f50b35333ee5430d5701))
+* **api:** api update ([3fae8c0](https://github.com/cloudflare/cloudflare-typescript/commit/3fae8c09b137827a5d0c721b274c40e022a325b2))
+* **api:** api update ([eb17884](https://github.com/cloudflare/cloudflare-typescript/commit/eb178842dd729e53d832f58e86ce41bd64e70600))
+* **api:** api update ([58ea846](https://github.com/cloudflare/cloudflare-typescript/commit/58ea846c9cc9622a959c354b81d13e108a83a869))
+* **api:** api update ([7c37a85](https://github.com/cloudflare/cloudflare-typescript/commit/7c37a85e50989df912f100a67e383624b2b70fbd))
+* **api:** api update ([99fa93e](https://github.com/cloudflare/cloudflare-typescript/commit/99fa93e063b91d33234384c739d0d492f8c4691b))
+* **api:** api update ([59a17cf](https://github.com/cloudflare/cloudflare-typescript/commit/59a17cf3bd914f6447c46bb27be346ac95717af8))
+* **api:** api update ([cbdd3e8](https://github.com/cloudflare/cloudflare-typescript/commit/cbdd3e82869bac6065a6b888457c10b7e8541f84))
+* **brand_protection:** Add new routes ([0017abd](https://github.com/cloudflare/cloudflare-typescript/commit/0017abded280a493b42e644dabd0f9035577530d))
+* **zero_trust_dlp:** Added individual resources and new routes ([132b56e](https://github.com/cloudflare/cloudflare-typescript/commit/132b56e00e7c59168161772a5a9fe4049c49e88c))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([5257b08](https://github.com/cloudflare/cloudflare-typescript/commit/5257b08cf295cc66714bd879bbe7907cbf9275ec))
+* **ci:** release-doctor — report correct token name ([c4f2ddf](https://github.com/cloudflare/cloudflare-typescript/commit/c4f2ddfe3a5c3bf5cefaefe347b5a0707c538447))
+* **client:** don't send `Content-Type` for bodyless methods ([cdfc263](https://github.com/cloudflare/cloudflare-typescript/commit/cdfc263036de41c293506f907ab4fe72b7d43135))
+
+
+### Chores
+
+* **api:** TTL is required on DNS records ([a492965](https://github.com/cloudflare/cloudflare-typescript/commit/a4929653c8c982a5c8fe81d21f315ea4c4d11086))
+* **ci:** enable for pull requests ([6898174](https://github.com/cloudflare/cloudflare-typescript/commit/6898174da5c2bf8e78b503dffeacba7c0bf7a539))
+* **ci:** only run for pushes and fork pull requests ([ed461eb](https://github.com/cloudflare/cloudflare-typescript/commit/ed461eb0f3aa0fd81f48628830735cc70204eaed))
+* **internal:** codegen related update ([6a94ed9](https://github.com/cloudflare/cloudflare-typescript/commit/6a94ed94bfe950bf8193da2762ccf26a3a93065e))
+* mention unit type in timeout docs ([a5ad7f3](https://github.com/cloudflare/cloudflare-typescript/commit/a5ad7f384297aff6bcd491e6cdb22715432aa683))
+
 ## 4.4.1 (2025-06-16)
 
 Full Changelog: [v4.4.0...v4.4.1](https://github.com/cloudflare/cloudflare-typescript/compare/v4.4.0...v4.4.1)
