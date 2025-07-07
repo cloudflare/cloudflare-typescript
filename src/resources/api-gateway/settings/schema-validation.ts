@@ -10,14 +10,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Updates zone level schema validation settings on the zone
    *
-   * @example
-   * ```ts
-   * const settings =
-   *   await client.apiGateway.settings.schemaValidation.update({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     validation_default_mitigation_action: 'block',
-   *   });
-   * ```
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
    */
   update(params: SchemaValidationUpdateParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -30,13 +23,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Updates zone level schema validation settings on the zone
    *
-   * @example
-   * ```ts
-   * const settings =
-   *   await client.apiGateway.settings.schemaValidation.edit({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
    */
   edit(params: SchemaValidationEditParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -49,13 +36,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Retrieves zone level schema validation settings currently set on the zone
    *
-   * @example
-   * ```ts
-   * const settings =
-   *   await client.apiGateway.settings.schemaValidation.get({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
    */
   get(params: SchemaValidationGetParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id } = params;

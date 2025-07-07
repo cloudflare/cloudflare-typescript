@@ -66,7 +66,7 @@ export const tool: Tool = {
       seen_after: {
         type: 'string',
         description:
-          'Filters by the last_seen timestamp - returns only devices last seen after this timestamp.',
+          'Filter by the last_seen timestamp - returns only devices last seen after this timestamp.',
       },
       seen_before: {
         type: 'string',

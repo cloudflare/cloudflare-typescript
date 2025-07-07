@@ -51,7 +51,7 @@ export interface EntryCreateResponse {
 
   num_cells: number;
 
-  upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+  upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 }
 
 export interface EntryCreateParams {

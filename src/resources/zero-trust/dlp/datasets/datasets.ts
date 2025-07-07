@@ -137,7 +137,7 @@ export interface Dataset {
 
   secret: boolean;
 
-  status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+  status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
   /**
    * When the dataset was last updated.
@@ -164,13 +164,13 @@ export namespace Dataset {
 
     num_cells: number;
 
-    upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface Upload {
     num_cells: number;
 
-    status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+    status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
     version: number;
   }

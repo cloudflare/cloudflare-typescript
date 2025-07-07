@@ -219,6 +219,135 @@ export const tool: Tool = {
         description:
           'Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.',
       },
+      pdfOptions: {
+        type: 'object',
+        description: 'Check [options](https://pptr.dev/api/puppeteer.pdfoptions).',
+        properties: {
+          displayHeaderFooter: {
+            type: 'boolean',
+            description: 'Whether to show the header and footer.',
+          },
+          footerTemplate: {
+            type: 'string',
+            description: 'HTML template for the print footer.',
+          },
+          format: {
+            type: 'string',
+            description: 'Paper format. Takes priority over width and height if set.',
+            enum: ['letter', 'legal', 'tabloid', 'ledger', 'a0', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6'],
+          },
+          headerTemplate: {
+            type: 'string',
+            description: 'HTML template for the print header.',
+          },
+          height: {
+            anyOf: [
+              {
+                type: 'string',
+              },
+              {
+                type: 'number',
+              },
+            ],
+            description: 'Sets the height of paper. Can be a number or string with unit.',
+          },
+          landscape: {
+            type: 'boolean',
+            description: 'Whether to print in landscape orientation.',
+          },
+          margin: {
+            type: 'object',
+            description: 'Set the PDF margins. Useful when setting header and footer.',
+            properties: {
+              bottom: {
+                anyOf: [
+                  {
+                    type: 'string',
+                  },
+                  {
+                    type: 'number',
+                  },
+                ],
+              },
+              left: {
+                anyOf: [
+                  {
+                    type: 'string',
+                  },
+                  {
+                    type: 'number',
+                  },
+                ],
+              },
+              right: {
+                anyOf: [
+                  {
+                    type: 'string',
+                  },
+                  {
+                    type: 'number',
+                  },
+                ],
+              },
+              top: {
+                anyOf: [
+                  {
+                    type: 'string',
+                  },
+                  {
+                    type: 'number',
+                  },
+                ],
+              },
+            },
+            required: [],
+          },
+          omitBackground: {
+            type: 'boolean',
+            description: 'Hides default white background and allows generating pdfs with transparency.',
+          },
+          outline: {
+            type: 'boolean',
+            description: 'Generate document outline.',
+          },
+          pageRanges: {
+            type: 'string',
+            description: "Paper ranges to print, e.g. '1-5, 8, 11-13'.",
+          },
+          preferCSSPageSize: {
+            type: 'boolean',
+            description: 'Give CSS @page size priority over other size declarations.',
+          },
+          printBackground: {
+            type: 'boolean',
+            description: 'Set to true to print background graphics.',
+          },
+          scale: {
+            type: 'number',
+            description: 'Scales the rendering of the web page. Amount must be between 0.1 and 2.',
+          },
+          tagged: {
+            type: 'boolean',
+            description: 'Generate tagged (accessible) PDF.',
+          },
+          timeout: {
+            type: 'number',
+            description: 'Timeout in milliseconds.',
+          },
+          width: {
+            anyOf: [
+              {
+                type: 'string',
+              },
+              {
+                type: 'number',
+              },
+            ],
+            description: 'Sets the width of paper. Can be a number or string with unit.',
+          },
+        },
+        required: [],
+      },
       rejectRequestPattern: {
         type: 'array',
         description: "Block undesired requests that match the provided regex patterns, eg. '/^.*\\.(css)'.",
