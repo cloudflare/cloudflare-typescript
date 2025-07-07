@@ -21876,6 +21876,12 @@ export interface ApplicationListParams {
   domain?: string;
 
   /**
+   * Query param: True for only exact string matches against passed name/domain query
+   * parameters.
+   */
+  exact?: boolean;
+
+  /**
    * Query param: The name of the app.
    */
   name?: string;
