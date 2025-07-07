@@ -262,8 +262,7 @@ export namespace ItemGetResponse {
     hostname?: ListsAPI.Hostname;
 
     /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
     ip?: string;
 
@@ -306,8 +305,7 @@ export namespace ItemGetResponse {
     hostname?: ListsAPI.Hostname;
 
     /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
     ip?: string;
 
@@ -354,8 +352,7 @@ export namespace ItemCreateParams {
     hostname?: ListsAPI.HostnameParam;
 
     /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
     ip?: string;
 
@@ -397,8 +394,7 @@ export namespace ItemUpdateParams {
     hostname?: ListsAPI.HostnameParam;
 
     /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
     ip?: string;
 

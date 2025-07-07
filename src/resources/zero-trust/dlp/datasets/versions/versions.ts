@@ -55,7 +55,7 @@ export interface VersionCreateResponse {
 
   num_cells: number;
 
-  upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+  upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 }
 
 export interface VersionCreateParams {
