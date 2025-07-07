@@ -7,6 +7,7 @@ import * as Shared from '../../shared';
 import { TokensV4PagePaginationArray } from '../../shared';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
+  PermissionGroupListParams,
   PermissionGroupListResponse,
   PermissionGroupListResponsesSinglePage,
   PermissionGroups,
@@ -402,6 +403,7 @@ export declare namespace Tokens {
     PermissionGroups as PermissionGroups,
     type PermissionGroupListResponse as PermissionGroupListResponse,
     PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
+    type PermissionGroupListParams as PermissionGroupListParams,
   };
 
   export { Value as Value, type ValueUpdateParams as ValueUpdateParams };

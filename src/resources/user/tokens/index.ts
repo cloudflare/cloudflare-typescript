@@ -4,6 +4,7 @@ export {
   PermissionGroupListResponsesSinglePage,
   PermissionGroups,
   type PermissionGroupListResponse,
+  type PermissionGroupListParams,
 } from './permission-groups';
 export {
   Tokens,

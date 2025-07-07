@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -17,13 +18,23 @@ export class PermissionGroups extends APIResource {
    * ```
    */
   list(
+    query?: PermissionGroupListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PermissionGroupListResponsesSinglePage, PermissionGroupListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PermissionGroupListResponsesSinglePage, PermissionGroupListResponse>;
+  list(
+    query: PermissionGroupListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PermissionGroupListResponsesSinglePage, PermissionGroupListResponse> {
-    return this._client.getAPIList(
-      '/user/tokens/permission_groups',
-      PermissionGroupListResponsesSinglePage,
-      options,
-    );
+    if (isRequestOptions(query)) {
+      return this.list({}, query);
+    }
+    return this._client.getAPIList('/user/tokens/permission_groups', PermissionGroupListResponsesSinglePage, {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -51,11 +62,24 @@ export interface PermissionGroupListResponse {
   >;
 }
 
+export interface PermissionGroupListParams {
+  /**
+   * Filter by the name of the permission group. The value must be URL-encoded.
+   */
+  name?: string;
+
+  /**
+   * Filter by the scope of the permission group. The value must be URL-encoded.
+   */
+  scope?: string;
+}
+
 PermissionGroups.PermissionGroupListResponsesSinglePage = PermissionGroupListResponsesSinglePage;
 
 export declare namespace PermissionGroups {
   export {
     type PermissionGroupListResponse as PermissionGroupListResponse,
     PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
+    type PermissionGroupListParams as PermissionGroupListParams,
   };
 }
