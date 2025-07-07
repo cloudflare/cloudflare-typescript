@@ -7,7 +7,6 @@ export {
   type PermissionGroupListParams,
   type PermissionGroupGetParams,
   type PermissionGroupListResponsesSinglePage,
-  type PermissionGroupGetResponsesSinglePage,
 } from './permission-groups';
 export {
   Tokens,

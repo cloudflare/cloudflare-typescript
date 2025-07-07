@@ -26,6 +26,14 @@ export const tool: Tool = {
         title: 'Account Identifier',
         description: 'Account identifier tag.',
       },
+      name: {
+        type: 'string',
+        description: 'Filter by the name of the permission group.\nThe value must be URL-encoded.',
+      },
+      scope: {
+        type: 'string',
+        description: 'Filter by the scope of the permission group.\nThe value must be URL-encoded.',
+      },
     },
   },
 };

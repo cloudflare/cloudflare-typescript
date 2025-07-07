@@ -7,7 +7,6 @@ import * as PermissionGroupsAPI from './permission-groups';
 import {
   PermissionGroupGetParams,
   PermissionGroupGetResponse,
-  PermissionGroupGetResponsesSinglePage,
   PermissionGroupListParams,
   PermissionGroupListResponse,
   PermissionGroupListResponsesSinglePage,
@@ -470,7 +469,6 @@ export declare namespace Tokens {
     type PermissionGroupListResponse as PermissionGroupListResponse,
     type PermissionGroupGetResponse as PermissionGroupGetResponse,
     type PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
-    type PermissionGroupGetResponsesSinglePage as PermissionGroupGetResponsesSinglePage,
     type PermissionGroupListParams as PermissionGroupListParams,
     type PermissionGroupGetParams as PermissionGroupGetParams,
   };
