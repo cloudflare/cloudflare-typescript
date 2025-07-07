@@ -3,6 +3,7 @@
 export {
   PermissionGroups,
   type PermissionGroupListResponse,
+  type PermissionGroupListParams,
   type PermissionGroupListResponsesSinglePage,
 } from './permission-groups';
 export {

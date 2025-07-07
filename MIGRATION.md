@@ -1086,6 +1086,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.user.billing.history.list()`
 - `client.user.organizations.list()`
 - `client.user.tokens.list()`
+- `client.user.tokens.permissionGroups.list()`
 - `client.zones.list()`
 - `client.firewall.accessRules.list()`
 - `client.firewall.accessRules.delete()`

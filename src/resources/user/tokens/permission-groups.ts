@@ -17,12 +17,13 @@ export class PermissionGroups extends APIResource {
    * ```
    */
   list(
+    query: PermissionGroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PermissionGroupListResponsesSinglePage, PermissionGroupListResponse> {
     return this._client.getAPIList(
       '/user/tokens/permission_groups',
       SinglePage<PermissionGroupListResponse>,
-      options,
+      { query, ...options },
     );
   }
 }
@@ -51,9 +52,22 @@ export interface PermissionGroupListResponse {
   >;
 }
 
+export interface PermissionGroupListParams {
+  /**
+   * Filter by the name of the permission group. The value must be URL-encoded.
+   */
+  name?: string;
+
+  /**
+   * Filter by the scope of the permission group. The value must be URL-encoded.
+   */
+  scope?: string;
+}
+
 export declare namespace PermissionGroups {
   export {
     type PermissionGroupListResponse as PermissionGroupListResponse,
     type PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
+    type PermissionGroupListParams as PermissionGroupListParams,
   };
 }

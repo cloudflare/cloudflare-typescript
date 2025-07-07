@@ -20,12 +20,22 @@ export const tool: Tool = {
   description: 'Find all available permission groups for API Tokens',
   inputSchema: {
     type: 'object',
-    properties: {},
+    properties: {
+      name: {
+        type: 'string',
+        description: 'Filter by the name of the permission group.\nThe value must be URL-encoded.',
+      },
+      scope: {
+        type: 'string',
+        description: 'Filter by the scope of the permission group.\nThe value must be URL-encoded.',
+      },
+    },
   },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  return asTextContentResult(await client.user.tokens.permissionGroups.list());
+  const body = args as any;
+  return asTextContentResult(await client.user.tokens.permissionGroups.list(body));
 };
 
 export default { metadata, tool, handler };
