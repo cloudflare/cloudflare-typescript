@@ -72,33 +72,33 @@ export class MoveBulkResponsesSinglePage extends SinglePage<MoveBulkResponse> {}
 export interface MoveCreateResponse {
   completed_timestamp: string;
 
-  destination: string;
-
   item_count: number;
 
-  message_id: string;
+  destination?: string | null;
 
-  operation: string;
+  message_id?: string | null;
 
-  recipient: string;
+  operation?: string | null;
 
-  status: string;
+  recipient?: string | null;
+
+  status?: string | null;
 }
 
 export interface MoveBulkResponse {
   completed_timestamp: string;
 
-  destination: string;
-
   item_count: number;
 
-  message_id: string;
+  destination?: string | null;
 
-  operation: string;
+  message_id?: string | null;
 
-  recipient: string;
+  operation?: string | null;
 
-  status: string;
+  recipient?: string | null;
+
+  status?: string | null;
 }
 
 export interface MoveCreateParams {

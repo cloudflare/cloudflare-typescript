@@ -391,14 +391,14 @@ export interface RegistrationListParams extends CursorPaginationParams {
   search?: string;
 
   /**
-   * Query param: Filters by the last_seen timestamp - returns only registrations
-   * last seen after this timestamp.
+   * Query param: Filter by the last_seen timestamp - returns only registrations last
+   * seen after this timestamp.
    */
   seen_after?: string;
 
   /**
-   * Query param: Filters by the last_seen timestamp - returns only registrations
-   * last seen before this timestamp.
+   * Query param: Filter by the last_seen timestamp - returns only registrations last
+   * seen before this timestamp.
    */
   seen_before?: string;
 

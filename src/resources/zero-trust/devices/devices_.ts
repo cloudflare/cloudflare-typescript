@@ -385,7 +385,7 @@ export interface DeviceListParams extends CursorPaginationParams {
   search?: string;
 
   /**
-   * Query param: Filters by the last_seen timestamp - returns only devices last seen
+   * Query param: Filter by the last_seen timestamp - returns only devices last seen
    * after this timestamp.
    */
   seen_after?: string;

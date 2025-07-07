@@ -9,16 +9,7 @@ export class Operations extends APIResource {
    * Retrieves all operations from the schema. Operations that already exist in API
    * Shield Endpoint Management will be returned as full operations.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const operationListResponse of client.apiGateway.userSchemas.operations.list(
-   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
    */
   list(
     schemaId: string,
