@@ -36,6 +36,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'The domain of the app.',
       },
+      exact: {
+        type: 'boolean',
+        description: 'True for only exact string matches against passed name/domain query parameters.',
+      },
       name: {
         type: 'string',
         description: 'The name of the app.',

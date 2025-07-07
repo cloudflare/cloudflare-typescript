@@ -181,6 +181,32 @@ export const tool: Tool = {
             $ref: '#/$defs/saml_group_rule',
           },
           {
+            type: 'object',
+            title: 'OIDC claim',
+            description: 'Matches an OIDC claim.\nRequires an OIDC identity provider.',
+            properties: {
+              oidc: {
+                type: 'object',
+                properties: {
+                  claim_name: {
+                    type: 'string',
+                    description: 'The name of the OIDC claim.',
+                  },
+                  claim_value: {
+                    type: 'string',
+                    description: 'The OIDC claim value to look for.',
+                  },
+                  identity_provider_id: {
+                    type: 'string',
+                    description: 'The ID of your OIDC identity provider.',
+                  },
+                },
+                required: ['claim_name', 'claim_value', 'identity_provider_id'],
+              },
+            },
+            required: ['oidc'],
+          },
+          {
             $ref: '#/$defs/service_token_rule',
           },
         ],
