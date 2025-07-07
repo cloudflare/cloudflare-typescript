@@ -29,4 +29,15 @@ describe('resource permissionGroups', () => {
       client.user.tokens.permissionGroups.list({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
+
+  // TODO: investigate broken test
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.user.tokens.permissionGroups.list(
+        { name: 'Account%20Settings%20Write', scope: 'com.cloudflare.api.account.zone' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
 });

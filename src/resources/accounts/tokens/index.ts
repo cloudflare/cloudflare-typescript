@@ -2,7 +2,6 @@
 
 export {
   PermissionGroupListResponsesSinglePage,
-  PermissionGroupGetResponsesSinglePage,
   PermissionGroups,
   type PermissionGroupListResponse,
   type PermissionGroupGetResponse,

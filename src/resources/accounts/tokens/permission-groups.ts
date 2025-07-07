@@ -22,11 +22,11 @@ export class PermissionGroups extends APIResource {
     params: PermissionGroupListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<PermissionGroupListResponsesSinglePage, PermissionGroupListResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/tokens/permission_groups`,
       PermissionGroupListResponsesSinglePage,
-      options,
+      { query, ...options },
     );
   }
 
@@ -35,30 +35,27 @@ export class PermissionGroups extends APIResource {
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const permissionGroupGetResponse of client.accounts.tokens.permissionGroups.get(
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
+   * const permissionGroups =
+   *   await client.accounts.tokens.permissionGroups.get({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
    * ```
    */
   get(
     params: PermissionGroupGetParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PermissionGroupGetResponsesSinglePage, PermissionGroupGetResponse> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/tokens/permission_groups`,
-      PermissionGroupGetResponsesSinglePage,
-      options,
-    );
+  ): Core.APIPromise<PermissionGroupGetResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/tokens/permission_groups`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: PermissionGroupGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class PermissionGroupListResponsesSinglePage extends SinglePage<PermissionGroupListResponse> {}
-
-export class PermissionGroupGetResponsesSinglePage extends SinglePage<PermissionGroupGetResponse> {}
 
 export interface PermissionGroupListResponse {
   /**
@@ -82,51 +79,77 @@ export interface PermissionGroupListResponse {
   >;
 }
 
-export interface PermissionGroupGetResponse {
-  /**
-   * Public ID.
-   */
-  id?: string;
+export type PermissionGroupGetResponse = Array<PermissionGroupGetResponse.PermissionGroupGetResponseItem>;
 
-  /**
-   * Permission Group Name
-   */
-  name?: string;
+export namespace PermissionGroupGetResponse {
+  export interface PermissionGroupGetResponseItem {
+    /**
+     * Public ID.
+     */
+    id?: string;
 
-  /**
-   * Resources to which the Permission Group is scoped
-   */
-  scopes?: Array<
-    | 'com.cloudflare.api.account'
-    | 'com.cloudflare.api.account.zone'
-    | 'com.cloudflare.api.user'
-    | 'com.cloudflare.edge.r2.bucket'
-  >;
+    /**
+     * Permission Group Name
+     */
+    name?: string;
+
+    /**
+     * Resources to which the Permission Group is scoped
+     */
+    scopes?: Array<
+      | 'com.cloudflare.api.account'
+      | 'com.cloudflare.api.account.zone'
+      | 'com.cloudflare.api.user'
+      | 'com.cloudflare.edge.r2.bucket'
+    >;
+  }
 }
 
 export interface PermissionGroupListParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Query param: Filter by the name of the permission group. The value must be
+   * URL-encoded.
+   */
+  name?: string;
+
+  /**
+   * Query param: Filter by the scope of the permission group. The value must be
+   * URL-encoded.
+   */
+  scope?: string;
 }
 
 export interface PermissionGroupGetParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Query param: Filter by the name of the permission group. The value must be
+   * URL-encoded.
+   */
+  name?: string;
+
+  /**
+   * Query param: Filter by the scope of the permission group. The value must be
+   * URL-encoded.
+   */
+  scope?: string;
 }
 
 PermissionGroups.PermissionGroupListResponsesSinglePage = PermissionGroupListResponsesSinglePage;
-PermissionGroups.PermissionGroupGetResponsesSinglePage = PermissionGroupGetResponsesSinglePage;
 
 export declare namespace PermissionGroups {
   export {
     type PermissionGroupListResponse as PermissionGroupListResponse,
     type PermissionGroupGetResponse as PermissionGroupGetResponse,
     PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
-    PermissionGroupGetResponsesSinglePage as PermissionGroupGetResponsesSinglePage,
     type PermissionGroupListParams as PermissionGroupListParams,
     type PermissionGroupGetParams as PermissionGroupGetParams,
   };
