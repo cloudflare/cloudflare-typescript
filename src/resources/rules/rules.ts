@@ -11,11 +11,11 @@ import {
   ListGetParams,
   ListGetResponse,
   ListListParams,
-  ListListResponse,
   ListUpdateParams,
   ListUpdateResponse,
   Lists,
   ListsList,
+  ListsListsSinglePage,
   Redirect,
 } from './lists/lists';
 
@@ -24,6 +24,7 @@ export class Rules extends APIResource {
 }
 
 Rules.Lists = Lists;
+Rules.ListsListsSinglePage = ListsListsSinglePage;
 
 export declare namespace Rules {
   export {
@@ -33,9 +34,9 @@ export declare namespace Rules {
     type Redirect as Redirect,
     type ListCreateResponse as ListCreateResponse,
     type ListUpdateResponse as ListUpdateResponse,
-    type ListListResponse as ListListResponse,
     type ListDeleteResponse as ListDeleteResponse,
     type ListGetResponse as ListGetResponse,
+    ListsListsSinglePage as ListsListsSinglePage,
     type ListCreateParams as ListCreateParams,
     type ListUpdateParams as ListUpdateParams,
     type ListListParams as ListListParams,
