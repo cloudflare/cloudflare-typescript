@@ -6,6 +6,7 @@ export {
   type BulkOperationGetParams,
 } from './bulk-operations';
 export {
+  ItemListResponsesCursorPagination,
   Items,
   type ListCursor,
   type ListItem,
@@ -21,13 +22,13 @@ export {
   type ItemGetParams,
 } from './items';
 export {
+  ListsListsSinglePage,
   Lists,
   type Hostname,
   type ListsList,
   type Redirect,
   type ListCreateResponse,
   type ListUpdateResponse,
-  type ListListResponse,
   type ListDeleteResponse,
   type ListGetResponse,
   type ListCreateParams,

@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  ListsListsSinglePage,
   Lists,
   type Hostname,
   type ListsList,
   type Redirect,
   type ListCreateResponse,
   type ListUpdateResponse,
-  type ListListResponse,
   type ListDeleteResponse,
   type ListGetResponse,
   type ListCreateParams,
