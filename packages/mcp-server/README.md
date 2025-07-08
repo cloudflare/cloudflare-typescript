@@ -2032,16 +2032,16 @@ The following tools are available in this MCP server.
 
 - `create_lists_rules_items` (`write`): Appends new items to the list.
 
-  This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+  This operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.
 
 - `update_lists_rules_items` (`write`): Removes all existing items from the list and adds the provided items to the list.
 
-  This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+  This operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.
 
 - `list_lists_rules_items` (`read`): Fetches all the items in the list.
 - `delete_lists_rules_items` (`write`): Removes one or more items from a list.
 
-  This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+  This operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.
 
 - `get_lists_rules_items` (`read`): Fetches a list item in the list.
 

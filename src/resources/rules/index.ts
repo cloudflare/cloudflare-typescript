@@ -7,7 +7,6 @@ export {
   type Redirect,
   type ListCreateResponse,
   type ListUpdateResponse,
-  type ListListResponse,
   type ListDeleteResponse,
   type ListGetResponse,
   type ListCreateParams,
@@ -15,5 +14,6 @@ export {
   type ListListParams,
   type ListDeleteParams,
   type ListGetParams,
+  type ListsListsSinglePage,
 } from './lists/index';
 export { Rules } from './rules';

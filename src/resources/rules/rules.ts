@@ -11,11 +11,11 @@ import {
   ListGetParams,
   ListGetResponse,
   ListListParams,
-  ListListResponse,
   ListUpdateParams,
   ListUpdateResponse,
   Lists,
   ListsList,
+  ListsListsSinglePage,
   Redirect,
 } from './lists/lists';
 
@@ -33,9 +33,9 @@ export declare namespace Rules {
     type Redirect as Redirect,
     type ListCreateResponse as ListCreateResponse,
     type ListUpdateResponse as ListUpdateResponse,
-    type ListListResponse as ListListResponse,
     type ListDeleteResponse as ListDeleteResponse,
     type ListGetResponse as ListGetResponse,
+    type ListsListsSinglePage as ListsListsSinglePage,
     type ListCreateParams as ListCreateParams,
     type ListUpdateParams as ListUpdateParams,
     type ListListParams as ListListParams,

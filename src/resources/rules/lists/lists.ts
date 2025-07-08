@@ -13,6 +13,7 @@ import {
   ItemGetResponse,
   ItemListParams,
   ItemListResponse,
+  ItemListResponsesCursorPagination,
   ItemUpdateParams,
   ItemUpdateResponse,
   Items,
@@ -20,6 +21,7 @@ import {
   ListItem,
 } from './items';
 import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -74,18 +76,17 @@ export class Lists extends APIResource {
    *
    * @example
    * ```ts
-   * const lists = await client.rules.lists.list({
+   * // Automatically fetches more pages as needed.
+   * for await (const listsList of client.rules.lists.list({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * });
+   * })) {
+   *   // ...
+   * }
    * ```
    */
-  list(params: ListListParams, options?: RequestOptions): APIPromise<ListListResponse> {
+  list(params: ListListParams, options?: RequestOptions): PagePromise<ListsListsSinglePage, ListsList> {
     const { account_id } = params;
-    return (
-      this._client.get(path`/accounts/${account_id}/rules/lists`, options) as APIPromise<{
-        result: ListListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(path`/accounts/${account_id}/rules/lists`, SinglePage<ListsList>, options);
   }
 
   /**
@@ -128,6 +129,8 @@ export class Lists extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type ListsListsSinglePage = SinglePage<ListsList>;
 
 /**
  * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
@@ -226,294 +229,140 @@ export interface RedirectParam {
   subpath_matching?: boolean;
 }
 
-export type ListCreateResponse = ListCreateResponse.UnionMember0 | ListCreateResponse.UnionMember1;
+export interface ListCreateResponse {
+  /**
+   * The unique ID of the list.
+   */
+  id?: string;
 
-export namespace ListCreateResponse {
-  export interface UnionMember0 {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
+  /**
+   * The RFC 3339 timestamp of when the list was created.
+   */
+  created_on?: string;
 
-    /**
-     * The RFC 3339 timestamp of when the list was created.
-     */
-    created_on?: string;
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
 
-    /**
-     * An informative summary of the list.
-     */
-    description?: string;
+  /**
+   * The type of the list. Each type supports specific list items (IP addresses,
+   * ASNs, hostnames or redirects).
+   */
+  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
 
-    /**
-     * The type of the list. Each type supports specific list items (IP addresses,
-     * ASNs, hostnames or redirects).
-     */
-    kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+  /**
+   * The RFC 3339 timestamp of when the list was last modified.
+   */
+  modified_on?: string;
 
-    /**
-     * The RFC 3339 timestamp of when the list was last modified.
-     */
-    modified_on?: string;
+  /**
+   * An informative name for the list. Use this name in filter and rule expressions.
+   */
+  name?: string;
 
-    /**
-     * An informative name for the list. Use this name in filter and rule expressions.
-     */
-    name?: string;
+  /**
+   * The number of items in the list.
+   */
+  num_items?: number;
 
-    /**
-     * The number of items in the list.
-     */
-    num_items?: number;
-
-    /**
-     * The number of [filters](/operations/filters-list-filters) referencing the list.
-     */
-    num_referencing_filters?: number;
-  }
-
-  export interface UnionMember1 {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the list was created.
-     */
-    created_on?: string;
-
-    /**
-     * An informative summary of the list.
-     */
-    description?: string;
-
-    /**
-     * The type of the list. Each type supports specific list items (IP addresses,
-     * ASNs, hostnames or redirects).
-     */
-    kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
-
-    /**
-     * The RFC 3339 timestamp of when the list was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * An informative name for the list. Use this name in filter and rule expressions.
-     */
-    name?: string;
-
-    /**
-     * The number of items in the list.
-     */
-    num_items?: number;
-
-    /**
-     * The number of [filters](/operations/filters-list-filters) referencing the list.
-     */
-    num_referencing_filters?: number;
-  }
+  /**
+   * The number of [filters](/operations/filters-list-filters) referencing the list.
+   */
+  num_referencing_filters?: number;
 }
 
-export type ListUpdateResponse = ListUpdateResponse.UnionMember0 | ListUpdateResponse.UnionMember1;
+export interface ListUpdateResponse {
+  /**
+   * The unique ID of the list.
+   */
+  id?: string;
 
-export namespace ListUpdateResponse {
-  export interface UnionMember0 {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
+  /**
+   * The RFC 3339 timestamp of when the list was created.
+   */
+  created_on?: string;
 
-    /**
-     * The RFC 3339 timestamp of when the list was created.
-     */
-    created_on?: string;
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
 
-    /**
-     * An informative summary of the list.
-     */
-    description?: string;
+  /**
+   * The type of the list. Each type supports specific list items (IP addresses,
+   * ASNs, hostnames or redirects).
+   */
+  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
 
-    /**
-     * The type of the list. Each type supports specific list items (IP addresses,
-     * ASNs, hostnames or redirects).
-     */
-    kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+  /**
+   * The RFC 3339 timestamp of when the list was last modified.
+   */
+  modified_on?: string;
 
-    /**
-     * The RFC 3339 timestamp of when the list was last modified.
-     */
-    modified_on?: string;
+  /**
+   * An informative name for the list. Use this name in filter and rule expressions.
+   */
+  name?: string;
 
-    /**
-     * An informative name for the list. Use this name in filter and rule expressions.
-     */
-    name?: string;
+  /**
+   * The number of items in the list.
+   */
+  num_items?: number;
 
-    /**
-     * The number of items in the list.
-     */
-    num_items?: number;
-
-    /**
-     * The number of [filters](/operations/filters-list-filters) referencing the list.
-     */
-    num_referencing_filters?: number;
-  }
-
-  export interface UnionMember1 {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the list was created.
-     */
-    created_on?: string;
-
-    /**
-     * An informative summary of the list.
-     */
-    description?: string;
-
-    /**
-     * The type of the list. Each type supports specific list items (IP addresses,
-     * ASNs, hostnames or redirects).
-     */
-    kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
-
-    /**
-     * The RFC 3339 timestamp of when the list was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * An informative name for the list. Use this name in filter and rule expressions.
-     */
-    name?: string;
-
-    /**
-     * The number of items in the list.
-     */
-    num_items?: number;
-
-    /**
-     * The number of [filters](/operations/filters-list-filters) referencing the list.
-     */
-    num_referencing_filters?: number;
-  }
+  /**
+   * The number of [filters](/operations/filters-list-filters) referencing the list.
+   */
+  num_referencing_filters?: number;
 }
 
-export type ListListResponse = unknown | Array<unknown>;
-
-export type ListDeleteResponse = ListDeleteResponse.ID | ListDeleteResponse.ID;
-
-export namespace ListDeleteResponse {
-  export interface ID {
-    /**
-     * Defines the unique ID of the item in the List.
-     */
-    id?: string;
-  }
-
-  export interface ID {
-    /**
-     * Defines the unique ID of the item in the List.
-     */
-    id?: string;
-  }
+export interface ListDeleteResponse {
+  /**
+   * Defines the unique ID of the item in the List.
+   */
+  id?: string;
 }
 
-export type ListGetResponse = ListGetResponse.UnionMember0 | ListGetResponse.UnionMember1;
+export interface ListGetResponse {
+  /**
+   * The unique ID of the list.
+   */
+  id?: string;
 
-export namespace ListGetResponse {
-  export interface UnionMember0 {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
+  /**
+   * The RFC 3339 timestamp of when the list was created.
+   */
+  created_on?: string;
 
-    /**
-     * The RFC 3339 timestamp of when the list was created.
-     */
-    created_on?: string;
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
 
-    /**
-     * An informative summary of the list.
-     */
-    description?: string;
+  /**
+   * The type of the list. Each type supports specific list items (IP addresses,
+   * ASNs, hostnames or redirects).
+   */
+  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
 
-    /**
-     * The type of the list. Each type supports specific list items (IP addresses,
-     * ASNs, hostnames or redirects).
-     */
-    kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+  /**
+   * The RFC 3339 timestamp of when the list was last modified.
+   */
+  modified_on?: string;
 
-    /**
-     * The RFC 3339 timestamp of when the list was last modified.
-     */
-    modified_on?: string;
+  /**
+   * An informative name for the list. Use this name in filter and rule expressions.
+   */
+  name?: string;
 
-    /**
-     * An informative name for the list. Use this name in filter and rule expressions.
-     */
-    name?: string;
+  /**
+   * The number of items in the list.
+   */
+  num_items?: number;
 
-    /**
-     * The number of items in the list.
-     */
-    num_items?: number;
-
-    /**
-     * The number of [filters](/operations/filters-list-filters) referencing the list.
-     */
-    num_referencing_filters?: number;
-  }
-
-  export interface UnionMember1 {
-    /**
-     * The unique ID of the list.
-     */
-    id?: string;
-
-    /**
-     * The RFC 3339 timestamp of when the list was created.
-     */
-    created_on?: string;
-
-    /**
-     * An informative summary of the list.
-     */
-    description?: string;
-
-    /**
-     * The type of the list. Each type supports specific list items (IP addresses,
-     * ASNs, hostnames or redirects).
-     */
-    kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
-
-    /**
-     * The RFC 3339 timestamp of when the list was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * An informative name for the list. Use this name in filter and rule expressions.
-     */
-    name?: string;
-
-    /**
-     * The number of items in the list.
-     */
-    num_items?: number;
-
-    /**
-     * The number of [filters](/operations/filters-list-filters) referencing the list.
-     */
-    num_referencing_filters?: number;
-  }
+  /**
+   * The number of [filters](/operations/filters-list-filters) referencing the list.
+   */
+  num_referencing_filters?: number;
 }
 
 export interface ListCreateParams {
@@ -583,9 +432,9 @@ export declare namespace Lists {
     type Redirect as Redirect,
     type ListCreateResponse as ListCreateResponse,
     type ListUpdateResponse as ListUpdateResponse,
-    type ListListResponse as ListListResponse,
     type ListDeleteResponse as ListDeleteResponse,
     type ListGetResponse as ListGetResponse,
+    type ListsListsSinglePage as ListsListsSinglePage,
     type ListCreateParams as ListCreateParams,
     type ListUpdateParams as ListUpdateParams,
     type ListListParams as ListListParams,
@@ -608,6 +457,7 @@ export declare namespace Lists {
     type ItemListResponse as ItemListResponse,
     type ItemDeleteResponse as ItemDeleteResponse,
     type ItemGetResponse as ItemGetResponse,
+    type ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
     type ItemCreateParams as ItemCreateParams,
     type ItemUpdateParams as ItemUpdateParams,
     type ItemListParams as ItemListParams,
