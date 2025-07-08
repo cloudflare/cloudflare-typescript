@@ -8,7 +8,7 @@ export class Hosts extends APIResource {
   /**
    * Retrieve schema hosts in a zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
     params: HostListParams,

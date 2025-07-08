@@ -9,7 +9,7 @@ export class Operations extends APIResource {
    * Retrieves all operations from the schema. Operations that already exist in API
    * Shield Endpoint Management will be returned as full operations.
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
     schemaId: string,
