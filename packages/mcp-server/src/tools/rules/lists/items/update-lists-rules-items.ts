@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_lists_rules_items',
   description:
-    'Removes all existing items from the list and adds the provided items to the list.\n\nThis operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.',
+    'Removes all existing items from the list and adds the provided items to the list.\n\nThis operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.',
   inputSchema: {
     type: 'object',
     properties: {
