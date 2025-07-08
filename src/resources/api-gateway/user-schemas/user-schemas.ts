@@ -28,7 +28,7 @@ export class UserSchemas extends APIResource {
   /**
    * Upload a schema to a zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   create(params: UserSchemaCreateParams, options?: RequestOptions): APIPromise<SchemaUpload> {
     const { zone_id, ...body } = params;
@@ -43,7 +43,7 @@ export class UserSchemas extends APIResource {
   /**
    * Retrieve information about all schemas on a zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
     params: UserSchemaListParams,
@@ -60,7 +60,7 @@ export class UserSchemas extends APIResource {
   /**
    * Delete a schema
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   delete(
     schemaID: string,
@@ -74,7 +74,7 @@ export class UserSchemas extends APIResource {
   /**
    * Enable validation for a schema
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   edit(schemaID: string, params: UserSchemaEditParams, options?: RequestOptions): APIPromise<PublicSchema> {
     const { zone_id, ...body } = params;
@@ -89,7 +89,7 @@ export class UserSchemas extends APIResource {
   /**
    * Retrieve information about a specific schema on a zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   get(schemaID: string, params: UserSchemaGetParams, options?: RequestOptions): APIPromise<PublicSchema> {
     const { zone_id, ...query } = params;

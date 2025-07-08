@@ -9,7 +9,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Updates operation-level schema validation settings on the zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   update(
     operationID: string,
@@ -26,7 +26,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Updates multiple operation-level schema validation settings on the zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   edit(params: SchemaValidationEditParams, options?: RequestOptions): APIPromise<SettingsMultipleRequest> {
     const { zone_id, settings_multiple_request } = params;
@@ -41,7 +41,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Retrieves operation-level schema validation settings on the zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   get(
     operationID: string,

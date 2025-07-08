@@ -10,7 +10,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Updates zone level schema validation settings on the zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   update(params: SchemaValidationUpdateParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -23,7 +23,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Updates zone level schema validation settings on the zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   edit(params: SchemaValidationEditParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id, ...body } = params;
@@ -36,7 +36,7 @@ export class SchemaValidation extends APIResource {
   /**
    * Retrieves zone level schema validation settings currently set on the zone
    *
-   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation) instead.
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   get(params: SchemaValidationGetParams, options?: RequestOptions): APIPromise<SettingsAPI.Settings> {
     const { zone_id } = params;
