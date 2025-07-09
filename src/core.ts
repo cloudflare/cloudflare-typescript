@@ -299,10 +299,10 @@ export abstract class APIClient {
     return null;
   }
 
-  buildRequest<Req>(
+  async buildRequest<Req>(
     inputOptions: FinalRequestOptions<Req>,
     { retryCount = 0 }: { retryCount?: number } = {},
-  ): { req: RequestInit; url: string; timeout: number } {
+  ): Promise<{ req: RequestInit; url: string; timeout: number }> {
     const options = { ...inputOptions };
     const { method, path, query, defaultBaseURL, headers: headers = {} } = options;
 
@@ -450,7 +450,9 @@ export abstract class APIClient {
 
     await this.prepareOptions(options);
 
-    const { req, url, timeout } = this.buildRequest(options, { retryCount: maxRetries - retriesRemaining });
+    const { req, url, timeout } = await this.buildRequest(options, {
+      retryCount: maxRetries - retriesRemaining,
+    });
 
     await this.prepareRequest(req, { url, options });
 
