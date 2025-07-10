@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'get_dex_zero_trust_http_tests',
   description:
-    'Get test details and aggregate performance metrics for an http test for a given time period between 1 hour and 7 days.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGet test details and aggregate performance metrics for an http test for a given time period between 1 hour and 7 days.",
   inputSchema: {
     type: 'object',
     properties: {

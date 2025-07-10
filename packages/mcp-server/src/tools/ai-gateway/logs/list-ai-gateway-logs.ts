@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { maybeFilter } from 'cloudflare-mcp/filtering';
 import { asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -17,7 +18,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_ai_gateway_logs',
-  description: 'List Gateway Logs',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList Gateway Logs\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          id: {\n            type: 'string'\n          },\n          cached: {\n            type: 'boolean'\n          },\n          created_at: {\n            type: 'string',\n            format: 'date-time'\n          },\n          duration: {\n            type: 'integer'\n          },\n          model: {\n            type: 'string'\n          },\n          path: {\n            type: 'string'\n          },\n          provider: {\n            type: 'string'\n          },\n          success: {\n            type: 'boolean'\n          },\n          tokens_in: {\n            type: 'integer'\n          },\n          tokens_out: {\n            type: 'integer'\n          },\n          cost: {\n            type: 'number'\n          },\n          custom_cost: {\n            type: 'boolean'\n          },\n          metadata: {\n            type: 'string'\n          },\n          model_type: {\n            type: 'string'\n          },\n          request_content_type: {\n            type: 'string'\n          },\n          request_type: {\n            type: 'string'\n          },\n          response_content_type: {\n            type: 'string'\n          },\n          status_code: {\n            type: 'integer'\n          },\n          step: {\n            type: 'integer'\n          }\n        },\n        required: [          'id',\n          'cached',\n          'created_at',\n          'duration',\n          'model',\n          'path',\n          'provider',\n          'success',\n          'tokens_in',\n          'tokens_out'\n        ]\n      }\n    },\n    result_info: {\n      type: 'object',\n      properties: {\n        count: {\n          type: 'number'\n        },\n        max_cost: {\n          type: 'number'\n        },\n        max_duration: {\n          type: 'number'\n        },\n        max_tokens_in: {\n          type: 'number'\n        },\n        max_tokens_out: {\n          type: 'number'\n        },\n        max_total_tokens: {\n          type: 'number'\n        },\n        min_cost: {\n          type: 'number'\n        },\n        min_duration: {\n          type: 'number'\n        },\n        min_tokens_in: {\n          type: 'number'\n        },\n        min_tokens_out: {\n          type: 'number'\n        },\n        min_total_tokens: {\n          type: 'number'\n        },\n        page: {\n          type: 'number'\n        },\n        per_page: {\n          type: 'number'\n        },\n        total_count: {\n          type: 'number'\n        }\n      },\n      required: []\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'result',\n    'result_info',\n    'success'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -170,13 +172,20 @@ export const tool: Tool = {
       success: {
         type: 'boolean',
       },
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
+      },
     },
   },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { gateway_id, ...body } = args as any;
-  return asTextContentResult(await client.aiGateway.logs.list(gateway_id, body));
+  const response = await client.aiGateway.logs.list(gateway_id, body).asResponse();
+  return asTextContentResult(await maybeFilter(args, await response.json()));
 };
 
 export default { metadata, tool, handler };

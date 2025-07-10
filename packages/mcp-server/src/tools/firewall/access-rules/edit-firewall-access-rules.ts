@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'edit_firewall_access_rules',
   description:
-    'Updates an IP Access rule defined.\n\nNote: This operation will affect all zones in the account or zone.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates an IP Access rule defined.\n\nNote: This operation will affect all zones in the account or zone.",
   inputSchema: {
     type: 'object',
     properties: {

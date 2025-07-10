@@ -4,7 +4,7 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
-import { maybeMultipartFormRequestOptions } from '../../../internal/uploads';
+import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
 export class Values extends APIResource {
@@ -39,13 +39,8 @@ export class Values extends APIResource {
     return (
       this._client.put(
         path`/accounts/${account_id}/storage/kv/namespaces/${namespace_id}/values/${keyName}`,
-        maybeMultipartFormRequestOptions(
-          {
-            query: { expiration, expiration_ttl },
-            body,
-            ...options,
-            headers: buildHeaders([{ 'Content-Type': 'application/octet-stream' }, options?.headers]),
-          },
+        multipartFormRequestOptions(
+          { query: { expiration, expiration_ttl }, body, ...options },
           this._client,
         ),
       ) as APIPromise<{ result: ValueUpdateResponse | null }>

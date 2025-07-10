@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_stream',
   description:
-    'Lists up to 1000 videos from a single request. For a specific range, refer to the optional parameters.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists up to 1000 videos from a single request. For a specific range, refer to the optional parameters.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -68,7 +68,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.stream.list(body));
+  const response = await client.stream.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

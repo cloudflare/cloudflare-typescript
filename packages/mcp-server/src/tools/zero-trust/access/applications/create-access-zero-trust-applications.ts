@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_access_zero_trust_applications',
-  description: 'Adds a new application to Access.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nAdds a new application to Access.",
   inputSchema: {
     type: 'object',
     anyOf: [

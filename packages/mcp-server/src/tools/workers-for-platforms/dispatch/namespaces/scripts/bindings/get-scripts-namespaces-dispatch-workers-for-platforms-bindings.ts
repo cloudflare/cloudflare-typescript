@@ -18,7 +18,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_scripts_namespaces_dispatch_workers_for_platforms_bindings',
-  description: 'Fetch script bindings from a script uploaded to a Workers for Platforms namespace.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetch script bindings from a script uploaded to a Workers for Platforms namespace.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -40,9 +41,10 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { script_name, ...body } = args as any;
-  return asTextContentResult(
-    await client.workersForPlatforms.dispatch.namespaces.scripts.bindings.get(script_name, body),
-  );
+  const response = await client.workersForPlatforms.dispatch.namespaces.scripts.bindings
+    .get(script_name, body)
+    .asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

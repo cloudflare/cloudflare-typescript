@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_devices_zero_trust_posture',
-  description: 'Fetches device posture rules for a Zero Trust account.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetches device posture rules for a Zero Trust account.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -30,7 +31,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.zeroTrust.devices.posture.list(body));
+  const response = await client.zeroTrust.devices.posture.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

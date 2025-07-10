@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { maybeFilter } from 'cloudflare-mcp/filtering';
 import { asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -18,7 +19,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_scripts_namespaces_dispatch_workers_for_platforms_secrets',
-  description: 'List secrets bound to a script uploaded to a Workers for Platforms namespace.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList secrets bound to a script uploaded to a Workers for Platforms namespace.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            },\n            required: []\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            },\n            required: []\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    result: {\n      type: 'array',\n      items: {\n        anyOf: [          {\n            type: 'object',\n            properties: {\n              name: {\n                type: 'string',\n                description: 'A JavaScript variable name for the binding.'\n              },\n              text: {\n                type: 'string',\n                description: 'The secret value to use.'\n              },\n              type: {\n                type: 'string',\n                description: 'The kind of resource that the binding provides.',\n                enum: [                  'secret_text'\n                ]\n              }\n            },\n            required: [              'name',\n              'text',\n              'type'\n            ]\n          },\n          {\n            type: 'object',\n            properties: {\n              algorithm: {\n                type: 'object',\n                description: 'Algorithm-specific key parameters. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).'\n              },\n              format: {\n                type: 'string',\n                description: 'Data format of the key. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).',\n                enum: [                  'raw',\n                  'pkcs8',\n                  'spki',\n                  'jwk'\n                ]\n              },\n              name: {\n                type: 'string',\n                description: 'A JavaScript variable name for the binding.'\n              },\n              type: {\n                type: 'string',\n                description: 'The kind of resource that the binding provides.',\n                enum: [                  'secret_key'\n                ]\n              },\n              usages: {\n                type: 'array',\n                description: 'Allowed operations with the key. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).',\n                items: {\n                  type: 'string',\n                  enum: [                    'encrypt',\n                    'decrypt',\n                    'sign',\n                    'verify',\n                    'deriveKey',\n                    'deriveBits',\n                    'wrapKey',\n                    'unwrapKey'\n                  ]\n                }\n              },\n              key_base64: {\n                type: 'string',\n                description: 'Base64-encoded key data. Required if `format` is \"raw\", \"pkcs8\", or \"spki\".'\n              },\n              key_jwk: {\n                type: 'object',\n                description: 'Key data in [JSON Web Key](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#json_web_key) format. Required if `format` is \"jwk\".'\n              }\n            },\n            required: [              'algorithm',\n              'format',\n              'name',\n              'type',\n              'usages'\n            ]\n          }\n        ],\n        description: 'A secret value accessible through a binding.'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -34,15 +36,22 @@ export const tool: Tool = {
         type: 'string',
         description: 'Name of the script, used in URLs and route configuration.',
       },
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
+      },
     },
   },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { script_name, ...body } = args as any;
-  return asTextContentResult(
-    await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.list(script_name, body),
-  );
+  const response = await client.workersForPlatforms.dispatch.namespaces.scripts.secrets
+    .list(script_name, body)
+    .asResponse();
+  return asTextContentResult(await maybeFilter(args, await response.json()));
 };
 
 export default { metadata, tool, handler };

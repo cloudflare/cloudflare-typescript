@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_zero_trust_tunnels',
-  description: 'Lists and filters all types of Tunnels in an account.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists and filters all types of Tunnels in an account.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -86,7 +87,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.zeroTrust.tunnels.list(body));
+  const response = await client.zeroTrust.tunnels.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

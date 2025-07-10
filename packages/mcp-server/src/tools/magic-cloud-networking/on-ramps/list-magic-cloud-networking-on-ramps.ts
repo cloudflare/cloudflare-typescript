@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_magic_cloud_networking_on_ramps',
-  description: 'List On-ramps (Closed Beta).',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList On-ramps (Closed Beta).",
   inputSchema: {
     type: 'object',
     properties: {
@@ -43,7 +44,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.magicCloudNetworking.onRamps.list(body));
+  const response = await client.magicCloudNetworking.onRamps.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };
