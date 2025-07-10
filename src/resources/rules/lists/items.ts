@@ -105,11 +105,12 @@ export class Items extends APIResource {
    * ```
    */
   delete(listID: string, params: ItemDeleteParams, options?: RequestOptions): APIPromise<ItemDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.delete(path`/accounts/${account_id}/rules/lists/${listID}/items`, options) as APIPromise<{
-        result: ItemDeleteResponse;
-      }>
+      this._client.delete(path`/accounts/${account_id}/rules/lists/${listID}/items`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ItemDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -360,9 +361,18 @@ export interface ItemListParams extends CursorPaginationParams {
 
 export interface ItemDeleteParams {
   /**
-   * Defines an identifier.
+   * Path param: Defines an identifier.
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  items?: Array<ItemDeleteParams.Item>;
+}
+
+export namespace ItemDeleteParams {
+  export interface Item {}
 }
 
 export interface ItemGetParams {

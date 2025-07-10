@@ -30,6 +30,19 @@ export const tool: Tool = {
         type: 'string',
         description: 'The unique ID of the list.',
       },
+      items: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              description: 'Defines the unique ID of the item in the List.',
+            },
+          },
+          required: [],
+        },
+      },
     },
   },
 };
