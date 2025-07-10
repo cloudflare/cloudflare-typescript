@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { maybeFilter } from 'cloudflare-mcp/filtering';
 import { asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -17,7 +18,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_network_interconnects_interconnects',
-  description: 'Create a new interconnect',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreate a new interconnect\n\n# Response Schema\n```json\n{\n  anyOf: [    {\n      type: 'object',\n      title: 'Physical',\n      properties: {\n        account: {\n          type: 'string'\n        },\n        facility: {\n          type: 'object',\n          properties: {\n            address: {\n              type: 'array',\n              items: {\n                type: 'string'\n              }\n            },\n            name: {\n              type: 'string'\n            }\n          },\n          required: [            'address',\n            'name'\n          ]\n        },\n        name: {\n          type: 'string'\n        },\n        site: {\n          type: 'string',\n          description: 'A Cloudflare site name.'\n        },\n        slot_id: {\n          type: 'string'\n        },\n        speed: {\n          type: 'string'\n        },\n        type: {\n          type: 'string'\n        },\n        owner: {\n          type: 'string'\n        }\n      },\n      required: [        'account',\n        'facility',\n        'name',\n        'site',\n        'slot_id',\n        'speed',\n        'type'\n      ]\n    },\n    {\n      type: 'object',\n      title: 'GcpPartner',\n      properties: {\n        account: {\n          type: 'string'\n        },\n        name: {\n          type: 'string'\n        },\n        region: {\n          type: 'string'\n        },\n        type: {\n          type: 'string'\n        },\n        owner: {\n          type: 'string'\n        }\n      },\n      required: [        'account',\n        'name',\n        'region',\n        'type'\n      ]\n    }\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     anyOf: [
@@ -67,12 +69,22 @@ export const tool: Tool = {
         },
       },
     ],
+    properties: {
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
+      },
+    },
   },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.networkInterconnects.interconnects.create(body));
+  return asTextContentResult(
+    await maybeFilter(args, await client.networkInterconnects.interconnects.create(body)),
+  );
 };
 
 export default { metadata, tool, handler };

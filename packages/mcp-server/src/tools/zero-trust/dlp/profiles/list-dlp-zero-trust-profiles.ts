@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_dlp_zero_trust_profiles',
-  description: 'Lists all DLP profiles in an account.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists all DLP profiles in an account.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -34,7 +35,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.zeroTrust.dlp.profiles.list(body));
+  const response = await client.zeroTrust.dlp.profiles.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_access_zero_trust_groups',
-  description: 'Updates a configured Access group.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates a configured Access group.",
   inputSchema: {
     type: 'object',
     properties: {

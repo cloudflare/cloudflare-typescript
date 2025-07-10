@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_applications_access_zero_trust_policies',
   description:
-    'Updates an Access policy specific to an application. To update a reusable policy, use the /account or zones/{account or zone_id}/policies/{uid} endpoint.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates an Access policy specific to an application. To update a reusable policy, use the /account or zones/{account or zone_id}/policies/{uid} endpoint.",
   inputSchema: {
     type: 'object',
     properties: {

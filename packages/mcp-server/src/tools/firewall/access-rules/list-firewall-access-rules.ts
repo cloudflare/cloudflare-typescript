@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_firewall_access_rules',
   description:
-    'Fetches IP Access rules of an account or zone. These rules apply to all the zones in the account or zone. You can filter the results using several optional parameters.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetches IP Access rules of an account or zone. These rules apply to all the zones in the account or zone. You can filter the results using several optional parameters.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -85,7 +85,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.firewall.accessRules.list(body));
+  const response = await client.firewall.accessRules.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

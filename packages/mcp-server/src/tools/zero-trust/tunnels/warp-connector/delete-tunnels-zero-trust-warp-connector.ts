@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_tunnels_zero_trust_warp_connector',
-  description: 'Deletes a Warp Connector Tunnel from an account.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nDeletes a Warp Connector Tunnel from an account.",
   inputSchema: {
     type: 'object',
     properties: {

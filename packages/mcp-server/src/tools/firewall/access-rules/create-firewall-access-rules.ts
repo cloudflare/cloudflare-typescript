@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_firewall_access_rules',
   description:
-    'Creates a new IP Access rule for an account or zone. The rule will apply to all zones in the account or zone.\n\nNote: To create an IP Access rule that applies to a single zone, refer to the [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a new IP Access rule for an account or zone. The rule will apply to all zones in the account or zone.\n\nNote: To create an IP Access rule that applies to a single zone, refer to the [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.",
   inputSchema: {
     type: 'object',
     properties: {

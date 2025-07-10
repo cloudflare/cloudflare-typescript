@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_events_analytics_spectrum_bytimes',
-  description: 'Retrieves a list of aggregate metrics grouped by time interval.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves a list of aggregate metrics grouped by time interval.",
   inputSchema: {
     type: 'object',
     properties: {

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'delete_stream_live_inputs',
   description:
-    'Prevents a live input from being streamed to and makes the live input inaccessible to any future API calls.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nPrevents a live input from being streamed to and makes the live input inaccessible to any future API calls.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {}\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -29,6 +29,12 @@ export const tool: Tool = {
       live_input_identifier: {
         type: 'string',
         description: 'A unique identifier for a live input.',
+      },
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
   },

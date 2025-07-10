@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { maybeFilter } from 'cloudflare-mcp/filtering';
 import { asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'edit_default_policies_devices_zero_trust_certificates',
   description:
-    'Enable Zero Trust Clients to provision a certificate, containing a x509 subject, and referenced by Access device posture policies when the client visits MTLS protected domains. This facilitates device posture without a WARP session.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nEnable Zero Trust Clients to provision a certificate, containing a x509 subject, and referenced by Access device posture policies when the client visits MTLS protected domains. This facilitates device posture without a WARP session.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    result: {\n      $ref: '#/$defs/device_policy_certificates'\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          },\n          required: []\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    device_policy_certificates: {\n      type: 'object',\n      properties: {\n        enabled: {\n          type: 'boolean',\n          description: 'The current status of the device policy certificate provisioning feature for WARP clients.'\n        }\n      },\n      required: [        'enabled'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -30,13 +31,21 @@ export const tool: Tool = {
         description:
           'The current status of the device policy certificate provisioning feature for WARP clients.',
       },
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
+      },
     },
   },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.zeroTrust.devices.policies.default.certificates.edit(body));
+  return asTextContentResult(
+    await maybeFilter(args, await client.zeroTrust.devices.policies.default.certificates.edit(body)),
+  );
 };
 
 export default { metadata, tool, handler };

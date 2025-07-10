@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_zaraz_config',
-  description: 'Updates Zaraz configuration for a zone.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates Zaraz configuration for a zone.",
   inputSchema: {
     type: 'object',
     properties: {

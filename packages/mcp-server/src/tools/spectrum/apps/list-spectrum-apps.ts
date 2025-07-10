@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_spectrum_apps',
-  description: 'Retrieves a list of currently existing Spectrum applications inside a zone.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves a list of currently existing Spectrum applications inside a zone.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -50,7 +51,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.spectrum.apps.list(body));
+  const response = await client.spectrum.apps.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

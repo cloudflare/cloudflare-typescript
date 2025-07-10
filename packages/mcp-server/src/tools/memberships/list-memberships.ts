@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_memberships',
-  description: 'List memberships of accounts the user can access.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList memberships of accounts the user can access.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -64,7 +65,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.memberships.list(body));
+  const response = await client.memberships.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { maybeFilter } from 'cloudflare-mcp/filtering';
 import { asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_kv_namespaces',
   description:
-    'Creates a namespace under the given title. A `400` is returned if the account already owns a namespace with this title. A namespace must be explicitly deleted to be replaced.',
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a namespace under the given title. A `400` is returned if the account already owns a namespace with this title. A namespace must be explicitly deleted to be replaced.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      $ref: '#/$defs/namespace'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          },\n          required: []\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    namespace: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Namespace identifier tag.'\n        },\n        title: {\n          type: 'string',\n          description: 'A human-readable string name for a Namespace.'\n        },\n        beta: {\n          type: 'boolean',\n          description: 'True if new beta namespace, with additional preview features.'\n        },\n        supports_url_encoding: {\n          type: 'boolean',\n          description: 'True if keys written on the URL will be URL-decoded before storing. For example, if set to \"true\", a key written on the URL as \"%3F\" will be stored as \"?\".'\n        }\n      },\n      required: [        'id',\n        'title'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -30,13 +31,19 @@ export const tool: Tool = {
         type: 'string',
         description: 'A human-readable string name for a Namespace.',
       },
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
+      },
     },
   },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.kv.namespaces.create(body));
+  return asTextContentResult(await maybeFilter(args, await client.kv.namespaces.create(body)));
 };
 
 export default { metadata, tool, handler };

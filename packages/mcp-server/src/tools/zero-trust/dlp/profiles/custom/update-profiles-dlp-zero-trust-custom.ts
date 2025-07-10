@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_profiles_dlp_zero_trust_custom',
-  description: 'Updates a DLP custom profile.',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates a DLP custom profile.",
   inputSchema: {
     type: 'object',
     properties: {
