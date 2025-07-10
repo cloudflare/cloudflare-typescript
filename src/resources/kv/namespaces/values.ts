@@ -37,13 +37,7 @@ export class Values extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-        Core.maybeMultipartFormRequestOptions({
-          query: { expiration, expiration_ttl },
-          body,
-          ...options,
-          headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
-          __binaryRequest: true,
-        }),
+        Core.multipartFormRequestOptions({ query: { expiration, expiration_ttl }, body, ...options }),
       ) as Core.APIPromise<{ result: ValueUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
