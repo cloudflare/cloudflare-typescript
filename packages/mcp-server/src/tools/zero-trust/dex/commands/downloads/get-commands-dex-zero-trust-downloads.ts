@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { asBinaryContentResult } from 'cloudflare-mcp/tools/types';
+import { Metadata, asBinaryContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import type { Metadata } from '../../../../';
 import Cloudflare from 'cloudflare';
 
 export const metadata: Metadata = {
