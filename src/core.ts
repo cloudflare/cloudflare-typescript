@@ -177,6 +177,7 @@ export abstract class APIClient {
   httpAgent: Agent | undefined;
 
   private fetch: Fetch;
+  private usingCustomFetch: boolean = false;
   protected idempotencyHeader?: string;
 
   constructor({
@@ -204,6 +205,7 @@ export abstract class APIClient {
     this.httpAgent = httpAgent;
 
     this.fetch = overriddenFetch ?? fetch;
+    this.usingCustomFetch = !!overriddenFetch;
   }
 
   protected authHeaders(opts: FinalRequestOptions): Headers {
@@ -234,7 +236,7 @@ export abstract class APIClient {
   /**
    * Override this to add your own headers validation:
    */
-  protected validateHeaders(headers: Headers, customHeaders: Headers) {}
+  protected validateHeaders(headers: Headers, customHeaders: Headers, usingCustomFetch: boolean) {}
 
   protected defaultIdempotencyKey(): string {
     return `stainless-node-retry-${uuid4()}`;
@@ -397,7 +399,7 @@ export abstract class APIClient {
       reqHeaders['x-stainless-timeout'] = String(options.timeout);
     }
 
-    this.validateHeaders(reqHeaders, headers);
+    this.validateHeaders(reqHeaders, headers, this.usingCustomFetch);
 
     return reqHeaders;
   }
