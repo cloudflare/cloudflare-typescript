@@ -94,8 +94,6 @@ export class ThreatEvents extends APIResource {
    * const threatEvent =
    *   await client.cloudforceOne.threatEvents.create({
    *     account_id: 'account_id',
-   *     attacker: 'Flying Yeti',
-   *     attackerCountry: 'CN',
    *     category: 'Domain Resolution',
    *     date: '2022-04-01T00:00:00Z',
    *     event: 'An attacker registered the domain domain.com',
@@ -172,8 +170,6 @@ export class ThreatEvents extends APIResource {
    *     account_id: 'account_id',
    *     data: [
    *       {
-   *         attacker: 'Flying Yeti',
-   *         attackerCountry: 'CN',
    *         category: 'Domain Resolution',
    *         date: '2022-04-01T00:00:00Z',
    *         event:
@@ -253,8 +249,6 @@ export interface ThreatEventCreateResponse {
 
   category: string;
 
-  categoryId: number;
-
   date: string;
 
   event: string;
@@ -312,8 +306,6 @@ export namespace ThreatEventListResponse {
 
     category: string;
 
-    categoryId: number;
-
     date: string;
 
     event: string;
@@ -362,66 +354,10 @@ export interface ThreatEventDeleteResponse {
   uuid: string;
 }
 
-export type ThreatEventBulkCreateResponse =
-  Array<ThreatEventBulkCreateResponse.ThreatEventBulkCreateResponseItem>;
-
-export namespace ThreatEventBulkCreateResponse {
-  export interface ThreatEventBulkCreateResponseItem {
-    id: number;
-
-    accountId: number;
-
-    attacker: string;
-
-    attackerCountry: string;
-
-    category: string;
-
-    categoryId: number;
-
-    date: string;
-
-    event: string;
-
-    indicator: string;
-
-    indicatorType: string;
-
-    indicatorTypeId: number;
-
-    killChain: number;
-
-    mitreAttack: Array<string>;
-
-    numReferenced: number;
-
-    numReferences: number;
-
-    rawId: string;
-
-    referenced: Array<string>;
-
-    referencedIds: Array<number>;
-
-    references: Array<string>;
-
-    referencesIds: Array<number>;
-
-    tags: Array<string>;
-
-    targetCountry: string;
-
-    targetIndustry: string;
-
-    tlp: string;
-
-    uuid: string;
-
-    insight?: string;
-
-    releasabilityId?: string;
-  }
-}
+/**
+ * Number of created bulk events
+ */
+export type ThreatEventBulkCreateResponse = number;
 
 export interface ThreatEventEditResponse {
   id: number;
@@ -433,8 +369,6 @@ export interface ThreatEventEditResponse {
   attackerCountry: string;
 
   category: string;
-
-  categoryId: number;
 
   date: string;
 
@@ -490,8 +424,6 @@ export interface ThreatEventGetResponse {
 
   category: string;
 
-  categoryId: number;
-
   date: string;
 
   event: string;
@@ -544,16 +476,6 @@ export interface ThreatEventCreateParams {
   /**
    * Body param:
    */
-  attacker: string;
-
-  /**
-   * Body param:
-   */
-  attackerCountry: string;
-
-  /**
-   * Body param:
-   */
   category: string;
 
   /**
@@ -589,6 +511,16 @@ export interface ThreatEventCreateParams {
   /**
    * Body param:
    */
+  attacker?: string;
+
+  /**
+   * Body param:
+   */
+  attackerCountry?: string;
+
+  /**
+   * Body param:
+   */
   datasetId?: string;
 
   /**
@@ -614,7 +546,7 @@ export interface ThreatEventCreateParams {
 
 export namespace ThreatEventCreateParams {
   export interface Raw {
-    data: Record<string, unknown> | null;
+    data: { [key: string]: unknown } | null;
 
     source?: string;
 
@@ -712,10 +644,6 @@ export interface ThreatEventBulkCreateParams {
 
 export namespace ThreatEventBulkCreateParams {
   export interface Data {
-    attacker: string;
-
-    attackerCountry: string;
-
     category: string;
 
     date: string;
@@ -730,6 +658,10 @@ export namespace ThreatEventBulkCreateParams {
 
     accountId?: number;
 
+    attacker?: string;
+
+    attackerCountry?: string;
+
     datasetId?: string;
 
     indicator?: string;
@@ -743,7 +675,7 @@ export namespace ThreatEventBulkCreateParams {
 
   export namespace Data {
     export interface Raw {
-      data: Record<string, unknown> | null;
+      data: { [key: string]: unknown } | null;
 
       source?: string;
 

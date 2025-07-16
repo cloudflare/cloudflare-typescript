@@ -329,6 +329,7 @@ export type AccessRule =
   | IPRule
   | OktaGroupRule
   | SAMLGroupRule
+  | AccessRule.AccessOIDCClaimRule
   | ServiceTokenRule;
 
 export namespace AccessRule {
@@ -389,6 +390,32 @@ export namespace AccessRule {
       id: string;
     }
   }
+
+  /**
+   * Matches an OIDC claim. Requires an OIDC identity provider.
+   */
+  export interface AccessOIDCClaimRule {
+    oidc: AccessOIDCClaimRule.OIDC;
+  }
+
+  export namespace AccessOIDCClaimRule {
+    export interface OIDC {
+      /**
+       * The name of the OIDC claim.
+       */
+      claim_name: string;
+
+      /**
+       * The OIDC claim value to look for.
+       */
+      claim_value: string;
+
+      /**
+       * The ID of your OIDC identity provider.
+       */
+      identity_provider_id: string;
+    }
+  }
 }
 
 /**
@@ -416,6 +443,7 @@ export type AccessRuleParam =
   | IPRuleParam
   | OktaGroupRuleParam
   | SAMLGroupRuleParam
+  | AccessRuleParam.AccessOIDCClaimRule
   | ServiceTokenRuleParam;
 
 export namespace AccessRuleParam {
@@ -474,6 +502,32 @@ export namespace AccessRuleParam {
        * The ID of an identity provider.
        */
       id: string;
+    }
+  }
+
+  /**
+   * Matches an OIDC claim. Requires an OIDC identity provider.
+   */
+  export interface AccessOIDCClaimRule {
+    oidc: AccessOIDCClaimRule.OIDC;
+  }
+
+  export namespace AccessOIDCClaimRule {
+    export interface OIDC {
+      /**
+       * The name of the OIDC claim.
+       */
+      claim_name: string;
+
+      /**
+       * The OIDC claim value to look for.
+       */
+      claim_value: string;
+
+      /**
+       * The ID of your OIDC identity provider.
+       */
+      identity_provider_id: string;
     }
   }
 }

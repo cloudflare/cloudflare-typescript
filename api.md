@@ -104,7 +104,7 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/tokens/permission_groups">client.accounts.tokens.permissionGroups.<a href="./src/resources/accounts/tokens/permission-groups.ts">list</a>({ ...params }) -> PermissionGroupListResponsesSinglePage</code>
-- <code title="get /accounts/{account_id}/tokens/permission_groups">client.accounts.tokens.permissionGroups.<a href="./src/resources/accounts/tokens/permission-groups.ts">get</a>({ ...params }) -> PermissionGroupGetResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/tokens/permission_groups">client.accounts.tokens.permissionGroups.<a href="./src/resources/accounts/tokens/permission-groups.ts">get</a>({ ...params }) -> PermissionGroupGetResponse</code>
 
 ### Value
 
@@ -269,7 +269,7 @@ Types:
 
 Methods:
 
-- <code title="get /user/tokens/permission_groups">client.user.tokens.permissionGroups.<a href="./src/resources/user/tokens/permission-groups.ts">list</a>() -> PermissionGroupListResponsesSinglePage</code>
+- <code title="get /user/tokens/permission_groups">client.user.tokens.permissionGroups.<a href="./src/resources/user/tokens/permission-groups.ts">list</a>({ ...params }) -> PermissionGroupListResponsesSinglePage</code>
 
 ### Value
 
@@ -2951,16 +2951,24 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/brand-protection.ts">Info</a></code>
-- <code><a href="./src/resources/brand-protection.ts">RuleMatch</a></code>
-- <code><a href="./src/resources/brand-protection.ts">ScanStatus</a></code>
-- <code><a href="./src/resources/brand-protection.ts">Submit</a></code>
-- <code><a href="./src/resources/brand-protection.ts">URLInfoModelResults</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">Info</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">RuleMatch</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">ScanStatus</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">Submit</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">URLInfoModelResults</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/brand-protection/submit">client.brandProtection.<a href="./src/resources/brand-protection.ts">submit</a>({ ...params }) -> Submit</code>
-- <code title="get /accounts/{account_id}/brand-protection/url-info">client.brandProtection.<a href="./src/resources/brand-protection.ts">urlInfo</a>({ ...params }) -> Info</code>
+- <code title="post /accounts/{account_id}/brand-protection/submit">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">submit</a>({ ...params }) -> Submit</code>
+- <code title="get /accounts/{account_id}/brand-protection/url-info">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">urlInfo</a>({ ...params }) -> Info</code>
+
+## Queries
+
+## Matches
+
+## Logos
+
+## LogoMatches
 
 # Diagnostics
 
@@ -3438,15 +3446,19 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorCreateResponse</a></code>
 - <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorUpdateResponse</a></code>
 - <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorDeleteResponse</a></code>
 - <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorEditResponse</a></code>
 - <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorGetResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/magic/connectors">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">create</a>({ ...params }) -> ConnectorCreateResponse</code>
 - <code title="put /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">update</a>(connectorId, { ...params }) -> ConnectorUpdateResponse</code>
 - <code title="get /accounts/{account_id}/magic/connectors">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">list</a>({ ...params }) -> ConnectorListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">delete</a>(connectorId, { ...params }) -> ConnectorDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">edit</a>(connectorId, { ...params }) -> ConnectorEditResponse</code>
 - <code title="get /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">get</a>(connectorId, { ...params }) -> ConnectorGetResponse</code>
 
@@ -3895,7 +3907,6 @@ Types:
 - <code><a href="./src/resources/rules/lists/lists.ts">Redirect</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">ListCreateResponse</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">ListUpdateResponse</a></code>
-- <code><a href="./src/resources/rules/lists/lists.ts">ListListResponse</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">ListDeleteResponse</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">ListGetResponse</a></code>
 
@@ -3903,7 +3914,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">create</a>({ ...params }) -> ListCreateResponse</code>
 - <code title="put /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">update</a>(listId, { ...params }) -> ListUpdateResponse</code>
-- <code title="get /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">list</a>({ ...params }) -> ListListResponse</code>
+- <code title="get /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">list</a>({ ...params }) -> ListsListsSinglePage</code>
 - <code title="delete /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">delete</a>(listId, { ...params }) -> ListDeleteResponse</code>
 - <code title="get /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">get</a>(listId, { ...params }) -> ListGetResponse</code>
 
@@ -3933,7 +3944,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">create</a>(listId, [ ...body ]) -> ItemCreateResponse</code>
 - <code title="put /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">update</a>(listId, [ ...body ]) -> ItemUpdateResponse</code>
-- <code title="get /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">list</a>(listId, { ...params }) -> ItemListResponse</code>
+- <code title="get /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">list</a>(listId, { ...params }) -> ItemListResponsesCursorPagination</code>
 - <code title="delete /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">delete</a>(listId, { ...params }) -> ItemDeleteResponse</code>
 - <code title="get /accounts/{account_id}/rules/lists/{list_id}/items/{item_id}">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">get</a>(listId, itemId, { ...params }) -> ItemGetResponse</code>
 
@@ -5701,10 +5712,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">PredefinedProfile</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">PredefinedDeleteResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/dlp/profiles/predefined">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">create</a>({ ...params }) -> Profile</code>
 - <code title="put /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">update</a>(profileId, { ...params }) -> Profile</code>
+- <code title="delete /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">delete</a>(profileId, { ...params }) -> PredefinedDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">get</a>(profileId, { ...params }) -> Profile</code>
 
 ### Limits
@@ -5721,19 +5735,61 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryDeleteResponse</a></code>
-- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">create</a>({ ...params }) -> EntryCreateResponse</code>
-- <code title="put /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">update</a>(entryId, { ...params }) -> EntryUpdateResponse</code>
-- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">list</a>({ ...params }) -> EntryListResponsesSinglePage</code>
-- <code title="delete /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">delete</a>(entryId, { ...params }) -> EntryDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">get</a>(entryId, { ...params }) -> EntryGetResponse</code>
+- <code title="post /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">create</a>({ ...params }) -> EntryCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">update</a>(entryId, { ...params }) -> EntryUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">list</a>({ ...params }) -> EntryListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">delete</a>(entryId, { ...params }) -> EntryDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">get</a>(entryId, { ...params }) -> EntryGetResponse</code>
+
+#### Custom
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">create</a>({ ...params }) -> CustomCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">update</a>(entryId, { ...params }) -> CustomUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">delete</a>(entryId, { ...params }) -> CustomDeleteResponse | null</code>
+
+#### Predefined
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/entries/predefined">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">create</a>({ ...params }) -> PredefinedCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/predefined/{entry_id}">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">update</a>(entryId, { ...params }) -> PredefinedUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/predefined/{entry_id}">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">delete</a>(entryId, { ...params }) -> PredefinedDeleteResponse | null</code>
+
+#### Integration
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/entries/integration">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">create</a>({ ...params }) -> IntegrationCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/integration/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">update</a>(entryId, { ...params }) -> IntegrationUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/integration/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">delete</a>(entryId, { ...params }) -> IntegrationDeleteResponse | null</code>
 
 ## Gateway
 
@@ -6386,6 +6442,36 @@ Types:
 Methods:
 
 - <code title="get /radar/bgp/ips/timeseries">client.radar.bgp.ips.<a href="./src/resources/radar/bgp/ips.ts">timeseries</a>({ ...params }) -> IPTimeseriesResponse</code>
+
+## Bots
+
+Types:
+
+- <code><a href="./src/resources/radar/bots/bots.ts">BotListResponse</a></code>
+- <code><a href="./src/resources/radar/bots/bots.ts">BotGetResponse</a></code>
+- <code><a href="./src/resources/radar/bots/bots.ts">BotSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/bots/bots.ts">BotTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/bots/bots.ts">BotTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bots">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">list</a>({ ...params }) -> BotListResponse</code>
+- <code title="get /radar/bots/{bot_slug}">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">get</a>(botSlug, { ...params }) -> BotGetResponse</code>
+- <code title="get /radar/bots/summary/{dimension}">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">summary</a>(dimension, { ...params }) -> BotSummaryResponse</code>
+- <code title="get /radar/bots/timeseries">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">timeseries</a>({ ...params }) -> BotTimeseriesResponse</code>
+- <code title="get /radar/bots/timeseries_groups/{dimension}">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">timeseriesGroups</a>(dimension, { ...params }) -> BotTimeseriesGroupsResponse</code>
+
+### WebCrawlers
+
+Types:
+
+- <code><a href="./src/resources/radar/bots/web-crawlers.ts">WebCrawlerSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/bots/web-crawlers.ts">WebCrawlerTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bots/crawlers/summary/{dimension}">client.radar.bots.webCrawlers.<a href="./src/resources/radar/bots/web-crawlers.ts">summary</a>(dimension, { ...params }) -> WebCrawlerSummaryResponse</code>
+- <code title="get /radar/bots/crawlers/timeseries_groups/{dimension}">client.radar.bots.webCrawlers.<a href="./src/resources/radar/bots/web-crawlers.ts">timeseriesGroups</a>(dimension, { ...params }) -> WebCrawlerTimeseriesGroupsResponse</code>
 
 ## Datasets
 

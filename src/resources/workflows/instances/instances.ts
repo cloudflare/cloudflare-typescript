@@ -321,6 +321,11 @@ export interface InstanceCreateParams {
   /**
    * Body param:
    */
+  instance_retention?: unknown;
+
+  /**
+   * Body param:
+   */
   params?: unknown;
 }
 
@@ -369,6 +374,8 @@ export interface InstanceBulkParams {
 export namespace InstanceBulkParams {
   export interface Body {
     instance_id?: string;
+
+    instance_retention?: unknown;
 
     params?: unknown;
   }

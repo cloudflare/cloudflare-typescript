@@ -26,7 +26,7 @@ export class Eligible extends APIResource {
   }
 }
 
-export type EligibleGetResponse = Record<string, Array<EligibleGetResponse.Item>>;
+export type EligibleGetResponse = { [key: string]: Array<EligibleGetResponse.Item> };
 
 export namespace EligibleGetResponse {
   export interface Item {

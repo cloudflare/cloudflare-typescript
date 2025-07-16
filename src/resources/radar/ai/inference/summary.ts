@@ -62,7 +62,7 @@ export interface SummaryModelResponse {
    */
   meta: SummaryModelResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryModelResponse {
@@ -159,7 +159,7 @@ export interface SummaryTaskResponse {
    */
   meta: SummaryTaskResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryTaskResponse {

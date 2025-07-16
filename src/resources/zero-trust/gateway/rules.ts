@@ -417,7 +417,7 @@ export interface RuleSetting {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: Record<string, string> | null;
+  add_headers?: { [key: string]: string } | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -846,7 +846,7 @@ export interface RuleSettingParam {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: Record<string, string> | null;
+  add_headers?: { [key: string]: string } | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.

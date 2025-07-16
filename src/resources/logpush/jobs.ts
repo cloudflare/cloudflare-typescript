@@ -15,6 +15,26 @@ export class Jobs extends APIResource {
    * const logpushJob = await client.logpush.jobs.create({
    *   destination_conf: 's3://mybucket/logs?region=us-west-2',
    *   account_id: 'account_id',
+   *   dataset: 'gateway_dns',
+   *   filter:
+   *     '{"where":{"and":[{"key":"ClientRequestPath","operator":"contains","value":"/static"},{"key":"ClientRequestHost","operator":"eq","value":"example.com"}]}}',
+   *   max_upload_bytes: 5000000,
+   *   max_upload_interval_seconds: 30,
+   *   max_upload_records: 1000,
+   *   name: 'example.com',
+   *   output_options: {
+   *     'CVE-2021-44228': false,
+   *     batch_prefix: '',
+   *     batch_suffix: '',
+   *     field_delimiter: ',',
+   *     field_names: ['Datetime', 'DstIP', 'SrcIP'],
+   *     output_type: 'ndjson',
+   *     record_delimiter: '',
+   *     record_prefix: '{',
+   *     record_suffix: '}\n',
+   *     sample_rate: 1,
+   *     timestamp_format: 'unixnano',
+   *   },
    * });
    * ```
    */
@@ -51,6 +71,25 @@ export class Jobs extends APIResource {
    * ```ts
    * const logpushJob = await client.logpush.jobs.update(1, {
    *   account_id: 'account_id',
+   *   destination_conf: 's3://mybucket/logs?region=us-west-2',
+   *   filter:
+   *     '{"where":{"and":[{"key":"ClientRequestPath","operator":"contains","value":"/static"},{"key":"ClientRequestHost","operator":"eq","value":"example.com"}]}}',
+   *   max_upload_bytes: 5000000,
+   *   max_upload_interval_seconds: 30,
+   *   max_upload_records: 1000,
+   *   output_options: {
+   *     'CVE-2021-44228': false,
+   *     batch_prefix: '',
+   *     batch_suffix: '',
+   *     field_delimiter: ',',
+   *     field_names: ['Datetime', 'DstIP', 'SrcIP'],
+   *     output_type: 'ndjson',
+   *     record_delimiter: '',
+   *     record_prefix: '{',
+   *     record_suffix: '}\n',
+   *     sample_rate: 1,
+   *     timestamp_format: 'unixnano',
+   *   },
    * });
    * ```
    */
@@ -302,10 +341,9 @@ export interface LogpushJob {
 
   /**
    * The kind parameter (optional) is used to differentiate between Logpush and Edge
-   * Log Delivery jobs. Currently, Edge Log Delivery is only supported for the
-   * `http_requests` dataset.
+   * Log Delivery jobs (when supported by the dataset).
    */
-  kind?: 'edge';
+  kind?: '' | 'edge';
 
   /**
    * Records the last time for which logs have been successfully pushed. If the last
@@ -335,27 +373,25 @@ export interface LogpushJob {
    * The maximum uncompressed file size of a batch of logs. This setting value must
    * be between `5 MB` and `1 GB`, or `0` to disable it. Note that you cannot set a
    * minimum file size; this means that log files may be much smaller than this batch
-   * size. This parameter is not available for jobs with `edge` as its kind.
+   * size.
    */
-  max_upload_bytes?: number | null;
+  max_upload_bytes?: 0 | unknown | null;
 
   /**
    * The maximum interval in seconds for log batches. This setting must be between 30
    * and 300 seconds (5 minutes), or `0` to disable it. Note that you cannot specify
    * a minimum interval for log batches; this means that log files may be sent in
-   * shorter intervals than this. This parameter is only used for jobs with `edge` as
-   * its kind.
+   * shorter intervals than this.
    */
-  max_upload_interval_seconds?: number | null;
+  max_upload_interval_seconds?: 0 | unknown | null;
 
   /**
    * The maximum number of log lines per batch. This setting must be between 1000 and
    * 1,000,000 lines, or `0` to disable it. Note that you cannot specify a minimum
    * number of log lines per batch; this means that log files may contain many fewer
-   * lines than this. This parameter is not available for jobs with `edge` as its
-   * kind.
+   * lines than this.
    */
-  max_upload_records?: number | null;
+  max_upload_records?: 0 | unknown | null;
 
   /**
    * Optional human readable job name. Not unique. Cloudflare suggests that you set
@@ -605,10 +641,9 @@ export interface JobCreateParams {
 
   /**
    * Body param: The kind parameter (optional) is used to differentiate between
-   * Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only
-   * supported for the `http_requests` dataset.
+   * Logpush and Edge Log Delivery jobs (when supported by the dataset).
    */
-  kind?: 'edge';
+  kind?: '' | 'edge';
 
   /**
    * @deprecated Body param: This field is deprecated. Use `output_options` instead.
@@ -623,28 +658,25 @@ export interface JobCreateParams {
    * Body param: The maximum uncompressed file size of a batch of logs. This setting
    * value must be between `5 MB` and `1 GB`, or `0` to disable it. Note that you
    * cannot set a minimum file size; this means that log files may be much smaller
-   * than this batch size. This parameter is not available for jobs with `edge` as
-   * its kind.
+   * than this batch size.
    */
-  max_upload_bytes?: number | null;
+  max_upload_bytes?: 0 | unknown | null;
 
   /**
    * Body param: The maximum interval in seconds for log batches. This setting must
    * be between 30 and 300 seconds (5 minutes), or `0` to disable it. Note that you
    * cannot specify a minimum interval for log batches; this means that log files may
-   * be sent in shorter intervals than this. This parameter is only used for jobs
-   * with `edge` as its kind.
+   * be sent in shorter intervals than this.
    */
-  max_upload_interval_seconds?: number | null;
+  max_upload_interval_seconds?: 0 | unknown | null;
 
   /**
    * Body param: The maximum number of log lines per batch. This setting must be
    * between 1000 and 1,000,000 lines, or `0` to disable it. Note that you cannot
    * specify a minimum number of log lines per batch; this means that log files may
-   * contain many fewer lines than this. This parameter is not available for jobs
-   * with `edge` as its kind.
+   * contain many fewer lines than this.
    */
-  max_upload_records?: number | null;
+  max_upload_records?: 0 | unknown | null;
 
   /**
    * Body param: Optional human readable job name. Not unique. Cloudflare suggests
@@ -708,10 +740,9 @@ export interface JobUpdateParams {
 
   /**
    * Body param: The kind parameter (optional) is used to differentiate between
-   * Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only
-   * supported for the `http_requests` dataset.
+   * Logpush and Edge Log Delivery jobs (when supported by the dataset).
    */
-  kind?: 'edge';
+  kind?: '' | 'edge';
 
   /**
    * @deprecated Body param: This field is deprecated. Use `output_options` instead.
@@ -726,28 +757,25 @@ export interface JobUpdateParams {
    * Body param: The maximum uncompressed file size of a batch of logs. This setting
    * value must be between `5 MB` and `1 GB`, or `0` to disable it. Note that you
    * cannot set a minimum file size; this means that log files may be much smaller
-   * than this batch size. This parameter is not available for jobs with `edge` as
-   * its kind.
+   * than this batch size.
    */
-  max_upload_bytes?: number | null;
+  max_upload_bytes?: 0 | unknown | null;
 
   /**
    * Body param: The maximum interval in seconds for log batches. This setting must
    * be between 30 and 300 seconds (5 minutes), or `0` to disable it. Note that you
    * cannot specify a minimum interval for log batches; this means that log files may
-   * be sent in shorter intervals than this. This parameter is only used for jobs
-   * with `edge` as its kind.
+   * be sent in shorter intervals than this.
    */
-  max_upload_interval_seconds?: number | null;
+  max_upload_interval_seconds?: 0 | unknown | null;
 
   /**
    * Body param: The maximum number of log lines per batch. This setting must be
    * between 1000 and 1,000,000 lines, or `0` to disable it. Note that you cannot
    * specify a minimum number of log lines per batch; this means that log files may
-   * contain many fewer lines than this. This parameter is not available for jobs
-   * with `edge` as its kind.
+   * contain many fewer lines than this.
    */
-  max_upload_records?: number | null;
+  max_upload_records?: 0 | unknown | null;
 
   /**
    * Body param: Optional human readable job name. Not unique. Cloudflare suggests

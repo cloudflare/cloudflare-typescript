@@ -164,10 +164,9 @@ export class Namespaces extends APIResource {
   }
 
   /**
-   * Get multiple KV pairs from the namespace. Body should contain keys to retrieve
-   * at most 100. Keys must contain text-based values. If value is json, it can be
-   * requested to return in JSON, instead of string. Metadata can be return if
-   * withMetadata is true.
+   * Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based
+   * values. JSON values can optionally be parsed instead of being returned as a
+   * string value. Metadata can be included if `withMetadata` is true.
    *
    * @example
    * ```ts
@@ -208,7 +207,7 @@ export class Namespaces extends APIResource {
    *   '0f2ac74b498b48028cb68387c421e279',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{}],
+   *     body: [{ key: 'My-Key', value: 'Some string' }],
    *   },
    * );
    * ```
@@ -282,7 +281,7 @@ export interface NamespaceDeleteResponse {}
 
 export interface NamespaceBulkDeleteResponse {
   /**
-   * Number of keys successfully updated
+   * Number of keys successfully updated.
    */
   successful_key_count?: number;
 
@@ -299,33 +298,27 @@ export type NamespaceBulkGetResponse =
 export namespace NamespaceBulkGetResponse {
   export interface WorkersKVBulkGetResult {
     /**
-     * Requested keys are paired with their values in an object
+     * Requested keys are paired with their values in an object.
      */
-    values?: Record<string, string | number | boolean | Record<string, unknown>>;
+    values?: { [key: string]: string | number | boolean | { [key: string]: unknown } };
   }
 
   export interface WorkersKVBulkGetResultWithMetadata {
     /**
-     * Requested keys are paired with their values and metadata in an object
+     * Requested keys are paired with their values and metadata in an object.
      */
-    values?: Record<string, WorkersKVBulkGetResultWithMetadata.Values | null>;
+    values?: { [key: string]: WorkersKVBulkGetResultWithMetadata.Values | null };
   }
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
-      /**
-       * The metadata associated with the key
-       */
-      metadata: Record<string, unknown> | null;
+      metadata: unknown;
+
+      value: unknown;
 
       /**
-       * The value associated with the key
-       */
-      value: string | number | boolean | Record<string, unknown>;
-
-      /**
-       * The time, measured in number of seconds since the UNIX epoch, at which the key
-       * should expire.
+       * Expires the key at a certain time, measured in number of seconds since the UNIX
+       * epoch.
        */
       expiration?: number;
     }
@@ -334,7 +327,7 @@ export namespace NamespaceBulkGetResponse {
 
 export interface NamespaceBulkUpdateResponse {
   /**
-   * Number of keys successfully updated
+   * Number of keys successfully updated.
    */
   successful_key_count?: number;
 
@@ -346,7 +339,7 @@ export interface NamespaceBulkUpdateResponse {
 
 export interface NamespaceCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -358,7 +351,7 @@ export interface NamespaceCreateParams {
 
 export interface NamespaceUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -370,7 +363,7 @@ export interface NamespaceUpdateParams {
 
 export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -387,14 +380,14 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
 
 export interface NamespaceDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface NamespaceBulkDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -406,29 +399,29 @@ export interface NamespaceBulkDeleteParams {
 
 export interface NamespaceBulkGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Body param: Array of keys to retrieve (maximum 100)
+   * Body param: Array of keys to retrieve (maximum of 100).
    */
   keys: Array<string>;
 
   /**
-   * Body param: Whether to parse JSON values in the response
+   * Body param: Whether to parse JSON values in the response.
    */
   type?: 'text' | 'json';
 
   /**
-   * Body param: Whether to include metadata in the response
+   * Body param: Whether to include metadata in the response.
    */
   withMetadata?: boolean;
 }
 
 export interface NamespaceBulkUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -441,45 +434,41 @@ export interface NamespaceBulkUpdateParams {
 export namespace NamespaceBulkUpdateParams {
   export interface Body {
     /**
-     * Whether or not the server should base64 decode the value before storing it.
-     * Useful for writing values that wouldn't otherwise be valid JSON strings, such as
-     * images.
-     */
-    base64?: boolean;
-
-    /**
-     * The time, measured in number of seconds since the UNIX epoch, at which the key
-     * should expire.
-     */
-    expiration?: number;
-
-    /**
-     * The number of seconds for which the key should be visible before it expires. At
-     * least 60.
-     */
-    expiration_ttl?: number;
-
-    /**
      * A key's name. The name may be at most 512 bytes. All printable, non-whitespace
      * characters are valid.
      */
-    key?: string;
-
-    /**
-     * Arbitrary JSON that is associated with a key.
-     */
-    metadata?: Record<string, unknown>;
+    key: string;
 
     /**
      * A UTF-8 encoded string to be stored, up to 25 MiB in length.
      */
-    value?: string;
+    value: string;
+
+    /**
+     * Indicates whether or not the server should base64 decode the value before
+     * storing it. Useful for writing values that wouldn't otherwise be valid JSON
+     * strings, such as images.
+     */
+    base64?: boolean;
+
+    /**
+     * Expires the key at a certain time, measured in number of seconds since the UNIX
+     * epoch.
+     */
+    expiration?: number;
+
+    /**
+     * Expires the key after a number of seconds. Must be at least 60.
+     */
+    expiration_ttl?: number;
+
+    metadata?: unknown;
   }
 }
 
 export interface NamespaceGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

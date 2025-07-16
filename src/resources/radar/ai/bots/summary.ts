@@ -40,7 +40,7 @@ export interface SummaryUserAgentResponse {
    */
   meta: SummaryUserAgentResponse.Meta;
 
-  summary_0: Record<string, string>;
+  summary_0: { [key: string]: string };
 }
 
 export namespace SummaryUserAgentResponse {

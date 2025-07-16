@@ -21,8 +21,7 @@ The full API of this library can be found in [api.md](api.md).
 import Cloudflare from 'cloudflare';
 
 const client = new Cloudflare({
-  apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
-  apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
+  apiToken: process.env['CLOUDFLARE_API_TOKEN'], // This is the default and can be omitted
 });
 
 const zone = await client.zones.create({
@@ -43,8 +42,7 @@ This library includes TypeScript definitions for all request params and response
 import Cloudflare from 'cloudflare';
 
 const client = new Cloudflare({
-  apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
-  apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
+  apiToken: process.env['CLOUDFLARE_API_TOKEN'], // This is the default and can be omitted
 });
 
 const params: Cloudflare.ZoneCreateParams = {

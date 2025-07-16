@@ -115,9 +115,10 @@ export class BotManagement extends APIResource {
 
 export interface BotFightModeConfiguration {
   /**
-   * Enable rule to block AI Scrapers and Crawlers.
+   * Enable rule to block AI Scrapers and Crawlers. Please note the value
+   * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -190,9 +191,10 @@ export namespace BotFightModeConfiguration {
 
 export interface BotFightModeConfigurationParam {
   /**
-   * Enable rule to block AI Scrapers and Crawlers.
+   * Enable rule to block AI Scrapers and Crawlers. Please note the value
+   * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -213,9 +215,10 @@ export interface BotFightModeConfigurationParam {
 
 export interface SubscriptionConfiguration {
   /**
-   * Enable rule to block AI Scrapers and Crawlers.
+   * Enable rule to block AI Scrapers and Crawlers. Please note the value
+   * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Automatically update to the newest bot detection models created by Cloudflare as
@@ -296,9 +299,10 @@ export namespace SubscriptionConfiguration {
 
 export interface SubscriptionConfigurationParam {
   /**
-   * Enable rule to block AI Scrapers and Crawlers.
+   * Enable rule to block AI Scrapers and Crawlers. Please note the value
+   * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Automatically update to the newest bot detection models created by Cloudflare as
@@ -327,9 +331,10 @@ export interface SubscriptionConfigurationParam {
 
 export interface SuperBotFightModeDefinitelyConfiguration {
   /**
-   * Enable rule to block AI Scrapers and Crawlers.
+   * Enable rule to block AI Scrapers and Crawlers. Please note the value
+   * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -398,9 +403,10 @@ export namespace SuperBotFightModeDefinitelyConfiguration {
 
 export interface SuperBotFightModeDefinitelyConfigurationParam {
   /**
-   * Enable rule to block AI Scrapers and Crawlers.
+   * Enable rule to block AI Scrapers and Crawlers. Please note the value
+   * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -438,9 +444,10 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
 
 export interface SuperBotFightModeLikelyConfiguration {
   /**
-   * Enable rule to block AI Scrapers and Crawlers.
+   * Enable rule to block AI Scrapers and Crawlers. Please note the value
+   * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -508,9 +515,10 @@ export namespace SuperBotFightModeLikelyConfiguration {
 
 export interface SuperBotFightModeLikelyConfigurationParam {
   /**
-   * Enable rule to block AI Scrapers and Crawlers.
+   * Enable rule to block AI Scrapers and Crawlers. Please note the value
+   * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
-  ai_bots_protection?: 'block' | 'disabled';
+  ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -577,9 +585,10 @@ export declare namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: Enable rule to block AI Scrapers and Crawlers.
+     * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
+     * `only_on_ad_pages` is currently not available for Enterprise customers.
      */
-    ai_bots_protection?: 'block' | 'disabled';
+    ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -606,9 +615,10 @@ export declare namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: Enable rule to block AI Scrapers and Crawlers.
+     * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
+     * `only_on_ad_pages` is currently not available for Enterprise customers.
      */
-    ai_bots_protection?: 'block' | 'disabled';
+    ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -654,9 +664,10 @@ export declare namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: Enable rule to block AI Scrapers and Crawlers.
+     * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
+     * `only_on_ad_pages` is currently not available for Enterprise customers.
      */
-    ai_bots_protection?: 'block' | 'disabled';
+    ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -708,9 +719,10 @@ export declare namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: Enable rule to block AI Scrapers and Crawlers.
+     * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
+     * `only_on_ad_pages` is currently not available for Enterprise customers.
      */
-    ai_bots_protection?: 'block' | 'disabled';
+    ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
      * Body param: Automatically update to the newest bot detection models created by

@@ -8,15 +8,7 @@ export class Hosts extends APIResource {
   /**
    * Retrieve schema hosts in a zone
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const hostListResponse of client.apiGateway.userSchemas.hosts.list(
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
     params: HostListParams,

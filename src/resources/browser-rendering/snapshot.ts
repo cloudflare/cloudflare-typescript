@@ -167,7 +167,7 @@ export interface SnapshotCreateParams {
   /**
    * Body param:
    */
-  setExtraHTTPHeaders?: Record<string, string>;
+  setExtraHTTPHeaders?: { [key: string]: string };
 
   /**
    * Body param:

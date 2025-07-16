@@ -154,7 +154,7 @@ export interface CatalogSyncCreateResponse {
 
   update_mode: 'AUTO' | 'MANUAL';
 
-  errors?: Record<string, CatalogSyncCreateResponse.Errors>;
+  errors?: { [key: string]: CatalogSyncCreateResponse.Errors };
 
   includes_discoveries_until?: string;
 
@@ -362,7 +362,7 @@ export interface CatalogSyncUpdateResponse {
 
   update_mode: 'AUTO' | 'MANUAL';
 
-  errors?: Record<string, CatalogSyncUpdateResponse.Errors>;
+  errors?: { [key: string]: CatalogSyncUpdateResponse.Errors };
 
   includes_discoveries_until?: string;
 
@@ -570,7 +570,7 @@ export interface CatalogSyncListResponse {
 
   update_mode: 'AUTO' | 'MANUAL';
 
-  errors?: Record<string, CatalogSyncListResponse.Errors>;
+  errors?: { [key: string]: CatalogSyncListResponse.Errors };
 
   includes_discoveries_until?: string;
 
@@ -782,7 +782,7 @@ export interface CatalogSyncEditResponse {
 
   update_mode: 'AUTO' | 'MANUAL';
 
-  errors?: Record<string, CatalogSyncEditResponse.Errors>;
+  errors?: { [key: string]: CatalogSyncEditResponse.Errors };
 
   includes_discoveries_until?: string;
 
@@ -990,7 +990,7 @@ export interface CatalogSyncGetResponse {
 
   update_mode: 'AUTO' | 'MANUAL';
 
-  errors?: Record<string, CatalogSyncGetResponse.Errors>;
+  errors?: { [key: string]: CatalogSyncGetResponse.Errors };
 
   includes_discoveries_until?: string;
 

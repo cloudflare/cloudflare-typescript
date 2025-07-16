@@ -276,7 +276,7 @@ export interface ScriptUpdateParams {
    */
   metadata: ScriptUpdateParams.Metadata;
 
-  files?: Record<string, Core.Uploadable>;
+  files?: { [key: string]: Core.Uploadable };
 }
 
 export namespace ScriptUpdateParams {
@@ -444,7 +444,14 @@ export namespace ScriptUpdateParams {
          * or '!/'. At least one non-negative rule must be provided, and negative rules
          * have higher precedence than non-negative rules.
          */
-        run_worker_first?: Array<string>;
+        run_worker_first?: Array<string> | boolean;
+
+        /**
+         * @deprecated When true and the incoming request matches an asset, that will be
+         * served instead of invoking the Worker script. When false, requests will always
+         * invoke the Worker script.
+         */
+        serve_directly?: boolean;
       }
     }
 

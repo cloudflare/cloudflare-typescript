@@ -192,9 +192,14 @@ export interface V1CreateParams {
   account_id: string;
 
   /**
+   * Body param: An optional custom unique identifier for your image.
+   */
+  id?: string;
+
+  /**
    * Body param: An image binary data. Only needed when type is uploading a file.
    */
-  file?: unknown;
+  file?: Core.Uploadable;
 
   /**
    * Body param: User modifiable key-value store. Can use used for keeping references

@@ -21,7 +21,6 @@ import * as API from './resources/index';
 import { AbuseReports } from './resources/abuse-reports';
 import { AuditLogs } from './resources/audit-logs';
 import { BotManagement } from './resources/bot-management';
-import { BrandProtection } from './resources/brand-protection';
 import { ClientCertificates } from './resources/client-certificates';
 import { CustomNameservers } from './resources/custom-nameservers';
 import { CustomPages } from './resources/custom-pages';
@@ -48,6 +47,7 @@ import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
 import { Billing } from './resources/billing/billing';
 import { BotnetFeed } from './resources/botnet-feed/botnet-feed';
+import { BrandProtection } from './resources/brand-protection/brand-protection';
 import { BrowserRendering } from './resources/browser-rendering/browser-rendering';
 import { Cache } from './resources/cache/cache';
 import { Calls } from './resources/calls/calls';
@@ -153,6 +153,8 @@ export interface ClientOptions {
    *
    * Note that request timeouts are retried by default, so in a worst-case scenario you may wait
    * much longer than this timeout before the promise succeeds or fails.
+   *
+   * @unit milliseconds
    */
   timeout?: number | undefined;
 

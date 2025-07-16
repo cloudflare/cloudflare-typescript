@@ -14,7 +14,7 @@ export { AuditLogs } from './audit-logs';
 export { Billing } from './billing/billing';
 export { BotManagement } from './bot-management';
 export { BotnetFeed } from './botnet-feed/botnet-feed';
-export { BrandProtection } from './brand-protection';
+export { BrandProtection } from './brand-protection/brand-protection';
 export { BrowserRendering } from './browser-rendering/browser-rendering';
 export { Cache } from './cache/cache';
 export { Calls } from './calls/calls';

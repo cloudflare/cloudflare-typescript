@@ -757,7 +757,7 @@ export namespace Application {
           /**
            * A mapping from IdP ID to attribute name.
            */
-          name_by_idp?: Record<string, string>;
+          name_by_idp?: { [key: string]: string };
         }
       }
     }
@@ -1887,7 +1887,7 @@ export namespace OIDCSaaSApp {
       /**
        * A mapping from IdP ID to claim name.
        */
-      name_by_idp?: Record<string, string>;
+      name_by_idp?: { [key: string]: string };
     }
   }
 
@@ -2012,7 +2012,7 @@ export namespace OIDCSaaSAppParam {
       /**
        * A mapping from IdP ID to claim name.
        */
-      name_by_idp?: Record<string, string>;
+      name_by_idp?: { [key: string]: string };
     }
   }
 
@@ -5258,7 +5258,7 @@ export namespace ApplicationCreateResponse {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     export interface Policy {
@@ -5636,7 +5636,7 @@ export namespace ApplicationCreateResponse {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     /**
@@ -8546,7 +8546,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     export interface Policy {
@@ -8924,7 +8924,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     /**
@@ -11834,7 +11834,7 @@ export namespace ApplicationListResponse {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     export interface Policy {
@@ -12212,7 +12212,7 @@ export namespace ApplicationListResponse {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     /**
@@ -15129,7 +15129,7 @@ export namespace ApplicationGetResponse {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     export interface Policy {
@@ -15507,7 +15507,7 @@ export namespace ApplicationGetResponse {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     /**
@@ -18319,7 +18319,7 @@ export declare namespace ApplicationCreateParams {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     export interface Policy {
@@ -18601,7 +18601,7 @@ export declare namespace ApplicationCreateParams {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     /**
@@ -21394,7 +21394,7 @@ export declare namespace ApplicationUpdateParams {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     export interface Policy {
@@ -21676,7 +21676,7 @@ export declare namespace ApplicationUpdateParams {
       /**
        * Contains a map of target attribute keys to target attribute values.
        */
-      target_attributes: Record<string, Array<string>>;
+      target_attributes: { [key: string]: Array<string> };
     }
 
     /**
@@ -21916,6 +21916,12 @@ export interface ApplicationListParams {
    * Query param: The domain of the app.
    */
   domain?: string;
+
+  /**
+   * Query param: True for only exact string matches against passed name/domain query
+   * parameters.
+   */
+  exact?: boolean;
 
   /**
    * Query param: The name of the app.
