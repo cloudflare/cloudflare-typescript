@@ -22,6 +22,7 @@ import {
 } from './matches';
 import * as QueriesAPI from './queries';
 import { Queries, QueryCreateParams, QueryDeleteParams } from './queries';
+import { SinglePage } from '../../pagination';
 
 export class BrandProtection extends APIResource {
   queries: QueriesAPI.Queries = new QueriesAPI.Queries(this._client);
@@ -46,11 +47,17 @@ export class BrandProtection extends APIResource {
   urlInfo(
     params: BrandProtectionURLInfoParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BrandProtectionURLInfoResponse> {
+  ): Core.PagePromise<BrandProtectionURLInfoResponsesSinglePage, BrandProtectionURLInfoResponse> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/brand-protection/url-info`, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/brand-protection/url-info`,
+      BrandProtectionURLInfoResponsesSinglePage,
+      options,
+    );
   }
 }
+
+export class BrandProtectionURLInfoResponsesSinglePage extends SinglePage<BrandProtectionURLInfoResponse> {}
 
 export interface Info {
   /**
@@ -215,48 +222,12 @@ export namespace Submit {
 }
 
 export interface BrandProtectionSubmitResponse {
-  /**
-   * Error code
-   */
-  code?: number;
+  skipped_urls?: Array<{ [key: string]: unknown }>;
 
-  /**
-   * Errors
-   */
-  errors?: { [key: string]: unknown };
-
-  /**
-   * Error message
-   */
-  message?: string;
-
-  /**
-   * Error name
-   */
-  status?: string;
+  submitted_urls?: Array<{ [key: string]: unknown }>;
 }
 
-export interface BrandProtectionURLInfoResponse {
-  /**
-   * Error code
-   */
-  code?: number;
-
-  /**
-   * Errors
-   */
-  errors?: { [key: string]: unknown };
-
-  /**
-   * Error message
-   */
-  message?: string;
-
-  /**
-   * Error name
-   */
-  status?: string;
-}
+export type BrandProtectionURLInfoResponse = { [key: string]: unknown };
 
 export interface BrandProtectionSubmitParams {
   account_id: string;
@@ -266,6 +237,7 @@ export interface BrandProtectionURLInfoParams {
   account_id: string;
 }
 
+BrandProtection.BrandProtectionURLInfoResponsesSinglePage = BrandProtectionURLInfoResponsesSinglePage;
 BrandProtection.Queries = Queries;
 BrandProtection.Matches = Matches;
 BrandProtection.Logos = Logos;
@@ -277,6 +249,7 @@ export declare namespace BrandProtection {
     type Submit as Submit,
     type BrandProtectionSubmitResponse as BrandProtectionSubmitResponse,
     type BrandProtectionURLInfoResponse as BrandProtectionURLInfoResponse,
+    BrandProtectionURLInfoResponsesSinglePage as BrandProtectionURLInfoResponsesSinglePage,
     type BrandProtectionSubmitParams as BrandProtectionSubmitParams,
     type BrandProtectionURLInfoParams as BrandProtectionURLInfoParams,
   };
