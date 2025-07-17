@@ -50,6 +50,7 @@ export const tool: Tool = {
         description: 'Optionally filter results by test name',
       },
     },
+    required: ['account_id'],
   },
 };
 

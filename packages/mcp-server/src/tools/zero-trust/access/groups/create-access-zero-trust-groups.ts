@@ -61,6 +61,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['include', 'name'],
     $defs: {
       access_rule: {
         anyOf: [
@@ -239,7 +240,6 @@ export const tool: Tool = {
             type: 'object',
             description: 'An empty object which matches on all service tokens.',
             properties: {},
-            required: [],
           },
         },
         required: ['any_valid_service_token'],
@@ -293,7 +293,6 @@ export const tool: Tool = {
           certificate: {
             type: 'object',
             properties: {},
-            required: [],
           },
         },
         required: ['certificate'],
@@ -397,7 +396,6 @@ export const tool: Tool = {
             type: 'object',
             description: 'An empty object which matches on all users.',
             properties: {},
-            required: [],
           },
         },
         required: ['everyone'],

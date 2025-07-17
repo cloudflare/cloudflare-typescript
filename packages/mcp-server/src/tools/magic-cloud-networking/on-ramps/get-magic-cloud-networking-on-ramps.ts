@@ -40,6 +40,7 @@ export const tool: Tool = {
         type: 'boolean',
       },
     },
+    required: ['account_id', 'onramp_id'],
   },
 };
 

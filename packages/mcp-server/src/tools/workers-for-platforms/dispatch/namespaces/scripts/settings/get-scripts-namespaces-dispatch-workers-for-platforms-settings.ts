@@ -35,6 +35,7 @@ export const tool: Tool = {
         description: 'Name of the script, used in URLs and route configuration.',
       },
     },
+    required: ['account_id', 'dispatch_namespace', 'script_name'],
   },
 };
 

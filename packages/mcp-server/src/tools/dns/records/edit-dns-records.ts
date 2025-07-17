@@ -72,7 +72,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -82,6 +81,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -134,7 +134,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -144,6 +143,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -201,7 +201,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -211,6 +210,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -268,7 +268,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -278,6 +277,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -330,7 +330,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -340,6 +339,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -392,7 +392,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -402,6 +401,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -454,7 +454,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -464,6 +463,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -517,7 +517,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -527,6 +526,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -573,7 +573,6 @@ export const tool: Tool = {
                 description: "Value of the record. This field's semantics depend on the chosen tag.",
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -595,7 +594,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -605,6 +603,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -654,7 +653,6 @@ export const tool: Tool = {
                 description: 'Type.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -676,7 +674,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -686,6 +683,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -735,7 +733,6 @@ export const tool: Tool = {
                 description: 'Public Key.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -757,7 +754,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -767,6 +763,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -816,7 +813,6 @@ export const tool: Tool = {
                 description: 'Key Tag.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -838,7 +834,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -848,6 +843,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -893,7 +889,6 @@ export const tool: Tool = {
                 description: 'value.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -915,7 +910,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -925,6 +919,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -1008,7 +1003,6 @@ export const tool: Tool = {
                 description: 'Size of location in meters.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -1030,7 +1024,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -1040,6 +1033,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -1097,7 +1091,6 @@ export const tool: Tool = {
                 description: 'Service.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -1119,7 +1112,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -1129,6 +1121,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -1178,7 +1171,6 @@ export const tool: Tool = {
                 description: 'Usage.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -1200,7 +1192,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -1210,6 +1201,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -1260,7 +1252,6 @@ export const tool: Tool = {
                 description: 'The record weight.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -1282,7 +1273,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -1292,6 +1282,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -1337,7 +1328,6 @@ export const tool: Tool = {
                 description: 'type.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -1359,7 +1349,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -1369,6 +1358,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -1414,7 +1404,6 @@ export const tool: Tool = {
                 description: 'value.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -1436,7 +1425,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -1446,6 +1434,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -1495,7 +1484,6 @@ export const tool: Tool = {
                 description: 'Usage.',
               },
             },
-            required: [],
           },
           proxied: {
             type: 'boolean',
@@ -1517,7 +1505,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -1527,6 +1514,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
       {
         type: 'object',
@@ -1568,7 +1556,6 @@ export const tool: Tool = {
                 description: 'The record weight.',
               },
             },
-            required: [],
           },
           priority: {
             type: 'number',
@@ -1595,7 +1582,6 @@ export const tool: Tool = {
                   'When enabled, only AAAA records will be generated, and A records will not be created. This setting is intended for exceptional cases. Note that this option only applies to proxied records and it has no effect on whether Cloudflare communicates with the origin using IPv4 or IPv6.',
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -1605,6 +1591,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns_record_id', 'name', 'ttl', 'type'],
       },
     ],
     $defs: {

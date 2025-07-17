@@ -38,6 +38,7 @@ export const tool: Tool = {
         type: 'string',
       },
     },
+    required: ['account_id', 'cloud_type', 'friendly_name'],
   },
 };
 

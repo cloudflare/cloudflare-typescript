@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'A user-friendly name for a tunnel.',
       },
     },
+    required: ['account_id', 'name'],
   },
 };
 

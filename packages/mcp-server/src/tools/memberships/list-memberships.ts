@@ -29,7 +29,6 @@ export const tool: Tool = {
             description: 'Account name',
           },
         },
-        required: [],
       },
       direction: {
         type: 'string',
@@ -59,6 +58,7 @@ export const tool: Tool = {
         enum: ['accepted', 'pending', 'rejected'],
       },
     },
+    required: [],
   },
 };
 

@@ -28,6 +28,7 @@ export const tool: Tool = {
         type: 'string',
       },
     },
+    required: ['zone_id', 'load_balancer_id'],
   },
 };
 

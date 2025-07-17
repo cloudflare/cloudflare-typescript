@@ -44,7 +44,6 @@ export const tool: Tool = {
                 description: 'Specifies rough maximum number of rows per file.',
               },
             },
-            required: [],
           },
           compression: {
             type: 'object',
@@ -55,7 +54,6 @@ export const tool: Tool = {
                 enum: ['none', 'gzip', 'deflate'],
               },
             },
-            required: [],
           },
           credentials: {
             type: 'object',
@@ -145,7 +143,6 @@ export const tool: Tool = {
                       },
                     },
                   },
-                  required: [],
                 },
               },
               required: ['format', 'type'],
@@ -168,6 +165,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['account_id', 'destination', 'name', 'source'],
   },
 };
 

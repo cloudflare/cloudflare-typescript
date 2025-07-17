@@ -58,6 +58,7 @@ export const tool: Tool = {
         type: 'boolean',
       },
     },
+    required: ['account_id', 'profile_id'],
     $defs: {
       context_awareness: {
         type: 'object',

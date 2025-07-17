@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'UUID of the tunnel.',
       },
     },
+    required: ['account_id', 'tunnel_id'],
   },
 };
 

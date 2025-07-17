@@ -40,6 +40,7 @@ export const tool: Tool = {
         enum: ['GET', 'POST', 'HEAD', 'OPTIONS', 'PUT', 'DELETE', 'CONNECT', 'PATCH', 'TRACE'],
       },
     },
+    required: ['zone_id', 'endpoint', 'host', 'method'],
   },
 };
 

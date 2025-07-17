@@ -76,6 +76,7 @@ export const tool: Tool = {
         description: 'WARP client version',
       },
     },
+    required: ['account_id', 'from', 'page', 'per_page', 'to'],
   },
 };
 

@@ -87,14 +87,12 @@ export const tool: Tool = {
                       'When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.',
                   },
                 },
-                required: [],
               },
               jwt: {
                 type: 'string',
                 description: 'Token provided upon successful upload of all files from a registered manifest.',
               },
             },
-            required: [],
           },
           bindings: {
             type: 'array',
@@ -226,10 +224,8 @@ export const tool: Tool = {
                               description: 'Name of the outbound worker.',
                             },
                           },
-                          required: [],
                         },
                       },
-                      required: [],
                     },
                   },
                   required: ['name', 'namespace', 'type'],
@@ -688,7 +684,6 @@ export const tool: Tool = {
                     },
                   },
                 },
-                required: [],
               },
             ],
             description: 'Migrations to apply for Durable Objects associated with this Worker.',
@@ -754,7 +749,6 @@ export const tool: Tool = {
                 enum: ['SUCCESS', 'UNSUPPORTED_APPLICATION', 'INSUFFICIENT_INVOCATIONS'],
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -776,9 +770,9 @@ export const tool: Tool = {
             enum: ['standard'],
           },
         },
-        required: [],
       },
     },
+    required: ['account_id', 'script_name', 'metadata'],
     $defs: {
       single_step_migration: {
         type: 'object',
@@ -827,7 +821,6 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
             },
           },
           transferred_classes: {
@@ -847,11 +840,9 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
             },
           },
         },
-        required: [],
       },
       migration_step: {
         type: 'object',
@@ -890,7 +881,6 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
             },
           },
           transferred_classes: {
@@ -910,11 +900,9 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
             },
           },
         },
-        required: [],
       },
       consumer_script: {
         type: 'object',

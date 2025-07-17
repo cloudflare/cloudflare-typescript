@@ -76,7 +76,6 @@ export const tool: Tool = {
                 required: ['content', 'content_type', 'status_code'],
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -128,7 +127,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -142,7 +140,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -155,7 +152,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -224,6 +220,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -307,7 +304,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -321,7 +317,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -334,7 +329,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -403,6 +397,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -452,11 +447,9 @@ export const tool: Tool = {
                       enum: ['none', 'auto', 'default', 'gzip', 'brotli', 'zstd'],
                     },
                   },
-                  required: [],
                 },
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -508,7 +501,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -522,7 +514,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -535,7 +526,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -604,6 +594,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -754,7 +745,6 @@ export const tool: Tool = {
                     enum: ['default', 'medium', 'low', 'eoff'],
                   },
                 },
-                required: [],
               },
             },
             required: ['id'],
@@ -809,7 +799,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -823,7 +812,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -836,7 +824,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -905,6 +892,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -988,7 +976,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1002,7 +989,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1015,7 +1001,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -1084,6 +1069,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -1167,7 +1153,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1181,7 +1166,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1194,7 +1178,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -1263,6 +1246,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -1346,7 +1330,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1360,7 +1343,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1373,7 +1355,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -1442,6 +1423,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -1491,7 +1473,6 @@ export const tool: Tool = {
                     description: 'The name of the list to match against.',
                   },
                 },
-                required: [],
               },
               from_value: {
                 type: 'object',
@@ -1520,7 +1501,6 @@ export const tool: Tool = {
                             description: 'The URL to redirect the request to.',
                           },
                         },
-                        required: [],
                       },
                       {
                         type: 'object',
@@ -1532,16 +1512,13 @@ export const tool: Tool = {
                               'An expression to evaluate to get the URL to redirect the request to.',
                           },
                         },
-                        required: [],
                       },
                     ],
                     description: 'The URL to redirect the request to.',
                   },
                 },
-                required: [],
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -1593,7 +1570,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1607,7 +1583,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1620,7 +1595,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -1689,6 +1663,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -1739,10 +1714,8 @@ export const tool: Tool = {
                     $ref: '#/$defs/rewrite_uri_part',
                   },
                 },
-                required: [],
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -1794,7 +1767,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1808,7 +1780,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -1821,7 +1792,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -1890,6 +1860,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -1944,7 +1915,6 @@ export const tool: Tool = {
                     description: 'Override the destination port.',
                   },
                 },
-                required: [],
               },
               sni: {
                 type: 'object',
@@ -1960,7 +1930,6 @@ export const tool: Tool = {
                 required: ['value'],
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -2012,7 +1981,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2026,7 +1994,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2039,7 +2006,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -2108,6 +2074,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -2148,7 +2115,6 @@ export const tool: Tool = {
                   'Increment contains the delta to change the score and can be either positive or negative.',
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -2200,7 +2166,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2214,7 +2179,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2227,7 +2191,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -2296,6 +2259,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -2346,7 +2310,6 @@ export const tool: Tool = {
                 description: 'The status code to use for the error.',
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -2398,7 +2361,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2412,7 +2374,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2425,7 +2386,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -2494,6 +2454,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -2553,7 +2514,6 @@ export const tool: Tool = {
                     description: 'Minify JS files.',
                   },
                 },
-                required: [],
               },
               bic: {
                 type: 'boolean',
@@ -2637,7 +2597,6 @@ export const tool: Tool = {
                 description: 'Turn on or off Signed Exchanges (SXG).',
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -2689,7 +2648,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2703,7 +2661,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2716,7 +2673,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -2785,6 +2741,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -2863,7 +2820,6 @@ export const tool: Tool = {
                 },
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -2915,7 +2871,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2929,7 +2884,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -2942,7 +2896,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -3011,6 +2964,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -3130,7 +3084,6 @@ export const tool: Tool = {
                             },
                           },
                         },
-                        required: [],
                       },
                       header: {
                         type: 'object',
@@ -3171,7 +3124,6 @@ export const tool: Tool = {
                             },
                           },
                         },
-                        required: [],
                       },
                       host: {
                         type: 'object',
@@ -3186,7 +3138,6 @@ export const tool: Tool = {
                               'Use the resolved host in the cache key. A value of true will use the resolved host, while a value or false will use the original host.',
                           },
                         },
-                        required: [],
                       },
                       query_string: {
                         anyOf: [
@@ -3214,7 +3165,6 @@ export const tool: Tool = {
                                         },
                                       },
                                     },
-                                    required: [],
                                   },
                                   {
                                     type: 'object',
@@ -3228,13 +3178,11 @@ export const tool: Tool = {
                                           'Determines whether to include all query string parameters in the cache key.',
                                       },
                                     },
-                                    required: [],
                                   },
                                 ],
                                 description: 'A list of query string parameters used to build the cache key.',
                               },
                             },
-                            required: [],
                           },
                           {
                             type: 'object',
@@ -3260,7 +3208,6 @@ export const tool: Tool = {
                                         },
                                       },
                                     },
-                                    required: [],
                                   },
                                   {
                                     type: 'object',
@@ -3274,14 +3221,12 @@ export const tool: Tool = {
                                           'Determines whether to exclude all query string parameters from the cache key.',
                                       },
                                     },
-                                    required: [],
                                   },
                                 ],
                                 description:
                                   'A list of query string parameters NOT used to build the cache key. All parameters present in the request but missing in this list will be used to build the cache key.',
                               },
                             },
-                            required: [],
                           },
                         ],
                         description:
@@ -3309,10 +3254,8 @@ export const tool: Tool = {
                             description: "Use the user agent's language in the cache key.",
                           },
                         },
-                        required: [],
                       },
                     },
-                    required: [],
                   },
                   ignore_query_strings_order: {
                     type: 'boolean',
@@ -3321,7 +3264,6 @@ export const tool: Tool = {
                       "Treat requests with the same query parameters the same, regardless of the order those query parameters are in. A value of true ignores the query strings' order.",
                   },
                 },
-                required: [],
               },
               cache_reserve: {
                 type: 'object',
@@ -3446,7 +3388,6 @@ export const tool: Tool = {
                 required: ['disable_stale_while_updating'],
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -3498,7 +3439,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -3512,7 +3452,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -3525,7 +3464,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -3594,6 +3532,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -3728,7 +3667,6 @@ export const tool: Tool = {
                 },
               },
             },
-            required: [],
           },
           description: {
             type: 'string',
@@ -3780,7 +3718,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -3794,7 +3731,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -3807,7 +3743,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -3876,6 +3811,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -3959,7 +3895,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -3973,7 +3908,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -3986,7 +3920,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -4055,6 +3988,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
       {
         type: 'object',
@@ -4138,7 +4072,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -4152,7 +4085,6 @@ export const tool: Tool = {
                       'The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'object',
@@ -4165,7 +4097,6 @@ export const tool: Tool = {
                     description: 'An index at which to place the rule, where index 1 is the first rule.',
                   },
                 },
-                required: [],
               },
             ],
             description: 'An object configuring where the rule will be placed.',
@@ -4234,6 +4165,7 @@ export const tool: Tool = {
             description: 'The reference of the rule (the rule ID by default).',
           },
         },
+        required: ['ruleset_id'],
       },
     ],
     $defs: {

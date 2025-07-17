@@ -32,6 +32,7 @@ export const tool: Tool = {
         enum: [''],
       },
     },
+    required: ['account_id'],
   },
 };
 

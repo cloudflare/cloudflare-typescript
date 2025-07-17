@@ -37,6 +37,7 @@ export const tool: Tool = {
             description: 'ssl-recommender enrollment setting.',
           },
         },
+        required: ['zone_id', 'setting_id'],
       },
       {
         type: 'object',
@@ -68,7 +69,6 @@ export const tool: Tool = {
                       'Egress pool id which refers to a grouping of dedicated egress IPs through which Cloudflare will connect to origin.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'array',
@@ -85,7 +85,6 @@ export const tool: Tool = {
                     type: 'boolean',
                   },
                 },
-                required: [],
               },
               {
                 type: 'number',
@@ -122,15 +121,14 @@ export const tool: Tool = {
                         description: 'Enable automatic preload of the HSTS configuration.',
                       },
                     },
-                    required: [],
                   },
                 },
-                required: [],
               },
             ],
             description: 'Value of the zone setting.',
           },
         },
+        required: ['zone_id', 'setting_id'],
       },
     ],
     $defs: {

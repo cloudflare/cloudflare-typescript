@@ -71,6 +71,7 @@ export const tool: Tool = {
         description: 'Defines the order in which the individual WAF rule is executed within its rule group.',
       },
     },
+    required: ['zone_id', 'package_id'],
   },
 };
 

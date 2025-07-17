@@ -48,7 +48,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       action_result: {
         type: 'object',
@@ -62,7 +61,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       action_type: {
         type: 'object',
@@ -76,7 +74,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       actor_context: {
         type: 'object',
@@ -90,7 +87,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       actor_email: {
         type: 'object',
@@ -103,7 +99,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       actor_id: {
         type: 'object',
@@ -117,7 +112,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       actor_ip_address: {
         type: 'object',
@@ -130,7 +124,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       actor_token_id: {
         type: 'object',
@@ -144,7 +137,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       actor_token_name: {
         type: 'object',
@@ -158,7 +150,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       actor_type: {
         type: 'object',
@@ -172,7 +163,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       audit_log_id: {
         type: 'object',
@@ -185,7 +175,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       cursor: {
         type: 'string',
@@ -213,7 +202,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       raw_method: {
         type: 'object',
@@ -226,7 +214,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       raw_status_code: {
         type: 'object',
@@ -239,7 +226,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       raw_uri: {
         type: 'object',
@@ -252,7 +238,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       resource_id: {
         type: 'object',
@@ -265,7 +250,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       resource_product: {
         type: 'object',
@@ -279,7 +263,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       resource_scope: {
         type: 'object',
@@ -294,7 +277,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       resource_type: {
         type: 'object',
@@ -307,7 +289,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       zone_id: {
         type: 'object',
@@ -320,7 +301,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       zone_name: {
         type: 'object',
@@ -333,9 +313,9 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
     },
+    required: ['account_id', 'before', 'since'],
   },
 };
 

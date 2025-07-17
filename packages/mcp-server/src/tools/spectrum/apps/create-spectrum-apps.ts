@@ -81,6 +81,7 @@ export const tool: Tool = {
             $ref: '#/$defs/origin_port',
           },
         },
+        required: ['zone_id', 'dns', 'ip_firewall', 'protocol', 'proxy_protocol', 'tls', 'traffic_type'],
       },
       {
         type: 'object',
@@ -106,6 +107,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['zone_id', 'dns', 'protocol'],
       },
     ],
     $defs: {
@@ -123,7 +125,6 @@ export const tool: Tool = {
             enum: ['CNAME', 'ADDRESS'],
           },
         },
-        required: [],
       },
       edge_ips: {
         anyOf: [
@@ -142,7 +143,6 @@ export const tool: Tool = {
                 enum: ['dynamic'],
               },
             },
-            required: [],
           },
           {
             type: 'object',
@@ -163,7 +163,6 @@ export const tool: Tool = {
                 enum: ['static'],
               },
             },
-            required: [],
           },
         ],
         description: 'The anycast edge IP configuration for the hostname of this application.',
@@ -187,7 +186,6 @@ export const tool: Tool = {
             enum: ['', 'A', 'AAAA', 'SRV'],
           },
         },
-        required: [],
       },
       origin_port: {
         anyOf: [

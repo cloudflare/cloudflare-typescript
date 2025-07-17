@@ -41,6 +41,7 @@ export const tool: Tool = {
         enum: ['AUTO', 'MANUAL'],
       },
     },
+    required: ['account_id', 'sync_id'],
   },
 };
 

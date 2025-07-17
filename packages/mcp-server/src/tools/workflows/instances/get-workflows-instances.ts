@@ -31,6 +31,7 @@ export const tool: Tool = {
         type: 'string',
       },
     },
+    required: ['account_id', 'workflow_name', 'instance_id'],
   },
 };
 

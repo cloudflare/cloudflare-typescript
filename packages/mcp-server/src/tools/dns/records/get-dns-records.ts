@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'Identifier.',
       },
     },
+    required: ['zone_id', 'dns_record_id'],
   },
 };
 

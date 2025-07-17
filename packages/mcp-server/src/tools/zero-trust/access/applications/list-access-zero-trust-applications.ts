@@ -49,6 +49,7 @@ export const tool: Tool = {
         description: 'Search for apps by other listed query parameters.',
       },
     },
+    required: [],
   },
 };
 

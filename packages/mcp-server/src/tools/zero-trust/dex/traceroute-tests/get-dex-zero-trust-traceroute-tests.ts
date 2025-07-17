@@ -55,6 +55,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['account_id', 'test_id', 'from', 'interval', 'to'],
   },
 };
 

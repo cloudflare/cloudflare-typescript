@@ -49,6 +49,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['zone_id', 'body'],
   },
 };
 

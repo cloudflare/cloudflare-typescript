@@ -164,6 +164,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['account_id', 'profile_id', 'name'],
     $defs: {
       context_awareness: {
         type: 'object',

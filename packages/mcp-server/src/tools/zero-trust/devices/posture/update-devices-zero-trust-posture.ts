@@ -85,6 +85,7 @@ export const tool: Tool = {
           'Polling frequency for the WARP client posture check. Default: `5m` (poll every five minutes). Minimum: `1m`.',
       },
     },
+    required: ['account_id', 'rule_id', 'name', 'type'],
     $defs: {
       device_input: {
         anyOf: [
@@ -222,7 +223,6 @@ export const tool: Tool = {
                     },
                   },
                 },
-                required: [],
               },
               subject_alternative_names: {
                 type: 'array',
@@ -426,7 +426,6 @@ export const tool: Tool = {
             description: 'Whether to check all disks for encryption.',
           },
         },
-        required: [],
       },
       carbonblack_input: {
         type: 'string',
@@ -632,7 +631,6 @@ export const tool: Tool = {
             enum: ['windows', 'mac', 'linux', 'android', 'ios', 'chromeos'],
           },
         },
-        required: [],
       },
     },
   },

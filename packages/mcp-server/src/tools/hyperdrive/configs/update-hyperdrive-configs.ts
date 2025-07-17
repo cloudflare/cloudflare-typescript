@@ -126,7 +126,6 @@ export const tool: Tool = {
                 description: 'Set to true to disable caching of SQL responses. Default is false.',
               },
             },
-            required: [],
           },
           {
             type: 'object',
@@ -146,7 +145,6 @@ export const tool: Tool = {
                   'Specify the number of seconds the cache may serve a stale response. Omitted if set to the default (15).',
               },
             },
-            required: [],
           },
         ],
       },
@@ -167,7 +165,6 @@ export const tool: Tool = {
             description: "Set SSL mode to 'require', 'verify-ca', or 'verify-full' to verify the CA.",
           },
         },
-        required: [],
       },
       origin_connection_limit: {
         type: 'integer',
@@ -175,6 +172,7 @@ export const tool: Tool = {
           'The (soft) maximum number of connections the Hyperdrive is allowed to make to the origin database.',
       },
     },
+    required: ['account_id', 'hyperdrive_id', 'name', 'origin'],
   },
 };
 

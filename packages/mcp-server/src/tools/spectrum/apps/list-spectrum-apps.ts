@@ -45,6 +45,7 @@ export const tool: Tool = {
         description: 'Sets the maximum number of results per page.',
       },
     },
+    required: ['zone_id'],
   },
 };
 

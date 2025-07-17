@@ -39,6 +39,7 @@ export const tool: Tool = {
         description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
       },
     },
+    required: ['ruleset_id', 'ruleset_version'],
   },
 };
 

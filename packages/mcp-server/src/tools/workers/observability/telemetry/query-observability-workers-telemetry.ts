@@ -291,7 +291,6 @@ export const tool: Tool = {
             required: ['value'],
           },
         },
-        required: [],
       },
       patternType: {
         type: 'string',
@@ -302,6 +301,7 @@ export const tool: Tool = {
         enum: ['traces', 'events', 'calculations', 'invocations', 'requests', 'patterns'],
       },
     },
+    required: ['account_id', 'queryId', 'timeframe'],
   },
 };
 

@@ -41,6 +41,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['account_id', 'member_id'],
       },
       {
         type: 'object',
@@ -105,6 +106,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['account_id', 'member_id', 'policies'],
       },
     ],
     $defs: {
@@ -163,7 +165,6 @@ export const tool: Tool = {
                 $ref: '#/$defs/permission_grant',
               },
             },
-            required: [],
           },
         },
         required: ['id', 'description', 'name', 'permissions'],
@@ -178,7 +179,6 @@ export const tool: Tool = {
             type: 'boolean',
           },
         },
-        required: [],
       },
     },
   },

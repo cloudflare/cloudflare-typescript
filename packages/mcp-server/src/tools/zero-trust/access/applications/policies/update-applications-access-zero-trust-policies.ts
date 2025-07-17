@@ -72,6 +72,7 @@ export const tool: Tool = {
           'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
       },
     },
+    required: ['app_id', 'policy_id'],
     $defs: {
       approval_group: {
         type: 'object',

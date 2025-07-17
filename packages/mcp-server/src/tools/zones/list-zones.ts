@@ -34,7 +34,6 @@ export const tool: Tool = {
               'An account Name. Optional filter operators can be provided to extend refine the search:\n  * `equal` (default)\n  * `not_equal`\n  * `starts_with`\n  * `ends_with`\n  * `contains`\n  * `starts_with_case_sensitive`\n  * `ends_with_case_sensitive`\n  * `contains_case_sensitive`\n',
           },
         },
-        required: [],
       },
       direction: {
         type: 'string',
@@ -70,6 +69,7 @@ export const tool: Tool = {
         enum: ['initializing', 'pending', 'active', 'moved'],
       },
     },
+    required: [],
   },
 };
 

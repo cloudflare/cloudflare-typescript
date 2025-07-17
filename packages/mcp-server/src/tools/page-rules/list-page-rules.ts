@@ -47,6 +47,7 @@ export const tool: Tool = {
         enum: ['active', 'disabled'],
       },
     },
+    required: ['zone_id'],
   },
 };
 

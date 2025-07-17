@@ -31,6 +31,7 @@ export const tool: Tool = {
         type: 'boolean',
       },
     },
+    required: ['account_id', 'provider_id'],
   },
 };
 

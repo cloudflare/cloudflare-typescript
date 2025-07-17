@@ -50,7 +50,6 @@ export const tool: Tool = {
                 description: 'User-provided identifier for the version.',
               },
             },
-            required: [],
           },
           bindings: {
             type: 'array',
@@ -182,10 +181,8 @@ export const tool: Tool = {
                               description: 'Name of the outbound worker.',
                             },
                           },
-                          required: [],
                         },
                       },
-                      required: [],
                     },
                   },
                   required: ['name', 'namespace', 'type'],
@@ -609,6 +606,7 @@ export const tool: Tool = {
         required: ['main_module'],
       },
     },
+    required: ['account_id', 'script_name', 'metadata'],
   },
 };
 

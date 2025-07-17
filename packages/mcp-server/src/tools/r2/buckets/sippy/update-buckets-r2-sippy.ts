@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_buckets_r2_sippy',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nSets configuration for Sippy for an existing R2 bucket.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'string'\n      }\n    },\n    result: {\n      $ref: '#/$defs/sippy'\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          },\n          required: []\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    sippy: {\n      type: 'object',\n      properties: {\n        destination: {\n          type: 'object',\n          description: 'Details about the configured destination bucket.',\n          properties: {\n            accessKeyId: {\n              type: 'string',\n              description: 'ID of the Cloudflare API token used when writing objects to this\\nbucket.\\n'\n            },\n            account: {\n              type: 'string'\n            },\n            bucket: {\n              type: 'string',\n              description: 'Name of the bucket on the provider.'\n            },\n            provider: {\n              $ref: '#/$defs/provider'\n            }\n          },\n          required: []\n        },\n        enabled: {\n          type: 'boolean',\n          description: 'State of Sippy for this bucket.'\n        },\n        source: {\n          type: 'object',\n          description: 'Details about the configured source bucket.',\n          properties: {\n            bucket: {\n              type: 'string',\n              description: 'Name of the bucket on the provider.'\n            },\n            provider: {\n              type: 'string',\n              enum: [                'aws',\n                'gcs'\n              ]\n            },\n            region: {\n              type: 'string',\n              description: 'Region where the bucket resides (AWS only).'\n            }\n          },\n          required: []\n        }\n      },\n      required: []\n    },\n    provider: {\n      type: 'string',\n      enum: [        'r2'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nSets configuration for Sippy for an existing R2 bucket.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'string'\n      }\n    },\n    result: {\n      $ref: '#/$defs/sippy'\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    sippy: {\n      type: 'object',\n      properties: {\n        destination: {\n          type: 'object',\n          description: 'Details about the configured destination bucket.',\n          properties: {\n            accessKeyId: {\n              type: 'string',\n              description: 'ID of the Cloudflare API token used when writing objects to this\\nbucket.\\n'\n            },\n            account: {\n              type: 'string'\n            },\n            bucket: {\n              type: 'string',\n              description: 'Name of the bucket on the provider.'\n            },\n            provider: {\n              $ref: '#/$defs/provider'\n            }\n          }\n        },\n        enabled: {\n          type: 'boolean',\n          description: 'State of Sippy for this bucket.'\n        },\n        source: {\n          type: 'object',\n          description: 'Details about the configured source bucket.',\n          properties: {\n            bucket: {\n              type: 'string',\n              description: 'Name of the bucket on the provider.'\n            },\n            provider: {\n              type: 'string',\n              enum: [                'aws',\n                'gcs'\n              ]\n            },\n            region: {\n              type: 'string',\n              description: 'Region where the bucket resides (AWS only).'\n            }\n          }\n        }\n      }\n    },\n    provider: {\n      type: 'string',\n      enum: [        'r2'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     anyOf: [
@@ -51,7 +51,6 @@ export const tool: Tool = {
                   'Value of a Cloudflare API token.\nThis is the value labelled "Secret Access Key" when creating an API.\ntoken from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).\n\nSippy will use this token when writing objects to R2, so it is\nbest to scope this token to the bucket you\'re enabling Sippy for.\n',
               },
             },
-            required: [],
           },
           source: {
             type: 'object',
@@ -78,7 +77,6 @@ export const tool: Tool = {
                 description: 'Secret Access Key of an IAM credential (ideally scoped to a single S3 bucket).',
               },
             },
-            required: [],
           },
           jurisdiction: {
             type: 'string',
@@ -86,6 +84,7 @@ export const tool: Tool = {
             enum: ['default', 'eu', 'fedramp'],
           },
         },
+        required: ['account_id', 'bucket_name'],
       },
       {
         type: 'object',
@@ -116,7 +115,6 @@ export const tool: Tool = {
                   'Value of a Cloudflare API token.\nThis is the value labelled "Secret Access Key" when creating an API.\ntoken from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).\n\nSippy will use this token when writing objects to R2, so it is\nbest to scope this token to the bucket you\'re enabling Sippy for.\n',
               },
             },
-            required: [],
           },
           source: {
             type: 'object',
@@ -139,7 +137,6 @@ export const tool: Tool = {
                 enum: ['gcs'],
               },
             },
-            required: [],
           },
           jurisdiction: {
             type: 'string',
@@ -147,6 +144,7 @@ export const tool: Tool = {
             enum: ['default', 'eu', 'fedramp'],
           },
         },
+        required: ['account_id', 'bucket_name'],
       },
     ],
     $defs: {

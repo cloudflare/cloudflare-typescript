@@ -65,7 +65,6 @@ export const tool: Tool = {
               type: 'string',
             },
           },
-          required: [],
         },
       },
       addStyleTag: {
@@ -82,7 +81,6 @@ export const tool: Tool = {
               type: 'string',
             },
           },
-          required: [],
         },
       },
       allowRequestPattern: {
@@ -223,7 +221,6 @@ export const tool: Tool = {
             ],
           },
         },
-        required: [],
       },
       html: {
         type: 'string',
@@ -330,6 +327,7 @@ export const tool: Tool = {
         description: 'Waits for a specified timeout before continuing.',
       },
     },
+    required: ['account_id', 'elements'],
   },
 };
 

@@ -72,6 +72,7 @@ export const tool: Tool = {
         format: 'date-time',
       },
     },
+    required: ['account_id'],
   },
 };
 

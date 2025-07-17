@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'A Cloudflare-generated unique identifier for a media item.',
       },
     },
+    required: ['account_id', 'identifier'],
   },
 };
 

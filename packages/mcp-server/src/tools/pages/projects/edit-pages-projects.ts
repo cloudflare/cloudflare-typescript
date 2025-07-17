@@ -58,7 +58,6 @@ export const tool: Tool = {
             description: 'The auth token for analytics.',
           },
         },
-        required: [],
       },
       deployment_configs: {
         type: 'object',
@@ -124,7 +123,6 @@ export const tool: Tool = {
                     description: 'Placement mode.',
                   },
                 },
-                required: [],
               },
               queue_producers: {
                 type: 'object',
@@ -143,7 +141,6 @@ export const tool: Tool = {
                 description: 'Vectorize bindings used for Pages Functions.',
               },
             },
-            required: [],
           },
           production: {
             type: 'object',
@@ -205,7 +202,6 @@ export const tool: Tool = {
                     description: 'Placement mode.',
                   },
                 },
-                required: [],
               },
               queue_producers: {
                 type: 'object',
@@ -224,10 +220,8 @@ export const tool: Tool = {
                 description: 'Vectorize bindings used for Pages Functions.',
               },
             },
-            required: [],
           },
         },
-        required: [],
       },
       name: {
         type: 'string',
@@ -290,15 +284,14 @@ export const tool: Tool = {
                 type: 'string',
               },
             },
-            required: [],
           },
           type: {
             type: 'string',
           },
         },
-        required: [],
       },
     },
+    required: ['account_id', 'project_name'],
   },
 };
 

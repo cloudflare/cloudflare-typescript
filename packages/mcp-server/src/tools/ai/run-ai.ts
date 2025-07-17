@@ -35,6 +35,7 @@ export const tool: Tool = {
             description: 'The text that you want to classify',
           },
         },
+        required: ['account_id', 'model_name', 'text'],
       },
       {
         type: 'object',
@@ -102,6 +103,7 @@ export const tool: Tool = {
             description: 'The width of the generated image in pixels',
           },
         },
+        required: ['account_id', 'model_name', 'prompt'],
       },
       {
         type: 'object',
@@ -122,6 +124,7 @@ export const tool: Tool = {
               "The speech language (e.g., 'en' for English, 'fr' for French). Defaults to 'en' if not specified",
           },
         },
+        required: ['account_id', 'model_name', 'prompt'],
       },
       {
         type: 'object',
@@ -150,6 +153,7 @@ export const tool: Tool = {
             description: 'The text to embed',
           },
         },
+        required: ['account_id', 'model_name', 'text'],
       },
       {
         type: 'object',
@@ -179,6 +183,7 @@ export const tool: Tool = {
               'The language to translate the transcription into. Currently only English is supported.',
           },
         },
+        required: ['account_id', 'model_name', 'audio'],
       },
       {
         type: 'object',
@@ -199,6 +204,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['account_id', 'model_name', 'image'],
       },
       {
         type: 'object',
@@ -219,6 +225,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['account_id', 'model_name'],
       },
       {
         type: 'object',
@@ -270,7 +277,6 @@ export const tool: Tool = {
                 enum: ['json_object', 'json_schema'],
               },
             },
-            required: [],
           },
           seed: {
             type: 'integer',
@@ -296,6 +302,7 @@ export const tool: Tool = {
               "Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.",
           },
         },
+        required: ['account_id', 'model_name', 'prompt'],
       },
       {
         type: 'object',
@@ -373,7 +380,6 @@ export const tool: Tool = {
                 enum: ['json_object', 'json_schema'],
               },
             },
-            required: [],
           },
           seed: {
             type: 'integer',
@@ -490,6 +496,7 @@ export const tool: Tool = {
               "Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.",
           },
         },
+        required: ['account_id', 'model_name', 'messages'],
       },
       {
         type: 'object',
@@ -514,6 +521,7 @@ export const tool: Tool = {
               "The language code of the source text (e.g., 'en' for English). Defaults to 'en' if not specified",
           },
         },
+        required: ['account_id', 'model_name', 'target_lang', 'text'],
       },
       {
         type: 'object',
@@ -533,6 +541,7 @@ export const tool: Tool = {
             description: 'The maximum length of the generated summary in tokens',
           },
         },
+        required: ['account_id', 'model_name', 'input_text'],
       },
       {
         type: 'object',
@@ -596,6 +605,7 @@ export const tool: Tool = {
               "Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.",
           },
         },
+        required: ['account_id', 'model_name', 'image'],
       },
       {
         type: 'object',
@@ -654,6 +664,7 @@ export const tool: Tool = {
               "Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.",
           },
         },
+        required: ['account_id', 'model_name', 'image', 'prompt'],
       },
       {
         type: 'object',
@@ -727,6 +738,7 @@ export const tool: Tool = {
               "Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.",
           },
         },
+        required: ['account_id', 'model_name', 'image', 'messages'],
       },
     ],
   },

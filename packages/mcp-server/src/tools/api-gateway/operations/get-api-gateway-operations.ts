@@ -39,6 +39,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['zone_id', 'operation_id'],
   },
 };
 

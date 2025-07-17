@@ -47,6 +47,14 @@ export const tool: Tool = {
         description: 'The key for a custom uploaded certificate.',
       },
     },
+    required: [
+      'zone_id',
+      'custom_hostname_id',
+      'certificate_pack_id',
+      'certificate_id',
+      'custom_certificate',
+      'custom_key',
+    ],
   },
 };
 

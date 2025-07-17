@@ -123,7 +123,6 @@ export const tool: Tool = {
             description: 'The port number when used with proxy mode.',
           },
         },
-        required: [],
       },
       support_url: {
         type: 'string',
@@ -138,6 +137,7 @@ export const tool: Tool = {
         description: 'Determines which tunnel protocol to use.',
       },
     },
+    required: ['account_id', 'match', 'name', 'precedence'],
     $defs: {
       split_tunnel_exclude: {
         anyOf: [

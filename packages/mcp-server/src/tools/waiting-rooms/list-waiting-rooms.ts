@@ -37,6 +37,7 @@ export const tool: Tool = {
         description: 'Maximum number of results per page. Must be a multiple of 5.',
       },
     },
+    required: [],
   },
 };
 

@@ -142,6 +142,7 @@ export const tool: Tool = {
         description: 'Ownership challenge token to prove destination ownership.',
       },
     },
+    required: ['destination_conf'],
     $defs: {
       output_options: {
         type: 'object',
@@ -208,7 +209,6 @@ export const tool: Tool = {
             enum: ['unixnano', 'unix', 'rfc3339'],
           },
         },
-        required: [],
       },
     },
   },

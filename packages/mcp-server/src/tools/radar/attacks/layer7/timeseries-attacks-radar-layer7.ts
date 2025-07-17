@@ -181,6 +181,7 @@ export const tool: Tool = {
         enum: ['PERCENTAGE_CHANGE', 'MIN0_MAX'],
       },
     },
+    required: [],
   },
 };
 

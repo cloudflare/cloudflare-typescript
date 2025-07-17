@@ -26,6 +26,7 @@ export const tool: Tool = {
         description: 'The account id',
       },
     },
+    required: ['account_id'],
   },
 };
 
