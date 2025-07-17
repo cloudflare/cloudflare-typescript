@@ -24,7 +24,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Defines an identifier.',
+        description: 'The Account ID for this resource.',
       },
       list_id: {
         type: 'string',
@@ -72,6 +72,11 @@ export const tool: Tool = {
         properties: {
           url_hostname: {
             type: 'string',
+          },
+          exclude_exact_hostname: {
+            type: 'boolean',
+            description:
+              'Only applies to wildcard hostnames (e.g., *.example.com). When true (default), only subdomains are blocked. When false, both the root domain and subdomains are blocked.',
           },
         },
         required: ['url_hostname'],

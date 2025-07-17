@@ -270,6 +270,11 @@ export interface BlockSenderListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
+  pattern?: string;
+
+  /**
+   * Query param:
+   */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
   /**

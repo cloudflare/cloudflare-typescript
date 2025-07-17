@@ -36,7 +36,7 @@ export const tool: Tool = {
           main_module: {
             type: 'string',
             description:
-              'Name of the part in the multipart request that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker, which is required for Version Upload.',
+              'Name of the uploaded file that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker, which is required for Version Upload.',
           },
           annotations: {
             type: 'object',
@@ -604,6 +604,14 @@ export const tool: Tool = {
           },
         },
         required: ['main_module'],
+      },
+      files: {
+        type: 'array',
+        description:
+          'An array of modules (often JavaScript files) comprising a Worker script. At least one module must be present and referenced in the metadata as `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are: `application/javascript+module`, `text/javascript+module`, `application/javascript`, `text/javascript`, `application/wasm`, `text/plain`, `application/octet-stream`, `application/source-map`.',
+        items: {
+          type: 'string',
+        },
       },
     },
     required: ['account_id', 'script_name', 'metadata'],

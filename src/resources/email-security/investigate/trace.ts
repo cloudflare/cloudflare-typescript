@@ -38,6 +38,8 @@ export interface TraceGetResponse {
 export namespace TraceGetResponse {
   export interface Inbound {
     lines?: Array<Inbound.Line> | null;
+
+    pending?: boolean | null;
   }
 
   export namespace Inbound {
@@ -52,6 +54,8 @@ export namespace TraceGetResponse {
 
   export interface Outbound {
     lines?: Array<Outbound.Line> | null;
+
+    pending?: boolean | null;
   }
 
   export namespace Outbound {

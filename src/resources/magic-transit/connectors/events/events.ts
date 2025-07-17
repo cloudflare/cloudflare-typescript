@@ -270,6 +270,11 @@ export interface EventListParams {
   cursor?: string;
 
   /**
+   * Query param: Filter by event kind
+   */
+  k?: string;
+
+  /**
    * Query param:
    */
   limit?: number;

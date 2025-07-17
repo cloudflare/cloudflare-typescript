@@ -30,7 +30,7 @@ export class Lists extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 
   /**
-   * Creates a new list of the specified type.
+   * Creates a new list of the specified kind.
    *
    * @example
    * ```ts
@@ -138,6 +138,13 @@ export type ListsListsSinglePage = SinglePage<ListsList>;
  */
 export interface Hostname {
   url_hostname: string;
+
+  /**
+   * Only applies to wildcard hostnames (e.g., \*.example.com). When true (default),
+   * only subdomains are blocked. When false, both the root domain and subdomains are
+   * blocked.
+   */
+  exclude_exact_hostname?: boolean;
 }
 
 /**
@@ -146,6 +153,13 @@ export interface Hostname {
  */
 export interface HostnameParam {
   url_hostname: string;
+
+  /**
+   * Only applies to wildcard hostnames (e.g., \*.example.com). When true (default),
+   * only subdomains are blocked. When false, both the root domain and subdomains are
+   * blocked.
+   */
+  exclude_exact_hostname?: boolean;
 }
 
 export interface ListsList {
@@ -317,7 +331,7 @@ export interface ListUpdateResponse {
 
 export interface ListDeleteResponse {
   /**
-   * Defines the unique ID of the item in the List.
+   * The unique ID of the list.
    */
   id?: string;
 }
@@ -367,7 +381,7 @@ export interface ListGetResponse {
 
 export interface ListCreateParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
@@ -391,7 +405,7 @@ export interface ListCreateParams {
 
 export interface ListUpdateParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
@@ -403,21 +417,21 @@ export interface ListUpdateParams {
 
 export interface ListListParams {
   /**
-   * Defines an identifier.
+   * The Account ID for this resource.
    */
   account_id: string;
 }
 
 export interface ListDeleteParams {
   /**
-   * Defines an identifier.
+   * The Account ID for this resource.
    */
   account_id: string;
 }
 
 export interface ListGetParams {
   /**
-   * Defines an identifier.
+   * The Account ID for this resource.
    */
   account_id: string;
 }

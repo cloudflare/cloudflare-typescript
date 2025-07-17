@@ -333,6 +333,11 @@ export interface GatewayRule {
   name?: string;
 
   /**
+   * The rule cannot be shared via the Orgs API
+   */
+  not_sharable?: boolean;
+
+  /**
    * Precedence sets the order of your rules. Lower values indicate higher
    * precedence. At each processing phase, applicable rules are evaluated in
    * ascending order of this value. Refer to
@@ -340,6 +345,11 @@ export interface GatewayRule {
    * docs on how to manage precedence via Terraform.
    */
   precedence?: number;
+
+  /**
+   * The rule was shared via the Orgs API and cannot be edited by the current account
+   */
+  read_only?: boolean;
 
   /**
    * Additional settings that modify the rule's action.
@@ -351,6 +361,11 @@ export interface GatewayRule {
    * policies.
    */
   schedule?: Schedule | null;
+
+  /**
+   * account tag of account that created the rule
+   */
+  source_account?: string;
 
   /**
    * The wirefilter expression used for traffic matching.

@@ -38,6 +38,10 @@ export const tool: Tool = {
       cursor: {
         type: 'string',
       },
+      k: {
+        type: 'string',
+        description: 'Filter by event kind',
+      },
       limit: {
         type: 'number',
       },

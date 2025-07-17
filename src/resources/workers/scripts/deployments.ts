@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as DeploymentsAPI from './deployments';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -25,7 +24,7 @@ export class Deployments extends APIResource {
    *         {
    *           percentage: 100,
    *           version_id:
-   *             'bcf48806-b317-4351-9ee7-36e7d557d4de',
+   *             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *         },
    *       ],
    *     },
@@ -75,34 +74,20 @@ export class Deployments extends APIResource {
   }
 }
 
-export interface Deployment {
-  /**
-   * Human-readable message about the deployment. Truncated to 100 bytes.
-   */
-  'workers/message'?: string;
-}
-
-export interface DeploymentParam {
-  /**
-   * Human-readable message about the deployment. Truncated to 100 bytes.
-   */
-  'workers/message'?: string;
-}
-
 export interface DeploymentCreateResponse {
+  id: string;
+
+  created_on: string;
+
+  source: string;
+
   strategy: 'percentage';
 
   versions: Array<DeploymentCreateResponse.Version>;
 
-  id?: string;
-
-  annotations?: Deployment;
+  annotations?: DeploymentCreateResponse.Annotations;
 
   author_email?: string;
-
-  created_on?: string;
-
-  source?: string;
 }
 
 export namespace DeploymentCreateResponse {
@@ -111,27 +96,34 @@ export namespace DeploymentCreateResponse {
 
     version_id: string;
   }
+
+  export interface Annotations {
+    /**
+     * Human-readable message about the deployment. Truncated to 100 bytes.
+     */
+    'workers/message'?: string;
+  }
 }
 
 export interface DeploymentGetResponse {
-  deployments?: Array<DeploymentGetResponse.Deployment>;
+  deployments: Array<DeploymentGetResponse.Deployment>;
 }
 
 export namespace DeploymentGetResponse {
   export interface Deployment {
+    id: string;
+
+    created_on: string;
+
+    source: string;
+
     strategy: 'percentage';
 
     versions: Array<Deployment.Version>;
 
-    id?: string;
-
-    annotations?: DeploymentsAPI.Deployment;
+    annotations?: Deployment.Annotations;
 
     author_email?: string;
-
-    created_on?: string;
-
-    source?: string;
   }
 
   export namespace Deployment {
@@ -139,6 +131,13 @@ export namespace DeploymentGetResponse {
       percentage: number;
 
       version_id: string;
+    }
+
+    export interface Annotations {
+      /**
+       * Human-readable message about the deployment. Truncated to 100 bytes.
+       */
+      'workers/message'?: string;
     }
   }
 }
@@ -169,7 +168,7 @@ export interface DeploymentCreateParams {
   /**
    * Body param:
    */
-  annotations?: DeploymentParam;
+  annotations?: DeploymentCreateParams.Annotations;
 }
 
 export namespace DeploymentCreateParams {
@@ -177,6 +176,13 @@ export namespace DeploymentCreateParams {
     percentage: number;
 
     version_id: string;
+  }
+
+  export interface Annotations {
+    /**
+     * Human-readable message about the deployment. Truncated to 100 bytes.
+     */
+    'workers/message'?: string;
   }
 }
 
@@ -189,7 +195,6 @@ export interface DeploymentGetParams {
 
 export declare namespace Deployments {
   export {
-    type Deployment as Deployment,
     type DeploymentCreateResponse as DeploymentCreateResponse,
     type DeploymentGetResponse as DeploymentGetResponse,
     type DeploymentCreateParams as DeploymentCreateParams,

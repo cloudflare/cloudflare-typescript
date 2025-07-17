@@ -60,6 +60,7 @@ describe('resource trustedDomains', () => {
       is_similarity: true,
       order: 'pattern',
       page: 1,
+      pattern: 'pattern',
       per_page: 1,
       search: 'search',
     });

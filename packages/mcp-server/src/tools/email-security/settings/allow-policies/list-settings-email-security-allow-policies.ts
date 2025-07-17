@@ -59,6 +59,9 @@ export const tool: Tool = {
         type: 'integer',
         description: 'The page number of paginated results.',
       },
+      pattern: {
+        type: 'string',
+      },
       pattern_type: {
         type: 'string',
         enum: ['EMAIL', 'DOMAIN', 'IP', 'UNKNOWN'],
