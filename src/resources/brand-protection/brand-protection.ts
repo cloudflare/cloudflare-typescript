@@ -22,6 +22,7 @@ import {
 import * as QueriesAPI from './queries';
 import { Queries, QueryCreateParams, QueryDeleteParams } from './queries';
 import { APIPromise } from '../../core/api-promise';
+import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -48,11 +49,17 @@ export class BrandProtection extends APIResource {
   urlInfo(
     params: BrandProtectionURLInfoParams,
     options?: RequestOptions,
-  ): APIPromise<BrandProtectionURLInfoResponse> {
+  ): PagePromise<BrandProtectionURLInfoResponsesSinglePage, BrandProtectionURLInfoResponse> {
     const { account_id } = params;
-    return this._client.get(path`/accounts/${account_id}/brand-protection/url-info`, options);
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/brand-protection/url-info`,
+      SinglePage<BrandProtectionURLInfoResponse>,
+      options,
+    );
   }
 }
+
+export type BrandProtectionURLInfoResponsesSinglePage = SinglePage<BrandProtectionURLInfoResponse>;
 
 export interface Info {
   /**
@@ -217,48 +224,12 @@ export namespace Submit {
 }
 
 export interface BrandProtectionSubmitResponse {
-  /**
-   * Error code
-   */
-  code?: number;
+  skipped_urls?: Array<{ [key: string]: unknown }>;
 
-  /**
-   * Errors
-   */
-  errors?: { [key: string]: unknown };
-
-  /**
-   * Error message
-   */
-  message?: string;
-
-  /**
-   * Error name
-   */
-  status?: string;
+  submitted_urls?: Array<{ [key: string]: unknown }>;
 }
 
-export interface BrandProtectionURLInfoResponse {
-  /**
-   * Error code
-   */
-  code?: number;
-
-  /**
-   * Errors
-   */
-  errors?: { [key: string]: unknown };
-
-  /**
-   * Error message
-   */
-  message?: string;
-
-  /**
-   * Error name
-   */
-  status?: string;
-}
+export type BrandProtectionURLInfoResponse = { [key: string]: unknown };
 
 export interface BrandProtectionSubmitParams {
   account_id: string;
@@ -279,6 +250,7 @@ export declare namespace BrandProtection {
     type Submit as Submit,
     type BrandProtectionSubmitResponse as BrandProtectionSubmitResponse,
     type BrandProtectionURLInfoResponse as BrandProtectionURLInfoResponse,
+    type BrandProtectionURLInfoResponsesSinglePage as BrandProtectionURLInfoResponsesSinglePage,
     type BrandProtectionSubmitParams as BrandProtectionSubmitParams,
     type BrandProtectionURLInfoParams as BrandProtectionURLInfoParams,
   };

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'url_info_brand_protection',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReturn submitted URLs based on ID\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    code: {\n      type: 'integer',\n      description: 'Error code'\n    },\n    errors: {\n      type: 'object',\n      description: 'Errors'\n    },\n    message: {\n      type: 'string',\n      description: 'Error message'\n    },\n    status: {\n      type: 'string',\n      description: 'Error name'\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReturn submitted URLs based on ID\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'array',\n      items: {\n        type: 'object'\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -37,7 +37,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.brandProtection.urlInfo(body)));
+  const response = await client.brandProtection.urlInfo(body).asResponse();
+  return asTextContentResult(await maybeFilter(args, await response.json()));
 };
 
 export default { metadata, tool, handler };
