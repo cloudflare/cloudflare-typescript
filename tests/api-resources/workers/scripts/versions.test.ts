@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -38,6 +38,7 @@ describe('resource versions', () => {
         keep_bindings: ['string'],
         usage_model: 'standard',
       },
+      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
     });
   });
 

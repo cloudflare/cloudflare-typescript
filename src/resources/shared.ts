@@ -888,9 +888,9 @@ export interface TokenPolicy {
   permission_groups: Array<TokenPolicy.PermissionGroup>;
 
   /**
-   * A list of resource names that the policy applies to.
+   * Resource permissions for the policy. Use either simple or nested permissions.
    */
-  resources: { [key: string]: string | { [key: string]: string } };
+  resources: TokenPolicy.Resources;
 }
 
 export namespace TokenPolicy {
@@ -925,6 +925,21 @@ export namespace TokenPolicy {
       value?: string;
     }
   }
+
+  /**
+   * Resource permissions for the policy. Use either simple or nested permissions.
+   */
+  export interface Resources {
+    /**
+     * Nested resource permissions for hierarchical scoping.
+     */
+    nested?: { [key: string]: { [key: string]: string } };
+
+    /**
+     * Simple resource permissions where each resource maps to a permission string.
+     */
+    simple?: { [key: string]: string };
+  }
 }
 
 export interface TokenPolicyParam {
@@ -939,9 +954,9 @@ export interface TokenPolicyParam {
   permission_groups: Array<TokenPolicyParam.PermissionGroup>;
 
   /**
-   * A list of resource names that the policy applies to.
+   * Resource permissions for the policy. Use either simple or nested permissions.
    */
-  resources: { [key: string]: string | { [key: string]: string } };
+  resources: TokenPolicyParam.Resources;
 }
 
 export namespace TokenPolicyParam {
@@ -970,6 +985,21 @@ export namespace TokenPolicyParam {
 
       value?: string;
     }
+  }
+
+  /**
+   * Resource permissions for the policy. Use either simple or nested permissions.
+   */
+  export interface Resources {
+    /**
+     * Nested resource permissions for hierarchical scoping.
+     */
+    nested?: { [key: string]: { [key: string]: string } };
+
+    /**
+     * Simple resource permissions where each resource maps to a permission string.
+     */
+    simple?: { [key: string]: string };
   }
 }
 

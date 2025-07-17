@@ -413,7 +413,7 @@ export namespace Video {
     /**
      * Specifies the processing status for all quality levels for a video.
      */
-    state?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error';
+    state?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error' | 'live-inprogress';
   }
 }
 
@@ -502,7 +502,7 @@ export interface StreamListParams {
   /**
    * Query param: Specifies the processing status for all quality levels for a video.
    */
-  status?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error';
+  status?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error' | 'live-inprogress';
 
   /**
    * Query param: Specifies whether the video is `vod` or `live`.

@@ -9,11 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource investigate', () => {
-  test('list: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+describe('resource matches', () => {
+  test('download: only required params', async () => {
+    const responsePromise = client.brandProtection.matches.download({ account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,32 +21,18 @@ describe('resource investigate', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      action_log: true,
-      alert_id: 'alert_id',
-      detections_only: true,
-      domain: 'domain',
-      end: '2019-12-27T18:11:19.117Z',
-      final_disposition: 'MALICIOUS',
-      message_action: 'PREVIEW',
-      message_id: 'message_id',
-      metric: 'metric',
-      page: 1,
-      per_page: 1,
-      query: 'query',
-      recipient: 'recipient',
-      sender: 'sender',
-      start: '2019-12-27T18:11:19.117Z',
-      subject: 'subject',
+  test('download: required and optional params', async () => {
+    const response = await client.brandProtection.matches.download({
+      account_id: 'x',
+      id: 'id',
+      include_domain_id: true,
+      limit: 0,
+      offset: 0,
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.get('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.brandProtection.matches.get({ account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -59,8 +43,12 @@ describe('resource investigate', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.get('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.brandProtection.matches.get({
+      account_id: 'x',
+      id: 'id',
+      include_domain_id: true,
+      limit: 0,
+      offset: 0,
     });
   });
 });

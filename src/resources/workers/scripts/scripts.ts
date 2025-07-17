@@ -7,7 +7,6 @@ import * as ContentAPI from './content';
 import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as DeploymentsAPI from './deployments';
 import {
-  Deployment,
   DeploymentCreateParams,
   DeploymentCreateResponse,
   DeploymentGetParams,
@@ -115,12 +114,12 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id, files, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
         Core.maybeMultipartFormRequestOptions({
-          body: { ...body, ...files },
+          body,
           ...options,
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
         }),
@@ -456,7 +455,15 @@ export interface ScriptUpdateParams {
    */
   metadata: ScriptUpdateParams.Metadata;
 
-  files?: { [key: string]: Core.Uploadable };
+  /**
+   * Body param: An array of modules (often JavaScript files) comprising a Worker
+   * script. At least one module must be present and referenced in the metadata as
+   * `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are:
+   * `application/javascript+module`, `text/javascript+module`,
+   * `application/javascript`, `text/javascript`, `application/wasm`, `text/plain`,
+   * `application/octet-stream`, `application/source-map`.
+   */
+  files?: Array<Core.Uploadable>;
 }
 
 export namespace ScriptUpdateParams {
@@ -1289,7 +1296,6 @@ export declare namespace Scripts {
 
   export {
     Deployments as Deployments,
-    type Deployment as Deployment,
     type DeploymentCreateResponse as DeploymentCreateResponse,
     type DeploymentGetResponse as DeploymentGetResponse,
     type DeploymentCreateParams as DeploymentCreateParams,

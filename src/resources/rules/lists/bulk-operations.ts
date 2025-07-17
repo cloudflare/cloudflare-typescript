@@ -59,7 +59,7 @@ export interface BulkOperationGetResponse {
 
 export interface BulkOperationGetParams {
   /**
-   * Defines an identifier.
+   * The Account ID for this resource.
    */
   account_id: string;
 }

@@ -43,7 +43,6 @@ describe('resource top', () => {
           limitDirection: 'ORIGIN',
           limitPerLocation: 10,
           location: ['string'],
-          magnitude: 'MITIGATED_REQUESTS',
           mitigationProduct: ['DDOS'],
           name: ['main_series'],
           normalization: 'PERCENTAGE',

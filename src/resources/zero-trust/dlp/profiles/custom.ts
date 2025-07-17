@@ -126,12 +126,6 @@ export interface CustomProfile {
   allowed_match_count: number;
 
   /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  context_awareness: ProfilesAPI.ContextAwareness;
-
-  /**
    * When the profile was created.
    */
   created_at: string;
@@ -160,6 +154,12 @@ export interface CustomProfile {
   ai_context_enabled?: boolean;
 
   confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
+
+  /**
+   * @deprecated Scan the context of predefined entries to only return matches
+   * surrounded by keywords.
+   */
+  context_awareness?: ProfilesAPI.ContextAwareness;
 
   /**
    * The description of the profile.
@@ -339,8 +339,8 @@ export interface CustomCreateParams {
   confidence_threshold?: string | null;
 
   /**
-   * Body param: Scan the context of predefined entries to only return matches
-   * surrounded by keywords.
+   * @deprecated Body param: Scan the context of predefined entries to only return
+   * matches surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
@@ -452,8 +452,8 @@ export interface CustomUpdateParams {
   confidence_threshold?: string | null;
 
   /**
-   * Body param: Scan the context of predefined entries to only return matches
-   * surrounded by keywords.
+   * @deprecated Body param: Scan the context of predefined entries to only return
+   * matches surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 

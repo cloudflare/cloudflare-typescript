@@ -276,7 +276,7 @@ export interface ItemGetResponse {
 
 export interface ItemCreateParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
@@ -318,7 +318,7 @@ export namespace ItemCreateParams {
 
 export interface ItemUpdateParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
@@ -360,7 +360,7 @@ export namespace ItemUpdateParams {
 
 export interface ItemListParams extends CursorPaginationParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
@@ -374,7 +374,7 @@ export interface ItemListParams extends CursorPaginationParams {
 
 export interface ItemDeleteParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
@@ -390,7 +390,7 @@ export namespace ItemDeleteParams {
 
 export interface ItemGetParams {
   /**
-   * Defines an identifier.
+   * The Account ID for this resource.
    */
   account_id: string;
 }

@@ -138,8 +138,8 @@ export interface PredefinedProfile {
   confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
   /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
+   * @deprecated Scan the context of predefined entries to only return matches
+   * surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwareness;
 
@@ -299,8 +299,8 @@ export interface PredefinedCreateParams {
   confidence_threshold?: string | null;
 
   /**
-   * Body param: Scan the context of predefined entries to only return matches
-   * surrounded by keywords.
+   * @deprecated Body param: Scan the context of predefined entries to only return
+   * matches surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
@@ -345,8 +345,8 @@ export interface PredefinedUpdateParams {
   confidence_threshold?: string | null;
 
   /**
-   * Body param: Scan the context of predefined entries to only return matches
-   * surrounded by keywords.
+   * @deprecated Body param: Scan the context of predefined entries to only return
+   * matches surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
