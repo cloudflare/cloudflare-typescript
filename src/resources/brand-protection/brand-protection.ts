@@ -3,13 +3,25 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as LogoMatchesAPI from './logo-matches';
-import { LogoMatches } from './logo-matches';
+import {
+  LogoMatchDownloadParams,
+  LogoMatchDownloadResponse,
+  LogoMatchGetParams,
+  LogoMatchGetResponse,
+  LogoMatches,
+} from './logo-matches';
 import * as LogosAPI from './logos';
-import { Logos } from './logos';
+import { LogoCreateParams, LogoCreateResponse, LogoDeleteParams, Logos } from './logos';
 import * as MatchesAPI from './matches';
-import { Matches } from './matches';
+import {
+  MatchDownloadParams,
+  MatchDownloadResponse,
+  MatchGetParams,
+  MatchGetResponse,
+  Matches,
+} from './matches';
 import * as QueriesAPI from './queries';
-import { Queries } from './queries';
+import { Queries, QueryCreateParams, QueryDeleteParams } from './queries';
 
 export class BrandProtection extends APIResource {
   queries: QueriesAPI.Queries = new QueriesAPI.Queries(this._client);
@@ -18,43 +30,25 @@ export class BrandProtection extends APIResource {
   logoMatches: LogoMatchesAPI.LogoMatches = new LogoMatchesAPI.LogoMatches(this._client);
 
   /**
-   * Submit suspicious URL for scanning.
-   *
-   * @example
-   * ```ts
-   * const submit = await client.brandProtection.submit({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * });
-   * ```
+   * Return new URL submissions
    */
-  submit(params: BrandProtectionSubmitParams, options?: Core.RequestOptions): Core.APIPromise<Submit> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/brand-protection/submit`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Submit }>
-    )._thenUnwrap((obj) => obj.result);
+  submit(
+    params: BrandProtectionSubmitParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BrandProtectionSubmitResponse> {
+    const { account_id } = params;
+    return this._client.post(`/accounts/${account_id}/brand-protection/submit`, options);
   }
 
   /**
-   * Gets phishing details about a URL.
-   *
-   * @example
-   * ```ts
-   * const info = await client.brandProtection.urlInfo({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * });
-   * ```
+   * Return submitted URLs based on ID
    */
-  urlInfo(params: BrandProtectionURLInfoParams, options?: Core.RequestOptions): Core.APIPromise<Info> {
-    const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/brand-protection/url-info`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: Info }>
-    )._thenUnwrap((obj) => obj.result);
+  urlInfo(
+    params: BrandProtectionURLInfoParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BrandProtectionURLInfoResponse> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/brand-protection/url-info`, options);
   }
 }
 
@@ -67,18 +61,18 @@ export interface Info {
   /**
    * List of model results for completed scans.
    */
-  model_results?: Array<URLInfoModelResults>;
+  model_results?: Array<Info.ModelResult>;
 
   /**
    * List of signatures that matched against site content found when crawling the
    * URL.
    */
-  rule_matches?: Array<RuleMatch>;
+  rule_matches?: Array<Info.RuleMatch>;
 
   /**
    * Status of the most recent scan found.
    */
-  scan_status?: ScanStatus;
+  scan_status?: Info.ScanStatus;
 
   /**
    * For internal use.
@@ -108,53 +102,65 @@ export namespace Info {
      */
     verification_status?: string;
   }
-}
 
-export interface RuleMatch {
-  /**
-   * For internal use.
-   */
-  banning?: boolean;
+  export interface ModelResult {
+    /**
+     * Name of the model.
+     */
+    model_name?: string;
 
-  /**
-   * For internal use.
-   */
-  blocking?: boolean;
+    /**
+     * This is the score that is outputted by the model for this submission.
+     */
+    model_score?: number;
+  }
 
-  /**
-   * Description of the signature that matched.
-   */
-  description?: string;
+  export interface RuleMatch {
+    /**
+     * For internal use.
+     */
+    banning?: boolean;
 
-  /**
-   * Name of the signature that matched.
-   */
-  name?: string;
-}
+    /**
+     * For internal use.
+     */
+    blocking?: boolean;
 
-/**
- * Status of the most recent scan found.
- */
-export interface ScanStatus {
-  /**
-   * Timestamp of when the submission was processed.
-   */
-  last_processed?: string;
+    /**
+     * Description of the signature that matched.
+     */
+    description?: string;
 
-  /**
-   * For internal use.
-   */
-  scan_complete?: boolean;
+    /**
+     * Name of the signature that matched.
+     */
+    name?: string;
+  }
 
   /**
-   * Status code that the crawler received when loading the submitted URL.
+   * Status of the most recent scan found.
    */
-  status_code?: number;
+  export interface ScanStatus {
+    /**
+     * Timestamp of when the submission was processed.
+     */
+    last_processed?: string;
 
-  /**
-   * ID of the most recent submission.
-   */
-  submission_id?: number;
+    /**
+     * For internal use.
+     */
+    scan_complete?: boolean;
+
+    /**
+     * Status code that the crawler received when loading the submitted URL.
+     */
+    status_code?: number;
+
+    /**
+     * ID of the most recent submission.
+     */
+    submission_id?: number;
+  }
 }
 
 export interface Submit {
@@ -208,45 +214,56 @@ export namespace Submit {
   }
 }
 
-export interface URLInfoModelResults {
+export interface BrandProtectionSubmitResponse {
   /**
-   * Name of the model.
+   * Error code
    */
-  model_name?: string;
+  code?: number;
 
   /**
-   * This is the score that is outputted by the model for this submission.
+   * Errors
    */
-  model_score?: number;
+  errors?: { [key: string]: unknown };
+
+  /**
+   * Error message
+   */
+  message?: string;
+
+  /**
+   * Error name
+   */
+  status?: string;
+}
+
+export interface BrandProtectionURLInfoResponse {
+  /**
+   * Error code
+   */
+  code?: number;
+
+  /**
+   * Errors
+   */
+  errors?: { [key: string]: unknown };
+
+  /**
+   * Error message
+   */
+  message?: string;
+
+  /**
+   * Error name
+   */
+  status?: string;
 }
 
 export interface BrandProtectionSubmitParams {
-  /**
-   * Path param: Identifier.
-   */
   account_id: string;
-
-  /**
-   * Body param: URL(s) to filter submissions results by.
-   */
-  url?: string;
 }
 
 export interface BrandProtectionURLInfoParams {
-  /**
-   * Path param: Identifier.
-   */
   account_id: string;
-
-  /**
-   * Query param: Submission URL(s) to filter submission results by.
-   */
-  url?: Array<string>;
-
-  /**
-   * Query param: Submission ID(s) to filter submission results by.
-   */
-  url_id?: Array<number>;
 }
 
 BrandProtection.Queries = Queries;
@@ -257,19 +274,39 @@ BrandProtection.LogoMatches = LogoMatches;
 export declare namespace BrandProtection {
   export {
     type Info as Info,
-    type RuleMatch as RuleMatch,
-    type ScanStatus as ScanStatus,
     type Submit as Submit,
-    type URLInfoModelResults as URLInfoModelResults,
+    type BrandProtectionSubmitResponse as BrandProtectionSubmitResponse,
+    type BrandProtectionURLInfoResponse as BrandProtectionURLInfoResponse,
     type BrandProtectionSubmitParams as BrandProtectionSubmitParams,
     type BrandProtectionURLInfoParams as BrandProtectionURLInfoParams,
   };
 
-  export { Queries as Queries };
+  export {
+    Queries as Queries,
+    type QueryCreateParams as QueryCreateParams,
+    type QueryDeleteParams as QueryDeleteParams,
+  };
 
-  export { Matches as Matches };
+  export {
+    Matches as Matches,
+    type MatchDownloadResponse as MatchDownloadResponse,
+    type MatchGetResponse as MatchGetResponse,
+    type MatchDownloadParams as MatchDownloadParams,
+    type MatchGetParams as MatchGetParams,
+  };
 
-  export { Logos as Logos };
+  export {
+    Logos as Logos,
+    type LogoCreateResponse as LogoCreateResponse,
+    type LogoCreateParams as LogoCreateParams,
+    type LogoDeleteParams as LogoDeleteParams,
+  };
 
-  export { LogoMatches as LogoMatches };
+  export {
+    LogoMatches as LogoMatches,
+    type LogoMatchDownloadResponse as LogoMatchDownloadResponse,
+    type LogoMatchGetResponse as LogoMatchGetResponse,
+    type LogoMatchDownloadParams as LogoMatchDownloadParams,
+    type LogoMatchGetParams as LogoMatchGetParams,
+  };
 }

@@ -4,7 +4,6 @@ export { Assets } from './assets/index';
 export { Content, type ContentUpdateParams, type ContentGetParams } from './content';
 export {
   Deployments,
-  type Deployment,
   type DeploymentCreateResponse,
   type DeploymentGetResponse,
   type DeploymentCreateParams,

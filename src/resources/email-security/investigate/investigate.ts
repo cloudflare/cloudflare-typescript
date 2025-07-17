@@ -148,6 +148,8 @@ export interface InvestigateListResponse {
     | 'NONE'
     | null;
 
+  findings?: Array<InvestigateListResponse.Finding> | null;
+
   from?: string | null;
 
   from_name?: string | null;
@@ -169,12 +171,39 @@ export interface InvestigateListResponse {
 
 export namespace InvestigateListResponse {
   export interface Properties {
-    allowlisted_pattern_type?: string;
+    allowlisted_pattern?: string;
 
-    /**
-     * @deprecated
-     */
-    whitelisted_pattern_type?: string;
+    allowlisted_pattern_type?:
+      | 'quarantine_release'
+      | 'blocked_sender'
+      | 'acceptable_sender'
+      | 'allowed_sender'
+      | 'allowed_recipient'
+      | 'domain_similarity'
+      | 'domain_recency'
+      | 'managed_acceptable_sender';
+
+    blocklisted_message?: boolean;
+
+    blocklisted_pattern?: string;
+
+    whitelisted_pattern_type?:
+      | 'quarantine_release'
+      | 'blocked_sender'
+      | 'acceptable_sender'
+      | 'allowed_sender'
+      | 'allowed_recipient'
+      | 'domain_similarity'
+      | 'domain_recency'
+      | 'managed_acceptable_sender';
+  }
+
+  export interface Finding {
+    detail?: string | null;
+
+    name?: string | null;
+
+    value?: string | null;
   }
 
   export interface Validation {
@@ -241,6 +270,8 @@ export interface InvestigateGetResponse {
     | 'NONE'
     | null;
 
+  findings?: Array<InvestigateGetResponse.Finding> | null;
+
   from?: string | null;
 
   from_name?: string | null;
@@ -262,12 +293,39 @@ export interface InvestigateGetResponse {
 
 export namespace InvestigateGetResponse {
   export interface Properties {
-    allowlisted_pattern_type?: string;
+    allowlisted_pattern?: string;
 
-    /**
-     * @deprecated
-     */
-    whitelisted_pattern_type?: string;
+    allowlisted_pattern_type?:
+      | 'quarantine_release'
+      | 'blocked_sender'
+      | 'acceptable_sender'
+      | 'allowed_sender'
+      | 'allowed_recipient'
+      | 'domain_similarity'
+      | 'domain_recency'
+      | 'managed_acceptable_sender';
+
+    blocklisted_message?: boolean;
+
+    blocklisted_pattern?: string;
+
+    whitelisted_pattern_type?:
+      | 'quarantine_release'
+      | 'blocked_sender'
+      | 'acceptable_sender'
+      | 'allowed_sender'
+      | 'allowed_recipient'
+      | 'domain_similarity'
+      | 'domain_recency'
+      | 'managed_acceptable_sender';
+  }
+
+  export interface Finding {
+    detail?: string | null;
+
+    name?: string | null;
+
+    value?: string | null;
   }
 
   export interface Validation {
@@ -376,6 +434,11 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
    * `now - 30 days`.
    */
   start?: string;
+
+  /**
+   * Query param:
+   */
+  subject?: string;
 }
 
 export interface InvestigateGetParams {

@@ -330,7 +330,8 @@ export type AccessRule =
   | OktaGroupRule
   | SAMLGroupRule
   | AccessRule.AccessOIDCClaimRule
-  | ServiceTokenRule;
+  | ServiceTokenRule
+  | AccessRule.AccessLinkedAppTokenRule;
 
 export namespace AccessRule {
   /**
@@ -416,6 +417,23 @@ export namespace AccessRule {
       identity_provider_id: string;
     }
   }
+
+  /**
+   * Matches OAuth 2.0 access tokens issued by the specified Access OIDC SaaS
+   * application. Only compatible with non_identity and bypass decisions.
+   */
+  export interface AccessLinkedAppTokenRule {
+    linked_app_token: AccessLinkedAppTokenRule.LinkedAppToken;
+  }
+
+  export namespace AccessLinkedAppTokenRule {
+    export interface LinkedAppToken {
+      /**
+       * The ID of an Access OIDC SaaS application
+       */
+      app_uid: string;
+    }
+  }
 }
 
 /**
@@ -444,7 +462,8 @@ export type AccessRuleParam =
   | OktaGroupRuleParam
   | SAMLGroupRuleParam
   | AccessRuleParam.AccessOIDCClaimRule
-  | ServiceTokenRuleParam;
+  | ServiceTokenRuleParam
+  | AccessRuleParam.AccessLinkedAppTokenRule;
 
 export namespace AccessRuleParam {
   /**
@@ -528,6 +547,23 @@ export namespace AccessRuleParam {
        * The ID of your OIDC identity provider.
        */
       identity_provider_id: string;
+    }
+  }
+
+  /**
+   * Matches OAuth 2.0 access tokens issued by the specified Access OIDC SaaS
+   * application. Only compatible with non_identity and bypass decisions.
+   */
+  export interface AccessLinkedAppTokenRule {
+    linked_app_token: AccessLinkedAppTokenRule.LinkedAppToken;
+  }
+
+  export namespace AccessLinkedAppTokenRule {
+    export interface LinkedAppToken {
+      /**
+       * The ID of an Access OIDC SaaS application
+       */
+      app_uid: string;
     }
   }
 }

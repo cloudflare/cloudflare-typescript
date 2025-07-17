@@ -7,12 +7,7 @@ export class Recommendations extends APIResource {
   /**
    * Retrieve the SSL/TLS Recommender's recommendation for a zone.
    *
-   * @example
-   * ```ts
-   * const recommendation = await client.ssl.recommendations.get(
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * @deprecated SSL/TLS Recommender has been decommissioned in favor of Automatic SSL/TLS
    */
   get(
     params: RecommendationGetParams,
@@ -28,20 +23,30 @@ export class Recommendations extends APIResource {
 }
 
 export interface RecommendationGetResponse {
+  id: string;
+
   /**
-   * Identifier of a recommendation result.
+   * Whether this setting can be updated or not.
    */
-  id?: string;
+  editable: boolean;
 
-  modified_on?: string;
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on: string;
 
-  value?: 'flexible' | 'full' | 'strict';
+  /**
+   * Current setting of the automatic SSL/TLS.
+   */
+  value: 'auto' | 'custom';
+
+  /**
+   * Next time this zone will be scanned by the Automatic SSL/TLS.
+   */
+  next_scheduled_scan?: string | null;
 }
 
 export interface RecommendationGetParams {
-  /**
-   * Identifier.
-   */
   zone_id: string;
 }
 

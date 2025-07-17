@@ -253,6 +253,10 @@ TEST_PATHS=(
 	tests/api-resources/billing/billing.test.ts
 	tests/api-resources/billing/profiles.test.ts
 	tests/api-resources/brand-protection/brand-protection.test.ts
+	tests/api-resources/brand-protection/queries.test.ts
+	tests/api-resources/brand-protection/matches.test.ts
+	tests/api-resources/brand-protection/logos.test.ts
+	tests/api-resources/brand-protection/logo-matches.test.ts
 	tests/api-resources/diagnostics/diagnostics.test.ts
 	tests/api-resources/diagnostics/traceroutes.test.ts
 	tests/api-resources/images/images.test.ts
