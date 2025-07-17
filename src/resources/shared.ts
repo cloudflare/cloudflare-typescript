@@ -43,7 +43,7 @@ export interface AuditLog {
   resource?: AuditLog.Resource;
 
   /**
-   * A UTC RFC3339 timestamp that specifies when the action being logged occured.
+   * A UTC RFC3339 timestamp that specifies when the action being logged occurred.
    */
   when?: string;
 }
